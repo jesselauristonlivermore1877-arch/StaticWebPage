@@ -70,5 +70,6 @@ jobs:
             echo "今天沒有任何變動，不提交。"
           else
             git commit -m "每日更新 $(TZ=Asia/Taipei date +%F)"
+            git pull --rebase origin main   # ⬅️ 補上這行，把遠端的新進度拉下來合併
             git push
           fi
