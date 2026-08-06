@@ -8,8 +8,9 @@ name: 每日戰情更新
 
 on:
   schedule:
-    # GitHub 的 cron 用 UTC。09:30 UTC = 台北 17:30（收盤與期交所盤後資料都出齊了）
-    - cron: "30 9 * * 1-5"
+    # GitHub 的 cron 用 UTC，換算台北要 +8
+    - cron: "30 7 * * 1-5"    # 台北 15:30 — 期權籌碼、三大法人已出，先更新一版
+    - cron: "0 14 * * 1-5"    # 台北 22:00 — 主動ETF(18:00)、信用交易(21:00) 都出齊，這版才完整
   workflow_dispatch:        # 也可以在網頁上手動按「Run workflow」
 
 permissions:
