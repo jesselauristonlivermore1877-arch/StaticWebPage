@@ -33,10 +33,10 @@ jobs:
       - name: 取出程式 repo
         uses: actions/checkout@v4
         with:
-          repository: OWNER/CustomerServiceANDSales   # ← 改成你的 GitHub 帳號
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales   # ← 改成你的 GitHub 帳號
           path: code
           # 程式 repo 若是 private，取消下一行註解，並在 Settings → Secrets 加 CODE_REPO_TOKEN
-          # token: ${{ secrets.CODE_REPO_TOKEN }}
+          token: ${{ secrets.CODE_REPO_TOKEN }}
 
       - uses: actions/setup-python@v5
         with:
