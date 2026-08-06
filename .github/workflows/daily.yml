@@ -1,0 +1,73 @@
+# 放在 staticWebPage repo 的 .github/workflows/daily.yml
+#
+# 為什麼 Action 放在網頁 repo 而不是程式 repo：
+#   程式 repo 一被 push，Render 就會重新部署一次。每天自動跑就等於每天重啟一次，
+#   永豐長測會被打斷。放在網頁 repo，每天的 commit 只落在網頁這邊，Render 完全不受影響。
+
+name: 每日戰情更新
+
+on:
+  schedule:
+    # GitHub 的 cron 用 UTC。09:30 UTC = 台北 17:30（收盤與期交所盤後資料都出齊了）
+    - cron: "30 9 * * 1-5"
+  workflow_dispatch:        # 也可以在網頁上手動按「Run workflow」
+
+permissions:
+  contents: write           # 要把產出 commit 回這個 repo
+
+concurrency:
+  group: daily-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: 取出網頁 repo（產出物落在這）
+        uses: actions/checkout@v4
+        with:
+          path: site
+
+      - name: 取出程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: OWNER/CustomerServiceANDSales   # ← 改成你的 GitHub 帳號
+          path: code
+          # 程式 repo 若是 private，取消下一行註解，並在 Settings → Secrets 加 CODE_REPO_TOKEN
+          # token: ${{ secrets.CODE_REPO_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 安裝套件
+        run: pip install requests feedparser pandas numpy yfinance curl-cffi
+
+      - name: 產出資料與網頁
+        working-directory: code
+        run: |
+          python build_web.py \
+            --out ../site/data \
+            --private-out "${{ runner.temp }}/private"
+        # 私有版（VIP）寫進 runner 的暫存目錄，跑完就隨機器銷毀，
+        # 永遠不會進到任何 repo。要看 VIP 就在自己電腦跑。
+
+      - name: 健康檢查
+        working-directory: code
+        run: python check_web.py ../site/data/web_data.json
+
+      - name: 提交
+        working-directory: site
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data docs
+          if git diff --staged --quiet; then
+            echo "今天沒有任何變動，不提交。"
+          else
+            git commit -m "每日更新 $(TZ=Asia/Taipei date +%F)"
+            git push
+          fi
