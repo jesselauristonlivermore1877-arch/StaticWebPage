@@ -9,8 +9,11 @@ name: 每日戰情更新
 on:
   schedule:
     # GitHub 的 cron 用 UTC，換算台北要 +8
-    - cron: "30 7 * * 1-5"    # 台北 15:30 — 期權籌碼、三大法人已出，先更新一版
-    - cron: "0 14 * * 1-5"    # 台北 22:00 — 主動ETF(18:00)、信用交易(21:00) 都出齊，這版才完整
+    # 避開整點/半點：GitHub 的排程是全球共用佇列，:00 和 :30 最壅塞，
+    # 碎數分鐘拿到執行權的機會較高。（注意：GitHub 不會為你多開機器，
+    # 這是排隊順位問題，不是資源問題 —— 所以碎數只是「比較不會塞」，不保證準時。）
+    - cron: "9 7 * * 1-5"     # 台北 15:09 — 期權籌碼、三大法人已出，先更新一版
+    - cron: "9 13 * * 1-5"    # 台北 21:09 — 主動ETF(18:00)、信用交易(21:00) 出齊，這版才完整
   workflow_dispatch:        # 也可以在網頁上手動按「Run workflow」
 
 permissions:
@@ -26,6 +29,13 @@ jobs:
     timeout-minutes: 30
 
     steps:
+      - name: 排程延遲量測
+        run: |
+          echo "排定時間 (UTC) : ${{ github.event.schedule }}"
+          echo "實際啟動 (UTC) : $(date -u +%H:%M)"
+          echo "實際啟動 (台北) : $(TZ=Asia/Taipei date +%H:%M)"
+          echo "↑ 累積幾天就知道真實延遲分布，再決定要不要把 cron 往前挪。"
+
       - name: 取出網頁 repo（產出物落在這）
         uses: actions/checkout@v4
         with:
@@ -56,6 +66,9 @@ jobs:
         # 私有版（VIP）寫進 runner 的暫存目錄，跑完就隨機器銷毀，
         # 永遠不會進到任何 repo。要看 VIP 就在自己電腦跑。
 
+      # 健康檢查放在提交之前，而且允許它擋下這次更新：
+      # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。
+      # （只有「不可能的數字」才會 exit 1；缺漏只是警告，不會擋。）
       - name: 健康檢查
         working-directory: code
         run: python check_web.py ../site/data/web_data.json
