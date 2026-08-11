@@ -3,7 +3,7 @@
 # 為什麼 Action 放在網頁 repo 而不是程式 repo：
 #   程式 repo 一被 push，Render 就會重新部署一次。每天自動跑就等於每天重啟一次，
 #   永豐長測會被打斷。放在網頁 repo，每天的 commit 只落在網頁這邊，Render 完全不受影響。
-
+# re-register 2026-08-11
 name: 每日戰情更新
 
 on:
