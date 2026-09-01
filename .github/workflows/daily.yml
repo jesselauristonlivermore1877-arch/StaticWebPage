@@ -71,7 +71,9 @@ jobs:
       - name: 同步策略頁籤的圖
         run: |
           SRC=code/static/bt/precomp/pub
-          DST=site/data/strategy/pub
+          # 圖必須放在 index.html 旁邊：前端的 SIMG 是相對路徑，
+          # 而網頁本體是 docs/index.html。放 repo 根目錄的 data/ 會 404。
+          DST=site/docs/data/strategy/pub
           if [ ! -d "$SRC" ]; then
             echo "::warning::找不到 $SRC —— 策略圖這次不同步（頁面會缺圖）"
             exit 0
@@ -90,7 +92,7 @@ jobs:
           p = "site/data/web_data.json"
           d = json.load(open(p, encoding="utf-8"))
           want = (d.get("strategy") or {}).get("images") or []
-          have = set(os.listdir("site/data/strategy/pub")) if os.path.isdir("site/data/strategy/pub") else set()
+          have = set(os.listdir("site/docs/data/strategy/pub")) if os.path.isdir("site/docs/data/strategy/pub") else set()
           miss = [x for x in want if x not in have]
           print(f"JSON 記 {len(want)} 張，磁碟上 {len(have)} 張")
           if miss:
