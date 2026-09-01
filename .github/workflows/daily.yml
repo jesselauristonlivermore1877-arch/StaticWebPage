@@ -59,6 +59,44 @@ jobs:
         # 私有版（VIP）寫進 runner 的暫存目錄，跑完就隨機器銷毀，
         # 永遠不會進到任何 repo。要看 VIP 就在自己電腦跑。
 
+      # 🟢 GEA 2026-09-01：程式策略頁籤的圖。
+      # 圖由 pub_render.py 在 Colab 產、隨程式 repo 一起 commit；
+      # 這一步只負責搬到網頁 repo 的 data/strategy/pub/，
+      # 對應前端的 SIMG = "data/strategy/pub/"。
+      #
+      # 整個目錄先砍再複製是刻意的：檔名改過或某張不再產出時，舊圖要跟著消失，
+      # 不然頁面會引用到一張沒人維護的殘檔，而且沒有人會發現。
+      #
+      # 來源不在就只警告不中止 —— 策略圖沒同步到不該擋掉整天的籌碼更新。
+      - name: 同步策略頁籤的圖
+        run: |
+          SRC=code/static/bt/precomp/pub
+          DST=site/data/strategy/pub
+          if [ ! -d "$SRC" ]; then
+            echo "::warning::找不到 $SRC —— 策略圖這次不同步（頁面會缺圖）"
+            exit 0
+          fi
+          # 用 rm -rf + cp 而不是 rsync：runner 上 rsync 不保證存在，
+          # 而且這裡要的就是「整個目錄換成來源那一份」，語意更直接。
+          rm -rf "$DST"
+          mkdir -p "$DST"
+          cp "$SRC"/*.png "$DST"/
+          N=$(ls -1 "$DST"/*.png 2>/dev/null | wc -l)
+          echo "策略圖同步 $N 張 → $DST"
+          # 對帳：web_data.json 記了幾張、磁碟上就該有幾張。
+          # 對不上代表程式 repo 那邊的圖與 JSON 不是同一輪產的。
+          python - <<'PY'
+          import json, os, sys
+          p = "site/data/web_data.json"
+          d = json.load(open(p, encoding="utf-8"))
+          want = (d.get("strategy") or {}).get("images") or []
+          have = set(os.listdir("site/data/strategy/pub")) if os.path.isdir("site/data/strategy/pub") else set()
+          miss = [x for x in want if x not in have]
+          print(f"JSON 記 {len(want)} 張，磁碟上 {len(have)} 張")
+          if miss:
+              print("::warning::缺這幾張：" + ", ".join(miss[:8]))
+          PY
+
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
       # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。
       # （只有「不可能的數字」才會 exit 1；缺漏只是警告，不會擋。）
