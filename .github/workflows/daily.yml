@@ -47,8 +47,13 @@ jobs:
           python-version: "3.12"
           cache: pip
 
+      # 🔴 openpyxl 是中信 ETF adapter（pcf/ctbc.py）要的 —— 它的 PCF 是 base64 xlsx。
+      #    2026-09-07 首班漏了它，00406A／00983A／00995A 三檔當場退回第三方站
+      #    （第三方只給股票那 79.63%，期貨／選擇權／保證金全沒有）。
+      #    ⚠️ 本機有裝所以 selftest 全綠，**只有正式環境會炸**（SOP 雷區 82）。
+      # 🔴 curl-cffi 是野村／元大／第一金／凱基／安聯要的（憑證鏈不合規，見雷區 69）。
       - name: 安裝套件
-        run: pip install requests feedparser pandas numpy yfinance curl-cffi
+        run: pip install requests feedparser pandas numpy yfinance curl-cffi openpyxl
 
       - name: 產出資料與網頁
         working-directory: code
