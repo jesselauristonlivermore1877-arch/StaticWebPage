@@ -1,0 +1,145 @@
+# ============================================================================
+# backfill_bars.yml ─ 全市場兩年日 K 回補（八片平行）
+#
+#   ⚠️ 放哪：**StaticWebPage** repo 的 .github/workflows/backfill_bars.yml
+#            （跟 daily.yml 同一個資料夾。CustomerServiceANDSales 沒有 .github）
+#   搭配：backfill_bars.py 放 CustomerServiceANDSales 根目錄（engines.py 旁邊）
+#   怎麼跑：GitHub → StaticWebPage → Actions →「回補全市場日K」→ Run workflow
+#
+#   ── 兩個 repo 的分工（照 daily.yml 既有的形狀）──────────────────
+#     code = CustomerServiceANDSales　程式（backfill_bars.py / engines.py）
+#     site = StaticWebPage            資料（daily_raw/ 落在這裡）
+#   資料寫回 site repo，所以用這個 workflow 自己的 GITHUB_TOKEN 就能 push，
+#   不需要對 code repo 有寫入權（那兩支 token 都是唯讀的）。
+#
+#   ── 為什麼要分片 ────────────────────────────────────────────────
+#   TWSE 的配額懸崖綁**出口 IP**，約 66~168 發（實測：本機 168、Colab 66/88）。
+#   Actions 的每個 matrix job 是獨立 VM、獨立 IP，八片各 ~65 發都在懸崖以下。
+#   ⚠️ 不要把片數調小 —— 少於六片單片就超過 87 發，開始撞牆。
+#
+#   ── 為什麼不讓每片自己 commit ──────────────────────────────────
+#   八個 job 同時 push 同一個 branch 一定打架。改成各自上傳 artifact，
+#   最後一個 merge job 下載全部、寫進 repo、**只 commit 一次**。
+#
+#   可重複執行：已經在 daily_raw/ 裡的日子會跳過，撞牆的片下次接著補。
+#   ⚠️ daily_raw/ 放 repo 根目錄，**不要放 docs/ 底下** —— docs 是 Pages
+#      對外服務的目錄，這批中間檔沒有必要對外送。
+#      daily.yml 的提交步驟只 `git add data docs`，所以兩邊互不干擾。
+#
+#   ── 跟 daily.yml 的併發關係 ────────────────────────────────────
+#   兩個 workflow 都會 push 同一個 repo 的 main。merge job 掛上跟 daily.yml
+#   **同一個 concurrency group**，所以回補的提交會排在每日班後面，不會對撞。
+#   crawl 那八片不 push，不進這個 group，照樣平行跑。
+# ============================================================================
+name: 回補全市場日K
+
+on:
+  workflow_dispatch:
+    inputs:
+      years:
+        description: "往回抓幾年"
+        required: false
+        default: "2"
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false          # 一片撞牆不要拖累其他七片
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      # 這一片只需要程式，不需要 site repo
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}   # ⚠️ 名稱要跟 daily.yml 一致
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # engines.py 頂層 import requests / feedparser（它同時是 LINE 機器人的引擎）。
+      # certifi 是上櫃那條的保險：Colab 實測 engines 那條會 CERTIFICATE_VERIFY_FAILED，
+      # 明確指定 certifi 的 CA bundle 才過。Actions 上兩條都通，帶著不吃虧。
+      - run: pip install requests feedparser certifi
+
+      - name: 抓片 ${{ matrix.shard }}
+        working-directory: code
+        run: |
+          python backfill_bars.py \
+            --shard ${{ matrix.shard }} --of 8 \
+            --years ${{ inputs.years }} \
+            --out ../out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bars-${{ matrix.shard }}
+          path: out/
+          if-no-files-found: warn
+          retention-days: 1
+
+  merge:
+    needs: crawl
+    if: always()                # 就算有片失敗，成功的那幾片也要收進來
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:                # 跟 daily.yml 同一組，避免兩邊同時 push main
+      group: daily-build
+      cancel-in-progress: false
+    steps:
+      # 不帶 repository 就是這個 workflow 自己的 repo（StaticWebPage），
+      # 所以下面用 GITHUB_TOKEN 直接 push 就行。
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: dl
+          pattern: bars-*
+          merge-multiple: true
+
+      - name: 合併＋對帳
+        run: |
+          mkdir -p daily_raw
+          cp -n dl/*.json daily_raw/ 2>/dev/null || true
+          python - <<'PY'
+          import os, json, glob
+          fs = sorted(glob.glob("daily_raw/*.json"))
+          tw = tp = 0
+          bad = []
+          for p in fs:
+              d = json.load(open(p, encoding="utf-8"))
+              tw += len(d.get("twse") or {})
+              n = len(d.get("tpex") or {})
+              tp += n
+              if not n:
+                  bad.append(os.path.basename(p)[:-5])
+          size = sum(os.path.getsize(p) for p in fs) / 1048576
+          print(f"daily_raw/ 共 {len(fs)} 天　{size:.1f} MB")
+          print(f"  上市總格數 {tw:,}　上櫃總格數 {tp:,}")
+          if fs:
+              print(f"  區間 {os.path.basename(fs[0])[:-5]} → {os.path.basename(fs[-1])[:-5]}")
+          if bad:
+              print(f"  ⚠ 有 {len(bad)} 天沒有上櫃資料"
+                    f"（欄位驗證沒過或當天抓失敗）：{bad[:12]}")
+          PY
+
+      - name: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add daily_raw
+          if git diff --staged --quiet; then
+            echo "沒有新增任何一天，不提交。"
+          else
+            git commit -m "data: 回補全市場日K $(TZ=Asia/Taipei date +%F)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
