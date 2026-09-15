@@ -1,0 +1,149 @@
+# ============================================================================
+# backfill_pcf.yml ─ 主動式 ETF 歷史持股快照回補（八片平行）　X-9b
+#
+#   ⚠️ 放哪：**StaticWebPage** repo 的 .github/workflows/backfill_pcf.yml
+#   搭配：backfill_pcf.py 放 CustomerServiceANDSales 根目錄
+#   怎麼跑：GitHub → StaticWebPage → Actions →「回補 ETF 歷史持股」→ Run workflow
+#
+#   ── 跟 backfill_inst.yml 的差別 ────────────────────────────────
+#   1. 分片照「檔」切，不是照日期。各家是不同網站、不同配額，
+#      照日期切會讓八片同時打同一家。
+#   2. merge **用 `cp -n` 不覆蓋**。`data/pcf/` 裡既有的快照是每日班當天
+#      抓下來的第一手，回補只填空格，**絕不蓋掉既有的那一份**。
+#   3. 中間檔走 artifact 不進 repo；merge 只把快照放進 data/pcf/。
+#
+#   ── 先探測再抓 ────────────────────────────────────────────────
+#   每一檔開抓前做兩日差分測試，卡在最新的整檔跳過（2026-09-15 實測
+#   00986A 就是這種）。硬抓的話會把今天的持股寫成歷史 —— 值合法、
+#   圖畫得出來、不報錯。
+#
+#   ── 併發 ──────────────────────────────────────────────────────
+#   merge 掛跟 daily.yml 同一個 concurrency group，排在每日班後面。
+#   crawl 八片不 push，照樣平行。
+# ============================================================================
+name: 回補 ETF 歷史持股
+
+on:
+  workflow_dispatch:
+    inputs:
+      years:
+        description: "往回抓幾年（主動式 ETF 多半 2025 後才掛牌，1 年通常就到底）"
+        required: false
+        default: "1"
+      codes:
+        description: "只跑這幾檔（逗號分隔，留空＝全部）"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # etf_source → pcf/* 各家 adapter。curl_cffi 是野村那家的憑證鏈需要的
+      # （SOP 雷區 69），裝了不吃虧。
+      - run: pip install requests feedparser certifi curl_cffi lxml beautifulsoup4
+
+      - name: 抓片 ${{ matrix.shard }}
+        working-directory: code
+        run: |
+          python backfill_pcf.py \
+            --shard ${{ matrix.shard }} --of 8 \
+            --years ${{ inputs.years }} \
+            ${{ inputs.codes && format('--codes {0}', inputs.codes) || '' }} \
+            --out ../out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pcf-${{ matrix.shard }}
+          path: out/
+          if-no-files-found: warn
+          retention-days: 1
+
+  merge:
+    needs: crawl
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: daily-build
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: dl
+          pattern: pcf-*
+          merge-multiple: true
+
+      - name: 併進 data/pcf（不覆蓋既有快照）
+        run: |
+          mkdir -p data/pcf
+          # 🔴 -n：既有的第一手快照永遠優先，回補只填空格
+          cp -rn dl/. data/pcf/ 2>/dev/null || true
+          python - <<'PY'
+          import os, json, glob
+          root = "data/pcf"
+          tot = thin = 0
+          rows = []
+          for code in sorted(os.listdir(root)):
+              d = os.path.join(root, code)
+              if not os.path.isdir(d):
+                  continue
+              fs = sorted(x[:-5] for x in os.listdir(d) if x.endswith(".json"))
+              if not fs:
+                  continue
+              n_tw = 0
+              try:
+                  sn = json.load(open(os.path.join(d, fs[-1] + ".json"),
+                                      encoding="utf-8"))
+                  n_tw = sum(1 for h in (sn.get("holdings") or [])
+                             if str(h.get("code", "")).strip().isdigit())
+              except Exception:
+                  pass
+              tot += len(fs)
+              rows.append((code, len(fs), fs[0], fs[-1], n_tw))
+              if len(fs) < 30:
+                  thin += 1
+          print("data/pcf 共 %d 檔基金、%d 份快照" % (len(rows), tot))
+          print("  代號      天數  區間                      最新台股持股數")
+          for c, n, a, b, tw in rows:
+              mark = "  ← 天數太少" if n < 30 else ""
+              print("  %-9s %4d  %s → %s   %3d%s" % (c, n, a, b, tw, mark))
+          if thin:
+              print("  ⚠ 有 %d 檔快照少於 30 天 —— 可能是新掛牌，"
+                    "或那一家的日期路徑沒接（看 crawl 那幾片的 log）" % thin)
+          PY
+
+      - name: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/pcf
+          if git diff --staged --quiet; then
+            echo "沒有新增任何快照，不提交。"
+          else
+            git commit -m "data(X-9b): 回補 ETF 歷史持股快照 $(TZ=Asia/Taipei date +%F)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
