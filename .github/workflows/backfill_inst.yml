@@ -1,0 +1,133 @@
+# ============================================================================
+# backfill_inst.yml ─ 逐檔法人買賣超兩年回補（八片平行）　X-8b
+#
+#   ⚠️ 放哪：**StaticWebPage** repo 的 .github/workflows/backfill_inst.yml
+#            （跟 daily.yml／backfill_bars.yml 同一個資料夾）
+#   搭配：backfill_inst.py ＋ merge_inst_raw.py 放 CustomerServiceANDSales 根目錄
+#   怎麼跑：GitHub → StaticWebPage → Actions →「回補逐檔法人買賣超」→ Run workflow
+#
+#   ── 跟 backfill_bars.yml 的差別（只有兩個）────────────────────────
+#   1. crawl 抓的是 T86 ＋ 上櫃三大法人，不是 MI_INDEX ＋ no1430
+#   2. merge **直接寫 inst.npz**，不是留一堆中間檔。
+#      理由：日 K 那批當初要先落 daily_raw 再 pivot；法人這批的寫入邏輯
+#      `inst_bars.append_npz()` 已經存在而且每天在用，直接走它就好 ——
+#      另寫一份寫入路徑＝同一條判準散在兩個地方（雷區 127）。
+#      所以 merge job 要 checkout 程式 repo 並裝 numpy。
+#
+#   ── 配額 ────────────────────────────────────────────────────────
+#   TWSE 懸崖綁**出口 IP**（本機 168 發、Colab 66~88 發）。
+#   兩年約 520 個平日，八片各 ~65 天 = 65 發 TWSE ＋ 65 發 TPEx，都在懸崖以下。
+#   🔴 不要把片數調小 —— 少於六片單片就超過 87 發，開始撞牆。
+#
+#   可重複執行：已經在 inst.npz 裡的日子 merge 會跳過，撞牆的片重跑會接著補。
+#   ⚠️ 中間檔走 artifact，**不進 repo** —— 法人那批 JSON 兩年約 40 MB，
+#      落進 git 就是永久的。日 K 那批進 daily_raw/ 是因為後面還要 pivot，
+#      這批 merge 完就沒用了。
+#
+#   ── 跟 daily.yml 的併發關係 ────────────────────────────────────
+#   merge job 掛同一個 concurrency group，回補的提交會排在每日班後面。
+#   crawl 那八片不 push，不進這個 group，照樣平行跑。
+# ============================================================================
+name: 回補逐檔法人買賣超
+
+on:
+  workflow_dispatch:
+    inputs:
+      years:
+        description: "往回抓幾年"
+        required: false
+        default: "2"
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false          # 一片撞牆不要拖累其他七片
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # engines.py 頂層 import requests / feedparser（它同時是 LINE 機器人的引擎）
+      - run: pip install requests feedparser certifi
+
+      - name: 抓片 ${{ matrix.shard }}
+        working-directory: code
+        run: |
+          python backfill_inst.py \
+            --shard ${{ matrix.shard }} --of 8 \
+            --years ${{ inputs.years }} \
+            --out ../out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: inst-${{ matrix.shard }}
+          path: out/
+          if-no-files-found: warn
+          retention-days: 1
+
+  merge:
+    needs: crawl
+    if: always()                # 就算有片失敗，成功的那幾片也要收進來
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: daily-build
+      cancel-in-progress: false
+    steps:
+      # 不帶 repository 就是這個 workflow 自己的 repo（StaticWebPage）
+      - uses: actions/checkout@v4
+
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install numpy requests feedparser
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: dl
+          pattern: inst-*
+          merge-multiple: true
+
+      - name: 併進 inst.npz ＋ 逐格驗證
+        working-directory: code
+        run: |
+          python merge_inst_raw.py \
+            --raw ../dl \
+            --npz ../data/bars/inst.npz
+
+      - name: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/bars/inst.npz
+          if git diff --staged --quiet; then
+            echo "inst.npz 沒有變化，不提交。"
+          else
+            git commit -m "data(X-8b): 回補逐檔法人買賣超 $(TZ=Asia/Taipei date +%F)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
