@@ -1,0 +1,134 @@
+# ============================================================================
+# backfill_chips.yml ─ 三大法人買賣超 ＋ 信用交易 一年回補（八片平行）　X-10
+#
+#   ⚠️ 放哪：**StaticWebPage** repo 的 .github/workflows/backfill_chips.yml
+#            （跟 daily.yml／backfill_inst.yml 同一個資料夾。
+#              CustomerServiceANDSales 沒有 .github，2026-09-02 已確認過）
+#   搭配：backfill_chips.py ＋ merge_chips_raw.py 放 CustomerServiceANDSales 根目錄
+#   怎麼跑：GitHub → StaticWebPage → Actions →「回補籌碼序列」→ Run workflow
+#
+#   ── 做什麼 ──────────────────────────────────────────────────────
+#   把 `data/series_hist.json` 從 40 天補到一年。補完之後
+#   「三大法人買賣超」與「信用交易」那兩張同軸對照圖的天數鈕才會從
+#   「近20日／全部」長成「20／30／60／120／全部」。
+#   前端不用改（overlayBox 本來就會照序列長度長按鈕）。
+#
+#   ── 跟 backfill_inst.yml 的差別 ──────────────────────────────────
+#   1. 抓的是 BFI82U（三大法人買賣金額統計，整體不分檔）
+#      ＋ MI_MARGN selectType=MS（融資融券餘額增減），都是**每天一列**，
+#      不是逐檔，所以產物很小。
+#   2. merge 直接改寫 `data/series_hist.json`，不留中間檔 ——
+#      寫入邏輯（第一手優先、天數只能增不能減）在 merge_chips_raw.py 裡。
+#
+#   ── 配額 ────────────────────────────────────────────────────────
+#   TWSE 懸崖綁**出口 IP**（本機 168 發、Colab 66~88 發）。
+#   一年約 260 個平日 × 2 支端點 = 520 發，八片各 ~65 發，都在懸崖以下。
+#   🔴 不要把片數調小 —— 少於六片單片就超過 87 發，開始撞牆。
+#   可重複執行：已經在 series_hist.json 裡的日子 merge 會跳過，
+#   撞牆的片重跑會接著補。
+#
+#   ── 跟 daily.yml 的併發關係 ────────────────────────────────────
+#   merge job 掛同一個 concurrency group，回補的提交排在每日班後面。
+#   crawl 那八片不 push，不進這個 group，照樣平行跑。
+# ============================================================================
+name: 回補籌碼序列
+
+on:
+  workflow_dispatch:
+    inputs:
+      years:
+        description: "往回抓幾年（0.5 = 半年）"
+        required: false
+        default: "1"
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false          # 一片撞牆不要拖累其他七片
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}   # ⚠️ 名稱要跟 daily.yml 一致
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # engines.py 頂層 import requests / feedparser（它同時是 LINE 機器人的引擎）
+      - run: pip install requests feedparser certifi
+
+      - name: 抓片 ${{ matrix.shard }}
+        working-directory: code
+        run: |
+          python backfill_chips.py \
+            --shard ${{ matrix.shard }} --of 8 \
+            --years ${{ inputs.years }} \
+            --out ../out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: chips-${{ matrix.shard }}
+          path: out/
+          if-no-files-found: warn
+          retention-days: 1
+
+  merge:
+    needs: crawl
+    if: always()                # 就算有片失敗，成功的那幾片也要收進來
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: daily-build
+      cancel-in-progress: false
+    steps:
+      # 不帶 repository 就是這個 workflow 自己的 repo（StaticWebPage）
+      - uses: actions/checkout@v4
+
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: dl
+          pattern: chips-*
+          merge-multiple: true
+
+      - name: 併進 series_hist.json ＋ 逐條對帳
+        working-directory: code
+        run: |
+          python merge_chips_raw.py \
+            --raw ../dl \
+            --hist ../data/series_hist.json
+
+      - name: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/series_hist.json
+          if git diff --staged --quiet; then
+            echo "series_hist.json 沒有變化，不提交。"
+          else
+            git commit -m "data(X-10): 回補籌碼序列 $(TZ=Asia/Taipei date +%F)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
