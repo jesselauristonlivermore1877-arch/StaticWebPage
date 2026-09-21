@@ -1,0 +1,115 @@
+# ============================================================================
+# backfill_margin.yml ─ 逐檔融資融券餘額回補（八片平行）　N-32
+#
+#   ⚠️ 放哪：**StaticWebPage** repo 的 .github/workflows/backfill_margin.yml
+#            （跟 daily.yml／backfill_inst.yml 同一個資料夾）
+#   搭配：backfill_margin.py ＋ merge_margin_raw.py ＋ margin_bars.py
+#         放 CustomerServiceANDSales 根目錄
+#   怎麼跑：GitHub → StaticWebPage → Actions →「回補逐檔信用交易」→ Run workflow
+#
+#   形狀照抄 backfill_inst.yml：crawl 八片各自上傳 artifact，
+#   merge 一次寫進 data/bars/margin.npz、只 commit 一次，
+#   掛 daily-build 同一組 concurrency，排在每日班後面。
+#   中間檔走 artifact，不進 repo。
+# ============================================================================
+name: 回補逐檔信用交易
+
+on:
+  workflow_dispatch:
+    inputs:
+      years:
+        description: "往回抓幾年（0.6 ≈ 150 個交易日，夠 120 日窗）"
+        required: false
+        default: "0.6"
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install requests feedparser certifi numpy
+
+      - name: 抓片 ${{ matrix.shard }}
+        working-directory: code
+        run: |
+          python backfill_margin.py \
+            --shard ${{ matrix.shard }} --of 8 \
+            --years ${{ inputs.years }} \
+            --out ../out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: margin-${{ matrix.shard }}
+          path: out/
+          if-no-files-found: warn
+          retention-days: 1
+
+  merge:
+    needs: crawl
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: daily-build
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install numpy requests feedparser
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: dl
+          pattern: margin-*
+          merge-multiple: true
+
+      - name: 併進 margin.npz ＋ 逐格驗證
+        working-directory: code
+        run: |
+          python merge_margin_raw.py \
+            --raw ../dl \
+            --npz ../data/bars/margin.npz
+
+      - name: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/bars/margin.npz
+          if git diff --staged --quiet; then
+            echo "margin.npz 沒有變化，不提交。"
+          else
+            git commit -m "data(N-32): 回補逐檔信用交易 $(TZ=Asia/Taipei date +%F)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
