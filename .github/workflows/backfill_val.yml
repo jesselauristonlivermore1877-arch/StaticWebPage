@@ -1,0 +1,124 @@
+# ============================================================================
+# backfill_val.yml ─ 逐檔本益比五年回補（十六片平行）→ data/bars/val.npz
+#
+#   ⚠️ 放哪：**StaticWebPage** repo 的 .github/workflows/backfill_val.yml
+#   搭配：val_bars.py 放 CustomerServiceANDSales 根目錄（engines.py 旁邊）
+#   怎麼跑：GitHub → StaticWebPage → Actions →「回補本益比」→ Run workflow
+#
+#   形狀照抄 backfill_orders.yml。五年約 1,250 個交易日 × 上市上櫃各一發，
+#   所以是**十六片**不是八片：每片上市 ~80 發、上櫃 ~80 發，都在懸崖（~168）以下。
+#   不要把片數調小。
+#
+#   可重複執行：val.npz 已經有（上市上櫃都齊）的日子不再打；
+#   日K庫涵蓋區間內的休市日也不打。撞牆的片下次接著補。
+#   merge 最後印驗收表 —— 那段 log 貼回來。
+# ============================================================================
+name: 回補本益比
+
+on:
+  workflow_dispatch:
+    inputs:
+      years:
+        description: "往回抓幾年"
+        required: false
+        default: "5"
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    steps:
+      - name: 取出網頁 repo（只為了知道哪些日子已經有了）
+        uses: actions/checkout@v4
+        with:
+          path: site
+
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install requests feedparser certifi numpy
+
+      - name: 抓片 ${{ matrix.shard }}
+        working-directory: code
+        run: |
+          python val_bars.py \
+            --shard ${{ matrix.shard }} --of 16 \
+            --years ${{ inputs.years }} \
+            --have ../site/data \
+            --out ../out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: val-${{ matrix.shard }}
+          path: out/
+          if-no-files-found: warn
+          retention-days: 1
+
+  merge:
+    needs: crawl
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: daily-build
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install requests feedparser certifi numpy
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: dl
+          pattern: val-*
+          merge-multiple: true
+
+      - name: 合併進 data/bars/val.npz（驗收表這段 log 貼回來）
+        working-directory: code
+        run: python val_bars.py --merge ../data ../dl
+
+      - name: 河流圖試算（不寫檔，只印對帳數字）
+        working-directory: code
+        continue-on-error: true
+        run: python river.py ../data
+
+      - name: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/bars/val.npz
+          if git diff --staged --quiet; then
+            echo "沒有新增任何一天，不提交。"
+          else
+            git commit -m "data: 回補本益比 $(TZ=Asia/Taipei date +%F)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
