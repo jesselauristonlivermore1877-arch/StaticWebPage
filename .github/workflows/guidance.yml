@@ -1,0 +1,77 @@
+# ============================================================================
+# guidance.yml ─ 法說與報告擷取（每週六台北 10:00；也可手動按）
+#
+#   ⚠️ 放哪：**StaticWebPage** repo 的 .github/workflows/guidance.yml
+#   搭配：guidance.py 放 CustomerServiceANDSales 根目錄
+#   需要：StaticWebPage → Settings → Secrets → GEMINI_API_KEY（2026-09-22 已放）
+#
+#   已處理過的文件記在 data/guidance.json，不會重送 Gemini；免費層撞到每日上限就存檔收工，
+#   下一次接著跑。第一次會比較久（156 檔的最新一場法說 ＋ 近半年報告），之後每週只跑新的。
+#   跟 daily.yml 同一個 concurrency group，不會對撞。
+# ============================================================================
+name: 法說與報告擷取
+
+on:
+  workflow_dispatch:
+    inputs:
+      max:
+        description: "這次最多送幾份給 Gemini"
+        required: false
+        default: "150"
+  schedule:
+    - cron: "0 2 * * 6"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-build
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: site
+
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install requests feedparser certifi numpy
+
+      - name: 擷取（這段 log 貼回來）
+        working-directory: code
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python guidance.py ../site/data --max ${{ inputs.max || '150' }}
+
+      - name: 河流圖前瞻試算（不寫檔，只印對帳數字）
+        working-directory: code
+        continue-on-error: true
+        run: python river.py ../site/data
+
+      - name: commit
+        working-directory: site
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/guidance.json
+          if git diff --staged --quiet; then
+            echo "沒有新東西，不提交。"
+          else
+            git commit -m "data: 法說與報告擷取 $(TZ=Asia/Taipei date +%F)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
