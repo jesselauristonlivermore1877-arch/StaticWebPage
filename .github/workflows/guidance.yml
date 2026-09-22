@@ -1,5 +1,5 @@
 # ============================================================================
-# guidance.yml ─ 法說與報告擷取（每週六台北 10:00；也可手動按）
+# guidance.yml ─ 法說與報告擷取（每天台北 10:00；也可手動按）
 #
 #   ⚠️ 放哪：**StaticWebPage** repo 的 .github/workflows/guidance.yml
 #   搭配：guidance.py 放 CustomerServiceANDSales 根目錄
@@ -19,7 +19,7 @@ on:
         required: false
         default: "150"
   schedule:
-    - cron: "0 2 * * 6"
+    - cron: "0 2 * * *"      # 每天台北 10:00（免費層每日額度每天重置；補完之後每天只會跑到新的）
 
 permissions:
   contents: write
