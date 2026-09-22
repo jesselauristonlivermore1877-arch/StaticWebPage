@@ -58,8 +58,10 @@ jobs:
 
       - name: 擷取（這段 log 貼回來）
         working-directory: code
+        continue-on-error: true           # 中途出錯也要往下走到 commit，不然整輪白做
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GUIDANCE_BUDGET_MIN: "90"       # 程式自己在 90 分鐘收工（job 時限 120）
         run: python guidance.py ../site/data --max ${{ inputs.max || '150' }}
 
       - name: 河流圖前瞻試算（不寫檔，只印對帳數字）
@@ -68,11 +70,12 @@ jobs:
         run: python river.py ../site/data
 
       - name: commit
+        if: always()                      # 失敗、手動取消也照樣把已經做完的存回去
         working-directory: site
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/guidance.json
+          git add -A data/guidance.json docs/data/ir
           if git diff --staged --quiet; then
             echo "沒有新東西，不提交。"
           else
