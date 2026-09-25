@@ -1,15 +1,15 @@
 {
  "file": "gemini_weekly_2026-09-27.md",
- "checked_at": "2026-09-25T14:15:14+00:00",
+ "checked_at": "2026-09-25T14:22:27+00:00",
  "offline": false,
  "min_rate": 0.7,
  "n": 19,
  "summary": {
-  "通過": 1,
-  "失敗": 15,
+  "通過": 0,
+  "失敗": 16,
   "無法驗證": 3
  },
- "rate": 0.053,
+ "rate": 0.0,
  "show": false,
  "items": [
   {
@@ -117,7 +117,7 @@
    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm",
    "date": "2026-09-16",
    "http": 200,
-   "title": "Federal Reserve Board - Federal Reserve issues FOMC statement",
+   "title": "Federal Reserve Board - Federal Reserve issues FOMC statement ‖ Board of Governors of the Federal Reserve System The Federal Open Market Committee approved the following statement for release by a 12 &#8211; 0 vote: The Committee decided to raise the target range for the Federal Reserve issues FOMC statement The Federal Open Market Committee approved the following statement for release by a 12 &#8211; 0 vote: The Committee decided to raise the target range for",
    "keywords": [
     "Warsh"
    ],
@@ -139,7 +139,7 @@
    "url": "https://www.bloomberg.com/news/articles/2026-09-22/trump-slams-fed-rate-hike",
    "date": "2026-09-22",
    "http": 403,
-   "title": "Bloomberg - Are you a robot?",
+   "title": "Bloomberg - Are you a robot? ‖ Bloomberg",
    "keywords": [
     "FOMC",
     "Fed ",
@@ -200,17 +200,20 @@
    "event": "3. 美中磋商與關稅：釜山協議休戰順延兩個月，AI 首度列入對話",
    "sub": "關鍵人物說了什麼",
    "status": "失敗",
-   "reason": "HTTP 404",
+   "reason": "頁面主題不符：人名／關鍵字只出現在內文或側欄，標題是「Latest Breaking News Videos | Fox News Video」",
    "url": "https://www.foxnews.com/video/bessent-us-china-trade-talks-sept-2026",
    "date": "2026-09-23",
-   "http": 404,
-   "title": "404 - Server Error | Nuxt",
+   "http": 200,
+   "title": "Latest Breaking News Videos | Fox News Video ‖ Fox News Videos  Discover the latest breaking news videos from Fox News. From politics to entertainment Fox News has the most up-to-date videos that you can watch now. Latest Breaking News Videos | Fox News Video Discover the latest breaking news videos from Fox News. From politics to entertainment Fox News has the most up-to-date videos that you can watch now. Latest Breaking News Videos | Fox Ne",
    "keywords": [
     "Bessent",
     "Busan",
     "Scott Bessent"
    ],
-   "matched": [],
+   "matched": [
+    "Bessent",
+    "Scott Bessent"
+   ],
    "quotes": [
     "我們已經同意，將我們所稱"
    ],
@@ -265,7 +268,7 @@
    "url": "https://www.aljazeera.com/news/2026/9/25/un-talks-iran-us-strait-of-hormuz",
    "date": "2026-09-25",
    "http": 404,
-   "title": "404 - Page not found",
+   "title": "404 - Page not found ‖ Page not found",
    "keywords": [
     "Hormuz",
     "Iran"
@@ -279,12 +282,12 @@
    "id": "4.2",
    "event": "4. 地緣政治：霍爾木茲海峽封鎖僵局與紐約停火穿梭談判",
    "sub": "關鍵人物說了什麼",
-   "status": "通過",
-   "reason": "HTTP 200，頁面含 Araghchi、Hormuz、Iran",
+   "status": "失敗",
+   "reason": "頁面主題不符：人名／關鍵字只出現在內文或側欄，標題是「Hezbollah uses Fadi-3 missile in attacking Israel - Mehr New」",
    "url": "https://en.mehrnews.com/news/221845/",
    "date": "2026-09-24",
    "http": 200,
-   "title": "Hezbollah uses Fadi-3 missile in attacking Israel - Mehr News Agency",
+   "title": "Hezbollah uses Fadi-3 missile in attacking Israel - Mehr News Agency ‖ Hezbollah uses Fadi-3 missile in attacking Israel Hezbollah uses Fadi-3 missile in attacking Israel TEHRAN, Sep. 24 (MNA) – Hezbollah said its forces fired a Fadi-3 surface-to-surface missile for the first time on Tuesday as they attacked military sites in northern occupied Palestine. Hezbollah uses Fadi-3 missile in attacking Israel TEHRAN, Sep. 24 (MNA) – Hezbollah said its forces fired a Fadi-3",
    "keywords": [
     "Abbas Araghchi",
     "Araghchi",
@@ -348,7 +351,7 @@
    "url": "https://www.goldmansachs.com/insights/pages/communacopia-technology-conference-2026.html",
    "date": "2026-09-24",
    "http": 404,
-   "title": "404 | Goldman Sachs",
+   "title": "404 | Goldman Sachs ‖ Page Not Found 404",
    "keywords": [
     "CapEx",
     "Goldman"
@@ -367,7 +370,7 @@
    "url": "https://nvidianews.nvidia.com/news/events-presentations-2026",
    "date": "2026-09-10 / 2026-09-24",
    "http": 200,
-   "title": "News Archive | NVIDIA Newsroom",
+   "title": "News Archive | NVIDIA Newsroom ‖ News Archive Browse and search for NVIDIA latest news and archive news by month, year or category. News Archive News Archive",
    "keywords": [
     "CoWoS",
     "Goldman",
@@ -406,5 +409,6 @@
    "text": "科技資本市場對 AI 概念股實施嚴格的業績分流驗證；真正掌握實質產能的硬體供應鏈獲法人買盤支撐，純靠題材炒作但無營收兌現能力的邊緣個股股價重挫。"
   }
  ],
- "md_sha": "3488e01f1108ce553648db7c02071172b7cdf101"
+ "md_sha": "3488e01f1108ce553648db7c02071172b7cdf101",
+ "v": 2
 }
