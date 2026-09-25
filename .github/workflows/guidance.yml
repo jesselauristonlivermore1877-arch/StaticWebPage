@@ -19,6 +19,10 @@ on:
         description: "這次最多送幾份給 Gemini"
         required: false
         default: "150"
+      compare:
+        description: "1＝這次只做 lite vs flash 品質比對（不擷取新文件、不改既有結果）"
+        required: false
+        default: "0"
   schedule:
     - cron: "0 2 * * *"      # 每天台北 10:00（免費層每日額度每天重置；補完之後每天只會跑到新的）
 
@@ -62,6 +66,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GUIDANCE_BUDGET_MIN: "90"       # 程式自己在 90 分鐘收工（job 時限 120）
+          GUIDANCE_COMPARE: ${{ inputs.compare || '0' }}
         run: python guidance.py ../site/data --max ${{ inputs.max || '150' }}
 
       - name: 河流圖前瞻試算（不寫檔，只印對帳數字）
