@@ -1033,35 +1033,43 @@
 "fail": {
 "gooaye:07a93403-e26a-4a8b-a53a-497aa4e9ca20": {
 "at": "2026-09-26",
-"err": "JSONDecodeError: Unterminated string starting at: line 149 column 15 (char 8623)"
+"err": "FileNotFoundError: [Errno 2] No such file or directory: 'ffmpeg'"
 },
 "gooaye:fd5c07ef-4122-424e-8567-baad5d2b8b7d": {
 "at": "2026-09-26",
-"err": "JSONDecodeError: Unterminated string starting at: line 105 column 15 (char 6373)"
+"err": "FileNotFoundError: [Errno 2] No such file or directory: 'ffmpeg'"
 },
 "gooaye:184c0e0e-4e66-4273-a4ab-111451d2993d": {
 "at": "2026-09-26",
-"err": "JSONDecodeError: Expecting value: line 28 column 11 (char 1185)"
+"err": "FileNotFoundError: [Errno 2] No such file or directory: 'ffmpeg'"
 },
 "gooaye:bfdf7f30-6031-4eef-a689-16129f261d10": {
 "at": "2026-09-26",
-"err": "JSONDecodeError: Unterminated string starting at: line 237 column 15 (char 10973)"
+"err": "FileNotFoundError: [Errno 2] No such file or directory: 'ffmpeg'"
 },
 "gooaye:8523446e-c80a-4aac-a9cd-34adad88e4c2": {
 "at": "2026-09-26",
-"err": "JSONDecodeError: Unterminated string starting at: line 1 column 103029 (char 103028)"
+"err": "FileNotFoundError: [Errno 2] No such file or directory: 'ffmpeg'"
 },
 "gooaye:dcff9355-4c66-4b25-8afc-bf70ffd57d0a": {
 "at": "2026-09-26",
-"err": "JSONDecodeError: Unterminated string starting at: line 9 column 15 (char 581)"
+"err": "FileNotFoundError: [Errno 2] No such file or directory: 'ffmpeg'"
 },
 "yutinghao:Xlj2cBFC7_s": {
 "at": "2026-09-26",
-"err": "JSONDecodeError: Invalid control character at: line 5 column 5532 (char 5575)"
+"err": "ReadTimeout: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=900)"
 },
 "yutinghao:U4RH_CPe3GQ": {
 "at": "2026-09-26",
 "err": "JSONDecodeError: Expecting ',' delimiter: line 15 column 2 (char 8245)"
+},
+"gooaye:eb3399a6-5fd2-4191-a7ae-b7ab77ec2358": {
+"at": "2026-09-26",
+"err": "FileNotFoundError: [Errno 2] No such file or directory: 'ffmpeg'"
+},
+"gooaye:8001cf1a-4104-4db2-b349-447f2866da76": {
+"at": "2026-09-26",
+"err": "FileNotFoundError: [Errno 2] No such file or directory: 'ffmpeg'"
 }
 }
 }
