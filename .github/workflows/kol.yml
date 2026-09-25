@@ -1,0 +1,63 @@
+# kol.yml ─ 信息流「財經意見領袖追蹤」（2026-09-25）
+#   股癌（Podcast 公開 RSS 的 mp3）、游庭皓的財經皓角（YouTube）→ Gemini 擷取提及的產業／個股＋原話與時間點，
+#   原話要對到同一集的語音時間點才上網頁（kol.py）。逐字稿只在記憶體裡查核，不寫檔。
+#   只寫 data/kol/kol.json 與 docs/data/kol.json；獨立一組 concurrency（跑得久，不卡每日班），push 前 pull --rebase。
+name: 財經意見領袖
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "回補幾天（預設 28＝4 週）"
+        required: false
+        default: "28"
+      max:
+        description: "這班最多處理幾集"
+        required: false
+        default: "8"
+  schedule:
+    - cron: "40 0 * * *"       # 每天台北 08:40
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kol
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: site
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install requests feedparser numpy
+      - name: 擷取
+        working-directory: code
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PYTHONUNBUFFERED: "1"
+        run: python kol.py ../site/data --days "${{ inputs.days || '28' }}" --max "${{ inputs.max || '8' }}"
+      - name: 提交
+        working-directory: site
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/kol docs/data/kol.json 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "沒有變動，不提交。"
+          else
+            git commit -m "data: 財經意見領袖 $(TZ=Asia/Taipei date +%F)"
+            for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 10; done
+          fi
