@@ -1,0 +1,56 @@
+# macro.yml ─ 信息流「世界趨勢」（總清單 3.5，2026-09-26）
+#   FRED 總經一年走勢 ＋ 關鍵人物／議題新聞（Gemini；grounding 叫不動就走 Google News RSS）。
+#   獨立一班，跟盤後 daily 的失效域分開（它掛掉不影響網站其他區塊）；只寫 data/macro_flow.json 與 docs/data/macro.json。
+#   需要：GEMINI_API_KEY（已有）；FRED_API_KEY 選配（沒有就走 FRED 公開 CSV）。
+name: 世界趨勢
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 23 * * *"      # 每天台北 07:15（開盤前）
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-build
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: site
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install requests feedparser googlenewsdecoder
+      - name: 世界趨勢
+        working-directory: code
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          PYTHONUNBUFFERED: "1"
+        run: python macro_flow.py ../site/data
+      - name: 提交
+        working-directory: site
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/macro_flow.json docs/data/macro.json
+          if git diff --staged --quiet; then
+            echo "沒有變動，不提交。"
+          else
+            git commit -m "data: 世界趨勢 $(TZ=Asia/Taipei date +%F)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
