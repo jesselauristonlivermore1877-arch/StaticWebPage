@@ -1,0 +1,49 @@
+# 雲端探針（2026-09-26）：雲端 Claude Code 的容器連不到證交所／投信／FRED，
+# 要打外部資料源的診斷就在這裡跑 —— 手動觸發、跑程式 repo 裡的一行 Python、**不 commit 任何東西**。
+# 例：cmd = python -c "import pcf.base as b; b.VERBOSE=True; import pcf.mega as m; print(m.fetch('00996A'))"
+name: 雲端探針（唯讀）
+
+on:
+  workflow_dispatch:
+    inputs:
+      cmd:
+        description: "在程式 repo 根目錄執行的指令（python ...）"
+        required: true
+      ref:
+        description: "程式 repo 的分支"
+        required: false
+        default: "main"
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 取出網頁 repo（唯讀，給需要 data/ 的探針用）
+        uses: actions/checkout@v4
+        with:
+          path: site
+      - name: 取出程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          ref: ${{ inputs.ref }}
+          path: code
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: 安裝套件
+        run: pip install requests feedparser pandas numpy yfinance curl-cffi openpyxl
+      - name: 執行
+        working-directory: code
+        env:
+          CMD: ${{ inputs.cmd }}
+          PYTHONUNBUFFERED: "1"
+        run: |
+          echo "▶ $CMD"
+          bash -c "$CMD"
