@@ -1,0 +1,112 @@
+# ============================================================================
+# backfill_elecfin.yml ─ 電金比（電子工業類÷金融保險類指數）回補（八片平行）
+#
+#   ⚠️ 放哪：**StaticWebPage** repo 的 .github/workflows/backfill_elecfin.yml
+#   搭配：elecfin.py 放 CustomerServiceANDSales 根目錄（engines.py 旁邊）
+#   怎麼跑：GitHub → StaticWebPage → Actions →「回補電金比」→ Run workflow
+#
+#   形狀照抄 backfill_bars.yml（雷區：TWSE 懸崖綁出口 IP，八片各 ~65 發都在懸崖以下；
+#   不要把片數調小）。八片不 push、各自上傳 artifact，merge 只 commit 一次，
+#   而且跟 daily.yml 同一個 concurrency group，不會對撞。
+#
+#   可重複執行：已經在 data/elecfin_hist.json 的日子保留，撞牆的片下次接著補。
+# ============================================================================
+name: 回補電金比
+
+on:
+  workflow_dispatch:
+    inputs:
+      years:
+        description: "往回抓幾年"
+        required: false
+        default: "2"
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install requests feedparser certifi
+
+      - name: 抓片 ${{ matrix.shard }}
+        working-directory: code
+        run: |
+          python elecfin.py \
+            --shard ${{ matrix.shard }} --of 8 \
+            --years ${{ inputs.years }} \
+            --out ../out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elecfin-${{ matrix.shard }}
+          path: out/
+          if-no-files-found: warn
+          retention-days: 1
+
+  merge:
+    needs: crawl
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: daily-build
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install requests feedparser certifi
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: dl
+          pattern: elecfin-*
+          merge-multiple: true
+
+      - name: 合併進 data/elecfin_hist.json
+        working-directory: code
+        run: python elecfin.py --merge ../data ../dl
+
+
+      - name: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/elecfin_hist.json
+          if git diff --staged --quiet; then
+            echo "沒有新增任何一天，不提交。"
+          else
+            git commit -m "data: 回補電金比 $(TZ=Asia/Taipei date +%F)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
