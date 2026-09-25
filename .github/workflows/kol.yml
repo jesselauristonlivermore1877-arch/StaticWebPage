@@ -43,6 +43,8 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install requests feedparser numpy
+      - name: 安裝 ffmpeg（Podcast 切段用；ubuntu-24.04 映像檔沒有內建）
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null && ffmpeg -version | head -1
       - name: 擷取
         working-directory: code
         env:
