@@ -6,6 +6,11 @@ name: 世界趨勢
 
 on:
   workflow_dispatch:
+    inputs:
+      weekly_force:
+        description: "1＝今天就組週報（平常只有週日組）"
+        required: false
+        default: "0"
   schedule:
     - cron: "15 23 * * *"      # 每天台北 07:15（開盤前）
 
@@ -41,6 +46,8 @@ jobs:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           # 新聞來源：空白＝RSS（預設）；開了 Gemini 計費後到 Settings › Variables 設 MACRO_MODE=grounding
           MACRO_MODE: ${{ vars.MACRO_MODE }}
+          # 週報每週日自動組；手動觸發時 weekly_force=1 可以今天就組（測試用）
+          WEEKLY_FORCE: ${{ inputs.weekly_force }}
           PYTHONUNBUFFERED: "1"
         run: python macro_flow.py ../site/data
       - name: 提交
@@ -48,7 +55,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/macro_flow.json docs/data/macro.json data/weekly/*.verify.json 2>/dev/null || git add data/macro_flow.json docs/data/macro.json
+          git add data/macro_flow.json docs/data/macro.json data/weekly
           if git diff --staged --quiet; then
             echo "沒有變動，不提交。"
           else
