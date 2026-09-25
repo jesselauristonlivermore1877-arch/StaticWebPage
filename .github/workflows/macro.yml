@@ -39,6 +39,8 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          # 新聞來源：空白＝RSS（預設）；開了 Gemini 計費後到 Settings › Variables 設 MACRO_MODE=grounding
+          MACRO_MODE: ${{ vars.MACRO_MODE }}
           PYTHONUNBUFFERED: "1"
         run: python macro_flow.py ../site/data
       - name: 提交
