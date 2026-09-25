@@ -1169,7 +1169,10 @@ footer p{margin:4px 0}
       <div><h4>授權</h4><ul>
         <li id="ft-lic">本站內容僅供研究與資訊參考，不構成任何投資建議或要約。原始資料之權利屬各來源（臺灣證券交易所、證券櫃檯買賣中心、臺灣期貨交易所、公開資訊觀測站及各公司）。本站之整理、計算與圖表 © 2026 觀市 MarketWatch，未經書面同意不得轉載或作商業使用。</li>
       </ul>
-      <h4 style="margin-top:10px">聯絡</h4><ul><li id="ft-contact">—</li></ul></div>
+      <h4 style="margin-top:10px">聯絡</h4><ul>
+        <li>聯絡我們：<a id="ft-contact" href="mailto:JesseLauristonLivermore1877@gmail.com">JesseLauristonLivermore1877@gmail.com</a></li>
+        <li><a id="ft-feedback" href="mailto:JesseLauristonLivermore1877@gmail.com?subject=%E8%A7%80%E5%B8%82%20MarketWatch%20%E6%84%8F%E8%A6%8B%E5%9B%9E%E9%A5%8B">意見回饋</a>（開啟郵件，主旨已預填）</li>
+      </ul></div>
     </div>
     <p id="foot-note">—</p>
     <p class="ft-disc" id="foot-disc">—</p>
@@ -1826,12 +1829,13 @@ document.getElementById("foot-note").textContent =
 document.getElementById("foot-disc").textContent = D.meta.disclaimer + "。本站不提供個股買賣建議。" +
   "本站所有內容僅為公開資訊的整理與量化統計，不構成任何投資建議、要約或招攬；" +
   "資料可能因來源延遲、更正或程式錯誤而有誤，請以各資料提供者公告為準。投資有風險，盈虧自負。";
-// 🟢 2026-09-26：聯絡方式由 build_web 的 meta.contact 帶（環境變數 SITE_CONTACT），沒設就寫「尚未公開」
+// 🟢 2026-09-26：聯絡信箱 09-25 Evans 定（JesseLauristonLivermore1877@gmail.com，直接寫在頁尾）。
+//    meta.contact（環境變數 SITE_CONTACT）有設就覆蓋，「聯絡我們」與「意見回饋」一起換；意見回饋主旨固定「觀市 MarketWatch 意見回饋」。
 (function () {
-  const c = D.meta.contact, e = document.getElementById("ft-contact");
-  if (!e) return;
-  if (c && /^[^@\s]+@[^@\s]+$/.test(c)) e.innerHTML = `<a href="mailto:${esc(c)}">${esc(c)}</a>`;
-  else e.textContent = c ? String(c) : "尚未公開";
+  const c = D.meta.contact, e = document.getElementById("ft-contact"), f = document.getElementById("ft-feedback");
+  if (!e || !c || !/^[^@\s]+@[^@\s]+$/.test(c)) return;
+  e.href = "mailto:" + c; e.textContent = c;
+  if (f) f.href = "mailto:" + c + "?subject=" + encodeURIComponent("觀市 MarketWatch 意見回饋");
 })();
 
 // 🟢 GEA 2026-08-20（G-1b）：軸的最後一天 ≠ 權威交易日，就把整頁標成過期。
