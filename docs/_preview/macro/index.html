@@ -1009,6 +1009,16 @@ footer p{margin:4px 0}
 .mf-tl b{font-family:var(--mono);font-weight:600;color:var(--ink-2);margin-right:6px}
 .mf-wk{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:6px 12px}
 .mf-wk h1,.mf-wk h2,.mf-wk h3{font-size:15px;margin:10px 0 4px} .mf-wk p,.mf-wk li{font-size:13.5px;line-height:1.7}
+.tl-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0 10px;font-size:13px;color:var(--ink-2)}
+.tl-bar select{font:inherit;font-size:13px;padding:3px 8px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink-1)}
+.tl-grp{margin:10px 0 4px;font-weight:800;font-size:14.5px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.tl-grp small{font-weight:500;color:var(--ink-3);font-size:12.5px}
+.tl-ev{display:grid;grid-template-columns:92px 54px minmax(0,1fr);gap:8px;align-items:baseline;padding:4px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.tl-ev b{font-family:var(--mono);font-weight:600;color:var(--ink-2)}
+.tl-k{font-size:11.5px;font-weight:800;border-radius:4px;padding:0 6px;text-align:center}
+.tl-k.ir{background:rgba(63,196,255,.16);color:var(--rv-fwd)} .tl-k.rp{background:rgba(255,176,32,.18);color:var(--rv-cy)} .tl-k.nw{background:var(--chip);color:var(--ink-2)}
+.tl-ev a{color:var(--acc)}
+@media (max-width:560px){ .tl-ev{grid-template-columns:78px minmax(0,1fr)} .tl-ev .tl-k{grid-column:1} .tl-ev > span:last-child{grid-column:1/-1} }
 .mf-demo{background:rgba(217,164,65,.14);border:1px dashed var(--acc);border-radius:8px;padding:6px 10px;font-size:13px;margin:6px 0}
 
 .rv-key{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--ink-2);margin:6px 0 4px;align-items:center}
@@ -1114,7 +1124,7 @@ footer p{margin:4px 0}
 </style>
 </head>
 <body>
-<div style="position:relative;z-index:30;background:#7a4b00;color:#fff;font:13px/1.5 sans-serif;padding:4px 10px;white-space:normal">預覽（未上線）：信息流（含手機版修正）：頂層新頁籤「信息流」→ 世界趨勢（總經七格一年走勢、關鍵人物、議題時間軸）。資料是 09-25 真資料（世界趨勢那一班）。</div>
+<div style="position:relative;z-index:30;background:#7a4b00;color:#fff;font:13px/1.5 sans-serif;padding:4px 10px;white-space:normal">預覽（未上線）：信息流（含手機版修正）：頂層新頁籤「信息流」→ 世界趨勢（總經、人物、議題）＋ 個股／族群時間軸（第 7 項）。資料是 09-25 真資料。</div>
 
 <header>
   <div class="wrap hbar">
@@ -7531,6 +7541,61 @@ function worldTrend(M) {
     "川普的 Truth Social 等社群發言只透過新聞報導間接收錄。僅供參考，不具任何臆測，非投資建議。"));
   return w;
 }
+/* 🟢 2026-09-26（總清單 7）：信息流時間軸 —— 法說（重點句）、券商報告（評等／目標價）、世界趨勢新聞（有族群標籤的），
+   依個股或族群分組。料全部是已公開的檔：data/ir/index.json、data/broker.json、data/macro.json。點開才載。tl- 前綴。 */
+function infoTimeline() {
+  const root = el("div");
+  root.appendChild(el("div", "sub", "時間軸載入中…"));
+  Promise.all([irLoadIdx(), bkLoad(), mfLoad()]).then(([I, B, M]) => {
+    root.innerHTML = "";
+    const BM = (D.screen || {}).big_map || {}, U = (D.screen || {}).universe || {};
+    const nm = c => (U[c] || {}).name || c;
+    const EV = [];
+    ((I || {}).list || []).forEach(x => EV.push({d: x.date, k: "ir", code: x.code, name: x.name || nm(x.code), big: BM[x.code] || x.sec || "其他",
+      t: x.head || x.note || "法說會", extra: x.source ? `（${x.source}${x.tr ? "・有逐字稿" : ""}）` : ""}));
+    Object.entries((B || {}).stocks || {}).forEach(([c, v]) => (v.rep || []).forEach(r => EV.push({d: r.date, k: "rp", code: c, name: nm(c), big: BM[c] || "其他",
+      t: `${r.src || "報告"}${r.rating ? "　" + r.rating : ""}${r.tp != null ? "　目標價 " + nf(r.tp, 0) : ""}`,
+      extra: r.eps ? "　" + Object.entries(r.eps).map(([y, e]) => y + "E " + nf(e, 2)).join("、") : ""})));
+    ((M || {}).news || []).forEach(x => (x.sectors || []).forEach(sec => EV.push({d: x.date, k: "nw", code: null, name: null, big: sec,
+      t: x.title, url: x.url, extra: x.source ? `（${x.source}）` : ""})));
+    if (!EV.length) { root.appendChild(el("div", "empty", "還沒有法說、報告或新聞。")); return; }
+    let DAYS = 30, BY = "stock", BIG = "", KINDS = new Set(["ir", "rp", "nw"]);
+    const bigs = [...new Set(EV.map(e => e.big))].sort();
+    const bar = el("div", "tl-bar"), body = el("div");
+    const draw = () => {
+      bar.innerHTML = ""; body.innerHTML = "";
+      [[7, "7 天"], [30, "30 天"], [90, "90 天"]].forEach(([n, t]) => { const b = el("button", "rv-pill" + (DAYS === n ? " on" : ""), t); b.onclick = () => { DAYS = n; draw(); }; bar.appendChild(b); });
+      bar.appendChild(el("span", "", "　分組"));
+      [["stock", "依個股"], ["big", "依族群"]].forEach(([k, t]) => { const b = el("button", "rv-pill" + (BY === k ? " on" : ""), t); b.onclick = () => { BY = k; draw(); }; bar.appendChild(b); });
+      bar.appendChild(el("span", "", "　類型"));
+      [["ir", "法說"], ["rp", "報告"], ["nw", "新聞"]].forEach(([k, t]) => { const b = el("button", "rv-pill" + (KINDS.has(k) ? " on" : ""), t);
+        b.onclick = () => { KINDS.has(k) ? KINDS.delete(k) : KINDS.add(k); if (!KINDS.size) KINDS.add(k); draw(); }; bar.appendChild(b); });
+      const sel = el("select"); sel.appendChild(new Option("全部族群", "")); bigs.forEach(b => sel.appendChild(new Option(b, b)));
+      sel.value = BIG; sel.onchange = () => { BIG = sel.value; draw(); }; bar.appendChild(sel);
+      const since = new Date(Date.now() - DAYS * 864e5).toISOString().slice(0, 10);
+      const L = EV.filter(e => e.d >= since && KINDS.has(e.k) && (!BIG || e.big === BIG) && (BY === "big" || e.code));
+      const grp = {};
+      L.forEach(e => { const g = BY === "stock" ? e.code : e.big; (grp[g] = grp[g] || []).push(e); });
+      const keys = Object.keys(grp).sort((a, b) => {
+        const la = grp[a].reduce((m, e) => e.d > m ? e.d : m, ""), lb = grp[b].reduce((m, e) => e.d > m ? e.d : m, "");
+        return lb.localeCompare(la) || grp[b].length - grp[a].length; });
+      body.appendChild(el("div", "submeta", `${L.length} 則、${keys.length} 個${BY === "stock" ? "個股" : "族群"}（新的在上）${BY === "stock" ? "　新聞沒有對應個股，切「依族群」才看得到" : ""}`));
+      keys.slice(0, 60).forEach(k => {
+        const es = grp[k].sort((a, b) => b.d.localeCompare(a.d));
+        body.appendChild(el("div", "tl-grp", BY === "stock" ? `${esc(nm(k))} <small>${esc(k)}　${esc(es[0].big)}　${es.length} 則</small>` : `${esc(k)} <small>${es.length} 則</small>`));
+        es.slice(0, 8).forEach(e => body.appendChild(el("div", "tl-ev",
+          `<b>${esc(e.d)}</b><span class="tl-k ${e.k}">${({ir: "法說", rp: "報告", nw: "新聞"})[e.k]}</span>` +
+          `<span>${BY === "big" && e.code ? `<b style="font-family:inherit">${esc(e.name)}</b>　` : ""}${esc(e.t)}${esc(e.extra || "")}` +
+          `${e.url ? ` <a href="${esc(e.url)}" target="_blank" rel="noopener">↗</a>` : ""}</span>`)));
+      });
+      if (keys.length > 60) body.appendChild(el("div", "submeta", `還有 ${keys.length - 60} 組，縮短期間或選族群看。`));
+    };
+    root.appendChild(bar); root.appendChild(body); draw();
+    root.appendChild(el("div", "rv-note", "法說＝公開資訊觀測站的法說會（重點句由 AI 依官方錄音／簡報整理）；報告＝公開報告整理（目標價已依發布日還原除權）；新聞＝世界趨勢收錄、有標影響族群的那幾則。僅供參考，不具任何臆測。"));
+  });
+  return card("個股／族群時間軸", "法說、券商報告、新聞，依個股或族群排在同一條時間軸上", root);
+}
+
 function tabInfo() {
   const root = el("div");
   root.appendChild(el("div", "sub", "信息流載入中…"));
