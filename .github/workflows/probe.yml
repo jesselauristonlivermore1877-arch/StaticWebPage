@@ -44,6 +44,9 @@ jobs:
         env:
           CMD: ${{ inputs.cmd }}
           PYTHONUNBUFFERED: "1"
+          # 探針要測 Gemini／FRED 時用（跟 guidance.yml 同一把；FRED_API_KEY 還沒設時是空字串）
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: |
           echo "▶ $CMD"
           bash -c "$CMD"
