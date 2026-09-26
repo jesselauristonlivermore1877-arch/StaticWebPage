@@ -24,7 +24,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:
@@ -55,7 +55,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/macro_flow.json docs/data/macro.json data/weekly
+          git add data/macro_flow.json docs/data/macro.json data/weekly data/central_banks.json data/news_pool.json data/people_roles.json
           if git diff --staged --quiet; then
             echo "沒有變動，不提交。"
           else
