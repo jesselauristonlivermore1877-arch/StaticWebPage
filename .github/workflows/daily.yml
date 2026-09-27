@@ -106,6 +106,16 @@ jobs:
               print("::warning::缺這幾張：" + ", ".join(miss[:8]))
           PY
 
+      # 🟢 第六批（09-27）：處置股／個股行事曆／公司基本資料 → docs/data/{disposal,calendar,company}.json
+      # 全是證交所／櫃買／公開資訊觀測站官方 API。失敗就沿用上一份，不擋當天更新（continue-on-error）。
+      - name: 處置股・行事曆・基本資料
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 8
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python corp_events.py ../site/data
+
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
       # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。
       # （只有「不可能的數字」才會 exit 1；缺漏只是警告，不會擋。）
