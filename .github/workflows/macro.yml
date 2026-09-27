@@ -11,6 +11,10 @@ on:
         description: "1＝今天就組週報（平常只有週日組）"
         required: false
         default: "0"
+      retag:
+        description: "1＝只重新併本機分類（不打網路；本機 macro_tags 跑完用 gh 觸發）"
+        required: false
+        default: "0"
   schedule:
     - cron: "15 23 * * *"      # 每天台北 07:15（開盤前）
 
@@ -49,7 +53,13 @@ jobs:
           # 週報每週日自動組；手動觸發時 weekly_force=1 可以今天就組（測試用）
           WEEKLY_FORCE: ${{ inputs.weekly_force }}
           PYTHONUNBUFFERED: "1"
-        run: python macro_flow.py ../site/data
+        run: |
+          if [ "${{ inputs.retag }}" = "1" ]; then
+            echo "只重新併本機分類（data/macro_tags.json），不打網路"
+            python macro_flow.py ../site/data --retag
+          else
+            python macro_flow.py ../site/data
+          fi
       - name: 提交
         working-directory: site
         run: |
