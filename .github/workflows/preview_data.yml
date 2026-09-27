@@ -48,7 +48,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install requests feedparser
+      - run: pip install requests feedparser yfinance   # yfinance：FedWatch 自算（09-27）
 
       - name: 產出預覽資料與頁面
         working-directory: code
