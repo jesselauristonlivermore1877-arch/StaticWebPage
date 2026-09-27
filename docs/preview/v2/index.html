@@ -3550,7 +3550,7 @@ function infoTimeline() {
    數字一律官方（FRED；經濟指標、利率、匯率、油價、公司債利差），不用 AI；新聞分類讀本機產生的 data/macro_tags.json
    （macro_flow 併進 macro.json 的 news[].tags），沒標到的退回用世界趨勢原本的主題／人物對應。
    話語權人物：只客觀記錄發言內容、時間、出處，以及之後相關市場的走勢；頁面不寫任何評價。 */
-const IF_CATS = ["利率與央行", "經濟指標", "匯率", "地緣政治與戰爭", "科技與 AI", "話語權人物"];
+const IF_CATS = ["利率與央行", "經濟指標", "匯率", "地緣政治與戰爭", "科技與 AI", "話語權人物"];   // 資料欄位；畫面上「話語權人物」一律顯示為「意見領袖」（第六批 一-2）
 const IF_GROUPS = ["政治領袖", "央行與財經官員", "科技領袖", "投資大老", "財經網紅", "電視財經節目"];
 const IF_KEYCAT = {"Fed 降息預期": "利率與央行", "美債殖利率": "利率與央行", "地緣政治": "地緣政治與戰爭",
   "美中談判／關稅": "地緣政治與戰爭", "AI 資本支出": "科技與 AI"};
@@ -3723,13 +3723,23 @@ function ifResident(M, cats) {
   const wrap = el("div");
   if (!list.length) { wrap.appendChild(el("div", "empty", "常駐人物要等世界趨勢那一班跑過新版才會出現。")); return card("常駐人物", null, wrap); }
   const KIND = {role: "依職位", fixed: "指定", dynamic: "近 30 天聲量", promoted: "自動升格"};
+  // 🟢 第六批 一-3（Evans 09-27）：依流量排序 —— 流量＝近 30 天被新聞標題點名的則數（職位固定的人一起排）；
+  //    近 7 天的日均 > 前 23 天日均的 1.5 倍、且近 7 天 ≥ 3 則 → 加「↑」。
+  const lo30 = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10), lo7 = new Date(Date.now() - 7 * 864e5).toISOString().slice(0, 10);
+  // ↑ 要有「前 23 天」可比：資料最早一天要早於 7 天前再往前 14 天，不然每個人都會是 ↑（歷史發言才開始累積時就是這樣）
+  const hMin = Object.values((M.pool || {}).hist || {}).reduce((m, H) => H.length && H.at(-1)[0] < m ? H.at(-1)[0] : m, "9999");
+  const canUp = hMin <= new Date(Date.now() - 21 * 864e5).toISOString().slice(0, 10);
+  list.forEach(r => { const H = (r.zh || r.en) ? ifHistOf(M, r) : [];
+    r._n30 = H.filter(h => h.d >= lo30).length; r._n7 = H.filter(h => h.d >= lo7).length;
+    r._up = canUp && r._n7 >= 3 && r._n7 / 7 > 1.5 * Math.max(r._n30 - r._n7, 1) / 23; });
+  list.sort((a, b) => b._n30 - a._n30 || b._n7 - a._n7);
   let all = false;
   const grid = el("div", "if-res");
   const draw = () => {
     grid.innerHTML = "";
     (all ? list : list.slice(0, 8)).forEach(r => {
       const L = r.latest, nm = r.zh && r.en ? `${r.zh} <small>${esc(r.en)}</small>` : esc(r.zh || r.en || "（現任者待確認）");
-      const badge = KIND[r.kind] + (r.n30 ? ` ${r.n30} 則` : "");
+      const badge = `${KIND[r.kind]}・近 30 天 ${r._n30} 則${r._up ? " ↑" : ""}`;
       const c = el("div", "if-rc if-click",
         `<div class="if-rr">${esc(r.role)}<span class="if-rk">${esc(badge)}</span></div><div class="if-rn">${ifFlag(ifPersonCC(r))}${r.zh ? esc(r.zh) + (r.en ? ` <small>${esc(r.en)}</small>` : "") : nm}</div>` +
         (L ? `<div class="if-rq">${esc(L.title)}</div>${/[\u4e00-\u9fff]/.test(L.title) ? "" : ifZh(ifZhOf(M, L.title))}<div class="if-rm"><b>${esc(L.date)}</b> ${ifFlag(ifSrcCC(L))}<a href="${esc(L.url)}" target="_blank" rel="noopener">${esc(L.source || "原文")} ↗</a>${L.say ? "" : ' <span class="flat">（近 7 天沒有直接發言，列最新一則相關報導）</span>'}</div>`
@@ -3743,8 +3753,18 @@ function ifResident(M, cats) {
     if (list.length > 8) { const b = el("button", "rv-pill", all ? "收合" : `展開全部 ${list.length} 位`); b.onclick = () => { all = !all; draw(); }; grid.appendChild(b); }
   };
   draw(); wrap.appendChild(grid);
-  return card("常駐人物", `${list.length} 位・每位最新一則發言與日期；點卡片看個人頁`, wrap,
+  return card("常駐人物", `${list.length} 位・依近 30 天流量排序（被新聞標題點名的則數，↑＝近 7 天明顯增加）` +
+    (canUp ? "" : `；資料從 ${hMin === "9999" ? "—" : hMin.slice(5)} 起累積，滿三週前「↑」暫不判斷`) + "；點卡片看個人頁", wrap,
     "依職位設定、由程式依最新新聞確認現任者（名字必須出現在新聞標題裡才採用）；「近 30 天聲量」「自動升格」依新聞標題中被點名的次數排名，這兩類的身分欄是 AI 依新聞標題判讀、僅供辨識。發言內容以新聞標題與原文為準，本站不另加評語。");
+}
+/* 🟢 第六批 一-1（Evans 09-27）：信息流每個子分頁再分一層左側子列，一個子列一塊，整頁不再是一條長流水線。
+   各子分頁照舊把區塊做出來，只是改成 w.add("子列名", 節點)；done(順序) 依指定順序組成 sideTabs（topN＝0 → 全放左列）。
+   常駐人物一律是第一個子列（Evans 09-27 ①）。 */
+function ifParts() {
+  const P = [];
+  return {add: (n, x) => { if (x) P.push([n, x]); },
+          done: order => { const L = order ? order.map(n => P.find(p => p[0] === n)).filter(Boolean).concat(P.filter(p => !order.includes(p[0]))) : P;
+            return sideTabs(L.map(([n, x]) => [n, () => x]), null, 0); }};
 }
 /* 🟢 第五批 二-3（Evans 09-27）：清單一律只露前 4 則，more 每次多 20 則，可收合。 */
 const IF_MORE_N = 4, IF_MORE_STEP = 20;
@@ -3902,9 +3922,9 @@ function ifCB(M) {
   return w;
 }
 function ifRates(M) {
-  const w = el("div");
-  w.appendChild(ifResident(M, "利率與央行"));
-  w.appendChild(card("美債殖利率與利差", "FRED，近一年；滑過看當天數值", ifGrid(M, ["DGS2", "DGS10", "DGS30", "T10Y2Y", "T10Y3M"])));
+  const w = ifParts();
+  w.add("常駐人物", ifResident(M, "利率與央行"));
+  w.add("美債殖利率", card("美債殖利率與利差", "FRED，近一年；滑過看當天數值", ifGrid(M, ["DGS2", "DGS10", "DGS30", "T10Y2Y", "T10Y3M"])));
   // 對答案：SEP 中位數（各版本）× 實際政策利率 × 市場定價（2 年期公債代理）
   const H = M.sep_hist || {}, vers = Object.keys(H).sort();
   const act = (((M.fred || {}).DFEDTARU || {}).obs || []).filter(x => x[1] != null);
@@ -3940,7 +3960,7 @@ function ifRates(M) {
     if (rows.length) box.appendChild(table(["目標年", "SEP 版本日", "當時預測年底", "實際年底（上限）", "實際 − 預測"], rows.map(r => r.map(esc)), ["", "r", "r", "r", "r"], false));
     else box.appendChild(el("div", "submeta", vers.length <= 1 ? "SEP 舊版預測：有 FRED API key 才抓得到歷次版本（ALFRED）；沒有 key 就從今天起每一版自己累積，之後才對得了答案。" : "還沒有已經走完的目標年可以對答案。"));
   }
-  w.appendChild(card("Fed 點陣圖對答案", "SEP 聯邦基金利率中位數預測 vs 實際政策利率 vs 市場定價", box,
+  w.add("點陣圖對答案", card("Fed 點陣圖對答案", "SEP 聯邦基金利率中位數預測 vs 實際政策利率 vs 市場定價", box,
     "SEP＝FOMC 每季的經濟預測摘要，點陣圖中位數取自 FRED（FEDTARMD）。市場定價：CME FedWatch 沒有免費官方資料，以 2 年期公債殖利率代理（反映市場對未來兩年政策利率的平均預期），僅供對照。"));
   // 🟢 M-1（09-27）：FedWatch 自算 —— 聯邦基金期貨各月合約＋FOMC 行事曆，方法同 CME（CME 沒有免費資料）
   const FW = M.fedwatch;
@@ -3953,19 +3973,19 @@ function ifRates(M) {
       return [esc(x.date), nf(x.rate, 2) + "%", `<span class="num ${cls(x.chg)}">${sgn(x.chg * 100, 0)} bp</span>`,
         `${esc(top[0])}%　<b>${pp(top[1])}</b>`, `<span class="num${dn >= .005 ? " down" : " flat"}">${pp(dn)}</span>`, pp(hold), `<span class="num${up >= .005 ? " up" : " flat"}">${pp(up)}</span>`];
     });
-    w.appendChild(card("市場隱含的利率路徑（FedWatch 自算）", `目前目標區間 ${cur}%，有效利率 ${nf(FW.effr, 2)}%；期貨價格日 ${esc(FW.asof || "—")}`,
+    w.add("隱含利率（FedWatch）", card("市場隱含的利率路徑（FedWatch 自算）", `目前目標區間 ${cur}%，有效利率 ${nf(FW.effr, 2)}%；期貨價格日 ${esc(FW.asof || "—")}`,
       table(["FOMC 決議日", "會後隱含利率", "較目前", "最可能的目標區間", "比目前低", "維持", "比目前高"], rows, ["", "r", "r", "", "r", "r", "r"], false),
       "CME FedWatch 沒有免費資料，這裡照 CME 公開的方法自己算：聯邦基金期貨（ZQ）各月合約的價格換成那個月的平均利率（100 − 價格）；" +
       "有 FOMC 會議的月份，用「會前天數 × 會前利率 ＋ 會後天數 × 會後利率 ＝ 月平均」解出會後利率（下個月沒有會議時直接用下個月）；" +
       "每次會議的預期變動除以 0.25 拆成相鄰兩檔的機率，逐次往後串接。「比目前低／高」是相對目前目標區間的累計機率。" +
       "期貨價格取自 Yahoo Finance（晚 15 分鐘以上），會議日期取自 Fed 官網。這是市場定價的換算，不是預測。"));
   }
-  w.appendChild(card("各國央行", "目前利率、最近一次變動、下次決議日；日銀、台灣、歐洲、英國取自各央行官網", ifCB(M),
+  w.add("各國央行", card("各國央行", "目前利率、最近一次變動、下次決議日；日銀、台灣、歐洲、英國取自各央行官網", ifCB(M),
     "Fed 取自 FRED（聯準會官方序列）；日銀、台灣央行、歐洲央行、英國央行取自各自官網（端點見 SOURCES）。「生效日」是利率實際生效那天（通常是決議隔天），「決議日」是會議宣布那天。台灣央行沒有公布全年日程的固定頁面，下次理監事會依慣例預估並標明。各央行的態度看下方新聞原文，本站不另行解讀。"));
   const N = ifNews(M, x => x._t.cats.includes("利率與央行"));
   const nb = N.length ? ifMore(N, x => ifItem(x)) : el("div", "empty", "近 60 天沒有收錄。");
-  w.appendChild(card("央行動態（新聞）", `${N.length} 則`, nb));
-  return w;
+  w.add("央行動態", card("央行動態（新聞）", `${N.length} 則`, nb));
+  return w.done(["常駐人物", "點陣圖對答案", "隱含利率（FedWatch）", "美債殖利率", "各國央行", "央行動態"]);
 }
 /* 🟢 第五批 二-6（Evans 09-27）：經濟指標長歷史（FRED 最長：CPI 1947、核心 CPI 1957、PCE 1959、失業率 1948、非農 1939）
    ＋區間快選＋NBER 衰退期（USREC）灰底。資料在 macro.json 的 fred_long（預覽由 tools/preview_macro.py 補抓）；沒有就退回一般的三年資料。
@@ -4065,37 +4085,37 @@ function ifEcon(M) {
     ["非農就業月增（千人）", nfpD.at(-1) ? nf(nfpD.at(-1)[1], 0) : "—", nfpD.at(-2) ? nf(nfpD.at(-2)[1], 0) : "—", '<span class="flat">—</span>', nfpD.at(-1) ? esc(nfpD.at(-1)[0]) : "—", esc(nx("就業報告（非農、失業率）")), "PAYEMS"],
     ["失業率", lv.at(-1) ? nf(lv.at(-1)[1], 1) + "%" : "—", lv.at(-2) ? nf(lv.at(-2)[1], 1) + "%" : "—", '<span class="flat">—</span>', lv.at(-1) ? esc(lv.at(-1)[0]) : "—", esc(nx("就業報告（非農、失業率）")), "UNRATE"],
     ["ISM 製造業 PMI", '<span class="flat">無免費官方來源</span>', "—", '<span class="flat">—</span>', "—", "—", "—"]];
-  const w = el("div");
-  w.appendChild(ifResident(M, "經濟指標"));
-  w.appendChild(card("經濟指標", "公布值／前值取自 FRED（BLS、BEA 官方數字）", table(["指標", "公布值", "前值", "預期值", "資料期間", "下次公布日", "FRED 序列"],
+  const w = ifParts();
+  w.add("常駐人物", ifResident(M, "經濟指標"));
+  w.add("指標總表", card("經濟指標", "公布值／前值取自 FRED（BLS、BEA 官方數字）", table(["指標", "公布值", "前值", "預期值", "資料期間", "下次公布日", "FRED 序列"],
     rows.map(r => r.map((x, i) => i === 6 ? `<small class="flat">${esc(x)}</small>` : x)), ["", "r", "r", "r", "r", "r", ""], false),
     "數字一律取自官方（FRED 轉載 BLS／BEA），不用 AI。市場預期值（共識）沒有官方免費來源，照實標「—」；ISM 製造業 PMI 自 2016 年起不在 FRED、官網要付費，暫不列數字。" +
     "下次公布日取自 FRED 的官方公布行事曆（需要 FRED API key，還沒設定時顯示「—」）。核心 PCE 是 Fed 官方偏好的通膨指標。"));
-  w.appendChild(card("長期走勢", "FRED 有多長就畫多長；區間快選、灰底＝NBER 認定的美國衰退期", ifLong(M),
+  w.add("長期走勢", card("長期走勢", "FRED 有多長就畫多長；區間快選、灰底＝NBER 認定的美國衰退期", ifLong(M),
     "年增率＝該月指數 ÷ 去年同月 − 1。衰退期取自 FRED 的 USREC（NBER 景氣循環認定，事後公布，最近幾個月可能尚未認定）。非農就業畫每月增減（千人）。數字一律官方，不用 AI。"));
-  return w;
+  return w.done(["常駐人物", "指標總表", "長期走勢"]);
 }
 function ifFx(M) {
-  const w = el("div");
-  w.appendChild(ifResident(M, "匯率"));
-  w.appendChild(card("匯率", "FRED H.10 匯率（聯準會公布，約晚一週）；美元指數用 FRED 廣義美元指數（非 ICE DXY）",
+  const w = ifParts();
+  w.add("常駐人物", ifResident(M, "匯率"));
+  w.add("匯率走勢", card("匯率", "FRED H.10 匯率（聯準會公布，約晚一週）；美元指數用 FRED 廣義美元指數（非 ICE DXY）",
     ifGrid(M, [["DEXTAUS", v => nf(v, 3)], ["DEXJPUS", v => nf(v, 2)], ["DTWEXBGS", v => nf(v, 2)]])));
-  w.appendChild(card("各國央行動態", null, ifCB(M)));
+  w.add("各國央行", card("各國央行動態", null, ifCB(M)));
   const N = ifNews(M, x => x._t.cats.includes("匯率") || /匯率|新台幣|日圓|美元指數|升值|貶值/.test(x.title || ""));
   const nb = N.length ? ifMore(N, x => ifItem(x)) : el("div", "empty", "近 60 天沒有收錄。");
-  w.appendChild(card("匯率相關新聞", `${N.length} 則`, nb));
-  return w;
+  w.add("匯率新聞", card("匯率相關新聞", `${N.length} 則`, nb));
+  return w.done(["常駐人物", "匯率走勢", "各國央行", "匯率新聞"]);
 }
 function ifGeo(M) {
-  const w = el("div");
-  w.appendChild(ifResident(M, "地緣政治與戰爭"));
+  const w = ifParts();
+  w.add("常駐人物", ifResident(M, "地緣政治與戰爭"));
   // 二-3（Evans 09-27）：數據圖移到戰線上方 —— 油價、通膨、公司債利差
   const y = ifYoy(((M.fred || {}).CPIAUCSL || {}).obs);
   const cg = ifGrid(M, ["DCOILWTICO", "DCOILBRENTEU", "T5YIE"]);
   const c = el("div", "mf-card"); c.innerHTML = `<div class="k">美國 CPI 年增率（BLS）</div><div class="v">${y.length ? nf(y.at(-1)[1], 1) + "%" : "—"}</div><div class="s">${y.length ? esc(y.at(-1)[0]) : ""}　前值 ${y.length > 1 ? nf(y.at(-2)[1], 1) + "%" : "—"}</div>`;
   cg.appendChild(c);
   ["BAMLH0A0HYM2", "BAMLC0A4CBBB"].forEach(sid => cg.appendChild(ifFredCard(M, sid)));
-  w.appendChild(card("油價、通膨與信用利差", "並列看戰線消息與油價、通膨預期、公司債利差的連動（FRED）", cg,
+  w.add("油價通膨利差", card("油價、通膨與信用利差", "並列看戰線消息與油價、通膨預期、公司債利差的連動（FRED）", cg,
     "公司債利差（高收益債、BBB 級）是市場對風險的定價，戰事升溫時通常會擴大；個別公司的 CDS 沒有免費資料源，以整體利差代替。"));
   const N = ifNews(M, x => x._t.cats.includes("地緣政治與戰爭") || x._t.front);
   const fronts = [...new Set((((M.pool || {}).fronts) || ["美伊", "俄烏"]).concat(N.map(x => x._t.front).filter(Boolean)))];
@@ -4117,63 +4137,74 @@ function ifGeo(M) {
       });
       box.appendChild(d);
     });
-  w.appendChild(card("戰線", `${fronts.length} 條・預設收合，點一條展開時間軸（最新 4 則起）`, box,
+  w.add("戰線", card("戰線", `${fronts.length} 條・預設收合，點一條展開時間軸（最新 4 則起）`, box,
     "新增戰線：在擴抓設定（news_config.json 的 fronts）加一條就會自動多一組查詢與一條時間軸；本機的新聞分類（data/macro_tags.json）標上的 front 也會自動出現。"));
   const other = N.filter(x => !x._t.front);
-  if (other.length) w.appendChild(card("其他地緣政治", `${other.length} 則`, ifMore(other, x => ifItem(x))));
-  return w;
+  if (other.length) w.add("其他地緣", card("其他地緣政治", `${other.length} 則`, ifMore(other, x => ifItem(x))));
+  return w.done(["常駐人物", "油價通膨利差", "戰線", "其他地緣"]);
 }
 function ifTech(M) {
-  const w = el("div");
-  w.appendChild(ifResident(M, "科技與 AI"));
-  w.appendChild(card("公司債利差（代替個別公司 CDS）", "ICE BofA 選擇權調整利差，FRED", ifGrid(M, ["BAMLC0A0CM", "BAMLC0A4CBBB", "BAMLH0A0HYM2"]),
+  const w = ifParts();
+  w.add("常駐人物", ifResident(M, "科技與 AI"));
+  w.add("公司債利差", card("公司債利差（代替個別公司 CDS）", "ICE BofA 選擇權調整利差，FRED", ifGrid(M, ["BAMLC0A0CM", "BAMLC0A4CBBB", "BAMLH0A0HYM2"]),
     "個別公司（例如甲骨文）的 CDS 沒有免費資料源，這裡用整體公司債利差代替：投資等級、BBB 級（重資產科技公司多在這一級）、高收益債。個別公司的債務消息看下方「重資產公司的債務風險」新聞。"));
   const N = ifNews(M, x => x._t.cats.includes("科技與 AI"));
   const SUBS = [["AI 資本支出", /資本支出|capex|算力|資料中心|擴產|雲端/i], ["AI 變現進度", /營收|現金流|變現|訂閱|獲利|OpenAI|Anthropic/i], ["重資產公司的債務風險", /債|融資|信評|甲骨文|Oracle|槓桿|違約/i]];
-  const g = el("div", "grid2");
   SUBS.forEach(([nm, rx]) => {
     const L = N.filter(x => x._t.sub ? x._t.sub === nm || x._t.sub.startsWith(nm.slice(0, 4)) : rx.test(x.title || ""));
-    g.appendChild(card(nm, `${L.length} 則`, L.length ? ifMore(L, x => ifItem(x)) : el("div", "empty", "近 60 天沒有收錄。")));
+    w.add(nm, card(nm, `${L.length} 則`, L.length ? ifMore(L, x => ifItem(x)) : el("div", "empty", "近 60 天沒有收錄。")));
   });
-  w.appendChild(g);
-  return w;
+  return w.done(["常駐人物", "公司債利差"]);
 }
 function ifPeople(M) {
-  const root = el("div");
-  let GRP = IF_GROUPS[0];
-  const bar = el("div", "hm-bar"), body = el("div");
-  root.appendChild(bar); root.appendChild(body);
+  // 🟢 第六批 一-1／一-2：「話語權人物」畫面上改名「意見領袖」（資料欄位不動）；六個群組改成左側子列，每格＝卡片牆＋新聞
   const s = (D.market || {}).s240 || {}, ds = s.dates || [], tw = (s.tw || {}).close || [];
   const after = d => {                  // 發言日之後加權指數 1／5 個交易日的漲跌（只列數字）
     const i = ds.findIndex(x => x >= d); if (i < 0 || !tw[i - 1 >= 0 ? i - 1 : i]) return "";
     const b = tw[i - 1 >= 0 ? i - 1 : i], f = n => (tw[i + n - 1] != null && b) ? `<span class="num ${cls(tw[i + n - 1] / b - 1)}">${pc(tw[i + n - 1] / b - 1, 1)}</span>` : "—";
     return `<span class="if-after">之後加權指數 1 日 ${f(1)}　5 日 ${f(5)}</span>`;
   };
-  const draw = () => {
-    bar.innerHTML = ""; body.innerHTML = "";
-    IF_GROUPS.forEach(g => { const b = el("button", "rv-pill" + (GRP === g ? " on" : ""), g); b.onclick = () => { GRP = g; draw(); }; bar.appendChild(b); });
-    const RC = {"政治領袖": "地緣政治與戰爭", "央行與財經官員": ["利率與央行", "經濟指標", "匯率"], "科技領袖": "科技與 AI",
-      "投資大老": "投資大老", "財經網紅": "財經網紅", "電視財經節目": "電視財經節目"}[GRP];
-    body.appendChild(ifResident(M, RC));
-    if (GRP === "財經網紅") { body.appendChild(kolBox()); }
+  const RCS = {"政治領袖": "地緣政治與戰爭", "央行與財經官員": ["利率與央行", "經濟指標", "匯率"], "科技領袖": "科技與 AI",
+    "投資大老": "投資大老", "財經網紅": "財經網紅", "電視財經節目": "電視財經節目"};
+  const grp = GRP => {
+    const body = el("div");
+    body.appendChild(ifResident(M, RCS[GRP]));
+    if (GRP === "財經網紅") body.appendChild(kolBox());
     const N = ifNews(M, x => x._t.grp === GRP);
     const byP = {};
     N.forEach(x => (byP[x._t.person || "其他"] = byP[x._t.person || "其他"] || []).push(x));
-    if (!N.length && GRP !== "財經網紅") body.appendChild(el("div", "empty", "沒有收錄。"));
+    const nb = el("div");
+    if (!N.length && GRP !== "財經網紅") nb.appendChild(el("div", "empty", "沒有收錄。"));
     Object.entries(byP).forEach(([p, L]) => {
-      body.appendChild(el("div", "mf-who", esc(p)));
-      body.appendChild(ifMore(L, x => ifItem(x, after(x.date))));
+      nb.appendChild(el("div", "mf-who", esc(p)));
+      nb.appendChild(ifMore(L, x => ifItem(x, after(x.date))));
     });
+    body.appendChild(card(`${GRP}：新聞`, `${N.length} 則・依人物分組`, nb,
+      "只客觀記錄：發言內容以新聞標題與原文連結為準，「之後」的市場走勢是發言日前一個交易日收盤到之後 1／5 個交易日的加權指數漲跌，只是並列，不代表因果。"));
+    return body;
   };
-  draw();
-  return card("話語權人物", "發言內容、時間、出處，以及之後相關市場的走勢", root,
-    "只客觀記錄：發言內容以新聞標題與原文連結為準，「之後」的市場走勢是發言日前一個交易日收盤到之後 1／5 個交易日的加權指數漲跌，只是並列，不代表因果。");
+  return sideTabs(IF_GROUPS.map(g => [g, () => grp(g)]), null, 0);
 }
+
 function ifWeekly(M) {
-  if (!(M.weekly && M.weekly.md)) return card("週報", null, el("div", "empty", "還沒有通過查核的週報（每週日由本週新聞組成）。"));
-  const d = el("div", "mf-wk"); d.innerHTML = mfMd(M.weekly.md);
-  return card("週報", esc(M.weekly.date || ""), d);
+  // 🟢 第六批 一-4：週報新的在上面（後端已把每個議題內的條目改成新→舊）；歷史週報也是新的在上（macro.json 的 weekly_hist）
+  const cur = () => {
+    if (!(M.weekly && M.weekly.md)) return card("週報", null, el("div", "empty", "還沒有通過查核的週報（每週日由本週新聞組成）。"));
+    const d = el("div", "mf-wk"); d.innerHTML = mfMd(M.weekly.md);
+    return card("本週週報", esc(M.weekly.date || ""), d);
+  };
+  const hist = () => {
+    const H = (M.weekly_hist || []).slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+    const w = el("div");
+    if (!H.length) { w.appendChild(el("div", "empty", "歷史週報會從下一班世界趨勢起出現（每週日一期）。")); return card("歷史週報", null, w); }
+    H.forEach((x, k) => { const dd = el("details", "if-fr"); if (!k) dd.open = true;
+      dd.appendChild(el("summary", "", `<b>${esc(x.date || "")} 那一週</b><span class="if-frn">出處查核 ${x.verify ? `${x.verify.pass}／${x.verify.n}` : "—"}</span>`));
+      const b = el("div", "if-frb mf-wk"); b.innerHTML = mfMd(x.md || ""); dd.appendChild(b); w.appendChild(dd); });
+    return card("歷史週報", `${H.length} 期・新的在上`, w);
+  };
+  return sideTabs([["本週", cur], ["歷史週報", hist]], null, 0);
 }
+
 function tabInfo() {
   ifFlagCss();
   const root = el("div");
@@ -4192,7 +4223,7 @@ function tabInfo() {
     tb.appendChild(el("span", "", `外文標題 ${fo.length} 則，已有中文翻譯 ${nz} 則` + (nz ? "（AI 翻譯，原文保留在上方）" : "（翻譯由本機每天產生，還沒有的只顯示原文）")));
     root.appendChild(tb);
     root.appendChild(sideTabs([["利率與央行", () => ifRates(M)], ["經濟指標", () => ifEcon(M)], ["匯率", () => ifFx(M)],
-      ["地緣政治與戰爭", () => ifGeo(M)], ["科技與 AI", () => ifTech(M)], ["話語權人物", () => ifPeople(M)], ["週報", () => ifWeekly(M)]]));
+      ["地緣政治與戰爭", () => ifGeo(M)], ["科技與 AI", () => ifTech(M)], ["意見領袖", () => ifPeople(M)], ["週報", () => ifWeekly(M)]]));
     root.appendChild(el("div", "rv-note", `資料日 ${esc(M.asof || "—")}。數字：FRED（聖路易聯邦準備銀行，轉載 BLS／BEA／聯準會等官方資料）。新聞：每則附原文連結，以原文為準；分類 ${M.tagged ? `本機標記 ${M.tagged} 則，其餘` : ""}依世界趨勢原本的主題與人物。僅供參考，不具任何臆測，非投資建議。`));
   });
   return root;
