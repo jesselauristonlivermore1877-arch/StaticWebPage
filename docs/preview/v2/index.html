@@ -233,6 +233,8 @@ button.theme svg{width:15px; height:15px}
 .rgrid.r5{font-size:12.5px}
 .rgrid.r5 td, .rgrid.r5 th{padding-left:7px}
 .rtile.rfoot{padding:7px 11px}
+.mw-t td,.mw-t th{padding:4px 8px;white-space:nowrap} .mw-t td:first-child{white-space:normal}
+.rtile.rview .rsub{margin-top:3px;font-size:12.5px;line-height:1.6;color:var(--ink-1)}
 .rtile.rfoot .rsub{margin-top:0}
 /* .rline —— 左軌底部的單行摘要。站上月線本來在右軌佔一整張卡
    （標題／大字／副標三行、約 74px），內容其實只有兩個數字。
@@ -1346,6 +1348,60 @@ const yi = v => (v === null || v === undefined) ? "—" : nf(v / 1e8, 0) + " 億
 const etfTW = h => (h && typeof h === "object" && h.tw !== undefined)
   ? !!h.tw : /^\d{4,6}[A-Z]?$/.test(String((h && h.code) || h || "").trim());
 const esc = s => String(s ?? "").replace(/[&<>"]/g, m => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[m]));
+/* 🟢 N-7／N-8（Evans 09-05 立案、09-27 排進這一輪）：右軌「今日視角」各一句 —— 規則式，不用 LLM（Evans 裁決）。
+   句型與門檻全部放在這個常數區塊，看膩了直接改字串與數字，不用動邏輯。
+   只陳述數字、方向、集中在哪裡，不做買賣建議。 */
+const VIEW = {
+  SPOT_SMALL: 10,       // 億：法人淨額小於這個加「小幅」
+  SPOT_OPP: 20,         // 億：外資與投信反向、而且兩邊都超過這個，才說「方向相反」
+  SEC_TOP: 2,           // 買超／賣超各列幾個族群
+  SEC_MIN: 3,           // 億：族群淨額小於這個不列
+  FUT_BIG: 2000,        // 口：外資台指期淨部位單日增減超過這個說「大幅」
+  RETAIL_TILT: 10,      // %：小台散戶多空比超過 ±這個說「偏多／偏空」
+  T: {                  // 句型
+    spot: "外資{f}，投信{t}，自營{d}",
+    opp: "；外資與投信方向相反",
+    sec: "。外資買超集中在{buy}，賣超集中在{sell}（追蹤名單估算）",
+    fut: "外資台指期淨{side} {n} 口，較前日{chg}",
+    retail: "；小台散戶多空比 {r}%（{tilt}）",
+    diverge: "，與外資方向相反",
+    pcr: "；Put／Call 未平倉 {p}%（較前日 {pd}）"
+  }
+};
+const viewFill = (t, o) => t.replace(/\{(\w+)\}/g, (_, k) => o[k] ?? "");
+function viewSpot() {
+  const su = (D.inst || {}).summary || {};
+  const w = v => v == null ? "—" : `${Math.abs(v) < VIEW.SPOT_SMALL ? "小幅" : ""}${v >= 0 ? "買超" : "賣超"} <b class="num ${cls(v)}">${nf(Math.abs(v), 1)}</b> 億`;
+  const f = (su["外資"] || {}).net, t = (su["投信"] || {}).net, d = (su["自營"] || {}).net;
+  if (f == null) return null;
+  let s = viewFill(VIEW.T.spot, {f: w(f), t: w(t), d: w(d)});
+  if (t != null && Math.sign(f) !== Math.sign(t) && Math.abs(f) >= VIEW.SPOT_OPP && Math.abs(t) >= VIEW.SPOT_OPP) s += VIEW.T.opp;
+  const {BM, instBy} = stkCtx(), by = {};
+  Object.entries(BM).forEach(([c, b]) => { const r = instBy[c]; if (r && r.px) by[b] = (by[b] || 0) + (r.foreign_lots || 0) * 1000 * r.px / 1e8; });
+  const E = Object.entries(by);
+  const top = (arr) => arr.slice(0, VIEW.SEC_TOP).map(([b, v]) => `${esc(b)}（<span class="num ${cls(v)}">${sgn(v, 1)}</span> 億）`).join("、") || "—";
+  const buy = E.filter(([, v]) => v >= VIEW.SEC_MIN).sort((a, b) => b[1] - a[1]), sell = E.filter(([, v]) => v <= -VIEW.SEC_MIN).sort((a, b) => a[1] - b[1]);
+  if (buy.length || sell.length) s += viewFill(VIEW.T.sec, {buy: top(buy), sell: top(sell)});
+  return s + "。";
+}
+function viewFut() {
+  const o = D.options || {}, fi = ((o.fut_inst || {}).TX || {}).foreign || {}, pv = ((o.prev || {}).fut || {}).foreign;
+  if (fi.net == null) return null;
+  const chg = pv == null ? null : fi.net - pv;
+  let s = viewFill(VIEW.T.fut, {side: fi.net >= 0 ? "多" : "空", n: `<b class="num">${nf(Math.abs(fi.net), 0)}</b>`,
+    chg: chg == null ? "—" : `${Math.abs(chg) >= VIEW.FUT_BIG ? "大幅" : ""}${chg >= 0 ? "偏多" : "偏空"}調整 <b class="num ${cls(chg)}">${sgn(chg, 0)}</b> 口`});
+  const r = ((o.retail || {}).MXF || [])[0];
+  if (r != null) {
+    const tilt = r >= VIEW.RETAIL_TILT ? "偏多" : (r <= -VIEW.RETAIL_TILT ? "偏空" : "沒有明顯偏向");
+    s += viewFill(VIEW.T.retail, {r: `<b class="num ${cls(r)}">${sgn(r, 1)}</b>`, tilt});
+    if (tilt !== "沒有明顯偏向" && (tilt === "偏多") === (fi.net < 0)) s += VIEW.T.diverge;
+  }
+  const P0 = (Array.isArray(o.pcr) ? o.pcr : [])[0] || {}, pp = ((o.prev || {}).pcr || {}).oi;
+  const p = P0["PutCallOIRatio%"];
+  if (p != null) s += viewFill(VIEW.T.pcr, {p: nf(p, 1), pd: pp == null ? "—" : sgn(p - pp, 1)});
+  return s + "。";
+}
+
 const el = (t, c, h, s) => { const e = document.createElement(t); if (c) e.className = c; if (h !== undefined) e.innerHTML = h; if (s) e.style.cssText = s; return e; };
 const sv = (t, a) => { const e = document.createElementNS(SVGNS, t); for (const k in a) e.setAttribute(k, a[k]); return e; };
 const chip = (name, code, mkt) =>
@@ -2246,6 +2302,7 @@ applyFs();
   irows.push({cls: "sum", c: ["合計", nf(sb, 0), nf(ss, 0), sgn(sn, 1)],
               col: ["", "", "", cls(sn)]});
   R.appendChild(hd("現貨籌碼"));
+  { const v = viewSpot(); if (v) R.appendChild(el("div", "rtile rview", `<div class="k"><span>今日視角</span><span class="rtag">規則式</span></div><div class="rsub">${v}</div>`)); }
   R.appendChild(card("三大法人買賣超", "億元",
     grid(["", "買", "賣", "淨"], irows)));
 
@@ -2307,6 +2364,7 @@ applyFs();
                               fdN ? sgn(fd, 0) : "—"],
               col: ["", "", "", cls(fn), fdN ? cls(fd) : ""]});
   R.appendChild(hd("期貨與選擇權"));
+  { const v = viewFut(); if (v) R.appendChild(el("div", "rtile rview", `<div class="k"><span>今日視角</span><span class="rtag">規則式</span></div><div class="rsub">${v}</div>`)); }
   R.appendChild(card("台指期未平倉", "口",
     grid(["", "多", "空", "淨", "增減"], frows).replace(
       '<table class="rgrid">', '<table class="rgrid r5">')));
@@ -3884,6 +3942,24 @@ function ifRates(M) {
   }
   w.appendChild(card("Fed 點陣圖對答案", "SEP 聯邦基金利率中位數預測 vs 實際政策利率 vs 市場定價", box,
     "SEP＝FOMC 每季的經濟預測摘要，點陣圖中位數取自 FRED（FEDTARMD）。市場定價：CME FedWatch 沒有免費官方資料，以 2 年期公債殖利率代理（反映市場對未來兩年政策利率的平均預期），僅供對照。"));
+  // 🟢 M-1（09-27）：FedWatch 自算 —— 聯邦基金期貨各月合約＋FOMC 行事曆，方法同 CME（CME 沒有免費資料）
+  const FW = M.fedwatch;
+  if (FW && (FW.meetings || []).length) {
+    const cur = `${nf(FW.cur[0], 2)}-${nf(FW.cur[1], 2)}`;
+    const rows = FW.meetings.map(x => {
+      const P = Object.entries(x.probs || {}), dn = P.filter(([k]) => +k.split("-")[0] < FW.cur[0]).reduce((a, [, v]) => a + v, 0),
+            up = P.filter(([k]) => +k.split("-")[0] > FW.cur[0]).reduce((a, [, v]) => a + v, 0), hold = (x.probs || {})[cur] || 0;
+      const top = P.sort((a, b) => b[1] - a[1])[0] || ["—", 0], pp = v => (v * 100).toFixed(0) + "%";   // 機率不帶正負號
+      return [esc(x.date), nf(x.rate, 2) + "%", `<span class="num ${cls(x.chg)}">${sgn(x.chg * 100, 0)} bp</span>`,
+        `${esc(top[0])}%　<b>${pp(top[1])}</b>`, `<span class="num${dn >= .005 ? " down" : " flat"}">${pp(dn)}</span>`, pp(hold), `<span class="num${up >= .005 ? " up" : " flat"}">${pp(up)}</span>`];
+    });
+    w.appendChild(card("市場隱含的利率路徑（FedWatch 自算）", `目前目標區間 ${cur}%，有效利率 ${nf(FW.effr, 2)}%；期貨價格日 ${esc(FW.asof || "—")}`,
+      table(["FOMC 決議日", "會後隱含利率", "較目前", "最可能的目標區間", "比目前低", "維持", "比目前高"], rows, ["", "r", "r", "", "r", "r", "r"], false),
+      "CME FedWatch 沒有免費資料，這裡照 CME 公開的方法自己算：聯邦基金期貨（ZQ）各月合約的價格換成那個月的平均利率（100 − 價格）；" +
+      "有 FOMC 會議的月份，用「會前天數 × 會前利率 ＋ 會後天數 × 會後利率 ＝ 月平均」解出會後利率（下個月沒有會議時直接用下個月）；" +
+      "每次會議的預期變動除以 0.25 拆成相鄰兩檔的機率，逐次往後串接。「比目前低／高」是相對目前目標區間的累計機率。" +
+      "期貨價格取自 Yahoo Finance（晚 15 分鐘以上），會議日期取自 Fed 官網。這是市場定價的換算，不是預測。"));
+  }
   w.appendChild(card("各國央行", "目前利率、最近一次變動、下次決議日；日銀、台灣、歐洲、英國取自各央行官網", ifCB(M),
     "Fed 取自 FRED（聯準會官方序列）；日銀、台灣央行、歐洲央行、英國央行取自各自官網（端點見 SOURCES）。「生效日」是利率實際生效那天（通常是決議隔天），「決議日」是會議宣布那天。台灣央行沒有公布全年日程的固定頁面，下次理監事會依慣例預估並標明。各央行的態度看下方新聞原文，本站不另行解讀。"));
   const N = ifNews(M, x => x._t.cats.includes("利率與央行"));
@@ -5824,14 +5900,20 @@ function tabStock() {
   const bigCount = {};
   items.forEach(x => { bigCount[x.big] = (bigCount[x.big] || 0) + 1; });
   const bigs = Object.keys(bigCount).sort((a, b) => bigCount[b] - bigCount[a]);
-  const POS = [["站上全部均線", x => x.above === 5],
-               ["站上月線", x => (x.st.dsma || {})["20"] >= 0],
-               ["跌破季線", x => (x.st.dsma || {})["60"] < 0],
-               ["沉睡未動", x => x.tags.includes("沉睡未動")],
-               ["攻後敗退", x => x.tags.includes("攻後敗退")],
-               ["創52週新高", x => x.tags.includes("創52週新高")],
-               ["法人買超", x => x.inst && (x.inst.foreign_lots > 0 || x.inst.trust_lots > 0)],
-               ["主動ETF持有", x => x.etf && x.etf.n > 0]];
+  // 🟢 N-4（Evans 09-04 立案、09-27 排進）：位置膠囊重新定義 —— 上面只放幾個通俗的常態類別，
+  //    「喜歡動能的」「喜歡布局的」各一組，每顆都寫明條件；更細的自由交叉留給 N-2。
+  //    第三個欄位是說明（滑過看、選了之後在下面列出）。條件只用現成欄位，後端零改動。
+  const dsm = (x, d) => (x.st.dsma || {})[String(d)];
+  const POS = [
+    ["動能｜創 52 週新高", x => x.tags.includes("創52週新高"), "收盤距 52 週高點 0.5% 以內"],
+    ["動能｜多頭排列", x => x.above === 5, "站上 5／20／60／120／240 日全部均線"],
+    ["動能｜領漲", x => x.tags.includes("領漲"), "近 20 日漲幅贏大盤 15 個百分點以上"],
+    ["動能｜法人同買", x => x.inst && x.inst.foreign_lots > 0 && x.inst.trust_lots > 0, "外資、投信當日都買超"],
+    ["布局｜回檔守季線", x => dsm(x, 60) >= 0 && x.dd60 != null && x.dd60 <= -0.08 && x.dd60 >= -0.20, "距近 60 日高點回檔 8%～20%，但仍在季線（60 日均線）之上"],
+    ["布局｜低檔轉強", x => dsm(x, 60) < 0 && dsm(x, 20) >= 0, "還在季線之下，但已經站回月線（20 日均線）"],
+    ["布局｜沉睡未動", x => x.tags.includes("沉睡未動"), "近 20 日漲幅不到 5%，而且站上的均線不超過 2 條"],
+    ["布局｜主動 ETF 持有", x => x.etf && x.etf.n > 0, "至少一檔主動式 ETF 持有"],
+    ["留意｜攻後敗退", x => x.tags.includes("攻後敗退"), "近 20 日漲超過 10%，但已從近 60 日高點回落 12% 以上"]];
   const SORTS = [["分數", x => x.score], ["相對大盤20日", x => x.rs20],
                  ["當日漲幅", x => x.st.r1], ["20日漲幅", x => x.r20],
                  ["距52週高", x => x.dd52], ["今年以來", x => x.st.ytd]];
@@ -5887,13 +5969,18 @@ function tabStock() {
     // 🟢 GEA 2026-08-30（V-3）：位置與排序回到上方橫條。
     // 它們是條件篩選、項目也少，放左列會被族群那 10 顆擠到很下面，沒人會捲下去點。
     const r2 = el("div", "stkbar");
-    r2.appendChild(el("span", "lab", "位置"));
-    POS.forEach(([lab], i) => r2.appendChild(
-      chip(lab, state.pos.includes(i), () => {
+    // N-4：依「動能／布局／留意」分組，膠囊只顯示後半段；滑過看條件，選了之後在下面列出條件
+    let grp0 = null;
+    POS.forEach(([lab, , why], i) => {
+      const [g, nm] = lab.split("｜");
+      if (g !== grp0) { grp0 = g; r2.appendChild(el("span", "lab", esc(g))); }
+      const c = chip(nm, state.pos.includes(i), () => {
         state.pos = state.pos.includes(i) ? state.pos.filter(x => x !== i)
                                           : state.pos.concat(i);
         draw();
-      })));
+      });
+      c.title = why; r2.appendChild(c);
+    });
     // 🟢 GEA 2026-08-30（W-2）：位置是「多選且互相 AND」，
     // 「站上全部均線」＋「跌破季線」必然 0 筆 —— 邏輯沒錯，但沒有清除鍵、
     // 高亮又不會動的時候，看起來就像當掉。
@@ -5901,6 +5988,8 @@ function tabStock() {
       chip(`✕ 清除 ${state.pos.length} 個條件`, false,
            () => { state.pos = []; draw(); }));
     topBar.appendChild(r2);
+    if (state.pos.length) topBar.appendChild(el("div", "submeta", "條件：" +
+      state.pos.map(i => `<b>${esc(POS[i][0].split("｜")[1])}</b>＝${esc(POS[i][2])}`).join("；") + "（同時成立）"));
 
     const r3 = el("div", "stkbar");
     r3.appendChild(el("span", "lab", "排序"));
@@ -6003,7 +6092,7 @@ function tabStock() {
 
     if (!arr.length) {
       // 空的時候要講清楚是哪幾個條件把它篩空的，不然看起來像壞掉。
-      const on = state.pos.map(i => POS[i][0]);
+      const on = state.pos.map(i => POS[i][0].split("｜")[1]);
       list.appendChild(el("div", "empty",
         on.length > 1
           ? `沒有個股同時滿足這 ${on.length} 個條件：${on.join("、")}。` +
@@ -7036,6 +7125,69 @@ function tabTrail() {
   return holder;
 }
 
+/* 🟢 N-11b／N-17（Evans 09-06／09-07；09-27 排進）：族群動向多週期 —— 近 5／10／20／60／120／240 日。
+   TODO 當時說瓶頸在後端（stats 只有 r5／r20）；現在 docs/data/stock_bars.json 已經有 1,301 檔 × 240 天的收盤與成交金額，
+   前端就算得出來，後端零改動。原本的六欄圖一個字沒動，這是它下面另一張卡。
+   動能＝各股 N 日報酬在全體（追蹤名單）裡的百分位，取大類中位數；量能＝近 N 日平均成交金額 ÷ 前 N 日平均，同樣取百分位中位數。
+   50＝跟全體中位一樣。量能要 2N 天的料，240 日沒有「前 240 日」可比 → 照實標「—」。 */
+const MW_WIN = [5, 10, 20, 60, 120, 240];
+function sectorMulti() {
+  const box = el("div");
+  box.appendChild(el("div", "sub", "載入 240 天日K中…"));
+  stkBars("2330").then(() => {
+    box.innerHTML = "";
+    const SB = _barsCache;
+    if (!SB || !SB.bars) { box.appendChild(el("div", "empty", "載不到 data/stock_bars.json")); return; }
+    const BM = stkCtx().BM;
+    const codes = Object.keys(BM).filter(c => SB.bars[c]);
+    const val = {};                                         // val[win] = {mom: {code: x}, vol: {code: x}}
+    MW_WIN.forEach(N => {
+      const mom = {}, vol = {};
+      codes.forEach(c => {
+        const C = SB.bars[c].c, A = SB.bars[c].a;
+        let L = C.length - 1; while (L >= 0 && (C[L] == null)) L--;
+        if (L < 1) return;
+        const b = Math.max(0, L - N);
+        if (C[b] != null && C[b] > 0 && L - b >= Math.min(N, C.length - 1) * 0.9) mom[c] = C[L] / C[b] - 1;
+        if (L + 1 >= 2 * N) {
+          let s1 = 0, s0 = 0;
+          for (let i = L - N + 1; i <= L; i++) s1 += A[i] || 0;
+          for (let i = L - 2 * N + 1; i <= L - N; i++) s0 += A[i] || 0;
+          if (s0 > 0) vol[c] = s1 / s0;
+        }
+      });
+      const pct = o => { const e = Object.entries(o).sort((a, b) => a[1] - b[1]), n = e.length, r = {};
+        e.forEach(([c], i) => { r[c] = n > 1 ? i / (n - 1) * 100 : 50; }); return r; };
+      val[N] = {mom: pct(mom), vol: pct(vol)};
+    });
+    const bigs = [...new Set(codes.map(c => BM[c]))];
+    const med = a => { const v = a.filter(x => x != null).sort((p, q) => p - q); return v.length ? v[Math.floor((v.length - 1) / 2)] : null; };
+    const cell = {};                                        // cell[big][win][k]
+    bigs.forEach(b => { cell[b] = {}; const mem = codes.filter(c => BM[c] === b);
+      MW_WIN.forEach(N => { cell[b][N] = {mom: med(mem.map(c => val[N].mom[c])), vol: med(mem.map(c => val[N].vol[c])), n: mem.length}; }); });
+    let K = "mom", SW = 20;
+    const bar = el("div", "if-lgbar"), tb = el("div");
+    box.appendChild(bar); box.appendChild(tb);
+    const col = v => v == null ? "" : `background:${v >= 50 ? `rgba(229,72,77,${((v - 50) / 50 * .55).toFixed(2)})` : `rgba(18,163,102,${((50 - v) / 50 * .55).toFixed(2)})`}`;
+    const draw = () => {
+      bar.innerHTML = "";
+      [["mom", "動能"], ["vol", "量能"]].forEach(([k, t]) => { const x = el("button", "rv-pill" + (K === k ? " on" : ""), t); x.onclick = () => { K = k; draw(); }; bar.appendChild(x); });
+      bar.appendChild(el("span", "submeta", "　排序依"));
+      MW_WIN.forEach(N => { const x = el("button", "rv-pill" + (SW === N ? " on" : ""), `${N} 日`); x.onclick = () => { SW = N; draw(); }; bar.appendChild(x); });
+      const sw = bigs.some(x => cell[x][SW][K] != null) ? SW : 120;   // 量能 240 日整欄沒有 → 退回 120 日排序
+      if (sw !== SW) bar.appendChild(el("span", "submeta", "（240 日沒有量能，改依 120 日排序）"));
+      const rows = bigs.slice().sort((a, b) => (cell[b][sw][K] ?? -1) - (cell[a][sw][K] ?? -1));
+      tb.innerHTML = `<div class="tbl"><table class="mw-t"><thead><tr><th>大類</th>${MW_WIN.map(N => `<th class="r">${N} 日</th>`).join("")}</tr></thead><tbody>` +
+        rows.map(b => `<tr><td>${esc(b)} <small class="flat">${cell[b][5].n}</small></td>` + MW_WIN.map(N => { const v = cell[b][N][K];
+          return `<td class="r num" style="${col(v)}">${v == null ? '<span class="flat">—</span>' : v.toFixed(0)}</td>`; }).join("") + `</tr>`).join("") + `</tbody></table></div>`;
+    };
+    draw();
+    box.appendChild(el("div", "submeta", `資料：stock_bars.json（${esc(SB.dates[0])} ～ ${esc(SB.dates.at(-1))}，${SB.dates.length} 個交易日），追蹤名單 ${codes.length} 檔。` +
+      "240 日＝這份資料最長的一段（約一年）；量能要前後各 N 天，240 日照實標「—」。"));
+  });
+  return box;
+}
+
 function sectorFlow(ss, sx) {
   // 🟢 N-3b（2026-09-06）：一張圖六欄，不是六張圖。
   // 六張各自排序的橫條互相對不上 —— 要知道「伺服器量能 91，那它回檔呢」
@@ -7365,7 +7517,13 @@ function tabScore() {
     // 再看那一區的個股評分。順序反過來就變成「先挑贏家再解釋」。
     const _sx = s.sector_extra && s.sector_extra.sectors ? s.sector_extra : null;
     const _nc = _sx ? 9 : 6;
-    const _cFlow = () => card("族群動向",
+    const _cFlow = () => { const w = el("div"); w.appendChild(_cFlow1()); w.appendChild(card("族群動向：多週期",
+      "近 5／10／20／60／120／240 日，每個大類的動能與量能（百分位中位數，50＝全體中位）", sectorMulti(),
+      `<b>動能</b>＝每檔 N 日報酬在追蹤名單全體裡的百分位（0～100），大類取成員的中位數。<br>
+       <b>量能</b>＝每檔近 N 日平均成交金額 ÷ 再前 N 日平均，一樣換成百分位取中位數。量能只說明錢在這裡進出，不說明是買是賣。<br>
+       紅＝高於全體中位、綠＝低於，顏色越深離中位越遠；<b>不是漲跌</b>。橫著讀一列＝這個族群從一年到一週的變化。
+       這是量化統計結果，不是個股買賣建議。`)); return w; };
+    const _cFlow1 = () => card("族群動向",
       `${rows.length} 個大類 × ${_nc} 個維度。列序照評分中位由高到低，所有欄共用同一條列序，
        所以可以橫著讀完一列。左邊六欄中間那條是量尺的中位 50`
       + (_sx ? `，右邊三欄是觀察維度、**不進評分**。` : `。`),
@@ -9497,13 +9655,32 @@ function tabInstSummary() {
 }
 
 /* 🟢 GEA 協同修改：外資投信買賣超與同買，新增「佔當日成交比」欄位 */
+/* 🟢 N-23（Evans 09-08 立案、09-27 排進）：外資／投信買賣超、同買同賣加一排「市場」橫排篩選 —— 全部／上市／上櫃／ETF。
+   外資、投信本來就各一頁，這排補的是另一維；三頁共用同一個選擇（切頁不重選）。ETF＝00 開頭（權證已排除）。 */
+var INST_MKT = "全部";
+const INST_MKTS = [["全部", () => true], ["上市", r => r.market === "市" && !/^00/.test(r.code)],
+                   ["上櫃", r => r.market === "櫃" && !/^00/.test(r.code)], ["ETF", r => /^00/.test(r.code)]];
+function instMktBar(rank, redraw) {
+  const b = el("div", "if-lgbar");
+  b.appendChild(el("span", "submeta", "市場："));
+  INST_MKTS.forEach(([nm, fn]) => { const x = el("button", "rv-pill" + (INST_MKT === nm ? " on" : ""), `${esc(nm)} <small>${rank.filter(fn).length}</small>`);
+    x.onclick = () => { INST_MKT = nm; redraw(); }; b.appendChild(x); });
+  return b;
+}
+const instMktFn = () => (INST_MKTS.find(x => x[0] === INST_MKT) || INST_MKTS[0])[1];
 function instTop(key0, label0) {
+  const wrap = el("div");
+  const draw = () => { wrap.innerHTML = ""; wrap.appendChild(instTop0(key0, label0, draw)); };
+  draw(); return wrap;
+}
+function instTop0(key0, label0, redraw) {
   const i = D.inst || {}, f = document.createDocumentFragment();
   // 🔴 原本 `!/^00/` 把**所有 ETF 一起砍掉**。Evans：「外資投信買賣超都沒有 ETF，
   //    這個要找回來，但是不要權證」。後端（get_power_list）本來就送了 ETF 進來，
   //    濾掉的是這一行。ETF＝00 開頭 5~6 碼（0050／00878／00981A）；
   //    權證是 6 碼且不以 00 開頭（03xxxx／7xxxxx），兩者分得開。
-  const rank = (i.rank || []).filter(r => /^(\d{4}|00\d{2,4}[A-Z]?)$/.test(r.code));
+  const rank0 = (i.rank || []).filter(r => /^(\d{4}|00\d{2,4}[A-Z]?)$/.test(r.code));
+  const rank = rank0.filter(instMktFn());
   // 🟢 GEA 2026-08-27：候選池改成「張數前 N ∪ 金額前 N」的聯集。
   // 舊寫法是 srt(依張數).slice(0, 80) 之後才交給 sortTable 依金額排 ——
   // 也就是「依金額排序」只在張數前 80 名的範圍內成立。
@@ -9548,7 +9725,8 @@ function instTop(key0, label0) {
       sortTable(cols, mkRows(sell), {sortable: [1, 2, 3], sortKey: 2, dir: 1, size: 30, aligns: al})));
     return g;
   };
-  f.appendChild(el("div", "eyebrow", `法人買賣超 資料日 ${esc(i.date || "—")} · 共 ${rank.length} 檔個股`));
+  f.appendChild(el("div", "eyebrow", `法人買賣超 資料日 ${esc(i.date || "—")} · 共 ${rank0.length} 檔（${esc(INST_MKT)} ${rank.length} 檔）`));
+  f.appendChild(instMktBar(rank0, redraw));
   f.appendChild(mk(key0, label0));
   return f;
 }
@@ -9559,12 +9737,18 @@ function tabInstForeign() { return instTop("foreign_lots", "外資"); }
 function tabInstTrust()   { return instTop("trust_lots", "投信"); }
 
 function tabInstCo() {
+  const wrap = el("div");
+  const draw = () => { wrap.innerHTML = ""; wrap.appendChild(tabInstCo0(draw)); };
+  draw(); return wrap;
+}
+function tabInstCo0(redraw) {
   const i = D.inst || {}, f = document.createDocumentFragment();
   // 🔴 原本 `!/^00/` 把**所有 ETF 一起砍掉**。Evans：「外資投信買賣超都沒有 ETF，
   //    這個要找回來，但是不要權證」。後端（get_power_list）本來就送了 ETF 進來，
   //    濾掉的是這一行。ETF＝00 開頭 5~6 碼（0050／00878／00981A）；
   //    權證是 6 碼且不以 00 開頭（03xxxx／7xxxxx），兩者分得開。
-  const rank = (i.rank || []).filter(r => /^(\d{4}|00\d{2,4}[A-Z]?)$/.test(r.code));
+  const rank0 = (i.rank || []).filter(r => /^(\d{4}|00\d{2,4}[A-Z]?)$/.test(r.code));
+  const rank = rank0.filter(instMktFn());
   const both = rank.filter(r => r.foreign_lots > 0 && r.trust_lots > 0)
     .sort((a, b) => (b.foreign_lots + b.trust_lots) - (a.foreign_lots + a.trust_lots));
   const neither = rank.filter(r => r.foreign_lots < 0 && r.trust_lots < 0)
@@ -9588,7 +9772,8 @@ function tabInstCo() {
     
   // 🟢 GEA 2026-08-27C（③）：補資料日。tabInstTop 有這一行，這裡漏了，寫法照抄。
   f.appendChild(el("div", "eyebrow",
-    `法人買賣超 資料日 ${esc(i.date || "—")} · 共 ${rank.length} 檔個股`));
+    `法人買賣超 資料日 ${esc(i.date || "—")} · 共 ${rank0.length} 檔（${esc(INST_MKT)} ${rank.length} 檔）`));
+  f.appendChild(instMktBar(rank0, redraw));
   const g2 = el("div", "grid2");
   g2.appendChild(mk2(both, "外資投信同步買超"));
   g2.appendChild(mk2(neither, "外資投信同步賣超"));
