@@ -79,7 +79,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "breadth_hist.json 沒有變化，不提交。"
           else
-            git commit -m "data(第七批 15): 回補漲跌家數 $(TZ=Asia/Taipei date +%F)"
+            git commit -m "data(第七批 12): 回補漲跌家數 $(TZ=Asia/Taipei date +%F)"
             git pull --rebase origin main
             git push origin HEAD:main
           fi
