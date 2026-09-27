@@ -42,7 +42,7 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-      - run: pip install requests feedparser googlenewsdecoder
+      - run: pip install requests feedparser googlenewsdecoder yfinance   # yfinance：FedWatch 自算用的聯邦基金期貨（09-27）
       - name: 世界趨勢
         working-directory: code
         env:
