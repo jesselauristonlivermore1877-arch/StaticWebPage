@@ -111,7 +111,7 @@ jobs:
       - name: 處置股・行事曆・基本資料
         working-directory: code
         continue-on-error: true
-        timeout-minutes: 8
+        timeout-minutes: 12
         env:
           PYTHONUNBUFFERED: "1"
         run: python corp_events.py ../site/data
