@@ -34,7 +34,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35                 # 第七批：預覽多了擴充查詢（官方職位表的人名、AI 產業、各國匯率）
     steps:
       - uses: actions/checkout@v4
         with:
