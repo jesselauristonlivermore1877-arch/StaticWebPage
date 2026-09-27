@@ -1,0 +1,85 @@
+# backfill_dealer.yml ─ 逐檔自營商（自行買賣／避險）歷史回補（第七批 15，Evans 09-27）
+#   程式：CustomerServiceANDSales 的 backfill_dealer.py；產物：data/bars/dealer.npz（新檔，inst.npz 不動）
+#   每日班之後由 dealer_bars.py 每天接一列；這支只補歷史（預設近 190 天 ≈ 130 個交易日，夠 120 日窗）。
+name: 回補逐檔自營商
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "往回抓幾個日曆天"
+        required: false
+        default: "190"
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install requests feedparser certifi
+      - name: 抓片 ${{ matrix.shard }}
+        working-directory: code
+        run: python backfill_dealer.py --shard ${{ matrix.shard }} --of 8 --days ${{ inputs.days }} --out ../out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dealer-${{ matrix.shard }}
+          path: out/
+          if-no-files-found: warn
+          retention-days: 1
+
+  merge:
+    needs: crawl
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: daily-build
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install numpy requests feedparser
+      - uses: actions/download-artifact@v4
+        with:
+          path: dl
+          pattern: dealer-*
+          merge-multiple: true
+      - name: 併進 dealer.npz ＋ 逐格驗證
+        working-directory: code
+        run: python backfill_dealer.py --merge ../dl --npz ../data/bars/dealer.npz
+      - name: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/bars/dealer.npz
+          if git diff --staged --quiet; then
+            echo "dealer.npz 沒有變化，不提交。"
+          else
+            git commit -m "data(第七批 15): 回補逐檔自營商 $(TZ=Asia/Taipei date +%F)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
