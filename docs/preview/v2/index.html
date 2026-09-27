@@ -1182,6 +1182,33 @@ footer p{margin:4px 0}
 .if-flag{width:1.2em;height:.9em;border-radius:2px;vertical-align:-1px;margin-right:4px;box-shadow:0 0 0 1px rgba(128,128,128,.25)}
 .if-lg{width:100%;height:auto;display:block;touch-action:pan-y}
 .if-lgbar{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}
+/* 二-1／二-2／二-5：人物卡片牆、個人頁、立場統計、翻譯 */
+.if-rc.if-click{cursor:pointer;transition:border-color .12s} .if-rc.if-click:hover{border-color:var(--acc)}
+.if-rgo{display:inline-block;font-size:12px;color:var(--acc);margin-top:6px;padding:3px 10px;border:1px solid var(--acc);border-radius:999px}
+.if-st{font-size:11.5px;color:var(--ink-2);margin-top:4px;display:flex;flex-wrap:wrap;gap:2px 8px;align-items:center}
+.if-st .n{font-family:var(--mono)}
+.if-bd{font-size:11px;font-weight:700;border-radius:8px;padding:0 7px;color:#fff;white-space:nowrap}
+.if-bd.up{background:var(--up)} .if-bd.down{background:var(--down)}
+.if-sc{font-size:10.5px;border-radius:7px;padding:0 5px;margin-left:4px;border:1px solid currentColor;white-space:nowrap}
+.if-sc.up{color:var(--up)} .if-sc.down{color:var(--down)} .if-sc.flat{color:var(--ink-3)}
+.if-zh{font-size:12.5px;color:var(--ink-2);margin:1px 0 2px;overflow-wrap:anywhere} .if-zh::before{content:"譯　";color:var(--ink-3);font-size:11px}
+.if-nozh .if-zh{display:none}
+.if-topbar{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:0 0 8px;font-size:12.5px;color:var(--ink-2)}
+.if-ov{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.55);overflow:auto;padding:3vh 12px}
+.if-pg{max-width:980px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px 20px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.if-pgh{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:8px}
+.if-pgh h3{margin:0;font-size:19px} .if-pgh small{color:var(--ink-3);font-weight:500;font-size:13px}
+.if-pgx{font-size:20px;line-height:1;background:none;border:1px solid var(--line);border-radius:8px;color:var(--ink-1);cursor:pointer;padding:4px 10px}
+.if-pgbar{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:6px 0 10px;font-size:12.5px;color:var(--ink-2)}
+.if-pgbar input[type=search]{flex:1 1 200px;min-width:0;padding:5px 9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink-1)}
+.if-pgbar input[type=date]{padding:4px 6px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink-1);max-width:150px}
+.if-h{display:grid;grid-template-columns:88px 1fr;gap:2px 10px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.if-h>b{font-family:var(--mono);font-weight:600;color:var(--ink-2);font-size:12.5px}
+.if-h .t{font-size:13.5px;overflow-wrap:anywhere} .if-h .m{font-size:11.5px;color:var(--ink-2)} .if-h .m a{color:var(--acc)}
+.if-say{font-size:10.5px;border-radius:7px;padding:0 5px;background:rgba(217,164,65,.18);color:var(--acc);margin-left:4px}
+.if-ep{border:1px solid var(--line);border-radius:8px;padding:7px 10px;margin:0 0 6px}
+.if-ep>summary{cursor:pointer;font-size:12.5px;color:var(--acc);margin-top:3px}
+@media (max-width:600px){.if-h{grid-template-columns:1fr}.if-ov{padding:0}.if-pg{border-radius:0;min-height:100%}}
 .md-tip{position:absolute;top:6px;display:none;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:12.5px;pointer-events:none;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.18)}
 .md-tools{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:2px 0 8px}
 .md-tools input[type=date]{font:inherit;font-size:12.5px;padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink-1)}
@@ -1262,6 +1289,7 @@ footer p{margin:4px 0}
     <div class="sx-box" id="sx-box"><input id="sx-in" type="search" placeholder="搜尋 代號／名稱／族群／頁籤" autocomplete="off" aria-label="站內搜尋"><div class="sx-res" id="sx-res"></div></div>
     <span class="vc-badge" id="vc-badge" hidden></span>
     <div class="spacer"></div>
+    <button class="theme" id="lang-btn" type="button" disabled title="英文版準備中（位置先預留）" style="opacity:.55;cursor:default">中文／English</button>
     <button class="theme" id="fs-btn" type="button" title="調整字級"><span id="fs-txt">字級</span></button>
     <button class="theme" id="theme-btn" type="button"><span id="theme-ico"></span><span id="theme-txt">淺色</span></button>
   </div>
@@ -3521,6 +3549,114 @@ function ifNews(M, pred) {           // 世界趨勢收錄（近 60 天）＋ �
   }
   return IF_ALL.filter(pred);
 }
+/* 🟢 第五批 二-5（Evans 09-27）：外文標題旁顯示中文翻譯（原文保留、可切換）。翻譯由本機 macro_tags（Gemini）產生，
+   放在 macro.json 的 tags.title_zh；沒有翻譯就只顯示原文。切換狀態存在本機瀏覽器。 */
+let IF_ZH = true;
+try { IF_ZH = localStorage.getItem("if-zh") !== "0"; } catch (e) {}
+const ifZh = zh => zh ? `<div class="if-zh">${esc(zh)}</div>` : "";
+let IF_ZHMAP = null;                  // 標題 → 中譯（常駐人物「最新一則」用）
+function ifZhOf(M, title) {
+  if (!IF_ZHMAP) { IF_ZHMAP = {}; ifNews(M, () => false); (IF_ALL || []).forEach(x => { const z = (x.tags || {}).title_zh; if (z) IF_ZHMAP[x.title] = z; }); }
+  return IF_ZHMAP[title] || null;
+}
+/* 🟢 第五批 二-2：立場統計 —— 近 30 天看多／看空／中性則數（本機 macro_tags 判讀、對股市）。
+   看多＋看空＋中性 ≥ 5 則、且同一方向 > 70% → 標「立場鮮明」（看多紅、看空綠）。只列統計事實，不加評語。 */
+const IF_STC = {"看多": "up", "看空": "down", "中性": "flat"};
+function ifStanceStat(entries) {
+  const lo = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+  const L = entries.filter(h => h.d >= lo), c = {"看多": 0, "看空": 0, "中性": 0};
+  L.forEach(h => { if (c[h.st] != null) c[h.st]++; });
+  const j = c["看多"] + c["看空"] + c["中性"];
+  const top = c["看多"] >= c["看空"] ? "看多" : "看空";
+  return {c, j, tot: L.length, strong: j >= 5 && c[top] / j > 0.7 ? top : null};
+}
+function ifStanceHtml(S) {
+  if (!S.tot) return `<div class="if-st">近 30 天沒有收錄</div>`;
+  if (!S.j) return `<div class="if-st">近 30 天立場：尚無判讀（${S.tot} 則待本機判讀）</div>`;
+  return `<div class="if-st">近 30 天立場：看多 <span class="n">${S.c["看多"]}</span>・看空 <span class="n">${S.c["看空"]}</span>・中性 <span class="n">${S.c["中性"]}</span>` +
+    (S.strong ? `<span class="if-bd ${IF_STC[S.strong]}">立場鮮明：${S.strong}</span>` : "") +
+    (S.j < S.tot ? `<span>（判讀涵蓋 ${S.j}／${S.tot} 則）</span>` : "") + `</div>`;
+}
+/* 人物的歷史發言：預覽資料的 pool.hist（跟上一份合併累積，保留 365 天）；沒有就用這次收錄裡提到他的新聞。
+   → [{d, t, s, u, l, say, st, zh}]（新的在前） */
+function ifHistOf(M, r) {
+  const H = ((M.pool || {}).hist || {})[r.key];
+  if (H && H.length) return H.map(h => ({d: h[0], t: h[1], s: h[2], u: h[3], l: h[4], say: h[5], st: h[6], zh: h[7]}));
+  const nm = [r.zh, r.en && r.en.split(" ").at(-1)].filter(x => x && x.length > 1);
+  return ifNews(M, x => (x.people || []).includes(r.key) || nm.some(n => (x.title || "").includes(n)))
+    .map(x => ({d: x.date, t: x.title, s: x.source, u: x.url, l: x.l, say: 0, st: (x.tags || {}).stance, zh: (x.tags || {}).title_zh}));
+}
+/* 🟢 第五批 二-1：個人頁（覆蓋層）—— 完整歷史發言時間軸、關鍵字搜尋、日期篩選；
+   股癌、游庭皓改列節目集數（錄音／影片連結），逐字重點與時間點預設收合。 */
+const IF_KOL_SRC = {gooaye: "gooaye", yu_tinghao: "yutinghao"};
+function ifPersonPage(M, r) {
+  const ov = el("div", "if-ov" + (IF_ZH ? "" : " if-nozh")), pg = el("div", "if-pg");
+  ov.appendChild(pg);
+  const close = () => { ov.remove(); document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  const onKey = e => { if (e.key === "Escape") close(); };
+  ov.onclick = e => { if (e.target === ov) close(); };
+  document.addEventListener("keydown", onKey); document.body.style.overflow = "hidden";
+  const H = ifHistOf(M, r), S = ifStanceStat(H), cc = ifPersonCC(r);
+  const hd = el("div", "if-pgh");
+  hd.appendChild(el("div", "", `<h3>${ifFlag(cc)}${esc(r.zh || r.en || "（現任者待確認）")} ${r.zh && r.en ? `<small>${esc(r.en)}</small>` : ""}</h3>` +
+    `<div class="submeta">${esc(r.role || "")}　${esc({role: "依職位", fixed: "指定", dynamic: "近 30 天聲量", promoted: "自動升格"}[r.kind] || "")}</div>` + ifStanceHtml(S)));
+  const x = el("button", "if-pgx", "×"); x.title = "關閉（Esc）"; x.onclick = close; hd.appendChild(x);
+  pg.appendChild(hd);
+  let KW = "", D0 = "", D1 = "", SAY = false;
+  const bar = el("div", "if-pgbar"), body = el("div");
+  const kw = el("input"); kw.type = "search"; kw.placeholder = "關鍵字（標題、翻譯、原話）";
+  const d0 = el("input"), d1 = el("input"); d0.type = d1.type = "date";
+  const sy = el("label", "", `<input type="checkbox"> 只看直接發言`);
+  const cnt = el("span", "submeta");
+  bar.appendChild(kw); bar.appendChild(el("span", "", "起")); bar.appendChild(d0); bar.appendChild(el("span", "", "迄")); bar.appendChild(d1);
+  if (!IF_KOL_SRC[r.key]) bar.appendChild(sy);
+  bar.appendChild(cnt);
+  pg.appendChild(bar); pg.appendChild(body);
+  const hit = (...xs) => !KW || xs.some(t => (t || "").toLowerCase().includes(KW));
+  const inD = d => (!D0 || d >= D0) && (!D1 || d <= D1);
+  const draw = () => {
+    body.innerHTML = "";
+    const L = H.filter(h => inD(h.d) && (!SAY || h.say) && hit(h.t, h.zh, h.s));
+    if (IF_KOL_SRC[r.key]) {
+      const eb = el("div"); body.appendChild(eb);
+      eb.appendChild(el("div", "sub", "節目集數載入中…"));
+      kolLoad().then(K => {
+        eb.innerHTML = "";
+        const eps = ((K || {}).episodes || []).filter(e => e.src === IF_KOL_SRC[r.key] && inD(e.date) &&
+          hit(e.title, ...(e.mentions || []).flatMap(m => [m.quote, m.point])));
+        cnt.textContent = `節目 ${eps.length} 集・新聞 ${L.length} 則`;
+        eb.appendChild(el("h4", "", "節目集數"));
+        if (!eps.length) eb.appendChild(el("div", "empty", "這個條件下沒有擷取到的集數（每天 08:40 更新；原話經自動查核才列出）。"));
+        eps.forEach(e => {
+          const b = el("div", "if-ep");
+          b.appendChild(el("div", "", `<b class="num">${esc(e.date)}</b>　${esc(e.title)}　<a href="${esc(e.url)}" target="_blank" rel="noopener" style="color:var(--acc)">${e.kind === "youtube" ? "觀看影片" : "收聽錄音"} ↗</a>`));
+          const dt = el("details"); dt.appendChild(el("summary", "", `逐字重點與時間點（${(e.mentions || []).length} 則）`));
+          (e.mentions || []).forEach(m => dt.appendChild(el("div", "kl-m", `<a class="kl-t" href="${esc(kolLink(e, m))}" target="_blank" rel="noopener">${esc(m.t || "")}</a>` +
+            `<div><div class="kl-q">「${esc(m.quote)}」</div>${m.point ? `<div class="kl-p">${esc(m.point)}</div>` : ""}</div>`)));
+          b.appendChild(dt); eb.appendChild(b);
+        });
+        if (L.length) { eb.appendChild(el("h4", "", "新聞提及")); eb.appendChild(ifMore(L, ifHistRow, 20)); }
+      });
+      return;
+    }
+    cnt.textContent = `${L.length}／${H.length} 則`;
+    if (!L.length) { body.appendChild(el("div", "empty", H.length ? "這個條件下沒有符合的發言。" : "還沒有收錄（預覽資料每跑一次會多累積一次）。")); return; }
+    body.appendChild(ifMore(L, ifHistRow, 30));
+  };
+  kw.oninput = () => { KW = kw.value.trim().toLowerCase(); draw(); };
+  d0.onchange = () => { D0 = d0.value; draw(); }; d1.onchange = () => { D1 = d1.value; draw(); };
+  sy.querySelector("input").onchange = e => { SAY = e.target.checked; draw(); };
+  draw();
+  pg.appendChild(el("div", "rv-note", "發言內容以新聞標題與原文連結為準；立場與翻譯由 AI 依標題判讀、僅供參考；本站不另加評語。時間軸保留近 365 天。"));
+  document.body.appendChild(ov);
+  kw.focus();
+}
+function ifHistRow(h) {
+  return el("div", "if-h", `<b>${esc(h.d)}</b><div><div class="t">${esc(h.t)}${h.say ? '<span class="if-say">發言</span>' : ""}` +
+    (h.st ? `<span class="if-sc ${IF_STC[h.st] || "flat"}">${esc(h.st)}</span>` : "") + `</div>` +
+    (h.l && h.l !== "zh" ? ifZh(h.zh) : "") +
+    `<div class="m">${ifFlag(ifSrcCC({source: h.s, title: h.t}))}<a href="${esc(h.u)}" target="_blank" rel="noopener">${esc(h.s || "原文")} ↗</a></div></div>`);
+}
 /* 常駐人物列：各子分頁頂端，每位一格 —— 職位、姓名、最新一則發言（新聞標題原文）與日期、出處。只列事實，不加評語。 */
 function ifResident(M, cats) {
   const P = (M.pool || {}).people || {};
@@ -3536,15 +3672,20 @@ function ifResident(M, cats) {
     (all ? list : list.slice(0, 8)).forEach(r => {
       const L = r.latest, nm = r.zh && r.en ? `${r.zh} <small>${esc(r.en)}</small>` : esc(r.zh || r.en || "（現任者待確認）");
       const badge = KIND[r.kind] + (r.n30 ? ` ${r.n30} 則` : "");
-      grid.appendChild(el("div", "if-rc",
-        `<div class="if-rr">${esc(r.role)}<span class="if-rk">${esc(badge)}</span></div><div class="if-rn">${r.zh ? esc(r.zh) + (r.en ? ` <small>${esc(r.en)}</small>` : "") : nm}</div>` +
-        (L ? `<div class="if-rq">${esc(L.title)}</div><div class="if-rm"><b>${esc(L.date)}</b> <a href="${esc(L.url)}" target="_blank" rel="noopener">${esc(L.source || "原文")} ↗</a>${L.say ? "" : ' <span class="flat">（近 7 天沒有直接發言，列最新一則相關報導）</span>'}</div>`
-           : `<div class="if-rm flat">近 7 天沒有收錄</div>`)));
+      const c = el("div", "if-rc if-click",
+        `<div class="if-rr">${esc(r.role)}<span class="if-rk">${esc(badge)}</span></div><div class="if-rn">${ifFlag(ifPersonCC(r))}${r.zh ? esc(r.zh) + (r.en ? ` <small>${esc(r.en)}</small>` : "") : nm}</div>` +
+        (L ? `<div class="if-rq">${esc(L.title)}</div>${/[\u4e00-\u9fff]/.test(L.title) ? "" : ifZh(ifZhOf(M, L.title))}<div class="if-rm"><b>${esc(L.date)}</b> ${ifFlag(ifSrcCC(L))}<a href="${esc(L.url)}" target="_blank" rel="noopener">${esc(L.source || "原文")} ↗</a>${L.say ? "" : ' <span class="flat">（近 7 天沒有直接發言，列最新一則相關報導）</span>'}</div>`
+           : `<div class="if-rm flat">近 7 天沒有收錄</div>`) +
+        ((r.zh || r.en) ? ifStanceHtml(ifStanceStat(ifHistOf(M, r))) + `<div class="if-rgo">個人頁：完整發言時間軸 ›</div>` : ""));
+      if (r.zh || r.en) { c.setAttribute("role", "button"); c.tabIndex = 0;
+        c.onclick = e => { if (!e.target.closest("a")) ifPersonPage(M, r); };
+        c.onkeydown = e => { if (e.key === "Enter") ifPersonPage(M, r); }; }
+      grid.appendChild(c);
     });
     if (list.length > 8) { const b = el("button", "rv-pill", all ? "收合" : `展開全部 ${list.length} 位`); b.onclick = () => { all = !all; draw(); }; grid.appendChild(b); }
   };
   draw(); wrap.appendChild(grid);
-  return card("常駐人物", `${list.length} 位・每位最新一則發言與日期`, wrap,
+  return card("常駐人物", `${list.length} 位・每位最新一則發言與日期；點卡片看個人頁`, wrap,
     "依職位設定、由程式依最新新聞確認現任者（名字必須出現在新聞標題裡才採用）；「近 30 天聲量」「自動升格」依新聞標題中被點名的次數排名，這兩類的身分欄是 AI 依新聞標題判讀、僅供辨識。發言內容以新聞標題與原文為準，本站不另加評語。");
 }
 /* 🟢 第五批 二-3（Evans 09-27）：清單一律只露前 4 則，more 每次多 20 則，可收合。 */
@@ -3612,7 +3753,9 @@ function ifSrcCC(x) {
   return null;
 }
 function ifItem(it, extra) {
-  return el("div", "mf-it", `<div class="t">${esc(it.title)}</div>` +
+  const tg = it.tags || {};
+  return el("div", "mf-it", `<div class="t">${esc(it.title)}${tg.stance ? `<span class="if-sc ${IF_STC[tg.stance] || "flat"}">${esc(tg.stance)}</span>` : ""}</div>` +
+    (it.l && it.l !== "zh" || !/[\u4e00-\u9fff]/.test(it.title || "") ? ifZh(tg.title_zh) : "") +
     `<div class="mf-meta"><b>${esc(it.date)}</b>${it._t && it._t.person ? `<span class="mf-sec">${esc(it._t.person)}</span>` : ""}` +
     `${ifFlag(ifSrcCC(it))}<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.source || "原文")} ↗</a>${extra || ""}</div>`);
 }
@@ -3881,7 +4024,7 @@ function ifGeo(M) {
   const N = ifNews(M, x => x._t.cats.includes("地緣政治與戰爭") || x._t.front);
   const fronts = [...new Set((((M.pool || {}).fronts) || ["美伊", "俄烏"]).concat(N.map(x => x._t.front).filter(Boolean)))];
   const box = el("div");
-  const li = x => el("li", "", `<b>${esc(x.date)}</b>${esc(x.title)} ${ifFlag(ifSrcCC(x))}<small class="flat">${esc(x.source || "")}</small> <a href="${esc(x.url)}" target="_blank" rel="noopener" style="color:var(--acc)">↗</a>`);
+  const li = x => el("li", "", `<b>${esc(x.date)}</b>${esc(x.title)}${ifZh((x.tags || {}).title_zh)} ${ifFlag(ifSrcCC(x))}<small class="flat">${esc(x.source || "")}</small> <a href="${esc(x.url)}" target="_blank" rel="noopener" style="color:var(--acc)">↗</a>`);
   fronts.map(fr => [fr, N.filter(x => x._t.front === fr)]).sort((a, b) => (b[1][0] || {}).date?.localeCompare((a[1][0] || {}).date || "") || b[1].length - a[1].length)
     .forEach(([fr, L]) => {
       const d = el("details", "if-fr");
@@ -3962,6 +4105,16 @@ function tabInfo() {
   mfLoad().then(M => {
     root.innerHTML = "";
     if (!M) { root.appendChild(el("div", "empty", "載不到 data/macro.json —— 世界趨勢那一班可能還沒跑")); return; }
+    // 二-5：翻譯切換（原文一律保留）；外文標題與已翻譯的則數照實列
+    ifNews(M, () => false);
+    const fo = IF_ALL.filter(x => x.l ? x.l !== "zh" : !/[\u4e00-\u9fff]/.test(x.title || "")), nz = fo.filter(x => (x.tags || {}).title_zh).length;
+    const tb = el("div", "if-topbar"), zb = el("button", "rv-pill" + (IF_ZH ? " on" : ""), IF_ZH ? "中文翻譯：顯示" : "中文翻譯：隱藏");
+    zb.onclick = () => { IF_ZH = !IF_ZH; try { localStorage.setItem("if-zh", IF_ZH ? "1" : "0"); } catch (e) {}
+      root.classList.toggle("if-nozh", !IF_ZH); zb.className = "rv-pill" + (IF_ZH ? " on" : ""); zb.textContent = IF_ZH ? "中文翻譯：顯示" : "中文翻譯：隱藏"; };
+    root.classList.toggle("if-nozh", !IF_ZH);
+    tb.appendChild(zb);
+    tb.appendChild(el("span", "", `外文標題 ${fo.length} 則，已有中文翻譯 ${nz} 則` + (nz ? "（AI 翻譯，原文保留在上方）" : "（翻譯由本機每天產生，還沒有的只顯示原文）")));
+    root.appendChild(tb);
     root.appendChild(sideTabs([["利率與央行", () => ifRates(M)], ["經濟指標", () => ifEcon(M)], ["匯率", () => ifFx(M)],
       ["地緣政治與戰爭", () => ifGeo(M)], ["科技與 AI", () => ifTech(M)], ["話語權人物", () => ifPeople(M)], ["週報", () => ifWeekly(M)]]));
     root.appendChild(el("div", "rv-note", `資料日 ${esc(M.asof || "—")}。數字：FRED（聖路易聯邦準備銀行，轉載 BLS／BEA／聯準會等官方資料）。新聞：每則附原文連結，以原文為準；分類 ${M.tagged ? `本機標記 ${M.tagged} 則，其餘` : ""}依世界趨勢原本的主題與人物。僅供參考，不具任何臆測，非投資建議。`));
