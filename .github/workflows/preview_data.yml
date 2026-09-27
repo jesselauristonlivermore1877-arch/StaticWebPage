@@ -1,0 +1,103 @@
+# preview_data.yml ─ 預覽 v2 的資料與頁面（第五批，2026-09-27；Evans 09-27 核准放 main）
+#
+#   這支只是「預覽用的工具」放在 main，**不是把 v2 合進 main**：
+#   預覽的程式在 CustomerServiceANDSales 的 preview/v2 分支，產出只落在 docs/preview/v2/。
+#
+#   Evans 定的三個條件（缺一不可）：
+#   1. 只能手動觸發（workflow_dispatch）—— 不設 schedule、不設 push。
+#   2. 寫入路徑寫死 docs/preview/v2/；工作區只要有這個資料夾以外的變動，就直接失敗、不 push。
+#   3. 跟正式站同一個 concurrency group（daily-build），push 前先 pull --rebase，兩支不會同時推 main 互相覆蓋。
+#
+#   做的事：
+#   ① tools/preview_macro.py：讀 main 的 docs/data/macro.json＋data/news_pool.json＋data/people_roles.json（唯讀），
+#      用 preview/v2 的程式重算（人名驗證、人物歷史發言、FRED 長歷史＋USREC）→ docs/preview/v2/macro.json
+#   ② tools/mkpreview.py：preview/v2 的 template.html ＋ main 的 data/web_data.json → docs/preview/v2/index.html
+#      （noindex、<base href="../../">、window.MF_URL 指向 ①）
+#
+#   正式站不受影響：daily.yml 的 build_web 只寫 docs/index.html 與 docs/data/ 底下固定幾個檔，從不刪 docs/preview/；
+#   check_web 只檢查 web_data.json 與 data/ 的落地檔，不看 docs/preview/。
+name: 預覽 v2 資料（手動）
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-build
+  cancel-in-progress: false
+
+env:
+  PREVIEW_DIR: docs/preview/v2/      # ⬅️ 唯一允許寫入的地方（寫死，不接受輸入）
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: site
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          ref: preview/v2
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests feedparser
+
+      - name: 產出預覽資料與頁面
+        working-directory: code
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          PYTHONUNBUFFERED: "1"
+        run: |
+          echo "程式：preview/v2 @ $(git rev-parse --short HEAD)"
+          python tools/preview_macro.py ../site
+          python tools/mkpreview.py ../site
+
+      # 🔴 斷言：工作區（含未追蹤檔）任何一個變動不在 docs/preview/v2/ 底下 → 失敗，後面的提交不會跑。
+      - name: 斷言只動到 docs/preview/v2/
+        working-directory: site
+        run: |
+          git status --porcelain --untracked-files=all > "$RUNNER_TEMP/changed.txt"
+          echo "變動："
+          cat "$RUNNER_TEMP/changed.txt"
+          # porcelain 格式：前 3 個字元是狀態；改名是「舊 -> 新」，兩邊都要檢查
+          BAD=$(cut -c4- "$RUNNER_TEMP/changed.txt" | sed 's/ -> /\n/' | sed 's/^"//; s/"$//' | grep -v "^${PREVIEW_DIR}" || true)
+          if [ -n "$BAD" ]; then
+            echo "::error::動到 ${PREVIEW_DIR} 以外的檔案，不提交："
+            echo "$BAD"
+            exit 1
+          fi
+          echo "✓ 全部在 ${PREVIEW_DIR} 底下"
+
+      - name: 提交
+        working-directory: site
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- "$PREVIEW_DIR"
+          if git diff --staged --quiet; then
+            echo "沒有變動，不提交。"
+            exit 0
+          fi
+          # 再確認一次：這次 commit 只含預覽資料夾
+          BAD=$(git diff --staged --name-only | grep -v "^${PREVIEW_DIR}" || true)
+          if [ -n "$BAD" ]; then
+            echo "::error::staged 有 ${PREVIEW_DIR} 以外的檔案：$BAD"
+            exit 1
+          fi
+          git commit -m "preview: v2 資料與頁面 $(TZ=Asia/Taipei date '+%F %H:%M')"
+          git pull --rebase origin main
+          # rebase 之後，這個 commit 相對遠端 main 仍然只能動預覽資料夾
+          BAD=$(git diff --name-only origin/main HEAD | grep -v "^${PREVIEW_DIR}" || true)
+          if [ -n "$BAD" ]; then
+            echo "::error::rebase 後相對 main 多出 ${PREVIEW_DIR} 以外的差異，不 push：$BAD"
+            exit 1
+          fi
+          git push origin HEAD:main
