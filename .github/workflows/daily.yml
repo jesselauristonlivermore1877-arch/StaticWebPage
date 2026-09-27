@@ -85,6 +85,8 @@ jobs:
           fi
           # 用 rm -rf + cp 而不是 rsync：runner 上 rsync 不保證存在，
           # 而且這裡要的就是「整個目錄換成來源那一份」，語意更直接。
+          case "$DST/" in *docs/preview/*) echo "::error::DST 落在 docs/preview/ 底下，不刪"; exit 1;; esac
+          echo "[寫檔稽核] 整個刪除 $DST（接著從 $SRC 複製）"
           rm -rf "$DST"
           mkdir -p "$DST"
           cp "$SRC"/*.png "$DST"/
@@ -116,6 +118,13 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # 🔴 09-27（Evans）：正式建置不可以動到預覽資料夾 —— 有任何變動（改、刪、新增）就不提交
+          if [ -n "$(git status --porcelain --untracked-files=all -- docs/preview)" ]; then
+            echo "::error::正式建置動到 docs/preview/，不提交："
+            git status --porcelain --untracked-files=all -- docs/preview
+            exit 1
+          fi
+          echo "✓ docs/preview/ 沒有被動到"
           git add data docs
           if git diff --staged --quiet; then
             echo "今天沒有任何變動，不提交。"
