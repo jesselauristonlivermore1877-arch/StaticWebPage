@@ -1,0 +1,85 @@
+# backfill_breadth.yml ─ 上市漲跌家數＋漲停跌停家數歷史回補（第七批 12，Evans 09-27）
+#   程式：CustomerServiceANDSales 的 breadth.py；來源：證交所 MI_INDEX type=MS 的官方「漲跌證券數合計」（股票欄）
+#   上櫃沒有官方歷史表，從每日班起往後累積。
+name: 回補漲跌家數
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "往回抓幾個日曆天"
+        required: false
+        default: "360"
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install requests feedparser certifi
+      - name: 抓片 ${{ matrix.shard }}
+        working-directory: code
+        run: python breadth.py --backfill ../out --shard ${{ matrix.shard }} --of 8 --days ${{ inputs.days }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: breadth-${{ matrix.shard }}
+          path: out/
+          if-no-files-found: warn
+          retention-days: 1
+
+  merge:
+    needs: crawl
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: daily-build
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install numpy requests feedparser
+      - uses: actions/download-artifact@v4
+        with:
+          path: dl
+          pattern: breadth-*
+          merge-multiple: true
+      - name: 併進 breadth_hist.json
+        working-directory: code
+        run: python breadth.py --merge ../dl --data ../data
+      - name: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/breadth_hist.json
+          if git diff --staged --quiet; then
+            echo "breadth_hist.json 沒有變化，不提交。"
+          else
+            git commit -m "data(第七批 15): 回補漲跌家數 $(TZ=Asia/Taipei date +%F)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
