@@ -1,6 +1,6 @@
 {
  "date": "2026-09-24",
- "made": "2026-09-28T07:27",
+ "made": "2026-09-28T07:44",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "facts": [
   {
@@ -313,18 +313,18 @@
    "id": "etf_net",
    "sec": "主動式 ETF",
    "label": "主動式 ETF 合計淨買賣（含申購贖回）",
-   "value": -155.2,
+   "value": 0.0,
    "unit": " 億元",
-   "text": "-155.2 億元",
+   "text": "+0.0 億元",
    "src": "docs/data/etf_flow.json"
   },
   {
    "id": "etf_xnet",
    "sec": "主動式 ETF",
    "label": "主動式 ETF 經理人自己調整持股的淨額（扣申購贖回）",
-   "value": -85.6,
+   "value": 0.0,
    "unit": " 億元",
-   "text": "-85.6 億元",
+   "text": "+0.0 億元",
    "src": "docs/data/etf_flow.json"
   },
   {
