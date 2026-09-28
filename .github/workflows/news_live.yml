@@ -40,7 +40,7 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-      - run: pip install feedparser
+      - run: pip install feedparser requests
       - name: 即時信息流
         working-directory: code
         env:
