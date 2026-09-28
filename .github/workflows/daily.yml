@@ -121,11 +121,12 @@ jobs:
       - name: 官方職位表・全球資料
         working-directory: code
         continue-on-error: true
-        timeout-minutes: 10
+        timeout-minutes: 20
         env:
           PYTHONUNBUFFERED: "1"
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: |
+          python registry_verify.py ../site/data
           python officials.py ../site/data
           python world_data.py ../site/data
 
