@@ -52,7 +52,10 @@ jobs:
       group: daily-build
       cancel-in-progress: false
     steps:
+      # 🔴 09-28：要拿最新的 main（不是觸發時那個 commit）——抓片期間每日班可能已經提交過同一個檔，舊 checkout 會在 rebase 時 add/add 衝突
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/checkout@v4
         with:
           repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
