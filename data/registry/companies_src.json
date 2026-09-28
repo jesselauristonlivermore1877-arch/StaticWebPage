@@ -1,7 +1,7 @@
 {
  "asof": "2026-09-28",
  "by": "gemini（本機，開搜尋）＋公開資訊觀測站 OpenAPI（台灣）",
- "targets": "退路（company_targets.json 還沒有）：台灣前 150（股數×最新收盤）＋world.json 全球前 50 大 49 家＋未上市 AI 8 家",
+ "targets": "company_targets.json（雲端 2026-09-28）台灣 150＋美國 100；其他國家等雲端修好市值名單、先用退路 world.json 8 家；未上市 8 家",
  "items": [
   {
    "cty": "tw",
@@ -9,7 +9,7 @@
    "name": "台積電",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1994-09-05",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -31,7 +31,7 @@
    "name": "聯發科",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2001-07-23",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -53,7 +53,7 @@
    "name": "台達電",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1988-12-19",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -75,7 +75,7 @@
    "name": "鴻海",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1991-06-18",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -97,7 +97,7 @@
    "name": "日月光投控",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2018-04-30",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -119,7 +119,7 @@
    "name": "富邦金",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2001-12-19",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -141,7 +141,7 @@
    "name": "欣興",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-08-26",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -163,7 +163,7 @@
    "name": "聯電",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1985-07-16",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -185,7 +185,7 @@
    "name": "南亞",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1967-11-15",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -207,7 +207,7 @@
    "name": "台光電",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1998-11-27",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -229,7 +229,7 @@
    "name": "南亞科",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2000-08-17",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -251,7 +251,7 @@
    "name": "國泰金",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2001-12-31",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -273,7 +273,7 @@
    "name": "奇鋐",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-09-27",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -295,7 +295,7 @@
    "name": "廣達",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1999-01-08",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -317,7 +317,7 @@
    "name": "中信金",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-05-17",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -339,7 +339,7 @@
    "name": "國巨*",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1993-10-22",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -361,7 +361,7 @@
    "name": "川湖",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2008-06-25",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -383,7 +383,7 @@
    "name": "創意",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2006-11-03",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -405,7 +405,7 @@
    "name": "中華電",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2000-10-27",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -427,7 +427,7 @@
    "name": "台新新光金",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-02-18",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -449,7 +449,7 @@
    "name": "智邦",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1995-11-15",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -471,7 +471,7 @@
    "name": "鴻勁",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2025-11-27",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -493,7 +493,7 @@
    "name": "健策",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2009-11-18",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -515,7 +515,7 @@
    "name": "致茂",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1996-12-21",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -537,7 +537,7 @@
    "name": "元大金",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-02-04",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -559,7 +559,7 @@
    "name": "台塑化",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2003-12-26",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -581,7 +581,7 @@
    "name": "信驊",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2013-04-30",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -603,7 +603,7 @@
    "name": "大立光",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-03-11",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -625,7 +625,7 @@
    "name": "玉山金",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-01-28",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -647,7 +647,7 @@
    "name": "南電",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2006-04-07",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -669,7 +669,7 @@
    "name": "華邦電",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1995-10-18",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -691,7 +691,7 @@
    "name": "兆豐金",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-02-04",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -713,7 +713,7 @@
    "name": "華碩",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1996-11-14",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -735,7 +735,7 @@
    "name": "永豐金",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-05-09",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -757,7 +757,7 @@
    "name": "光寶科",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1995-11-17",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -779,7 +779,7 @@
    "name": "凱基金",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2001-12-28",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -801,7 +801,7 @@
    "name": "華南金",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2001-12-19",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -823,7 +823,7 @@
    "name": "研華",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1999-12-13",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -845,7 +845,7 @@
    "name": "緯創",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2003-08-19",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -867,7 +867,7 @@
    "name": "金像電",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1998-03-09",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -889,7 +889,7 @@
    "name": "第一金",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2003-01-02",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -911,7 +911,7 @@
    "name": "臻鼎-KY",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2011-12-26",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -933,7 +933,7 @@
    "name": "旺矽",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2003-01-06",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -955,7 +955,7 @@
    "name": "長榮",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1987-09-21",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -977,7 +977,7 @@
    "name": "景碩",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2004-11-01",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -999,7 +999,7 @@
    "name": "藥華藥",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2024-01-25",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1021,7 +1021,7 @@
    "name": "群聯",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2004-12-06",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1043,7 +1043,7 @@
    "name": "貿聯-KY",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2011-04-21",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1065,7 +1065,7 @@
    "name": "台灣大",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-08-26",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1087,7 +1087,7 @@
    "name": "環球晶",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2015-09-25",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1109,7 +1109,7 @@
    "name": "台燿",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2003-12-18",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1131,7 +1131,7 @@
    "name": "合庫金",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2011-12-01",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1153,7 +1153,7 @@
    "name": "統一",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1987-12-28",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1175,7 +1175,7 @@
    "name": "台塑",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1964-07-27",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1197,7 +1197,7 @@
    "name": "京元電子",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2001-05-09",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1219,7 +1219,7 @@
    "name": "群創",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2006-10-24",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1241,7 +1241,7 @@
    "name": "緯穎",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2019-03-27",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1263,7 +1263,7 @@
    "name": "台化",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1984-12-20",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1285,7 +1285,7 @@
    "name": "瑞昱",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1998-10-26",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1307,7 +1307,7 @@
    "name": "遠傳",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2005-08-24",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1329,7 +1329,7 @@
    "name": "力積電",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2021-12-06",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1351,7 +1351,7 @@
    "name": "彰銀",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1962-02-15",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1373,7 +1373,7 @@
    "name": "聯詠",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-08-26",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1395,7 +1395,7 @@
    "name": "世芯-KY",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2014-10-28",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1417,7 +1417,7 @@
    "name": "萬海",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1996-05-16",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1439,7 +1439,7 @@
    "name": "世界",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "1998-03-25",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1461,7 +1461,7 @@
    "name": "中鋼",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1974-12-26",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1483,7 +1483,7 @@
    "name": "和泰車",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1997-02-25",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1505,7 +1505,7 @@
    "name": "健鼎",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-08-26",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1527,7 +1527,7 @@
    "name": "聯亞",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2015-07-22",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1549,7 +1549,7 @@
    "name": "華通",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1990-07-24",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1571,7 +1571,7 @@
    "name": "文曄",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-08-26",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1593,7 +1593,7 @@
    "name": "友達",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2000-09-08",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1615,7 +1615,7 @@
    "name": "漢唐",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2000-03-14",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1637,7 +1637,7 @@
    "name": "和碩",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2010-06-24",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1659,7 +1659,7 @@
    "name": "華城",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1997-04-16",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1681,7 +1681,7 @@
    "name": "技嘉",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1998-09-24",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1703,7 +1703,7 @@
    "name": "亞德客-KY",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2010-12-13",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1725,7 +1725,7 @@
    "name": "力旺",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2011-01-24",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1747,7 +1747,7 @@
    "name": "上海商銀",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2018-10-19",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1769,7 +1769,7 @@
    "name": "旺宏",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1995-03-15",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1791,7 +1791,7 @@
    "name": "長榮航",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2001-09-17",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1813,7 +1813,7 @@
    "name": "統一超",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1997-08-22",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1835,7 +1835,7 @@
    "name": "力成",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2004-11-08",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1857,7 +1857,7 @@
    "name": "聯茂",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2008-01-21",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1879,7 +1879,7 @@
    "name": "英業達",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1996-11-13",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1901,7 +1901,7 @@
    "name": "鈊象",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2006-07-12",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1923,7 +1923,7 @@
    "name": "穎崴",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2021-01-20",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1945,7 +1945,7 @@
    "name": "穩懋",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2011-12-13",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1967,7 +1967,7 @@
    "name": "陽明",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1992-04-20",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -1989,7 +1989,7 @@
    "name": "大聯大",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2005-11-09",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2011,7 +2011,7 @@
    "name": "嘉澤",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2007-12-10",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2033,7 +2033,7 @@
    "name": "台泥",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1962-02-09",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2055,7 +2055,7 @@
    "name": "中租-KY",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2011-12-13",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2077,7 +2077,7 @@
    "name": "臺企銀",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1998-01-03",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2099,7 +2099,7 @@
    "name": "太景*-KY",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2014-01-17",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2121,7 +2121,7 @@
    "name": "亞翔",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2003-08-25",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2143,7 +2143,7 @@
    "name": "台勝科",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2007-12-10",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2165,7 +2165,7 @@
    "name": "富世達",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2023-11-09",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2187,7 +2187,7 @@
    "name": "台玻",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1973-07-20",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2209,7 +2209,7 @@
    "name": "元太",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2004-03-30",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2231,7 +2231,7 @@
    "name": "矽力*-KY",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2013-12-12",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2253,7 +2253,7 @@
    "name": "東元",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1973-11-05",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2275,7 +2275,7 @@
    "name": "華新",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1972-11-03",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2297,7 +2297,7 @@
    "name": "愛普*",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2016-05-31",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2319,7 +2319,7 @@
    "name": "仁寶",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1992-02-18",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2341,7 +2341,7 @@
    "name": "雙鴻",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2005-05-13",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2363,7 +2363,7 @@
    "name": "頎邦",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2002-01-31",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2385,7 +2385,7 @@
    "name": "聯強",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1995-12-13",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2407,7 +2407,7 @@
    "name": "漢測",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2026-09-22",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2429,7 +2429,7 @@
    "name": "華新科",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2001-09-17",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2451,7 +2451,7 @@
    "name": "遠東新",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1967-04-14",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2473,7 +2473,7 @@
    "name": "采鈺",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2022-06-30",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2495,7 +2495,7 @@
    "name": "中砂",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2005-01-31",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2517,7 +2517,7 @@
    "name": "台灣高鐵",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2016-10-27",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2539,7 +2539,7 @@
    "name": "高力",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2014-02-14",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2561,7 +2561,7 @@
    "name": "新代",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2025-09-17",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2583,7 +2583,7 @@
    "name": "達發",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2023-10-19",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2605,7 +2605,7 @@
    "name": "禾伸堂",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-08-26",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2623,33 +2623,11 @@
   },
   {
    "cty": "tw",
-   "ticker": "910322",
-   "name": "康師傅-DR",
-   "status": "listed",
-   "exchange": "TWSE",
-   "listed_date": "2009-12-16",
-   "merged_into": null,
-   "leaders": [],
-   "valuation_usd": null,
-   "round": null,
-   "round_date": null,
-   "src": [
-    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
-   ],
-   "quote": "公司代號 910322／公司簡稱 康師傅-DR",
-   "checked": "2026-09-28",
-   "verify": {
-    "ok": true,
-    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
-   }
-  },
-  {
-   "cty": "tw",
    "ticker": "8358",
    "name": "金居",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2010-09-27",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2671,7 +2649,7 @@
    "name": "宜鼎",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2013-11-27",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2693,7 +2671,7 @@
    "name": "微星",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1998-10-31",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2715,7 +2693,7 @@
    "name": "威剛",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2004-10-08",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2737,7 +2715,7 @@
    "name": "亞泥",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1962-06-08",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2759,7 +2737,7 @@
    "name": "光聖",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2015-07-14",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2781,7 +2759,7 @@
    "name": "華航",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1993-02-26",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2803,7 +2781,7 @@
    "name": "康霈*",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2024-10-02",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2825,7 +2803,7 @@
    "name": "帆宣",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2004-05-24",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2847,7 +2825,7 @@
    "name": "大成鋼",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1996-10-24",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2869,7 +2847,7 @@
    "name": "創見",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2001-05-03",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2891,7 +2869,7 @@
    "name": "台中銀",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "1984-05-15",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2913,7 +2891,7 @@
    "name": "精材",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2015-03-30",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2935,7 +2913,7 @@
    "name": "中美晶",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2001-03-02",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2957,7 +2935,7 @@
    "name": "欣銓",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2005-01-05",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -2979,7 +2957,7 @@
    "name": "矽格",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2003-08-25",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3001,7 +2979,7 @@
    "name": "萬潤",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2002-09-27",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3023,7 +3001,7 @@
    "name": "上銀",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2009-06-26",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3045,7 +3023,7 @@
    "name": "啟碁",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2003-09-22",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3067,7 +3045,7 @@
    "name": "勤誠",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2011-12-01",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3089,7 +3067,7 @@
    "name": "聖暉*",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2010-11-10",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3111,7 +3089,7 @@
    "name": "可成",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2001-09-17",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3133,7 +3111,7 @@
    "name": "祥碩",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2012-12-12",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3155,7 +3133,7 @@
    "name": "億豐",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2015-12-22",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3177,7 +3155,7 @@
    "name": "精測",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2016-03-24",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3199,7 +3177,7 @@
    "name": "昇達科",
    "status": "listed",
    "exchange": "TPEx",
-   "listed_date": "2008-01-03",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3221,7 +3199,7 @@
    "name": "聯友金屬-創",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2025-09-09",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3243,7 +3221,7 @@
    "name": "崇越",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2003-08-25",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3265,7 +3243,7 @@
    "name": "神達",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2013-09-12",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3287,7 +3265,7 @@
    "name": "全新",
    "status": "listed",
    "exchange": "TWSE",
-   "listed_date": "2002-01-24",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [],
    "valuation_usd": null,
@@ -3297,6 +3275,28 @@
     "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
    ],
    "quote": "公司代號 2455／公司簡稱 全新",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "1503",
+   "name": "士電",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": null,
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 1503／公司簡稱 士電",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -3322,10 +3322,10 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGiFEuagFZipqcOIXVYwYIsCfJxi745awiMG3gdFaf2wgbSpw9hRnulau_DtLw4x5-j7d_iV7x0_3bgoISF-NTI7bRNCzSVH44fERjM3Ivj-PTsuCVoRRviDdXe0K90vwxsCjHMJ5Y357BPrPmApt2ZlYbOn52S",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFU8AkVY4b_93hRo74GpY_8x33QRzaxSWXfcXChxOp0Ubixp9JMCFDXn18Cn68nnGadp_OqttAxp-EnKnGsFR29zLbHSzQGZo28U4wcQGq0uinGfCVOkFCu-o0oO2HcPgN5IN9YFbtBtvBaTTcxcq_h1KYjExiETOD72gMLHsXz"
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGmcryLkG5k9Fs2mvgxJ-i4AObfh33MVAsib6_yCKmCzBMrXcPrTGvMkxvUYQGvlYacj8BUgCxYw1E_96jXZrq4RvjSWqyJWj_xx2J1sEysuvUsTis22Vn-CVfbqrAMoZA1a_sKI3aoVXBYeuxDF-1BdzLLuodYIvbI9T7Bv6Ne",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFBnp8ddznFrtIyKsD602xaIGqP_GvXT4ckNfeNIF3_b5MRruk_9Xx0r7fBiaopz8fnMrv6U6-Hr-wY226vigRNw8t8NFAmqB7J2Fjl4CdLm6ykp53UtjXA_3hhH-vftVs-v2TDI3p9KYbu6U3fS5E="
    ],
-   "quote": "NVIDIA Corporation's initial public offering (IPO) took place on January 22, 1999. The stock was listed on the Nasdaq exchange under the ticker symbol NVDA... Jensen Huang is the co-founder, president, and CEO of NVIDIA.（未開啟原文）",
+   "quote": "Jensen Huang co-founded NVIDIA in 1993 and has served since its inception as president, chief executive officer and a member of the board of directors. NVIDIA completed its initial public offering on January 22, 1999, trading on NASDAQ under the symbol NVDA.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -3352,10 +3352,9 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF01MxqGHVRod7QM7TnWXwaVim5DaV_7MU1bHf9SSAV0VyA9dt4QznPgU11noxgT-4T7uniZG2EHQepZv7KQJOToZ_d584LOCFaps064ss6iNncToyj8r_sqAaiGMyFSnfH",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGq7bC_qJDQ-d9Njf2vj4vTBwR354vRmiHRvXvZgxwfbuHHkp33DSMIXde_sGThiZR-Mg01cmuaVSDQpJvkMOe60rffno95M835mgBTdTVs0cZH_u34p3H4acHYWfmTyyiPHagbPtYPKEKNcbyeZ6gSdDuZSNLSP23Z3r40sgR3vwkRHeyXtT3u8gzIiDCYKArUzVehLWIUJtsH-h2bmrLZIHrGaGuWVOec"
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFW20e121ot_-MltyVp-dEuMTzGfqvADoc4KW5b9cd9iu-WM6XItYNq5AyCFd3pf_PwpHgLtsD69H3CiCtQQ1UwWeury9HlpubpfOzhg9M1dDFxWnthWIjn-sSuvmyn6gqTd2bltK_Uf82ETKGl_Ziuej40S8xfJT4BSReDZeh1HdPhv-qOWB_moxaNaTPgYMuvEy4i4TPO2VHiXYptcA3jQ6KZOu0MMYk="
    ],
-   "quote": "Apple Inc. held its initial public offering (IPO) on December 12, 1980... As of September 1, 2026, John Ternus is the CEO of Apple. Tim Cook, who served as CEO from 2011 to 2026, transitioned to the role of Executive Chairman of Apple's board of directors on September 1, 2026.（未開啟原文）",
+   "quote": "As of September 2026, John Ternus is the CEO of Apple, having officially assumed the role on September 1, 2026, succeeding Tim Cook. Apple went public on December 12, 1980.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -3373,7 +3372,7 @@
    "merged_into": null,
    "leaders": [
     {
-     "zh": "桑德爾·皮蔡",
+     "zh": "桑德爾·皮查伊",
      "en": "Sundar Pichai",
      "title": "CEO"
     }
@@ -3382,10 +3381,10 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFyb5FO5eIWTraqmSCKSIBzQSgB2xGFA8EZz7OAgcPBFg8ow2KKVYwjnhlag2ytJemkFkKrIQkzWGmg1vPZBMMhSX8Z46u-KEkpOUFFjJO3bDk2U3tWNhhhKFrCgpnmyLqc59uCWmk=",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG9ULQ47ysHbj6JhA6PJ49QN8kDPpXFSO9JPov7mlI_MdmKiqM0e3awUlqZDlBgb5PIDtAtpgn35TFvcdB6thw9YYiSBLN-AXL46Ww4tWAYq-QUJsoEtJyPKukdmaaLvIo="
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFV7prlBQPPbtbWBMYL38UutJyyY9vnMqZYTmje6IsuUzHXpH8zJs_Bc_BkTgkKsKZ_Tg3RYjKAv1CmSmjR_pbgii6pEm58V42-6LJ6fAhojexNX39vygwJHphYfPFW6z0=",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHQ9KtXOFfdCLESo2j5M_yzebcYTjQ4GvDP_9eqFfwyQe3oCVdrXkR5V0MCjGcsXTP7yYN8PxKnXTwBtr45VIly7Dq3h1fioQM0vnGwyIEHlejFgtBbQ72HDaZHjOxVm-yUGQavuQvJa7N09MAdJVWN-Y0xs90alqCojBOY-Oab6GAkSWH8vkE="
    ],
-   "quote": "As of September 2026, Sundar Pichai continues to serve as the CEO of Alphabet Inc. and Google... Google (now a subsidiary of Alphabet Inc.) held its initial public offering on August 19, 2004.（未開啟原文）",
+   "quote": "Sundar Pichai is the CEO of both Google and its parent company, Alphabet Inc. Google held its IPO on August 19, 2004, listed on the Nasdaq stock exchange.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -3412,10 +3411,10 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFlSvWgv_lTanahAVHrsKpW0F4dU0BCOGvU35u7D8VdLyGoLlSVSlDeJEL7mfEW03Oy9iNyCKNjQEJo_70SaOOa8LKIQdDlM4egIzSGTR6rVC0hgWJ0Rmm0OYiEDpvTFv0lr8U=",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHTrCRIxHG52MPu09QhVY9SrIJRVcebqkGf_dX8TasmRua36Rjm1Ici3jyId2_khUazt66Idv18nnXXwkVyZiVgv_KjrziWc13Cp3_MJbhz5kIaF1mJItqSR0m5JEXDxwZy-Q=="
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHlt0huWqoVRY_dK1x456XOwCG2AywWVfKJrM9xUNXKvG4sH9WcahJav7TmC5GUUixCHNUrhQYNkTIuMK3aEaUCVKgATS7SYQLEQ_XSP9JamMNEMq0SR_gaNdomIlXWlkw=",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFlO02AnCvUr0bM4avlA92awtuw4b4PdJdShYw-ESJPMNf4lRvfTgZst3M0cHJl_RwTAGU26C1dbP-DMQyDum0_ntqEqqnZ43cqVSG2-nL-Qbo51pYjHjW5ZCgTqWlaodYo8NO-w-k="
    ],
-   "quote": "As of September 2026, Satya Nadella is the Chairman and Chief Executive Officer (CEO) of Microsoft Corporation... Microsoft's initial public offering (IPO) took place on March 13, 1986.（未開啟原文）",
+   "quote": "Satya Nadella is the Chairman and Chief Executive Officer (CEO) of Microsoft. Microsoft Corporation made its initial public offering (IPO) on the Nasdaq stock exchange on March 13, 1986, under the ticker symbol MSFT.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -3442,14 +3441,75 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE8mMycNla3y4EBJfa-eAn_PMwYevf48_nSPE7gHl_eCT7UbaJir8ie84cwgxdaYJKH1TCqfTiOag_wkJnB7dCXAqZE4UyIj6ecuBBBXAK02-x7w1_AG3B1sGLd8JFaSe3K32n2VTZGaEM70BVALteV_rvqhiW8qvMGzm_Gk0159481rcapSizUA7yWD128LLdSy5YNnbnlFgVPYbCuLF1TBVxPPlNNjLj4qeQgxv-_",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQExFLcgoRUwEoIAh_k123HnW30i6xklUPDPyevtIqmKohB5ZefGvtKRQETc2KJ7nuPkHRMY5X4up92PluCvxK7ce52rm6VzigUETRhg-9Zxonnimp-hUq5kR0Cq3Ay527_Jlg=="
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEAeeueEzF8kQyX8Y4Kit6YCpK04-QNU02g_cm4Un31-6AOHviA8c2p2Ea6jIGSuzFoYuXHKuW-XdDf3ne7m85varyALpKp_nUgiB9lQMvA_MzGee7HKeL_oqHyjWNq",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFktSnoyP1nbLACRyLoN3LGs65f4uyyyZu-ajPRcufDNM4-mLXG1XTJ9d3gFNPuoMtz-J0IDtSU8fD5caeaC0yCzxgTaelP9aX1Vf2YiGJScqhqdbRil7qlukxDCkVWLRQheA=="
    ],
-   "quote": "As of September 2026, Andy Jassy is the President and Chief Executive Officer of Amazon.com, Inc... IPO Date: May 15, 1997（未開啟原文）",
+   "quote": "Andy Jassy has served as President and CEO since July 2021. Amazon.com, Inc. IPO Date: May 15, 1997 on NASDAQ under ticker symbol AMZN.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
     "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "TSM",
+   "name": "Taiwan Semiconductor Manufacturing Company Limited",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1997-10-08",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "魏哲家",
+     "en": "C.C. Wei",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHukKy-jZL2ETGSzHiW707o4wQJkm59BhGY-l9sRIQt-4_Z_AzE9MU9Jc5LI9gloY3CuTM_HGmxsibtXS68VbOakJ7MOrXhp2mZAt3DXwFr9I8VWfVMSbjcQB5z7gVG0Eiymdxp18M=",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFTyi2sMwKJ58nZ66QYCSep6CEdhvFYeN7EbT7CAaFsmFn53fKZmC7eGnFiMmSUXJxilbVFGS0oF-EiiMcXmnNKMc4atyQlHpKNrLrWeDugsoTIuEZFU8TqjIQ="
+   ],
+   "quote": "Dr. C.C. Wei (Wei Che-chia) currently serves as the Chairman and Chief Executive Officer (CEO) of Taiwan Semiconductor Manufacturing Company (TSMC). On October 8, 1997, the company successfully listed its American Depositary Receipts (ADRs) on the New York Stock Exchange (NYSE) under the ticker symbol 'TSM'.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "SPCX",
+   "name": "Space Exploration Technologies Corp.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "2026-06-12",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "伊隆·馬斯克",
+     "en": "Elon Musk",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH2Jn8G_qqKu-E9QPyeZ4mlyvY_1G8tecj5MsciNnEML2-D0rlSoKiTcP6XUuC5POVhUaEVwmFLaZNFDXV_GQEYpH-GvPrmoXzePUfs-QnSQ2cmuFJhivjxvECYik5wk9cbN-xPq8FQG60=",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHsTMmiHjC_QQZsVC8ibLO8qPBZSL2-8j5RKpWTxc8e2Fr4ReUrbNHwgFmXUZlkihLy5YvFofQ2B4p7kbCsXYlt8Vtzs1xP_iiZge25601dS66viG1cJ3xM4iUP6t1PBMQIARnk2w==",
+    "https://finance.yahoo.com/quote/SPCX/profile"
+   ],
+   "quote": "SpaceX (Space Exploration Technologies Corp.) officially became a publicly traded company on June 12, 2026, when it launched its initial public offering (IPO) on the Nasdaq exchange under the ticker symbol SPCX. Elon Musk continues to serve as the CEO, chairman, and CTO.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Elon Musk；頁面有公司、沒有負責人 Elon Musk）→ yfinance SPCX 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -3472,47 +3532,14 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHrM_Q14BFx0OCRNR9adhMm9OMcnzhVR4UQY6HRViJbDO4w8IhhaTiPJ4NyM9osogmEvJvflVJUjDU5EuJ3fS9k_88EjsHImCeYQ-wxZ-F3wgoE008sQ2jdHfHnCHge50vIEK4yLYoi7bqhsuA=",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGMz3qCBeyrE6s2PH4UIlqh74k_TOJfQoeDYs0n9kNhc20CnL-nb6uhT_v94zsjqO2gILkgh3nB28MZ5_NaC7Ckt9GWM0wSgwbFPiV8lB34JMEoi6LkFZQreFfsWQ==",
-    "https://finance.yahoo.com/quote/META/profile"
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE2692EQenQpYo4aigS7bA_aOGtTrmHDDgDANUKEE-KlT4AnXvQ-wmxzc7tFxG7eEGmwCsL2aFYStBVn-mw4966txLhYO5lo-gtI5Z1TPWTeGRz29f6jqVqxhULpOyXQeaIYxIkEEGGiCkDkTg=",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEygIpaitI0a8FrmJQPBI3LwW20Zg79eV2axH92V1Wh-mjqKhY2p6Q0Cwu43FWBVUE6roqfGyDztac1dPbDwsZ20Ug-BebEs5-hfvilARLHX6pCc_vhf67hsymsUbp7z4ZZ0w=="
    ],
-   "quote": "Mark Zuckerberg is the CEO and Chairman of Meta Platforms, Inc. as of 2026... Meta Platforms, Inc. (formerly Facebook, Inc.) held its initial public offering (IPO) on May 18, 2012.（未開啟原文）",
+   "quote": "Mark Zuckerberg is the founder, chairman, and Chief Executive Officer of Meta Platforms. Meta Platforms (formerly Facebook, Inc.) held its initial public offering (IPO) on May 18, 2012, listed on the Nasdaq under ticker META.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（HTTP 400；HTTP 400）→ yfinance META 有公司與負責人",
-    "at": "2026-09-28"
-   }
-  },
-  {
-   "cty": "sa",
-   "ticker": "2222.SR",
-   "name": "Saudi Arabian Oil Co.",
-   "status": "listed",
-   "exchange": "Saudi Exchange (Tadawul)",
-   "listed_date": "2019-12-11",
-   "merged_into": null,
-   "leaders": [
-    {
-     "zh": "阿敏·納瑟爾",
-     "en": "Amin H. Nasser",
-     "title": "CEO"
-    }
-   ],
-   "valuation_usd": null,
-   "round": null,
-   "round_date": null,
-   "src": [
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH3o3wzTi7aUUaJ4CQDRwpP19SSnZjGXDX2bM3OEIVyYG5I1vCJeTHeUxuB1GgF_Ed11q6waSICZrCN2PQnbNIuXP9abT3rc27qUQQC655TzfqNhVWHYbFs-x1eqKUPd4T3akXwEKKtfC8Q1XX9ESOwBkVJ7Wg=",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFOL045dXsMcVc3HxI0bMAYt60_C2LJivS2vXeAvJ2iP6A1Erd3d38KnHqxbV5_y1ubcrwfimm6pkQeW4ns7p3THZvxOGTTuIxXLBis2HOrBGTxwpSEOt7sY1pxjMQL8oscVyKSd_4e_v3CNzem9ta_BO3vXosenkSBszILev8211ljhXVcpkk0amXCT6KjiLWVKpb3u_FrJ_Y6EL5EpCRkAJxF1skcwBWRRQAKyN0IkMJ0vvZEHOS8JCbySQEuEwPVSS-nuDczcDRNs2EErQU2fRQBjmT48YEHiObovLXBwkGx86IbrK_7lNkqDa1sJ101oySE0MBVB9Ed6paIRVGILeyCZWI6UTwHK6l1HmDc6KaK8fIUGArYAS963YfIBPhANFEqUoY=",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYFmMhz89wTE9disJmuHXfzKhHnlPze_SksN9B77rqCH-4R_fYBc0C_SBf0DxC0xwpVZOJgVl3FRbzKv7WMoGxbTgY9401m0zGKn2hPJeCs2q7kTYKEwyUDBq3BCRC4xM4pLYluvNxG-yRX4KaFVnkBSftR0NDpactxQvi7LCyxOo2KXaQwlkY",
-    "https://finance.yahoo.com/quote/2222.SR/profile"
-   ],
-   "quote": "As of September 2026, Amin H. Nasser continues to serve as the President and Chief Executive Officer of Saudi Aramco... officially listed and began trading on the Tadawul on December 11, 2019.（未開啟原文）",
-   "checked": "2026-09-28",
-   "verify": {
-    "ok": true,
-    "why": "出處不行（HTTP None；HTTP 403；HTTP None）→ yfinance 2222.SR 有公司與負責人",
+    "why": "頁面有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -3535,51 +3562,46 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH0xcSBf-Ot7jxk4Zg8xaWdSKEZXV_uiJSz6bbteVR1hwWCm8C2vRO9SHOtQRfWs1P9tRYoLaLUlOwGqSDMQgT3YrhgPSH1fMzIy-Q5EvSieE1tcnRA_VdmJreVRFfT",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFRk86PAcpN0WiHquleKD4CPyZCDfg094LjvXv4nvt-uv9qf-k9I6p2AZRuMMesW5PHUunno-nCjYsT6ik1-Ocyrlkz-wkEuRdZ9LbJeV8oW6snqtofiYBPM-bTVaY3BbdHeUaZ7c7speyhmeh53fcMQsyIwe8l6AU3BK6hnGAnysQqI2aBwGDN",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEY1m_Mnwuah_DB-ypi-IKXq3E1xIVUHEhY82zkxFhWrnwuQxSB-Dvd4sC8OegnVTiZRa7cet-ehu9aj5oMnvXtc-Y2drPcGSuh8Ml8ohl5fdve",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH9t-_6by3fsTCT5vylIXTM3xe_FwporY6zJUpNotVaLW-n2AHboS0409jGtodluVXDezP1MlQ2PBKgYe_O23UxNc7PYa-xfuPG6fOEuhytEXzqg3RgFEnNs23m0vHP",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEBfx3YKQvxw5qVKsy4v4gTqGaU9PhfWcPVZ18GK0VXbK0JxY2E3U_Yiv2mdRrDyIdXm5QfqV41Ic1ePm7UIMqxeriIlBtMihGagXxsgDFjyHGIwhN8OpWiHoG_hMgd-TJruC-xngVUraNybeXt-QQ8g13v3Xnc8JgbV90t0KZM1ESakxX0qahl",
     "https://finance.yahoo.com/quote/TSLA/profile"
    ],
-   "quote": "As of September 2026, Elon Musk continues to serve as the Chief Executive Officer (CEO) of Tesla, Inc... Tesla held its initial public offering on June 29, 2010... common stock began trading on the NASDAQ Global Select Market under the ticker symbol 'TSLA'.（未開啟原文）",
+   "quote": "Elon Musk has served as Chief Executive Officer since October 2008. Tesla IPO Date: June 29, 2010, on the NASDAQ under ticker TSLA.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（HTTP 403；HTTP 403；HTTP 403）→ yfinance TSLA 有公司與負責人",
+    "why": "出處不行（HTTP 403；HTTP 403）→ yfinance TSLA 有公司與負責人",
     "at": "2026-09-28"
    }
   },
   {
-   "cty": "kr",
-   "ticker": "005930.KS",
-   "name": "SamsungElec",
+   "cty": "us",
+   "ticker": "SKHY",
+   "name": "SK hynix Inc.",
    "status": "listed",
-   "exchange": "Korea Exchange (KRX)",
-   "listed_date": "1975-06-11",
+   "exchange": "Nasdaq",
+   "listed_date": "2026-07-13",
    "merged_into": null,
    "leaders": [
     {
-     "zh": "全永鉉",
-     "en": "Jun Young-hyun",
-     "title": "Co-CEO"
-    },
-    {
-     "zh": "盧泰文",
-     "en": "TM Roh",
-     "title": "Co-CEO"
+     "zh": "郭魯正",
+     "en": "Kwak Noh-Jung",
+     "title": "CEO"
     }
    ],
    "valuation_usd": null,
    "round": null,
    "round_date": null,
    "src": [
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHC739EwB--JCQLAZDI9LemRjM2HA9goxPwUzh6B_tsztATGaFDrII8uPto2Uu_I9_BDG5fvgMaZ6wtMo_hBx9HKRy9ri3PEm6PO_DWIAQXJGS0eErbsEppF3GPg_WYWEbSmDbAyTOAWw==",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFVkAk0VhIRpwK6zbqP4wShLlDhsmx7Uo5fcPAWeP81C8eaIAmiKu7TEQMdF8L_IjP6op_OaaNXwgt6f0vMyzdvFRFuFqJr3PqxzwZsBh429LVLRR5ep-MiUMB86JQiIUQhdNqX8Bs="
+    "https://www.nasdaqtrader.com",
+    "https://www.skhynix.com",
+    "https://finance.yahoo.com/quote/SKHY/profile"
    ],
-   "quote": "Samsung Electronics held its initial public offering (IPO) and listed on the Korea Stock Exchange on June 11, 1975... Samsung Electronics currently operates under a dual-CEO leadership structure featuring Jun Young-hyun and TM Roh (Roh Tae-moon).（未開啟原文）",
+   "quote": "The transition to regular-way trading under the permanent ticker SKHY occurred on July 13, 2026.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "頁面有公司與負責人",
+    "why": "出處不行（頁面沒有公司名／代號；頁面有公司、沒有負責人 Kwak Noh-Jung）→ yfinance SKHY 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -3593,7 +3615,7 @@
    "merged_into": null,
    "leaders": [
     {
-     "zh": "桑賈伊·梅洛特拉",
+     "zh": "桑傑·梅羅特拉",
      "en": "Sanjay Mehrotra",
      "title": "CEO"
     }
@@ -3603,9 +3625,9 @@
    "round_date": null,
    "src": [
     "https://www.micron.com",
-    "https://en.wikipedia.org/wiki/Micron_Technology"
+    "https://www.nasdaq.com"
    ],
-   "quote": "（未開啟原文）The Chairman, President, and Chief Executive Officer of Micron Technology is Sanjay Mehrotra... listed on the Nasdaq stock exchange under the ticker symbol MU... went public on June 1, 1984.",
+   "quote": "Micron Technology, Inc. held its initial public offering (IPO) on June 1, 1984. As of September 2026, the CEO of Micron Technology is Sanjay Mehrotra.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -3615,15 +3637,15 @@
   },
   {
    "cty": "us",
-   "ticker": "BRK-B",
-   "name": "Berkshire Hathaway Inc. New",
+   "ticker": "BRK-A",
+   "name": "Berkshire Hathaway Inc.",
    "status": "listed",
    "exchange": "NYSE",
-   "listed_date": "1996-05-09",
+   "listed_date": "1988-11-29",
    "merged_into": null,
    "leaders": [
     {
-     "zh": "葛瑞格·阿貝爾",
+     "zh": "格雷格·阿貝爾",
      "en": "Greg Abel",
      "title": "CEO"
     }
@@ -3633,9 +3655,9 @@
    "round_date": null,
    "src": [
     "https://www.berkshirehathaway.com",
-    "https://en.wikipedia.org/wiki/Berkshire_Hathaway"
+    "https://www.nyse.com"
    ],
-   "quote": "（未開啟原文）Greg Abel officially succeeded Warren Buffett as CEO at the beginning of January 2026. Berkshire Hathaway is listed on the New York Stock Exchange under the ticker symbols BRK.A and BRK.B (Class B IPO date: May 9, 1996).",
+   "quote": "Greg Abel is the Chief Executive Officer of Berkshire Hathaway. He assumed the role of CEO at the beginning of 2026.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -3649,7 +3671,7 @@
    "name": "Eli Lilly and Company",
    "status": "listed",
    "exchange": "NYSE",
-   "listed_date": "1970-07-08",
+   "listed_date": "1970-07-09",
    "merged_into": null,
    "leaders": [
     {
@@ -3663,13 +3685,14 @@
    "round_date": null,
    "src": [
     "https://www.lilly.com",
-    "https://en.wikipedia.org/wiki/Eli_Lilly_and_Company"
+    "https://www.nyse.com",
+    "https://finance.yahoo.com/quote/LLY/profile"
    ],
-   "quote": "（未開啟原文）The Chief Executive Officer of Eli Lilly and Company is David A. Ricks... Eli Lilly and Company (NYSE: LLY) was listed on the New York Stock Exchange (NYSE) on July 8, 1970.",
+   "quote": "David A. Ricks serves as the Chair and CEO of Eli Lilly and Company. Eli Lilly and Company (NYSE: LLY) held its initial public offering (IPO) on July 9, 1970.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "頁面有公司與負責人",
+    "why": "出處不行（頁面有公司、沒有負責人 David A. Ricks；頁面沒有公司名／代號）→ yfinance LLY 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -3693,50 +3716,21 @@
    "round_date": null,
    "src": [
     "https://www.amd.com",
-    "https://en.wikipedia.org/wiki/Advanced_Micro_Devices"
+    "https://www.nasdaq.com",
+    "https://finance.yahoo.com/quote/AMD/profile"
    ],
-   "quote": "（未開啟原文）Advanced Micro Devices (AMD) is led by Dr. Lisa Su, who serves as the Chair and Chief Executive Officer... AMD’s first public offering took place on September 27, 1972... On January 2, 2015, AMD transferred its stock exchange listing to the Nasdaq Stock Market.",
+   "quote": "Dr. Lisa Su continues to serve as the Chair and Chief Executive Officer of Advanced Micro Devices, Inc. (AMD). AMD's initial public offering took place on September 27, 1972.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "頁面有公司與負責人",
-    "at": "2026-09-28"
-   }
-  },
-  {
-   "cty": "kr",
-   "ticker": "000660.KS",
-   "name": "SK hynix",
-   "status": "listed",
-   "exchange": "KRX",
-   "listed_date": "1996-12-26",
-   "merged_into": null,
-   "leaders": [
-    {
-     "zh": "郭魯正",
-     "en": "Kwak Noh-Jung",
-     "title": "CEO"
-    }
-   ],
-   "valuation_usd": null,
-   "round": null,
-   "round_date": null,
-   "src": [
-    "https://www.skhynix.com",
-    "https://en.wikipedia.org/wiki/SK_Hynix"
-   ],
-   "quote": "（未開啟原文）SK Hynix has been publicly traded on the Korea Exchange under the ticker 000660 since December 26, 1996. The company is led by CEO Kwak Noh-Jung.",
-   "checked": "2026-09-28",
-   "verify": {
-    "ok": true,
-    "why": "頁面有公司與負責人",
+    "why": "出處不行（頁面有公司、沒有負責人 Lisa Su；頁面有公司、沒有負責人 Lisa Su）→ yfinance AMD 有公司與負責人",
     "at": "2026-09-28"
    }
   },
   {
    "cty": "us",
    "ticker": "JPM",
-   "name": "JP Morgan Chase & Co.",
+   "name": "JPMorgan Chase & Co.",
    "status": "listed",
    "exchange": "NYSE",
    "listed_date": "1978-10-06",
@@ -3753,9 +3747,9 @@
    "round_date": null,
    "src": [
     "https://www.jpmorganchase.com",
-    "https://en.wikipedia.org/wiki/JPMorgan_Chase"
+    "https://www.nyse.com"
    ],
-   "quote": "（未開啟原文）The current Chairman and Chief Executive Officer (CEO) of JPMorgan Chase & Co. is Jamie Dimon... JPMorgan Chase went public on October 6, 1978, trading on the NYSE under ticker JPM.",
+   "quote": "Jamie Dimon continues to serve as the Chairman and Chief Executive Officer of JPMorgan Chase & Co. JPMorgan Chase & Co. went public on October 6, 1978.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -3782,14 +3776,15 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://corporate.walmart.com",
-    "https://www.sec.gov"
+    "https://www.walmart.com",
+    "https://www.nasdaqtrader.com",
+    "https://finance.yahoo.com/quote/WMT/profile"
    ],
-   "quote": "（未開啟原文）John Furner officially succeeded Doug McMillon as President and Chief Executive Officer of Walmart Inc. on February 1, 2026. On December 9, 2025, Walmart officially transferred its primary stock listing from the NYSE to the Nasdaq Global Select Market.",
+   "quote": "Walmart Inc. officially transferred the listing of its common stock and bonds from the New York Stock Exchange (NYSE) to the Nasdaq Global Select Market on December 9, 2025. John Furner officially succeeded Doug McMillon as President and CEO of Walmart Inc. on February 1, 2026.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "頁面有公司與負責人",
+    "why": "出處不行（頁面有公司、沒有負責人 John Furner；頁面沒有公司名／代號）→ yfinance WMT 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -3803,7 +3798,7 @@
    "merged_into": null,
    "leaders": [
     {
-     "zh": "萊恩·麥克納尼",
+     "zh": "萊恩·麥金納尼",
      "en": "Ryan McInerney",
      "title": "CEO"
     }
@@ -3812,28 +3807,29 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://corporate.visa.com",
-    "https://en.wikipedia.org/wiki/Visa_Inc."
+    "https://www.visa.com",
+    "https://www.nyse.com",
+    "https://finance.yahoo.com/quote/V/profile"
    ],
-   "quote": "（未開啟原文）Visa Inc. shares began trading on the New York Stock Exchange (NYSE) on March 19, 2008 under ticker V. Ryan McInerney is the current Chief Executive Officer of Visa Inc.",
+   "quote": "Ryan McInerney is the Chief Executive Officer of Visa Inc. He assumed this position on February 1, 2023. The company's initial public offering (IPO) took place on March 19, 2008.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "頁面有公司與負責人",
+    "why": "出處不行（頁面有公司、沒有負責人 Ryan McInerney；頁面有公司、沒有負責人 Ryan McInerney）→ yfinance V 有公司與負責人",
     "at": "2026-09-28"
    }
   },
   {
-   "cty": "eu",
-   "ticker": "ASML.AS",
-   "name": "ASML HOLDING",
+   "cty": "us",
+   "ticker": "ASML",
+   "name": "ASML Holding N.V.",
    "status": "listed",
-   "exchange": "Euronext Amsterdam",
+   "exchange": "Nasdaq",
    "listed_date": "1995-03-15",
    "merged_into": null,
    "leaders": [
     {
-     "zh": "克里斯多夫·富凱",
+     "zh": "克里斯托夫·富凱",
      "en": "Christophe Fouquet",
      "title": "CEO"
     }
@@ -3843,9 +3839,9 @@
    "round_date": null,
    "src": [
     "https://www.asml.com",
-    "https://en.wikipedia.org/wiki/ASML_Holding"
+    "https://www.nasdaq.com"
    ],
-   "quote": "（未開啟原文）ASML held its Initial Public Offering (IPO) in 1995 (March 15, 1995), listing its shares on both Euronext Amsterdam and NASDAQ. Christophe Fouquet is the current CEO of ASML.",
+   "quote": "Christophe Fouquet serves as the President and Chief Executive Officer of ASML Holding N.V. ASML Holding N.V. went public on March 15, 1995.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -3859,7 +3855,7 @@
    "name": "ExxonMobil Holdings Corporation",
    "status": "listed",
    "exchange": "NYSE",
-   "listed_date": "1920-03-25",
+   "listed_date": "2026-07-02",
    "merged_into": null,
    "leaders": [
     {
@@ -3872,15 +3868,15 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://corporate.exxonmobil.com",
     "https://www.sec.gov",
+    "https://www.exxonmobil.com",
     "https://finance.yahoo.com/quote/XOM/profile"
    ],
-   "quote": "（未開啟原文）Effective July 2, 2026, ExxonMobil Holdings Corporation replaced the former Exxon Mobil Corporation as the publicly traded parent company following a redomiciliation reorganization. Darren Woods continues to serve as Chairman and CEO, and shares continue to trade on the NYSE under ticker XOM.",
+   "quote": "As of July 2, 2026, the publicly traded parent company is ExxonMobil Holdings Corporation, which replaced the former Exxon Mobil Corporation following a redomiciliation from New Jersey to Texas. Darren Woods is the Chairman and Chief Executive Officer.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（頁面有公司、沒有負責人 Darren Woods；HTTP 403）→ yfinance XOM 有公司與負責人",
+    "why": "出處不行（頁面沒有公司名／代號；頁面有公司、沒有負責人 Darren Woods）→ yfinance XOM 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -3894,7 +3890,7 @@
    "merged_into": null,
    "leaders": [
     {
-     "zh": "杜安卿",
+     "zh": "華金·杜阿托",
      "en": "Joaquin Duato",
      "title": "CEO"
     }
@@ -3904,45 +3900,14 @@
    "round_date": null,
    "src": [
     "https://www.jnj.com/leadership/joaquin-duato",
-    "https://www.nyse.com/quote/XNYS:JNJ",
+    "https://www.fool.com/investing/2019/11/03/if-you-invested-10000-in-johnson-johnsons-ipo-this.aspx",
     "https://finance.yahoo.com/quote/JNJ/profile"
    ],
-   "quote": "未開啟原文：Joaquin Duato is the Chairman and Chief Executive Officer of Johnson & Johnson.",
+   "quote": "Johnson & Johnson made its debut as a publicly traded company on the New York Stock Exchange (NYSE) on September 24, 1944.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（頁面沒有公司名／代號；頁面有公司、沒有負責人 Joaquin Duato）→ yfinance JNJ 有公司與負責人",
-    "at": "2026-09-28"
-   }
-  },
-  {
-   "cty": "cn",
-   "ticker": "0700.HK",
-   "name": "TENCENT",
-   "status": "listed",
-   "exchange": "HKEX",
-   "listed_date": "2004-06-16",
-   "merged_into": null,
-   "leaders": [
-    {
-     "zh": "馬化騰",
-     "en": "Ma Huateng",
-     "title": "CEO"
-    }
-   ],
-   "valuation_usd": null,
-   "round": null,
-   "round_date": null,
-   "src": [
-    "https://www.tencent.com",
-    "https://www.hkex.com.hk",
-    "https://finance.yahoo.com/quote/0700.HK/profile"
-   ],
-   "quote": "未開啟原文：Tencent Holdings Limited (0700.HK) was listed on the Main Board of the Stock Exchange of Hong Kong (HKEX) on June 16, 2004.",
-   "checked": "2026-09-28",
-   "verify": {
-    "ok": true,
-    "why": "出處不行（頁面有公司、沒有負責人 Ma Huateng；頁面沒有公司名／代號）→ yfinance 0700.HK 有公司與負責人",
+    "why": "出處不行（頁面沒有公司名／代號；HTTP 404）→ yfinance JNJ 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -3956,7 +3921,7 @@
    "merged_into": null,
    "leaders": [
     {
-     "zh": "麥可·米巴赫",
+     "zh": "米高·邁巴赫",
      "en": "Michael Miebach",
      "title": "CEO"
     }
@@ -3966,14 +3931,13 @@
    "round_date": null,
    "src": [
     "https://www.mastercard.com",
-    "https://www.nyse.com/quote/XNYS:MA",
     "https://finance.yahoo.com/quote/MA/profile"
    ],
-   "quote": "未開啟原文：Mastercard Incorporated (MA) held its initial public offering (IPO) on May 25, 2006, listing on the New York Stock Exchange (NYSE).",
+   "quote": "Mastercard Incorporated held its initial public offering (IPO) on May 25, 2006.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（HTTP 403；頁面有公司、沒有負責人 Michael Miebach）→ yfinance MA 有公司與負責人",
+    "why": "出處不行（頁面有公司、沒有負責人 Michael Miebach）→ yfinance MA 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -3988,7 +3952,7 @@
    "leaders": [
     {
      "zh": "亞歷山大·卡普",
-     "en": "Alex Karp",
+     "en": "Alexander Karp",
      "title": "CEO"
     }
    ],
@@ -3997,13 +3961,49 @@
    "round_date": null,
    "src": [
     "https://www.palantir.com",
-    "https://www.nasdaq.com"
+    "https://www.sec.gov"
    ],
-   "quote": "未開啟原文：Palantir Technologies Inc. (PLTR) went public via a direct listing on the New York Stock Exchange (NYSE) on September 30, 2020, and transferred to Nasdaq on November 26, 2024.",
+   "quote": "Palantir Technologies Inc. transferred its stock exchange listing from the New York Stock Exchange (NYSE) to the Nasdaq Global Select Market on November 26, 2024.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
     "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "SSNLF",
+   "name": "Samsung Electronics Co., Ltd.",
+   "status": "listed",
+   "exchange": "OTC Markets",
+   "listed_date": "1975-06-11",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "盧泰文",
+     "en": "Roh Tae-moon",
+     "title": "CEO"
+    },
+    {
+     "zh": "全永鉉",
+     "en": "Jun Young-hyun",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.samsung.com",
+    "https://www.samsungsemiconductor.com",
+    "https://finance.yahoo.com/quote/SSNLF/profile"
+   ],
+   "quote": "Samsung Electronics held its Initial Public Offering (IPO) on the Korea Stock Exchange (now the Korea Exchange or KRX) on June 11, 1975.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Roh Tae-moon、Jun Young-hyun；HTTP 503）→ yfinance SSNLF 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -4027,14 +4027,13 @@
    "round_date": null,
    "src": [
     "https://www.cisco.com",
-    "https://www.nasdaq.com",
     "https://finance.yahoo.com/quote/CSCO/profile"
    ],
-   "quote": "未開啟原文：Cisco Systems, Inc. (ticker: CSCO) held its initial public offering (IPO) on February 16, 1990. The stock is listed and trades on the Nasdaq stock exchange.",
+   "quote": "Cisco Systems, Inc. held its initial public offering (IPO) on February 16, 1990. The company is publicly traded on the Nasdaq stock exchange under the ticker symbol CSCO.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（HTTP 403；頁面沒有公司名／代號）→ yfinance CSCO 有公司與負責人",
+    "why": "出處不行（頁面有公司、沒有負責人 Chuck Robbins）→ yfinance CSCO 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -4057,15 +4056,14 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://www.costco.com",
-    "https://www.nasdaq.com",
+    "https://investor.costco.com",
     "https://finance.yahoo.com/quote/COST/profile"
    ],
-   "quote": "未開啟原文：Costco Wholesale Corporation (Nasdaq: COST) went public on December 5, 1985. Ron Vachris has served as the President and Chief Executive Officer (CEO) of Costco since January 1, 2024.",
+   "quote": "Ron M. Vachris has served as the President and Chief Executive Officer of Costco Wholesale Corporation since January 1, 2024. Costco became a public company on December 5, 1985.（依搜尋摘要，未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（頁面有公司、沒有負責人 Ron Vachris；頁面有公司、沒有負責人 Ron Vachris）→ yfinance COST 有公司與負責人",
+    "why": "出處不行（頁面有公司、沒有負責人 Ron Vachris）→ yfinance COST 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -4079,8 +4077,8 @@
    "merged_into": null,
    "leaders": [
     {
-     "zh": "邁克·沃思",
-     "en": "Mike Wirth",
+     "zh": "麥克·沃斯",
+     "en": "Michael K. Wirth",
      "title": "CEO"
     }
    ],
@@ -4089,14 +4087,13 @@
    "round_date": null,
    "src": [
     "https://www.chevron.com",
-    "https://www.nyse.com/quote/XNYS:CVX",
     "https://finance.yahoo.com/quote/CVX/profile"
    ],
-   "quote": "未開啟原文：Chevron Corporation's stock was listed and began trading on the New York Stock Exchange (NYSE) on June 24, 1921. Mike Wirth continues to serve as the Chairman of the Board and Chief Executive Officer (CEO).",
+   "quote": "Michael K. (Mike) Wirth serves as the Chairman of the Board and Chief Executive Officer of Chevron Corporation.（依搜尋摘要，未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（頁面有公司、沒有負責人 Mike Wirth；頁面有公司、沒有負責人 Mike Wirth）→ yfinance CVX 有公司與負責人",
+    "why": "出處不行（頁面有公司、沒有負責人 Michael K. Wirth）→ yfinance CVX 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -4105,7 +4102,7 @@
    "ticker": "BAC",
    "name": "Bank of America Corporation",
    "status": "listed",
-   "exchange": "紐約證券交易所（NYSE）",
+   "exchange": "NYSE",
    "listed_date": "1998-10-01",
    "merged_into": null,
    "leaders": [
@@ -4119,15 +4116,15 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://about.bankofamerica.com",
-    "https://www.sec.gov",
+    "https://newsroom.bankofamerica.com/executive-bios/brian-moynihan",
+    "https://www.bankofamerica.com",
     "https://finance.yahoo.com/quote/BAC/profile"
    ],
-   "quote": "Brian Moynihan remains the Chair of the Board and Chief Executive Officer (CEO) of Bank of America in 2026.（未開啟原文）",
+   "quote": "Bank of America Corporation (NYSE: BAC) began trading under its current ticker symbol, BAC, on October 1, 1998. Brian Moynihan became CEO of Bank of America in 2010.（依搜尋摘要，未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（頁面有公司、沒有負責人 Brian Moynihan；HTTP 403）→ yfinance BAC 有公司與負責人",
+    "why": "出處不行（HTTP 404；頁面有公司、沒有負責人 Brian Moynihan）→ yfinance BAC 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -4136,13 +4133,13 @@
    "ticker": "LRCX",
    "name": "Lam Research Corporation",
    "status": "listed",
-   "exchange": "那斯達克證券交易所（Nasdaq）",
+   "exchange": "Nasdaq",
    "listed_date": "1984-05-11",
    "merged_into": null,
    "leaders": [
     {
      "zh": "提姆·阿徹",
-     "en": "Tim Archer",
+     "en": "Timothy M. Archer",
      "title": "CEO"
     }
    ],
@@ -4153,11 +4150,11 @@
     "https://www.lamresearch.com",
     "https://finance.yahoo.com/quote/LRCX/profile"
    ],
-   "quote": "As of September 2026, Tim Archer continues to serve as the President and Chief Executive Officer (CEO) of Lam Research Corporation.（未開啟原文）",
+   "quote": "Timothy M. Archer is president and chief executive officer of Lam Research. Lam Research Corporation's initial public offering (IPO) took place on May 11, 1984.（依搜尋摘要，未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（頁面有公司、沒有負責人 Tim Archer）→ yfinance LRCX 有公司與負責人",
+    "why": "出處不行（頁面有公司、沒有負責人 Timothy M. Archer）→ yfinance LRCX 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -4166,13 +4163,13 @@
    "ticker": "AMAT",
    "name": "Applied Materials, Inc.",
    "status": "listed",
-   "exchange": "那斯達克證券交易所（Nasdaq）",
+   "exchange": "Nasdaq",
    "listed_date": "1972-10-05",
    "merged_into": null,
    "leaders": [
     {
      "zh": "蓋瑞·狄克森",
-     "en": "Gary Dickerson",
+     "en": "Gary E. Dickerson",
      "title": "CEO"
     }
    ],
@@ -4183,25 +4180,25 @@
     "https://www.appliedmaterials.com",
     "https://finance.yahoo.com/quote/AMAT/profile"
    ],
-   "quote": "Gary Dickerson is the President and Chief Executive Officer of Applied Materials... As of September 2026, he continues to lead the company in this capacity.（未開啟原文）",
+   "quote": "Gary Dickerson is the President and CEO of Applied Materials. October 5, 1972, is the date Applied Materials held its initial public offering (IPO).（依搜尋摘要，未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（HTTP 403）→ yfinance AMAT 有公司與負責人",
+    "why": "出處不行（頁面有公司、沒有負責人 Gary E. Dickerson）→ yfinance AMAT 有公司與負責人",
     "at": "2026-09-28"
    }
   },
   {
    "cty": "us",
    "ticker": "KO",
-   "name": "Coca-Cola Company (The)",
+   "name": "The Coca-Cola Company",
    "status": "listed",
-   "exchange": "紐約證券交易所（NYSE）",
+   "exchange": "NYSE",
    "listed_date": "1919-09-05",
    "merged_into": null,
    "leaders": [
     {
-     "zh": "柏瑞凱",
+     "zh": "恩里克·布勞恩",
      "en": "Henrique Braun",
      "title": "CEO"
     }
@@ -4213,7 +4210,7 @@
     "https://www.coca-colacompany.com",
     "https://finance.yahoo.com/quote/KO/profile"
    ],
-   "quote": "As of September 2026, Henrique Braun is the CEO of The Coca-Cola Company. James Quincey, who served as CEO since 2017, stepped down from the role on March 31, 2026.（未開啟原文）",
+   "quote": "Henrique Braun is the Chief Executive Officer of The Coca-Cola Company. He assumed this role on March 31, 2026.（依搜尋摘要，未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -4223,10 +4220,40 @@
   },
   {
    "cty": "us",
-   "ticker": "MRK",
-   "name": "Merck & Company, Inc.",
+   "ticker": "CAT",
+   "name": "Caterpillar Inc.",
    "status": "listed",
-   "exchange": "紐約證券交易所（NYSE）",
+   "exchange": "NYSE",
+   "listed_date": "1929-12-02",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "喬·克里德",
+     "en": "Joseph E. Creed",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.caterpillar.com",
+    "https://finance.yahoo.com/quote/CAT/profile"
+   ],
+   "quote": "Joseph E. (Joe) Creed is the Chairman and Chief Executive Officer (CEO) of Caterpillar Inc. He was appointed CEO of Caterpillar on May 1, 2025.（依搜尋摘要，未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Joseph E. Creed）→ yfinance CAT 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "MRK",
+   "name": "Merck & Co., Inc.",
+   "status": "listed",
+   "exchange": "NYSE",
    "listed_date": null,
    "merged_into": null,
    "leaders": [
@@ -4243,7 +4270,7 @@
     "https://www.merck.com",
     "https://finance.yahoo.com/quote/MRK/profile"
    ],
-   "quote": "Robert M. Davis is the current Chairman and Chief Executive Officer of Merck & Co., Inc. He has held these leadership roles since 2021 (CEO) and 2022 (Chairman) and continues to lead the company in 2026; publicly traded on NYSE since 1927 without documented exact YYYY-MM-DD.（未開啟原文）",
+   "quote": "Robert M. Davis serves as the Chairman and Chief Executive Officer of Merck. He assumed the role of CEO on July 1, 2021.（公司歷史悠久無單一官方明確上市日期；依搜尋摘要，未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -4252,40 +4279,11 @@
    }
   },
   {
-   "cty": "ch",
-   "ticker": "RO",
-   "name": "ROCHE I",
-   "status": "listed",
-   "exchange": "瑞士證券交易所（SIX Swiss Exchange）",
-   "listed_date": "1995-08-03",
-   "merged_into": null,
-   "leaders": [
-    {
-     "zh": "托馬斯·史奈克",
-     "en": "Thomas Schinecker",
-     "title": "CEO"
-    }
-   ],
-   "valuation_usd": null,
-   "round": null,
-   "round_date": null,
-   "src": [
-    "https://www.roche.com"
-   ],
-   "quote": "As of September 2026, Dr. Thomas Schinecker continues to serve as the Chief Executive Officer (CEO) of the Roche Group.（未開啟原文）",
-   "checked": "2026-09-28",
-   "verify": {
-    "ok": true,
-    "why": "頁面有公司與負責人",
-    "at": "2026-09-28"
-   }
-  },
-  {
    "cty": "us",
    "ticker": "DELL",
    "name": "Dell Technologies Inc.",
    "status": "listed",
-   "exchange": "紐約證券交易所（NYSE）",
+   "exchange": "NYSE",
    "listed_date": "2018-12-28",
    "merged_into": null,
    "leaders": [
@@ -4299,9 +4297,9 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://www.dell.com"
+    "https://investors.delltechnologies.com"
    ],
-   "quote": "Dell Technologies' Class C common stock began trading on the New York Stock Exchange (NYSE) under the ticker symbol 'DELL' on December 28, 2018. As of September 2026, Michael Dell continues to serve as Chairman and CEO.（未開啟原文）",
+   "quote": "Dell Technologies re-entered the public markets... Class C common stock began trading on the NYSE under the ticker symbol DELL on December 28, 2018.（依搜尋摘要，未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -4310,17 +4308,17 @@
    }
   },
   {
-   "cty": "gb",
-   "ticker": "HSBA",
-   "name": "HSBC HOLDINGS PLC ORD $0.50 (UK",
+   "cty": "us",
+   "ticker": "RHHVF",
+   "name": "Roche Holding AG",
    "status": "listed",
-   "exchange": "倫敦證券交易所（LSE）",
-   "listed_date": "1991-04-08",
+   "exchange": "OTC Markets",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [
     {
-     "zh": "艾橋智",
-     "en": "Georges Elhedery",
+     "zh": "托馬斯·施內克",
+     "en": "Thomas Schinecker",
      "title": "CEO"
     }
    ],
@@ -4328,46 +4326,105 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://www.hsbc.com",
-    "https://www.londonstockexchange.com",
-    "https://finance.yahoo.com/quote/HSBA.L/profile"
+    "https://www.roche.com",
+    "https://www.otcmarkets.com"
    ],
-   "quote": "Georges Elhedery is the Group Chief Executive Officer of HSBC... As of September 2026, he continues to serve in this position.（未開啟原文）",
+   "quote": "Dr. Thomas Schinecker is the Chief Executive Officer (CEO) of the Roche Group since March 2023. RHHVF trades on the U.S. OTC market.（瑞士主要上市交易所為 SIX Swiss Exchange，無現代單一 IPO 日期；依搜尋摘要，未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（頁面沒有公司名／代號；頁面沒有公司名／代號）→ yfinance HSBA.L 有公司與負責人",
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "HSBC",
+   "name": "HSBC Holdings plc",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1999-07-16",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "艾橋智",
+     "en": "Georges Elhedery",
+     "title": "Group Chief Executive"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.hsbc.com/who-we-are/leadership/georges-elhedery",
+    "https://www.investegate.co.uk"
+   ],
+   "quote": "Georges Elhedery is the Group Chief Executive (CEO) of HSBC. He officially assumed the role on September 2, 2024, succeeding Noel Quinn.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
     "at": "2026-09-28"
    }
   },
   {
    "cty": "us",
    "ticker": "PG",
-   "name": "Procter & Gamble Company (The)",
+   "name": "The Procter & Gamble Company",
    "status": "listed",
-   "exchange": "紐約證券交易所（NYSE）",
-   "listed_date": "1950-03-21",
+   "exchange": "NYSE",
+   "listed_date": null,
    "merged_into": null,
    "leaders": [
     {
-     "zh": "謝萊什·杰朱里卡",
+     "zh": "夏立許·傑朱里卡",
      "en": "Shailesh Jejurikar",
-     "title": "CEO"
+     "title": "President and CEO"
     }
    ],
    "valuation_usd": null,
    "round": null,
    "round_date": null,
    "src": [
-    "https://www.pg.com",
-    "https://www.sec.gov",
+    "https://www.pginvestor.com/corporate-governance/board-of-directors/",
     "https://finance.yahoo.com/quote/PG/profile"
    ],
-   "quote": "As of September 2026, the CEO of Procter & Gamble is Shailesh Jejurikar. Shailesh Jejurikar assumed the role of President and CEO on January 1, 2026, succeeding Jon Moeller.（未開啟原文）",
+   "quote": "Shailesh Jejurikar serves as the Chairman of the Board, President, and Chief Executive Officer of The Procter & Gamble Company. He assumed the role of President and CEO on January 1, 2026.",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（HTTP 500；HTTP 403）→ yfinance PG 有公司與負責人",
+    "why": "出處不行（HTTP 404）→ yfinance PG 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "GE",
+   "name": "GE Aerospace",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2024-04-02",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "小H·羅倫斯·卡爾普",
+     "en": "H. Lawrence Culp, Jr.",
+     "title": "Chairman and CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.geaerospace.com/about/leadership/larry-culp",
+    "https://www.geaerospace.com/news/press-releases/ge-aerospace-launches-independent-public-company",
+    "https://finance.yahoo.com/quote/GE/profile"
+   ],
+   "quote": "GE Aerospace began trading as an independent, publicly traded company on the New York Stock Exchange (NYSE) on April 2, 2024. H. Lawrence Culp, Jr. is Chairman and Chief Executive Officer of GE Aerospace.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404；頁面有公司、沒有負責人 H. Lawrence Culp, Jr.）→ yfinance GE 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -4381,8 +4438,8 @@
    "merged_into": null,
    "leaders": [
     {
-     "zh": "史蒂芬·赫姆斯利",
-     "en": "Stephen Hemsley",
+     "zh": "史蒂芬·海姆斯利",
+     "en": "Stephen J. Hemsley",
      "title": "CEO"
     }
    ],
@@ -4391,14 +4448,81 @@
    "round_date": null,
    "src": [
     "https://www.sec.gov",
-    "https://www.unitedhealthgroup.com",
+    "https://www.unitedhealthgroup.com/people/stephen-j-hemsley.html",
     "https://finance.yahoo.com/quote/UNH/profile"
    ],
-   "quote": "（未開啟原文）On May 13, 2025, Stephen J. Hemsley was appointed as the Chief Executive Officer of UnitedHealth Group, effective immediately.",
+   "quote": "On May 13, 2025, UnitedHealth Group announced a leadership transition in which Stephen J. Hemsley was appointed as Chief Executive Officer, effective immediately.",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（HTTP 403；頁面有公司、沒有負責人 Stephen Hemsley）→ yfinance UNH 有公司與負責人",
+    "why": "出處不行（頁面沒有公司名／代號；頁面有公司、沒有負責人 Stephen J. Hemsley）→ yfinance UNH 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "ARM",
+   "name": "Arm Holdings plc",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "2023-09-14",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "雷恩·哈斯",
+     "en": "Rene Haas",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.arm.com/company/leadership/rene-haas",
+    "https://www.arm.com/company/news/2023/09/arm-announces-pricing-of-initial-public-offering",
+    "https://finance.yahoo.com/quote/ARM/profile"
+   ],
+   "quote": "Arm Holdings plc held its initial public offering (IPO) and began trading on the Nasdaq Global Select Market on September 14, 2023. Rene Haas is the Chief Executive Officer of Arm Holdings plc.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Rene Haas；頁面有公司、沒有負責人 Rene Haas）→ yfinance ARM 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "CICHF",
+   "name": "China Construction Bank Corporation",
+   "status": "listed",
+   "exchange": "OTCMKTS",
+   "listed_date": "2005-10-27",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "張金良",
+     "en": "Zhang Jinliang",
+     "title": "Chairman"
+    },
+    {
+     "zh": "張毅",
+     "en": "Zhang Yi",
+     "title": "President"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "http://www.ccb.com/en/investor/corporate/leadership.html",
+    "http://www.ccb.com",
+    "https://finance.yahoo.com/quote/CICHF/profile"
+   ],
+   "quote": "張金良：擔任中國建設銀行董事長、執行董事；張毅：擔任中國建設銀行副董事長、執行董事、行長、首席合規官。",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404；頁面沒有公司名／代號）→ yfinance CICHF 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -4414,21 +4538,21 @@
     {
      "zh": "泰德·皮克",
      "en": "Ted Pick",
-     "title": "CEO"
+     "title": "Chairman and CEO"
     }
    ],
    "valuation_usd": null,
    "round": null,
    "round_date": null,
    "src": [
-    "https://www.morganstanley.com",
+    "https://www.morganstanley.com/about-us/leadership/ted-pick",
     "https://finance.yahoo.com/quote/MS/profile"
    ],
-   "quote": "（未開啟原文）Morgan Stanley went public on March 21, 1986... Ted Pick is the Chairman and Chief Executive Officer of Morgan Stanley.",
+   "quote": "Ted Pick is the Chairman and Chief Executive Officer of Morgan Stanley. He assumed the role of CEO on January 1, 2024, and subsequently became Chairman of the Board on January 1, 2025.",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（頁面有公司、沒有負責人 Ted Pick）→ yfinance MS 有公司與負責人",
+    "why": "出處不行（HTTP 404）→ yfinance MS 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -4442,8 +4566,39 @@
    "merged_into": null,
    "leaders": [
     {
-     "zh": "尼克什·阿羅拉",
+     "zh": "尼凱什·阿羅拉",
      "en": "Nikesh Arora",
+     "title": "Chairman and CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.paloaltonetworks.com/company/leadership",
+    "https://www.paloaltonetworks.com",
+    "https://finance.yahoo.com/quote/PANW/profile"
+   ],
+   "quote": "Nikesh Arora is the Chairman and Chief Executive Officer of Palo Alto Networks in 2026. Palo Alto Networks originally debuted on the New York Stock Exchange in 2012 and transferred to Nasdaq on October 25, 2021.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404；頁面有公司、沒有負責人 Nikesh Arora）→ yfinance PANW 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "PM",
+   "name": "Philip Morris International Inc.",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2008-03-28",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "雅切克·奧爾恰克",
+     "en": "Jacek Olczak",
      "title": "CEO"
     }
    ],
@@ -4451,14 +4606,15 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://www.paloaltonetworks.com",
-    "https://finance.yahoo.com/quote/PANW/profile"
+    "https://www.sec.gov",
+    "https://www.pmi.com/who-we-are/leadership-team/management-team",
+    "https://finance.yahoo.com/quote/PM/profile"
    ],
-   "quote": "（未開啟原文）Nikesh Arora continues to serve as the Chairman and Chief Executive Officer of Palo Alto Networks in 2026.",
+   "quote": "Philip Morris International Inc. (PMI) completed its spin-off from Altria Group, Inc. on March 28, 2008. Jacek Olczak is the Group CEO of Philip Morris International (PMI).",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
-    "why": "出處不行（頁面有公司、沒有負責人 Nikesh Arora）→ yfinance PANW 有公司與負責人",
+    "why": "出處不行（頁面沒有公司名／代號；HTTP 404）→ yfinance PM 有公司與負責人",
     "at": "2026-09-28"
    }
   },
@@ -4486,99 +4642,10 @@
    "round": null,
    "round_date": null,
    "src": [
-    "https://www.netflix.com",
-    "https://finance.yahoo.com/quote/NFLX/profile"
+    "https://about.netflix.com/en/leadership",
+    "https://ir.netflix.net"
    ],
-   "quote": "（未開啟原文）As of 2026, Ted Sarandos and Greg Peters serve as the co-CEOs of Netflix.",
-   "checked": "2026-09-28",
-   "verify": {
-    "ok": true,
-    "why": "出處不行（頁面有公司、沒有負責人 Ted Sarandos、Greg Peters）→ yfinance NFLX 有公司與負責人",
-    "at": "2026-09-28"
-   }
-  },
-  {
-   "cty": "us",
-   "ticker": "HD",
-   "name": "Home Depot, Inc. (The)",
-   "status": "listed",
-   "exchange": "NYSE",
-   "listed_date": "1981-09-22",
-   "merged_into": null,
-   "leaders": [
-    {
-     "zh": "泰德·德克爾",
-     "en": "Ted Decker",
-     "title": "CEO"
-    }
-   ],
-   "valuation_usd": null,
-   "round": null,
-   "round_date": null,
-   "src": [
-    "https://www.homedepot.com",
-    "https://finance.yahoo.com/quote/HD/profile"
-   ],
-   "quote": "（未開啟原文）Ted Decker serves as the Chair, President, and Chief Executive Officer (CEO) of The Home Depot.",
-   "checked": "2026-09-28",
-   "verify": {
-    "ok": true,
-    "why": "出處不行（HTTP 403）→ yfinance HD 有公司與負責人",
-    "at": "2026-09-28"
-   }
-  },
-  {
-   "cty": "ca",
-   "ticker": "RY.TO",
-   "name": "ROYAL BANK OF CANADA",
-   "status": "listed",
-   "exchange": "TSX",
-   "listed_date": "1972-12-01",
-   "merged_into": null,
-   "leaders": [
-    {
-     "zh": "大衛·麥凱",
-     "en": "Dave McKay",
-     "title": "CEO"
-    }
-   ],
-   "valuation_usd": null,
-   "round": null,
-   "round_date": null,
-   "src": [
-    "https://www.rbc.com",
-    "https://finance.yahoo.com/quote/RY.TO/profile"
-   ],
-   "quote": "（未開啟原文）Dave McKay is the President and Chief Executive Officer of the Royal Bank of Canada (RBC) in 2026.",
-   "checked": "2026-09-28",
-   "verify": {
-    "ok": true,
-    "why": "出處不行（頁面沒有公司名／代號）→ yfinance RY.TO 有公司與負責人",
-    "at": "2026-09-28"
-   }
-  },
-  {
-   "cty": "ch",
-   "ticker": "NOVN.SW",
-   "name": "NOVARTIS N",
-   "status": "listed",
-   "exchange": "SIX Swiss Exchange",
-   "listed_date": "1996-12-20",
-   "merged_into": null,
-   "leaders": [
-    {
-     "zh": "萬思瀚",
-     "en": "Vas Narasimhan",
-     "title": "CEO"
-    }
-   ],
-   "valuation_usd": null,
-   "round": null,
-   "round_date": null,
-   "src": [
-    "https://www.novartis.com"
-   ],
-   "quote": "（未開啟原文）Vas Narasimhan continues to serve as the Chief Executive Officer of Novartis as of September 2026.",
+   "quote": "Ted Sarandos and Greg Peters serve as co-CEOs of Netflix. They have held this joint leadership position since January 2023.",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -4588,27 +4655,1419 @@
   },
   {
    "cty": "us",
-   "ticker": null,
-   "name": "xAI",
-   "status": "merged",
-   "exchange": null,
-   "listed_date": null,
-   "merged_into": "SpaceX",
+   "ticker": "HD",
+   "name": "The Home Depot, Inc.",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1981-09-22",
+   "merged_into": null,
    "leaders": [
     {
-     "zh": "伊隆·馬斯克",
-     "en": "Elon Musk",
+     "zh": "愛德華·德克爾",
+     "en": "Edward Decker",
      "title": "CEO"
     }
    ],
-   "valuation_usd": 230000000000,
-   "round": "Series E",
-   "round_date": "2026-01-06",
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
    "src": [
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGy_QL0bTF40k1rQnCIDLpc-4E4-PUbB35dJ47onO8KEGAIXtb55Xi31UpxVoZzIMiqd5ifwIDD2VRn6p3jARLGN_t6d6-29EILP61BQ3rpMQ==",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPQjvwEgpB16rKS2gGWq-A08I7HO3aXcnMEnXDu-ZVQpyCuEnVfQPtHfL7BFhQvFJLgAM2CJgngngXpwW2WSbSONf5-7T2RI72sMNDxtD0iMg2yFwottHnHDf3NPJVTOeXdV5YDoRKvWEzsPjzQYoGBEl57Nmwz3icibxdEAE60A=="
+    "https://ir.homedepot.com/investor-resources/faqs",
+    "https://ir.homedepot.com/management-team",
+    "https://finance.yahoo.com/quote/HD/profile"
    ],
-   "quote": "（未開啟原文）xAI officially announced the completion of its Series E funding round on January 6, 2026, which brought xAI to a post-money valuation of approximately $230 billion; on February 2, 2026, SpaceX officially announced the acquisition of xAI in an all-stock transaction.",
+   "quote": "The Home Depot went public on September 22, 1981... Ted Decker is chair, president and chief executive officer of The Home Depot.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Edward Decker；HTTP 404）→ yfinance HD 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "CTATF",
+   "name": "Contemporary Amperex Technology Co., Limited",
+   "status": "listed",
+   "exchange": "SZSE",
+   "listed_date": "2018-06-11",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "曾毓群",
+     "en": "Robin Zeng",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.catl.com",
+    "https://www.otcmarkets.com/stock/CTATF/overview",
+    "https://finance.yahoo.com/quote/CTATF/profile"
+   ],
+   "quote": "Dr. Robin Zeng serves as the Chairman and CEO of CATL (Contemporary Amperex Technology Co., Limited). （未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Robin Zeng；頁面沒有公司名／代號）→ yfinance CTATF 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "BABAF",
+   "name": "Alibaba Group Holding Limited",
+   "status": "listed",
+   "exchange": "OTC Markets",
+   "listed_date": "2014-09-19",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "吳泳銘",
+     "en": "Eddie Wu",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.alibabagroup.com",
+    "https://www.otcmarkets.com/stock/BABAF/overview"
+   ],
+   "quote": "Eddie Wu is the Chief Executive Officer of Alibaba Group, a position he has held since September 2023. （未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "RY",
+   "name": "Royal Bank of Canada",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1995-10-16",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "戴夫·麥凱",
+     "en": "Dave McKay",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.rbc.com",
+    "https://www.nyse.com",
+    "https://finance.yahoo.com/quote/RY/profile"
+   ],
+   "quote": "Dave McKay currently serves as the President and Chief Executive Officer of the Royal Bank of Canada (RBC). （未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面沒有公司名／代號；頁面沒有公司名／代號）→ yfinance RY 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "NVS",
+   "name": "Novartis AG",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2000-05-11",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "瓦斯·納拉辛漢",
+     "en": "Vas Narasimhan",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.novartis.com",
+    "https://www.sec.gov"
+   ],
+   "quote": "Vasant (Vas) Narasimhan, M.D., has served as the Chief Executive Officer (CEO) of Novartis since February 1, 2018. （未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "SHEL",
+   "name": "Shell plc",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2022-01-31",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "瓦埃爾·薩萬",
+     "en": "Wael Sawan",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.shell.com",
+    "https://www.nyse.com",
+    "https://finance.yahoo.com/quote/SHEL/profile"
+   ],
+   "quote": "Wael Sawan is the Chief Executive Officer (CEO) of Shell plc. He was appointed to this position on January 1, 2023. （未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Wael Sawan；頁面沒有公司名／代號）→ yfinance SHEL 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "GS",
+   "name": "The Goldman Sachs Group, Inc.",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1999-05-04",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "大衛·所羅門",
+     "en": "David Solomon",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.goldmansachs.com",
+    "https://www.nyse.com"
+   ],
+   "quote": "David Solomon is the Chairman and Chief Executive Officer of The Goldman Sachs Group, Inc. （未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "MUFG",
+   "name": "Mitsubishi UFJ Financial Group, Inc.",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2001-04-02",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "半澤淳一",
+     "en": "Junichi Hanzawa",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.mufg.jp/dam/pressrelease/2026/pdf/news-20260115-001_en.pdf",
+    "https://stockanalysis.com/stocks/mufg/company/"
+   ],
+   "quote": "As of April 1, 2026, Junichi Hanzawa serves as the President & Group CEO of Mitsubishi UFJ Financial Group (MUFG).（未開啟原文，依搜尋結果摘要）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "ANET",
+   "name": "Arista Networks, Inc.",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2014-06-06",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "吉絲莉·烏拉爾",
+     "en": "Jayshree Ullal",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://stockanalysis.com/stocks/anet/company/",
+    "https://en.wikipedia.org/wiki/Arista_Networks"
+   ],
+   "quote": "Arista Networks (ANET) held its initial public offering (IPO) on June 6, 2014. Jayshree Ullal serves as the CEO and Chairperson of the company.（未開啟原文，依搜尋結果摘要）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "SNDK",
+   "name": "Sandisk Corporation",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "2025-02-24",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "大衛·格克勒",
+     "en": "David Goeckeler",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.sandisk.com/about/press-room/press-releases/2025/2025-02-24-sandisk-completes-spin-off-from-western-digital",
+    "https://www.westerndigital.com/company/newsroom/press-releases/2025/2025-02-24-western-digital-completes-separation-of-sandisk",
+    "https://finance.yahoo.com/quote/SNDK/profile"
+   ],
+   "quote": "Western Digital officially completed the spin-off of its flash memory business as SanDisk Corporation on February 24, 2025. Following the separation, SanDisk began trading as an independent company on the Nasdaq Stock Market under the ticker symbol 'SNDK'. David Goeckeler serves as the Chairman and CEO of the independent SanDisk Corporation.（未開啟原文，依搜尋結果摘要）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404；HTTP 404）→ yfinance SNDK 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "AZN",
+   "name": "AstraZeneca PLC",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2026-02-02",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "巴斯卡·索利奧特",
+     "en": "Pascal Soriot",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.astrazeneca.com/media-centre/press-releases/2026/astrazeneca-to-transition-us-listing-to-the-new-york-stock-exchange.html",
+    "https://www.londonstockexchange.com/news-article/AZN/listing-transfer-to-nyse/16843210",
+    "https://finance.yahoo.com/quote/AZN/profile"
+   ],
+   "quote": "On February 2, 2026, the company transitioned to a direct listing of its ordinary shares on the New York Stock Exchange (NYSE). Pascal Soriot has served as the Chief Executive Officer (CEO) of AstraZeneca since October 1, 2012.（未開啟原文，依搜尋結果摘要）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Pascal Soriot；頁面沒有公司名／代號）→ yfinance AZN 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "CRWD",
+   "name": "CrowdStrike Holdings, Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "2019-06-12",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "喬治·柯茲",
+     "en": "George Kurtz",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tradingview.com/symbols/NASDAQ-CRWD/",
+    "https://www.crowdstrike.com/leadership/george-kurtz/"
+   ],
+   "quote": "CrowdStrike Holdings, Inc. (CRWD) went public on the Nasdaq stock exchange on June 12, 2019. George Kurtz is the co-founder and has served as the President and CEO of the company since its inception.（未開啟原文，依搜尋結果摘要）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "RTX",
+   "name": "RTX Corporation",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2020-04-03",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "克里斯多福·卡利歐",
+     "en": "Christopher T. Calio",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.rtx.com/who-we-are/leadership/christopher-t-calio",
+    "https://www.rtx.com/news/news-releases/2020/04/03/united-technologies-and-raytheon-complete-merger-of-equals",
+    "https://finance.yahoo.com/quote/RTX/profile"
+   ],
+   "quote": "RTX Corporation (NYSE: RTX), led by Chairman and Chief Executive Officer Christopher T. Calio... began trading on the New York Stock Exchange (NYSE) on April 3, 2020, under the ticker symbol 'RTX'.（未開啟原文，依搜尋結果摘要）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404；頁面有公司、沒有負責人 Christopher T. Calio）→ yfinance RTX 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "GEV",
+   "name": "GE Vernova Inc.",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2024-04-02",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "史考特·史特拉茲克",
+     "en": "Scott Strazik",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.gevernova.com/news/press-releases/ge-vernova-completes-spin-off-and-begins-trading-on-nyse",
+    "https://www.gevernova.com/about/leadership/scott-strazik"
+   ],
+   "quote": "GE Vernova Inc. (NYSE: GEV) began trading as an independent company on the New York Stock Exchange on April 2, 2024. The company's Chief Executive Officer and President is Scott Strazik.（未開啟原文，依搜尋結果摘要）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "TXN",
+   "name": "Texas Instruments Incorporated",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "2012-01-03",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "哈維夫·伊蘭",
+     "en": "Haviv Ilan",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.ti.com/about-ti/company/leadership-executives/haviv-ilan.html",
+    "https://investor.ti.com/news-releases/news-release-details/texas-instruments-transfer-stock-exchange-listing-nasdaq",
+    "https://finance.yahoo.com/quote/TXN/profile"
+   ],
+   "quote": "Texas Instruments Incorporated (TXN) is currently listed on the Nasdaq stock exchange... shares began trading on the Nasdaq on January 3, 2012. Haviv Ilan serves as Chairman, President, and Chief Executive Officer.（未開啟原文，依搜尋結果摘要）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404；HTTP 404）→ yfinance TXN 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "WFC",
+   "name": "Wells Fargo & Company",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1972-06-01",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "查理·沙夫",
+     "en": "Charlie Scharf",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://bpi.com/board-of-directors/charles-w-scharf/",
+    "https://www.economicclub.org/events/charlie-scharf"
+   ],
+   "quote": "Charlie Scharf has served as the Chief Executive Officer of Wells Fargo & Company since October 2019. Wells Fargo & Company (WFC) is listed on the New York Stock Exchange (NYSE).（未開啟原文，依搜尋結果摘要）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "TMO",
+   "name": "Thermo Fisher Scientific Inc.",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2006-11-09",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "馬克·卡斯珀",
+     "en": "Marc N. Casper",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.thermofisher.com",
+    "https://www.sec.gov",
+    "https://finance.yahoo.com/quote/TMO/profile"
+   ],
+   "quote": "Marc N. Casper serves as Chairman, President and Chief Executive Officer of Thermo Fisher Scientific.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Marc N. Casper；頁面沒有公司名／代號）→ yfinance TMO 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "KLAC",
+   "name": "KLA Corporation",
+   "status": "listed",
+   "exchange": "NASDAQ",
+   "listed_date": "1980-10-08",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "理查德·華萊士",
+     "en": "Richard P. Wallace",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.kla.com"
+   ],
+   "quote": "Richard Wallace serves as the President and Chief Executive Officer of KLA Corporation.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "SIEGY",
+   "name": "Siemens Aktiengesellschaft",
+   "status": "listed",
+   "exchange": "Frankfurt Stock Exchange / OTC Markets",
+   "listed_date": "1899-03-08",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "博樂仁",
+     "en": "Roland Busch",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.siemens.com",
+    "https://finance.yahoo.com/quote/SIEGY/profile"
+   ],
+   "quote": "Roland Busch is President and Chief Executive Officer of Siemens AG.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Roland Busch）→ yfinance SIEGY 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "SAP",
+   "name": "SAP SE",
+   "status": "listed",
+   "exchange": "Frankfurt Stock Exchange / NYSE",
+   "listed_date": "1988-11-04",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "柯睿安",
+     "en": "Christian Klein",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.sap.com",
+    "https://finance.yahoo.com/quote/SAP/profile"
+   ],
+   "quote": "Christian Klein is Chief Executive Officer and Member of the Executive Board of SAP SE.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Christian Klein）→ yfinance SAP 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "NSRGY",
+   "name": "Nestlé S.A.",
+   "status": "listed",
+   "exchange": "SIX Swiss Exchange / OTC Markets",
+   "listed_date": "1905-10-25",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "菲利普·納夫拉蒂爾",
+     "en": "Philipp Navratil",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.nestle.com",
+    "https://finance.yahoo.com/quote/NSRGY/profile"
+   ],
+   "quote": "The Nestlé Board of Directors has appointed Philipp Navratil as Chief Executive Officer of Nestlé S.A., effective September 1, 2025.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 403）→ yfinance NSRGY 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "LRLCF",
+   "name": "L'Oréal S.A.",
+   "status": "listed",
+   "exchange": "Euronext Paris / OTC Markets",
+   "listed_date": null,
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "葉鴻慕",
+     "en": "Nicolas Hieronimus",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.loreal-finance.com",
+    "https://www.loreal.com",
+    "https://finance.yahoo.com/quote/LRLCF/profile"
+   ],
+   "quote": "Nicolas Hieronimus is the Chief Executive Officer of L'Oréal since May 1, 2021.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面沒有公司名／代號；頁面沒有公司名／代號）→ yfinance LRLCF 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "MRVL",
+   "name": "Marvell Technology, Inc.",
+   "status": "listed",
+   "exchange": "NASDAQ",
+   "listed_date": "2000-06-27",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "馬特·墨菲",
+     "en": "Matt Murphy",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.marvell.com",
+    "https://finance.yahoo.com/quote/MRVL/profile"
+   ],
+   "quote": "Matt Murphy is Chairman and Chief Executive Officer of Marvell.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Matt Murphy）→ yfinance MRVL 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "LVMHF",
+   "name": "LVMH Moët Hennessy - Louis Vuitton, Société Européenne",
+   "status": "listed",
+   "exchange": "Euronext Paris / OTC Markets",
+   "listed_date": "1987-06-03",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "貝爾納·阿爾諾",
+     "en": "Bernard Arnault",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.lvmh.com",
+    "https://finance.yahoo.com/quote/LVMHF/profile"
+   ],
+   "quote": "Bernard Arnault is Chairman and Chief Executive Officer of LVMH Moët Hennessy Louis Vuitton.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面沒有公司名／代號）→ yfinance LVMHF 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "C",
+   "name": "Citigroup Inc.",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1998-10-08",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "簡·弗雷澤",
+     "en": "Jane Fraser",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.citigroup.com/about-us/leadership/jane-fraser",
+    "https://en.wikipedia.org/wiki/Citigroup"
+   ],
+   "quote": "Jane Fraser is the Chair of the Board and Chief Executive Officer (CEO) of Citigroup Inc.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "AMGN",
+   "name": "Amgen Inc.",
+   "status": "listed",
+   "exchange": "NASDAQ",
+   "listed_date": "1983-06-17",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "羅伯特·布拉德威",
+     "en": "Robert A. Bradway",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.amgen.com/about/leadership/robert-a-bradway",
+    "https://finance.yahoo.com/quote/AMGN/profile"
+   ],
+   "quote": "Robert A. Bradway is the Chairman and Chief Executive Officer of Amgen.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404）→ yfinance AMGN 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "BHPLF",
+   "name": "BHP Group Limited",
+   "status": "listed",
+   "exchange": "OTC",
+   "listed_date": null,
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "布蘭登·克雷格",
+     "en": "Brandon Craig",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.bhp.com/news/media-centre/releases/2026/03/bhp-appoints-brandon-craig-as-ceo",
+    "https://finance.yahoo.com/quote/BHPLF/profile"
+   ],
+   "quote": "Brandon Craig assumed the role of Chief Executive Officer (CEO) and a Director of BHP Group Limited on 1 July 2026.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404）→ yfinance BHPLF 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "LIN",
+   "name": "Linde plc",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "2023-11-07",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "桑吉夫·蘭巴",
+     "en": "Sanjiv Lamba",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.linde.com/about-linde/leadership/sanjiv-lamba",
+    "https://www.nasdaqtrader.com",
+    "https://finance.yahoo.com/quote/LIN/profile"
+   ],
+   "quote": "Sanjiv Lamba is the Chairman and Chief Executive Officer of Linde plc.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404；頁面有公司、沒有負責人 Sanjiv Lamba）→ yfinance LIN 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "QCOM",
+   "name": "QUALCOMM Incorporated",
+   "status": "listed",
+   "exchange": "NASDAQ",
+   "listed_date": "1991-12-12",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "克里斯蒂亞諾·阿蒙",
+     "en": "Cristiano Amon",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.qualcomm.com/company/leadership/cristiano-amon",
+    "https://finance.yahoo.com/quote/QCOM/profile"
+   ],
+   "quote": "Cristiano Amon is the President and Chief Executive Officer of QUALCOMM Incorporated.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404）→ yfinance QCOM 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "IBM",
+   "name": "International Business Machines Corporation",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1915-11-11",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "阿爾溫德·克里希納",
+     "en": "Arvind Krishna",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.ibm.com/about/leadership/arvind-krishna",
+    "https://finance.yahoo.com/quote/IBM/profile"
+   ],
+   "quote": "Arvind Krishna is the Chairman and Chief Executive Officer of IBM.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404）→ yfinance IBM 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "SAN",
+   "name": "Banco Santander, S.A.",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1987-07-30",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "埃克托爾·格里西",
+     "en": "Héctor Grisi",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.santander.com/en/about-us/corporate-governance/hector-grisi-checa",
+    "https://www.sec.gov",
+    "https://finance.yahoo.com/quote/SAN/profile"
+   ],
+   "quote": "Héctor Grisi Checa is the Chief Executive Officer (CEO) of Banco Santander.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404；頁面沒有公司名／代號）→ yfinance SAN 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "AXP",
+   "name": "American Express Company",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1977-05-18",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "斯蒂芬·斯奎里",
+     "en": "Stephen J. Squeri",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.americanexpress.com/en-us/company/about/leadership/stephen-j-squeri/",
+    "https://finance.yahoo.com/quote/AXP/profile"
+   ],
+   "quote": "Stephen J. Squeri has served as the company's Chairman and Chief Executive Officer since February 2018.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404）→ yfinance AXP 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "STX",
+   "name": "Seagate Technology Holdings plc",
+   "status": "listed",
+   "exchange": "NASDAQ",
+   "listed_date": "2002-12-11",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "戴夫·莫斯利",
+     "en": "Dave Mosley",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.seagate.com/leadership/dave-mosley/",
+    "https://finance.yahoo.com/quote/STX/profile"
+   ],
+   "quote": "Dave Mosley is the Chairman of the Board and Chief Executive Officer of Seagate Technology.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404）→ yfinance STX 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "APH",
+   "name": "Amphenol Corporation",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1991-11-08",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "亞當·諾維特",
+     "en": "R. Adam Norwitt",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.amphenol.com/about/leadership/r-adam-norwitt",
+    "https://finance.yahoo.com/quote/APH/profile"
+   ],
+   "quote": "R. Adam Norwitt serves as the Chairman and Chief Executive Officer of Amphenol Corporation.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 404）→ yfinance APH 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "TTE",
+   "name": "TotalEnergies SE",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2025-12-08",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "帕特里克·普揚內",
+     "en": "Patrick Pouyanné",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://totalenergies.com",
+    "https://finance.yahoo.com/quote/TTE/profile"
+   ],
+   "quote": "TotalEnergies (NYSE: TTE) began trading its ordinary shares on the New York Stock Exchange (NYSE) on December 8, 2025. Patrick Pouyanné serves as the Chairman and Chief Executive Officer (CEO) of TotalEnergies.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Patrick Pouyanné）→ yfinance TTE 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "TD",
+   "name": "The Toronto-Dominion Bank",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1996-08-30",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "鍾偉民",
+     "en": "Raymond Chun",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.td.com",
+    "https://finance.yahoo.com/quote/TD/profile"
+   ],
+   "quote": "Raymond Chun is the Group President and Chief Executive Officer of TD Bank Group. He assumed this role on February 1, 2025.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Raymond Chun）→ yfinance TD 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "RTNTF",
+   "name": "Rio Tinto Group",
+   "status": "listed",
+   "exchange": "OTC Markets",
+   "listed_date": "1973-11-01",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "西蒙·特洛特",
+     "en": "Simon Trott",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.riotinto.com"
+   ],
+   "quote": "Simon Trott is the Chief Executive of Rio Tinto. He assumed this role on August 25, 2025.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "VZ",
+   "name": "Verizon Communications Inc.",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2000-07-03",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "丹·舒爾曼",
+     "en": "Dan Schulman",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.verizon.com",
+    "https://finance.yahoo.com/quote/VZ/profile"
+   ],
+   "quote": "Dan Schulman is the Chief Executive Officer of Verizon. He was appointed to the position by the company's Board of Directors and assumed the role on October 6, 2025.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Dan Schulman）→ yfinance VZ 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "CRM",
+   "name": "Salesforce, Inc.",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2004-06-23",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "馬克·貝尼奧夫",
+     "en": "Marc Benioff",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.salesforce.com",
+    "https://finance.yahoo.com/quote/CRM/profile"
+   ],
+   "quote": "Marc Benioff serves as the Chair and CEO of Salesforce.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Marc Benioff）→ yfinance CRM 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "IDEXF",
+   "name": "Industria de Diseño Textil, S.A.",
+   "status": "listed",
+   "exchange": "OTC Markets",
+   "listed_date": "2001-05-23",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "奧斯卡·加西亞·馬塞拉斯",
+     "en": "Óscar García Maceiras",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.inditex.com",
+    "https://finance.yahoo.com/quote/IDEXF/profile"
+   ],
+   "quote": "Óscar García Maceiras has served as the Chief Executive Officer (CEO) of Inditex since November 2021.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面沒有公司名／代號）→ yfinance IDEXF 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "ADI",
+   "name": "Analog Devices, Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "1979-04-03",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "文森特·羅奇",
+     "en": "Vincent Roche",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.analog.com",
+    "https://finance.yahoo.com/quote/ADI/profile"
+   ],
+   "quote": "Vincent Roche is the Chief Executive Officer, President, and Chair of the Board of Directors at Analog Devices, Inc. (ADI).（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 403）→ yfinance ADI 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "SBGSF",
+   "name": "Schneider Electric S.E.",
+   "status": "listed",
+   "exchange": "Euronext Paris",
+   "listed_date": null,
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "奧利維耶·布盧姆",
+     "en": "Olivier Blum",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.se.com",
+    "https://finance.yahoo.com/quote/SBGSF/profile"
+   ],
+   "quote": "Olivier Blum has served as the Chief Executive Officer of Schneider Electric since November 4, 2024.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Olivier Blum）→ yfinance SBGSF 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "GILD",
+   "name": "Gilead Sciences, Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "1992-01-22",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "丹尼爾·奧戴",
+     "en": "Daniel O'Day",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.gilead.com",
+    "https://finance.yahoo.com/quote/GILD/profile"
+   ],
+   "quote": "Daniel O'Day is the Chairman and Chief Executive Officer of Gilead Sciences, Inc.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Daniel O'Day）→ yfinance GILD 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "sa",
+   "ticker": "2222",
+   "name": "Saudi Arabian Oil Company",
+   "status": "listed",
+   "exchange": "Saudi Exchange (Tadawul)",
+   "listed_date": "2019-12-11",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "阿明·納賽爾",
+     "en": "Amin H. Nasser",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.saudiexchange.sa",
+    "https://www.aramco.com"
+   ],
+   "quote": "The company officially listed and began trading on the Tadawul on December 11, 2019; Amin Nasser continues to serve as the President and Chief Executive Officer of Saudi Aramco in 2026.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "ca",
+   "ticker": "ASML",
+   "name": "ASML CDR (CAD Hedged)",
+   "status": "listed",
+   "exchange": "Cboe Canada",
+   "listed_date": "2025-02-19",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "克里斯托夫·富凱",
+     "en": "Christophe Fouquet",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.cboe.com",
+    "https://www.asml.com"
+   ],
+   "quote": "ASML Canadian Depositary Receipts (CAD Hedged) trade on Cboe Canada under the ticker symbol ASML, with listing date February 19, 2025; Christophe Fouquet is President and CEO of ASML.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "br",
+   "ticker": "T2TD34",
+   "name": "The Trade Desk, Inc.",
+   "status": "listed",
+   "exchange": "B3",
+   "listed_date": "2016-09-21",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "傑夫·格林",
+     "en": "Jeff Green",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.thetradedesk.com",
+    "https://www.b3.com.br",
+    "https://finance.yahoo.com/quote/T2TD34.SA/profile"
+   ],
+   "quote": "The Trade Desk, led by co-founder, chairman, and CEO Jeff Green, held its initial public offering (IPO) on September 21, 2016; its BDR program trades on B3 under ticker T2TD34 registered in 2021.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Jeff Green；頁面沒有公司名／代號）→ yfinance T2TD34.SA 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "ca",
+   "ticker": "ZPLT",
+   "name": "PALANTIR (PLTR) BMO CDR (CAD HE",
+   "status": "listed",
+   "exchange": "Cboe Canada",
+   "listed_date": "2025-10-23",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "亞歷克斯·卡普",
+     "en": "Alex Karp",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.cboe.com",
+    "https://www.bmo.com",
+    "https://www.palantir.com"
+   ],
+   "quote": "On October 23, 2025, BMO launched the Palantir Technologies Inc. (Class A) CDR (ticker ZPLT) trading on Cboe Canada; Alex Karp continues to serve as the Chief Executive Officer of Palantir Technologies.（未開啟原文）",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -4626,7 +6085,7 @@
    "merged_into": null,
    "leaders": [
     {
-     "zh": "阿瑟·門施",
+     "zh": "阿圖爾·門施",
      "en": "Arthur Mensch",
      "title": "CEO"
     }
@@ -4635,67 +6094,9 @@
    "round": "Series D",
    "round_date": "2026-09-08",
    "src": [
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFG78katl6QMiHX5vCwalx0TU05xbs3zpj9sRcmISwND11hYe-JojuEoK4ILPlTvwUS2tABrpCA5asgbkiQ37DoRjco3kydTcHsCFp6EI88CypyHd-wk3NrrEzEDbsKHjVSVG4a9dxilPTRQihLhmURNQW8eaPlI83EYn7MaBOIDaGC6hQeyy0smQ=="
+    "https://mistral.ai"
    ],
-   "quote": "（未開啟原文）On September 8, 2026, Mistral AI officially announced the closing of a €3 billion Series D funding round, resulting in a post-money valuation of more than €21 billion, which was widely reported as approximately $24 billion.",
-   "checked": "2026-09-28",
-   "verify": {
-    "ok": true,
-    "why": "頁面有公司與負責人",
-    "at": "2026-09-28"
-   }
-  },
-  {
-   "cty": "us",
-   "ticker": null,
-   "name": "Safe Superintelligence (SSI)",
-   "status": "private",
-   "exchange": null,
-   "listed_date": null,
-   "merged_into": null,
-   "leaders": [
-    {
-     "zh": "伊利亞·蘇茨克維",
-     "en": "Ilya Sutskever",
-     "title": "CEO"
-    }
-   ],
-   "valuation_usd": 32000000000,
-   "round": null,
-   "round_date": "2026-07-27",
-   "src": [
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEah-hLT6Ag4jLX_mF-iKfVFR0iaX2kZA8UEIiVn2n_zvn4HSKrC68B4Swo81YiTy5qhNhehK4xkF2IvMqZ49wRmzrnHC16gPykKqbyr5LPe3EZIeHTYk-UGS16JMum9e6_U7JgNzHQC2HRbqk3DnF47EA1cXNkjW6lOcofwn70zZkfOtzPQCIpQ21bWpOlHbxsJzdXAlmSp8rdK3snTUQXGVp76YYMSfrDLyQ_vQfxqspnooe3yGoueAp27aZHO26A5tjPdZta-ebmJSBVooXoun8P2FjGUu7Wa5dUhxM="
-   ],
-   "quote": "（未開啟原文）Nvidia and Safe Superintelligence (SSI), the AI startup co-founded by Ilya Sutskever, officially announced their long-term strategic partnership on July 27, 2026... At the time of the announcement, SSI was reported to have a valuation of approximately $32 billion.",
-   "checked": "2026-09-28",
-   "verify": {
-    "ok": true,
-    "why": "頁面有公司與負責人",
-    "at": "2026-09-28"
-   }
-  },
-  {
-   "cty": "us",
-   "ticker": null,
-   "name": "Databricks",
-   "status": "private",
-   "exchange": null,
-   "listed_date": null,
-   "merged_into": null,
-   "leaders": [
-    {
-     "zh": "阿里·戈德西",
-     "en": "Ali Ghodsi",
-     "title": "CEO"
-    }
-   ],
-   "valuation_usd": 190000000000,
-   "round": "Strategic Funding",
-   "round_date": "2026-08-13",
-   "src": [
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGvWC0qErG1Ss72YAIJcqsnnPFIbaqJ1X8UW-e7WNItkVEvPJVc6PONPZuGf-wP2790TKqbuNxBxMqQ1wJV8E9OvxsMjqYq0zqs14852JZpI-5gZKpe2VaGRxRhvq0m8oLBrMCkwUdxq8-Ap3RMwbDpjjdW19loGF0o_Nylz-aqGVpeHgOIavbSDkiNjMg9j-8MfwymQ5EXDMO2yWp5Ai2Azor60ToIBV34cyZRlQ=="
-   ],
-   "quote": "（未開啟原文）On August 13, 2026, Databricks closed a $5 billion strategic funding round, bringing the company's valuation to $190 billion.",
+   "quote": "[未開啟原文] In early September 2026, Mistral AI closed a €3 billion ($3.5 billion) Series D funding round... pushing the company’s post-money valuation to more than €21 billion (approximately $24 billion).",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -4722,10 +6123,9 @@
    "round": "Strategic Investment",
    "round_date": "2025-06-12",
    "src": [
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGMzussyPhNZD0mxF44joT74F39pAtSGYC6OsOUnZmFjns90ZF2SHUopqzNSNjTtXg_uXCmDJ1V5tb-jr9JAC8woRtWuhWC1Sc1RNVai7nIJh_8PvBcZvwDYq7DY9FOx45u61J3s6VQgG7qXHRxWGLxiBDR_gETS-kUy5muXi4=",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE5ICHdPkNl_a2q1_8sNEvl8jRkuiHP_Kw-Q-QrHCGlJXfnCo8feIqVppPEnk3PkwdanmF7zLLCH0Ejenqb8vNcWJbTZ2OyCdlSWKnm5uxpl7tsXa9D0GJTX7BB0z0IUOAB-xw="
+    "https://scale.com"
    ],
-   "quote": "（未開啟原文）On June 12, 2025, Scale AI officially announced that Meta Platforms had made a significant investment to acquire a 49% non-voting stake in the company... approximately $14.3 billion in the deal, which established an implied valuation for Scale AI of roughly $29 billion; Francis deSouza officially assumed the CEO role on August 10, 2026.",
+   "quote": "[未開啟原文] Scale AI officially announced the investment from Meta Platforms, Inc. on June 12, 2025... The investment valued Scale AI at over $29 billion.",
    "checked": "2026-09-28",
    "verify": {
     "ok": true,
@@ -4734,5 +6134,5 @@
    }
   }
  ],
- "rejected": 10
+ "rejected": 23
 }
