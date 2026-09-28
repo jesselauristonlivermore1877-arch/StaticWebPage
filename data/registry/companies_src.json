@@ -1,0 +1,4738 @@
+{
+ "asof": "2026-09-28",
+ "by": "gemini（本機，開搜尋）＋公開資訊觀測站 OpenAPI（台灣）",
+ "targets": "退路（company_targets.json 還沒有）：台灣前 150（股數×最新收盤）＋world.json 全球前 50 大 49 家＋未上市 AI 8 家",
+ "items": [
+  {
+   "cty": "tw",
+   "ticker": "2330",
+   "name": "台積電",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1994-09-05",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2330／公司簡稱 台積電",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2454",
+   "name": "聯發科",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2001-07-23",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2454／公司簡稱 聯發科",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2308",
+   "name": "台達電",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1988-12-19",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2308／公司簡稱 台達電",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2317",
+   "name": "鴻海",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1991-06-18",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2317／公司簡稱 鴻海",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3711",
+   "name": "日月光投控",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2018-04-30",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3711／公司簡稱 日月光投控",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2881",
+   "name": "富邦金",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2001-12-19",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2881／公司簡稱 富邦金",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3037",
+   "name": "欣興",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-08-26",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3037／公司簡稱 欣興",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2303",
+   "name": "聯電",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1985-07-16",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2303／公司簡稱 聯電",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "1303",
+   "name": "南亞",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1967-11-15",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 1303／公司簡稱 南亞",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2383",
+   "name": "台光電",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1998-11-27",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2383／公司簡稱 台光電",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2408",
+   "name": "南亞科",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2000-08-17",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2408／公司簡稱 南亞科",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2882",
+   "name": "國泰金",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2001-12-31",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2882／公司簡稱 國泰金",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3017",
+   "name": "奇鋐",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-09-27",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3017／公司簡稱 奇鋐",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2382",
+   "name": "廣達",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1999-01-08",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2382／公司簡稱 廣達",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2891",
+   "name": "中信金",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-05-17",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2891／公司簡稱 中信金",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2327",
+   "name": "國巨*",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1993-10-22",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2327／公司簡稱 國巨*",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2059",
+   "name": "川湖",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2008-06-25",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2059／公司簡稱 川湖",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3443",
+   "name": "創意",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2006-11-03",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3443／公司簡稱 創意",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2412",
+   "name": "中華電",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2000-10-27",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2412／公司簡稱 中華電",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2887",
+   "name": "台新新光金",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-02-18",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2887／公司簡稱 台新新光金",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2345",
+   "name": "智邦",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1995-11-15",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2345／公司簡稱 智邦",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "7769",
+   "name": "鴻勁",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2025-11-27",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 7769／公司簡稱 鴻勁",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3653",
+   "name": "健策",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2009-11-18",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3653／公司簡稱 健策",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2360",
+   "name": "致茂",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1996-12-21",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2360／公司簡稱 致茂",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2885",
+   "name": "元大金",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-02-04",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2885／公司簡稱 元大金",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6505",
+   "name": "台塑化",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2003-12-26",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6505／公司簡稱 台塑化",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "5274",
+   "name": "信驊",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2013-04-30",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 5274／公司簡稱 信驊",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3008",
+   "name": "大立光",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-03-11",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3008／公司簡稱 大立光",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2884",
+   "name": "玉山金",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-01-28",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2884／公司簡稱 玉山金",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "8046",
+   "name": "南電",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2006-04-07",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 8046／公司簡稱 南電",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2344",
+   "name": "華邦電",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1995-10-18",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2344／公司簡稱 華邦電",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2886",
+   "name": "兆豐金",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-02-04",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2886／公司簡稱 兆豐金",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2357",
+   "name": "華碩",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1996-11-14",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2357／公司簡稱 華碩",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2890",
+   "name": "永豐金",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-05-09",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2890／公司簡稱 永豐金",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2301",
+   "name": "光寶科",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1995-11-17",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2301／公司簡稱 光寶科",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2883",
+   "name": "凱基金",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2001-12-28",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2883／公司簡稱 凱基金",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2880",
+   "name": "華南金",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2001-12-19",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2880／公司簡稱 華南金",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2395",
+   "name": "研華",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1999-12-13",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2395／公司簡稱 研華",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3231",
+   "name": "緯創",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2003-08-19",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3231／公司簡稱 緯創",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2368",
+   "name": "金像電",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1998-03-09",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2368／公司簡稱 金像電",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2892",
+   "name": "第一金",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2003-01-02",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2892／公司簡稱 第一金",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "4958",
+   "name": "臻鼎-KY",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2011-12-26",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 4958／公司簡稱 臻鼎-KY",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6223",
+   "name": "旺矽",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2003-01-06",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 6223／公司簡稱 旺矽",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2603",
+   "name": "長榮",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1987-09-21",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2603／公司簡稱 長榮",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3189",
+   "name": "景碩",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2004-11-01",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3189／公司簡稱 景碩",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6446",
+   "name": "藥華藥",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2024-01-25",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6446／公司簡稱 藥華藥",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "8299",
+   "name": "群聯",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2004-12-06",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 8299／公司簡稱 群聯",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3665",
+   "name": "貿聯-KY",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2011-04-21",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3665／公司簡稱 貿聯-KY",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3045",
+   "name": "台灣大",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-08-26",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3045／公司簡稱 台灣大",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6488",
+   "name": "環球晶",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2015-09-25",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 6488／公司簡稱 環球晶",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6274",
+   "name": "台燿",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2003-12-18",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 6274／公司簡稱 台燿",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "5880",
+   "name": "合庫金",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2011-12-01",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 5880／公司簡稱 合庫金",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "1216",
+   "name": "統一",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1987-12-28",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 1216／公司簡稱 統一",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "1301",
+   "name": "台塑",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1964-07-27",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 1301／公司簡稱 台塑",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2449",
+   "name": "京元電子",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2001-05-09",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2449／公司簡稱 京元電子",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3481",
+   "name": "群創",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2006-10-24",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3481／公司簡稱 群創",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6669",
+   "name": "緯穎",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2019-03-27",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6669／公司簡稱 緯穎",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "1326",
+   "name": "台化",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1984-12-20",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 1326／公司簡稱 台化",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2379",
+   "name": "瑞昱",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1998-10-26",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2379／公司簡稱 瑞昱",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "4904",
+   "name": "遠傳",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2005-08-24",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 4904／公司簡稱 遠傳",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6770",
+   "name": "力積電",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2021-12-06",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6770／公司簡稱 力積電",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2801",
+   "name": "彰銀",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1962-02-15",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2801／公司簡稱 彰銀",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3034",
+   "name": "聯詠",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-08-26",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3034／公司簡稱 聯詠",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3661",
+   "name": "世芯-KY",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2014-10-28",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3661／公司簡稱 世芯-KY",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2615",
+   "name": "萬海",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1996-05-16",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2615／公司簡稱 萬海",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "5347",
+   "name": "世界",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "1998-03-25",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 5347／公司簡稱 世界",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2002",
+   "name": "中鋼",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1974-12-26",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2002／公司簡稱 中鋼",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2207",
+   "name": "和泰車",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1997-02-25",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2207／公司簡稱 和泰車",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3044",
+   "name": "健鼎",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-08-26",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3044／公司簡稱 健鼎",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3081",
+   "name": "聯亞",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2015-07-22",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 3081／公司簡稱 聯亞",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2313",
+   "name": "華通",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1990-07-24",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2313／公司簡稱 華通",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3036",
+   "name": "文曄",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-08-26",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3036／公司簡稱 文曄",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2409",
+   "name": "友達",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2000-09-08",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2409／公司簡稱 友達",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2404",
+   "name": "漢唐",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2000-03-14",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2404／公司簡稱 漢唐",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "4938",
+   "name": "和碩",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2010-06-24",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 4938／公司簡稱 和碩",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "1519",
+   "name": "華城",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1997-04-16",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 1519／公司簡稱 華城",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2376",
+   "name": "技嘉",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1998-09-24",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2376／公司簡稱 技嘉",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "1590",
+   "name": "亞德客-KY",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2010-12-13",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 1590／公司簡稱 亞德客-KY",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3529",
+   "name": "力旺",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2011-01-24",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 3529／公司簡稱 力旺",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "5876",
+   "name": "上海商銀",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2018-10-19",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 5876／公司簡稱 上海商銀",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2337",
+   "name": "旺宏",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1995-03-15",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2337／公司簡稱 旺宏",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2618",
+   "name": "長榮航",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2001-09-17",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2618／公司簡稱 長榮航",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2912",
+   "name": "統一超",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1997-08-22",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2912／公司簡稱 統一超",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6239",
+   "name": "力成",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2004-11-08",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6239／公司簡稱 力成",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6213",
+   "name": "聯茂",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2008-01-21",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6213／公司簡稱 聯茂",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2356",
+   "name": "英業達",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1996-11-13",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2356／公司簡稱 英業達",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3293",
+   "name": "鈊象",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2006-07-12",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 3293／公司簡稱 鈊象",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6515",
+   "name": "穎崴",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2021-01-20",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6515／公司簡稱 穎崴",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3105",
+   "name": "穩懋",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2011-12-13",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 3105／公司簡稱 穩懋",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2609",
+   "name": "陽明",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1992-04-20",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2609／公司簡稱 陽明",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3702",
+   "name": "大聯大",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2005-11-09",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3702／公司簡稱 大聯大",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3533",
+   "name": "嘉澤",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2007-12-10",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3533／公司簡稱 嘉澤",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "1101",
+   "name": "台泥",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1962-02-09",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 1101／公司簡稱 台泥",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "5871",
+   "name": "中租-KY",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2011-12-13",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 5871／公司簡稱 中租-KY",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2834",
+   "name": "臺企銀",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1998-01-03",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2834／公司簡稱 臺企銀",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "4157",
+   "name": "太景*-KY",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2014-01-17",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 4157／公司簡稱 太景*-KY",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6139",
+   "name": "亞翔",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2003-08-25",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6139／公司簡稱 亞翔",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3532",
+   "name": "台勝科",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2007-12-10",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3532／公司簡稱 台勝科",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6805",
+   "name": "富世達",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2023-11-09",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6805／公司簡稱 富世達",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "1802",
+   "name": "台玻",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1973-07-20",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 1802／公司簡稱 台玻",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "8069",
+   "name": "元太",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2004-03-30",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 8069／公司簡稱 元太",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6415",
+   "name": "矽力*-KY",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2013-12-12",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6415／公司簡稱 矽力*-KY",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "1504",
+   "name": "東元",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1973-11-05",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 1504／公司簡稱 東元",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "1605",
+   "name": "華新",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1972-11-03",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 1605／公司簡稱 華新",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6531",
+   "name": "愛普*",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2016-05-31",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6531／公司簡稱 愛普*",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2324",
+   "name": "仁寶",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1992-02-18",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2324／公司簡稱 仁寶",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3324",
+   "name": "雙鴻",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2005-05-13",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 3324／公司簡稱 雙鴻",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6147",
+   "name": "頎邦",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2002-01-31",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 6147／公司簡稱 頎邦",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2347",
+   "name": "聯強",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1995-12-13",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2347／公司簡稱 聯強",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "7856",
+   "name": "漢測",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2026-09-22",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 7856／公司簡稱 漢測",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2492",
+   "name": "華新科",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2001-09-17",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2492／公司簡稱 華新科",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "1402",
+   "name": "遠東新",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1967-04-14",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 1402／公司簡稱 遠東新",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6789",
+   "name": "采鈺",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2022-06-30",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6789／公司簡稱 采鈺",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "1560",
+   "name": "中砂",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2005-01-31",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 1560／公司簡稱 中砂",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2633",
+   "name": "台灣高鐵",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2016-10-27",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2633／公司簡稱 台灣高鐵",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "8996",
+   "name": "高力",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2014-02-14",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 8996／公司簡稱 高力",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "7750",
+   "name": "新代",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2025-09-17",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 7750／公司簡稱 新代",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6526",
+   "name": "達發",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2023-10-19",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6526／公司簡稱 達發",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3026",
+   "name": "禾伸堂",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-08-26",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3026／公司簡稱 禾伸堂",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "910322",
+   "name": "康師傅-DR",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2009-12-16",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 910322／公司簡稱 康師傅-DR",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "8358",
+   "name": "金居",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2010-09-27",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 8358／公司簡稱 金居",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "5289",
+   "name": "宜鼎",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2013-11-27",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 5289／公司簡稱 宜鼎",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2377",
+   "name": "微星",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1998-10-31",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2377／公司簡稱 微星",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3260",
+   "name": "威剛",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2004-10-08",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 3260／公司簡稱 威剛",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "1102",
+   "name": "亞泥",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1962-06-08",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 1102／公司簡稱 亞泥",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6442",
+   "name": "光聖",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2015-07-14",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6442／公司簡稱 光聖",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2610",
+   "name": "華航",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1993-02-26",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2610／公司簡稱 華航",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6919",
+   "name": "康霈*",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2024-10-02",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6919／公司簡稱 康霈*",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6196",
+   "name": "帆宣",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2004-05-24",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6196／公司簡稱 帆宣",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2027",
+   "name": "大成鋼",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1996-10-24",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2027／公司簡稱 大成鋼",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2451",
+   "name": "創見",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2001-05-03",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2451／公司簡稱 創見",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2812",
+   "name": "台中銀",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "1984-05-15",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2812／公司簡稱 台中銀",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3374",
+   "name": "精材",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2015-03-30",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 3374／公司簡稱 精材",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "5483",
+   "name": "中美晶",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2001-03-02",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 5483／公司簡稱 中美晶",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3264",
+   "name": "欣銓",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2005-01-05",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 3264／公司簡稱 欣銓",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6257",
+   "name": "矽格",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2003-08-25",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6257／公司簡稱 矽格",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6187",
+   "name": "萬潤",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2002-09-27",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 6187／公司簡稱 萬潤",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2049",
+   "name": "上銀",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2009-06-26",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2049／公司簡稱 上銀",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6285",
+   "name": "啟碁",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2003-09-22",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 6285／公司簡稱 啟碁",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "8210",
+   "name": "勤誠",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2011-12-01",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 8210／公司簡稱 勤誠",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "5536",
+   "name": "聖暉*",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2010-11-10",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 5536／公司簡稱 聖暉*",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2474",
+   "name": "可成",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2001-09-17",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2474／公司簡稱 可成",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "5269",
+   "name": "祥碩",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2012-12-12",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 5269／公司簡稱 祥碩",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "8464",
+   "name": "億豐",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2015-12-22",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 8464／公司簡稱 億豐",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "6510",
+   "name": "精測",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2016-03-24",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 6510／公司簡稱 精測",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3491",
+   "name": "昇達科",
+   "status": "listed",
+   "exchange": "TPEx",
+   "listed_date": "2008-01-03",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+   ],
+   "quote": "公司代號 3491／公司簡稱 昇達科",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "7610",
+   "name": "聯友金屬-創",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2025-09-09",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 7610／公司簡稱 聯友金屬-創",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "5434",
+   "name": "崇越",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2003-08-25",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 5434／公司簡稱 崇越",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "3706",
+   "name": "神達",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2013-09-12",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 3706／公司簡稱 神達",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "tw",
+   "ticker": "2455",
+   "name": "全新",
+   "status": "listed",
+   "exchange": "TWSE",
+   "listed_date": "2002-01-24",
+   "merged_into": null,
+   "leaders": [],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+   ],
+   "quote": "公司代號 2455／公司簡稱 全新",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "公開資訊觀測站 OpenAPI 有這個代號（官方來源）"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "NVDA",
+   "name": "NVIDIA Corporation",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "1999-01-22",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "黃仁勳",
+     "en": "Jensen Huang",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGiFEuagFZipqcOIXVYwYIsCfJxi745awiMG3gdFaf2wgbSpw9hRnulau_DtLw4x5-j7d_iV7x0_3bgoISF-NTI7bRNCzSVH44fERjM3Ivj-PTsuCVoRRviDdXe0K90vwxsCjHMJ5Y357BPrPmApt2ZlYbOn52S",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFU8AkVY4b_93hRo74GpY_8x33QRzaxSWXfcXChxOp0Ubixp9JMCFDXn18Cn68nnGadp_OqttAxp-EnKnGsFR29zLbHSzQGZo28U4wcQGq0uinGfCVOkFCu-o0oO2HcPgN5IN9YFbtBtvBaTTcxcq_h1KYjExiETOD72gMLHsXz"
+   ],
+   "quote": "NVIDIA Corporation's initial public offering (IPO) took place on January 22, 1999. The stock was listed on the Nasdaq exchange under the ticker symbol NVDA... Jensen Huang is the co-founder, president, and CEO of NVIDIA.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "AAPL",
+   "name": "Apple Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "1980-12-12",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "約翰·特納斯",
+     "en": "John Ternus",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF01MxqGHVRod7QM7TnWXwaVim5DaV_7MU1bHf9SSAV0VyA9dt4QznPgU11noxgT-4T7uniZG2EHQepZv7KQJOToZ_d584LOCFaps064ss6iNncToyj8r_sqAaiGMyFSnfH",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGq7bC_qJDQ-d9Njf2vj4vTBwR354vRmiHRvXvZgxwfbuHHkp33DSMIXde_sGThiZR-Mg01cmuaVSDQpJvkMOe60rffno95M835mgBTdTVs0cZH_u34p3H4acHYWfmTyyiPHagbPtYPKEKNcbyeZ6gSdDuZSNLSP23Z3r40sgR3vwkRHeyXtT3u8gzIiDCYKArUzVehLWIUJtsH-h2bmrLZIHrGaGuWVOec"
+   ],
+   "quote": "Apple Inc. held its initial public offering (IPO) on December 12, 1980... As of September 1, 2026, John Ternus is the CEO of Apple. Tim Cook, who served as CEO from 2011 to 2026, transitioned to the role of Executive Chairman of Apple's board of directors on September 1, 2026.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "GOOGL",
+   "name": "Alphabet Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "2004-08-19",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "桑德爾·皮蔡",
+     "en": "Sundar Pichai",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFyb5FO5eIWTraqmSCKSIBzQSgB2xGFA8EZz7OAgcPBFg8ow2KKVYwjnhlag2ytJemkFkKrIQkzWGmg1vPZBMMhSX8Z46u-KEkpOUFFjJO3bDk2U3tWNhhhKFrCgpnmyLqc59uCWmk=",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG9ULQ47ysHbj6JhA6PJ49QN8kDPpXFSO9JPov7mlI_MdmKiqM0e3awUlqZDlBgb5PIDtAtpgn35TFvcdB6thw9YYiSBLN-AXL46Ww4tWAYq-QUJsoEtJyPKukdmaaLvIo="
+   ],
+   "quote": "As of September 2026, Sundar Pichai continues to serve as the CEO of Alphabet Inc. and Google... Google (now a subsidiary of Alphabet Inc.) held its initial public offering on August 19, 2004.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "MSFT",
+   "name": "Microsoft Corporation",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "1986-03-13",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "薩蒂亞·納德拉",
+     "en": "Satya Nadella",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFlSvWgv_lTanahAVHrsKpW0F4dU0BCOGvU35u7D8VdLyGoLlSVSlDeJEL7mfEW03Oy9iNyCKNjQEJo_70SaOOa8LKIQdDlM4egIzSGTR6rVC0hgWJ0Rmm0OYiEDpvTFv0lr8U=",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHTrCRIxHG52MPu09QhVY9SrIJRVcebqkGf_dX8TasmRua36Rjm1Ici3jyId2_khUazt66Idv18nnXXwkVyZiVgv_KjrziWc13Cp3_MJbhz5kIaF1mJItqSR0m5JEXDxwZy-Q=="
+   ],
+   "quote": "As of September 2026, Satya Nadella is the Chairman and Chief Executive Officer (CEO) of Microsoft Corporation... Microsoft's initial public offering (IPO) took place on March 13, 1986.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "AMZN",
+   "name": "Amazon.com, Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "1997-05-15",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "安迪·賈西",
+     "en": "Andy Jassy",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE8mMycNla3y4EBJfa-eAn_PMwYevf48_nSPE7gHl_eCT7UbaJir8ie84cwgxdaYJKH1TCqfTiOag_wkJnB7dCXAqZE4UyIj6ecuBBBXAK02-x7w1_AG3B1sGLd8JFaSe3K32n2VTZGaEM70BVALteV_rvqhiW8qvMGzm_Gk0159481rcapSizUA7yWD128LLdSy5YNnbnlFgVPYbCuLF1TBVxPPlNNjLj4qeQgxv-_",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQExFLcgoRUwEoIAh_k123HnW30i6xklUPDPyevtIqmKohB5ZefGvtKRQETc2KJ7nuPkHRMY5X4up92PluCvxK7ce52rm6VzigUETRhg-9Zxonnimp-hUq5kR0Cq3Ay527_Jlg=="
+   ],
+   "quote": "As of September 2026, Andy Jassy is the President and Chief Executive Officer of Amazon.com, Inc... IPO Date: May 15, 1997（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "META",
+   "name": "Meta Platforms, Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "2012-05-18",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "馬克·祖克柏",
+     "en": "Mark Zuckerberg",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHrM_Q14BFx0OCRNR9adhMm9OMcnzhVR4UQY6HRViJbDO4w8IhhaTiPJ4NyM9osogmEvJvflVJUjDU5EuJ3fS9k_88EjsHImCeYQ-wxZ-F3wgoE008sQ2jdHfHnCHge50vIEK4yLYoi7bqhsuA=",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGMz3qCBeyrE6s2PH4UIlqh74k_TOJfQoeDYs0n9kNhc20CnL-nb6uhT_v94zsjqO2gILkgh3nB28MZ5_NaC7Ckt9GWM0wSgwbFPiV8lB34JMEoi6LkFZQreFfsWQ==",
+    "https://finance.yahoo.com/quote/META/profile"
+   ],
+   "quote": "Mark Zuckerberg is the CEO and Chairman of Meta Platforms, Inc. as of 2026... Meta Platforms, Inc. (formerly Facebook, Inc.) held its initial public offering (IPO) on May 18, 2012.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 400；HTTP 400）→ yfinance META 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "sa",
+   "ticker": "2222.SR",
+   "name": "Saudi Arabian Oil Co.",
+   "status": "listed",
+   "exchange": "Saudi Exchange (Tadawul)",
+   "listed_date": "2019-12-11",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "阿敏·納瑟爾",
+     "en": "Amin H. Nasser",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH3o3wzTi7aUUaJ4CQDRwpP19SSnZjGXDX2bM3OEIVyYG5I1vCJeTHeUxuB1GgF_Ed11q6waSICZrCN2PQnbNIuXP9abT3rc27qUQQC655TzfqNhVWHYbFs-x1eqKUPd4T3akXwEKKtfC8Q1XX9ESOwBkVJ7Wg=",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFOL045dXsMcVc3HxI0bMAYt60_C2LJivS2vXeAvJ2iP6A1Erd3d38KnHqxbV5_y1ubcrwfimm6pkQeW4ns7p3THZvxOGTTuIxXLBis2HOrBGTxwpSEOt7sY1pxjMQL8oscVyKSd_4e_v3CNzem9ta_BO3vXosenkSBszILev8211ljhXVcpkk0amXCT6KjiLWVKpb3u_FrJ_Y6EL5EpCRkAJxF1skcwBWRRQAKyN0IkMJ0vvZEHOS8JCbySQEuEwPVSS-nuDczcDRNs2EErQU2fRQBjmT48YEHiObovLXBwkGx86IbrK_7lNkqDa1sJ101oySE0MBVB9Ed6paIRVGILeyCZWI6UTwHK6l1HmDc6KaK8fIUGArYAS963YfIBPhANFEqUoY=",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYFmMhz89wTE9disJmuHXfzKhHnlPze_SksN9B77rqCH-4R_fYBc0C_SBf0DxC0xwpVZOJgVl3FRbzKv7WMoGxbTgY9401m0zGKn2hPJeCs2q7kTYKEwyUDBq3BCRC4xM4pLYluvNxG-yRX4KaFVnkBSftR0NDpactxQvi7LCyxOo2KXaQwlkY",
+    "https://finance.yahoo.com/quote/2222.SR/profile"
+   ],
+   "quote": "As of September 2026, Amin H. Nasser continues to serve as the President and Chief Executive Officer of Saudi Aramco... officially listed and began trading on the Tadawul on December 11, 2019.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP None；HTTP 403；HTTP None）→ yfinance 2222.SR 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "TSLA",
+   "name": "Tesla, Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "2010-06-29",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "伊隆·馬斯克",
+     "en": "Elon Musk",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH0xcSBf-Ot7jxk4Zg8xaWdSKEZXV_uiJSz6bbteVR1hwWCm8C2vRO9SHOtQRfWs1P9tRYoLaLUlOwGqSDMQgT3YrhgPSH1fMzIy-Q5EvSieE1tcnRA_VdmJreVRFfT",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFRk86PAcpN0WiHquleKD4CPyZCDfg094LjvXv4nvt-uv9qf-k9I6p2AZRuMMesW5PHUunno-nCjYsT6ik1-Ocyrlkz-wkEuRdZ9LbJeV8oW6snqtofiYBPM-bTVaY3BbdHeUaZ7c7speyhmeh53fcMQsyIwe8l6AU3BK6hnGAnysQqI2aBwGDN",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEY1m_Mnwuah_DB-ypi-IKXq3E1xIVUHEhY82zkxFhWrnwuQxSB-Dvd4sC8OegnVTiZRa7cet-ehu9aj5oMnvXtc-Y2drPcGSuh8Ml8ohl5fdve",
+    "https://finance.yahoo.com/quote/TSLA/profile"
+   ],
+   "quote": "As of September 2026, Elon Musk continues to serve as the Chief Executive Officer (CEO) of Tesla, Inc... Tesla held its initial public offering on June 29, 2010... common stock began trading on the NASDAQ Global Select Market under the ticker symbol 'TSLA'.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 403；HTTP 403；HTTP 403）→ yfinance TSLA 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "kr",
+   "ticker": "005930.KS",
+   "name": "SamsungElec",
+   "status": "listed",
+   "exchange": "Korea Exchange (KRX)",
+   "listed_date": "1975-06-11",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "全永鉉",
+     "en": "Jun Young-hyun",
+     "title": "Co-CEO"
+    },
+    {
+     "zh": "盧泰文",
+     "en": "TM Roh",
+     "title": "Co-CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHC739EwB--JCQLAZDI9LemRjM2HA9goxPwUzh6B_tsztATGaFDrII8uPto2Uu_I9_BDG5fvgMaZ6wtMo_hBx9HKRy9ri3PEm6PO_DWIAQXJGS0eErbsEppF3GPg_WYWEbSmDbAyTOAWw==",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFVkAk0VhIRpwK6zbqP4wShLlDhsmx7Uo5fcPAWeP81C8eaIAmiKu7TEQMdF8L_IjP6op_OaaNXwgt6f0vMyzdvFRFuFqJr3PqxzwZsBh429LVLRR5ep-MiUMB86JQiIUQhdNqX8Bs="
+   ],
+   "quote": "Samsung Electronics held its initial public offering (IPO) and listed on the Korea Stock Exchange on June 11, 1975... Samsung Electronics currently operates under a dual-CEO leadership structure featuring Jun Young-hyun and TM Roh (Roh Tae-moon).（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "MU",
+   "name": "Micron Technology, Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "1984-06-01",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "桑賈伊·梅洛特拉",
+     "en": "Sanjay Mehrotra",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.micron.com",
+    "https://en.wikipedia.org/wiki/Micron_Technology"
+   ],
+   "quote": "（未開啟原文）The Chairman, President, and Chief Executive Officer of Micron Technology is Sanjay Mehrotra... listed on the Nasdaq stock exchange under the ticker symbol MU... went public on June 1, 1984.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "BRK-B",
+   "name": "Berkshire Hathaway Inc. New",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1996-05-09",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "葛瑞格·阿貝爾",
+     "en": "Greg Abel",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.berkshirehathaway.com",
+    "https://en.wikipedia.org/wiki/Berkshire_Hathaway"
+   ],
+   "quote": "（未開啟原文）Greg Abel officially succeeded Warren Buffett as CEO at the beginning of January 2026. Berkshire Hathaway is listed on the New York Stock Exchange under the ticker symbols BRK.A and BRK.B (Class B IPO date: May 9, 1996).",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "LLY",
+   "name": "Eli Lilly and Company",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1970-07-08",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "戴夫·里克斯",
+     "en": "David A. Ricks",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.lilly.com",
+    "https://en.wikipedia.org/wiki/Eli_Lilly_and_Company"
+   ],
+   "quote": "（未開啟原文）The Chief Executive Officer of Eli Lilly and Company is David A. Ricks... Eli Lilly and Company (NYSE: LLY) was listed on the New York Stock Exchange (NYSE) on July 8, 1970.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "AMD",
+   "name": "Advanced Micro Devices, Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "1972-09-27",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "蘇姿丰",
+     "en": "Lisa Su",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.amd.com",
+    "https://en.wikipedia.org/wiki/Advanced_Micro_Devices"
+   ],
+   "quote": "（未開啟原文）Advanced Micro Devices (AMD) is led by Dr. Lisa Su, who serves as the Chair and Chief Executive Officer... AMD’s first public offering took place on September 27, 1972... On January 2, 2015, AMD transferred its stock exchange listing to the Nasdaq Stock Market.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "kr",
+   "ticker": "000660.KS",
+   "name": "SK hynix",
+   "status": "listed",
+   "exchange": "KRX",
+   "listed_date": "1996-12-26",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "郭魯正",
+     "en": "Kwak Noh-Jung",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.skhynix.com",
+    "https://en.wikipedia.org/wiki/SK_Hynix"
+   ],
+   "quote": "（未開啟原文）SK Hynix has been publicly traded on the Korea Exchange under the ticker 000660 since December 26, 1996. The company is led by CEO Kwak Noh-Jung.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "JPM",
+   "name": "JP Morgan Chase & Co.",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1978-10-06",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "傑米·戴蒙",
+     "en": "Jamie Dimon",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.jpmorganchase.com",
+    "https://en.wikipedia.org/wiki/JPMorgan_Chase"
+   ],
+   "quote": "（未開啟原文）The current Chairman and Chief Executive Officer (CEO) of JPMorgan Chase & Co. is Jamie Dimon... JPMorgan Chase went public on October 6, 1978, trading on the NYSE under ticker JPM.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "WMT",
+   "name": "Walmart Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "1970-10-01",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "約翰·富納",
+     "en": "John Furner",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://corporate.walmart.com",
+    "https://www.sec.gov"
+   ],
+   "quote": "（未開啟原文）John Furner officially succeeded Doug McMillon as President and Chief Executive Officer of Walmart Inc. on February 1, 2026. On December 9, 2025, Walmart officially transferred its primary stock listing from the NYSE to the Nasdaq Global Select Market.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "V",
+   "name": "Visa Inc.",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2008-03-19",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "萊恩·麥克納尼",
+     "en": "Ryan McInerney",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://corporate.visa.com",
+    "https://en.wikipedia.org/wiki/Visa_Inc."
+   ],
+   "quote": "（未開啟原文）Visa Inc. shares began trading on the New York Stock Exchange (NYSE) on March 19, 2008 under ticker V. Ryan McInerney is the current Chief Executive Officer of Visa Inc.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "eu",
+   "ticker": "ASML.AS",
+   "name": "ASML HOLDING",
+   "status": "listed",
+   "exchange": "Euronext Amsterdam",
+   "listed_date": "1995-03-15",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "克里斯多夫·富凱",
+     "en": "Christophe Fouquet",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.asml.com",
+    "https://en.wikipedia.org/wiki/ASML_Holding"
+   ],
+   "quote": "（未開啟原文）ASML held its Initial Public Offering (IPO) in 1995 (March 15, 1995), listing its shares on both Euronext Amsterdam and NASDAQ. Christophe Fouquet is the current CEO of ASML.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "XOM",
+   "name": "ExxonMobil Holdings Corporation",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1920-03-25",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "達倫·伍茲",
+     "en": "Darren Woods",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://corporate.exxonmobil.com",
+    "https://www.sec.gov",
+    "https://finance.yahoo.com/quote/XOM/profile"
+   ],
+   "quote": "（未開啟原文）Effective July 2, 2026, ExxonMobil Holdings Corporation replaced the former Exxon Mobil Corporation as the publicly traded parent company following a redomiciliation reorganization. Darren Woods continues to serve as Chairman and CEO, and shares continue to trade on the NYSE under ticker XOM.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Darren Woods；HTTP 403）→ yfinance XOM 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "JNJ",
+   "name": "Johnson & Johnson",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1944-09-24",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "杜安卿",
+     "en": "Joaquin Duato",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.jnj.com/leadership/joaquin-duato",
+    "https://www.nyse.com/quote/XNYS:JNJ",
+    "https://finance.yahoo.com/quote/JNJ/profile"
+   ],
+   "quote": "未開啟原文：Joaquin Duato is the Chairman and Chief Executive Officer of Johnson & Johnson.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面沒有公司名／代號；頁面有公司、沒有負責人 Joaquin Duato）→ yfinance JNJ 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "cn",
+   "ticker": "0700.HK",
+   "name": "TENCENT",
+   "status": "listed",
+   "exchange": "HKEX",
+   "listed_date": "2004-06-16",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "馬化騰",
+     "en": "Ma Huateng",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.tencent.com",
+    "https://www.hkex.com.hk",
+    "https://finance.yahoo.com/quote/0700.HK/profile"
+   ],
+   "quote": "未開啟原文：Tencent Holdings Limited (0700.HK) was listed on the Main Board of the Stock Exchange of Hong Kong (HKEX) on June 16, 2004.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Ma Huateng；頁面沒有公司名／代號）→ yfinance 0700.HK 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "MA",
+   "name": "Mastercard Incorporated",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "2006-05-25",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "麥可·米巴赫",
+     "en": "Michael Miebach",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.mastercard.com",
+    "https://www.nyse.com/quote/XNYS:MA",
+    "https://finance.yahoo.com/quote/MA/profile"
+   ],
+   "quote": "未開啟原文：Mastercard Incorporated (MA) held its initial public offering (IPO) on May 25, 2006, listing on the New York Stock Exchange (NYSE).",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 403；頁面有公司、沒有負責人 Michael Miebach）→ yfinance MA 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "PLTR",
+   "name": "Palantir Technologies Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "2020-09-30",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "亞歷山大·卡普",
+     "en": "Alex Karp",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.palantir.com",
+    "https://www.nasdaq.com"
+   ],
+   "quote": "未開啟原文：Palantir Technologies Inc. (PLTR) went public via a direct listing on the New York Stock Exchange (NYSE) on September 30, 2020, and transferred to Nasdaq on November 26, 2024.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "CSCO",
+   "name": "Cisco Systems, Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "1990-02-16",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "查克·羅賓斯",
+     "en": "Chuck Robbins",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.cisco.com",
+    "https://www.nasdaq.com",
+    "https://finance.yahoo.com/quote/CSCO/profile"
+   ],
+   "quote": "未開啟原文：Cisco Systems, Inc. (ticker: CSCO) held its initial public offering (IPO) on February 16, 1990. The stock is listed and trades on the Nasdaq stock exchange.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 403；頁面沒有公司名／代號）→ yfinance CSCO 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "COST",
+   "name": "Costco Wholesale Corporation",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "1985-12-05",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "羅恩·瓦克里斯",
+     "en": "Ron Vachris",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.costco.com",
+    "https://www.nasdaq.com",
+    "https://finance.yahoo.com/quote/COST/profile"
+   ],
+   "quote": "未開啟原文：Costco Wholesale Corporation (Nasdaq: COST) went public on December 5, 1985. Ron Vachris has served as the President and Chief Executive Officer (CEO) of Costco since January 1, 2024.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Ron Vachris；頁面有公司、沒有負責人 Ron Vachris）→ yfinance COST 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "CVX",
+   "name": "Chevron Corporation",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1921-06-24",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "邁克·沃思",
+     "en": "Mike Wirth",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.chevron.com",
+    "https://www.nyse.com/quote/XNYS:CVX",
+    "https://finance.yahoo.com/quote/CVX/profile"
+   ],
+   "quote": "未開啟原文：Chevron Corporation's stock was listed and began trading on the New York Stock Exchange (NYSE) on June 24, 1921. Mike Wirth continues to serve as the Chairman of the Board and Chief Executive Officer (CEO).",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Mike Wirth；頁面有公司、沒有負責人 Mike Wirth）→ yfinance CVX 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "BAC",
+   "name": "Bank of America Corporation",
+   "status": "listed",
+   "exchange": "紐約證券交易所（NYSE）",
+   "listed_date": "1998-10-01",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "布萊恩·莫尼漢",
+     "en": "Brian Moynihan",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://about.bankofamerica.com",
+    "https://www.sec.gov",
+    "https://finance.yahoo.com/quote/BAC/profile"
+   ],
+   "quote": "Brian Moynihan remains the Chair of the Board and Chief Executive Officer (CEO) of Bank of America in 2026.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Brian Moynihan；HTTP 403）→ yfinance BAC 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "LRCX",
+   "name": "Lam Research Corporation",
+   "status": "listed",
+   "exchange": "那斯達克證券交易所（Nasdaq）",
+   "listed_date": "1984-05-11",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "提姆·阿徹",
+     "en": "Tim Archer",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.lamresearch.com",
+    "https://finance.yahoo.com/quote/LRCX/profile"
+   ],
+   "quote": "As of September 2026, Tim Archer continues to serve as the President and Chief Executive Officer (CEO) of Lam Research Corporation.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Tim Archer）→ yfinance LRCX 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "AMAT",
+   "name": "Applied Materials, Inc.",
+   "status": "listed",
+   "exchange": "那斯達克證券交易所（Nasdaq）",
+   "listed_date": "1972-10-05",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "蓋瑞·狄克森",
+     "en": "Gary Dickerson",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.appliedmaterials.com",
+    "https://finance.yahoo.com/quote/AMAT/profile"
+   ],
+   "quote": "Gary Dickerson is the President and Chief Executive Officer of Applied Materials... As of September 2026, he continues to lead the company in this capacity.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 403）→ yfinance AMAT 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "KO",
+   "name": "Coca-Cola Company (The)",
+   "status": "listed",
+   "exchange": "紐約證券交易所（NYSE）",
+   "listed_date": "1919-09-05",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "柏瑞凱",
+     "en": "Henrique Braun",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.coca-colacompany.com",
+    "https://finance.yahoo.com/quote/KO/profile"
+   ],
+   "quote": "As of September 2026, Henrique Braun is the CEO of The Coca-Cola Company. James Quincey, who served as CEO since 2017, stepped down from the role on March 31, 2026.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Henrique Braun）→ yfinance KO 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "MRK",
+   "name": "Merck & Company, Inc.",
+   "status": "listed",
+   "exchange": "紐約證券交易所（NYSE）",
+   "listed_date": null,
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "羅伯特·戴維斯",
+     "en": "Robert M. Davis",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.merck.com",
+    "https://finance.yahoo.com/quote/MRK/profile"
+   ],
+   "quote": "Robert M. Davis is the current Chairman and Chief Executive Officer of Merck & Co., Inc. He has held these leadership roles since 2021 (CEO) and 2022 (Chairman) and continues to lead the company in 2026; publicly traded on NYSE since 1927 without documented exact YYYY-MM-DD.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Robert M. Davis）→ yfinance MRK 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "ch",
+   "ticker": "RO",
+   "name": "ROCHE I",
+   "status": "listed",
+   "exchange": "瑞士證券交易所（SIX Swiss Exchange）",
+   "listed_date": "1995-08-03",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "托馬斯·史奈克",
+     "en": "Thomas Schinecker",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.roche.com"
+   ],
+   "quote": "As of September 2026, Dr. Thomas Schinecker continues to serve as the Chief Executive Officer (CEO) of the Roche Group.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "DELL",
+   "name": "Dell Technologies Inc.",
+   "status": "listed",
+   "exchange": "紐約證券交易所（NYSE）",
+   "listed_date": "2018-12-28",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "麥可·戴爾",
+     "en": "Michael Dell",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.dell.com"
+   ],
+   "quote": "Dell Technologies' Class C common stock began trading on the New York Stock Exchange (NYSE) under the ticker symbol 'DELL' on December 28, 2018. As of September 2026, Michael Dell continues to serve as Chairman and CEO.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "gb",
+   "ticker": "HSBA",
+   "name": "HSBC HOLDINGS PLC ORD $0.50 (UK",
+   "status": "listed",
+   "exchange": "倫敦證券交易所（LSE）",
+   "listed_date": "1991-04-08",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "艾橋智",
+     "en": "Georges Elhedery",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.hsbc.com",
+    "https://www.londonstockexchange.com",
+    "https://finance.yahoo.com/quote/HSBA.L/profile"
+   ],
+   "quote": "Georges Elhedery is the Group Chief Executive Officer of HSBC... As of September 2026, he continues to serve in this position.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面沒有公司名／代號；頁面沒有公司名／代號）→ yfinance HSBA.L 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "PG",
+   "name": "Procter & Gamble Company (The)",
+   "status": "listed",
+   "exchange": "紐約證券交易所（NYSE）",
+   "listed_date": "1950-03-21",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "謝萊什·杰朱里卡",
+     "en": "Shailesh Jejurikar",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.pg.com",
+    "https://www.sec.gov",
+    "https://finance.yahoo.com/quote/PG/profile"
+   ],
+   "quote": "As of September 2026, the CEO of Procter & Gamble is Shailesh Jejurikar. Shailesh Jejurikar assumed the role of President and CEO on January 1, 2026, succeeding Jon Moeller.（未開啟原文）",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 500；HTTP 403）→ yfinance PG 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "UNH",
+   "name": "UnitedHealth Group Incorporated",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1984-10-17",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "史蒂芬·赫姆斯利",
+     "en": "Stephen Hemsley",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.sec.gov",
+    "https://www.unitedhealthgroup.com",
+    "https://finance.yahoo.com/quote/UNH/profile"
+   ],
+   "quote": "（未開啟原文）On May 13, 2025, Stephen J. Hemsley was appointed as the Chief Executive Officer of UnitedHealth Group, effective immediately.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 403；頁面有公司、沒有負責人 Stephen Hemsley）→ yfinance UNH 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "MS",
+   "name": "Morgan Stanley",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1986-03-21",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "泰德·皮克",
+     "en": "Ted Pick",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.morganstanley.com",
+    "https://finance.yahoo.com/quote/MS/profile"
+   ],
+   "quote": "（未開啟原文）Morgan Stanley went public on March 21, 1986... Ted Pick is the Chairman and Chief Executive Officer of Morgan Stanley.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Ted Pick）→ yfinance MS 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "PANW",
+   "name": "Palo Alto Networks, Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "2012-07-20",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "尼克什·阿羅拉",
+     "en": "Nikesh Arora",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.paloaltonetworks.com",
+    "https://finance.yahoo.com/quote/PANW/profile"
+   ],
+   "quote": "（未開啟原文）Nikesh Arora continues to serve as the Chairman and Chief Executive Officer of Palo Alto Networks in 2026.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Nikesh Arora）→ yfinance PANW 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "NFLX",
+   "name": "Netflix, Inc.",
+   "status": "listed",
+   "exchange": "Nasdaq",
+   "listed_date": "2002-05-23",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "泰德·薩蘭多斯",
+     "en": "Ted Sarandos",
+     "title": "Co-CEO"
+    },
+    {
+     "zh": "格雷格·彼得斯",
+     "en": "Greg Peters",
+     "title": "Co-CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.netflix.com",
+    "https://finance.yahoo.com/quote/NFLX/profile"
+   ],
+   "quote": "（未開啟原文）As of 2026, Ted Sarandos and Greg Peters serve as the co-CEOs of Netflix.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面有公司、沒有負責人 Ted Sarandos、Greg Peters）→ yfinance NFLX 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": "HD",
+   "name": "Home Depot, Inc. (The)",
+   "status": "listed",
+   "exchange": "NYSE",
+   "listed_date": "1981-09-22",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "泰德·德克爾",
+     "en": "Ted Decker",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.homedepot.com",
+    "https://finance.yahoo.com/quote/HD/profile"
+   ],
+   "quote": "（未開啟原文）Ted Decker serves as the Chair, President, and Chief Executive Officer (CEO) of The Home Depot.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（HTTP 403）→ yfinance HD 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "ca",
+   "ticker": "RY.TO",
+   "name": "ROYAL BANK OF CANADA",
+   "status": "listed",
+   "exchange": "TSX",
+   "listed_date": "1972-12-01",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "大衛·麥凱",
+     "en": "Dave McKay",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.rbc.com",
+    "https://finance.yahoo.com/quote/RY.TO/profile"
+   ],
+   "quote": "（未開啟原文）Dave McKay is the President and Chief Executive Officer of the Royal Bank of Canada (RBC) in 2026.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "出處不行（頁面沒有公司名／代號）→ yfinance RY.TO 有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "ch",
+   "ticker": "NOVN.SW",
+   "name": "NOVARTIS N",
+   "status": "listed",
+   "exchange": "SIX Swiss Exchange",
+   "listed_date": "1996-12-20",
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "萬思瀚",
+     "en": "Vas Narasimhan",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": null,
+   "round": null,
+   "round_date": null,
+   "src": [
+    "https://www.novartis.com"
+   ],
+   "quote": "（未開啟原文）Vas Narasimhan continues to serve as the Chief Executive Officer of Novartis as of September 2026.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": null,
+   "name": "xAI",
+   "status": "merged",
+   "exchange": null,
+   "listed_date": null,
+   "merged_into": "SpaceX",
+   "leaders": [
+    {
+     "zh": "伊隆·馬斯克",
+     "en": "Elon Musk",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": 230000000000,
+   "round": "Series E",
+   "round_date": "2026-01-06",
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGy_QL0bTF40k1rQnCIDLpc-4E4-PUbB35dJ47onO8KEGAIXtb55Xi31UpxVoZzIMiqd5ifwIDD2VRn6p3jARLGN_t6d6-29EILP61BQ3rpMQ==",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPQjvwEgpB16rKS2gGWq-A08I7HO3aXcnMEnXDu-ZVQpyCuEnVfQPtHfL7BFhQvFJLgAM2CJgngngXpwW2WSbSONf5-7T2RI72sMNDxtD0iMg2yFwottHnHDf3NPJVTOeXdV5YDoRKvWEzsPjzQYoGBEl57Nmwz3icibxdEAE60A=="
+   ],
+   "quote": "（未開啟原文）xAI officially announced the completion of its Series E funding round on January 6, 2026, which brought xAI to a post-money valuation of approximately $230 billion; on February 2, 2026, SpaceX officially announced the acquisition of xAI in an all-stock transaction.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": null,
+   "name": "Mistral AI",
+   "status": "private",
+   "exchange": null,
+   "listed_date": null,
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "阿瑟·門施",
+     "en": "Arthur Mensch",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": 24000000000,
+   "round": "Series D",
+   "round_date": "2026-09-08",
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFG78katl6QMiHX5vCwalx0TU05xbs3zpj9sRcmISwND11hYe-JojuEoK4ILPlTvwUS2tABrpCA5asgbkiQ37DoRjco3kydTcHsCFp6EI88CypyHd-wk3NrrEzEDbsKHjVSVG4a9dxilPTRQihLhmURNQW8eaPlI83EYn7MaBOIDaGC6hQeyy0smQ=="
+   ],
+   "quote": "（未開啟原文）On September 8, 2026, Mistral AI officially announced the closing of a €3 billion Series D funding round, resulting in a post-money valuation of more than €21 billion, which was widely reported as approximately $24 billion.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": null,
+   "name": "Safe Superintelligence (SSI)",
+   "status": "private",
+   "exchange": null,
+   "listed_date": null,
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "伊利亞·蘇茨克維",
+     "en": "Ilya Sutskever",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": 32000000000,
+   "round": null,
+   "round_date": "2026-07-27",
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEah-hLT6Ag4jLX_mF-iKfVFR0iaX2kZA8UEIiVn2n_zvn4HSKrC68B4Swo81YiTy5qhNhehK4xkF2IvMqZ49wRmzrnHC16gPykKqbyr5LPe3EZIeHTYk-UGS16JMum9e6_U7JgNzHQC2HRbqk3DnF47EA1cXNkjW6lOcofwn70zZkfOtzPQCIpQ21bWpOlHbxsJzdXAlmSp8rdK3snTUQXGVp76YYMSfrDLyQ_vQfxqspnooe3yGoueAp27aZHO26A5tjPdZta-ebmJSBVooXoun8P2FjGUu7Wa5dUhxM="
+   ],
+   "quote": "（未開啟原文）Nvidia and Safe Superintelligence (SSI), the AI startup co-founded by Ilya Sutskever, officially announced their long-term strategic partnership on July 27, 2026... At the time of the announcement, SSI was reported to have a valuation of approximately $32 billion.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": null,
+   "name": "Databricks",
+   "status": "private",
+   "exchange": null,
+   "listed_date": null,
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "阿里·戈德西",
+     "en": "Ali Ghodsi",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": 190000000000,
+   "round": "Strategic Funding",
+   "round_date": "2026-08-13",
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGvWC0qErG1Ss72YAIJcqsnnPFIbaqJ1X8UW-e7WNItkVEvPJVc6PONPZuGf-wP2790TKqbuNxBxMqQ1wJV8E9OvxsMjqYq0zqs14852JZpI-5gZKpe2VaGRxRhvq0m8oLBrMCkwUdxq8-Ap3RMwbDpjjdW19loGF0o_Nylz-aqGVpeHgOIavbSDkiNjMg9j-8MfwymQ5EXDMO2yWp5Ai2Azor60ToIBV34cyZRlQ=="
+   ],
+   "quote": "（未開啟原文）On August 13, 2026, Databricks closed a $5 billion strategic funding round, bringing the company's valuation to $190 billion.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  },
+  {
+   "cty": "us",
+   "ticker": null,
+   "name": "Scale AI",
+   "status": "private",
+   "exchange": null,
+   "listed_date": null,
+   "merged_into": null,
+   "leaders": [
+    {
+     "zh": "弗朗西斯·德蘇扎",
+     "en": "Francis deSouza",
+     "title": "CEO"
+    }
+   ],
+   "valuation_usd": 29000000000,
+   "round": "Strategic Investment",
+   "round_date": "2025-06-12",
+   "src": [
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGMzussyPhNZD0mxF44joT74F39pAtSGYC6OsOUnZmFjns90ZF2SHUopqzNSNjTtXg_uXCmDJ1V5tb-jr9JAC8woRtWuhWC1Sc1RNVai7nIJh_8PvBcZvwDYq7DY9FOx45u61J3s6VQgG7qXHRxWGLxiBDR_gETS-kUy5muXi4=",
+    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE5ICHdPkNl_a2q1_8sNEvl8jRkuiHP_Kw-Q-QrHCGlJXfnCo8feIqVppPEnk3PkwdanmF7zLLCH0Ejenqb8vNcWJbTZ2OyCdlSWKnm5uxpl7tsXa9D0GJTX7BB0z0IUOAB-xw="
+   ],
+   "quote": "（未開啟原文）On June 12, 2025, Scale AI officially announced that Meta Platforms had made a significant investment to acquire a 49% non-voting stake in the company... approximately $14.3 billion in the deal, which established an implied valuation for Scale AI of roughly $29 billion; Francis deSouza officially assumed the CEO role on August 10, 2026.",
+   "checked": "2026-09-28",
+   "verify": {
+    "ok": true,
+    "why": "頁面有公司與負責人",
+    "at": "2026-09-28"
+   }
+  }
+ ],
+ "rejected": 10
+}

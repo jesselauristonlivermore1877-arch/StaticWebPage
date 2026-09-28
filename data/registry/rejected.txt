@@ -1,0 +1,46 @@
+# 現況查證名單 2026-09-28：程式打開出處核對沒通過、不採用的項目（tools/registry_check.py）
+官員 us_labor 美國勞工部長（代理）：基思·桑德林（Keith Sonderling）｜出處打不開（HTTP 403）；出處頁找不到名字（基思·桑德林／Keith Sonderling）；出處打不開（HTTP 403）｜['https://www.dol.gov/agencies/osec', 'https://www.whitehouse.gov']
+官員 cn_leader 中國國家主席：習近平（Xi Jinping）｜出處頁找不到名字（習近平／Xi Jinping）｜['https://www.gov.cn/']
+官員 cn_finance 中國財政部長：藍佛安（Lan Fo'an）｜出處頁找不到名字（藍佛安／Lan Fo'an）｜['https://www.mof.gov.cn/']
+官員 de_finance 德國財政部長：拉爾斯·克林拜耳（Lars Klingbeil）｜出處頁找不到名字（拉爾斯·克林拜耳／Lars Klingbeil）｜['https://www.bundesfinanzministerium.de/Web/EN/Home/home.html']
+官員 in_finance 印度財政部長：尼爾馬拉·西塔拉曼（Nirmala Sitharaman）｜出處打不開（HTTP None）；出處打不開（HTTP None）｜['https://dea.gov.in', 'https://finmin.gov.in/']
+官員 jp_fx 日本財務官（負責匯率）：三村淳（Atsushi Mimura）｜出處頁找不到名字（三村淳／Atsushi Mimura）｜['https://www.mof.go.jp/english/']
+官員 fr_finance 法國經濟財政部長：羅蘭·萊斯屈爾（Roland Lescure）｜出處打不開（HTTP 403）｜['https://www.economie.gouv.fr/']
+官員 fr_cb 法國央行總裁：埃馬紐埃爾·穆蘭（Emmanuel Moulin）｜出處頁找不到名字（埃馬紐埃爾·穆蘭／Emmanuel Moulin）｜['https://www.banque-france.fr/en']
+官員 ca_leader 加拿大總理：馬克·卡尼（Mark Carney）｜出處打不開（HTTP None）｜['https://www.pm.gc.ca/en']
+官員 ca_finance 加拿大財政部長：商鵬飛（François-Philippe Champagne）｜出處打不開（HTTP None）｜['https://www.canada.ca/en/department-finance.html']
+官員 br_finance 巴西財政部長：達里奧·杜里甘（Dario Durigan）｜出處頁找不到名字（達里奧·杜里甘／Dario Durigan）｜['https://www.gov.br/fazenda/pt-br']
+官員 br_cb 巴西央行總裁：加布里埃爾·加利波洛（Gabriel Galípolo）｜出處頁找不到名字（加布里埃爾·加利波洛／Gabriel Galípolo）｜['https://www.bcb.gov.br/']
+官員 es_leader 西班牙首相：佩德羅·桑切斯（Pedro Sánchez）｜出處打不開（HTTP None）｜['https://www.lamoncloa.gob.es/lang/en/']
+官員 es_finance 西班牙財政部長：阿爾卡迪·伊斯帕尼亞·加西亞（Arcadi España García）｜出處頁找不到名字（阿爾卡迪·伊斯帕尼亞·加西亞／Arcadi España García）；出處打不開（HTTP None）｜['https://www.hacienda.gob.es/', 'https://www.lamoncloa.gob.es/']
+官員 au_leader 澳洲總理：安東尼·艾班尼斯（Anthony Albanese）｜出處頁找不到名字（安東尼·艾班尼斯／Anthony Albanese）｜['https://www.pm.gov.au/']
+官員 au_cb 澳洲央行總裁：米歇爾·布洛克（Michele Bullock）｜出處打不開（HTTP 403）｜['https://www.rba.gov.au/about-rba/boards/']
+官員 mx_leader 墨西哥總統：克勞蒂亞·薛恩鮑姆（Claudia Sheinbaum Pardo）｜出處頁找不到名字（克勞蒂亞·薛恩鮑姆／Claudia Sheinbaum Pardo）｜['https://www.gob.mx/presidencia']
+官員 mx_finance 墨西哥財政部長：埃德加·阿馬多爾·薩莫拉（Édgar Amador Zamora）｜出處頁找不到名字（埃德加·阿馬多爾·薩莫拉／Édgar Amador Zamora）｜['https://www.gob.mx/shcp']
+官員 tr_finance 土耳其財政部長：穆罕默德·希姆謝克（Mehmet Şimşek）｜出處頁找不到名字（穆罕默德·希姆謝克／Mehmet Şimşek）｜['https://en.hmb.gov.tr/minister']
+官員 id_leader 印尼總統：普拉博沃·蘇比安托（Prabowo Subianto）｜出處頁找不到名字（普拉博沃·蘇比安托／Prabowo Subianto）｜['https://setkab.go.id/en/']
+官員 id_finance 印尼財政部長：蘇阿哈西爾·納扎拉（Suahasil Nazara）｜出處頁找不到名字（蘇阿哈西爾·納扎拉／Suahasil Nazara）｜['https://www.kemenkeu.go.id/']
+官員 id_cb 印尼央行總裁：德絲特莉·達瑪揚蒂（Destry Damayanti）｜出處頁找不到名字（德絲特莉·達瑪揚蒂／Destry Damayanti）｜['https://www.bi.go.id/en/']
+官員 nl_cb 荷蘭央行總裁：奧拉夫·斯萊彭（Olaf Sleijpen）｜出處打不開（HTTP 403）｜['https://www.dnb.nl/en/about-us/executive-board/']
+官員 sa_finance 沙烏地財政部長：穆罕默德·本·阿卜杜拉·賈丹（Mohammed bin Abdullah Al-Jadaan）｜出處頁找不到名字（穆罕默德·本·阿卜杜拉·賈丹／Mohammed bin Abdullah Al-Jadaan）｜['https://www.mof.gov.sa/en/']
+官員 sa_cb 沙烏地央行總裁：艾曼·賽亞里（Ayman M. Al-Sayari）｜出處頁找不到名字（艾曼·賽亞里／Ayman M. Al-Sayari）｜['https://www.sama.gov.sa/en-US/']
+官員 ch_leader 瑞士聯邦主席：居伊·帕姆蘭（Guy Parmelin）｜出處打不開（HTTP 403）｜['https://www.admin.ch/gov/en/start/federal-council/members-of-the-federal-council.html']
+官員 ch_finance 瑞士財政部長（聯邦委員）：卡琳·凱勒-祖特爾（Karin Keller-Sutter）｜出處打不開（HTTP 403）｜['https://www.admin.ch/gov/en/start/federal-council/members-of-the-federal-council.html']
+官員 ch_cb 瑞士央行總裁：馬丁·施萊格爾（Martin Schlegel）｜出處頁找不到名字（馬丁·施萊格爾／Martin Schlegel）｜['https://www.snb.ch/en/']
+官員 tw_leader 台灣總統：賴清德（Lai Ching-te）｜出處打不開（HTTP None）｜['https://www.president.gov.tw/']
+官員 tw_finance 財政部長：莊翠雲（Chuang Tsui-Yun）｜出處打不開（HTTP None）｜['https://www.mof.gov.tw/singlehtml/121?cntId=959e613779dc467ea3e4879bf919f941']
+官員 tw_cb 中央銀行總裁：楊金龍（Yang Chin-long）｜出處打不開（HTTP None）；出處打不開（HTTP None）｜['https://www.cbc.gov.tw/tw/mp-1.html', 'https://www.cbc.gov.tw/tw/cp-127-12628-56834-1.html']
+官員 eu_finance 歐元集團主席：基里亞科斯·皮埃拉卡基斯（Kyriakos Pierrakakis）｜出處打不開（HTTP 403）｜['https://www.consilium.europa.eu/en/eurogroup/president/']
+官員 ua_leader 烏克蘭總統：弗拉迪米爾·澤倫斯基（Volodymyr Zelenskyy）｜出處打不開（HTTP 403）｜['https://www.president.gov.ua/en/president']
+官員 ir_leader 伊朗最高領袖：阿里·哈米尼（Ali Khamenei）｜出處打不開（HTTP 403）｜['https://english.khamenei.ir/']
+官員 il_leader 以色列總理：班傑明·納坦雅胡（Benjamin Netanyahu）｜出處打不開（HTTP 403）｜['https://www.gov.il/en/departments/prime_ministers_office']
+公司 us Broadcom Inc.（AVGO）：頁面有公司、沒有負責人 Hock Tan；HTTP None；yfinance AVGO 主管名單沒有 Hock Tan｜https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGUNidS9yT69iOYFj0cO4FcebA9ZjTVkf2kjqKDwiGWLxMG7DR-l
+公司 us Intel Corporation（INTC）：HTTP 403；頁面有公司、沒有負責人 Lip-Bu Tan；yfinance INTC 主管名單沒有 Lip-Bu Tan｜https://www.intel.com、https://www.intc.com
+公司 us AbbVie Inc.（ABBV）：HTTP 403；HTTP 403；yfinance ABBV 主管名單沒有 Robert A. Michael｜https://www.abbvie.com、https://www.sec.gov
+公司 us Oracle Corporation（ORCL）：HTTP 403；頁面沒有公司名／代號；yfinance ORCL 主管名單沒有 Clay Magouyrk、Mike Sicilia｜https://www.oracle.com、https://www.nyse.com
+公司 cn ICBC（1398）：頁面有公司、沒有負責人 Liao Lin、Liu Jun；yfinance 1398.HK 公司名「Industrial and Commercial Bank of China Limited」對不上｜https://www.icbc-ltd.com
+公司 cn CCB（0939.HK）：頁面沒有公司名／代號；頁面沒有公司名／代號；yfinance 0939.HK 公司名「China Construction Bank Corporation」對不上｜https://www.hkex.com.hk、http://www.ccb.com
+公司 cn ABC（1288.HK）：頁面沒有公司名／代號；頁面有公司、沒有負責人 Gu Shu、Wang Zhiheng；yfinance 1288.HK 公司名「Agricultural Bank of China Limited」對不上｜https://www.hkexnews.hk、http://www.abchina.com
+公司 us OpenAI（None）：HTTP 403｜https://openai.com
+公司 us Anthropic（None）：頁面有公司、沒有負責人 Dario Amodei｜https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHeJ6aInOXFfL0Zll5GSPsU6iM79uwajGX734KzbeMk9_wz17rGI
+公司 us Perplexity（None）：頁面有公司、沒有負責人 Aravind Srinivas｜https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGGvKe1clKLHN3xLuTZ_btVtVnNTKUw7fsSTceQmolNtsCWI0OsV
