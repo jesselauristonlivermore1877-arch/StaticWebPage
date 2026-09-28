@@ -1145,6 +1145,46 @@ a.td-g{color:var(--ink-1);font-weight:800;text-decoration:none;border-bottom:1px
 .qd-kpi div{background:var(--raise);border:1px solid var(--line);border-radius:8px;padding:6px 10px} .qd-kpi span{display:block;font-size:11.5px;color:var(--ink-3)} .qd-kpi b{font-size:16px}
 .qd-txt{border:0;background:transparent;padding:0 2px}
 .qd-sec.if-sum .qd-txt p{font-size:15px;font-weight:600;color:var(--ink-1)}
+/* 即時信息流（nl-） */
+.nl-head{font-size:13px;margin:4px 0 8px} .nl-head small{display:block;color:var(--ink-3);font-size:11.5px;margin-top:2px}
+.nl-list{display:flex;flex-direction:column;gap:2px;white-space:normal}
+.nl-it{display:grid;grid-template-columns:92px 56px 1fr;gap:2px 8px;padding:6px 4px;border-bottom:1px solid var(--line);font-size:13.5px;align-items:baseline}
+.nl-it .nl-t{color:var(--ink-2);font-size:12px} .nl-it .nl-src{font-weight:700;color:var(--acc);font-size:12px}
+.nl-it .nl-sub{grid-column:3;color:var(--ink-3);font-size:11px}
+.nl-h{margin:14px 0 6px;font-size:15px} .nl-h small{font-weight:400;color:var(--ink-3);font-size:11.5px;margin-left:6px}
+.nl-tr{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px} .nl-tr div{background:var(--raise);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.nl-tr ol{margin:4px 0 0;padding-left:18px;font-size:12.5px} .nl-tr small{color:var(--ink-3)}
+@media (max-width:640px){.nl-it{grid-template-columns:78px 1fr}.nl-it .nl-src{grid-column:2}.nl-it a{grid-column:1/-1}.nl-it .nl-sub{grid-column:1/-1}}
+/* 公司產業報告（cr-）與量化日報版面：參考藏鋒資本公開貼文（深藍襯線大標、金色重點數字、藥丸標籤、四格摘要、總結流程） */
+:root{--cr-navy:#1B2A4A;--cr-gold:#B8862B;--cr-card:#FBF8F1;--cr-line:#E7DFCC}
+.cr-root,.qd-root{white-space:normal}
+.cr-root{max-width:980px;background:var(--cr-card);color:#1B2A4A;border:1px solid var(--cr-line);border-radius:12px;padding:16px 18px}
+.cr-hero{text-align:left;border-bottom:1px solid var(--cr-line);padding-bottom:10px;margin-bottom:12px}
+.cr-ind{font-size:12px;color:#6B6452;letter-spacing:.06em}
+.cr-code{font-family:"Noto Serif TC",serif;font-size:30px;font-weight:900;color:var(--cr-gold);line-height:1.2}
+.cr-code b{color:var(--cr-gold)}
+.cr-title{font-family:"Noto Serif TC",serif;font-size:22px;font-weight:900;color:var(--cr-navy);margin-top:4px}
+.cr-subt{font-size:14px;color:#4A4636;margin-top:2px}
+.cr-pill{display:inline-block;background:var(--cr-navy);color:#fff;border-radius:999px;font-size:11.5px;padding:1px 10px;font-weight:700}
+.cr-kpi,.qd-hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:8px;margin:10px 0}
+.cr-kpi div,.qd-hero div{background:#fff;border:1px solid var(--cr-line);border-radius:10px;padding:8px 10px;text-align:center}
+.cr-kpi b,.qd-hero b{display:block;font-family:"Noto Serif TC",serif;font-size:24px;color:var(--cr-gold);margin-top:4px}
+.cr-kpi small,.qd-hero small{color:#6B6452;font-size:11.5px}
+.cr-flow,.qd-flow{background:#fff;border-left:4px solid var(--cr-gold);border-radius:6px;padding:8px 12px;margin:8px 0;font-weight:700;color:var(--cr-navy)}
+.cr-flow i,.qd-flow i{font-style:normal;color:var(--cr-gold);margin:0 4px}
+.cr-quad{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:10px 0}
+.cr-quad div{background:#fff;border:1px solid var(--cr-line);border-radius:10px;padding:8px 12px}
+.cr-quad h4,.cr-h{margin:0 0 4px;font-size:15px;color:var(--cr-navy);border-bottom:2px solid var(--cr-gold);display:inline-block;padding-bottom:2px}
+.cr-h{margin-top:12px}
+.cr-quad p,.cr-txt p{margin:4px 0;font-size:13.5px;line-height:1.65;color:#2A2A2A}
+.cr-rv{display:block;margin:4px 0 8px;font-size:12.5px;color:var(--cr-navy);font-weight:700}
+.cr-svg{width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--cr-line);border-radius:10px}
+.cr-bar{fill:#1B2A4A;opacity:.82} .cr-line{fill:none;stroke:var(--cr-gold);stroke-width:2.5} .cr-dot{fill:var(--cr-gold)}
+.cr-ax{font-size:11px;fill:#6B6452} .cr-ms{font-size:10.5px;fill:var(--cr-gold);font-weight:700}
+.cr-tbl{margin-top:8px} .cr-tbl table{background:#fff;color:#1B2A4A} .cr-tbl th{background:var(--cr-navy);color:#fff}
+.cr-root .rv-note{color:#6B6452} .cr-root .rv-note a{color:var(--cr-navy)}
+.cr-list{display:flex;flex-wrap:wrap;gap:6px}
+@media (max-width:640px){.cr-quad{grid-template-columns:1fr}.cr-code{font-size:24px}.cr-title{font-size:18px}}
 /* 第八批 4：利差小框右上角標籤 */
 .if-tagbox{position:relative} .if-tags{position:absolute;top:6px;right:8px;display:flex;flex-direction:column;align-items:flex-end;gap:2px;pointer-events:none}
 .if-tags i{font-style:normal;font-size:10.5px;font-weight:700;line-height:1.3;padding:0 5px;border-radius:5px;background:var(--bg);color:var(--ink-2);border:1px solid var(--line)}
@@ -4031,6 +4071,46 @@ function ifWeekly(M) {
   return sideTabs([["本週", cur], ["歷史週報", hist]]);
 }
 /* 日報的 md 依「## 國家」切開 */
+/* 🟢 即時信息流（Evans 09-28）：news_live.py 盤中每 30 分鐘、其他時段每小時增量抓，只收權威來源（路透、美聯社、彭博、日經、中央社）。
+   每則標發布時間（台北）與「發布 → 上網頁」延遲；下方另列 Google Trends 各國熱搜（聲量，不是新聞）。資料 docs/data/news_live.json。 */
+var _nlW = null;
+function nlLoad() { if (!_nlW) _nlW = fetch("data/news_live.json" + _dv(), {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null); return _nlW; }
+const nlTpe = iso => { const d = new Date(iso); return isNaN(d) ? "" : new Date(d.getTime() + 8 * 3600e3).toISOString().slice(5, 16).replace("T", " "); };
+function ifLive() {
+  const root = el("div");
+  root.appendChild(el("div", "sub", "即時信息流載入中…"));
+  nlLoad().then(J => {
+    root.innerHTML = "";
+    if (!J) { root.appendChild(el("div", "empty", "即時信息流建置中：「即時信息流」排程第一次跑完後就會出現。")); return; }
+    const R = (J.runs || [])[0] || {};
+    root.appendChild(el("div", "nl-head", `最近一次 <b>${esc(nlTpe(J.asof))}</b>（台北）　新增 ${R.new ?? "—"} 則　發布 → 抓到延遲中位 ${R.lag_med_min ?? "—"} 分` +
+      `<small>只收權威來源（路透、美聯社、彭博、日經、中央社），不追數量；非權威來源 ${R.auth_drop ?? 0} 則不收。</small>`));
+    const cats = ["全部", ...new Set((J.items || []).map(x => x.cat))];
+    let CAT = "全部";
+    const bar = el("div", "tl-bar"), list = el("div", "nl-list");
+    const paint = () => {
+      list.innerHTML = "";
+      const L = (J.items || []).filter(x => CAT === "全部" || x.cat === CAT).slice(0, 120);
+      if (!L.length) { list.appendChild(el("div", "empty", "近 48 小時沒有權威來源的相關新聞。")); return; }
+      L.forEach(x => list.appendChild(el("div", "nl-it",
+        `<span class="nl-t num">${esc(nlTpe(x.pub))}</span><span class="nl-src">${esc(x.src)}</span>` +
+        `<a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.t)}</a>` +
+        `<small class="nl-sub">${esc(x.cat)}｜${esc((x.sub || []).slice(0, 2).join("、"))}${x.lag_min != null ? `｜延遲 ${x.lag_min} 分` : ""}</small>`)));
+    };
+    cats.forEach(c => { const b = el("button", "rv-pill" + (c === CAT ? " on" : ""), esc(c));
+      b.onclick = () => { CAT = c; [...bar.children].forEach(k => k.classList.toggle("on", k === b)); paint(); }; bar.appendChild(b); });
+    root.appendChild(bar); root.appendChild(list); paint();
+    const T = J.trends || {};
+    if (Object.keys(T).length) {
+      root.appendChild(el("h4", "nl-h", "各國熱搜 <small>Google Trends，代表搜尋聲量，不是新聞、也不代表重要性</small>"));
+      root.appendChild(el("div", "nl-tr", Object.entries(T).map(([g, v]) => `<div><b>${esc(v.name || g)}</b><ol>` +
+        (v.items || []).map(i => `<li>${esc(i.t)} <small>${esc(i.traffic || "")}</small></li>`).join("") + "</ol></div>").join("")));
+    }
+    root.appendChild(el("div", "rv-note", `新聞：Google News 搜尋（常駐職位、熱門議題、科技與 AI 人物），只留權威來源，每則附原文連結、以原文為準；延遲＝第一次抓到 − Google News 標示的發布時間。` +
+      `排程：盤中每 30 分鐘、其他時段每小時（GitHub 排程可能延遲數分鐘）。${esc(J.trends_src || "")}。僅供參考，非投資建議。`));
+  });
+  return card("即時信息流", "權威來源的最新消息，近 48 小時", root);
+}
 function ifDailySecs(md) {
   const out = [], lines = (md || "").split("\n");
   let head = [], cur = null;
@@ -4065,6 +4145,14 @@ function ifQuant(M) {
     w.appendChild(el("div", "qd-head", `<div class="qd-t">量化統計日報</div><div class="qd-d">${esc(x.date || "")}　盤後</div>` +
       `<div class="qd-n">數字 ${x.facts.length} 筆全部由程式從站上資料產生，文中引用 ${x.cited || 0} 筆、逐一核對一致</div>`));
     const bySec = {}; (x.facts || []).forEach(f => (bySec[f.sec] = bySec[f.sec] || []).push(f));
+    // 藏鋒風格（_inbox/ref_藏鋒，Evans 09-28）：今日總結第一句當大標，總結裡引用的數字（最多 4 個）做成金色重點數字卡
+    const sum = secs.find(sct => /總結/.test(sct.name));
+    if (sum) {
+      const st = sum.lines.join(" ").trim(), first = (st.match(/^[^。！？]+[。！？]?/) || [""])[0];
+      if (first) w.appendChild(el("div", "qd-flow", esc(first)));
+      const hero = (x.facts || []).filter(f => f.text && st.includes(f.text)).slice(0, 4);
+      if (hero.length) w.appendChild(el("div", "qd-hero", hero.map(f => `<div><span class="cr-pill">${esc(f.label)}</span><b class="num">${esc(f.text)}</b><small>${esc(f.sec)}</small></div>`).join("")));
+    }
     secs.forEach(sct => {
       const box = el("div", "qd-sec" + (/總結/.test(sct.name) ? " if-sum" : ""));
       box.appendChild(el("h3", "", esc(sct.name)));
@@ -4679,7 +4767,7 @@ function tabInfo() {
     tb.appendChild(el("span", "", `外文標題 ${fo.length} 則，已有中文翻譯 ${nz} 則` + (nz ? "（AI 翻譯，原文保留在上方）" : "（翻譯由本機每天產生，還沒有的只顯示原文）")));
     root.appendChild(tb);
     // 🟢 第七批（Evans 09-27）：週報品質最好 → 第一格；新增日報
-    root.appendChild(sideTabs([["週報", () => ifWeekly(M)], ["日報", () => ifDaily(M)], ["量化統計日報", () => ifQuant(M)], ["利率與央行", () => ifRates(M)], ["經濟指標", () => ifEcon(M)], ["匯率", () => ifFx(M)],
+    root.appendChild(sideTabs([["即時", () => ifLive()], ["週報", () => ifWeekly(M)], ["日報", () => ifDaily(M)], ["量化統計日報", () => ifQuant(M)], ["利率與央行", () => ifRates(M)], ["經濟指標", () => ifEcon(M)], ["匯率", () => ifFx(M)],
       ["地緣政治與戰爭", () => ifGeo(M)], ["科技與 AI", () => ifTech(M)], ["意見領袖", () => ifPeople(M)]]));
     root.appendChild(el("div", "rv-note", `資料日 ${esc(M.asof || "—")}。數字：FRED（聖路易聯邦準備銀行，轉載 BLS／BEA／聯準會等官方資料）。新聞：每則附原文連結，以原文為準；分類 ${M.tagged ? `本機標記 ${M.tagged} 則，其餘` : ""}依世界趨勢原本的主題與人物。僅供參考，不具任何臆測，非投資建議。`));
   });
@@ -6769,7 +6857,7 @@ function sbView(mode) {
     if (!C || !C.rows.length) { root.appendChild(el("div", "empty", "個股日K資料（stock_bars.json）沒有載到，請切到「表」。")); return; }
     const S = C.S.slice().sort((a, b) => (b[K] ?? -1) - (a[K] ?? -1));
     const title = mode === "up" ? "轉強雷達・族群熱力圖" : "高點回檔・族群熱力圖";
-    const sub = `${S.length} 個大類、${C.rows.length} 檔（資料日 ${C.asof}）· 面積＝最新一日成交金額、顏色＝族群分數（成員中位數，紅高綠低）· 點族群看個股`;
+    const sub = `${S.length} 個大類、${C.rows.length} 檔（資料日 ${C.asof}）· 面積＝最新一日成交金額、顏色＝族群分數（成員中位數，紅高綠低）· 點族群看個股 · 族群歷史依目前分類回算`;
     const NW = window.innerWidth < 700, W = NW ? 480 : 1040, H = NW ? 620 : 460, cells = hmSquarify(S.filter(s => s.amt > 0).map(s => Object.assign({v: s.amt}, s)), 0, 0, W, H);
     const svg = sv("svg", {viewBox: `0 0 ${W} ${H}`, style: "width:100%;height:auto;display:block;cursor:pointer", role: "img"});
     const detail = el("div", "");
@@ -8304,7 +8392,7 @@ function tabRadar() {
     [sub, alert, grid, time, det].forEach(x => root.appendChild(x));
     root.appendChild(el("div", "rv-note", `X 軸＝族群資金流向：近 ${WN} 日族群成交金額占全市場比重，減這 ${WN} 日之前 20 個交易日的平均（pp）。Y 軸＝族群近 ${WN} 日漲跌幅（成員中位數）。泡泡大小＝族群當日成交金額。
       尾跡＝前 5 個交易日。軸的邊界＝整段期間的 95 分位，超出的泡泡貼邊、虛線外框（滑鼠移上去看真實數值）。成員少於 ${R.min_n} 檔的族群不畫。
-      「過濾微幅跨越」：跨過的那條軸，今天離軸小於該族群近 ${R.sd_days} 日標準差 × ${K} 不算。只用日線資料（盤後）。量化統計結果，非投資建議。`));
+      「過濾微幅跨越」：跨過的那條軸，今天離軸小於該族群近 ${R.sd_days} 日標準差 × ${K} 不算。只用日線資料（盤後）。族群歷史依目前分類回算（產業分類調整時，過去的族群成員一併換成現在的分類；已發布的每日族群評分快照不變）。量化統計結果，非投資建議。`));
     const cross = t => t < 1 ? [] : S.map(s => { const a = R.sectors[s].days[t - 1], b = R.sectors[s].days[t];
       if ([a[0], a[1], b[0], b[1]].some(v => v == null)) return null;
       const qa = brQuad(a[0], a[1]), qb = brQuad(b[0], b[1]); if (qa === qb) return null;
@@ -8739,7 +8827,10 @@ function tabRiver() {
     if (!R) { root.innerHTML = ""; root.appendChild(el("div", "empty", "載不到 data/river.json —— 這一班可能還沒產出")); return; }
     SEC = Object.keys(R.sectors)[0]; draw();
   });
-  return root;
+  // 🟢 Evans 09-28：sector_map 不加生效日 → 頁面註明族群歷史依目前分類回算
+  const outer = el("div"); outer.appendChild(root);
+  outer.appendChild(el("div", "rv-note", "產業本益比中位數與分位用現在的同業成員計算；族群歷史依目前分類回算（產業分類調整時，過去的族群成員一併換成現在的分類；已發布的每日族群評分快照不變）。"));
+  return outer;
 }
 /* 🟢 D-2（2026-09-22）：法說會。版面照 preview_ir.html（Evans 09-22「完美」）。
    料：docs/data/ir/index.json（列表）、ir/<代號>.json（近 4 場）、ir/tr/<檔>.json（逐字稿，點開才載）。
@@ -9033,7 +9124,81 @@ function tabResearch() {
   // 🟢 第六批（09-27）：法說會、時間軸、行事曆共用「族群 → 個股」導覽；行事曆只放這裡（Evans 9）
   /* 第七批 10（Evans 09-27）：法說會 → 河流圖 → 產業動向 → 報告與事件（原「時間軸」）→ 行事曆 */
   return sideTabs([["法說會", tabIR, "screen"], ["河流圖", tabRiver, "screen"], ["產業動向", tabIndustryNotes],
-                   ["報告與事件", infoTimeline], ["行事曆", tabCalendar]]);
+                   ["公司報告", tabCoReport], ["報告與事件", infoTimeline], ["行事曆", tabCalendar]]);
+}
+/* 🟢 公司產業報告（Evans 09-28）：本機程式產數字（公開資訊觀測站、月營收、法說簡報、站上資料）、Gemini 寫初稿，
+   雲端 company_verify 逐篇核對（數字、合規、出處、交叉核對、表格、章節）通過才進 company_reports.json。
+   版面參考藏鋒資本公開貼文（_inbox/ref_藏鋒）：大標＋副標、重點數字卡、「總結 → 流程」一行、四格摘要（事件／影響／估值依據／後續追蹤）。
+   不放評等、目標價、潛在漲幅；估值只用河流圖（連過去看位階）。 */
+var _crW = null;
+function crLoad() { if (!_crW) _crW = fetch((window.MF_URL ? "preview/v2/company_reports.json" : "data/company_reports.json") + _dv(), {cache: "force-cache"}).then(r => r.ok ? r.json() : null).catch(() => null); return _crW; }
+function crFactText(F, id) { const f = F[id]; return f ? f.text : "—"; }
+function crMd(t) { return esc(t || "").replace(/\n{2,}/g, "</p><p>").replace(/\n/g, "<br>"); }
+function crChart(R, F) {
+  const P = (R.chart || {}).rev_eps || [];
+  if (P.length < 2) return null;
+  const W = 640, H = 220, L = 46, Rr = 46, T = 14, B = 40, n = P.length, bw = (W - L - Rr) / n;
+  const rv = P.map(p => (F[p.rev_id] || {}).value), ev = P.map(p => (F[p.eps_id] || {}).value);
+  const rmax = Math.max(...rv.filter(v => v != null), 1), emin = Math.min(0, ...ev.filter(v => v != null)), emax = Math.max(...ev.filter(v => v != null), 1);
+  const yR = v => T + (H - T - B) * (1 - v / rmax), yE = v => T + (H - T - B) * (1 - (v - emin) / (emax - emin || 1));
+  let g = `<svg viewBox="0 0 ${W} ${H}" class="cr-svg" role="img" aria-label="營收與 EPS">`;
+  P.forEach((p, i) => { const x = L + i * bw + bw * 0.18, v = rv[i]; if (v != null) g += `<rect x="${x}" y="${yR(v)}" width="${bw * 0.64}" height="${H - B - yR(v)}" class="cr-bar"><title>${esc(p.period)} 營收 ${esc(crFactText(F, p.rev_id))}</title></rect>`;
+    g += `<text x="${L + i * bw + bw / 2}" y="${H - B + 16}" class="cr-ax" text-anchor="middle">${esc(p.period)}</text>`; });
+  const pts = P.map((p, i) => ev[i] == null ? null : [L + i * bw + bw / 2, yE(ev[i])]).filter(Boolean);
+  if (pts.length > 1) g += `<polyline points="${pts.map(q => q.join(",")).join(" ")}" class="cr-line"/>`;
+  P.forEach((p, i) => { if (ev[i] != null) g += `<circle cx="${L + i * bw + bw / 2}" cy="${yE(ev[i])}" r="4" class="cr-dot"><title>${esc(p.period)} EPS ${esc(crFactText(F, p.eps_id))}</title></circle>`; });
+  ((R.chart || {}).milestones || []).forEach(m => { const i = P.findIndex(p => p.period === m.period); if (i >= 0)
+    g += `<text x="${L + i * bw + bw / 2}" y="${H - 6}" class="cr-ms" text-anchor="middle">▲ ${esc(m.text)}</text>`; });
+  g += `<text x="4" y="${T + 4}" class="cr-ax">營收（億元）</text><text x="${W - 4}" y="${T + 4}" class="cr-ax" text-anchor="end">EPS（元）</text></svg>`;
+  return el("div", "cr-chart", g);
+}
+function crOne(R) {
+  const F = {}; (R.facts || []).forEach(f => { F[f.id] = f; });
+  const S = R.sections || {}, w = el("div", "cr-root");
+  w.appendChild(el("div", "cr-hero", `<div class="cr-ind">${esc(R.industry || "")}　${esc(R.date || "")}</div>` +
+    `<div class="cr-code"><b>${esc(R.code)}</b> ${esc(R.name || "")}</div><div class="cr-title">${esc(S["標題"] || "")}</div><div class="cr-subt">${esc(S["副標"] || "")}</div>`));
+  const kpi = (R.facts || []).filter(f => f.sec === "關鍵數據").slice(0, 4);
+  if (kpi.length) w.appendChild(el("div", "cr-kpi", kpi.map(f => `<div><span class="cr-pill">${esc(f.label)}</span><b class="num">${esc(f.text)}</b><small>${esc(f.period || "")}</small></div>`).join("")));
+  if (S["總結"]) w.appendChild(el("div", "cr-flow", `<span class="cr-pill">總結</span> ${esc(S["總結"]).replace(/→/g, '<i>→</i>')}`));
+  w.appendChild(el("div", "cr-quad", [["事件", "事件"], ["影響", "影響"], ["估值依據", "預估與估值依據"], ["後續追蹤", "後續追蹤"]]
+    .map(([t, k]) => `<div><h4>${esc(t)}</h4><p>${crMd(S[k])}</p></div>`).join("")));
+  const lk = el("a", "cr-rv", "到「河流圖」看這檔的本益比位階 ›"); lk.href = "javascript:void 0";
+  lk.onclick = () => window.GO_TAB && window.GO_TAB("個股研究", "河流圖", () => window.RV_GO && window.RV_GO(R.code)); w.appendChild(lk);
+  const ch = crChart(R, F); if (ch) { w.appendChild(el("h4", "cr-h", "營收與 EPS")); w.appendChild(ch); }
+  Object.values(R.tables || {}).forEach(T => {
+    const tb = el("div", "rv-twrap cr-tbl");
+    tb.innerHTML = `<table><thead><tr><th>${esc(T.title || "")}</th>${(T.cols || []).map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>` +
+      (T.rows || []).map(r => `<tr><td>${esc(r.label)}</td>${(r.cells || []).map(id => `<td class="num">${id ? esc(crFactText(F, id)) : "—"}</td>`).join("")}</tr>`).join("") + "</tbody></table>";
+    w.appendChild(tb);
+  });
+  [["風險", "風險"], ["公司簡介", "公司簡介"]].forEach(([t, k]) => { if (S[k]) { w.appendChild(el("h4", "cr-h", esc(t))); w.appendChild(el("div", "cr-txt", `<p>${crMd(S[k])}</p>`)); } });
+  const srcs = [...new Set((R.facts || []).map(f => f.src).filter(u => /^https?:/.test(u || "")))];
+  w.appendChild(el("div", "rv-note", `數字 ${(R.facts || []).length} 筆全部由程式取自公開資訊觀測站、月營收、法說簡報與站上資料，逐筆核對；文字由 AI 撰寫初稿。` +
+    `不含評等、目標價與潛在漲幅；估值只用河流圖位階。官方出處：${srcs.slice(0, 6).map((u, i) => `<a href="${esc(u)}" target="_blank" rel="noopener">${i + 1}</a>`).join("、") || "—"}`));
+  return w;
+}
+function tabCoReport() {
+  const root = el("div");
+  const draw = () => {
+    root.innerHTML = "";
+    root.appendChild(rsNav(root, draw));
+    const body = el("div"); root.appendChild(body);
+    body.appendChild(el("div", "sub", "載入中…"));
+    crLoad().then(J => {
+      body.innerHTML = "";
+      const L = (J && J.reports) || [];
+      const mine = L.filter(r => rsMatch(r.code));
+      if (RS.code && mine.length) { body.appendChild(crOne(mine[0])); return; }
+      if (!L.length) { body.appendChild(el("div", "empty", "公司產業報告建置中：本機試產第一份（3665 貿聯）通過雲端核對後，會在這裡顯示。")); return; }
+      if (RS.code) body.appendChild(el("div", "sub", `${esc(RS.code)} 還沒有公司產業報告。`));
+      const lst = el("div", "cr-list");
+      (mine.length ? mine : L).forEach(r => { const b = el("button", "rv-pill", `${esc(r.name || r.code)} <small>${esc(r.code)}　${esc(r.date)}</small>`);
+        b.onclick = () => rsSet(rsBigOf(r.code), r.code); lst.appendChild(b); });
+      body.appendChild(lst);
+    });
+  };
+  draw();
+  return card("公司產業報告", "事件 → 影響 → 估值依據；數字逐筆核對、不含評等與目標價 · 上排選族群、下排選個股", root);
 }
 /* 產業動向：資料由本機產生到 data/industry_notes/，發布到 docs/data/industry_notes.json（還沒有就顯示建置中） */
 function tabIndustryNotes() {
@@ -9153,6 +9318,8 @@ const SUB_DESC = {
   "本週": "本週的週報。",
   "依國家": "各頁常駐人物統整在一起：先選國家，「全球」依近 30 天流量排序。",
   "今日總結": "今天的重點一段話，細節在各國子列。",
+  "即時": "權威來源（路透、美聯社、彭博、日經、中央社）的最新消息，盤中每 30 分鐘更新；下方附各國熱搜。",
+  "公司報告": "公司產業報告：事件 → 影響 → 估值依據；數字逐筆核對，不含評等與目標價。",
   "量化統計日報": "站上所有量化統計（市場動態、籌碼、族群、ETF、處置股）的當日重點，寫成一篇短文；每個數字都跟資料檔核對過。",
   "歷史日報": "最近 14 期日報。",
   "歷史週報": "最近 12 期週報，可以回頭對照當時的判斷。",
