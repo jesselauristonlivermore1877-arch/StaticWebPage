@@ -1,6 +1,6 @@
 {
  "date": "2026-09-29",
- "made": "2026-09-29T10:44",
+ "made": "2026-09-29T13:26",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "facts": [
   {
@@ -121,6 +121,42 @@
    "src": "web_data.breadth"
   },
   {
+   "id": "br_tp_0",
+   "sec": "市場廣度",
+   "label": "上櫃上漲家數",
+   "value": 389,
+   "unit": " 家",
+   "text": "389 家",
+   "src": "web_data.breadth"
+  },
+  {
+   "id": "br_tp_1",
+   "sec": "市場廣度",
+   "label": "上櫃下跌家數",
+   "value": 399,
+   "unit": " 家",
+   "text": "399 家",
+   "src": "web_data.breadth"
+  },
+  {
+   "id": "br_tp_3",
+   "sec": "市場廣度",
+   "label": "上櫃漲停家數",
+   "value": 21,
+   "unit": " 家",
+   "text": "21 家",
+   "src": "web_data.breadth"
+  },
+  {
+   "id": "br_tp_4",
+   "sec": "市場廣度",
+   "label": "上櫃跌停家數",
+   "value": 2,
+   "unit": " 家",
+   "text": "2 家",
+   "src": "web_data.breadth"
+  },
+  {
    "id": "ord_ratio_n",
    "sec": "市場廣度",
    "label": "委賣筆÷委買筆",
@@ -231,10 +267,10 @@
   {
    "id": "sec_bot3",
    "sec": "族群",
-   "label": "族群評分倒數第 3 名：光通訊中下游",
-   "value": 17.5,
+   "label": "族群評分倒數第 3 名：被動元件",
+   "value": 17.4,
    "unit": " 分",
-   "text": "17.5 分",
+   "text": "17.4 分",
    "src": "web_data.screen.sector_score"
   },
   {
@@ -313,18 +349,18 @@
    "id": "disp_hot",
    "sec": "處置股",
    "label": "再一次注意就處置的個股數",
-   "value": 5,
+   "value": 12,
    "unit": " 檔",
-   "text": "5 檔",
+   "text": "12 檔",
    "src": "docs/data/disposal.json"
   },
   {
    "id": "disp_now",
    "sec": "處置股",
    "label": "處置中的個股數",
-   "value": 18,
+   "value": 19,
    "unit": " 檔",
-   "text": "18 檔",
+   "text": "19 檔",
    "src": "docs/data/disposal.json"
   }
  ],
