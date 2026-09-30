@@ -1,6 +1,6 @@
 {
  "date": "2026-09-30",
- "made": "2026-09-30T10:44",
+ "made": "2026-09-30T13:26",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "facts": [
   {
@@ -195,46 +195,46 @@
   {
    "id": "sec_top2",
    "sec": "族群",
-   "label": "族群評分第 2 名：面板",
-   "value": 66.1,
+   "label": "族群評分第 2 名：矽晶圓與化合物半導體",
+   "value": 76.8,
    "unit": " 分",
-   "text": "66.1 分",
+   "text": "76.8 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_top3",
    "sec": "族群",
-   "label": "族群評分第 3 名：載板與PCB",
-   "value": 65.5,
+   "label": "族群評分第 3 名：晶圓代工與製造",
+   "value": 67.1,
    "unit": " 分",
-   "text": "65.5 分",
+   "text": "67.1 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot1",
    "sec": "族群",
-   "label": "族群評分倒數第 1 名：光通訊上游",
-   "value": 17.0,
+   "label": "族群評分倒數第 1 名：光通訊中下游",
+   "value": 18.1,
    "unit": " 分",
-   "text": "17.0 分",
+   "text": "18.1 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot2",
    "sec": "族群",
-   "label": "族群評分倒數第 2 名：光通訊中下游",
-   "value": 17.9,
+   "label": "族群評分倒數第 2 名：生技醫療",
+   "value": 19.1,
    "unit": " 分",
-   "text": "17.9 分",
+   "text": "19.1 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot3",
    "sec": "族群",
    "label": "族群評分倒數第 3 名：被動元件",
-   "value": 18.4,
+   "value": 19.6,
    "unit": " 分",
-   "text": "18.4 分",
+   "text": "19.6 分",
    "src": "web_data.screen.sector_score"
   },
   {
@@ -277,18 +277,18 @@
    "id": "etf_net",
    "sec": "主動式 ETF",
    "label": "主動式 ETF 合計淨買賣（含申購贖回）",
-   "value": -3.5,
+   "value": 0.0,
    "unit": " 億元",
-   "text": "-3.5 億元",
+   "text": "+0.0 億元",
    "src": "docs/data/etf_flow.json"
   },
   {
    "id": "etf_xnet",
    "sec": "主動式 ETF",
    "label": "主動式 ETF 經理人自己調整持股的淨額（扣申購贖回）",
-   "value": -3.4,
+   "value": 0.0,
    "unit": " 億元",
-   "text": "-3.4 億元",
+   "text": "+0.0 億元",
    "src": "docs/data/etf_flow.json"
   },
   {
@@ -313,9 +313,9 @@
    "id": "disp_hot",
    "sec": "處置股",
    "label": "再一次注意就處置的個股數",
-   "value": 8,
+   "value": 14,
    "unit": " 檔",
-   "text": "8 檔",
+   "text": "14 檔",
    "src": "docs/data/disposal.json"
   },
   {
