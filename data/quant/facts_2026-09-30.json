@@ -1,6 +1,6 @@
 {
  "date": "2026-09-30",
- "made": "2026-09-30T13:26",
+ "made": "2026-10-01T10:44",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "facts": [
   {
@@ -142,18 +142,18 @@
    "id": "inst_外資",
    "sec": "法人籌碼",
    "label": "外資買賣超",
-   "value": 296.4,
+   "value": 308.6,
    "unit": " 億元",
-   "text": "+296.4 億元",
+   "text": "+308.6 億元",
    "src": "web_data.inst.summary"
   },
   {
    "id": "inst_投信",
    "sec": "法人籌碼",
    "label": "投信買賣超",
-   "value": 77.8,
+   "value": 82.9,
    "unit": " 億元",
-   "text": "+77.8 億元",
+   "text": "+82.9 億元",
    "src": "web_data.inst.summary"
   },
   {
@@ -169,9 +169,9 @@
    "id": "margin_twse",
    "sec": "信用交易",
    "label": "上市融資餘額",
-   "value": 6186.5,
+   "value": 6222.5,
    "unit": " 億元",
-   "text": "6186.5 億元",
+   "text": "6222.5 億元",
    "src": "web_data.market.margin_balance"
   },
   {
@@ -250,27 +250,27 @@
    "id": "rrg_轉弱",
    "sec": "族群",
    "label": "RRG 週線「轉弱」象限族群數",
-   "value": 7,
+   "value": 6,
    "unit": " 個",
-   "text": "7 個",
+   "text": "6 個",
    "src": "docs/data/rrg.json"
   },
   {
    "id": "rrg_落後",
    "sec": "族群",
    "label": "RRG 週線「落後」象限族群數",
-   "value": 7,
+   "value": 6,
    "unit": " 個",
-   "text": "7 個",
+   "text": "6 個",
    "src": "docs/data/rrg.json"
   },
   {
    "id": "rrg_改善",
    "sec": "族群",
    "label": "RRG 週線「改善」象限族群數",
-   "value": 2,
+   "value": 4,
    "unit": " 個",
-   "text": "2 個",
+   "text": "4 個",
    "src": "docs/data/rrg.json"
   },
   {
@@ -295,36 +295,36 @@
    "id": "dl_self",
    "sec": "法人籌碼",
    "label": "自營商自行買賣（個股加總估算）",
-   "value": 11.8,
+   "value": 38.2,
    "unit": " 億元",
-   "text": "+11.8 億元",
+   "text": "+38.2 億元",
    "src": "docs/data/chips.json"
   },
   {
    "id": "dl_hedge",
    "sec": "法人籌碼",
    "label": "自營商避險（個股加總估算）",
-   "value": 4.3,
+   "value": -29.7,
    "unit": " 億元",
-   "text": "+4.3 億元",
+   "text": "-29.7 億元",
    "src": "docs/data/chips.json"
   },
   {
    "id": "disp_hot",
    "sec": "處置股",
    "label": "再一次注意就處置的個股數",
-   "value": 14,
+   "value": 11,
    "unit": " 檔",
-   "text": "14 檔",
+   "text": "11 檔",
    "src": "docs/data/disposal.json"
   },
   {
    "id": "disp_now",
    "sec": "處置股",
    "label": "處置中的個股數",
-   "value": 19,
+   "value": 20,
    "unit": " 檔",
-   "text": "19 檔",
+   "text": "20 檔",
    "src": "docs/data/disposal.json"
   }
  ],
