@@ -1,0 +1,332 @@
+{
+ "date": "2026-10-01",
+ "made": "2026-10-01T13:25",
+ "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
+ "facts": [
+  {
+   "id": "taiex_close",
+   "sec": "大盤",
+   "label": "加權指數收盤",
+   "value": 48353.49,
+   "unit": " 點",
+   "text": "48353.49 點",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_chg",
+   "sec": "大盤",
+   "label": "加權指數漲跌點",
+   "value": 413.36,
+   "unit": " 點",
+   "text": "+413.36 點",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_r1",
+   "sec": "大盤",
+   "label": "加權指數漲跌幅",
+   "value": 0.86,
+   "unit": "%",
+   "text": "+0.86%",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_dd52",
+   "sec": "大盤",
+   "label": "加權指數距 52 週高點",
+   "value": -0.51,
+   "unit": "%",
+   "text": "-0.51%",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_ma20",
+   "sec": "大盤",
+   "label": "加權指數距 20 日均線",
+   "value": 2.92,
+   "unit": "%",
+   "text": "+2.92%",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "otc_close",
+   "sec": "大盤",
+   "label": "櫃買指數收盤",
+   "value": 418.82,
+   "unit": " 點",
+   "text": "418.82 點",
+   "src": "web_data.market.otc"
+  },
+  {
+   "id": "otc_r1",
+   "sec": "大盤",
+   "label": "櫃買指數漲跌幅",
+   "value": 0.42,
+   "unit": "%",
+   "text": "+0.42%",
+   "src": "web_data.market.otc"
+  },
+  {
+   "id": "tsmc_close",
+   "sec": "大盤",
+   "label": "台積電收盤",
+   "value": 2510.0,
+   "unit": " 元",
+   "text": "2510.00 元",
+   "src": "web_data.market.tsmc"
+  },
+  {
+   "id": "tsmc_r1",
+   "sec": "大盤",
+   "label": "台積電漲跌幅",
+   "value": 1.21,
+   "unit": "%",
+   "text": "+1.21%",
+   "src": "web_data.market.tsmc"
+  },
+  {
+   "id": "br_tw_0",
+   "sec": "市場廣度",
+   "label": "上市上漲家數",
+   "value": 422,
+   "unit": " 家",
+   "text": "422 家",
+   "src": "web_data.breadth"
+  },
+  {
+   "id": "br_tw_1",
+   "sec": "市場廣度",
+   "label": "上市下跌家數",
+   "value": 551,
+   "unit": " 家",
+   "text": "551 家",
+   "src": "web_data.breadth"
+  },
+  {
+   "id": "br_tw_3",
+   "sec": "市場廣度",
+   "label": "上市漲停家數",
+   "value": 23,
+   "unit": " 家",
+   "text": "23 家",
+   "src": "web_data.breadth"
+  },
+  {
+   "id": "br_tw_4",
+   "sec": "市場廣度",
+   "label": "上市跌停家數",
+   "value": 2,
+   "unit": " 家",
+   "text": "2 家",
+   "src": "web_data.breadth"
+  },
+  {
+   "id": "ord_ratio_n",
+   "sec": "市場廣度",
+   "label": "委賣筆÷委買筆",
+   "value": 1.16,
+   "unit": "",
+   "text": "1.16",
+   "src": "web_data.orders"
+  },
+  {
+   "id": "ord_ratio_v",
+   "sec": "市場廣度",
+   "label": "委賣張÷委買張",
+   "value": 0.59,
+   "unit": "",
+   "text": "0.59",
+   "src": "web_data.orders"
+  },
+  {
+   "id": "inst_外資",
+   "sec": "法人籌碼",
+   "label": "外資買賣超",
+   "value": 219.4,
+   "unit": " 億元",
+   "text": "+219.4 億元",
+   "src": "web_data.inst.summary"
+  },
+  {
+   "id": "inst_投信",
+   "sec": "法人籌碼",
+   "label": "投信買賣超",
+   "value": 56.6,
+   "unit": " 億元",
+   "text": "+56.6 億元",
+   "src": "web_data.inst.summary"
+  },
+  {
+   "id": "inst_自營",
+   "sec": "法人籌碼",
+   "label": "自營買賣超",
+   "value": 16.6,
+   "unit": " 億元",
+   "text": "+16.6 億元",
+   "src": "web_data.inst.summary"
+  },
+  {
+   "id": "margin_twse",
+   "sec": "信用交易",
+   "label": "上市融資餘額",
+   "value": 6222.5,
+   "unit": " 億元",
+   "text": "6222.5 億元",
+   "src": "web_data.market.margin_balance"
+  },
+  {
+   "id": "elecfin",
+   "sec": "族群",
+   "label": "電金比（電子÷金融）",
+   "value": 0.8768,
+   "unit": "",
+   "text": "0.8768",
+   "src": "web_data.elecfin"
+  },
+  {
+   "id": "sec_top1",
+   "sec": "族群",
+   "label": "族群評分第 1 名：載板與PCB",
+   "value": 75.5,
+   "unit": " 分",
+   "text": "75.5 分",
+   "src": "web_data.screen.sector_score"
+  },
+  {
+   "id": "sec_top2",
+   "sec": "族群",
+   "label": "族群評分第 2 名：矽晶圓與化合物半導體",
+   "value": 71.3,
+   "unit": " 分",
+   "text": "71.3 分",
+   "src": "web_data.screen.sector_score"
+  },
+  {
+   "id": "sec_top3",
+   "sec": "族群",
+   "label": "族群評分第 3 名：廠務工程",
+   "value": 70.2,
+   "unit": " 分",
+   "text": "70.2 分",
+   "src": "web_data.screen.sector_score"
+  },
+  {
+   "id": "sec_bot1",
+   "sec": "族群",
+   "label": "族群評分倒數第 1 名：光通訊中下游",
+   "value": 17.6,
+   "unit": " 分",
+   "text": "17.6 分",
+   "src": "web_data.screen.sector_score"
+  },
+  {
+   "id": "sec_bot2",
+   "sec": "族群",
+   "label": "族群評分倒數第 2 名：連接器與機構件",
+   "value": 21.2,
+   "unit": " 分",
+   "text": "21.2 分",
+   "src": "web_data.screen.sector_score"
+  },
+  {
+   "id": "sec_bot3",
+   "sec": "族群",
+   "label": "族群評分倒數第 3 名：網通與衛星",
+   "value": 21.4,
+   "unit": " 分",
+   "text": "21.4 分",
+   "src": "web_data.screen.sector_score"
+  },
+  {
+   "id": "rrg_領先",
+   "sec": "族群",
+   "label": "RRG 週線「領先」象限族群數",
+   "value": 10,
+   "unit": " 個",
+   "text": "10 個",
+   "src": "docs/data/rrg.json"
+  },
+  {
+   "id": "rrg_轉弱",
+   "sec": "族群",
+   "label": "RRG 週線「轉弱」象限族群數",
+   "value": 6,
+   "unit": " 個",
+   "text": "6 個",
+   "src": "docs/data/rrg.json"
+  },
+  {
+   "id": "rrg_落後",
+   "sec": "族群",
+   "label": "RRG 週線「落後」象限族群數",
+   "value": 6,
+   "unit": " 個",
+   "text": "6 個",
+   "src": "docs/data/rrg.json"
+  },
+  {
+   "id": "rrg_改善",
+   "sec": "族群",
+   "label": "RRG 週線「改善」象限族群數",
+   "value": 4,
+   "unit": " 個",
+   "text": "4 個",
+   "src": "docs/data/rrg.json"
+  },
+  {
+   "id": "etf_net",
+   "sec": "主動式 ETF",
+   "label": "主動式 ETF 合計淨買賣（含申購贖回）",
+   "value": 0.0,
+   "unit": " 億元",
+   "text": "+0.0 億元",
+   "src": "docs/data/etf_flow.json"
+  },
+  {
+   "id": "etf_xnet",
+   "sec": "主動式 ETF",
+   "label": "主動式 ETF 經理人自己調整持股的淨額（扣申購贖回）",
+   "value": 0.0,
+   "unit": " 億元",
+   "text": "+0.0 億元",
+   "src": "docs/data/etf_flow.json"
+  },
+  {
+   "id": "dl_self",
+   "sec": "法人籌碼",
+   "label": "自營商自行買賣（個股加總估算）",
+   "value": 38.2,
+   "unit": " 億元",
+   "text": "+38.2 億元",
+   "src": "docs/data/chips.json"
+  },
+  {
+   "id": "dl_hedge",
+   "sec": "法人籌碼",
+   "label": "自營商避險（個股加總估算）",
+   "value": -29.7,
+   "unit": " 億元",
+   "text": "-29.7 億元",
+   "src": "docs/data/chips.json"
+  },
+  {
+   "id": "disp_hot",
+   "sec": "處置股",
+   "label": "再一次注意就處置的個股數",
+   "value": 9,
+   "unit": " 檔",
+   "text": "9 檔",
+   "src": "docs/data/disposal.json"
+  },
+  {
+   "id": "disp_now",
+   "sec": "處置股",
+   "label": "處置中的個股數",
+   "value": 21,
+   "unit": " 檔",
+   "text": "21 檔",
+   "src": "docs/data/disposal.json"
+  }
+ ],
+ "ids_unique": true
+}
