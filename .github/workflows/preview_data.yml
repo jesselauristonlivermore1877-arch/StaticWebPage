@@ -34,7 +34,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 35                 # 第七批：預覽多了擴充查詢（官方職位表的人名、AI 產業、各國匯率）
+    timeout-minutes: 55                 # 10-04 晚：35 分鐘被擴充查詢撐爆一次（run 37199345438）；第七批：預覽多了擴充查詢（官方職位表的人名、AI 產業、各國匯率）
     steps:
       - uses: actions/checkout@v4
         with:
