@@ -4,49 +4,67 @@
 
 ## 本週總結
 
-在美中談判與地緣政治方面，美中雙方雖同意對各自300億美元商品降稅但尚無落實時間表，美國同時放緩飛機零件對中出口，而中東與俄烏戰況持續發展且美國擴大了對伊朗的制裁封鎖。美債市場出現劇烈波動，30年期美債殖利率一度飆升至5.62%的24年新高，隨後受就業數據疲軟影響回落，美財長貝森特則表示將持續加碼回購長債。貨幣政策方面，美國9月非農就業僅增加2.9萬人使市場對聯準會升息押注降溫，但川普仍持續施壓要求降息。在AI資本支出議題上，川普簽署行政命令將AI改稱為SI超級智慧並挺業者自律，帶動輝達市值逼近6兆美元，惟市場對高額投資回收與供應鏈瓶頸仍存有疑慮。（由 AI 依本週新聞標題與摘要彙整）
+在本週美中經貿與關稅方面，雙方雖同意互降各300億美元商品的關稅，但美方表示因法律程序在年終購物季前恐難上路，且川普再度威脅加徵關稅並施壓聯準會降息。在金融與地緣政治上，美債殖利率一度飆升至數十年新高後因就業數據疲軟而回落，而中東局勢因沙國首都遇襲與美軍增派航母而升溫，俄烏戰事也因俄軍持續轟炸基輔與烏克蘭首度使用國產彈道飛彈而愈加緊繃。在AI資本支出領域，科技巨頭持續擴大投資，川普政府則正式簽署行政命令將AI改名為「超級智慧（SI）」並支持業者自律，同時輝達市值逼近六兆美元，馬斯克也證實正與台積電洽談晶片製造合作。（由 AI 依本週新聞標題與摘要彙整）
 
 ## 五大議題
 
 ### 美中談判／關稅
 
 - **本週新聞**：
+  【事實】中國商務部：G20多數成員對產能過剩、強迫勞動都有意見（經濟日報）  
+  出處日期：2026-10-04  
+  出處連結：https://money.udn.com/money/story/5603/9793849  
   【事實】中國國際貿易談判代表兼商務部副部長李成鋼技術官僚扛中美談判重任- 專題周報- 工商時報（中時新聞網）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMia0FVX3lxTE5QSTAxUFhPa08xWWoxaC1GZ1pZMDU0X3BWWHhQQnltQkt6Z18zOUI0ME9aZ0UwN3FwbllDNlVIcnN1NXJyQWEtVC01UVBJMmU1TWZZUW90ZURtX0FaUnhhU3Jaajg5S2htZ2xr?oc=5  
+  出處連結：https://www.chinatimes.com/newspapers/20261004000220-260209  
   【事實】余茂春：美中無法解決關稅安全等根本問題 對台灣是機會（自由時報）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMiakFVX3lxTFBVd0trQ0ZxRzMycTNKazhRR1J3MW1GeEU4SUZRWVlZampocmYzMlJGS3luQUdJSzFvVHY5UVVLeDc2bDFiUExwYnFuZHQzNTFnNkRWbnlQeVpqck1Memc0U1hfTTh6MGtkZFHSAW9BVV95cUxQakFseWtKMXBIb1FPTElvUjliRmUxbkZHekNid1NNUjU0dGxNQUlYVTI2TWRiSmlsMFdjek91MDFvS3dac0tnYW9YTG5BM1JuYjVIZkN4SUpGbVIwWlJBWDFaQ2VXZkR0WG5BZ2RNSUk?oc=5  
+  出處連結：https://news.ltn.com.tw/news/politics/breakingnews/5594798  
+  【事實】商務部:對原產歐盟進口對硝基甲苯反傾銷調查（信報網站）  
+  出處日期：2026-10-04  
+  出處連結：https://m.hkej.com/landing/mobarticle2/id/4531184/%25E5%2595%2586%25E5%258B%2599%25E9%2583%25A8%253A%25E5%25B0%258D%25E5%258E%259F%25E7%2594%25A2%25E6%25AD%2590%25E7%259B%259F%25E9%2580%25B2%25E5%258F%25A3%25E5%25B0%258D%25E7%25A1%259D%25E5%259F%25BA%25E7%2594%25B2%25E8%258B%25AF%25E5%258F%258D%25E5%2582%25BE%25E9%258A%25B7%25E8%25AA%25BF%25E6%259F%25A5  
   【事實】美中峰會川普兩度駁習近平 維護日相高市（大紀元）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMiZkFVX3lxTE93c0F0Z2ZQWTRNNjBKSkZ3cG1TVWtBTm4yV05Ja3JUc2JCMEpKZ1Y3VUxIRmIweUVOdnhYRkRzc2pNV3dxWENZel9aMzV0X1NSWVR1ekNrdUtyQUlJU28ybTBNVU9JUdIBZkFVX3lxTE93c0F0Z2ZQWTRNNjBKSkZ3cG1TVWtBTm4yV05Ja3JUc2JCMEpKZ1Y3VUxIRmIweUVOdnhYRkRzc2pNV3dxWENZel9aMzV0X1NSWVR1ekNrdUtyQUlJU28ybTBNVU9JUQ?oc=5  
+  出處連結：https://www.epochtimes.com/b5/26/10/3/n14862789.htm/amp  
   【事實】美伊談判續卡關 川普放話「不排除來硬的」（華視新聞網）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMieEFVX3lxTFBfMUwtbTFyVmVCVGVlSWFtMnpCSGRRWFc3QnNNeTl6Z3JuOFdkOXBRZFlqUUlJcm5TZjd0VWJicUtlMkl0ajRfaWwxWTMyTGRfcnBaRk1aYmV2WnMzRVVlUTRkNzN3Y2NiRkprdzBqNGp6T0NveVZFbQ?oc=5  
+  出處連結：https://news.cts.com.tw/cts/international/202610/202610043085948.html  
+  【事實】美國新關稅出爐！台灣獲10%且不疊加 行政院：持續爭取最佳利益（三立新聞網SETN.com）  
+  出處日期：2026-10-04  
+  出處連結：https://www.setn.com/news/1877598  
   【事實】貝森特：中國AI實力已達美國8至9成擬建異常通報機制| 太報（LINE TODAY）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMidEFVX3lxTE1wOFBQSWJ2V0hpX2dEZGh0TUQ5dmRoY1ZmS053MDVJNWthX3Bzd1hGNjRQRDQ4OGx3cG0xVGxZZjVfYmdlM1hUUHYxVG16ek9oRmU1ODh5OGZsQ041S1hjM2QxVDdwX1F2S00xTDhRS1dDQnVk?oc=5  
+  出處連結：https://today.line.me/tw/v3/article/rmp3jan?view=topic&referral=AI  
   【事實】商務部宣布對歐盟進口對硝基甲苯進行反傾銷調查 稱將公正裁決（香港01）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMixwNBVV95cUxQMkZvaXRMSS1IZDktYXZrdDhiYmJCaWpseTIwLVFjYWtQZFh2bFNTYkpVTUd1Zlh1b2JGczB1TVA0bUlqTS1uYWI1SXAwWGs0UlVnYlNZZDhueTk2Vl9FMDc5YVg3Mk5NZ0NwcFZfMTBuLXVIZjlFam9tWWZHYTdrZWVGZllONlAwNm5nV1hQN3lHR1hNd0VQMTVTejd4QnhQVFdBXzFGSXhwbVRpSmF3TXJjN29ZOGVlWVRLZ29zaWZWZzNIanQ3WExvQTZPNkpXQ0Q1NURQb1ZrY1JTNnRvYnRDTWJfckFUVFpoVDZvX2ZRTkY5ekVmR0Z4SDF6VGoyU2V5dndhYVZUbEZOU2g1NzhOMFdSbmtDTm5RTU1lZEFnMVdGOUNyQUw5Y0NBS2RfSmNmNTROOFNDX3JqTG5qNHluTDdPcXBhaDI5WTloSGplOS1JNnZjMEd1VURkS0RYQTRFYXBwY25iekZqSDZVbzRyOVh0MmthSTZBMm5Gam9PTks2MTJDY0J2SUx0eGhPTWhZMlV1ckxmbVB4Q2tYZWhiZS1ydFFHcDFMNUhhM1Bncm9BU3BRRTZFbnlhcWNNZFVvcUhQNA?oc=5  
+  出處連結：https://www.hk01.com/%E5%8D%B3%E6%99%82%E5%9C%8B%E9%9A%9B/60396080/%E5%95%86%E5%8B%99%E9%83%A8%E5%AE%A3%E5%B8%83%E5%B0%8D%E6%AD%90%E7%9B%9F%E9%80%B2%E5%8F%A3%E5%B0%8D%E7%A1%9D%E5%9F%BA%E7%94%B2%E8%8B%AF%E9%80%B2%E8%A1%8C%E5%8F%8D%E5%82%BE%E9%8A%B7%E8%AA%BF%E6%9F%A5-%E7%A8%B1%E5%B0%87%E5%85%AC%E6%AD%A3%E8%A3%81%E6%B1%BA  
+  【事實】川普再祭「50％關稅」威脅！中國外交部回應| NOWNEWS今日新聞（LINE TODAY）  
+  出處日期：2026-10-03  
+  出處連結：https://today.line.me/tw/v3/article/0MG6Bj3?view=topic&referral=TOPIC-2025worldtopic  
+  【事實】美中關稅減免卡法律程式 葛裡爾：年終購物季前難上路（finance.biggo.com.tw）  
+  出處日期：2026-10-03  
+  出處連結：https://finance.biggo.com.tw/news/62f0659c-a83a-4144-80b2-fbd339fd9575  
+  【事實】美貿易代表葛里爾：反制中國產能過剩 措施幾周內公布（世界新聞網）  
+  出處日期：2026-10-03  
+  出處連結：https://www.worldjournal.com/wj/story/121339/9792244  
   【事實】IMF歡迎美中貿易協議，同時對全球經濟衝擊表達疑慮（BigGo 財經）  
   出處日期：2026-10-02  
-  出處連結：https://news.google.com/rss/articles/CBMiekFVX3lxTE5fYkg1N3h6SU5wbktxaHlFN2dOMTdWV1RtcU80Smg2S2VhcnlqRk9fbGowV20zQ0FfbXFIMVpVSnVzXzhocVpieEc5bDlYeWR6ZWJGSklnSFllMEhxYXpSQ05CY0NkMVlVM1ltRlhOVExuT2FicENycVZn?oc=5  
+  出處連結：https://finance.biggo.com.tw/news/df4eee87-8990-4e24-908d-55e40d1102ec  
   【事實】川普憂弱勢日元衝擊美貿易 高市：日元低估本身就是問題（鉅亨網）  
   出處日期：2026-10-02  
   出處連結：https://m.cnyes.com/news/id/6620467  
   【事實】美中各300億美元商品擬降關稅 「美國黃豆未列入」專家揭原因（自由時報）  
   出處日期：2026-10-02  
-  出處連結：https://news.google.com/rss/articles/CBMiWEFVX3lxTE9tZ2U1WFU3OTdrX2hxM2dKMkFTRDNRQUJTQl81bE92Y3hzcl9jd3F0aFBzc3lUQXdFV2dNd1FxVF9DeHpNOWdMcUJWTkN6MFVIZGswd1A5Rmc?oc=5  
+  出處連結：https://stock.ltn.com.tw/article/1w9n6z8g7u2k  
   【事實】美中各300億美元商品擬降關稅 「美國黃豆未列入」專家揭原因（自由時報）  
   出處日期：2026-10-02  
   出處連結：https://stock.ltn.com.tw/article/1w9n6z8g7u2k  
   【事實】美中貿易談判再添籌碼！路透：美國放慢對中飛機零件出口許可（Yahoo新聞）  
   出處日期：2026-10-02  
-  出處連結：https://news.google.com/rss/articles/CBMijgNBVV95cUxNbjNWMnBSaE9Zb3RXOVBGTndPWkYtaWdmU1hpOXRJZzF2a3JRa2lZSnJ2YnpOa2hJamY5MG56Uy1xOF9aQlFSR2Q3Q1ZyTlAzWGNqODZKRllETlZnQ3otTFNVQjV0OWNjcGNnSW9DSWtsRnQzNzVQR0ZKNjZCYy1acFZvZ1ZXNmM4a1lVUnhUTEJKZXNsT3BnVkZPaWZUMl9vOTVjM21JMW5WR0R1eEFlcTlJa3ltQzhhNlNJV3VCQW1pNXhuWEt4X21pZnFrUGhnZEloV181TFh5WlJDd2FFWTd5WVktVjdMZ3ZUb3FVNEpPY1ZaSUQ2N3JxRTZ0UzI4bkJ5Ui0yYllfeFdpRkZScWFhQVNkbzNaRFVLZU1kRTlCal9YYVp5SHgwNzk1UWlwMzVwUUlodnAzanhKSWljRzZVQzFfWEVFR2RqeDRWcUNDSkcyS3luTDd4OVlYYlpQVkFoamtoU1R3eXA5Uk9GdlBRZ1gwRlg0MnJkdHAyUlNLd1VuVkpXbWI4TS1VQQ?oc=5  
+  出處連結：https://tw.news.yahoo.com/%E7%BE%8E%E4%B8%AD%E8%B2%BF%E6%98%93%E8%AB%87%E5%88%A4%E5%86%8D%E6%B7%BB%E7%B1%8C%E7%A2%BC-%E8%B7%AF%E9%80%8F-%E7%BE%8E%E5%9C%8B%E6%94%BE%E6%85%A2%E5%B0%8D%E4%B8%AD%E9%A3%9B%E6%A9%9F%E9%9B%B6%E4%BB%B6%E5%87%BA%E5%8F%A3%E8%A8%B1%E5%8F%AF-072806853.html  
   【事實】討論牆 | 趕不上耶誕購物季！美貿易代表：美中600億美元關稅減免「沒有時間表」（LINE TODAY）  
   出處日期：2026-10-02  
-  出處連結：https://news.google.com/rss/articles/CBMiZEFVX3lxTFBLOHlyNUFtaURmeFNzYzNsZ1ExckZNdE80cmFvdTlIdURnRmtWUi1DcVRGWnQxekdNMzRLTG13TG5NQkNQZ3M0ZmwyaXF1Z3RTVDE4WTZ3OWd3NzR0Nm9kS0RqWDk?oc=5  
+  出處連結：https://today.line.me/tw/v3/posts/list/article/1DPYelv  
   【事實】趕不上耶誕購物季！美貿易代表：美中600億美元關稅減免「沒有時間表」（news.cnyes.com）  
   出處日期：2026-10-02  
   出處連結：https://news.cnyes.com/news/print/6620026  
@@ -87,24 +105,39 @@
 ### 美債殖利率
 
 - **本週新聞**：
+  【事實】中國AI資料竟送進美國Claude！ 美財長曝擬與北京建「通報管道」（自由時報）  
+  出處日期：2026-10-04  
+  出處連結：https://news.ltn.com.tw/amp/news/world/breakingnews/5595037  
+  【事實】市場瘋AI！美銀Hartnett為何喊出美債「抄底時刻」來了- 國際（工商時報）  
+  出處日期：2026-10-04  
+  出處連結：https://www.ctee.com.tw/news/20261004700369-430702  
   【事實】美債殖利率飆升 唐湘龍示警「金融聖嬰現象」 陳鳳馨揭資金避風港（Yahoo新聞）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMimwNBVV95cUxOcFotQ0RmY2l5Qm5aV0VVSjhOcVhzVHhiOE1Od0xpVnNJSzFXaVZCUGxUMERoTURfQms0QWZqWUp5bWE0VG5wWkxrOEY3WnU1U2dmV2JRUm8tZGdwazlSdV9xM1dYLUo2NVRjSlUwN0ltSnVjbXRBeGxUVnhuYkJabFp0RlhLRzZ0dEk4M1FCRGlTUm1CVkswODE5djdEdkVpTzNlUFNWYldabDZ1ckJMd0VXMXQtYnJtZUJXUjNxNGVjSk5CX0pEek1GczFWTFVVSHJZVVc1ZlhJM2YwN05ycmdGSGw3YzB5SDdORVhWT21qRjNRckFCRmJxaC1UdWZtalF3VlJGSl9hRXkyclIwMzF3RlBjZ1ozMl9fTVhaekxjN0N6WThrNkJUbWdGSkdKY09VNzRWc19kaTNlOTg5Z3RnNjZCZC0yWEdORTVwSXpOVXc2Wm1JOWZxbDZ2TU94aldBYVFOMXNOblJoWjk0QlRFakhNZWhkVC1ObTNmNU9hWmlvV3RNRWpib1pieU1JRGl6NlE2QnhoeGM?oc=5  
-  【事實】美就業數據疲軟，日圓仍守在157價位，長債殖利率突破5%成日圓弱勢結構性支撐（BigGo 財經）  
+  出處連結：https://tw.news.yahoo.com/%E7%BE%8E%E5%82%B5%E6%AE%96%E5%88%A9%E7%8E%87%E9%A3%86%E5%8D%87-%E5%94%90%E6%B9%98%E9%BE%8D%E7%A4%BA%E8%AD%A6-%E9%87%91%E8%9E%8D%E8%81%96%E5%AC%B0%E7%8F%BE%E8%B1%A1-%E9%99%B3%E9%B3%B3%E9%A6%A8%E6%8F%AD%E8%B3%87%E9%87%91%E9%81%BF%E9%A2%A8%E6%B8%AF-162752335.html  
+  【事實】美就業數據疲軟，日圓仍守在157價位，長債殖利率突破5%成日圓弱勢結構性支撐（finance.biggo.com.tw）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMiekFVX3lxTE85QTdNLW93Ymg3QmNTZE1ZMXNKWU41UVVueXJOb2VwMEE1Q0ctX1BwS3htR2NEZWVhQjF3ZGFiZVFobjNOUzl4V0gyQXBQSlRTOVpDTXFRb2xpNDd4LTJEc1hPZlNNSVJlLUd2aFpvXzdzNlpxVHkyeERn?oc=5  
+  出處連結：https://finance.biggo.com.tw/news/b84f2548-972a-4a3c-807f-04872c0c0a66  
+  【事實】貝森特出面打強心劑！美債殖利率飆升「反映全球趨勢」、AI泡沫「不用太擔心」（鉅亨網）  
+  出處日期：2026-10-04  
+  出處連結：https://m.cnyes.com/news/id/6621092  
   【事實】貝森特又派定心丸 淡化對收益率上升和AI泡沫的擔憂（香港01）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMiTkFVX3lxTE5kVnZkRUFweF9wSTNpRWw2aXB4Vnh2STFHdDVvaVFzbEJIb1NTWnRiaS1ERTRkY0FxaVBKX00yZEpOejBUU05TYmJqWWFKQQ?oc=5  
+  出處連結：https://www.hk01.com/article/60396135  
+  【事實】高盛：長天期美債「完全無人問津」，分析師警告債價還沒見底| 動區動趨-最具影響力的區塊鏈新聞媒體（動區動趨）  
+  出處日期：2026-10-04  
+  出處連結：https://www.blocktempo.com/goldman-treasury-yields-surge-long-bonds-lack-buyers-valuations-bottom/  
   【事實】搶救美債破功？ 貝森特：持續加碼回購長債（自由時報）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMiWEFVX3lxTE9VOFF1S2EzaGVNcGxIMU9ERWNrc3Z6S254ZF92RENqZzBKXzBSNTFOdTVpTDVPRFVYVnk4T1V3elpYcWtxemczUzNPQ3M3RU9uWFNkZ0N6Qlc?oc=5  
+  出處連結：https://stock.ltn.com.tw/article/kw3vffsvmwax  
+  【事實】美債殖利率升破20多年來新高 投資想落袋 專家建議這3招（聯合報數位版）  
+  出處日期：2026-10-03  
+  出處連結：https://vip.udn.com/vip/story/122864/9791418?from=udn-category  
   【事實】美債殖利率飆破 5.3% 恆達理財CEO：無懼市場憂慮 股市牛市續存（商傳媒）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMijwNBVV95cUxPWjVPTU9OU1RtX2lSV0o0M3Qxc1ZnSTRXTlJSSlFZS3NwaVE1WEJrQWgxcFJvTEFDVTVyRUtEV2dQdWJMUFdyVkg0ZmJkWGNXY2ZuRHdYS2xYNWUwMEdVdGF2Zy1rc3lrcDFrX3hqZUZaMTQydjNXTi1FeFJBU3pLZXNCT3JId1IxQ0xqcWNFMW1aYURwY3lrRGhCQnlWYWFMR1FwbzBCS2dUNm9LMTdSSXh2by1mbHBpMUlWNFdaVzFiRFk3WnZXdkExYUppYWRQY0xJbVdaWFo5UG9QcmlvNk5XeXNVMHRxZzV0MHlnYVAtRGtlUkNRRWtKZ0lVLXlDUzdIcFJNWHUwaGUtVkRod2xwVUFLV2RVQkNHQ3ozdE9VOWdwNjRndDY3ZnF2LXMybGc3eERFVU14SFpnWjFWYmdtYUFVNVAtM2dEZDNMUlFwdUpRRnVRUzk5bmY1YTVDRkVuNk1lRUJVWm11T1pWWXRsdzh2Ml9jVHIwbHBCcEZ5QXhQZERDSHRoX1NtaFE?oc=5  
+  出處連結：https://sunmedia.tw/news/finance/1790983017-%E7%BE%8E%E5%82%B5%E6%AE%96%E5%88%A9%E7%8E%87%E9%A3%86%E7%A0%B4%205.3%25%20%E6%81%86%E9%81%94%E7%90%86%E8%B2%A1CEO%EF%BC%9A%E7%84%A1%E6%87%BC%E5%B8%82%E5%A0%B4%E6%86%82%E6%85%AE%20%E8%82%A1%E5%B8%82%E7%89%9B%E5%B8%82%E7%BA%8C%E5%AD%98  
   【事實】財長貝森特與美國國稅局打擊富人用來規避資本利得稅的ETF策略（flamingwheels.online）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMidEFVX3lxTFBNZTRmSmZKd0dlSXNlS3plVnNSQ2d5NGZtRHhSRExlX05Wc3cyVDZpanRnaEVUY3B3U3hCV2FfOURxN1p3ZnpSWnZ0WEFySjlfOU9MUl9WUnVEd3l2eHlXVEtsdTZvTUpuNEJ6bFVobXIxQlVT?oc=5  
+  出處連結：https://www.flamingwheels.online/news-view.html?_FgID=aKE9AHI1BHc3  
   【事實】海陸空夾殺！美國擴大制裁伊朗 貝森特：徹底斷絕政權收入（自由時報）  
   出處日期：2026-10-02  
   出處連結：https://news.ltn.com.tw/news/world/breakingnews/5592708  
@@ -113,13 +146,13 @@
   出處連結：https://tw.news.yahoo.com/%E7%BE%8E%E5%82%B5%E6%AE%96%E5%88%A9%E7%8E%87%E5%9B%9E%E8%90%BD-%E7%BE%8E%E8%82%A1%E5%8F%8D%E5%BD%88%E5%9B%9B%E5%A4%A7%E6%8C%87%E6%95%B8%E6%94%B6%E7%B4%85-001003560.html  
   【事實】美債殖利率飆破20年新高後「驚天反轉」 揭秘華爾街為何急忙逢低搶進 | 謝駒蕥 | 新聞（Storm.mg）  
   出處日期：2026-10-02  
-  出處連結：https://news.google.com/rss/articles/CBMiTkFVX3lxTE81eXhVVE4zMmQ3OTh2ZDVSallMU1BMeDk1bGhaazVEMENtcTBwZ1FGSnRYaFZNcjNuVENEUExSVzhXLUU5Tng1UUh0elp5UQ?oc=5  
+  出處連結：https://www.storm.mg/article/11169251  
   【事實】美法英日債殖利率飆數十年新高！全球利息支出3.3兆美元 甚至超越AI與國防（news.cnyes.com）  
   出處日期：2026-10-02  
   出處連結：https://news.cnyes.com/news/id/6620018  
   【事實】非農爆冷救美債！2年期美債殖利率跳水 Fed本月不升息機率破8成（news.cnyes.com）  
   出處日期：2026-10-02  
-  出處連結：https://news.google.com/rss/articles/CBMiT0FVX3lxTFBLSXNVX0wxdXBZeUtUZENYRjNxZVlyMlNwZjlPTndBOFhYT1ZLZHd1T1RRWW1iV2FvWjVfaFhkdHFKUXZndU5UOWdNbTNiUXc?oc=5  
+  出處連結：https://news.cnyes.com/news/id/6620666  
   【事實】別被高殖利率騙了！策略師示警美債可能還沒跌夠（news.cnyes.com）  
   出處日期：2026-10-01  
   出處連結：https://news.cnyes.com/news/id/6619859  
@@ -157,15 +190,27 @@
 ### Fed 降息預期
 
 - **本週新聞**：
+  【事實】司法部不重啟前聯準會主席鮑爾的刑事調查，川普要求辭去Fed 理事職位| 動區動趨-最具影響力的區塊鏈新聞媒體（動區動趨）  
+  出處日期：2026-10-04  
+  出處連結：https://www.blocktempo.com/doj-blanche-drops-powell-criminal-probe-fed-renovation-audit-looms/  
+  【事實】川普喊話Fed新主席︰下週應降息（自由時報）  
+  出處日期：2026-10-04  
+  出處連結：https://stock.ltn.com.tw/article/uexuhfrshsay  
   【事實】美債拋售潮反轉訊號來了！空頭大將Bianco 6年首度翻多 喊「此價位」殖利率是甜甜價（自由時報）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMiWEFVX3lxTFBxcG1RQ2NoTl81Z1c5NlcyTnUzZGtudjhUU19PQ1BFQUdZN2wwQXhXQ3dNV2xocHJfNHhmcVhUSFRmRmJpbHROLWNNUU1TSktra205VTUyZUQ?oc=5  
+  出處連結：https://stock.ltn.com.tw/article/53net2awqabm  
+  【事實】聯準會降息預期推升台指狂飆677點！光通訊迎轉單效應，緯穎籌碼承壓-財經焦點情報站（CMoney投資網誌）  
+  出處日期：2026-10-04  
+  出處連結：https://cmnews.com.tw/article/forumnews-25f527f4-bfaa-11f1-a707-39ece1e6a005  
   【事實】Fed示警「通膨心態」成降息阻力！企業提前漲價恐讓美國通膨更難降至2%（鉅亨網）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMiS0FVX3lxTFB2UVBjQkRiZ2stS2hUTWt0c3pVMHA5TGhXUXQtOTM1azlmcXlhWlZVaXB3dGQ0bS1RT0RvM3VBTGI0RWlESDU4TFh4WQ?oc=5  
+  出處連結：https://m.cnyes.com/news/id/6620945  
+  【事實】川普想撤換 Fed 三理事 難如願（UDN）  
+  出處日期：2026-10-03  
+  出處連結：https://udn.com/news/story/6813/9791712  
   【事實】美國司法部長稱不會重啟對前聯準會主席鮑爾的刑事調查 | 國際焦點 | 國際（經濟日報）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMiWkFVX3lxTE11d3IxeXQ1YnFVUktSUlp1N2dsMnVHaGV6ZWk4QVhqbkhqV3RQUDlyZk9QVDBlcUhsOXNQZ1BhZmtuWjhrZ1BscDJ5Y3lrdG0xa0QySC1WWjFfUQ?oc=5  
+  出處連結：https://money.udn.com/money/story/5599/9791875  
   【事實】Fed升息機率飆 川普、華許緊張升溫（自由時報）  
   出處日期：2026-10-02  
   出處連結：https://stock.ltn.com.tw/article/ytkfbdf0yanc  
@@ -177,16 +222,16 @@
   出處連結：https://udn.com/news/story/6811/9790013  
   【事實】川普重申美國利率應為「全球最低」（Yahoo 財經）  
   出處日期：2026-10-02  
-  出處連結：https://news.google.com/rss/articles/CBMihwJBVV95cUxPUHhURmdCem5CZkxOMHZrV1BmZHBOZGJmMGgyamxPSHFIUW9VY3Y5VUcwNld6UnZPa3FQX2t3LWYwQkpjRjI1QnIxa0w3M1dMMG5lSzVMTWw1bWxvU2lQdzEyTzJvSnhGOXNfU01pVHJ0YWl2WmgyMURNaTFHeTJKdHJRR3ZnV3BBMU15ay12N3dZdHZTVlFLdlR5NW4zM2dNT0YyOUw2dm5FakF2WF93RXVJSVAwenNab05pSzNMdTRUc1h2ZnY2VHpiOXNqRFZTb0ZVNkhWZkpFdG1XNVlPX2pSZ24zQUFIMV83UFMta0NWZS15NzJRX2pCZEJhWE5kaEZZRkdxaw?oc=5  
+  出處連結：https://hk.finance.yahoo.com/news/%E5%B7%9D%E6%99%AE%E9%87%8D%E7%94%B3%E7%BE%8E%E5%9C%8B%E5%88%A9%E7%8E%87%E6%87%89%E7%82%BA-%E5%85%A8%E7%90%83%E6%9C%80%E4%BD%8E-044008933.html  
   【事實】庫克：AI擴張恐推升通膨 2027年成聯準會重要風險（科技島）  
   出處日期：2026-10-02  
   出處連結：https://www.technice.com.tw/issues/ai/324924/  
   【事實】想換掉鮑爾沒那麼簡單！川普鎖定Fed三理事 最終恐難開鍘（news.cnyes.com）  
   出處日期：2026-10-02  
-  出處連結：https://news.google.com/rss/articles/CBMiT0FVX3lxTE0xWTZPNGhqVHM4akI0OW1renowam1KUFNXcE1hX2RrRjBHSEJ5ZTF2aVA0TzRDMlFIODRzLWVJejB6WVFWaURkdGxBeTh1Wlk?oc=5  
+  出處連結：https://news.cnyes.com/news/id/6620024  
   【事實】美國 9 月非農僅增 2.9 萬人！前值慘下修 6 萬、失業率升至 4.2%，聯準會升息押注降溫（動區動趨）  
   出處日期：2026-10-02  
-  出處連結：https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbUdrN29KQkUwZ1Z4WW9makcxU0UtRzVCQUpJMVk1WDJqS1ZoQUFuc21mRVJKLUdJNVBtUkJrbVdlbXN5YlZFcFdxMzJTRkkxU3NyeUhEWUwwYzVvdC1wbFdOY1I5OWtNTmZPdXIxUFpuM0gtVUwxaXEtakhDYy1pS1FwT0hidjdD?oc=5  
+  出處連結：https://www.blocktempo.com/us-nonfarm-payrolls-september-2026-labor-market-cools/  
   【事實】Fed總部翻修調查出爐！未發現違法 川普仍逼鮑爾辭理事（news.cnyes.com）  
   出處日期：2026-10-01  
   出處連結：https://news.cnyes.com/news/id/6619180  
@@ -214,31 +259,43 @@
 - **本週新聞**：
   【事實】“日本已決定購買烏克蘭無人機”（鉅亨號）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMiSEFVX3lxTFBQeVlxRDlMaGVzWlJaMFpwUEtITXVBcUFlRlM1TGhOdnBPV2d2RmVZWEZHUk5hMnh2ZnM3VW9CeEEtMXBpcU9JNg?oc=5  
+  出處連結：https://hao.cnyes.com/post/270825  
   【事實】中東戰火升溫！沙國首都遇襲 青年運動轟炸能源設施（Yahoo新聞）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMi3gJBVV95cUxNOVJvY09odXZmSHhxZDlOOV9KNnhqOWZ0elFoRW9DZXpQZmFqbTgwNnNuZzJlRmFWYkV6MmlJY3BUYWNSQzdGS0JsNzJVU1JKdEprVlZ4YVh3Nl8tMEJkTXVWMHB3VWpLeXV6S1FEQnh5X1FLTlhnNExjVUU1cTNGZVFidTV6X0VyNWtkSlhzSFhKNnBzSnB0ZzBwa0V0ZV8xaVdPTjJ0dUl4MFFMRnBlTTJhQ1lVTTdEWnh0cEIwZ2pwYzQyS3dsdWVOVDNjNGpUdWdfVUdOMXZ2V3J1dmdTcmU5b2RpNnhrTkY3OVpKNnhKMV9iYzJqRUU3d3JBNjI2TlBOUWVkc0loSTlIOUtocU1GU1JuTTBiV2M0OW5UQ0R0ZlFFTXNON09aeXBfdjVKWFp6c05lWWVvTGhraWt0U3FCb0FYU1llMUE4MHRoY3NKVFI4akZnWnpxMEZZZw?oc=5  
+  出處連結：https://tw.news.yahoo.com/%E4%B8%AD%E6%9D%B1%E6%88%B0%E7%81%AB%E5%8D%87%E6%BA%AB-%E6%B2%99%E5%9C%8B%E9%A6%96%E9%83%BD%E9%81%87%E8%A5%B2-%E9%9D%92%E5%B9%B4%E9%81%8B%E5%8B%95%E8%BD%9F%E7%82%B8%E8%83%BD%E6%BA%90%E8%A8%AD%E6%96%BD-021029322.html  
   【事實】中東戰雲密布 川普國安高層大衛營密會（自由時報）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMiXEFVX3lxTFBSZDREeW80TTVBalVYd1VjTUgyck1IV3ZDLVNSb0dBWDg4SVpOaVdzeEJCbnZIbDU4S2lVVFhscDB5MlhMVnVUY0RyV2F2clN5TS1fMC11OXZYeE9i0gFiQVVfeXFMTkM4RDNZSDk3UHkyS2tsbEg3SC1aYnBOOENZcUdDVUpzVWtDOVBzR0VrT2RhWU1qcDBCTTVJYUVxT0RNMXg5SzJGV2JiaXBGWVpwcGg4c2UyUU5MTnN1MkJESEE?oc=5  
+  出處連結：https://news.ltn.com.tw/news/world/paper/1773189  
+  【事實】俄國冬天擴大攻擊烏克蘭將炸煉油廠反制| 國際焦點| 全球（UDN）  
+  出處日期：2026-10-04  
+  出處連結：https://udn.com/news/story/6809/9793733?from=udn-ch1_breaknews-1-99-news  
+  【事實】俄羅斯警告外國人「立刻撤離基輔」放話持續轟炸烏克蘭（東森新聞）  
+  出處日期：2026-10-04  
+  出處連結：https://news.ebc.net.tw/news/world/574157  
+  【事實】德國總理Merz造訪基輔 攜國防高層承諾力挺烏克蘭 | 民視新聞網（LINE TODAY）  
+  出處日期：2026-10-04  
+  出處連結：https://today.line.me/tw/v3/article/kEp9kww  
   【事實】澤連斯基稱烏克蘭將加強對俄煉油廠打擊（中國評論新聞）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9rTDRDM2VTVFQyS2xGQVdjWHV4dGZuRjVxR0s5VGFJV0ctZkZlTElIV1BoNEw2bzZYM2gtazVobjRTWDRlVUFSRjhua3BVdlduTnh6cG9TM1dDeDF0cVU1OEVmSF95dXc?oc=5  
+  出處連結：http://www.crntt.com/doc/7_0_107240660_1_1004095148.html  
+  【事實】美批星巴克新疆開店“道德淪喪” 外交部駁斥（中國評論新聞）  
+  出處日期：2026-10-04  
+  出處連結：http://www.crntt.com/doc/151_21811_107240632_1_1004102245.html  
   【事實】六四37周年：中國抨擊美國國務卿悼念評論 - Radio-Canada（Radio-Canada）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMiqAJBVV95cUxNV3YxbGc0NWhLY1M3RmYyWFFYYnE3MUh4RE5kRXpTMlJxSjFteldmLXJNZnRUaUtqTTBLR0pzc3FBTnR5N0RxQkpVZ1RQOTJhRWlmcnVwRkZWdXJaNUpTczBrNXBKT194T1d4RlhCNGJEbzFlQ2p6M3pxNE80eWhiUHVxMzNnSGJWNGtHT1lmVmpWeC12VUFzS3FuZ05MVTgtMVppRlZ3OTVWWWlzMVMtNnZ4VzVUbGxvbTNfZmx5ZThWMm5jUF9CNDYwM00wR1JwNEZSOTNXaVRLY2E5alVpeDJ2RDlqUDI0bU83U3J0eEpmQkdnM3Bpb21mNGNPa2U0QXFweFNqSERMbERhQkJ6aF9NZjRCTFl6LVhLQUpJRUpiZWg1bFI3dQ?oc=5  
+  出處連結：https://ici.radio-canada.ca/rci/zh-hant/%E6%96%B0%E9%97%BB/2259174/%E5%85%AD%E5%9B%9B-37%E5%91%A8%E5%B9%B4-%E4%B8%AD%E5%9B%BD-%E6%8A%A8%E5%87%BB-%E7%BE%8E%E5%9B%BD-%E6%82%BC%E5%BF%B5-%E8%AF%84%E8%AE%BA  
   【事實】普丁絕望？下令俄軍「不再遵守戰爭規則」、澤倫斯基揭情報：加大攻擊烏克蘭平民（news.cnyes.com）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMiT0FVX3lxTE9IU0xISW9Ldm1iM3NhejM5MTRCU0g1dnR4TXdDU1RIMUd4TDNSNHZybE5tRmVFUnIwcDBud3NaUDU1anItclh1MWFkTWNuNDA?oc=5  
+  出處連結：https://news.cnyes.com/news/id/6620949  
   【事實】深圳APEC峰會11月登場 中國外交部：歡迎普丁出席（rti.org.tw）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMiV0FVX3lxTE9rOTZmZEJMSFBvRjJxS0txV28wMFVPTms1T0FsNkx5OGMwUzN6VFctejVVbFE2T09qWllwRWJWMlBlZnRNRXV3UHdLeXV5Q0tYZkYxOXkyVQ?oc=5  
+  出處連結：https://www.rti.org.tw/news?uid=3&pid=235558  
   【事實】美議員促星巴克關閉新疆門市 中國外交部批捏造事實（民視新聞網）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMiYEFVX3lxTE5Kc3FlRW1mWGZ5Z192QmtXc0tnVFBtb3d6NlZhZVl6UlN3X25TQ1JULTFORGtISzBMdnc5QjNCemJxSmh0LVdsQ0JWZDZmcVNEeEJJVFFUWFhPazhvRU1qcQ?oc=5  
+  出處連結：https://www.ftvnews.com.tw/news/detail/2026A03W0454  
   【事實】中國外交部直呼「高市早苗」不提首相頭銜 分析：刻意降級釋強硬訊號 | 太報（LINE TODAY）  
   出處日期：2026-10-02  
-  出處連結：https://news.google.com/rss/articles/CBMicEFVX3lxTFAzLXdSc004UDIyTkItWnc3WFMtQmZlV051Tkt1OElRTkhFVktBX3Z5WElmd2c2aFo3UHQ2VVVhX2ppREhBOEM2TGhGaFJiSXM5SkY0elZFR2FabHZtV2U4Z2VjUlNqcV9ka0kxSkdRSHA?oc=5  
+  出處連結：https://today.line.me/tw/v3/article/GgN0aJ5?referral=globalnews  
   【事實】傳中國暫停出口燃料、美增派部隊赴中東 油價大漲（自由財經）  
   出處日期：2026-10-02  
   出處連結：https://ec.ltn.com.tw/article/breakingnews/5592671  
@@ -256,7 +313,7 @@
   出處連結：https://n.yam.com/Article/20261002153128  
   【事實】美財政部制裁10名包括香港的個人及實體 涉助伊朗採購武器及零件（香港01）  
   出處日期：2026-10-02  
-  出處連結：https://news.google.com/rss/articles/CBMiygNBVV95cUxNXy12VzdTUzM5bnF1NVFDVmVBZ0lrRjZpd0JGdmJVNmJKZWY1ODBteG9EdmNiRTh6Nk94YTh3MkozQVEyZmZsbmoxLWItbTFqYy1qSTlZYS1LaXZZbEQzZTJWbWY3bUFaQ05xMFM0OUN1OUZGczhvRHpKZ2puZ2R1WkJrcWVFc0xURkR3NWlSYzY3VFVzanBleVBoVHFnSkZOc0JEUWFjY2RXX2FFbHhWNnVqZVBKSUtYQmc5T1cyMTdxdjg4R3YyWVZ1dU9yR1YtSzNzVVRJVFVHc1FsQl9CQ05QaE9QQkZJbkNZY1dtcTlsSzJPWW5IQmZhLUM0aTBucF9Sb3ViT0s3bnVubkhqNHFnNlFsN05DUUtEQjZYcFVVMUdHUzRndG1IU0Q5dVRxQ0hDdXJvOElqcElLd2VNajZJZ2U5b1JfMl93XzEyZGIzR1dXWVdERlFQMjBROER5ekppaGZwSmw4RkQxSmhxYnFoQkx3emVXemZHNGtaN3BTMHRaSVU1UEp2cWNaWUZYUmFpTkJhTU9aSXlJcWtDZEJoOU1JdGwzMmQ4RTFtdlBxWDJHQUVWcGhXcnE2N0pzUzlpWDhGV3VwZw?oc=5  
+  出處連結：https://www.hk01.com/%E5%8D%B3%E6%99%82%E5%9C%8B%E9%9A%9B/60395037/%E7%BE%8E%E8%B2%A1%E6%94%BF%E9%83%A8%E5%88%B6%E8%A3%8110%E5%90%8D%E5%8C%85%E6%8B%AC%E9%A6%99%E6%B8%AF%E7%9A%84%E5%80%8B%E4%BA%BA%E5%8F%8A%E5%AF%A6%E9%AB%94-%E6%B6%89%E5%8A%A9%E4%BC%8A%E6%9C%97%E6%8E%A1%E8%B3%BC%E6%AD%A6%E5%99%A8%E5%8F%8A%E9%9B%B6%E4%BB%B6  
   【事實】馬斯克重獲川普政府青睞！攜手國防大咖研擬「未來戰爭」科技（NOWnews今日新聞）  
   出處日期：2026-10-02  
   出處連結：https://www.nownews.com/news/6879891  
@@ -293,9 +350,6 @@
   【事實】俄羅斯無人機猛轟基輔烏克蘭國家科學院陷火海| 國際（中央社 CNA）  
   出處日期：2026-09-29  
   出處連結：https://www.cna.com.tw/news/aopl/202609290317.aspx  
-  【事實】部份外援未到位 烏克蘭將推遲非關鍵支出（rti.org.tw）  
-  出處日期：2026-09-29  
-  出處連結：https://www.rti.org.tw/news?uid=3&pid=234510  
   【事實】荷莫茲海峽重開再等等，川普拒絕伊朗提案（TechNews 科技新報）  
   出處日期：2026-09-28  
   出處連結：https://technews.tw/2026/09/28/strait-of-hormuz-reopening-delayed-trump-rejects-iran-7-day-plan/  
@@ -305,46 +359,79 @@
 - **本週新聞**：
   【事實】AI伺服器出口上看4,000億元，EPS分化會先淘汰誰？-跟著大資走 澤明（CMoney投資網誌）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMigwFBVV95cUxPQ29jby05X2FoNTIxQjdOaUxfQno1cS1SSm4zMHdNTnFXN0pXU0tPenhwUEYyQnQ1VGdWTzRmcmtwTnpyTE9lUXBFMzI2SnJkNVBDa3VIMnByZ0RRUFh0OFI4ZkZwT2pCYVZzUUprQk9ZckdobkNNb2p4T3YxTFRuNUc3cw?oc=5  
+  出處連結：https://cmnews.com.tw/article/wangzeming-5cc41bb4-bf8a-11f1-8f58-4524fea8c554  
   【事實】五大雲端業者資本支出都在拉高，自由現金流何時回升才算關鍵?（CMoney）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMie0FVX3lxTE5nMG5XVlJtSUNJT080Y0F1RzVGMkxxT0d1dnpiTnlTN3FkNkIxVGRNY0tqY21QYkFET1ZadkZOVnAycXJOUmhFQV95Sm9rbXZjaWszQzRVRzU4UkxvZ0xWUFdweDVQc003cldsWklVQ2pucFJ1OFpfYUN0UQ?oc=5  
+  出處連結：https://www.cmoney.tw/forum/readmo/a78ad22b-d0a9-41b1-9fce-2867d196848c  
+  【事實】仁寶亮相 2026 OCP 全球峰會，展示輝達 AI 工廠基礎設施方案（TechNews 科技新報）  
+  出處日期：2026-10-04  
+  出處連結：https://technews.tw/2026/10/04/compal-2026-ocp/  
+  【事實】台積電可能加入 Terafab，馬斯克證實正在洽談晶片製造合作（TechNews 科技新報）  
+  出處日期：2026-10-04  
+  出處連結：https://finance.technews.tw/2026/10/04/elon-musk-confirmed-that-hes-in-talks-with-tsmc-for-joining-the-terafab/  
+  【事實】台積電永續報告書出爐 魏哲家：利潤分配加大ESG資源投入（自由時報）  
+  出處日期：2026-10-04  
+  出處連結：https://stock.ltn.com.tw/article/sv1xaf8rwchb  
+  【事實】川普任命國家情報為「AI沙皇」！白宮成立超級智慧工作小組、120天內評估風險（鉅亨網）  
+  出處日期：2026-10-04  
+  出處連結：https://m.cnyes.com/news/id/6621180  
+  【事實】川普巡迴行程轉戰俄州！力保資料中心擴建 嚴防中國科技超車（Yahoo新聞）  
+  出處日期：2026-10-04  
+  出處連結：https://tw.news.yahoo.com/%E5%B7%9D%E6%99%AE%E5%B7%A1%E8%BF%B4%E8%A1%8C%E7%A8%8B%E8%BD%89%E6%88%B0%E4%BF%84%E5%B7%9E-%E5%8A%9B%E4%BF%9D%E8%B3%87%E6%96%99%E4%B8%AD%E5%BF%83%E6%93%B4%E5%BB%BA-%E5%9A%B4%E9%98%B2%E4%B8%AD%E5%9C%8B%E7%A7%91%E6%8A%80%E8%B6%85%E8%BB%8A-055435313.html  
+  【事實】川普鬆口美國政府可能入股 OpenAI、Anthropic（動區動趨）  
+  出處日期：2026-10-04  
+  出處連結：https://www.blocktempo.com/trump-time-interview-anthropic-stake-intel-formula-openai-amodei-dinner/  
   【事實】祖克柏開砲！反對放慢AI研發直言： 產品不安全自然會被市場淘汰（T客邦）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMiiAFBVV95cUxNVkJQVXJLSHVLUVVKb2JmcGxUYmtsRjNGNHRxTzc4c1V4RHhZMDJBSUZFajRoc2ZRU2NNcTFUNXc3V040d0lkUHVuMXhlT3VDV0c1c1BTUnBuVDRLb1Zkbzdkc1BjS29TZEg2OWlnN2JJemxHYWpqMVhzWGNhUG9YQ1M3Q0NtVFdB?oc=5  
+  出處連結：https://www.techbang.com/posts/133738-zuckerberg-ai-safety-independent-evaluation  
+  【事實】輝達AI小鋼炮記憶體砍半更貴 宏碁、華碩、技嘉、微星搶賣（民報）  
+  出處日期：2026-10-04  
+  出處連結：https://www.peoplenews.tw/articles/economic-news/58975  
   【事實】輝達推64G高貴迷你PC 宏碁、華碩等是合作廠商| 全球財經| 全球（UDN）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMic0FVX3lxTE54WWRyaGJMLWdIbDBSRzhmTldIdFhSNlo3UEVHaGM2cS10cHVtdm53c2MtdkFqYld2cVRMeUkyR1p0ZHdfb0RCQzMyemx1ci1fdTZQbEFJdG5lZ3NZdEUzN3ZUQnFGbzJiVmttVjRSRktZWlU?oc=5  
+  出處連結：http://udn.com/news/story/6811/9793023?from=udn-catebreaknews_ch2  
   【事實】輝達新版 DGX Spark 上市！台系品牌與零組件供應鏈迎商機（鏈新聞 ABMedia）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMiS0FVX3lxTE4xR29FLU9Ea3J4czZrSlZ1Q21pUTFRT0NfMG41ZDFmT3M1Sm5ieFFfb0hmcmxBQkkyZU1VWV9wOEhCVFZHeFprSXM3WQ?oc=5  
+  出處連結：https://abmedia.io/nvidia-dgx-spark  
+  【事實】輝達股價刷新高！市值直逼6兆美元 大摩喊買「目標價300」（TVBS新聞網）  
+  出處日期：2026-10-04  
+  出處連結：https://news.tvbs.com.tw/money/4031384  
   【事實】輝達股價創盤中歷史新高 市值逼近6萬億美元（信報網站）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMi7wNBVV95cUxPZVFaRHNiYVM3N19KOUNJYUNjVGdQU2hicVJWXzRMSDNXTy1DSHppSW9ib1lPeGRxNEtYdmJaWUd4WWF4RElrdmk0T0tvck1ON0l5MzJ3a0RxSlpVdTVzZFQ5OHNqV2xXUTBrYzJqT3c4UHhOVjVBYWVwZGQ2cUtVVlc0bEVSSnRHWm1xMWJnQ0tYN2VxaDVOY1QtVWphbU56a2RQQVpxd1d2dHNHbENSelF4UElGeDZtaHB6VUNNYmt0UlF6cWI3akV1bms0cXdudVF3R19WS1Y5V3czZEk4bWZwMVlVa1FRa2NDMUM5T2xYMzkwci1DNnJmQTFrR21BSDBpeW9xQ1BhM3pUZjJ0TV82TUVoNVpBRWxibXlPdGx0djFpSHZ6aFpOems5NkloZVhuR01Qdk5NMmstUE8wODlTb1VIdUFTdjdCSExGZnlCaWNXbXZFU19hSnZmSUtWcVZSTWY3djZkTEotT3FwdHdIVS0tazRGRUVNQjBwZ2gtY1BVdkpOX2xBM3ZLNXVLZVRPOERNQThRWnU3UmE3RC1aTXBvVnJfamg0YTF6dDJpNVlRZUNKTEwzaml1N0k2YjJXMkJJV0o3Y3k0Q29BTm1fd1E3anJreFdsNGJWSG4tdWNWWDlkN0loeTRZdzQ?oc=5  
-  【事實】馬斯克調高特斯拉AI5晶片記憶體至96GB！效能喊超越輝達、成本僅1成（鉅亨網）  
+  出處連結：https://www.hkej.com/instantnews/international/article/4531158/%25E8%25BC%259D%25E9%2581%2594%25E8%2582%25A1%25E5%2583%25B9%25E5%2589%25B5%25E7%259B%25A4%25E4%25B8%25AD%25E6%25AD%25B7%25E5%258F%25B2%25E6%2596%25B0%25E9%25AB%2598-%25E5%25B8%2582%25E5%2580%25BC%25E9%2580%25BC%25E8%25BF%25916%25E8%2590%25AC%25E5%2584%2584%25E7%25BE%258E%25E5%2585%2583  
+  【事實】馬斯克調高特斯拉AI5晶片記憶體至96GB！效能喊超越輝達、成本僅1成（news.cnyes.com）  
   出處日期：2026-10-04  
-  出處連結：https://news.google.com/rss/articles/CBMiS0FVX3lxTE9rRVFFR3BSSmRIZ0xsUEJVcV9nN3NPQ3d6OE5uNUFlaWNXS04zaHg3Q3ROSDhBWG43YjZsUVpSV04tdnRQMjdEUWQ4dw?oc=5  
+  出處連結：https://news.cnyes.com/news/id/6620969  
+  【事實】黃仁勳指資安越獄恐慌是「人造的」，AI Agent 將成最強防護盾（T客邦）  
+  出處日期：2026-10-04  
+  出處連結：https://www.techbang.com/posts/133136-jensen-huang-nvidia-ai-security-fear-sells  
   【事實】AI帶動出口與投資 景氣連9紅、全年經濟成長估11.05%（PChome Online 新聞）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMiiwFBVV95cUxQazU1RTdOTHBKS20tYXVEQWdIUUFrcW9WVXF6Q1hSc2xCRkxnLVJEZGluYUxEV0FscjJTVmpxZkplZEhlakpqcTZKeGVWN3FFUTZQVzhYZEkxQlJJTUpVek84WnMzRVFuc0ZqRENLUHpXQV90WHljdjdPeklmYy0zUE5xU05Vdnc0QWFZ?oc=5  
+  出處連結：https://news.pchome.com.tw/finance/grinews/20261003/index-79100361605679205003.html  
   【事實】AI資本支出一路擴到記憶體與代工廠，誰先把訂單變營收？-跟著大資走 澤明（CMoney投資網誌）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMigwFBVV95cUxPTF9yWHVwX1p5QUdUNko5Nkw1aGR5Nkd4Z1gtRlRPM2lkbHFQUVdJS3dGTm5TVkJLMUhfWHhoamZZa29iSUN5MGRONzNpZHpqZ3NtdXRZNWVFbm82SFlDcFBtRnB0QmNGOGh3aTBtV0hTaVhfNnVnZ3RodFN6QWlYNDFpNA?oc=5  
+  出處連結：https://cmnews.com.tw/article/wangzeming-e777b98e-beed-11f1-b935-795addbd00d3  
   【事實】傳黃仁勳女兒已出嫁 三星會長李在鎔曝：不久前剛完婚（三立新聞）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMiS0FVX3lxTE1hOEFGZ1Frc3ZEbmhaZm9DcjBaeng1NVVGT2lkRVNkS1Q5NWtmbVBYQlAwbTByVmMzdDRPU3I2c3Q0WGJXaC04M25mZw?oc=5  
+  出處連結：https://inews.setn.com/news/1916821  
   【事實】台積電與馬斯克洽談德州晶圓廠合作！馬斯克證實「可能會有進展」 持股、營運模式尚未定案（放言Fount Media）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMiUkFVX3lxTE9EYlU5UElXaHlHZ3REUG5VcUtmWnhoRFU3NjlYWTBpejZibWJwbXo3ZmtVaGZ4b1FPMEVhVzRhOGtoLUtIajZIYXNoLXktOGotTGc?oc=5  
+  出處連結：https://www.fountmedia.io/article/430799  
   【事實】川普邀6科技大咖 談AI監管（自由時報）  
   出處日期：2026-10-03  
-  出處連結：https://news.google.com/rss/articles/CBMiWEFVX3lxTE56bmx6eXJEN25fd2lzelZ3SWRmX1ZzZF94WmFaajRWcWpuNGV0UDlVLTZFMS13eUZxcm9sM0UzcWwyRjFsY20yNEhkT0FUWHpOTXY5RGdiQV8?oc=5  
+  出處連結：https://stock.ltn.com.tw/article/31dvcchzynke  
+  【事實】輝達GPU大單加持！「封測大廠」目標價喊370元 三大法人卻砍2.3萬張抱回69.6億元（Yahoo股市）  
+  出處日期：2026-10-03  
+  出處連結：https://tw.stock.yahoo.com/news/%E8%BC%9D%E9%81%94gpu%E5%A4%A7%E5%96%AE%E5%8A%A0%E6%8C%81-%E5%B0%81%E6%B8%AC%E5%A4%A7%E5%BB%A0-%E7%9B%AE%E6%A8%99%E5%83%B9%E5%96%8A370%E5%85%83-%E4%B8%89%E5%A4%A7%E6%B3%95%E4%BA%BA%E5%8D%BB%E7%A0%8D2-3%E8%90%AC%E5%BC%B5%E6%8A%B1%E5%9B%9E69-133000829.html  
   【事實】輝達股價創歷史新高！市值首破5.7兆美元（中天新聞網）  
   出處日期：2026-10-03  
   出處連結：https://ctinews.com/news/items/8knJqoqqxo  
   【事實】AI 燒錢潮壓頂！Amazon 傳打包轉賣 Nvidia 晶片籌資，科網巨頭資本支出戰開打（CMoney投資網誌）  
   出處日期：2026-10-02  
-  出處連結：https://news.google.com/rss/articles/CBMijgFBVV95cUxPQ253REwtTkdMQ0ZLUHEwb2E2cmcxbUp0dUJJejUyTEowY0xUbVE5ekVqVk5SdTRjTlJuVEY2eHlBYnpVbk1aUGIzbl9MQ3l0SEZvdXNuT245RUJTWUprTmNyb05JeTV6MHpId1liaG41cmJNdmNBX0FMY1Y3cWhjRVBUNFdNNmx6djgtVVF3?oc=5  
+  出處連結：https://cmnews.com.tw/article/cmoneyairesearcher-30324dc9-be1e-11f1-b3e9-aa4b17065419  
+  【事實】AI一路旺到2028？大摩給出關鍵答案（鉅亨網）  
+  出處日期：2026-10-02  
+  出處連結：https://m.cnyes.com/news/print/6620527  
   【事實】Amazon擬將價值80億美元的輝達GPU移出資產負債表，AI算力投資催生新融資模式（優分析UAnalyze）  
   出處日期：2026-10-02  
   出處連結：https://uanalyze.com.tw/articles/3427156417  
@@ -360,6 +447,9 @@
   【事實】「AI 改名 SI」川普正式簽署行政命令，業界自律協議同步登場｜美股觀察｜豐雲學堂2026 年 10 月（sinotrade.com.tw）  
   出處日期：2026-10-02  
   出處連結：https://www.sinotrade.com.tw/richclub/hotstock/-AI-%E6%94%B9%E5%90%8D-SI-%E5%B7%9D%E6%99%AE%E6%AD%A3%E5%BC%8F%E7%B0%BD%E7%BD%B2%E8%A1%8C%E6%94%BF%E5%91%BD%E4%BB%A4-%E6%A5%AD%E7%95%8C%E8%87%AA%E5%BE%8B%E5%8D%94%E8%AD%B0%E5%90%8C%E6%AD%A5%E7%99%BB%E5%A0%B4-%E7%BE%8E%E8%82%A1%E8%A7%80%E5%AF%9F-6abe27c0d03a4f01608637e0  
+  【事實】光寶擴大 AI 電源產能，砸 88.5 億元擴產高雄（TechNews 科技新報）  
+  出處日期：2026-10-02  
+  出處連結：https://finance.technews.tw/2026/10/02/lite-on-expands-ai-power-supply-capacity-investing-nt8-85-billion-kaohsiung/  
   【事實】川普AI午餐會獨缺蘋果！外媒曝庫克缺席背後真相（自由財經）  
   出處日期：2026-10-02  
   出處連結：https://ec.ltn.com.tw/article/breakingnews/5592703  
@@ -369,6 +459,9 @@
   【事實】川普：美國政府可能入股OpenAI跟Anthropic（news.cnyes.com）  
   出處日期：2026-10-02  
   出處連結：https://news.cnyes.com/news/id/6620023  
+  【事實】摩根士丹利重新將NVIDIA列為半導體首選 黃仁勳透露AI需求不只來自雲端巨頭（優分析UAnalyze）  
+  出處日期：2026-10-02  
+  出處連結：https://uanalyze.com.tw/articles/2812756413  
   【事實】馬斯克大砍記憶體規格！特斯拉 AI5 降至 72GB、AI6 縮減 1/3 容量（TechNews 科技新報）  
   出處日期：2026-10-02  
   出處連結：https://technews.tw/2026/10/02/elon-musk-tesla-ai5-chip/  
