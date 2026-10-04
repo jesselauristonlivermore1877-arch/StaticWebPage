@@ -1,0 +1,160 @@
+{
+ "v": 1,
+ "l1": [
+  "產業",
+  "金融經濟",
+  "政治",
+  "民生"
+ ],
+ "l2": {
+  "產業": [
+   "產業與科技",
+   "台股公司",
+   "美股公司"
+  ],
+  "金融經濟": [
+   "利率、央行與匯率",
+   "經濟指標"
+  ],
+  "政治": [
+   "地緣政治"
+  ],
+  "民生": [
+   "民生"
+  ]
+ },
+ "l3": [
+  "公開資訊觀測站重大訊息",
+  "國內媒體",
+  "國外媒體",
+  "外資券商",
+  "意見領袖",
+  "PTT"
+ ],
+ "cat2l2": {
+  "科技與 AI": "產業與科技",
+  "產業題材": "產業與科技",
+  "台股公司": "台股公司",
+  "台股公司（上櫃）": "台股公司",
+  "台股": "台股公司",
+  "利率與央行": "利率、央行與匯率",
+  "匯率": "利率、央行與匯率",
+  "經濟指標": "經濟指標",
+  "地緣政治與戰爭": "地緣政治",
+  "民生": "民生"
+ },
+ "gate": {
+  "產業與科技": {
+   "zh": "人工智慧|晶片|半導體|伺服器|算力|資料中心|雲端|製程|晶圓|封裝|記憶體|供應鏈|財報|營收|獲利|出貨|訂單|產能|擴產|資本支出|模型|輝達|台積|蘋果|微軟|谷歌|亞馬遜|特斯拉|機器人|自駕|電動車|衛星|光通訊|矽光子|載板|散熱|液冷|被動元件|玻璃基板|面板|手機|筆電|專利|併購|收購|上市|股價|市值|法說|營運|產業|科技|メモリ|半導体|메모리|반도체|인공지능|파운드리|삼성전자|하이닉스|증시|코스피|價量|漲價|報價|需求|設備",
+   "en": "AI|GPU|CoWoS|HBM|DRAM|NAND|ABF|PCB|MLCC|CPO|5G|6G|PC|EV|IPO|Nvidia|TSMC|Apple|Microsoft|Google|Meta|Amazon|Tesla|OpenAI|Anthropic|Micron|Samsung|SK Hynix|Intel|AMD|Broadcom|chips?|semiconductors?|servers?|data cent(?:er|re)s?|cloud|foundry|fabs?|wafers?|packaging|memory|supply chain|earnings|revenue|profit|guidance|shipments?|capex|models?|robots?|robotics|satellites?|acqui\\w*|shares|stocks?",
+   "deny": "女兒|兒子|千金|嫁|婚禮|結婚|離婚|緋聞|女友|男友|戀情|八卦|豪宅|生日|度假|寵物|穿搭|皮衣|演唱會|夜市|美食|小吃|球賽|球隊|撞衫|私生活|\\b(?:daughter|wedding|married|divorce|girlfriend|boyfriend|dating|birthday|mansion|vacation)\\b"
+  },
+  "利率、央行與匯率": {
+   "zh": "央行|中央銀行|總裁|利率|升息|降息|加息|減息|息口|殖利率|收益率|公債|國債|美債|聯準會|鮑爾|華許|日銀|日本銀行|植田|歐洲央行|拉加德|英國央行|英倫銀行|英格蘭銀行|人民銀行|人行|潘功勝|理監事|貨幣政策|量化寬鬆|縮表|楊金龍|重貼現率|再通膨|再通脹|通縮|財務大臣|財務相|匯率|匯市|外匯|新台幣|台幣|日圓|日元|美元指數|人民幣|韓元|歐元|英鎊|升值|貶值|干預|円安|円高|為替|金融政策|利上げ|利下げ|日銀|금리|환율|한은|한국은행",
+   "en": "Fed|FOMC|LPR|RBI|BOJ|ECB|BOE|PBOC|RBA|SNB|central banks?|interest rates?|rate (?:cut|hike|decision)s?|cuts? rates|raises? rates|monetary policy|yields?|Treasur\\w*|bonds?|Powell|Warsh|Lagarde|Ueda|Bank of (?:England|Japan|Canada|Korea)|reflation\\w*|deflation\\w*|dollar|yen|yuan|won|euro|pound|sterling|franc|lira|rupee|currenc\\w*|forex|FX",
+   "src_ok": "中央銀行|聯準會|Federal Reserve|日本銀行|歐洲央行|ECB|Bank of England|人民銀行"
+  },
+  "經濟指標": {
+   "zh": "通膨|物價|非農|就業|失業|景氣|消費者信心|工業生產|初領|經濟數據|經濟成長|貿易順差|貿易逆差|薪資|零售|出口|進口|外銷訂單|勞動|雇用|물가|고용|수출",
+   "en": "CPI|PPI|PCE|GDP|PMI|ISM|inflation|payrolls?|jobs|jobless(?: claims)?|initial claims|unemployment|employment|labou?r|retail sales|manufacturing|economy|economic|consumer|trade (?:surplus|deficit)|wages|recession"
+  },
+  "地緣政治": {
+   "zh": "戰|軍|飛彈|導彈|攻擊|空襲|恐攻|恐怖|停火|談判|制裁|關稅|外交|峰會|總統|首相|總理|選舉|國會|衝突|邊境|核|入侵|伊朗|以色列|烏克蘭|俄|中東|台海|兩岸|北韓|南海|哈瑪斯|真主黨|川普|川習|習近平|普丁|澤倫斯基|白宮|國務院|外交部|國防|貿易代表|反制|中國|台灣|日本|美國|미사일|북한|전쟁|대통령",
+   "en": "war|military|missiles?|strikes?|attacks?|ceasefire|talks|sanctions?|tariffs?|summit|elections?|parliament|congress|senate|secretary|border|nuclear|invasion|Iran|Israel|Ukrain\\w*|Russia\\w*|Gaza|Hamas|Hezbollah|Trump|Xi|Putin|Zelensky|White House|ministers?|president|China|Chinese|Taiwan|Beijing|Korea|NATO|defen[cs]e|terror\\w*"
+  },
+  "民生": {
+   "zh": "颱風|地震|停班|停課|豪雨|油價|電價|水價|房價|房貸|租金|健保|勞保|年金|基本工資|食安|疫情|流感|疫苗|交通|高鐵|台鐵|捷運|停電|缺水",
+   "en": "typhoon|earthquake|gas prices|electricity prices|housing|rent|pension|minimum wage"
+  }
+ },
+ "gate_order": [
+  "產業與科技",
+  "利率、央行與匯率",
+  "經濟指標",
+  "地緣政治",
+  "民生"
+ ],
+ "us_co": "輝達|蘋果|微軟|谷歌|亞馬遜|特斯拉|博通|超微|英特爾|美光|高通|甲骨文|網飛|安謀|超微電腦|戴爾|思科|波音|摩根大通|波克夏|(?<![A-Za-z])(?:Nvidia|Apple|Microsoft|Google|Alphabet|Meta|Amazon|Tesla|Broadcom|AMD|Intel|Micron|Qualcomm|Oracle|Netflix|SpaceX|Palantir|Arm Holdings|Supermicro|Dell|Cisco|IBM|Salesforce|Adobe|CoreWeave|Coinbase|Boeing|JPMorgan|Berkshire)(?![A-Za-z])",
+ "us_event": "財報|營收|獲利|財測|股價|市值|併購|收購|回購|裁員|上市|訂單|合約|罰款|反壟斷|(?<![A-Za-z])(?:earnings|revenue|profit|guidance|shares|stock|market cap|acqui\\w*|buyback|deal|contract|antitrust|fine|layoffs?|IPO)(?![A-Za-z])",
+ "domestic": "中央社|經濟日報|工商時報|鉅亨|MoneyDJ|自由|聯合|udn|財訊|今周刊|商周|商業周刊|數位時代|科技新報|Newtalk|ETtoday|中時|中國時報|TVBS|三立|天下|風傳媒|台視|中視|公視|華視|民視|中廣|央廣|Rti|聯合報|蘋果新聞網|鏡週刊|鏡新聞|DIGITIMES|電子時報|Yahoo股市|Anue|財經新報|經濟部|金管會|中央銀行|主計總處|行政院|總統府",
+ "broker": "瑞銀|摩根士丹利|大摩|摩根大通|小摩|高盛|美銀|花旗|麥格理|野村|大和|匯豐|巴克萊|里昂|伯恩斯坦|集邦|(?<![A-Za-z])(?:UBS|Morgan Stanley|JPMorgan|Goldman(?: Sachs)?|BofA|Bank of America|Citi(?:group)?|Macquarie|Nomura|Daiwa|HSBC|Barclays|CLSA|Bernstein|Evidence Lab|TrendForce|IDC|Counterpoint|Gartner)(?![A-Za-z])",
+ "tw_fin_big": [
+  "金融"
+ ],
+ "tw_trad_big": [
+  "航運",
+  "傳產石化",
+  "生技醫療"
+ ],
+ "twse_ind_tech": [
+  "24",
+  "25",
+  "26",
+  "27",
+  "28",
+  "29",
+  "30",
+  "31"
+ ],
+ "twse_ind_fin": [
+  "17"
+ ],
+ "big_min": 5,
+ "routine": "基準日|股東(?:常|臨時)?會|除權|除息|配息|配股|股利|現金股息|限制員工權利|員工認股|員工酬勞|董事會決議.*(?:召開|日期)|召開.*董事會|法人說明會|法說會.*(?:日期|召開)|代(?:重要)?(?:子|孫)公司|資金貸與|背書保證|取得.*使用權資產|向關係人|更正|補充|公司治理主管|會計主管|發言人|簽證會計師|營收公告|自結損益公告|月份.*營收|庫藏股.*(?:執行情形|轉讓|註銷)|股票.*(?:上市|上櫃)買賣|公告本公司",
+ "event_pts": [
+  [
+   3,
+   "併購|合併|收購|公開收購|私募|重大訂單|大單|簽訂.*(?:合約|協議)|財測|上修|下修|調升.*(?:目標|預估)|調降.*(?:目標|預估)|(?<![A-Za-z])(?:acqui\\w*|merger|takeover|guidance|orders?)(?![A-Za-z])"
+  ],
+  [
+   2,
+   "瑞銀|摩根士丹利|大摩|摩根大通|小摩|高盛|美銀|花旗|麥格理|野村|大和|匯豐|巴克萊|里昂|伯恩斯坦|集邦|(?<![A-Za-z])(?:UBS|Morgan Stanley|JPMorgan|Goldman(?: Sachs)?|BofA|Bank of America|Citi(?:group)?|Macquarie|Nomura|Daiwa|HSBC|Barclays|CLSA|Bernstein|Evidence Lab|TrendForce|IDC|Counterpoint|Gartner)(?![A-Za-z])"
+  ],
+  [
+   2,
+   "升息(?!預期)|降息(?!預期)|利率決策|利率決議|關稅|制裁|出口管制|禁令|補貼法案|(?<![A-Za-z])(?:rate (?:cut|hike|decision)s?|cuts? rates|raises? rates|tariffs?|sanctions?|export controls?|bans?)(?![A-Za-z])"
+  ],
+  [
+   2,
+   "回購|庫藏股|漲停|跌停|停工|停產|火災|爆炸|資安|網路攻擊|破產|重整|下市|下櫃|違約|裁罰|掛牌|(?<![A-Za-z])(?:IPO|buybacks?|repurchase|halt\\w*|bankrupt\\w*|default|cyberattack)(?![A-Za-z])"
+  ],
+  [
+   1,
+   "現金增資|減資|增資|轉換公司債|董事長|總經理|執行長|裁員|(?<![A-Za-z])(?:CEO|layoffs?)(?![A-Za-z])"
+  ]
+ ],
+ "co_pts": {
+  "cap_top": [
+   50,
+   2
+  ],
+  "cap_mid": [
+   150,
+   1
+  ],
+  "amt_top": [
+   50,
+   1
+  ],
+  "hot_grp": 1,
+  "us_mega": 2
+ },
+ "src_pts": {
+  "per_extra": 1,
+  "max": 2,
+  "window_h": 6
+ },
+ "speed_pts": {
+  "within_min": 15,
+  "pts": 1
+ },
+ "_說明": "雲端 news_layers.py 產生，不要手改；Worker 與 news_live 共用",
+ "explain": "重磅分數＝事件（併購／大單／財測 +3；外資報告、政策 +2；回購、漲跌停、停工、破產等 +2；增減資、經營層異動 +1；只取最高一項）＋公司權重（台股代號或標題提到的名單公司：市值前 50 名 +2、前 150 名 +1；成交金額前 50 名 +1；屬資金主流族群 +1；美股大型公司 +2）＋同時報導（每多 1 家權威來源 +1，最多 +2，6 小時內）＋速度（發布後 15 分內抓到 +1）；基準日、股東會、除權息、例行公告一律 0 分。≥ 5 分標重磅。",
+ "must": {
+  "產業與科技": "人工智慧|晶片|半導體|伺服器|算力|資料中心|雲端|製程|晶圓|封裝|記憶體|供應鏈|財報|營收|獲利|出貨|訂單|產能|擴產|資本支出|模型|輝達|台積|蘋果|微軟|谷歌|亞馬遜|特斯拉|機器人|自駕|電動車|衛星|光通訊|矽光子|載板|散熱|液冷|被動元件|玻璃基板|面板|手機|筆電|專利|併購|收購|上市|股價|市值|法說|營運|產業|科技|メモリ|半導体|메모리|반도체|인공지능|파운드리|삼성전자|하이닉스|증시|코스피|價量|漲價|報價|需求|設備|(?<![A-Za-z])(?:AI|GPU|CoWoS|HBM|DRAM|NAND|ABF|PCB|MLCC|CPO|5G|6G|PC|EV|IPO|Nvidia|TSMC|Apple|Microsoft|Google|Meta|Amazon|Tesla|OpenAI|Anthropic|Micron|Samsung|SK Hynix|Intel|AMD|Broadcom|chips?|semiconductors?|servers?|data cent(?:er|re)s?|cloud|foundry|fabs?|wafers?|packaging|memory|supply chain|earnings|revenue|profit|guidance|shipments?|capex|models?|robots?|robotics|satellites?|acqui\\w*|shares|stocks?)(?![A-Za-z])",
+  "利率、央行與匯率": "央行|中央銀行|總裁|利率|升息|降息|加息|減息|息口|殖利率|收益率|公債|國債|美債|聯準會|鮑爾|華許|日銀|日本銀行|植田|歐洲央行|拉加德|英國央行|英倫銀行|英格蘭銀行|人民銀行|人行|潘功勝|理監事|貨幣政策|量化寬鬆|縮表|楊金龍|重貼現率|再通膨|再通脹|通縮|財務大臣|財務相|匯率|匯市|外匯|新台幣|台幣|日圓|日元|美元指數|人民幣|韓元|歐元|英鎊|升值|貶值|干預|円安|円高|為替|金融政策|利上げ|利下げ|日銀|금리|환율|한은|한국은행|(?<![A-Za-z])(?:Fed|FOMC|LPR|RBI|BOJ|ECB|BOE|PBOC|RBA|SNB|central banks?|interest rates?|rate (?:cut|hike|decision)s?|cuts? rates|raises? rates|monetary policy|yields?|Treasur\\w*|bonds?|Powell|Warsh|Lagarde|Ueda|Bank of (?:England|Japan|Canada|Korea)|reflation\\w*|deflation\\w*|dollar|yen|yuan|won|euro|pound|sterling|franc|lira|rupee|currenc\\w*|forex|FX)(?![A-Za-z])",
+  "經濟指標": "通膨|物價|非農|就業|失業|景氣|消費者信心|工業生產|初領|經濟數據|經濟成長|貿易順差|貿易逆差|薪資|零售|出口|進口|外銷訂單|勞動|雇用|물가|고용|수출|(?<![A-Za-z])(?:CPI|PPI|PCE|GDP|PMI|ISM|inflation|payrolls?|jobs|jobless(?: claims)?|initial claims|unemployment|employment|labou?r|retail sales|manufacturing|economy|economic|consumer|trade (?:surplus|deficit)|wages|recession)(?![A-Za-z])",
+  "地緣政治": "戰|軍|飛彈|導彈|攻擊|空襲|恐攻|恐怖|停火|談判|制裁|關稅|外交|峰會|總統|首相|總理|選舉|國會|衝突|邊境|核|入侵|伊朗|以色列|烏克蘭|俄|中東|台海|兩岸|北韓|南海|哈瑪斯|真主黨|川普|川習|習近平|普丁|澤倫斯基|白宮|國務院|外交部|國防|貿易代表|反制|中國|台灣|日本|美國|미사일|북한|전쟁|대통령|(?<![A-Za-z])(?:war|military|missiles?|strikes?|attacks?|ceasefire|talks|sanctions?|tariffs?|summit|elections?|parliament|congress|senate|secretary|border|nuclear|invasion|Iran|Israel|Ukrain\\w*|Russia\\w*|Gaza|Hamas|Hezbollah|Trump|Xi|Putin|Zelensky|White House|ministers?|president|China|Chinese|Taiwan|Beijing|Korea|NATO|defen[cs]e|terror\\w*)(?![A-Za-z])",
+  "民生": "颱風|地震|停班|停課|豪雨|油價|電價|水價|房價|房貸|租金|健保|勞保|年金|基本工資|食安|疫情|流感|疫苗|交通|高鐵|台鐵|捷運|停電|缺水|(?<![A-Za-z])(?:typhoon|earthquake|gas prices|electricity prices|housing|rent|pension|minimum wage)(?![A-Za-z])"
+ }
+}
