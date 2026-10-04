@@ -1,0 +1,47 @@
+# cloudflare_live.yml ─ 部署「即時信息流」Cloudflare Worker（Evans 2026-10-04 定案：重大訊息 ≤ 5 分鐘、權威新聞 ≤ 15 分鐘）
+#   程式：CustomerServiceANDSales/cloudflare/live（wrangler.toml、src/worker.js、schema.sql）
+#   需要 StaticWebPage secrets：CLOUDFLARE_API_TOKEN、CLOUDFLARE_ACCOUNT_ID（Evans 建，步驟見 TODO 雲端段 10-04）
+#   手動觸發；第一次會建 D1 資料庫 gea-live 並建表，之後只更新 Worker。不寫 repo 任何檔案。
+name: Cloudflare 即時信息流部署
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: 部署
+        working-directory: code/cloudflare/live
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::error::還沒設 CLOUDFLARE_API_TOKEN／CLOUDFLARE_ACCOUNT_ID（步驟見 TODO 雲端段 10-04）"; exit 1
+          fi
+          npm i -g wrangler@4 >/dev/null 2>&1
+          wrangler --version
+          ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next((d['uuid'] for d in json.load(sys.stdin) if d['name']=='gea-live'), ''))")
+          if [ -z "$ID" ]; then
+            echo "第一次部署：建 D1 資料庫 gea-live"
+            wrangler d1 create gea-live
+            ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next((d['uuid'] for d in json.load(sys.stdin) if d['name']=='gea-live'), ''))")
+          fi
+          echo "D1 資料庫 gea-live：$ID"
+          sed -i "s/__D1_ID__/$ID/" wrangler.toml
+          wrangler d1 execute gea-live --remote --file schema.sql --yes
+          wrangler deploy 2>&1 | tee deploy.log
+          echo "▶ Worker 網址（填進 template.html 的 NL_WORKER）：$(grep -o 'https://[a-z0-9.-]*workers.dev' deploy.log | head -1)"
