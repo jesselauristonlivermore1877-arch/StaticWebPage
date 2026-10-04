@@ -293,6 +293,16 @@
    "domains": [
     "economist.com"
    ]
+  },
+  {
+   "name": "Culpium",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "culpium|tim culpan",
+   "domains": [
+    "culpium.com"
+   ],
+   "note": "Tim Culpan（前彭博科技專欄作家）的電子報，台積電、輝達等供應鏈獨家多；RSS https://www.culpium.com/feed（10-04 晚 Evans 加入）"
   }
  ],
  "not_accepted": "維基百科（不判斷現任）；內容農場、聚合轉貼站（LINE TODAY、BigGo、Yahoo 轉載原文以原媒體判斷）；toalpha.tw、alphamemo（不可抓）",
@@ -462,6 +472,10 @@
   {
    "domain": "economist.com",
    "name": "經濟學人"
+  },
+  {
+   "domain": "culpium.com",
+   "name": "Culpium"
   }
  ]
 }
