@@ -51,12 +51,20 @@ jobs:
       - name: 驗收（等 cron 跑幾輪，印 /lag.json 與 /live.json 前幾則）
         if: env.W != ''
         run: |
-          for i in 1 2 3 4 5 6; do
+          for i in 1 2 3 4 5 6 7; do
             sleep 60
             N=$(curl -s "$W/live.json?h=48&peek=1" | python3 -c "import json,sys; print(len(json.load(sys.stdin).get('items') or []))" 2>/dev/null || echo "?")
             echo "第 $i 分鐘：/live.json 有 $N 則"
           done
-          echo "── /lag.json?d=7"; curl -s "$W/lag.json?d=7"; echo
+          echo "── /lag.json?d=7"; curl -s "$W/lag.json?d=7" | python3 -c "
+          import json,sys
+          J=json.load(sys.stdin); R=J.pop('runs',[]) or []
+          print(json.dumps(J,ensure_ascii=False))
+          print('── 最近 %d 輪（at｜重訊列數｜RSS 則數｜新增｜錯誤）' % len(R))
+          for r in R: print('  ', r.get('at'), r.get('mops'), r.get('rss'), r.get('new'), r.get('err') or '—')
+          ptt=[r for r in R if 'ptt:' in (r.get('err') or '')]
+          print('PTT：最近 %d 輪有 %d 輪失敗' % (len(R), len(ptt)) + ('（' + ptt[0]['err'] + '）' if ptt else ''))"
+          curl -s "$W/live.json?h=48&peek=1" | python3 -c "import json,sys; L=json.load(sys.stdin).get('items') or []; print('PTT Stock 則數：', sum(1 for x in L if x.get('src')=='PTT Stock'))"
           echo "── /live.json 前 5 則"; curl -s "$W/live.json?h=48&peek=1" | python3 -c "
           import json,sys
           J=json.load(sys.stdin)
