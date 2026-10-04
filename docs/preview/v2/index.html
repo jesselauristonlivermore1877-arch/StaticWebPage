@@ -1151,6 +1151,10 @@ a.td-g{color:var(--ink-1);font-weight:800;text-decoration:none;border-bottom:1px
 .nl-it{display:grid;grid-template-columns:92px 56px 1fr;gap:2px 8px;padding:6px 4px;border-bottom:1px solid var(--line);font-size:13.5px;align-items:baseline}
 .nl-it .nl-t{color:var(--ink-2);font-size:12px} .nl-it .nl-src{font-weight:700;color:var(--acc);font-size:12px}
 .nl-it .nl-sub{grid-column:3;color:var(--ink-3);font-size:11px}
+/* 🟢 10-04（Evans）：重磅消息加框亮點，重要度高於一般新聞（排在最上面） */
+.nl-it.nl-big{border:2px solid var(--up);border-radius:8px;background:rgba(229,72,77,.07);margin:6px 0;padding:8px 8px}
+.nl-it.nl-big a{font-weight:800;font-size:14.5px}
+.nl-bigtag{display:inline-block;background:var(--up);color:#fff;font-size:11px;font-weight:800;border-radius:999px;padding:0 7px;margin-right:6px;vertical-align:1px}
 .nl-h{margin:14px 0 6px;font-size:15px} .nl-h small{font-weight:400;color:var(--ink-3);font-size:11.5px;margin-left:6px}
 .nl-tr{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px} .nl-tr div{background:var(--raise);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
 .nl-tr ol{margin:4px 0 0;padding-left:18px;font-size:12.5px} .nl-tr small{color:var(--ink-3)}
@@ -4025,7 +4029,8 @@ function ifResidentCty(M, list, opt) {
   const mx = Math.max(...list.map(r => r.cap_usd || 0), 1), mt = Math.max(...list.map(r => r._n30 || 0), 1);
   const capT = (a, b) => ((b.cap_usd || 0) / mx + (b._n30 || 0) / mt) - ((a.cap_usd || 0) / mx + (a._n30 || 0) / mt);
   const inCty = o.ceo ? (a, b) => (!!a.private - !!b.private) || (b.cap_usd || 0) - (a.cap_usd || 0) : byTraffic;   // 未上市排在上市公司後面（不跟上市市值一起排名）
-  const tabs = ifCtyTabs(list, r => [IF_CC2ZH[r.cty] || IF_CC2ZH[r.cc] || "全球"], (L, z) => ifResidentCards(M, z === "全球" ? L : L.slice().sort(inCty), z === "全球" ? 12 : 8),
+  const tabs = ifCtyTabs(list, r => [IF_CC2ZH[r.cty] || IF_CC2ZH[r.cc] || "全球"], (L, z) => o.ceo && z !== "全球" ? ifCeoInd(M, L, z)
+    : ifResidentCards(M, z === "全球" ? L : L.slice().sort(inCty), z === "全球" ? 12 : 8),
     {globalSort: o.ceo ? capT : byTraffic, unit: "位", globalDesc: o.ceo ? "全部公司合在一起，依「公司市值＋個人新聞流量」排序（各占一半）" : "全部國家合在一起，依近 30 天被新聞點名的則數排序",
      desc: z => o.ceo ? `${z}的公司負責人：跟自己國家比，依公司市值排序（台灣前 150、美國前 100、其他前 30；未上市公司排在後面、標私募估值）` : `${z}的${o.what || "官員"}，依流量排序`});
   const w = el("div"); w.appendChild(tabs);
@@ -4033,6 +4038,34 @@ function ifResidentCty(M, list, opt) {
     (canUp ? "" : `；資料從 ${hMin === "9999" ? "—" : hMin.slice(5)} 起累積，滿三週前「↑」暫不判斷`), w,
     "官方職位表：前 20 大經濟體（IMF 2025 名目 GDP）＋台灣＋歐元區的政治領袖、財政首長、央行首長，以及地緣戰事要角；每人附官方出處與查核日期，每月自動打開出處頁核對，名字不在就標「需要重新確認」，不自動改。被提名但尚未確認的顯示代理。" +
     (o.ceo ? "公司負責人：各國跟自己國家比——台灣市值前 150 大（公開資訊觀測站股數×收盤；負責人＝董事長＋總經理，同一人合併）、美國前 100、其他國家各前 30（Yahoo Finance 篩選器依主要掛牌地區、當地幣別排名，負責人取公司申報的主管名單），每週重排。未上市公司（OpenAI、Anthropic 等）用最近一輪私募估值，標「私募估值」、附出處，不跟上市市值一起排名。本機每週用 Gemini 查公司狀態與負責人，雲端打開出處頁核對過才蓋過去。" : "") + "發言內容以新聞標題與原文為準，本站不另加評語。");
+}
+/* 🟢 10-04（Evans）：公司負責人改成「國家 → 產業 → 公司」三層；產業＝world.json 的 grp（台灣公開資訊觀測站產業別、
+   其他國家 Yahoo sector 歸大類）；未上市公司自成一格（不跟上市市值一起排）；排序可切「市值／流量」。 */
+const IF_GRPS = ["科技", "金融", "醫療", "消費", "工業", "能源與原物料", "不動產", "其他"];
+let IF_CEO_SORT = "cap";
+function ifCeoInd(M, L, z) {
+  const w = el("div");
+  const bar = el("div", "tl-bar");
+  const body = el("div");
+  const g = r => r.private ? "未上市" : (r.grp || "其他");
+  const by = {}; L.forEach(r => (by[g(r)] = by[g(r)] || []).push(r));
+  const sortF = () => IF_CEO_SORT === "cap" ? (a, b) => (b.cap_usd || (b.private || {}).valuation_usd || 0) - (a.cap_usd || (a.private || {}).valuation_usd || 0)
+                                            : (a, b) => (b._n30 || 0) - (a._n30 || 0) || (b._n7 || 0) - (a._n7 || 0);
+  const tabs = () => {
+    const items = [["全部 " + L.filter(r => !r.private).length, () => ifResidentCards(M, L.filter(r => !r.private).sort(sortF()), 12), null,
+      `${z}的上市公司負責人，依${IF_CEO_SORT === "cap" ? "公司市值" : "近 30 天新聞流量"}排序`]];
+    IF_GRPS.concat(["未上市"]).forEach(k => { if (by[k] && by[k].length)
+      items.push([`${k} ${by[k].length}`, () => ifResidentCards(M, by[k].slice().sort(sortF()), 12), null,
+        k === "未上市" ? `${z}的未上市公司（私募估值，不跟上市市值一起排名）` : `${z}・${k}類公司的負責人`]); });
+    return sideTabs(items);
+  };
+  [["cap", "依市值"], ["flow", "依流量"]].forEach(([k, t]) => {
+    const b = el("button", "rv-pill" + (IF_CEO_SORT === k ? " on" : ""), t);
+    b.onclick = () => { IF_CEO_SORT = k; [...bar.children].forEach(x => x.classList.toggle("on", x === b)); body.innerHTML = ""; body.appendChild(tabs()); };
+    bar.appendChild(b);
+  });
+  w.appendChild(bar); body.appendChild(tabs()); w.appendChild(body);
+  return w;
 }
 /* 新聞清單＋國家子列 */
 function ifNewsCty(list, empty) {
@@ -4072,7 +4105,7 @@ function ifWeekly(M) {
   return sideTabs([["本週", cur], ["歷史週報", hist]]);
 }
 /* 日報的 md 依「## 國家」切開 */
-/* 🟢 即時信息流（Evans 09-28）：news_live.py 盤中每 30 分鐘、其他時段每小時增量抓，只收權威來源（路透、美聯社、彭博、日經、中央社）。
+/* 🟢 即時信息流（Evans 09-28）：news_live.py 盤中每 30 分鐘、其他時段每小時增量抓，只收權威來源（10-04 起名單在 data/registry/authority_sources.json）。
    每則標發布時間（台北）與「發布 → 上網頁」延遲；下方另列 Google Trends 各國熱搜（聲量，不是新聞）。資料 docs/data/news_live.json。 */
 var _nlW = null;
 function nlLoad() { if (!_nlW) _nlW = fetch("data/news_live.json" + _dv(), {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null); return _nlW; }
@@ -4085,17 +4118,20 @@ function ifLive() {
     if (!J) { root.appendChild(el("div", "empty", "即時信息流建置中：「即時信息流」排程第一次跑完後就會出現。")); return; }
     const R = (J.runs || [])[0] || {};
     root.appendChild(el("div", "nl-head", `最近一次 <b>${esc(nlTpe(J.asof))}</b>（台北）　新增 ${R.new ?? "—"} 則　發布 → 抓到延遲中位 ${R.lag_med_min ?? "—"} 分` +
-      `<small>只收權威來源（路透、美聯社、彭博、日經、中央社），不追數量；非權威來源 ${R.auth_drop ?? 0} 則不收。</small>`));
+      `<small>${esc(J.rule || "只收權威來源")}，不追數量；非權威來源 ${R.auth_drop ?? 0} 則、標題沒提到對象 ${R.off_topic ?? 0} 則不收。</small>`));
     const cats = ["全部", ...new Set((J.items || []).map(x => x.cat))];
     let CAT = "全部";
     const bar = el("div", "tl-bar"), list = el("div", "nl-list");
     const paint = () => {
       list.innerHTML = "";
-      const L = (J.items || []).filter(x => CAT === "全部" || x.cat === CAT).slice(0, 120);
+      // 重磅：近 24 小時的排最上面加框；其餘照時間
+      const t24 = Date.now() - 24 * 3600e3, isBig = x => x.big && new Date(x.pub).getTime() >= t24;
+      const F = (J.items || []).filter(x => CAT === "全部" || x.cat === CAT);
+      const L = F.filter(isBig).concat(F.filter(x => !isBig(x))).slice(0, 120);
       if (!L.length) { list.appendChild(el("div", "empty", "近 48 小時沒有權威來源的相關新聞。")); return; }
-      L.forEach(x => list.appendChild(el("div", "nl-it",
+      L.forEach(x => list.appendChild(el("div", "nl-it" + (isBig(x) ? " nl-big" : ""),
         `<span class="nl-t num">${esc(nlTpe(x.pub))}</span><span class="nl-src">${esc(x.src)}</span>` +
-        `<a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.t)}</a>` +
+        `<a href="${esc(x.u)}" target="_blank" rel="noopener">${isBig(x) ? '<span class="nl-bigtag">重磅</span>' : ""}${esc(x.t)}</a>` +
         `<small class="nl-sub">${esc(x.cat)}｜${esc((x.sub || []).slice(0, 2).join("、"))}${x.lag_min != null ? `｜延遲 ${x.lag_min} 分` : ""}</small>`)));
     };
     cats.forEach(c => { const b = el("button", "rv-pill" + (c === CAT ? " on" : ""), esc(c));
@@ -4107,7 +4143,7 @@ function ifLive() {
       root.appendChild(el("div", "nl-tr", Object.entries(T).map(([g, v]) => `<div><b>${esc(v.name || g)}</b><ol>` +
         (v.items || []).map(i => `<li>${esc(i.t)} <small>${esc(i.traffic || "")}</small></li>`).join("") + "</ol></div>").join("")));
     }
-    root.appendChild(el("div", "rv-note", `新聞：Google News 搜尋（常駐職位、熱門議題、科技與 AI 人物），只留權威來源，每則附原文連結、以原文為準；延遲＝第一次抓到 − Google News 標示的發布時間。` +
+    root.appendChild(el("div", "rv-note", `新聞：Google News 搜尋（常駐職位、熱門議題、科技與 AI 人物、有重大訊息的台股公司、產業題材），只留權威來源；台股公司另收公開資訊觀測站當天重大訊息（官方原文），每則附原文連結、以原文為準；延遲＝第一次抓到 − Google News 標示的發布時間。` +
       `排程：盤中每 30 分鐘、其他時段每小時（GitHub 排程可能延遲數分鐘）。${esc(J.trends_src || "")}。僅供參考，非投資建議。`));
   });
   return card("即時信息流", "權威來源的最新消息，近 48 小時", root);
@@ -4317,7 +4353,9 @@ const IF_CAPEX_RX = {"晶片與代工": /晶片|代工|先進製程|CoWoS|封裝
   "變壓器": /變壓器|重電|transformer/i, "資料中心基建": /資料中心|data center|液冷|機房|hyperscaler/i};
 function ifTech(M) {
   const w = ifParts();
-  w.add("常駐人物", ifResidentCty(M, ifOfficials(M, ["ceo"]), {ceo: true}));
+  // 🟢 10-04（Evans：高盛 CEO 不該在科技與 AI）：這一頁只列科技類與未上市（AI）公司；其他產業的負責人在「意見領袖」頁的國家 → 產業
+  const CEO = ifOfficials(M, ["ceo"]), hasGrp = CEO.some(r => r.grp);
+  w.add("常駐人物", ifResidentCty(M, hasGrp ? CEO.filter(r => r.private || r.grp === "科技") : CEO, {ceo: true}));
   w.add("公司債利差", card("公司債利差（代替個別公司 CDS）", "ICE BofA 選擇權調整利差，FRED", ifGrid(M, ["BAMLC0A0CM", "BAMLC0A4CBBB", "BAMLH0A0HYM2"]),
     "<b>公司債利差怎麼代替個別公司的 CDS</b>：CDS（信用違約交換）是「替某家公司的債買保險」的價格，保費越高＝市場越擔心它還不出錢；但個別公司的 CDS 報價要付費、沒有免費來源。" +
     "公司債利差＝公司債殖利率 − 同天期公債殖利率，是投資人借錢給公司多要的補償，跟 CDS 反映的是同一件事（違約風險）。" +
@@ -4343,7 +4381,9 @@ function ifPeople(M) {
   const all = ifPagePeople(M, null, ["利率與央行", "經濟指標", "匯率", "地緣政治與戰爭", "科技與 AI"]);
   const inv = ifPagePeople(M, [], ["投資大老", "財經網紅", "電視財經節目"]);
   const w = ifParts();
-  w.add("依國家", ifResidentCty(M, all, {what: "意見領袖"}));
+  w.add("依國家", ifResidentCty(M, all.filter(r => r.kind0 !== "ceo"), {what: "官員與意見領袖"}));
+  // 🟢 10-04（Evans）：公司負責人一律「國家 → 產業 → 公司」，市值／流量兩種排序
+  w.add("公司負責人", ifResidentCty(M, ifOfficials(M, ["ceo"]), {ceo: true}));
   [["投資大老", "投資大老"], ["財經網紅", "財經網紅"], ["電視財經節目", "電視財經節目"]].forEach(([g, c]) => {
     const L = inv.filter(r => r.cat === c);
     if (!L.length && g !== "財經網紅") return;
@@ -4360,7 +4400,7 @@ function ifPeople(M) {
     if (g === "財經網紅") body.appendChild(kolBox());
     w.add(g, body);
   });
-  return w.done(["依國家", "投資大老", "財經網紅", "電視財經節目"]);
+  return w.done(["依國家", "公司負責人", "投資大老", "財經網紅", "電視財經節目"]);
 }
 
 function ifParts() {
@@ -4546,7 +4586,8 @@ function ifCB(M) {
 }
 function ifRates(M) {
   const w = ifParts();
-  w.add("常駐人物", ifResidentCty(M, ifPagePeople(M, ["cb", "finance"], "利率與央行"), {what: "央行與財經首長"}));
+  // 🟢 10-04（Evans）：匯率併入利率與央行 —— 常駐人物加負責匯率的官員；匯率走勢、匯率新聞成為這一頁的子列
+  w.add("常駐人物", ifResidentCty(M, ifPagePeople(M, ["cb", "finance", "fx"], "利率與央行"), {what: "央行、財經與匯率首長"}));
   // 🟢 第七批：利差寫出背後的意義
   const _lv = sid => ((((M.fred || {})[sid] || {}).obs || []).filter(x => x[1] != null).at(-1) || [])[1];
   const s102 = _lv("T10Y2Y"), s103 = _lv("T10Y3M");
@@ -4640,7 +4681,10 @@ function ifRates(M) {
   w.add("央行目前利率", ifRatesCty(M));
   const N = ifNews(M, x => x._t.cats.includes("利率與央行"));
   w.add("央行動態", card("央行動態（新聞）", `${N.length} 則・依國家分`, ifNewsCty(N)));
-  return w.done(["常駐人物", "點陣圖對答案", "隱含利率（FedWatch）", "美債殖利率", "央行目前利率", "央行動態"]);
+  w.add("匯率走勢", card("美元指數與主要貨幣對美元", "美國＝美元指數（DXY）；其餘＝前 20 大經濟體的貨幣＋新台幣兌美元；點卡片看大圖", ifFxGrid(M)));
+  const NF = ifNews(M, x => x._t.cats.includes("匯率") || (x.ctys || []).length || /匯率|新台幣|日圓|美元指數|升值|貶值|exchange rate|\byen\b|\byuan\b/i.test(x.title || ""));
+  w.add("匯率新聞", card("匯率相關新聞", `${NF.length} 則・依國家分`, ifNewsCty(NF)));
+  return w.done(["常駐人物", "點陣圖對答案", "隱含利率（FedWatch）", "美債殖利率", "央行目前利率", "央行動態", "匯率走勢", "匯率新聞"]);
 }
 /* 🟢 第五批 二-6（Evans 09-27）：經濟指標長歷史（FRED 最長：CPI 1947、核心 CPI 1957、PCE 1959、失業率 1948、非農 1939）
    ＋區間快選＋NBER 衰退期（USREC）灰底。資料在 macro.json 的 fred_long（預覽由 tools/preview_macro.py 補抓）；沒有就退回一般的三年資料。
@@ -4768,7 +4812,7 @@ function tabInfo() {
     tb.appendChild(el("span", "", `外文標題 ${fo.length} 則，已有中文翻譯 ${nz} 則` + (nz ? "（AI 翻譯，原文保留在上方）" : "（翻譯由本機每天產生，還沒有的只顯示原文）")));
     root.appendChild(tb);
     // 🟢 第七批（Evans 09-27）：週報品質最好 → 第一格；新增日報
-    root.appendChild(sideTabs([["即時", () => ifLive()], ["週報", () => ifWeekly(M)], ["日報", () => ifDaily(M)], ["量化統計日報", () => ifQuant(M)], ["利率與央行", () => ifRates(M)], ["經濟指標", () => ifEcon(M)], ["匯率", () => ifFx(M)],
+    root.appendChild(sideTabs([["即時", () => ifLive()], ["週報", () => ifWeekly(M)], ["日報", () => ifDaily(M)], ["量化統計日報", () => ifQuant(M)], ["利率與央行", () => ifRates(M)], ["經濟指標", () => ifEcon(M)],
       ["地緣政治與戰爭", () => ifGeo(M)], ["科技與 AI", () => ifTech(M)], ["意見領袖", () => ifPeople(M)]]));
     root.appendChild(el("div", "rv-note", `資料日 ${esc(M.asof || "—")}。數字：FRED（聖路易聯邦準備銀行，轉載 BLS／BEA／聯準會等官方資料）。新聞：每則附原文連結，以原文為準；分類 ${M.tagged ? `本機標記 ${M.tagged} 則，其餘` : ""}依世界趨勢原本的主題與人物。僅供參考，不具任何臆測，非投資建議。`));
   });
@@ -7199,12 +7243,33 @@ function trailRows() {
     //    選近 240 天也還是只加最後 20 天 —— 數字看起來合理，但答非所問。
     r.sum20 = r.v.reduce((a, b) => a + (b || 0), 0);
     r.cohNow = r.coh ? r.coh[r.coh.length - 1] : null;
+    // 🟢 10-04（Evans）：近 N 日累計畫成以零軸為準的線，看得出是「由負翻正」還是「正值續強」
+    let acc = 0;
+    r.cum = r.v.map(x => (acc += (x || 0)));
+    r.state = trailState(r.cum);
   });
   // 由強到弱／由弱到強 —— 有人看最強的，有人專挑連續下殺、量縮到最後一名的
   rows.sort((a, b) => TR.desc ? ((b.run - a.run) || (b.sum20 - a.sum20))
                               : ((a.run - b.run) || (a.sum20 - b.sum20)));
   const cap = TR.level === "K" ? 40 : rows.length;
   return {rows: rows.slice(0, cap), total: rows.length, dates: dates.slice(t0)};
+}
+
+/** 累計線的狀態：由負翻正／正值續強／正值轉弱／由正翻負／負值續弱／負值收斂（看最後一次穿越零軸與近 5 日斜率）。 */
+function trailState(cum) {
+  // 只把「近 10 個交易日內穿越零軸」算成翻正／翻負；更早穿越的，看現在在零軸哪一邊、近 5 日的方向。
+  const n = cum.length;
+  if (!n) return null;
+  const last = cum[n - 1];
+  let k = n - 1;
+  while (k > 0 && Math.sign(cum[k - 1] || 0) === Math.sign(last || 0)) k--;
+  const ago = n - k, recent = k > 0 && ago <= 10;
+  const slope = last - cum[Math.max(0, n - 6)];
+  if (last > 0) return recent ? {t: `由負翻正 ${ago} 天`, c: "up", turn: 1}
+                              : {t: slope >= 0 ? "正值續強" : "正值轉弱", c: slope >= 0 ? "up" : "flat", turn: 0};
+  if (last < 0) return recent ? {t: `由正翻負 ${ago} 天`, c: "down", turn: -1}
+                              : {t: slope <= 0 ? "負值續弱" : "負值收斂", c: slope <= 0 ? "down" : "flat", turn: 0};
+  return {t: "零軸附近", c: "flat", turn: 0};
 }
 
 function trailChart(box) {
@@ -7216,7 +7281,7 @@ function trailChart(box) {
   // 🔴 字為什麼小：viewBox 固定 1250，塞進較窄的容器會**整張等比縮小**，
   //    13.5px 的字到螢幕上只剩 9~10px。把 viewBox 收窄，同一個容器裡
   //    縮放比例接近 1，字就回到真實大小 —— 這比逐個調 font-size 有效。
-  const W = 1000, LBL = 168, RIGHT = 190, HEAD = 42;
+  const W = 1120, LBL = 168, RIGHT = 316, HEAD = 42;     // 10-04：右欄加「累計狀態」，同向那欄原本超出 viewBox 被切掉
   const RH = rows.length <= 4 ? 64 : rows.length <= 8 ? 50
            : rows.length <= 14 ? 40 : 34;
   const PW = W - LBL - RIGHT, n = dates.length, bw = Math.max(2, PW / n - 1.5);
@@ -7250,7 +7315,8 @@ function trailChart(box) {
     "font-weight": "700"});
   t(LBL + PW + 142, HEAD - 16, `近${n}日累計`, {"text-anchor": "end",
     "font-size": "11", opacity: ".55", "font-weight": "700"});
-  if (TR.level === "S") t(LBL + PW + 204, HEAD - 16, "同向",
+  t(LBL + PW + 152, HEAD - 16, "累計狀態", {"font-size": "11", opacity: ".55", "font-weight": "700"});
+  if (TR.level === "S") t(LBL + PW + 306, HEAD - 16, "同向",
     {"text-anchor": "end", "font-size": "11", opacity: ".55", "font-weight": "700"});
 
   rows.forEach((r, ri) => {
@@ -7264,8 +7330,20 @@ function trailChart(box) {
       const h = Math.max(1, Math.min(1, Math.abs(x) / cap) * half);
       svg.appendChild(sv("rect", {x: LBL + i * (PW / n), y: x > 0 ? mid - h : mid,
         width: bw, height: h, fill: x > 0 ? "var(--up)" : "var(--down)",
-        opacity: ".85"}));
+        opacity: ".32"}));
     });
+    // 🟢 10-04：累計線（以零軸為準，每列自己的尺度；零軸上方紅、下方綠，穿越零軸的那一段在交點切開）
+    const cm = Math.max(1e-9, ...r.cum.map(Math.abs));
+    const px = i => LBL + i * (PW / n) + bw / 2, py = v => mid - v / cm * half;
+    for (let i = 1; i < r.cum.length; i++) {
+      const a = r.cum[i - 1], b = r.cum[i];
+      const seg = (x1, y1, x2, y2, pos) => svg.appendChild(sv("line", {x1, y1, x2, y2,
+        stroke: pos ? "var(--up)" : "var(--down)", "stroke-width": "2.2", "stroke-linecap": "round"}));
+      if (a * b < 0) {
+        const f = a / (a - b), xm = px(i - 1) + f * (px(i) - px(i - 1));
+        seg(px(i - 1), py(a), xm, mid, a > 0); seg(xm, mid, px(i), py(b), b > 0);
+      } else seg(px(i - 1), py(a), px(i), py(b), (a + b) > 0 || (a + b === 0 && b >= 0));
+    }
     // 目前那一段連續要看得到，不是只有數字
     if (Math.abs(r.run) >= 2) {
       const x0 = LBL + (n - Math.abs(r.run)) * (PW / n);
@@ -7279,7 +7357,11 @@ function trailChart(box) {
     t(LBL + PW + 142, mid + 4, (r.sum20 >= 0 ? "+" : "") + r.sum20.toFixed(2),
       {"text-anchor": "end", "font-size": "14.5", "font-weight": "700",
        fill: r.sum20 >= 0 ? "var(--up)" : "var(--down)"});
-    if (r.cohNow) t(LBL + PW + 204, mid + 4, r.cohNow[0] + "/" + r.cohNow[1],
+    if (r.state) t(LBL + PW + 152, mid + 4, r.state.t,
+      {"font-size": "12.5", "font-weight": r.state.turn ? "800" : "600",
+       fill: r.state.c === "up" ? "var(--up)" : r.state.c === "down" ? "var(--down)" : "currentColor",
+       opacity: r.state.turn ? "1" : ".7"});
+    if (r.cohNow) t(LBL + PW + 306, mid + 4, r.cohNow[0] + "/" + r.cohNow[1],
       {"text-anchor": "end", "font-size": "14", "font-weight": "700",
        opacity: r.cohNow[0] / r.cohNow[1] >= .7 ? ".95" : ".45"});
   });
@@ -7376,7 +7458,8 @@ function trailChart(box) {
       + (v == null ? "　—"
          : `　<span style="color:${v > 0 ? "var(--up)" : "var(--down)"};`
            + `font-weight:800">${v > 0 ? "+" : ""}${v.toFixed(2)}${unit}</span>`
-           + `　連續第 ${run} 天` + (c ? `　同向 ${c[0]}/${c[1]} 檔` : ""))
+           + `　連續第 ${run} 天` + (c ? `　同向 ${c[0]}/${c[1]} 檔` : "")
+           + `　累計 <b style="color:${r.cum[i] >= 0 ? "var(--up)" : "var(--down)"}">${r.cum[i] >= 0 ? "+" : ""}${r.cum[i].toFixed(2)}${unit}</b>`)
       + det;
   };
   svg.addEventListener("mousemove", paint);
@@ -7872,6 +7955,9 @@ function tabTrail() {
            <b>籌碼軌跡</b>　淨買賣<b>金額</b> ÷ 當日成交金額（%）。不用張數：
            台積電跟小型股的張數差一百倍，同一張圖畫不下；佔成交金額的比例才可讀。
            族群是淨額加總 ÷ 成交金額加總，不是把成員的百分比平均。<br>
+           <b>累計線</b>　從區間第一天起逐日加總（以零軸為準，每列自己的尺度）：零軸上方紅、下方綠。
+           右欄「由負翻正 N 天」＝累計原本是負的、近 10 個交易日內（N 天前）穿越零軸翻上來；「正值續強」＝在零軸上方、近 5 日還在往上；
+           反過來是「由正翻負」「負值續弱」；「正值轉弱／負值收斂」＝還沒穿越零軸但近 5 日方向反了。柱子是每天的值。<br>
            <b>連續</b>　從你指到的那一天往回數，同方向連了幾天。一天反向就歸零。<br>
            <b>同向</b>　當天成員裡與族群同方向的幾檔／共幾檔。<b>同向低＝族群沒有一起動</b>，
            一檔權值股就能把整個大類拉起來 —— 這一欄就是拿來分「族群性買盤」與
@@ -9295,7 +9381,7 @@ const SUB_DESC = {
   // 信息流
   "週報": "每週日由本週收錄的新聞自動組成、逐條查核出處；先看「本週總結」抓重點，再依議題往下看原始新聞。",
   "日報": "前一天 06:00 到當天 06:00（台北時間）的重點，依國家分；每條都附出處並自動查核，查核沒過的不顯示。",
-  "利率與央行": "利率是資金的價格。央行升息＝資金變貴、股市估值承壓；降息＝資金變便宜。先看政策利率與市場預期，再看美債殖利率。",
+  "利率與央行": "利率是資金的價格。央行升息＝資金變貴、股市估值承壓；降息＝資金變便宜。先看政策利率與市場預期，再看美債殖利率；匯率（資金往哪裡跑）也在這一頁。",
   "經濟指標": "就業、通膨、景氣的官方數字。通膨高於預期→央行不敢降息；就業轉弱→景氣降溫。看「公布值 vs 前值」的方向。",
   "匯率": "匯率反映資金流向：外資買台股通常伴隨台幣升值。看主要貨幣對美元的走勢，判斷資金往哪裡跑。",
   "地緣政治與戰爭": "戰爭與制裁會推升油價、打亂供應鏈。每條戰線一條時間軸，先看油價與通膨有沒有跟著動。",
