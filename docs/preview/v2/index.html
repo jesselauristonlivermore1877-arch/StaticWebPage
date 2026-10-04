@@ -1151,6 +1151,7 @@ a.td-g{color:var(--ink-1);font-weight:800;text-decoration:none;border-bottom:1px
 .nl-it{display:grid;grid-template-columns:92px 56px 1fr;gap:2px 8px;padding:6px 4px;border-bottom:1px solid var(--line);font-size:13.5px;align-items:baseline}
 .nl-it .nl-t{color:var(--ink-2);font-size:12px} .nl-it .nl-src{font-weight:700;color:var(--acc);font-size:12px}
 .nl-it .nl-sub{grid-column:3;color:var(--ink-3);font-size:11px}
+.tpex-down{margin:8px 0;padding:8px 12px;border:1px solid var(--acc);border-left:4px solid var(--acc);border-radius:8px;font-size:13.5px;background:var(--surface)}
 /* 🟢 10-04（Evans）：重磅消息加框亮點，重要度高於一般新聞（排在最上面） */
 .nl-it.nl-big{border:2px solid var(--up);border-radius:8px;background:rgba(229,72,77,.07);margin:6px 0;padding:8px 8px}
 .nl-it.nl-big a{font-weight:800;font-size:14.5px}
@@ -4108,7 +4109,22 @@ function ifWeekly(M) {
 /* 🟢 即時信息流（Evans 09-28）：news_live.py 盤中每 30 分鐘、其他時段每小時增量抓，只收權威來源（10-04 起名單在 data/registry/authority_sources.json）。
    每則標發布時間（台北）與「發布 → 上網頁」延遲；下方另列 Google Trends 各國熱搜（聲量，不是新聞）。資料 docs/data/news_live.json。 */
 var _nlW = null;
-function nlLoad() { if (!_nlW) _nlW = fetch("data/news_live.json" + _dv(), {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null); return _nlW; }
+// 🟢 10-04（Evans）：即時信息流改讀 Cloudflare Worker 唯讀端點（每分鐘輪詢；重大訊息 ≤ 5 分、權威新聞 ≤ 15 分）。
+//    部署後把網址填進 NL_WORKER；沒填或讀不到就退回 Actions 產的 data/news_live.json（熱搜也從那份來）。
+const NL_WORKER = "";
+function nlLoad() {
+  if (_nlW) return _nlW;
+  const old = fetch("data/news_live.json" + _dv(), {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null);
+  if (!NL_WORKER) return (_nlW = old);
+  return (_nlW = Promise.all([fetch(NL_WORKER.replace(/\/$/, "") + "/live.json?h=48", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null), old])
+    .then(([W, J]) => {
+      if (!W || !(W.items || []).length) return J;
+      const run = W.run || {};
+      return Object.assign({}, J || {}, {asof: W.asof, rule: W.rule, worker: true, items: W.items.map(x => Object.assign({sub: [x.code ? x.code : x.cat].filter(Boolean)}, x)),
+        runs: [{new: run.new, auth_drop: 0, off_topic: 0, lag_med_min: null}]});
+    }));
+}
+const NL_GRADE = {A: "一手", B: "研究機構", C: "權威媒體", D: "意見領袖"};
 const nlTpe = iso => { const d = new Date(iso); return isNaN(d) ? "" : new Date(d.getTime() + 8 * 3600e3).toISOString().slice(5, 16).replace("T", " "); };
 function ifLive() {
   const root = el("div");
@@ -4132,7 +4148,8 @@ function ifLive() {
       L.forEach(x => list.appendChild(el("div", "nl-it" + (isBig(x) ? " nl-big" : ""),
         `<span class="nl-t num">${esc(nlTpe(x.pub))}</span><span class="nl-src">${esc(x.src)}</span>` +
         `<a href="${esc(x.u)}" target="_blank" rel="noopener">${isBig(x) ? '<span class="nl-bigtag">重磅</span>' : ""}${esc(x.t)}</a>` +
-        `<small class="nl-sub">${esc(x.cat)}｜${esc((x.sub || []).slice(0, 2).join("、"))}${x.lag_min != null ? `｜延遲 ${x.lag_min} 分` : ""}</small>`)));
+        `<small class="nl-sub">${x.grade ? `<b>${esc(x.grade)} ${esc(NL_GRADE[x.grade] || "")}</b>｜` : ""}${esc(x.cat)}｜${esc((x.sub || []).slice(0, 2).join("、"))}` +
+        (x.served ? `｜發布 ${esc(nlTpe(x.pub))} → 抓到 ${esc(nlTpe(x.seen))} → 上網頁 ${esc(nlTpe(x.served))}（${x.lag_web_min} 分）` : x.lag_min != null ? `｜延遲 ${x.lag_min} 分` : "") + `</small>`)));
     };
     cats.forEach(c => { const b = el("button", "rv-pill" + (c === CAT ? " on" : ""), esc(c));
       b.onclick = () => { CAT = c; [...bar.children].forEach(k => k.classList.toggle("on", k === b)); paint(); }; bar.appendChild(b); });
@@ -13584,6 +13601,14 @@ if (D.wave && D.wave.stocks && D.wave.stocks.length) {
 }
 
 const nav = document.getElementById("tabs"), main = document.getElementById("main"), panels = [];
+// 🟢 10-04（Evans）：上櫃資料來源暫停（櫃買回 5xx／403／非 JSON）→ 頁面標示，不擋整站
+(() => {
+  const S = (D.inst || {}).tpex_src || [], rk = (D.inst || {}).rank || [];
+  const down = S.filter(x => (x.http || 0) >= 500 || x.http === 403 || !x.json);
+  if (S.length && down.length === S.length && !rk.some(r => r.market === "櫃"))
+    nav.parentNode.insertBefore(el("div", "tpex-down",
+      `上櫃資料來源暫停（HTTP ${esc([...new Set(down.map(x => x.http))].join("／"))}）：這一班沒有取得櫃買中心的上櫃法人資料，法人榜只有上市個股；來源恢復後下一班自動補上。`), nav);
+})();
 TABS.forEach(([label, fn, key], i) => {
   const b = el("button", "", esc(label));
   b.setAttribute("role", "tab");
