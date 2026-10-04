@@ -13,7 +13,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,6 +29,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
+          set -o pipefail
           if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
             echo "::error::還沒設 CLOUDFLARE_API_TOKEN／CLOUDFLARE_ACCOUNT_ID（步驟見 TODO 雲端段 10-04）"; exit 1
           fi
@@ -44,4 +45,19 @@ jobs:
           sed -i "s/__D1_ID__/$ID/" wrangler.toml
           wrangler d1 execute gea-live --remote --file schema.sql --yes
           wrangler deploy 2>&1 | tee deploy.log
-          echo "▶ Worker 網址（填進 template.html 的 NL_WORKER）：$(grep -o 'https://[a-z0-9.-]*workers.dev' deploy.log | head -1)"
+          W=$(grep -o 'https://[a-z0-9.-]*workers.dev' deploy.log | head -1)
+          echo "▶ Worker 網址（填進 template.html 的 NL_WORKER）：$W"
+          echo "W=$W" >> "$GITHUB_ENV"
+      - name: 驗收（等 cron 跑幾輪，印 /lag.json 與 /live.json 前幾則）
+        if: env.W != ''
+        run: |
+          for i in 1 2 3 4 5 6; do
+            sleep 60
+            N=$(curl -s "$W/live.json?h=48&peek=1" | python3 -c "import json,sys; print(len(json.load(sys.stdin).get('items') or []))" 2>/dev/null || echo "?")
+            echo "第 $i 分鐘：/live.json 有 $N 則"
+          done
+          echo "── /lag.json?d=7"; curl -s "$W/lag.json?d=7"; echo
+          echo "── /live.json 前 5 則"; curl -s "$W/live.json?h=48&peek=1" | python3 -c "
+          import json,sys
+          J=json.load(sys.stdin)
+          for x in (J.get('items') or [])[:5]: print(json.dumps(x, ensure_ascii=False)[:300])"
