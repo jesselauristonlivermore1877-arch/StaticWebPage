@@ -116,6 +116,18 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: python corp_events.py ../site/data
 
+      # 🟢 量化統計日報（10-04 Evans）：數字檔一定要在 build_web 寫完 web_data.json、corp_events 寫完 disposal.json 之後才產
+      #    （以前在 build_web 裡面跑，讀到上一班的 web_data，把別天的數字檔蓋掉）。已有日報的數字檔凍結不覆寫。
+      - name: 量化統計日報數字檔
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 5
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python quant_facts.py ../site/data
+          python quant_verify.py ../site/data
+
       # 🟢 第七批（09-27）：官方職位表（每 30 天自動核對出處頁）＋全球資料（BIS 各國政策利率、16 種貨幣匯率、全球前 50 大市值每週）
       #    → docs/data/officials.json、docs/data/world.json。失敗沿用上一份，不擋當天更新。
       - name: 官方職位表・全球資料

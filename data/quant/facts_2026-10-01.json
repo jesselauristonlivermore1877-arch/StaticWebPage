@@ -1,7 +1,26 @@
 {
  "date": "2026-10-01",
- "made": "2026-10-02T10:45",
+ "data_date": "2026-10-01",
+ "made": "2026-10-04T09:19+08:00",
+ "built_at": "2026-10-01T21:21:01+08:00",
+ "run": null,
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
+ "src_dates": {
+  "web_data.market.taiex": "2026-10-01",
+  "web_data.market.otc": "2026-10-01",
+  "web_data.market.tsmc": "2026-10-01",
+  "web_data.breadth": "2026-10-01",
+  "web_data.orders": "2026-10-01",
+  "web_data.inst.summary": "2026-10-01",
+  "web_data.market.margin_balance": "2026-10-01",
+  "web_data.elecfin": "2026-10-01",
+  "web_data.screen.sector_score": "2026-10-01",
+  "docs/data/rrg.json": "2026-10-01",
+  "docs/data/chips.json": "2026-10-01",
+  "docs/data/disposal.json": "2026-10-01",
+  "docs/data/etf_flow.json": "2026-10-01"
+ },
+ "skipped": {},
  "facts": [
   {
    "id": "taiex_close",
@@ -295,18 +314,18 @@
    "id": "rrg_落後",
    "sec": "族群",
    "label": "RRG 週線「落後」象限族群數",
-   "value": 7,
+   "value": 6,
    "unit": " 個",
-   "text": "7 個",
+   "text": "6 個",
    "src": "docs/data/rrg.json"
   },
   {
    "id": "rrg_改善",
    "sec": "族群",
    "label": "RRG 週線「改善」象限族群數",
-   "value": 3,
+   "value": 4,
    "unit": " 個",
-   "text": "3 個",
+   "text": "4 個",
    "src": "docs/data/rrg.json"
   },
   {
@@ -331,18 +350,18 @@
    "id": "dl_self",
    "sec": "法人籌碼",
    "label": "自營商自行買賣（個股加總估算）",
-   "value": 58.5,
+   "value": 38.2,
    "unit": " 億元",
-   "text": "+58.5 億元",
+   "text": "+38.2 億元",
    "src": "docs/data/chips.json"
   },
   {
    "id": "dl_hedge",
    "sec": "法人籌碼",
    "label": "自營商避險（個股加總估算）",
-   "value": -31.6,
+   "value": -29.7,
    "unit": " 億元",
-   "text": "-31.6 億元",
+   "text": "-29.7 億元",
    "src": "docs/data/chips.json"
   },
   {

@@ -1,7 +1,26 @@
 {
  "date": "2026-10-02",
- "made": "2026-10-02T13:24",
+ "data_date": "2026-10-02",
+ "made": "2026-10-04T09:19+08:00",
+ "built_at": "2026-10-02T21:20:48+08:00",
+ "run": null,
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
+ "src_dates": {
+  "web_data.market.taiex": "2026-10-02",
+  "web_data.market.otc": "2026-10-02",
+  "web_data.market.tsmc": "2026-10-02",
+  "web_data.breadth": "2026-10-02",
+  "web_data.orders": "2026-10-02",
+  "web_data.inst.summary": "2026-10-02",
+  "web_data.market.margin_balance": "2026-10-02",
+  "web_data.elecfin": "2026-10-02",
+  "web_data.screen.sector_score": "2026-10-02",
+  "docs/data/rrg.json": "2026-10-02",
+  "docs/data/chips.json": "2026-10-02",
+  "docs/data/disposal.json": "2026-10-02",
+  "docs/data/etf_flow.json": "2026-10-02"
+ },
+ "skipped": {},
  "facts": [
   {
    "id": "taiex_close",
@@ -187,9 +206,9 @@
    "id": "inst_投信",
    "sec": "法人籌碼",
    "label": "投信買賣超",
-   "value": 49.1,
+   "value": 57.7,
    "unit": " 億元",
-   "text": "+49.1 億元",
+   "text": "+57.7 億元",
    "src": "web_data.inst.summary"
   },
   {
@@ -205,9 +224,9 @@
    "id": "margin_twse",
    "sec": "信用交易",
    "label": "上市融資餘額",
-   "value": 6298.7,
+   "value": 6351.0,
    "unit": " 億元",
-   "text": "6298.7 億元",
+   "text": "6351.0 億元",
    "src": "web_data.market.margin_balance"
   },
   {
