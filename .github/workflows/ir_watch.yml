@@ -1,0 +1,54 @@
+# ir_watch.yml ─ 法說即時報告的偵測（Evans 2026-10-04 晚）：雲端偵測、本機產報告
+#   公開資訊觀測站「法人說明會一覽」（本月＋下月，上市＋上櫃）出現重點公司的新場次、或簡報 PDF 上傳 →
+#   寫 data/ir_trigger/<代號>_<法說日期>.json 並推上；本機看到觸發檔就產報告。重點公司名單 data/registry/ir_watch.json。
+#   程式：CustomerServiceANDSales/ir_watch.py（日期一律以官方行事曆為準，不寫死）
+name: 法說偵測
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7,37 0-12 * * 1-5"    # 平日台北 08:07～20:37 每 30 分鐘（簡報多在法說當天上傳）
+    - cron: "17 14 * * *"          # 每天台北 22:17 再掃一次（晚上法說、週末公告）
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ir-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: site
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests feedparser certifi numpy
+      - name: 偵測
+        working-directory: code
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python ir_watch.py ../site/data
+      - name: 提交
+        working-directory: site
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ir_trigger data/registry/ir_watch.json 2>/dev/null || true
+          if git diff --staged --quiet; then echo "沒有新的法說或簡報。"; exit 0; fi
+          git commit -m "data: 法說偵測 $(TZ=Asia/Taipei date '+%F %H:%M')"
+          for i in 1 2 3 4; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep $((2 ** i))
+          done
+          exit 1
