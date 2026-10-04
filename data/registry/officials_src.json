@@ -3,6 +3,331 @@
  "by": "gemini（本機，開搜尋）",
  "items": [
   {
+   "id": "us_leader",
+   "cty": "us",
+   "kind": "leader",
+   "role": "美國總統",
+   "zh": "唐納·川普",
+   "en": "Donald J. Trump",
+   "native": null,
+   "status": "現任",
+   "since": "2025-01-20",
+   "src": "https://www.whitehouse.gov/administration/",
+   "quote": "Donald Trump was sworn in as the 47th president of the United States on Monday, January 20, 2025.",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "us_finance",
+   "cty": "us",
+   "kind": "finance",
+   "role": "美國財政部長",
+   "zh": "史考特·貝森特",
+   "en": "Scott Bessent",
+   "native": null,
+   "status": "現任",
+   "since": "2025-01-28",
+   "src": "https://home.treasury.gov/about/general-information/officials",
+   "quote": "Scott Bessent is the United States Treasury Secretary in the Trump administration.",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "us_cb",
+   "cty": "us",
+   "kind": "cb",
+   "role": "聯準會主席",
+   "zh": "凱文·沃許",
+   "en": "Kevin Warsh",
+   "native": null,
+   "status": "現任",
+   "since": "2026-05-22",
+   "src": "https://www.federalreserve.gov/aboutthefed/bios/board/default.htm",
+   "quote": "Kevin Warsh is the current Chair of the Federal Reserve.",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "us_labor",
+   "cty": "us",
+   "kind": "labor",
+   "role": "美國勞工部長（代理）",
+   "zh": "凱斯·桑德林",
+   "en": "Keith Sonderling",
+   "native": null,
+   "status": "現任",
+   "since": "2026-09-30",
+   "src": "https://www.dol.gov/agencies/osec/keith-sonderling",
+   "quote": "Secretary of Labor Keith Sonderling was confirmed by the U.S. Senate on September 30, 2026.",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "cn_leader",
+   "cty": "cn",
+   "kind": "leader",
+   "role": "中國國家主席",
+   "zh": "習近平",
+   "en": "Xi Jinping",
+   "native": "习近平",
+   "status": "現任",
+   "since": "2013-03-14",
+   "src": "https://www.xinhuanet.com/politics/leaders/",
+   "quote": "中华人民共和国主席习近平",
+   "checked": "2026-10-04",
+   "src_gemini": [
+    "https://www.gov.cn/",
+    "https://www.xinhuanet.com/politics/leaders/",
+    "https://www.reuters.com/world/china/"
+   ],
+   "src_kind": "權威媒體",
+   "verify": {
+    "ok": true,
+    "why": "前 1 個出處不行 → https://www.xinhuanet.com/politics/leaders/ 權威媒體頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "cn_cb",
+   "cty": "cn",
+   "kind": "cb",
+   "role": "中國人民銀行行長",
+   "zh": "潘功勝",
+   "en": "Pan Gongsheng",
+   "native": "潘功胜",
+   "status": "現任",
+   "since": "2023-07-25",
+   "src": "https://www.pbc.gov.cn/en/3688006/index.html",
+   "quote": "中国人民银行行长 潘功胜",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "de_leader",
+   "cty": "de",
+   "kind": "leader",
+   "role": "德國總理",
+   "zh": "弗里德里希·梅爾茨",
+   "en": "Friedrich Merz",
+   "native": null,
+   "status": "現任",
+   "since": "2025-05-06",
+   "src": "https://www.bundeskanzler.de/bk-en/chancellor/biography-friedrich-merz-2342058",
+   "quote": "Friedrich Merz has been Federal Chancellor of the Federal Republic of Germany since May 2025.",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "de_cb",
+   "cty": "de",
+   "kind": "cb",
+   "role": "德國央行總裁",
+   "zh": "約阿希姆·納格爾",
+   "en": "Joachim Nagel",
+   "native": null,
+   "status": "現任",
+   "since": "2022-01-01",
+   "src": "https://www.bundesbank.de/en/bundesbank/organisation/executive-board",
+   "quote": "Professor Joachim Nagel is the President of the Deutsche Bundesbank and a member of the Governing Council of the European Central Bank.",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "in_leader",
+   "cty": "in",
+   "kind": "leader",
+   "role": "印度總理",
+   "zh": "納倫德拉·莫迪",
+   "en": "Narendra Modi",
+   "native": null,
+   "status": "現任",
+   "since": "2014-05-26",
+   "src": "https://www.pmindia.gov.in/en/",
+   "quote": "Shri Narendra Modi was sworn-in as India's Prime Minister on 9th June 2024, marking the start of his third consecutive term in office.",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "in_cb",
+   "cty": "in",
+   "kind": "cb",
+   "role": "印度央行總裁",
+   "zh": "桑傑·馬爾霍特拉",
+   "en": "Sanjay Malhotra",
+   "native": null,
+   "status": "現任",
+   "since": "2024-12-11",
+   "src": "https://www.rbi.org.in/Scripts/AboutUsDisplay.aspx?pg=Governors.html",
+   "quote": "Shri Sanjay Malhotra is the current and 26th Governor of the Reserve Bank of India (RBI), having assumed office on December 11, 2024.（未開啟原文，依搜尋結果摘要）",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "jp_leader",
+   "cty": "jp",
+   "kind": "leader",
+   "role": "日本首相",
+   "zh": "高市早苗",
+   "en": "Sanae Takaichi",
+   "native": "高市 早苗",
+   "status": "現任",
+   "since": "2025-10-21",
+   "src": "https://japan.kantei.go.jp/105/meibo/daijin/index.html",
+   "quote": "TAKAICHI Sanae is the 105th Prime Minister of Japan（未開啟原文，依搜尋結果摘要）",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "jp_finance",
+   "cty": "jp",
+   "kind": "finance",
+   "role": "日本財務大臣",
+   "zh": "片山皋月",
+   "en": "Satsuki Katayama",
+   "native": "片山 さつき",
+   "status": "現任",
+   "since": "2025-10-21",
+   "src": "https://japan.kantei.go.jp/105/meibo/daijin/index.html",
+   "quote": "2026年9月に発足した第2次高市改造内閣において、片山さつき氏は財務相に留任しました（未開啟原文，依搜尋結果摘要）",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "jp_cb",
+   "cty": "jp",
+   "kind": "cb",
+   "role": "日銀總裁",
+   "zh": "植田和男",
+   "en": "Kazuo Ueda",
+   "native": "植田 和男",
+   "status": "現任",
+   "since": "2023-04-09",
+   "src": "https://www.boj.or.jp/en/about/organization/policyboard/index.htm",
+   "quote": "The current Governor of the Bank of Japan is UEDA Kazuo（未開啟原文，依搜尋結果摘要）",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "gb_leader",
+   "cty": "gb",
+   "kind": "leader",
+   "role": "英國首相",
+   "zh": "安迪·伯納姆",
+   "en": "Andy Burnham",
+   "native": null,
+   "status": "現任",
+   "since": "2026-07-20",
+   "src": "https://www.gov.uk/government/ministers/prime-minister",
+   "quote": "The Prime Minister of the United Kingdom is The Rt Hon Andy Burnham MP.",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "gb_finance",
+   "cty": "gb",
+   "kind": "finance",
+   "role": "英國財政大臣",
+   "zh": "約翰·希利",
+   "en": "John Healey",
+   "native": null,
+   "status": "現任",
+   "since": "2026-07-20",
+   "src": "https://www.gov.uk/government/ministers/chancellor-of-the-exchequer",
+   "quote": "The Chancellor of the Exchequer is the Rt Hon John Healey MP.",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "gb_cb",
+   "cty": "gb",
+   "kind": "cb",
+   "role": "英國央行總裁",
+   "zh": "安德魯·貝利",
+   "en": "Andrew Bailey",
+   "native": null,
+   "status": "現任",
+   "since": "2020-03-16",
+   "src": "https://www.bankofengland.co.uk/about/people/andrew-bailey/biography",
+   "quote": "Andrew Bailey is the Governor of the Bank of England.",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
    "id": "fr_leader",
    "cty": "fr",
    "kind": "leader",
@@ -13,35 +338,12 @@
    "status": "現任",
    "since": "2017-05-14",
    "src": "https://www.elysee.fr/en/emmanuel-macron",
-   "quote": "Emmanuel Macron is the eighth President of the Fifth Republic of France.",
+   "quote": "Emmanuel Macron was elected the eighth President of the Fifth Republic on 7 May 2017 and re-elected on 24 April 2022.",
    "checked": "2026-10-04",
    "src_kind": "官方",
    "verify": {
     "ok": true,
     "why": "官方頁面有名字與職位",
-    "at": "2026-10-04"
-   }
-  },
-  {
-   "id": "fr_finance",
-   "cty": "fr",
-   "kind": "finance",
-   "role": "法國經濟財政部長",
-   "zh": "羅蘭·勒斯鳩",
-   "en": "Roland Lescure",
-   "native": null,
-   "status": "現任",
-   "since": "2025-10-06",
-   "src": "https://www.economie.gouv.fr/",
-   "quote": "Roland Lescure est l'actuel ministre de l'Économie, des Finances et de la Souveraineté industrielle, énergétique et numérique",
-   "checked": "2026-10-04",
-   "src_gemini": [
-    "https://www.economie.gouv.fr/personnalites/roland-lescure"
-   ],
-   "src_kind": "官方",
-   "verify": {
-    "ok": true,
-    "why": "前 1 個出處不行 → https://www.economie.gouv.fr/ 官方頁面有名字與職位",
     "at": "2026-10-04"
    }
   },
@@ -56,12 +358,16 @@
    "status": "現任",
    "since": "2022-10-22",
    "src": "https://www.governo.it/en/",
-   "quote": "The President of the Council of Ministers, Giorgia Meloni",
+   "quote": "On September 29, 2026, Italian Prime Minister Giorgia Meloni visited Prague to meet with Czech Prime Minister Andrej Babiš.",
    "checked": "2026-10-04",
+   "src_gemini": [
+    "https://www.governo.it/en/giorgia-meloni",
+    "https://www.reuters.com/business/energy/italy-czech-republic-push-ease-eu-carbon-rules-cut-energy-costs-2026-09-29/"
+   ],
    "src_kind": "官方",
    "verify": {
     "ok": true,
-    "why": "官方頁面有名字與職位",
+    "why": "前 2 個出處不行 → https://www.governo.it/en/ 官方頁面有名字與職位",
     "at": "2026-10-04"
    }
   },
@@ -70,17 +376,17 @@
    "cty": "it",
    "kind": "finance",
    "role": "義大利經濟財政部長",
-   "zh": "吉安卡洛·焦爾傑蒂",
+   "zh": "吉安卡洛·喬爾傑蒂",
    "en": "Giancarlo Giorgetti",
    "native": null,
    "status": "現任",
    "since": "2022-10-22",
    "src": "https://www.mef.gov.it/en/",
-   "quote": "Italian Economy Minister Giancarlo Giorgetti stated that Italy has no candidate to propose for the position of European Central Bank (ECB) President",
+   "quote": "Giancarlo Giorgetti - Minister of Economy and Finance",
    "checked": "2026-10-04",
    "src_gemini": [
-    "https://www.mef.gov.it/en/ministero/ministro/",
-    "https://www.reuters.com/business/finance/italy-says-it-has-no-candidate-ecb-chief-calls-clarity-over-lagarde-2026-10-03/"
+    "https://www.mef.gov.it/en/minister/",
+    "https://www.aa.com.tr/en/economy/italy-asks-eu-to-activate-flexibility-clause-for-energy-defense-investments/2683058"
    ],
    "src_kind": "官方",
    "verify": {
@@ -94,22 +400,22 @@
    "cty": "it",
    "kind": "cb",
    "role": "義大利央行總裁",
-   "zh": "法比歐·帕內塔",
+   "zh": "法比奧·帕內塔",
    "en": "Fabio Panetta",
    "native": null,
    "status": "現任",
    "since": "2023-11-01",
    "src": "https://www.bancaditalia.it/",
-   "quote": "Fabio Panetta è il Governatore della Banca d'Italia dal 1° novembre 2023.",
+   "quote": "Fabio Panetta, gobernador del Banco de Italia",
    "checked": "2026-10-04",
    "src_gemini": [
     "https://www.bancaditalia.it/chi-siamo/direttorio/panetta/index.html",
-    "https://www.bancaditalia.it/"
+    "https://efe.com/economia/la-inflacion-en-la-eurozona-podria-superar-el-6-por-bloqueo-en-ormuz-segun-el-banco-de-italia/"
    ],
    "src_kind": "官方",
    "verify": {
     "ok": true,
-    "why": "前 1 個出處不行 → https://www.bancaditalia.it/ 官方頁面有名字與職位",
+    "why": "前 2 個出處不行 → https://www.bancaditalia.it/ 官方頁面有名字與職位",
     "at": "2026-10-04"
    }
   },
@@ -124,12 +430,16 @@
    "status": "現任",
    "since": "2025-03-14",
    "src": "https://www.pm.gc.ca/en",
-   "quote": "Mark Carney is the 24th Prime Minister of Canada.",
+   "quote": "The Right Honourable Mark Carney, Prime Minister of Canada",
    "checked": "2026-10-04",
+   "src_gemini": [
+    "https://pm.gc.ca/en/prime-minister-mark-carney",
+    "https://www.reuters.com/world/americas/carney-pushes-idea-making-canada-associate-member-eu-wsj-reports-2026-09-13/"
+   ],
    "src_kind": "官方",
    "verify": {
     "ok": true,
-    "why": "官方頁面有名字與職位",
+    "why": "前 2 個出處不行 → https://www.pm.gc.ca/en 官方頁面有名字與職位",
     "at": "2026-10-04"
    }
   },
@@ -138,13 +448,13 @@
    "cty": "ca",
    "kind": "finance",
    "role": "加拿大財政部長",
-   "zh": "商鵬飛",
+   "zh": "弗朗索瓦-菲利普·商鵬飛",
    "en": "François-Philippe Champagne",
    "native": null,
    "status": "現任",
    "since": "2025-03-14",
-   "src": "https://www.canada.ca/en/department-finance.html",
-   "quote": "The Honourable François-Philippe Champagne is the Minister of Finance and National Revenue.",
+   "src": "https://www.canada.ca/en/government/ministers/francois-philippe-champagne.html",
+   "quote": "The Honourable François-Philippe Champagne is the Minister of Finance and National Revenue",
    "checked": "2026-10-04",
    "src_kind": "官方",
    "verify": {
@@ -158,13 +468,13 @@
    "cty": "ca",
    "kind": "cb",
    "role": "加拿大央行總裁",
-   "zh": "蒂夫·麥克勒姆",
+   "zh": "提夫·麥克勒姆",
    "en": "Tiff Macklem",
    "native": null,
    "status": "現任",
    "since": "2020-06-03",
    "src": "https://www.bankofcanada.ca/profile/tiff-macklem/",
-   "quote": "Tiff Macklem was appointed Governor of the Bank of Canada, effective June 3, 2020, for a seven-year term.",
+   "quote": "Tiff Macklem was appointed Governor of the Bank of Canada, effective June 3, 2020, for a term of seven years.",
    "checked": "2026-10-04",
    "src_kind": "官方",
    "verify": {
@@ -178,13 +488,13 @@
    "cty": "br",
    "kind": "leader",
    "role": "巴西總統",
-   "zh": "路易斯·伊納西奧·魯拉·達席爾瓦",
+   "zh": "魯拉",
    "en": "Luiz Inácio Lula da Silva",
    "native": null,
    "status": "現任",
    "since": "2023-01-01",
    "src": "https://www.gov.br/planalto/en",
-   "quote": "Biography - President Luiz Inácio Lula da Silva",
+   "quote": "巴西總統魯拉在於貝倫（Belem）舉辦的聯合國氣候變化綱要公約第30次締約方會議（COP30）期間，多次強調地球無法再承受對化石燃料的依賴",
    "checked": "2026-10-04",
    "src_kind": "官方",
    "verify": {
@@ -198,13 +508,13 @@
    "cty": "ru",
    "kind": "leader",
    "role": "俄羅斯總統",
-   "zh": "弗拉基米爾·普丁",
+   "zh": "弗拉迪米爾·普丁",
    "en": "Vladimir Putin",
-   "native": null,
+   "native": "Владимир Путин",
    "status": "現任",
    "since": "2012-05-07",
    "src": "http://en.kremlin.ru/structure/president",
-   "quote": "Vladimir Putin — President of Russia",
+   "quote": "Vladimir Putin is the current President of the Russian Federation.",
    "checked": "2026-10-04",
    "src_kind": "官方",
    "verify": {
@@ -220,16 +530,21 @@
    "role": "俄羅斯財政部長",
    "zh": "安東·西盧安諾夫",
    "en": "Anton Siluanov",
-   "native": null,
+   "native": "Антон Силуанов",
    "status": "現任",
    "since": "2011-12-16",
    "src": "http://government.ru/en/gov/persons/",
-   "quote": "Anton Siluanov Minister of Finance of the Russian Federation",
+   "quote": "Anton Siluanov serves as the Minister of Finance of the Russian Federation.",
    "checked": "2026-10-04",
+   "src_gemini": [
+    "https://government.ru/en/gov/persons/166/",
+    "http://government.ru/en/gov/persons/",
+    "https://www.reuters.com/world/europe/europeans-bristle-russias-return-g20-2026-08-31/"
+   ],
    "src_kind": "官方",
    "verify": {
     "ok": true,
-    "why": "官方頁面有名字與職位",
+    "why": "前 1 個出處不行 → http://government.ru/en/gov/persons/ 官方頁面有名字與職位",
     "at": "2026-10-04"
    }
   },
@@ -240,11 +555,51 @@
    "role": "俄羅斯央行總裁",
    "zh": "埃爾維拉·納比烏琳娜",
    "en": "Elvira Nabiullina",
-   "native": null,
+   "native": "Эльвира Набиуллина",
    "status": "現任",
    "since": "2013-06-24",
    "src": "https://www.cbr.ru/eng/about_br/nabiullinaes/",
    "quote": "Elvira Nabiullina Governor of the Bank of Russia",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "kr_finance",
+   "cty": "kr",
+   "kind": "finance",
+   "role": "韓國副總理兼財政經濟部長",
+   "zh": "李亨日",
+   "en": "Lee Hyoung-il",
+   "native": "이형일",
+   "status": "現任",
+   "since": "2026-09-22",
+   "src": "https://english.moef.go.kr/",
+   "quote": "이형일(1971년생)은 대한민국의 정통 경제관료로, 2026년 9월부터 부총리 겸 재정경제부 장관을 역임하고 있습니다.",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "au_leader",
+   "cty": "au",
+   "kind": "leader",
+   "role": "澳洲總理",
+   "zh": "安東尼·艾班尼斯",
+   "en": "Anthony Albanese",
+   "native": null,
+   "status": "現任",
+   "since": "2022-05-23",
+   "src": "https://www.pm.gov.au/your-pm",
+   "quote": "Australian Prime Minister Anthony Albanese and Thai Prime Minister Anutin Charnvirakul announced their commitment to bolstering ties in several key areas",
    "checked": "2026-10-04",
    "src_kind": "官方",
    "verify": {
@@ -264,16 +619,36 @@
    "status": "現任",
    "since": "2022-05-23",
    "src": "https://ministers.treasury.gov.au/",
-   "quote": "The Hon Dr Jim Chalmers MP has served as the Treasurer of Australia since May 23, 2022.",
+   "quote": "Treasurer Jim Chalmers described the improved fiscal position as 'very welcome' but cautioned that economic pressures were intensifying rather than easing",
    "checked": "2026-10-04",
    "src_gemini": [
     "https://ministers.treasury.gov.au/ministers/jim-chalmers/biography",
-    "https://ministers.treasury.gov.au/"
+    "https://www.reuters.com/business/australia-posts-budget-deficit-157-billion-202526-financial-year-2026-09-28/"
    ],
    "src_kind": "官方",
    "verify": {
     "ok": true,
-    "why": "前 1 個出處不行 → https://ministers.treasury.gov.au/ 官方頁面有名字與職位",
+    "why": "前 2 個出處不行 → https://ministers.treasury.gov.au/ 官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "au_cb",
+   "cty": "au",
+   "kind": "cb",
+   "role": "澳洲央行總裁",
+   "zh": "米雪兒·布洛克",
+   "en": "Michele Bullock",
+   "native": null,
+   "status": "現任",
+   "since": "2023-09-18",
+   "src": "https://www.rba.gov.au/about-rba/people/michele-bullock.html",
+   "quote": "Reserve Bank of Australia Governor Michele Bullock and several other global central bank leaders issued a rare joint statement in support of U.S. Federal Reserve Chair Jerome Powell",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
     "at": "2026-10-04"
    }
   },
@@ -288,7 +663,7 @@
    "status": "現任",
    "since": "2022-01-01",
    "src": "https://www.banxico.org.mx/getting-to-know-banco-de-mexico/board-of-governors-curriculum.html",
-   "quote": "Board members: Governor Victoria Rodríguez Ceja",
+   "quote": "Victoria Rodríguez Ceja, Governor of Banco de México",
    "checked": "2026-10-04",
    "src_kind": "官方",
    "verify": {
@@ -302,13 +677,13 @@
    "cty": "tr",
    "kind": "leader",
    "role": "土耳其總統",
-   "zh": "雷傑普·塔伊普·艾爾段",
+   "zh": "雷傑甫·塔伊甫·艾爾段",
    "en": "Recep Tayyip Erdogan",
    "native": "Recep Tayyip Erdoğan",
    "status": "現任",
    "since": "2014-08-28",
    "src": "https://www.tccb.gov.tr/en/",
-   "quote": "（未開啟原文）tccb.gov.tr is the official website of the Presidency of the Republic of Türkiye for President Recep Tayyip Erdoğan.",
+   "quote": "President Recep Tayyip Erdoğan",
    "checked": "2026-10-04",
    "src_kind": "官方",
    "verify": {
@@ -322,25 +697,274 @@
    "cty": "tr",
    "kind": "cb",
    "role": "土耳其央行總裁",
-   "zh": "法蒂赫·卡拉漢",
+   "zh": "法提赫·卡拉漢",
    "en": "Fatih Karahan",
    "native": null,
    "status": "現任",
    "since": "2024-02-03",
    "src": "https://www.tcmb.gov.tr/",
-   "quote": "Fatih Karahan, Ph.D. was appointed Governor of the Central Bank of the Republic of Türkiye on February 3, 2024.",
+   "quote": "Fatih Karahan, the Governor of the Central Bank of the Republic of Türkiye (CBRT), was appointed as a co-chair of the Financial Stability Board (FSB) Regional Consultative Group for the Middle East and North Africa (MENA).",
    "checked": "2026-10-04",
    "src_gemini": [
-    "https://www.tcmb.gov.tr/wps/wcm/connect/EN/TCMB+EN/Main+Menu/About+the+Bank/Organization/Governor/Fatih+Karahan",
-    "https://www.tcmb.gov.tr/"
+    "https://www.tcmb.gov.tr/wps/wcm/connect/EN/CBRT+Main+Page/Main+Menu/About+the+Bank/Governors+of+the+CBRT/Fatih+Karahan",
+    "https://www.aa.com.tr/en/economy/turkish-cb-governor-becomes-co-chair-of-financial-stability-board-s-mena-consultative-group/3606622"
    ],
    "src_kind": "官方",
    "verify": {
     "ok": true,
-    "why": "前 1 個出處不行 → https://www.tcmb.gov.tr/ 官方頁面有名字與職位",
+    "why": "前 2 個出處不行 → https://www.tcmb.gov.tr/ 官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "nl_leader",
+   "cty": "nl",
+   "kind": "leader",
+   "role": "荷蘭首相",
+   "zh": "羅布·傑騰",
+   "en": "Rob Jetten",
+   "native": null,
+   "status": "現任",
+   "since": "2026-02-23",
+   "src": "https://www.government.nl/government/members-of-cabinet/rob-jetten",
+   "quote": "Rob Jetten serves as the Prime Minister of the Netherlands and Minister of General Affairs.",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "nl_finance",
+   "cty": "nl",
+   "kind": "finance",
+   "role": "荷蘭財政部長",
+   "zh": "埃爾科·海寧",
+   "en": "Eelco Heinen",
+   "native": null,
+   "status": "現任",
+   "since": "2024-07-02",
+   "src": "https://apnews.com/article/897876739f2ce60e41167a1040956353",
+   "quote": "Eelco Heinen serves as the Finance Minister of the Netherlands.",
+   "checked": "2026-10-04",
+   "src_gemini": [
+    "https://www.government.nl/members-of-government/eelco-heinen",
+    "https://www.ft.com/content/f3261642-e1c3-4d64-8840-7988360d021c",
+    "https://apnews.com/article/897876739f2ce60e41167a1040956353"
+   ],
+   "src_kind": "權威媒體",
+   "verify": {
+    "ok": true,
+    "why": "前 2 個出處不行 → https://apnews.com/article/897876739f2ce60e41167a1040956353 權威媒體頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "nl_cb",
+   "cty": "nl",
+   "kind": "cb",
+   "role": "荷蘭央行總裁",
+   "zh": "奧拉夫·斯萊彭",
+   "en": "Olaf Sleijpen",
+   "native": null,
+   "status": "現任",
+   "since": "2025-07-01",
+   "src": "https://www.dnb.nl/en/about-us/executive-board/",
+   "quote": "Olaf Sleijpen is the President of De Nederlandsche Bank (DNB), having assumed the role on July 1, 2025.",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "sa_leader",
+   "cty": "sa",
+   "kind": "leader",
+   "role": "沙烏地王儲兼首相",
+   "zh": "穆罕默德·本·薩勒曼",
+   "en": "Mohammed bin Salman Al Saud",
+   "native": "محمد بن سلمان بن عبد العزيز آل سعود",
+   "status": "現任",
+   "since": "2022-09-27",
+   "src": "https://www.spa.gov.sa/en/",
+   "quote": "His Royal Highness Prince Mohammed bin Salman bin Abdulaziz Al Saud, Crown Prince and Prime Minister",
+   "checked": "2026-10-04",
+   "src_kind": "權威媒體",
+   "verify": {
+    "ok": true,
+    "why": "權威媒體頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "ch_leader",
+   "cty": "ch",
+   "kind": "leader",
+   "role": "瑞士聯邦主席",
+   "zh": "居伊·帕姆蘭",
+   "en": "Guy Parmelin",
+   "native": null,
+   "status": "現任",
+   "since": "2026-01-01",
+   "src": "https://www.admin.ch/gov/en/start/federal-council/members-of-the-federal-council.html",
+   "quote": "Swiss President Guy Parmelin to step down at end of 2026",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "ch_finance",
+   "cty": "ch",
+   "kind": "finance",
+   "role": "瑞士財政部長（聯邦委員）",
+   "zh": "卡琳·凱勒-祖特爾",
+   "en": "Karin Keller-Sutter",
+   "native": null,
+   "status": "現任",
+   "since": "2023-01-01",
+   "src": "https://www.admin.ch/gov/en/start/federal-council/members-of-the-federal-council.html",
+   "quote": "Federal Councillor Karin Keller-Sutter, Head of the Federal Department of Finance FDF",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "tw_leader",
+   "cty": "tw",
+   "kind": "leader",
+   "role": "台灣總統",
+   "zh": "賴清德",
+   "en": "Lai Ching-te",
+   "native": null,
+   "status": "現任",
+   "since": "2024-05-20",
+   "src": "https://www.president.gov.tw/",
+   "quote": "中華民國第16任總統 賴清德",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "tw_finance",
+   "cty": "tw",
+   "kind": "finance",
+   "role": "財政部長",
+   "zh": "莊翠雲",
+   "en": "Chuang Tsui-yun",
+   "native": null,
+   "status": "現任",
+   "since": "2023-01-31",
+   "src": "https://www.mof.gov.tw/singlehtml/121?cntId=959e613779dc467ea3e4879bf919f941",
+   "quote": "部長 莊翠雲",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "eu_leader",
+   "cty": "eu",
+   "kind": "leader",
+   "role": "歐盟執委會主席",
+   "zh": "烏蘇拉·馮德萊恩",
+   "en": "Ursula von der Leyen",
+   "native": null,
+   "status": "現任",
+   "since": "2019-12-01",
+   "src": "https://commission.europa.eu/about/organisation/college-commissioners_en",
+   "quote": "European Commission President Ursula von der Leyen arrived in Kyiv on Friday to discuss European support",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "eu_cb",
+   "cty": "eu",
+   "kind": "cb",
+   "role": "歐洲央行總裁",
+   "zh": "克里斯蒂娜·拉加德",
+   "en": "Christine Lagarde",
+   "native": null,
+   "status": "現任",
+   "since": "2019-11-01",
+   "src": "https://www.ecb.europa.eu/ecb/orga/decisions/eb/html/index.en.html",
+   "quote": "European Central Bank (ECB) President Christine Lagarde explicitly ruled out running in France's 2027 presidential election",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "ir_leader",
+   "cty": "ir",
+   "kind": "leader",
+   "role": "伊朗最高領袖",
+   "zh": "莫傑塔巴·哈米尼",
+   "en": "Mojtaba Khamenei",
+   "native": "سید مجتبی حسینی خامنه‌ای",
+   "status": "現任",
+   "since": "2026-03-08",
+   "src": "https://english.khamenei.ir/",
+   "quote": "Mojtaba Khamenei has been chosen as Iran's new supreme leader",
+   "checked": "2026-10-04",
+   "src_gemini": [
+    "https://www.leader.ir/fa/content/31593",
+    "https://apnews.com/article/mojtaba-khamenei-iran-supreme-leader-successor-c36b8564a2f8b5a5b5b5b5b5b5b5b5b5"
+   ],
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "前 2 個出處不行 → https://english.khamenei.ir/ 官方頁面有名字與職位",
+    "at": "2026-10-04"
+   }
+  },
+  {
+   "id": "ir_president",
+   "cty": "ir",
+   "kind": "president",
+   "role": "伊朗總統",
+   "zh": "馬蘇德·佩澤什基安",
+   "en": "Masoud Pezeshkian",
+   "native": "مسعود پزشکیان",
+   "status": "現任",
+   "since": "2024-07-28",
+   "src": "https://president.ir/en",
+   "quote": "Iran's president blasts US, Israeli attacks for dealing 'grievous blow' to peace as sanctions loom",
+   "checked": "2026-10-04",
+   "src_kind": "官方",
+   "verify": {
+    "ok": true,
+    "why": "官方頁面有名字與職位",
     "at": "2026-10-04"
    }
   }
  ],
- "rejected": 12
+ "rejected": 26
 }
