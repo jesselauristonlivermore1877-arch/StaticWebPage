@@ -15,8 +15,17 @@ on:
         description: "1＝只重新併本機分類（不打網路；本機 macro_tags 跑完用 gh 觸發）"
         required: false
         default: "0"
+      fred_only:
+        description: "1＝只抓 FRED 經濟指標（不抓新聞）；auto＝今天是公布日才抓（cron-job.org 用這個）"
+        required: false
+        default: "0"
   schedule:
     - cron: "15 23 * * *"      # 每天台北 07:15（開盤前）
+    # 🟢 10-04（Evans）：美國經濟數據公布日（PCE、非農、CPI、PPI）晚上加抓 FRED，不等隔天早上。
+    #    美國夏令時間公布在台北 20:30、冬令（11/1 起）21:30 → 兩個時間都排；不是公布日的那幾天第一步就結束。
+    #    GitHub 排程常延遲 → 準點靠 cron-job.org 打 workflow_dispatch（fred_only=1），設定見 TODO 雲端段 10-04。
+    - cron: "35 12 * * 1-5"    # 台北 20:35
+    - cron: "35 13 * * 1-5"    # 台北 21:35
 
 permissions:
   contents: write
@@ -28,7 +37,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 80     # 10-04：正式加工（擴充查詢約 15～20 分）接在世界趨勢後面
     steps:
       - uses: actions/checkout@v4
         with:
@@ -43,7 +52,31 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install requests feedparser googlenewsdecoder yfinance   # yfinance：FedWatch 自算用的聯邦基金期貨（09-27）
+      - name: 判斷這一班要做什麼
+        id: mode
+        working-directory: site
+        run: |
+          EV="${{ github.event_name }}"; SCH="${{ github.event.schedule }}"
+          MODE=full
+          if [ "${{ inputs.retag }}" = "1" ]; then MODE=retag; fi
+          if [ "${{ inputs.fred_only }}" = "1" ]; then MODE=fred; fi
+          if [ "${{ inputs.fred_only }}" = "auto" ] || { [ "$EV" = "schedule" ] && [ "$SCH" != "15 23 * * *" ]; }; then
+            # 晚上那兩個排程：今天（台北）是公布日才抓
+            MODE=$(python3 - <<'PY'
+          import json, datetime as dt
+          t = (dt.datetime.utcnow() + dt.timedelta(hours=8)).date().isoformat()
+          R = (json.load(open("data/macro_flow.json", encoding="utf-8")).get("releases") or {})
+          hit = [k for k, v in R.items() if t in ((v or {}).get("next"), (v or {}).get("last"))]
+          print("  公布日檢查 %s：%s" % (t, "、".join(hit) or "不是公布日"), file=__import__("sys").stderr)
+          print("fred" if hit else "skip")
+          PY
+          )
+          fi
+          echo "觸發：$EV　排程：${SCH:-（手動／cron-job.org）}　模式：$MODE"
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
       - name: 世界趨勢
+        if: steps.mode.outputs.mode != 'skip'
+
         working-directory: code
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -54,22 +87,35 @@ jobs:
           WEEKLY_FORCE: ${{ inputs.weekly_force }}
           PYTHONUNBUFFERED: "1"
         run: |
-          if [ "${{ inputs.retag }}" = "1" ]; then
+          M="${{ steps.mode.outputs.mode }}"
+          if [ "$M" = "retag" ]; then
             echo "只重新併本機分類（data/macro_tags.json），不打網路"
             python macro_flow.py ../site/data --retag
+            python tools/preview_macro.py ../site --formal --light
+          elif [ "$M" = "fred" ]; then
+            echo "只抓 FRED 經濟指標（公布日加抓）"
+            python macro_flow.py ../site/data --no-news
+            python tools/preview_macro.py ../site --formal --light
           else
             python macro_flow.py ../site/data
+            # 🟢 10-04 v2 合進 main：常駐人物（官方職位表＋各國市值名單負責人）、擴充查詢、人物歷史發言、量化統計日報
+            python tools/preview_macro.py ../site --formal
           fi
       - name: 提交
+        if: steps.mode.outputs.mode != 'skip'
         working-directory: site
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/macro_flow.json docs/data/macro.json data/weekly data/central_banks.json data/news_pool.json data/people_roles.json
+          git add data/macro_flow.json docs/data/macro.json data/weekly data/central_banks.json data/news_pool.json data/people_roles.json data/macro_v2_state.json
           if git diff --staged --quiet; then
             echo "沒有變動，不提交。"
           else
-            git commit -m "data: 世界趨勢 $(TZ=Asia/Taipei date +%F)"
-            git pull --rebase origin main
-            git push origin HEAD:main
+            git commit -m "data: 世界趨勢 $(TZ=Asia/Taipei date '+%F %H:%M')（${{ steps.mode.outputs.mode }}）"
+            for i in 1 2 3 4; do
+              git pull --rebase origin main && git push origin HEAD:main && exit 0
+              git rebase --abort 2>/dev/null || true
+              sleep $((2 ** i))
+            done
+            exit 1
           fi

@@ -45,7 +45,13 @@ jobs:
         working-directory: code
         env:
           PYTHONUNBUFFERED: "1"
-        run: python news_live.py ../site/data --hours "${{ inputs.hours || '2' }}"
+          # 10-04：記下每一班是誰觸發的（GitHub 排程／cron-job.org 打 API＝workflow_dispatch），查平日為什麼只跑約 16 班
+          GH_EVENT: ${{ github.event_name }}
+          GH_SCHEDULE: ${{ github.event.schedule }}
+          GH_ACTOR: ${{ github.triggering_actor }}
+        run: |
+          echo "觸發：${{ github.event_name }}　排定（UTC）：${{ github.event.schedule }}　實際啟動（台北）：$(TZ=Asia/Taipei date +%H:%M)"
+          python news_live.py ../site/data --hours "${{ inputs.hours || '2' }}"
       - name: 提交
         working-directory: site
         run: |
@@ -58,8 +64,21 @@ jobs:
           fi
           git commit -m "data: 即時信息流 $(TZ=Asia/Taipei date '+%F %H:%M')"
           # 每日班可能同時提交 → 重試 4 次（2、4、8、16 秒）
+          # 🔴 10-04：09-30、10-01 10:00 那兩班 rebase 撞到 news_live.json 衝突、重試 4 次都卡在未解決的衝突 →
+          #    衝突時 abort、把這一班的結果先存起來、reset 到最新 main、用程式重併（news_live.py --merge-from），再提交。
+          cp data/news_live.json "$RUNNER_TEMP/mine.json"
           for i in 1 2 3 4; do
-            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            if git pull --rebase origin main; then
+              git push origin HEAD:main && exit 0
+            else
+              echo "rebase 衝突（第 $i 次）→ 改用程式重併"
+              git rebase --abort 2>/dev/null || true
+              git fetch origin main && git reset --hard origin/main
+              (cd ../code && python news_live.py ../site/data --merge-from "$RUNNER_TEMP/mine.json")
+              git add data/news_live.json docs/data/news_live.json
+              git diff --staged --quiet || git commit -m "data: 即時信息流 $(TZ=Asia/Taipei date '+%F %H:%M')（重併）"
+              git push origin HEAD:main && exit 0
+            fi
             sleep $((2 ** i))
           done
           exit 1

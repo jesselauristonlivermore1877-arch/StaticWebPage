@@ -127,6 +127,8 @@ jobs:
         run: |
           python quant_facts.py ../site/data
           python quant_verify.py ../site/data
+          # 10-04 v2 合進 main：把通過核對的量化統計日報、日報刷新進 docs/data/macro.json（不打網路）
+          python tools/preview_macro.py ../site --formal --light
 
       # 🟢 第七批（09-27）：官方職位表（每 30 天自動核對出處頁）＋全球資料（BIS 各國政策利率、16 種貨幣匯率、全球前 50 大市值每週）
       #    → docs/data/officials.json、docs/data/world.json。失敗沿用上一份，不擋當天更新。
