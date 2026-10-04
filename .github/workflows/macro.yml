@@ -51,7 +51,7 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-      - run: pip install requests feedparser googlenewsdecoder yfinance   # yfinance：FedWatch 自算用的聯邦基金期貨（09-27）
+      - run: pip install requests feedparser googlenewsdecoder "selectolax<1" yfinance   # selectolax<1：1.0 拿掉舊引擎、googlenewsdecoder 匯入會失敗（10-04 週報 47 條轉址沒解開）； yfinance：FedWatch 自算用的聯邦基金期貨（09-27）
       - name: 判斷這一班要做什麼
         id: mode
         working-directory: site
