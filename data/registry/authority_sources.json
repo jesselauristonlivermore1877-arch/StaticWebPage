@@ -1,0 +1,467 @@
+{
+ "version": "2026-10-04",
+ "owner": "雲端（StaticWebPage）擁有；本機 tools/registry_check.py 只讀不改",
+ "rule": "收錄標準（Evans 2026-10-04）：有權威性、有市場影響力。「現在的狀態」（誰在任、上市與否、公司結構）以官方發布為準；權威媒體有一個核對通過就算通過；維基不拿來判斷誰現任。新聞量多不代表有參考性。",
+ "fields": "name＝顯示名；kind＝official／agency（國家通訊社）／media（財經媒體）；cty＝國家；src_rx＝比對 Google News 來源名稱的正規式（不分大小寫）；domains＝網域（registry_check 核對出處網址用）；scope＝限定用途（有寫才限制）；domains＝把 sources 的網域攤平（本機 registry_check 讀這個；only_cty＝cn 表示只收中國官方宣布）",
+ "sources": [
+  {
+   "name": "中央社",
+   "kind": "agency",
+   "cty": "tw",
+   "src_rx": "^中央社|中央通訊社|focus taiwan|^cna$",
+   "domains": [
+    "cna.com.tw",
+    "focustaiwan.tw"
+   ]
+  },
+  {
+   "name": "韓聯社",
+   "kind": "agency",
+   "cty": "kr",
+   "src_rx": "yonhap|韓聯社|연합뉴스",
+   "domains": [
+    "yna.co.kr",
+    "en.yna.co.kr"
+   ]
+  },
+  {
+   "name": "共同社",
+   "kind": "agency",
+   "cty": "jp",
+   "src_rx": "kyodo|共同通信|共同社",
+   "domains": [
+    "kyodonews.net",
+    "nordot.app"
+   ]
+  },
+  {
+   "name": "法新社",
+   "kind": "agency",
+   "cty": "fr",
+   "src_rx": "^afp$|agence france|法新社|france 24",
+   "domains": [
+    "afp.com",
+    "france24.com"
+   ]
+  },
+  {
+   "name": "德新社",
+   "kind": "agency",
+   "cty": "de",
+   "src_rx": "^dpa|deutsche presse|德新社",
+   "domains": [
+    "dpa.com",
+    "dpa-international.com"
+   ]
+  },
+  {
+   "name": "新華社",
+   "kind": "agency",
+   "cty": "cn",
+   "src_rx": "xinhua|新華社|新华社|新华网",
+   "domains": [
+    "xinhuanet.com",
+    "news.cn"
+   ],
+   "scope": "只收中國官方宣布（政策、人事、官方數據），評論與一般報導不收"
+  },
+  {
+   "name": "路透",
+   "kind": "agency",
+   "cty": "gb",
+   "src_rx": "^reuters|路透",
+   "domains": [
+    "reuters.com"
+   ]
+  },
+  {
+   "name": "美聯社",
+   "kind": "agency",
+   "cty": "us",
+   "src_rx": "^(the )?associated press|^ap news$|美聯社",
+   "domains": [
+    "apnews.com"
+   ]
+  },
+  {
+   "name": "彭博",
+   "kind": "media",
+   "cty": "us",
+   "src_rx": "^bloomberg|彭博",
+   "domains": [
+    "bloomberg.com"
+   ]
+  },
+  {
+   "name": "日經",
+   "kind": "media",
+   "cty": "jp",
+   "src_rx": "nikkei|日經|日本經濟新聞",
+   "domains": [
+    "nikkei.com",
+    "asia.nikkei.com",
+    "zh.cn.nikkei.com"
+   ]
+  },
+  {
+   "name": "經濟日報",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^經濟日報|money\\.udn",
+   "domains": [
+    "money.udn.com"
+   ]
+  },
+  {
+   "name": "工商時報",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^工商時報|ctee",
+   "domains": [
+    "ctee.com.tw"
+   ]
+  },
+  {
+   "name": "鉅亨",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^鉅亨|cnyes",
+   "domains": [
+    "cnyes.com",
+    "news.cnyes.com"
+   ]
+  },
+  {
+   "name": "MoneyDJ",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "moneydj|理財網",
+   "domains": [
+    "moneydj.com"
+   ]
+  },
+  {
+   "name": "ANSA",
+   "kind": "agency",
+   "cty": "it",
+   "src_rx": "^ansa",
+   "domains": [
+    "ansa.it"
+   ]
+  },
+  {
+   "name": "EFE",
+   "kind": "agency",
+   "cty": "es",
+   "src_rx": "^efe|agencia efe",
+   "domains": [
+    "efe.com"
+   ]
+  },
+  {
+   "name": "安納托利亞通訊社",
+   "kind": "agency",
+   "cty": "tr",
+   "src_rx": "anadolu",
+   "domains": [
+    "aa.com.tr"
+   ]
+  },
+  {
+   "name": "PTI",
+   "kind": "agency",
+   "cty": "in",
+   "src_rx": "^pti$|press trust of india",
+   "domains": [
+    "ptinews.com"
+   ]
+  },
+  {
+   "name": "ANTARA",
+   "kind": "agency",
+   "cty": "id",
+   "src_rx": "antara",
+   "domains": [
+    "antaranews.com"
+   ]
+  },
+  {
+   "name": "Bernama",
+   "kind": "agency",
+   "cty": "my",
+   "src_rx": "bernama",
+   "domains": [
+    "bernama.com"
+   ]
+  },
+  {
+   "name": "塔斯社",
+   "kind": "agency",
+   "cty": "ru",
+   "src_rx": "^tass|塔斯",
+   "domains": [
+    "tass.com",
+    "tass.ru"
+   ]
+  },
+  {
+   "name": "AAP",
+   "kind": "agency",
+   "cty": "au",
+   "src_rx": "^aap$|australian associated press",
+   "domains": [
+    "aap.com.au"
+   ]
+  },
+  {
+   "name": "加拿大通訊社",
+   "kind": "agency",
+   "cty": "ca",
+   "src_rx": "canadian press",
+   "domains": [
+    "thecanadianpress.com"
+   ]
+  },
+  {
+   "name": "巴西通訊社",
+   "kind": "agency",
+   "cty": "br",
+   "src_rx": "agência brasil|agencia brasil",
+   "domains": [
+    "agenciabrasil.ebc.com.br"
+   ]
+  },
+  {
+   "name": "烏克蘭國家通訊社",
+   "kind": "agency",
+   "cty": "ua",
+   "src_rx": "ukrinform",
+   "domains": [
+    "ukrinform.net"
+   ]
+  },
+  {
+   "name": "伊朗國家通訊社",
+   "kind": "agency",
+   "cty": "ir",
+   "src_rx": "^irna",
+   "domains": [
+    "irna.ir"
+   ]
+  },
+  {
+   "name": "沙烏地通訊社",
+   "kind": "agency",
+   "cty": "sa",
+   "src_rx": "saudi press agency",
+   "domains": [
+    "spa.gov.sa"
+   ]
+  },
+  {
+   "name": "金融時報",
+   "kind": "media",
+   "cty": "gb",
+   "src_rx": "financial times|^ft\\.com",
+   "domains": [
+    "ft.com"
+   ]
+  },
+  {
+   "name": "華爾街日報",
+   "kind": "media",
+   "cty": "us",
+   "src_rx": "wall street journal|^wsj",
+   "domains": [
+    "wsj.com"
+   ]
+  },
+  {
+   "name": "CNBC",
+   "kind": "media",
+   "cty": "us",
+   "src_rx": "^cnbc",
+   "domains": [
+    "cnbc.com"
+   ]
+  },
+  {
+   "name": "經濟學人",
+   "kind": "media",
+   "cty": "gb",
+   "src_rx": "economist",
+   "domains": [
+    "economist.com"
+   ]
+  }
+ ],
+ "not_accepted": "維基百科（不判斷現任）；內容農場、聚合轉貼站（LINE TODAY、BigGo、Yahoo 轉載原文以原媒體判斷）；toalpha.tw、alphamemo（不可抓）",
+ "domains": [
+  {
+   "domain": "cna.com.tw",
+   "name": "中央社"
+  },
+  {
+   "domain": "focustaiwan.tw",
+   "name": "中央社"
+  },
+  {
+   "domain": "yna.co.kr",
+   "name": "韓聯社"
+  },
+  {
+   "domain": "en.yna.co.kr",
+   "name": "韓聯社"
+  },
+  {
+   "domain": "kyodonews.net",
+   "name": "共同社"
+  },
+  {
+   "domain": "nordot.app",
+   "name": "共同社"
+  },
+  {
+   "domain": "afp.com",
+   "name": "法新社"
+  },
+  {
+   "domain": "france24.com",
+   "name": "法新社"
+  },
+  {
+   "domain": "dpa.com",
+   "name": "德新社"
+  },
+  {
+   "domain": "dpa-international.com",
+   "name": "德新社"
+  },
+  {
+   "domain": "xinhuanet.com",
+   "name": "新華社",
+   "only_cty": "cn"
+  },
+  {
+   "domain": "news.cn",
+   "name": "新華社",
+   "only_cty": "cn"
+  },
+  {
+   "domain": "reuters.com",
+   "name": "路透"
+  },
+  {
+   "domain": "apnews.com",
+   "name": "美聯社"
+  },
+  {
+   "domain": "bloomberg.com",
+   "name": "彭博"
+  },
+  {
+   "domain": "nikkei.com",
+   "name": "日經"
+  },
+  {
+   "domain": "asia.nikkei.com",
+   "name": "日經"
+  },
+  {
+   "domain": "zh.cn.nikkei.com",
+   "name": "日經"
+  },
+  {
+   "domain": "money.udn.com",
+   "name": "經濟日報"
+  },
+  {
+   "domain": "ctee.com.tw",
+   "name": "工商時報"
+  },
+  {
+   "domain": "cnyes.com",
+   "name": "鉅亨"
+  },
+  {
+   "domain": "news.cnyes.com",
+   "name": "鉅亨"
+  },
+  {
+   "domain": "moneydj.com",
+   "name": "MoneyDJ"
+  },
+  {
+   "domain": "ansa.it",
+   "name": "ANSA"
+  },
+  {
+   "domain": "efe.com",
+   "name": "EFE"
+  },
+  {
+   "domain": "aa.com.tr",
+   "name": "安納托利亞通訊社"
+  },
+  {
+   "domain": "ptinews.com",
+   "name": "PTI"
+  },
+  {
+   "domain": "antaranews.com",
+   "name": "ANTARA"
+  },
+  {
+   "domain": "bernama.com",
+   "name": "Bernama"
+  },
+  {
+   "domain": "tass.com",
+   "name": "塔斯社"
+  },
+  {
+   "domain": "tass.ru",
+   "name": "塔斯社"
+  },
+  {
+   "domain": "aap.com.au",
+   "name": "AAP"
+  },
+  {
+   "domain": "thecanadianpress.com",
+   "name": "加拿大通訊社"
+  },
+  {
+   "domain": "agenciabrasil.ebc.com.br",
+   "name": "巴西通訊社"
+  },
+  {
+   "domain": "ukrinform.net",
+   "name": "烏克蘭國家通訊社"
+  },
+  {
+   "domain": "irna.ir",
+   "name": "伊朗國家通訊社"
+  },
+  {
+   "domain": "spa.gov.sa",
+   "name": "沙烏地通訊社"
+  },
+  {
+   "domain": "ft.com",
+   "name": "金融時報"
+  },
+  {
+   "domain": "wsj.com",
+   "name": "華爾街日報"
+  },
+  {
+   "domain": "cnbc.com",
+   "name": "CNBC"
+  },
+  {
+   "domain": "economist.com",
+   "name": "經濟學人"
+  }
+ ]
+}
