@@ -148,6 +148,7 @@ jobs:
           python is_hist.py ../site/data --max 8 || echo "::warning::綜合損益表回補失敗（三率、十年季度表這班不更新）"
           python ir_hist.py ../site/data --max 12 || echo "::warning::法說歷史回補失敗（法說反應這班不更新）"
           python contrib.py ../site/data || echo "::warning::大盤點數貢獻失敗（這班不更新）"
+          python mi_react.py ../site/data || echo "::warning::重訊反應失敗（這班不更新）"
 
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
       # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。
