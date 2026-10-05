@@ -7,7 +7,12 @@
 name: 每日戰情更新
 
 on:
-  workflow_dispatch:        # 也可以在網頁上手動按「Run workflow」
+  workflow_dispatch:        # 也可以在網頁上手動按「Run workflow」（cron-job.org 15:40／18:40／21:20 也是打這個）
+  # 🔴 10-05（Evans：無人值守）：以前唯一的觸發來源是 cron-job.org（同一支 PAT，11-11 到期）→ 加 GitHub 排程當第二條路。
+  #    重複跑沒關係（同一個 concurrency group 排隊、沒變動不提交）；GitHub 排程常延遲 5～30 分鐘。
+  schedule:
+    - cron: "25 8 * * *"    # 台北 16:25（15:40 那班之後）
+    - cron: "5 14 * * *"    # 台北 22:05（21:20 那班之後）
 
 permissions:
   contents: write           # 要把產出 commit 回這個 repo
@@ -44,7 +49,7 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.12.14"
           cache: pip
 
       # 🔴 openpyxl 是中信 ETF adapter（pcf/ctbc.py）要的 —— 它的 PCF 是 base64 xlsx。
@@ -53,7 +58,7 @@ jobs:
       #    ⚠️ 本機有裝所以 selftest 全綠，**只有正式環境會炸**（SOP 雷區 82）。
       # 🔴 curl-cffi 是野村／元大／第一金／凱基／安聯要的（憑證鏈不合規，見雷區 69）。
       - name: 安裝套件
-        run: pip install requests feedparser pandas numpy yfinance curl-cffi openpyxl
+        run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests feedparser pandas numpy yfinance curl-cffi openpyxl
 
       - name: 產出資料與網頁
         working-directory: code
@@ -109,6 +114,7 @@ jobs:
       # 🟢 第六批（09-27）：處置股／個股行事曆／公司基本資料 → docs/data/{disposal,calendar,company}.json
       # 全是證交所／櫃買／公開資訊觀測站官方 API。失敗就沿用上一份，不擋當天更新（continue-on-error）。
       - name: 處置股・行事曆・基本資料
+        id: corp
         working-directory: code
         continue-on-error: true
         timeout-minutes: 12
@@ -119,6 +125,7 @@ jobs:
       # 🟢 量化統計日報（10-04 Evans）：數字檔一定要在 build_web 寫完 web_data.json、corp_events 寫完 disposal.json 之後才產
       #    （以前在 build_web 裡面跑，讀到上一班的 web_data，把別天的數字檔蓋掉）。已有日報的數字檔凍結不覆寫。
       - name: 量化統計日報數字檔
+        id: quant
         working-directory: code
         continue-on-error: true
         timeout-minutes: 5
@@ -133,6 +140,7 @@ jobs:
       # 🟢 第七批（09-27）：官方職位表（每 30 天自動核對出處頁）＋全球資料（BIS 各國政策利率、16 種貨幣匯率、全球前 50 大市值每週）
       #    → docs/data/officials.json、docs/data/world.json。失敗沿用上一份，不擋當天更新。
       - name: 官方職位表・全球資料
+        id: world
         working-directory: code
         continue-on-error: true
         timeout-minutes: 20
@@ -143,15 +151,15 @@ jobs:
           python registry_verify.py ../site/data
           python officials.py ../site/data
           python world_data.py ../site/data
-          python sector_pe.py ../site/data || echo "::warning::產業本益比分位失敗（流向總覽第四條線這班不更新）"
-          python industry_notes.py ../site/data || echo "::warning::產業動向發布失敗（個股研究 → 產業動向這班不更新）"
-          python is_hist.py ../site/data --max 8 || echo "::warning::綜合損益表回補失敗（三率、十年季度表這班不更新）"
-          python ir_hist.py ../site/data --max 12 || echo "::warning::法說歷史回補失敗（法說反應這班不更新）"
-          python contrib.py ../site/data || echo "::warning::大盤點數貢獻失敗（這班不更新）"
-          python mi_react.py ../site/data || echo "::warning::重訊反應失敗（這班不更新）"
-          python news_heat.py ../site/data || echo "::warning::新聞熱度失敗（這班不更新）"
-          python insider.py ../site/data || echo "::warning::內部人持股失敗（這班不更新）"
-          python ps_river.py ../site/data || echo "::warning::股價營收比河流失敗（這班不更新）"
+          python sector_pe.py ../site/data || { echo "::warning::產業本益比分位失敗（流向總覽第四條線這班不更新）"; echo "產業本益比分位失敗（流向總覽第四條線這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python industry_notes.py ../site/data || { echo "::warning::產業動向發布失敗（個股研究 → 產業動向這班不更新）"; echo "產業動向發布失敗（個股研究 → 產業動向這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python is_hist.py ../site/data --max 8 || { echo "::warning::綜合損益表回補失敗（三率、十年季度表這班不更新）"; echo "綜合損益表回補失敗（三率、十年季度表這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python ir_hist.py ../site/data --max 12 || { echo "::warning::法說歷史回補失敗（法說反應這班不更新）"; echo "法說歷史回補失敗（法說反應這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python contrib.py ../site/data || { echo "::warning::大盤點數貢獻失敗（這班不更新）"; echo "大盤點數貢獻失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python mi_react.py ../site/data || { echo "::warning::重訊反應失敗（這班不更新）"; echo "重訊反應失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python news_heat.py ../site/data || { echo "::warning::新聞熱度失敗（這班不更新）"; echo "新聞熱度失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python insider.py ../site/data || { echo "::warning::內部人持股失敗（這班不更新）"; echo "內部人持股失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python ps_river.py ../site/data || { echo "::warning::股價營收比河流失敗（這班不更新）"; echo "股價營收比河流失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
 
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
       # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。
@@ -180,3 +188,16 @@ jobs:
             git pull --rebase origin main   # ⬅️ 補上這行，把遠端的新進度拉下來合併
             git push origin HEAD:main
           fi
+
+      # 🔴 10-05（Evans：無人值守，每一個失敗都要寄信）：上面「失敗就沿用上一份、不擋上線」的步驟，失敗時網站照常更新，
+      #    但以前整個 run 還是綠的、沒人知道。這一步在資料提交之後檢查，有任何一項失敗就讓這次 run 標成失敗 → GitHub 寄信。
+      - name: 失敗通報
+        if: always()
+        run: |
+          F=0
+          if [ -s "$RUNNER_TEMP/soft_fail.txt" ]; then echo "::error::這幾項失敗（資料已用上一份）："; cat "$RUNNER_TEMP/soft_fail.txt"; F=1; fi
+          for s in "corp:${{ steps.corp.outcome }}" "quant:${{ steps.quant.outcome }}" "world:${{ steps.world.outcome }}"; do
+            case "$s" in *:failure) echo "::error::步驟 ${s%%:*} 失敗（處置股行事曆＝corp、量化數字檔＝quant、職位表全球資料＝world）"; F=1;; esac
+          done
+          if [ "$F" = 1 ]; then exit 1; fi
+          echo "✓ 這一班沒有被吞掉的失敗"

@@ -25,9 +25,9 @@ jobs:
           path: code
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.12.14"
           cache: pip
-      - run: pip install requests feedparser certifi
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests feedparser certifi
       - name: 抓片 ${{ matrix.shard }}
         working-directory: code
         run: python tdcc.py --backfill ../out --shard ${{ matrix.shard }} --of 8
@@ -58,9 +58,9 @@ jobs:
           path: code
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.12.14"
           cache: pip
-      - run: pip install numpy requests feedparser
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" numpy requests feedparser
       - uses: actions/download-artifact@v4
         with:
           path: dl

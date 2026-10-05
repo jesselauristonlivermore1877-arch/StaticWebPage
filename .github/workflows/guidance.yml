@@ -51,16 +51,17 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.12.14"
           cache: pip
 
-      - run: pip install requests feedparser certifi numpy
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests feedparser certifi numpy
 
       # 錄音要用 ffmpeg 把影片的聲音抽出來（1 小時 → 約 14 MB），runner 沒有就裝
       - name: ffmpeg
         run: which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
 
       - name: 擷取（這段 log 貼回來）
+        id: grab
         working-directory: code
         continue-on-error: true           # 中途出錯也要往下走到 commit，不然整輪白做
         env:
@@ -88,3 +89,10 @@ jobs:
             git pull --rebase origin main
             git push origin HEAD:main
           fi
+
+      # 🔴 10-05（Evans：無人值守）：擷取失敗時照樣存回已做完的，但這次 run 要標失敗 → GitHub 寄信
+      - name: 失敗通報
+        if: always()
+        run: |
+          if [ "${{ steps.grab.outcome }}" = "failure" ]; then echo "::error::法說與報告擷取失敗（已做完的部分有存回）"; exit 1; fi
+          echo "✓ 擷取正常"

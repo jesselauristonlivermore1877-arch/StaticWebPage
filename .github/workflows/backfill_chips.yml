@@ -62,11 +62,11 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.12.14"
           cache: pip
 
       # engines.py 頂層 import requests / feedparser（它同時是 LINE 機器人的引擎）
-      - run: pip install requests feedparser certifi
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests feedparser certifi
 
       - name: 抓片 ${{ matrix.shard }}
         working-directory: code
@@ -104,7 +104,7 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.12.14"
           cache: pip
 
       - uses: actions/download-artifact@v4

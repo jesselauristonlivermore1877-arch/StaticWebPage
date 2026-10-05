@@ -38,9 +38,9 @@ jobs:
           path: code
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.12.14"
           cache: pip
-      - run: pip install feedparser requests
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" feedparser requests
       - name: 即時信息流
         working-directory: code
         env:
