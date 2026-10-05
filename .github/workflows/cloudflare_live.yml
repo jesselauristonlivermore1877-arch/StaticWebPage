@@ -56,6 +56,7 @@ jobs:
             N=$(curl -s "$W/live.json?h=48&peek=1" | python3 -c "import json,sys; print(len(json.load(sys.stdin).get('items') or []))" 2>/dev/null || echo "?")
             echo "第 $i 分鐘：/live.json 有 $N 則"
           done
+          echo "── /health（看門狗，10-05）"; curl -s -o /tmp/h.json -w "HTTP %{http_code}\n" "$W/health"; cat /tmp/h.json; echo
           echo "── /lag.json?d=7"; curl -s "$W/lag.json?d=7" | python3 -c "
           import json,sys
           J=json.load(sys.stdin); R=J.pop('runs',[]) or []
