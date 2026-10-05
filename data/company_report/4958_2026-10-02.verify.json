@@ -2,7 +2,7 @@
  "file": "4958_2026-10-02.md",
  "code": "4958",
  "date": "2026-10-02",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,17 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "close",
+    "why": "數字檔 561.00 元，站上資料 576.0"
+   },
+   {
+    "id": "mcap",
+    "why": "數字檔 6358.4 億元，站上資料 6528.3677"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",
