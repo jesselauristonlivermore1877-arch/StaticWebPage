@@ -2,7 +2,7 @@
  "file": "3665_2026-10-02.md",
  "code": "3665",
  "date": "2026-10-02",
- "show": false,
+ "show": true,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,21 +18,8 @@
   "bad": []
  },
  "cross": {
-  "ok": false,
-  "bad": [
-   {
-    "id": "close",
-    "why": "數字檔 2540.00 元，站上資料 2485.0"
-   },
-   {
-    "id": "mcap",
-    "why": "數字檔 5069.3 億元，站上資料 4959.5234"
-   },
-   {
-    "id": "pe_ttm",
-    "why": "數字檔 46.64 倍，站上資料 45.63"
-   }
-  ],
+  "ok": true,
+  "bad": [],
   "checked": [
    "close",
    "eps_q",

@@ -1,13 +1,13 @@
 {
- "file": "4958_2026-10-02.md",
- "code": "4958",
- "date": "2026-10-02",
- "show": true,
+ "file": "2454_2026-10-05.md",
+ "code": "2454",
+ "date": "2026-10-05",
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
-  "cited": 44,
-  "facts": 131
+  "cited": 36,
+  "facts": 117
  },
  "compliance": {
   "ok": true,
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 81.75 倍，站上資料 85.3"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",
