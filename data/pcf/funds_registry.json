@@ -1,5 +1,5 @@
 {
- "checked": "2026-09-28",
+ "checked": "2026-10-05",
  "funds": {
   "00981A": {
    "house": "uni",
@@ -204,7 +204,20 @@
    "name": "主動凱基台灣",
    "house_id": "J024",
    "added": "2026-09-28"
+  },
+  "ETF27": {
+   "house": "fh",
+   "name": "復華台灣新星主動式ETF基金",
+   "house_id": "ETF27",
+   "added": "2026-10-05"
   }
  },
- "added_log": []
+ "added_log": [
+  {
+   "date": "2026-10-05",
+   "code": "ETF27",
+   "name": "復華台灣新星主動式ETF基金",
+   "house": "fh"
+  }
+ ]
 }
