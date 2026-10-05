@@ -4,7 +4,7 @@
 #   is_hist.py 一次抓到 max 張表（40 季 × 上市櫃＝80 張；MOPS 一張 10～80 秒）；可重複執行，抓過的季不再抓。
 #   跟 daily.yml 同一個 concurrency group，不會對撞。每日班平常每班也會補 8 張。
 # ============================================================================
-name: 回補綜合損益表
+name: 回補綜合損益表與法說歷史
 
 on:
   workflow_dispatch:
@@ -44,13 +44,15 @@ jobs:
         working-directory: code
         env:
           PYTHONUNBUFFERED: "1"
-        run: python is_hist.py ../site/data --max ${{ inputs.max }}
+        run: |
+          python is_hist.py ../site/data --max ${{ inputs.max }}
+          python ir_hist.py ../site/data --max 60
       - name: commit
         working-directory: site
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/is_hist.json docs/data/is_q.json
+          git add data/is_hist.json docs/data/is_q.json data/ir_hist.json docs/data/ir_react.json
           if git diff --staged --quiet; then
             echo "沒有變動，不提交。"
           else
