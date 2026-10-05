@@ -9399,6 +9399,1139 @@
 ],
 "n_pass": 12,
 "n_fail": 59
+},
+"harry_pod:cmuunv7ll08nc01ss4fnl3p42": {
+"src": "harry_pod",
+"name": "哈利說（科技浪 Tech.wav）",
+"kind": "podcast",
+"title": "EP157 - AI Agent 大戰全面開打！深度解析 OpenAI Dots、Muse、Grok Bot、Instinct",
+"date": "2026-10-05",
+"url": "https://open.firstory.fm/story/cmuunv7ll08nc01ss4fnl3p42",
+"dur_s": 5279,
+"models": [
+"gemini-3-flash-preview",
+"gemini-3.5-flash",
+"gemini-3.5-flash-lite"
+],
+"at": "2026-10-05",
+"n_seg": 180,
+"len_s": 5276,
+"mentions": [
+{
+"t": "0:05:58",
+"sec": 358,
+"quote": "重點是它的股票會怎樣嘛，它買的這些供應鏈會怎樣嘛，對不對？所以我們也會稍微聊到一些就是關於 infra 的部分",
+"point": "講者表示將探討 AI Agent 趨勢對相關企業股價與供應鏈的影響，並聚焦於基礎設施領域。",
+"sectors": [
+"伺服器與品牌組裝"
+],
+"stocks": [],
+"match": 0.96,
+"status": "通過",
+"reason": "原話對得上（重疊 96%）"
+},
+{
+"t": "0:06:08",
+"sec": 368,
+"quote": "關於這個算力的基礎設施會如何受到這一波 AI Agent 的影響，那這邊其實我們今天主要會 focus 在 CPU 啦。",
+"point": "講者指出將重點分析 AI Agent 如何影響算力基礎設施，並特別關注 CPU 的需求變化。",
+"sectors": [
+"IC設計",
+"伺服器與品牌組裝"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:06:20",
+"sec": 380,
+"quote": "它最特別的一個地方就是它不只是增加 GPU 跟記憶體的量，它也會增加 CPU 的量。那這個 CPU，我們應該要怎麼樣去思考？",
+"point": "講者強調 AI Agent 趨勢最特別之處在於除了增加 GPU 與記憶體用量外，也會同步提升對 CPU 的需求。",
+"sectors": [
+"IC設計",
+"記憶體"
+],
+"stocks": [],
+"match": 0.98,
+"status": "通過",
+"reason": "原話對得上（重疊 98%）"
+},
+{
+"t": "0:48:11",
+"sec": 2891,
+"quote": "我覺得 Grok Bot 一定是比 Dots 更好的，OK，我自己其實也有稍微用過一下 Grok Bot",
+"point": "講者認為 Grok Bot 比 Dots 更好，自己也曾稍微使用過。",
+"sectors": [],
+"stocks": [],
+"match": 0.91,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+},
+{
+"t": "0:58:19",
+"sec": 3499,
+"quote": "四大天王，是不是二二分，兩個人是走一派，另外兩個人是走另一派。",
+"point": "講者提到四大天王在商業模式的分佈與路線差異。",
+"sectors": [
+"伺服器與品牌組裝"
+],
+"stocks": [],
+"match": 0.19,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 19%）"
+},
+{
+"t": "0:59:16",
+"sec": 3556,
+"quote": "Instinct 跟 Meta，OK，Instinct 是比較這個 all in 這條路線的。",
+"point": "講者指出 Instinct 採取 all in 產品完全免費的路線。",
+"sectors": [],
+"stocks": [],
+"match": 0.57,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 57%）"
+},
+{
+"t": "1:22:45",
+"sec": 4965,
+"quote": "當然AMD跟Intel還是噴了很多波啦，就是從這個應該是稍微年初那個時候還是年中的時候，",
+"point": "講者指出AMD與Intel的股價在年初到年中有一段漲幅。",
+"sectors": [],
+"stocks": [],
+"match": 0.92,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+},
+{
+"t": "1:22:55",
+"sec": 4975,
+"quote": "有因為CPU噴一波，股價的部分有噴一波，然後最近這一個月呢",
+"point": "講者提到最近一個月CPU相關股價因為特定題材再次上揚。",
+"sectors": [],
+"stocks": [],
+"match": 1.0,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+},
+{
+"t": "1:23:00",
+"sec": 4980,
+"quote": "也因為Meta Muse的爆紅，又有噴一波這樣子，",
+"point": "講者說明Meta Muse的爆紅帶動了相關股價表現。",
+"sectors": [],
+"stocks": [],
+"match": 1.0,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+}
+],
+"n_pass": 3,
+"n_fail": 6
+},
+"harry_pod:cmujrssyt02t101uo8xlg87c3": {
+"src": "harry_pod",
+"name": "哈利說（科技浪 Tech.wav）",
+"kind": "podcast",
+"title": "EP156 - 半導體展深度訪談：先進封裝、矽光子、量子晶片測試、飛輪儲能",
+"date": "2026-09-28",
+"url": "https://open.firstory.fm/story/cmujrssyt02t101uo8xlg87c3",
+"dur_s": 4465,
+"models": [
+"gemini-3.5-flash-lite"
+],
+"at": "2026-10-05",
+"n_seg": 425,
+"len_s": 4320,
+"mentions": [
+{
+"t": "0:03:44",
+"sec": 224,
+"quote": "假設真的驗證成功，市場真的有這個需求，然後未來大規模生產的話，他們在做的事情是真的有機遇改變主流的先進封裝的方式的",
+"point": "講者說明若新先進封裝驗證成功且有市場需求，有機會改變主流的先進封裝方式。",
+"sectors": [
+"封裝測試"
+],
+"stocks": [],
+"match": 0.96,
+"status": "通過",
+"reason": "原話對得上（重疊 96%）"
+},
+{
+"t": "0:06:06",
+"sec": 366,
+"quote": "比如你有了AMD與X3D，那是其中一項的，他們把更多的內幕放在頂上的邏輯。這也是市場早期的一個驗證。",
+"point": "講者指出市場早期有驗證將更多記憶體放在邏輯晶片上方的架構。",
+"sectors": [
+"記憶體",
+"晶圓代工與製造"
+],
+"stocks": [],
+"match": 0.13,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 13%）"
+},
+{
+"t": "0:06:20",
+"sec": 380,
+"quote": "你的儲存，你的快取記憶體和你的運算， people integrate all together in one die。",
+"point": "講者提到將儲存、快取記憶體和運算整合在同一個晶片上的趨勢。",
+"sectors": [
+"記憶體",
+"IC設計"
+],
+"stocks": [],
+"match": 0.69,
+"status": "通過",
+"reason": "原話對得上（重疊 69%）"
+},
+{
+"t": "0:07:31",
+"sec": 451,
+"quote": "我今天去了，一整天都在走seminar，走seminar booth, and advanced packaging.",
+"point": "講者提到今天一整天都在參訪並談論先進封裝。",
+"sectors": [
+"封裝測試"
+],
+"stocks": [],
+"match": 0.68,
+"status": "通過",
+"reason": "原話對得上（重疊 68%）"
+},
+{
+"t": "0:11:10",
+"sec": 670,
+"quote": "相比於Wire Bonding，我們可以有更小的Pitch,所以更小的尺寸，因為我們使用transfer技術。",
+"point": "講者說明其技術相較於傳統打線封裝，能提供更小的間距與尺寸。",
+"sectors": [
+"封裝測試"
+],
+"stocks": [],
+"match": 0.46,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 46%）"
+},
+{
+"t": "0:11:41",
+"sec": 701,
+"quote": "我們發到公司3年前，現在我們有已經有客戶韓國、日本、台灣。",
+"point": "講者指出公司三年前成立，目前已擁有韓國、日本與台灣的客戶。",
+"sectors": [
+"封裝測試"
+],
+"stocks": [],
+"match": 0.0,
+"status": "失敗",
+"reason": "時間點附近沒有逐字稿（時間點可能超出這集長度）"
+},
+{
+"t": "0:11:50",
+"sec": 710,
+"quote": "我們的工廠是現在正在被建設，和我們是 ready for first silicon out in December this year。",
+"point": "講者提到公司目前正在興建工廠，預計今年12月能產出第一批矽晶圓。",
+"sectors": [
+"矽晶圓與化合物半導體"
+],
+"stocks": [],
+"match": 0.71,
+"status": "通過",
+"reason": "原話對得上（重疊 71%）"
+},
+{
+"t": "0:12:43",
+"sec": 763,
+"quote": "例如在Flash memory，你有個memory stack， and memory chip itself is also made out of layers。",
+"point": "講者以快閃記憶體為例，說明其採用多層的記憶體堆疊結構。",
+"sectors": [
+"記憶體"
+],
+"stocks": [],
+"match": 0.85,
+"status": "通過",
+"reason": "原話對得上（重疊 85%）"
+},
+{
+"t": "0:17:18",
+"sec": 1038,
+"quote": "I think the biggest trend is that you will see it in almost every chip. Uh so like I said in the beginning, it was only very high end CPUs.",
+"point": "講者指出先進封裝正從過去的高階CPU普及到幾乎每個晶片。",
+"sectors": [
+"封裝測試"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:17:29",
+"sec": 1049,
+"quote": "uh but you will see advanced packaging also in simple power devices in your car, in your uh normal electronics.",
+"point": "講者表示先進封裝也應用在車用與一般電子的簡單功率元件。",
+"sectors": [
+"封裝測試",
+"功率元件"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:18:47",
+"sec": 1127,
+"quote": "I would say it's starting to support it. But it always takes of course a few years for technology to land in the industry.",
+"point": "講者認為技術需要幾年時間才能落實到汽車等產業。",
+"sectors": [
+"傳產石化"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:21:19",
+"sec": 1279,
+"quote": "people talk about Silicon photonics, optical interconnects between chips.",
+"point": "講者提到矽光子與晶片間光學互連是眾人討論的焦點。",
+"sectors": [
+"光通訊上游"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:22:17",
+"sec": 1337,
+"quote": "Fiber optics in the data center is already widely implemented, but not the CPO part, right?",
+"point": "講者指出資料中心的光纖已廣泛應用，但CPO部分則尚未。",
+"sectors": [
+"光通訊上游"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:22:28",
+"sec": 1348,
+"quote": "as of today, um within data centers there is a lot of fiber optics. It's been there for years.",
+"point": "講者表示現今資料中心內已有大量且行之有年的光纖應用。",
+"sectors": [
+"光通訊上游"
+],
+"stocks": [],
+"match": 0.96,
+"status": "通過",
+"reason": "原話對得上（重疊 96%）"
+},
+{
+"t": "0:22:38",
+"sec": 1358,
+"quote": "Fiber optics is basically transferring data transferring data with light instead of uh electricity instead of electrons, right?",
+"point": "講者說明光纖是用光而非電子來傳輸資料。",
+"sectors": [
+"光通訊上游"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:23:08",
+"sec": 1388,
+"quote": "we already have a lot of optic fiber connections within data centers.",
+"point": "講者指出資料中心內部已有許多光纖連接。",
+"sectors": [
+"光通訊上游"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:24:00",
+"sec": 1440,
+"quote": "just to be clear, before there's we're already using light to transfer data.",
+"point": "講者澄清在此之前就已經在使用光來傳輸資料。",
+"sectors": [
+"光通訊上游"
+],
+"stocks": [],
+"match": 0.98,
+"status": "通過",
+"reason": "原話對得上（重疊 98%）"
+},
+{
+"t": "0:24:10",
+"sec": 1450,
+"quote": "It's like when data comes out of the chip, it's already been turned into light.",
+"point": "講者表示當資料從晶片出來時就已經被轉成光。",
+"sectors": [
+"光通訊上游"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:25:21",
+"sec": 1521,
+"quote": "it's hard to say. I mean uh big companies are driving this and uh what we see is that this shift is happening.",
+"point": "講者表示大公司正在推動這項轉變的發生。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:25:31",
+"sec": 1531,
+"quote": "CPU architectures have been demonstrated, um they're moving from prototyping into uh engineering and mass manufacturing.",
+"point": "講者提到CPU架構已從原型階段邁向工程與量產。",
+"sectors": [
+"IC設計"
+],
+"stocks": [],
+"match": 0.97,
+"status": "通過",
+"reason": "原話對得上（重疊 97%）"
+},
+{
+"t": "0:26:23",
+"sec": 1583,
+"quote": "in the end of the day, these optical engines will need to be interfaced with optical fibers.",
+"point": "講者指出最終光引擎需要與光纖進行介接。",
+"sectors": [
+"光通訊上游"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:26:36",
+"sec": 1596,
+"quote": "this is typically the interface between the chip and the fiber is something that uh has been heavily investigated, developed and and it's pretty mature in in the system, in the ecosystem.",
+"point": "講者說明晶片與光纖間的介接已受到大量研究與開發，在生態系中相當成熟。",
+"sectors": [
+"光通訊上游"
+],
+"stocks": [],
+"match": 0.99,
+"status": "通過",
+"reason": "原話對得上（重疊 99%）"
+},
+{
+"t": "0:27:29",
+"sec": 1649,
+"quote": "the optical engine is what turns the you know, digital signal into to light, right?",
+"point": "講者說明光引擎是將數位訊號轉為光的裝置。",
+"sectors": [
+"光通訊上游"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:27:36",
+"sec": 1656,
+"quote": "and the optic fiber is what is the channel for the data to go out, right?",
+"point": "講者指出光纖是資料傳輸出去的通道。",
+"sectors": [
+"光通訊上游"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:28:30",
+"sec": 1710,
+"quote": "this position is to be this accurate also during the uh let's say the operation over temperature, over different environmental factors.",
+"point": "講者強調此定位在溫度與環境因素變化時必須保持精確。",
+"sectors": [
+"測試設備與介面"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:39:48",
+"sec": 2388,
+"quote": "what is this current state right now? Like, what just what just say? Cuz like, I feel like in the past few years, every once in a while, we'll hear like a quantum breakthrough from like Google or like Microsoft or IBM, and maybe after a week or two, the news will fizzle out",
+"point": "講者提問目前量子電腦現況與過去新聞常稱有突破但隨後沉寂的原因。",
+"sectors": [
+"伺服器與品牌組裝",
+"電信與雲端服務"
+],
+"stocks": [
+{
+"code": "2317",
+"name": "鴻海"
+},
+{
+"code": "2330",
+"name": "台積電"
+}
+],
+"match": 0.98,
+"status": "通過",
+"reason": "原話對得上（重疊 98%）"
+},
+{
+"t": "0:40:17",
+"sec": 2417,
+"quote": "as for the industry in terms of quantum computing, that the milestones are being hit by the major players like IBM and Google, and there they have the how I would say the commercial resources as well.",
+"point": "講者指出量子運算領域中，IBM與Google等主要玩家正達到相關里程碑並具備商業資源。",
+"sectors": [
+"伺服器與品牌組裝",
+"電信與雲端服務"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:41:04",
+"sec": 2464,
+"quote": "there we can say that slowly we are getting there to towards the the the promise.",
+"point": "講者表示量子運算正緩慢朝向承諾的目標邁進。",
+"sectors": [
+"伺服器與品牌組裝",
+"電信與雲端服務"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:41:10",
+"sec": 2470,
+"quote": "And then with the 2019 paper from from Google of the Quantum Supremacy paper, that shows that",
+"point": "講者提到2019年Google發表量子霸權論文顯示出相關進展。",
+"sectors": [
+"伺服器與品牌組裝",
+"電信與雲端服務"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:41:42",
+"sec": 2502,
+"quote": "The most meaningful one I would say is the combination of the CPU, GPU as well as the QPU type of approach",
+"point": "講者認為最具意義的是CPU、GPU與QPU混合架構的結合方式。",
+"sectors": [
+"伺服器與品牌組裝",
+"伺服器電源與儲能"
+],
+"stocks": [],
+"match": 0.99,
+"status": "通過",
+"reason": "原話對得上（重疊 99%）"
+},
+{
+"t": "0:42:00",
+"sec": 2520,
+"quote": "So classical combined with quantum. Exactly. And there that shows the potential promise that QPUs will be able to do useful computing",
+"point": "講者說明經典與量子結合能展現潛力，使QPU能夠執行有用的運算。",
+"sectors": [
+"伺服器與品牌組裝",
+"伺服器電源與儲能"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:42:34",
+"sec": 2554,
+"quote": "this takes a lot of uh money. Yeah, and then and then also the most important thing is to show that individual technical milestones,",
+"point": "講者提到量子運算發展需要大量資金，且需展示個別技術里程碑。",
+"sectors": [
+"伺服器與品牌組裝",
+"伺服器電源與儲能"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:42:59",
+"sec": 2579,
+"quote": "they are we can say that slowly we are getting there to towards the the the promise.",
+"point": "講者重申量子運算正在逐漸接近其承諾的目標。",
+"sectors": [
+"伺服器與品牌組裝",
+"電信與雲端服務"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:43:02",
+"sec": 2582,
+"quote": "And then with the 2019 paper from from Google of the Quantum Supremacy paper, that shows that",
+"point": "講者再次提及2019年Google的量子霸權論文證明了相關進展。",
+"sectors": [
+"伺服器與品牌組裝",
+"電信與雲端服務"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:43:10",
+"sec": 2590,
+"quote": "at the very least there will always be a a a an application or a a maybe not so useful",
+"point": "講者認為至少會有一些應用存在，儘管可能未必那麼普及或實用。",
+"sectors": [
+"伺服器與品牌組裝",
+"電信與雲端服務"
+],
+"stocks": [],
+"match": 0.98,
+"status": "通過",
+"reason": "原話對得上（重疊 98%）"
+},
+{
+"t": "0:43:25",
+"sec": 2605,
+"quote": "but there will all there will be a point where the classical computer will not be able to uh compete with the the same quantum computer.",
+"point": "講者指出未來將會達到一個時間點，經典電腦將無法與量子電腦競爭。",
+"sectors": [
+"伺服器與品牌組裝",
+"電信與雲端服務"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:43:42",
+"sec": 2622,
+"quote": "The most meaningful one I would say is the combination of the CPU, GPU as well as the QPU type",
+"point": "講者再次強調CPU、GPU與QPU結合是極具意義的方法。",
+"sectors": [
+"伺服器與品牌組裝",
+"伺服器電源與儲能"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:44:12",
+"sec": 2652,
+"quote": "I think we'll get to the applications of quantum computers later.",
+"point": "講者表示稍後將探討量子電腦的應用。",
+"sectors": [
+"伺服器與品牌組裝",
+"電信與雲端服務"
+],
+"stocks": [],
+"match": 0.98,
+"status": "通過",
+"reason": "原話對得上（重疊 98%）"
+},
+{
+"t": "0:44:16",
+"sec": 2656,
+"quote": "Let's start talking about like the bottlenecks in you know scaling up quantum computers, right?",
+"point": "",
+"sectors": [
+"伺服器與品牌組裝",
+"電信與雲端服務"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:54:40",
+"sec": 3280,
+"quote": "For now we are really focused on non-destructive uh chiplet testing. And so we're always open to more partners.",
+"point": "公司目前專注於非破壞性晶片小幫手測試，並對更多合作夥伴保持開放態度。",
+"sectors": [
+"封裝測試"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:54:50",
+"sec": 3290,
+"quote": "yesterday we recently announced that IQM our first uh uh launching product uh customer for the Max system.",
+"point": "公司最近宣佈 IQM 成為 Max 系統的第一個推出產品客戶。",
+"sectors": [
+"封裝測試"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:54:59",
+"sec": 3299,
+"quote": "They they want to be included in the partnership program where we upgrade the system to chiplet based uh non-destructive testing.",
+"point": "客戶希望加入合作夥伴計劃，將系統升級至基於晶片小幫手的非破壞性測試。",
+"sectors": [
+"封裝測試"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:55:07",
+"sec": 3307,
+"quote": "And then also cryo switching where we can also do quick uh parallel testing in one go in a single system.",
+"point": "此外也提供極低溫切換，可在單一系統中一次進行快速的平行測試。",
+"sectors": [
+"封裝測試"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:55:15",
+"sec": 3315,
+"quote": "So you guys already have products uh but that huge unlock would be maybe when quantum computer becomes uh",
+"point": "公司目前已有產品，但重大的突破將會是量子電腦實現的時候。",
+"sectors": [
+"封裝測試"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:55:24",
+"sec": 3324,
+"quote": "And I think the biggest the biggest unlock in terms of the product roadmap so far, yes.",
+"point": "就產品發展藍圖而言，目前最大的突破是資料管理基礎設施。",
+"sectors": [
+"封裝測試"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:55:33",
+"sec": 3333,
+"quote": "So we have already a prototype deployed, but then it's really maturing it and making sure that it includes uh the Nvidia ASING,",
+"point": "公司已經部署了原型機，目前正致力於使其成熟，並確保包含 Nvidia 的 ASIC。",
+"sectors": [
+"封裝測試"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "1:04:50",
+"sec": 3890,
+"quote": "we in IT use flywheels. Um and that is a different approach where we basically make use of the inertia of a flywheel.",
+"point": "IT產業使用飛輪儲能作為不同的應對方式，利用飛輪的慣性。",
+"sectors": [
+"伺服器電源與儲能"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "1:05:06",
+"sec": 3906,
+"quote": "inertia wants to continue that. And the generator, motor generator that is connected to that, is on the one hand a motor that fuels the flywheel to keep on spinning",
+"point": "馬達發電機連接到飛輪，在一端作為馬達為飛輪提供動力使其持續旋轉。",
+"sectors": [
+"伺服器電源與儲能"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "1:08:47",
+"sec": 4127,
+"quote": "you can see also here in Taiwan that companies like Micron and Nanya and TSMC and Winbond are using our dynamic rotary systems",
+"point": "台灣的美光、南亞科、台積電和華邦電等公司正在使用動態旋轉系統。",
+"sectors": [
+"伺服器電源與儲能",
+"晶圓代工與製造"
+],
+"stocks": [
+{
+"code": "2408",
+"name": "南亞科"
+},
+{
+"code": "2330",
+"name": "台積電"
+},
+{
+"code": "2344",
+"name": "華邦電"
+}
+],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "1:10:28",
+"sec": 4228,
+"quote": "the companies started in the Netherlands making electrical machines in about 1895",
+"point": "公司大約在1895年於荷蘭開始製造電機設備。",
+"sectors": [
+"伺服器電源與儲能"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "1:10:37",
+"sec": 4237,
+"quote": "that was at the same time that Philips the worldwide lighting company also invented the incandescent lamp.",
+"point": "這與全球照明公司飛利浦發明白熾燈泡是在同一時期。",
+"sectors": [
+"伺服器電源與儲能"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+}
+],
+"n_pass": 48,
+"n_fail": 3
+},
+"harry_pod:cmugchalo01bf01uvb2kb7x4d": {
+"src": "harry_pod",
+"name": "哈利說（科技浪 Tech.wav）",
+"kind": "podcast",
+"title": "【試聽】XEP29 - AI 市場變了！DeepSeek 最新壓縮技術、量化前沿與 AI 市場新訊號",
+"date": "2026-09-25",
+"url": "https://open.firstory.fm/story/cmugchalo01bf01uvb2kb7x4d",
+"dur_s": 740,
+"models": [
+"gemini-3.5-flash-lite"
+],
+"at": "2026-10-05",
+"n_seg": 96,
+"len_s": 733,
+"mentions": [],
+"n_pass": 0,
+"n_fail": 0
+},
+"harry_pod:cmuali3vi0s2y01x94y9egxvz": {
+"src": "harry_pod",
+"name": "哈利說（科技浪 Tech.wav）",
+"kind": "podcast",
+"title": "EP155 - 席捲 AI 圈的 Jev，到底在紅什麼？AI Agent 真的要大改了嗎？",
+"date": "2026-09-21",
+"url": "https://open.firstory.fm/story/cmuali3vi0s2y01x94y9egxvz",
+"dur_s": 4329,
+"models": [
+"gemini-3.5-flash-lite"
+],
+"at": "2026-10-05",
+"n_seg": 264,
+"len_s": 4327,
+"mentions": [
+{
+"t": "0:34:39",
+"sec": 2079,
+"quote": "哎人類的大腦有system1跟system2的這兩種思考系統",
+"point": "人類大腦有 system 1 與 system 2 這兩種思考系統。",
+"sectors": [],
+"stocks": [],
+"match": 0.96,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+},
+{
+"t": "0:34:45",
+"sec": 2085,
+"quote": "system1是直覺腦，就你直接想也不想針對這個問題反射性的直接給出答案",
+"point": "system 1 是直覺腦，針對問題反射性直接給出答案。",
+"sectors": [],
+"stocks": [],
+"match": 0.94,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+},
+{
+"t": "0:34:52",
+"sec": 2092,
+"quote": "system2就是就是思考計劃腦，就是你會針對這個問題，你會花很多時間去認真的一步一步的思考去做計劃，去安排，然後再去回答。",
+"point": "system 2 是思考計劃腦，針對問題會花時間一步步思考、計劃、安排後再回答。",
+"sectors": [],
+"stocks": [],
+"match": 0.96,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+},
+{
+"t": "0:35:04",
+"sec": 2104,
+"quote": "那一般的LLM是system2，現在應該說現在絕大多數LLM都是會思考的嘛",
+"point": "一般的 LLM 屬於 system 2，絕大多數 LLM 都是會思考的。",
+"sectors": [],
+"stocks": [],
+"match": 1.0,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+},
+{
+"t": "0:35:12",
+"sec": 2112,
+"quote": "那Jeff他就是完全不會思考，他反射性的針對這個問題直接給出一個答案的model",
+"point": "Jeff 完全不會思考，反射性針對問題直接給出答案。",
+"sectors": [],
+"stocks": [],
+"match": 0.87,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+},
+{
+"t": "1:02:08",
+"sec": 3728,
+"quote": "現在我用龍蝦基本上就是使用GPT5.6，其實我應該去換阿修羅，只是還沒找到時間，然後就目前用起來覺得我的use case5.6已經差不多了，所以我就",
+"point": "講者提到自己目前主要使用 GPT-5.6，並考慮改用阿修羅，但使用經驗上 5.6 已經差不多。",
+"sectors": [],
+"stocks": [],
+"match": 0.33,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 33%）"
+},
+{
+"t": "1:08:11",
+"sec": 4091,
+"quote": "現在我的龍蝦基本上就是使用GPT5.6，其實我應該去換阿修羅，就是但就是還沒找到時間，然後就目前用起來覺得我的use case5.6已經差不多了，所以我就",
+"point": "講者表示自己的龍蝦目前主要使用 GPT-5.6 且覺得差不多，還沒時間換阿修羅。",
+"sectors": [],
+"stocks": [],
+"match": 0.89,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+},
+{
+"t": "1:08:54",
+"sec": 4134,
+"quote": "跑在我自己的DJX Spark上面，或者是甚至MacMini都有可能，就是超級小的，其實也是可以啊，對不對？",
+"point": "講者提到模型可以跑在自己的 DJX Spark 或 Mac Mini 上。",
+"sectors": [],
+"stocks": [],
+"match": 0.91,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+}
+],
+"n_pass": 0,
+"n_fail": 8
+},
+"harry_pod:cmu0m7zgj07fa01xfaxvxg9r7": {
+"src": "harry_pod",
+"name": "哈利說（科技浪 Tech.wav）",
+"kind": "podcast",
+"title": "EP154 - AI 真的解決了數學世紀難題嗎？Anthropic 員工開始警告末日",
+"date": "2026-09-14",
+"url": "https://open.firstory.fm/story/cmu0m7zgj07fa01xfaxvxg9r7",
+"dur_s": 4377,
+"models": [
+"gemini-3.5-flash-lite"
+],
+"at": "2026-10-05",
+"n_seg": 253,
+"len_s": 4374,
+"mentions": [
+{
+"t": "0:57:30",
+"sec": 3450,
+"quote": "甚至包括像是Oly podcast裡面很有名的四個host，一些VC大佬呢，他們竟然也都這樣子認為。",
+"point": "Podcast主持人與VC大佬也認為AI有毀滅世界的風險",
+"sectors": [],
+"stocks": [],
+"match": 0.89,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+},
+{
+"t": "1:04:21",
+"sec": 3861,
+"quote": "年頭的時候這個GPT的進展呢是靠著Astra去推動的,那Astra的進展呢是靠著Bell去推動的",
+"point": "講者提到Astra與Bell推動GPT的進展。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"match": 0.91,
+"status": "通過",
+"reason": "原話對得上（重疊 91%）"
+},
+{
+"t": "1:09:30",
+"sec": 4170,
+"quote": "這個Anthropic他們是找meter嘛對不對?但meter也是有Anthropic的這個資金在投資的",
+"point": "講者指出Anthropic找meter並有其資金投資。",
+"sectors": [
+"伺服器與品牌組裝"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "1:09:42",
+"sec": 4182,
+"quote": "Anthropic投資的一間公司去監管OpenAI",
+"point": "講者提到Anthropic投資公司去監管OpenAI。",
+"sectors": [
+"伺服器與品牌組裝"
+],
+"stocks": [],
+"match": 0.83,
+"status": "通過",
+"reason": "原話對得上（重疊 83%）"
+},
+{
+"t": "1:11:18",
+"sec": 4278,
+"quote": "所有這些AI lab以及美國政府要一起去慢慢 figure out的一件事情",
+"point": "講者提到所有AI lab及美國政府需一起找出應對方向。",
+"sectors": [
+"伺服器與品牌組裝"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+}
+],
+"n_pass": 4,
+"n_fail": 1
+},
+"harry_pod:cmtqnt4wo0rf501y86xs36zbt": {
+"src": "harry_pod",
+"name": "哈利說（科技浪 Tech.wav）",
+"kind": "podcast",
+"title": "EP153 - GPT-6 Astra 強到離譜（大部分情況）",
+"date": "2026-09-07",
+"url": "https://open.firstory.fm/story/cmtqnt4wo0rf501y86xs36zbt",
+"dur_s": 4282,
+"models": [
+"gemini-3.5-flash-lite"
+],
+"at": "2026-10-05",
+"n_seg": 350,
+"len_s": 4281,
+"mentions": [
+{
+"t": "0:18:19",
+"sec": 1099,
+"quote": "再來處理知識工作的能力，就是做PPT啊，做Excel啊等等的，這邊我覺得我沒有感受到非常明顯的能力提升。",
+"point": "講者提到處理知識工作如PPT和Excel的能力沒有感受到非常明顯的提升。",
+"sectors": [],
+"stocks": [],
+"match": 1.0,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+},
+{
+"t": "0:19:06",
+"sec": 1146,
+"quote": "那首先我們就先從這個3D建模的能力開始聊起，這邊我覺得可以說是Astra它最大亮點。",
+"point": "講者指出3D建模能力是Astra的最大亮點。",
+"sectors": [],
+"stocks": [],
+"match": 0.92,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+},
+{
+"t": "0:23:07",
+"sec": 1387,
+"quote": "那我會選它呢，是因為它的質感很特殊，就是它有兩面的金屬呢是做成那一種很複雜的花紋的的這種金屬。",
+"point": "講者說明選擇Astra生成DJI Spark的理由在於其質感非常特殊。",
+"sectors": [],
+"stocks": [],
+"match": 1.0,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+},
+{
+"t": "0:26:09",
+"sec": 1569,
+"quote": "啊這個一定就是去網路上找一些現成素材啊，有的沒的，那當然有這些懷疑是正常的啦。",
+"point": "講者提到有人會懷疑網路上是否已有現成素材可用。",
+"sectors": [],
+"stocks": [],
+"match": 0.97,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+},
+{
+"t": "0:27:17",
+"sec": 1637,
+"quote": "GPT5.6它做出來的那個金屬泡棉的材質，完全沒有重現，它直接把它做跟沙發一樣啊。",
+"point": "講者指出GPT-5.6做出的金屬泡棉材質看起來像沙發。",
+"sectors": [],
+"stocks": [],
+"match": 0.89,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號"
+}
+],
+"n_pass": 0,
+"n_fail": 5
 }
 },
 "fail": {
