@@ -145,7 +145,7 @@ jobs:
           python world_data.py ../site/data
           python sector_pe.py ../site/data || echo "::warning::產業本益比分位失敗（流向總覽第四條線這班不更新）"
           python industry_notes.py ../site/data || echo "::warning::產業動向發布失敗（個股研究 → 產業動向這班不更新）"
-          python is_hist.py ../site/data --max 16 || echo "::warning::綜合損益表回補失敗（三率、十年季度表這班不更新）"
+          python is_hist.py ../site/data --max 8 || echo "::warning::綜合損益表回補失敗（三率、十年季度表這班不更新）"
 
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
       # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。
