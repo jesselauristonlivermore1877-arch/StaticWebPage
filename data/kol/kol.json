@@ -10183,11 +10183,12 @@
 "url": "https://open.firstory.fm/story/cmugchalo01bf01uvb2kb7x4d",
 "dur_s": 740,
 "models": [
-"gemini-3.5-flash-lite"
+"gemini-3.6-flash",
+"gemini-3.7-flash"
 ],
-"at": "2026-10-07",
-"n_seg": 88,
-"len_s": 733,
+"at": "2026-10-09",
+"n_seg": 29,
+"len_s": 711,
 "mentions": [],
 "n_pass": 0,
 "n_fail": 0
@@ -10747,6 +10748,14 @@
 "yutinghao:U4RH_CPe3GQ": {
 "at": "2026-09-26",
 "err": "JSONDecodeError: Expecting ',' delimiter: line 15 column 2 (char 8245)"
+},
+"harry_pod:cmuali3vi0s2y01x94y9egxvz": {
+"at": "2026-10-09",
+"err": "ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+},
+"harry_pod:cmu0m7zgj07fa01xfaxvxg9r7": {
+"at": "2026-10-09",
+"err": "ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
 }
 }
 }
