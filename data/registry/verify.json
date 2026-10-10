@@ -1,10 +1,170 @@
 {
-"checked": "2026-10-04",
+"checked": "2026-10-10",
 "src_asof": [
 "2026-10-04",
 "2026-10-04"
 ],
 "officials": [
+{
+"id": "us_leader",
+"zh": "唐納·川普",
+"en": "Donald J. Trump",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.whitehouse.gov/administration/"
+]
+},
+{
+"id": "us_finance",
+"zh": "史考特·貝森特",
+"en": "Scott Bessent",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://home.treasury.gov/about/general-information/officials"
+]
+},
+{
+"id": "us_cb",
+"zh": "凱文·沃許",
+"en": "Kevin Warsh",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.federalreserve.gov/aboutthefed/bios/board/default.htm"
+]
+},
+{
+"id": "us_labor",
+"zh": "凱斯·桑德林",
+"en": "Keith Sonderling",
+"ok": false,
+"why": "出處打不開（HTTP 403）",
+"src": [
+"https://www.dol.gov/agencies/osec/keith-sonderling"
+]
+},
+{
+"id": "cn_leader",
+"zh": "習近平",
+"en": "Xi Jinping",
+"ok": false,
+"why": "出處頁找不到名字",
+"src": [
+"https://www.xinhuanet.com/politics/leaders/"
+]
+},
+{
+"id": "cn_cb",
+"zh": "潘功勝",
+"en": "Pan Gongsheng",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.pbc.gov.cn/en/3688006/index.html"
+]
+},
+{
+"id": "de_leader",
+"zh": "弗里德里希·梅爾茨",
+"en": "Friedrich Merz",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.bundeskanzler.de/bk-en/chancellor/biography-friedrich-merz-2342058"
+]
+},
+{
+"id": "de_cb",
+"zh": "約阿希姆·納格爾",
+"en": "Joachim Nagel",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.bundesbank.de/en/bundesbank/organisation/executive-board"
+]
+},
+{
+"id": "in_leader",
+"zh": "納倫德拉·莫迪",
+"en": "Narendra Modi",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.pmindia.gov.in/en/"
+]
+},
+{
+"id": "in_cb",
+"zh": "桑傑·馬爾霍特拉",
+"en": "Sanjay Malhotra",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.rbi.org.in/Scripts/AboutUsDisplay.aspx?pg=Governors.html"
+]
+},
+{
+"id": "jp_leader",
+"zh": "高市早苗",
+"en": "Sanae Takaichi",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://japan.kantei.go.jp/105/meibo/daijin/index.html"
+]
+},
+{
+"id": "jp_finance",
+"zh": "片山皋月",
+"en": "Satsuki Katayama",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://japan.kantei.go.jp/105/meibo/daijin/index.html"
+]
+},
+{
+"id": "jp_cb",
+"zh": "植田和男",
+"en": "Kazuo Ueda",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.boj.or.jp/en/about/organization/policyboard/index.htm"
+]
+},
+{
+"id": "gb_leader",
+"zh": "安迪·伯納姆",
+"en": "Andy Burnham",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.gov.uk/government/ministers/prime-minister"
+]
+},
+{
+"id": "gb_finance",
+"zh": "約翰·希利",
+"en": "John Healey",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.gov.uk/government/ministers/chancellor-of-the-exchequer"
+]
+},
+{
+"id": "gb_cb",
+"zh": "安德魯·貝利",
+"en": "Andrew Bailey",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.bankofengland.co.uk/about/people/andrew-bailey/biography"
+]
+},
 {
 "id": "fr_leader",
 "zh": "艾曼紐·馬克宏",
@@ -13,16 +173,6 @@
 "why": "出處頁有名字與職位",
 "src": [
 "https://www.elysee.fr/en/emmanuel-macron"
-]
-},
-{
-"id": "fr_finance",
-"zh": "羅蘭·勒斯鳩",
-"en": "Roland Lescure",
-"ok": true,
-"why": "出處頁有名字與職位",
-"src": [
-"https://www.economie.gouv.fr/"
 ]
 },
 {
@@ -37,7 +187,7 @@
 },
 {
 "id": "it_finance",
-"zh": "吉安卡洛·焦爾傑蒂",
+"zh": "吉安卡洛·喬爾傑蒂",
 "en": "Giancarlo Giorgetti",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -47,10 +197,10 @@
 },
 {
 "id": "it_cb",
-"zh": "法比歐·帕內塔",
+"zh": "法比奧·帕內塔",
 "en": "Fabio Panetta",
-"ok": false,
-"why": "出處頁找不到職位關鍵字",
+"ok": true,
+"why": "出處頁有名字與職位",
 "src": [
 "https://www.bancaditalia.it/"
 ]
@@ -67,17 +217,17 @@
 },
 {
 "id": "ca_finance",
-"zh": "商鵬飛",
+"zh": "弗朗索瓦-菲利普·商鵬飛",
 "en": "François-Philippe Champagne",
 "ok": false,
 "why": "出處打不開（HTTP 0）",
 "src": [
-"https://www.canada.ca/en/department-finance.html"
+"https://www.canada.ca/en/government/ministers/francois-philippe-champagne.html"
 ]
 },
 {
 "id": "ca_cb",
-"zh": "蒂夫·麥克勒姆",
+"zh": "提夫·麥克勒姆",
 "en": "Tiff Macklem",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -87,7 +237,7 @@
 },
 {
 "id": "br_leader",
-"zh": "路易斯·伊納西奧·魯拉·達席爾瓦",
+"zh": "魯拉",
 "en": "Luiz Inácio Lula da Silva",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -97,7 +247,7 @@
 },
 {
 "id": "ru_leader",
-"zh": "弗拉基米爾·普丁",
+"zh": "弗拉迪米爾·普丁",
 "en": "Vladimir Putin",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -126,6 +276,26 @@
 ]
 },
 {
+"id": "kr_finance",
+"zh": "李亨日",
+"en": "Lee Hyoung-il",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://english.moef.go.kr/"
+]
+},
+{
+"id": "au_leader",
+"zh": "安東尼·艾班尼斯",
+"en": "Anthony Albanese",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.pm.gov.au/your-pm"
+]
+},
+{
 "id": "au_finance",
 "zh": "吉姆·查默斯",
 "en": "Jim Chalmers",
@@ -133,6 +303,16 @@
 "why": "出處頁有名字與職位",
 "src": [
 "https://ministers.treasury.gov.au/"
+]
+},
+{
+"id": "au_cb",
+"zh": "米雪兒·布洛克",
+"en": "Michele Bullock",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.rba.gov.au/about-rba/people/michele-bullock.html"
 ]
 },
 {
@@ -147,7 +327,7 @@
 },
 {
 "id": "tr_leader",
-"zh": "雷傑普·塔伊普·艾爾段",
+"zh": "雷傑甫·塔伊甫·艾爾段",
 "en": "Recep Tayyip Erdogan",
 "ok": false,
 "why": "出處頁找不到名字",
@@ -157,12 +337,132 @@
 },
 {
 "id": "tr_cb",
-"zh": "法蒂赫·卡拉漢",
+"zh": "法提赫·卡拉漢",
 "en": "Fatih Karahan",
 "ok": true,
 "why": "出處頁有名字與職位",
 "src": [
 "https://www.tcmb.gov.tr/"
+]
+},
+{
+"id": "nl_leader",
+"zh": "羅布·傑騰",
+"en": "Rob Jetten",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.government.nl/government/members-of-cabinet/rob-jetten"
+]
+},
+{
+"id": "nl_finance",
+"zh": "埃爾科·海寧",
+"en": "Eelco Heinen",
+"ok": false,
+"why": "出處打不開（HTTP 403）",
+"src": [
+"https://apnews.com/article/897876739f2ce60e41167a1040956353"
+]
+},
+{
+"id": "nl_cb",
+"zh": "奧拉夫·斯萊彭",
+"en": "Olaf Sleijpen",
+"ok": false,
+"why": "出處打不開（HTTP 403）",
+"src": [
+"https://www.dnb.nl/en/about-us/executive-board/"
+]
+},
+{
+"id": "sa_leader",
+"zh": "穆罕默德·本·薩勒曼",
+"en": "Mohammed bin Salman Al Saud",
+"ok": false,
+"why": "出處頁找不到名字",
+"src": [
+"https://www.spa.gov.sa/en/"
+]
+},
+{
+"id": "ch_leader",
+"zh": "居伊·帕姆蘭",
+"en": "Guy Parmelin",
+"ok": false,
+"why": "出處打不開（HTTP 403）",
+"src": [
+"https://www.admin.ch/gov/en/start/federal-council/members-of-the-federal-council.html"
+]
+},
+{
+"id": "ch_finance",
+"zh": "卡琳·凱勒-祖特爾",
+"en": "Karin Keller-Sutter",
+"ok": false,
+"why": "出處打不開（HTTP 403）",
+"src": [
+"https://www.admin.ch/gov/en/start/federal-council/members-of-the-federal-council.html"
+]
+},
+{
+"id": "tw_leader",
+"zh": "賴清德",
+"en": "Lai Ching-te",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.president.gov.tw/"
+]
+},
+{
+"id": "tw_finance",
+"zh": "莊翠雲",
+"en": "Chuang Tsui-yun",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.mof.gov.tw/singlehtml/121?cntId=959e613779dc467ea3e4879bf919f941"
+]
+},
+{
+"id": "eu_leader",
+"zh": "烏蘇拉·馮德萊恩",
+"en": "Ursula von der Leyen",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://commission.europa.eu/about/organisation/college-commissioners_en"
+]
+},
+{
+"id": "eu_cb",
+"zh": "克里斯蒂娜·拉加德",
+"en": "Christine Lagarde",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.ecb.europa.eu/ecb/orga/decisions/eb/html/index.en.html"
+]
+},
+{
+"id": "ir_leader",
+"zh": "莫傑塔巴·哈米尼",
+"en": "Mojtaba Khamenei",
+"ok": false,
+"why": "出處打不開（HTTP 403）",
+"src": [
+"https://english.khamenei.ir/"
+]
+},
+{
+"id": "ir_president",
+"zh": "馬蘇德·佩澤什基安",
+"en": "Masoud Pezeshkian",
+"ok": false,
+"why": "出處頁找不到名字",
+"src": [
+"https://president.ir/en"
 ]
 }
 ],
@@ -1356,8 +1656,8 @@
 "ticker": "COST",
 "name": "Costco Wholesale Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -1516,8 +1816,8 @@
 "ticker": "TXN",
 "name": "Texas Instruments Incorporated",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -1588,24 +1888,24 @@
 "ticker": "QCOM",
 "name": "QUALCOMM Incorporated",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
 "ticker": "IBM",
 "name": "International Business Machines Corporation",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
 "ticker": "APH",
 "name": "Amphenol Corporation",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
@@ -1668,8 +1968,8 @@
 "ticker": "TMUS",
 "name": "T-Mobile US, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -1724,8 +2024,8 @@
 "ticker": "SCCO",
 "name": "Southern Copper Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -1845,15 +2145,15 @@
 "name": "Bristol-Myers Squibb Company",
 "status": "listed",
 "ok": false,
-"why": "出處打不開（HTTP 500）"
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
 "ticker": "PH",
 "name": "Parker-Hannifin Corporation",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
@@ -1868,8 +2168,8 @@
 "ticker": "COF",
 "name": "Capital One Financial Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -1940,8 +2240,8 @@
 "ticker": "005930.KS",
 "name": "Samsung Electronics Co., Ltd.",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "kr",
@@ -1981,7 +2281,7 @@
 "name": "HSBC Holdings plc",
 "status": "listed",
 "ok": false,
-"why": "出處打不開（HTTP 404）"
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "ch",
@@ -2004,16 +2304,16 @@
 "ticker": null,
 "name": "Scale AI",
 "status": "private",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 403）"
 }
 ],
 "n_ok": [
-13,
-157
+35,
+156
 ],
 "n": [
-16,
+46,
 230
 ]
 }
