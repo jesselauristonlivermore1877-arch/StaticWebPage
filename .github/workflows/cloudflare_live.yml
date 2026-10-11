@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "deploy＝部署；stats＝只看 CPU 用量（近 24 小時分狀態統計＋即時 tail 4 分鐘，10-11）"
+        description: "deploy＝部署；stats＝只看 CPU 用量（近 24 小時分狀態統計＋即時 tail 4 分鐘，10-11）；sources＝只讀盤點各來源近 7 天則數＋候選媒體 RSS 試抓（10-11 v6-2）"
         required: false
         default: "deploy"
 
@@ -73,8 +73,89 @@ jobs:
               print(e.get("eventTimestamp"), e.get("outcome"), "CPU", e.get("cpuTime"), "ms 牆鐘", e.get("wallTime"), "ms", what, [l.get("message") for l in (e.get("logs") or [])][:3], [x.get("name") for x in (e.get("exceptions") or [])])
           print("tail 共", n, "筆")
           PY
+      - name: 來源盤點（只讀；D1 近 7 天各來源則數、錯誤紀錄＋候選媒體 RSS 試抓）
+        if: inputs.mode == 'sources'
+        working-directory: code/cloudflare/live
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npm i -g wrangler@4.147.0 >/dev/null 2>&1
+          Q() { wrangler d1 execute gea-live --remote --json --command "$1" 2>/dev/null | python3 -c "
+          import json,sys
+          J=json.load(sys.stdin); R=(J[0] if isinstance(J,list) else J).get('results') or []
+          for r in R: print('  ', ' | '.join(str(v) for v in r.values()))
+          print('   （%d 列）' % len(R))"; }
+          echo "── Worker D1：近 7 天各來源則數（依 pub）"
+          Q "SELECT src, kind, COUNT(*) AS n, MAX(pub) AS last FROM items WHERE pub >= datetime('now','-7 days') GROUP BY src, kind ORDER BY n DESC"
+          echo "── Worker D1：工商時報全部則數（14 天內）與最後一則"
+          Q "SELECT COUNT(*) AS n, MAX(pub) AS last, MAX(seen) AS seen FROM items WHERE src = '工商時報'"
+          echo "── Worker runs.err：近 7 天提到工商時報的輪次（最近 10 筆）"
+          Q "SELECT at, rss, new, err, task FROM runs WHERE err LIKE '%工商%' OR task LIKE '%工商%' ORDER BY at DESC LIMIT 10"
+          echo "── Worker runs.err：近 7 天各來源失敗次數（從 err 欄解析）"
+          wrangler d1 execute gea-live --remote --json --command "SELECT err FROM runs WHERE err LIKE '%來源：%'" 2>/dev/null | python3 -c "
+          import json,sys,re,collections
+          J=json.load(sys.stdin); R=(J[0] if isinstance(J,list) else J).get('results') or []
+          c=collections.Counter()
+          for r in R:
+              for x in re.findall(r'([^、：\s]+?) (逾時|失敗|0則)', r['err'].split('來源：',1)[1]): c[x]+=1
+          for k,v in c.most_common(): print('  ', k[0], k[1], v, '次')
+          print('   （%d 輪有來源錯誤）' % len(R))"
+          echo "── 候選媒體 RSS 試抓（GitHub Actions 出口；Cloudflare 出口看部署後 runs.err）"
+          python3 - <<'PY'
+          import urllib.request, re, datetime as dt, email.utils
+          C = [
+            ("經濟日報", "https://money.udn.com/rssfeed/news/1001/5590?ch=money"),
+            ("工商時報", "https://www.ctee.com.tw/rss_web/livenews/ctee"),
+            ("工商時報(股市)", "https://www.ctee.com.tw/rss_web/livenews/stock"),
+            ("MoneyDJ", "https://www.moneydj.com/kmdj/RssCenter.aspx?svc=NR&fno=1&arg=MB010000"),
+            ("中央社 財經", "https://feeds.feedburner.com/rsscna/finance"),
+            ("中央社 政治", "https://feeds.feedburner.com/rsscna/politics"),
+            ("中央社 國際", "https://feeds.feedburner.com/rsscna/intworld"),
+            ("財訊", "https://www.wealth.com.tw/rss"),
+            ("今周刊", "https://www.businesstoday.com.tw/rss"),
+            ("商業周刊", "https://www.businessweekly.com.tw/rss/latest"),
+            ("天下雜誌", "https://www.cw.com.tw/RSS/cw_content.xml"),
+            ("數位時代", "https://www.bnext.com.tw/rss"),
+            ("DIGITIMES", "https://www.digitimes.com.tw/rss/rptlist.xml"),
+            ("科技新報", "https://technews.tw/feed/"),
+            ("自由財經", "https://news.ltn.com.tw/rss/business.xml"),
+            ("ETtoday 財經", "https://feeds.feedburner.com/ettoday/finance"),
+            ("中時 財經", "https://www.chinatimes.com/rss/realtimenews-finance.xml"),
+            ("聯合新聞網 股市", "https://udn.com/rssfeed/news/2/6644?ch=news"),
+            ("風傳媒", "https://www.storm.mg/api/getRss/channel_id/2"),
+            ("三立 財經", "https://www.setn.com/Rss.aspx?NewsType=2"),
+            ("東森新聞 財經", "https://news.ebc.net.tw/rss/news/fin"),
+            ("CMoney", "https://www.cmoney.tw/notes/rss"),
+            ("Yahoo 股市 台股", "https://tw.stock.yahoo.com/rss?category=tw-market"),
+            ("彭博 Markets", "https://feeds.bloomberg.com/markets/news.rss"),
+            ("彭博 Technology", "https://feeds.bloomberg.com/technology/news.rss"),
+            ("WSJ Markets", "https://feeds.content.dowjones.io/public/rss/RSSMarketsMain"),
+            ("WSJ Tech", "https://feeds.content.dowjones.io/public/rss/RSSWSJD"),
+            ("MarketWatch", "https://feeds.content.dowjones.io/public/rss/mw_topstories"),
+            ("Barron's", "https://www.barrons.com/xml/rss/3_7510.xml"),
+            ("Yahoo Finance", "https://finance.yahoo.com/news/rssindex"),
+            ("TechCrunch", "https://techcrunch.com/feed/"),
+            ("The Information", "https://www.theinformation.com/feed"),
+            ("CNBC Tech", "https://www.cnbc.com/id/19854910/device/rss/rss.html"),
+            ("FT Companies", "https://www.ft.com/companies?format=rss"),
+            ("日經 Tech", "https://asia.nikkei.com/rss/feed/nar"),
+          ]
+          for nm, u in C:
+              try:
+                  r = urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0 (GEA live)"}), timeout=15)
+                  b = r.read().decode("utf-8", "replace"); st = r.status
+              except Exception as e:
+                  print("  ✗ %-16s %s  %s" % (nm, str(e)[:70], u)); continue
+              items = re.findall(r"<item[\s>]|<entry[\s>]", b)
+              d = re.findall(r"<pubDate>([^<]+)</pubDate>|<updated>([^<]+)</updated>|<dc:date>([^<]+)</dc:date>", b)
+              last = next((x for t in d[:3] for x in t if x), "")
+              mark = "✓" if items else "△"
+              print("  %s %-16s HTTP %s 則數 %3d 最新 %-32s %s" % (mark, nm, st, len(items), last[:32], u))
+              if not items: print("      開頭：", re.sub(r"\s+", " ", b[:200]))
+          PY
       - name: 部署
-        if: inputs.mode != 'stats'
+        if: inputs.mode == 'deploy' || inputs.mode == ''
         working-directory: code/cloudflare/live
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -100,7 +181,7 @@ jobs:
           echo "▶ Worker 網址（填進 template.html 的 NL_WORKER）：$W"
           echo "W=$W" >> "$GITHUB_ENV"
       - name: 驗收（等 cron 跑幾輪，印 /lag.json 與 /live.json 前幾則）
-        if: env.W != '' && inputs.mode != 'stats'
+        if: env.W != '' && (inputs.mode == 'deploy' || inputs.mode == '')
         run: |
           for i in 1 2 3 4 5 6 7; do
             sleep 60
