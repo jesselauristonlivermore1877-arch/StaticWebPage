@@ -84,13 +84,22 @@ jobs:
           sleep 15; pkill -f "wrangler tail" ; sleep 2
           python3 - <<'PY'
           import json, collections
-          ev = collections.defaultdict(list)
+          ev = collections.defaultdict(list); shown = 0
           for line in open("tail.jsonl", encoding="utf-8", errors="replace"):
               try: e = json.loads(line)
               except Exception: continue
-              x = e.get("event") or {}
-              kind = "websocket訊息" if "getWebSocketEvent" in x or x.get("webSocketEventType") else ("HTTP " + ((x.get("request") or {}).get("url", "").split("?")[0].split("/", 3)[-1] or "/")) if x.get("request") else (e.get("eventType") or e.get("executionModel") or "其他")
-              if (x.get("webSocketEventType")): kind = "ws " + x["webSocketEventType"]
+              if not isinstance(e, dict): continue
+              if shown < 3:                                    # 先印原始結構定位（10-11：event 有時是字串）
+                  print("  樣本：", json.dumps({k: (v if not isinstance(v, (dict, list)) else type(v).__name__) for k, v in e.items()}, ensure_ascii=False)[:300]); shown += 1
+              x = e.get("event")
+              x = x if isinstance(x, dict) else {}
+              req = x.get("request") if isinstance(x.get("request"), dict) else {}
+              if x.get("webSocketEventType") or x.get("getWebSocketEvent"):
+                  kind = "ws " + str(x.get("webSocketEventType") or "event")
+              elif req:
+                  kind = "HTTP /" + (req.get("url", "").split("?")[0].split("/", 3)[-1])
+              else:
+                  kind = str(e.get("eventType") or e.get("executionModel") or "其他")
               ev[kind].append((e.get("cpuTime") or 0, e.get("wallTime") or 0, e.get("outcome")))
           print("── CPU（wrangler tail，每次呼叫 ms）")
           for k, L in sorted(ev.items()):
