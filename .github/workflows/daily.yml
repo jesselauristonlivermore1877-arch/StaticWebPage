@@ -160,6 +160,8 @@ jobs:
           python news_heat.py ../site/data || { echo "::warning::新聞熱度失敗（這班不更新）"; echo "新聞熱度失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           python insider.py ../site/data || { echo "::warning::內部人持股失敗（這班不更新）"; echo "內部人持股失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           python ps_river.py ../site/data || { echo "::warning::股價營收比河流失敗（這班不更新）"; echo "股價營收比河流失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python margin_otc.py ../site/data || { echo "::warning::上櫃逐檔信用失敗（搜尋框上櫃融資融券這班不更新）"; echo "上櫃逐檔信用失敗（搜尋框上櫃融資融券這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python stock_lookup.py ../site/data || { echo "::warning::個股查詢資料失敗（搜尋框資訊框這班不更新）"; echo "個股查詢資料失敗（搜尋框資訊框這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
 
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
       # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。
