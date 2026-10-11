@@ -165,6 +165,8 @@ jobs:
           python mi_react.py ../site/data || { echo "::warning::重訊反應失敗（這班不更新）"; echo "重訊反應失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           python news_heat.py ../site/data || { echo "::warning::新聞熱度失敗（這班不更新）"; echo "新聞熱度失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           python insider.py ../site/data || { echo "::warning::內部人持股失敗（這班不更新）"; echo "內部人持股失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python capital.py ../site/data || { echo "::warning::籌資動態失敗（這班不更新）"; echo "籌資動態失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python warrant.py ../site/data || { echo "::warning::權證籌碼失敗（這班不更新）"; echo "權證籌碼失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           python ps_river.py ../site/data || { echo "::warning::股價營收比河流失敗（這班不更新）"; echo "股價營收比河流失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           python margin_otc.py ../site/data || { echo "::warning::上櫃逐檔信用失敗（搜尋框上櫃融資融券這班不更新）"; echo "上櫃逐檔信用失敗（搜尋框上櫃融資融券這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           python media_rank.py ../site/data || { echo "::warning::國內財經媒體流量排名失敗（沿用上一份）"; echo "國內財經媒體流量排名失敗（沿用上一份）" >> "$RUNNER_TEMP/soft_fail.txt"; }
