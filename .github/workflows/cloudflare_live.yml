@@ -6,6 +6,11 @@ name: Cloudflare 即時信息流部署
 
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "deploy＝部署；stats＝只看 CPU 用量（近 24 小時分狀態統計＋即時 tail 4 分鐘，10-11）"
+        required: false
+        default: "deploy"
 
 permissions:
   contents: read
@@ -23,7 +28,53 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22.23.3"
+      - name: CPU 用量（近 24 小時＋即時 tail 4 分鐘；不部署）
+        if: inputs.mode == 'stats'
+        working-directory: code/cloudflare/live
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npm i -g wrangler@4.147.0 >/dev/null 2>&1
+          python3 - <<'PY'
+          import json, os, urllib.request, datetime as dt
+          now = dt.datetime.now(dt.timezone.utc); t0 = now - dt.timedelta(hours=24)
+          q = """query($a:String!,$s:Time!,$e:Time!){viewer{accounts(filter:{accountTag:$a}){
+            workersInvocationsAdaptive(limit:500,filter:{scriptName:"gea-live",datetime_geq:$s,datetime_leq:$e}){
+              sum{requests errors subrequests} quantiles{cpuTimeP50 cpuTimeP99 wallTimeP50 wallTimeP99}
+              dimensions{status datetimeHour}}}}}"""
+          body = json.dumps({"query": q, "variables": {"a": os.environ["CLOUDFLARE_ACCOUNT_ID"], "s": t0.strftime("%Y-%m-%dT%H:%M:%SZ"), "e": now.strftime("%Y-%m-%dT%H:%M:%SZ")}}).encode()
+          r = urllib.request.Request("https://api.cloudflare.com/client/v4/graphql", body, {"Authorization": "Bearer " + os.environ["CLOUDFLARE_API_TOKEN"], "Content-Type": "application/json"})
+          try:
+              J = json.load(urllib.request.urlopen(r, timeout=60))
+          except Exception as e:
+              print("GraphQL 失敗：", e); J = {}
+          if J.get("errors"): print("GraphQL errors：", json.dumps(J["errors"], ensure_ascii=False)[:600])
+          rows = (((((J.get("data") or {}).get("viewer") or {}).get("accounts") or [{}])[0]) or {}).get("workersInvocationsAdaptive") or []
+          tot = {}
+          for x in sorted(rows, key=lambda x: (x["dimensions"]["datetimeHour"], x["dimensions"]["status"])):
+              d, sm, qn = x["dimensions"], x["sum"], x["quantiles"]
+              tot[d["status"]] = tot.get(d["status"], 0) + sm["requests"]
+              print("%s %-22s 次數 %5d  CPU p50 %6.1fms p99 %6.1fms  牆鐘 p99 %7.0fms" % (d["datetimeHour"][5:16], d["status"], sm["requests"], qn["cpuTimeP50"] / 1000, qn["cpuTimeP99"] / 1000, qn["wallTimeP99"] / 1000))
+          print("近 24 小時各狀態合計：", tot)
+          PY
+          echo "── 即時 tail 4 分鐘（每次呼叫：事件、結果、CPU、牆鐘）"
+          timeout 240 wrangler tail gea-live --format json > tail.jsonl 2> tail.err || true
+          tail -3 tail.err
+          python3 - <<'PY'
+          import json
+          n = 0
+          for line in open("tail.jsonl", encoding="utf-8", errors="replace"):
+              try: e = json.loads(line)
+              except Exception: continue
+              n += 1
+              ev = e.get("event") or {}
+              what = ("cron " + ev.get("cron", "")) if "cron" in ev else ((ev.get("request") or {}).get("url", "")[-60:])
+              print(e.get("eventTimestamp"), e.get("outcome"), "CPU", e.get("cpuTime"), "ms 牆鐘", e.get("wallTime"), "ms", what, [l.get("message") for l in (e.get("logs") or [])][:3], [x.get("name") for x in (e.get("exceptions") or [])])
+          print("tail 共", n, "筆")
+          PY
       - name: 部署
+        if: inputs.mode != 'stats'
         working-directory: code/cloudflare/live
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -49,7 +100,7 @@ jobs:
           echo "▶ Worker 網址（填進 template.html 的 NL_WORKER）：$W"
           echo "W=$W" >> "$GITHUB_ENV"
       - name: 驗收（等 cron 跑幾輪，印 /lag.json 與 /live.json 前幾則）
-        if: env.W != ''
+        if: env.W != '' && inputs.mode != 'stats'
         run: |
           for i in 1 2 3 4 5 6 7; do
             sleep 60
