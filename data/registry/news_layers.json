@@ -28,6 +28,7 @@
   "國內媒體",
   "國外媒體",
   "外資券商",
+  "國內券商",
   "意見領袖",
   "PTT"
  ],
@@ -75,8 +76,9 @@
  ],
  "us_co": "輝達|蘋果|微軟|谷歌|亞馬遜|特斯拉|博通|超微|英特爾|美光|高通|甲骨文|網飛|安謀|超微電腦|戴爾|思科|波音|摩根大通|波克夏|(?<![A-Za-z])(?:Nvidia|Apple|Microsoft|Google|Alphabet|Meta|Amazon|Tesla|Broadcom|AMD|Intel|Micron|Qualcomm|Oracle|Netflix|SpaceX|Palantir|Arm Holdings|Supermicro|Dell|Cisco|IBM|Salesforce|Adobe|CoreWeave|Coinbase|Boeing|JPMorgan|Berkshire)(?![A-Za-z])",
  "us_event": "財報|營收|獲利|財測|股價|市值|併購|收購|回購|裁員|上市|訂單|合約|罰款|反壟斷|(?<![A-Za-z])(?:earnings|revenue|profit|guidance|shares|stock|market cap|acqui\\w*|buyback|deal|contract|antitrust|fine|layoffs?|IPO)(?![A-Za-z])",
- "domestic": "中央社|經濟日報|工商時報|鉅亨|MoneyDJ|自由|聯合|udn|財訊|今周刊|商周|商業周刊|數位時代|科技新報|Newtalk|ETtoday|中時|中國時報|TVBS|三立|天下|風傳媒|台視|中視|公視|華視|民視|中廣|央廣|Rti|聯合報|蘋果新聞網|鏡週刊|鏡新聞|DIGITIMES|電子時報|Yahoo股市|Anue|財經新報|經濟部|金管會|中央銀行|主計總處|行政院|總統府",
- "broker": "瑞銀|摩根士丹利|大摩|摩根大通|小摩|高盛|美銀|花旗|麥格理|野村|大和|匯豐|巴克萊|里昂|伯恩斯坦|集邦|(?<![A-Za-z])(?:UBS|Morgan Stanley|JPMorgan|Goldman(?: Sachs)?|BofA|Bank of America|Citi(?:group)?|Macquarie|Nomura|Daiwa|HSBC|Barclays|CLSA|Bernstein|Evidence Lab|TrendForce|IDC|Counterpoint|Gartner)(?![A-Za-z])",
+ "domestic": "中央社|經濟日報|工商時報|鉅亨|MoneyDJ|自由|聯合|udn|財訊|今周刊|商周|商業周刊|數位時代|科技新報|Newtalk|ETtoday|中時|中國時報|TVBS|三立|天下|風傳媒|台視|中視|公視|華視|民視|中廣|央廣|Rti|聯合報|蘋果新聞網|鏡週刊|鏡新聞|DIGITIMES|電子時報|Yahoo股市|Anue|財經新報|東森|CMoney|理財周刊|遠見|NOWnews|今日新聞|新頭殼|自由財經|中時新聞網|經濟部|金管會|中央銀行|主計總處|行政院|總統府",
+ "broker": "瑞銀|摩根士丹利|大摩|摩根大通|小摩|高盛|美銀|美林|花旗|麥格理|野村|大和|匯豐|巴克萊|里昂|伯恩斯坦|集邦|德意志|德銀|瑞穗|法巴|法國巴黎|傑富瑞|富國銀行|星展|加拿大皇家|三菱日聯|日興|瑞信|聯博|貝萊德|晨星|(?<![A-Za-z])(?:UBS|Morgan Stanley|JPMorgan|J\\.P\\. Morgan|Goldman(?: Sachs)?|BofA|Bank of America|Merrill|Citi(?:group)?|Macquarie|Nomura|Daiwa|HSBC|Barclays|CLSA|Bernstein|Evidence Lab|TrendForce|IDC|Counterpoint|Gartner|Deutsche Bank|Mizuho|BNP Paribas|Jefferies|Wells Fargo|DBS|RBC|MUFG|SMBC Nikko|Credit Suisse|Morningstar|Wedbush|Needham|KeyBanc|Piper Sandler|Evercore|Bernstein)(?![A-Za-z])",
+ "broker_tw": "(?:元大|凱基|富邦|國票|群益|永豐|統一|兆豐|第一金|華南永昌|華南|日盛|康和|台新|玉山|中信|元富|宏遠|福邦|大華國際|新光)(?:證券|證|投顧|投信研究|期貨|研究部|投資顧問|證期)",
  "tw_fin_big": [
   "金融"
  ],
@@ -112,7 +114,7 @@
   ],
   [
    2,
-   "瑞銀|摩根士丹利|大摩|摩根大通|小摩|高盛|美銀|花旗|麥格理|野村|大和|匯豐|巴克萊|里昂|伯恩斯坦|集邦|(?<![A-Za-z])(?:UBS|Morgan Stanley|JPMorgan|Goldman(?: Sachs)?|BofA|Bank of America|Citi(?:group)?|Macquarie|Nomura|Daiwa|HSBC|Barclays|CLSA|Bernstein|Evidence Lab|TrendForce|IDC|Counterpoint|Gartner)(?![A-Za-z])"
+   "瑞銀|摩根士丹利|大摩|摩根大通|小摩|高盛|美銀|美林|花旗|麥格理|野村|大和|匯豐|巴克萊|里昂|伯恩斯坦|集邦|德意志|德銀|瑞穗|法巴|法國巴黎|傑富瑞|富國銀行|星展|加拿大皇家|三菱日聯|日興|瑞信|聯博|貝萊德|晨星|(?<![A-Za-z])(?:UBS|Morgan Stanley|JPMorgan|J\\.P\\. Morgan|Goldman(?: Sachs)?|BofA|Bank of America|Merrill|Citi(?:group)?|Macquarie|Nomura|Daiwa|HSBC|Barclays|CLSA|Bernstein|Evidence Lab|TrendForce|IDC|Counterpoint|Gartner|Deutsche Bank|Mizuho|BNP Paribas|Jefferies|Wells Fargo|DBS|RBC|MUFG|SMBC Nikko|Credit Suisse|Morningstar|Wedbush|Needham|KeyBanc|Piper Sandler|Evercore|Bernstein)(?![A-Za-z])"
   ],
   [
    2,
