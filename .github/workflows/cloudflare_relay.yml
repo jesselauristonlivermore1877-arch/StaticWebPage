@@ -1,0 +1,102 @@
+# cloudflare_relay.yml ─ 部署並測試「下單訊號雲端中繼」gea-signal-relay（Evans 2026-10-11 15:50 派工；協定見 CustomerServiceANDSales TODO.md 同段）
+#   程式：本 repo cloudflare/relay（wrangler.toml、src/worker.js、test.mjs）。跟即時信息流 gea-live 分開部署。
+#   secrets：沿用 CLOUDFLARE_API_TOKEN、CLOUDFLARE_ACCOUNT_ID。
+#   RELAY_PUB_TOKEN／RELAY_ADMIN_TOKEN：第一次部署時產生，存進 D1 資料庫 gea-relay-keys 的 keys 表（Evans 從 Cloudflare 主控台複製，
+#     路徑寫在 TODO 雲端段），再設成 Worker secret；之後每次部署沿用同一組（不會換，除非 mode=rotate）。log 只印遮罩。
+#   mode：deploy＝部署＋自動測試；test＝只測試；rotate＝換新兩組 token 後部署＋測試（換完發送端與管理端要改用新值）。
+#   測試時同時 wrangler tail 收每次呼叫的 CPU／牆鐘（stats）。不寫 repo 任何檔案。
+name: Cloudflare 下單訊號中繼
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "deploy＝部署＋測試；test＝只測試；rotate＝換 token＋部署＋測試"
+        required: false
+        default: "deploy"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-relay
+  cancel-in-progress: false
+
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: cloudflare/relay
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      DB: gea-relay-keys
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.23.3"
+      - name: 安裝 wrangler、ws
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then echo "::error::缺 CLOUDFLARE_API_TOKEN／CLOUDFLARE_ACCOUNT_ID"; exit 1; fi
+          npm i -g wrangler@4.147.0 >/dev/null 2>&1
+          npm i --no-save ws@8.18.0 >/dev/null 2>&1
+          wrangler --version
+      - name: 取得（或第一次產生）RELAY_PUB_TOKEN／RELAY_ADMIN_TOKEN（存 D1 gea-relay-keys）
+        run: |
+          set -o pipefail
+          ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next((d['uuid'] for d in json.load(sys.stdin) if d['name']=='$DB'), ''))")
+          if [ -z "$ID" ]; then echo "第一次：建 D1 $DB"; wrangler d1 create "$DB" >/dev/null; fi
+          wrangler d1 execute "$DB" --remote --yes --command "CREATE TABLE IF NOT EXISTS keys(name TEXT PRIMARY KEY, value TEXT NOT NULL, created TEXT NOT NULL)" >/dev/null
+          get() { wrangler d1 execute "$DB" --remote --json --command "SELECT value FROM keys WHERE name='$1'" | python3 -c "import json,sys; r=json.load(sys.stdin)[0]['results']; print(r[0]['value'] if r else '')"; }
+          for K in RELAY_PUB_TOKEN RELAY_ADMIN_TOKEN; do
+            V=$(get $K)
+            if [ -z "$V" ] || [ "${{ inputs.mode }}" = "rotate" ]; then
+              [ "${{ inputs.mode }}" = "test" ] && { echo "::error::$K 還沒產生（先跑 deploy）"; exit 1; }
+              V=$(openssl rand -hex 32)
+              echo "::add-mask::$V"
+              wrangler d1 execute "$DB" --remote --yes --command "INSERT INTO keys(name,value,created) VALUES('$K','$V',datetime('now')) ON CONFLICT(name) DO UPDATE SET value=excluded.value, created=excluded.created" >/dev/null
+              echo "$K：新產生 ${V:0:4}…（共 ${#V} 字）"
+            else
+              echo "::add-mask::$V"
+              echo "$K：沿用 ${V:0:4}…（共 ${#V} 字）"
+            fi
+            echo "$K=$V" >> "$GITHUB_ENV"
+          done
+          echo "▶ Evans 複製位置：Cloudflare 主控台 → Storage & databases → D1 SQL database → $DB → Console，執行 SELECT * FROM keys"
+      - name: 部署＋設定 Worker secret
+        if: inputs.mode != 'test'
+        run: |
+          set -o pipefail
+          wrangler deploy 2>&1 | tee deploy.log
+          python3 -c "import json,os; json.dump({k: os.environ[k] for k in ('RELAY_PUB_TOKEN','RELAY_ADMIN_TOKEN')}, open('/tmp/sec.json','w'))"
+          wrangler secret bulk /tmp/sec.json; rm -f /tmp/sec.json
+          sleep 15
+      - name: 自動測試（1 發 3 收；同時 tail 收 CPU）
+        run: |
+          W=https://gea-signal-relay.jesselauristonlivermore1877.workers.dev
+          for i in 1 2 3 4 5 6; do C=$(curl -s -o /dev/null -w "%{http_code}" "$W/"); echo "GET / → $C"; [ "$C" = 200 ] && break; sleep 10; done
+          (timeout 150 wrangler tail gea-signal-relay --format json > tail.jsonl 2> tail.err &) ; sleep 12
+          set +e
+          BASE=$W node test.mjs; RC=$?
+          sleep 15; pkill -f "wrangler tail" ; sleep 2
+          python3 - <<'PY'
+          import json, collections
+          ev = collections.defaultdict(list)
+          for line in open("tail.jsonl", encoding="utf-8", errors="replace"):
+              try: e = json.loads(line)
+              except Exception: continue
+              x = e.get("event") or {}
+              kind = "websocket訊息" if "getWebSocketEvent" in x or x.get("webSocketEventType") else ("HTTP " + ((x.get("request") or {}).get("url", "").split("?")[0].split("/", 3)[-1] or "/")) if x.get("request") else (e.get("eventType") or e.get("executionModel") or "其他")
+              if (x.get("webSocketEventType")): kind = "ws " + x["webSocketEventType"]
+              ev[kind].append((e.get("cpuTime") or 0, e.get("wallTime") or 0, e.get("outcome")))
+          print("── CPU（wrangler tail，每次呼叫 ms）")
+          for k, L in sorted(ev.items()):
+              c = sorted(a for a, _, _ in L); w = sorted(b for _, b, _ in L)
+              print("  %-22s %4d 次｜CPU 中位 %s、最大 %s｜牆鐘 中位 %s、最大 %s｜outcome %s" % (k, len(L), c[len(c)//2], c[-1], w[len(w)//2], w[-1], dict(collections.Counter(o for _, _, o in L))))
+          print("tail 共", sum(map(len, ev.values())), "筆")
+          PY
+          tail -3 tail.err
+          exit $RC

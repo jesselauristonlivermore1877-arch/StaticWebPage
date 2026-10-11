@@ -1,0 +1,19 @@
+# gea-signal-relay ── 下單訊號雲端中繼（Evans 2026-10-11 15:50 派工；協定見 CustomerServiceANDSales TODO.md 同段）
+#   獨立 Worker，不跟即時信息流 gea-live 混在一起（CPU 上限各自計算）。
+#   一個頻道＝一個 Durable Object（SQLite 後端、Hibernation API）；免費方案只能用 SQLite 後端。
+#   secrets：RELAY_PUB_TOKEN、RELAY_ADMIN_TOKEN（由 .github/workflows/cloudflare_relay.yml 產生並設定）。
+name = "gea-signal-relay"
+main = "src/worker.js"
+compatibility_date = "2026-06-01"
+workers_dev = true
+
+[[durable_objects.bindings]]
+name = "RELAY"
+class_name = "Relay"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Relay"]
+
+[observability]
+enabled = true
