@@ -1,0 +1,98 @@
+{
+ "asof": "2026-10-11",
+ "src": "Tranco（tranco-list.eu）網站流量排名，網域層級",
+ "top": 10,
+ "rule": "國內財經媒體依 Tranco 名次取前 10，合併進權威名單（tier＝流量前 10），只用在國內媒體；入口網站轉載不算。",
+ "sources": [
+  {
+   "name": "經濟日報",
+   "domains": [
+    "udn.com"
+   ],
+   "src_rx": "經濟日報|聯合新聞網|udn",
+   "rank": 4097,
+   "tier": "流量前10"
+  },
+  {
+   "name": "中時新聞網",
+   "domains": [
+    "chinatimes.com"
+   ],
+   "src_rx": "中時|中國時報|China Times",
+   "rank": 5202,
+   "tier": "流量前10"
+  },
+  {
+   "name": "自由財經",
+   "domains": [
+    "ltn.com.tw"
+   ],
+   "src_rx": "自由時報|自由財經|Liberty Times",
+   "rank": 5393,
+   "tier": "流量前10"
+  },
+  {
+   "name": "風傳媒",
+   "domains": [
+    "storm.mg"
+   ],
+   "src_rx": "風傳媒|Storm",
+   "rank": 6951,
+   "tier": "流量前10"
+  },
+  {
+   "name": "三立新聞",
+   "domains": [
+    "setn.com"
+   ],
+   "src_rx": "三立",
+   "rank": 7082,
+   "tier": "流量前10"
+  },
+  {
+   "name": "ETtoday",
+   "domains": [
+    "ettoday.net"
+   ],
+   "src_rx": "ETtoday",
+   "rank": 11572,
+   "tier": "流量前10"
+  },
+  {
+   "name": "CMoney",
+   "domains": [
+    "cmoney.tw"
+   ],
+   "src_rx": "CMoney",
+   "rank": 12469,
+   "tier": "流量前10"
+  },
+  {
+   "name": "工商時報",
+   "domains": [
+    "ctee.com.tw"
+   ],
+   "src_rx": "工商時報|ctee",
+   "rank": 14285,
+   "tier": "流量前10"
+  },
+  {
+   "name": "NOWnews",
+   "domains": [
+    "nownews.com"
+   ],
+   "src_rx": "NOWnews|今日新聞",
+   "rank": 15695,
+   "tier": "流量前10"
+  },
+  {
+   "name": "東森財經新聞",
+   "domains": [
+    "ebc.net.tw"
+   ],
+   "src_rx": "東森|EBC",
+   "rank": 17631,
+   "tier": "流量前10"
+  }
+ ]
+}
