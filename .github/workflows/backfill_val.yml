@@ -22,6 +22,11 @@ on:
         description: "往回抓幾年"
         required: false
         default: "5"
+      pb:
+        description: "只補股價淨值比（10-11 P1-10；已有 pe 的日子只補 pb）"
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: write
@@ -61,7 +66,7 @@ jobs:
             --shard ${{ matrix.shard }} --of 16 \
             --years ${{ inputs.years }} \
             --have ../site/data \
-            --out ../out
+            --out ../out ${{ inputs.pb && '--pb' || '' }}
 
       - uses: actions/upload-artifact@v4
         with:
@@ -101,9 +106,23 @@ jobs:
           pattern: val-*
           merge-multiple: true
 
+      # 🔴 10-11（Evans P1-10）：val.npz 是河流圖核心資料 —— 合併前先把現在這份存成備份（artifact 保留 30 天；git 歷史另有一份）
+      - name: 備份現有 val.npz
+        run: mkdir -p backup && cp data/bars/val.npz "backup/val_$(TZ=Asia/Taipei date +%Y%m%d_%H%M).npz" && ls -la backup
+      - uses: actions/upload-artifact@v4
+        with:
+          name: val-backup
+          path: backup/
+          retention-days: 30
+
       - name: 合併進 data/bars/val.npz（驗收表這段 log 貼回來）
         working-directory: code
         run: python val_bars.py --merge ../data ../dl
+
+      - name: 股價淨值比抽查（3 檔 × 3 天 vs 證交所單檔表；不一致就不提交）
+        if: ${{ inputs.pb }}
+        working-directory: code
+        run: python val_bars.py --spot ../data
 
       - name: 河流圖試算（不寫檔，只印對帳數字）
         working-directory: code
