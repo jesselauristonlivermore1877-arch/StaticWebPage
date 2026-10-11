@@ -81,19 +81,22 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           npm i -g wrangler@4.147.0 >/dev/null 2>&1
-          Q() { wrangler d1 execute gea-live --remote --json --command "$1" 2>/dev/null | python3 -c "
+          ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next((d['uuid'] for d in json.load(sys.stdin) if d['name']=='gea-live'), ''))")
+          echo "D1 gea-live：${ID:-（找不到）}"; sed -i "s/__D1_ID__/$ID/" wrangler.toml
+          SINCE=$(date -u -d '7 days ago' +%Y-%m-%dT%H:%MZ)
+          Q() { wrangler d1 execute gea-live --remote --json --command "$1" 2>q.err > q.json || { echo "   ✗ 查詢失敗："; tail -5 q.err; }; python3 -c "
           import json,sys
           J=json.load(sys.stdin); R=(J[0] if isinstance(J,list) else J).get('results') or []
           for r in R: print('  ', ' | '.join(str(v) for v in r.values()))
-          print('   （%d 列）' % len(R))"; }
+          print('   （%d 列）' % len(R))" < q.json || head -c 300 q.json; }
           echo "── Worker D1：近 7 天各來源則數（依 pub）"
-          Q "SELECT src, kind, COUNT(*) AS n, MAX(pub) AS last FROM items WHERE pub >= datetime('now','-7 days') GROUP BY src, kind ORDER BY n DESC"
+          Q "SELECT src, kind, COUNT(*) AS n, MAX(pub) AS last FROM items WHERE pub >= '$SINCE' GROUP BY src, kind ORDER BY n DESC"
           echo "── Worker D1：工商時報全部則數（14 天內）與最後一則"
           Q "SELECT COUNT(*) AS n, MAX(pub) AS last, MAX(seen) AS seen FROM items WHERE src = '工商時報'"
           echo "── Worker runs.err：近 7 天提到工商時報的輪次（最近 10 筆）"
           Q "SELECT at, rss, new, err, task FROM runs WHERE err LIKE '%工商%' OR task LIKE '%工商%' ORDER BY at DESC LIMIT 10"
           echo "── Worker runs.err：近 7 天各來源失敗次數（從 err 欄解析）"
-          wrangler d1 execute gea-live --remote --json --command "SELECT err FROM runs WHERE err LIKE '%來源：%'" 2>/dev/null | python3 -c "
+          wrangler d1 execute gea-live --remote --json --command "SELECT err FROM runs WHERE err LIKE '%來源：%'" 2>q.err | python3 -c "
           import json,sys,re,collections
           J=json.load(sys.stdin); R=(J[0] if isinstance(J,list) else J).get('results') or []
           c=collections.Counter()
@@ -153,6 +156,24 @@ jobs:
               mark = "✓" if items else "△"
               print("  %s %-16s HTTP %s 則數 %3d 最新 %-32s %s" % (mark, nm, st, len(items), last[:32], u))
               if not items: print("      開頭：", re.sub(r"\s+", " ", b[:200]))
+          PY
+          echo "── Google News site: 查詢（近 7 天則數；沒 RSS 或 RSS 停更的媒體走這條）"
+          python3 - <<'PY'
+          import urllib.request, urllib.parse, re
+          S = [("財訊","wealth.com.tw"),("今周刊","businesstoday.com.tw"),("商業周刊","businessweekly.com.tw"),("天下雜誌","cw.com.tw"),
+               ("數位時代","bnext.com.tw"),("DIGITIMES","digitimes.com.tw"),("中時新聞網","chinatimes.com"),("三立新聞","setn.com"),
+               ("東森財經新聞","news.ebc.net.tw"),("CMoney","cmoney.tw"),("MoneyDJ","moneydj.com"),("工商時報","ctee.com.tw"),
+               ("Barron's","barrons.com"),("Yahoo Finance","finance.yahoo.com"),("路透","reuters.com"),("Nikkei Asia","asia.nikkei.com"),
+               ("The Information","theinformation.com"),("MarketWatch","marketwatch.com")]
+          for nm, d in S:
+              lang = "hl=zh-TW&gl=TW&ceid=TW:zh-Hant" if d.endswith(".tw") or d in ("chinatimes.com","setn.com") else "hl=en-US&gl=US&ceid=US:en"
+              u = "https://news.google.com/rss/search?q=" + urllib.parse.quote("site:%s when:7d" % d) + "&" + lang
+              try:
+                  b = urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"}), timeout=20).read().decode("utf-8","replace")
+              except Exception as e:
+                  print("  ✗ %-14s %s" % (nm, str(e)[:60])); continue
+              src = re.findall(r"<source[^>]*>([^<]+)</source>", b)
+              print("  %-14s %3d 則（Google News 單次上限 100）來源名稱：%s" % (nm, b.count("<item>"), "、".join(sorted(set(src))[:4])))
           PY
       - name: 部署
         if: inputs.mode == 'deploy' || inputs.mode == ''
