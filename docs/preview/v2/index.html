@@ -16,16 +16,17 @@
 /* ══ 色票 ═══════════════════════════════════════════════════════ */
 :root{
   --up:#E5484D; --down:#12A366; --acc:#D9A441;
-  --r:12px; --w:1880px;
+  --r:12px; --w:2400px;
 }
 /* 🟢 GEA 2026-08-27D（①）：字級可調。
    全站 font-size 是寫死的 px（80 幾處），逐條改一次只能改一級，
    改完不滿意還要再來一輪。改用 zoom 整體縮放 ——
    連 SVG 圖裡的字也會一起放大，而不是只有 HTML 文字變大、圖表字還是小的。
    --w 反向縮小，讓外框寬度在三個級距下都維持 ~1320px，不會冒出橫捲軸。 */
-html[data-fs="100"]{--w:1880px}
-html[data-fs="115"]{--w:1630px}
-html[data-fs="130"]{--w:1440px}
+/* 10-11 P0-1：外框上限 1880 → 2400（2K 螢幕中間區太窄），三個級距等比 */
+html[data-fs="100"]{--w:2400px}
+html[data-fs="115"]{--w:2090px}
+html[data-fs="130"]{--w:1850px}
 html[data-fs="115"] body{zoom:1.15}
 html[data-fs="130"] body{zoom:1.30}
 :root{
@@ -275,34 +276,57 @@ button.theme svg{width:15px; height:15px}
 .rline .n{font-family:var(--mono); font-variant-numeric:tabular-nums;
   font-size:15px; font-weight:800; color:var(--ink-1)}
 .rline .p{font-family:var(--mono); font-weight:800; color:var(--acc)}
-@media(min-width:1500px){
-  .shell{display:grid; grid-template-columns:322px minmax(0,1fr) 306px;
-    gap:14px; align-items:start}
-  #rail-l{order:0; grid-column:1; grid-row:1}
+/* 🟢 10-11 15:10（Evans P0-1，筆電實測中間太小）：響應式三欄。
+   ≥ 1100px：三欄，左右欄寬 clamp(200px, 14vw, 280px)；< 1600px 左右欄預設收合（抽屜），頂端各一顆按鈕展開／收起，
+   使用者選擇記在 localStorage（gea_rail_l／gea_rail_r）。收合的欄 display:none → 該欄 auto 寬度歸零、中間吃滿。
+   < 1100px：單欄（兩軌攤成橫向磚牆，同舊版）。 */
+.rtog{display:none}
+@media(min-width:1100px){
+  .shell{display:grid; grid-template-columns:auto minmax(0,1fr) auto; column-gap:0; align-items:start}
+  #rail-l{order:0; grid-column:1; grid-row:1; width:clamp(200px,14vw,280px); margin-right:14px}
   .colmain{order:0; grid-column:2; grid-row:1}
-  #rail-r{order:0; grid-column:3; grid-row:1}
+  #rail-r{order:0; grid-column:3; grid-row:1; width:clamp(200px,14vw,280px); margin-left:14px}
+  .shell.nol #rail-l, .shell.nor #rail-r{display:none}
+  /* 欄寬上限 280 → 「指數｜量能」150px＋其餘並排會把量能卡擠成直排字（10-11 截圖）→ 欄內一律單欄 */
+  .mrail .mrow, .mrail .rpair{grid-template-columns:minmax(0,1fr)}
   /* 🔴 2026-09-08：align-items:stretch 是**必要**的，不是美化。
      基礎規則的 .mrail 有 align-items:start（那是給 grid 磚牆版用的），
      在這個 flex 直排裡 start 作用在**橫向** → 每張卡縮成 fit-content，
      所以「三欄的三大法人」會比「兩欄的融資融券」還窄（誰的數字長誰就寬）。
      並排那兩張因為是 grid 才撐滿 —— 這就是「對不齊」的根因，跟寬度數值無關。 */
   .mrail{display:flex; flex-direction:column; gap:8px; position:sticky; top:10px;
-    margin-top:0; align-items:stretch}
-  .colmain nav.tabs{margin-top:0}
+    margin-top:0; align-items:stretch; max-height:calc(100vh - 20px); overflow-y:auto; scrollbar-width:thin}
+  .colmain .navbar{margin-top:0}
+  .rtog{display:inline-flex; align-items:center; gap:4px; flex:0 0 auto; align-self:flex-start; margin-top:6px;
+    background:var(--surface); border:1px solid var(--line); border-radius:8px; color:var(--ink-2);
+    font:inherit; font-size:12.5px; font-weight:700; padding:5px 9px; cursor:pointer; white-space:nowrap}
+  .rtog:hover{color:var(--ink-1); border-color:var(--acc)}
+  .rtog[aria-pressed="true"]{color:var(--ink-1); background:var(--raise)}
 }
 
 /* ══ 頁籤 ══ */
 /* 🟢 GEA 協同修改：支援 11 個頁籤雙排折行 (flex-wrap)，取消不換行限制 */
-nav.tabs{display:flex; gap:3px; flex-wrap:wrap; margin:26px 0 0;
-  position:sticky; top:0; z-index:20; background:var(--bg);
-  border-bottom:1px solid var(--line); padding-bottom: 2px;}
+.navbar{display:flex; gap:8px; align-items:flex-start; margin:26px 0 0;
+  position:sticky; top:0; z-index:20; background:var(--bg); border-bottom:1px solid var(--line)}
+.navbar .navs{flex:1 1 auto; min-width:0}
+nav.tabs{display:flex; gap:3px; flex-wrap:wrap; margin:0; padding-bottom: 2px;}
+/* 🟢 10-11（P0-2）：第一列＝5 組（大字），第二列＝子頁籤（小字、靠左、不撐滿） */
+nav.tgrp{display:flex; gap:4px; flex-wrap:wrap}
+nav.tgrp button{background:none; border:0; border-bottom:3px solid transparent; color:var(--ink-2); font:inherit;
+  font-size:16.5px; font-weight:800; padding:9px 18px; cursor:pointer; white-space:nowrap; letter-spacing:.04em}
+nav.tgrp button:hover{color:var(--ink-1); background:var(--raise); border-radius:4px 4px 0 0}
+nav.tgrp button[aria-selected="true"]{color:var(--ink-1); border-bottom-color:var(--acc)}
+nav.tabs{border-top:1px dashed var(--line)}
+nav.tabs.solo{display:none}
+nav.tabs button[hidden]{display:none}
+@media (max-width:560px){ nav.tgrp button{font-size:15px; padding:7px 9px} }
 nav.tabs button{background:none; border:0; border-bottom:2.5px solid transparent;
-  color:var(--ink-2); font:inherit; font-size:15px; font-weight:700; padding:10px 14px;
-  cursor:pointer; flex: 1 1 auto; text-align: center; white-space:nowrap}
+  color:var(--ink-2); font:inherit; font-size:14px; font-weight:700; padding:6px 13px;
+  cursor:pointer; flex: 0 0 auto; text-align: center; white-space:nowrap}
 nav.tabs button:hover{color:var(--ink-1); background: var(--raise); border-radius: 4px 4px 0 0;}
 nav.tabs button[aria-selected="true"]{color:var(--ink-1); border-bottom-color:var(--acc)}
 /* 🟢 2026-09-26 手機：九個大頁籤吸頂排三行約 160px，吃掉快兩成畫面 → 縮字距與內距（仍吸頂，三行約 105px） */
-@media (max-width:560px){ nav.tabs{margin-top:16px} nav.tabs button{font-size:14px; padding:7px 6px} }
+@media (max-width:560px){ .navbar{margin-top:16px} nav.tabs button{font-size:14px; padding:7px 6px} }
 
 /* ══ 卡片 ══ */
 main{padding:24px 0 48px}
@@ -344,6 +368,9 @@ tr:last-child td{border-bottom:0}
 /* 窄螢幕 .fnwrap 直排＋align-items:flex-start 時，.fnbody 的寬度變成「內容多寬就多寬」（表格 936px 撐出去）→ 一律撐滿、最多 100% */
 .fnwrap > .fnbody{align-self:stretch; max-width:100%}
 .tcards{overflow-x:visible}
+.tscroll{overflow-x:auto}
+.tscroll > table > thead > tr > :first-child, .tscroll > table > tbody > tr > :first-child{position:sticky; left:0; z-index:1; background:var(--surface)}
+.tscroll > table > tbody > tr.grp > :first-child, .tscroll > table > tbody > tr.detrow > :first-child{position:static}
 .tcards > table, .tcards > table > tbody, .tcards > table > tbody > tr, .tcards > table > tbody > tr > td,
 .tcards > table > tbody > tr > th{display:block; width:auto!important}
 .tcards > table > thead, .tcards > table > colgroup, .tcards > table > tbody > tr.thr{display:none}
@@ -375,6 +402,13 @@ tr:last-child td{border-bottom:0}
   border-radius:4px; padding:1px 6px; margin-right:7px; font-weight:700; letter-spacing:.02em}
 .grp .gcode{max-width:none}
 th.s{cursor:pointer; user-select:none} th.s:hover{color:var(--acc)}
+.fn-fin{display:inline-block; font-size:12px; font-weight:800; color:var(--acc); border:1px solid var(--acc); border-radius:5px; padding:0 6px; margin-right:6px}
+.cal-e.cal-big{font-weight:800; outline:1.5px solid var(--acc); outline-offset:-1px}
+.tfx-below{margin-top:14px; border-top:1px solid var(--line); padding-top:10px}
+.tfx-h{font-weight:800; font-size:15px; margin:2px 0 8px} .tfx-h small{font-weight:500; color:var(--ink-3)}
+.mf-bq{margin:6px 0; padding:6px 12px; border-left:3px solid var(--acc); background:var(--raise); border-radius:0 6px 6px 0}
+.mf-sm{color:var(--ink-3); margin:4px 0}
+.fwpe-t{width:100%} .fwpe-t td, .fwpe-t th{padding:5px 10px; white-space:nowrap; font-size:13.5px}
 th.s .ar{color:var(--acc); font-size:11px; margin-left:3px}
 .pager{display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:2px 0 12px;
   font-size:13.5px; color:var(--ink-2)}
@@ -1488,7 +1522,7 @@ a.td-g{color:var(--ink-1);font-weight:800;text-decoration:none;border-bottom:1px
 <div class="wrap shell">
   <aside class="mrail" id="rail-l"></aside>
   <div class="colmain">
-    <nav class="tabs" id="tabs" role="tablist"></nav>
+    <div class="navbar"><button class="rtog" id="rtog-l" type="button" title="展開／收起左欄（今日、指數與量能）">◧ 盤勢</button><div class="navs"><nav class="tgrp" id="tgrp" role="tablist"></nav><nav class="tabs" id="tabs" role="tablist"></nav></div><button class="rtog" id="rtog-r" type="button" title="展開／收起右欄（現貨籌碼、期貨與選擇權）">籌碼 ◨</button></div>
     <main id="main"></main>
   </div>
   <aside class="mrail" id="rail-r"></aside>
@@ -2654,11 +2688,34 @@ function table(cols, rows, aligns, scroll, widths) {
 /* 🟢 2026-09-25（手機／平板）：表格比容器寬就自動改成卡片（每列一張卡、每格「欄名：值」），
    不出現橫向捲軸。依實際寬度判斷、不寫死斷點 —— 375／768／1024 都適用；視窗或容器變寬時自動切回表格。 */
 const _tblRO = typeof ResizeObserver === "function" ? new ResizeObserver(es => es.forEach(e => tblFitNow(e.target))) : null;
+/* 🔴 10-11 15:10（Evans P0-3）：全站禁用「一列一張直式卡片、欄名：值往下疊」—— 筆電中間欄一窄，大類明細就整片變成卡片。
+   改成：表格放不下 → 橫向捲動、第一欄（名稱）固定；只有手機（視窗 < 560px）才轉卡片。 */
 function tblFitNow(box) {
   const t = box.querySelector(":scope > table");
   if (!t || !box.clientWidth) return;
-  box.classList.remove("tcards");
-  if (t.scrollWidth > box.clientWidth + 2) box.classList.add("tcards");
+  box.classList.remove("tcards", "tscroll");
+  if (t.scrollWidth > box.clientWidth + 2) box.classList.add(window.innerWidth < 560 ? "tcards" : "tscroll");
+}
+/* 表頭點擊排序（自寫的小表用；table() 產的表有自己的 sortable）：數字欄依數值、其餘依文字；再點一次反向 */
+function thSort(t, skip) {
+  const hr = t.tHead && t.tHead.rows[0];
+  if (!hr) return t;
+  const num = c => { const v = parseFloat(String(c.textContent).replace(/[,+%倍億張]/g, "")); return isNaN(v) ? null : v; };
+  [...hr.cells].forEach((th, i) => {
+    if ((skip || []).includes(i)) return;
+    th.classList.add("s"); th.title = "點一下排序";
+    th.onclick = () => {
+      const dir = th.dataset.dir === "-1" ? 1 : -1;
+      [...hr.cells].forEach(x => { delete x.dataset.dir; const a = x.querySelector(".ar"); if (a) a.remove(); });
+      th.dataset.dir = dir; th.insertAdjacentHTML("beforeend", `<span class="ar">${dir < 0 ? "▼" : "▲"}</span>`);
+      const tb = t.tBodies[0], R = [...tb.rows];
+      R.sort((a, b) => { const x = num(a.cells[i]), y = num(b.cells[i]);
+        if (x == null && y == null) return dir * a.cells[i].textContent.localeCompare(b.cells[i].textContent, "zh-Hant");
+        if (x == null) return 1; if (y == null) return -1; return dir * (x - y); });
+      R.forEach(r => tb.appendChild(r));
+    };
+  });
+  return t;
 }
 function tblFit(box) {
   if (box._fit) return;
@@ -3241,7 +3298,8 @@ function tabMarket() {
     ["均線廣度明細", () => breadthCard],
     ["站上月線名單", () => rosterCard],
     ["關注度排行", () => attnCard()],               // 🟢 10-11（Evans P1-8）：新聞、PTT、意見領袖點名最多的個股
-  ], null, 7));
+    ["週報與日報", () => ifReports()],              // 🟢 10-11 15:10（Evans P1-6）：從信息流移過來
+  ], null, 8));
   return f;
 }
 /* 🟢 10-11（Evans P1-8）：關注度排行 —— attention.py（新聞池、即時信息流、PTT、意見領袖點名次數；同一則只算一次） */
@@ -3560,7 +3618,15 @@ function kolLink(e, m) {         // YouTube 帶時間點；Podcast 連到那一�
   if (e.kind === "youtube" && m && m.sec != null) return e.url + (e.url.includes("?") ? "&" : "?") + "t=" + m.sec + "s";
   return e.url;
 }
-function kolBox() {
+/* 🟢 10-11 15:10（Evans P1-6）：意見領袖依領域分在 產業／總經／政治 底下 —— 提及有產業或個股標記＝產業；
+   其餘依原話關鍵字分總經（利率、通膨、匯率…）與政治（關稅、選舉、戰爭…）；dom 不給＝全部。 */
+const KOL_DOM = {
+  "總經": /利率|降息|升息|聯準會|Fed|FOMC|通膨|CPI|PCE|就業|非農|美元|匯率|台幣|殖利率|公債|美債|經濟|GDP|衰退|景氣|央行|鮑爾/i,
+  "政治": /川普|Trump|關稅|選舉|大選|戰爭|制裁|地緣|俄羅斯|烏克蘭|以色列|伊朗|中東|兩岸|中共|北京|白宮|國會|罷免|立法院/i,
+};
+const kolDom = m => ((m.stocks || []).length || (m.sectors || []).length) ? "產業"
+  : KOL_DOM["政治"].test(m.quote + " " + (m.point || "")) ? "政治" : KOL_DOM["總經"].test(m.quote + " " + (m.point || "")) ? "總經" : "";
+function kolBox(dom) {
   const root = el("div");
   root.appendChild(el("div", "sub", "載入中…"));
   kolLoad().then(K => {
@@ -3580,12 +3646,16 @@ function kolBox() {
       sel.value = SEC; sel.onchange = () => { SEC = sel.value; draw(); }; bar.appendChild(sel);
       const since = new Date(Date.now() - DAYS * 864e5).toISOString().slice(0, 10);
       const eps = K.episodes.filter(e => e.date >= since && (!SRC || e.src === SRC))
-        .map(e => ({...e, ms: e.mentions.filter(m => !SEC || (m.sectors || []).includes(SEC))}))
-        .filter(e => e.ms.length || !SEC);
+        .map(e => ({...e, ms: e.mentions.filter(m => (!SEC || (m.sectors || []).includes(SEC)) && (!dom || kolDom(m) === dom))}))
+        .filter(e => e.ms.length || (!SEC && !dom));
       // 被提及次數（個股）
       const cnt = {};
       eps.forEach(e => e.ms.forEach(m => (m.stocks || []).forEach(s => { cnt[s.code] = cnt[s.code] || {n: 0, name: s.name}; cnt[s.code].n++; })));
       const top = Object.entries(cnt).sort((a, b) => b[1].n - a[1].n).slice(0, 12);
+      if (dom && dom !== "產業" && !eps.length) {
+        body.appendChild(el("div", "empty", `目前沒有談到${dom}的段落：意見領袖擷取（kol.py）現在只收談到台股產業或個股、原話查核通過的段落；總經與政治段落要等擷取規則擴充（已記 TODO）。`));
+        return;
+      }
       body.appendChild(el("div", "submeta", `${eps.length} 集、${eps.reduce((a, e) => a + e.ms.length, 0)} 則提及（只列原話查核通過的）`));
       if (top.length) {
         const r = el("div", "kl-rank");
@@ -3611,7 +3681,7 @@ function kolBox() {
     root.appendChild(bar); root.appendChild(body); draw();
     root.appendChild(el("div", "rv-note", esc(K.rule || "") + "。時間點可點（YouTube 直接跳到那一秒；Podcast 開啟該集）。整理自公開節目，僅供參考，不具任何臆測，非投資建議。"));
   });
-  return card("財經意見領袖", "股癌（Podcast）、游庭皓的財經皓角（YouTube）：談到哪些產業與個股、原話與時間點", root);
+  return card(dom ? `意見領袖・${dom}` : "財經意見領袖", (dom ? `只列談到${dom === "產業" ? "產業與個股" : dom === "總經" ? "利率、通膨、匯率、景氣等總經" : "關稅、選舉、戰爭等政治"}的段落・` : "") + "股癌（Podcast）、游庭皓的財經皓角、羊叔開講（YouTube）：原話與時間點", root);
 }
 /* 個股展開：近 30 天被意見領袖提及（有才畫） */
 function kolStockBox(code) {
@@ -3634,19 +3704,25 @@ function mfLoad() {
   if (!_mf) _mf = fetch((window.MF_URL || "data/macro.json") + _dv(), {cache: "force-cache"}).then(r => r.ok ? r.json() : null).catch(() => null);
   return _mf;
 }
-function mfMd(md) {       // 週報的極簡 markdown：標題、清單、段落、粗體、連結
-  const out = [], lines = String(md || "").split(/\r?\n/);
-  let inl = false;
+/* 週報、產業動向、研究報告共用的極簡 markdown：標題、清單（- * 1.）、引言（>）、<small> 註記、段落、粗體、連結；<!-- --> 註解整段拿掉。
+   🔴 10-11 15:10（Evans P1-8）：雙鴻產業動向原樣露出「>」「<small>」「<!-- -->」→ 這三種補上；check_web【未渲染標記】用同一套規則把關（✗✗）。 */
+function mfMd(md) {
+  const out = [], lines = String(md || "").replace(/<!--[\s\S]*?-->/g, "").split(/\r?\n/);
+  let inl = "";
   const inline = t => esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>")
     .replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
   lines.forEach(l => {
-    const h = l.match(/^(#{1,3})\s+(.*)/), li = l.match(/^\s*[-*]\s+(.*)/);
-    if (!li && inl) { out.push("</ul>"); inl = false; }
-    if (h) out.push(`<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`);
-    else if (li) { if (!inl) { out.push("<ul>"); inl = true; } out.push(`<li>${inline(li[1])}</li>`); }
-    else if (l.trim()) out.push(`<p>${inline(l)}</p>`);
+    const h = l.match(/^(#{1,4})\s+(.*)/), li = l.match(/^\s*[-*]\s+(.*)/), ol = l.match(/^\s*\d+[.、]\s+(.*)/),
+          bq = l.match(/^\s*>\s?(.*)/), sm = l.match(/^\s*<small>([\s\S]*?)<\/small>\s*$/i);
+    const want = li ? "ul" : ol ? "ol" : "";
+    if (inl && inl !== want) { out.push(`</${inl}>`); inl = ""; }
+    if (h) out.push(`<h${Math.min(h[1].length, 3)}>${inline(h[2])}</h${Math.min(h[1].length, 3)}>`);
+    else if (want) { if (!inl) { out.push(`<${want}>`); inl = want; } out.push(`<li>${inline((li || ol)[1])}</li>`); }
+    else if (bq) { if (bq[1].trim()) out.push(`<blockquote class="mf-bq">${inline(bq[1])}</blockquote>`); }
+    else if (sm) out.push(`<p class="mf-sm"><small>${inline(sm[1])}</small></p>`);
+    else if (l.trim()) out.push(`<p>${inline(l.replace(/<\/?small>/gi, ""))}</p>`);
   });
-  if (inl) out.push("</ul>");
+  if (inl) out.push(`</${inl}>`);
   return out.join("");
 }
 function mfSpark(obs) {
@@ -4446,8 +4522,9 @@ function nlLayerCard(l2, title) {
   root.appendChild(el("div", "sub", "即時信息流載入中…"));
   Promise.all([nlLoad(), nlMcapLoad()]).then(([J]) => {
     root.innerHTML = "";
-    const A = ((J || {}).items || []).filter(x => x.l2 === l2);
-    let SRC = "全部", L4 = "全部", SEC = "全部", GRP = "全部", MIK = "全部";
+    const L2S = Array.isArray(l2) ? l2 : [l2];
+    const A = ((J || {}).items || []).filter(x => L2S.includes(x.l2));
+    let SRC = "全部", L4 = "全部", SEC = "全部", GRP = "全部", MIK = "全部", CAT = "全部";
     const bars = el("div"), body = el("div");
     const pills = (lab, opts, cur, cb) => { const b = el("div", "tl-bar"); b.appendChild(el("span", "lab", lab));
       opts.forEach(([k, n]) => { const p = el("button", "rv-pill" + (k === cur ? " on" : ""), `${esc(k)} <small>${n}</small>`); p.onclick = () => cb(k); b.appendChild(p); }); bars.appendChild(b); };
@@ -4455,6 +4532,11 @@ function nlLayerCard(l2, title) {
     const draw = () => {
       bars.innerHTML = ""; body.innerHTML = "";
       let L = A;
+      if (L2S.length > 1) {                     // 🟢 10-11 15:10（P1-6）：「即時訊息」把這一組的分類合在一起，先切分類
+        const cs2 = cnt(L, x => x.l2);
+        pills("分類", [["全部", L.length]].concat(L2S.filter(k => cs2[k]).map(k => [k, cs2[k]])), CAT, k => { CAT = k; SRC = L4 = SEC = GRP = MIK = "全部"; draw(); });
+        if (CAT !== "全部") L = L.filter(x => x.l2 === CAT);
+      }
       const ss = cnt(L, x => x.l3);
       pills("來源", [["全部", L.length]].concat(NL_L3.filter(k => ss[k]).map(k => [k, ss[k]])), SRC, k => { SRC = k; L4 = SEC = GRP = MIK = "全部"; draw(); });
       if (SRC !== "全部") L = L.filter(x => x.l3 === SRC);
@@ -4486,14 +4568,14 @@ function nlLayerCard(l2, title) {
     root.appendChild(bars); root.appendChild(body); draw();
     if (!J) root.appendChild(el("div", "empty", "即時信息流載不到（Worker 與 data/news_live.json 都沒有回應）。"));
   });
-  return card(title || "即時", `${esc(l2)}・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群`, root);
+  return card(title || "即時", `${esc(L2S_TXT(l2))}・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群`, root);
 }
-/** 第二層頁：即時卡在上、原本的世界趨勢內容在下（沒有就只有即時）。 */
+const L2S_TXT = l2 => Array.isArray(l2) ? l2.join("、") : l2;
+/** 第二層頁。🟢 10-11 15:10（Evans P1-6）：中間常駐的「即時」框拿掉，即時新聞集中到各組第一格「即時訊息」；
+    有長期整理的頁（產業與科技、利率央行匯率、經濟指標、地緣政治）只放長期整理；沒有的（台股公司、美股公司）就是這一類的新聞列表。 */
 function nlL2(l2, more) {
-  const w = el("div");
-  w.appendChild(nlLayerCard(l2));
-  if (more) { const m = more(); if (m) w.appendChild(m); }
-  return w;
+  const m = more && more();
+  return m || nlLayerCard(l2, l2);
 }
 function ifDailySecs(md) {
   const out = [], lines = (md || "").split("\n");
@@ -5154,7 +5236,11 @@ function ifEcon(M) {
     "年增率＝該月指數 ÷ 去年同月 − 1。衰退期取自 FRED 的 USREC（NBER 景氣循環認定，事後公布，最近幾個月可能尚未認定）。非農就業畫每月增減（千人）。數字一律官方，不用 AI。"));
   return w.done(["指標總表", "長期走勢"]);
 }
-function tabInfo() {
+/* 🟢 10-11 15:10（Evans P1-6）：信息流拆成兩個母標籤 ——
+   「產業信息」（產業組）：即時訊息｜產業與科技｜台股公司｜美股公司（原「產業」那一層拿掉）；
+   「總經政治」（總經政治組）：金融經濟（即時訊息｜利率、央行與匯率｜經濟指標）｜政治（即時訊息｜地緣政治）｜總經行事曆。
+   民生刪掉；週報、日報、量化統計日報移到市場動態「週報與日報」；意見領袖照領域分在各組（即時訊息的來源列）。 */
+function ifShell(build) {
   ifFlagCss();
   const root = el("div", "if-root");
   root.appendChild(el("div", "sub", "信息流載入中…"));
@@ -5171,22 +5257,83 @@ function tabInfo() {
     tb.appendChild(zb);
     tb.appendChild(el("span", "", `外文標題 ${fo.length} 則，已有中文翻譯 ${nz} 則` + (nz ? "（AI 翻譯，原文保留在上方）" : "（翻譯由本機每天產生，還沒有的只顯示原文）")));
     root.appendChild(tb);
-    // 🟢 第七批（Evans 09-27）：週報品質最好 → 第一格；新增日報
-    // 🟢 10-04 晚（Evans B1）：三層 —— 第一層 產業｜金融經濟｜政治｜民生（重要性：產業 → 總經 → 消息與情緒…），
-    //    第二層見下，第三層＝來源（每個第二層頁上方的「即時」卡切換）。週報、日報、量化日報與人物頁放最後一格「報告與人物」（雲端判斷，待 Evans 看）。
-    root.appendChild(sideTabs([
-      ["產業", () => sideTabs([["產業與科技", () => nlL2("產業與科技", () => ifTech(M))],
-                               ["台股公司", () => nlL2("台股公司")],
-                               ["美股公司", () => nlL2("美股公司")]])],
-      ["金融經濟", () => sideTabs([["利率、央行與匯率", () => nlL2("利率、央行與匯率", () => ifRates(M))],
-                                   ["經濟指標", () => nlL2("經濟指標", () => ifEcon(M))]])],
-      ["政治", () => sideTabs([["地緣政治", () => nlL2("地緣政治", () => ifGeo(M))]])],
-      ["民生", () => sideTabs([["民生", () => nlL2("民生")]])],
-      // 🟢 10-05（Evans 裁決）：「報告與人物」刪掉；週報、日報、量化統計日報放「週報與日報」；意見領袖不另開頁籤（靠第三層來源篩選）；「全部即時」拿掉
-      ["週報與日報", () => sideTabs([["週報", () => ifWeekly(M)], ["日報", () => ifDaily(M)], ["量化統計日報", () => ifQuant(M)]])]], null, 5));
+    root.appendChild(build(M));
     root.appendChild(el("div", "rv-note", `資料日 ${esc(M.asof || "—")}。數字：FRED（聖路易聯邦準備銀行，轉載 BLS／BEA／聯準會等官方資料）。新聞：每則附原文連結，以原文為準；分類 ${M.tagged ? `本機標記 ${M.tagged} 則，其餘` : ""}依世界趨勢原本的主題與人物。僅供參考，不具任何臆測，非投資建議。`));
   });
   return root;
+}
+function tabIndInfo() {
+  const L = ["產業與科技", "台股公司", "美股公司"];
+  return ifShell(M => sideTabs([
+    ["即時訊息", () => nlLayerCard(L, "即時訊息")],
+    ["產業與科技", () => nlL2("產業與科技", () => ifTech(M))],
+    ["台股公司", () => nlL2("台股公司")],
+    ["美股公司", () => nlL2("美股公司")],
+    ["意見領袖", () => kolBox("產業")]], null, 5));
+}
+function tabMacroPol() {
+  return ifShell(M => sideTabs([
+    ["金融經濟", () => sideTabs([["即時訊息", () => nlLayerCard(["利率、央行與匯率", "經濟指標"], "即時訊息")],
+                                 ["利率、央行與匯率", () => nlL2("利率、央行與匯率", () => ifRates(M))],
+                                 ["經濟指標", () => nlL2("經濟指標", () => ifEcon(M))],
+                                 ["意見領袖", () => kolBox("總經")]], null, 4)],
+    ["政治", () => sideTabs([["即時訊息", () => nlLayerCard(["地緣政治", "政治"], "即時訊息")],
+                             ["地緣政治", () => nlL2("地緣政治", () => ifGeo(M))],
+                             ["意見領袖", () => kolBox("政治")]], null, 3)],
+    ["總經行事曆", () => macroCal()]], null, 3));
+}
+/* 市場動態「週報與日報」（P1-6 從信息流移過來） */
+function ifReports() {
+  const root = el("div", "if-root");
+  ifFlagCss();
+  root.appendChild(el("div", "sub", "載入中…"));
+  mfLoad().then(M => {
+    root.innerHTML = "";
+    if (!M) { root.appendChild(el("div", "empty", "載不到 data/macro.json —— 世界趨勢那一班可能還沒跑")); return; }
+    ifNews(M, () => false);
+    root.appendChild(sideTabs([["週報", () => ifWeekly(M)], ["日報", () => ifDaily(M)], ["量化統計日報", () => ifQuant(M)]], null, 3));
+  });
+  return root;
+}
+/* 🟢 10-11 15:10（Evans P1-7）：總經行事曆 —— 料全是 macro.json 已有的官方日程（不另抓）：
+   聯準會 FOMC（federalreserve.gov 行事曆，fedwatch.meetings）、各國央行下次會議（cb.*.next，附官方／預估註記）、
+   美國重要數據（releases：CPI、PPI、就業報告、PCE，下次與上次公布日）。表格：日期｜星期｜事件｜類別｜依據。 */
+function macroCal() {
+  const root = el("div");
+  root.appendChild(el("div", "sub", "載入中…"));
+  mfLoad().then(M => {
+    root.innerHTML = "";
+    if (!M) { root.appendChild(el("div", "empty", "載不到 data/macro.json")); return; }
+    const today = (M.asof || new Date().toISOString().slice(0, 10)).slice(0, 10), E = [];
+    ((M.fedwatch || {}).meetings || []).slice(0, 8).forEach(m => E.push({d: m.date, t: "聯準會 FOMC 利率決策", k: "利率決策", b: "federalreserve.gov 行事曆（決議日）",
+      x: m.probs ? "期貨隱含：" + Object.entries(m.probs).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([r, p]) => `${r}% ${(p * 100).toFixed(0)}%`).join("、") : ""}));
+    Object.values(M.cb || {}).forEach(c => {
+      if (c.next && c.next.date) E.push({d: c.next.date, t: `${c.name} 利率決策`, k: "利率決策", b: c.next.basis || "", x: c.rate != null ? `現行 ${c.rate_name || "政策利率"} ${c.rate}%` : ""});
+      (c.meetings || []).filter(m => m.date >= today.slice(0, 4) + "-01-01").slice(0, 2).forEach(m => E.push({d: m.date, t: `${c.name} 利率決策`, k: "利率決策", b: "已開會", x: m.change ? "有調整" : "維持不變"}));
+    });
+    Object.entries(M.releases || {}).forEach(([n, r]) => {
+      if (r.next) E.push({d: r.next, t: `美國 ${n}`, k: "經濟數據", b: "官方公布日程（FRED release calendar）", x: ""});
+      if (r.last) E.push({d: r.last, t: `美國 ${n}`, k: "經濟數據", b: "已公布", x: ""});
+    });
+    const seen = new Set(), L = E.filter(e => { const k = e.d + e.t; if (seen.has(k)) return false; seen.add(k); return true; });
+    let PAST = false;
+    const bar = el("div", "tl-bar"), out = el("div");
+    const pb = el("button", "rv-pill", "含已過去的");
+    pb.onclick = () => { PAST = !PAST; pb.classList.toggle("on", PAST); paint(); };
+    bar.appendChild(pb);
+    const WK = "日一二三四五六";
+    const paint = () => {
+      const R = L.filter(e => PAST || e.d >= today).sort((a, b) => PAST ? b.d.localeCompare(a.d) : a.d.localeCompare(b.d));
+      out.innerHTML = `<div class="tbl"><table class="fwpe-t"><thead><tr><th>日期</th><th>星期</th><th>事件</th><th>類別</th><th>備註</th><th>依據</th></tr></thead><tbody>` +
+        R.map(e => `<tr${e.d < today ? ' class="rv-dim"' : ""}><td class="num">${esc(e.d)}</td><td>${WK[new Date(e.d + "T00:00:00Z").getUTCDay()]}</td>` +
+          `<td style="font-weight:${e.k === "利率決策" ? 800 : 600}">${esc(e.t)}</td><td><span class="cal-e ${e.k === "利率決策" ? "ir" : "dl"}" style="padding:0 6px">${esc(e.k)}</span></td>` +
+          `<td>${esc(e.x)}</td><td class="rv-dim" style="white-space:normal">${esc(e.b)}</td></tr>`).join("") + `</tbody></table></div>` +
+        (R.length ? "" : `<div class="empty">沒有日程。</div>`);
+    };
+    root.appendChild(bar); root.appendChild(out); paint();
+    root.appendChild(el("div", "rv-note", `資料日 ${esc(M.asof || "—")}。FOMC：聯準會官網行事曆；各國央行：各央行官方日程（台灣央行未公布時依慣例預估，以央行公告為準）；美國數據：FRED 公布日程（轉載 BLS／BEA）。期貨隱含機率＝聯邦基金期貨推算，僅供參考。`));
+  });
+  return card("總經行事曆", "聯準會與各國央行利率決策、美國重要經濟數據公布日 · 預設只列今天起", root);
 }
 
 function tabVolume() {
@@ -7491,7 +7638,7 @@ function _noclip(c) { if (c && c.style) c.style.overflow = "visible"; return c; 
 
 let TRAIL = null, TRAIL_ERR = null;
 const TR = {kind: "A", level: "S", who: "a", win: 60, sec: "",
-            pin: false, desc: true, anchorDate: ""};
+            pin: false, desc: true, anchorDate: "", cap: 40, by: "run"};   // 🟢 10-11（P1-5）：cap＝全部個股只畫前幾列（可展開）、by＝排序依據
 
 async function trailData() {
   if (TRAIL || TRAIL_ERR) return TRAIL;
@@ -7619,9 +7766,11 @@ function trailRows() {
     r.state = trailState(r.cum);
   });
   // 由強到弱／由弱到強 —— 有人看最強的，有人專挑連續下殺、量縮到最後一名的
-  rows.sort((a, b) => TR.desc ? ((b.run - a.run) || (b.sum20 - a.sum20))
-                              : ((a.run - b.run) || (a.sum20 - b.sum20)));
-  const cap = TR.level === "K" ? 40 : rows.length;
+  const key = TR.by === "sum" ? (r => r.sum20) : TR.by === "code" ? null : (r => r.run);
+  if (key) rows.sort((a, b) => TR.desc ? ((key(b) - key(a)) || (b.sum20 - a.sum20) || (b.run - a.run))
+                                       : ((key(a) - key(b)) || (a.sum20 - b.sum20) || (a.run - b.run)));
+  else rows.sort((a, b) => (a.code || a.name).localeCompare(b.code || b.name) * (TR.desc ? 1 : -1));
+  const cap = TR.level === "K" && !TR.sec ? (TR.cap || rows.length) : rows.length;
   return {rows: rows.slice(0, cap), total: rows.length, dates: dates.slice(t0)};
 }
 
@@ -7729,9 +7878,15 @@ function trailChart(box) {
     "pointer-events": "none"});
   svg.appendChild(guide);
   box.appendChild(svg);
-  if (total > rows.length) box.appendChild(el("div", "sub",
-    `共 ${total} 檔，只畫連續天數最多的前 ${rows.length} 列。要看某一個大類就用上面的下拉。`,
-    ""));
+  // 🟢 10-11 15:10（Evans P1-5）：全部個股（不分族群）原本只畫前 40 列 → 加「展開全部／收合」
+  if (TR.level === "K" && !TR.sec && (total > rows.length || !TR.cap)) {
+    const ft = el("div", "sub", total > rows.length
+      ? `共 ${total} 檔，目前畫排序最前的 ${rows.length} 列。` : `共 ${total} 檔，已全部展開。`);
+    const b = el("button", "chip", total > rows.length ? `展開全部 ${total} 檔` : "收合成前 40 列");
+    b.style.marginLeft = "8px";
+    b.onclick = () => { TR.cap = TR.cap ? 0 : 40; box.innerHTML = ""; trailChart(box); };
+    ft.appendChild(b); box.appendChild(ft);
+  }
 
   // 🔴 浮標不跟著游標：這是 22~40 列的網格，跟著游標的小框一定會蓋住相鄰的列，
   //    而相鄰的列正是要比的對象。改成①頂端固定讀數列（在圖外，不會被遮）
@@ -7929,6 +8084,8 @@ function trailCard() {
   };
   bar.appendChild(dinp);
   bar.appendChild(el("span", "steplab", "④ 排序"));
+  sel([["run", "依連續天數"], ["sum", "依區間累計"], ["code", "依代號"]], TR.by,
+      v => { TR.by = v; render(); });
   sel([["d", "由強到弱"], ["a", "由弱到強"]], TR.desc ? "d" : "a",
       v => { TR.desc = (v === "d"); render(); });
 
@@ -7980,7 +8137,10 @@ const FW = {who: "ft", win: 60, mode: "focus", sel: null, hov: -1, kind: "inst"}
 const FW_KIND = {inst: {lab: "法人資金", unit: "億", axis: "累積淨流入（億元）", d: 1, cum: true},
                  vol: {lab: "量能", unit: "pp", axis: "量能累計（成交金額占比 − 自己 20 日均，pp）", d: 2, cum: true},
                  mom: {lab: "動能", unit: "%", axis: "動能累計（族群平均漲跌幅加總，%）", d: 1, cum: true},
-                 pe: {lab: "產業本益比", unit: "倍", axis: "產業本益比中位數（倍，對數刻度）", d: 1, cum: false, log: true}};   // 🟢 10-11（Evans 10-05 P1-6）：改回原始倍數＋對數縱軸
+                 pe: {lab: "產業本益比", unit: "倍", axis: "產業本益比中位數（倍，對數刻度）", d: 1, cum: false, log: true},
+                 pb: {lab: "股價淨值比", unit: "倍", axis: "產業股價淨值比中位數（倍，對數刻度）", d: 2, cum: false, log: true}};   // 🟢 10-11 15:10（Evans P1-10）
+const FW_VAL = k => k === "pe" || k === "pb";                     // 評價類（本益比／淨值比）：讀 sector_pe.json、沒有軌跡
+const FW_MED = () => FW.kind === "pb" ? ((SPE || {}).med_pb || {}) : ((SPE || {}).med || {});   // 🟢 10-11（Evans 10-05 P1-6）：改回原始倍數＋對數縱軸
 let SPE = null, SPE_ERR = null;
 function spLoad() {
   if (SPE || SPE_ERR) return Promise.resolve(SPE);
@@ -7994,7 +8154,7 @@ const FW_PAL = ["#E5484D", "#D9A441", "#12A366", "#4C8DFF", "#B06CD9", "#E07B39"
 
 // 🟢 10-05（Evans 4）：近一年各大類本益比原始倍數對照（成員本益比中位數，倍）
 function fwPeTable() {
-  const P = SPE || {}, pd = P.dates || [], N = pd.length, back = [250, 125, 63, 21, 0];
+  const P = {dates: (SPE || {}).dates, med: FW_MED(), n_mem: (SPE || {}).n_mem}, pd = P.dates || [], N = pd.length, back = [250, 125, 63, 21, 0];
   const at = (m, k) => { for (let j = N - 1 - k; j >= Math.max(0, N - 1 - k - 5); j--) if (m[j] != null) return m[j]; return null; };
   const rows = Object.keys(P.med || {}).map(g => {
     const m = P.med[g] || [], v = back.map(k => at(m, k));
@@ -8003,11 +8163,13 @@ function fwPeTable() {
   const box = el("div", "fwpe");
   box.style.cssText = "white-space:normal;overflow-x:auto;margin-top:10px";
   const hd = back.map(k => k ? (pd[N - 1 - k] || "—") : (pd[N - 1] || "最新"));
-  box.innerHTML = `<div class="sub">近一年各大類本益比原始倍數（成員本益比中位數，0＜PE＜200、當天至少 3 檔；欄位日期為交易日）</div>`
-    + `<table class="tbl"><thead><tr><th>大類</th><th>成員</th>${hd.map((d, i) => `<th>${["一年前", "半年前", "三個月前", "一個月前", "最新"][i]}<br><span class="sub">${esc(d)}</span></th>`).join("")}<th>一年累計對數變化</th></tr></thead><tbody>`
-    + rows.map(r => `<tr><td>${esc(r.g)}</td><td class="num">${r.n ?? "—"}</td>${r.v.map(x => `<td class="num">${x == null ? "—" : x.toFixed(1)}</td>`).join("")}`
-      + `<td class="num" style="color:${r.ch > 0 ? "var(--up)" : r.ch < 0 ? "var(--down)" : "var(--ink-3)"}">${r.ch == null ? "—" : (r.ch > 0 ? "+" : "") + r.ch.toFixed(1) + "%"}</td></tr>`).join("")
-    + `</tbody></table>`;
+  const PBM = FW.kind === "pb";
+  box.innerHTML = `<div class="sub">${PBM ? "近一年各大類股價淨值比原始倍數（成員股價淨值比中位數，0＜PB＜50" : "近一年各大類本益比原始倍數（成員本益比中位數，0＜PE＜200"}、當天至少 3 檔；欄位日期為交易日）</div>`
+    + `<div class="tbl"><table class="fwpe-t"><thead><tr><th>大類</th><th class="r">成員數</th>${hd.map((d, i) => `<th class="r">${["一年前", "半年前", "三個月前", "一個月前", "最新"][i]}<br><span class="sub">${esc(d)}</span></th>`).join("")}<th class="r">一年累計變化</th></tr></thead><tbody>`
+    + rows.map(r => `<tr><td>${esc(r.g)}</td><td class="r num">${r.n ?? "—"}</td>${r.v.map(x => `<td class="r num">${x == null ? "—" : x.toFixed(PBM ? 2 : 1)}</td>`).join("")}`
+      + `<td class="r num" style="font-weight:800;color:${r.ch > 0 ? "var(--up)" : r.ch < 0 ? "var(--down)" : "var(--ink-3)"}">${r.ch == null ? "—" : (r.ch > 0 ? "+" : "") + r.ch.toFixed(1) + "%"}</td></tr>`).join("")
+    + `</tbody></table></div><div class="sub" style="margin-top:4px">表頭可點排序；一年累計變化＝100 × ln(最新 ÷ 一年前)，紅＝本益比上升、綠＝下降。</div>`;
+  thSort(box.querySelector("table"));
   return box;
 }
 
@@ -8021,8 +8183,8 @@ function fwSeries() {
     if (g) (G[g] = G[g] || []).push(c);
   });
   const out = [];
-  if (FW.kind === "pe") {                     // 🟢 10-05（Evans 4）：產業本益比改「從區間起點算的累計對數變化率」—— 100×ln(中位數 t ÷ 區間第一個有值的中位數)，零軸為準
-    const P = SPE || {}, pd = P.dates || [], k0 = Math.max(0, pd.length - FW.win);
+  if (FW_VAL(FW.kind)) {                      // 🟢 10-05（Evans 4）：產業本益比改「從區間起點算的累計對數變化率」—— 100×ln(中位數 t ÷ 區間第一個有值的中位數)，零軸為準
+    const P = {dates: (SPE || {}).dates, med: FW_MED()}, pd = P.dates || [], k0 = Math.max(0, pd.length - FW.win);
     Object.keys(P.med || {}).forEach((g, gi) => {
       const m = (P.med[g] || []).slice(k0), b = m.find(x => x != null && x > 0);
       if (b == null) return;
@@ -8095,7 +8257,7 @@ function fwCard() {
   box.appendChild(read);
   box.appendChild(holder);
   const fnum = (v, d) => (v >= 0 ? "+" : "") + v.toFixed(d === undefined ? 1 : d);
-  const fv = (v, d) => v == null ? "—" : FW_KIND[FW.kind].log ? v.toFixed(1) + " 倍" : FW_KIND[FW.kind].cum ? fnum(v, d === undefined ? (FW.kind === "vol" ? 1 : 0) : d) : v.toFixed(0);
+  const fv = (v, d) => v == null ? "—" : FW_KIND[FW.kind].log ? v.toFixed(FW.kind === "pb" ? 2 : 1) + " 倍" : FW_KIND[FW.kind].cum ? fnum(v, d === undefined ? (FW.kind === "vol" ? 1 : 0) : d) : v.toFixed(0);
   const fcls = v => (v > 0 ? "var(--up)" : (v < 0 ? "var(--down)" : "var(--ink-3)"));
 
   function axis(lab, items, cur, cb) {
@@ -8112,7 +8274,7 @@ function fwCard() {
   function render() {
     bars.innerHTML = "";
     axis("流向", Object.entries(FW_KIND).map(([k, o]) => [k, o.lab]), FW.kind,
-         v => { FW.kind = v; FW.sel = null; if (v === "pe" && !SPE) { holder.innerHTML = "<div class='sub'>產業本益比載入中…</div>"; spLoad().then(render); } else render(); });
+         v => { FW.kind = v; FW.sel = null; if (FW_VAL(v) && !SPE) { holder.innerHTML = "<div class='sub'>產業本益比載入中…</div>"; spLoad().then(render); } else render(); });
     if (FW.kind === "inst")
       axis("法人", [["f", "外資"], ["t", "投信"], ["ft", "外資＋投信"]], FW.who,
            v => { FW.who = v; render(); });
@@ -8139,7 +8301,13 @@ function fwCard() {
 
     const {ser, dates} = fwSeries();
     const KD = FW_KIND[FW.kind], U = KD.unit;
-    if (FW.kind === "pe" && !SPE) {
+    if (FW.kind === "pb" && SPE && !SPE.med_pb) {
+      holder.innerHTML = "";
+      holder.appendChild(el("div", "empty", "股價淨值比回補中：本益比庫（val.npz）正在補 5 年的股價淨值比，補完並用 3 檔抽查對過證交所單檔表才發布。"));
+      if (typeof FW.on === "function") FW.on();
+      return;
+    }
+    if (FW_VAL(FW.kind) && !SPE) {
       holder.innerHTML = "";
       holder.appendChild(el("div", "empty", "載不到 data/sector_pe.json —— 每日班跑過 sector_pe.py 後就會有。" + (SPE_ERR ? "（" + esc(SPE_ERR) + "）" : "")));
       return;
@@ -8151,7 +8319,8 @@ function fwCard() {
     }
     const show = FW.mode === "focus" && ser.length > 12
       ? ser.slice(0, 6).concat(ser.slice(-6)) : ser;
-    const W = 1240, H = 500, L = 62, R = 232, T = 32, B = 28, G = 20;
+    // 🔴 10-11 15:10（Evans P1-5）：「全部大類」26 條時右側名單被框切斷 → 圖高依條數放大（每條 15px），標籤推出上緣就整排往下挪
+    const W = 1240, L = 62, R = 232, T = 32, B = 28, G = 20, H = Math.max(500, show.length * 15 + T + B + 16);
     const n = dates.length;
     let lo = KD.cum ? 0 : 100, hi = 0;
     if (KD.log) { lo = Infinity; hi = 0; }
@@ -8197,6 +8366,7 @@ function fwCard() {
       if (lb[i].y - lb[i - 1].y < 15) lb[i].y = lb[i - 1].y + 15;
     for (let i = lb.length - 2; i >= 0; i--)
       if (lb[i + 1].y - lb[i].y < 15) lb[i].y = lb[i + 1].y - 15;
+    if (lb.length && lb[0].y < T - 4) { const dy = T - 4 - lb[0].y; lb.forEach(o => o.y += dy); }
     const BX = W - R + G;
     lb.forEach(o => {
       const dim = FW.sel && FW.sel !== o.g;
@@ -8221,7 +8391,7 @@ function fwCard() {
     holder.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet"`
       + ` style="display:block;width:100%;height:auto">${s}</svg>`;
     const svg = holder.querySelector("svg");
-    if (FW.kind === "pe") holder.appendChild(fwPeTable());
+    if (FW_VAL(FW.kind)) holder.appendChild(fwPeTable());
     const cur = svg.querySelector("#fwcur"), hit = svg.querySelector("#fwhit");
 
     const relabel = i => {
@@ -8281,6 +8451,7 @@ function fwCard() {
       p.onclick = () => { FW.sel = FW.sel === p.dataset.g ? null : p.dataset.g; render(); mem(); };
     });
     mem();
+    if (typeof FW.on === "function") FW.on();       // 🟢 10-11 15:10（P1-5）：軌跡流向——上方切換或點線 → 下方軌跡跟著換
 
     function mem() {
       if (!FW.sel) return;
@@ -8362,6 +8533,62 @@ function tabFlow() {
         holder.innerHTML = "";
         holder.appendChild(el("div", "empty", "載不到 data/stock_bars.json"));
       });
+  });
+  return holder;
+}
+
+/* 🟢 10-11 15:10（Evans P1-5）：「流向總覽」＋「軌跡」合併成「軌跡流向」。
+   上方＝流向折線（法人資金｜量能｜動能｜產業本益比切換）；下方常駐軌跡，跟著上方走：
+     沒選線 → 族群軌跡（法人資金＝籌碼軌跡、量能＝量能軌跡、動能＝動能軌跡）；
+     點某條線或右側族群名 → 該族群的個股成員明細軌跡；再點一次收回族群。
+     產業本益比模式沒有軌跡（評價不是逐日進出）。下方軌跡的按鈕仍可自己切（例：個股全部、不分族群＋展開）。 */
+function tabTrailFlow() {
+  const holder = el("div", "");
+  holder.appendChild(el("div", "sub", "資料載入中…"));
+  const mount = () => {
+    holder.innerHTML = "";
+    const body = el("div", ""), below = el("div", "tfx-below");
+    let last = null;
+    FW.on = () => {
+      if (!below.isConnected && last !== null) return;
+      if (FW_VAL(FW.kind)) {
+        if (last === FW.kind) return; last = FW.kind;
+        below.innerHTML = `<div class="tfx-h">軌跡</div><div class="sub">${esc(FW_KIND[FW.kind].lab)}模式沒有軌跡（評價不是逐日進出）；切到法人資金、量能或動能，下方就會出現對應的軌跡。</div>`;
+        return;
+      }
+      const k = {inst: "C", vol: "A", mom: "B"}[FW.kind], who = {ft: "a", f: "f", t: "t"}[FW.who] || "a";
+      const key = [k, who, FW.sel || "", FW.win].join("/");
+      if (key === last) return;
+      last = key;
+      Object.assign(TR, {kind: k, who, level: FW.sel ? "K" : "S", sec: FW.sel || "", win: Math.max(5, FW.win), anchorDate: ""});
+      below.innerHTML = "";
+      below.appendChild(el("div", "tfx-h", FW.sel
+        ? `軌跡：${esc(FW.sel)} 的個股成員（${esc({A: "量能", B: "動能", C: "籌碼"}[k])}軌跡）　<small>再點一次上方那條線回到族群</small>`
+        : `軌跡：全部族群（${esc({A: "量能", B: "動能", C: "籌碼"}[k])}軌跡）　<small>點上方任一條線或右側族群名，看該族群個股</small>`));
+      below.appendChild(trailCard());
+    };
+    body.appendChild(fwCard());          // FW.on 要先掛上：fwCard 第一次畫完就會呼叫它
+    body.appendChild(below);
+    holder.appendChild(_noclip(card("軌跡流向",
+      "上方一條線＝一個大類，切換法人資金、量能、動能、產業本益比；下方是同一指標的逐日軌跡。點線或右側族群名，下方換成那個族群的個股。",
+      body,
+      `<b>流向線</b>　法人資金＝外資與投信累積淨流入（億元，金額＝張 × 1000 × 當日收盤）；量能＝成交金額占比 − 自己 20 日均，逐日累計（pp）；
+       動能＝族群平均漲跌幅逐日累計（%）；產業本益比＝成員本益比中位數（倍，對數縱軸），圖下附近一年大類對照表。累計線區間起點歸零；右側照末值排序。<br>
+       <b>軌跡</b>　量能軌跡＝當日成交金額占全市場比例減自己近 20 日平均（pp）；動能軌跡＝當日漲跌幅（%），族群取成員平均；
+       籌碼軌跡＝淨買賣金額 ÷ 當日成交金額（%），族群是淨額加總 ÷ 成交金額加總。紅＝正、綠＝負；右欄是累計與累計狀態（由負翻正、正值續強…）。<br>
+       <b>連續</b>　從你指到的那一天往回數，同方向連了幾天。<b>同向</b>　當天成員裡與族群同方向的幾檔／共幾檔 —— 同向低＝族群沒有一起動。<br>
+       🔴 主動式 ETF 不進法人資金合計（它的下單身份就是投信，T86 投信欄已含）。這是量化統計結果，不是個股買賣建議。`)));
+  };
+  trailData().then(() => {
+    if (!TRAIL) {
+      holder.innerHTML = "";
+      holder.appendChild(el("div", "empty", "載不到 data/trail.json —— 這一班可能還沒產出那個檔。" + (TRAIL_ERR ? "（" + esc(TRAIL_ERR) + "）" : "")));
+      return;
+    }
+    if (window.__SBARS) { mount(); return; }
+    fetch("data/stock_bars.json" + _dv(), {cache: "force-cache"}).then(r => r.json())
+      .then(sb => { window.__SBARS = sb.bars || {}; mount(); })
+      .catch(() => { holder.innerHTML = ""; holder.appendChild(el("div", "empty", "載不到 data/stock_bars.json")); });
   });
   return holder;
 }
@@ -8861,12 +9088,11 @@ function tabScore() {
     //    族群總覽 → 輪動圖 → 量價象限（原泡泡雷達）→ 流向總覽（原法人資金流向，四條線切換）→ 軌跡；轉強雷達、高點回檔（價格面）排最後。
     //    🔴 topN 仍是 7（項目數沒變）。
     f.appendChild(sideTabs([["族群總覽", () => viewToggle("sector", [["圖", _cFlow], ["表", _cTable]])],
-                            ["輪動圖", tabRRG],
+                            ["強弱輪動", tabRRG],
                             ["量價象限", tabRadar, "screen"],
-                            ["流向總覽", tabFlow],
-                            ["軌跡", tabTrail],
+                            ["軌跡流向", tabTrailFlow],          // 🟢 10-11 15:10（Evans P1-5）：流向總覽＋軌跡合併；🔴 topN 7 → 6
                             ["轉強雷達", () => viewToggle("strength", [["圖", () => sbView("up")], ["表", tabStrength]]), "screen"],
-                            ["高點回檔", () => viewToggle("drawdown", [["圖", () => sbView("dn")], ["表", tabDrawdown]]), "screen"]], null, 7));
+                            ["高點回檔", () => viewToggle("drawdown", [["圖", () => sbView("dn")], ["表", tabDrawdown]]), "screen"]], null, 6));
   } else {
       f.appendChild(el("div", "empty", "今日無族群評分資料。"));
   }
@@ -9293,8 +9519,8 @@ function riverStockBox(code) {
     if (!R) { h.appendChild(el("div", "sub", "載不到 data/river.json —— 這一班可能還沒產出", "font-size:11.5px")); return; }
     if (!R.stocks[code]) return;
     const hd = el("div", "rv-h", `${esc(code)} ${esc(R.stocks[code].n)}　河流圖　`);
-    const lk = el("a", "", "到「個股研究 › 河流圖」看完整版 ›"); lk.href = "javascript:void 0"; lk.style.cssText = "font-size:12.5px;font-weight:500";
-    lk.onclick = () => window.GO_TAB && window.GO_TAB("個股研究", "河流圖", () => window.RV_GO && window.RV_GO(code));
+    const lk = el("a", "", "到「產業研究 › 河流圖」看完整版 ›"); lk.href = "javascript:void 0"; lk.style.cssText = "font-size:12.5px;font-weight:500";
+    lk.onclick = () => window.GO_TAB && window.GO_TAB("產業研究", "河流圖", () => window.RV_GO && window.RV_GO(code));
     hd.appendChild(lk); h.appendChild(hd);
     h.appendChild(rvStockNode(R, SB, code, "auto", ""));
   });
@@ -9660,7 +9886,7 @@ function tabCalendar() {
     });
   };
   draw();
-  return card("個股行事曆", "股東會、停止過戶、除權除息、股利發放、法說會、董事會、現增／減資、CB、庫藏股、營收與財報期限 · 上排選族群、下排選個股", root);
+  return card("產業行事曆", "★＝重量級排前・股東會、停止過戶、除權除息、股利發放、法說會、董事會、現增／減資、CB、庫藏股、營收與財報期限 · 上排選族群、下排選個股", root);
 }
 let CAL_M = null;
 function calMonth(EV, C) {
@@ -9684,15 +9910,15 @@ function calMonth(EV, C) {
     "日一二三四五六".split("").forEach(w => g.appendChild(el("div", "cal-w", w)));
     for (let i = 0; i < first.getUTCDay(); i++) g.appendChild(el("div", "cal-d cal-x"));
     for (let d = 1; d <= days; d++) {
-      const ds = `${CAL_M}-${String(d).padStart(2, "0")}`, es = by[ds] || [];
+      const ds = `${CAL_M}-${String(d).padStart(2, "0")}`, es = calSort(by[ds] || []), WT = calWt();
       const cell = el("div", "cal-d" + (ds === today ? " cal-today" : "") + (es.length ? " cal-has" : ""));
-      cell.innerHTML = `<span class="cal-n">${d}</span>` + es.slice(0, 3).map(e => `<span class="cal-e ${CAL_K(e.kind)}">${esc(e.name || e.code)}</span>`).join("")
+      cell.innerHTML = `<span class="cal-n">${d}</span>` + es.slice(0, 3).map(e => `<span class="cal-e ${CAL_K(e.kind)}${WT.big(e) ? " cal-big" : ""}">${WT.big(e) ? "★" : ""}${esc(e.name || e.code)}</span>`).join("")
         + (es.length > 3 ? `<span class="cal-more">＋${es.length - 3}</span>` : "") + (es.length ? `<span class="cal-dot">${es.length}</span>` : "");
       if (es.length) cell.onclick = () => { g.querySelectorAll(".cal-d.on").forEach(x => x.classList.remove("on")); cell.classList.add("on"); det.innerHTML = ""; det.appendChild(calRows(es, ds)); };
       g.appendChild(cell);
     }
     box.appendChild(g);
-    box.appendChild(el("div", "cal-leg", CAL_KINDS.map(([k, t]) => `<span class="cal-e ${k}">${esc(t)}</span>`).join("") + `　點有事件的日子看明細`));
+    box.appendChild(el("div", "cal-leg", CAL_KINDS.map(([k, t]) => `<span class="cal-e ${k}">${esc(t)}</span>`).join("") + `　★＝重量級（指數權重 ≥ 0.5% 或成交金額前 30 名），同一天排前面　點有事件的日子看明細`));
     box.appendChild(det);
   };
   paint();
@@ -9701,10 +9927,24 @@ function calMonth(EV, C) {
 function calRows(es, head) {
   const w = el("div");
   if (head) w.appendChild(el("div", "tl-grp", `${esc(head)} <small>${es.length} 件</small>`));
-  es.forEach(e => w.appendChild(el("div", "tl-ev", `<b>${esc(e.d)}</b><span class="cal-e ${CAL_K(e.kind)}" style="padding:0 6px;margin:0 6px">${esc(e.kind)}</span>` +
-    `<span><b style="font-family:inherit">${esc(e.name || "")}</b> <span class="rv-dim">${esc(e.code)}</span>　${esc(e.text || "")} <span class="rv-dim">（${esc(e.src || "")}）</span></span>`)));
+  const WT = calWt();
+  calSort(es).forEach(e => w.appendChild(el("div", "tl-ev", `<b>${esc(e.d)}</b><span class="cal-e ${CAL_K(e.kind)}" style="padding:0 6px;margin:0 6px">${esc(e.kind)}</span>` +
+    `<span><b style="font-family:inherit">${WT.big(e) ? "★" : ""}${esc(e.name || "")}</b> <span class="rv-dim">${esc(e.code)}</span>　${esc(e.text || "")} <span class="rv-dim">（${esc(e.src || "")}）</span></span>`)));
   return w;
 }
+/* 🟢 10-11 15:10（Evans P1-7）：重量級事件排前、凸顯 —— 分數＝指數權重（市值）＋成交金額占全市場＋法說會加權；
+   重量級＝權重 ≥ 0.5%（約前 28 檔）或成交金額前 30 名，格子裡加 ★、粗框（例：台積電 10/15、聯發科法說）。 */
+let CAL_WT = null;
+function calWt() {
+  if (CAL_WT) return CAL_WT;
+  const W = (D.screen || {}).weights || {}, V = ((D.screen || {}).volume || {}).rows || [], tot = V.reduce((a, r) => a + (r[2] || 0), 0) || 1;
+  const amt = {}, rk = {};
+  V.forEach((r, i) => { amt[r[0]] = (r[2] || 0) / tot; rk[r[0]] = i + 1; });
+  CAL_WT = {score: e => (W[e.code] || 0) * 100 + (amt[e.code] || 0) * 100 + (/法說/.test(e.kind) ? 0.5 : 0),
+            big: e => (W[e.code] || 0) >= 0.005 || (rk[e.code] || 999) <= 30};
+  return CAL_WT;
+}
+const calSort = es => { const w = calWt(); return es.slice().sort((a, b) => w.score(b) - w.score(a)); };
 function calList(EV, C) {
   const box = el("div"), today = C.asof || new Date().toISOString().slice(0, 10);
   let PAST = false;
@@ -9733,8 +9973,34 @@ function fnLoad() { if (!_fnW) _fnW = fetch("data/is_q.json" + _dv(), {cache: "f
 const fnYi = v => v == null ? "—" : nf(v / 1e5, 2);                  // 千元 → 億元
 const fnPct = v => v == null ? "—" : v.toFixed(1) + "%";
 function fnQ(q) { const [y, s] = q.split("Q"); return (+y + 1911) + "Q" + s; }
+/* 🟢 10-11 15:10（Evans P1-9）：金融業格式 —— 淨收益、稅前淨利、歸母淨利、EPS、ROE／ROA（年化＝單季 × 4 ÷ 期末權益／資產），
+   欄位以公開資訊觀測站金融業報表為準（銀行、證券、金控、保險、異業五種表，SOURCES 五十二）。 */
+function fnStockFin(J, code, S) {
+  const w = el("div", "fn-root"), Q = S.q, L = Q[Q.length - 1];
+  w.appendChild(el("div", "fn-h", `<span class="fn-fin">金融業格式</span> 金融業沒有毛利、營業收入，改看淨收益、稅前淨利、ROE、ROA`));
+  const kv = el("div", "kv");
+  [["ROE（年化）", 5, "roe", 2], ["ROA（年化）", 6, "roa", 3], ["EPS（單季）", 4, null, 2]].forEach(([t, i, k, d]) => {
+    const pc = k ? (S.pct || {})[k] : null;
+    kv.appendChild(el("div", "", `<div class="k">${t}（${fnQ(L[0])}）</div><div class="v num">${L[i] == null ? "—" : L[i].toFixed(d) + (k ? "%" : "")}</div>` +
+      `<div class="sub">${k ? `近 ${J.pct_n} 季第 ${pc ?? "—"} 百分位` : "元"}</div>`));
+  });
+  w.appendChild(kv);
+  const rows = Q.slice().reverse().map(r => [r, Q.find(x => x[0] === (+r[0].split("Q")[0] - 1) + "Q" + r[0].split("Q")[1])]);
+  w.appendChild(el("div", "fn-h", "季度損益與報酬率（單季；金額億元）"));
+  const box = el("div", "tbl", `<table class="fwpe-t"><thead><tr><th>季</th><th class="r">淨收益</th><th class="r">年增</th><th class="r">稅前淨利</th><th class="r">歸屬母公司淨利</th><th class="r">EPS</th><th class="r">ROE（年化）</th><th class="r">ROA（年化）</th></tr></thead><tbody></tbody></table>`);
+  const body = box.querySelector("tbody");
+  const draw = k => { body.innerHTML = rows.slice(0, k).map(([r, p]) => { const yo = p && p[1] ? (r[1] / p[1] - 1) * 100 : null;
+    return `<tr><td class="num">${fnQ(r[0])}</td><td class="r num">${fnYi(r[1])}</td><td class="r num ${yo == null ? "" : yo >= 0 ? "up" : "down"}">${yo == null ? "—" : (yo > 0 ? "+" : "") + yo.toFixed(1) + "%"}</td>` +
+      `<td class="r num">${fnYi(r[2])}</td><td class="r num">${fnYi(r[3])}</td><td class="r num">${r[4] == null ? "—" : r[4].toFixed(2)}</td>` +
+      `<td class="r num">${r[5] == null ? "—" : r[5].toFixed(2) + "%"}</td><td class="r num">${r[6] == null ? "—" : r[6].toFixed(3) + "%"}</td></tr>`; }).join(""); };
+  let K = 8; draw(K); w.appendChild(box);
+  if (rows.length > 8) { const b = el("button", "rv-pill if-more", `展開（還有 ${rows.length - 8} 季）`); b.onclick = () => { K = K > 8 ? 8 : rows.length; draw(K); b.textContent = K > 8 ? "收合" : `展開（還有 ${rows.length - 8} 季）`; }; w.appendChild(b); }
+  w.appendChild(el("div", "rv-note", "公開資訊觀測站綜合損益表彙總（金融業各格式）＋資產負債表彙總；單季＝當季累計 − 上季累計；淨收益：金控表原值、銀行＝利息淨收益＋利息以外淨損益、保險＝保險服務結果＋財務結果＋其他營業結果、證券＝收益。ROE（年化）＝單季歸屬母公司淨利 × 4 ÷ 期末歸屬母公司權益；ROA（年化）＝單季本期淨利 × 4 ÷ 期末資產總額。只呈現財報數字，不做評價。"));
+  return w;
+}
 function fnStock(J, code) {
   const S = (J.stocks || {})[code], w = el("div", "fn-root");
+  if (S && S.fin && (S.q || []).length) return fnStockFin(J, code, S);
   if (!S || !(S.q || []).length) { w.appendChild(el("div", "empty", `${esc(code)}：還沒有綜合損益表資料（回補中，或金融業格式不同沒有毛利）。`)); return w; }
   const Q = S.q, L = Q[Q.length - 1];
   const kv = el("div", "kv");
@@ -9794,14 +10060,24 @@ function tabFinance() {
       if (!J || !Object.keys(J.stocks || {}).length) { body.appendChild(el("div", "empty", "財務體質建置中：公開資訊觀測站綜合損益表 40 季回補中（「回補綜合損益表」與每日班），補到兩季以上就會出現。")); return; }
       if (RS.code) { body.appendChild(coBox(RS.code)); body.appendChild(fnStock(J, RS.code)); return; }
       const U = (D.screen || {}).universe || {};
-      const L = Object.entries(J.stocks).filter(([c]) => rsMatch(c)).map(([c, v]) => [c, v, v.q[v.q.length - 1]]).sort((a, b) => ((b[1].pct || {}).gm ?? -1) - ((a[1].pct || {}).gm ?? -1));
+      const LF = Object.entries(J.stocks).filter(([c, v]) => v.fin && rsMatch(c)).map(([c, v]) => [c, v, v.q[v.q.length - 1]]).sort((a, b) => (b[2][5] ?? -1e9) - (a[2][5] ?? -1e9));
+      const L = Object.entries(J.stocks).filter(([c, v]) => !v.fin && rsMatch(c)).map(([c, v]) => [c, v, v.q[v.q.length - 1]]).sort((a, b) => ((b[1].pct || {}).gm ?? -1) - ((a[1].pct || {}).gm ?? -1));
       const t = el("div", "rv-twrap", `<table class="rv-t"><thead><tr><th>個股</th><th>最新季</th><th>毛利率</th><th>年變</th><th>近 ${J.pct_n} 季百分位</th><th>營益率</th><th>百分位</th><th>淨利率</th><th>百分位</th></tr></thead><tbody>` +
         L.map(([c, v, r]) => `<tr class="m" data-c="${esc(c)}"><td><span class="num rv-dim">${esc(c)}</span> ${esc((U[c] || {}).name || "")}</td><td class="num">${fnQ(r[0])}</td><td class="num">${fnPct(r[6])}</td>` +
           `<td class="num">${(v.yoy_pp || {}).gm == null ? "—" : (v.yoy_pp.gm > 0 ? "+" : "") + v.yoy_pp.gm.toFixed(1) + " pp"}</td><td class="num">${(v.pct || {}).gm ?? "—"}</td>` +
           `<td class="num">${fnPct(r[7])}</td><td class="num">${(v.pct || {}).om ?? "—"}</td><td class="num">${fnPct(r[8])}</td><td class="num">${(v.pct || {}).nm ?? "—"}</td></tr>`).join("") + `</tbody></table>`);
       t.querySelectorAll("tr.m").forEach(tr => tr.onclick = () => rsSet(rsBigOf(tr.dataset.c), tr.dataset.c));
       body.appendChild(el("div", "submeta", `${L.length} 檔，依毛利率在近 ${J.pct_n} 季的百分位由高到低；點一列看個股`));
-      body.appendChild(t);
+      if (L.length) body.appendChild(t);
+      if (LF.length) {                       // 🟢 10-11（P1-9）：金融股另一張表（金融業格式）
+        const f = el("div", "tbl", `<table class="fwpe-t"><thead><tr><th>個股</th><th>最新季</th><th class="r">淨收益（億）</th><th class="r">歸屬母公司淨利（億）</th><th class="r">EPS</th><th class="r">ROE（年化）</th><th class="r">近 ${J.pct_n} 季百分位</th><th class="r">ROA（年化）</th></tr></thead><tbody>` +
+          LF.map(([c, v, r]) => `<tr class="m" data-c="${esc(c)}" style="cursor:pointer"><td><span class="num rv-dim">${esc(c)}</span> ${esc((U[c] || {}).name || "")}</td><td class="num">${fnQ(r[0])}</td><td class="r num">${fnYi(r[1])}</td><td class="r num">${fnYi(r[3])}</td>` +
+            `<td class="r num">${r[4] == null ? "—" : r[4].toFixed(2)}</td><td class="r num">${r[5] == null ? "—" : r[5].toFixed(2) + "%"}</td><td class="r num">${(v.pct || {}).roe ?? "—"}</td><td class="r num">${r[6] == null ? "—" : r[6].toFixed(3) + "%"}</td></tr>`).join("") + `</tbody></table>`);
+        f.querySelectorAll("tr.m").forEach(tr => tr.onclick = () => rsSet(rsBigOf(tr.dataset.c), tr.dataset.c));
+        thSort(f.querySelector("table"));
+        body.appendChild(el("div", "fn-h", `<span class="fn-fin">金融業格式</span> ${LF.length} 檔，依 ROE 由高到低`));
+        body.appendChild(f);
+      }
     });
   };
   draw();
@@ -9812,7 +10088,7 @@ function tabResearch() {
   // 🟢 第六批（09-27）：法說會、時間軸、行事曆共用「族群 → 個股」導覽；行事曆只放這裡（Evans 9）
   /* 第七批 10（Evans 09-27）：法說會 → 河流圖 → 產業動向 → 報告與事件（原「時間軸」）→ 行事曆 */
   return sideTabs([["法說會", tabIR, "screen"], ["河流圖", tabRiver, "screen"], ["財務體質", tabFinance], ["產業動向", tabIndustryNotes],
-                   ["AI 研究報告", tabCoReport], ["法人報告與事件", infoTimeline], ["行事曆", tabCalendar]]);
+                   ["AI 研究報告", tabCoReport], ["法人報告與事件", infoTimeline], ["產業行事曆", tabCalendar]]);
 }
 /* 🟢 公司產業報告（Evans 09-28）：本機程式產數字（公開資訊觀測站、月營收、法說簡報、站上資料）、Gemini 寫初稿，
    雲端 company_verify 逐篇核對（數字、合規、出處、交叉核對、表格、章節）通過才進 company_reports.json。
@@ -9851,7 +10127,7 @@ function crOne(R) {
   w.appendChild(el("div", "cr-quad", [["事件", "事件"], ["影響", "影響"], ["估值依據", "預估與估值依據"], ["後續追蹤", "後續追蹤"]]
     .map(([t, k]) => `<div><h4>${esc(t)}</h4><p>${crMd(S[k])}</p></div>`).join("")));
   const lk = el("a", "cr-rv", "到「河流圖」看這檔的本益比位階 ›"); lk.href = "javascript:void 0";
-  lk.onclick = () => window.GO_TAB && window.GO_TAB("個股研究", "河流圖", () => window.RV_GO && window.RV_GO(R.code)); w.appendChild(lk);
+  lk.onclick = () => window.GO_TAB && window.GO_TAB("產業研究", "河流圖", () => window.RV_GO && window.RV_GO(R.code)); w.appendChild(lk);
   const ch = crChart(R, F); if (ch) { w.appendChild(el("h4", "cr-h", "營收與 EPS")); w.appendChild(ch); }
   // 🟢 10-11（Evans 10-05 P0-2）：季度表（營收、毛利、營益、淨利、EPS、三率、年增、季增）合成一張：列＝季度、欄＝指標
   const Q = (R.tables || {}).quarters;
@@ -10045,6 +10321,10 @@ const SUB_DESC = {
   "美股公司": "美股大型公司的財報、併購、訂單等公司事件。",
   "利率、央行與匯率": "利率是資金的價格；央行決策、美債殖利率與匯率都在這一頁。",
   "地緣政治": "戰爭與制裁會推升油價、打亂供應鏈。每條戰線一條時間軸，先看油價與通膨有沒有跟著動。",
+  "即時訊息": "這一組的即時新聞（權威來源近 48 小時）：先切分類，再切來源；重磅的加框置頂。",
+  "意見領袖": "財經意見領袖談到這個領域的原話與時間點（原話經自動查核才出現）。",
+  "週報與日報": "週報、世界趨勢日報、量化統計日報（每個數字都跟資料檔或出處核對過）。",
+  "總經行事曆": "聯準會與各國央行利率決策、重要經濟數據公布日（官方行事曆）。",
   "全部即時": "不分類的即時新聞（權威來源近 48 小時），重磅的加框置頂。",
   "科技與 AI": "AI 投資週期的三個環節：誰在花錢（資本支出）、誰在賺錢（變現）、誰借錢在撐（債務風險）。",
   "意見領袖": "各國政治領袖、財經官員、科技領袖與投資人的最新公開發言；只記錄原話與出處，不加評語。",
@@ -10083,16 +10363,17 @@ const SUB_DESC = {
   "河流圖": "股價放在產業歷史本益比區間裡看：位在第幾分位，對照基本盤、本年、前瞻三把尺。",
   "產業動向": "依 26 大類整理的產業訊息。",
   "法人報告與事件": "法人報告的評等與目標價、公開資訊觀測站重大訊息、新聞、論壇與意見領袖的提及，依個股或族群排在同一條時間軸上。",
-  "行事曆": "股東會、除權息、股利發放、法說會、董事會等公開資訊觀測站上的已公告事件。",
+  "產業行事曆": "股東會、除權息、股利發放、法說會、董事會等公開資訊觀測站上的已公告事件。",
   // 產業族群
   "量價象限": "每個族群一顆泡泡：位置看強弱與動能、大小看資金。先掃一眼今天錢往哪一區堆。",
   "族群總覽": "26 大類的評分、動能與量能；圖看全貌，表可以點進族群看成員。",
   "軌跡": "每個族群／個股近 N 天的量能、動能、籌碼逐日紅綠格，看連續幾天同方向。",
+  "軌跡流向": "上方四條流向線（法人資金、量能、動能、產業本益比）看錢與評價往哪一區移動；下方同一指標的逐日軌跡，點線看該族群個股。",
   "流向總覽": "四條流向線切換：法人資金、量能、動能、產業本益比（從區間起點算的累計對數變化率），看錢與評價往哪一區移動。",
   "轉強雷達": "族群熱力圖＋個股泡泡：符合越多轉強條件（站上 5 日線、EMA9、5 日線上彎、收高、量增、站上 20 日線）越高。",
   "高點回檔": "距今年最高點回檔多少；分數越高＝離高點越近。先看族群，再點進個股。",
   "輪動雷達": "族群相對大盤的強弱與強弱變化，看資金在族群之間怎麼輪動。",
-  "輪動圖": "26 大類相對大盤的強弱（橫軸）與強弱變化（縱軸），尾巴是最近幾期的路徑：順時針 改善→領先→轉弱→落後。",
+  "強弱輪動": "26 大類相對大盤的強弱（橫軸）與強弱變化（縱軸），尾巴是最近幾期的路徑：順時針 改善→領先→轉弱→落後。",
   // 市場動態
   "市場廣度儀表": "追蹤名單裡站上各條均線的比例：越高＝多數股票同步走強；指數漲但廣度下降＝只有少數權值股在撐。",
   "台股儀表板": "證交所、櫃買的官方統計：成交金額、信用交易、委買委賣、漲跌家數等，看今天的市場氣氛。",
@@ -10105,7 +10386,7 @@ const SUB_DESC = {
   "進出（依基金）": "每檔主動式 ETF 今天買賣了什麼；點方塊看那一檔的明細。",
   "完整持股明細": "主動式 ETF 的完整持股與權重。",
   "進出（依標的）": "同一檔股票今天被哪些基金買賣；越多檔同時動越值得注意。",
-  "大戶持股": "集保股權分散表：持有 400 張／1,000 張以上的大戶合計持股比例，逐週變化；族群彙總、點族群看個股。",
+  "集保大戶持股": "集保股權分散表：持有 400 張／1,000 張以上的大戶合計持股比例，逐週變化；族群彙總、點族群看個股。",
   "被最多持有": "被最多檔主動式 ETF 同時持有的股票，以及區間內的淨買賣。",
   "資金流": "主動式 ETF 每天的申購贖回與買賣淨額。",
   // 現貨籌碼
@@ -10941,15 +11222,16 @@ function tabChips() {
   //    每一格自己的篩選器（.subpick）由 sideTabs 搬到同一行，左列整條讓給資料區。
   //    Evans 看過 preview_chips_n32.html 才定案。原本的六支函式一個字沒改，
   //    外面包一層 tabN32*：單日＋不加條件時畫的就是原本那一張。
-  return sideTabs([["籌碼篩選",       tabChipFilter,  "inst"],
+  // 🟢 10-11 15:10（Evans P1-4）：大戶持股 → 「集保大戶持股」排第一格；內部人申報升為「籌碼」組的子頁籤（P0-2）
+  return sideTabs([["集保大戶持股",   tabTdcc],
+                   ["籌碼篩選",       tabChipFilter,  "inst"],
                    // 🟢 第六批（09-27）：加「圖／表」切換（圖只畫今天；區間累計在「表」）
                    ["三大法人買賣超", () => viewToggle("chip_sum", [["圖", () => chipChart("sum")], ["表", tabN32Sum]]), "inst"],
                    ["外資買賣超",     () => viewToggle("chip_f", [["圖", () => chipChart("f")], ["表", tabN32Foreign]]), "inst"],
                    ["投信買賣超",     () => viewToggle("chip_t", [["圖", () => chipChart("t")], ["表", tabN32Trust]]), "inst"],
                    ["外資投信同買",   () => viewToggle("chip_co", [["圖", () => chipChart("co")], ["表", tabN32Co]]), "inst"],
                    ["信用交易",       () => viewToggle("chip_mg", [["圖", () => chipChart("mg")], ["表", tabN32Margin]]), "market"],
-                   ["大戶持股",       tabTdcc],
-                   ["內部人申報",     tabInsider]], null, 8);         // 🟢 10-11（Evans P2-9）
+                   ], null, 7);
 }
 
 /* 🟢 2026-09-08：主動式 ETF 獨立頁籤。
@@ -11549,7 +11831,7 @@ function tabTdcc() {
   const root = el("div");
   root.appendChild(el("div", "sub", "集保分散表載入中…"));
   Promise.all([tdLoad(), coLoad()]).then(([T, CO]) => {
-    if (!T || !(T.dates || []).length) { root.innerHTML = ""; root.appendChild(card("大戶持股", null, el("div", "empty", "載不到 data/tdcc.json —— 下一班正式建置（或回補集保大戶）後就會有。"))); return; }
+    if (!T || !(T.dates || []).length) { root.innerHTML = ""; root.appendChild(card("集保大戶持股", null, el("div", "empty", "載不到 data/tdcc.json —— 下一班正式建置（或回補集保大戶）後就會有。"))); return; }
     const co = (CO || {}).co || {}, ds = T.dates, L = ds.length - 1, NM = n32Names();
     const val = (c, i) => {
       if (TD_TH === 400 || TD_TH === 1000) { const r = (T.rows[c] || [])[i]; return r ? r[TD_TH === 400 ? 0 : 1] : null; }
@@ -14268,14 +14550,16 @@ const TABS = [
   // 🟢 10-04 晚（Evans 裁決）：頂層也照「產業 → 總經 → 消息與情緒 → 籌碼 → 價格與技術面」排，重要的放前面：
   //    產業族群、個股研究（產業）→ 信息流（總經＋消息，內部也是產業為先）→ 市場動態（市場氣氛：廣度、委買委賣、台股儀表板）
   //    → 主動式ETF、現貨籌碼、期權籌碼（籌碼）→ 成交金額、量化個股、處置股（價格與技術面）→ 程式策略、程式績效。
-  ["產業族群", tabScore, "screen"],
-  ["個股研究", tabResearch, "screen"],
-  ["信息流", tabInfo, "market"],
+  ["族群動態", tabScore, "screen"],          // 🟢 10-11 15:10（Evans P1-4）：產業族群 → 族群動態
+  ["產業研究", tabResearch, "screen"],       // 🟢 10-11 15:10（Evans P1-4）：個股研究 → 產業研究
+  ["產業信息", tabIndInfo, "market"],         // 🟢 10-11 15:10（Evans P1-6）：信息流拆成 產業信息／總經政治
+  ["總經政治", tabMacroPol, "market"],
   ["處置股", tabDisposal, "screen"],          // 🟢 10-05（Evans 1）：處置股移到信息流之後、市場動態之前
   ["市場動態", tabMarket, "market"],
   ["主動式ETF", tabETF, "etf"],
   ["現貨籌碼", tabChips, "inst"],
   ["期權籌碼", tabOptions, "options"],
+  ["內部人申報", tabInsider, "inst"],         // 🟢 10-11 15:10（P0-2）：從現貨籌碼搬出來，籌碼組第四格
   ["成交金額", tabVolume, "screen"],
   ["量化個股", tabStock, "screen"],
   ["程式策略", tabStrategy, "strategy"],
@@ -14301,6 +14585,18 @@ if (D.wave && D.wave.stocks && D.wave.stocks.length) {
               ["個股位階", tabWaveStocks, "wave"]);
 }
 
+/* 🟢 10-11 15:10（Evans P0-2）：頂層改 5 組＋第二列子頁籤，順序「產業 → 總經 → 消息 → 籌碼 → 價格」。
+   TABS 仍是一張平的表（GO_TAB、搜尋、徽章都照名稱找），這裡只決定排序與分組；組內只有一頁時第二列不顯示。 */
+const TGRP = [
+  ["產業", ["產業信息", "產業研究", "族群動態", "個股位階"]],
+  ["總經政治", ["總經政治"]],
+  ["市場", ["市場動態", "處置股", "成交金額", "量化個股"]],
+  ["籌碼", ["現貨籌碼", "期權籌碼", "主動式ETF", "內部人申報"]],
+  ["策略", ["程式策略", "程式績效"]],
+];
+const TG_OF = {};
+TGRP.forEach(([g, L], gi) => L.forEach((t, ti) => TG_OF[t] = [gi, ti]));
+TABS.sort((a, b) => { const A = TG_OF[a[0]] || [9, 0], B = TG_OF[b[0]] || [9, 0]; return A[0] - B[0] || A[1] - B[1]; });
 const nav = document.getElementById("tabs"), main = document.getElementById("main"), panels = [];
 // 🟢 10-04（Evans）：上櫃資料來源暫停（櫃買回 5xx／403／非 JSON）→ 頁面標示，不擋整站
 (() => {
@@ -14337,11 +14633,34 @@ TABS.forEach(([label, fn, key], i) => {
   };
   nav.appendChild(b); main.appendChild(p); panels.push(p);
 });
+// 🟢 10-11（P0-2）：第一列＝組；點組 → 回到這組上次看的那一頁（沒看過就第一頁）。點子頁籤（含搜尋、GO_TAB）都會同步組。
+const tgrp = document.getElementById("tgrp"), tgLast = {};
+const tgBtns = TGRP.map(([g], gi) => {
+  const ti = TABS.findIndex(t => (TG_OF[t[0]] || [9])[0] === gi);
+  if (ti < 0) return null;
+  const b = el("button", "", esc(g));
+  b.setAttribute("role", "tab"); b.dataset.g = g;
+  b.onclick = () => nav.querySelectorAll("button")[tgLast[gi] != null ? tgLast[gi] : ti].click();
+  tgrp.appendChild(b);
+  return b;
+});
+const tgSync = ti => {
+  const gi = (TG_OF[TABS[ti][0]] || [9])[0];
+  tgLast[gi] = ti;
+  tgBtns.forEach((b, i) => b && b.setAttribute("aria-selected", i === gi ? "true" : "false"));
+  let n = 0;
+  nav.querySelectorAll("button").forEach((b, i) => { const on = (TG_OF[TABS[i][0]] || [9])[0] === gi; b.hidden = !on; n += on; });
+  nav.classList.toggle("solo", n < 2);
+};
+nav.querySelectorAll("button").forEach((b, i) => b.addEventListener("click", () => tgSync(i)));
+tgSync(0);
 // 🟢 第六批 六-3（09-27）：有「快要處置」的個股時，頁籤上掛紅色數字（頁面內標紅置頂；LINE 推播另一輪）
 setTimeout(() => dpLoad().then(J => {
   const n = J ? (J.stocks || []).filter(e => e.hot && e.stock).length : 0;
   const b = [...nav.querySelectorAll("button")].find(x => x.textContent.trim() === "處置股");
   if (b && n) b.insertAdjacentHTML("beforeend", ` <span class="dp-badge" title="再被公布一次注意就處置">${n}</span>`);
+  const g = tgrp.querySelector('button[data-g="市場"]');      // 🟢 10-11（P0-2）：組上也要看得到
+  if (g && n) g.insertAdjacentHTML("beforeend", ` <span class="dp-badge" title="處置股：再被公布一次注意就處置">${n}</span>`);
 }), 1500);
 
 /* 🟢 10-11（Evans P1-6）：個股資訊框 —— 近期重大訊息（現金增資附認股基準日、繳款期間、最後過戶日、撥券日）＋融資融券（單日或區間）。
@@ -14479,6 +14798,30 @@ function sxCard(code, name, mkt, goStock) {
     const s = document.createElement("script"); s.defer = true; s.src = "https://static.cloudflareinsights.com/beacon.min.js";
     s.setAttribute("data-cf-beacon", JSON.stringify({token: C.token})); document.head.appendChild(s);
   }
+})();
+
+/* 🟢 10-11 15:10（Evans P0-1）：左右欄抽屜。≥ 1600px 預設展開、< 1600px 預設收合；按頂端按鈕切換，選擇記在 localStorage（包 try/catch，
+   私密視窗讀不到就照預設）。< 1100px 單欄時 CSS 不理會收合（兩軌照舊攤成磚牆）。 */
+(function () {
+  const sh = document.querySelector(".shell"), K = {l: "gea_rail_l", r: "gea_rail_r"};
+  if (!sh) return;
+  const get = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  const put = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+  const apply = () => {
+    const wide = window.innerWidth >= 1600;
+    ["l", "r"].forEach(s => {
+      const v = get(K[s]), open = v === null ? wide : v === "1";
+      sh.classList.toggle("no" + s, !open);
+      const b = document.getElementById("rtog-" + s);
+      if (b) b.setAttribute("aria-pressed", open ? "true" : "false");
+    });
+  };
+  ["l", "r"].forEach(s => {
+    const b = document.getElementById("rtog-" + s);
+    if (b) b.onclick = () => { put(K[s], sh.classList.contains("no" + s) ? "1" : "0"); apply(); };
+  });
+  apply();
+  window.addEventListener("resize", apply);
 })();
 
 // 點左上角圖示回首頁：切回第一個頁籤並捲到最上。
