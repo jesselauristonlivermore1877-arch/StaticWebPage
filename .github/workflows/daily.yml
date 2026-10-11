@@ -24,7 +24,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 35   # 10-12：內部人逐人回補＋代持拆項＋權證逐檔期間 world 那步約 17 分，放寬
 
     steps:
       - name: 排程延遲量測
@@ -149,7 +149,7 @@ jobs:
         id: world
         working-directory: code
         continue-on-error: true
-        timeout-minutes: 20
+        timeout-minutes: 25
         env:
           PYTHONUNBUFFERED: "1"
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
