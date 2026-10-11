@@ -10978,6 +10978,112 @@
 ],
 "n_pass": 14,
 "n_fail": 3
+},
+"gooaye:e6664835-0084-491c-acfb-f35535f2c121": {
+"src": "gooaye",
+"name": "股癌",
+"kind": "podcast",
+"title": "EP704 | 🐘",
+"date": "2026-10-10",
+"url": "https://player.soundon.fm/p/954689a5-3096-43a4-a80b-7810b219cef3/episodes/e6664835-0084-491c-acfb-f35535f2c121",
+"dur_s": 3016,
+"models": [
+"gemini-3.5-flash",
+"gemini-3.6-flash",
+"gemini-3.7-flash"
+],
+"at": "2026-10-11",
+"n_seg": 108,
+"len_s": 2880,
+"mentions": [
+{
+"t": "0:26:28",
+"sec": 1588,
+"quote": "大家看到像什麼聯電去往這個方向去做佈局，大家提前去買一個這種做夢的行情",
+"point": "講者提及市場先前關注聯電佈局新技術材料並提前買進相關行情。",
+"sectors": [
+"晶圓代工與製造"
+],
+"stocks": [
+{
+"code": "2303",
+"name": "聯電"
+}
+],
+"match": 0.94,
+"status": "通過",
+"reason": "原話對得上（重疊 94%）"
+},
+{
+"t": "0:27:50",
+"sec": 1670,
+"quote": "我覺得她最主要不是要去搶BMC的市場，就是伺服器管理晶片，也就是大家熟知的像是信驊、新唐",
+"point": "講者指出伺服器管理晶片（BMC）市場的代表性台廠包含信驊與新唐。",
+"sectors": [
+"IC設計"
+],
+"stocks": [
+{
+"code": "5274",
+"name": "信驊"
+}
+],
+"match": 0.95,
+"status": "通過",
+"reason": "原話對得上（重疊 95%）"
+},
+{
+"t": "0:28:16",
+"sec": 1696,
+"quote": "當時我也是第一次意識到，原來信驊的營收這麼小，它是一個超級貴的公司大家都知道",
+"point": "講者提到信驊雖為高價股，但 BMC 市場帶給該公司的營收規模其實不算大。",
+"sectors": [
+"IC設計"
+],
+"stocks": [
+{
+"code": "5274",
+"name": "信驊"
+}
+],
+"match": 0.89,
+"status": "通過",
+"reason": "原話對得上（重疊 89%）"
+},
+{
+"t": "0:28:26",
+"sec": 1706,
+"quote": "以新唐來講，新唐的大多數的營收還是在MCU這邊嘛",
+"point": "講者提到新唐的主要營收來源仍以 MCU 為主。",
+"sectors": [
+"IC設計"
+],
+"stocks": [],
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:30:25",
+"sec": 1825,
+"quote": "即便這個東西丟出來立刻像那個信驊的股價就跌下去吧",
+"point": "講者提及信驊先前因市場擔憂競爭者搶占市場而導致股價下跌。",
+"sectors": [
+"IC設計"
+],
+"stocks": [
+{
+"code": "5274",
+"name": "信驊"
+}
+],
+"match": 0.91,
+"status": "通過",
+"reason": "原話對得上（重疊 91%）"
+}
+],
+"n_pass": 5,
+"n_fail": 0
 }
 },
 "fail": {
@@ -10988,6 +11094,14 @@
 "yutinghao:U4RH_CPe3GQ": {
 "at": "2026-09-26",
 "err": "JSONDecodeError: Expecting ',' delimiter: line 15 column 2 (char 8245)"
+},
+"harry_pod:cmuali3vi0s2y01x94y9egxvz": {
+"at": "2026-10-11",
+"err": "ChunkedEncodingError: ('Connection broken: IncompleteRead(1189 bytes read, 9051 more expected)', IncompleteRead(1189 bytes read, 9051 more expected))"
+},
+"harry_pod:cmu0m7zgj07fa01xfaxvxg9r7": {
+"at": "2026-10-11",
+"err": "ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
 }
 }
 }
