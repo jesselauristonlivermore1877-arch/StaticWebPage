@@ -11,7 +11,18 @@ h2{font-size:17px;margin:0 0 6px} .u{margin:0 0 4px;overflow-wrap:anywhere} .u a
 .b{margin:0 0 6px;color:var(--ink2);font-size:13px} ul{margin:6px 0 0;padding-left:20px} li{margin:3px 0}
 </style></head><body><main><h1>待審預覽</h1>
 <p class="m">共 3 項　更新 2026-10-05 14:10（台北）　只放公開版會出現的內容；審核通過、套版後就刪掉對應的預覽。</p>
-<section><h2>【10-11】預覽 v4（網址沿用 v2）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">程式：CustomerServiceANDSales 分支 preview/v2；後端資料已上 main（每日更新會產）</p><ul>
+<section><h2>【10-11 15:10】預覽 v5（網址沿用 v2）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">程式：CustomerServiceANDSales 分支 preview/v2；後端（is_hist 金融業、val_bars 股價淨值比、現增日期、check_web、LINE 上櫃信用）已上 main。截圖全在 <a href="v5/shots/">preview/v5/shots/</a></p><ul>
+<li><b>P0-1 響應式三欄</b>：左右欄寬 clamp(200px, 14vw, 280px)；&lt;1600 寬預設收合，頂端「◧ 盤勢」「籌碼 ◨」兩顆按鈕展開（瀏覽器記住）；&lt;1100 單欄。中間資料區：1366×768 <b>1320px（96.6%）</b>、1536×864 1490px（97.0%）、1920×1080 1224px（63.8%，左右欄展開）、2560×1440 1681px（65.7%）、1024×768 978px（95.5%，單欄）。截圖：<a href="v5/shots/p01_1366x768.png">1366</a>、<a href="v5/shots/p01_1536x864.png">1536</a>、<a href="v5/shots/p01_1920x1080.png">1920</a>、<a href="v5/shots/p01_2560x1440.png">2560</a>、<a href="v5/shots/p01_1024x768.png">1024</a></li>
+<li><b>P0-2 頂層 5 組</b>：產業｜總經政治｜市場｜籌碼｜策略＋第二列子頁籤；處置股紅色數字掛在「市場」組上。<a href="v5/shots/p02_nav_1366.png">截圖</a>、<a href="v5/shots/p02_market_badge_1366.png">市場組</a></li>
+<li><b>P0-3 直式卡片</b>：根因是全站「表格比框寬就自動轉成一列一張卡」→ 改成橫向捲動＋第一欄固定，只有手機（&lt;560px）才轉卡片；1366 寬左右欄展開時原本會被轉成卡片的 9 處（河流圖對照、AI 研究報告、點數貢獻、四軌對照、處置股、成交金額排行、ETF 非股票部位、程式績效月表等）全部恢復表格。產業本益比大類明細改緊湊表、表頭可點排序、一年累計變化紅綠。<a href="v5/shots/p03_pe_table_1366.png">本益比表</a>、<a href="v5/shots/p03_tscroll_1366_rails.png">橫向捲動</a></li>
+<li><b>P1-4 改名</b>：族群動態、強弱輪動、產業研究、產業行事曆、集保大戶持股（現貨籌碼第一格）；內部人申報升為籌碼組子頁籤。<a href="v5/shots/p04_chips_1366.png">現貨籌碼</a>、<a href="v5/shots/p04_rename_research_1366.png">產業研究</a></li>
+<li><b>P1-5 軌跡流向</b>（流向總覽＋軌跡合併）：上方折線切換；不選線時下方是族群軌跡；點線或右側族群名 → 該族群個股軌跡；本益比／淨值比模式沒有軌跡；全部個股可「展開全部」＋排序依據（連續天數／區間累計／代號）；右側 26 個族群名單不再被切斷。<a href="v5/shots/p05_trailflow_1366.png">預設</a>、<a href="v5/shots/p05_trailflow_sel_1366.png">點金融</a>、<a href="v5/shots/p05_trail_allstocks_1366.png">全部個股</a></li>
+<li><b>P1-6 信息流拆分</b>：產業信息（即時訊息｜產業與科技｜台股公司｜美股公司｜意見領袖）、總經政治（金融經濟、政治各有即時訊息與意見領袖；總經行事曆）；民生刪除；週報與日報移到市場動態；中間常駐即時框拿掉。⚠ 意見領袖目前擷取只收產業段落，總經／政治頁先顯示說明。<a href="v5/shots/p06_industry_info_1366.png">產業信息</a>、<a href="v5/shots/p06_macro_pol_1366.png">總經政治</a>、<a href="v5/shots/p06_reports_1366.png">週報與日報</a></li>
+<li><b>P1-7 行事曆</b>：重量級（指數權重 ≥0.5% 或成交金額前 30）★排前，例 10/15 ★台積電；總經行事曆＝FOMC、各國央行、美國 CPI／PPI／就業／PCE（表格）。<a href="v5/shots/p07_cal_1366.png">產業行事曆</a>、<a href="v5/shots/p07_macro_cal_1366.png">總經行事曆</a></li>
+<li><b>P1-8 產業動向</b>：&gt;、&lt;small&gt;、&lt;!-- --&gt; 正確渲染；check_web 新增【未渲染標記】✗✗（main）。<a href="v5/shots/p08_notes_1366.png">雙鴻</a></li>
+<li><b>P1-9 金融業財務體質</b>：淨收益、稅前淨利、歸母淨利、EPS、ROE／ROA（年化），標「金融業格式」；資料回補中（回補綜合損益表已觸發），回補完才會出現。<a href="v5/shots/p09_finance_1366.png">截圖（回補前）</a></li>
+<li><b>P1-10 股價淨值比</b>：流向多「股價淨值比」切換；val.npz 回補 5 年中（合併前自動備份、三檔抽查通過才提交），滿 250 天才發布，之前顯示「回補中」。<a href="v5/shots/p10_pb_1366.png">截圖</a></li>
+</ul></section><section><h2>【10-11】預覽 v4（網址沿用 v2）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">程式：CustomerServiceANDSales 分支 preview/v2；後端資料已上 main（每日更新會產）</p><ul>
 <li><b>信息流</b>：常駐人物子列拿掉（匯率、地緣政治、科技與 AI、利率與央行、經濟指標五頁；人物名單照舊用在新聞標人名）；每則新聞多「影響判定」（可能受影響族群、個股、偏多／偏空、理由、出處；程式規則判定、不是操作建議）；第三層多「國內券商」；外資券商名單擴充</li>
 <li><b>搜尋框</b>：輸入代號或名稱，全市場個股都查得到（不只追蹤池）→ 資訊框列近 90 天重大訊息（現金增資附認股基準日、繳款期間、最後過戶日、撥券日）＋融資融券（可選單日或區間，逐日表）。上櫃信用從 10-11 起每天累積</li>
 <li><b>市場動態</b>：點數貢獻移到第一個、緊湊表格正負各 30 檔；新增「關注度排行」（新聞、PTT、意見領袖點名次數、較前一日、名次變化）；委買賣比／委買賣張數／電金比統一「一句說明＋統計觀察」（近一年百分位、20 日變化、相對前 60 日中位），手寫觀察拿掉</li>
