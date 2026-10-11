@@ -1,7 +1,7 @@
 {
- "version": "2026-10-04",
+ "version": "2026-10-11",
  "owner": "雲端（StaticWebPage）擁有；本機 tools/registry_check.py 只讀不改",
- "rule": "收錄標準（Evans 2026-10-04）：有權威性、有市場影響力。「現在的狀態」（誰在任、上市與否、公司結構）以官方發布為準；權威媒體有一個核對通過就算通過；維基不拿來判斷誰現任。新聞量多不代表有參考性。",
+ "rule": "收錄標準（Evans 2026-10-04）：有權威性、有市場影響力。「現在的狀態」（誰在任、上市與否、公司結構）以官方發布為準；權威媒體有一個核對通過就算通過；維基不拿來判斷誰現任。新聞量多不代表有參考性。 2026-10-11（Evans v6-2）：正規新聞媒體一律收（國內 20 家以上＋美股主要財經科技媒體），內容農場、匿名轉貼站不收；條款禁止的照舊不收；免費原則不變。",
  "fields": "name＝顯示名；kind＝official／agency（國家通訊社）／media（財經媒體）；cty＝國家；src_rx＝比對 Google News 來源名稱的正規式（不分大小寫）；domains＝網域（registry_check 核對出處網址用）；scope＝限定用途（有寫才限制）；domains＝把 sources 的網域攤平（本機 registry_check 讀這個；only_cty＝cn 表示只收中國官方宣布）",
  "sources": [
   {
@@ -303,9 +303,244 @@
     "culpium.com"
    ],
    "note": "Tim Culpan（前彭博科技專欄作家）的電子報，台積電、輝達等供應鏈獨家多；RSS https://www.culpium.com/feed（10-04 晚 Evans 加入）"
+  },
+  {
+   "name": "財訊",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^財訊(?!商城)",
+   "domains": [
+    "wealth.com.tw"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "今周刊",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^今周刊$|^今週刊$",
+   "domains": [
+    "businesstoday.com.tw"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "商業周刊",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^商業周刊|^商周",
+   "domains": [
+    "businessweekly.com.tw"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "天下雜誌",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^天下雜誌|^天下$|^CommonWealth",
+   "domains": [
+    "cw.com.tw"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "數位時代",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^數位時代|^Business Next",
+   "domains": [
+    "bnext.com.tw"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "DIGITIMES",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^digitimes",
+   "domains": [
+    "digitimes.com.tw",
+    "digitimes.com"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "科技新報",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^科技新報|^TechNews",
+   "domains": [
+    "technews.tw"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "聯合新聞網",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^聯合新聞網|^聯合報|^udn",
+   "domains": [
+    "udn.com"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "自由財經",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^自由時報|^自由財經|^Liberty Times|^Taipei Times",
+   "domains": [
+    "ltn.com.tw",
+    "ec.ltn.com.tw",
+    "taipeitimes.com"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "中時新聞網",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^中時|^中國時報|^旺得富|^China Times",
+   "domains": [
+    "chinatimes.com"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "ETtoday",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^ETtoday",
+   "domains": [
+    "ettoday.net"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "風傳媒",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^風傳媒|^Storm Media",
+   "domains": [
+    "storm.mg"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "三立新聞",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^三立(?:新聞|財經)",
+   "domains": [
+    "setn.com"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "東森財經新聞",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^東森(?:新聞|財經|電視)",
+   "domains": [
+    "news.ebc.net.tw",
+    "ebc.net.tw"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "CMoney",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^CMoney",
+   "domains": [
+    "cmoney.tw"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "Yahoo 股市",
+   "kind": "media",
+   "cty": "tw",
+   "src_rx": "^Yahoo\\s*(?:奇摩)?\\s*股市|^Yahoo奇摩新聞",
+   "domains": [
+    "tw.stock.yahoo.com"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "MarketWatch",
+   "kind": "media",
+   "cty": "us",
+   "src_rx": "^MarketWatch",
+   "domains": [
+    "marketwatch.com"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "Barron's",
+   "kind": "media",
+   "cty": "us",
+   "src_rx": "^Barron'?s",
+   "domains": [
+    "barrons.com"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "Yahoo Finance",
+   "kind": "media",
+   "cty": "us",
+   "src_rx": "^Yahoo Finance$",
+   "domains": [
+    "finance.yahoo.com"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "TechCrunch",
+   "kind": "media",
+   "cty": "us",
+   "src_rx": "^TechCrunch",
+   "domains": [
+    "techcrunch.com"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
+  },
+  {
+   "name": "The Information",
+   "kind": "media",
+   "cty": "us",
+   "src_rx": "^The Information$",
+   "domains": [
+    "theinformation.com"
+   ],
+   "since": "2026-10-11",
+   "why": "Evans 10-11 v6-2：正規新聞媒體一律收（內容農場、匿名轉貼站不收）"
   }
  ],
- "not_accepted": "維基百科（不判斷現任）；內容農場、聚合轉貼站（LINE TODAY、BigGo、Yahoo 轉載原文以原媒體判斷）；toalpha.tw、alphamemo（不可抓）",
+ "not_accepted": "維基百科（不判斷現任）；內容農場、聚合轉貼站（LINE TODAY、BigGo；Yahoo 轉載別家的以原媒體判斷，Yahoo 股市自製新聞收）；toalpha.tw、alphamemo（不可抓）",
  "domains": [
   {
    "domain": "cna.com.tw",
@@ -476,6 +711,106 @@
   {
    "domain": "culpium.com",
    "name": "Culpium"
+  },
+  {
+   "domain": "wealth.com.tw",
+   "name": "財訊"
+  },
+  {
+   "domain": "businesstoday.com.tw",
+   "name": "今周刊"
+  },
+  {
+   "domain": "businessweekly.com.tw",
+   "name": "商業周刊"
+  },
+  {
+   "domain": "cw.com.tw",
+   "name": "天下雜誌"
+  },
+  {
+   "domain": "bnext.com.tw",
+   "name": "數位時代"
+  },
+  {
+   "domain": "digitimes.com.tw",
+   "name": "DIGITIMES"
+  },
+  {
+   "domain": "digitimes.com",
+   "name": "DIGITIMES"
+  },
+  {
+   "domain": "technews.tw",
+   "name": "科技新報"
+  },
+  {
+   "domain": "udn.com",
+   "name": "聯合新聞網"
+  },
+  {
+   "domain": "ltn.com.tw",
+   "name": "自由財經"
+  },
+  {
+   "domain": "ec.ltn.com.tw",
+   "name": "自由財經"
+  },
+  {
+   "domain": "taipeitimes.com",
+   "name": "自由財經"
+  },
+  {
+   "domain": "chinatimes.com",
+   "name": "中時新聞網"
+  },
+  {
+   "domain": "ettoday.net",
+   "name": "ETtoday"
+  },
+  {
+   "domain": "storm.mg",
+   "name": "風傳媒"
+  },
+  {
+   "domain": "setn.com",
+   "name": "三立新聞"
+  },
+  {
+   "domain": "news.ebc.net.tw",
+   "name": "東森財經新聞"
+  },
+  {
+   "domain": "ebc.net.tw",
+   "name": "東森財經新聞"
+  },
+  {
+   "domain": "cmoney.tw",
+   "name": "CMoney"
+  },
+  {
+   "domain": "tw.stock.yahoo.com",
+   "name": "Yahoo 股市"
+  },
+  {
+   "domain": "marketwatch.com",
+   "name": "MarketWatch"
+  },
+  {
+   "domain": "barrons.com",
+   "name": "Barron's"
+  },
+  {
+   "domain": "finance.yahoo.com",
+   "name": "Yahoo Finance"
+  },
+  {
+   "domain": "techcrunch.com",
+   "name": "TechCrunch"
+  },
+  {
+   "domain": "theinformation.com",
+   "name": "The Information"
   }
  ]
 }
