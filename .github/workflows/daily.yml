@@ -161,6 +161,7 @@ jobs:
           python insider.py ../site/data || { echo "::warning::內部人持股失敗（這班不更新）"; echo "內部人持股失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           python ps_river.py ../site/data || { echo "::warning::股價營收比河流失敗（這班不更新）"; echo "股價營收比河流失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           python margin_otc.py ../site/data || { echo "::warning::上櫃逐檔信用失敗（搜尋框上櫃融資融券這班不更新）"; echo "上櫃逐檔信用失敗（搜尋框上櫃融資融券這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python attention.py ../site/data || { echo "::warning::關注度排行失敗（這班不更新）"; echo "關注度排行失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           python stock_lookup.py ../site/data || { echo "::warning::個股查詢資料失敗（搜尋框資訊框這班不更新）"; echo "個股查詢資料失敗（搜尋框資訊框這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
 
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
