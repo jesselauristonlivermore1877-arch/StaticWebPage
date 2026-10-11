@@ -115,6 +115,12 @@ jobs:
             git commit -m "data: 世界趨勢 $(TZ=Asia/Taipei date '+%F %H:%M')（${{ steps.mode.outputs.mode }}）"
             for i in 1 2 3 4; do
               git pull --rebase origin main && git push origin HEAD:main && exit 0
+              # 🟢 10-11：geo_ai.json 跟「即時信息流」同時寫會衝突（10-11 10:48 那班就是這樣失敗）→ 只有它衝突時用遠端那份（即時信息流每小時重算）
+              U=$(git diff --name-only --diff-filter=U)
+              if [ "$U" = "data/registry/geo_ai.json" ]; then
+                echo "geo_ai.json 衝突 → 用遠端版本"
+                git checkout --ours data/registry/geo_ai.json && git add data/registry/geo_ai.json && GIT_EDITOR=true git rebase --continue && git push origin HEAD:main && exit 0
+              fi
               git rebase --abort 2>/dev/null || true
               sleep $((2 ** i))
             done
