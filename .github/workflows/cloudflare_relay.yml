@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "deploy＝部署＋測試；test＝只測試；rotate＝換 token＋部署＋測試"
+        description: "deploy＝部署＋測試；test＝只測試；rotate＝換 token＋部署＋測試；stats＝近 24 小時 CPU（GraphQL，Worker＋Durable Object）"
         required: false
         default: "deploy"
 
@@ -54,7 +54,7 @@ jobs:
           for K in RELAY_PUB_TOKEN RELAY_ADMIN_TOKEN; do
             V=$(get $K)
             if [ -z "$V" ] || [ "${{ inputs.mode }}" = "rotate" ]; then
-              [ "${{ inputs.mode }}" = "test" ] && { echo "::error::$K 還沒產生（先跑 deploy）"; exit 1; }
+              [ "${{ inputs.mode }}" = "test" ] || [ "${{ inputs.mode }}" = "stats" ] && { echo "::error::$K 還沒產生（先跑 deploy）"; exit 1; }
               V=$(openssl rand -hex 32)
               echo "::add-mask::$V"
               wrangler d1 execute "$DB" --remote --yes --command "INSERT INTO keys(name,value,created) VALUES('$K','$V',datetime('now')) ON CONFLICT(name) DO UPDATE SET value=excluded.value, created=excluded.created" >/dev/null
@@ -67,7 +67,7 @@ jobs:
           done
           echo "▶ Evans 複製位置：Cloudflare 主控台 → Storage & databases → D1 SQL database → $DB → Console，執行 SELECT * FROM keys"
       - name: 部署＋設定 Worker secret
-        if: inputs.mode != 'test'
+        if: inputs.mode != 'test' && inputs.mode != 'stats'
         run: |
           set -o pipefail
           wrangler deploy 2>&1 | tee deploy.log
@@ -75,6 +75,7 @@ jobs:
           wrangler secret bulk /tmp/sec.json; rm -f /tmp/sec.json
           sleep 15
       - name: 自動測試（1 發 3 收；同時 tail 收 CPU）
+        if: inputs.mode != 'stats'
         run: |
           W=https://gea-signal-relay.jesselauristonlivermore1877.workers.dev
           for i in 1 2 3 4 5 6; do C=$(curl -s -o /dev/null -w "%{http_code}" "$W/"); echo "GET / → $C"; [ "$C" = 200 ] && break; sleep 10; done
@@ -85,9 +86,15 @@ jobs:
           python3 - <<'PY'
           import json, collections
           ev = collections.defaultdict(list); shown = 0
-          for line in open("tail.jsonl", encoding="utf-8", errors="replace"):
-              try: e = json.loads(line)
-              except Exception: continue
+          raw = open("tail.jsonl", encoding="utf-8", errors="replace").read()
+          print("  tail.jsonl %d 字" % len(raw))
+          dec, i, objs = json.JSONDecoder(), 0, []
+          while True:                                          # wrangler tail --format json 是多行縮排、一個接一個 → 串流解碼
+              j = raw.find("{", i)
+              if j < 0: break
+              try: o, i = dec.raw_decode(raw, j); objs.append(o)
+              except Exception: i = j + 1
+          for e in objs:
               if not isinstance(e, dict): continue
               if shown < 3:                                    # 先印原始結構定位（10-11：event 有時是字串）
                   print("  樣本：", json.dumps({k: (v if not isinstance(v, (dict, list)) else type(v).__name__) for k, v in e.items()}, ensure_ascii=False)[:300]); shown += 1
@@ -109,3 +116,30 @@ jobs:
           PY
           tail -3 tail.err
           exit $RC
+      - name: CPU 用量（GraphQL 近 24 小時；Worker 與 Durable Object 分開）
+        if: inputs.mode == 'stats'
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request, datetime as dt
+          now = dt.datetime.now(dt.timezone.utc); t0 = now - dt.timedelta(hours=24)
+          V = {"a": os.environ["CLOUDFLARE_ACCOUNT_ID"], "s": t0.strftime("%Y-%m-%dT%H:%M:%SZ"), "e": now.strftime("%Y-%m-%dT%H:%M:%SZ")}
+          Q = {
+            "Worker": """query($a:String!,$s:Time!,$e:Time!){viewer{accounts(filter:{accountTag:$a}){
+              workersInvocationsAdaptive(limit:200,filter:{scriptName:"gea-signal-relay",datetime_geq:$s,datetime_leq:$e}){
+                sum{requests errors} quantiles{cpuTimeP50 cpuTimeP99 wallTimeP99} dimensions{status datetimeHour}}}}}""",
+            "Durable Object": """query($a:String!,$s:Time!,$e:Time!){viewer{accounts(filter:{accountTag:$a}){
+              durableObjectsInvocationsAdaptiveGroups(limit:200,filter:{scriptName:"gea-signal-relay",datetime_geq:$s,datetime_leq:$e}){
+                sum{requests errors wallTime} quantiles{cpuTimeP50 cpuTimeP99} dimensions{datetimeHour}}}}}""",
+          }
+          for name, q in Q.items():
+              r = urllib.request.Request("https://api.cloudflare.com/client/v4/graphql", json.dumps({"query": q, "variables": V}).encode(),
+                                         {"Authorization": "Bearer " + os.environ["CLOUDFLARE_API_TOKEN"], "Content-Type": "application/json"})
+              try: J = json.load(urllib.request.urlopen(r, timeout=60))
+              except Exception as e: print(name, "GraphQL 失敗：", e); continue
+              if J.get("errors"): print(name, "errors：", json.dumps(J["errors"], ensure_ascii=False)[:500])
+              acc = ((((J.get("data") or {}).get("viewer") or {}).get("accounts") or [{}])[0]) or {}
+              rows = next(iter(acc.values()), []) if acc else []
+              print("──", name, len(rows), "列")
+              for x in sorted(rows, key=lambda x: str(x.get("dimensions"))):
+                  print("  ", json.dumps(x, ensure_ascii=False)[:240])
+          PY
