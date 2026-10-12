@@ -3,7 +3,7 @@
  "name": "富邦金",
  "date": "2026-10-08",
  "industry": "金融",
- "made": "本機 company_report（2026-10-11T15:58）",
+ "made": "本機 company_report（2026-10-12T20:40）",
  "deck": {
   "url": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
   "date": "2026-10-08"
@@ -828,6 +828,226 @@
    "text": "13.2%",
    "src": "https://mopsov.twse.com.tw/mops/web/t163sb05",
    "period": "近四季"
+  },
+  {
+   "id": "prod_1",
+   "sec": "產品線",
+   "label": "傳統壽險：分期繳 營收占比（1H26）",
+   "value": 32.8,
+   "unit": "%",
+   "text": "32.8%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H26"
+  },
+  {
+   "id": "prod_2",
+   "sec": "產品線",
+   "label": "健康險、傷害險和其他 營收占比（1H26）",
+   "value": 18.4,
+   "unit": "%",
+   "text": "18.4%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H26"
+  },
+  {
+   "id": "prod_3",
+   "sec": "產品線",
+   "label": "傳統壽險：躉繳 營收占比（1H26）",
+   "value": 42.4,
+   "unit": "%",
+   "text": "42.4%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H26"
+  },
+  {
+   "id": "prod_4",
+   "sec": "產品線",
+   "label": "投資型保單 營收占比（1H26）",
+   "value": 6.4,
+   "unit": "%",
+   "text": "6.4%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H26"
+  },
+  {
+   "id": "prod_5",
+   "sec": "產品線",
+   "label": "傳統壽險：分期繳 營收占比（1H25）",
+   "value": 24.7,
+   "unit": "%",
+   "text": "24.7%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H25"
+  },
+  {
+   "id": "prod_6",
+   "sec": "產品線",
+   "label": "健康險、傷害險和其他 營收占比（1H25）",
+   "value": 12.4,
+   "unit": "%",
+   "text": "12.4%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H25"
+  },
+  {
+   "id": "prod_8",
+   "sec": "產品線",
+   "label": "投資型保單 營收占比（1H25）",
+   "value": 8.9,
+   "unit": "%",
+   "text": "8.9%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H25"
+  },
+  {
+   "id": "prod_9",
+   "sec": "產品線",
+   "label": "Auto 營收占比（2026/6/30）",
+   "value": 38.7,
+   "unit": "%",
+   "text": "38.7%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "2026/6/30"
+  },
+  {
+   "id": "prod_10",
+   "sec": "產品線",
+   "label": "Accident and health 營收占比（2026/6/30）",
+   "value": 14.9,
+   "unit": "%",
+   "text": "14.9%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "2026/6/30"
+  },
+  {
+   "id": "prod_11",
+   "sec": "產品線",
+   "label": "Comprehensive personal 營收占比（2026/6/30）",
+   "value": 2.5,
+   "unit": "%",
+   "text": "2.5%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "2026/6/30"
+  },
+  {
+   "id": "prod_12",
+   "sec": "產品線",
+   "label": "Commercial fire 營收占比（2026/6/30）",
+   "value": 16.1,
+   "unit": "%",
+   "text": "16.1%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "2026/6/30"
+  },
+  {
+   "id": "prod_13",
+   "sec": "產品線",
+   "label": "Marine 營收占比（2026/6/30）",
+   "value": 6.5,
+   "unit": "%",
+   "text": "6.5%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "2026/6/30"
+  },
+  {
+   "id": "prod_15",
+   "sec": "產品線",
+   "label": "Casualty 營收占比（2026/6/30）",
+   "value": 10.3,
+   "unit": "%",
+   "text": "10.3%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "2026/6/30"
+  },
+  {
+   "id": "prod_16",
+   "sec": "產品線",
+   "label": "傳統壽險：分期繳 營收占比（1H26）",
+   "value": 32.8,
+   "unit": "%",
+   "text": "32.8%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H26"
+  },
+  {
+   "id": "prod_17",
+   "sec": "產品線",
+   "label": "健康險、傷害險和其他 營收占比（1H26）",
+   "value": 18.4,
+   "unit": "%",
+   "text": "18.4%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H26"
+  },
+  {
+   "id": "prod_18",
+   "sec": "產品線",
+   "label": "傳統壽險：躉繳 營收占比（1H26）",
+   "value": 42.4,
+   "unit": "%",
+   "text": "42.4%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H26"
+  },
+  {
+   "id": "prod_19",
+   "sec": "產品線",
+   "label": "投資型保單 營收占比（1H26）",
+   "value": 6.4,
+   "unit": "%",
+   "text": "6.4%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H26"
+  },
+  {
+   "id": "prod_20",
+   "sec": "產品線",
+   "label": "傳統壽險：分期繳 營收占比（1H25）",
+   "value": 24.7,
+   "unit": "%",
+   "text": "24.7%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H25"
+  },
+  {
+   "id": "prod_21",
+   "sec": "產品線",
+   "label": "健康險、傷害險和其他 營收占比（1H25）",
+   "value": 12.4,
+   "unit": "%",
+   "text": "12.4%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H25"
+  },
+  {
+   "id": "prod_23",
+   "sec": "產品線",
+   "label": "投資型保單 營收占比（1H25）",
+   "value": 8.9,
+   "unit": "%",
+   "text": "8.9%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H25"
+  },
+  {
+   "id": "prod_26",
+   "sec": "產品線",
+   "label": "個人險 營收占比（1H25）",
+   "value": 57.3,
+   "unit": "%",
+   "text": "57.3%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H25"
+  },
+  {
+   "id": "prod_27",
+   "sec": "產品線",
+   "label": "企業險 營收占比（1H25）",
+   "value": 42.7,
+   "unit": "%",
+   "text": "42.7%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/288120261008M002.pdf",
+   "period": "1H25"
   }
  ],
  "tables": {
@@ -1025,6 +1245,146 @@
       "rel_1m",
       "rel_3m",
       null
+     ]
+    }
+   ]
+  },
+  "products": {
+   "title": "產品線營收占比（法說簡報）",
+   "cols": [
+    "占比"
+   ],
+   "rows": [
+    {
+     "label": "傳統壽險：分期繳（1H26）",
+     "cells": [
+      "prod_1"
+     ]
+    },
+    {
+     "label": "健康險、傷害險和其他（1H26）",
+     "cells": [
+      "prod_2"
+     ]
+    },
+    {
+     "label": "傳統壽險：躉繳（1H26）",
+     "cells": [
+      "prod_3"
+     ]
+    },
+    {
+     "label": "投資型保單（1H26）",
+     "cells": [
+      "prod_4"
+     ]
+    },
+    {
+     "label": "傳統壽險：分期繳（1H25）",
+     "cells": [
+      "prod_5"
+     ]
+    },
+    {
+     "label": "健康險、傷害險和其他（1H25）",
+     "cells": [
+      "prod_6"
+     ]
+    },
+    {
+     "label": "投資型保單（1H25）",
+     "cells": [
+      "prod_8"
+     ]
+    },
+    {
+     "label": "Auto（2026/6/30）",
+     "cells": [
+      "prod_9"
+     ]
+    },
+    {
+     "label": "Accident and health（2026/6/30）",
+     "cells": [
+      "prod_10"
+     ]
+    },
+    {
+     "label": "Comprehensive personal（2026/6/30）",
+     "cells": [
+      "prod_11"
+     ]
+    },
+    {
+     "label": "Commercial fire（2026/6/30）",
+     "cells": [
+      "prod_12"
+     ]
+    },
+    {
+     "label": "Marine（2026/6/30）",
+     "cells": [
+      "prod_13"
+     ]
+    },
+    {
+     "label": "Casualty（2026/6/30）",
+     "cells": [
+      "prod_15"
+     ]
+    },
+    {
+     "label": "傳統壽險：分期繳（1H26）",
+     "cells": [
+      "prod_16"
+     ]
+    },
+    {
+     "label": "健康險、傷害險和其他（1H26）",
+     "cells": [
+      "prod_17"
+     ]
+    },
+    {
+     "label": "傳統壽險：躉繳（1H26）",
+     "cells": [
+      "prod_18"
+     ]
+    },
+    {
+     "label": "投資型保單（1H26）",
+     "cells": [
+      "prod_19"
+     ]
+    },
+    {
+     "label": "傳統壽險：分期繳（1H25）",
+     "cells": [
+      "prod_20"
+     ]
+    },
+    {
+     "label": "健康險、傷害險和其他（1H25）",
+     "cells": [
+      "prod_21"
+     ]
+    },
+    {
+     "label": "投資型保單（1H25）",
+     "cells": [
+      "prod_23"
+     ]
+    },
+    {
+     "label": "個人險（1H25）",
+     "cells": [
+      "prod_26"
+     ]
+    },
+    {
+     "label": "企業險（1H25）",
+     "cells": [
+      "prod_27"
      ]
     }
    ]
