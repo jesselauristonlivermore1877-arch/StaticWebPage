@@ -11084,6 +11084,917 @@
 ],
 "n_pass": 5,
 "n_fail": 0
+},
+"harry_pod:cmv4o5zzv03yd01w1dgw83mu8": {
+"src": "harry_pod",
+"name": "哈利說（科技浪 Tech.wav）",
+"kind": "podcast",
+"title": "EP159 - 馬斯克砸 80 億買頻譜！SpaceX 真的要取代傳統電信商了嗎？",
+"date": "2026-10-12",
+"url": "https://open.firstory.fm/story/cmv4o5zzv03yd01w1dgw83mu8",
+"dur_s": 3773,
+"models": [
+"gemini-3-flash-preview",
+"gemini-3.5-flash-lite"
+],
+"at": "2026-10-12",
+"n_seg": 105,
+"len_s": 3756,
+"mentions": [
+{
+"t": "0:01:04",
+"sec": 64,
+"quote": "那現在呢，搭載RTX Spark的筆電也終於登場了，我們今天要介紹的是ASUS ProArt P16",
+"point": "ASUS推出搭載RTX Spark的ProArt P16筆電。",
+"sectors": [
+"伺服器與品牌組裝"
+],
+"stocks": [
+{
+"code": "2357",
+"name": "華碩"
+}
+],
+"area": "產業",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:02:28",
+"sec": 148,
+"quote": "就送你ProArt 27寸專業的螢幕，直接送你一個螢幕，價值8000多塊的",
+"point": "購買ProArt P16筆電送27吋專業螢幕。",
+"sectors": [
+"伺服器與品牌組裝"
+],
+"stocks": [
+{
+"code": "2357",
+"name": "華碩"
+}
+],
+"area": "產業",
+"match": 0.93,
+"status": "通過",
+"reason": "原話對得上（重疊 93%）"
+},
+{
+"t": "0:04:19",
+"sec": 259,
+"quote": "SpaceX現在終於要直接跟傳統的電信商競爭了，OK，就是直接跟美國的",
+"point": "SpaceX將直接與傳統電信商競爭。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"area": "產業",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:04:29",
+"sec": 269,
+"quote": "直接就像是AT&T、T-Mobile、Verizon，就就好像是美國的台灣大哥大、中華電信去直接對幹了",
+"point": "SpaceX競爭對象為AT&T、T-Mobile、Verizon等傳統電信商。",
+"sectors": [
+"網通與衛星",
+"電信與雲端服務"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.86,
+"status": "通過",
+"reason": "原話對得上（重疊 86%）"
+},
+{
+"t": "0:05:04",
+"sec": 304,
+"quote": "因為SpaceX的Starlink會推出一個全國無死角的電信服務",
+"point": "Starlink將推出全國無死角電信服務。",
+"sectors": [
+"網通與衛星",
+"電信與雲端服務"
+],
+"stocks": [],
+"area": "產業",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:06:01",
+"sec": 361,
+"quote": "全部的美國電信商，直接股價都暴跌將近10%，OK，就是無一例外",
+"point": "SpaceX推出電信服務後美國電信商股價暴跌近10%。",
+"sectors": [
+"網通與衛星",
+"電信與雲端服務"
+],
+"stocks": [],
+"area": "產業",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:06:31",
+"sec": 391,
+"quote": "我其實是覺得馬斯克的Starlink是沒有辦法取代傳統電信商的",
+"point": "講者認為馬斯克的Starlink無法取代傳統電信商。",
+"sectors": [
+"網通與衛星",
+"電信與雲端服務"
+],
+"stocks": [],
+"area": "產業",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:09:41",
+"sec": 581,
+"quote": "Starlink是SpaceX的一個低軌衛星網路服務",
+"point": "Starlink是SpaceX的低軌衛星網路服務。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.48,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 48%）"
+},
+{
+"t": "0:09:59",
+"sec": 599,
+"quote": "已經有1萬顆左右了，OK，那這1萬顆的衛星呢，就是能夠持續的為地球的表面提供網路服務",
+"point": "Starlink已有約1萬顆衛星為地球表面提供網路服務。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.25,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 25%）"
+},
+{
+"t": "0:10:31",
+"sec": 631,
+"quote": "是使用一個叫做Starlink Dishi的東西，就是你要買一塊買一塊這個白色的長方形的板子",
+"point": "接收Starlink衛星訊號需購買白色長方形板子Dishy。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.29,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 29%）"
+},
+{
+"t": "0:11:07",
+"sec": 667,
+"quote": "現在大多數人使用到Starlink的服務呢，都是透過這個Dishy，然後人數還真的不少哦",
+"point": "多數人使用Starlink是透過Dishy設備且人數不少。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.27,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 27%）"
+},
+{
+"t": "0:12:33",
+"sec": 753,
+"quote": "Direct to cell，就是衛星是直接把訊號傳到你的手機裡，你是直接用你的手機的天線去接收衛星的這些電磁波",
+"point": "Direct to cell技術讓衛星訊號直接傳到手機接收電磁波。",
+"sectors": [
+"網通與衛星",
+"電信與雲端服務"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.29,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 29%）"
+},
+{
+"t": "0:13:01",
+"sec": 781,
+"quote": "就比如說他們有跟T-Mobile合作嘛，那T-Mobile那個合作的內容呢，通常就是說，在傳統電信商電信插的訊號插的時候，這個有盲區的時候呢，手機就會自動切換到Starlink的網路",
+"point": "T-Mobile合作案在電信訊號盲區會自動切換至Starlink網路。",
+"sectors": [
+"網通與衛星",
+"電信與雲端服務"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.12,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 12%）"
+},
+{
+"t": "0:13:43",
+"sec": 823,
+"quote": "是這個歐洲的一個OneWeb的服務，那他們就是650顆的一個低軌衛星網路服務",
+"point": "歐洲OneWeb擁有650顆低軌衛星網路服務。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.21,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 21%）"
+},
+{
+"t": "0:13:53",
+"sec": 833,
+"quote": "Amazon Leo是第三名，390顆",
+"point": "Amazon Leo為第三名擁有390顆衛星。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.0,
+"status": "失敗",
+"reason": "時間點附近沒有逐字稿（時間點可能超出這集長度）"
+},
+{
+"t": "0:14:14",
+"sec": 854,
+"quote": "冷不防的收購了一個800MHz的低平頻譜嘛，對不對？",
+"point": "SpaceX收購了800MHz低頻頻譜。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.43,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 43%）"
+},
+{
+"t": "0:16:10",
+"sec": 970,
+"quote": "這也就是為什麼一個頻段，一個某些特定的頻率呢，不能由很多人共用，不能有很多的電信商去共用",
+"point": "特定頻率不能由多人或多家電信商共用",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:17:51",
+"sec": 1071,
+"quote": "比較低的頻率跟比較高的頻率的電磁波，還是會有一些物理性質上面的不同嘛，對不對",
+"point": "低頻與高頻的電磁波在物理性質上有所不同",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 0.94,
+"status": "通過",
+"reason": "原話對得上（重疊 94%）"
+},
+{
+"t": "0:18:02",
+"sec": 1082,
+"quote": "我們現在講的800MHz的頻率，我們知道赫茲就是你一秒就是震動幾次嘛，對不對",
+"point": "赫茲代表一秒內的震動次數",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:19:09",
+"sec": 1149,
+"quote": "有一個就是最直接的就是頻率低，就代表它的波長比較長嘛，對不對",
+"point": "頻率低代表波長較長",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:19:36",
+"sec": 1176,
+"quote": "這個就是為什麼低頻頻段會比較適合室內的收訊，OK",
+"point": "低頻頻段較適合室內收訊",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:20:41",
+"sec": 1241,
+"quote": "這個Starlink要開始取代傳統電信商上了嘛，對不對",
+"point": "Starlink要開始取代傳統電信商",
+"sectors": [
+"網通與衛星",
+"電信與雲端服務"
+],
+"stocks": [],
+"area": "產業",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:23:12",
+"sec": 1392,
+"quote": "這兩者加起來呢，它們就是很多人覺得Starlink就可以拼成一個能夠直接取代傳統電信商的一個服務",
+"point": "Starlink的頻譜组合被認為可以取代傳統電信商",
+"sectors": [
+"網通與衛星",
+"電信與雲端服務"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.44,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 44%）"
+},
+{
+"t": "0:24:16",
+"sec": 1456,
+"quote": "就是在於物理距離嘛，OK，那這個物理距離就是低軌衛星是在地球軌道上，它是在外太空",
+"point": "低軌衛星位在外太空的地球軌道上",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 0.2,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 20%）"
+},
+{
+"t": "0:25:11",
+"sec": 1511,
+"quote": "這邊數學都可以直接算出來哦，我們今天假設所有其他條件都一樣，就是整個訊號原始訊號強度功率啊",
+"point": "假設其他條件相同，計算訊號功率與強度",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 0.2,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 20%）"
+},
+{
+"t": "0:26:21",
+"sec": 1581,
+"quote": "因為我們知道電池波也是波嘛，那高中沒有學過就是波可以可以干涉，OK",
+"point": "電磁波可以產生干涉現象",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 0.18,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 18%）"
+},
+{
+"t": "0:27:15",
+"sec": 1635,
+"quote": "這個爭議真的是黑科技啊，就是能做到這種程度呢，其實就是Starlink也是業界第一名啊",
+"point": "Starlink在業界技術水準排名第一",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 0.36,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 36%）"
+},
+{
+"t": "0:27:35",
+"sec": 1655,
+"quote": "爭議又不是只有太空的衛星可以使用，地表的基地台也是可以爭議啊，對不對",
+"point": "地表基地台同樣可以使用爭議技術",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 0.34,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 34%）"
+},
+{
+"t": "0:28:39",
+"sec": 1719,
+"quote": "那一個衛星呢可以發幾百個波數，就這個那個電磁波一個波數這樣子",
+"point": "一個衛星可以發射多個電磁波波數",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 0.44,
+"status": "失敗",
+"reason": "原話在時間點 ±180 秒內對不到（重疊 44%）"
+},
+{
+"t": "0:33:18",
+"sec": 1998,
+"quote": "SpaceX 的頻譜資源真的很少，SpaceX 總共就只有 79MHz 的頻譜資產",
+"point": "講者提到SpaceX的頻譜資源總共只有79MHz。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.96,
+"status": "通過",
+"reason": "原話對得上（重疊 96%）"
+},
+{
+"t": "0:33:25",
+"sec": 2005,
+"quote": "T-Mobile 有 400MHz，而且 T-Mobile 只是一間電信商",
+"point": "講者指出T-Mobile擁有400MHz的頻譜。",
+"sectors": [
+"電信與雲端服務"
+],
+"stocks": [],
+"area": "產業",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:33:33",
+"sec": 2013,
+"quote": "SpaceX 它現在在低頻的這個頻譜這邊，低頻頻段這邊呢，其實最主要就是只有 800MHz 的這一個頻段可以使用而已",
+"point": "講者說明SpaceX在低頻段僅有800MHz可使用。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"area": "產業",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "0:39:38",
+"sec": 2378,
+"quote": "SpaceX 他們絕對有在研究這邊的技術，他們已經有公開說了，他們有使用 MIMO",
+"point": "講者提到SpaceX有公開表示他們有使用MIMO技術。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.0,
+"status": "失敗",
+"reason": "時間點附近沒有逐字稿（時間點可能超出這集長度）"
+},
+{
+"t": "0:41:15",
+"sec": 2475,
+"quote": "像 SpaceX 他們說，他們初步對於 Direct to Cell 的願景呢，是做到每個用戶 150Mbps per second 的峰值速率",
+"point": "講者提到SpaceX對於Direct to Cell的願景是提供每用戶150Mbps的峰值速率。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.0,
+"status": "失敗",
+"reason": "時間點附近沒有逐字稿（時間點可能超出這集長度）"
+},
+{
+"t": "0:41:51",
+"sec": 2511,
+"quote": "首先這個是峰值最高的，然後再來，他們也沒有說是都市還是郊外，然後同時有多少的用戶去使用",
+"point": "講者探討峰值速率並未區分都市與郊外及用戶數量。",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 0.0,
+"status": "失敗",
+"reason": "時間點附近沒有逐字稿（時間點可能超出這集長度）"
+},
+{
+"t": "0:59:14",
+"sec": 3554,
+"quote": "有300台的Cybercab，然後除此之外，他們還有400台的Model Y已經在就是已經有登記了。",
+"point": "講者提到特斯拉在德州有 300 台 Cybercab 與 400 台 Model Y 已登記。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 1.0,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落"
+},
+{
+"t": "0:59:27",
+"sec": 3567,
+"quote": "所以特斯拉在德州的總共登記的車輛有700多台，OK。",
+"point": "講者指出特斯拉在德州總登記車輛達 700 多台。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 0.91,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落"
+},
+{
+"t": "0:59:38",
+"sec": 3578,
+"quote": "一眨眼，特斯拉的車隊，無人的車隊已經從十幾台二十幾台的小規模測試，已經變成幾百台了。",
+"point": "講者表示特斯拉無人車隊測試規模已從十幾二十台擴大到幾百台。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 0.97,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落"
+},
+{
+"t": "0:59:48",
+"sec": 3588,
+"quote": "那Waymo是什麼規模呢?Waymo它在就是最新的這個車輛登記追踪平台呢，是顯示它有1200台左右。",
+"point": "講者提到 Waymo 最新車輛登記追蹤平台顯示其規模約 1200 台。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 0.98,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落"
+},
+{
+"t": "0:59:58",
+"sec": 3598,
+"quote": "那特斯拉700台的Cybercab...",
+"point": "講者提及特斯拉擁有 700 台 Cybercab。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 1.0,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落"
+},
+{
+"t": "1:00:08",
+"sec": 3608,
+"quote": "Cybercab在德州無人的載客，然後這這些Cybercab，就真的是那種很炫砲的，",
+"point": "講者描述德州無人載客的 Cybercab 外型很炫砲。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 0.9,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落"
+},
+{
+"t": "1:00:21",
+"sec": 3621,
+"quote": "但過去這一個月，我覺得這個擴張有明顯的加速咯，",
+"point": "講者認為過去一個月擴張有明顯加速。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 0.95,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落"
+},
+{
+"t": "1:00:29",
+"sec": 3629,
+"quote": "就是我們在去過去上個月的月初的時候呢，特斯拉有進行一些那個Cybercap的event，",
+"point": "講者提到特斯拉上個月初舉辦了 Cybercab 活動。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 0.85,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落"
+},
+{
+"t": "1:00:43",
+"sec": 3643,
+"quote": "然後有實際在德州部署Cybercap。",
+"point": "講者提到特斯拉已實際在德州部署 Cybercab。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 0.94,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落"
+},
+{
+"t": "1:00:48",
+"sec": 3648,
+"quote": "Cybercap跟不是Robotaxi喲，",
+"point": "講者指出 Cybercab 不是 Robotaxi。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 0.84,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落"
+},
+{
+"t": "1:00:51",
+"sec": 3651,
+"quote": "原本特斯拉在進行的這個Robotaxi呢，都是使用Model Y的模型，",
+"point": "講者說明特斯拉先前進行 Robotaxi 是使用 Model Y 模型。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 0.94,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落"
+},
+{
+"t": "1:01:10",
+"sec": 3670,
+"quote": "但它從9月開始是放了300台的Cybercap在德州，",
+"point": "講者指出特斯拉從 9 月開始在德州投放 300 台 Cybercab。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 0.92,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落"
+},
+{
+"t": null,
+"sec": null,
+"quote": "無人的載客，那這些Cybercap，就真的是那是那種很炫砲的，",
+"point": "講者形容德州無人的 Cybercab 是很炫砲的車款。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "金色的，沒有方向盤，然後也沒有油門，",
+"point": "講者描述該車輛為金色、無方向盤且無油門。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "的那台無人計程車，OK，兩人坐的。",
+"point": "講者說明這是一台兩人座的無人計程車。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "那那個時候開放呃就是就是，現在基本上已經是好像大家都可以呃就是叫到了這樣子，",
+"point": "講者提到目前該服務基本上大家都已經可以叫到。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "然後很多人拍了他們的視乘體驗，那真的是feels like the future，真的，",
+"point": "講者提到許多人拍攝試乘體驗，感覺就像未來。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "你坐進一台沒有方向盤的車子，然後那個車門還是往上開的，",
+"point": "講者描述乘坐無方向盤且車門往上開的車輛體驗。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "然後你進去之後他那個呃這個大螢幕顯示，welcome，你的名字還是什麼東西，",
+"point": "講者提到進入車內大螢幕會顯示歡迎詞與乘車者名字。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "然後你的地點在哪裡，然後每一關上它就自己開始走了。",
+"point": "講者說明設定地點後車輛就會自動行駛。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "真的式完全是未來的感覺啊。",
+"point": "講者重申這完全是未來的感覺。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "那德州已經可以體驗到這樣子的未來啦，",
+"point": "講者指出德州已經可以體驗到這樣的未來。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "有300台的Cybercap，然後除此之外，",
+"point": "講者重複提到德州有 300 台 Cybercab。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "他們還有400台的Model Y已經在就是已經有登記了。",
+"point": "講者重申另外還有 400 台 Model Y 已登記。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "所以特斯拉在德州的總共登記的車輛有700多台，OK。",
+"point": "講者總結特斯拉在德州總計有 700 多台登記車輛。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "那這個跟我們呃我大概半年前，",
+"point": "講者提及大約半年前的情況。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "那時候在抱怨的，怎麼搞到現在也才十幾台，",
+"point": "講者提到半年前曾抱怨車輛數只有十幾台。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "已經是完全不一樣的規模了對不对?",
+"point": "講者指出規模已經完全不同。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "一眨眼，特斯拉的車隊，無人的車隊已經從十幾台二十幾台的小規模測試，",
+"point": "講者描述無人車隊從十幾二十台小規模測試迅速擴大。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": null,
+"sec": null,
+"quote": "已經變成幾百台了。",
+"point": "講者強調無人車隊規模已達數百台。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"status": "失敗",
+"reason": "沒有時間點或原話太短"
+},
+{
+"t": "1:01:21",
+"sec": 3681,
+"quote": "所以原本如果你已經追蹤特斯拉追到有點不想追了，因為根本就沒什麼新東西的話呢，哎搞不好最近呢你可以又再回來看一下",
+"point": "講者指出特斯拉過去因缺乏新東西而少人追蹤，但最近可能有新題材可以重新關注。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"area": "產業",
+"match": 0.94,
+"status": "通過",
+"reason": "原話對得上（重疊 94%）"
+},
+{
+"t": "1:01:30",
+"sec": 3690,
+"quote": "尤其他們在下禮拜又要發表那個 Roaster了嘛，對不對？就是聽說是會飛天的車子啊。",
+"point": "講者提到特斯拉下禮拜將發表據傳會飛天的 Roaster 車款。",
+"sectors": [
+"網通與衛星"
+],
+"stocks": [],
+"area": "產業",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "1:02:10",
+"sec": 3730,
+"quote": "就電信業的技術，我也是沒有懂到超級深入啦。",
+"point": "講者表示自己對電信業技術的理解並非超級深入。",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）"
+},
+{
+"t": "1:02:15",
+"sec": 3735,
+"quote": "我只是從一個，我比較high level、比較粗淺的技術的角度，就覺得說，本質上我們目前看不到真的有太大機會在這邊",
+"point": "講者從較高層次與粗淺技術角度認為目前看不到太大機會。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 0.92,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落"
+},
+{
+"t": "1:02:24",
+"sec": 3744,
+"quote": "但是如果真的很懂這個產業的，然後有有看到一些我們沒看到技術的人，也歡迎指教。",
+"point": "講者歡迎真正懂該產業且看到未被發掘技術的人給予指教。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 0.88,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落"
+}
+],
+"n_pass": 19,
+"n_fail": 51,
+"area_v": 1
 }
 },
 "fail": {
@@ -11094,14 +12005,6 @@
 "yutinghao:U4RH_CPe3GQ": {
 "at": "2026-09-26",
 "err": "JSONDecodeError: Expecting ',' delimiter: line 15 column 2 (char 8245)"
-},
-"harry_pod:cmuali3vi0s2y01x94y9egxvz": {
-"at": "2026-10-11",
-"err": "ChunkedEncodingError: ('Connection broken: IncompleteRead(1189 bytes read, 9051 more expected)', IncompleteRead(1189 bytes read, 9051 more expected))"
-},
-"harry_pod:cmu0m7zgj07fa01xfaxvxg9r7": {
-"at": "2026-10-11",
-"err": "ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
 }
 }
 }
