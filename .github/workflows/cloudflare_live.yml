@@ -67,6 +67,7 @@ jobs:
           for line in open("tail.jsonl", encoding="utf-8", errors="replace"):
               try: e = json.loads(line)
               except Exception: continue
+              if not isinstance(e, dict): continue   # 10-12：wrangler 偶爾吐一行純字串（狀態訊息）
               n += 1
               ev = e.get("event") or {}
               what = ("cron " + ev.get("cron", "")) if "cron" in ev else ((ev.get("request") or {}).get("url", "")[-60:])
