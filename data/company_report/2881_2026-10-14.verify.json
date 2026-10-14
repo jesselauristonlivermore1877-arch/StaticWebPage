@@ -1,0 +1,39 @@
+{
+ "file": "2881_2026-10-14.md",
+ "code": "2881",
+ "date": "2026-10-14",
+ "show": true,
+ "numbers": {
+  "ok": true,
+  "bad": [],
+  "cited": 88,
+  "facts": 88
+ },
+ "compliance": {
+  "ok": true,
+  "hits": []
+ },
+ "src": {
+  "ok": true,
+  "bad": []
+ },
+ "cross": {
+  "ok": true,
+  "bad": [],
+  "checked": [
+   "close",
+   "eps_q",
+   "mcap",
+   "pe_ttm",
+   "rev_m"
+  ]
+ },
+ "tables": {
+  "ok": true,
+  "bad": []
+ },
+ "sections": {
+  "ok": true,
+  "missing": []
+ }
+}
