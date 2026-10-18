@@ -1,0 +1,22 @@
+# gea-member ── GEA 會員區（看盤區＋訊號區＋客戶選單區；Evans 2026-10-18 17:05 派工「預覽轉正式」）
+#   程式（驗會員、發檔）公開放這裡；網頁與資料（格點、績效、報價單）不進這個公開 repo：
+#   由私有 repo CustomerServiceANDSales 的 tools/member_push.py 用管理 token 上傳到 KV（FILES），登入的會員才拿得到。
+#   會員名單、登入連結雜湊、session、策略上下架表存 D1（DB）。
+#   部署：.github/workflows/cloudflare_member.yml（第一次自動建 D1 gea-member、KV gea-member-files，把 id 填進下面兩個佔位字）。
+#   secrets：ADMIN_TOKEN（workflow 產生，副本存 D1 gea-member 的 keys 表）；LINE_CHANNEL_ID／LINE_CHANNEL_SECRET（Evans 建好 LINE Login channel 後才有，沒有就不開 LINE 登入）。
+name = "gea-member"
+main = "src/worker.js"
+compatibility_date = "2026-06-01"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "gea-member"
+database_id = "__D1_ID__"
+
+[[kv_namespaces]]
+binding = "FILES"
+id = "__KV_ID__"
+
+[observability]
+enabled = true

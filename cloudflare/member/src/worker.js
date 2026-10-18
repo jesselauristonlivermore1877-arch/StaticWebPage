@@ -1,0 +1,233 @@
+// gea-member ── GEA 會員區 Worker（Evans 2026-10-18 17:05 派工「預覽轉正式」；設計見 CustomerServiceANDSales TODO 同日段）
+//   · 會員登入：① GEA 給的專屬登入連結（/login?k=…，打開後按「進入」才建 session，避免 LINE 預覽機器人吃掉名額）
+//               ② LINE Login（設了 LINE_CHANNEL_ID／LINE_CHANNEL_SECRET 才開；第一次要先用專屬連結登入、按「綁定 LINE」）
+//   · 每個會員最多 3 個裝置同時登入（第 4 個登入時踢掉最舊的）；到期或停用 → 所有頁面與資料都拿不到。
+//   · 網頁與資料都在 KV（FILES），只有有效會員拿得到；index.html 送出前塞入 window.GEA_ME（姓名、到期日、是否管理者）。
+//   · 管理 API（Bearer ADMIN_TOKEN 或管理者 session）：會員增刪改、重發連結、踢裝置；檔案上傳／列表／刪除；策略上下架表。
+//   · 登入連結與 session 只存 SHA-256 雜湊，資料庫外洩也拿不到可用的連結。
+const COOKIE = "gea_s", LCOOKIE = "gea_ls", DAY = 86400, SESS_DAYS = 30, MAX_SESS = 3;
+const enc = new TextEncoder();
+const hex = b => [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join("");
+const rand = (n = 32) => hex(crypto.getRandomValues(new Uint8Array(n)));
+const sha = async s => hex(await crypto.subtle.digest("SHA-256", typeof s === "string" ? enc.encode(s) : s));
+const now = () => Math.floor(Date.now() / 1000);
+const today = () => new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10);          // 台北日期
+const SEC = {"x-content-type-options": "nosniff", "referrer-policy": "no-referrer", "x-frame-options": "DENY", "x-robots-tag": "noindex, nofollow"};
+const json = (o, st = 200, h = {}) => new Response(JSON.stringify(o), {status: st, headers: {"content-type": "application/json; charset=utf-8", "cache-control": "no-store", ...SEC, ...h}});
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const cookie = (req, n) => { const m = (req.headers.get("cookie") || "").match(new RegExp("(?:^|;\\s*)" + n + "=([^;]+)")); return m ? m[1] : null; };
+const setCookie = (n, v, age) => `${n}=${v}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${age}`;
+const NAME_RE = /^[A-Za-z0-9_\-][A-Za-z0-9_.\-\/]{0,199}$/;
+
+const SCHEMA = [
+  "CREATE TABLE IF NOT EXISTS members(id TEXT PRIMARY KEY, name TEXT NOT NULL, contact TEXT, exp TEXT NOT NULL, on_ INTEGER NOT NULL DEFAULT 1, admin INTEGER NOT NULL DEFAULT 0, key_hash TEXT UNIQUE, line_sub TEXT UNIQUE, created INTEGER, last_seen INTEGER)",
+  "CREATE TABLE IF NOT EXISTS sessions(sid TEXT PRIMARY KEY, member_id TEXT NOT NULL, created INTEGER NOT NULL, last INTEGER NOT NULL, ua TEXT)",
+  "CREATE INDEX IF NOT EXISTS sessions_member ON sessions(member_id, created)",
+  "CREATE TABLE IF NOT EXISTS conf(name TEXT PRIMARY KEY, value TEXT NOT NULL, updated INTEGER)",
+];
+let ready = false;
+async function init(env) { if (ready) return; await env.DB.batch(SCHEMA.map(s => env.DB.prepare(s))); ready = true; }
+
+// ───────── 頁面（登入、到期、錯誤）─────────
+function page(title, body, st = 200, h = {}) {
+  return new Response(`<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>${esc(title)}</title>
+<style>:root{--bg:#07090c;--panel:#121821;--line:#26303d;--tx:#d5dde7;--mut:#8593a3;--acc:#f0b429}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;background:radial-gradient(circle at 30% 20%,#1d2633,var(--bg));color:var(--tx);font:15px/1.6 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+.box{width:420px;max-width:100%;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px}h1{margin:0 0 4px;font-size:22px;color:var(--acc)}.note{font-size:13px;color:var(--mut)}
+.btn{display:block;width:100%;padding:12px;border:none;border-radius:8px;font-weight:700;font-size:15px;margin-top:14px;text-align:center;text-decoration:none;cursor:pointer;font-family:inherit}.line{background:#06c755;color:#fff}.go{background:var(--acc);color:#111}.err{color:#ff6b6b}</style></head>
+<body><div class="box"><h1>GEA 量化交易 會員區</h1>${body}</div></body></html>`, {status: st, headers: {"content-type": "text/html; charset=utf-8", "cache-control": "no-store", ...SEC, ...h}});
+}
+function loginPage(env, msg = "", st = 200) {
+  const line = env.LINE_CHANNEL_ID && env.LINE_CHANNEL_SECRET;
+  return page("GEA 會員登入", `<div class="note">看盤區、訊號區、程式績效只開放給付費會員。</div>
+${msg ? `<p class="err">${msg}</p>` : ""}
+${line ? `<a class="btn line" href="/auth/line">用 LINE 登入</a><div class="note" style="margin-top:6px">第一次請先用 GEA 給你的專屬登入連結進入，再按右上角「綁定 LINE」，之後就能直接用 LINE 登入。</div>`
+       : `<p>請用 GEA 給你的<b>專屬登入連結</b>進入。</p>`}
+<div class="note" style="margin-top:16px;border-top:1px solid var(--line);padding-top:10px">連結遺失、換手機或會員到期，請聯絡 GEA。</div>`, st);
+}
+const expiredPage = m => page("GEA 會員已到期", `<p class="err"><b>${m.on_ ? "會員已到期" : "會員已停用"}</b>${m.on_ ? `（到期日 ${esc(m.exp)}）` : ""}。</p><p class="note">續約後由 GEA 延長到期日，重新整理就能進入。</p><a class="btn go" href="/logout">回登入畫面</a>`, 403);
+
+// ───────── 身分 ─────────
+const valid = m => m && m.on_ === 1 && m.exp >= today();
+async function session(req, env) {
+  const sid = cookie(req, COOKIE); if (!sid || !/^[0-9a-f]{64}$/.test(sid)) return null;
+  const r = await env.DB.prepare("SELECT s.sid, s.created AS s_created, s.last AS s_last, m.* FROM sessions s JOIN members m ON m.id = s.member_id WHERE s.sid = ?").bind(await sha(sid)).first();
+  if (!r) return null;
+  const t = now();
+  if (t - r.s_created > SESS_DAYS * DAY) { await env.DB.prepare("DELETE FROM sessions WHERE sid = ?").bind(r.sid).run(); return null; }
+  if (t - r.s_last > 600) await env.DB.batch([env.DB.prepare("UPDATE sessions SET last = ? WHERE sid = ?").bind(t, r.sid), env.DB.prepare("UPDATE members SET last_seen = ? WHERE id = ?").bind(t, r.id)]);
+  return r;
+}
+async function newSession(env, req, m, to = "/") {
+  const sid = rand(), h = await sha(sid), t = now();
+  await env.DB.batch([
+    env.DB.prepare("INSERT INTO sessions(sid, member_id, created, last, ua) VALUES(?,?,?,?,?)").bind(h, m.id, t, t, (req.headers.get("user-agent") || "").slice(0, 160)),
+    env.DB.prepare("DELETE FROM sessions WHERE member_id = ? AND sid NOT IN (SELECT sid FROM sessions WHERE member_id = ? ORDER BY created DESC LIMIT ?)").bind(m.id, m.id, MAX_SESS),
+    env.DB.prepare("UPDATE members SET last_seen = ? WHERE id = ?").bind(t, m.id),
+  ]);
+  return new Response(null, {status: 302, headers: {location: to, "set-cookie": setCookie(COOKIE, sid, SESS_DAYS * DAY), "cache-control": "no-store", ...SEC}});
+}
+function same(a, b) { if (!a || !b || a.length !== b.length) return false; let x = 0; for (let i = 0; i < a.length; i++) x |= a.charCodeAt(i) ^ b.charCodeAt(i); return x === 0; }
+async function isAdmin(req, env, s) {
+  const a = req.headers.get("authorization") || "";
+  if (a.startsWith("Bearer ") && env.ADMIN_TOKEN && same(a.slice(7), env.ADMIN_TOKEN)) return true;
+  if (s === undefined) s = await session(req, env);
+  return !!(s && valid(s) && s.admin === 1 && (req.method === "GET" || (req.headers.get("content-type") || "").startsWith("application/json") || req.headers.get("x-gea") === "1"));
+}
+
+// ───────── LINE Login（OpenID Connect）─────────
+async function lineStart(req, env, url) {
+  if (!(env.LINE_CHANNEL_ID && env.LINE_CHANNEL_SECRET)) return loginPage(env, "LINE 登入尚未開通。", 404);
+  let mode = "l";
+  if (url.searchParams.get("bind") === "1") { const s = await session(req, env); if (!s || !valid(s)) return loginPage(env, "請先登入再綁定 LINE。", 401); mode = "b"; }
+  const st = rand(16);
+  const q = new URLSearchParams({response_type: "code", client_id: env.LINE_CHANNEL_ID, redirect_uri: url.origin + "/auth/line/cb", state: st, scope: "openid profile"});
+  return new Response(null, {status: 302, headers: {location: "https://access.line.me/oauth2/v2.1/authorize?" + q, "set-cookie": setCookie(LCOOKIE, mode + st, 600), "cache-control": "no-store"}});
+}
+async function lineCallback(req, env, url) {
+  if (!(env.LINE_CHANNEL_ID && env.LINE_CHANNEL_SECRET)) return loginPage(env, "LINE 登入尚未開通。", 404);
+  const c = cookie(req, LCOOKIE) || "", code = url.searchParams.get("code"), st = url.searchParams.get("state");
+  if (!code || !st || !same(c.slice(1), st)) return loginPage(env, "LINE 登入逾時或來源不符，請再試一次。", 400);
+  const tok = await fetch("https://api.line.me/oauth2/v2.1/token", {method: "POST", headers: {"content-type": "application/x-www-form-urlencoded"},
+    body: new URLSearchParams({grant_type: "authorization_code", code, redirect_uri: url.origin + "/auth/line/cb", client_id: env.LINE_CHANNEL_ID, client_secret: env.LINE_CHANNEL_SECRET})}).then(r => r.json()).catch(() => ({}));
+  if (!tok.id_token) return loginPage(env, "LINE 登入失敗（取不到身分），請再試一次。", 502);
+  const v = await fetch("https://api.line.me/oauth2/v2.1/verify", {method: "POST", headers: {"content-type": "application/x-www-form-urlencoded"},
+    body: new URLSearchParams({id_token: tok.id_token, client_id: env.LINE_CHANNEL_ID})}).then(r => r.json()).catch(() => ({}));
+  if (!v.sub) return loginPage(env, "LINE 身分驗證失敗，請再試一次。", 502);
+  const clear = setCookie(LCOOKIE, "", 0);
+  if (c[0] === "b") {
+    const s = await session(req, env); if (!s || !valid(s)) return loginPage(env, "請先登入再綁定 LINE。", 401);
+    const other = await env.DB.prepare("SELECT id FROM members WHERE line_sub = ? AND id <> ?").bind(v.sub, s.id).first();
+    if (other) return page("綁定失敗", `<p class="err">這個 LINE 帳號已綁定別的會員。</p><a class="btn go" href="/">回會員區</a>`, 409, {"set-cookie": clear});
+    await env.DB.prepare("UPDATE members SET line_sub = ? WHERE id = ?").bind(v.sub, s.id).run();
+    return new Response(null, {status: 302, headers: {location: "/#bound", "set-cookie": clear}});
+  }
+  const m = await env.DB.prepare("SELECT * FROM members WHERE line_sub = ?").bind(v.sub).first();
+  if (!m) return loginPage(env, "這個 LINE 帳號還沒綁定會員。請先用 GEA 給你的專屬登入連結進入，再按「綁定 LINE」。", 403);
+  if (!valid(m)) return expiredPage(m);
+  return newSession(env, req, m);
+}
+
+// ───────── 管理 API ─────────
+async function adminApi(req, env, url, path) {
+  const db = env.DB;
+  if (path === "/api/admin/members") {
+    if (req.method === "GET") {
+      const r = await db.prepare("SELECT m.id, m.name, m.contact, m.exp, m.on_, m.admin, m.line_sub IS NOT NULL AS line, m.created, m.last_seen, (SELECT COUNT(*) FROM sessions s WHERE s.member_id = m.id) AS devices FROM members m ORDER BY m.created").all();
+      return json({today: today(), members: r.results});
+    }
+    const b = await req.json().catch(() => ({}));
+    if (req.method === "POST") {
+      if (!b.name || !/^\d{4}-\d{2}-\d{2}$/.test(b.exp || "")) return json({error: "姓名、到期日（YYYY-MM-DD）必填"}, 400);
+      const id = rand(6), key = rand(24);
+      await db.prepare("INSERT INTO members(id, name, contact, exp, on_, admin, key_hash, created) VALUES(?,?,?,?,1,?,?,?)").bind(id, String(b.name).slice(0, 60), String(b.contact || "").slice(0, 120), b.exp, b.admin ? 1 : 0, await sha(key), now()).run();
+      return json({id, link: url.origin + "/login?k=" + key});
+    }
+    if (req.method === "PATCH") {
+      const m = await db.prepare("SELECT * FROM members WHERE id = ?").bind(b.id || "").first(); if (!m) return json({error: "沒有這個會員"}, 404);
+      const st = [], out = {id: m.id};
+      if (b.name != null) st.push(db.prepare("UPDATE members SET name = ? WHERE id = ?").bind(String(b.name).slice(0, 60), m.id));
+      if (b.contact != null) st.push(db.prepare("UPDATE members SET contact = ? WHERE id = ?").bind(String(b.contact).slice(0, 120), m.id));
+      if (b.exp != null) { if (!/^\d{4}-\d{2}-\d{2}$/.test(b.exp)) return json({error: "到期日格式 YYYY-MM-DD"}, 400); st.push(db.prepare("UPDATE members SET exp = ? WHERE id = ?").bind(b.exp, m.id)); }
+      if (b.on != null) st.push(db.prepare("UPDATE members SET on_ = ? WHERE id = ?").bind(b.on ? 1 : 0, m.id));
+      if (b.admin != null) st.push(db.prepare("UPDATE members SET admin = ? WHERE id = ?").bind(b.admin ? 1 : 0, m.id));
+      if (b.unbindLine) st.push(db.prepare("UPDATE members SET line_sub = NULL WHERE id = ?").bind(m.id));
+      if (b.rotate) { const key = rand(24); st.push(db.prepare("UPDATE members SET key_hash = ? WHERE id = ?").bind(await sha(key), m.id)); out.link = url.origin + "/login?k=" + key; }
+      if (b.kick || b.rotate) st.push(db.prepare("DELETE FROM sessions WHERE member_id = ?").bind(m.id));
+      if (st.length) await db.batch(st);
+      return json(out);
+    }
+    if (req.method === "DELETE") {
+      const id = url.searchParams.get("id") || "";
+      await db.batch([db.prepare("DELETE FROM sessions WHERE member_id = ?").bind(id), db.prepare("DELETE FROM members WHERE id = ?").bind(id)]);
+      return json({deleted: id});
+    }
+  }
+  if (path === "/api/admin/file") {
+    const name = url.searchParams.get("name") || "";
+    if (!NAME_RE.test(name) || name.includes("..")) return json({error: "檔名不合法"}, 400);
+    if (req.method === "PUT") {
+      const buf = await req.arrayBuffer();
+      if (buf.byteLength > 24 * 1024 * 1024) return json({error: "檔案超過 24 MB"}, 413);
+      const meta = {ct: req.headers.get("x-ct") || "application/octet-stream", sha: await sha(buf), size: buf.byteLength, ts: now()};
+      await env.FILES.put(name, buf, {metadata: meta});
+      return json({name, ...meta});
+    }
+    if (req.method === "DELETE") { await env.FILES.delete(name); return json({deleted: name}); }
+  }
+  if (path === "/api/admin/files" && req.method === "GET") {
+    const out = []; let cursor;
+    do { const r = await env.FILES.list({cursor, limit: 1000}); r.keys.forEach(k => out.push({name: k.name, ...(k.metadata || {})})); cursor = r.list_complete ? null : r.cursor; } while (cursor);
+    return json({files: out});
+  }
+  if (path === "/api/admin/strategies" && req.method === "PUT") {
+    const b = await req.json().catch(() => null);
+    if (Array.isArray(b) && b.length === 0) { await env.DB.prepare("DELETE FROM conf WHERE name = 'strategies'").run(); return json({saved: 0, reset: true}); }   // 空陣列＝回到網頁內建預設
+    if (!Array.isArray(b) || b.length > 100 || b.some(s => !s || typeof s.id !== "string" || !/^[A-Za-z0-9_]{1,40}$/.test(s.id))) return json({error: "格式：[{id, name, side, solo, combo, on}]"}, 400);
+    const clean = b.map(s => ({id: s.id, name: String(s.name || s.id).slice(0, 40), side: String(s.side || "").slice(0, 8), solo: !!s.solo, combo: !!s.combo, on: !!s.on, note: String(s.note || "").slice(0, 120)}));
+    await env.DB.prepare("INSERT INTO conf(name, value, updated) VALUES('strategies', ?, ?) ON CONFLICT(name) DO UPDATE SET value = excluded.value, updated = excluded.updated").bind(JSON.stringify(clean), now()).run();
+    return json({saved: clean.length});
+  }
+  return json({error: "沒有這個管理功能"}, 404);
+}
+
+// ───────── 發檔（只給有效會員）─────────
+async function serveFile(req, env, s, name) {
+  const r = await env.FILES.getWithMetadata(name, {type: name === "index.html" ? "text" : "stream"});
+  if (r.value == null) return name === "index.html" ? page("GEA 會員區", "<p>網站資料準備中，請稍後再來。</p>", 503) : new Response("找不到", {status: 404, headers: SEC});
+  const m = r.metadata || {};
+  if (name === "index.html") {
+    const me = JSON.stringify({id: s.id, name: s.name, exp: s.exp, admin: s.admin === 1, line: !!s.line_sub, lineOn: !!(env.LINE_CHANNEL_ID && env.LINE_CHANNEL_SECRET)}).replace(/</g, "\\u003c");
+    return new Response(r.value.replace("<!--GEA_ME-->", `<script>window.GEA_ME=${me};</script>`), {headers: {"content-type": "text/html; charset=utf-8", "cache-control": "no-store", ...SEC}});
+  }
+  const etag = m.sha ? `"${m.sha}"` : null;
+  if (etag && req.headers.get("if-none-match") === etag) return new Response(null, {status: 304, headers: {etag, "cache-control": "private, no-cache", ...SEC}});
+  return new Response(r.value, {headers: {"content-type": m.ct || "application/octet-stream", "cache-control": "private, no-cache", ...(etag ? {etag} : {}), ...SEC}});
+}
+
+export default {
+  async fetch(req, env) {
+    await init(env);
+    const url = new URL(req.url), path = url.pathname;
+    try {
+      if (path === "/login") {
+        if (req.method === "GET") {                                                   // 只顯示按鈕；按下才建 session（預覽機器人不會按）
+          const k = url.searchParams.get("k") || "";
+          if (!/^[0-9a-f]{48}$/.test(k)) return loginPage(env, "登入連結不完整，請整段複製 GEA 給你的連結。", 400);
+          return page("GEA 會員登入", `<form method="post" action="/login"><input type="hidden" name="k" value="${esc(k)}"><button class="btn go" type="submit">進入會員區</button></form><div class="note" style="margin-top:10px">這是你的專屬連結，請勿轉傳；同一帳號最多 ${MAX_SESS} 台裝置同時登入。</div>`);
+        }
+        if (req.method === "POST") {
+          const k = String((await req.formData().catch(() => null))?.get("k") || "");
+          const m = /^[0-9a-f]{48}$/.test(k) ? await env.DB.prepare("SELECT * FROM members WHERE key_hash = ?").bind(await sha(k)).first() : null;
+          if (!m) return loginPage(env, "登入連結無效或已更換，請向 GEA 索取新連結。", 403);
+          if (!valid(m)) return expiredPage(m);
+          return newSession(env, req, m);
+        }
+      }
+      if (path === "/logout") {
+        const sid = cookie(req, COOKIE); if (sid && /^[0-9a-f]{64}$/.test(sid)) await env.DB.prepare("DELETE FROM sessions WHERE sid = ?").bind(await sha(sid)).run();
+        return new Response(null, {status: 302, headers: {location: "/", "set-cookie": setCookie(COOKIE, "", 0), "cache-control": "no-store"}});
+      }
+      if (path === "/auth/line") return lineStart(req, env, url);
+      if (path === "/auth/line/cb") return lineCallback(req, env, url);
+      if (path === "/robots.txt") return new Response("User-agent: *\nDisallow: /\n", {headers: {"content-type": "text/plain"}});
+      if (path.startsWith("/api/admin/")) return (await isAdmin(req, env)) ? adminApi(req, env, url, path) : json({error: "需要管理權限"}, 401);
+
+      const s = await session(req, env);
+      if (path.startsWith("/api/")) {
+        if (!s) return json({error: "請先登入"}, 401);
+        if (!valid(s)) return json({error: "會員已到期或停用", exp: s.exp}, 403);
+        if (path === "/api/me") return json({name: s.name, exp: s.exp, admin: s.admin === 1, line: !!s.line_sub});
+        if (path === "/api/strategies") { const r = await env.DB.prepare("SELECT value FROM conf WHERE name = 'strategies'").first(); return json(r ? JSON.parse(r.value) : null); }
+        return json({error: "沒有這個功能"}, 404);
+      }
+      if (!s) return path === "/" ? loginPage(env) : new Response(null, {status: 302, headers: {location: "/", "cache-control": "no-store"}});
+      if (!valid(s)) return expiredPage(s);
+      const name = path === "/" ? "index.html" : decodeURIComponent(path.slice(1));
+      if (!NAME_RE.test(name) || name.includes("..")) return new Response("找不到", {status: 404, headers: SEC});
+      return serveFile(req, env, s, name);
+    } catch (e) {
+      console.log("錯誤", path, e && e.stack || e);
+      return json({error: "伺服器錯誤"}, 500);
+    }
+  },
+};

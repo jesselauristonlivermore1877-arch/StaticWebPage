@@ -1,0 +1,97 @@
+# cloudflare_member.yml ─ 部署並測試「GEA 會員區」gea-member（Evans 2026-10-18 17:05 派工「預覽轉正式」；設計見 CustomerServiceANDSales TODO 同日段）
+#   程式：本 repo cloudflare/member（wrangler.toml、src/worker.js、test.mjs）。網頁與資料不在這裡：由私有 repo 的 tools/member_push.py 上傳到 KV。
+#   secrets：沿用 CLOUDFLARE_API_TOKEN、CLOUDFLARE_ACCOUNT_ID；選用 LINE_CHANNEL_ID、LINE_CHANNEL_SECRET（Evans 建好 LINE Login channel 後設，沒設就不開 LINE 登入）。
+#   ADMIN_TOKEN：第一次部署時產生，存進 D1 gea-member 的 keys 表（Evans 從 Cloudflare 主控台複製，設成本機使用者變數 GEA_MEMBER_ADMIN_TOKEN），
+#     再設成 Worker secret；之後每次部署沿用（mode=rotate 才換）。log 只印遮罩。
+#   mode：deploy＝部署＋自動測試；test＝只測試；rotate＝換 ADMIN_TOKEN 後部署＋測試。
+name: Cloudflare 會員區
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "deploy＝部署＋測試；test＝只測試；rotate＝換管理 token＋部署＋測試"
+        required: false
+        default: "deploy"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-member
+  cancel-in-progress: false
+
+jobs:
+  member:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: cloudflare/member
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      LINE_CHANNEL_ID: ${{ secrets.LINE_CHANNEL_ID }}
+      LINE_CHANNEL_SECRET: ${{ secrets.LINE_CHANNEL_SECRET }}
+      DB: gea-member
+      KV: gea-member-files
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.23.3"
+      - name: 安裝 wrangler
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then echo "::error::缺 CLOUDFLARE_API_TOKEN／CLOUDFLARE_ACCOUNT_ID"; exit 1; fi
+          npm i -g wrangler@4.147.0 >/dev/null 2>&1
+          wrangler --version
+      - name: 取得（或第一次建立）D1 gea-member、KV gea-member-files，填進 wrangler.toml
+        run: |
+          set -o pipefail
+          ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next((d['uuid'] for d in json.load(sys.stdin) if d['name']=='$DB'), ''))")
+          if [ -z "$ID" ]; then echo "第一次：建 D1 $DB"; wrangler d1 create "$DB" >/dev/null
+            ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next((d['uuid'] for d in json.load(sys.stdin) if d['name']=='$DB'), ''))"); fi
+          KID=$(wrangler kv namespace list | python3 -c "import json,sys; print(next((d['id'] for d in json.load(sys.stdin) if d['title'] in ('$KV','gea-member-$KV')), ''))")
+          if [ -z "$KID" ]; then echo "第一次：建 KV $KV"; wrangler kv namespace create "$KV" >/dev/null
+            KID=$(wrangler kv namespace list | python3 -c "import json,sys; print(next((d['id'] for d in json.load(sys.stdin) if d['title'] in ('$KV','gea-member-$KV')), ''))"); fi
+          [ -n "$ID" ] && [ -n "$KID" ] || { echo "::error::D1 或 KV id 取不到（D1 '$ID'、KV '$KID'）"; exit 1; }
+          echo "D1 $DB：$ID；KV $KV：$KID"
+          sed -i "s/__D1_ID__/$ID/; s/__KV_ID__/$KID/" wrangler.toml
+          wrangler d1 execute "$DB" --remote --yes --command "CREATE TABLE IF NOT EXISTS keys(name TEXT PRIMARY KEY, value TEXT NOT NULL, created TEXT NOT NULL)" >/dev/null
+      - name: 取得（或第一次產生）ADMIN_TOKEN（存 D1 gea-member 的 keys 表）
+        run: |
+          set -o pipefail
+          get() { wrangler d1 execute "$DB" --remote --json --command "SELECT value FROM keys WHERE name='$1'" | python3 -c "import json,sys; r=json.load(sys.stdin)[0]['results']; print(r[0]['value'] if r else '')"; }
+          V=$(get ADMIN_TOKEN)
+          if [ -z "$V" ] || [ "${{ inputs.mode }}" = "rotate" ]; then
+            [ "${{ inputs.mode }}" = "test" ] && { echo "::error::ADMIN_TOKEN 還沒產生（先跑 deploy）"; exit 1; }
+            V=$(openssl rand -hex 32)
+            echo "::add-mask::$V"
+            wrangler d1 execute "$DB" --remote --yes --command "INSERT INTO keys(name,value,created) VALUES('ADMIN_TOKEN','$V',datetime('now')) ON CONFLICT(name) DO UPDATE SET value=excluded.value, created=excluded.created" >/dev/null
+            echo "ADMIN_TOKEN：新產生 ${V:0:4}…（共 ${#V} 字）"
+          else
+            echo "::add-mask::$V"
+            echo "ADMIN_TOKEN：沿用 ${V:0:4}…（共 ${#V} 字）"
+          fi
+          echo "ADMIN_TOKEN=$V" >> "$GITHUB_ENV"
+          echo "▶ Evans 複製位置：Cloudflare 主控台 → Storage & databases → D1 SQL database → $DB → Console，執行 SELECT * FROM keys"
+      - name: 部署＋設定 Worker secret
+        if: inputs.mode != 'test'
+        run: |
+          set -o pipefail
+          wrangler deploy 2>&1 | tee deploy.log
+          python3 - <<'PY'
+          import json, os
+          s = {"ADMIN_TOKEN": os.environ["ADMIN_TOKEN"]}
+          if os.environ.get("LINE_CHANNEL_ID") and os.environ.get("LINE_CHANNEL_SECRET"):
+              s["LINE_CHANNEL_ID"] = os.environ["LINE_CHANNEL_ID"]; s["LINE_CHANNEL_SECRET"] = os.environ["LINE_CHANNEL_SECRET"]
+          print("Worker secrets：", "、".join(s))
+          json.dump(s, open("/tmp/sec.json", "w"))
+          PY
+          wrangler secret bulk /tmp/sec.json; rm -f /tmp/sec.json
+          sleep 15
+      - name: 自動測試
+        run: |
+          W=https://gea-member.jesselauristonlivermore1877.workers.dev
+          for i in 1 2 3 4 5 6; do C=$(curl -s -o /dev/null -w "%{http_code}" "$W/"); echo "GET / → $C"; [ "$C" = 200 ] && break; sleep 10; done
+          BASE=$W node test.mjs
