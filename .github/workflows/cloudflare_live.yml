@@ -95,6 +95,13 @@ jobs:
           for x in sorted(R.get("d1AnalyticsAdaptiveGroups") or [], key=lambda x: x["dimensions"]["date"]):
               s = x["sum"]
               print("   %s 讀查詢 %7d 寫查詢 %7d 讀列 %11d 寫列 %9d" % (x["dimensions"]["date"], s["readQueries"], s["writeQueries"], s["rowsRead"], s["rowsWritten"]))
+          # 10-18：逐條查詢的讀取列數（哪一句 SQL 讀最多）—— 近 24 小時前 12 名
+          R = gql("""query($a:String!,$s:Time!,$e:Time!){viewer{accounts(filter:{accountTag:$a}){
+            d1QueriesAdaptiveGroups(limit:12,filter:{datetime_geq:$s,datetime_leq:$e},orderBy:[sum_rowsRead_DESC]){
+              count sum{rowsRead rowsWritten} dimensions{query}}}}}""", {"a": a, "s": (now - dt.timedelta(hours=24)).strftime("%Y-%m-%dT%H:%M:%SZ"), "e": now.strftime("%Y-%m-%dT%H:%M:%SZ")})
+          print("══ D1 近 24 小時讀最多的查詢（次數、讀列、寫列、SQL 前 110 字）")
+          for x in R.get("d1QueriesAdaptiveGroups") or []:
+              print("   %6d 次 讀 %9d 寫 %7d  %s" % (x["count"], x["sum"]["rowsRead"], x["sum"]["rowsWritten"], " ".join(x["dimensions"]["query"].split())[:110]))
           R = gql("""query($a:String!,$s:Time!,$e:Time!){viewer{accounts(filter:{accountTag:$a}){
             aiInferenceAdaptiveGroups(limit:1000,filter:{datetime_geq:$s,datetime_leq:$e}){
               count sum{totalNeurons} dimensions{date modelId}}}}}""", {"a": a, "s": d0 + "T00:00:00Z", "e": now.strftime("%Y-%m-%dT%H:%M:%SZ")})
@@ -226,6 +233,7 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          BLS_KEY: ${{ secrets.BLS_KEY }}
         run: |
           set -o pipefail
           if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
@@ -243,6 +251,8 @@ jobs:
           sed -i "s/__D1_ID__/$ID/" wrangler.toml
           wrangler d1 execute gea-live --remote --file schema.sql --yes
           wrangler deploy 2>&1 | tee deploy.log
+          # 10-18（D4）：BLS 免費 key（Evans 註冊後放 StaticWebPage secret BLS_KEY）；沒有就用 BLS v1 無 key（每天 25 次）
+          if [ -n "$BLS_KEY" ]; then echo "$BLS_KEY" | wrangler secret put BLS_KEY >/dev/null && echo "✓ BLS_KEY 已設"; else echo "（沒有 BLS_KEY：用 BLS v1 無 key）"; fi
           W=$(grep -o 'https://[a-z0-9.-]*workers.dev' deploy.log | head -1)
           echo "▶ Worker 網址（填進 template.html 的 NL_WORKER）：$W"
           echo "W=$W" >> "$GITHUB_ENV"
@@ -256,6 +266,7 @@ jobs:
           done
           echo "── /health（看門狗，10-05）"; curl -s -o /tmp/h.json -w "HTTP %{http_code}\n" "$W/health"; cat /tmp/h.json; echo
           echo "── /site-health（網站資料新鮮度，10-05 無人值守）"; curl -s -o /tmp/s.json -w "HTTP %{http_code}\n" "$W/site-health"; cat /tmp/s.json; echo
+          echo "── /macro.json（10-18 重大數據即時）"; curl -s "$W/macro.json"; echo
           echo "── /lag.json?d=7"; curl -s "$W/lag.json?d=7" | python3 -c "
           import json,sys
           J=json.load(sys.stdin); R=J.pop('runs',[]) or []
