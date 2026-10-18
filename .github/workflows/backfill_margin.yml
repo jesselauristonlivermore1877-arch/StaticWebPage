@@ -21,12 +21,17 @@ on:
         description: "往回抓幾年（0.6 ≈ 150 個交易日，夠 120 日窗）"
         required: false
         default: "0.6"
+      otc_days:
+        description: "只回補上櫃（margin_otc.npz）往回幾個日曆天；填了就不跑上市那八片（10-18 D9）"
+        required: false
+        default: "0"
 
 permissions:
   contents: write
 
 jobs:
   crawl:
+    if: inputs.otc_days == '0' || inputs.otc_days == ''
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
@@ -65,7 +70,7 @@ jobs:
 
   merge:
     needs: crawl
-    if: always()
+    if: always() && (inputs.otc_days == '0' || inputs.otc_days == '')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     concurrency:
@@ -110,6 +115,42 @@ jobs:
             echo "margin.npz 沒有變化，不提交。"
           else
             git commit -m "data(N-32): 回補逐檔信用交易 $(TZ=Asia/Taipei date +%F)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+  # 10-18（Evans D9：首頁個股查詢的融資融券只到 10/5）：上櫃逐檔信用往回補，舊的日子插進 margin_otc.npz 中間
+  otc:
+    if: inputs.otc_days != '0' && inputs.otc_days != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    concurrency:
+      group: daily-build
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+          cache: pip
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" numpy requests feedparser certifi
+      - name: 上櫃信用回補
+        working-directory: code
+        run: python margin_otc.py ../data --backfill ${{ inputs.otc_days }}
+      - name: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 -c "import numpy as np; z=np.load('data/bars/margin_otc.npz'); print('margin_otc.npz', len(z['dates']), '天', z['dates'][0], '～', z['dates'][-1], len(z['codes']), '檔')"
+          git add data/bars/margin_otc.npz
+          if git diff --staged --quiet; then echo "沒有變化"; else
+            git commit -m "data: 回補上櫃逐檔信用 $(TZ=Asia/Taipei date +%F)"
             git pull --rebase origin main
             git push origin HEAD:main
           fi
