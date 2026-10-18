@@ -125,6 +125,10 @@
    "回購|庫藏股|漲停|跌停|停工|停產|火災|爆炸|資安|網路攻擊|破產|重整|下市|下櫃|違約|裁罰|掛牌|(?<![A-Za-z])(?:IPO|buybacks?|repurchase|halt\\w*|bankrupt\\w*|default|cyberattack)(?![A-Za-z])"
   ],
   [
+   2,
+   "法說|財報|季報|每股盈餘|單季(?:營收|獲利|EPS)|營收(?:創|年增|季增)|獲利(?:創|年增|季增)|毛利率(?:創|達)|(?<![A-Za-z])(?:earnings|EPS|quarterly results)(?![A-Za-z])"
+  ],
+  [
    1,
    "現金增資|減資|增資|轉換公司債|董事長|總經理|執行長|裁員|(?<![A-Za-z])(?:CEO|layoffs?)(?![A-Za-z])"
   ]
