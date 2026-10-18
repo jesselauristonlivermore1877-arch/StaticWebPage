@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>GEA 下單訊號管理</title>
+<!-- gea-signal-relay 管理頁（Evans 2026-10-18 20:40 派工第 1 項）：策略上架／下架、客戶新增／停權、勾選訂閱、到期日；測試頻道模擬情境。
+     這頁本身不含任何資料：貼管理 token（RELAY_ADMIN_TOKEN）後才呼叫 /admin/*；token 只存這個分頁（sessionStorage），關掉就沒了。 -->
+<style>
+:root{--bg:#0b0f14;--panel:#121821;--panel2:#18202b;--line:#26303d;--tx:#d5dde7;--mut:#8593a3;--acc:#f0b429;--up:#e5484d;--dn:#2fb36b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+header{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:10px 16px;background:#0e141c;border-bottom:1px solid var(--line);position:sticky;top:0}
+header b{color:var(--acc)}main{padding:12px 16px;max-width:1400px}
+button,select,input{font:inherit;color:var(--tx);background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:4px 10px}
+button{cursor:pointer}button:hover{border-color:var(--acc)}button.pri{background:var(--acc);color:#111;font-weight:700}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:12px}.card h3{margin:0 0 8px;font-size:15px}
+table{border-collapse:collapse;width:100%}th,td{padding:4px 8px;border-bottom:1px solid var(--line);font-size:13px;white-space:nowrap;text-align:left}th{color:var(--mut);font-weight:500}
+.scroll{overflow:auto}.note{font-size:12px;color:var(--mut)}.ok{color:var(--dn)}.bad{color:var(--up)}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tag{display:inline-block;padding:0 8px;border-radius:10px;font-size:12px;border:1px solid var(--line)}.on{background:#123222;border-color:#1f6b45}.off{background:#3a1717;border-color:#7a2a2a}
+.test{background:#3a2a05;color:#ffd77a}input[type=checkbox]{accent-color:var(--acc)}
+#tokbox{background:#2b2410;padding:8px;border-radius:8px;margin-top:6px}
+</style>
+</head>
+<body>
+<header>
+  <b>GEA 下單訊號管理</b>
+  <span>頻道</span><select id="ch"><option value="gea">gea（正式）</option><option value="test">test（測試，不影響正式客戶）</option></select>
+  <span id="chTag"></span>
+  <span style="margin-left:auto" class="row"><input id="tok" type="password" placeholder="管理 token" style="width:220px"><button onclick="login()">登入</button><button onclick="logout()">登出</button></span>
+</header>
+<main>
+  <div class="card" id="msg" style="display:none"></div>
+  <div class="card"><h3>策略（新策略第一次送上來會自動出現在這裡，預設「下架」）</h3>
+    <div class="scroll"><table id="stT"></table></div>
+    <div class="row" style="margin-top:8px"><input id="stCode" placeholder="代號（例 GEA5）" style="width:140px"><input id="stName" placeholder="名稱" style="width:140px"><button onclick="addStrat()">先登記一支</button></div>
+  </div>
+  <div class="card"><h3>客戶（接收端）</h3>
+    <div class="note">訂閱打勾＝他會收到這支（策略也要上架）；「全部」＝不管上下架全收（只給 GEA 自己的機器）。到期日留空＝不到期；到期或停權立刻斷線。</div>
+    <div class="scroll" style="margin-top:6px"><table id="usT"></table></div>
+    <div class="row" style="margin-top:8px"><input id="nuId" placeholder="代號（英數，例 cust_001）" style="width:180px"><input id="nuNote" placeholder="備註（姓名）" style="width:160px"><input id="nuExp" type="date"><span id="nuSubs" class="row"></span><button class="pri" onclick="addUser()">新增客戶</button></div>
+    <div id="tokbox" style="display:none"></div>
+  </div>
+  <div class="card"><h3>模擬（不送任何東西）</h3>
+    <div class="row"><span>假如送出策略</span><select id="simS"></select><button onclick="simulate()">誰會收到？</button>
+      <span style="margin-left:16px">客戶</span><select id="rpU"></select><span>斷線前最後收到序號</span><input id="rpSince" type="number" value="0" style="width:90px"><button onclick="replay()">重連會補哪些？</button></div>
+    <div class="scroll" style="margin-top:6px"><table id="simT"></table></div>
+  </div>
+  <div class="card" id="testCard"><h3>測試頻道專用</h3>
+    <div class="note">只在 test 頻道能用。假訊號沒有真簽章：真的接收端連到 test 頻道也會以「簽章不符」拒單，不會下單。</div>
+    <div class="row" style="margin-top:6px"><button onclick="scenario()">建立標準情境</button><span class="note">（策略 T_ON 上架、T_NEW 下架；客戶 t_all 全部、t_one 只訂 T_ON、t_stop 停權、t_exp 已到期）</span></div>
+    <div class="row" style="margin-top:6px"><span>送測試訊號</span><select id="tpS"></select><button onclick="testpub()">送出</button><button onclick="purge()" style="margin-left:auto">清空整個測試頻道</button></div>
+    <div class="scroll" style="margin-top:6px"><table id="tpT"></table></div>
+  </div>
+</main>
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const esc = v => String(v == null ? "" : v).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const ts = t => t ? new Date(t + 8 * 3600e3).toISOString().slice(5, 16).replace("T", " ") : "—";
+let TOK = sessionStorage.getItem("gea_relay_admin") || "", ST = null;
+const CH = () => $("#ch").value;
+function say(t, bad) { const m = $("#msg"); m.style.display = t ? "" : "none"; m.innerHTML = t; m.className = "card " + (bad ? "bad" : ""); }
+async function api(path, method, body) {
+  const r = await fetch("/admin/" + path + (path.includes("?") ? "&" : "?") + "ch=" + CH(), {method: method || "GET",
+    headers: Object.assign({authorization: "Bearer " + TOK}, body ? {"content-type": "application/json"} : {}), body: body ? JSON.stringify(body) : undefined});
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || ("HTTP " + r.status));
+  return j;
+}
+function login() { TOK = $("#tok").value.trim(); $("#tok").value = ""; sessionStorage.setItem("gea_relay_admin", TOK); load(); }
+function logout() { TOK = ""; sessionStorage.removeItem("gea_relay_admin"); location.reload(); }
+$("#ch").onchange = load;
+async function load() {
+  $("#chTag").innerHTML = CH().startsWith("test") ? "<span class='tag test'>測試頻道</span>" : "<span class='tag on'>正式頻道</span>";
+  $("#testCard").style.display = CH().startsWith("test") ? "" : "none";
+  if (!TOK) { say("請在右上角貼管理 token（RELAY_ADMIN_TOKEN）後按登入。"); return; }
+  try { ST = await api("state"); say(""); } catch (e) { say("讀取失敗：" + esc(e.message) + (e.message === "unauthorized" ? "（管理 token 不對）" : ""), true); return; }
+  render();
+}
+function render() {
+  const S = ST.strategies, codes = S.map(s => s.code);
+  $("#stT").innerHTML = "<tr><th>代號</th><th>名稱</th><th>狀態</th><th>中繼保留則數</th><th>最後一則</th><th>訂閱人數</th><th></th></tr>" + S.map(s => {
+    const n = ST.users.filter(u => u.subs === "*" || u.subs.split(",").includes(s.code)).length;
+    return "<tr><td>" + esc(s.code) + "</td><td><input data-name='" + esc(s.code) + "' value='" + esc(s.name) + "' style='width:120px'></td>" +
+      "<td><button data-list='" + esc(s.code) + "' class='tag " + (s.listed ? "on" : "off") + "'>" + (s.listed ? "上架中（按一下下架）" : "下架（按一下上架）") + "</button></td>" +
+      "<td>" + s.kept + "</td><td>" + ts(s.last) + "</td><td>" + n + "</td><td><button data-sdel='" + esc(s.code) + "'>移除登記</button></td></tr>"; }).join("");
+  document.querySelectorAll("[data-list]").forEach(b => b.onclick = () => act(() => api("strategy?code=" + b.dataset.list, "POST", {listed: !S.find(s => s.code === b.dataset.list).listed})));
+  document.querySelectorAll("[data-name]").forEach(i => i.onchange = () => act(() => api("strategy?code=" + i.dataset.name, "POST", {name: i.value})));
+  document.querySelectorAll("[data-sdel]").forEach(b => b.onclick = () => confirm("移除登記（下次再送上來會重新出現、預設下架）？") && act(() => api("strategy_delete?code=" + b.dataset.sdel, "POST", {})));
+  const subBox = (u, pre) => "<label><input type='checkbox' data-" + pre + "='*' " + (u && u.subs === "*" ? "checked" : "") + "> 全部</label> " +
+    codes.map(c => "<label><input type='checkbox' data-" + pre + "='" + esc(c) + "' " + (u && (u.subs === "*" || u.subs.split(",").includes(c)) ? "checked" : "") + (u && u.subs === "*" ? " disabled" : "") + "> " + esc(c) + "</label>").join(" ");
+  $("#usT").innerHTML = "<tr><th>代號</th><th>備註</th><th>訂閱</th><th>到期日</th><th>狀態</th><th>在線</th><th>最後連線</th><th></th></tr>" + ST.users.map(u => {
+    const st = !u.enabled ? "<span class='bad'>停權</span>" : u.expired ? "<span class='bad'>已到期</span>" : "<span class='ok'>正常</span>";
+    return "<tr data-u='" + esc(u.id) + "'><td>" + esc(u.id) + "</td><td><input class='note_' value='" + esc(u.note) + "' style='width:110px'></td><td class='row'>" + subBox(u, "s") + "</td>" +
+      "<td><input type='date' class='exp_' value='" + esc(u.exp) + "'></td><td>" + st + "</td><td>" + (u.online ? "<span class='ok'>● " + u.online + "</span>" : "<span class='note'>離線</span>") + "</td><td>" + ts(u.last_seen) + "</td>" +
+      "<td><button class='save_ pri'>儲存</button> <button class='en_'>" + (u.enabled ? "停權" : "復權") + "</button> <button class='re_'>重發 token</button></td></tr>"; }).join("");
+  document.querySelectorAll("tr[data-u]").forEach(tr => {
+    const id = tr.dataset.u, u = ST.users.find(x => x.id === id);
+    tr.querySelector("[data-s='*']").onchange = e => tr.querySelectorAll("[data-s]:not([data-s='*'])").forEach(c => { c.disabled = e.target.checked; c.checked = e.target.checked || (u.subs !== "*" && u.subs.split(",").includes(c.dataset.s)); });
+    tr.querySelector(".save_").onclick = () => act(() => api("set?id=" + id, "POST", {note: tr.querySelector(".note_").value, exp: tr.querySelector(".exp_").value, subs: pick(tr, "s")}), "已儲存 " + id);
+    tr.querySelector(".en_").onclick = () => confirm((u.enabled ? "停權" : "復權") + " " + id + "？") && act(() => api((u.enabled ? "disable" : "enable") + "?id=" + id, "POST", {}));
+    tr.querySelector(".re_").onclick = () => confirm("重發後舊 token 立刻失效、他的接收端會被踢掉，要把新 token 給他重設。確定？") && act(async () => showTok(id, (await api("user?id=" + id, "POST", {})).token));
+  });
+  $("#nuSubs").innerHTML = subBox(null, "n");
+  $("#nuSubs").querySelector("[data-n='*']").onchange = e => $("#nuSubs").querySelectorAll("[data-n]:not([data-n='*'])").forEach(c => { c.disabled = e.target.checked; });
+  const opt = codes.map(c => "<option>" + esc(c) + "</option>").join("");
+  $("#simS").innerHTML = opt; $("#tpS").innerHTML = opt;
+  $("#rpU").innerHTML = ST.users.map(u => "<option>" + esc(u.id) + "</option>").join("");
+}
+function pick(root, pre) { const all = root.querySelector("[data-" + pre + "='*']"); if (all && all.checked) return "*"; return [...root.querySelectorAll("[data-" + pre + "]:checked")].map(c => c.dataset[pre]).filter(x => x !== "*"); }
+async function act(fn, ok) { try { await fn(); if (ok) say(esc(ok)); await load(); } catch (e) { say("失敗：" + esc(e.message), true); } }
+function showTok(id, tok) {
+  const b = $("#tokbox"); b.style.display = "";
+  b.innerHTML = "<b>" + esc(id) + " 的 token（只顯示這一次）</b>：安裝時貼上；中繼只存雜湊，遺失就重發。<div class='row' style='margin-top:6px'><input id='tkV' value='" + esc(tok) + "' readonly style='flex:1;min-width:300px'><button id='tkC'>複製</button><button id='tkX'>關閉並清除</button></div>";
+  $("#tkC").onclick = e => navigator.clipboard.writeText($("#tkV").value).then(() => e.target.textContent = "已複製");
+  $("#tkX").onclick = () => { b.innerHTML = ""; b.style.display = "none"; };
+}
+function addStrat() { const c = $("#stCode").value.trim(); if (!c) return; act(() => api("strategy?code=" + encodeURIComponent(c), "POST", {name: $("#stName").value.trim() || c, listed: false})); $("#stCode").value = $("#stName").value = ""; }
+function addUser() {
+  const id = $("#nuId").value.trim();
+  if (!/^[A-Za-z0-9_-]{1,40}$/.test(id)) { say("代號只能用英文、數字、_、-", true); return; }
+  if (ST.users.some(u => u.id === id)) { say("代號已存在（要換 token 請按那一列的「重發 token」）", true); return; }
+  act(async () => { const r = await api("user?id=" + id, "POST", {note: $("#nuNote").value, exp: $("#nuExp").value, subs: pick($("#nuSubs"), "n")}); showTok(id, r.token); $("#nuId").value = $("#nuNote").value = ""; });
+}
+async function simulate() {
+  try { const r = await api("simulate", "POST", {strategy: $("#simS").value});
+    $("#simT").innerHTML = "<tr><th colspan=3>策略 " + esc(r.strategy) + "（" + (r.listed ? "上架" : "下架") + "）送出時</th></tr><tr><th>客戶</th><th>會收到？</th><th>原因</th></tr>" +
+      r.users.map(u => "<tr><td>" + esc(u.id) + "</td><td>" + (u.receive ? "<span class='ok'>會</span>" : "<span class='bad'>不會</span>") + "</td><td>" + esc(u.why) + "</td></tr>").join("");
+  } catch (e) { say("失敗：" + esc(e.message), true); }
+}
+async function replay() {
+  try { const r = await api("replay?id=" + encodeURIComponent($("#rpU").value) + "&since=" + (+$("#rpSince").value || 0));
+    $("#simT").innerHTML = "<tr><th>" + esc(r.id) + " 從序號 " + r.since + " 之後重連</th></tr><tr><td>會補：" + (r.will.join("、") || "（沒有）") + "</td></tr><tr><td class='note'>不補：" +
+      (r.skipped.map(x => "#" + x[0] + " " + esc(x[1]) + "（" + esc(x[2]) + "）").join("、") || "（沒有）") + "</td></tr>";
+  } catch (e) { say("失敗：" + esc(e.message), true); }
+}
+async function testpub() {
+  try { const r = await api("testpub", "POST", {strategy: $("#tpS").value, raw: "TEST " + new Date().toISOString()});
+    $("#tpT").innerHTML = "<tr><td>#" + r.seq + " " + esc($("#tpS").value) + " → 實際送給在線的：" + (r.to.map(esc).join("、") || "（沒有人）") + "（在線 " + r.online + "）</td></tr>" + $("#tpT").innerHTML;
+    load();
+  } catch (e) { say("失敗：" + esc(e.message), true); }
+}
+async function scenario() {
+  if (!CH().startsWith("test")) return;
+  await act(async () => {
+    await api("strategy?code=T_ON", "POST", {name: "測試上架", listed: true});
+    await api("strategy?code=T_NEW", "POST", {name: "測試新策略", listed: false});
+    const mk = async (id, body) => { if (!ST.users.some(u => u.id === id)) await api("user?id=" + id, "POST", body); else await api("set?id=" + id, "POST", body); };
+    await mk("t_all", {subs: "*", note: "全部"}); await mk("t_one", {subs: ["T_ON"], note: "只訂 T_ON"});
+    await mk("t_stop", {subs: ["T_ON"], note: "停權"}); await api("disable?id=t_stop", "POST", {});
+    await mk("t_exp", {subs: ["T_ON"], note: "已到期", exp: "2020-01-01"});
+  }, "已建立標準情境：按「誰會收到？」逐支看");
+}
+function purge() { confirm("清空整個測試頻道（客戶、策略、訊號全刪）？") && act(() => api("purge", "POST", {}), "測試頻道已清空"); }
+load();
+</script>
+</body>
+</html>

@@ -39,13 +39,15 @@ function connect(role, id, token) {
 
 const sig = (seq, extra = {}) => JSON.stringify({ Seq: seq, TsMs: Date.now(), Strategy: "TEST", Symbol: "TXF", Month: "", Side: "B",
   Qty: 1, Effect: "O", PriceType: "MKT", Price: 0, Sig: "f".repeat(64), ...extra });
+// 被中繼關閉：收到關閉框就算（本機 wrangler dev 會停在 CLOSING、不觸發 close 事件；ws 8 收到關閉框會記 _closeCode）
+const kickedCode = c => c.closed ? c.closed[0] : (c.ws._closeFrameReceived ? c.ws._closeCode : null);
 const until = async (fn, ms = 5000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (fn()) return true; await sleep(20); } return fn(); };
 
 console.log("頻道", CH, "｜", BASE);
 // ── 建用戶
 const tok = {};
 for (const u of ["u1", "u2", "u3", "u4"]) {
-  const r = await admin("user?id=" + u);
+  const r = await admin("user?id=" + u + "&subs=*");                     // 這批用戶訂閱「全部」（舊測試照舊）；訂閱控管在後面另測
   tok[u] = r.j.token;
   ok(r.status === 200 && /^[0-9a-f]{48}$/.test(r.j.token || ""), `新增用戶 ${u}`);
 }
@@ -120,8 +122,8 @@ ok(raw && JSON.parse(sig(11)).Sig === u3b.got[0].Sig && u3b.got[0].Strategy === 
 
 // ── 在線停權
 await admin("disable?id=u2");
-await until(() => subs.u2.closed);
-ok(subs.u2.closed && subs.u2.closed[0] === 4003, "在線用戶停權 → 立刻以 4003 關閉", JSON.stringify(subs.u2.closed));
+await until(() => kickedCode(subs.u2));
+ok(kickedCode(subs.u2) === 4003, "在線用戶停權 → 立刻以 4003 關閉", String(kickedCode(subs.u2)));
 await admin("enable?id=u2");
 r = await connect("sub", "u2", tok.u2);
 ok(!r.err, "復權後可再連"); if (!r.err) r.ws.close();
@@ -141,6 +143,63 @@ await until(() => old.ctl.some(c => c.ctl === "replayed"), 20000);
 const rq = old.ctl.find(c => c.ctl === "replayed") || {};
 ok(old.got.length === 500 && old.got[0].Seq === 21 && rq.last === 520 && JSON.stringify(rq.gap) === "[1,20]", "只留 500 則（21～520），since=0 回報缺段 1～20", `${old.got.length} 則、${JSON.stringify(rq)}`);
 old.ws.close();
+
+// ── 訂閱控管（10-18 20:40 派工第 1 項）：只轉送訂閱且上架的策略；補發照同一規則；到期踢線；模擬端點；管理頁
+const post = async (path, body) => { const r = await fetch(`${BASE}/admin/${path}${path.includes("?") ? "&" : "?"}ch=${CH}`, { method: "POST",
+  headers: { Authorization: "Bearer " + ADMIN, "content-type": "application/json" }, body: JSON.stringify(body || {}) }); return { status: r.status, j: await r.json().catch(() => ({})) }; };
+let st = await admin("state", "GET");
+ok((st.j.strategies || []).some(s => s.code === "TEST" && !s.listed), "送過的策略自動登記成下架", JSON.stringify(st.j.strategies));
+ok((await post("strategy?code=GEA5", { listed: true })).status === 200 && (await post("strategy?code=GEA6", { listed: false })).status === 200, "登記 GEA5 上架、GEA6 下架");
+for (const [id, subs] of [["s1", ["GEA5"]], ["s2", ["GEA5", "GEA6"]], ["s3", ["GEA6"]], ["s0", undefined]]) {
+  const rr = await post("user?id=" + id, subs ? { subs } : {}); tok[id] = rr.j.token;
+}
+st = await admin("state", "GET");
+ok((st.j.users || []).find(u => u.id === "s0").subs === "", "新用戶沒指定訂閱 → 什麼都沒訂");
+const sc = {};
+for (const id of ["s1", "s2", "s3", "s0"]) { sc[id] = await connect("sub", id, tok[id]); ok(!sc[id].err, `訂閱測試接收端 ${id} 連上`); }
+const got = id => sc[id].got.map(m => m.Strategy + m.Seq).join(",");
+const sigS = (seq, strat) => sig(seq, { Strategy: strat });
+let q = 521;
+pub.ws.send(sigS(q, "GEA5"));
+await until(() => sc.s1.got.length >= 1 && sc.s2.got.length >= 1); await sleep(300);
+ok(got("s1") === "GEA5521" && got("s2") === "GEA5521" && got("s3") === "" && got("s0") === "", "GEA5（上架）只送訂 GEA5 的 s1、s2", `s1 ${got("s1")}｜s2 ${got("s2")}｜s3 ${got("s3")}｜s0 ${got("s0")}`);
+const ackS = () => pub.ctl.filter(c => c.ctl === "ack").pop();
+await until(() => ackS() && ackS().seq === q);
+ok(ackS().subs === 2 + 2 && ackS().online >= 6, "ack 的 subs＝實際送出數（s1、s2＋兩個全部訂閱）", JSON.stringify(ackS()));
+pub.ws.send(sigS(++q, "GEA6"));
+await until(() => subs.u1.got.some(m => m.Seq === q)); await sleep(300);
+ok(got("s2") === "GEA5521" && got("s3") === "" && subs.u1.got.some(m => m.Seq === q), "GEA6（下架）一般客戶都收不到；訂「全部」的照收");
+await post("strategy?code=GEA6", { listed: true });
+pub.ws.send(sigS(++q, "GEA6"));
+await until(() => sc.s3.got.length >= 1); await sleep(300);
+ok(got("s2") === "GEA5521,GEA6523" && got("s3") === "GEA6523" && got("s1") === "GEA5521", "GEA6 上架後 → 送 s2、s3，s1 照樣收不到", `s1 ${got("s1")}｜s2 ${got("s2")}｜s3 ${got("s3")}`);
+pub.ws.send(sigS(++q, "NEWONE"));
+await until(() => subs.u1.got.some(m => m.Seq === q)); await sleep(300);
+st = await admin("state", "GET");
+ok((st.j.strategies || []).some(s => s.code === "NEWONE" && !s.listed) && got("s2") === "GEA5521,GEA6523", "新策略 NEWONE 自動登記下架、一般客戶收不到");
+const s1b = await connect("sub", "s1", tok.s1);
+s1b.ws.send(JSON.stringify({ since: 520 }));
+await until(() => s1b.ctl.some(c => c.ctl === "replayed"));
+ok(s1b.got.map(m => m.Seq).join() === "521", "s1 重連 since=520 只補他訂的（521），不補 522～524", s1b.got.map(m => m.Seq).join());
+s1b.ws.close();
+const rp2 = await admin("replay?id=s3&since=520", "GET");
+ok(JSON.stringify(rp2.j.will) === "[522,523]", "/admin/replay：s3 會補 522、523（補發依「現在」的上架與訂閱判斷）", JSON.stringify(rp2.j));
+const sim = await post("simulate", { strategy: "GEA5" });
+const simOf = id => (sim.j.users || []).find(u => u.id === id) || {};
+ok(simOf("s1").receive && !simOf("s3").receive && simOf("s3").why === "沒訂閱" && simOf("u4").why === "停權", "/admin/simulate 原因正確", JSON.stringify(sim.j.users.map(u => u.id + ":" + u.why)));
+await post("set?id=s2", { exp: "2020-01-01" });
+await until(() => kickedCode(sc.s2));
+ok(kickedCode(sc.s2) === 4003, "改成已到期 → 在線立刻 4003 斷線", String(kickedCode(sc.s2)));
+r = await connect("sub", "s2", tok.s2);
+ok(r.err === 403, "到期用戶再連 → 403", "HTTP " + r.err);
+await post("set?id=s1", { subs: [] });
+pub.ws.send(sigS(++q, "GEA5"));
+await until(() => subs.u1.got.some(m => m.Seq === q)); await sleep(300);
+ok(got("s1") === "GEA5521", "s1 取消訂閱後收不到 GEA5（不用重連，下一則就生效）");
+ok((await post("testpub", { strategy: "GEA5" })).status === 403, "testpub 只限 test 開頭頻道（正式頻道 403）");
+const cons = await fetch(`${BASE}/console`);
+ok(cons.status === 200 && (await cons.text()).includes("GEA 下單訊號管理"), "管理頁 /console 開得起來（不含資料）");
+for (const id of ["s1", "s3", "s0"]) sc[id].ws.close();
 
 // ── 收尾
 for (const c of [subs.u1, u3b, pub]) c.ws.close();
