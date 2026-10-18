@@ -1,0 +1,47 @@
+# company_reports.yml ─ 公司產業報告一推上就上網頁（Evans 2026-10-18 D11：台積電 10/15 22:43 本機已推報告，網頁要等隔天每日班才出現）
+#   本機 ir_report_watch 推 data/company_report/*.md 進 main → 這支只跑 company_verify.bundle（同每日班那道核對關卡）→ 寫 docs/data/company_reports.json。
+#   跟每日班同一個 concurrency group，不會同時推 main。
+name: 公司產業報告上網頁
+
+on:
+  push:
+    branches: [main]
+    paths: ["data/company_report/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-build
+  cancel-in-progress: false
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: site
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+      - name: 核對＋打包
+        working-directory: code
+        run: python company_verify.py ../site/data ../site/docs/data/company_reports.json
+      - name: commit
+        working-directory: site
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/company_reports.json
+          if git diff --staged --quiet; then echo "company_reports.json 沒有變化"; exit 0; fi
+          git commit -m "data: 公司產業報告上網頁 $(TZ=Asia/Taipei date '+%F %H:%M')"
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep 5; done
+          exit 1
