@@ -1271,7 +1271,9 @@ thead th{cursor:pointer}thead th.srt-d::after{content:" ▼";font-size:9px}thead
 /* 公司產業報告（cr-）與量化日報版面：參考藏鋒資本公開貼文（深藍襯線大標、金色重點數字、藥丸標籤、四格摘要、總結流程） */
 :root{--cr-navy:#1B2A4A;--cr-gold:#B8862B;--cr-card:#FBF8F1;--cr-line:#E7DFCC}
 .cr-root,.qd-root{white-space:normal}
-.cr-print .rv-twrap{overflow:visible!important;max-height:none!important}.cr-print table{width:100%!important;font-size:10.5px}.cr-print td,.cr-print th{white-space:normal!important;padding:3px 4px!important}.cr-print .cr-dl{display:none}
+.cap-info{white-space:normal;padding:6px 4px}.cap-ih{font-weight:700;margin-bottom:6px}.cap-ig{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:6px 12px}.cap-ig div{display:flex;flex-direction:column}.cap-ig b{font-weight:600}
+.cap-st{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px;margin-bottom:10px;white-space:normal}.cap-st>div{border:1px solid var(--line);border-radius:10px;padding:8px 12px}.cap-st h4{margin:0 0 4px}.cap-st p{margin:3px 0;font-size:13px}
+.cr-print .rv-twrap{overflow:visible!important;max-height:none!important}.cr-pdf .cr-2c{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;align-items:start}.cr-pdf .cr-2c .cr-quad{grid-template-columns:1fr}.cr-pdf .cr-2c .cr-svg{max-width:none}.cr-pdf .cr-kpi{grid-template-columns:repeat(4,minmax(0,1fr))}.cr-pdf .cr-tbl{margin-top:8px}.cr-print table{width:100%!important;font-size:10.5px}.cr-print td,.cr-print th{white-space:normal!important;padding:3px 4px!important}.cr-print .cr-dl{display:none}
 .cr-root{max-width:980px;background:var(--cr-card);color:#1B2A4A;border:1px solid var(--cr-line);border-radius:12px;padding:16px 18px}
 .cr-hero{text-align:left;border-bottom:1px solid var(--cr-line);padding-bottom:10px;margin-bottom:12px}
 .cr-ind{font-size:12px;color:#6B6452;letter-spacing:.06em}
@@ -4140,11 +4142,53 @@ var _capW = null;
 function capLoad() { if (!_capW) _capW = fetch("data/capital.json" + _dv(), {cache: "force-cache"}).then(r => r.ok ? r.json() : null).catch(() => null); return _capW; }
 function capCBTable(rows, nm, SB, withCode) {
   const close = c => { const B = SB && SB.bars && SB.bars[c]; const cs = (B && B.c) || []; for (let i = cs.length - 1; i >= 0; i--) if (cs[i] != null) return cs[i]; return null; };
-  return el("div", "rv-twrap", `<table class="rv-t ct-t cap-t"><thead><tr>${withCode ? "<th>代號</th><th>名稱</th>" : ""}<th>債券</th><th>發行日</th><th>到期日</th><th>發行（億）</th><th>餘額（億）</th><th>轉換進度</th><th>轉換價<small>（發行時）</small></th><th>平價<small>（股價÷轉換價×100）</small></th><th>轉換期間</th><th>賣回日／價</th><th>承銷方式</th><th>承銷商</th></tr></thead><tbody>` +
-    rows.map(([c, b]) => { const px = close(c), par = px && b.cp0 ? 100 * px / b.cp0 : null;
-      return `<tr>${withCode ? `<td class="num">${esc(c)}</td><td style="text-align:left">${esc(nm(c))}</td>` : ""}<td style="text-align:left">${esc(b.nm)}${b.bc ? ` <small class="rv-dim">${esc(b.bc)}</small>` : ""}${b.pp ? ` <span class="cap-pp">私募</span>` : ""}</td><td class="num">${esc(b.iss_d || "—")}</td><td class="num">${esc(b.mat_d || "—")}</td><td class="num">${b.iss != null ? nf(b.iss, 2) : "—"}</td><td class="num">${b.out != null ? nf(b.out, 2) : "—"}</td>` +
-        `<td class="num"><span class="cap-bar"><i style="width:${Math.max(0, Math.min(100, b.conv || 0))}%"></i></span> ${b.conv != null ? nf(b.conv, 1) + "%" : "—"}</td><td class="num">${b.cp0 ? nf(b.cp0, 2) : "—"}</td><td class="num">${par != null ? `<span class="${par >= 100 ? "up" : ""}">${nf(par, 1)}</span>` : "—"}</td>` +
+  const nc = (withCode ? 2 : 0) + 14;
+  const w = el("div", "rv-twrap", `<table class="rv-t ct-t cap-t"><thead><tr>${withCode ? "<th>代號</th><th>名稱</th>" : ""}<th>債券</th><th>定價基準日</th><th>發行日</th><th>到期日</th><th>發行（億）</th><th>餘額（億）</th><th>轉換進度</th><th>轉換價<small>（發行時）</small></th><th>溢價率</th><th>平價<small>（股價÷轉換價×100）</small></th><th>轉換期間</th><th>賣回日／價</th><th>承銷方式</th><th>承銷商</th></tr></thead><tbody>` +
+    rows.map(([c, b], i) => { const px = close(c), par = px && b.cp0 ? 100 * px / b.cp0 : null, P = b.px || {};
+      return `<tr class="cap-r" data-i="${i}" style="cursor:pointer" title="點一下看這檔的基本資料">${withCode ? `<td class="num">${esc(c)}</td><td style="text-align:left">${esc(nm(c))}</td>` : ""}<td style="text-align:left">${esc(b.nm)}${b.bc ? ` <small class="rv-dim">${esc(b.bc)}</small>` : ""}${b.pp ? ` <span class="cap-pp">私募</span>` : ""}</td><td class="num">${esc(P.bd || "—")}</td><td class="num">${esc(b.iss_d || "—")}</td><td class="num">${esc(b.mat_d || "—")}</td><td class="num">${b.iss != null ? nf(b.iss, 2) : "—"}</td><td class="num">${b.out != null ? nf(b.out, 2) : "—"}</td>` +
+        `<td class="num"><span class="cap-bar"><i style="width:${Math.max(0, Math.min(100, b.conv || 0))}%"></i></span> ${b.conv != null ? nf(b.conv, 1) + "%" : "—"}</td><td class="num">${b.cp0 ? nf(b.cp0, 2) : "—"}</td><td class="num">${P.prem ? nf(P.prem, 2) + "%" : "—"}</td><td class="num">${par != null ? `<span class="${par >= 100 ? "up" : ""}">${nf(par, 1)}</span>` : "—"}</td>` +
         `<td class="num">${esc((b.cv0 || "").slice(2))}～${esc((b.cv1 || "").slice(2))}</td><td class="num">${b.put_d ? `${esc(b.put_d)}／${nf(b.put_p, 2)}` : "—"}</td><td style="text-align:left;white-space:normal">${b.um ? `<span class="cap-pp">${esc(b.um)}</span>${b.ud ? ` <small class="rv-dim">${esc(b.ud.slice(5))}</small>` : ""}${b.uavg ? `<br><small class="rv-dim">得標均價 ${nf(b.uavg, 2)}${b.ulo ? `・最低 ${nf(b.ulo, 2)}` : ""}</small>` : ""}` : `<span class="rv-dim" title="證交所公告只回近期案件，舊債查不到">—</span>`}</td><td style="text-align:left;white-space:normal">${esc(b.uw || "—")}</td></tr>`; }).join("") + `</tbody></table>`);
+  w.querySelectorAll("tr.cap-r").forEach(tr => tr.onclick = () => {
+    const nx = tr.nextElementSibling; if (nx && nx.classList.contains("cap-det")) { nx.remove(); return; }
+    const [c, b] = rows[+tr.dataset.i], d = document.createElement("tr"); d.className = "cap-det";
+    d.innerHTML = `<td colspan="${nc}" style="text-align:left;white-space:normal">${capCBInfo(c, b, nm)}</td>`; tr.after(d); });
+  return w;
+}
+/* 🟢 10-18 17:05（Evans D7）：可轉債基本資料 —— 點一檔帶出：轉換價、定價基準日、基準價、轉換溢價率、基準價規則（公告寫的＋日 K 實際對到哪一個）、
+   發行／到期、承銷方式、承銷商、票面利率、轉換期間、賣回；公開說明書連證交所公開資訊（doc.twse.com.tw t57sb01，官方 PDF）。 */
+function capCBInfo(c, b, nm) {
+  const P = b.px || {}, kv = (k, v) => `<div><small class="rv-dim">${esc(k)}</small><b>${v}</b></div>`;
+  return `<div class="cap-info"><div class="cap-ih">${esc(c)} ${esc(nm(c))}・${esc(b.nm)}${b.bc ? `（${esc(b.bc)}）` : ""}${b.pp ? "・私募" : ""}</div><div class="cap-ig">` +
+    kv("轉換價（發行時）", b.cp0 ? nf(b.cp0, 2) + " 元" : "—") + kv("定價基準日", esc(P.bd || "—")) +
+    kv("基準價", P.base ? nf(P.base, 2) + " 元" + (P.base_calc ? " <small>（轉換價÷溢價率回推）</small>" : "") : "—") +
+    kv("轉換溢價率", P.prem ? nf(P.prem, 2) + "%" : "—") + kv("基準價規則（公告）", esc(P.rule || "—")) +
+    kv("日 K 實際對到", P.hit ? `${esc(P.hit)}${P.pos ? `（三者中${esc(P.pos)}）` : ""}` : "—") + kv("基準日前 5 日收盤振幅", P.rng5 != null ? nf(P.rng5, 2) + "%" : "—") +
+    kv("發行日／到期日", `${esc(b.iss_d || "—")}／${esc(b.mat_d || "—")}`) + kv("發行額／餘額", `${b.iss != null ? nf(b.iss, 2) : "—"}／${b.out != null ? nf(b.out, 2) : "—"} 億`) +
+    kv("票面利率", b.cr != null ? nf(b.cr, 2) + "%" : "—") + kv("轉換期間", `${esc(b.cv0 || "—")}～${esc(b.cv1 || "—")}`) +
+    kv("賣回日／價", b.put_d ? `${esc(b.put_d)}／${nf(b.put_p, 2)}` : "—") +
+    kv("承銷方式", b.um ? esc(b.um) + (b.uavg ? `・得標均價 ${nf(b.uavg, 2)}` : "") : "—") + kv("承銷商", esc(b.uw || "—")) +
+    `</div><div class="rv-dim" style="font-size:12px;margin-top:4px">定價數字取自公開資訊觀測站「訂定轉換價格／完成訂價」重大訊息內文；公開說明書：<a href="https://doc.twse.com.tw/server-java/t57sb01?step=1&co_id=${esc(c)}&mtype=B" target="_blank" rel="noopener">證交所公開資訊（官方 PDF）</a></div></div>`;
+}
+/* 定價統計：可轉債基準價規則（前 1／3／5 日均價取高或低）、現增發行價約市價幾折 —— 用歷史實際案例（capital.py pricing） */
+function capPxStats(C, nm, code) {
+  const S = C.px_stats || {}, L = (C.px || []).filter(e => !code || e.code === code), w = el("div");
+  const qq = q => q ? `中位數 <b>${nf(q.med, 2)}</b>（四分位 ${nf(q.p25, 2)}～${nf(q.p75, 2)}，最低 ${nf(q.min, 2)}、最高 ${nf(q.max, 2)}；${q.n} 筆）` : "—";
+  const dd = o => Object.entries(o || {}).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${esc(k)} ${v}`).join("、") || "—";
+  if (!code) w.appendChild(el("div", "cap-st",
+    `<div><h4>可轉債（國內）${(S.cb || {}).n || 0} 案</h4><p>公告寫的基準價規則：${dd((S.cb || {}).rule)}</p><p>日 K 實際對到：${dd((S.cb || {}).hit)}；「前 1／3／5 日擇一」的案件取三者中的：${dd((S.cb || {}).pos)}</p>` +
+    `<p>轉換溢價率：${qq((S.cb || {}).prem)}</p><p>基準日前 5 日收盤振幅（%）：${qq((S.cb || {}).rng5)}</p><p class="rv-dim">海外可轉債 ${(S.cb || {}).os_n || 0} 案（參考價＝訂價日收盤）：溢價率 ${qq((S.cb || {}).os_prem)}</p></div>` +
+    `<div><h4>現金增資 ${(S.cash || {}).n || 0} 案</h4><p>發行價 ÷ 基準日前一日收盤（%）：${qq((S.cash || {}).disc1)}</p><p>公告寫的「參考價格之 X%」：${qq((S.cash || {}).ratio)}</p>` +
+    `<p>參考價對到：${dd((S.cash || {}).hit)}（${dd((S.cash || {}).pos)}）</p><p>基準日前 5 日收盤振幅（%）：${qq((S.cash || {}).rng5)}</p></div>`));
+  if (!L.length) { w.appendChild(el("div", "empty", code ? "近一年沒有擷取到定價公告。" : "定價案例累積中（每班往回補一年的重大訊息、逐則擷取內文）。")); return w; }
+  w.appendChild(el("div", "rv-twrap", `<table class="rv-t ct-t"><thead><tr><th>基準日</th>${code ? "" : "<th>個股</th>"}<th>類別</th><th>轉換價／發行價</th><th>基準價／參考價</th><th>溢價率／折數</th><th>規則（公告）</th><th>日 K 對到</th><th>前 1／3／5 日均</th><th>前 5 日振幅</th><th>基準日後 5 日收盤</th></tr></thead><tbody>` +
+    L.slice(0, code ? 40 : 80).map(e => { const P = e.pre || {};
+      return `<tr><td class="num">${esc(e.bd)}${e.bd_guess ? ' <small class="rv-dim" title="公告沒寫基準日，用公告日">推算</small>' : ""}</td>${code ? "" : `<td style="text-align:left"><span class="num rv-dim">${esc(e.code)}</span> ${esc(nm(e.code))}</td>`}` +
+        `<td>${e.k === "cb" ? (e.os ? "海外 CB" : "可轉債") : "現增"}</td><td class="num">${nf(e.k === "cb" ? e.cp : e.px, 2)}</td><td class="num">${e.k === "cb" ? (e.base ? nf(e.base, 2) + (e.base_calc ? "<small>回推</small>" : "") : "—") : (e.ref ? nf(e.ref, 2) : "—")}</td>` +
+        `<td class="num">${e.k === "cb" ? (e.prem ? nf(e.prem, 2) + "%" : "—") : (e.ratio ? nf(e.ratio, 2) + "%" : e.disc1 ? `<span title="發行價÷前一日收盤">${nf(e.disc1, 1)}%</span>` : "—")}</td>` +
+        `<td style="white-space:normal">${esc(e.rule || "—")}</td><td>${e.hit ? esc(e.hit) + (e.pos ? `<small class="rv-dim">・${esc(e.pos)}</small>` : "") : "—"}</td>` +
+        `<td class="num">${P.a1 ? `${nf(P.a1, 2)}／${nf(P.a3, 2)}／${nf(P.a5, 2)}` : "—"}</td><td class="num">${e.rng5 != null ? nf(e.rng5, 2) + "%" : "—"}</td><td class="num" style="white-space:normal">${(P.post || []).map(v => nf(v, v < 100 ? 2 : 1)).join(" ") || "—"}</td></tr>`; }).join("") + `</tbody></table>`));
+  w.appendChild(el("div", "rv-note", esc(C.px_rule || "")));
+  return w;
 }
 function capEvList(L, code, nm, api) {
   const g = el("div", "sxc-ev");
@@ -4156,16 +4200,17 @@ function capEvList(L, code, nm, api) {
   return g;
 }
 /* 🟢 10-18（Evans 10-12 15:35）：籌資動態 K 線化 —— 個股收盤線上標可轉債（發行、可轉換起、賣回日）、現金增資（認股基準日、繳款、增資基準日、上市買賣日）、可轉債公告、私募 */
-function capK(code, name, SB, cbs, cash, cbev, pp) {
+function capK(code, name, SB, cbs, cash, cbev, pp, pxs) {
   const B = SB && SB.bars && SB.bars[code], ds = (SB || {}).dates || [], box = el("div", "ins-k");
-  const KC = {cb: "var(--up)", cv: "#ff9f1a", put: "#3fc4ff", cash: "#9d7bff", ce: "var(--ink-2)", pp: "var(--down)"};
-  const KN = {cb: "可轉債發行", cv: "可轉換起", put: "賣回日", cash: "現增時程", ce: "可轉債公告", pp: "私募（董事會）"};
+  const KC = {px: "#d4a017", cb: "var(--up)", cv: "#ff9f1a", put: "#3fc4ff", cash: "#9d7bff", ce: "var(--ink-2)", pp: "var(--down)"};
+  const KN = {px: "定價基準日", cb: "可轉債發行", cv: "可轉換起", put: "賣回日", cash: "現增時程", ce: "可轉債公告", pp: "私募（董事會）"};
   const EV = [];
   cbs.forEach(x => { if (x.iss_d) EV.push({d: x.iss_d, k: "cb", t: `${x.nm} 發行 ${x.iss ?? "—"} 億・轉換價 ${x.cp0 ?? "—"}`});
     if (x.cv0) EV.push({d: x.cv0, k: "cv", t: `${x.nm} 開始可轉換`}); if (x.put_d) EV.push({d: x.put_d, k: "put", t: `${x.nm} 賣回日（${x.put_p ?? "—"}）`}); });
   cash.forEach(e => Object.entries(e.cap || {}).forEach(([k, v]) => { const d = String(v).slice(0, 10); if (/^\d{4}-\d{2}-\d{2}$/.test(d)) EV.push({d, k: "cash", t: `現增 ${k} ${v}`}); }));
   cbev.forEach(e => EV.push({d: e.d, k: "ce", t: e.s}));
   pp.forEach(([d, t]) => EV.push({d, k: "pp", t: `私募 ${t}`}));
+  (pxs || []).forEach(e => EV.push({d: e.bd, k: "px", t: e.k === "cb" ? `轉換價 ${e.cp ?? "—"}・基準價 ${e.base ?? "—"}・溢價率 ${e.prem ?? "—"}%（${e.rule || "規則未寫"}）` : `現增發行價 ${e.px}${e.ratio ? `・參考價之 ${e.ratio}%` : e.disc1 ? `・前一日收盤的 ${e.disc1}%` : ""}`}));
   if (!B || !(B.c || []).length) { box.appendChild(el("div", "sub", "這檔沒有日 K（追蹤名單外），事件只列在其他子標籤。")); return card("股價與籌資事件", null, box); }
   const W = 900, H = 230, P = 34, cs = B.c, n = cs.length, ok = cs.filter(v => v != null);
   const lo = Math.min(...ok), hi = Math.max(...ok), px = i => P + (W - P - 8) * i / Math.max(1, n - 1), py = v => 16 + (H - 36) * (1 - (v - lo) / ((hi - lo) || 1));
@@ -4188,7 +4233,7 @@ function tabCapital() {
     root.innerHTML = "";
     if (!C) { root.appendChild(el("div", "empty", "載不到 data/capital.json —— 這一班可能還沒產出")); return; }
     const NM = n32Names(), U = (D.screen || {}).universe || {};
-    const nm = c => ((NM[c] || {}).name) || ((U[c] || {}).name) || c;
+    const nm = c => ((NM[c] || {}).name) || ((U[c] || {}).name) || ((C.names || {})[c]) || c;      // 10-18 D7：興櫃／未上市從 capital.json names 補
     const sb = nlSearchBox(Q, v => { Q = v.trim(); draw(); const n = root.querySelector(".nl-sin"); if (n) { n.focus(); n.setSelectionRange(n.value.length, n.value.length); } });
     sb.querySelector(".nl-sin").placeholder = "代號／名稱（例 2330、台積電）";
     root.appendChild(sb);
@@ -4199,7 +4244,8 @@ function tabCapital() {
       if (!c) { root.appendChild(el("div", "empty", `找不到「${esc(Q)}」。`)); return; }
       root.appendChild(el("h3", "cap-h", `${esc(c)} ${esc(nm(c))}　籌資動態`));
       const b = (CB[c] || []).map(x => [c, x]), T = [];
-      T.push(capK(c, nm(c), SB, b.map(x => x[1]), CA[c] || [], CE[c] || [], PP[c] || []));
+      T.push(capK(c, nm(c), SB, b.map(x => x[1]), CA[c] || [], CE[c] || [], PP[c] || [], (C.px || []).filter(e => e.code === c)));
+      T.push(card("定價", "可轉債轉換價、現增發行價的定價基準日與規則（重大訊息內文擷取）", capPxStats(C, nm, c)));
       T.push(card("可轉債", b.length ? `${b.length} 檔・金額單位億元` : "目前沒有流通中的可轉債", b.length ? capCBTable(b, nm, SB, false) : el("div", "empty", "櫃買轉(交)換公司債發行資料裡沒有這家公司。")));
       T.push(card("可轉債公告", "近一年・點主旨看公開資訊觀測站當月公告（轉換價重設、調整都在這裡）", (CE[c] || []).length ? capEvList(CE[c].map(e => [c, e]), c, nm, "ajax_t05st01") : el("div", "empty", "近一年沒有可轉債類重大訊息。")));
       T.push(card("現金增資", "近一年・日期由公告內文擷取", (CA[c] || []).length ? capEvList(CA[c].map(e => [c, e]), c, nm, "ajax_t05st01") : el("div", "empty", "近一年沒有現金增資類重大訊息。")));
@@ -4207,9 +4253,9 @@ function tabCapital() {
       root.appendChild(cardTabs(T));
     } else {
       const T = [];
-      const lim = new Date(Date.now() - 120 * 864e5).toISOString().slice(0, 10);
+      const lim = new Date(Date.now() - 365 * 864e5).toISOString().slice(0, 10);     // 10-18 D7：120 天 → 一年（CB 多三到五年，一年前詢圈／競拍的可能今年才發酵）
       const nb = [].concat(...Object.entries(CB).map(([c, L]) => L.map(b => [c, b]))).filter(([, b]) => !b.pp && (b.iss_d || "") >= lim).sort((a, b) => b[1].iss_d.localeCompare(a[1].iss_d));
-      T.push(card("近 120 天新發行可轉債", `${nb.length} 檔・金額單位億元`, nb.length ? capCBTable(nb, nm, SB, true) : el("div", "empty", "近 120 天沒有新發行。")));
+      T.push(card("近一年新發行可轉債", `${nb.length} 檔・金額單位億元・點一列看基本資料`, nb.length ? capCBTable(nb, nm, SB, true) : el("div", "empty", "近一年沒有新發行。")));
       const hp = [].concat(...Object.entries(CB).map(([c, L]) => L.map(b => [c, b]))).filter(([, b]) => !b.pp && b.conv != null && b.conv >= 30 && b.out > 0).sort((a, b) => b[1].conv - a[1].conv);
       T.push(card("轉換進度 30% 以上（還有餘額）", `${hp.length} 檔・轉換多＝股本膨脹多`, hp.length ? capCBTable(hp.slice(0, 40), nm, SB, true) : el("div", "empty", "沒有。")));
       const ev = (D2, L = []) => (Object.entries(D2).forEach(([c, es]) => es.forEach(e => L.push([c, e]))), L.sort((a, b) => b[1].d.localeCompare(a[1].d)));
@@ -4217,6 +4263,7 @@ function tabCapital() {
       T.push(card("現金增資時程", `近一年有日期的 ${ca.length} 則・新的在上`, ca.length ? capEvList(ca.slice(0, 30), null, nm, "ajax_t05st01") : el("div", "empty", "沒有。")));
       const ce = ev(CE);
       T.push(card("可轉債公告", `近一年 ${ce.length} 則・新的在上`, ce.length ? capEvList(ce.slice(0, 30), null, nm, "ajax_t05st01") : el("div", "empty", "沒有。")));
+      T.push(card("定價統計", "可轉債基準價規則（前 1／3／5 日均價取高或低）、現增發行價約市價幾折 —— 歷史實際案例", capPxStats(C, nm, null)));
       const pp = Object.entries(PP).sort((a, b) => b[1].length - a[1].length);
       T.push(card("私募", `近兩年 ${pp.length} 家・依次數排序`, el("div", "sub", pp.slice(0, 60).map(([c, L]) => `<a href="javascript:void 0" data-c="${esc(c)}">${esc(c)} ${esc(nm(c))}</a> <small class="rv-dim">${L.length} 次</small>`).join("　"))));
       root.appendChild(cardTabs(T, t => t.replace(/（還有餘額）/, "")));
@@ -4224,6 +4271,46 @@ function tabCapital() {
     }
     root.appendChild(el("div", "rv-note", esc(C.rule || "") + "　來源：" + esc(C.src || "") + "　資料日 " + esc(C.asof || "")));
   }; window.CAP_GO = c => { Q = c; draw(); }; draw(); });
+  return root;
+}
+/* 🟢 10-18 17:05（總指揮 11）：美國機構持股（13F）—— docs/data/f13.json（thirteenf.py，SEC EDGAR 官方申報）。f13- 前綴。
+   基金買賣進出（新進／加碼／減碼／出清）、持股報酬（申報市值÷股數推算的季底價變動）、集中度與清算風險（申報面）、跨基金同買同賣。 */
+var _f13W = null;
+function f13Load() { if (!_f13W) _f13W = fetch("data/f13.json" + _dv(), {cache: "force-cache"}).then(r => r.ok ? r.json() : null).catch(() => null); return _f13W; }
+function tabF13() {
+  const root = el("div", "f13-root", `<div class="sub">載入中…</div>`);
+  let FI = 0, ACT = "";
+  f13Load().then(J => { const draw = () => {
+    root.innerHTML = "";
+    if (!J || !(J.funds || []).length) { root.appendChild(el("div", "empty", "13F 資料建置中：SEC 擋雲端 Actions 的連線，改由本機每週抓一次（SEC 申報後 45 天內公布，季度更新）。")); return; }
+    const F = J.funds[Math.min(FI, J.funds.length - 1)], S = F.sum || {}, yi = v => v == null ? "—" : nf(v / 1e8, 1) + " 億美元";
+    const bar = el("div", "ir-tools", "機構 ");
+    J.funds.forEach((f, i) => { const b = el("button", "rv-pill" + (i === FI ? " on" : ""), esc(f.zh)); b.onclick = () => { FI = i; ACT = ""; draw(); }; bar.appendChild(b); });
+    root.appendChild(bar);
+    const kv = el("div", "kv");
+    [["申報市值", yi(S.aum), `上季 ${yi(S.aum0)}`], ["持股檔數", nf(S.n, 0), `選擇權部位 ${S.opt || 0} 筆（不算權重）`],
+     ["前 1／前 10 大權重", `${S.top1 == null ? "—" : nf(S.top1, 1) + "%"}／${S.top10 == null ? "—" : nf(S.top10, 1) + "%"}`, "集中度"],
+     ["持股季報酬（推算）", S.ret == null ? "—" : `<span class="${S.ret >= 0 ? "up" : "down"}">${S.ret > 0 ? "+" : ""}${nf(S.ret, 2)}%</span>`, `兩季都有的 ${S.ret_n || 0} 檔，上季市值加權`],
+     ["清算／大減（申報面）", S.cut == null ? "—" : nf(S.cut, 1) + "%", "出清＋減碼 ≥ 50% 占上季市值"]].forEach(([k, v, sub]) =>
+      kv.appendChild(el("div", "", `<div class="k">${k}</div><div class="v num">${v}</div><div class="sub">${sub}</div>`)));
+    root.appendChild(card(`${F.zh}　${F.rd} 季`, `${esc(F.en || "")}・申報日 ${esc(F.fd)}・對照上季 ${esc(F.rd0 || "—")}`, kv));
+    const C = S.cnt || {}, ab = el("div", "ir-tools", "動作 ");
+    [["", "全部"], ["新進"], ["加碼"], ["減碼"], ["出清"], ["持平"]].forEach(([a, t]) => { const b = el("button", "rv-pill" + (a === ACT ? " on" : ""), `${esc(t || a)}${a ? ` <small>${C[a] || 0}</small>` : ""}`); b.onclick = () => { ACT = a; draw(); }; ab.appendChild(b); });
+    const R = (F.rows || []).filter(e => !ACT || e.act === ACT), AC = {新進: "up", 加碼: "up", 減碼: "down", 出清: "down"};
+    const t = el("div", "rv-twrap", `<table class="rv-t ct-t"><thead><tr><th>標的</th><th>類別</th><th>動作</th><th>股數變動</th><th>本季市值</th><th>權重</th><th>上季權重</th><th>季底價變動（推算）</th></tr></thead><tbody>` +
+      R.map(e => `<tr><td style="text-align:left">${esc(e.nm)} <small class="rv-dim">${esc(e.cu)}</small></td><td>${esc(e.pc || e.cl || "")}</td><td><b class="${AC[e.act] || ""}">${esc(e.act)}</b></td>` +
+        `<td class="num">${e.dsh == null ? "—" : (e.dsh > 0 ? "+" : "") + nf(e.dsh, 1) + "%"}</td><td class="num">${nf(e.v / 1e6, 1)} 百萬</td><td class="num">${e.w == null ? "—" : nf(e.w, 2) + "%"}</td><td class="num">${e.w0 == null ? "—" : nf(e.w0, 2) + "%"}</td>` +
+        `<td class="num">${e.ret == null ? "—" : `<span class="${e.ret >= 0 ? "up" : "down"}">${e.ret > 0 ? "+" : ""}${nf(e.ret, 1)}%</span>`}</td></tr>`).join("") + `</tbody></table>`);
+    thSort(t.querySelector("table"));
+    const hold = el("div"); hold.appendChild(ab); hold.appendChild(t);
+    hold.appendChild(el("div", "rv-note", `出處：<a href="${esc(F.src)}" target="_blank" rel="noopener">本季資訊表</a>${F.src0 ? `、<a href="${esc(F.src0)}" target="_blank" rel="noopener">上季資訊表</a>` : ""}（SEC EDGAR）`));
+    const X = J.cross || [];
+    const cx = X.length ? el("div", "rv-twrap", `<table class="rv-t ct-t"><thead><tr><th>標的</th><th>買進（新進／加碼）</th><th>賣出（減碼／出清）</th></tr></thead><tbody>` +
+      X.map(x => `<tr><td style="text-align:left">${esc(x.nm)} <small class="rv-dim">${esc(x.cu)}</small></td><td style="text-align:left;white-space:normal" class="up">${x.buy.map(b => esc(b[0]) + " " + esc(b[1])).join("、") || "—"}</td>` +
+        `<td style="text-align:left;white-space:normal" class="down">${x.sell.map(b => esc(b[0]) + " " + esc(b[1]) + (b[2] != null ? `（${nf(b[2], 0)}%）` : "")).join("、") || "—"}</td></tr>`).join("") + `</tbody></table>`) : el("div", "empty", "這季沒有兩家以上同時進出的標的。");
+    root.appendChild(cardTabs([card("持股進出", `${R.length} 檔・依本季市值排序（可點表頭排序）`, hold), card("跨基金同買同賣", `${X.length} 檔・兩家以上同時進出`, cx)]));
+    root.appendChild(el("div", "rv-note", esc(J.rule || "") + "　來源：" + esc(J.src || "") + "　資料日 " + esc(J.asof || "")));
+  }; draw(); });
   return root;
 }
 /* 🟢 10-12（Evans 五問第 4 項）：權證放量（單檔成交相對自身 20 日均、相對發行量）＋同標的集中 —— 泡泡圖＋列表。wr- 前綴。 */
@@ -5052,7 +5139,8 @@ function nlItem(x) {
 }
 function nlList(F, empty) {
   const w = el("div", "nl-list");
-  const L = F.slice().sort((a, b) => nlLevel(b) - nlLevel(a)).slice(0, 120);   // 重磅 → 重點 → 其餘（同級照時間）
+  // 重磅 → 重點 → 其餘；🟢 10-18 17:05（D11）：重磅、重點裡再依重點分數（權值龍頭分數高 → 排前面），其餘照時間
+  const L = F.slice().sort((a, b) => nlLevel(b) - nlLevel(a) || (nlLevel(a) ? (b.bs || 0) - (a.bs || 0) : 0)).slice(0, 120);
   if (!L.length) { w.appendChild(el("div", "empty", empty || "近 48 小時沒有這一類的權威來源新聞。")); return w; }
   const rk = nlTagRank(L);
   if (rk) w.appendChild(rk);
@@ -5722,7 +5810,12 @@ function ifRates(M) {
    非農畫月增，Y 軸截在 ±1,500 千人，超出的點畫在邊上、標實際數字（2020 年的 −2,000 萬會把其他年份壓扁）。 */
 function ifLong(M) {
   const FL = M.fred_long || {}, F = M.fred || {};
-  const src = sid => ((FL[sid] && FL[sid].obs && FL[sid].obs.length ? FL[sid] : F[sid]) || {}).obs || [];
+  // 月均序列（FEDFUNDS、GS2…）還沒進長歷史時，退回日資料（DFF、DGS2…）自己算月均 —— 至少看得到近一年
+  const DAY = {FEDFUNDS: "DFF", GS2: "DGS2", GS10: "DGS10", GS30: "DGS30"};
+  const mavg = o => { const m = new Map(); o.forEach(([d, v]) => { if (v == null) return; const k = d.slice(0, 7), a = m.get(k) || [0, 0]; a[0] += v; a[1]++; m.set(k, a); });
+    return [...m].map(([k, a]) => [k + "-01", +(a[0] / a[1]).toFixed(2)]); };
+  const src = sid => { const o = ((FL[sid] && FL[sid].obs && FL[sid].obs.length ? FL[sid] : F[sid]) || {}).obs || [];
+    return o.length || !DAY[sid] ? o : mavg(((F[DAY[sid]] || {}).obs) || []); };
   const mo = o => o.filter(x => x[1] != null).map(x => [x[0].slice(0, 7), x[1]]);
   const SER = [
     ["CPI 年增率", () => ifYoy(src("CPIAUCSL")), v => nf(v, 1) + "%", "CPIAUCSL"],
@@ -5831,7 +5924,12 @@ function ifEcon(M) {
 /* 🟢 10-18（Evans D4）：自由疊圖 —— 勾幾條就疊幾條；% 類左軸、千人右軸；區間快選；滑鼠移過去同一個月全部列出。勾選記在瀏覽器。 */
 function ifOverlay(M) {
   const FL = M.fred_long || {}, F = M.fred || {};
-  const src = sid => ((FL[sid] && FL[sid].obs && FL[sid].obs.length ? FL[sid] : F[sid]) || {}).obs || [];
+  // 月均序列（FEDFUNDS、GS2…）還沒進長歷史時，退回日資料（DFF、DGS2…）自己算月均 —— 至少看得到近一年
+  const DAY = {FEDFUNDS: "DFF", GS2: "DGS2", GS10: "DGS10", GS30: "DGS30"};
+  const mavg = o => { const m = new Map(); o.forEach(([d, v]) => { if (v == null) return; const k = d.slice(0, 7), a = m.get(k) || [0, 0]; a[0] += v; a[1]++; m.set(k, a); });
+    return [...m].map(([k, a]) => [k + "-01", +(a[0] / a[1]).toFixed(2)]); };
+  const src = sid => { const o = ((FL[sid] && FL[sid].obs && FL[sid].obs.length ? FL[sid] : F[sid]) || {}).obs || [];
+    return o.length || !DAY[sid] ? o : mavg(((F[DAY[sid]] || {}).obs) || []); };
   const mo = o => o.filter(x => x[1] != null).map(x => [x[0].slice(0, 7), x[1]]);
   const SER = [
     ["CPI 年增", () => ifYoy(src("CPIAUCSL")), "%"], ["核心 CPI 年增", () => ifYoy(src("CPILFESL")), "%"],
@@ -10811,15 +10909,17 @@ function crChart(R, F) {
   return el("div", "cr-chart", g);
 }
 /* 🟢 10-18（Evans 本周 NOTE：AI 產業報告要能下載，手機一到兩頁看完，不用再截圖被截斷）：
-   PDF＝A4 直式（排成 760px 寬，一到兩頁）；長圖 PNG＝手機寬（390px）。html2canvas 轉圖 → 浮水印直接畫進像素（不是 PDF 圖層，刪不掉）→ 切頁進 jsPDF。 */
+   PDF＝A4 直式（排成 760px 寬，一到兩頁）；長圖 PNG＝手機寬（390px）。html2canvas 轉圖 → 浮水印直接畫進像素（不是 PDF 圖層，刪不掉）→ 切頁進 jsPDF。
+   🟢 10-18 17:05（Evans D6）：PDF 改外資報告那種雙欄並排（1120px 寬排版、A4 直式）：上方標題＋重點數字＋總結橫跨，
+   左欄文字（事件／影響／估值依據／後續追蹤、風險、公司簡介），右欄圖表與表格；長條圖跟著欄寬縮小，不再拉長版面。 */
 const CR_LIB = {h2c: "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js", pdf: "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"};
 function crScript(u) { return new Promise((ok, no) => { if (document.querySelector(`script[src="${u}"]`)) return ok(); const t = document.createElement("script"); t.src = u; t.onload = ok; t.onerror = no; document.head.appendChild(t); }); }
 async function crExport(R, kind, btn) {
   const t0 = btn.textContent; btn.textContent = "產生中…"; btn.disabled = true;
-  const host = el("div", "cr-print"); host.style.cssText = `position:fixed;left:-10000px;top:0;width:${kind === "pdf" ? 760 : 390}px;padding:${kind === "pdf" ? 24 : 14}px;background:` + getComputedStyle(document.body).backgroundColor;
+  const host = el("div", "cr-print" + (kind === "pdf" ? " cr-pdf" : "")); host.style.cssText = `position:fixed;left:-10000px;top:0;width:${kind === "pdf" ? 1120 : 390}px;padding:${kind === "pdf" ? 28 : 14}px;background:` + getComputedStyle(document.body).backgroundColor;
   try {
     await crScript(CR_LIB.h2c); if (kind === "pdf") await crScript(CR_LIB.pdf);
-    const node = crOne(R, true); host.appendChild(node);
+    const node = crOne(R, true); if (kind === "pdf") crTwoCol(node); host.appendChild(node);
     host.appendChild(el("div", "rv-note", `GEA 戰情・AI 研究報告｜下載 ${new Date().toISOString().slice(0, 10)}｜僅供參考，不構成投資建議`));
     document.body.appendChild(host);
     const cv = await window.html2canvas(host, {scale: 2, backgroundColor: getComputedStyle(document.body).backgroundColor, useCORS: true, logging: false});
@@ -10843,12 +10943,20 @@ async function crExport(R, kind, btn) {
   } catch (e) { alert("下載失敗：" + (e && e.message || e)); }
   host.remove(); btn.textContent = t0; btn.disabled = false;
 }
+/* PDF 雙欄：把 crOne 排好的區塊分到上方橫跨／左欄文字／右欄圖表；小標（h4）跟著下一個區塊走 */
+function crTwoCol(w) {
+  const top = el("div"), g = el("div", "cr-2c"), cl = el("div"), cr = el("div"), bot = el("div"), kids = [...w.children];
+  const where = k => { const c = k.className || "";
+    return /cr-hero|cr-kpi|cr-flow/.test(c) ? top : /cr-chart|cr-tbl/.test(c) ? cr : /rv-note/.test(c) ? bot : cl; };
+  kids.forEach((k, i) => { const nx = k.tagName === "H4" && kids[i + 1] ? kids[i + 1] : k; where(nx).appendChild(k); });
+  g.appendChild(cl); g.appendChild(cr); w.innerHTML = ""; [top, g, bot].forEach(x => w.appendChild(x));
+}
 function crOne(R, bare) {
   const F = {}; (R.facts || []).forEach(f => { F[f.id] = f; });
   const S = R.sections || {}, w = el("div", "cr-root");
   if (!bare) { const dl = el("div", "ir-tools cr-dl", "下載 ");
-    [["pdf", "PDF（手機版面）"], ["png", "長圖 PNG"]].forEach(([k, t]) => { const b = el("button", "rv-pill", t); b.onclick = e => { e.stopPropagation(); crExport(R, k, b); }; dl.appendChild(b); });
-    dl.appendChild(el("small", "rv-dim", "　含浮水印；手機一到兩頁看完")); w.appendChild(dl); }
+    [["pdf", "PDF（雙欄 A4）"], ["png", "長圖 PNG（手機寬）"]].forEach(([k, t]) => { const b = el("button", "rv-pill", t); b.onclick = e => { e.stopPropagation(); crExport(R, k, b); }; dl.appendChild(b); });
+    dl.appendChild(el("small", "rv-dim", "　含浮水印；PDF 雙欄一到兩頁看完")); w.appendChild(dl); }
   w.appendChild(el("div", "cr-hero", `<div class="cr-ind">${esc(R.industry || "")}　資料日 ${esc(R.data_date || R.date || "")}${R.made_date ? "｜報告產出日 " + esc(R.made_date) : ""}</div>` +
     `<div class="cr-code"><b>${esc(R.code)}</b> ${esc(R.name || "")}</div><div class="cr-title">${esc(S["標題"] || "")}</div><div class="cr-subt">${esc(S["副標"] || "")}</div>`));
   const kpi = (R.facts || []).filter(f => f.sec === "關鍵數據").slice(0, 4);
@@ -11085,6 +11193,7 @@ const SUB_DESC = {
   "即時": "權威來源（路透、美聯社、彭博、日經、中央社）的最新消息，盤中每 30 分鐘更新；下方附各國熱搜。",
   "點數貢獻": "加權指數當天漲跌由台積電、其他前十大權值股、其餘上市股各貢獻多少點；正、負貢獻各前 30 名（盤後估算）。",
   "關注度排行": "當天新聞、PTT、意見領袖點名最多的個股，跟前一天比；只是被提到的多寡，不代表看多看空。",
+  "美國機構持股": "美國機構季報持股（13F）：波克夏、橋水等基金本季新進／加碼／減碼／出清、持股報酬（推算）、集中度與清算風險、跨基金同買同賣（SEC EDGAR 官方申報）。",
   "籌資動態": "可轉債（發行、轉換價、轉換進度、賣回日）、現金增資時程、私募。公司為資本支出籌資的手段，也會改變股本與籌碼（櫃買、公開資訊觀測站）。",
   "權證籌碼": "盤後依標的加總認購／認售權證成交金額，跟前 20 個交易日平均比；成交異常的標的排前面。權證多為避險與短線交易，不代表方向。",
   "內部人申報": "董監大股東事前申報轉讓、申報後未轉讓、每月持股異動、質押與解質、配偶與未成年子女及利用他人名義持股（證交所／櫃買公開資料）。",
@@ -15510,6 +15619,7 @@ const TABS = [
   ["內部人申報", tabInsider, "inst"],         // 🟢 10-11 15:10（P0-2）：從現貨籌碼搬出來，籌碼組第四格
   ["籌資動態", tabCapital, "inst"],          // 🟢 10-11（預覽 v6 第 12 項）
   ["權證籌碼", tabWarrant, "inst"],          // 🟢 10-11（預覽 v6 第 13 項）
+  ["美國機構持股", tabF13, "inst"],          // 🟢 10-18 17:05（總指揮 11）：13F
   ["成交金額", tabVolume, "screen"],
   ["量化個股", tabStock, "screen"],
   ["程式策略", tabStrategy, "strategy"],
@@ -15541,7 +15651,7 @@ const TGRP = [
   ["產業", ["產業信息", "產業研究", "族群動態", "個股位階"]],
   ["總經政治", ["總經政治"]],
   ["市場", ["市場動態", "處置股", "成交金額", "量化個股"]],
-  ["籌碼", ["現貨籌碼", "期權籌碼", "主動式ETF", "內部人申報", "籌資動態", "權證籌碼"]],
+  ["籌碼", ["現貨籌碼", "期權籌碼", "主動式ETF", "內部人申報", "籌資動態", "權證籌碼", "美國機構持股"]],
   ["策略", ["程式策略", "程式績效"]],
 ];
 const TG_OF = {};
