@@ -82,7 +82,7 @@ jobs:
           python3 - <<'PY'
           import json, os, urllib.request
           W = "https://gea-signal-relay.jesselauristonlivermore1877.workers.dev"
-          H = {"Authorization": "Bearer " + os.environ["RELAY_ADMIN_TOKEN"], "Content-Type": "application/json"}
+          H = {"Authorization": "Bearer " + os.environ["RELAY_ADMIN_TOKEN"], "Content-Type": "application/json", "User-Agent": "gea-relay-admin/1.0"}    # 沒有 UA 會被 Cloudflare 擋 403（10-19 第一次跑）
           def call(path, body=None):
               r = urllib.request.Request(W + path, None if body is None else json.dumps(body).encode(), H, method="GET" if body is None else "POST")
               return json.load(urllib.request.urlopen(r, timeout=30))
