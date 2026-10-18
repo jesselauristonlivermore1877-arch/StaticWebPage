@@ -101,6 +101,26 @@ r = await go("/api/prices", {headers: {cookie: neu.cookie}});
 const pnow = await r.json();
 t("價格還原成測試前", JSON.stringify(pnow ? {strat: pnow.strat, infra: pnow.infra, pack: pnow.pack} : null) === JSON.stringify(porig ? pback : null), porig ? "有自訂價格" : "（原本是報價單原價）");
 
+// 訂閱（Evans 10-19）：沒訂的策略資料 403、訂了才拿得到、"*"＝全部、原型研究完整版只給管理者
+for (const [n, b] of [["data_s_ZZA.js", "window.A=1"], ["data_s_ZZB.js", "window.B=1"], ["data_adm_zz.js", "window.X=1"]])
+  await go("/api/admin/file?name=" + n, {method: "PUT", headers: {...A, "x-ct": "text/javascript; charset=utf-8"}, body: b});
+const st = async n => (await go("/" + n, {headers: {cookie: neu.cookie}})).status;
+t("沒訂閱：策略資料 403", (await st("data_s_ZZA.js")) === 403);
+r = await go("/api/admin/members", {method: "PATCH", headers: {...A, "content-type": "application/json"}, body: JSON.stringify({id: mem.id, subs: "ZZA"})});
+t("訂 ZZA：拿得到 ZZA、拿不到 ZZB", (await st("data_s_ZZA.js")) === 200 && (await st("data_s_ZZB.js")) === 403);
+r = await go("/api/me", {headers: {cookie: neu.cookie}});
+t("/api/me 帶訂閱", JSON.stringify((await r.json()).subs) === '["ZZA"]');
+r = await go("/api/admin/members", {method: "PATCH", headers: {...A, "content-type": "application/json"}, body: JSON.stringify({id: mem.id, subs: "*"})});
+t("訂 *：兩個都拿得到", (await st("data_s_ZZA.js")) === 200 && (await st("data_s_ZZB.js")) === 200);
+t("一般會員拿不到原型研究完整版", (await st("data_adm_zz.js")) === 403);
+r = await go("/api/admin/members", {method: "PATCH", headers: {...A, "content-type": "application/json"}, body: JSON.stringify({id: mem.id, subs: "ZZA;drop"})});
+t("訂閱格式錯被擋", r.status === 400, "HTTP " + r.status);
+r = await go("/api/admin/members", {headers: A});
+t("會員列表帶訂閱欄", ((await r.json()).members.find(m => m.id === mem.id) || {}).subs === "*");
+r = await go("/api/admin/members", {method: "PATCH", headers: {...A, "content-type": "application/json"}, body: JSON.stringify({id: mem.id, admin: true})});
+t("管理者拿得到原型研究完整版", (await st("data_adm_zz.js")) === 200);
+for (const n of ["data_s_ZZA.js", "data_s_ZZB.js", "data_adm_zz.js"]) await go("/api/admin/file?name=" + n, {method: "DELETE", headers: A});
+
 r = await go("/api/admin/members?id=" + mem.id, {method: "DELETE", headers: A});
 r = await go("/api/me", {headers: {cookie: neu.cookie}});
 t("刪除會員後 session 失效", r.status === 401, "HTTP " + r.status);

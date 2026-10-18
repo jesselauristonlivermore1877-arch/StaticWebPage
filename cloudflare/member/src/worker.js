@@ -4,6 +4,8 @@
 //   · 每個會員最多 3 個裝置同時登入（第 4 個登入時踢掉最舊的）；到期或停用 → 所有頁面與資料都拿不到。
 //   · 網頁與資料都在 D1 的 files／file_chunks（文字檔存原文、圖片存 base64，切塊 ≤ 1 MB：D1 一列上限 2 MB；10-18 部署時 API token 沒有 KV 權限，改用 D1），只有有效會員拿得到；index.html 送出前塞入 window.GEA_ME（姓名、到期日、是否管理者）。
 //   · 管理 API（Bearer ADMIN_TOKEN 或管理者 session）：會員增刪改、重發連結、踢裝置；檔案上傳／列表／刪除；策略上下架表。
+//   · 訂閱（Evans 10-19「留給客戶的當然是照訂閱，沒訂的連訊號圖都不能看」）：members.subs＝訂閱的策略代碼（逗號分隔，"*"＝全部）；
+//     data_s_<代碼>.js（該策略的交易與權益）只發給有訂閱的會員或管理者，data_adm_*（原型研究完整版）只發給管理者，其他人一律 403。
 //   · 登入連結與 session 只存 SHA-256 雜湊，資料庫外洩也拿不到可用的連結。
 const COOKIE = "gea_s", LCOOKIE = "gea_ls", DAY = 86400, SESS_DAYS = 30, MAX_SESS = 3;
 const enc = new TextEncoder();
@@ -52,7 +54,22 @@ async function fileGet(env, name, metaOnly = false) {
   return {meta: m, body: m.enc === "t" ? str : unb64(str)};
 }
 let ready = false;
-async function init(env) { if (ready) return; await env.DB.batch(SCHEMA.map(s => env.DB.prepare(s))); ready = true; }
+async function init(env) {
+  if (ready) return;
+  await env.DB.batch(SCHEMA.map(s => env.DB.prepare(s)));
+  const cols = (await env.DB.prepare("PRAGMA table_info(members)").all()).results.map(c => c.name);
+  if (!cols.includes("subs")) await env.DB.prepare("ALTER TABLE members ADD COLUMN subs TEXT NOT NULL DEFAULT ''").run();   // 10-19 加：舊會員預設沒訂閱
+  ready = true;
+}
+const SUB_RE = /^(\*|[A-Za-z0-9_]{1,40}(,[A-Za-z0-9_]{1,40}){0,49})?$/;
+const subsOf = s => s.admin === 1 ? ["*"] : String(s.subs || "").split(",").filter(Boolean);
+function canFile(s, name) {                                                       // 依訂閱擋檔：策略資料看訂閱、原型研究完整版只給管理者
+  if (s.admin === 1) return true;
+  if (name.startsWith("data_adm_")) return false;
+  const m = name.match(/^data_s_([A-Za-z0-9_]+)\.js$/);
+  if (m) { const a = subsOf(s); return a.includes("*") || a.includes(m[1]); }
+  return true;
+}
 
 // ───────── 頁面（登入、到期、錯誤）─────────
 function page(title, body, st = 200, h = {}) {
@@ -138,14 +155,15 @@ async function adminApi(req, env, url, path) {
   const db = env.DB;
   if (path === "/api/admin/members") {
     if (req.method === "GET") {
-      const r = await db.prepare("SELECT m.id, m.name, m.contact, m.exp, m.on_, m.admin, m.line_sub IS NOT NULL AS line, m.created, m.last_seen, (SELECT COUNT(*) FROM sessions s WHERE s.member_id = m.id) AS devices FROM members m ORDER BY m.created").all();
+      const r = await db.prepare("SELECT m.id, m.name, m.contact, m.exp, m.on_, m.admin, m.line_sub IS NOT NULL AS line, m.subs, m.created, m.last_seen, (SELECT COUNT(*) FROM sessions s WHERE s.member_id = m.id) AS devices FROM members m ORDER BY m.created").all();
       return json({today: today(), members: r.results});
     }
     const b = await req.json().catch(() => ({}));
     if (req.method === "POST") {
       if (!b.name || !/^\d{4}-\d{2}-\d{2}$/.test(b.exp || "")) return json({error: "姓名、到期日（YYYY-MM-DD）必填"}, 400);
+      if (b.subs != null && !SUB_RE.test(String(b.subs))) return json({error: "訂閱格式：策略代碼用逗號分隔，或 *＝全部"}, 400);
       const id = rand(6), key = rand(24);
-      await db.prepare("INSERT INTO members(id, name, contact, exp, on_, admin, key_hash, created) VALUES(?,?,?,?,1,?,?,?)").bind(id, String(b.name).slice(0, 60), String(b.contact || "").slice(0, 120), b.exp, b.admin ? 1 : 0, await sha(key), now()).run();
+      await db.prepare("INSERT INTO members(id, name, contact, exp, on_, admin, key_hash, created, subs) VALUES(?,?,?,?,1,?,?,?,?)").bind(id, String(b.name).slice(0, 60), String(b.contact || "").slice(0, 120), b.exp, b.admin ? 1 : 0, await sha(key), now(), String(b.subs || "")).run();
       return json({id, link: url.origin + "/login?k=" + key});
     }
     if (req.method === "PATCH") {
@@ -156,6 +174,7 @@ async function adminApi(req, env, url, path) {
       if (b.exp != null) { if (!/^\d{4}-\d{2}-\d{2}$/.test(b.exp)) return json({error: "到期日格式 YYYY-MM-DD"}, 400); st.push(db.prepare("UPDATE members SET exp = ? WHERE id = ?").bind(b.exp, m.id)); }
       if (b.on != null) st.push(db.prepare("UPDATE members SET on_ = ? WHERE id = ?").bind(b.on ? 1 : 0, m.id));
       if (b.admin != null) st.push(db.prepare("UPDATE members SET admin = ? WHERE id = ?").bind(b.admin ? 1 : 0, m.id));
+      if (b.subs != null) { if (!SUB_RE.test(String(b.subs))) return json({error: "訂閱格式：策略代碼用逗號分隔，或 *＝全部"}, 400); st.push(db.prepare("UPDATE members SET subs = ? WHERE id = ?").bind(String(b.subs), m.id)); }
       if (b.unbindLine) st.push(db.prepare("UPDATE members SET line_sub = NULL WHERE id = ?").bind(m.id));
       if (b.rotate) { const key = rand(24); st.push(db.prepare("UPDATE members SET key_hash = ? WHERE id = ?").bind(await sha(key), m.id)); out.link = url.origin + "/login?k=" + key; }
       if (b.kick || b.rotate) st.push(db.prepare("DELETE FROM sessions WHERE member_id = ?").bind(m.id));
@@ -206,13 +225,14 @@ async function adminApi(req, env, url, path) {
 
 // ───────── 發檔（只給有效會員）─────────
 async function serveFile(req, env, s, name) {
+  if (!canFile(s, name)) return new Response("沒有訂閱這個策略", {status: 403, headers: {"cache-control": "no-store", ...SEC}});
   const etag0 = req.headers.get("if-none-match");
   const r = await fileGet(env, name, !!etag0 && name !== "index.html");            // 帶 ETag 來的先只查 meta，沒變就 304、不讀內容
   if (r && etag0 && !r.body) { if (etag0 === `"${r.meta.sha}"`) return new Response(null, {status: 304, headers: {etag: etag0, "cache-control": "private, no-cache", ...SEC}}); return serveFile(new Request(req.url, {headers: {cookie: req.headers.get("cookie") || ""}}), env, s, name); }
   if (!r) return name === "index.html" ? page("GEA 會員區", "<p>網站資料準備中，請稍後再來。</p>", 503) : new Response("找不到", {status: 404, headers: SEC});
   const m = r.meta;
   if (name === "index.html") {
-    const me = JSON.stringify({id: s.id, name: s.name, exp: s.exp, admin: s.admin === 1, line: !!s.line_sub, lineOn: !!(env.LINE_CHANNEL_ID && env.LINE_CHANNEL_SECRET)}).replace(/</g, "\\u003c");
+    const me = JSON.stringify({id: s.id, name: s.name, exp: s.exp, admin: s.admin === 1, subs: subsOf(s), line: !!s.line_sub, lineOn: !!(env.LINE_CHANNEL_ID && env.LINE_CHANNEL_SECRET)}).replace(/</g, "\\u003c");
     return new Response(r.body.replace("<!--GEA_ME-->", `<script>window.GEA_ME=${me};</script>`), {headers: {"content-type": "text/html; charset=utf-8", "cache-control": "no-store", ...SEC}});
   }
   const etag = m.sha ? `"${m.sha}"` : null;
@@ -252,7 +272,7 @@ export default {
       if (path.startsWith("/api/")) {
         if (!s) return json({error: "請先登入"}, 401);
         if (!valid(s)) return json({error: "會員已到期或停用", exp: s.exp}, 403);
-        if (path === "/api/me") return json({name: s.name, exp: s.exp, admin: s.admin === 1, line: !!s.line_sub});
+        if (path === "/api/me") return json({name: s.name, exp: s.exp, admin: s.admin === 1, subs: subsOf(s), line: !!s.line_sub});
         if (path === "/api/strategies") { const r = await env.DB.prepare("SELECT value FROM conf WHERE name = 'strategies'").first(); return json(r ? JSON.parse(r.value) : null); }
         if (path === "/api/prices") { const r = await env.DB.prepare("SELECT value, updated FROM conf WHERE name = 'prices'").first(); return json(r ? Object.assign(JSON.parse(r.value), {updated: r.updated}) : null); }
         return json({error: "沒有這個功能"}, 404);
