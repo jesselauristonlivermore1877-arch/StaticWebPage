@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "deploy＝部署＋測試；test＝只測試；rotate＝換 token＋部署＋測試；stats＝近 24 小時 CPU（GraphQL，Worker＋Durable Object）；subs＝套用正式訂閱（GEA5、GEA6 上架，舊客戶改 GEA5,GEA6）"
+        description: "deploy＝部署＋測試；test＝只測試；rotate＝換 token＋部署＋測試；stats＝近 24 小時 CPU（GraphQL，Worker＋Durable Object）；subs＝套用正式訂閱（GEA5、GEA6 上架，舊客戶改 GEA5,GEA6）；conns＝只印連線明細（每條連線的代號、連上時間、閒置秒數、機房）"
         required: false
         default: "deploy"
 
@@ -56,7 +56,7 @@ jobs:
           for K in RELAY_PUB_TOKEN RELAY_ADMIN_TOKEN; do
             V=$(get $K)
             if [ -z "$V" ] || [ "${{ inputs.mode }}" = "rotate" ]; then
-              [ "${{ inputs.mode }}" = "test" ] || [ "${{ inputs.mode }}" = "stats" ] || [ "${{ inputs.mode }}" = "subs" ] && { echo "::error::$K 還沒產生（先跑 deploy）"; exit 1; }
+              [ "${{ inputs.mode }}" = "test" ] || [ "${{ inputs.mode }}" = "stats" ] || [ "${{ inputs.mode }}" = "subs" ] || [ "${{ inputs.mode }}" = "conns" ] && { echo "::error::$K 還沒產生（先跑 deploy）"; exit 1; }
               V=$(openssl rand -hex 32)
               echo "::add-mask::$V"
               wrangler d1 execute "$DB" --remote --yes --command "INSERT INTO keys(name,value,created) VALUES('$K','$V',datetime('now')) ON CONFLICT(name) DO UPDATE SET value=excluded.value, created=excluded.created" >/dev/null
@@ -69,7 +69,7 @@ jobs:
           done
           echo "▶ Evans 複製位置：Cloudflare 主控台 → Storage & databases → D1 SQL database → $DB → Console，執行 SELECT * FROM keys"
       - name: 部署＋設定 Worker secret
-        if: inputs.mode != 'test' && inputs.mode != 'stats' && inputs.mode != 'subs'
+        if: inputs.mode != 'test' && inputs.mode != 'stats' && inputs.mode != 'subs' && inputs.mode != 'conns'
         run: |
           set -o pipefail
           wrangler deploy 2>&1 | tee deploy.log
@@ -109,7 +109,7 @@ jobs:
           print("✓ 正式訂閱規則套用完成")
           PY
       - name: 自動測試（1 發 3 收；同時 tail 收 CPU）
-        if: inputs.mode != 'stats' && inputs.mode != 'subs'
+        if: inputs.mode != 'stats' && inputs.mode != 'subs' && inputs.mode != 'conns'
         run: |
           W=https://gea-signal-relay.jesselauristonlivermore1877.workers.dev
           for i in 1 2 3 4 5 6; do C=$(curl -s -o /dev/null -w "%{http_code}" "$W/"); echo "GET / → $C"; [ "$C" = 200 ] && break; sleep 10; done
@@ -150,6 +150,19 @@ jobs:
           PY
           tail -3 tail.err
           exit $RC
+      - name: 連線明細（mode=conns；deploy／rotate 跑完也印）
+        if: always() && (inputs.mode == 'conns' || inputs.mode == 'deploy' || inputs.mode == 'rotate')
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+          W = "https://gea-signal-relay.jesselauristonlivermore1877.workers.dev"
+          H = {"Authorization": "Bearer " + os.environ["RELAY_ADMIN_TOKEN"], "User-Agent": "gea-relay-admin/1.0"}
+          st = json.load(urllib.request.urlopen(urllib.request.Request(W + "/admin/state?ch=gea", None, H), timeout=30))
+          print("頻道 gea｜最後序號 %s｜發送端在線 %s｜本次清掉殭屍 %s" % (st["last_seq"], st["pubs_online"], st.get("swept", "（舊版沒有）")))
+          for u in st["users"]: print("  用戶 %-12s 在線 %d 條｜subs=%s｜最後連線 %s" % (u["id"], u["online"], u["subs"], u["last_seen"]))
+          if "conns" not in st: print("（中繼還是舊版，沒有逐條連線明細）")
+          for c in st.get("conns", []): print("  連線 %-3s %-12s 連上 %s｜閒置 %4d 秒｜機房 %s" % (c["role"], c["id"], c["since"], c["idle_s"], c["colo"]))
+          PY
       - name: CPU 用量（GraphQL 近 24 小時；Worker 與 Durable Object 分開）
         if: inputs.mode == 'stats'
         run: |

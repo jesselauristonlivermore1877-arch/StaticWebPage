@@ -6,6 +6,9 @@
 //         回 pub：{"ctl":"ack","seq":N}；重送（Seq ≤ 最後一則）回 {"ctl":"dup","seq":N}、不再廣播；格式錯回 {"ctl":"err","why":…}。
 //   補發  sub 連上後送 {"since":<最後收到的 Seq>} → 依序補發 Seq > since 的原文，最後送 {"ctl":"replayed","n":筆數,"last":最後 Seq}。
 //   心跳  兩端送文字 "ping" → 自動回 "pong"（setWebSocketAutoResponse，不喚醒 DO、不計費）；90 秒沒回應就重連（指數退避上限 30 秒，用戶端負責）。
+//   同代號只留一條（總指揮 2026-10-19 00:50）：同 role＋同 id 新連線進來 → 舊連線以 4009 replaced 關閉（新的贏）；
+//         用戶端收到 4009 不重連、直接結束並通知「同代號在別處登入」。
+//   清理  每次有人連上、廣播或查狀態時，把超過 STALE_S（150 秒）沒有任何心跳或訊息的連線以 1001 stale 關掉（殭屍連線）。
 //   停權  /admin/disable 之後，該用戶在線連線立刻以 4003 關閉、之後連線一律 403。
 //   監看  GET /health?ch=<頻道> → 最後一則發送時間、在線接收端數、最近 1 小時訊號數。
 //   管理  Authorization: Bearer RELAY_ADMIN_TOKEN：
@@ -84,11 +87,15 @@ export default {
   },
 };
 
+const STALE_S = 150;   // 用戶端每 30 秒 ping；150 秒＝連漏 4 次以上才算殭屍（測試可用 var RELAY_STALE_S 縮短）
+
 export class Relay extends DurableObject {
   constructor(ctx, env) {
     super(ctx, env);
     this.sql = ctx.storage.sql;
     this.schema();
+    this.dead = new WeakSet();
+    this.staleMs = (Number(env.RELAY_STALE_S) || STALE_S) * 1e3;
     // 心跳：自動回應，不喚醒 DO、不計 duration
     ctx.setWebSocketAutoResponse(new WebSocketRequestResponsePair("ping", "pong"));
   }
@@ -136,10 +143,22 @@ export class Relay extends DurableObject {
     if (!Array.isArray(v)) v = String(v || "").split(",");
     return v.map(x => String(x).trim()).filter(x => NAME_RE.test(x)).join(",");
   }
+  // 最後活動時間：自動回應 ping 的時間（getWebSocketAutoResponseTimestamp）、最後訊息時間、連上時間取最晚
+  lastAct(ws) {
+    const a = ws.deserializeAttachment() || {}, t = this.ctx.getWebSocketAutoResponseTimestamp(ws);
+    return Math.max(a.at || 0, a.rx || 0, t ? t.getTime() : 0);
+  }
+  sweep() {
+    const now = Date.now(); let n = 0;
+    for (const ws of this.ctx.getWebSockets()) if (now - this.lastAct(ws) > this.staleMs) { try { ws.close(1001, "stale"); } catch (e) { } this.dead.add(ws); n++; }
+    return n;
+  }
+  live(tag) { return this.ctx.getWebSockets(tag).filter(ws => !this.dead.has(ws)); }   // 剛踢掉、還在關閉中的不算
   broadcast(data, strat) {
+    this.sweep();
     const U = this.users(), S = this.strats(), to = [];
     let online = 0;
-    for (const s of this.ctx.getWebSockets("sub")) {
+    for (const s of this.live("sub")) {
       online++;
       const a = s.deserializeAttachment() || {};
       if (this.why(U[a.id], strat, S) === null) { this.send(s, data); to.push(a.id); }
@@ -167,10 +186,15 @@ export class Relay extends DurableObject {
           online: this.ctx.getWebSockets("s:" + r.id).length })) });
     }
     if (p === "/admin/state") {
+      const swept = this.sweep(), now = Date.now();
+      const conns = this.live().map(ws => { const a = ws.deserializeAttachment() || {};
+        return { role: a.role, id: a.id, colo: a.colo || null, since: new Date(a.at || 0).toISOString(),
+          idle_s: Math.round((now - this.lastAct(ws)) / 1000) }; });
       const online = {};
-      for (const ws of this.ctx.getWebSockets("sub")) { const a = ws.deserializeAttachment() || {}; online[a.id] = (online[a.id] || 0) + 1; }
+      for (const ws of this.live("sub")) { const a = ws.deserializeAttachment() || {}; online[a.id] = (online[a.id] || 0) + 1; }
       const stat = Object.fromEntries(this.sql.exec("SELECT strat, COUNT(*) AS n, MAX(rts) AS last FROM msgs GROUP BY strat").toArray().map(r => [r.strat, r]));
       return J({ ch: u.searchParams.get("ch"), today: today(), last_seq: this.lastSeq(), pubs_online: this.ctx.getWebSockets("pub").length,
+        swept, conns,
         users: this.sql.exec("SELECT id, enabled, subs, exp, note, created, last_seen FROM users ORDER BY id").toArray()
           .map(r => ({ ...r, enabled: !!r.enabled, expired: expired(r), online: online[r.id] || 0 })),
         strategies: this.sql.exec("SELECT * FROM strategies ORDER BY code").toArray()
@@ -265,9 +289,12 @@ export class Relay extends DurableObject {
       if (expired(r)) return J({ error: "expired" }, 403);
       this.sql.exec("UPDATE users SET last_seen=? WHERE id=?", Date.now(), id);
     }
+    this.sweep();
+    const tag = role[0] + ":" + id;
+    for (const old of this.live(tag)) { try { old.close(4009, "replaced"); } catch (e) { } this.dead.add(old); }   // 同代號只留一條：新的贏
     const pair = new WebSocketPair();
-    this.ctx.acceptWebSocket(pair[1], [role, role[0] + ":" + id]);
-    pair[1].serializeAttachment({ role, id, at: Date.now() });
+    this.ctx.acceptWebSocket(pair[1], [role, tag]);
+    pair[1].serializeAttachment({ role, id, at: Date.now(), colo: (req.cf && req.cf.colo) || null });
     return new Response(null, { status: 101, webSocket: pair[0] });
   }
 
@@ -275,6 +302,7 @@ export class Relay extends DurableObject {
 
   async webSocketMessage(ws, data) {
     const a = ws.deserializeAttachment() || {};
+    if (!a.rx || Date.now() - a.rx > 10e3) { a.rx = Date.now(); ws.serializeAttachment(a); }   // 最後訊息時間（10 秒內不重寫）
     if (typeof data !== "string") return this.send(ws, { ctl: "err", why: "text only" });
     if (data.length > MAX_BYTES) return this.send(ws, { ctl: "err", why: "too large" });
     let m;

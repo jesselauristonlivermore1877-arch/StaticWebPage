@@ -137,7 +137,8 @@ ok((us.j.users || []).length === 5, "/admin/users 列 5 個用戶", (us.j.users 
 // ── 只留最近 500 則；要補的太舊 → replayed.gap 標出缺段
 for (let i = 16; i <= 520; i++) pub.ws.send(sig(i));
 await until(() => pub.ctl.filter(c => c.ctl === "ack" && c.seq === 520).length === 1, 20000);
-const old = await connect("sub", "u1", tok.u1);
+tok.r1 = (await admin("user?id=r1&subs=*")).j.token;               // 另開代號：同代號再連會把 u1 踢掉（4009，同代號只留一條）
+const old = await connect("sub", "r1", tok.r1);
 old.ws.send(JSON.stringify({ since: 0 }));
 await until(() => old.ctl.some(c => c.ctl === "replayed"), 20000);
 const rq = old.ctl.find(c => c.ctl === "replayed") || {};
@@ -200,6 +201,22 @@ ok((await post("testpub", { strategy: "GEA5" })).status === 403, "testpub 只限
 const cons = await fetch(`${BASE}/console`);
 ok(cons.status === 200 && (await cons.text()).includes("GEA 下單訊號管理"), "管理頁 /console 開得起來（不含資料）");
 for (const id of ["s1", "s3", "s0"]) sc[id].ws.close();
+
+// ── 同代號只留一條（總指揮 2026-10-19 00:50）：同 id 連兩次 → 舊的以 4009 被踢、新的照收、訊號只送一份
+const dj = await admin("user?id=d1&subs=*");
+const d1a = await connect("sub", "d1", dj.j.token);
+const d1b = await connect("sub", "d1", dj.j.token);
+await until(() => kickedCode(d1a));
+ok(kickedCode(d1a) === 4009, "同代號第二條連上 → 第一條以 4009 被踢", String(kickedCode(d1a)));
+ok(!kickedCode(d1b), "新的那條保持連線");
+const st9 = await admin("state", "GET");
+const d1on = (st9.j.users || []).find(x => x.id === "d1") || {};
+ok(d1on.online === 1 && (st9.j.conns || []).filter(c => c.id === "d1").length === 1, "/admin/state：d1 只剩 1 條（conns 有連線明細）", JSON.stringify((st9.j.conns || []).filter(c => c.id === "d1")));
+const nA = d1a.got.length;
+pub.ws.send(sig(++q, { Strategy: "GEA5" }));
+await until(() => d1b.got.some(m => m.Seq === q)); await sleep(300);
+ok(d1b.got.filter(m => m.Seq === q).length === 1 && d1a.got.length === nA, "訊號只送新的那條、只一份");
+d1b.ws.close();
 
 // ── 收尾
 for (const c of [subs.u1, u3b, pub]) c.ws.close();
