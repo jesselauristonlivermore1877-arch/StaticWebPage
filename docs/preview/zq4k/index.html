@@ -1,0 +1,24 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>族群動態 4K 驗收</title><style>
+:root{--bg:#f6f5f1;--ink:#1d1d1b;--ink2:#5c5b57;--line:#dcd9d0;--acc:#b0842f;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#16171a;--ink:#ecebe7;--ink2:#a4a29c;--line:#34363b;--acc:#d6a54a;--card:#1f2125}}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 system-ui,-apple-system,"Noto Sans TC",sans-serif}
+main{max-width:1200px;margin:0 auto;padding:24px 16px 60px}
+table{border-collapse:collapse;margin:8px 0 16px;width:100%;overflow-x:auto;display:block}
+td,th{border:1px solid var(--line);padding:4px 10px;text-align:right;white-space:nowrap} th:first-child,td:first-child{text-align:left}
+img{max-width:100%;border:1px solid var(--line);border-radius:6px;margin:6px 0 18px} h2{font-size:17px;margin:18px 0 4px} .m{color:var(--ink2);font-size:13px}
+</style></head><body><main>
+<h1>族群動態：28 吋 4K（3840×2160）驗收</h1>
+<p class="m">2026-10-19 凌晨（台北）。23:55 總指揮裁示雲端 1～3：第 12 項已合進 main（067227d）、族群動向圖兩個小修（818a947）。截圖用 main 的 template 烤成預覽頁拍的，與正式站下一班每日更新相同；主圖捲到頁籤列下方拍第一張、再往下捲 0.4 屏拍第二張。字級為大螢幕預設 115％。</p>
+<table><tr><th>系統縮放</th><th>瀏覽器實際大小</th><th>主圖高度</th><th>主圖底部</th><th>多週期表標題</th><th>結論</th></tr>
+<tr><td>150％</td><td>2560×1440</td><td>1057px</td><td>1165px</td><td>1381px</td><td>主圖整張＋多週期標題都在第一屏</td></tr>
+<tr><td>200％</td><td>1920×1080</td><td>866px</td><td>974px</td><td>1190px</td><td>主圖底部在第一屏；往下約 110px 就是多週期表</td></tr></table>
+<h2>兩個小修（同一個原因）</h2>
+<p>全站 CSS <code>.chart text{font-size:15px}</code> 會蓋掉圖上寫的字級（11、9.5），所以：左上「50 ＝ 這 187 檔的中位」實際寬 172、左邊超出圖框 → 只剩「0 ＝」；欄底刻度實際 15px、間距只有 14.8 → 「20 50 80」疊成「2050 80」。改成行內字級（中位說明 12px、刻度 11px，20／80 往外靠 3），資金占比欄的「-2 0 +2」一起修；同一原因左邊被切的「矽晶圓與化合物半導體」列名（10 字）改 13px。實測：整張圖所有文字左緣 ≥ 1.9（不出框），底部 27 個刻度數字兩兩不重疊、最小間距 6.2。</p>
+<img src="fix.jpg" alt="修正後的族群動向圖（1920×1080＠200％）">
+<h2>150％　第一屏</h2><img src="zq_150_chart.jpg" alt="150％ 第一屏">
+<h2>150％　往下捲</h2><img src="zq_150_down.jpg" alt="150％ 往下捲">
+<h2>200％　第一屏</h2><img src="zq_200_chart.jpg" alt="200％ 第一屏">
+<h2>200％　往下捲</h2><img src="zq_200_down.jpg" alt="200％ 往下捲">
+</main></body></html>
