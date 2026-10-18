@@ -43,6 +43,17 @@ t("登入後讀到測試檔", r.status === 200 && got === body, "HTTP " + r.stat
 const etag = r.headers.get("etag");
 r = await go("/zz_test/hello.txt", {headers: {cookie: s1.cookie, "if-none-match": etag}});
 t("ETag 沒變回 304", r.status === 304, "HTTP " + r.status);
+const big = ("GEA 大檔測試，中文全形" + "abcdefghij".repeat(5) + "\n").repeat(60000);           // 約 4.6 MB：切塊存、讀回要一模一樣
+r = await go("/api/admin/file?name=zz_test/big.js", {method: "PUT", headers: {...A, "x-ct": "text/javascript; charset=utf-8"}, body: big});
+const bm = await r.json();
+r = await go("/zz_test/big.js", {headers: {cookie: s1.cookie}});
+t("大文字檔切塊存取一致", r.status === 200 && (await r.text()) === big, `${(bm.size / 1e6).toFixed(1)} MB`);
+const bin = new Uint8Array(1500000).map((_, i) => (i * 7919) % 256);
+r = await go("/api/admin/file?name=zz_test/bin.webp", {method: "PUT", headers: {...A, "x-ct": "image/webp"}, body: bin});
+r = await go("/zz_test/bin.webp", {headers: {cookie: s1.cookie}});
+const bb = new Uint8Array(await r.arrayBuffer());
+t("二進位檔（base64 切塊）存取一致", r.status === 200 && bb.length === bin.length && bb.every((v, i) => v === bin[i]), r.headers.get("content-type"));
+await go("/api/admin/file?name=zz_test/big.js", {method: "DELETE", headers: A}); await go("/api/admin/file?name=zz_test/bin.webp", {method: "DELETE", headers: A});
 r = await go("/api/me", {headers: {cookie: s1.cookie}});
 const me = await r.json();
 t("/api/me 是測試會員", me.name === "自動測試" && me.admin === false);

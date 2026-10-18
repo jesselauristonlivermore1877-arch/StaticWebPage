@@ -1,5 +1,5 @@
 # cloudflare_member.yml ─ 部署並測試「GEA 會員區」gea-member（Evans 2026-10-18 17:05 派工「預覽轉正式」；設計見 CustomerServiceANDSales TODO 同日段）
-#   程式：本 repo cloudflare/member（wrangler.toml、src/worker.js、test.mjs）。網頁與資料不在這裡：由私有 repo 的 tools/member_push.py 上傳到 KV。
+#   程式：本 repo cloudflare/member（wrangler.toml、src/worker.js、test.mjs）。網頁與資料不在這裡：由私有 repo 的 tools/member_push.py 上傳到 D1（API token 沒有 KV 權限）。
 #   secrets：沿用 CLOUDFLARE_API_TOKEN、CLOUDFLARE_ACCOUNT_ID；選用 LINE_CHANNEL_ID、LINE_CHANNEL_SECRET（Evans 建好 LINE Login channel 後設，沒設就不開 LINE 登入）。
 #   ADMIN_TOKEN：第一次部署時產生，存進 D1 gea-member 的 keys 表（Evans 從 Cloudflare 主控台複製，設成本機使用者變數 GEA_MEMBER_ADMIN_TOKEN），
 #     再設成 Worker secret；之後每次部署沿用（mode=rotate 才換）。log 只印遮罩。
@@ -34,7 +34,6 @@ jobs:
       LINE_CHANNEL_ID: ${{ secrets.LINE_CHANNEL_ID }}
       LINE_CHANNEL_SECRET: ${{ secrets.LINE_CHANNEL_SECRET }}
       DB: gea-member
-      KV: gea-member-files
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -45,18 +44,15 @@ jobs:
           if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then echo "::error::缺 CLOUDFLARE_API_TOKEN／CLOUDFLARE_ACCOUNT_ID"; exit 1; fi
           npm i -g wrangler@4.147.0 >/dev/null 2>&1
           wrangler --version
-      - name: 取得（或第一次建立）D1 gea-member、KV gea-member-files，填進 wrangler.toml
+      - name: 取得（或第一次建立）D1 gea-member，填進 wrangler.toml
         run: |
           set -o pipefail
           ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next((d['uuid'] for d in json.load(sys.stdin) if d['name']=='$DB'), ''))")
           if [ -z "$ID" ]; then echo "第一次：建 D1 $DB"; wrangler d1 create "$DB" >/dev/null
             ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next((d['uuid'] for d in json.load(sys.stdin) if d['name']=='$DB'), ''))"); fi
-          KID=$(wrangler kv namespace list | python3 -c "import json,sys; print(next((d['id'] for d in json.load(sys.stdin) if d['title'] in ('$KV','gea-member-$KV')), ''))")
-          if [ -z "$KID" ]; then echo "第一次：建 KV $KV"; wrangler kv namespace create "$KV" >/dev/null
-            KID=$(wrangler kv namespace list | python3 -c "import json,sys; print(next((d['id'] for d in json.load(sys.stdin) if d['title'] in ('$KV','gea-member-$KV')), ''))"); fi
-          [ -n "$ID" ] && [ -n "$KID" ] || { echo "::error::D1 或 KV id 取不到（D1 '$ID'、KV '$KID'）"; exit 1; }
-          echo "D1 $DB：$ID；KV $KV：$KID"
-          sed -i "s/__D1_ID__/$ID/; s/__KV_ID__/$KID/" wrangler.toml
+          [ -n "$ID" ] || { echo "::error::D1 id 取不到"; exit 1; }
+          echo "D1 $DB：$ID"
+          sed -i "s/__D1_ID__/$ID/" wrangler.toml
           wrangler d1 execute "$DB" --remote --yes --command "CREATE TABLE IF NOT EXISTS keys(name TEXT PRIMARY KEY, value TEXT NOT NULL, created TEXT NOT NULL)" >/dev/null
       - name: 取得（或第一次產生）ADMIN_TOKEN（存 D1 gea-member 的 keys 表）
         run: |

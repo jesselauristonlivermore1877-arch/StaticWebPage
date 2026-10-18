@@ -2,7 +2,7 @@
 //   · 會員登入：① GEA 給的專屬登入連結（/login?k=…，打開後按「進入」才建 session，避免 LINE 預覽機器人吃掉名額）
 //               ② LINE Login（設了 LINE_CHANNEL_ID／LINE_CHANNEL_SECRET 才開；第一次要先用專屬連結登入、按「綁定 LINE」）
 //   · 每個會員最多 3 個裝置同時登入（第 4 個登入時踢掉最舊的）；到期或停用 → 所有頁面與資料都拿不到。
-//   · 網頁與資料都在 KV（FILES），只有有效會員拿得到；index.html 送出前塞入 window.GEA_ME（姓名、到期日、是否管理者）。
+//   · 網頁與資料都在 D1 的 files／file_chunks（文字檔存原文、圖片存 base64，切塊 ≤ 1 MB：D1 一列上限 2 MB；10-18 部署時 API token 沒有 KV 權限，改用 D1），只有有效會員拿得到；index.html 送出前塞入 window.GEA_ME（姓名、到期日、是否管理者）。
 //   · 管理 API（Bearer ADMIN_TOKEN 或管理者 session）：會員增刪改、重發連結、踢裝置；檔案上傳／列表／刪除；策略上下架表。
 //   · 登入連結與 session 只存 SHA-256 雜湊，資料庫外洩也拿不到可用的連結。
 const COOKIE = "gea_s", LCOOKIE = "gea_ls", DAY = 86400, SESS_DAYS = 30, MAX_SESS = 3;
@@ -24,7 +24,33 @@ const SCHEMA = [
   "CREATE TABLE IF NOT EXISTS sessions(sid TEXT PRIMARY KEY, member_id TEXT NOT NULL, created INTEGER NOT NULL, last INTEGER NOT NULL, ua TEXT)",
   "CREATE INDEX IF NOT EXISTS sessions_member ON sessions(member_id, created)",
   "CREATE TABLE IF NOT EXISTS conf(name TEXT PRIMARY KEY, value TEXT NOT NULL, updated INTEGER)",
+  "CREATE TABLE IF NOT EXISTS files(name TEXT PRIMARY KEY, ct TEXT, sha TEXT, size INTEGER, ts INTEGER, enc TEXT, chunks INTEGER)",
+  "CREATE TABLE IF NOT EXISTS file_chunks(name TEXT NOT NULL, i INTEGER NOT NULL, data TEXT NOT NULL, PRIMARY KEY(name, i))",
 ];
+
+// ───────── 檔案（D1）：文字檔存原文（切 300,000 字，中文全形最多 0.9 MB）、其他存 base64（切 900,000 字）─────────
+const isText = ct => /^text\/|^application\/(json|javascript)/.test(ct);
+function b64(buf) { const u = new Uint8Array(buf); let s = ""; for (let i = 0; i < u.length; i += 0x8000) s += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000)); return btoa(s); }
+function unb64(t) { const s = atob(t), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i); return u; }
+async function filePut(env, name, buf, ct) {
+  const text = isText(ct), str = text ? new TextDecoder().decode(buf) : b64(buf), step = text ? 300000 : 900000;
+  const parts = []; for (let i = 0; i < str.length || i === 0; i += step) parts.push(str.slice(i, i + step));
+  const meta = {ct, sha: await sha(buf), size: buf.byteLength, ts: now()};
+  await env.DB.batch([
+    env.DB.prepare("DELETE FROM file_chunks WHERE name = ?").bind(name),
+    ...parts.map((d, i) => env.DB.prepare("INSERT INTO file_chunks(name, i, data) VALUES(?,?,?)").bind(name, i, d)),
+    env.DB.prepare("INSERT INTO files(name, ct, sha, size, ts, enc, chunks) VALUES(?,?,?,?,?,?,?) ON CONFLICT(name) DO UPDATE SET ct = excluded.ct, sha = excluded.sha, size = excluded.size, ts = excluded.ts, enc = excluded.enc, chunks = excluded.chunks")
+      .bind(name, ct, meta.sha, meta.size, meta.ts, text ? "t" : "b", parts.length),
+  ]);
+  return meta;
+}
+async function fileGet(env, name, metaOnly = false) {
+  const m = await env.DB.prepare("SELECT * FROM files WHERE name = ?").bind(name).first();
+  if (!m || metaOnly) return m ? {meta: m} : null;
+  const r = await env.DB.prepare("SELECT data FROM file_chunks WHERE name = ? ORDER BY i").bind(name).all();
+  const str = r.results.map(x => x.data).join("");
+  return {meta: m, body: m.enc === "t" ? str : unb64(str)};
+}
 let ready = false;
 async function init(env) { if (ready) return; await env.DB.batch(SCHEMA.map(s => env.DB.prepare(s))); ready = true; }
 
@@ -148,16 +174,14 @@ async function adminApi(req, env, url, path) {
     if (req.method === "PUT") {
       const buf = await req.arrayBuffer();
       if (buf.byteLength > 24 * 1024 * 1024) return json({error: "檔案超過 24 MB"}, 413);
-      const meta = {ct: req.headers.get("x-ct") || "application/octet-stream", sha: await sha(buf), size: buf.byteLength, ts: now()};
-      await env.FILES.put(name, buf, {metadata: meta});
+      const meta = await filePut(env, name, buf, req.headers.get("x-ct") || "application/octet-stream");
       return json({name, ...meta});
     }
-    if (req.method === "DELETE") { await env.FILES.delete(name); return json({deleted: name}); }
+    if (req.method === "DELETE") { await env.DB.batch([env.DB.prepare("DELETE FROM file_chunks WHERE name = ?").bind(name), env.DB.prepare("DELETE FROM files WHERE name = ?").bind(name)]); return json({deleted: name}); }
   }
   if (path === "/api/admin/files" && req.method === "GET") {
-    const out = []; let cursor;
-    do { const r = await env.FILES.list({cursor, limit: 1000}); r.keys.forEach(k => out.push({name: k.name, ...(k.metadata || {})})); cursor = r.list_complete ? null : r.cursor; } while (cursor);
-    return json({files: out});
+    const r = await env.DB.prepare("SELECT name, ct, sha, size, ts, chunks FROM files ORDER BY name").all();
+    return json({files: r.results});
   }
   if (path === "/api/admin/strategies" && req.method === "PUT") {
     const b = await req.json().catch(() => null);
@@ -172,16 +196,18 @@ async function adminApi(req, env, url, path) {
 
 // ───────── 發檔（只給有效會員）─────────
 async function serveFile(req, env, s, name) {
-  const r = await env.FILES.getWithMetadata(name, {type: name === "index.html" ? "text" : "stream"});
-  if (r.value == null) return name === "index.html" ? page("GEA 會員區", "<p>網站資料準備中，請稍後再來。</p>", 503) : new Response("找不到", {status: 404, headers: SEC});
-  const m = r.metadata || {};
+  const etag0 = req.headers.get("if-none-match");
+  const r = await fileGet(env, name, !!etag0 && name !== "index.html");            // 帶 ETag 來的先只查 meta，沒變就 304、不讀內容
+  if (r && etag0 && !r.body) { if (etag0 === `"${r.meta.sha}"`) return new Response(null, {status: 304, headers: {etag: etag0, "cache-control": "private, no-cache", ...SEC}}); return serveFile(new Request(req.url, {headers: {cookie: req.headers.get("cookie") || ""}}), env, s, name); }
+  if (!r) return name === "index.html" ? page("GEA 會員區", "<p>網站資料準備中，請稍後再來。</p>", 503) : new Response("找不到", {status: 404, headers: SEC});
+  const m = r.meta;
   if (name === "index.html") {
     const me = JSON.stringify({id: s.id, name: s.name, exp: s.exp, admin: s.admin === 1, line: !!s.line_sub, lineOn: !!(env.LINE_CHANNEL_ID && env.LINE_CHANNEL_SECRET)}).replace(/</g, "\\u003c");
-    return new Response(r.value.replace("<!--GEA_ME-->", `<script>window.GEA_ME=${me};</script>`), {headers: {"content-type": "text/html; charset=utf-8", "cache-control": "no-store", ...SEC}});
+    return new Response(r.body.replace("<!--GEA_ME-->", `<script>window.GEA_ME=${me};</script>`), {headers: {"content-type": "text/html; charset=utf-8", "cache-control": "no-store", ...SEC}});
   }
   const etag = m.sha ? `"${m.sha}"` : null;
   if (etag && req.headers.get("if-none-match") === etag) return new Response(null, {status: 304, headers: {etag, "cache-control": "private, no-cache", ...SEC}});
-  return new Response(r.value, {headers: {"content-type": m.ct || "application/octet-stream", "cache-control": "private, no-cache", ...(etag ? {etag} : {}), ...SEC}});
+  return new Response(r.body, {headers: {"content-type": m.ct || "application/octet-stream", "cache-control": "private, no-cache", ...(etag ? {etag} : {}), ...SEC}});
 }
 
 export default {
