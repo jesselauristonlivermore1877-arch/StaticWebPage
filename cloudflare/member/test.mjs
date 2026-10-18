@@ -86,6 +86,21 @@ r = await go("/api/admin/strategies", {method: "PUT", headers: {...A, "content-t
 r = await go("/api/strategies", {headers: {cookie: neu.cookie}});
 t("上下架表還原成測試前", JSON.stringify(await r.json()) === JSON.stringify(orig), orig ? orig.length + " 列" : "（原本是預設）");
 
+// 客戶選單價格（Evans 10-19）：存、讀、格式錯擋下、還原成測試前
+const porig = await (await go("/api/prices", {headers: {cookie: neu.cookie}})).json();
+r = await go("/api/admin/prices", {method: "PUT", headers: {...A, "content-type": "application/json"}, body: JSON.stringify({strat: {ZZ_TEST: 12345}})});
+t("選單價格可存", r.status === 200, "HTTP " + r.status);
+r = await go("/api/prices", {headers: {cookie: neu.cookie}});
+const pg = await r.json();
+t("會員讀得到價格", r.status === 200 && pg && pg.strat && pg.strat.ZZ_TEST === 12345);
+r = await go("/api/admin/prices", {method: "PUT", headers: {...A, "content-type": "application/json"}, body: JSON.stringify({strat: {ZZ_TEST: -1}})});
+t("價格格式錯（負數）被擋", r.status === 400, "HTTP " + r.status);
+const pback = porig ? {strat: porig.strat, infra: porig.infra, pack: porig.pack} : {};
+r = await go("/api/admin/prices", {method: "PUT", headers: {...A, "content-type": "application/json"}, body: JSON.stringify(pback)});
+r = await go("/api/prices", {headers: {cookie: neu.cookie}});
+const pnow = await r.json();
+t("價格還原成測試前", JSON.stringify(pnow ? {strat: pnow.strat, infra: pnow.infra, pack: pnow.pack} : null) === JSON.stringify(porig ? pback : null), porig ? "有自訂價格" : "（原本是報價單原價）");
+
 r = await go("/api/admin/members?id=" + mem.id, {method: "DELETE", headers: A});
 r = await go("/api/me", {headers: {cookie: neu.cookie}});
 t("刪除會員後 session 失效", r.status === 401, "HTTP " + r.status);

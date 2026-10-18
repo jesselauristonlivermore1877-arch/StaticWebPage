@@ -191,6 +191,16 @@ async function adminApi(req, env, url, path) {
     await env.DB.prepare("INSERT INTO conf(name, value, updated) VALUES('strategies', ?, ?) ON CONFLICT(name) DO UPDATE SET value = excluded.value, updated = excluded.updated").bind(JSON.stringify(clean), now()).run();
     return json({saved: clean.length});
   }
+  if (path === "/api/admin/prices" && req.method === "PUT") {   // 客戶選單價格（Evans 10-19：還在定價，要能在管理頁隨時改，不寫死）：{strat:{代碼:年費}, infra:{編號:年費}, pack:{套餐名稱:年費}}
+    const b = await req.json().catch(() => null);
+    const ok = o => o && typeof o === "object" && !Array.isArray(o) && Object.keys(o).length <= 200 && Object.entries(o).every(([k, v]) => k.length <= 80 && Number.isInteger(v) && v >= 0 && v <= 1e8);
+    if (!b || typeof b !== "object" || !["strat", "infra", "pack"].every(k => b[k] == null || ok(b[k]))) return json({error: "格式：{strat:{代碼:年費}, infra:{編號:年費}, pack:{名稱:年費}}，年費是 0 以上的整數"}, 400);
+    const clean = {strat: b.strat || {}, infra: b.infra || {}, pack: b.pack || {}};
+    const n = Object.keys(clean.strat).length + Object.keys(clean.infra).length + Object.keys(clean.pack).length;
+    if (!n) { await env.DB.prepare("DELETE FROM conf WHERE name = 'prices'").run(); return json({saved: 0, reset: true}); }   // 全空＝回到報價單原價
+    await env.DB.prepare("INSERT INTO conf(name, value, updated) VALUES('prices', ?, ?) ON CONFLICT(name) DO UPDATE SET value = excluded.value, updated = excluded.updated").bind(JSON.stringify(clean), now()).run();
+    return json({saved: n});
+  }
   return json({error: "沒有這個管理功能"}, 404);
 }
 
@@ -244,6 +254,7 @@ export default {
         if (!valid(s)) return json({error: "會員已到期或停用", exp: s.exp}, 403);
         if (path === "/api/me") return json({name: s.name, exp: s.exp, admin: s.admin === 1, line: !!s.line_sub});
         if (path === "/api/strategies") { const r = await env.DB.prepare("SELECT value FROM conf WHERE name = 'strategies'").first(); return json(r ? JSON.parse(r.value) : null); }
+        if (path === "/api/prices") { const r = await env.DB.prepare("SELECT value, updated FROM conf WHERE name = 'prices'").first(); return json(r ? Object.assign(JSON.parse(r.value), {updated: r.updated}) : null); }
         return json({error: "沒有這個功能"}, 404);
       }
       if (!s) return path === "/" ? loginPage(env) : new Response(null, {status: 302, headers: {location: "/", "cache-control": "no-store"}});
