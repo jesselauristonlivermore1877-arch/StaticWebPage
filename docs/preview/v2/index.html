@@ -1271,6 +1271,7 @@ thead th{cursor:pointer}thead th.srt-d::after{content:" ▼";font-size:9px}thead
 /* 公司產業報告（cr-）與量化日報版面：參考藏鋒資本公開貼文（深藍襯線大標、金色重點數字、藥丸標籤、四格摘要、總結流程） */
 :root{--cr-navy:#1B2A4A;--cr-gold:#B8862B;--cr-card:#FBF8F1;--cr-line:#E7DFCC}
 .cr-root,.qd-root{white-space:normal}
+.cr-print .rv-twrap{overflow:visible!important;max-height:none!important}.cr-print table{width:100%!important;font-size:10.5px}.cr-print td,.cr-print th{white-space:normal!important;padding:3px 4px!important}.cr-print .cr-dl{display:none}
 .cr-root{max-width:980px;background:var(--cr-card);color:#1B2A4A;border:1px solid var(--cr-line);border-radius:12px;padding:16px 18px}
 .cr-hero{text-align:left;border-bottom:1px solid var(--cr-line);padding-bottom:10px;margin-bottom:12px}
 .cr-ind{font-size:12px;color:#6B6452;letter-spacing:.06em}
@@ -10809,9 +10810,45 @@ function crChart(R, F) {
   g += `<text x="4" y="${T + 4}" class="cr-ax">營收（億元）</text><text x="${W - 4}" y="${T + 4}" class="cr-ax" text-anchor="end">EPS（元）</text></svg>`;
   return el("div", "cr-chart", g);
 }
-function crOne(R) {
+/* 🟢 10-18（Evans 本周 NOTE：AI 產業報告要能下載，手機一到兩頁看完，不用再截圖被截斷）：
+   PDF＝A4 直式（排成 760px 寬，一到兩頁）；長圖 PNG＝手機寬（390px）。html2canvas 轉圖 → 浮水印直接畫進像素（不是 PDF 圖層，刪不掉）→ 切頁進 jsPDF。 */
+const CR_LIB = {h2c: "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js", pdf: "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"};
+function crScript(u) { return new Promise((ok, no) => { if (document.querySelector(`script[src="${u}"]`)) return ok(); const t = document.createElement("script"); t.src = u; t.onload = ok; t.onerror = no; document.head.appendChild(t); }); }
+async function crExport(R, kind, btn) {
+  const t0 = btn.textContent; btn.textContent = "產生中…"; btn.disabled = true;
+  const host = el("div", "cr-print"); host.style.cssText = `position:fixed;left:-10000px;top:0;width:${kind === "pdf" ? 760 : 390}px;padding:${kind === "pdf" ? 24 : 14}px;background:` + getComputedStyle(document.body).backgroundColor;
+  try {
+    await crScript(CR_LIB.h2c); if (kind === "pdf") await crScript(CR_LIB.pdf);
+    const node = crOne(R, true); host.appendChild(node);
+    host.appendChild(el("div", "rv-note", `GEA 戰情・AI 研究報告｜下載 ${new Date().toISOString().slice(0, 10)}｜僅供參考，不構成投資建議`));
+    document.body.appendChild(host);
+    const cv = await window.html2canvas(host, {scale: 2, backgroundColor: getComputedStyle(document.body).backgroundColor, useCORS: true, logging: false});
+    const g = cv.getContext("2d"), wm = `GEA 戰情 ・ ${R.code} ${R.name || ""} ・ ${new Date().toISOString().slice(0, 10)}`;
+    g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = .13; g.fillStyle = "#7a7468"; g.font = "bold 30px sans-serif"; g.rotate(-Math.PI / 7);
+    for (let y = -cv.width; y < cv.height + cv.width; y += 210) for (let x = -cv.width; x < cv.width * 2; x += 520) g.fillText(wm, x, y);
+    g.restore();
+    const fn = `GEA_${R.code}_${R.name || ""}_${R.data_date || R.date || ""}`;
+    if (kind === "png") { const blob = await new Promise(ok => cv.toBlob(ok, "image/png")), a = document.createElement("a");
+      a.href = URL.createObjectURL(blob); a.download = fn + ".png"; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 2000); }
+    else {
+      const PW = cv.width, PH = Math.round(PW * 297 / 210), doc = new window.jspdf.jsPDF({unit: "px", format: [PW / 2, PH / 2], hotfixes: ["px_scaling"]});
+      for (let y = 0, i = 0; y < cv.height; y += PH, i++) {
+        const pc = document.createElement("canvas"); pc.width = PW; pc.height = Math.min(PH, cv.height - y);
+        pc.getContext("2d").drawImage(cv, 0, y, PW, pc.height, 0, 0, PW, pc.height);
+        if (i) doc.addPage([PW / 2, PH / 2]);
+        doc.addImage(pc.toDataURL("image/jpeg", .9), "JPEG", 0, 0, PW / 2, pc.height / 2);
+      }
+      doc.save(fn + ".pdf");
+    }
+  } catch (e) { alert("下載失敗：" + (e && e.message || e)); }
+  host.remove(); btn.textContent = t0; btn.disabled = false;
+}
+function crOne(R, bare) {
   const F = {}; (R.facts || []).forEach(f => { F[f.id] = f; });
   const S = R.sections || {}, w = el("div", "cr-root");
+  if (!bare) { const dl = el("div", "ir-tools cr-dl", "下載 ");
+    [["pdf", "PDF（手機版面）"], ["png", "長圖 PNG"]].forEach(([k, t]) => { const b = el("button", "rv-pill", t); b.onclick = e => { e.stopPropagation(); crExport(R, k, b); }; dl.appendChild(b); });
+    dl.appendChild(el("small", "rv-dim", "　含浮水印；手機一到兩頁看完")); w.appendChild(dl); }
   w.appendChild(el("div", "cr-hero", `<div class="cr-ind">${esc(R.industry || "")}　資料日 ${esc(R.data_date || R.date || "")}${R.made_date ? "｜報告產出日 " + esc(R.made_date) : ""}</div>` +
     `<div class="cr-code"><b>${esc(R.code)}</b> ${esc(R.name || "")}</div><div class="cr-title">${esc(S["標題"] || "")}</div><div class="cr-subt">${esc(S["副標"] || "")}</div>`));
   const kpi = (R.facts || []).filter(f => f.sec === "關鍵數據").slice(0, 4);
@@ -10819,8 +10856,8 @@ function crOne(R) {
   if (S["總結"]) w.appendChild(el("div", "cr-flow", `<span class="cr-pill">總結</span> ${esc(S["總結"]).replace(/→/g, '<i>→</i>')}`));
   w.appendChild(el("div", "cr-quad", [["事件", "事件"], ["影響", "影響"], ["估值依據", "預估與估值依據"], ["後續追蹤", "後續追蹤"]]
     .map(([t, k]) => `<div><h4>${esc(t)}</h4><p>${crMd(S[k])}</p></div>`).join("")));
-  const lk = el("a", "cr-rv", "到「河流圖」看這檔的本益比位階 ›"); lk.href = "javascript:void 0";
-  lk.onclick = () => window.GO_TAB && window.GO_TAB("產業研究", "河流圖", () => window.RV_GO && window.RV_GO(R.code)); w.appendChild(lk);
+  if (!bare) { const lk = el("a", "cr-rv", "到「河流圖」看這檔的本益比位階 ›"); lk.href = "javascript:void 0";
+    lk.onclick = () => window.GO_TAB && window.GO_TAB("產業研究", "河流圖", () => window.RV_GO && window.RV_GO(R.code)); w.appendChild(lk); }
   const ch = crChart(R, F); if (ch) { w.appendChild(el("h4", "cr-h", "營收與 EPS")); w.appendChild(ch); }
   // 🟢 10-11（Evans 10-05 P0-2）：季度表（營收、毛利、營益、淨利、EPS、三率、年增、季增）合成一張：列＝季度、欄＝指標
   const Q = (R.tables || {}).quarters;
@@ -14589,6 +14626,18 @@ function tabStrategyPair() {
       out.appendChild(sCard(ok ? "看起來合得來" : "看起來合不來",
         ok ? "最痛的日子沒有明顯重疊，合併之後回撤被壓下來了。這是真的分散，不是多押一份。"
            : "最痛的日子傾向一起發生。加上去主要是多部署資金，不是降低風險。", null));
+      // 🟢 10-18（Evans D10）：配對結果直接用程式績效那套完整圖表（審核卡、權益、逐年逐月），你的策略當第三支腳，可單看或任意組合
+      const wrap = el("div"), ub = el("div", "subpick"), hold = el("div");
+      let unit = 1;
+      const one = () => { hold.innerHTML = "";
+        const pn = ds.map(d => M.has(d) ? M.get(d) / unit : 0);
+        const w = w5Block([{id: "u", name: "你的策略", pnl: pn}]);
+        hold.appendChild(w || el("div", "empty", "這份資料沒有逐日序列，畫不出組合圖。")); };
+      ub.appendChild(el("span", "lab", "你的損益單位"));
+      [[1, "台指期點數"], [200, "新台幣元（÷200 換成點）"]].forEach(([u, t]) => { const b = el("button", "pill" + (unit === u ? " on" : ""), t);
+        b.onclick = () => { unit = u; [...ub.querySelectorAll("button")].forEach(x => x.classList.toggle("on", x === b)); one(); }; ub.appendChild(b); });
+      wrap.appendChild(ub); wrap.appendChild(hold); one();
+      out.appendChild(sCard("放進程式績效的組合圖", "勾「你的策略」跟 GEA 5／6 號任意組合；你的檔案沒涵蓋的日子當 0，區間建議選重疊期間（" + ds.filter(d => M.has(d))[0] + " 起）", wrap));
     };
     r.readAsText(f);
   }
@@ -14650,8 +14699,7 @@ function tabStrategy() {
     ["GEA 高原", tabStrategyPlateau, "strategy"],
     ["組合精神", tabStrategyCombo, "strategy"],
     ["反直覺真相", tabStrategyTruths, "strategy"],
-    ["價差還原", tabStrategyRoll, "strategy"],
-    ["策略配對器", tabStrategyPair, "strategy"]
+    ["價差還原", tabStrategyRoll, "strategy"]
   ]);
 }
 
@@ -14698,8 +14746,16 @@ function w5Data() {
   const cum = arr => { let s = 0; return arr.map(v => (s += (+v || 0))); };
   if (ser && ser.a && ser.a.length === dates.length) {
     const A = cum(ser.a), B = cum(ser.b);
-    return {dates, full: true, cum: {a: A, b: B, c: A.map((v, i) => v + B[i])},
-            bench: ser.bench || null, tm: ser.tm || {}, cards: ser.cards || {},
+    // 🟢 10-18（Evans D10）：策略可自由加入 —— 之後 Colab 在 series.legs 放 {代號: {name, pnl[逐日損益，跟 dates 對齊], tm[逐月交易彙總], card}}，
+    //    這裡自動多一支可勾選的策略；a／b（GEA 5、6 號）照舊。代號 c 保留給「組合」。
+    const legs = [{id: "a", name: W5_NAME.a}, {id: "b", name: W5_NAME.b}], CM = {a: A, b: B};
+    const tm = Object.assign({}, ser.tm || {}), cards = Object.assign({}, ser.cards || {});
+    Object.entries(ser.legs || {}).forEach(([id, x]) => {
+      if (!/^[a-z0-9_]+$/.test(id) || id === "c" || CM[id] || !x || (x.pnl || []).length !== dates.length) return;
+      legs.push({id, name: x.name || id}); CM[id] = cum(x.pnl); W5_NAME[id] = x.name || id; W5_TITLE[id] = "TXF　" + (x.name || id);
+      if (x.tm) tm[id] = x.tm; if (x.card) cards[id] = x.card; });
+    return {dates, full: true, legs, cum: Object.assign({c: A.map((v, i) => v + B[i])}, CM), sel: ["a", "b"],
+            bench: ser.bench || null, tm, cards,
             k: Object.assign({margin: 636000, pv: 200, slip: 12, score_t: 24}, ser.const || {}),
             warn: ser.warn || []};
   }
@@ -14708,6 +14764,19 @@ function w5Data() {
   return {dates, full: false, cum: {c: cum(p)}, bench: null, tm: {}, cards: {},
           k: {margin: 636000, pv: 200, slip: 12, score_t: 24}, warn: ["no_series"]};
 }
+
+/* 🟢 10-18（D10）：依勾選的策略組出「組合」c —— 選 1 支＝單看；2 支以上＝逐日相加，MH＝支數。
+   預烘的組合卡只對應 GEA 5＋6 號，換了組合就在瀏覽器重算。 */
+function w5View(W, sel) {
+  const ids = sel.filter(id => W.cum[id] && id !== "c");
+  W5_TITLE.c = ids.map(id => W5_NAME[id]).join(" ＋ ") + " 組合｜MH" + ids.length;
+  if (ids.length < 2) return Object.assign({}, W, {sel: ids});
+  const c = W.cum[ids[0]].map((_, i) => ids.reduce((t, id) => t + W.cum[id][i], 0));
+  const cards = Object.assign({}, W.cards);
+  if (!(ids.length === 2 && ids.includes("a") && ids.includes("b"))) delete cards.c;
+  return Object.assign({}, W, {cum: Object.assign({}, W.cum, {c}), cards, sel: ids});
+}
+const w5MH = (W, tag) => tag === "c" ? Math.max(2, (W.sel || []).length) : 1;
 
 /* ── 純數學：bt.py 同名函式的逐行移植 ─────────────────────────── */
 function w5Score(N, O, P, R, W, n, T) {
@@ -14791,23 +14860,20 @@ function w5Card(W, tag, i0, i1) {
   const yrs = (new Date(d1) - new Date(d0)) / 864e5 / 365;
   const ym0 = d0.slice(0, 7), ym1 = d1.slice(0, 7);
   let t;
-  if (tag === "c") {
-    const ta = W.tm.a ? w5Trades(W.tm.a, ym0, ym1) : null;
-    const tb = W.tm.b ? w5Trades(W.tm.b, ym0, ym1) : null;
-    t = (ta && tb) ? w5Trades([].concat(W.tm.a, W.tm.b), ym0, ym1) : {n: 0, o: NaN, p: NaN, w: NaN};
-  } else t = W.tm[tag] ? w5Trades(W.tm[tag], ym0, ym1) : {n: 0, o: NaN, p: NaN, w: NaN};
+  const SEL = tag === "c" ? (W.sel || ["a", "b"]) : [tag];
+  t = SEL.every(id => W.tm[id]) ? w5Trades([].concat(...SEL.map(id => W.tm[id])), ym0, ym1) : {n: 0, o: NaN, p: NaN, w: NaN};
   const net = y[y.length - 1], mdd = w5Mdd(y, true);
-  const r = w5Assemble(net, mdd, yrs, t, tag === "c" ? 2 : 1, y, W.k);
+  const r = w5Assemble(net, mdd, yrs, t, w5MH(W, tag), y, W.k);
   r.win = [d0, d1]; r.src = "live";
-  if (tag === "c" && W.cum.a) {
-    const ya = w5Slice(W.cum.a, i0, i1), yb = w5Slice(W.cum.b, i0, i1);
-    const ma = w5Mdd(ya, true), mb = w5Mdd(yb, true);
-    const da = [], db = [];
-    for (let i = 1; i < ya.length; i++) { da.push(ya[i] - ya[i - 1]); db.push(yb[i] - yb[i - 1]); }
-    r.legs = {a: {net: ya[ya.length - 1], mdd: ma, MAR: ma ? ya[ya.length - 1] / ma / yrs : NaN},
-              b: {net: yb[yb.length - 1], mdd: mb, MAR: mb ? yb[yb.length - 1] / mb / yrs : NaN}};
-    r.dr = (ma + mb) ? mdd / (ma + mb) : NaN;
-    r.rho = w5Corr(da, db);
+  if (tag === "c" && SEL.length >= 2) {
+    const Ls = SEL.map(id => { const yy = w5Slice(W.cum[id], i0, i1), m = w5Mdd(yy, true), d = [];
+      for (let i = 1; i < yy.length; i++) d.push(yy[i] - yy[i - 1]);
+      return {id, net: yy[yy.length - 1], mdd: m, MAR: m ? yy[yy.length - 1] / m / yrs : NaN, d}; });
+    r.legs = Object.fromEntries(Ls.map(x => [x.id, x]));
+    const sm = Ls.reduce((t, x) => t + x.mdd, 0);
+    r.dr = sm ? mdd / sm : NaN;
+    const rs = []; for (let i = 0; i < Ls.length; i++) for (let j = i + 1; j < Ls.length; j++) rs.push(w5Corr(Ls[i].d, Ls[j].d));
+    r.rho = rs.length ? rs.reduce((t, v) => t + v, 0) / rs.length : NaN;     // 3 支以上＝兩兩相關的平均
   }
   return r;
 }
@@ -14828,7 +14894,7 @@ function w5CardNode(W, tag, r) {
     if (sub) c.appendChild(el("div", "w5-sub", sub));
   };
   const sec = t => c.appendChild(el("div", "w5-sec", t));
-  const mh = tag === "c" ? 2 : 1;
+  const mh = w5MH(W, tag);
   c.appendChild(el("div", "w5-hd", "🧪 GEA 審核卡"
     + `<span class="w5-src">${r.src === "baked" ? "預烘原值" : "區間重算"}</span>`));
   c.appendChild(el("div", "w5-ttl", esc(W5_TITLE[tag])));
@@ -14858,11 +14924,10 @@ function w5CardNode(W, tag, r) {
   if (tag === "c") {
     sec("組合");
     const L = r.legs || {};
-    const A = L.a || W.cards.a || {}, B = L.b || W.cards.b || {};
-    [["GEA 5 號", A], ["GEA 6 號", B]].forEach(([nm, x]) => c.appendChild(el("div", "w5-legrow num",
-      `${nm}：淨 ${w5Fmt(x.net)}｜MDD ${w5Fmt(x.mdd)}｜MAR ${w5Fmt(x.MAR, 2)}`)));
+    (W.sel || ["a", "b"]).forEach(id => { const x = L[id] || W.cards[id] || {};
+      c.appendChild(el("div", "w5-legrow num", `${esc(W5_NAME[id] || id)}：淨 ${w5Fmt(x.net)}｜MDD ${w5Fmt(x.mdd)}｜MAR ${w5Fmt(x.MAR, 2)}`)); });
     row("MDD 分散比", w5Fmt(r.dr, 2), "", "<0.85＝結構性分散");
-    row("日損益 ρ", w5Fmt(r.rho, 2));
+    row((W.sel || []).length > 2 ? "日損益 ρ（兩兩平均）" : "日損益 ρ", w5Fmt(r.rho, 2));
   }
   if (r.src === "live")
     c.appendChild(el("div", "w5-foot",
@@ -14944,11 +15009,12 @@ function w5XTicks(dates) {
 
 /* ── 權益曲線三格（_save_curve_png） ─────────────────────────── */
 function w5Equity(W, tag, i0, i1, card) {
-  const PV = W.k.pv, mh = tag === "c" ? 2 : 1;
+  const PV = W.k.pv, mh = w5MH(W, tag);
   const dates = W.dates.slice(i0, i1 + 1), n = dates.length;
   const ypt = w5Slice(W.cum[tag], i0, i1), y = ypt.map(v => v * PV / 1e6);
   const ypk = []; let pk = -Infinity; y.forEach(v => { pk = Math.max(pk, v); ypk.push(pk); });
-  const subs = tag === "c" && W.cum.a ? [["a", "#8fa3b8"], ["b", "#b8a68f"]] : [];
+  const W5_SUBC = ["#8fa3b8", "#b8a68f", "#9db88f", "#b88fb0", "#8fb8b3", "#c4a36a", "#a08fb8", "#b88f8f", "#8f9db8", "#b8b08f"];
+  const subs = tag === "c" ? (W.sel || ["a", "b"]).map((id, i) => [id, W5_SUBC[i % W5_SUBC.length]]) : [];
   const subY = subs.map(([t]) => w5Slice(W.cum[t], i0, i1).map(v => v * PV / 1e6));
   const bench = W.bench ? W.bench.slice(i0, i1 + 1) : null;
 
@@ -15110,7 +15176,7 @@ function w5CmapColor(t) {                 // t ∈ [-1, 1]
   return "rgb(" + c0.map((v, k) => Math.round(v + (c1[k] - v) * f)).join(",") + ")";
 }
 function w5Period(W, tag, i0, i1, card) {
-  const PV = W.k.pv, mh = tag === "c" ? 2 : 1;
+  const PV = W.k.pv, mh = w5MH(W, tag);
   const dates = W.dates.slice(i0, i1 + 1);
   const y = w5Slice(W.cum[tag], i0, i1);
   const dp = y.map((v, i) => i ? v - y[i - 1] : v);          // dpnl.iloc[0] = daily.iloc[0]
@@ -15208,21 +15274,31 @@ function w5Period(W, tag, i0, i1, card) {
 }
 
 /* ── 組裝：兩排膠囊（主線 × 區間）＋ 卡｜權益 ＋ 週期 ─────────── */
-function w5Block() {
-  const W = w5Data();
-  if (!W) return null;
-  const st = {main: "c", range: "all", from: "", to: ""};
+function w5Block(extra) {
+  const W0 = w5Data();
+  if (!W0) return null;
+  // 🟢 10-18（D10）：策略配對器上傳的策略（extra＝[{id, name, pnl}]，pnl 已對齊 dates、單位點）當成多一支腳
+  (extra || []).forEach(x => { if (!W0.full || W0.cum[x.id] || (x.pnl || []).length !== W0.dates.length) return;
+    let t = 0; W0.cum[x.id] = x.pnl.map(v => (t += (+v || 0))); W0.legs.push({id: x.id, name: x.name}); W5_NAME[x.id] = x.name; W5_TITLE[x.id] = x.name; });
+  const legs = W0.legs || [{id: "c", name: "組合"}];
+  const st = {sel: W0.full ? legs.map(l => l.id) : ["c"], range: "all", from: "", to: ""};
+  let W = W0;
   const root = el("div", "w5");
   const bar = el("div", "subpick w5-bar");
   const body = el("div");
   root.appendChild(bar); root.appendChild(body);
-  const tags = ["c", "a", "b"].filter(t => W.cum[t]);
 
   function drawBar() {
     bar.innerHTML = "";
-    const r1 = el("div", "w5-axis"); r1.appendChild(el("span", "lab", "主線"));
-    tags.forEach(t => { const b = el("button", "pill" + (st.main === t ? " on" : ""), esc(W5_NAME[t]));
-      b.onclick = () => { st.main = t; draw(); }; r1.appendChild(b); });
+    const r1 = el("div", "w5-axis"); r1.appendChild(el("span", "lab", "策略"));
+    if (W0.full) {
+      legs.forEach(l => { const on = st.sel.includes(l.id), b = el("button", "pill" + (on ? " on" : ""), (on ? "☑ " : "☐ ") + esc(l.name));
+        b.title = "可複選：勾 1 支＝單看，勾 2 支以上＝合併成組合";
+        b.onclick = () => { if (on && st.sel.length === 1) return; st.sel = on ? st.sel.filter(x => x !== l.id) : legs.map(x => x.id).filter(x => x === l.id || st.sel.includes(x)); draw(); };
+        r1.appendChild(b); });
+      const all = el("button", "pill", "全選"); all.onclick = () => { st.sel = legs.map(l => l.id); draw(); }; r1.appendChild(all);
+      r1.appendChild(el("span", "w5-dim", st.sel.length > 1 ? `　組合 ${st.sel.length} 支（MH${st.sel.length}）` : "　單看"));
+    } else r1.appendChild(el("span", "w5-dim", "組合"));
     const r2 = el("div", "w5-axis"); r2.appendChild(el("span", "lab", "區間"));
     W5_RANGES.forEach(([k, lab]) => { const b = el("button", "pill" + (st.range === k ? " on" : ""), lab);
       b.onclick = () => { st.range = k; draw(); }; r2.appendChild(b); });
@@ -15236,6 +15312,8 @@ function w5Block() {
     bar.appendChild(r1); bar.appendChild(r2);
   }
   function draw() {
+    W = W0.full ? w5View(W0, st.sel) : W0;
+    st.main = W0.full ? (st.sel.length > 1 ? "c" : st.sel[0]) : "c";
     drawBar();
     body.innerHTML = "";
     const [i0, i1] = w5Window(W.dates, st);
@@ -15308,6 +15386,8 @@ function tabPerf() {
   // 而且 perf.nq.span 不是 null（現在是 null，TXF 那邊有值）。
   // if (P.nq) items.push(["那斯達克 NQ", () => tabPerfBody("nq"), "strategy"]);
   if (!items.length) items.push(["程式績效", () => tabPerfBody("txf"), "strategy"]);
+  // 🟢 10-18（Evans D10）：策略配對器從程式策略搬來 —— 配對後的圖表沿用程式績效的完整版
+  items.push(["策略配對器", tabStrategyPair, "strategy"]);
   return sideTabs(items);
 }
 
