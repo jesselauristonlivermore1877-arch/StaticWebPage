@@ -38,25 +38,41 @@ jobs:
           npm i -g wrangler@4.147.0 >/dev/null 2>&1
           python3 - <<'PY'
           import json, os, urllib.request, datetime as dt
-          now = dt.datetime.now(dt.timezone.utc); t0 = now - dt.timedelta(hours=24)
+          # 10-18：Cloudflare 又超限被擋 → 全帳號所有 Worker（不只 gea-live）近 3 天逐日、逐支、逐狀態，免費方案每天 10 萬次請求、每次 CPU 10ms
+          now = dt.datetime.now(dt.timezone.utc)
           q = """query($a:String!,$s:Time!,$e:Time!){viewer{accounts(filter:{accountTag:$a}){
-            workersInvocationsAdaptive(limit:500,filter:{scriptName:"gea-live",datetime_geq:$s,datetime_leq:$e}){
+            workersInvocationsAdaptive(limit:2000,filter:{datetime_geq:$s,datetime_leq:$e}){
               sum{requests errors subrequests} quantiles{cpuTimeP50 cpuTimeP99 wallTimeP50 wallTimeP99}
-              dimensions{status datetimeHour}}}}}"""
-          body = json.dumps({"query": q, "variables": {"a": os.environ["CLOUDFLARE_ACCOUNT_ID"], "s": t0.strftime("%Y-%m-%dT%H:%M:%SZ"), "e": now.strftime("%Y-%m-%dT%H:%M:%SZ")}}).encode()
-          r = urllib.request.Request("https://api.cloudflare.com/client/v4/graphql", body, {"Authorization": "Bearer " + os.environ["CLOUDFLARE_API_TOKEN"], "Content-Type": "application/json"})
-          try:
-              J = json.load(urllib.request.urlopen(r, timeout=60))
-          except Exception as e:
-              print("GraphQL 失敗：", e); J = {}
-          if J.get("errors"): print("GraphQL errors：", json.dumps(J["errors"], ensure_ascii=False)[:600])
-          rows = (((((J.get("data") or {}).get("viewer") or {}).get("accounts") or [{}])[0]) or {}).get("workersInvocationsAdaptive") or []
-          tot = {}
-          for x in sorted(rows, key=lambda x: (x["dimensions"]["datetimeHour"], x["dimensions"]["status"])):
-              d, sm, qn = x["dimensions"], x["sum"], x["quantiles"]
-              tot[d["status"]] = tot.get(d["status"], 0) + sm["requests"]
-              print("%s %-22s 次數 %5d  CPU p50 %6.1fms p99 %6.1fms  牆鐘 p99 %7.0fms" % (d["datetimeHour"][5:16], d["status"], sm["requests"], qn["cpuTimeP50"] / 1000, qn["cpuTimeP99"] / 1000, qn["wallTimeP99"] / 1000))
-          print("近 24 小時各狀態合計：", tot)
+              dimensions{scriptName status datetimeHour}}}}}"""
+          def run(t0, t1):
+              body = json.dumps({"query": q, "variables": {"a": os.environ["CLOUDFLARE_ACCOUNT_ID"], "s": t0.strftime("%Y-%m-%dT%H:%M:%SZ"), "e": t1.strftime("%Y-%m-%dT%H:%M:%SZ")}}).encode()
+              r = urllib.request.Request("https://api.cloudflare.com/client/v4/graphql", body, {"Authorization": "Bearer " + os.environ["CLOUDFLARE_API_TOKEN"], "Content-Type": "application/json"})
+              try:
+                  J = json.load(urllib.request.urlopen(r, timeout=60))
+              except Exception as e:
+                  print("GraphQL 失敗：", e); return []
+              if J.get("errors"): print("GraphQL errors：", json.dumps(J["errors"], ensure_ascii=False)[:600])
+              return (((((J.get("data") or {}).get("viewer") or {}).get("accounts") or [{}])[0]) or {}).get("workersInvocationsAdaptive") or []
+          for back in (2, 1, 0):
+              t1 = now - dt.timedelta(days=back); t0 = t1 - dt.timedelta(hours=24)
+              rows = run(t0, t1)
+              day, hr = {}, {}
+              for x in rows:
+                  d, sm = x["dimensions"], x["sum"]
+                  k = (d["scriptName"], d["status"])
+                  day[k] = day.get(k, 0) + sm["requests"]
+                  hk = (d["scriptName"], d["datetimeHour"][5:13])
+                  h = hr.setdefault(hk, [0, 0, 0.0])
+                  h[0] += sm["requests"]; h[2] = max(h[2], x["quantiles"]["cpuTimeP99"] / 1000)
+                  if d["status"] != "success": h[1] += sm["requests"]
+              print("══ %s ～ %s（UTC）全帳號請求 %d 次" % (t0.strftime("%m-%d %H:%M"), t1.strftime("%m-%d %H:%M"), sum(day.values())))
+              for (sn, st), n in sorted(day.items(), key=lambda x: -x[1]):
+                  print("   %-20s %-22s %7d" % (sn, st, n))
+              if back == 0:
+                  print("── 最近 24 小時逐小時（支、時、次數、非 success、CPU p99 ms）")
+                  for (sn, h), v in sorted(hr.items(), key=lambda x: (x[0][1], x[0][0])):
+                      print("   %s %-20s %5d  非成功 %4d  p99 %6.1f" % (h, sn, v[0], v[1], v[2]))
+          PY
           PY
           echo "── 即時 tail 4 分鐘（每次呼叫：事件、結果、CPU、牆鐘）"
           timeout 240 wrangler tail gea-live --format json > tail.jsonl 2> tail.err || true
