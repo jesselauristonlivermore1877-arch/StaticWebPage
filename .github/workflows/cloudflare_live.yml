@@ -73,6 +73,34 @@ jobs:
                   for (sn, h), v in sorted(hr.items(), key=lambda x: (x[0][1], x[0][0])):
                       print("   %s %-20s %5d  非成功 %4d  p99 %6.1f" % (h, sn, v[0], v[1], v[2]))
           PY
+          python3 - <<'PY'
+          # 10-18：請求數只有每天 1,800 次、遠低於 10 萬 → 再查 D1（免費每天讀 500 萬列、寫 10 萬列）與 Workers AI（每天 1 萬 neurons）
+          import json, os, urllib.request, datetime as dt
+          now = dt.datetime.now(dt.timezone.utc)
+          d0, d1 = (now - dt.timedelta(days=7)).strftime("%Y-%m-%d"), now.strftime("%Y-%m-%d")
+          def gql(q, v):
+              body = json.dumps({"query": q, "variables": v}).encode()
+              r = urllib.request.Request("https://api.cloudflare.com/client/v4/graphql", body, {"Authorization": "Bearer " + os.environ["CLOUDFLARE_API_TOKEN"], "Content-Type": "application/json"})
+              try:
+                  J = json.load(urllib.request.urlopen(r, timeout=60))
+              except Exception as e:
+                  print("GraphQL 失敗：", e); return {}
+              if J.get("errors"): print("GraphQL errors：", json.dumps(J["errors"], ensure_ascii=False)[:600])
+              return ((((J.get("data") or {}).get("viewer") or {}).get("accounts") or [{}])[0]) or {}
+          a = os.environ["CLOUDFLARE_ACCOUNT_ID"]
+          R = gql("""query($a:String!,$s:Date!,$e:Date!){viewer{accounts(filter:{accountTag:$a}){
+            d1AnalyticsAdaptiveGroups(limit:1000,filter:{date_geq:$s,date_leq:$e}){
+              sum{readQueries writeQueries rowsRead rowsWritten} dimensions{date databaseId}}}}}""", {"a": a, "s": d0, "e": d1})
+          print("══ D1 逐日（免費上限：讀 5,000,000 列／寫 100,000 列）")
+          for x in sorted(R.get("d1AnalyticsAdaptiveGroups") or [], key=lambda x: x["dimensions"]["date"]):
+              s = x["sum"]
+              print("   %s 讀查詢 %7d 寫查詢 %7d 讀列 %11d 寫列 %9d" % (x["dimensions"]["date"], s["readQueries"], s["writeQueries"], s["rowsRead"], s["rowsWritten"]))
+          R = gql("""query($a:String!,$s:Time!,$e:Time!){viewer{accounts(filter:{accountTag:$a}){
+            aiInferenceAdaptiveGroups(limit:1000,filter:{datetime_geq:$s,datetime_leq:$e}){
+              count sum{totalNeurons} dimensions{date modelId}}}}}""", {"a": a, "s": d0 + "T00:00:00Z", "e": now.strftime("%Y-%m-%dT%H:%M:%SZ")})
+          print("══ Workers AI 逐日（免費上限：每天 10,000 neurons）")
+          for x in sorted(R.get("aiInferenceAdaptiveGroups") or [], key=lambda x: x["dimensions"]["date"]):
+              print("   %s %-40s 次數 %6d neurons %10.0f" % (x["dimensions"]["date"], x["dimensions"]["modelId"], x["count"], x["sum"]["totalNeurons"]))
           PY
           echo "── 即時 tail 4 分鐘（每次呼叫：事件、結果、CPU、牆鐘）"
           timeout 240 wrangler tail gea-live --format json > tail.jsonl 2> tail.err || true
