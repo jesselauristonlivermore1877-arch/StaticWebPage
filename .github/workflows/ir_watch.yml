@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write
+  actions: write       # 10-18：簡報一上傳就當天觸發「法說與報告擷取」
 
 concurrency:
   group: ir-watch
@@ -52,3 +53,46 @@ jobs:
             sleep $((2 ** i))
           done
           exit 1
+
+      # 🟢 10-18 17:05（總指揮 10／Evans D11）：法說當天處理完 —— 簡報（deck_url）一上傳就觸發「法說與報告擷取」
+      #    （guidance.py 只處理新文件：官方錄音逐字稿＋簡報擷取，接著 river.py 更新河流圖），不用等隔天 10:00。
+      #    同一個 concurrency group（daily-build）只留一個排隊：已有排隊中的就不觸發（會把它擠掉），留旗標下一班（30 分後）再試。
+      - name: 當天觸發法說擷取
+        working-directory: site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          FLAG=data/registry/ir_kick.json
+          NEW=$(python3 - <<'PY'
+          import json, glob, os, datetime as dt
+          lo = (dt.datetime.utcnow() - dt.timedelta(days=2)).isoformat()
+          done = set((json.load(open("data/registry/ir_kick.json")) if os.path.exists("data/registry/ir_kick.json") else {}).get("files") or [])
+          new = []
+          for f in sorted(glob.glob("data/ir_trigger/*.json")):
+              try:
+                  t = json.load(open(f, encoding="utf-8"))
+              except Exception:
+                  continue
+              if t.get("deck_url") and str(t.get("deck_seen") or "") >= lo and os.path.basename(f) not in done:
+                  new.append(os.path.basename(f))
+          print(" ".join(new))
+          PY
+          )
+          echo "近兩天新上傳、還沒觸發過的簡報：${NEW:-（沒有）}"
+          if [ -z "$NEW" ]; then exit 0; fi
+          BUSY=0
+          for w in daily.yml guidance.yml preview_data.yml backfill_margin.yml company_reports.yml; do
+            for st in queued pending waiting; do
+              c=$(gh run list -R "$GITHUB_REPOSITORY" --workflow "$w" --status "$st" --json databaseId -q 'length' 2>/dev/null || echo 0)
+              BUSY=$((BUSY + c))
+            done
+          done
+          if [ "$BUSY" -gt 0 ]; then echo "daily-build 有 $BUSY 支排隊中 → 這班不觸發（避免擠掉），30 分後再試"; exit 0; fi
+          gh workflow run guidance.yml -R "$GITHUB_REPOSITORY" -f max=30 && echo "✓ 已觸發 法說與報告擷取（max=30）"
+          NEW="$NEW" python3 -c "import json,os,datetime as dt;p='$FLAG';o=json.load(open(p)) if os.path.exists(p) else {};f=sorted(set(o.get('files') or [])|set(os.environ['NEW'].split()));json.dump({'files':f[-200:],'at':dt.datetime.utcnow().isoformat(timespec='minutes')},open(p,'w'),ensure_ascii=False,indent=1)"
+          git add "$FLAG"
+          git commit -m "data: 法說擷取當天觸發 $(TZ=Asia/Taipei date '+%F %H:%M')" || exit 0
+          for i in 1 2 3 4; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep $((2 ** i))
+          done
