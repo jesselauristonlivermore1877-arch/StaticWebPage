@@ -4,6 +4,8 @@
 #   RELAY_PUB_TOKEN／RELAY_ADMIN_TOKEN：第一次部署時產生，存進 D1 資料庫 gea-relay-keys 的 keys 表（Evans 從 Cloudflare 主控台複製，
 #     路徑寫在 TODO 雲端段），再設成 Worker secret；之後每次部署沿用同一組（不會換，除非 mode=rotate）。log 只印遮罩。
 #   mode：deploy＝部署＋自動測試；test＝只測試；rotate＝換新兩組 token 後部署＋測試（換完發送端與管理端要改用新值）。
+#     subs＝套用正式訂閱規則（總指揮 2026-10-18 23:55 第 1 項）：gea 頻道 GEA5、GEA6 上架；w_office、evans_nb 訂閱改 GEA5,GEA6；
+#           再印用戶／策略狀態與「模擬誰會收到」（不送任何訊號、不部署、不印 token）。管理 token 只在 Actions 裡從 D1 取。
 #   測試時同時 wrangler tail 收每次呼叫的 CPU／牆鐘（stats）。不寫 repo 任何檔案。
 name: Cloudflare 下單訊號中繼
 
@@ -11,7 +13,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "deploy＝部署＋測試；test＝只測試；rotate＝換 token＋部署＋測試；stats＝近 24 小時 CPU（GraphQL，Worker＋Durable Object）"
+        description: "deploy＝部署＋測試；test＝只測試；rotate＝換 token＋部署＋測試；stats＝近 24 小時 CPU（GraphQL，Worker＋Durable Object）；subs＝套用正式訂閱（GEA5、GEA6 上架，舊客戶改 GEA5,GEA6）"
         required: false
         default: "deploy"
 
@@ -54,7 +56,7 @@ jobs:
           for K in RELAY_PUB_TOKEN RELAY_ADMIN_TOKEN; do
             V=$(get $K)
             if [ -z "$V" ] || [ "${{ inputs.mode }}" = "rotate" ]; then
-              [ "${{ inputs.mode }}" = "test" ] || [ "${{ inputs.mode }}" = "stats" ] && { echo "::error::$K 還沒產生（先跑 deploy）"; exit 1; }
+              [ "${{ inputs.mode }}" = "test" ] || [ "${{ inputs.mode }}" = "stats" ] || [ "${{ inputs.mode }}" = "subs" ] && { echo "::error::$K 還沒產生（先跑 deploy）"; exit 1; }
               V=$(openssl rand -hex 32)
               echo "::add-mask::$V"
               wrangler d1 execute "$DB" --remote --yes --command "INSERT INTO keys(name,value,created) VALUES('$K','$V',datetime('now')) ON CONFLICT(name) DO UPDATE SET value=excluded.value, created=excluded.created" >/dev/null
@@ -67,15 +69,47 @@ jobs:
           done
           echo "▶ Evans 複製位置：Cloudflare 主控台 → Storage & databases → D1 SQL database → $DB → Console，執行 SELECT * FROM keys"
       - name: 部署＋設定 Worker secret
-        if: inputs.mode != 'test' && inputs.mode != 'stats'
+        if: inputs.mode != 'test' && inputs.mode != 'stats' && inputs.mode != 'subs'
         run: |
           set -o pipefail
           wrangler deploy 2>&1 | tee deploy.log
           python3 -c "import json,os; json.dump({k: os.environ[k] for k in ('RELAY_PUB_TOKEN','RELAY_ADMIN_TOKEN')}, open('/tmp/sec.json','w'))"
           wrangler secret bulk /tmp/sec.json; rm -f /tmp/sec.json
           sleep 15
+      - name: 套用正式訂閱規則（mode=subs）
+        if: inputs.mode == 'subs'
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+          W = "https://gea-signal-relay.jesselauristonlivermore1877.workers.dev"
+          H = {"Authorization": "Bearer " + os.environ["RELAY_ADMIN_TOKEN"], "Content-Type": "application/json"}
+          def call(path, body=None):
+              r = urllib.request.Request(W + path, None if body is None else json.dumps(body).encode(), H, method="GET" if body is None else "POST")
+              return json.load(urllib.request.urlopen(r, timeout=30))
+          before = call("/admin/state?ch=gea")
+          print("── 改之前")
+          for u in before["users"]: print("  用戶 %-12s subs=%-12s exp=%-10s 在線 %d 最後連線 %s" % (u["id"], u["subs"], u["exp"], u["online"], u["last_seen"]))
+          for x in before["strategies"]: print("  策略 %-10s %s 保留 %d 則" % (x["code"], "上架" if x["listed"] else "下架", x["kept"]))
+          ids = {u["id"] for u in before["users"]}
+          for c in ("GEA5", "GEA6"):
+              r = call("/admin/strategy?ch=gea&code=" + c, {"listed": True}); print("✓ 上架", c, "→", r["strategy"]["listed"])
+          for i in ("w_office", "evans_nb"):
+              if i not in ids: print("✗ 沒有用戶", i); continue
+              r = call("/admin/set?ch=gea&id=" + i, {"subs": "GEA5,GEA6"}); print("✓ 訂閱", i, "→", r["user"]["subs"])
+          after = call("/admin/state?ch=gea")
+          print("── 改之後")
+          for u in after["users"]: print("  用戶 %-12s subs=%-12s exp=%-10s 在線 %d" % (u["id"], u["subs"], u["exp"], u["online"]))
+          for x in after["strategies"]: print("  策略 %-10s %s" % (x["code"], "上架" if x["listed"] else "下架"))
+          print("── 模擬誰會收到（不送任何東西）")
+          for c in ("GEA5", "GEA6", "GEA_NEW_X"):
+              r = call("/admin/simulate?ch=gea", {"strategy": c})
+              print("  %s（%s）：" % (c, "上架" if r["listed"] else "下架／未登記"), "；".join("%s %s（%s）" % (u["id"], "收" if u["receive"] else "不收", u["why"]) for u in r["users"]))
+          bad = [u["id"] for u in after["users"] if u["id"] in ("w_office", "evans_nb") and u["subs"] != "GEA5,GEA6"]
+          if bad: raise SystemExit("✗ 沒改成功：%s" % bad)
+          print("✓ 正式訂閱規則套用完成")
+          PY
       - name: 自動測試（1 發 3 收；同時 tail 收 CPU）
-        if: inputs.mode != 'stats'
+        if: inputs.mode != 'stats' && inputs.mode != 'subs'
         run: |
           W=https://gea-signal-relay.jesselauristonlivermore1877.workers.dev
           for i in 1 2 3 4 5 6; do C=$(curl -s -o /dev/null -w "%{http_code}" "$W/"); echo "GET / → $C"; [ "$C" = 200 ] && break; sleep 10; done
