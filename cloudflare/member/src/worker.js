@@ -241,7 +241,7 @@ async function adminApi(req, env, url, path) {
     const b = await req.json().catch(() => null);
     if (Array.isArray(b) && b.length === 0) { await env.DB.prepare("DELETE FROM conf WHERE name = 'strategies'").run(); return json({saved: 0, reset: true}); }   // 空陣列＝回到網頁內建預設
     if (!Array.isArray(b) || b.length > 100 || b.some(s => !s || typeof s.id !== "string" || !/^[A-Za-z0-9_]{1,40}$/.test(s.id))) return json({error: "格式：[{id, name, side, solo, combo, on}]"}, 400);
-    const clean = b.map(s => ({id: s.id, name: String(s.name || s.id).slice(0, 40), side: String(s.side || "").slice(0, 8), solo: !!s.solo, combo: !!s.combo, on: !!s.on, note: String(s.note || "").slice(0, 120)}));
+    const clean = b.map(s => ({id: s.id, name: String(s.name || s.id).slice(0, 40), side: String(s.side || "").slice(0, 8), solo: !!s.solo, combo: !!s.combo, on: !!s.on, note: String(s.note || "").slice(0, 120), ...(s.stats && typeof s.stats === "object" ? {stats: Object.fromEntries(["net","mdd","mar","pf","payoff","win","trades","expectancy"].filter(k => Number.isFinite(s.stats[k])).map(k => [k, s.stats[k]]))} : {})}));
     await env.DB.prepare("INSERT INTO conf(name, value, updated) VALUES('strategies', ?, ?) ON CONFLICT(name) DO UPDATE SET value = excluded.value, updated = excluded.updated").bind(JSON.stringify(clean), now()).run();
     return json({saved: clean.length});
   }
@@ -254,6 +254,15 @@ async function adminApi(req, env, url, path) {
     if (!n) { await env.DB.prepare("DELETE FROM conf WHERE name = 'prices'").run(); return json({saved: 0, reset: true}); }   // 全空＝回到報價單原價
     await env.DB.prepare("INSERT INTO conf(name, value, updated) VALUES('prices', ?, ?) ON CONFLICT(name) DO UPDATE SET value = excluded.value, updated = excluded.updated").bind(JSON.stringify(clean), now()).run();
     return json({saved: n});
+  }
+  if (path === "/api/admin/packages" && req.method === "PUT") { // 管理者可調整套餐名稱、內容與年費
+    const b = await req.json().catch(() => null);
+    if (!Array.isArray(b) || b.length > 30 || b.some(p => !p || !/^[A-Za-z0-9_]{1,40}$/.test(p.id || "") || typeof p.name !== "string" || !p.name.trim() || p.name.length > 60 || typeof p.desc !== "string" || p.desc.length > 400 || !Array.isArray(p.codes) || p.codes.length < 1 || p.codes.length > 40 || p.codes.some(c => typeof c !== "string" || !/^[A-Za-z0-9_]{1,40}$/.test(c)) || new Set(p.codes).size !== p.codes.length || !Number.isInteger(p.year) || p.year < 0 || p.year > 1e8)) return json({error: "套餐格式錯誤：需包含代號、名稱、說明、策略代碼與年費"}, 400);
+    if (new Set(b.map(p => p.id)).size !== b.length) return json({error:"套餐代號不可重複"},400);
+    if (b.length === 0) { await env.DB.prepare("DELETE FROM conf WHERE name = 'packages'").run(); return json({saved:0,reset:true}); }
+    const clean = b.map(p => ({id:p.id, name:p.name.trim(), desc:p.desc.trim(), codes:p.codes, year:p.year}));
+    await env.DB.prepare("INSERT INTO conf(name, value, updated) VALUES('packages', ?, ?) ON CONFLICT(name) DO UPDATE SET value = excluded.value, updated = excluded.updated").bind(JSON.stringify(clean), now()).run();
+    return json({saved: clean.length});
   }
   return json({error: "沒有這個管理功能"}, 404);
 }
@@ -328,6 +337,7 @@ export default {
           return new Response(unb64(r.data), {headers: {"content-type": "application/octet-stream", "cache-control": "no-store", "x-live-ts": String(r.ts), ...SEC}});
         }
         if (path === "/api/prices") { const r = await env.DB.prepare("SELECT value, updated FROM conf WHERE name = 'prices'").first(); return json(r ? Object.assign(JSON.parse(r.value), {updated: r.updated}) : null); }
+        if (path === "/api/packages") { const r = await env.DB.prepare("SELECT value, updated FROM conf WHERE name = 'packages'").first(); return json(r ? {packages: JSON.parse(r.value), updated: r.updated} : null); }
         return json({error: "沒有這個功能"}, 404);
       }
       if (!s) return path === "/" ? loginPage(env) : new Response(null, {status: 302, headers: {location: "/", "cache-control": "no-store"}});
