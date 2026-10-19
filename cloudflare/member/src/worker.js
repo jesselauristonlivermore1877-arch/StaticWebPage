@@ -28,7 +28,8 @@ const SCHEMA = [
   "CREATE TABLE IF NOT EXISTS conf(name TEXT PRIMARY KEY, value TEXT NOT NULL, updated INTEGER)",
   "CREATE TABLE IF NOT EXISTS files(name TEXT PRIMARY KEY, ct TEXT, sha TEXT, size INTEGER, ts INTEGER, enc TEXT, chunks INTEGER)",
   "CREATE TABLE IF NOT EXISTS file_chunks(name TEXT NOT NULL, i INTEGER NOT NULL, data TEXT NOT NULL, PRIMARY KEY(name, i))",
-  "CREATE TABLE IF NOT EXISTS live(id INTEGER PRIMARY KEY, ts INTEGER NOT NULL, data TEXT NOT NULL)",   // 看盤區盤中即時（10-19 Evans）：本機 tools/live_push.py 每根新K推一次（gzip JSON，base64）
+  "CREATE TABLE IF NOT EXISTS live(id INTEGER PRIMARY KEY, ts INTEGER NOT NULL, data TEXT NOT NULL)",
+  "CREATE TABLE IF NOT EXISTS livek(k TEXT PRIMARY KEY, ts INTEGER NOT NULL, data TEXT NOT NULL)",   // 訊號區／原型研究盤中即時（10-19 Evans）：s_<代碼>＝那支策略（照訂閱）、adm＝原型研究全部（只給管理者）   // 看盤區盤中即時（10-19 Evans）：本機 tools/live_push.py 每根新K推一次（gzip JSON，base64）
 ];
 
 // ───────── 檔案（D1）：文字檔存原文（切 300,000 字，中文全形最多 0.9 MB）、其他存 base64（切 900,000 字）─────────
@@ -62,6 +63,7 @@ async function init(env) {
   if (!cols.includes("subs")) await env.DB.prepare("ALTER TABLE members ADD COLUMN subs TEXT NOT NULL DEFAULT ''").run();   // 10-19 加：舊會員預設沒訂閱
   ready = true;
 }
+const LIVE_K = /^(adm|s_[A-Za-z0-9_]{1,40})$/;
 const SUB_RE = /^(\*|[A-Za-z0-9_]{1,40}(,[A-Za-z0-9_]{1,40}){0,49})?$/;
 const subsOf = s => s.admin === 1 ? ["*"] : String(s.subs || "").split(",").filter(Boolean);
 function canFile(s, name) {                                                       // 依訂閱擋檔：策略資料看訂閱、原型研究完整版只給管理者
@@ -202,7 +204,12 @@ async function adminApi(req, env, url, path) {
   if (path === "/api/admin/live" && req.method === "PUT") {
     const buf = await req.arrayBuffer();
     if (buf.byteLength > 1400 * 1024) return json({error: "即時資料超過 1.4 MB"}, 413);
-    const ts = Date.now();
+    const ts = Date.now(), k = url.searchParams.get("k");
+    if (k != null) {
+      if (!LIVE_K.test(k)) return json({error: "k 只收 s_<代碼> 或 adm"}, 400);
+      await env.DB.prepare("INSERT INTO livek(k, ts, data) VALUES(?, ?, ?) ON CONFLICT(k) DO UPDATE SET ts = excluded.ts, data = excluded.data").bind(k, ts, b64(buf)).run();
+      return json({k, ts, size: buf.byteLength});
+    }
     await env.DB.prepare("INSERT INTO live(id, ts, data) VALUES(1, ?, ?) ON CONFLICT(id) DO UPDATE SET ts = excluded.ts, data = excluded.data").bind(ts, b64(buf)).run();
     return json({ts, size: buf.byteLength});
   }
@@ -282,6 +289,16 @@ export default {
         if (!valid(s)) return json({error: "會員已到期或停用", exp: s.exp}, 403);
         if (path === "/api/me") return json({name: s.name, exp: s.exp, admin: s.admin === 1, subs: subsOf(s), line: !!s.line_sub});
         if (path === "/api/strategies") { const r = await env.DB.prepare("SELECT value FROM conf WHERE name = 'strategies'").first(); return json(r ? JSON.parse(r.value) : null); }
+        if (path === "/api/live" && url.searchParams.has("k")) {                       // 策略即時：s_<代碼> 照訂閱、adm 只給管理者
+          const k = url.searchParams.get("k"), v = url.searchParams.get("v") || "", sm = k.match(/^s_([A-Za-z0-9_]{1,40})$/);
+          if (!LIVE_K.test(k)) return json({error: "沒有這個即時資料"}, 404);
+          if (k === "adm" ? s.admin !== 1 : !canFile(s, "data_s_" + sm[1] + ".js")) return json({error: "沒有訂閱這支策略"}, 403);
+          const m = await env.DB.prepare("SELECT ts FROM livek WHERE k = ?").bind(k).first();
+          if (!m) return new Response(null, {status: 204, headers: {"cache-control": "no-store", ...SEC}});
+          if (String(m.ts) === v) return new Response(null, {status: 204, headers: {"cache-control": "no-store", "x-live-ts": String(m.ts), ...SEC}});
+          const r = await env.DB.prepare("SELECT ts, data FROM livek WHERE k = ?").bind(k).first();
+          return new Response(unb64(r.data), {headers: {"content-type": "application/octet-stream", "cache-control": "no-store", "x-live-ts": String(r.ts), ...SEC}});
+        }
         if (path === "/api/live") {                                                    // ?v=上次的 ts：沒變回 204（只查 ts，不讀內容）
           const v = url.searchParams.get("v") || "", m = await env.DB.prepare("SELECT ts FROM live WHERE id = 1").first();
           if (!m) return new Response(null, {status: 204, headers: {"cache-control": "no-store", ...SEC}});

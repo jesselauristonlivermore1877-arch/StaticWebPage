@@ -62,6 +62,16 @@ t("未登入拿不到盤中即時", r.status === 401 || r.status === 302, "HTTP 
 r = await go("/api/live", {headers: {cookie: s1.cookie}});
 t("會員拿得到盤中即時（200 有資料／204 還沒推）", r.status === 200 || r.status === 204, "HTTP " + r.status);
 if (r.status === 200) { const v = r.headers.get("x-live-ts"); await r.arrayBuffer(); r = await go("/api/live?v=" + v, {headers: {cookie: s1.cookie}}); t("即時資料沒變回 204", r.status === 204, "HTTP " + r.status); }
+r = await go("/api/admin/live?k=s_ZZTEST", {method: "PUT", headers: A, body: "zz"});
+t("管理 token 推策略即時", r.status === 200, "HTTP " + r.status);
+r = await go("/api/live?k=s_ZZTEST", {headers: {cookie: s1.cookie}});
+t("沒訂閱的策略即時 → 403", r.status === 403, "HTTP " + r.status);
+r = await go("/api/live?k=adm", {headers: {cookie: s1.cookie}});
+t("一般會員拿不到原型研究即時", r.status === 403, "HTTP " + r.status);
+await go("/api/admin/members", {method: "PATCH", headers: {...A, "content-type": "application/json"}, body: JSON.stringify({id: mem.id, subs: "ZZTEST"})});
+r = await go("/api/live?k=s_ZZTEST", {headers: {cookie: s1.cookie}});
+t("訂了就拿得到策略即時", r.status === 200 && (await r.text()) === "zz", "HTTP " + r.status);
+await go("/api/admin/members", {method: "PATCH", headers: {...A, "content-type": "application/json"}, body: JSON.stringify({id: mem.id, subs: ""})});
 r = await go("/api/admin/live", {method: "PUT", headers: {cookie: s1.cookie, "x-gea": "1"}, body: "x"});
 t("一般會員不能推即時資料", r.status === 401, "HTTP " + r.status);
 r = await go("/api/admin/members", {headers: {cookie: s1.cookie}});
