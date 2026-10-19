@@ -3,14 +3,14 @@
 #   secrets：沿用 CLOUDFLARE_API_TOKEN、CLOUDFLARE_ACCOUNT_ID；選用 LINE_CHANNEL_ID、LINE_CHANNEL_SECRET（Evans 建好 LINE Login channel 後設，沒設就不開 LINE 登入）。
 #   ADMIN_TOKEN：第一次部署時產生，存進 D1 gea-member 的 keys 表（Evans 從 Cloudflare 主控台複製，設成本機使用者變數 GEA_MEMBER_ADMIN_TOKEN），
 #     再設成 Worker secret；之後每次部署沿用（mode=rotate 才換）。log 只印遮罩。
-#   mode：deploy＝部署＋自動測試；test＝只測試；rotate＝換 ADMIN_TOKEN 後部署＋測試。
+#   mode：deploy＝部署＋自動測試；test＝只測試；rotate＝換 ADMIN_TOKEN 後部署＋測試；usage＝只查 Cloudflare 用量（最近 7 天每支 Worker 每天請求數、方案；10-19 總指揮本機段 4）。
 name: Cloudflare 會員區
 
 on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "deploy＝部署＋測試；test＝只測試；rotate＝換管理 token＋部署＋測試"
+        description: "deploy＝部署＋測試；test＝只測試；rotate＝換管理 token＋部署＋測試；usage＝只查用量"
         required: false
         default: "deploy"
 
@@ -22,7 +22,38 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  usage:
+    if: inputs.mode == 'usage'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Cloudflare 用量（GraphQL 分析：最近 7 天每支 Worker 每天請求數；Workers 方案）
+        shell: python
+        run: |
+          import json, os, urllib.request, datetime as dt
+          tok, acc = os.environ["CLOUDFLARE_API_TOKEN"], os.environ["CLOUDFLARE_ACCOUNT_ID"]
+          def call(url, body=None):
+              r = urllib.request.Request(url, data=json.dumps(body).encode() if body else None, headers={"authorization": "Bearer " + tok, "content-type": "application/json"})
+              try: return json.load(urllib.request.urlopen(r, timeout=30))
+              except urllib.error.HTTPError as e: return {"http": e.code, "body": e.read()[:300].decode("utf-8", "replace")}
+          e = dt.date.today(); s = e - dt.timedelta(days=6)
+          q = "query($a:String!,$s:Date!,$e:Date!){viewer{accounts(filter:{accountTag:$a}){workersInvocationsAdaptive(limit:1000,filter:{date_geq:$s,date_leq:$e}){sum{requests errors subrequests} dimensions{date scriptName}}}}}"
+          r = call("https://api.cloudflare.com/client/v4/graphql", {"query": q, "variables": {"a": acc, "s": str(s), "e": str(e)}})
+          if r.get("errors") or "http" in r: print("✗ GraphQL 讀不到（API token 可能沒有 Account Analytics 讀取權限）：", json.dumps(r, ensure_ascii=False)[:500])
+          else:
+              rows = r["data"]["viewer"]["accounts"][0]["workersInvocationsAdaptive"]; day = {}
+              for x in sorted(rows, key=lambda x: (x["dimensions"]["date"], x["dimensions"]["scriptName"])):
+                  d = x["dimensions"]["date"]; day[d] = day.get(d, 0) + x["sum"]["requests"]
+                  print(f'{d}　{x["dimensions"]["scriptName"]:<20} 請求 {x["sum"]["requests"]:>8,}　錯誤 {x["sum"]["errors"]:>6,}　子請求 {x["sum"]["subrequests"]:>8,}')
+              for d, n in sorted(day.items()): print(f"合計 {d}（UTC）：{n:,} 次＝免費額度 10 萬的 {n / 1000:.1f}%")
+          for u in ("/workers/account-settings", "/subscriptions"):
+              r = call("https://api.cloudflare.com/client/v4/accounts/" + acc + u)
+              print("方案資訊", u, "：", json.dumps(r.get("result", r), ensure_ascii=False)[:600])
   member:
+    if: inputs.mode != 'usage'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     defaults:

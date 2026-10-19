@@ -29,6 +29,7 @@ const SCHEMA = [
   "CREATE TABLE IF NOT EXISTS files(name TEXT PRIMARY KEY, ct TEXT, sha TEXT, size INTEGER, ts INTEGER, enc TEXT, chunks INTEGER)",
   "CREATE TABLE IF NOT EXISTS file_chunks(name TEXT NOT NULL, i INTEGER NOT NULL, data TEXT NOT NULL, PRIMARY KEY(name, i))",
   "CREATE TABLE IF NOT EXISTS live(id INTEGER PRIMARY KEY, ts INTEGER NOT NULL, data TEXT NOT NULL)",
+  "CREATE TABLE IF NOT EXISTS usage(day TEXT PRIMARY KEY, n INTEGER NOT NULL DEFAULT 0, poll INTEGER NOT NULL DEFAULT 0, push INTEGER NOT NULL DEFAULT 0)",   // 每天的請求數（UTC 日，跟 Cloudflare 額度同一天）
   "CREATE TABLE IF NOT EXISTS livek(k TEXT PRIMARY KEY, ts INTEGER NOT NULL, data TEXT NOT NULL)",   // 訊號區／原型研究盤中即時（10-19 Evans）：s_<代碼>＝那支策略（照訂閱）、adm＝原型研究全部（只給管理者）   // 看盤區盤中即時（10-19 Evans）：本機 tools/live_push.py 每根新K推一次（gzip JSON，base64）
 ];
 
@@ -153,6 +154,21 @@ async function lineCallback(req, env, url) {
   return newSession(env, req, m);
 }
 
+// ───────── 請求數（總指揮 2026-10-19 11:15 本機段 4：Workers 免費額度每天 10 萬次，UTC 00:00＝台灣 08:00 歸零）─────────
+//   記在記憶體、每 20 次或 30 秒併一次寫進 D1（isolate 被回收時沒寫進去的會少算，管理頁寫「約」）；poll＝/api/live 輪詢、push＝live_push 上傳。
+const USE = {d: "", n: 0, poll: 0, push: 0, at: 0};
+const flushUse = (env, u) => env.DB.prepare("INSERT INTO usage(day, n, poll, push) VALUES(?, ?, ?, ?) ON CONFLICT(day) DO UPDATE SET n = n + excluded.n, poll = poll + excluded.poll, push = push + excluded.push")
+  .bind(u.d, u.n, u.poll, u.push).run().catch(() => {});
+function countUse(env, ctx, path) {
+  const d = new Date().toISOString().slice(0, 10), now = Date.now(), later = p => ctx && ctx.waitUntil ? ctx.waitUntil(p) : p;
+  const take = () => { const u = {...USE}; USE.n = USE.poll = USE.push = 0; USE.at = now; return u; };
+  if (USE.d && USE.d !== d && USE.n) later(flushUse(env, take()));
+  USE.d = d; USE.n++;
+  if (path === "/api/live") USE.poll++; else if (path === "/api/admin/live") USE.push++;
+  if (!USE.at) USE.at = now;
+  if (USE.n >= 20 || now - USE.at > 30000) later(flushUse(env, take()));
+}
+
 // ───────── 管理 API ─────────
 async function adminApi(req, env, url, path) {
   const db = env.DB;
@@ -213,6 +229,10 @@ async function adminApi(req, env, url, path) {
     await env.DB.prepare("INSERT INTO live(id, ts, data) VALUES(1, ?, ?) ON CONFLICT(id) DO UPDATE SET ts = excluded.ts, data = excluded.data").bind(ts, b64(buf)).run();
     return json({ts, size: buf.byteLength});
   }
+  if (path === "/api/admin/usage" && req.method === "GET") {                 // 最近 14 天的請求數＋這個 isolate 還沒寫進去的
+    const r = await env.DB.prepare("SELECT day, n, poll, push FROM usage ORDER BY day DESC LIMIT 14").all();
+    return json({days: r.results, pending: {day: USE.d, n: USE.n}, limit: 100000, tz: "UTC"});
+  }
   if (path === "/api/admin/files" && req.method === "GET") {
     const r = await env.DB.prepare("SELECT name, ct, sha, size, ts, chunks FROM files ORDER BY name").all();
     return json({files: r.results});
@@ -256,9 +276,10 @@ async function serveFile(req, env, s, name) {
 }
 
 export default {
-  async fetch(req, env) {
+  async fetch(req, env, ctx) {
     await init(env);
     const url = new URL(req.url), path = url.pathname;
+    countUse(env, ctx, path);
     try {
       if (path === "/login") {
         if (req.method === "GET") {                                                   // 只顯示按鈕；按下才建 session（預覽機器人不會按）

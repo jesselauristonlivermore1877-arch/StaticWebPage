@@ -75,6 +75,11 @@ await go("/api/admin/members", {method: "PATCH", headers: {...A, "content-type":
 r = await go("/api/live?k=s_ZZTEST", {headers: {cookie: s1.cookie}});
 t("訂了就拿得到策略即時", r.status === 200 && (await r.text()) === "zz", "HTTP " + r.status);
 await go("/api/admin/members", {method: "PATCH", headers: {...A, "content-type": "application/json"}, body: JSON.stringify({id: mem.id, subs: ""})});
+r = await go("/api/admin/usage", {headers: A});
+const us = r.status === 200 ? await r.json() : {};
+t("管理 token 看得到每天請求數", r.status === 200 && Array.isArray(us.days) && us.limit === 100000, "HTTP " + r.status + "　" + JSON.stringify((us.days || [])[0] || us.pending || {}));
+r = await go("/api/admin/usage", {headers: {cookie: s1.cookie}});
+t("一般會員看不到請求數", r.status === 401, "HTTP " + r.status);
 r = await go("/api/admin/live", {method: "PUT", headers: {cookie: s1.cookie, "x-gea": "1"}, body: "x"});
 t("一般會員不能推即時資料", r.status === 401, "HTTP " + r.status);
 r = await go("/api/admin/members", {headers: {cookie: s1.cookie}});
