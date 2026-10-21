@@ -1,9 +1,9 @@
 {
  "date": "2026-10-21",
  "data_date": "2026-10-21",
- "made": "2026-10-21T18:49+08:00",
- "built_at": "2026-10-21T18:41:18+08:00",
- "run": "39586277763",
+ "made": "2026-10-21T21:29+08:00",
+ "built_at": "2026-10-21T21:21:18+08:00",
+ "run": "39607104517",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
   "web_data.market.taiex": "2026-10-21",
@@ -12,7 +12,7 @@
   "web_data.breadth": "2026-10-21",
   "web_data.orders": "2026-10-21",
   "web_data.inst.summary": "2026-10-21",
-  "web_data.market.margin_balance": "2026-10-20",
+  "web_data.market.margin_balance": "2026-10-21",
   "web_data.elecfin": "2026-10-21",
   "web_data.screen.sector_score": "2026-10-21",
   "docs/data/rrg.json": "2026-10-21",
@@ -20,9 +20,7 @@
   "docs/data/disposal.json": "2026-10-21",
   "docs/data/etf_flow.json": "2026-10-20"
  },
- "skipped": {
-  "web_data.market.margin_balance": "來源資料日 2026-10-20 ≠ 資料日 2026-10-21"
- },
+ "skipped": {},
  "facts": [
   {
    "id": "taiex_close",
@@ -199,28 +197,37 @@
    "id": "inst_外資",
    "sec": "法人籌碼",
    "label": "外資買賣超",
-   "value": 9.6,
+   "value": 22.4,
    "unit": " 億元",
-   "text": "+9.6 億元",
+   "text": "+22.4 億元",
    "src": "web_data.inst.summary"
   },
   {
    "id": "inst_投信",
    "sec": "法人籌碼",
    "label": "投信買賣超",
-   "value": 129.2,
+   "value": 128.0,
    "unit": " 億元",
-   "text": "+129.2 億元",
+   "text": "+128.0 億元",
    "src": "web_data.inst.summary"
   },
   {
    "id": "inst_自營",
    "sec": "法人籌碼",
    "label": "自營買賣超",
-   "value": -133.1,
+   "value": -135.7,
    "unit": " 億元",
-   "text": "-133.1 億元",
+   "text": "-135.7 億元",
    "src": "web_data.inst.summary"
+  },
+  {
+   "id": "margin_twse",
+   "sec": "信用交易",
+   "label": "上市融資餘額",
+   "value": 6443.7,
+   "unit": " 億元",
+   "text": "6443.7 億元",
+   "src": "web_data.market.margin_balance"
   },
   {
    "id": "elecfin",
