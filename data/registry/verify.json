@@ -1,5 +1,5 @@
 {
-"checked": "2026-10-17",
+"checked": "2026-10-23",
 "src_asof": [
 "2026-10-11",
 "2026-10-11"
@@ -2340,8 +2340,8 @@
 "ticker": "NEM",
 "name": "Newmont Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -2396,8 +2396,8 @@
 "ticker": "PLD",
 "name": "Prologis, Inc.",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
@@ -2468,8 +2468,8 @@
 "ticker": "ASML.AS",
 "name": "ASML Holding N.V.",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "cn",
@@ -2484,8 +2484,8 @@
 "ticker": "0700.HK",
 "name": "Tencent Holdings Limited",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "cn",
@@ -2522,7 +2522,7 @@
 ],
 "n_ok": [
 38,
-233
+235
 ],
 "n": [
 48,
