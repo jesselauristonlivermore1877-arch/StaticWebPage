@@ -1,9 +1,9 @@
 {
  "date": "2026-10-22",
  "data_date": "2026-10-22",
- "made": "2026-10-24T02:26+08:00",
- "built_at": "2026-10-24T02:16:21+08:00",
- "run": "40001796339",
+ "made": "2026-10-24T20:52+08:00",
+ "built_at": "2026-10-24T20:46:30+08:00",
+ "run": "40095264459",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
   "web_data.market.taiex": "2026-10-22",
@@ -98,9 +98,9 @@
    "id": "tsmc_r1",
    "sec": "大盤",
    "label": "台積電漲跌幅",
-   "value": -1.45,
+   "value": 0.0,
    "unit": "%",
-   "text": "-1.45%",
+   "text": "+0.00%",
    "src": "web_data.market.tsmc"
   },
   {
@@ -241,55 +241,55 @@
   {
    "id": "sec_top1",
    "sec": "族群",
-   "label": "族群評分第 1 名：光學鏡頭與元件",
-   "value": 54.7,
+   "label": "族群評分第 1 名：電信與雲端服務",
+   "value": 56.2,
    "unit": " 分",
-   "text": "54.7 分",
+   "text": "56.2 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_top2",
    "sec": "族群",
-   "label": "族群評分第 2 名：電信與雲端服務",
-   "value": 54.6,
+   "label": "族群評分第 2 名：金融",
+   "value": 54.3,
    "unit": " 分",
-   "text": "54.6 分",
+   "text": "54.3 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_top3",
    "sec": "族群",
    "label": "族群評分第 3 名：航運",
-   "value": 51.4,
+   "value": 53.4,
    "unit": " 分",
-   "text": "51.4 分",
+   "text": "53.4 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot1",
    "sec": "族群",
-   "label": "族群評分倒數第 1 名：測試設備與介面",
-   "value": 4.8,
+   "label": "族群評分倒數第 1 名：網通與衛星",
+   "value": 6.3,
    "unit": " 分",
-   "text": "4.8 分",
+   "text": "6.3 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot2",
    "sec": "族群",
-   "label": "族群評分倒數第 2 名：伺服器電源與儲能",
-   "value": 5.7,
+   "label": "族群評分倒數第 2 名：測試設備與介面",
+   "value": 6.4,
    "unit": " 分",
-   "text": "5.7 分",
+   "text": "6.4 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot3",
    "sec": "族群",
-   "label": "族群評分倒數第 3 名：電源管理IC",
-   "value": 6.0,
+   "label": "族群評分倒數第 3 名：記憶體",
+   "value": 7.8,
    "unit": " 分",
-   "text": "6.0 分",
+   "text": "7.8 分",
    "src": "web_data.screen.sector_score"
   },
   {
