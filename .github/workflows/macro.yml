@@ -15,6 +15,10 @@ on:
         description: "1＝只重新併本機分類（不打網路；本機 macro_tags 跑完用 gh 觸發）"
         required: false
         default: "0"
+      tg_test:
+        description: "1＝world_idx 另推一則 TG 測試訊息（驗 TG_BOT_TOKEN／TG_CHAT_ID）"
+        required: false
+        default: "0"
       fred_only:
         description: "1＝只抓 FRED 經濟指標（不抓新聞）；auto＝今天是公布日才抓（cron-job.org 用這個）"
         required: false
@@ -42,6 +46,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           path: site
+          ref: main     # 10-25：排隊等 concurrency 時，派送當下的 sha 已經舊了（第 140 班提交時週報、macro.json 衝突）→ 開跑時取最新 main
       - uses: actions/checkout@v4
         with:
           repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
@@ -91,6 +96,7 @@ jobs:
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
         run: |
           M="${{ steps.mode.outputs.mode }}"
+          WI_ARG=""; if [ "${{ inputs.tg_test }}" = "1" ]; then WI_ARG="--tg-test"; fi
           if [ "$M" = "retag" ]; then
             echo "只重新併本機分類（data/macro_tags.json），不打網路"
             python macro_flow.py ../site/data --retag
@@ -98,12 +104,12 @@ jobs:
           elif [ "$M" = "fred" ]; then
             echo "只抓 FRED 經濟指標（公布日加抓）"
             python macro_flow.py ../site/data --no-news
-            python world_idx.py ../site/data || echo "::warning::國際指數／公司債利差失敗（沿用上一份）"
+            python world_idx.py ../site/data $WI_ARG || echo "::warning::國際指數／公司債利差失敗（沿用上一份）"
             python tools/preview_macro.py ../site --formal --light
           else
             python macro_flow.py ../site/data
             # 🟢 10-25：早上就看得到美股收盤與公司債利差（失敗不擋世界趨勢）
-            python world_idx.py ../site/data || echo "::warning::國際指數／公司債利差失敗（沿用上一份）"
+            python world_idx.py ../site/data $WI_ARG || echo "::warning::國際指數／公司債利差失敗（沿用上一份）"
             # 🟢 10-04 v2 合進 main：常駐人物（官方職位表＋各國市值名單負責人）、擴充查詢、人物歷史發言、量化統計日報
             python tools/preview_macro.py ../site --formal
           fi
