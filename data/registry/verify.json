@@ -1,8 +1,8 @@
 {
-"checked": "2026-10-23",
+"checked": "2026-10-25",
 "src_asof": [
-"2026-10-11",
-"2026-10-11"
+"2026-10-25",
+"2026-10-25"
 ],
 "officials": [
 {
@@ -18,7 +18,7 @@
 {
 "id": "us_finance",
 "zh": "史考特·貝森特",
-"en": "Scott Bessent",
+"en": "Scott K. H. Bessent",
 "ok": true,
 "why": "出處頁有名字與職位",
 "src": [
@@ -27,7 +27,7 @@
 },
 {
 "id": "us_cb",
-"zh": "凱文·沃許",
+"zh": "凱文·華許",
 "en": "Kevin Warsh",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -37,7 +37,7 @@
 },
 {
 "id": "us_labor",
-"zh": "凱斯·桑德林",
+"zh": "基思·桑德林",
 "en": "Keith Sonderling",
 "ok": false,
 "why": "出處打不開（HTTP 403）",
@@ -66,6 +66,16 @@
 ]
 },
 {
+"id": "de_finance",
+"zh": "拉爾斯·克林拜耳",
+"en": "Lars Klingbeil",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.bundesregierung.de/breg-en/chancellor/lars-klingbeil-2354576"
+]
+},
+{
 "id": "de_cb",
 "zh": "約阿希姆·納格爾",
 "en": "Joachim Nagel",
@@ -82,7 +92,7 @@
 "ok": true,
 "why": "出處頁有名字與職位",
 "src": [
-"https://www.pmindia.gov.in/en/"
+"https://www.pmindia.gov.in/en/pms-profile/"
 ]
 },
 {
@@ -107,7 +117,7 @@
 },
 {
 "id": "jp_finance",
-"zh": "片山皋月",
+"zh": "片山皐月",
 "en": "Satsuki Katayama",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -126,8 +136,18 @@
 ]
 },
 {
+"id": "jp_fx",
+"zh": "三村淳",
+"en": "Atsushi Mimura",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.cna.com.tw/news/afe/202608040060.aspx"
+]
+},
+{
 "id": "gb_leader",
-"zh": "安迪·伯納姆",
+"zh": "安迪·柏納姆（柏南）",
 "en": "Andy Burnham",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -147,7 +167,7 @@
 },
 {
 "id": "gb_cb",
-"zh": "安德魯·貝利",
+"zh": "安德魯·貝利（貝里）",
 "en": "Andrew Bailey",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -166,18 +186,38 @@
 ]
 },
 {
+"id": "fr_finance",
+"zh": "羅蘭·萊斯屈爾（勒斯鳩）",
+"en": "Roland Lescure",
+"ok": true,
+"why": "出處頁有名字與職位",
+"src": [
+"https://www.cna.com.tw/news/aopl/202511040008.aspx"
+]
+},
+{
+"id": "fr_cb",
+"zh": "艾曼紐·穆蘭",
+"en": "Emmanuel Moulin",
+"ok": false,
+"why": "出處打不開（HTTP 403）",
+"src": [
+"https://www.banque-france.fr/fr/actualites/emmanuel-moulin-est-nomme-gouverneur-de-la-banque-de-france"
+]
+},
+{
 "id": "it_leader",
 "zh": "喬治亞·梅洛尼",
 "en": "Giorgia Meloni",
 "ok": true,
 "why": "出處頁有名字與職位",
 "src": [
-"https://www.governo.it/en/"
+"https://www.cna.com.tw/news/aopl/202610190004.aspx"
 ]
 },
 {
 "id": "it_finance",
-"zh": "吉安卡洛·喬捷蒂",
+"zh": "詹卡洛·喬爾傑蒂",
 "en": "Giancarlo Giorgetti",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -207,12 +247,12 @@
 },
 {
 "id": "ca_finance",
-"zh": "弗朗索瓦-菲利普·商鵬飛",
+"zh": "商鵬飛",
 "en": "François-Philippe Champagne",
-"ok": false,
-"why": "出處打不開（HTTP 0）",
+"ok": true,
+"why": "出處頁有名字與職位",
 "src": [
-"https://www.canada.ca/en/department-finance.html"
+"https://www.pm.gc.ca/en/cabinet/honourable-francois-philippe-champagne"
 ]
 },
 {
@@ -228,7 +268,7 @@
 {
 "id": "br_leader",
 "zh": "路易斯·伊納西奧·盧拉·達席爾瓦",
-"en": "Luiz Inacio Lula da Silva",
+"en": "Luiz Inácio Lula da Silva",
 "ok": true,
 "why": "出處頁有名字與職位",
 "src": [
@@ -236,8 +276,18 @@
 ]
 },
 {
+"id": "br_finance",
+"zh": "達里奧·杜里甘",
+"en": "Dario Durigan",
+"ok": false,
+"why": "出處頁找不到職位關鍵字",
+"src": [
+"https://www.gov.br/fazenda/pt-br/composicao/ministro/dario-carnevalli-durigan"
+]
+},
+{
 "id": "ru_leader",
-"zh": "弗拉迪米爾·普丁",
+"zh": "弗拉基米爾·普丁",
 "en": "Vladimir Putin",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -252,12 +302,12 @@
 "ok": true,
 "why": "出處頁有名字與職位",
 "src": [
-"http://government.ru/en/gov/persons/"
+"http://government.ru/en/gov/persons/166/"
 ]
 },
 {
 "id": "ru_cb",
-"zh": "埃爾薇拉·納比烏琳娜",
+"zh": "艾爾薇拉·納比烏林娜",
 "en": "Elvira Nabiullina",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -267,8 +317,8 @@
 },
 {
 "id": "es_finance",
-"zh": "阿爾卡迪·伊斯帕尼亞",
-"en": "Arcadi España",
+"zh": "阿爾卡迪·埃斯帕尼亞",
+"en": "Arcadi España García",
 "ok": false,
 "why": "出處頁找不到名字",
 "src": [
@@ -288,7 +338,7 @@
 {
 "id": "kr_leader",
 "zh": "李在明",
-"en": "Lee Jae-myung",
+"en": "Lee Jae Myung",
 "ok": true,
 "why": "出處頁有名字與職位",
 "src": [
@@ -298,7 +348,7 @@
 {
 "id": "kr_finance",
 "zh": "李炯日",
-"en": "Lee Hyoung-il",
+"en": "Lee Hyoung Il",
 "ok": true,
 "why": "出處頁有名字與職位",
 "src": [
@@ -322,12 +372,12 @@
 "ok": true,
 "why": "出處頁有名字與職位",
 "src": [
-"https://ministers.treasury.gov.au/"
+"https://ministers.treasury.gov.au/ministers/jim-chalmers-2022/biography"
 ]
 },
 {
 "id": "au_cb",
-"zh": "蜜雪兒·布洛克",
+"zh": "米歇爾·布洛克",
 "en": "Michele Bullock",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -347,17 +397,17 @@
 },
 {
 "id": "tr_leader",
-"zh": "雷傑甫·塔伊甫·艾爾多安",
+"zh": "雷傑普·塔伊普·艾爾段",
 "en": "Recep Tayyip Erdogan",
 "ok": false,
 "why": "出處頁找不到名字",
 "src": [
-"https://www.tccb.gov.tr/en/"
+"https://www.tccb.gov.tr/en/receptayyiperdogan/biography/"
 ]
 },
 {
 "id": "tr_cb",
-"zh": "法蒂赫·卡拉漢",
+"zh": "法提赫·卡拉漢",
 "en": "Fatih Karahan",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -367,7 +417,7 @@
 },
 {
 "id": "nl_leader",
-"zh": "羅伯·傑騰",
+"zh": "羅布·耶騰",
 "en": "Rob Jetten",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -377,7 +427,7 @@
 },
 {
 "id": "nl_finance",
-"zh": "埃爾科·海寧",
+"zh": "埃爾科·海嫩",
 "en": "Eelco Heinen",
 "ok": true,
 "why": "出處頁有名字與職位",
@@ -397,7 +447,7 @@
 },
 {
 "id": "sa_leader",
-"zh": "穆罕默德·賓·沙爾曼",
+"zh": "穆罕默德·本·沙爾曼",
 "en": "Mohammed bin Salman",
 "ok": false,
 "why": "出處頁找不到名字",
@@ -417,7 +467,7 @@
 },
 {
 "id": "ch_finance",
-"zh": "卡琳·凱勒-祖特爾",
+"zh": "卡琳·凱勒-蘇特",
 "en": "Karin Keller-Sutter",
 "ok": false,
 "why": "出處打不開（HTTP 403）",
@@ -438,7 +488,7 @@
 {
 "id": "tw_finance",
 "zh": "莊翠雲",
-"en": "Chuang Tsui-yun",
+"en": "Tsui-Yun Tsung",
 "ok": true,
 "why": "出處頁有名字與職位",
 "src": [
@@ -467,7 +517,7 @@
 },
 {
 "id": "ir_leader",
-"zh": "莫傑塔巴·哈米尼",
+"zh": "穆傑塔巴·哈米尼",
 "en": "Mojtaba Khamenei",
 "ok": false,
 "why": "出處打不開（HTTP 403）",
@@ -477,7 +527,7 @@
 },
 {
 "id": "ir_president",
-"zh": "馬蘇德·培澤什基安",
+"zh": "馬蘇德·佩澤希齊揚",
 "en": "Masoud Pezeshkian",
 "ok": false,
 "why": "出處頁找不到名字",
@@ -537,14 +587,6 @@
 },
 {
 "cty": "tw",
-"ticker": "2383",
-"name": "台光電",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
 "ticker": "2881",
 "name": "富邦金",
 "status": "listed",
@@ -555,6 +597,22 @@
 "cty": "tw",
 "ticker": "3037",
 "name": "欣興",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "2383",
+"name": "台光電",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "2882",
+"name": "國泰金",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -577,16 +635,8 @@
 },
 {
 "cty": "tw",
-"ticker": "2882",
-"name": "國泰金",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "3017",
-"name": "奇鋐",
+"ticker": "2891",
+"name": "中信金",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -601,32 +651,8 @@
 },
 {
 "cty": "tw",
-"ticker": "2891",
-"name": "中信金",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2327",
-"name": "國巨*",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "6669",
-"name": "緯穎",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2345",
-"name": "智邦",
+"ticker": "3017",
+"name": "奇鋐",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -641,32 +667,16 @@
 },
 {
 "cty": "tw",
+"ticker": "2327",
+"name": "國巨*",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
 "ticker": "3443",
 "name": "創意",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "7769",
-"name": "鴻勁",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "3653",
-"name": "健策",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "6505",
-"name": "台塑化",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -681,24 +691,24 @@
 },
 {
 "cty": "tw",
-"ticker": "2059",
-"name": "川湖",
+"ticker": "6669",
+"name": "緯穎",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "2360",
-"name": "致茂",
+"ticker": "6505",
+"name": "台塑化",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "8046",
-"name": "南電",
+"ticker": "2345",
+"name": "智邦",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -713,8 +723,24 @@
 },
 {
 "cty": "tw",
-"ticker": "3008",
-"name": "大立光",
+"ticker": "3653",
+"name": "健策",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "2059",
+"name": "川湖",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "7769",
+"name": "鴻勁",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -729,16 +755,24 @@
 },
 {
 "cty": "tw",
-"ticker": "2344",
-"name": "華邦電",
+"ticker": "8046",
+"name": "南電",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "2357",
-"name": "華碩",
+"ticker": "2360",
+"name": "致茂",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "3008",
+"name": "大立光",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -753,32 +787,32 @@
 },
 {
 "cty": "tw",
+"ticker": "2357",
+"name": "華碩",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "2344",
+"name": "華邦電",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "2880",
+"name": "華南金",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
 "ticker": "5274",
 "name": "信驊",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2301",
-"name": "光寶科",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2368",
-"name": "金像電",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "4958",
-"name": "臻鼎-KY",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -801,8 +835,8 @@
 },
 {
 "cty": "tw",
-"ticker": "2880",
-"name": "華南金",
+"ticker": "4958",
+"name": "臻鼎-KY",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -817,16 +851,16 @@
 },
 {
 "cty": "tw",
-"ticker": "2395",
-"name": "研華",
+"ticker": "2368",
+"name": "金像電",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "3189",
-"name": "景碩",
+"ticker": "2301",
+"name": "光寶科",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -841,40 +875,8 @@
 },
 {
 "cty": "tw",
-"ticker": "6223",
-"name": "旺矽",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "6488",
-"name": "環球晶",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "6274",
-"name": "台燿",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "1301",
-"name": "台塑",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "6446",
-"name": "藥華藥",
+"ticker": "2395",
+"name": "研華",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -889,8 +891,32 @@
 },
 {
 "cty": "tw",
-"ticker": "3665",
-"name": "貿聯-KY",
+"ticker": "3189",
+"name": "景碩",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "6446",
+"name": "藥華藥",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "6223",
+"name": "旺矽",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "1301",
+"name": "台塑",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -905,8 +931,24 @@
 },
 {
 "cty": "tw",
-"ticker": "8299",
-"name": "群聯",
+"ticker": "6488",
+"name": "環球晶",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "5880",
+"name": "合庫金",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "6274",
+"name": "台燿",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -929,24 +971,8 @@
 },
 {
 "cty": "tw",
-"ticker": "5880",
-"name": "合庫金",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "3481",
-"name": "群創",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2449",
-"name": "京元電子",
+"ticker": "8299",
+"name": "群聯",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -963,6 +989,54 @@
 "cty": "tw",
 "ticker": "4904",
 "name": "遠傳",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "3665",
+"name": "貿聯-KY",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "3481",
+"name": "群創",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "3034",
+"name": "聯詠",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "2801",
+"name": "彰銀",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "2449",
+"name": "京元電子",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "2615",
+"name": "萬海",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -993,32 +1067,8 @@
 },
 {
 "cty": "tw",
-"ticker": "2801",
-"name": "彰銀",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "3034",
-"name": "聯詠",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2615",
-"name": "萬海",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2313",
-"name": "華通",
+"ticker": "2002",
+"name": "中鋼",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1033,24 +1083,16 @@
 },
 {
 "cty": "tw",
-"ticker": "3081",
-"name": "聯亞",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2002",
-"name": "中鋼",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
 "ticker": "6213",
 "name": "聯茂",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "2313",
+"name": "華通",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1065,14 +1107,6 @@
 },
 {
 "cty": "tw",
-"ticker": "2409",
-"name": "友達",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
 "ticker": "3036",
 "name": "文曄",
 "status": "listed",
@@ -1081,16 +1115,24 @@
 },
 {
 "cty": "tw",
-"ticker": "2404",
-"name": "漢唐",
+"ticker": "2409",
+"name": "友達",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "3105",
-"name": "穩懋",
+"ticker": "4938",
+"name": "和碩",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "3081",
+"name": "聯亞",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1113,40 +1155,8 @@
 },
 {
 "cty": "tw",
-"ticker": "1590",
-"name": "亞德客-KY",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "1519",
-"name": "華城",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "4938",
-"name": "和碩",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "6239",
-"name": "力成",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2337",
-"name": "旺宏",
+"ticker": "2912",
+"name": "統一超",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1161,40 +1171,16 @@
 },
 {
 "cty": "tw",
+"ticker": "1590",
+"name": "亞德客-KY",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
 "ticker": "3293",
 "name": "鈊象",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2912",
-"name": "統一超",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "3529",
-"name": "力旺",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "3533",
-"name": "嘉澤",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2609",
-"name": "陽明",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1209,40 +1195,56 @@
 },
 {
 "cty": "tw",
-"ticker": "3702",
-"name": "大聯大",
+"ticker": "1519",
+"name": "華城",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "6515",
-"name": "穎崴",
+"ticker": "3105",
+"name": "穩懋",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "2492",
-"name": "華新科",
+"ticker": "2609",
+"name": "陽明",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "3532",
-"name": "台勝科",
+"ticker": "2404",
+"name": "漢唐",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "4157",
-"name": "太景*-KY",
+"ticker": "3533",
+"name": "嘉澤",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "2337",
+"name": "旺宏",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "6239",
+"name": "力成",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1257,6 +1259,22 @@
 },
 {
 "cty": "tw",
+"ticker": "3702",
+"name": "大聯大",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "2492",
+"name": "華新科",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
 "ticker": "1802",
 "name": "台玻",
 "status": "listed",
@@ -1265,24 +1283,8 @@
 },
 {
 "cty": "tw",
-"ticker": "5871",
-"name": "中租-KY",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "6139",
-"name": "亞翔",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2834",
-"name": "臺企銀",
+"ticker": "3529",
+"name": "力旺",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1297,24 +1299,32 @@
 },
 {
 "cty": "tw",
-"ticker": "1605",
-"name": "華新",
+"ticker": "5871",
+"name": "中租-KY",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "1504",
-"name": "東元",
+"ticker": "4157",
+"name": "太景*-KY",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "6147",
-"name": "頎邦",
+"ticker": "2834",
+"name": "臺企銀",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "6515",
+"name": "穎崴",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1329,8 +1339,8 @@
 },
 {
 "cty": "tw",
-"ticker": "6805",
-"name": "富世達",
+"ticker": "1504",
+"name": "東元",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1345,6 +1355,54 @@
 },
 {
 "cty": "tw",
+"ticker": "2324",
+"name": "仁寶",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "3532",
+"name": "台勝科",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "1605",
+"name": "華新",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "6805",
+"name": "富世達",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "6147",
+"name": "頎邦",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "6139",
+"name": "亞翔",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
 "ticker": "8996",
 "name": "高力",
 "status": "listed",
@@ -1353,16 +1411,8 @@
 },
 {
 "cty": "tw",
-"ticker": "6531",
-"name": "愛普*",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2324",
-"name": "仁寶",
+"ticker": "1402",
+"name": "遠東新",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1377,8 +1427,64 @@
 },
 {
 "cty": "tw",
-"ticker": "1402",
-"name": "遠東新",
+"ticker": "2633",
+"name": "台灣高鐵",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "2377",
+"name": "微星",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "7750",
+"name": "新代",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "6531",
+"name": "愛普*",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "6196",
+"name": "帆宣",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "3026",
+"name": "禾伸堂",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "6526",
+"name": "達發",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "1102",
+"name": "亞泥",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1401,126 +1507,6 @@
 },
 {
 "cty": "tw",
-"ticker": "6196",
-"name": "帆宣",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "6442",
-"name": "光聖",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "3026",
-"name": "禾伸堂",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2633",
-"name": "台灣高鐵",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "7750",
-"name": "新代",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "3324",
-"name": "雙鴻",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "7856",
-"name": "漢測",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "5483",
-"name": "中美晶",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "6257",
-"name": "矽格",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "8358",
-"name": "金居",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "3374",
-"name": "精材",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "6526",
-"name": "達發",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "2377",
-"name": "微星",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "1102",
-"name": "亞泥",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "5536",
-"name": "聖暉*",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
 "ticker": "3264",
 "name": "欣銓",
 "status": "listed",
@@ -1537,8 +1523,32 @@
 },
 {
 "cty": "tw",
-"ticker": "6285",
-"name": "啟碁",
+"ticker": "3406",
+"name": "玉晶光",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "3324",
+"name": "雙鴻",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "3374",
+"name": "精材",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "5483",
+"name": "中美晶",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1553,24 +1563,24 @@
 },
 {
 "cty": "tw",
-"ticker": "5289",
-"name": "宜鼎",
+"ticker": "6442",
+"name": "光聖",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "2451",
-"name": "創見",
+"ticker": "8358",
+"name": "金居",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "3260",
-"name": "威剛",
+"ticker": "6257",
+"name": "矽格",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1585,16 +1595,8 @@
 },
 {
 "cty": "tw",
-"ticker": "6919",
-"name": "康霈*",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名"
-},
-{
-"cty": "tw",
-"ticker": "3406",
-"name": "玉晶光",
+"ticker": "6285",
+"name": "啟碁",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1609,16 +1611,32 @@
 },
 {
 "cty": "tw",
-"ticker": "2049",
-"name": "上銀",
+"ticker": "6919",
+"name": "康霈*",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "3491",
-"name": "昇達科",
+"ticker": "2451",
+"name": "創見",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "7856",
+"name": "漢測",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "3260",
+"name": "威剛",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1641,16 +1659,16 @@
 },
 {
 "cty": "tw",
-"ticker": "8210",
-"name": "勤誠",
+"ticker": "2049",
+"name": "上銀",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
 },
 {
 "cty": "tw",
-"ticker": "6510",
-"name": "精測",
+"ticker": "5289",
+"name": "宜鼎",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1665,8 +1683,8 @@
 },
 {
 "cty": "tw",
-"ticker": "6691",
-"name": "洋基工程",
+"ticker": "6510",
+"name": "精測",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1681,8 +1699,40 @@
 },
 {
 "cty": "tw",
-"ticker": "2455",
-"name": "全新",
+"ticker": "2105",
+"name": "正新",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "8210",
+"name": "勤誠",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "1503",
+"name": "士電",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "5536",
+"name": "聖暉*",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名"
+},
+{
+"cty": "tw",
+"ticker": "3491",
+"name": "昇達科",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名"
@@ -1692,8 +1742,8 @@
 "ticker": "NVDA",
 "name": "NVIDIA Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -1724,8 +1774,8 @@
 "ticker": "AMZN",
 "name": "Amazon.com, Inc.",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
@@ -1748,6 +1798,22 @@
 "ticker": "TSLA",
 "name": "Tesla, Inc.",
 "status": "listed",
+"ok": false,
+"why": "出處打不開（HTTP 403）"
+},
+{
+"cty": "us",
+"ticker": "BRK-B",
+"name": "Berkshire Hathaway Inc.",
+"status": "listed",
+"ok": false,
+"why": "出處頁找不到公司名"
+},
+{
+"cty": "us",
+"ticker": "LLY",
+"name": "Eli Lilly and Company",
+"status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
 },
@@ -1761,16 +1827,8 @@
 },
 {
 "cty": "us",
-"ticker": "BRK-A",
-"name": "Berkshire Hathaway Inc.",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "LLY",
-"name": "Eli Lilly and Company",
+"ticker": "WMT",
+"name": "Walmart Inc.",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -1793,14 +1851,6 @@
 },
 {
 "cty": "us",
-"ticker": "WMT",
-"name": "Walmart Inc.",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
 "ticker": "V",
 "name": "Visa Inc.",
 "status": "listed",
@@ -1812,8 +1862,8 @@
 "ticker": "XOM",
 "name": "ExxonMobil Holdings Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 403）"
 },
 {
 "cty": "us",
@@ -1833,40 +1883,24 @@
 },
 {
 "cty": "us",
-"ticker": "PLTR",
-"name": "Palantir Technologies Inc.",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
 "ticker": "ABBV",
 "name": "AbbVie Inc.",
 "status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "INTC",
+"name": "Intel Corporation",
+"status": "listed",
 "ok": false,
-"why": "出處打不開（HTTP 403）"
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
-"ticker": "CSCO",
-"name": "Cisco Systems, Inc.",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "ORCL",
-"name": "Oracle Corporation",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "COST",
-"name": "Costco Wholesale Corporation",
+"ticker": "PLTR",
+"name": "Palantir Technologies Inc.",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -1881,24 +1915,16 @@
 },
 {
 "cty": "us",
-"ticker": "AMAT",
-"name": "Applied Materials, Inc.",
+"ticker": "COST",
+"name": "Costco Wholesale Corporation",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
-"ticker": "LRCX",
-"name": "Lam Research Corporation",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "BAC",
-"name": "Bank of America Corporation",
+"ticker": "CSCO",
+"name": "Cisco Systems, Inc.",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -1913,16 +1939,16 @@
 },
 {
 "cty": "us",
-"ticker": "DELL",
-"name": "Dell Technologies Inc.",
+"ticker": "ORCL",
+"name": "Oracle Corporation",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
-"ticker": "CAT",
-"name": "Caterpillar Inc.",
+"ticker": "UNH",
+"name": "UnitedHealth Group Incorporated",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -1945,32 +1971,64 @@
 },
 {
 "cty": "us",
-"ticker": "UNH",
-"name": "UnitedHealth Group Incorporated",
+"ticker": "BAC",
+"name": "Bank of America Corporation",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
-"ticker": "PANW",
-"name": "Palo Alto Networks, Inc.",
+"ticker": "CAT",
+"name": "Caterpillar Inc.",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
-"ticker": "GE",
-"name": "GE Aerospace",
+"ticker": "LRCX",
+"name": "Lam Research Corporation",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "AMAT",
+"name": "Applied Materials, Inc.",
+"status": "listed",
+"ok": false,
+"why": "出處打不開（HTTP 403）"
+},
+{
+"cty": "us",
+"ticker": "HD",
+"name": "The Home Depot, Inc.",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "DELL",
+"name": "Dell Technologies Inc.",
+"status": "listed",
+"ok": false,
+"why": "出處打不開（HTTP 403）"
 },
 {
 "cty": "us",
 "ticker": "PM",
 "name": "Philip Morris International Inc.",
+"status": "listed",
+"ok": false,
+"why": "出處頁找不到負責人名字"
+},
+{
+"cty": "us",
+"ticker": "GE",
+"name": "GE Aerospace",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -1985,40 +2043,16 @@
 },
 {
 "cty": "us",
+"ticker": "PANW",
+"name": "Palo Alto Networks, Inc.",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
 "ticker": "NFLX",
 "name": "Netflix, Inc.",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "HD",
-"name": "The Home Depot, Inc.",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "CRWD",
-"name": "CrowdStrike Holdings, Inc.",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "ANET",
-"name": "Arista Networks, Inc.",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "GEV",
-"name": "GE Vernova Inc.",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2036,40 +2070,8 @@
 "ticker": "TXN",
 "name": "Texas Instruments Incorporated",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "KLAC",
-"name": "KLA Corporation",
-"status": "listed",
 "ok": false,
-"why": "出處頁找不到負責人名字"
-},
-{
-"cty": "us",
-"ticker": "WFC",
-"name": "Wells Fargo & Company",
-"status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
-},
-{
-"cty": "us",
-"ticker": "RTX",
-"name": "RTX Corporation",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "MRVL",
-"name": "Marvell Technology, Inc.",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"why": "出處打不開（HTTP 403）"
 },
 {
 "cty": "us",
@@ -2081,8 +2083,32 @@
 },
 {
 "cty": "us",
-"ticker": "SNDK",
-"name": "Sandisk Corporation",
+"ticker": "RTX",
+"name": "RTX Corporation",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "GEV",
+"name": "GE Vernova Inc.",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "WFC",
+"name": "Wells Fargo & Company",
+"status": "listed",
+"ok": false,
+"why": "出處頁找不到負責人名字"
+},
+{
+"cty": "us",
+"ticker": "CRWD",
+"name": "CrowdStrike Holdings, Inc.",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2091,22 +2117,6 @@
 "cty": "us",
 "ticker": "AMGN",
 "name": "Amgen Inc.",
-"status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
-},
-{
-"cty": "us",
-"ticker": "C",
-"name": "Citigroup Inc.",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "APH",
-"name": "Amphenol Corporation",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2121,8 +2131,64 @@
 },
 {
 "cty": "us",
+"ticker": "ANET",
+"name": "Arista Networks, Inc.",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "MRVL",
+"name": "Marvell Technology, Inc.",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
 "ticker": "AXP",
 "name": "American Express Company",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "KLAC",
+"name": "KLA Corporation",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "C",
+"name": "Citigroup Inc.",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "SNDK",
+"name": "Sandisk Corporation",
+"status": "listed",
+"ok": false,
+"why": "出處打不開（HTTP 403）"
+},
+{
+"cty": "us",
+"ticker": "CRM",
+"name": "Salesforce, Inc.",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "APH",
+"name": "Amphenol Corporation",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2133,12 +2199,12 @@
 "name": "Analog Devices, Inc.",
 "status": "listed",
 "ok": false,
-"why": "出處頁找不到負責人名字"
+"why": "出處打不開（HTTP 403）"
 },
 {
 "cty": "us",
-"ticker": "CRM",
-"name": "Salesforce, Inc.",
+"ticker": "DIS",
+"name": "The Walt Disney Company",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2153,24 +2219,8 @@
 },
 {
 "cty": "us",
-"ticker": "DIS",
-"name": "The Walt Disney Company",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
 "ticker": "QCOM",
 "name": "QUALCOMM Incorporated",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "SCCO",
-"name": "Southern Copper Corporation",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2185,64 +2235,16 @@
 },
 {
 "cty": "us",
-"ticker": "ABT",
-"name": "Abbott Laboratories",
+"ticker": "PEP",
+"name": "PepsiCo, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到公司名"
 },
 {
 "cty": "us",
 "ticker": "VZ",
 "name": "Verizon Communications Inc.",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "PEP",
-"name": "PepsiCo, Inc.",
-"status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
-},
-{
-"cty": "us",
-"ticker": "DE",
-"name": "Deere & Company",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "SCHW",
-"name": "The Charles Schwab Corporation",
-"status": "listed",
-"ok": false,
-"why": "出處打不開（HTTP 403）"
-},
-{
-"cty": "us",
-"ticker": "MCD",
-"name": "McDonald's Corporation",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "UNP",
-"name": "Union Pacific Corporation",
-"status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
-},
-{
-"cty": "us",
-"ticker": "WELL",
-"name": "Welltower Inc.",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2257,8 +2259,40 @@
 },
 {
 "cty": "us",
-"ticker": "NEE",
-"name": "NextEra Energy, Inc.",
+"ticker": "MCD",
+"name": "McDonald's Corporation",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "ABT",
+"name": "Abbott Laboratories",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "UNP",
+"name": "Union Pacific Corporation",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "DE",
+"name": "Deere & Company",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "WELL",
+"name": "Welltower Inc.",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2273,6 +2307,14 @@
 },
 {
 "cty": "us",
+"ticker": "SCCO",
+"name": "Southern Copper Corporation",
+"status": "listed",
+"ok": false,
+"why": "出處頁找不到負責人名字"
+},
+{
+"cty": "us",
 "ticker": "TMUS",
 "name": "T-Mobile US, Inc.",
 "status": "listed",
@@ -2281,8 +2323,56 @@
 },
 {
 "cty": "us",
+"ticker": "NEE",
+"name": "NextEra Energy, Inc.",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "DHR",
+"name": "Danaher Corporation",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
 "ticker": "TJX",
 "name": "The TJX Companies, Inc.",
+"status": "listed",
+"ok": false,
+"why": "出處頁找不到負責人名字"
+},
+{
+"cty": "us",
+"ticker": "SCHW",
+"name": "The Charles Schwab Corporation",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "NOW",
+"name": "ServiceNow, Inc.",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "BA",
+"name": "The Boeing Company",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "ISRG",
+"name": "Intuitive Surgical, Inc.",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2297,16 +2387,8 @@
 },
 {
 "cty": "us",
-"ticker": "BA",
-"name": "The Boeing Company",
-"status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
-},
-{
-"cty": "us",
-"ticker": "ISRG",
-"name": "Intuitive Surgical, Inc.",
+"ticker": "WDC",
+"name": "Western Digital Corporation",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2315,38 +2397,6 @@
 "cty": "us",
 "ticker": "UBER",
 "name": "Uber Technologies, Inc.",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "NOW",
-"name": "ServiceNow, Inc.",
-"status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
-},
-{
-"cty": "us",
-"ticker": "BX",
-"name": "Blackstone Inc.",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "NEM",
-"name": "Newmont Corporation",
-"status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
-},
-{
-"cty": "us",
-"ticker": "GLW",
-"name": "Corning Incorporated",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2369,16 +2419,16 @@
 },
 {
 "cty": "us",
-"ticker": "SNOW",
-"name": "Snowflake Inc.",
+"ticker": "BX",
+"name": "Blackstone Inc.",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
-"ticker": "NET",
-"name": "Cloudflare, Inc.",
+"ticker": "SPGI",
+"name": "S&P Global Inc.",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2393,8 +2443,32 @@
 },
 {
 "cty": "us",
+"ticker": "COF",
+"name": "Capital One Financial Corporation",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "LMT",
+"name": "Lockheed Martin Corporation",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
 "ticker": "PLD",
 "name": "Prologis, Inc.",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": "BMY",
+"name": "Bristol-Myers Squibb Company",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2417,43 +2491,51 @@
 },
 {
 "cty": "us",
-"ticker": "COF",
-"name": "Capital One Financial Corporation",
+"ticker": "NEM",
+"name": "Newmont Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
+},
+{
+"cty": "us",
+"ticker": "MO",
+"name": "Altria Group, Inc.",
+"status": "listed",
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
 "ticker": "PH",
 "name": "Parker-Hannifin Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "BMY",
-"name": "Bristol-Myers Squibb Company",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "us",
-"ticker": "SPGI",
-"name": "S&P Global Inc.",
-"status": "listed",
 "ok": false,
-"why": "出處頁找不到公司名"
+"why": "出處頁找不到負責人名字"
+},
+{
+"cty": "us",
+"ticker": "CVS",
+"name": "CVS Health Corporation",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "sa",
 "ticker": "2222.SR",
 "name": "Saudi Arabian Oil Company",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "kr",
+"ticker": "005930.KS",
+"name": "Samsung Electronics Co., Ltd.",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "kr",
@@ -2467,14 +2549,6 @@
 "cty": "nl",
 "ticker": "ASML.AS",
 "name": "ASML Holding N.V.",
-"status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
-},
-{
-"cty": "cn",
-"ticker": "688825.SS",
-"name": "CXMT Corporation",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2500,13 +2574,37 @@
 "ticker": "601939.SS",
 "name": "China Construction Bank Corporation",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "cn",
+"ticker": "601288.SS",
+"name": "Agricultural Bank of China Limited",
+"status": "listed",
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "ch",
 "ticker": "ROP.SW",
 "name": "Roche Holding AG",
+"status": "listed",
+"ok": false,
+"why": "出處頁找不到負責人名字"
+},
+{
+"cty": "cn",
+"ticker": "600941.SS",
+"name": "China Mobile Limited",
+"status": "listed",
+"ok": false,
+"why": "出處頁找不到負責人名字"
+},
+{
+"cty": "gb",
+"ticker": "HSBA.L",
+"name": "HSBC Holdings plc",
 "status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
@@ -2514,18 +2612,58 @@
 {
 "cty": "us",
 "ticker": null,
-"name": "Mistral AI",
+"name": "Anthropic",
 "status": "private",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": null,
+"name": "xAI",
+"status": "merged",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": null,
+"name": "Safe Superintelligence (SSI)",
+"status": "private",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": null,
+"name": "Databricks",
+"status": "private",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": null,
+"name": "Scale AI",
+"status": "private",
+"ok": true,
+"why": "出處頁有公司名與負責人"
+},
+{
+"cty": "us",
+"ticker": null,
+"name": "Perplexity",
+"status": "private",
+"ok": true,
+"why": "出處頁有公司名與負責人"
 }
 ],
 "n_ok": [
-38,
-235
+42,
+243
 ],
 "n": [
-48,
-254
+53,
+265
 ]
 }
