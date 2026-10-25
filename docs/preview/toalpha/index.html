@@ -1,0 +1,56 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>個股頁功能對照</title><style>
+:root{--bg:#f6f5f1;--ink:#1d1d1b;--ink2:#5c5b57;--line:#dcd9d0;--acc:#b0842f;--card:#fff;--ok:#2f9e44;--mid:#e67700;--no:#c92a2a}
+@media (prefers-color-scheme:dark){:root{--bg:#16171a;--ink:#ecebe7;--ink2:#a4a29c;--line:#34363b;--acc:#d6a54a;--card:#1f2125;--ok:#51cf66;--mid:#ffa94d;--no:#ff6b6b}}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 system-ui,-apple-system,"Noto Sans TC",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:22px;margin:0 0 4px} .m{color:var(--ink2);font-size:13px;margin:0 0 14px}
+.wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:color-mix(in srgb,var(--acc) 12%,transparent);white-space:nowrap}
+td:first-child{white-space:nowrap;color:var(--ink2)}
+.s{font-weight:800;white-space:nowrap} .ok{color:var(--ok)} .mid{color:var(--mid)} .no{color:var(--no)}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:14px 0}
+h2{font-size:17px;margin:0 0 6px} ul{margin:4px 0 0;padding-left:20px} li{margin:3px 0}
+small{color:var(--ink2)}
+</style></head><body><main>
+<h1>ToAlpha 個股頁 ↔ 我們的網站：有／沒有對照</h1>
+<p class="m">2026-10-25（TODO 10-19 11:55 段、10-25 雲端 3）。依 Evans 截圖（_inbox/ref_toalpha.tw的thread/1019，台積電頁）逐項對照；ToAlpha 只用截圖人工比對，沒有用程式抓。
+「有」＝已上線（或在 preview/v2）；「部分」＝有資料但分散在別的頁籤或少一塊；「沒有」＝還沒做。來源欄只列免費、官方或可合規取得的。</p>
+
+<section><h2>先講結論</h2><ul>
+<li><b>最大的差別是「沒有單一個股頁」</b>：我們的個股資料分散在搜尋框資訊框、河流圖個股、財務體質、法說會、內部人、籌資動態等頁籤。資料大多已經有了，缺的是一頁把它們收在一起（頁首＋分頁）。</li>
+<li>建議下一步先做<b>個股頁外殼</b>（第 1 項：頁首＋分頁，分頁內容直接用現有模組），再補第 3、8、9 項裡的小缺口；這幾項都有免費官方來源。</li>
+<li><b>不做的</b>：賣方共識（評等、目標價、買進／持有／賣出家數）。原因是沒有免費來源，而且站上規定不放目標價與評等。分析師 EPS 預估、預估修正也沒有免費來源，只能用「整理自公開報告與法說會」的部分數字代替，請 Evans 決定（下方「待決定」）。</li>
+</ul></section>
+
+<div class="wrap"><table>
+<thead><tr><th>#</th><th>ToAlpha 有的</th><th>我們現在</th><th>狀態</th><th>補法／免費來源</th></tr></thead><tbody>
+<tr><td>1</td><td>頁首：現價、昨收、本益比、淨值比、殖利率、資料日；加入自選；13 個分頁</td><td>搜尋框資訊框有族群、本益比／位階、近四季 EPS、動能、法人、ETF、大戶、內部人；沒有統一頁首、分頁、自選</td><td class="s mid">部分</td><td>做個股頁外殼：頁首用日K＋val.npz（本益比、淨值比、殖利率證交所 BWIBBU 已在抓）；自選存瀏覽器。分頁直接掛現有模組</td></tr>
+<tr><td>2a</td><td>估值卡：近四季本益比、明後年預估本益比</td><td>河流圖三把尺（基本盤 TTM／本年 CY／前瞻 FWD）＋產業 PE 分位、同業倍數排名、股價營收比河流</td><td class="s ok">有</td><td>—（前瞻只有法人報告涵蓋的公司才有）</td></tr>
+<tr><td>2b</td><td>獲利預估卡：EPS 實際＋兩年預估長條、預估家數</td><td>實際 EPS 有（財務體質 40 季）；預估只有「整理自公開報告與法說會」的部分公司</td><td class="s mid">部分</td><td>🔴 分析師共識 EPS 沒有免費來源（待決定 1）</td></tr>
+<tr><td>2c</td><td>賣方共識卡：評等、家數、共識目標價與漲幅、近 90 天券商目標價</td><td>沒有</td><td class="s no">沒有</td><td>🔴 不做：沒有免費來源，且站規不放目標價、評等</td></tr>
+<tr><td>2d</td><td>籌碼結構卡：外資持股比＋20 日小圖、融資餘額與使用率</td><td>外資 5／20 日買賣超、融資融券（資訊框）；沒有外資持股比與融資使用率</td><td class="s mid">部分</td><td>外資持股比、尚可投資：證交所 MI_QFIIS／櫃買外資持股（免費、每日）；融資使用率＝融資餘額 ÷ 融資限額（同一張信用表有限額欄）</td></tr>
+<tr><td>3</td><td>股價走勢＋52 週區間位置條；1／3／6／12 個月個股 vs 加權、相對強弱</td><td>量化選股有「距 52 週高點」「相對大盤 20 日」；個股沒有位置條與多期間對照</td><td class="s mid">部分</td><td>全部用現有日K算（不用新來源）</td></tr>
+<tr><td>4</td><td>重大訊息分類標籤＋公告後首日報酬、超額報酬</td><td>10-05 已做：重訊依主旨分 9 類＋首日漲跌、相對 0050（mi_react）</td><td class="s ok">有</td><td>可再加「同類事件平均反應」（現有資料可算）</td></tr>
+<tr><td>5</td><td>新聞：來源、幾分鐘前、提及標籤、每 60 秒更新</td><td>即時信息流（Worker 每分鐘、頁面開著每 3 分鐘重抓）、個股新聞熱度、10-19 起重複合併＋另見</td><td class="s ok">有</td><td>個股頁裡放「這一檔的新聞」篩選即可</td></tr>
+<tr><td>6</td><td>內部人買賣圖：月收盤線＋淨買賣圓點（大小＝金額）、職稱人數均價、買賣金額柱、6／12 月合計</td><td>內部人持股、董監質押、近 30 天申報轉讓（insider.json）；沒有這張圖</td><td class="s mid">部分</td><td>觀測站內部人持股異動（已在抓）＋日K；歷史從 2026-10 起累積，要畫 12 個月得往回補（觀測站可按月查）</td></tr>
+<tr><td>7a</td><td>財務摘要：8 季 EPS 柱＋毛利率線；月營收（12 個月新高標紅、年增率線）；三大法人 20 日</td><td>財務體質 40 季三率、月營收、法人 5／20 日</td><td class="s ok">有</td><td>月營收「創 12 個月新高」標紅還沒有（小改）</td></tr>
+<tr><td>7b</td><td>預估修正：90／60／30 天前與現在的 EPS 預估、近 30 天調升／調降家數</td><td>沒有</td><td class="s no">沒有</td><td>🔴 沒有免費來源（待決定 1）</td></tr>
+<tr><td>8a</td><td>籌碼表：外資尚可投資、大戶（5000 張以上）比與 4 週變化、股東人數 4 週、董監持股與質押比</td><td>集保大戶（400／1000 張以上、週變化）、董監持股與質押</td><td class="s mid">部分</td><td>集保分級表本來就有 15 級人數與股數 → 加 5000 張以上、股東總人數 4 週；外資尚可投資見 2d</td></tr>
+<tr><td>8b</td><td>股利表：近五年平均、除權息日、除息當時殖利率</td><td>行事曆有除權息日、股利發放日；沒有五年股利表</td><td class="s mid">部分</td><td>證交所／櫃買除權息計算結果表（TWT49U 等，免費）＋日K算當時殖利率</td></tr>
+<tr><td>8c</td><td>法人持股：主動式 ETF 檔數與張數、權重最高的 ETF、投信基金持有檔數與市值</td><td>主動式 ETF 檔數、張數、近 5 日資金流（PCF）；投信基金持股另有頁</td><td class="s ok">有</td><td>「權重最高的 ETF」用現有 PCF 就能算（小改）</td></tr>
+<tr><td>9</td><td>公司概況、經營團隊（董事長、會計師、IR 聯絡人）、主要業務、基本資料變動追蹤</td><td>公司基本資料（資本額、股數、上市日、董事長、總經理）</td><td class="s mid">部分</td><td>觀測站公司基本資料另有發言人、主要經營業務、簽證會計師事務所（免費）；變動追蹤＝每天比對 company.json 前後版</td></tr>
+<tr><td>10</td><td>每張卡一行「白話」說明，可展開</td><td>多數卡片底下有說明文字，但不是每張、也不是統一格式</td><td class="s mid">部分</td><td>做個股頁時統一成一行白話＋展開（不用新資料）</td></tr>
+</tbody></table></div>
+
+<section><h2>統計</h2><p>16 列：有 5、部分 9、沒有 2（都卡在沒有免費來源：賣方共識、預估修正）。</p></section>
+
+<section><h2>待 Evans 決定</h2><ul>
+<li><b>1. 分析師 EPS 預估、預估修正</b>：沒有免費官方來源。Yahoo 財經頁有分析師預估，但資料是授權給 Yahoo 的，條款不允許轉載。選項：① 不做；② 只用我們「整理自公開報告與法說會」的數字，標明「非共識、家數少」；③ 付費資料（要先報價）。</li>
+<li><b>2. 個股頁外殼要不要做</b>：放在「產業研究」裡新增「個股」分頁，還是點搜尋框結果直接開整頁（取代現在的資訊框）？</li>
+</ul></section>
+<p class="m">只做功能比對，不抓 ToAlpha 的資料（服務條款禁止自動化擷取，SOURCES 第二十四節）。</p>
+</main></body></html>
