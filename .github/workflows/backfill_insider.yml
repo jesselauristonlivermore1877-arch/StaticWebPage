@@ -1,0 +1,100 @@
+# backfill_insider.yml ─ 內部人全市場回補（總指揮 2026-10-25 22:30 雲端 1：資料池＝全市場）
+#   程式：CustomerServiceANDSales 的 insider.py --crawl／--merge
+#   整批來源（OpenAPI t187ap11_L／mopsfin_t187ap11_O、t187ap12_L／_O）每日班已經全市場收；這裡只補官方沒有整批的：
+#   過去 12 個月逐人持股（ajax_stapap1）、代持拆項（ajax_query6_1：配偶及未成年子女／他人名義／信託）、事前申報歷史（ajax_t56sb12，一天一張全市場表）。
+#   順序：追蹤池先、事前申報、池外後。每 3 小時一輪，8 片各跑 25 分鐘；全部補完之後每輪只剩新月份，幾分鐘就結束。
+name: 回補內部人（全市場）
+
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: backfill-insider
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          sparse-checkout: |
+            data/insider.json
+            data/insider_people.json
+            docs/data/river.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+          cache: pip
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests
+      - name: 抓片 ${{ matrix.shard }}
+        working-directory: code
+        run: python insider.py ../site/data --crawl ../out --shard ${{ matrix.shard }} --of 8 --sec 1500
+      - uses: actions/upload-artifact@v4
+        with:
+          name: insider-${{ matrix.shard }}
+          path: out/
+          if-no-files-found: warn
+          retention-days: 1
+
+  merge:
+    needs: crawl
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: daily-build
+      cancel-in-progress: false
+    steps:
+      # 要拿最新的 main（抓片期間每日班可能已經提交過 insider.json）
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+          cache: pip
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" numpy requests
+      - uses: actions/download-artifact@v4
+        with:
+          path: dl
+          pattern: insider-*
+          merge-multiple: true
+      - name: 併進 insider.json 並發布
+        working-directory: code
+        run: python insider.py ../data --merge ../dl
+      - name: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/insider.json data/insider_people.json docs/data/insider.json docs/data/insider_rank.json docs/data/insider_mp.json docs/data/insider
+          if git diff --staged --quiet; then
+            echo "內部人沒有變化，不提交。"
+          else
+            git commit -m "data: 回補內部人（全市場） $(TZ=Asia/Taipei date '+%F %H:%M')"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

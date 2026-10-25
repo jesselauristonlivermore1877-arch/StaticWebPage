@@ -1,0 +1,133 @@
+# backfill_extra.yml ─ 個股補充資料全市場回補（總指揮 2026-10-25 22:30 雲端 2：資料池＝全市場）
+#   程式：CustomerServiceANDSales 的 stock_extra.py --crawl／--merge
+#   權息拆分（證交所 TWT49UDetail，上市「權息」那筆逐筆拆現金／配股）、主要經營業務（公開資訊觀測站 ajax_t05st03，30 天重抓）。
+#   分析師共識（yfinance）：追蹤池每日班照舊；池外輪替（broker.py --rotate），有覆蓋 7 天、沒覆蓋 30 天重抓，併進 docs/data/analyst.json。
+#   外資持股比、融資使用率、除權息紀錄本來就是全市場整批，每日班照舊。追蹤池先、池外後；每 3 小時一輪、一片 25 分鐘。
+name: 回補個股補充資料（全市場）
+
+on:
+  schedule:
+    - cron: "47 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: backfill-extra
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          sparse-checkout: |
+            data/stock_extra.json
+            docs/data/river.json
+            docs/data/company.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+          cache: pip
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests
+      - name: 抓
+        working-directory: code
+        run: python stock_extra.py ../site/data --crawl ../out --sec 1500
+      - uses: actions/upload-artifact@v4
+        with:
+          name: extra
+          path: out/
+          if-no-files-found: warn
+          retention-days: 1
+
+  analyst:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          sparse-checkout: |
+            data/analyst_rot.json
+            docs/data/river.json
+            docs/data/company.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+          cache: pip
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" yfinance pandas requests
+      - name: 池外分析師共識輪替
+        working-directory: code
+        env:
+          ROT_SEC: "1500"
+        run: python broker.py ../site/data --rotate ../out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: analyst
+          path: out/
+          if-no-files-found: warn
+          retention-days: 1
+
+  merge:
+    needs: [crawl, analyst]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: daily-build
+      cancel-in-progress: false
+    steps:
+      # 要拿最新的 main（抓的期間每日班可能已經提交過 stock_extra.json）
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+          cache: pip
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests
+      - uses: actions/download-artifact@v4
+        with:
+          path: dl
+          merge-multiple: true
+      - name: 併進 stock_extra.json
+        working-directory: code
+        run: python stock_extra.py ../data --merge ../dl
+      - name: 併進 analyst.json
+        working-directory: code
+        run: python broker.py ../data --rotate-merge ../dl
+      - name: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/stock_extra.json data/analyst_rot.json docs/data/analyst.json
+          if git diff --staged --quiet; then
+            echo "沒有變化，不提交。"
+          else
+            git commit -m "data: 回補個股補充資料（全市場） $(TZ=Asia/Taipei date '+%F %H:%M')"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
