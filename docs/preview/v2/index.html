@@ -4097,7 +4097,7 @@ function insMonthly(S, B, ds) {
   if (B && (B.c || []).length) ds.forEach((d, i) => { const v = B.c[i]; if (v == null) return; const m = d.slice(0, 7), o = M[m] = M[m] || {sum: 0, n: 0}; o.sum += v; o.n++; o.last = v; o.ld = d; });
   else (S.mp || []).forEach(([m, a, l]) => { if (a != null) M[m] = {sum: a, n: 1, last: l}; });   // 🟢 10-25 22:30：追蹤池外（沒有 stock_bars）用 insider_mp.json 的月均價／月底收盤
   const MS = Object.keys(M).sort();
-  const seen = new Set(), PM = {};                         // 月 → 人 → {ti, d, t:{self, sp, no, tr, rel}}
+  const seen = new Set(), PM = {};                         // 月 → 人 → {ti, d, t:{self, sp, no, tr, rel}}（持股月差，只拿來標職稱、他人名義／信託圈、還沒拆分的月份）
   (S.ev || []).forEach(([m, ti, who, dh, , dr, dsp, dno, dtr]) => {
     if (!M[m]) return; const k = m + "|" + who; if (seen.has(k)) return;
     const split = dsp != null || dno != null;
@@ -4106,45 +4106,53 @@ function insMonthly(S, B, ds) {
     (PM[m] = PM[m] || []).push({ti: String(ti).replace(/本人$/, ""), who, d, t}); });
   // 🔴 10-25 20:45：股本變動（分割、減資，insider.py split＝[[月, 持股倍率]]）→ 那個月以前的收盤除以倍率，線與期間漲跌才接得起來；金額照原價算（張數也是原單位）
   const adj = m => (S.split || []).reduce((a, [sm, f]) => sm > m ? a * f : a, 1);
-  return MS.map(m => { const P = PM[m] || [], avg = M[m].sum / M[m].n, buy = P.filter(p => p.d > 0), sel = P.filter(p => p.d < 0);
-    const bl = buy.reduce((a, p) => a + p.d, 0), sl = sel.reduce((a, p) => a + p.d, 0);
-    const side = Math.abs(bl) >= Math.abs(sl) ? buy : sel, big = side.slice().sort((a, b) => Math.abs(b.d) - Math.abs(a.d))[0];
-    const tiN = {}; side.forEach(p => tiN[p.ti] = (tiN[p.ti] || 0) + Math.abs(p.d));
-    const ty = {}; INK_T.forEach(([k]) => { ty[k] = [0, 0]; P.forEach(p => { const v = p.t[k]; if (v > 0) ty[k][0] += v; else if (v < 0) ty[k][1] += v; }); });
-    return {m, close: M[m].last, cadj: M[m].last / adj(m), avg, ba: bl * avg * 1000, sa: sl * avg * 1000, net: (bl + sl) * avg * 1000, nl: bl + sl, nb: buy.length, ns: sel.length,
-      top: big ? Object.entries(tiN).sort((a, b) => b[1] - a[1])[0][0] : "", nside: side.length, ty, P}; });
+  // 🟢 10-26 01:00（總指揮裁示 1、2，ToAlpha 口徑）：淨買賣＝集中市場買進－賣出（S.mk[月]＝[集中買股, 集中賣股, 其他增股, 其他減股, [買進人], [賣出人]]，
+  //   insider.py 依姓名去重、股數加總）→ 這裡才換張，不逐人四捨五入；贈與、繼承、信託、私募、員工酬勞＝其他原因，另列灰色、不算淨買賣。
+  //   還沒回補拆分的月份（沒有 S.mk[月]）pend＝持股月差（含其他原因），只畫灰色空心點、不計入合計。
+  const MK = S.mk || {};
+  return MS.map(m => { const P = PM[m] || [], avg = M[m].sum / M[m].n, k = MK[m];
+    const ty = {}; INK_T.forEach(([kk]) => { ty[kk] = [0, 0]; P.forEach(p => { const v = p.t[kk]; if (v > 0) ty[kk][0] += v; else if (v < 0) ty[kk][1] += v; }); });
+    const base = {m, close: M[m].last, cadj: M[m].last / adj(m), avg, ty, P};
+    if (!k) { const d = P.reduce((a, p) => a + p.d, 0);
+      return Object.assign(base, {mk: false, pend: P.some(p => p.d), pl: d, bl: 0, sl: 0, ba: 0, sa: 0, net: 0, nl: 0, nb: 0, ns: 0, oi: 0, od: 0, top: "", nside: 0, B: [], S: []}); }
+    const bl = k[0] / 1000, sl = -k[1] / 1000, nl = bl + sl, side = nl >= 0 ? k[4] : k[5];
+    const tiOf = w => (P.find(p => p.who === w) || {}).ti || "內部人", tiN = {}; side.forEach(w => tiN[tiOf(w)] = (tiN[tiOf(w)] || 0) + 1);
+    return Object.assign(base, {mk: true, pend: false, bl, sl, ba: bl * avg * 1000, sa: sl * avg * 1000, net: nl * avg * 1000, nl, nb: k[4].length, ns: k[5].length,
+      oi: k[2] / 1000, od: -k[3] / 1000, top: Object.entries(tiN).sort((a, b) => b[1] - a[1]).map(x => x[0])[0] || "", nside: side.length, B: k[4], S: k[5]}); });
 }
 /* 🟢 10-25 16:30（Evans 雲端 2，ToAlpha 那張）：內部人買賣 K 線圖（月）——
-   月底收盤線＋當月內部人淨買（紅）／淨賣（綠）圓點（面積＝金額）；金額最大的幾個月標框「買賣最多的職稱＋人數＋均價＋淨額」；
-   下方每月買進／賣出金額柱（🟢 10-25 20:45：柱子照本人／配偶及未成年／他人名義／信託分色疊起來）；近 6／12 個月淨買賣合計＋白話一行。
-   持股增減不一定都是市場買賣（含贈與、信託、配股、員工獎酬），頁面註明。ink- 前綴。 */
-const INK_C = {self: [null, 1], sp: [null, .45], no: ["#9d7bff", 1], tr: ["#d4a017", 1], rel: [null, .7]};
+   月底收盤線＋當月內部人集中市場淨買（紅）／淨賣（綠）圓點（面積＝金額）；金額最大的幾個月標框「職稱＋人數＋均價＋淨額」；
+   下方每月集中市場買進（往上紅）／賣出（往下綠）金額柱，其他原因增加／減少疊在外側用灰色（🟢 10-26 01:00 改 ToAlpha 口徑）；近 6／12 個月合計＋白話。ink- 前綴。 */
+const INK_GRAY = "#8a8f98";
 function insKMonth(S, B, ds, nm, code) {
   const box = el("div", "ink-box");
   if ((!B || !(B.c || []).length) && !(S.mp || []).length) { box.appendChild(el("div", "sub", "這檔沒有月均價資料，畫不出內部人買賣 K 線圖。")); return card("內部人買賣（月）", null, box); }
   const R = insMonthly(S, B, ds);
+  const LM = [S.ppl_m, ...Object.keys(S.mk || {})].filter(Boolean).sort().at(-1), LAST = LM ? R.reduce((a, r, i) => r.m <= LM ? i : a, -1) : R.length - 1;
   const W = 900, H1 = 250, H2 = 96, PL = 46, PR = 12, n = R.length, X = i => PL + (W - PL - PR) * (i + .5) / n;
   const cl = R.map(r => r.cadj), lo = Math.min(...cl), hi = Math.max(...cl), pad = (hi - lo) * .35 || hi * .1;
   const Y = v => 34 + (H1 - 68) * (1 - (v - (lo - pad * .3)) / ((hi + pad * .3) - (lo - pad * .3)));
   const mxA = Math.max(...R.map(r => Math.abs(r.net)), 1), rad = a => 4 + 16 * Math.sqrt(Math.abs(a) / mxA);
-  const yi = v => `${v > 0 ? "+" : v < 0 ? "−" : ""}${nf(Math.abs(v) / 1e8, Math.abs(v) >= 1e9 ? 1 : 2)} 億`;
-  const tyTxt = r => INK_T.filter(([k]) => r.ty[k][0] || r.ty[k][1]).map(([k, t]) => `${t} ${r.ty[k][0] ? "+" + nf(r.ty[k][0], 0) : ""}${r.ty[k][0] && r.ty[k][1] ? "／" : ""}${r.ty[k][1] ? nf(r.ty[k][1], 0) : ""} 張`).join("、");
+  const yi = v => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v) >= 1e8 ? nf(Math.abs(v) / 1e8, Math.abs(v) >= 1e9 ? 1 : 2) + " 億" : nf(Math.abs(v) / 1e4, 0) + " 萬"}`;
+  const zl = v => nf(Math.abs(v), Math.abs(v) < 10 && Math.round(Math.abs(v)) !== Math.abs(v) ? 1 : 0);   // 張數：不到 10 張留一位小數，其餘取整
   let g = "";
   [lo, (lo + hi) / 2, hi].forEach(v => g += `<line x1="${PL}" x2="${W - PR}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)" stroke-dasharray="2 3"/><text x="${PL - 4}" y="${Y(v) + 4}" font-size="11" text-anchor="end" fill="var(--ink-3)">${nf(v, v < 100 ? 1 : 0)}</text>`);
   g += `<path d="${R.map((r, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(r.cadj).toFixed(1)}`).join("")}" fill="none" stroke="var(--ink-2)" stroke-width="1.6"/>`;
   const lab = new Set(R.filter(r => r.net).sort((a, b) => Math.abs(b.net) - Math.abs(a.net)).slice(0, 5).map(r => r.m));
   const tw = t => [...t].reduce((s, ch) => s + (/[⺀-￿]/.test(ch) ? 11.5 : 6.6), 0), lanes = {u: [], d: []};
+  const othTxt = r => r.oi || r.od ? `其他原因${r.oi ? "增加 " + zl(r.oi) + " 張" : ""}${r.oi && r.od ? "、" : ""}${r.od ? "減少 " + zl(r.od) + " 張" : ""}（贈與、繼承、信託、私募、員工酬勞等，不是市場買賣）` : "";
   R.forEach((r, i) => {
     g += `<circle cx="${X(i)}" cy="${Y(r.cadj)}" r="2.5" fill="var(--ink-2)"/>`;
-    if (!r.net) return;
+    if (r.pend) { g += `<circle cx="${X(i)}" cy="${Y(r.cadj)}" r="6" fill="none" stroke="${INK_GRAY}" stroke-dasharray="2 2"><title>${esc(r.m)}｜還沒回補集中市場拆分（持股月差 ${r.pl > 0 ? "+" : ""}${nf(r.pl, 0)} 張，含其他原因），不計入淨買賣</title></circle>`; return; }
+    const tip = `${esc(r.m)}｜集中市場${r.nl ? `淨${r.nl > 0 ? "買" : "賣"} ${zl(r.nl)} 張 ≈ ${yi(r.net)}` : "沒有淨買賣"}｜買進 ${zl(r.bl)} 張（${r.nb} 人）、賣出 ${zl(r.sl)} 張（${r.ns} 人）${othTxt(r) ? "｜" + esc(othTxt(r)) : ""}｜當月均價 ${nf(r.avg, r.avg < 100 ? 2 : 1)}｜月底收盤 ${nf(r.close, r.close < 100 ? 2 : 1)}`;
+    if (!r.net) { if (r.oi || r.od) g += `<circle cx="${X(i)}" cy="${Y(r.cadj)}" r="5" fill="${INK_GRAY}" fill-opacity=".5" stroke="${INK_GRAY}"><title>${tip}</title></circle>`; return; }
     const up = r.net > 0, col = up ? "var(--up)" : "var(--down)";
-    // 圓點外圈：當月有他人名義（紫虛線）或信託（金虛線）變動就加一圈，一眼看出不是本人直接買賣
+    // 圓點外圈：當月有他人名義（紫虛線）或信託（金虛線）變動就加一圈
     const ring = r.ty.no[0] || r.ty.no[1] ? "#9d7bff" : r.ty.tr[0] || r.ty.tr[1] ? "#d4a017" : null;
-    g += `<circle cx="${X(i)}" cy="${Y(r.cadj)}" r="${rad(r.net).toFixed(1)}" fill="${col}" fill-opacity=".55" stroke="${col}"><title>${esc(r.m)}｜內部人淨${up ? "買" : "賣"} ${nf(Math.abs(r.nl), 0)} 張 ≈ ${yi(r.net)}｜買進 ${r.nb} 人、賣出 ${r.ns} 人｜${esc(tyTxt(r))}｜當月均價 ${nf(r.avg, r.avg < 100 ? 2 : 1)}｜月底收盤 ${nf(r.close, r.close < 100 ? 2 : 1)}</title></circle>`;
+    g += `<circle cx="${X(i)}" cy="${Y(r.cadj)}" r="${rad(r.net).toFixed(1)}" fill="${col}" fill-opacity=".55" stroke="${col}"><title>${tip}</title></circle>`;
     if (ring) g += `<circle cx="${X(i)}" cy="${Y(r.cadj)}" r="${(rad(r.net) + 3).toFixed(1)}" fill="none" stroke="${ring}" stroke-width="1.6" stroke-dasharray="3 2"/>`;
     if (!lab.has(r.m)) return;
-    const t1 = `${r.top} ${r.nside} 人`, t2 = `均價 ${nf(r.avg, r.avg < 100 ? 1 : 0)}・淨${up ? "買" : "賣"} ${yi(r.net).replace(/^[+−]/, "")}`;
-    // 標籤框：寬度照字算；同一側撞到前面的框就換下一層（上方往下疊、下方往上疊）
+    const t1 = `${r.top}${r.nside > 1 ? " 等 " + r.nside + " 人" : ""}`, t2 = `均 ${nf(r.avg, r.avg < 100 ? 1 : 0)}・淨${up ? "買" : "賣"} ${yi(r.net).replace(/^[+−]/, "")}`;
     const bw = Math.max(tw(t1), tw(t2)) + 14, bx = Math.min(Math.max(X(i) - bw / 2, PL), W - PR - bw), L = lanes[up ? "u" : "d"];
     let k = 0; while (L.some(o => o.k === k && bx < o.x + o.w + 4 && o.x < bx + bw + 4)) k++;
     L.push({k, x: bx, w: bw});
@@ -4153,40 +4161,47 @@ function insKMonth(S, B, ds, nm, code) {
       `<rect x="${bx}" y="${by}" width="${bw}" height="30" rx="4" fill="var(--bg)" stroke="${col}"/>` +
       `<text x="${bx + 6}" y="${by + 13}" font-size="11.5" fill="${col}" font-weight="700">${esc(t1)}</text><text x="${bx + 6}" y="${by + 26}" font-size="11" fill="var(--ink-2)">${esc(t2)}</text>`;
   });
-  // 下方：每月買進（往上）／賣出（往下）金額柱，照四類疊起來（本人實色、配偶淡色、他人名義紫、信託金）
-  const amt = (r, k, s) => r.ty[k][s] * r.avg * 1000;
-  const mxB = Math.max(...R.map(r => Math.max(INK_T.reduce((a, [k]) => a + amt(r, k, 0), 0), -INK_T.reduce((a, [k]) => a + amt(r, k, 1), 0))), 1);
+  // 下方：每月集中市場買進（往上紅）／賣出（往下綠）金額柱；其他原因增加／減少接在外側、灰色
+  const A = v => Math.abs(v) * 1000;
+  const mxB = Math.max(...R.map(r => Math.max(A(r.bl + r.oi) * r.avg, A(r.sl + r.od) * r.avg)), 1);
   const Z = H1 + H2 / 2, bh = v => (H2 / 2 - 6) * Math.abs(v) / mxB, cw = Math.min(26, (W - PL - PR) / n * .6);
   g += `<line x1="${PL}" x2="${W - PR}" y1="${Z}" y2="${Z}" stroke="var(--line)"/><text x="${PL - 4}" y="${H1 + 12}" font-size="10.5" text-anchor="end" fill="var(--ink-3)">買進</text><text x="${PL - 4}" y="${H1 + H2 - 4}" font-size="10.5" text-anchor="end" fill="var(--ink-3)">賣出</text>`;
   R.forEach((r, i) => {
     let yu = Z, yd = Z;
-    INK_T.forEach(([k, t]) => {
-      const [c0, op] = INK_C[k];
-      const a = amt(r, k, 0), b = amt(r, k, 1);
-      if (a) { const h = bh(a); yu -= h; g += `<rect x="${X(i) - cw / 2}" y="${yu}" width="${cw}" height="${h}" fill="${c0 || "var(--up)"}" fill-opacity="${op}"><title>${esc(r.m)} ${t} 增加 ${nf(r.ty[k][0], 0)} 張 ≈ ${yi(a)}</title></rect>`; }
-      if (b) { const h = bh(b); g += `<rect x="${X(i) - cw / 2}" y="${yd}" width="${cw}" height="${h}" fill="${c0 || "var(--down)"}" fill-opacity="${op}"><title>${esc(r.m)} ${t} 減少 ${nf(-r.ty[k][1], 0)} 張 ≈ ${yi(b)}</title></rect>`; yd += h; }
-    });
+    [[r.bl, "var(--up)", "集中市場買進"], [r.oi, INK_GRAY, "其他原因增加"]].forEach(([v, c, t]) => { if (!v) return; const a = A(v) * r.avg, h = bh(a); yu -= h;
+      g += `<rect x="${X(i) - cw / 2}" y="${yu}" width="${cw}" height="${h}" fill="${c}"><title>${esc(r.m)} ${t} ${zl(v)} 張 ≈ ${yi(a)}</title></rect>`; });
+    [[r.sl, "var(--down)", "集中市場賣出"], [r.od, INK_GRAY, "其他原因減少"]].forEach(([v, c, t]) => { if (!v) return; const a = A(v) * r.avg, h = bh(a);
+      g += `<rect x="${X(i) - cw / 2}" y="${yd}" width="${cw}" height="${h}" fill="${c}"><title>${esc(r.m)} ${t} ${zl(v)} 張 ≈ ${yi(a)}</title></rect>`; yd += h; });
+    if (r.pend) g += `<text x="${X(i)}" y="${Z + 4}" font-size="9.5" text-anchor="middle" fill="${INK_GRAY}">待補</text>`;
+    else if (i > LAST) g += `<text x="${X(i)}" y="${Z + 4}" font-size="9.5" text-anchor="middle" fill="${INK_GRAY}">未申報</text>`;
     if (i % Math.ceil(n / 12) === 0 || i === n - 1) g += `<text x="${X(i)}" y="${H1 + H2 + 14}" font-size="11" text-anchor="middle" fill="var(--ink-3)">${esc(r.m.slice(2).replace("-", "/"))}</text>`;
   });
   box.appendChild(el("div", "", `<svg viewBox="0 0 ${W} ${H1 + H2 + 20}" style="width:100%;height:auto;display:block">${g}</svg>`));
-  box.appendChild(el("div", "ins-lg", `<span><i style="background:var(--up)"></i>本人（買／增）</span><span><i style="background:var(--down)"></i>本人（賣／減）</span>` +
-    `<span><i style="background:var(--up);opacity:.45"></i>配偶及未成年子女</span><span><i style="background:#9d7bff"></i>利用他人名義</span><span><i style="background:#d4a017"></i>本人信託</span>` +
-    `<small class="rv-dim">　圓點外加虛線圈＝當月有他人名義（紫）或信託（金）變動${(S.split || []).length ? `；${S.split.map(([m, f]) => `${m} 股本變動（持股 ×${nf(f, 3)}）`).join("、")}，之前的收盤已除以倍率還原` : ""}</small>`));
-  // 近 6／12 個月合計＋白話
-  const sum = k => { const T = R.slice(-k); return {a: T.reduce((x, r) => x + r.net, 0), l: T.reduce((x, r) => x + r.nl, 0), p0: T[0], p1: T.at(-1)}; };
+  box.appendChild(el("div", "ins-lg", `<span><i style="background:var(--up)"></i>集中市場買進</span><span><i style="background:var(--down)"></i>集中市場賣出</span>` +
+    `<span><i style="background:${INK_GRAY}"></i>其他原因增減（贈與、繼承、信託、私募、員工酬勞等，不算買賣）</span>` +
+    `<small class="rv-dim">　圓點外加虛線圈＝當月有他人名義（紫）或信託（金）變動；灰色虛線空心圈＋「待補」＝還沒回補集中市場拆分的月份${(S.split || []).length ? `；${S.split.map(([m, f]) => `${m} 股本變動（持股 ×${nf(f, 3)}）`).join("、")}，之前的收盤已除以倍率還原` : ""}</small>`));
+  // 近 6／12 個月合計（只算已拆分的月份）＋白話
+  // 窗口結束在最後一個有申報的月份（每月 15 日前申報上個月；當月還沒申報 → 不算進近 6／12 個月，跟 ToAlpha 一樣）
+  const sum = k => { const T = R.slice(0, LAST + 1).slice(-k), D = T.filter(r => r.mk);
+    return {a: D.reduce((x, r) => x + r.net, 0), l: D.reduce((x, r) => x + r.nl, 0), b: D.reduce((x, r) => x + r.bl, 0), s: D.reduce((x, r) => x + r.sl, 0),
+      ba: D.reduce((x, r) => x + r.ba, 0), sa: D.reduce((x, r) => x + r.sa, 0), oi: D.reduce((x, r) => x + r.oi, 0), od: D.reduce((x, r) => x + r.od, 0),
+      pend: T.filter(r => r.pend).length, p0: T[0], p1: T.at(-1), T}; };
   const s6 = sum(6), s12 = sum(12);
   const chg = x => x.p0 && x.p1 ? (x.p1.cadj / x.p0.cadj - 1) * 100 : null;
-  const tl = x => `${x.a > 0 ? "淨買進" : x.a < 0 ? "淨賣出" : "沒有淨買賣"} ${x.a ? `${nf(Math.abs(x.l), 0)} 張 ≈ ${yi(x.a).replace(/^[+−]/, "")}` : ""}`;
+  const tl = x => `${x.a > 0 ? "淨買進" : x.a < 0 ? "淨賣出" : "沒有淨買賣"}${x.a || x.l ? ` ${zl(x.l)} 張 ≈ ${yi(x.a).replace(/^[+−]/, "")}` : ""}` +
+    `<small class="rv-dim">・買進 ${zl(x.b)} 張（${yi(x.ba).replace(/^[+−]/, "")}）・賣出 ${zl(x.s)} 張（${yi(x.sa).replace(/^[+−]/, "")}）${x.oi || x.od ? `・<span style="color:${INK_GRAY}">其他原因 +${zl(x.oi)}／−${zl(x.od)} 張</span>` : ""}${x.pend ? `・${x.pend} 個月待補` : ""}</small>`;
   const c6 = chg(s6);
-  box.appendChild(el("div", "ink-sum", `<span>近 6 個月：<b class="${cls(s6.a)}">${tl(s6)}</b></span><span>近 ${Math.min(12, n)} 個月：<b class="${cls(s12.a)}">${tl(s12)}</b></span>`));
-  const quiet = !R.some(r => r.net);
-  box.appendChild(el("div", "ink-say", quiet ? `白話：這段期間公開資訊觀測站的董監大股東每月持股（本人、配偶及未成年子女、他人名義、信託）都沒有變動，所以圖上沒有買賣點。只是籌碼統計，不代表股價方向。` :
-    `白話：近 6 個月內部人（董監、經理人、大股東）合計${s6.a > 0 ? "淨買進" : s6.a < 0 ? "淨賣出" : "幾乎沒有買賣"}` +
-    `${c6 == null ? "" : `，同期月底收盤${c6 >= 0 ? "上漲" : "下跌"} ${nf(Math.abs(c6), 1)}%`}。只是籌碼統計，不代表股價方向。`));
-  return card("內部人買賣（月）", `${nm} ${code}・${R[0].m} → ${R.at(-1).m}・線＝月底收盤、圓點面積＝當月淨買賣金額（紅買綠賣）`, box,
-    "內部人＝董事、監察人、經理人、持股 10% 以上大股東；每人每月持股增減（本人＋配偶未成年子女＋利用他人名義＋本人信託）× 當月收盤均價估金額，同一人兼多職只算一次。" +
-    "本人把股票移入「保留運用決定權信託」時，本人持股減少、信託增加，合計不變（不是賣出）。配偶及未成年子女、他人名義、信託的拆項來自公開資訊觀測站董監事持股異動（query6_1），還沒查到的月份整筆算「關係人（未拆）」。" +
-    "持股增減不一定是市場買賣（含贈與、信託、配股、員工獎酬），以公開資訊觀測站申報為準。框標金額最大的 5 個月：該方向持股變動最多的職稱、人數、當月均價、淨額。資料：證交所／櫃買董監事持股餘額明細（月）。量化統計，非投資建議。");
+  box.appendChild(el("div", "ink-sum", `<span>近 6 個月（集中市場）：<b class="${cls(s6.a)}">${tl(s6)}</b></span><span>近 ${Math.min(12, n)} 個月：<b class="${cls(s12.a)}">${tl(s12)}</b></span>`));
+  const om = s12.T.filter(r => r.oi || r.od).at(-1);       // 最近一個有其他原因增減的月份
+  const othSay = om ? `${om.m} ${othTxt(om)}，圖上灰色，不算進淨買賣。` : "";
+  const quiet = !R.some(r => r.bl || r.sl || r.oi || r.od || r.pend);
+  box.appendChild(el("div", "ink-say", quiet ? `白話：這段期間董監大股東在集中市場沒有買賣，也沒有其他原因的持股增減。只是籌碼統計，不代表股價方向。` :
+    `白話：近 6 個月內部人（董監、經理人、大股東）在集中市場合計${s6.a > 0 ? "淨買進" : s6.a < 0 ? "淨賣出" : s6.b || s6.s ? `買賣相抵（買進 ${zl(s6.b)} 張、賣出 ${zl(s6.s)} 張）` : "沒有買賣"}` +
+    `${c6 == null ? "" : `，同期月底收盤${c6 >= 0 ? "上漲" : "下跌"} ${nf(Math.abs(c6), 1)}%`}。${othSay}${s12.pend ? `還有 ${s12.pend} 個月還沒回補集中市場拆分（灰色空心圈），補到後數字會更新。` : ""}只是籌碼統計，不代表股價方向。`));
+  return card("內部人買賣（月）", `${nm} ${code}・${R[0].m} → ${R.at(-1).m}・線＝月底收盤、圓點面積＝當月集中市場淨買賣金額（紅買綠賣）`, box,
+    "內部人＝董事、監察人、經理人、持股 10% 以上大股東。淨買賣＝公開資訊觀測站董監事持股異動（query6_1）「自有股數（集中）」本月增加－本月減少（本人＋配偶未成年子女＋利用他人名義），同一人兼多職只算一次；" +
+    "先把股數加總、最後才換成張數；金額＝張數 × 當月收盤均價（申報表只有股數、沒有成交價，所以是估算）。贈與、繼承、信託、私募、員工酬勞等「其他原因」的增減另列灰色，不算買賣。" +
+    "還沒回補拆分的月份畫灰色空心圈，不計入合計。框標金額最大的 5 個月：該方向人數最多的職稱、人數、當月均價、淨額。量化統計，非投資建議。");
 }
 /* 🟢 10-25 20:45（總指揮雲端 1）：內部人申報頁一進來就看到 —— 近 1／3／6 個月內部人淨買／淨賣金額前 20 名（可切換、點表頭排序），
    右邊預設畫第一名的內部人買賣（月）K 線圖，點清單任一檔換圖。金額＝insMonthly 同一套算法。ink- 前綴。 */
@@ -4195,8 +4210,8 @@ function insKMonth(S, B, ds, nm, code) {
 function insTop(J, SB, nm, RK) {
   const S = (J && J.stocks) || {}, ds = (SB || {}).dates || [], w = el("div", "ink-top"), lst = el("div", "ink-lst"), chart = el("div", "ink-ch");
   const all = [];
-  if (!RK) Object.entries(S).forEach(([c, x]) => { const B = SB && SB.bars && SB.bars[c]; if (!B || !(B.c || []).length || !(x.ev || []).length) return; all.push({c, R: insMonthly(x, B, ds)}); });
-  const GM = RK ? (RK.GM || []) : [...new Set([].concat(...all.map(o => o.R.filter(r => r.P.length).map(r => r.m))))].sort();
+  if (!RK) Object.entries(S).forEach(([c, x]) => { const B = SB && SB.bars && SB.bars[c]; if (!B || !(B.c || []).length || !(x.ev || []).length && !Object.keys(x.mk || {}).length) return; all.push({c, R: insMonthly(x, B, ds)}); });
+  const GM = RK ? (RK.GM || []) : [...new Set([].concat(...all.map(o => o.R.filter(r => r.mk).map(r => r.m))))].sort();
   let PER = 1, SIDE = "buy", BY = "amt", DESC = true, SEL = null, SCOPE = "all";
   const sg = v => `${v > 0 ? "+" : ""}${nf(v, 0)}`;
   const show = c => { SEL = c; chart.innerHTML = "";
@@ -4218,31 +4233,31 @@ function insTop(J, SB, nm, RK) {
     lst.appendChild(bar);
     const ms = GM.slice(-PER);
     const rows = RK ? (((RK.rank || {})[PER] || {})[SIDE] || []).filter(r => SCOPE === "all" || r[7])
-      .map(r => ({c: r[0], a: r[1], l: r[2], nb: r[3], ns: r[4], chg: r[5], oth: !!r[6], pool: !!r[7]})) : all.map(o => { const T = o.R.filter(r => ms.includes(r.m)); if (!T.length) return null;
+      .map(r => ({c: r[0], a: r[1], l: r[2], nb: r[3], ns: r[4], chg: r[5], oth: !!r[6], pool: !!r[7], pend: r[8] || 0})) : all.map(o => { const T = o.R.filter(r => ms.includes(r.m)); if (!T.length) return null;
       const a = T.reduce((x, r) => x + r.net, 0), l = T.reduce((x, r) => x + r.nl, 0);
-      const nb = new Set([].concat(...T.map(r => r.P.filter(p => p.d > 0).map(p => p.who)))).size, ns = new Set([].concat(...T.map(r => r.P.filter(p => p.d < 0).map(p => p.who)))).size;
+      const nb = new Set([].concat(...T.map(r => r.B))).size, ns = new Set([].concat(...T.map(r => r.S))).size;
       const p0 = o.R[o.R.indexOf(T[0]) - 1] || T[0], p1 = T.at(-1);
-      const oth = T.some(r => r.ty.no[0] || r.ty.no[1] || r.ty.tr[0] || r.ty.tr[1]);
-      return {c: o.c, a, l, nb, ns, chg: p0 && p1 ? (p1.cadj / p0.cadj - 1) * 100 : null, oth}; }).filter(r => r && (SIDE === "buy" ? r.a > 0 : r.a < 0));
+      const oth = T.some(r => r.oi || r.od), pend = T.filter(r => r.pend).length;
+      return {c: o.c, a, l, nb, ns, chg: p0 && p1 ? (p1.cadj / p0.cadj - 1) * 100 : null, oth, pend}; }).filter(r => r && (SIDE === "buy" ? r.a > 0 : r.a < 0));
     const top = rows.sort((x, y) => SIDE === "buy" ? y.a - x.a : x.a - y.a).slice(0, 20);
     top.forEach((r, i) => r.rk = i + 1);
     const K = {rk: r => r.rk, amt: r => Math.abs(r.a), lots: r => Math.abs(r.l), nb: r => r.nb, ns: r => r.ns, chg: r => r.chg ?? -1e9};
     const view = top.slice().sort((x, y) => (DESC ? -1 : 1) * (K[BY](x) - K[BY](y)));
-    lst.appendChild(el("div", "submeta", ms.length ? `${esc(ms[0])}${ms.length > 1 ? " → " + esc(ms.at(-1)) : ""}・${RK ? (SCOPE === "all" ? `全市場 ${RK.n} 檔有月異動` : "追蹤名單") : `追蹤名單 ${all.length} 檔`}・淨${SIDE === "buy" ? "買進" : "賣出"}列前 20` : "還沒有月異動資料。"));
+    lst.appendChild(el("div", "submeta", ms.length ? `${esc(ms[0])}${ms.length > 1 ? " → " + esc(ms.at(-1)) : ""}・${RK ? (SCOPE === "all" ? `全市場 ${RK.n} 檔有月異動${RK.nmk != null && RK.nmk < RK.n ? `（已回補集中市場拆分 ${RK.nmk} 檔，其餘補到後才進排行）` : ""}` : "追蹤名單") : `追蹤名單 ${all.length} 檔`}・淨${SIDE === "buy" ? "買進" : "賣出"}列前 20` : "還沒有月異動資料。"));
     const th = (k, t) => `<th data-k="${k}" style="cursor:pointer">${t}${BY === k ? (DESC ? " ▼" : " ▲") : ""}</th>`;
     const tb = el("div", "rv-twrap", `<table class="rv-t ct-t ink-t"><thead><tr>${th("rk", "#")}<th style="text-align:left">個股</th>${th("amt", "淨額（億）")}${th("lots", "淨張數")}${th("nb", "買進人")}${th("ns", "賣出人")}${th("chg", "期間漲跌")}</tr></thead><tbody>` +
-      (view.map(r => `<tr data-c="${esc(r.c)}" style="cursor:pointer" title="點一下看這檔的內部人買賣（月）"><td class="num">${r.rk}</td><td style="text-align:left">${esc(nm(r.c))} <small class="rv-dim">${esc(r.c)}</small>${r.oth ? ' <small title="期間有他人名義或信託變動" style="color:#9d7bff">◆</small>' : ""}${RK && !r.pool ? ' <small class="rv-dim" title="不在追蹤名單（指標池），只在資料池">池外</small>' : ""}</td>` +
-        `<td class="num ${cls(r.a)}">${(r.a > 0 ? "+" : "−") + nf(Math.abs(r.a) / 1e8, 2)}</td><td class="num ${cls(r.l)}">${sg(r.l)}</td><td class="num">${r.nb}</td><td class="num">${r.ns}</td><td class="num ${cls(r.chg)}">${r.chg == null ? "—" : (r.chg > 0 ? "+" : "") + nf(r.chg, 1) + "%"}</td></tr>`).join("") ||
+      (view.map(r => `<tr data-c="${esc(r.c)}" style="cursor:pointer" title="點一下看這檔的內部人買賣（月）"><td class="num">${r.rk}</td><td style="text-align:left">${esc(nm(r.c))} <small class="rv-dim">${esc(r.c)}</small>${r.oth ? ' <small title="期間有其他原因增減（贈與、繼承、信託、私募、員工酬勞等），不算進淨買賣" style="color:#8a8f98">◆</small>' : ""}${r.pend ? ` <small class="rv-dim" title="期間有 ${r.pend} 個月還沒回補集中市場拆分，那幾個月沒算進來">待補 ${r.pend}</small>` : ""}${RK && !r.pool ? ' <small class="rv-dim" title="不在追蹤名單（指標池），只在資料池">池外</small>' : ""}</td>` +
+        `<td class="num ${cls(r.a)}">${(r.a > 0 ? "+" : "−") + nf(Math.abs(r.a) / 1e8, 2)}</td><td class="num ${cls(r.l)}">${Math.abs(r.l) < 10 && Math.round(r.l) !== r.l ? (r.l > 0 ? "+" : "") + nf(r.l, 1) : sg(Math.round(r.l))}</td><td class="num">${r.nb}</td><td class="num">${r.ns}</td><td class="num ${cls(r.chg)}">${r.chg == null ? "—" : (r.chg > 0 ? "+" : "") + nf(r.chg, 1) + "%"}</td></tr>`).join("") ||
         `<tr><td colspan="7" class="sub">這段期間沒有淨${SIDE === "buy" ? "買進" : "賣出"}的個股。</td></tr>`) + `</tbody></table>`);
     tb.querySelectorAll("th[data-k]").forEach(h => h.onclick = () => { const k = h.dataset.k; if (BY === k) DESC = !DESC; else { BY = k; DESC = k !== "rk"; } draw(); });
     tb.querySelectorAll("tr[data-c]").forEach(tr => tr.onclick = () => show(tr.dataset.c));
     lst.appendChild(tb);
-    lst.appendChild(el("div", "submeta", "淨額＝每人每月持股增減（本人＋配偶未成年＋他人名義＋信託）× 當月收盤均價；◆＝期間有他人名義或信託變動。點表頭排序、點個股換右邊的圖。"));
+    lst.appendChild(el("div", "submeta", "淨額＝集中市場買進－賣出（公開資訊觀測站董監事持股異動，股數加總後才換張）× 當月收盤均價；贈與、繼承、信託、私募、員工酬勞等其他原因不算。灰色◆＝期間有其他原因增減；待補 N＝有 N 個月還沒回補拆分、沒算進來。點表頭排序、點個股換右邊的圖。"));
     if (top.length && (!SEL || !top.some(r => r.c === SEL))) show(top[0].c); else if (SEL) show(SEL);
     if (!top.length) chart.innerHTML = `<div class="empty">這段期間沒有可畫的個股。</div>`;
   };
   w.appendChild(lst); w.appendChild(chart); draw();
-  return card("內部人買賣排行", `近 1／3／6 個月內部人淨買進、淨賣出金額前 20 名${RK ? "（全市場）" : ""}・點個股看月 K 圖`, w);
+  return card("內部人買賣排行", `近 1／3／6 個月內部人集中市場淨買進、淨賣出金額前 20 名${RK ? "（全市場）" : ""}・點個股看月 K 圖`, w);
 }
 /* 🟢 10-18（Evans D6 鐵律：頁面不准長到一直往下滑）：一串卡片 → 子標籤（標籤名＝卡片標題，可用 lab 改短） */
 function cardTabs(cards, lab) {
