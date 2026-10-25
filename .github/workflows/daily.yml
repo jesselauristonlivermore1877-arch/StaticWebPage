@@ -176,6 +176,8 @@ jobs:
           T python media_rank.py ../site/data || { echo "::warning::國內財經媒體流量排名失敗（沿用上一份）"; echo "國內財經媒體流量排名失敗（沿用上一份）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python impact.py ../site/data --export || { echo "::warning::影響判定索引失敗（Worker 用舊索引）"; echo "影響判定索引失敗（Worker 用舊索引）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python attention.py ../site/data || { echo "::warning::關注度排行失敗（這班不更新）"; echo "關注度排行失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          # 🟢 10-25 17:10（雲端 6）：個股頁補充資料（外資持股比、融資使用率、五年除權息）→ data/stock_extra.json，要在 stock_lookup 前面
+          T python stock_extra.py ../site/data || { echo "::warning::個股補充資料失敗（外資持股比／融資使用率／股利沿用上一份）"; echo "個股補充資料失敗（外資持股比／融資使用率／股利沿用上一份）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python stock_lookup.py ../site/data || { echo "::warning::個股查詢資料失敗（搜尋框資訊框這班不更新）"; echo "個股查詢資料失敗（搜尋框資訊框這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           # 🟢 10-25：頁首國際指數＋公司債利差「信用風險升溫」紅標（TG 兩個 secret 沒設時只上網頁）
           T python world_idx.py ../site/data || { echo "::warning::國際指數／公司債利差失敗（沿用上一份）"; echo "國際指數／公司債利差失敗（沿用上一份）" >> "$RUNNER_TEMP/soft_fail.txt"; }
@@ -204,7 +206,9 @@ jobs:
             echo "今天沒有任何變動，不提交。"
           else
             git commit -m "每日更新 $(TZ=Asia/Taipei date +%F)"
-            git pull --rebase origin main   # ⬅️ 補上這行，把遠端的新進度拉下來合併
+            # 10-25：同一段時間別的排程（即時信息流、國際指數）也改了 docs/index.html、world_idx.json → rebase 衝突整班沒推上（run 372）。
+            #        衝突時以這一班剛產出的為準（rebase 的 -X theirs＝正在重放的本班 commit）；其他檔照常合併。
+            git pull --rebase -X theirs origin main
             git push origin HEAD:main
           fi
 
