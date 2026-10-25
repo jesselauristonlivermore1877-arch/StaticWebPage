@@ -1259,7 +1259,27 @@ thead th{cursor:pointer}thead th.srt-d::after{content:" ▼";font-size:9px}thead
 .wi-c{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:5px 9px;font-size:12.5px;line-height:1.35;min-width:0}
 .wi-c .n{color:var(--ink-3);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .wi-c .v{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap} .wi-c .v b{font-size:15px}
-.wi-c svg{display:block;width:100%;height:22px;margin-top:2px}
+.wi-c{position:relative}
+.wi-c .n{display:flex;justify-content:space-between;align-items:center;gap:4px}
+.wi-z{border:0;background:none;color:var(--ink-3);font-size:13px;line-height:1;padding:0 2px;cursor:pointer}
+.wi-z:hover{color:var(--ink-1)}
+.wi-rg{display:flex;gap:2px;margin:2px 0 0}
+.wi-rg button{flex:1;border:1px solid var(--line);background:none;color:var(--ink-3);font-size:10.5px;line-height:1.5;padding:0 2px;border-radius:5px;cursor:pointer;white-space:nowrap}
+.wi-rg button.on{background:var(--acc);color:#111;border-color:var(--acc);font-weight:700}
+.wi-ch{position:relative;margin-top:3px;cursor:crosshair;touch-action:pan-y}
+.wi-c svg{display:block;width:100%;height:34px}
+.wi-vx{display:none;position:absolute;top:0;bottom:0;width:0;border-left:1px dashed var(--ink-3);pointer-events:none}
+.wi-dt{display:none;position:absolute;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--ink-1);pointer-events:none}
+.wi-tp{display:none;position:absolute;top:-4px;z-index:30;background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:3px 7px;font-size:11.5px;line-height:1.45;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.15);pointer-events:none}
+.wi-t{position:absolute;right:0;bottom:-1px;font-size:10px;color:var(--ink-3);background:var(--surface);padding:0 2px;border-radius:3px;pointer-events:none;opacity:.9}
+.wi-ov{position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:16px}
+.wi-pg{background:var(--surface);color:var(--ink-1);border-radius:12px;width:min(1100px,100%);max-height:100%;overflow:auto;padding:12px 14px;white-space:normal}
+.wi-ph{display:flex;align-items:center;gap:10px;flex-wrap:wrap} .wi-ph small{color:var(--ink-3)}
+.wi-ph .wi-rg{margin:0} .wi-ph .wi-rg button{font-size:12.5px;padding:1px 9px;flex:none}
+.wi-zb button,.wi-x{border:1px solid var(--line);background:none;color:var(--ink-1);border-radius:6px;font-size:14px;padding:1px 9px;cursor:pointer}
+.wi-x{margin-left:auto}
+.wi-lg{font-size:13px;margin:8px 0 4px;min-height:20px}
+.wi-bc{height:min(60vh,520px);position:relative}
 .wi-c.stale{opacity:.6}
 .if-sep{color:var(--ink-3);margin:0 2px;align-self:center}
 .wi-alert{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding:7px 12px;margin:6px 0 0;border:2px solid var(--up);border-radius:10px;background:rgba(229,72,77,.12);font-size:13.5px;white-space:normal}
@@ -4984,10 +5004,114 @@ document.addEventListener("click", ev => {
    雲端 2：美國公司債利差單日或 5 日擴大超過歷史第 95 百分位 → 頁首置頂紅框＋跑馬燈第一則紅標「信用風險升溫」。 */
 let WI_J = null, _wiP = null;
 function wiLoad() { return _wiP || (_wiP = fetch("data/world_idx.json" + _dv(), {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null).then(J => (WI_J = J))); }
-function wiSpark(d, up) {
-  const v = d.map(x => x[1]), a = Math.min(...v), b = Math.max(...v), W = 120, H = 22;
-  const pts = v.map((x, i) => (i * W / Math.max(1, v.length - 1)).toFixed(1) + "," + (H - 2 - (H - 4) * (x - a) / ((b - a) || 1)).toFixed(1)).join(" ");
-  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><polyline fill="none" stroke="${up ? "var(--up)" : "var(--down)"}" stroke-width="1.6" vector-effect="non-scaling-stroke" points="${pts}"/></svg>`;
+/* 🟢 10-25 11:20（TODO 雲端 2；Evans：大家不知道那是當天還是一段日子）：每格切換「當日／20 日／60 日／1 年」（預設當日＝5 分K、最近一個交易時段），
+   滑過有十字游標與「日期時間＋數值＋漲跌%」提示（手機點按）；右下角標資料時間；⤢ 或點圖（滑鼠）放大成可縮放的圖（同看盤區：拖曳平移、雙指縮放、＋／－／⟲）。
+   位置一律用比例（百分比）放，不受頁首字級 zoom 影響。 */
+const WI_RG = [["i", "當日"], ["20", "20 日"], ["60", "60 日"], ["y", "1 年"]];
+let WI_SEL = {};
+try { WI_SEL = JSON.parse(localStorage.getItem("wi-rg") || "{}") || {}; } catch (e) {}
+const wiTpe = t => { const d = new Date((t + 8 * 3600) * 1000), z = n => String(n).padStart(2, "0");
+  return `${z(d.getUTCMonth() + 1)}-${z(d.getUTCDate())} ${z(d.getUTCHours())}:${z(d.getUTCMinutes())}`; };
+// 一段資料：P＝[[標籤, 值, 時間鍵]]；ref＝算漲跌%的基準；intra＝是不是 5 分K
+function wiSeg(x, rg) {
+  if (rg === "i" && x.i && x.i.length > 1)
+    return {P: x.i.map(p => [wiTpe(p[0]), p[1], p[0]]), ref: x.i_ref != null ? x.i_ref : x.i[0][1], refN: "對前一時段收盤",
+            t: wiTpe(x.i_t || x.i.at(-1)[0] + 300), intra: 1};
+  const d = x.d || x.d20 || [], n = rg === "60" ? 61 : rg === "y" ? d.length : 21;
+  const P = d.slice(-n).map(p => [p[0], p[1], p[0]]);
+  return {P, ref: P.length ? P[0][1] : null, refN: "對區間起點", t: x.date, intra: 0, fb: rg === "i"};
+}
+function wiSvg(S) {
+  const v = S.P.map(p => p[1]), all = S.intra && S.ref != null ? v.concat([S.ref]) : v, a = Math.min(...all), b = Math.max(...all), W = 120, H = 34;
+  const y = q => (H - 2 - (H - 4) * (q - a) / ((b - a) || 1)).toFixed(1);
+  const up = v.at(-1) >= (S.ref != null ? S.ref : v[0]);
+  const pts = v.map((q, i) => (i * W / Math.max(1, v.length - 1)).toFixed(1) + "," + y(q)).join(" ");
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">` +
+    (S.intra && S.ref != null ? `<line x1="0" x2="${W}" y1="${y(S.ref)}" y2="${y(S.ref)}" stroke="var(--ink-3)" stroke-dasharray="2 2" stroke-width="1" vector-effect="non-scaling-stroke" opacity=".7"/>` : "") +
+    `<polyline fill="none" stroke="${up ? "var(--up)" : "var(--down)"}" stroke-width="1.6" vector-effect="non-scaling-stroke" points="${pts}"/></svg>`;
+}
+function wiTipTxt(S, i, x) {
+  const p = S.P[i], dg = x.last >= 1000 ? 0 : 2, pc = (a, b) => b ? (a / b - 1) * 100 : null;
+  const sg = n => n == null ? "—" : `<b style="color:${n >= 0 ? "var(--up)" : "var(--down)"}">${n >= 0 ? "+" : ""}${nf(n, 2)}%</b>`;
+  if (S.intra) return `${esc(p[0])}（台北）<br><b class="num">${nf(p[1], dg)}</b>　${sg(pc(p[1], S.ref))}<small> ${S.refN}</small>`;
+  const prev = i ? S.P[i - 1][1] : null;
+  return `${esc(p[0])}<br><b class="num">${nf(p[1], dg)}</b>　當日 ${sg(prev == null ? null : pc(p[1], prev))}<br><small>${S.refN} </small>${sg(pc(p[1], S.ref))}`;
+}
+function wiCard(k, x) {
+  const c = el("div", "wi-c" + (x.stale ? " stale" : "")), up = x.chg >= 0;
+  c.title = `${x.sym}｜來源 Yahoo Finance${x.stale ? "（這班沒抓到，沿用上一份）" : ""}`;
+  const draw = () => {
+    const rg = WI_SEL[k] || "i", S = wiSeg(x, rg);
+    c.innerHTML = `<div class="n"><span>${esc(x.name)}</span><button class="wi-z" title="放大（可縮放）" aria-label="放大">⤢</button></div>` +
+      `<div class="v"><b class="num">${nf(x.last, x.last >= 1000 ? 0 : 2)}</b><span class="num" style="color:${up ? "var(--up)" : "var(--down)"}">${up ? "▲" : "▼"}${nf(Math.abs(x.pct), 2)}%</span></div>` +
+      `<div class="wi-rg">${WI_RG.map(([v, n]) => `<button data-v="${v}" class="${v === rg ? "on" : ""}">${n}</button>`).join("")}</div>` +
+      `<div class="wi-ch">${S.P.length > 1 ? wiSvg(S) : ""}<i class="wi-vx"></i><i class="wi-dt"></i><div class="wi-tp"></div>` +
+      `<span class="wi-t">${S.fb ? "日線 " : ""}${esc(S.t)}</span></div>`;
+    c.querySelectorAll(".wi-rg button").forEach(b => b.onclick = e => { e.stopPropagation(); WI_SEL[k] = b.dataset.v;
+      try { localStorage.setItem("wi-rg", JSON.stringify(WI_SEL)); } catch (er) {} draw(); });
+    c.querySelector(".wi-z").onclick = e => { e.stopPropagation(); wiBig(k, x, rg); };
+    const ch = c.querySelector(".wi-ch"), vx = ch.querySelector(".wi-vx"), dt = ch.querySelector(".wi-dt"), tp = ch.querySelector(".wi-tp");
+    if (S.P.length < 2) return;
+    const v = S.P.map(p => p[1]), all = S.intra && S.ref != null ? v.concat([S.ref]) : v, a = Math.min(...all), b = Math.max(...all);
+    const show = ev => { const r = ch.getBoundingClientRect(), f = Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width)), i = Math.round(f * (v.length - 1)), fx = i / (v.length - 1);
+      const fy = 1 - (2 + 30 * (v[i] - a) / ((b - a) || 1)) / 34;
+      vx.style.left = dt.style.left = (fx * 100) + "%"; dt.style.top = (fy * 100) + "%"; vx.style.display = dt.style.display = tp.style.display = "block";
+      tp.innerHTML = wiTipTxt(S, i, x); tp.style.left = (fx * 100) + "%"; tp.style.transform = fx > .5 ? "translateX(calc(-100% - 8px))" : "translateX(8px)"; };
+    const hide = () => { vx.style.display = dt.style.display = tp.style.display = "none"; };
+    ch.addEventListener("pointermove", ev => { if (ev.pointerType === "mouse") show(ev); });
+    ch.addEventListener("pointerleave", ev => { if (ev.pointerType === "mouse") hide(); });
+    ch.addEventListener("pointerdown", ev => { if (ev.pointerType !== "mouse") { show(ev); clearTimeout(c._ht); c._ht = setTimeout(hide, 4000); } });
+    ch.addEventListener("click", ev => { if (!matchMedia("(hover:none)").matches) wiBig(k, x, WI_SEL[k] || "i"); });
+  };
+  draw();
+  return c;
+}
+/* 放大圖：lightweight-charts（同看盤區，本站自帶 assets/lw/，不連外部 CDN）；滾輪不縮放（避免捲頁時誤觸），拖曳平移、雙指或拖時間軸縮放、＋／－／⟲。 */
+let _lwP = null;
+const wiLW = () => _lwP || (_lwP = new Promise((ok, ng) => { if (window.LightweightCharts) return ok(window.LightweightCharts);
+  const sc = document.createElement("script"); sc.src = "assets/lw/lightweight-charts-5.2.1.js"; sc.onload = () => ok(window.LightweightCharts);
+  sc.onerror = () => { _lwP = null; ng(new Error("載入圖表元件失敗")); }; document.head.appendChild(sc); }));
+function wiBig(k, x, rg0) {
+  const ov = el("div", "wi-ov"), pg = el("div", "wi-pg");
+  ov.appendChild(pg); document.body.appendChild(ov); document.body.style.overflow = "hidden";
+  let chart = null, rg = rg0;
+  const close = () => { if (chart) chart.remove(); ov.remove(); document.body.style.overflow = ""; document.removeEventListener("keydown", onKey); };
+  const onKey = e => { if (e.key === "Escape") close(); };
+  document.addEventListener("keydown", onKey); ov.onclick = e => { if (e.target === ov) close(); };
+  pg.innerHTML = `<div class="wi-ph"><b>${esc(x.name)}</b><small>${esc(x.sym)}｜Yahoo Finance</small><span class="wi-rg"></span>` +
+    `<span class="wi-zb"><button data-z="in" title="放大（看更少）">＋</button><button data-z="out" title="縮小（看更多）">－</button><button data-z="rs" title="回到全部">⟲</button></span>` +
+    `<button class="wi-x" title="關閉（Esc）">✕</button></div><div class="wi-lg"></div><div class="wi-bc"></div>` +
+    `<div class="submeta">拖曳左右移動；手機雙指縮放；滑鼠在下方時間軸左右拖也能縮放。當日＝最近一個交易時段 5 分K（台北時間），虛線＝前一時段收盤。</div>`;
+  pg.querySelector(".wi-x").onclick = close;
+  const lg = pg.querySelector(".wi-lg"), box = pg.querySelector(".wi-bc");
+  const build = LW => {
+    if (chart) { chart.remove(); chart = null; }
+    const S = wiSeg(x, rg), cs = getComputedStyle(document.documentElement), C = n => (cs.getPropertyValue(n) || "").trim();
+    pg.querySelector(".wi-rg").innerHTML = WI_RG.map(([v, n]) => `<button data-v="${v}" class="${v === rg ? "on" : ""}">${n}</button>`).join("");
+    pg.querySelectorAll(".wi-rg button").forEach(b => b.onclick = () => { rg = b.dataset.v; build(LW); });
+    if (S.P.length < 2) { box.innerHTML = '<div class="empty">這一段沒有資料。</div>'; return; }
+    chart = LW.createChart(box, {autoSize: true, handleScale: {mouseWheel: false, pinch: true, axisPressedMouseMove: true},
+      handleScroll: {mouseWheel: false, pressedMouseMove: true, horzTouchDrag: true, vertTouchDrag: false},
+      layout: {background: {type: "solid", color: C("--surface") || "#fff"}, textColor: C("--ink-2") || "#555", fontSize: 12, attributionLogo: false},
+      grid: {vertLines: {color: C("--line") || "#eee"}, horzLines: {color: C("--line") || "#eee"}}, rightPriceScale: {borderColor: C("--line") || "#ddd"},
+      timeScale: {borderColor: C("--line") || "#ddd", timeVisible: !!S.intra, secondsVisible: false, rightOffset: 3}, crosshair: {mode: 0}});
+    const up = S.P.at(-1)[1] >= (S.ref != null ? S.ref : S.P[0][1]), col = up ? (C("--up") || "#e5484d") : (C("--down") || "#2f9e44");
+    const se = chart.addSeries(LW.AreaSeries, {lineColor: col, topColor: col + "33", bottomColor: col + "00", lineWidth: 2, priceLineVisible: false,
+      priceFormat: {type: "price", precision: x.last >= 1000 ? 0 : 2, minMove: x.last >= 1000 ? 1 : 0.01}});
+    const T = p => S.intra ? p[2] + 8 * 3600 : p[2];       // 5 分K 以台北時間顯示（圖表元件用 UTC 畫）
+    se.setData(S.P.map(p => ({time: T(p), value: p[1]})));
+    if (S.intra && S.ref != null) se.createPriceLine({price: S.ref, color: C("--ink-3") || "#999", lineStyle: 2, lineWidth: 1, axisLabelVisible: true, title: "前收"});
+    const idx = new Map(S.P.map((p, i) => [String(T(p)), i]));
+    const leg = i => { lg.innerHTML = wiTipTxt(S, i, x).replace(/<br>/g, "　"); };
+    leg(S.P.length - 1);
+    chart.subscribeCrosshairMove(pr => { const i = pr && pr.time != null ? idx.get(String(typeof pr.time === "object" ? `${pr.time.year}-${String(pr.time.month).padStart(2, "0")}-${String(pr.time.day).padStart(2, "0")}` : pr.time)) : undefined;
+      leg(i == null ? S.P.length - 1 : i); });
+    chart.timeScale().fitContent();
+    pg.querySelectorAll(".wi-zb button").forEach(b => b.onclick = () => { const ts = chart.timeScale(), r = ts.getVisibleLogicalRange();
+      if (b.dataset.z === "rs" || !r) return ts.fitContent();
+      const n = (r.to - r.from) * (b.dataset.z === "in" ? 0.6 : 1 / 0.6), to = r.to; ts.setVisibleLogicalRange({from: to - Math.max(5, n), to}); });
+  };
+  wiLW().then(build).catch(e => { box.innerHTML = `<div class="empty">${esc(e.message)}</div>`; });
 }
 function wiBoot() {
   const bx = document.getElementById("wi-bar"), al = document.getElementById("wi-alert");
@@ -4995,13 +5119,10 @@ function wiBoot() {
   return wiLoad().then(J => {
     if (!J || !J.idx) { bx.innerHTML = ""; return; }
     const K = ["TWII", "SOX", "NQ", "YM", "KOSPI", "N225"].filter(k => J.idx[k]);
-    bx.innerHTML = `<div class="wi-bar">` + K.map(k => { const x = J.idx[k], up = x.chg >= 0, c = up ? "var(--up)" : "var(--down)";
-      return `<div class="wi-c${x.stale ? " stale" : ""}" title="${esc(x.sym)}｜資料日 ${esc(x.date)}${x.stale ? "（這班沒抓到，沿用上一份）" : ""}｜近 20 個交易日收盤｜來源 Yahoo Finance">` +
-        `<div class="n">${esc(x.name)} <small>${esc(x.date.slice(5))}</small></div>` +
-        `<div class="v"><b class="num">${nf(x.last, x.last >= 1000 ? 0 : 2)}</b><span class="num" style="color:${c}">${up ? "▲" : "▼"}${nf(Math.abs(x.pct), 2)}%</span></div>` +
-        wiSpark(x.d20 || [], (x.d20 || []).length > 1 ? x.d20.at(-1)[1] >= x.d20[0][1] : up) + `</div>`; }).join("") + `</div>`;
+    const g = el("div", "wi-bar"); K.forEach(k => g.appendChild(wiCard(k, J.idx[k])));
+    bx.innerHTML = ""; bx.appendChild(g);
     if (al) al.innerHTML = J.alert && J.alert.on ? `<div class="wi-alert"><b>⚠ 信用風險升溫</b><span>${esc(J.alert.text.replace(/^信用風險升溫：/, ""))}</span>` +
-      `<small style="color:var(--ink-3)">資料日 ${esc(J.alert.date)}｜FRED（ICE BofA 公司債 OAS）｜門檻：歷史變動第 95 百分位</small></div>` : "";
+      `<small style="color:var(--ink-3)">資料日 ${esc(J.alert.date)}｜FRED（ICE BofA 公司債 OAS、穆迪 Baa／Aaa 對 10 年公債）｜門檻：歷史變動第 95 百分位</small></div>` : "";
   });
 }
 function hlBoot() {
@@ -6032,10 +6153,12 @@ function ifOverlay(M) {
   const WIc = sid => ((((WI_J || {}).credit || {})[sid] || {}).m || []).map(x => [x[0], x[1]]);
   const WIi = k => ((((WI_J || {}).idx || {})[k] || {}).m || []).map(x => [x[0], x[1]]);
   SER.push(["高收益債利差", () => WIc("BAMLH0A0HYM2"), "%"], ["投資等級債利差", () => WIc("BAMLC0A0CM"), "%"]);
+  // 10-25 11:20（TODO 雲端 1b）：ICE 兩條 FRED 只給近 3 年（ALFRED 也補不回來）→ 加穆迪對 10 年公債利差，1983／1986 起
+  SER.push(["穆迪 Baa 利差", () => WIc("BAA10Y"), "%"], ["穆迪 Aaa 利差", () => WIc("AAA10Y"), "%"]);
   const IX0 = SER.length;
   [["加權指數", "TWII"], ["費城半導體", "SOX"], ["那斯達克 100", "NQ"], ["道瓊", "YM"], ["韓國 KOSPI", "KOSPI"], ["日經 225", "N225"]].forEach(([nm, k]) => SER.push([nm, () => WIi(k), "點"]));
   const COL = ["#e5484d", "#f08c00", "#2f9e44", "#1c7ed6", "#9c36b5", "#495057", "#c2255c", "#0b7285", "#5c940d", "#364fc7", "#862e9c", "#e67700",
-               "#a61e4d", "#1098ad", "#212529", "#d6336c", "#7048e8", "#2b8a3e", "#e8590c", "#1971c2"];
+               "#a61e4d", "#1098ad", "#212529", "#d6336c", "#7048e8", "#2b8a3e", "#e8590c", "#1971c2", "#5f3dc4", "#f76707"];
   const RNG = [["5 年", 5], ["10 年", 10], ["20 年", 20], ["2000 起", "2000"], ["全部", 0]];
   let ON = new Set([1, 7, 9]), R = 2;
   try { const v = JSON.parse(localStorage.getItem("if-ov") || "null"); if (Array.isArray(v) && v.length) ON = new Set(v); } catch (e) {}
@@ -6052,7 +6175,7 @@ function ifOverlay(M) {
       b.onclick = () => { if (ON.has(i)) ON.delete(i); else { ON.add(i);
           // 右軸只有一條：勾指數就拿掉非農月增（千人），反之亦然
           if (SER[i][2] === "點") ON.delete(6); if (SER[i][2] === "千人") SER.forEach((x, j) => { if (x[2] === "點") ON.delete(j); }); }
-        if (!ON.size) ON.add(i); draw(); }; bar1.appendChild(b); if (i === IX0 - 1 || i === IX0 - 3) bar1.appendChild(el("span", "if-sep", "｜")); });
+        if (!ON.size) ON.add(i); draw(); }; bar1.appendChild(b); if (i === IX0 - 1 || i === IX0 - 5) bar1.appendChild(el("span", "if-sep", "｜")); });
     RNG.forEach(([nm], i) => { const b = el("button", "rv-pill" + (R === i ? " on" : ""), esc(nm)); b.onclick = () => { R = i; draw(); }; bar2.appendChild(b); });
     const S = [...ON].map(i => ({i, nm: SER[i][0], u: SER[i][2], d: SER[i][1]()})).filter(x => x.d.length > 1);
     if (!S.length) { box.innerHTML = '<div class="empty">勾選的指標還沒有長歷史資料（世界趨勢那一班跑過才會有）。</div>'; note.textContent = ""; return; }
