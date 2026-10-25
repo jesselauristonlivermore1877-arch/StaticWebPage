@@ -2462,6 +2462,14 @@
 "ticker": "PLD",
 "name": "Prologis, Inc.",
 "status": "listed",
+"ok": false,
+"why": "出處頁找不到負責人名字"
+},
+{
+"cty": "us",
+"ticker": "BMY",
+"name": "Bristol-Myers Squibb Company",
+"status": "listed",
 "ok": true,
 "why": "出處頁有公司名與負責人"
 },
@@ -2660,7 +2668,7 @@
 ],
 "n_ok": [
 42,
-243
+242
 ],
 "n": [
 53,
