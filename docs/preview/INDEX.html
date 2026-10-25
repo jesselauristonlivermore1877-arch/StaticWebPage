@@ -11,26 +11,7 @@ h2{font-size:17px;margin:0 0 6px} .u{margin:0 0 4px;overflow-wrap:anywhere} .u a
 .b{margin:0 0 6px;color:var(--ink2);font-size:13px} ul{margin:6px 0 0;padding-left:20px} li{margin:3px 0}
 </style></head><body><main><h1>待審預覽</h1>
 <p class="m">共 10 項　更新 2026-10-25（台北）　只放公開版會出現的內容；審核通過、套版後就刪掉對應的預覽。</p>
-<section><h2>【10-26 凌晨】內部人全市場排行與池外個股（10-25 22:30 雲端 1～3）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">程式：CustomerServiceANDSales 分支 preview/v2；後端（insider.py 全市場分片、insider_rank.json、insider_mp.json，以及回補流程 backfill_insider.yml／backfill_extra.yml）已上 main，每 3 小時補一輪。截圖：<a href="v2/shots/ins_all.png">全市場排行</a>、<a href="v2/shots/ins_all_click.png">點池外個股</a>、<a href="v2/shots/stock_ins_3044.png">池外個股頁（3044）</a>。要看的重點：</p><ul>
-<li>內部人申報 › 排行：多一組切換鈕「全市場／追蹤池」，預設全市場（2026-09 有 834 檔月異動）。池外個股名稱後面標「池外」，點一下才載入那一檔的月 K 圖。</li>
-<li>搜尋：追蹤池找不到的代號，會改查全市場公司名冊與個股分片，所以 1,982 檔都開得到資訊框。</li>
-<li>⚠️ 排行目前還是「持股月差」口徑，會把員工酬勞、贈與、信託算進淨買賣。例：台積電 2026-09 的 +623 張其實是員工酬勞，ToAlpha 記為市場淨額 0。要不要改成 ToAlpha 口徑（只算集中市場，其他原因另列）等你決定，差異表在 TODO「2026-10-25 22:30 裁示　雲端回報」第 3 段。</li>
-<li>⚠️ 池外個股的逐人歷史還在回補（受 MOPS 限流影響，全市場預估 9～11 天），所以像 3044 這類目前會顯示「沒有淨買賣」，等補齊就會出現。</li>
-</ul></section>
-<section><h2>【10-25 深夜】內部人排行上層、代持／信託分色、權息拆分、主要業務（10-25 20:45 雲端 1～3）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">程式：CustomerServiceANDSales 分支 preview/v2；後端（insider.py 拆項＋分割偵測＋事前申報回補、stock_extra.py 權息拆分＋主要業務）已上 main，每日更新會產、分批補齊。這段跟上一段 ToAlpha 9 項一起，你點頭後一次合進正式站。要看的重點：</p><ul>
-<li><b>1 內部人申報頁一進去就是排行</b>：近 1／3／6 個月 × 淨買／淨賣，前 20 名，表頭可點排序；右邊預設第 1 名的月 K＋內部人增減圖，點任一列換圖；搜尋框留在下面。截圖：<a href="v2/shots/ins_top_card.png">桌機</a>、<a href="v2/shots/ins_top_sell6.png">6 個月淨賣</a>、<a href="v2/shots/ins_top_m.png">手機</a></li>
-<li><b>個股頁也有一份「內部人買賣（月）」</b>：本人／配偶及未成年／他人名義／信託分色疊；有他人名義或信託變動的月份加虛線圈；沒有變動的畫平線並寫明。截圖：<a href="v2/shots/stock_ins_2330.png">2330</a>、<a href="v2/shots/stock_ins_2059.png">2059 川湖</a></li>
-<li><b>2059 川湖</b>：公開資訊觀測站逐人持股 12 個月完全沒變、信託 0、沒有他人名義列 → 月增減本來就是 0（不是漏收）。事前申報歷史（近 365 天）開始逐日回補，約 13 班補完。<b>要對 ToAlpha 需要你放 2059（加 3 檔）的截圖到 _inbox/ref_toalpha.tw的thread/。</b></li>
-<li><b>分割／減資不再算成內部人買賣</b>：6669 緯穎 2026-09 持股 ×2.983 被當成狂買 +3,502 億 → 修後 +3.75 億；圖上註明。</li>
-<li><b>股利表</b>：上市「權息」用 TWT49UDetail 拆成現金＋配股（追蹤池 79 列，約 2 班補完；＊＝還沒拆到）。<b>公司概況</b>多一塊「主要經營業務」（MOPS t05st03，每月更新，追蹤池先補）。</li>
-</ul></section>
-<section><h2>【10-25 晚】ToAlpha「部分有」個股頁升級（10-25 17:10 雲端 6）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">搜尋任一檔個股開資訊框。程式：CustomerServiceANDSales 分支 preview/v2；後端（stock_extra.py、corp_events.py、tdcc.py、stock_lookup.py）已上 main，10-25 第 374 班已寫出真資料。要看的重點：</p><ul>
-<li><b>頁首</b>（部分 1、3）：收盤、漲跌、昨收、資料日、本益比、淨值比、殖利率、☆加入自選（存在這台瀏覽器）；52 週位置條；1／3／6／12 個月 vs 加權（上櫃比櫃買）＋相對強弱，下面一行白話。截圖：<a href="v2/shots/stock_head_2330.png">2330</a>、<a href="v2/shots/stock_head_6488.png">6488 上櫃</a>、<a href="v2/shots/stock_head_2330_m.png">手機</a></li>
-<li><b>分頁鈕</b>（部分 1）：頁首下一排按鈕，點了跳到該段（公司概況／分析師共識／近期重大訊息／籌碼結構與股利／融資融券），捲動時黏在上方。資訊框加寬到 980px</li>
-<li><b>籌碼結構與股利</b>（部分 2d、8a、8b）：外資持股比（20 日變化要累積 20 個交易日）、融資使用率（餘額÷限額）、股東人數（近 4 週要累積 4 週）、近 12 月殖利率；近 5 年每年現金股利表。截圖：<a href="v2/shots/stock_struct_2330.png">2330</a>、<a href="v2/shots/stock_struct_2884.png">2884（權息年度拆不開，標＊）</a>、<a href="v2/shots/stock_struct_6488.png">6488</a></li>
-<li><b>公司概況</b>（部分 9）：董事長、總經理、發言人、簽證會計師、股務代理、成立／上市、資本額、網址；每天比對變動，有變動列在下面。截圖：<a href="v2/shots/stock_profile_2330.png">2330</a></li>
-<li><b>每段白話</b>（部分 10）：頁首、籌碼結構各有一行白話；分析師共識、內部人已有。</li>
-<li>沒做到的（寫在 TODO）：大戶「5000 張以上」（集保最高分級 1000 張，做不到）、「主要業務」（OpenAPI 沒有這欄）、上市「權息」那次的現金股利（要一檔一發明細，會被擋）。</li></ul></section>
+<section><h2>【10-26】內部人集中市場口徑＋ToAlpha 9 項＋內部人上層已合進正式站（10-26 01:00 雲端 1～3）：正式站截圖驗收</h2><p class="b">淨買賣只算集中市場買進－賣出；贈與／繼承／信託／私募／員工酬勞另列「其他原因」灰色；股數加總後才換張。2330、2059、3105 對 1025 截圖逐月＋6／12 個月合計已過（差異說明見 TODO 10-26 01:00 雲端回報）。main 6b740f9e → 10-26 第 377 班上正式站（check_web 無 ✗✗、頁面無 JS 錯誤）。原 10-25 晚、10-25 深夜、10-26 凌晨三段預覽已刪。排行目前已回補集中市場拆分 184／844 檔，其餘每 3 小時補一輪。截圖（正式站）：<a href="v2/live_ins_rank.png">全市場排行（近 6 個月淨賣出）</a>、<a href="v2/live_ins_2330.png">2330</a>、<a href="v2/live_ins_2059.png">2059</a>、<a href="v2/live_ins_3105.png">3105</a></p></section>
 <section><h2>【10-25 晚】預覽 v2 已合進正式站（10-25 17:10 雲端 5）：正式站截圖驗收</h2><p class="b">新聞一行結論、集保並排、自營商拆自行／避險、內部人買賣月K圖、籌碼流向、Yahoo 分析師共識 → 10-25 第 373 班上正式站（check_web 無 ✗✗、頁面無 JS 錯誤）。原 10-25 下午、傍晚兩段預覽已刪。截圖（正式站）：<a href="v2/shots/live_news_gist.png">新聞結論</a>、<a href="v2/shots/live_tdcc.png">集保</a>、<a href="v2/shots/live_dealer.png">自營</a>、<a href="v2/shots/live_insider.png">內部人</a>、<a href="v2/shots/live_chipflow.png">籌碼流向</a>、<a href="v2/shots/live_analyst.png">分析師共識</a></p></section>
 <section><h2>【10-25】國際指數、信用風險提醒、疊圖加指數與利差（10-25 雲端 1、2）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">程式：CustomerServiceANDSales 分支 preview/v2（437c34d）；後端 world_idx.py 已上 main；10-25 10:45 世界趨勢第 141 班已寫出真資料（world_idx.json、credit_hist.json），預覽已重烘。截圖：<a href="v2/shots/home_desktop.png">首頁桌機</a>、<a href="v2/shots/home_mobile.png">首頁手機</a>、<a href="v2/shots/overlay.png">自由疊圖（利差＋加權＋那斯達克）</a>。要看的重點：</p><ul>
 <li><b>頁首（每一頁都在第一屏）</b>：加權、費半、那斯達克 100 期貨、道瓊期貨、KOSPI、日經六格：現價、漲跌%、近 20 日小走勢（手機兩欄）</li>
