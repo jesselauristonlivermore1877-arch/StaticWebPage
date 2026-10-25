@@ -68,6 +68,7 @@ jobs:
           # 🔴 10-04：09-30、10-01 10:00 那兩班 rebase 撞到 news_live.json 衝突、重試 4 次都卡在未解決的衝突 →
           #    衝突時 abort、把這一班的結果先存起來、reset 到最新 main、用程式重併（news_live.py --merge-from），再提交。
           cp data/news_live.json "$RUNNER_TEMP/mine.json"
+          cp data/registry/news_gist.json "$RUNNER_TEMP/gist.json"     # 10-25：新聞一行結論快取（重併時 reset 會洗掉，要併回來）
           for i in 1 2 3 4; do
             if git pull --rebase origin main; then
               git push origin HEAD:main && exit 0
@@ -75,6 +76,7 @@ jobs:
               echo "rebase 衝突（第 $i 次）→ 改用程式重併"
               git rebase --abort 2>/dev/null || true
               git fetch origin main && git reset --hard origin/main
+              python3 -c "import json,sys;p='data/registry/news_gist.json';a=json.load(open(p,encoding='utf-8'));a.update(json.load(open(sys.argv[1],encoding='utf-8')));json.dump(a,open(p,'w',encoding='utf-8'),ensure_ascii=False,separators=(',',':'))" "$RUNNER_TEMP/gist.json"
               (cd ../code && python news_live.py ../site/data --merge-from "$RUNNER_TEMP/mine.json")
               git add data/news_live.json docs/data/news_live.json data/registry/news_layers.json data/registry/news_big_weights.json data/registry/geo_ai.json data/registry/news_gist.json
               git diff --staged --quiet || git commit -m "data: 即時信息流 $(TZ=Asia/Taipei date '+%F %H:%M')（重併）"

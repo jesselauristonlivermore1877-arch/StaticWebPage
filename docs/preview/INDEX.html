@@ -11,10 +11,10 @@ h2{font-size:17px;margin:0 0 6px} .u{margin:0 0 4px;overflow-wrap:anywhere} .u a
 .b{margin:0 0 6px;color:var(--ink2);font-size:13px} ul{margin:6px 0 0;padding-left:20px} li{margin:3px 0}
 </style></head><body><main><h1>待審預覽</h1>
 <p class="m">共 9 項　更新 2026-10-25（台北）　只放公開版會出現的內容；審核通過、套版後就刪掉對應的預覽。</p>
-<section><h2>【10-25 午】國際指數小圖互動＋穆迪長歷史利差（10-25 11:20 雲端 1、2）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">程式：CustomerServiceANDSales 分支 preview/v2；後端 world_idx.py 已上 main，10-25 11:25 世界趨勢那班已寫出新格式資料。要看的重點：</p><ul>
-<li><b>頁首六格</b>：每格切換「當日／20 日／60 日／1 年」（預設當日＝最近一個交易時段 5 分K，虛線＝前一時段收盤）；右下角是資料時間（當日為台北時間）；滑過有十字游標＋「日期時間、數值、漲跌%」，手機點一下顯示、4 秒後收起。截圖：<a href="v2/shots/wi_cards.png">桌機</a>、<a href="v2/shots/wi_mobile.png">手機</a></li>
-<li><b>放大</b>：右上 ⤢（桌機點圖也可以）→ 可縮放大圖，操作同看盤區（拖曳平移、雙指縮放、拖時間軸縮放、＋／－／⟲，滾輪不縮放）。截圖：<a href="v2/shots/wi_big_intraday.png">當日</a>、<a href="v2/shots/wi_big_1y.png">1 年（放大後）</a></li>
-<li><b>利差長歷史</b>：ALFRED 補不回 ICE 兩條（版本最早 2023-10-24、每一版都只從 2023-10 起）→ 改加穆迪 Baa、Aaa 對 10 年公債利差（1986／1983 起），疊圖可選、提醒也套用。截圖：<a href="v2/shots/overlay_moodys.png">自由疊圖（全部區間）</a></li>
+<section><h2>【10-25 下午】新聞一行結論、集保大戶並排、自營商個股拆自行買賣／避險（10-25 14:40 雲端 1～3）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">程式：CustomerServiceANDSales 分支 preview/v2；新聞結論後端（news_gist.py）已上 main，每班「即時信息流」產生。上一版 v2（國際指數等）已於 12:20 合進正式站。要看的重點：</p><ul>
+<li><b>1 新聞一行結論</b>（消息 → 即時信息流、產業信息等新聞列）：標題右側一行 20～40 字濃縮＋「偏多／偏空／中性」小標（手機改在標題下方）；滑過小標看依據（多空要有原文逐字片語才標，其餘一律中性）。截圖：<a href="v2/shots/news_gist.png">桌機</a>、<a href="v2/shots/news_gist_m.png">手機</a></li>
+<li><b>2 集保大戶持股</b>（籌碼 → 現貨籌碼 → 集保大戶持股，「圖」模式）：族群與個股左右並排；點族群後「增加／減少」左右並排。列表模式照舊上下。截圖：<a href="v2/shots/tdcc_side.png">並排</a></li>
+<li><b>3 自營商個股</b>：①「自營商」加「圖／表」，圖＝自行買賣、避險兩張熱力圖並排 ②「籌碼篩選」多「自營自行」「自營避險」兩欄與篩選條件（單日與各區間都有）③搜尋個股的資訊框多「自營自行／自營避險 5 日、20 日」。截圖：<a href="v2/shots/dealer_heat.png">熱力圖</a>、<a href="v2/shots/chipfilter_dealer.png">篩選表</a></li>
 </ul></section>
 <section><h2>【10-25】國際指數、信用風險提醒、疊圖加指數與利差（10-25 雲端 1、2）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">程式：CustomerServiceANDSales 分支 preview/v2（437c34d）；後端 world_idx.py 已上 main；10-25 10:45 世界趨勢第 141 班已寫出真資料（world_idx.json、credit_hist.json），預覽已重烘。截圖：<a href="v2/shots/home_desktop.png">首頁桌機</a>、<a href="v2/shots/home_mobile.png">首頁手機</a>、<a href="v2/shots/overlay.png">自由疊圖（利差＋加權＋那斯達克）</a>。要看的重點：</p><ul>
 <li><b>頁首（每一頁都在第一屏）</b>：加權、費半、那斯達克 100 期貨、道瓊期貨、KOSPI、日經六格：現價、漲跌%、近 20 日小走勢（手機兩欄）</li>
