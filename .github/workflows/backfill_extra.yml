@@ -40,7 +40,7 @@ jobs:
         with:
           python-version: "3.12.14"
           cache: pip
-      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests feedparser
       - name: 抓
         working-directory: code
         run: python stock_extra.py ../site/data --crawl ../out --sec 1500
@@ -108,7 +108,7 @@ jobs:
         with:
           python-version: "3.12.14"
           cache: pip
-      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests feedparser
       - uses: actions/download-artifact@v4
         with:
           path: dl
