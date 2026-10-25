@@ -1306,6 +1306,7 @@ thead th{cursor:pointer}thead th.srt-d::after{content:" ▼";font-size:9px}thead
 .ira-al{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding:8px 12px;margin:6px 0 0;border:2px solid var(--up);border-radius:10px;background:rgba(229,72,77,.14);font-size:14px;white-space:normal;cursor:pointer}
 .ira-al>b{color:#fff;background:var(--up);border-radius:6px;padding:1px 8px}
 .ira-al q{font-weight:600} .ira-al small{color:var(--ink-3)} .ira-al a{color:var(--ink-2)}
+.ira-big{white-space:nowrap;font-weight:700;color:#fff!important;background:var(--up);border-radius:4px;padding:0 5px}.ira-big.down{background:var(--down)}
 .ira-tag{color:#fff;background:var(--up);border-radius:4px;padding:0 5px;margin-right:5px;font-size:11.5px}
 .ira-sx{margin:8px 0;padding:8px 12px;border:2px solid var(--up);border-radius:10px;background:rgba(229,72,77,.10);font-size:13.5px;white-space:normal}
 .ira-sx>b{color:#fff;background:var(--up);border-radius:6px;padding:1px 8px;margin-right:6px}
@@ -5348,7 +5349,14 @@ let IRA_J = null, _iraP = null;
 function iraLoad() { return _iraP || (_iraP = fetch((window.IRA_URL || "data/ir_alert.json") + _dv(), {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null).then(J => (IRA_J = J))); }
 const iraTpe = t => { const d = new Date(new Date(t).getTime() + 8 * 3600e3), z = n => String(n).padStart(2, "0");
   return `${z(d.getUTCMonth() + 1)}-${z(d.getUTCDate())} ${z(d.getUTCHours())}:${z(d.getUTCMinutes())}`; };
-const iraPx = a => a.px && a.px.chg != null ? `${esc(a.px.d.slice(5))} 收盤 <b class="num">${nf(a.px.close, a.px.close >= 100 ? 1 : 2)}</b> <span class="${a.px.chg >= 0 ? "up" : "down"}">${a.px.chg >= 0 ? "+" : ""}${nf(a.px.chg, 2)}%</span>` : "";
+// 10-26 03:10（總指揮 雲端 6）：寫「法說日已漲／跌 ±X%」（|漲跌| ≥ 7% 醒目）；隔天起加「已反映」＝法說前一日收盤 → 最新收盤
+const iraPx = a => {
+  const m = a.mx, p = a.pre, lab = a.meeting ? "法說日" : "發布日", sg = x => (x > 0 ? "+" : "") + nf(x, 1) + "%";
+  if (!m) return a.px && a.px.chg != null ? `${esc(a.px.d.slice(5))} 收盤 <b class="num">${nf(a.px.close, a.px.close >= 100 ? 1 : 2)}</b>（${lab}還沒收盤）` : "";
+  let s = `<span class="${Math.abs(m.chg) >= 7 ? "ira-big " : ""}${m.chg >= 0 ? "up" : "down"}">${lab}（${esc(m.d.slice(5))}）已${m.chg > 0 ? "漲" : m.chg < 0 ? "跌" : "平盤"} ${sg(m.chg)}</span> 收盤 <b class="num">${nf(m.close, m.close >= 100 ? 1 : 2)}</b>`;
+  if (p && p.to_d > m.d) s += `｜已反映 <span class="${p.chg >= 0 ? "up" : "down"}">${sg(p.chg)}</span>（${esc(p.from_d.slice(5))}→${esc(p.to_d.slice(5))}）`;
+  return s;
+};
 function iraBoot() {
   const al = document.getElementById("ira-al");
   if (!al) return;
@@ -5362,7 +5370,7 @@ function iraBoot() {
 }
 function iraSx(code) {
   const a = ((IRA_J || {}).by_code || {})[code];
-  return a ? el("div", "ira-sx", `<b>法說重磅</b>${a.meeting ? `法說 ${esc(a.meeting)}　` : ""}<q>${esc(a.quote)}</q>　<small class="rv-dim">${esc(a.src)}｜${esc(iraTpe(a.pub))}（台北）</small>　<a href="${esc(a.url)}" target="_blank" rel="noopener">原文</a>`) : null;
+  return a ? el("div", "ira-sx", `<b>法說重磅</b>${a.meeting ? `法說 ${esc(a.meeting)}　` : ""}<q>${esc(a.quote)}</q>　<small class="rv-dim">${esc(a.src)}｜${esc(iraTpe(a.pub))}（台北）</small>${iraPx(a) ? `　<small>${iraPx(a)}</small>` : ""}　<a href="${esc(a.url)}" target="_blank" rel="noopener">原文</a>`) : null;
 }
 function hlBoot() {
   const mac = document.getElementById("hl-mac"), bar = document.getElementById("hl-bar");
@@ -16525,7 +16533,8 @@ function sxCard(code, name, mkt, goStock) {
   const C = D.meta.counter, b = document.getElementById("vc-badge");
   if (!C || !b) return;
   if (C.provider === "demo") { b.hidden = false; b.innerHTML = `訪客 <b>12,345</b>（示意）`; return; }
-  if (C.provider === "cloudflare" && /^[a-f0-9]{32}$/.test(C.token || "")) {
+  // 10-26：</body> 前已經有固定的 beacon 標籤（總指揮 03:15 給的 token）→ 這裡不再載第二次，免得重複計數
+  if (C.provider === "cloudflare" && /^[a-f0-9]{32}$/.test(C.token || "") && !document.querySelector("script[data-cf-beacon]")) {
     const s = document.createElement("script"); s.defer = true; s.src = "https://static.cloudflareinsights.com/beacon.min.js";
     s.setAttribute("data-cf-beacon", JSON.stringify({token: C.token})); document.head.appendChild(s);
   }
@@ -16593,5 +16602,6 @@ try { hlBoot(); } catch (e) { console.warn("hlBoot", e); }
 try { iraBoot(); } catch (e) { console.warn("iraBoot", e); }   // 10-26：法說重磅置頂
 try { wiBoot(); } catch (e) { console.warn("wiBoot", e); }   // 10-25：頁首國際指數＋信用風險紅標   // 10-18：頁首重大數據＋重點跑馬燈
 </script>
+<!-- 10-26 03:15（總指揮）：Cloudflare Web Analytics（免費、不用 cookie、不記 IP；token 是公開值）。只加正式站，預覽頁不加（preview/v2 分支的 tools/mkpreview.py 烘預覽時拿掉）。 -->
 </body>
 </html>
