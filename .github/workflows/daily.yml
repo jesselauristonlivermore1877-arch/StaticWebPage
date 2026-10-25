@@ -181,6 +181,8 @@ jobs:
           T python stock_lookup.py ../site/data || { echo "::warning::個股查詢資料失敗（搜尋框資訊框這班不更新）"; echo "個股查詢資料失敗（搜尋框資訊框這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           # 🟢 10-25：頁首國際指數＋公司債利差「信用風險升溫」紅標（TG 兩個 secret 沒設時只上網頁）
           T python world_idx.py ../site/data || { echo "::warning::國際指數／公司債利差失敗（沿用上一份）"; echo "國際指數／公司債利差失敗（沿用上一份）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          # 🟢 10-26 02:50（總指揮 雲端 6）：上櫃熱門股證券商進出排行每天存一份（只有當天、沒有歷史；存滿 1～2 個月再做分點分類）→ data/broker_hot/
+          T python broker_hot.py ../site/data || { echo "::warning::上櫃熱門股券商進出排行失敗（這班沒存）"; echo "上櫃熱門股券商進出排行失敗（這班沒存）" >> "$RUNNER_TEMP/soft_fail.txt"; }
 
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
       # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。

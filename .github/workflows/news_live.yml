@@ -40,7 +40,7 @@ jobs:
         with:
           python-version: "3.12.14"
           cache: pip
-      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" feedparser requests
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" feedparser requests numpy pypdf
       - name: 即時信息流
         working-directory: code
         env:
@@ -85,3 +85,42 @@ jobs:
             sleep $((2 ** i))
           done
           exit 1
+
+      # 🟢 10-26 02:50（總指揮 雲端 1～4）：法說「高成長指引」即時警報（程式 ir_alert.py）
+      #    第一段：偵測新聞＋重大訊息＋新上傳的法說簡報 → data/ir_alert.json、docs/data/ir_alert.json、data/ir_trigger 標「重磅」，推上；
+      #    rebase 衝突就 reset 到最新 main 重跑偵測（還沒推 TG，重跑不會重複推）。
+      #    第二段：推上之後才推 TG，推過的標 sent 再推一次。失敗不擋即時信息流。
+      - name: 法說重磅偵測
+        if: always()
+        continue-on-error: true
+        working-directory: site
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          F="data/ir_alert.json docs/data/ir_alert.json data/ir_trigger"
+          for i in 1 2 3 4; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            (cd ../code && PYTHONUNBUFFERED=1 python ir_alert.py ../site/data) || exit 1
+            git add $F 2>/dev/null || true
+            if git diff --staged --quiet; then echo "法說重磅：沒有變動。"; exit 0; fi
+            git commit -qm "data: 法說重磅偵測 $(TZ=Asia/Taipei date '+%F %H:%M')"
+            git push -q origin HEAD:main && break
+            sleep $((2 ** i))
+          done
+      - name: 法說重磅 TG
+        if: always()
+        continue-on-error: true
+        working-directory: site
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          (cd ../code && PYTHONUNBUFFERED=1 python ir_alert.py ../site/data --send)
+          git add data/ir_alert.json 2>/dev/null || true
+          if git diff --staged --quiet; then exit 0; fi
+          git commit -qm "data: 法說重磅已推 TG $(TZ=Asia/Taipei date '+%F %H:%M')"
+          for i in 1 2 3 4; do
+            git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0
+            git rebase --abort 2>/dev/null || true
+            sleep $((2 ** i))
+          done
