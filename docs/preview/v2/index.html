@@ -476,7 +476,9 @@ th.s .ar{color:var(--acc); font-size:11px; margin-left:3px}
   border:1px solid var(--line);background:transparent;color:var(--ink-2)}
 .chipstruct{display:grid;grid-template-columns:1fr 80px 80px 80px 80px 80px 80px 76px;gap:8px;align-items:center;
   padding:7px 8px;border-top:.5px solid rgba(128,128,128,.2);font-size:13px}
+.cf-go{cursor:pointer}.cf-lg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--ink-2);margin-top:6px}.cf-lg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px}
 .chipstruct.h{font-size:12px;opacity:.55;border-top:0}
+.ink-sum{display:flex;flex-wrap:wrap;gap:6px 22px;margin:8px 0 2px;font-size:14px} .ink-say{font-size:13px;color:var(--ink-2);white-space:normal}
 @media(max-width:720px){.chipstruct{grid-template-columns:1fr 62px 62px 62px 62px;gap:4px}
   .chipstruct>span:nth-child(n+6){display:none}}
 .subpick{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:10px;
@@ -920,7 +922,7 @@ select:hover{border-color:var(--acc)}
    🔴 **只有這一頁。** Evans 三次反映的是這裡，不是全站。
       V-79a 壓 `.subpick` / `.tprow` 把所有頁籤一起放大，是錯的方向 ——
       那兩個 class 全站都在用。這裡改用這一頁自己才有的兩個 class：
-        `.cfbar`      ＝ tabChipFilter() 的篩選列（el("div","subpick cfbar")）
+        `.cfbar`      ＝ tabChipFlow() 的區間／檢視列（el("div","subpick cfbar")）
         `.chipstruct` ＝ 篩選結果表（表頭 .chipstruct.h、資料列 .chipstruct）
       其他頁籤沒有這兩個 class，結構上動不到。
    目標＝對齊同一頁的「三大法人買賣金額統計表」(.bigtable)：
@@ -4029,6 +4031,7 @@ function insStock(J, code, nm) {
       kbox.appendChild(svg);
       kbox.appendChild(el("div", "ins-lg", Object.entries(KN).map(([k, t]) => `<span><i style="background:${KC[k]}"></i>${t}</span>`).join("") + `<small class="rv-dim">　滑鼠移到點上看明細；月資料（質押、代持、持股異動）標在該月最後一個交易日</small>`));
     } else kbox.appendChild(el("div", "sub", "這檔沒有日 K（追蹤名單外）。"));
+    w.appendChild(insKMonth(S, B, ds, nm, code));          // 🟢 10-25 16:30（Evans 雲端 2）：內部人買賣 K 線圖（月）排第一
     w.appendChild(card(`${esc(nm)} ${esc(code)}　股價與內部人事件`, `近 ${ds.length} 個交易日收盤`, kbox));
     // ② 折線：董監持股比、質押比、代持比（每月）
     const relOf = () => (S.ppl || []).reduce((a, p) => a + (p[4] || 0), 0);
@@ -4062,10 +4065,78 @@ function insStock(J, code, nm) {
       S.tx.slice().reverse().map(t => `<tr><td class="num">${esc(t.d)}</td><td style="text-align:left">${esc(t.who)}</td><td style="text-align:left">${esc(t.nm)}</td><td>${esc(t.how)}</td><td class="num">${nf(t.lots, 0)}</td><td style="text-align:left;white-space:normal">${esc(t.to || "")}</td></tr>`).join("") + `</tbody></table>`)));
     // 🟢 10-18（Evans D6）：個股內部人也改子標籤
     const cs = [...w.children].filter(n => n.classList.contains("card")); cs.forEach(n => n.remove());
-    w.appendChild(cardTabs(cs, t => t.includes("股價與內部人事件") ? "股價與事件" : t.replace(/（逐筆）/, "")));
+    w.appendChild(cardTabs(cs, t => t.includes("內部人買賣（月）") ? "內部人買賣" : t.includes("股價與內部人事件") ? "股價與事件" : t.replace(/（逐筆）/, "")));
     w.appendChild(el("div", "ins-warn", "僅供參考：公司派、大股東買賣不必然影響股價。"));
   });
   return w;
+}
+/* 🟢 10-25 16:30（Evans 雲端 2，ToAlpha 那張）：內部人買賣 K 線圖（月）——
+   月底收盤線＋當月內部人淨買（紅）／淨賣（綠）圓點（面積＝金額）；金額最大的幾個月標框「買賣最多的職稱＋人數＋均價＋淨額」；
+   下方每月買進／賣出金額柱；近 6／12 個月淨買賣合計＋白話一行。
+   資料：insider.json 的 ev（每人每月持股增減＋代持增減，同一人多職稱只算一次）；金額＝張數 × 當月均價（stock_bars 收盤平均）× 1000。
+   持股增減不一定都是市場買賣（含贈與、信託、配股、員工獎酬），頁面註明。ink- 前綴。 */
+function insKMonth(S, B, ds, nm, code) {
+  const box = el("div", "ink-box");
+  if (!B || !(B.c || []).length) { box.appendChild(el("div", "sub", "這檔沒有日 K（追蹤名單外），畫不出內部人買賣 K 線圖。")); return card("內部人買賣（月）", null, box); }
+  const M = {};                                            // 月 → {last 月底收盤, sum, n 均價用}
+  ds.forEach((d, i) => { const v = B.c[i]; if (v == null) return; const m = d.slice(0, 7), o = M[m] = M[m] || {sum: 0, n: 0}; o.sum += v; o.n++; o.last = v; o.ld = d; });
+  const MS = Object.keys(M).sort();
+  const seen = new Set(), PM = {};                         // 月 → 人 → {ti, d}
+  (S.ev || []).forEach(([m, ti, who, dh, , dr]) => { const d = (dh || 0) + (dr || 0); if (!d || !M[m]) return; const k = m + "|" + who; if (seen.has(k)) return; seen.add(k);
+    (PM[m] = PM[m] || []).push({ti: String(ti).replace(/本人$/, ""), who, d}); });
+  const R = MS.map(m => { const P = PM[m] || [], avg = M[m].sum / M[m].n, buy = P.filter(p => p.d > 0), sel = P.filter(p => p.d < 0);
+    const bl = buy.reduce((a, p) => a + p.d, 0), sl = sel.reduce((a, p) => a + p.d, 0);
+    const side = Math.abs(bl) >= Math.abs(sl) ? buy : sel, big = side.slice().sort((a, b) => Math.abs(b.d) - Math.abs(a.d))[0];
+    const tiN = {}; side.forEach(p => tiN[p.ti] = (tiN[p.ti] || 0) + Math.abs(p.d));
+    return {m, close: M[m].last, avg, ba: bl * avg * 1000, sa: sl * avg * 1000, net: (bl + sl) * avg * 1000, nl: bl + sl, nb: buy.length, ns: sel.length,
+      top: big ? Object.entries(tiN).sort((a, b) => b[1] - a[1])[0][0] : "", nside: side.length}; });
+  const W = 900, H1 = 250, H2 = 90, PL = 46, PR = 12, n = R.length, X = i => PL + (W - PL - PR) * (i + .5) / n;
+  const cl = R.map(r => r.close), lo = Math.min(...cl), hi = Math.max(...cl), pad = (hi - lo) * .35 || hi * .1;
+  const Y = v => 34 + (H1 - 68) * (1 - (v - (lo - pad * .3)) / ((hi + pad * .3) - (lo - pad * .3)));
+  const mxA = Math.max(...R.map(r => Math.abs(r.net)), 1), rad = a => 4 + 16 * Math.sqrt(Math.abs(a) / mxA);
+  const yi = v => `${v > 0 ? "+" : v < 0 ? "−" : ""}${nf(Math.abs(v) / 1e8, Math.abs(v) >= 1e9 ? 1 : 2)} 億`;
+  let g = "";
+  [lo, (lo + hi) / 2, hi].forEach(v => g += `<line x1="${PL}" x2="${W - PR}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)" stroke-dasharray="2 3"/><text x="${PL - 4}" y="${Y(v) + 4}" font-size="11" text-anchor="end" fill="var(--ink-3)">${nf(v, v < 100 ? 1 : 0)}</text>`);
+  g += `<path d="${R.map((r, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(r.close).toFixed(1)}`).join("")}" fill="none" stroke="var(--ink-2)" stroke-width="1.6"/>`;
+  const lab = new Set(R.filter(r => r.net).sort((a, b) => Math.abs(b.net) - Math.abs(a.net)).slice(0, 5).map(r => r.m));
+  const tw = t => [...t].reduce((s, ch) => s + (/[\u2E80-\uFFFF]/.test(ch) ? 11.5 : 6.6), 0), lanes = {u: [], d: []};
+  R.forEach((r, i) => {
+    g += `<circle cx="${X(i)}" cy="${Y(r.close)}" r="2.5" fill="var(--ink-2)"/>`;
+    if (!r.net) return;
+    const up = r.net > 0, col = up ? "var(--up)" : "var(--down)";
+    g += `<circle cx="${X(i)}" cy="${Y(r.close)}" r="${rad(r.net).toFixed(1)}" fill="${col}" fill-opacity=".55" stroke="${col}"><title>${esc(r.m)}｜內部人淨${up ? "買" : "賣"} ${nf(Math.abs(r.nl), 0)} 張 ≈ ${yi(r.net)}｜買進 ${r.nb} 人、賣出 ${r.ns} 人｜當月均價 ${nf(r.avg, r.avg < 100 ? 2 : 1)}｜月底收盤 ${nf(r.close, r.close < 100 ? 2 : 1)}</title></circle>`;
+    if (!lab.has(r.m)) return;
+    const t1 = `${r.top} ${r.nside} 人`, t2 = `均價 ${nf(r.avg, r.avg < 100 ? 1 : 0)}・淨${up ? "買" : "賣"} ${yi(r.net).replace(/^[+−]/, "")}`;
+    // 標籤框：寬度照字算；同一側撞到前面的框就換下一層（上方往下疊、下方往上疊）
+    const bw = Math.max(tw(t1), tw(t2)) + 14, bx = Math.min(Math.max(X(i) - bw / 2, PL), W - PR - bw), L = lanes[up ? "u" : "d"];
+    let k = 0; while (L.some(o => o.k === k && bx < o.x + o.w + 4 && o.x < bx + bw + 4)) k++;
+    L.push({k, x: bx, w: bw});
+    const by = up ? 2 + k * 34 : H1 - 34 - k * 34;
+    g += `<line x1="${X(i)}" x2="${X(i)}" y1="${Y(r.close) + (up ? -rad(r.net) : rad(r.net))}" y2="${up ? by + 30 : by}" stroke="${col}" stroke-width="1"/>` +
+      `<rect x="${bx}" y="${by}" width="${bw}" height="30" rx="4" fill="var(--bg)" stroke="${col}"/>` +
+      `<text x="${bx + 6}" y="${by + 13}" font-size="11.5" fill="${col}" font-weight="700">${esc(t1)}</text><text x="${bx + 6}" y="${by + 26}" font-size="11" fill="var(--ink-2)">${esc(t2)}</text>`;
+  });
+  // 下方：每月買進（紅、往上）／賣出（綠、往下）金額柱
+  const mxB = Math.max(...R.map(r => Math.max(r.ba, -r.sa)), 1), Z = H1 + H2 / 2, bh = v => (H2 / 2 - 6) * Math.abs(v) / mxB, cw = Math.min(26, (W - PL - PR) / n * .6);
+  g += `<line x1="${PL}" x2="${W - PR}" y1="${Z}" y2="${Z}" stroke="var(--line)"/><text x="${PL - 4}" y="${H1 + 12}" font-size="10.5" text-anchor="end" fill="var(--ink-3)">買進</text><text x="${PL - 4}" y="${H1 + H2 - 4}" font-size="10.5" text-anchor="end" fill="var(--ink-3)">賣出</text>`;
+  R.forEach((r, i) => {
+    if (r.ba) g += `<rect x="${X(i) - cw / 2}" y="${Z - bh(r.ba)}" width="${cw}" height="${bh(r.ba)}" fill="var(--up)"><title>${esc(r.m)} 買進 ${yi(r.ba)}（${r.nb} 人）</title></rect>`;
+    if (r.sa) g += `<rect x="${X(i) - cw / 2}" y="${Z}" width="${cw}" height="${bh(r.sa)}" fill="var(--down)"><title>${esc(r.m)} 賣出 ${yi(r.sa)}（${r.ns} 人）</title></rect>`;
+    if (i % Math.ceil(n / 12) === 0 || i === n - 1) g += `<text x="${X(i)}" y="${H1 + H2 + 14}" font-size="11" text-anchor="middle" fill="var(--ink-3)">${esc(r.m.slice(2).replace("-", "/"))}</text>`;
+  });
+  box.appendChild(el("div", "", `<svg viewBox="0 0 ${W} ${H1 + H2 + 20}" style="width:100%;height:auto;display:block">${g}</svg>`));
+  // 近 6／12 個月合計＋白話
+  const sum = k => { const T = R.slice(-k); return {a: T.reduce((x, r) => x + r.net, 0), l: T.reduce((x, r) => x + r.nl, 0), p0: T[0], p1: T.at(-1)}; };
+  const s6 = sum(6), s12 = sum(12);
+  const chg = x => x.p0 && x.p1 ? (x.p1.close / x.p0.close - 1) * 100 : null;
+  const tl = x => `${x.a > 0 ? "淨買進" : x.a < 0 ? "淨賣出" : "沒有淨買賣"} ${x.a ? `${nf(Math.abs(x.l), 0)} 張 ≈ ${yi(x.a).replace(/^[+−]/, "")}` : ""}`;
+  const c6 = chg(s6);
+  box.appendChild(el("div", "ink-sum", `<span>近 6 個月：<b class="${cls(s6.a)}">${tl(s6)}</b></span><span>近 ${Math.min(12, n)} 個月：<b class="${cls(s12.a)}">${tl(s12)}</b></span>`));
+  box.appendChild(el("div", "ink-say", `白話：近 6 個月內部人（董監、經理人、大股東）合計${s6.a > 0 ? "淨買進" : s6.a < 0 ? "淨賣出" : "幾乎沒有買賣"}` +
+    `${c6 == null ? "" : `，同期月底收盤${c6 >= 0 ? "上漲" : "下跌"} ${nf(Math.abs(c6), 1)}%`}。只是籌碼統計，不代表股價方向。`));
+  return card("內部人買賣（月）", `${esc(nm)} ${esc(code)}・${esc(R[0].m)} → ${esc(R.at(-1).m)}・線＝月底收盤、圓點面積＝當月淨買賣金額（紅買綠賣）`, box,
+    "內部人＝董事、監察人、經理人、持股 10% 以上大股東；每人每月持股增減（本人＋配偶未成年子女與他人名義代持）× 當月收盤均價估金額，同一人兼多職只算一次。" +
+    "持股增減不一定是市場買賣（含贈與、信託、配股、員工獎酬），以公開資訊觀測站申報為準。框標金額最大的 5 個月：該方向持股變動最多的職稱、人數、當月均價、淨額。資料：證交所／櫃買董監事持股餘額明細（月）。量化統計，非投資建議。");
 }
 /* 🟢 10-18（Evans D6 鐵律：頁面不准長到一直往下滑）：一串卡片 → 子標籤（標籤名＝卡片標題，可用 lab 改短） */
 function cardTabs(cards, lab) {
@@ -11483,7 +11554,7 @@ const SUB_DESC = {
   "資金流": "主動式 ETF 每天的申購贖回與買賣淨額。",
   "推估成本": "依申購買回清單的持股增減回推每檔持股的平均成本（非基金公司公布數字），套牢最深／獲利最多。",
   // 現貨籌碼
-  "籌碼篩選": "用法人、融資、連買連賣天數等條件篩個股。",
+  "籌碼流向": "外資、投信、自營商、主動 ETF、融資的個股淨買賣金額：可排序的表、熱力圖、法人×散戶四象限。",
   "三大法人買賣超": "外資、投信、自營商（自行買賣、避險分開）的買賣超金額；自營商避險多半是權證避險，方向意義較小。",
   "外資買賣超": "外資買賣超個股；可切單日或區間累計。",
   "投信買賣超": "投信買賣超個股；投信常集中在中小型股、持續性較高。",
@@ -11685,207 +11756,149 @@ function tabChipStruct() {
   return f;
 }
 
-/* 🟢 GEA 2026-08-30（W-1）：籌碼篩選（原「籌碼結構」）。
-
-   為什麼從四種寫死形態改成可組合：
-     ① 標題塞不下 —— 「投信買 ＋ 外資賣 ＋ 融資增」已經是版面極限
-     ② 四種以外的組合永遠問不到，而真正想查的往往就是第五種
-
-   五個條件各自獨立、互相 AND：
-     外資 3 × 投信 3 × 融資 3 × 融券 3 × 主動ETF 5 = 405 種組合。
-
-   門檻刻意不取分位數 ——「買超」就是張數 > 0。
-   分位數要解釋（前 10% 是相對誰？），> 0 不用解釋，而且明天再查還是同一個意思。
-   會動的規則沒有辦法累積判斷經驗，這一頁的價值就在於可以重複問同一個問題。 */
-function tabChipFilter() {
+/* 🟢 10-25 16:30（Evans 雲端 1）：「籌碼篩選」→「籌碼流向」。拿掉篩選下拉，改看金額：
+   每欄＝淨買賣金額（億），張數放滑鼠提示；金額＝逐日張數×當日收盤×1000（chips.json 已算好的外資、投信、自營自行／避險）。
+   融資（散戶代理）＝區間增減張數×最新收盤×1000；主動 ETF＝今日各基金持股異動股數×最新收盤（只有今日）。
+   合計＝外資＋投信＋自營自行＋自營避險（主動 ETF 的買賣已含在投信裡，不重複加）。
+   三種檢視：表（每欄可排序、再點反向）／熱力圖（合計金額前 60 檔 × 6 欄）／四象限（橫＝法人合計、縱＝融資增減、泡泡＝成交金額、顏色＝族群）。
+   點個股開個股頁（sxCard）。 */
+let CF_VIEW = "表";
+try { CF_VIEW = localStorage.getItem("gea_cf_view") || "表"; } catch (e) {}
+function tabChipFlow() {
   const f = document.createDocumentFragment();
-  const i = D.inst || {}, md = D.margin_detail || {}, e = D.etf || {};
-  const mg = {}; (md.rows || []).forEach(r => { mg[r.code] = r; });
-  const {U} = stkCtx();
-
-  // 主動 ETF 的動作分類：從各基金的持股異動彙總到個股層級。
-  // 一檔個股可能同時被 A 基金加碼、被 B 基金減碼，所以四種動作是「有沒有發生過」
-  // 而不是互斥的分類 —— 這正是「哪些標的正在被建倉」問得出來的原因。
-  const act = {};
-  Object.values(e.changes || {}).forEach(cc => (cc.diff || []).forEach(r => {
-    const c = String(r.code || "").trim(); if (!c) return;
-    const a = (act[c] = act[c] || {new: 0, add: 0, cut: 0, clear: 0});
-    const p = r.pct, d = r.delta_shares || 0;
-    if (p === null || p === undefined) a.new++;
-    else if (p <= -0.999) a.clear++;
-    else if (d > 0) a.add++;
-    else if (d < 0) a.cut++;
-  }));
-
-  const rows = (i.rank || []).filter(r => /^\d{4}$/.test(r.code)).map(r => {
-    const m = mg[r.code] || {};
-    return {code: r.code, name: r.name,
-            fo: r.foreign_lots || 0, tr: r.trust_lots || 0, ds: null, dh: null,
-            mchg: m.margin_chg ?? null, mbal: m.margin_bal || 0,
-            schg: m.short_chg ?? null, sbal: m.short_bal || 0,
-            act: act[r.code] || null, inUni: !!U[r.code]};
-  });
-
-  // 🟢 N-32：區間版的列。單日＝上面那份（D.inst.rank，一個字沒改）；
-  //    選了區間才換成 chips.json 的累計值。融資／融券只有在信用落地夠深時才有值，
-  //    不夠深就是 null（那兩個下拉會變灰）；主動 ETF 永遠是今日動作。
+  const NM = n32Names(), BM = (D.screen || {}).big_map || {}, mg = {};
+  (D.margin_detail?.rows || []).forEach(r => { mg[r.code] = r; });
+  const etf = {};
+  Object.values((D.etf || {}).changes || {}).forEach(cc => (cc.diff || []).forEach(r => {
+    const c = String(r.code || "").trim(); if (c) etf[c] = (etf[c] || 0) + (r.delta_shares || 0); }));
+  const K = [["fa", "fl", "外資"], ["ta", "tl", "投信"], ["da", "dl", "自營自行"], ["ha", "hl", "自營避險"], ["ea", "el", "主動 ETF"], ["ma", "ml", "融資（散戶）"]];
+  const Y = v => v == null ? "—" : sgn(v / 1e8, Math.abs(v) < 1e9 ? 2 : 1);
   let cfWin = 1;
-  // 🟢 10-25 14:40（Evans 雲端 3）：自營商拆「自行買賣／避險」兩欄 —— chips.json 的 d 區塊（單日＝窗 1）；還沒回補夠的窗就是 null（下拉變灰）
-  const dOk = w => n32d.ok(window.__CHIPS, w);
-  function rowsFor(w) {
-    if (w === 1) {
-      if (dOk(1)) { const DR = window.__CHIPS.d.rows;
-        rows.forEach(r => { const x = DR[r.code]; r.ds = x ? n32d.lots(x, 1, "s") : 0; r.dh = x ? n32d.lots(x, 1, "h") : 0; }); }
-      return rows;
-    }
+  const cache = {};
+  function build(w) {
     const C = window.__CHIPS;
     if (!C) return null;
-    const NM = n32Names(), mOk = !!(C.m && C.m.ok && C.m.ok[String(w)]), wi = N32_WI[w];
-    const out = [];
+    if (cache[w]) return cache[w];
+    const wi = N32_WI[w], mOk = !!(C.m && C.m.ok && C.m.ok[String(w)]), dk = n32d.ok(C, w), out = [];
     for (const c in C.rows) {
-      if (!/^\d{4}$/.test(c)) continue;
-      const r = C.rows[c], mr = mOk ? (C.m.rows[c] || null) : null;
-      out.push({code: c, name: (NM[c] || {}).name || c,
-                fo: n32.lots(r, w, "f"), tr: n32.lots(r, w, "t"),
-                ds: dOk(w) ? (C.d.rows[c] ? n32d.lots(C.d.rows[c], w, "s") : 0) : null,
-                dh: dOk(w) ? (C.d.rows[c] ? n32d.lots(C.d.rows[c], w, "h") : 0) : null,
-                mchg: mr ? mr[2 + wi] : null, mbal: mr ? mr[0] : 0,
-                schg: mr ? mr[8 + wi] : null, sbal: mr ? (mr[1] || 0) : 0,
-                act: act[c] || null, inUni: !!U[c]});
+      if (!/^[1-9]\d{3}$/.test(c)) continue;          // 只看個股（0 開頭的 ETF 不列）
+      const r = C.rows[c], d = dk && C.d.rows[c], m = mOk ? C.m.rows[c] : null;
+      // 價格：法人排行的收盤；沒有就用單日外資（或投信）金額 ÷ 張數反推
+      let p = (NM[c] || {}).px || 0;
+      if (!p) for (const k of ["f", "t"]) { const L = n32.lots(r, 1, k); if (L) { p = n32.amt(r, 1, k) / L / 1000; break; } }
+      const ml = m ? m[2 + wi] : (w === 1 && mg[c] ? mg[c].margin_chg : null);
+      const x = {code: c, name: (NM[c] || {}).name || c, mkt: n32.mkt(r), big: BM[c] || "",
+        fa: n32.amt(r, w, "f"), ta: n32.amt(r, w, "t"), fl: n32.lots(r, w, "f"), tl: n32.lots(r, w, "t"),
+        da: dk ? (d ? n32d.amt(d, w, "s") : 0) : null, ha: dk ? (d ? n32d.amt(d, w, "h") : 0) : null,
+        dl: dk ? (d ? n32d.lots(d, w, "s") : 0) : null, hl: dk ? (d ? n32d.lots(d, w, "h") : 0) : null,
+        ml, ma: ml == null || !p ? null : ml * p * 1000,
+        el: etf[c] ? etf[c] / 1000 : null, ea: etf[c] && p ? etf[c] * p : null, vol: n32.vol(r, w)};
+      x.tot = x.fa + x.ta + (x.da || 0) + (x.ha || 0);
+      if (x.tot || x.ea || x.ma) out.push(x);
     }
-    return out;
+    return (cache[w] = out);
+  }
+  const bar = el("div", "subpick cfbar"), body = el("div");
+  // 點個股（表、熱力圖、四象限共用）→ 個股頁
+  body.addEventListener("click", ev => { const t = ev.target.closest("[data-cfc]"); if (!t) return;
+    const x = (build(cfWin) || []).find(r => r.code === t.dataset.cfc); if (x) sxCard(x.code, x.name, x.mkt); });
+  const tip = (x, k, lk, lab) => `${x.name} ${x.code}｜${lab} ${Y(x[k])} 億｜${x[lk] == null ? "—" : sgn(x[lk], k === "ea" ? 1 : 0)} 張`;
+  const cell = (x, k, lk, lab) => `<span class="num ${cls(x[k] || 0)}" title="${esc(tip(x, k, lk, lab))}">${Y(x[k])}</span>`;
+
+  function vTable(R) {
+    const L = R.slice().sort((a, b) => Math.abs(b.tot) - Math.abs(a.tot));
+    return sortTable(["個股", "族群", ...K.slice(0, 5).map(k => k[2]), "合計", K[5][2]],
+      L.map(x => ({g: "", v: [x.name, x.big, x.fa, x.ta, x.da, x.ha, x.ea, x.tot, x.ma],
+        c: [`<span class="cf-go" data-cfc="${esc(x.code)}">${chip(x.name, x.code, x.mkt)}</span>`, `<span class="flat">${esc(x.big || "名單外")}</span>`,
+            ...K.slice(0, 5).map(([k, lk, lab]) => cell(x, k, lk, lab)),
+            `<b class="num ${cls(x.tot)}" title="${esc(`${x.name}｜外資＋投信＋自營自行＋自營避險 ${Y(x.tot)} 億`)}">${Y(x.tot)}</b>`,
+            cell(x, "ma", "ml", K[5][2])]})),
+      {sortable: [2, 3, 4, 5, 6, 7, 8], sortKey: 7, dir: -1, size: 30, aligns: ["", "", "r", "r", "r", "r", "r", "r", "r"]});
   }
 
-  const DEF = [
-    ["fo", "外資", [["", "不限"], ["b", "買超"], ["s", "賣超"]],
-     (r, v) => v === "b" ? r.fo > 0 : r.fo < 0],
-    ["tr", "投信", [["", "不限"], ["b", "買超"], ["s", "賣超"]],
-     (r, v) => v === "b" ? r.tr > 0 : r.tr < 0],
-    ["ds", "自營自行", [["", "不限"], ["b", "買超"], ["s", "賣超"]],
-     (r, v) => r.ds === null ? false : (v === "b" ? r.ds > 0 : r.ds < 0)],
-    ["dh", "自營避險", [["", "不限"], ["b", "買超"], ["s", "賣超"]],
-     (r, v) => r.dh === null ? false : (v === "b" ? r.dh > 0 : r.dh < 0)],
-    ["mg", "融資", [["", "不限"], ["u", "資增"], ["d", "資減"]],
-     (r, v) => r.mchg === null ? false : (v === "u" ? r.mchg > 0 : r.mchg < 0)],
-    ["sh", "融券", [["", "不限"], ["u", "券增"], ["d", "券減"]],
-     (r, v) => r.schg === null ? false : (v === "u" ? r.schg > 0 : r.schg < 0)],
-    ["et", "主動 ETF（今日）", [["", "不限"], ["new", "新增"], ["add", "加碼"],
-                        ["cut", "減碼"], ["clear", "清倉"]],
-     (r, v) => !!(r.act && r.act[v] > 0)],
-  ];
-  const st = {};
-  DEF.forEach(([k]) => { st[k] = ""; });
+  function vHeat(R) {
+    const L = R.slice().sort((a, b) => Math.abs(b.tot) - Math.abs(a.tot)).slice(0, 60);
+    const mx = Math.max(1, ...L.flatMap(x => K.map(([k]) => Math.abs(x[k] || 0))));
+    const half = (A, off) => {
+      const LW = 118, CW = 64, RH = 22, W = LW + CW * K.length, H = 26 + A.length * RH;
+      let g = K.map(([, , lab], j) => `<text x="${LW + CW * j + CW / 2}" y="16" text-anchor="middle" font-size="11.5" fill="var(--ink-2)">${esc(lab.replace("（散戶）", ""))}</text>`).join("");
+      A.forEach((x, i) => {
+        const y = 24 + i * RH;
+        g += `<g data-cfc="${esc(x.code)}" style="cursor:pointer"><text x="${LW - 6}" y="${y + 15}" text-anchor="end" font-size="12" fill="var(--ink-1)">${off + i + 1}. ${esc(x.name)}</text>`;
+        K.forEach(([k, lk, lab], j) => {
+          const v = x[k], a = v ? .1 + .8 * Math.sqrt(Math.abs(v) / mx) : 0;
+          g += `<rect x="${LW + CW * j + 1}" y="${y + 1}" width="${CW - 2}" height="${RH - 2}" rx="2" fill="${v == null ? "var(--line)" : v > 0 ? `rgba(229,72,77,${a.toFixed(2)})` : v < 0 ? `rgba(18,163,102,${a.toFixed(2)})` : "var(--surface)"}"><title>${esc(tip(x, k, lk, lab))}</title></rect>` +
+            `<text x="${LW + CW * j + CW / 2}" y="${y + 15}" text-anchor="middle" font-size="10.5" fill="${a > .55 ? "#fff" : "var(--ink-2)"}" pointer-events="none">${v == null ? "—" : v ? Y(v) : "0"}</text>`;
+        });
+        g += "</g>";
+      });
+      return el("div", "", `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block">${g}</svg>`);
+    };
+    const gr = el("div", "grid2");
+    gr.appendChild(half(L.slice(0, 30), 0)); if (L.length > 30) gr.appendChild(half(L.slice(30), 30));
+    return card(`籌碼流向熱力圖（${n32Wl(cfWin)}）`, `合計金額（絕對值）前 ${L.length} 檔 · 格內數字＝淨買賣金額（億）· 紅＝淨買、綠＝淨賣，越深金額越大（全圖同一把尺、開根號壓縮）`, gr,
+      "欄：外資、投信、自營自行、自營避險、主動 ETF（今日持股異動）、融資（散戶代理；只有融資落地夠深的區間才有）。滑鼠移到格子看張數；點個股名稱開個股頁。量化統計結果，非投資建議。");
+  }
 
-  // 🟢 用 .subpick 這個 class —— sideTabs 會自動把它搬到左列按鈕下面。
-  // 篩選器不該佔用報表上方的橫幅：那塊空間是給結果看的，不是給控制項的。
-  const bar = el("div", "subpick cfbar");
-  const body = el("div");
+  function vQuad(R) {
+    const Q = R.filter(x => x.ma != null && x.tot).sort((a, b) => (Math.abs(b.tot) + Math.abs(b.ma)) - (Math.abs(a.tot) + Math.abs(a.ma))).slice(0, 120);
+    if (!Q.length) return card(`法人 × 散戶・四象限（${n32Wl(cfWin)}）`, null, el("div", "empty", `${n32Wl(cfWin)}的個股融資還沒落地夠深，畫不出四象限；先看「單日」。`));
+    const NW = window.innerWidth < 700, W = NW ? 480 : 1040, H = NW ? 480 : 560, M = 46, FS = NW ? 16 : 12;
+    const sq = v => Math.sign(v) * Math.log10(1 + Math.abs(v) / 1e6);     // 對數尺（百萬元起算），中間那團才拉得開
+    const fx = Math.max(...Q.map(x => Math.abs(sq(x.tot))), 1e-9), fy = Math.max(...Q.map(x => Math.abs(sq(x.ma))), 1e-9), mv = Math.max(...Q.map(x => x.vol || 0), 1);
+    const X = v => W / 2 + sq(v) / fx * (W / 2 - M), Yp = v => H / 2 - sq(v) / fy * (H / 2 - M);
+    const cnt = {}; Q.forEach(x => { if (x.big) cnt[x.big] = (cnt[x.big] || 0) + 1; });
+    const PAL = ["#3b82f6", "#c9922b", "#8b5cf6", "#ec4899", "#14b8a6", "#f97316", "#0ea5e9", "#a16207", "#6366f1"];
+    const top = Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a]).slice(0, PAL.length), col = x => PAL[top.indexOf(x.big)] || "#9ca3af";
+    let g = `<rect x="${W / 2}" y="${H / 2}" width="${W / 2}" height="${H / 2}" fill="rgba(229,72,77,.07)"/><rect x="0" y="0" width="${W / 2}" height="${H / 2}" fill="rgba(18,163,102,.07)"/>` +
+      `<line x1="0" x2="${W}" y1="${H / 2}" y2="${H / 2}" stroke="var(--ink-3)"/><line y1="0" y2="${H}" x1="${W / 2}" x2="${W / 2}" stroke="var(--ink-3)"/>` +
+      `<text x="${W - 6}" y="${H / 2 - 6}" text-anchor="end" font-size="${FS}" fill="var(--ink-3)">法人合計淨買 →</text><text x="6" y="${H / 2 - 6}" font-size="${FS}" fill="var(--ink-3)">← 法人合計淨賣</text>` +
+      `<text x="${W / 2 + 6}" y="${FS + 2}" font-size="${FS}" fill="var(--ink-3)">↑ 融資增（散戶買）</text><text x="${W / 2 + 6}" y="${H - 6}" font-size="${FS}" fill="var(--ink-3)">↓ 融資減（散戶賣）</text>` +
+      `<text x="${W - 6}" y="${H - 6}" text-anchor="end" font-size="${FS + 1}" font-weight="800" fill="var(--up)">法人買散戶賣（籌碼集中）</text>` +
+      `<text x="6" y="${FS + 4}" font-size="${FS + 1}" font-weight="800" fill="var(--down)">法人賣散戶買（籌碼渙散）</text>` +
+      `<text x="${W - 6}" y="${FS + 4}" text-anchor="end" font-size="${FS + 1}" font-weight="800" fill="var(--ink-2)">一起買</text>` +
+      `<text x="6" y="${H - 6}" font-size="${FS + 1}" font-weight="800" fill="var(--ink-2)">一起賣</text>`;
+    const placed = [], free = (x, y, w0) => !placed.some(q => Math.abs(q[1] - y) < FS + 2 && x < q[0] + q[2] && q[0] < x + w0);
+    Q.slice().sort((a, b) => (b.vol || 0) - (a.vol || 0)).forEach((x, k) => {
+      const cx = X(x.tot), cy = Yp(x.ma), r = (NW ? 5 : 4) + 16 * Math.sqrt((x.vol || 0) / mv), lw = x.name.length * FS;
+      g += `<g data-cfc="${esc(x.code)}" style="cursor:pointer"><title>${esc(x.name)} ${esc(x.code)}｜${esc(x.big || "名單外")}｜法人合計 ${Y(x.tot)} 億（外資 ${Y(x.fa)}、投信 ${Y(x.ta)}、自營自行 ${Y(x.da)}、避險 ${Y(x.ha)}）｜融資 ${Y(x.ma)} 億（${sgn(x.ml)} 張）｜成交金額 ${nf(x.vol / 1e8, 1)} 億</title>` +
+        `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r.toFixed(1)}" fill="${col(x)}" fill-opacity=".55" stroke="${col(x)}"/></g>`;
+      if (k < (NW ? 14 : 28) && free(cx + r + 2, cy, lw)) { placed.push([cx + r + 2, cy, lw]);
+        g += `<text x="${(cx + r + 2).toFixed(1)}" y="${(cy + 4).toFixed(1)}" font-size="${FS}" fill="var(--ink-1)" pointer-events="none">${esc(x.name)}</text>`; }
+    });
+    const lg = el("div", "cf-lg", top.map((b, i) => `<span><i style="background:${PAL[i]}"></i>${esc(b)}</span>`).join("") + `<span><i style="background:#9ca3af"></i>其他／名單外</span>`);
+    const w2 = el("div"); w2.appendChild(el("div", "", `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block">${g}</svg>`)); w2.appendChild(lg);
+    return card(`法人 × 散戶・四象限（${n32Wl(cfWin)}）`, `${n32Span(window.__CHIPS, cfWin)} · 法人合計＋融資金額變動最大的 ${Q.length} 檔 · 兩軸對數尺（億）· 泡泡大小＝成交金額 · 顏色＝族群`, w2,
+      "右下＝法人買、散戶（融資）賣：籌碼往法人集中；左上＝法人賣、散戶買：籌碼往散戶分散。右上一起買、左下一起賣。" +
+      "⚠️ 融資早就不等於散戶，主力大戶一樣用融資；這裡只描述誰的部位在動，不替任何位置貼好壞標籤。融資只有上市。點泡泡開個股頁。量化統計結果，非投資建議。");
+  }
 
   function apply() {
-    paintWin();
-    const base = rowsFor(cfWin);
-    if (!base) { body.innerHTML = ""; body.appendChild(n32Wait()); return; }
-    let arr = base.slice();
-    DEF.forEach(([k, , , test]) => { if (st[k]) arr = arr.filter(r => test(r, st[k])); });
-    arr.sort((a, b) => (Math.abs(b.fo) + Math.abs(b.tr)) - (Math.abs(a.fo) + Math.abs(a.tr)));
-    const on = DEF.filter(([k]) => st[k])
-      .map(([k, lab, opts]) => `${lab}${opts.find(o => o[0] === st[k])[1]}`);
+    paintBar();
     body.innerHTML = "";
-    body.appendChild(el("div", "eyebrow",
-      n32Wl(cfWin) + "　·　" + (on.length ? on.join("　＋　") : "未設條件（全部）") +
-      `　·　${arr.length} 檔　·　法人單位：張　·　資料日 ${esc(i.date || "—")}`));
-    const box = el("div");
-    const h = el("div", "chipstruct h");
-    ["個股", "外資", "投信", "自營自行", "自營避險", "融資增減", "融券增減", "主動 ETF"].forEach((c, k) =>
-      h.appendChild(el("span", "", esc(c), k ? "text-align:right" : "")));
-    box.appendChild(h);
-    if (!arr.length) box.appendChild(el("div", "empty",
-      "沒有個股同時滿足這組條件。條件是「同時成立」，越加越少是正常的 —— " +
-      "把其中一項改回「不限」再看看。"));
-    arr.slice(0, 60).forEach(r => {
-      const a = r.act || {};
-      const tag = [a.new && `新增${a.new}`, a.add && `加碼${a.add}`,
-                   a.cut && `減碼${a.cut}`, a.clear && `清倉${a.clear}`]
-        .filter(Boolean).join(" ") || "—";
-      box.appendChild(el("div", "chipstruct",
-        `<span>${chip(r.name, r.code)}${r.inUni ? "" :
-          '<span class="flat" style="font-size:10px;margin-left:5px">名單外</span>'}</span>` +
-        `<span class="num ${cls(r.fo)}" style="text-align:right">${sgn(r.fo)}</span>` +
-        `<span class="num ${cls(r.tr)}" style="text-align:right">${sgn(r.tr)}</span>` +
-        `<span class="num ${cls(r.ds || 0)}" style="text-align:right">${r.ds === null ? "—" : sgn(r.ds)}</span>` +
-        `<span class="num ${cls(r.dh || 0)}" style="text-align:right">${r.dh === null ? "—" : sgn(r.dh)}</span>` +
-        `<span class="num ${cls(r.mchg || 0)}" style="text-align:right">${
-          r.mchg === null ? "—" : sgn(r.mchg)}</span>` +
-        `<span class="num ${cls(r.schg || 0)}" style="text-align:right">${
-          r.schg === null ? "—" : sgn(r.schg)}</span>` +
-        `<span class="flat" style="text-align:right;font-size:11.5px">${esc(tag)}</span>`));
-    });
-    if (arr.length > 60) box.appendChild(el("div", "sub",
-      `另有 ${arr.length - 60} 檔未列出（依法人動用張數排序取前 60）`, "margin-top:6px"));
-    body.appendChild(card(on.length ? on.join(" ＋ ") : "全部個股",
-      `${arr.length} 檔 · 條件互相 AND · 買超／賣超以張數正負判定，不設分位門檻`, box,
-      `自營商拆成「自行買賣」（自己的錢、有方向性）與「避險」（權證等商品的被動避險），來源證交所 T86／櫃買逐檔欄位。
-       七個條件各自獨立、可以任意組合，所以問得到的不只是幾種固定形態。
-       門檻刻意用「張數正負」而不是分位數 —— 分位數要解釋「前 10% 是相對誰」，
-       正負不用解釋，而且明天再查還是同一個意思。規則會動就累積不了判斷經驗。
-       ⚠️ 融資早就不等於散戶，主力大戶一樣用融資；主動式 ETF 的建倉也可能只是換股。
-       這一頁只描述「誰的部位在動」，不替任何組合貼上好壞標籤 ——
-       那要看價格結構，籌碼自己回答不了。
-       ⚠️ 涵蓋全市場，不在 153 檔追蹤名單裡的標「名單外」，那些沒有五因子分數。
-       量化統計結果，非投資建議。`));
-  }
-
-  DEF.forEach(([k, lab, opts]) => {
-    const row = el("div", "row");
-    row.appendChild(el("span", "", esc(lab)));
-    const sel = el("select");
-    sel.dataset.k = k;
-    opts.forEach(([v, t]) => sel.appendChild(new Option(t, v)));
-    sel.onchange = () => { st[k] = sel.value; sel.classList.toggle("on", !!sel.value); apply(); };
-    row.appendChild(sel);
-    bar.appendChild(row);
-  });
-  const rs = el("button", "reset", "✕ 全部重設");
-  rs.onclick = () => { DEF.forEach(([k]) => { st[k] = ""; });
-    bar.querySelectorAll("select").forEach(s2 => { s2.value = ""; s2.classList.remove("on"); });
-    apply(); };
-  bar.appendChild(rs);
-
-  // 🟢 N-32：區間鈕接在同一條 .cfbar 最前面（sideTabs 只搬第一條 .subpick）。
-  //    就地改 winBox 的內容，不換節點。
-  const winBox = el("span", "n32win");
-  bar.insertBefore(winBox, bar.firstChild);
-  const cfCount = w => {
-    const base = rowsFor(w);
-    if (!base) return undefined;
-    let arr = base;
-    DEF.forEach(([k, , , test]) => { if (st[k]) arr = arr.filter(r => test(r, st[k])); });
-    return arr.length;
-  };
-  function paintWin() {
+    const R = build(cfWin);
+    if (!R) { body.appendChild(n32Wait()); return; }
     const C = window.__CHIPS;
-    const mOk = w => w === 1 || !!(C && C.m && C.m.ok && C.m.ok[String(w)]);
-    winBox.innerHTML = "";
-    winBox.appendChild(el("span", "lab", "區間"));
-    N32_WIN.forEach(([w, lab]) => {
-      const n = (w === 1 || C) ? cfCount(w) : undefined;
-      const b = el("button", "pill" + (cfWin === w ? " on" : ""),
-        esc(lab) + (n === undefined ? "" : `　${n}`));
-      if (cfWin !== w && (n === 0 || (w !== 1 && !C))) b.disabled = true;
-      b.onclick = () => { cfWin = w; apply(); };   // apply() 開頭會重畫這一排
-      winBox.appendChild(b);
-    });
-    // 融資／融券：信用落地不夠深的窗就停用，並清掉已選的條件（不然會篩成 0 檔又看不出為什麼）
-    bar.querySelectorAll("select").forEach(s2 => {
-      const k = s2.dataset.k;
-      if (k !== "mg" && k !== "sh" && k !== "ds" && k !== "dh") return;
-      const off = k === "ds" || k === "dh" ? !dOk(cfWin) : !mOk(cfWin);
-      s2.disabled = off;
-      s2.title = off ? "個股信用的逐日落地還不夠深，這個區間算不出來" : "";
-      if (off && st[k]) { st[k] = ""; s2.value = ""; s2.classList.remove("on"); }
-    });
+    body.appendChild(el("div", "eyebrow", `${n32Wl(cfWin)}　·　${esc(n32Span(C, cfWin))}　·　${R.length} 檔　·　單位：億元（張數在滑鼠提示）${esc(n32Holes(C, cfWin))}`));
+    if (CF_VIEW === "熱力圖") { body.appendChild(vHeat(R)); return; }
+    if (CF_VIEW === "四象限") { body.appendChild(vQuad(R)); return; }
+    body.appendChild(card(`籌碼流向（${n32Wl(cfWin)}）`, `${R.length} 檔 · 點欄位標題排序、再點反向 · 預設依合計金額由買到賣`, vTable(R),
+      `金額＝逐日買賣超張數×當日收盤×1000（外資、投信、自營商來源證交所 T86／櫃買逐檔）；融資＝區間增減張數×最新收盤×1000（散戶代理，只有上市）；
+       主動 ETF＝今日各主動式 ETF 持股異動股數×最新收盤（只有今日；已含在投信裡）。合計＝外資＋投信＋自營自行＋自營避險。
+       涵蓋全市場，不在追蹤名單裡的族群標「名單外」。點個股開個股頁。量化統計結果，非投資建議。`));
   }
-  n32Load().then(() => apply());   // chips 到了：按鈕數字與區間表都要重畫
+  const winBox = el("span", "n32win"), vBox = el("span", "n32win");
+  bar.appendChild(winBox); bar.appendChild(vBox);
+  function paintBar() {
+    const C = window.__CHIPS;
+    winBox.innerHTML = ""; winBox.appendChild(el("span", "lab", "區間"));
+    N32_WIN.forEach(([w, lab]) => { const b = el("button", "pill" + (cfWin === w ? " on" : ""), esc(lab));
+      if (!C && w !== 1) b.disabled = true; b.onclick = () => { cfWin = w; apply(); }; winBox.appendChild(b); });
+    vBox.innerHTML = ""; vBox.appendChild(el("span", "lab", "檢視"));
+    ["表", "熱力圖", "四象限"].forEach(v => { const b = el("button", "pill" + (CF_VIEW === v ? " on" : ""), v);
+      b.onclick = () => { CF_VIEW = v; try { localStorage.setItem("gea_cf_view", v); } catch (e) {} apply(); }; vBox.appendChild(b); });
+  }
+  n32Load().then(() => apply());
   apply();
   f.appendChild(bar);
   f.appendChild(body);
@@ -12367,7 +12380,7 @@ function tabChips() {
   //    外面包一層 tabN32*：單日＋不加條件時畫的就是原本那一張。
   // 🟢 10-11 15:10（Evans P1-4）：大戶持股 → 「集保大戶持股」排第一格；內部人申報升為「籌碼」組的子頁籤（P0-2）
   return sideTabs([["集保大戶持股",   tabTdcc],
-                   ["籌碼篩選",       tabChipFilter,  "inst"],
+                   ["籌碼流向",       tabChipFlow,    "inst"],   // 🟢 10-25 16:30（Evans 雲端 1）：籌碼篩選 → 籌碼流向（金額、排序、熱力圖、四象限）
                    // 🟢 第六批（09-27）：加「圖／表」切換（圖只畫今天；區間累計在「表」）
                    ["三大法人買賣超", () => viewToggle("chip_sum", [["圖", () => chipChart("sum")], ["表", tabN32Sum]]), "inst"],
                    // 🟢 10-18（Evans D7）：自營商自行買賣／避險移到顯眼處（自己一格）＋「自營選股（扣避險）」視角
@@ -16015,6 +16028,49 @@ setTimeout(() => dpLoad().then(J => {
 
 /* 🟢 10-11（Evans P1-6）：個股資訊框 —— 近期重大訊息（現金增資附認股基準日、繳款期間、最後過戶日、撥券日）＋融資融券（單日或區間）。
    資料＝stock_lookup.py 的 docs/data/lookup/<代號前兩碼>.json；全市場個股都查得到（上櫃信用要等 margin_otc 累積）。 */
+/* 🟢 10-25 16:30（Evans 雲端 3，12:20 段 2）：個股頁「分析師共識」—— 料：docs/data/analyst.json（broker.py 每天抓 yfinance 一次，點開才載）。
+   目標價（高／中位／低／平均）、評等家數（本月與上月）、EPS／營收預估（本季、下季、今年、明年）、預估修正（現在／7／30／60／90 天前）、
+   近 7／30 天調升調降家數。欄名照 yfinance 原樣。沒有這檔＝「無分析師覆蓋」。頁面標「資料來源：Yahoo Finance」。 */
+let _anW = null;
+function sxAnalyst(code) {
+  const sec = el("div", "sxc-sec", `<h4>分析師共識 <small class="rv-dim">資料來源：Yahoo Finance・整理自公開資料，僅供參考，不具任何臆測</small></h4>`);
+  const out = el("div", "sub", "載入中…"); sec.appendChild(out);
+  if (!_anW) _anW = fetch("data/analyst.json" + _dv(), {cache: "force-cache"}).then(r => r.ok ? r.json() : null).catch(() => null);
+  _anW.then(J => {
+    if (!J) { out.textContent = "分析師共識資料還沒產出（每天盤後抓一次）。"; return; }
+    const A = (J.stocks || {})[code];
+    if (!A) { out.textContent = "無分析師覆蓋。"; return; }
+    const n = (v, d) => v == null ? "—" : nf(v, d == null ? (Math.abs(v) < 100 ? 2 : 1) : d);
+    const pc = v => v == null ? "—" : `<span class="${v > 0 ? "up" : v < 0 ? "down" : ""}">${v > 0 ? "+" : ""}${nf(v * 100, 1)}%</span>`;
+    const PER = {"0q": "本季", "+1q": "下季", "0y": "今年", "+1y": "明年"};
+    const cell = [], add = (k, v, t) => cell.push(`<div class="sxk"${t ? ` title="${esc(t)}"` : ""}><i>${k}</i><b>${v}</b></div>`);
+    const pt = A.pt;
+    if (pt) add("目標價（中位）", `${n(pt.median)}<small>　高 ${n(pt.high)}／低 ${n(pt.low)}／平均 ${n(pt.mean)}${pt.current != null ? `　現價 ${n(pt.current)}` : ""}</small>`, "各家分析師目標價的統計（Yahoo Finance analyst_price_targets）");
+    const rc = A.rec || {}, r0 = rc["0m"], r1 = rc["-1m"];
+    const rs = r => r ? ["strongBuy", "buy", "hold", "sell", "strongSell"].map(k => r[k] || 0) : null;
+    if (r0) { const a = rs(r0), b = rs(r1), tot = a.reduce((x, y) => x + y, 0);
+      add(`評等家數（本月 ${tot} 家）`, `強買 ${a[0]}・買進 ${a[1]}・持有 ${a[2]}・賣出 ${a[3]}・強賣 ${a[4]}${b ? `<small>　上月 ${b.join("／")}</small>` : ""}`, "Yahoo Finance recommendations：本月與上月各評等的分析師家數（上月依 強買／買進／持有／賣出／強賣 排列）"); }
+    ["0y", "+1y"].forEach(p => { const e = (A.ee || {})[p]; if (e) add(`EPS 預估（${PER[p]}）`, `${n(e.avg)}<small>　${n(e.low)}～${n(e.high)}・${e.numberOfAnalysts ?? "—"} 家${e.yearAgoEps != null ? `・前一年 ${n(e.yearAgoEps)}` : ""}${e.growth != null ? `・成長 ${pc(e.growth)}` : ""}</small>`); });
+    ["0y", "+1y"].forEach(p => { const e = (A.re || {})[p]; if (e) add(`營收預估（${PER[p]}）`, `${n(e.avg / 1e8, 0)} 億<small>　${e.numberOfAnalysts ?? "—"} 家${e.growth != null ? `・成長 ${pc(e.growth)}` : ""}</small>`); });
+    {
+      const et = A.et || {};
+      ["0y", "+1y"].forEach(p => { const e = et[p]; if (!e || e.current == null) return;
+        const seq = [["90daysAgo", "90 天前"], ["60daysAgo", "60 天前"], ["30daysAgo", "30 天前"], ["7daysAgo", "7 天前"], ["current", "現在"]].filter(([k]) => e[k] != null);
+        const base = e["90daysAgo"];
+        add(`預估修正（${PER[p]} EPS）`, seq.map(([k]) => n(e[k])).join(" → ") + (base ? `<small>　90 天 ${pc(e.current / base - 1)}</small>` : ""), seq.map(([, l]) => l).join(" → "));
+      });
+      ["0y", "+1y"].forEach(p => { const e = (A.er || {})[p]; if (!e) return;
+        const g = k => e[k] ?? e[k.replace("Days", "days")] ?? e[k.replace("days", "Days")];
+        add(`調升／調降家數（${PER[p]}）`, `近 7 天 <span class="up">↑${g("upLast7days") ?? 0}</span> <span class="down">↓${g("downLast7Days") ?? 0}</span>　近 30 天 <span class="up">↑${g("upLast30days") ?? 0}</span> <span class="down">↓${g("downLast30days") ?? 0}</span>`, "Yahoo Finance eps_revisions：近 7／30 天調升、調降 EPS 預估的分析師家數");
+      });
+    }
+    out.className = ""; out.innerHTML = "";
+    if (!cell.length) { out.className = "sub"; out.textContent = "無分析師覆蓋。"; return; }
+    out.appendChild(el("div", "sxg", cell.join("")));
+    out.appendChild(el("div", "rv-dim", `資料日 ${esc(J.asof || "—")}・Yahoo Finance（yfinance）每天抓一次・家數與數字為各家分析師預估的統計，不代表本站觀點`, "margin-top:4px;font-size:12px"));
+  });
+  return sec;
+}
 function sxCard(code, name, mkt, goStock) {
   const old = document.querySelector(".sxc-wrap"); if (old) old.remove();
   const wrap = el("div", "sxc-wrap"), box = el("div", "sxc");
@@ -16063,6 +16119,7 @@ function sxCard(code, name, mkt, goStock) {
       lks.appendChild(b); }
     if (lks.children.length) box8.appendChild(lks);
     if (box8.children.length) body.appendChild(box8);
+    body.appendChild(sxAnalyst(code));             // 🟢 10-25 16:30（雲端 3）：分析師共識（Yahoo Finance）
     n32Load().then(() => { const C = window.__CHIPS, r = C && C.d && C.d.rows && C.d.rows[code];
       box8.querySelectorAll("[data-sxd]").forEach(n => { const k = n.dataset.sxd;
         n.innerHTML = !r ? "—" : [5, 20].map(w => `${w} 日 ${n32d.ok(C, w) ? sp(n32d.lots(r, w, k)) : "—"}`).join("　"); }); }).catch(() => {});
