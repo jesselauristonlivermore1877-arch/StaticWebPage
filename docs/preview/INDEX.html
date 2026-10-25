@@ -11,16 +11,14 @@ h2{font-size:17px;margin:0 0 6px} .u{margin:0 0 4px;overflow-wrap:anywhere} .u a
 .b{margin:0 0 6px;color:var(--ink2);font-size:13px} ul{margin:6px 0 0;padding-left:20px} li{margin:3px 0}
 </style></head><body><main><h1>待審預覽</h1>
 <p class="m">共 10 項　更新 2026-10-25（台北）　只放公開版會出現的內容；審核通過、套版後就刪掉對應的預覽。</p>
-<section><h2>【10-25 傍晚】內部人買賣月K圖、籌碼流向、分析師共識（10-25 16:30 雲端 1～3）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><ul>
-<li><b>2 內部人買賣（月）</b>（籌碼 → 內部人申報 → 搜尋個股，第一個子標籤）：月底收盤線＋當月淨買（紅）／淨賣（綠）圓點（面積＝金額），淨額最大 5 個月加標籤框（職稱＋人數／均價＋淨額），下方買進／賣出金額柱，近 6／12 個月合計＋白話一行。順手修掉金控（例 2891）子公司重複列造成的假異動。截圖：<a href="v2/shots/insider_kmonth_2330.png">2330</a>、<a href="v2/shots/insider_kmonth_2891.png">2891</a></li>
-<li><b>1 籌碼流向</b>（原「籌碼篩選」，篩選器拿掉）：金額為主（億，張數在滑鼠提示），外資／投信／自營自行／自營避險／主動 ETF／合計／融資每欄可排序、再點反向；「檢視」可切 表／熱力圖（合計前 60 檔×6 欄）／四象限（法人合計×融資、泡泡＝成交金額、顏色＝族群）；點個股開個股頁。截圖：<a href="v2/shots/chipflow_table.png">表</a>、<a href="v2/shots/chipflow_heat.png">熱力圖</a>、<a href="v2/shots/chipflow_quad.png">四象限</a></li>
-<li><b>3 分析師共識</b>（搜尋個股的資訊框）：目標價、評等家數（本月／上月）、EPS 與營收預估（今年、明年）、預估修正（90→60→30→7 天前→現在）、近 7／30 天調升調降家數；標「資料來源：Yahoo Finance」，沒有覆蓋顯示「無分析師覆蓋」。正式資料下一班每日更新後才有（截圖用 10-25 探針實際抓到的 1101 數字）。截圖：<a href="v2/shots/analyst_1101.png">1101</a>、<a href="v2/shots/analyst_2731.png">無覆蓋</a></li>
-</ul></section>
-<section><h2>【10-25 下午】新聞一行結論、集保大戶並排、自營商個股拆自行買賣／避險（10-25 14:40 雲端 1～3）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">程式：CustomerServiceANDSales 分支 preview/v2；新聞結論後端（news_gist.py）已上 main，每班「即時信息流」產生。上一版 v2（國際指數等）已於 12:20 合進正式站。要看的重點：</p><ul>
-<li><b>1 新聞一行結論</b>（消息 → 即時信息流、產業信息等新聞列）：標題右側一行 20～40 字濃縮＋「偏多／偏空／中性」小標（手機改在標題下方）；滑過小標看依據（多空要有原文逐字片語才標，其餘一律中性）。截圖：<a href="v2/shots/news_gist.png">桌機</a>、<a href="v2/shots/news_gist_m.png">手機</a></li>
-<li><b>2 集保大戶持股</b>（籌碼 → 現貨籌碼 → 集保大戶持股，「圖」模式）：族群與個股左右並排；點族群後「增加／減少」左右並排。列表模式照舊上下。截圖：<a href="v2/shots/tdcc_side.png">並排</a></li>
-<li><b>3 自營商個股</b>：①「自營商」加「圖／表」，圖＝自行買賣、避險兩張熱力圖並排 ②「籌碼篩選」多「自營自行」「自營避險」兩欄與篩選條件（單日與各區間都有）③搜尋個股的資訊框多「自營自行／自營避險 5 日、20 日」。截圖：<a href="v2/shots/dealer_heat.png">熱力圖</a>、<a href="v2/shots/chipfilter_dealer.png">篩選表</a></li>
-</ul></section>
+<section><h2>【10-25 晚】ToAlpha「部分有」個股頁升級（10-25 17:10 雲端 6）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">搜尋任一檔個股開資訊框。程式：CustomerServiceANDSales 分支 preview/v2；後端（stock_extra.py、corp_events.py、tdcc.py、stock_lookup.py）已上 main，10-25 第 374 班已寫出真資料。要看的重點：</p><ul>
+<li><b>頁首</b>（部分 1、3）：收盤、漲跌、昨收、資料日、本益比、淨值比、殖利率、☆加入自選（存在這台瀏覽器）；52 週位置條；1／3／6／12 個月 vs 加權（上櫃比櫃買）＋相對強弱，下面一行白話。截圖：<a href="v2/shots/stock_head_2330.png">2330</a>、<a href="v2/shots/stock_head_6488.png">6488 上櫃</a>、<a href="v2/shots/stock_head_2330_m.png">手機</a></li>
+<li><b>分頁鈕</b>（部分 1）：頁首下一排按鈕，點了跳到該段（公司概況／分析師共識／近期重大訊息／籌碼結構與股利／融資融券），捲動時黏在上方。資訊框加寬到 980px</li>
+<li><b>籌碼結構與股利</b>（部分 2d、8a、8b）：外資持股比（20 日變化要累積 20 個交易日）、融資使用率（餘額÷限額）、股東人數（近 4 週要累積 4 週）、近 12 月殖利率；近 5 年每年現金股利表。截圖：<a href="v2/shots/stock_struct_2330.png">2330</a>、<a href="v2/shots/stock_struct_2884.png">2884（權息年度拆不開，標＊）</a>、<a href="v2/shots/stock_struct_6488.png">6488</a></li>
+<li><b>公司概況</b>（部分 9）：董事長、總經理、發言人、簽證會計師、股務代理、成立／上市、資本額、網址；每天比對變動，有變動列在下面。截圖：<a href="v2/shots/stock_profile_2330.png">2330</a></li>
+<li><b>每段白話</b>（部分 10）：頁首、籌碼結構各有一行白話；分析師共識、內部人已有。</li>
+<li>沒做到的（寫在 TODO）：大戶「5000 張以上」（集保最高分級 1000 張，做不到）、「主要業務」（OpenAPI 沒有這欄）、上市「權息」那次的現金股利（要一檔一發明細，會被擋）。</li></ul></section>
+<section><h2>【10-25 晚】預覽 v2 已合進正式站（10-25 17:10 雲端 5）：正式站截圖驗收</h2><p class="b">新聞一行結論、集保並排、自營商拆自行／避險、內部人買賣月K圖、籌碼流向、Yahoo 分析師共識 → 10-25 第 373 班上正式站（check_web 無 ✗✗、頁面無 JS 錯誤）。原 10-25 下午、傍晚兩段預覽已刪。截圖（正式站）：<a href="v2/shots/live_news_gist.png">新聞結論</a>、<a href="v2/shots/live_tdcc.png">集保</a>、<a href="v2/shots/live_dealer.png">自營</a>、<a href="v2/shots/live_insider.png">內部人</a>、<a href="v2/shots/live_chipflow.png">籌碼流向</a>、<a href="v2/shots/live_analyst.png">分析師共識</a></p></section>
 <section><h2>【10-25】國際指數、信用風險提醒、疊圖加指數與利差（10-25 雲端 1、2）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">程式：CustomerServiceANDSales 分支 preview/v2（437c34d）；後端 world_idx.py 已上 main；10-25 10:45 世界趨勢第 141 班已寫出真資料（world_idx.json、credit_hist.json），預覽已重烘。截圖：<a href="v2/shots/home_desktop.png">首頁桌機</a>、<a href="v2/shots/home_mobile.png">首頁手機</a>、<a href="v2/shots/overlay.png">自由疊圖（利差＋加權＋那斯達克）</a>。要看的重點：</p><ul>
 <li><b>頁首（每一頁都在第一屏）</b>：加權、費半、那斯達克 100 期貨、道瓊期貨、KOSPI、日經六格：現價、漲跌%、近 20 日小走勢（手機兩欄）</li>
 <li><b>信用風險升溫</b>：美國高收益債或投資等級債利差，單日或 5 日擴大超過歷史第 95 百分位 → 頁首置頂紅框＋跑馬燈第一則紅標（10-22 高收益債 +0.13 個百分點，超過門檻 0.10，現在就會亮）</li>
