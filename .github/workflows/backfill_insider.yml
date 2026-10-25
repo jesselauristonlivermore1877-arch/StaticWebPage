@@ -9,6 +9,11 @@ on:
   schedule:
     - cron: "17 */3 * * *"
   workflow_dispatch:
+    inputs:
+      first:
+        description: "優先抓的代號（逗號分隔，驗收用，例 2330,2059,3105）"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -47,6 +52,8 @@ jobs:
       - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests
       - name: 抓片 ${{ matrix.shard }}
         working-directory: code
+        env:
+          INSIDER_FIRST: ${{ github.event.inputs.first }}
         run: python insider.py ../site/data --crawl ../out --shard ${{ matrix.shard }} --of 8 --sec 1500
       - uses: actions/upload-artifact@v4
         with:
