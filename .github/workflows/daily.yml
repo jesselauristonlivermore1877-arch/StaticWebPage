@@ -153,6 +153,8 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
         run: |
           # 10-12：每支印耗時（三班在 35 分被取消，定位是 insider 逐人回補 11.5 分）
           T(){ local s=$SECONDS; "$@"; local r=$?; echo "  ⏱ $2 用 $((SECONDS-s)) 秒（步驟累計 $SECONDS 秒）"; return $r; }
@@ -175,6 +177,8 @@ jobs:
           T python impact.py ../site/data --export || { echo "::warning::影響判定索引失敗（Worker 用舊索引）"; echo "影響判定索引失敗（Worker 用舊索引）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python attention.py ../site/data || { echo "::warning::關注度排行失敗（這班不更新）"; echo "關注度排行失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python stock_lookup.py ../site/data || { echo "::warning::個股查詢資料失敗（搜尋框資訊框這班不更新）"; echo "個股查詢資料失敗（搜尋框資訊框這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          # 🟢 10-25：頁首國際指數＋公司債利差「信用風險升溫」紅標（TG 兩個 secret 沒設時只上網頁）
+          T python world_idx.py ../site/data || { echo "::warning::國際指數／公司債利差失敗（沿用上一份）"; echo "國際指數／公司債利差失敗（沿用上一份）" >> "$RUNNER_TEMP/soft_fail.txt"; }
 
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
       # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。

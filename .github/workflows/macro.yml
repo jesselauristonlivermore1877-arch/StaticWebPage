@@ -87,6 +87,8 @@ jobs:
           WEEKLY_FORCE: ${{ inputs.weekly_force }}
           PYTHONUNBUFFERED: "1"
           GEA_SITE_DATA: ../site/data                      # 10-05：分類閘門的地緣政治 AI 判斷快取在這裡
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}          # 10-25：world_idx 信用風險提醒（沒設就只上網頁）
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
         run: |
           M="${{ steps.mode.outputs.mode }}"
           if [ "$M" = "retag" ]; then
@@ -96,9 +98,12 @@ jobs:
           elif [ "$M" = "fred" ]; then
             echo "只抓 FRED 經濟指標（公布日加抓）"
             python macro_flow.py ../site/data --no-news
+            python world_idx.py ../site/data || echo "::warning::國際指數／公司債利差失敗（沿用上一份）"
             python tools/preview_macro.py ../site --formal --light
           else
             python macro_flow.py ../site/data
+            # 🟢 10-25：早上就看得到美股收盤與公司債利差（失敗不擋世界趨勢）
+            python world_idx.py ../site/data || echo "::warning::國際指數／公司債利差失敗（沿用上一份）"
             # 🟢 10-04 v2 合進 main：常駐人物（官方職位表＋各國市值名單負責人）、擴充查詢、人物歷史發言、量化統計日報
             python tools/preview_macro.py ../site --formal
           fi
@@ -109,6 +114,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/macro_flow.json docs/data/macro.json docs/data/releases.json data/weekly data/central_banks.json data/news_pool.json data/people_roles.json data/macro_v2_state.json data/registry/geo_ai.json
+          git add docs/data/world_idx.json data/credit_hist.json 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "沒有變動，不提交。"
           else
