@@ -19,12 +19,7 @@ h2{font-size:17px;margin:0 0 6px} .u{margin:0 0 4px;overflow-wrap:anywhere} .u a
 <li><b>17:55 改</b>：淨值比河流色帶＝<b>這檔自己近 5 年</b>淨值比 25～75 分位 × 每股淨值（不滿 5 年用全部）；族群淨值比中位數改成上方一行參考文字。收盤只有日K庫的 2024-09 起，圖只畫這兩年，分位照樣用 5 年</li>
 <li><b>17:55 改</b>：手機預設只顯示最近 4 季，按「展開全部」才看 8／12 季</li>
 <li>法說重磅（18:15）：預覽不再放嘉晶回放樣本，跟正式站一樣讀 data/ir_alert.json；目前沒有即時偵測，所以頁首紅框與跑馬燈都不出現（這是正確的）</li></ul></section>
-<section><h2>【10-26】法說重磅：頁首紅色置頂＋跑馬燈第一則＋個股頁標記（10-26 02:50 雲端 1～4；03:10 雲端 6 加「法說日已漲／跌 ±X%」與「已反映」，<b>已合進正式站</b>，10-26 第 379 班）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">預覽用樣本（docs/preview/v2/ir_alert_sample.json）＝嘉晶 3016 2026-09-22 法說真實簡報句，不是即時資料；正式站讀 docs/data/ir_alert.json（news_live 每班偵測）。截圖：<a href="v2/ira_top.png">頁首紅框＋跑馬燈</a>、<a href="v2/ira_sx3016.png">3016 個股頁標記</a>。要看的重點：</p><ul>
-<li>頁首紅框（近 72 小時、最多 3 則）：公司（代號）、法說日、原句、出處、發布時間（台北）、另有幾個出處、觸發當日收盤與漲跌、原文連結；點紅框開個股卡</li>
-<li>跑馬燈第一則固定放「法說重磅」紅色標籤</li>
-<li>個股頁：近 30 天有觸發就在報酬表下面多一條紅框（法說日、原句、出處、原文）</li>
-<li>TG 立即推（公司、原句、來源連結、發布時間、當日收盤／漲跌）；後端與 TG 不用等預覽，已上 main</li>
-<li>回放驗證表在程式 repo TODO「10-26 02:50 雲端回報」</li></ul></section>
+
 <section><h2>【10-26】內部人集中市場口徑＋ToAlpha 9 項＋內部人上層已合進正式站（10-26 01:00 雲端 1～3）：正式站截圖驗收</h2><p class="b">淨買賣只算集中市場買進－賣出；贈與／繼承／信託／私募／員工酬勞另列「其他原因」灰色；股數加總後才換張。2330、2059、3105 對 1025 截圖逐月＋6／12 個月合計已過（差異說明見 TODO 10-26 01:00 雲端回報）。main 6b740f9e → 10-26 第 377 班上正式站（check_web 無 ✗✗、頁面無 JS 錯誤）。原 10-25 晚、10-25 深夜、10-26 凌晨三段預覽已刪。排行目前已回補集中市場拆分 184／844 檔，其餘每 3 小時補一輪。截圖（正式站）：<a href="v2/live_ins_rank.png">全市場排行（近 6 個月淨賣出）</a>、<a href="v2/live_ins_2330.png">2330</a>、<a href="v2/live_ins_2059.png">2059</a>、<a href="v2/live_ins_3105.png">3105</a></p></section>
 <section><h2>【10-25 晚】預覽 v2 已合進正式站（10-25 17:10 雲端 5）：正式站截圖驗收</h2><p class="b">新聞一行結論、集保並排、自營商拆自行／避險、內部人買賣月K圖、籌碼流向、Yahoo 分析師共識 → 10-25 第 373 班上正式站（check_web 無 ✗✗、頁面無 JS 錯誤）。原 10-25 下午、傍晚兩段預覽已刪。截圖（正式站）：<a href="v2/shots/live_news_gist.png">新聞結論</a>、<a href="v2/shots/live_tdcc.png">集保</a>、<a href="v2/shots/live_dealer.png">自營</a>、<a href="v2/shots/live_insider.png">內部人</a>、<a href="v2/shots/live_chipflow.png">籌碼流向</a>、<a href="v2/shots/live_analyst.png">分析師共識</a></p></section>
 <section><h2>【10-25】國際指數、信用風險提醒、疊圖加指數與利差（10-25 雲端 1、2）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a></p><p class="b">程式：CustomerServiceANDSales 分支 preview/v2（437c34d）；後端 world_idx.py 已上 main；10-25 10:45 世界趨勢第 141 班已寫出真資料（world_idx.json、credit_hist.json），預覽已重烘。截圖：<a href="v2/shots/home_desktop.png">首頁桌機</a>、<a href="v2/shots/home_mobile.png">首頁手機</a>、<a href="v2/shots/overlay.png">自由疊圖（利差＋加權＋那斯達克）</a>。要看的重點：</p><ul>
