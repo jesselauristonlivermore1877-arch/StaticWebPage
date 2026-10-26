@@ -66,6 +66,18 @@ jobs:
         working-directory: code
         run: python tools/sector_map_apply.py
 
+      # 🟢 10-26 11:15（總指揮雲端 2）：綜合損益表（財報公布期每天抓當季）與董事會通過／自結公告排在 build_web 之前
+      #    → 河流圖、本年 CY、個股頁當班就吃到新財報（以前排在後面，晚一班）。對照表在後面那段用這班的 river.json 印。
+      - name: 新財報入帳（綜合損益表・董事會通過／自結）
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 15
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python is_hist.py ../site/data --max 8 || { echo "::warning::綜合損益表回補失敗（三率、十年季度表這班不更新）"; echo "綜合損益表回補失敗（三率、十年季度表這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python fin_status.py ../site/data --no-table || { echo "::warning::財報入帳狀態失敗（董事會通過／自結這班不更新）"; echo "財報入帳狀態失敗（董事會通過／自結這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+
       - name: 產出資料與網頁
         working-directory: code
         run: |
@@ -163,8 +175,7 @@ jobs:
           T python world_data.py ../site/data
           T python sector_pe.py ../site/data || { echo "::warning::產業本益比分位失敗（流向總覽第四條線這班不更新）"; echo "產業本益比分位失敗（流向總覽第四條線這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python industry_notes.py ../site/data || { echo "::warning::產業動向發布失敗（個股研究 → 產業動向這班不更新）"; echo "產業動向發布失敗（個股研究 → 產業動向這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
-          T python is_hist.py ../site/data --max 8 || { echo "::warning::綜合損益表回補失敗（三率、十年季度表這班不更新）"; echo "綜合損益表回補失敗（三率、十年季度表這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
-          T python fin_status.py ../site/data || { echo "::warning::財報入帳狀態失敗（董事會通過／自結這班不更新）"; echo "財報入帳狀態失敗（董事會通過／自結這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          T python fin_status.py ../site/data --table-only || { echo "::warning::財報入帳對照表失敗（只影響 log）"; echo "財報入帳對照表失敗（只影響 log）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python ir_hist.py ../site/data --max 12 || { echo "::warning::法說歷史回補失敗（法說反應這班不更新）"; echo "法說歷史回補失敗（法說反應這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python contrib.py ../site/data || { echo "::warning::大盤點數貢獻失敗（這班不更新）"; echo "大盤點數貢獻失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python mi_react.py ../site/data || { echo "::warning::重訊反應失敗（這班不更新）"; echo "重訊反應失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
