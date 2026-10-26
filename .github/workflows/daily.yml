@@ -175,6 +175,7 @@ jobs:
           T python world_data.py ../site/data
           T python sector_pe.py ../site/data || { echo "::warning::產業本益比分位失敗（流向總覽第四條線這班不更新）"; echo "產業本益比分位失敗（流向總覽第四條線這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python industry_notes.py ../site/data || { echo "::warning::產業動向發布失敗（個股研究 → 產業動向這班不更新）"; echo "產業動向發布失敗（個股研究 → 產業動向這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          T python eps_flow.py ../site/data || { echo "::warning::獲利流向失敗（族群獲利流向／淨值比河流這班不更新）"; echo "獲利流向失敗（族群獲利流向／淨值比河流這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python fin_status.py ../site/data --table-only || { echo "::warning::財報入帳對照表失敗（只影響 log）"; echo "財報入帳對照表失敗（只影響 log）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python ir_hist.py ../site/data --max 12 || { echo "::warning::法說歷史回補失敗（法說反應這班不更新）"; echo "法說歷史回補失敗（法說反應這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python contrib.py ../site/data || { echo "::warning::大盤點數貢獻失敗（這班不更新）"; echo "大盤點數貢獻失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
