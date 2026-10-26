@@ -6,10 +6,13 @@
 //   · 管理 API（Bearer ADMIN_TOKEN 或管理者 session）：會員增刪改、重發連結、踢裝置；檔案上傳／列表／刪除；策略上下架表。
 //   · 訂閱（Evans 10-19「留給客戶的當然是照訂閱，沒訂的連訊號圖都不能看」）：members.subs＝訂閱的策略代碼（逗號分隔，"*"＝全部）；
 //     data_s_<代碼>.js（該策略的交易與權益）只發給有訂閱的會員或管理者，data_adm_*（原型研究完整版）只發給管理者，其他人一律 403。
+//   · 在新裝置登入（10-26 18:15 總指揮本機 3）：管理者按「在新裝置登入」→ 一次性登入連結＋QR 碼（/o?t=…，10 分鐘有效、用一次就失效），
+//     手機掃了按「進入」就登入；本機 member_push.py --login-link 也能把連結推到 Evans 自己的 TG。管理者最多 MAX_SESS_ADMIN 台裝置。
 //   · 登入連結與 session 只存 SHA-256 雜湊，資料庫外洩也拿不到可用的連結。
-const COOKIE = "gea_s", LCOOKIE = "gea_ls", DAY = 86400, SESS_DAYS = 30, MAX_SESS = 3;
+const COOKIE = "gea_s", LCOOKIE = "gea_ls", DAY = 86400, SESS_DAYS = 30, MAX_SESS = 3, MAX_SESS_ADMIN = 6, OTL_SEC = 600;
 const enc = new TextEncoder();
 const hex = b => [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join("");
+import qrcode from "./qrcode.js";
 const rand = (n = 32) => hex(crypto.getRandomValues(new Uint8Array(n)));
 const sha = async s => hex(await crypto.subtle.digest("SHA-256", typeof s === "string" ? enc.encode(s) : s));
 const now = () => Math.floor(Date.now() / 1000);
@@ -30,6 +33,7 @@ const SCHEMA = [
   "CREATE TABLE IF NOT EXISTS file_chunks(name TEXT NOT NULL, i INTEGER NOT NULL, data TEXT NOT NULL, PRIMARY KEY(name, i))",
   "CREATE TABLE IF NOT EXISTS live(id INTEGER PRIMARY KEY, ts INTEGER NOT NULL, data TEXT NOT NULL)",
   "CREATE TABLE IF NOT EXISTS usage(day TEXT PRIMARY KEY, n INTEGER NOT NULL DEFAULT 0, poll INTEGER NOT NULL DEFAULT 0, push INTEGER NOT NULL DEFAULT 0)",   // 每天的請求數（UTC 日，跟 Cloudflare 額度同一天）
+  "CREATE TABLE IF NOT EXISTS otl(h TEXT PRIMARY KEY, member_id TEXT NOT NULL, exp INTEGER NOT NULL, used INTEGER NOT NULL DEFAULT 0)",   // 一次性登入連結（10-26）：只存雜湊
   "CREATE TABLE IF NOT EXISTS livek(k TEXT PRIMARY KEY, ts INTEGER NOT NULL, data TEXT NOT NULL)",   // 訊號區／原型研究盤中即時（10-19 Evans）：s_<代碼>＝那支策略（照訂閱）、adm＝原型研究全部（只給管理者）   // 看盤區盤中即時（10-19 Evans）：本機 tools/live_push.py 每根新K推一次（gzip JSON，base64）
 ];
 
@@ -108,7 +112,7 @@ async function newSession(env, req, m, to = "/") {
   const sid = rand(), h = await sha(sid), t = now();
   await env.DB.batch([
     env.DB.prepare("INSERT INTO sessions(sid, member_id, created, last, ua) VALUES(?,?,?,?,?)").bind(h, m.id, t, t, (req.headers.get("user-agent") || "").slice(0, 160)),
-    env.DB.prepare("DELETE FROM sessions WHERE member_id = ? AND sid NOT IN (SELECT sid FROM sessions WHERE member_id = ? ORDER BY created DESC LIMIT ?)").bind(m.id, m.id, MAX_SESS),
+    env.DB.prepare("DELETE FROM sessions WHERE member_id = ? AND sid NOT IN (SELECT sid FROM sessions WHERE member_id = ? ORDER BY created DESC LIMIT ?)").bind(m.id, m.id, m.admin === 1 ? MAX_SESS_ADMIN : MAX_SESS),
     env.DB.prepare("UPDATE members SET last_seen = ? WHERE id = ?").bind(t, m.id),
   ]);
   return new Response(null, {status: 302, headers: {location: to, "set-cookie": setCookie(COOKIE, sid, SESS_DAYS * DAY), "cache-control": "no-store", ...SEC}});
@@ -170,8 +174,21 @@ function countUse(env, ctx, path) {
 }
 
 // ───────── 管理 API ─────────
+function qrSvg(text) {
+  const q = qrcode(0, "M"); q.addData(text); q.make();
+  return q.createSvgTag({cellSize: 6, margin: 4, scalable: true});
+}
 async function adminApi(req, env, url, path) {
   const db = env.DB;
+  if (path === "/api/admin/otl" && req.method === "POST") {                       // 一次性登入連結＋QR（10 分鐘、用一次就失效）
+    const b = await req.json().catch(() => ({}));
+    const m = await db.prepare("SELECT * FROM members WHERE id = ?").bind(b.id || "").first(); if (!m) return json({error: "沒有這個會員"}, 404);
+    if (!valid(m)) return json({error: "會員已到期或停用"}, 403);
+    const t = rand(24), exp = now() + OTL_SEC;
+    await db.batch([db.prepare("DELETE FROM otl WHERE exp < ? OR used = 1").bind(now()), db.prepare("INSERT INTO otl(h, member_id, exp) VALUES(?,?,?)").bind(await sha(t), m.id, exp)]);
+    const link = url.origin + "/o?t=" + t;
+    return json({id: m.id, link, exp, qr: qrSvg(link)});
+  }
   if (path === "/api/admin/members") {
     if (req.method === "GET") {
       const r = await db.prepare("SELECT m.id, m.name, m.contact, m.exp, m.on_, m.admin, m.line_sub IS NOT NULL AS line, m.subs, m.created, m.last_seen, (SELECT COUNT(*) FROM sessions s WHERE s.member_id = m.id) AS devices FROM members m ORDER BY m.created").all();
@@ -303,6 +320,20 @@ export default {
           if (!valid(m)) return expiredPage(m);
           return newSession(env, req, m);
         }
+      }
+      if (path === "/o") {                                                          // 一次性登入：GET 只顯示按鈕（預覽機器人不會按），POST 才用掉
+        const t = req.method === "POST" ? String((await req.formData().catch(() => null))?.get("t") || "") : url.searchParams.get("t") || "";
+        if (!/^[0-9a-f]{48}$/.test(t)) return loginPage(env, "一次性登入連結不完整。", 400);
+        const h = await sha(t), o = await env.DB.prepare("SELECT * FROM otl WHERE h = ?").bind(h).first();
+        if (!o || o.used || o.exp < now()) return loginPage(env, "這個一次性登入連結已用過或已過期（10 分鐘），請在已登入的裝置重新產生。", 403);
+        if (req.method !== "POST")
+          return page("GEA 會員登入", `<form method="post" action="/o"><input type="hidden" name="t" value="${esc(t)}"><button class="btn go" type="submit">在這台裝置進入會員區</button></form><div class="note" style="margin-top:10px">一次性連結：按下後就失效，${Math.max(1, Math.round((o.exp - now()) / 60))} 分鐘內有效。</div>`);
+        const u = await env.DB.prepare("UPDATE otl SET used = 1 WHERE h = ? AND used = 0 AND exp >= ?").bind(h, now()).run();
+        if (!u.meta || u.meta.changes !== 1) return loginPage(env, "這個一次性登入連結已用過或已過期，請重新產生。", 403);
+        const m = await env.DB.prepare("SELECT * FROM members WHERE id = ?").bind(o.member_id).first();
+        if (!m) return loginPage(env, "會員不存在。", 403);
+        if (!valid(m)) return expiredPage(m);
+        return newSession(env, req, m);
       }
       if (path === "/logout") {
         const sid = cookie(req, COOKIE); if (sid && /^[0-9a-f]{64}$/.test(sid)) await env.DB.prepare("DELETE FROM sessions WHERE sid = ?").bind(await sha(sid)).run();
