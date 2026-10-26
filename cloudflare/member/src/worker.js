@@ -8,6 +8,8 @@
 //     data_s_<代碼>.js（該策略的交易與權益）只發給有訂閱的會員或管理者，data_adm_*（原型研究完整版）只發給管理者，其他人一律 403。
 //   · 在新裝置登入（10-26 18:15 總指揮本機 3）：管理者按「在新裝置登入」→ 一次性登入連結＋QR 碼（/o?t=…，10 分鐘有效、用一次就失效），
 //     手機掃了按「進入」就登入；本機 member_push.py --login-link 也能把連結推到 Evans 自己的 TG。管理者最多 MAX_SESS_ADMIN 台裝置。
+//   · 會員自己的版面（10-26 19:15 總指揮本機 2）：prefs 表（會員 × 名稱），看盤區「儲存我的版面」PUT /api/prefs?k=watch；
+//     送 index.html 時直接塞進 GEA_ME.prefs，任何裝置登入都載入同一份；沒存過才用預設。
 //   · 登入連結與 session 只存 SHA-256 雜湊，資料庫外洩也拿不到可用的連結。
 const COOKIE = "gea_s", LCOOKIE = "gea_ls", DAY = 86400, SESS_DAYS = 30, MAX_SESS = 3, MAX_SESS_ADMIN = 6, OTL_SEC = 600;
 const enc = new TextEncoder();
@@ -33,6 +35,7 @@ const SCHEMA = [
   "CREATE TABLE IF NOT EXISTS file_chunks(name TEXT NOT NULL, i INTEGER NOT NULL, data TEXT NOT NULL, PRIMARY KEY(name, i))",
   "CREATE TABLE IF NOT EXISTS live(id INTEGER PRIMARY KEY, ts INTEGER NOT NULL, data TEXT NOT NULL)",
   "CREATE TABLE IF NOT EXISTS usage(day TEXT PRIMARY KEY, n INTEGER NOT NULL DEFAULT 0, poll INTEGER NOT NULL DEFAULT 0, push INTEGER NOT NULL DEFAULT 0)",   // 每天的請求數（UTC 日，跟 Cloudflare 額度同一天）
+  "CREATE TABLE IF NOT EXISTS prefs(member_id TEXT NOT NULL, k TEXT NOT NULL, v TEXT NOT NULL, ts INTEGER NOT NULL, PRIMARY KEY(member_id, k))",   // 會員版面（10-26）
   "CREATE TABLE IF NOT EXISTS otl(h TEXT PRIMARY KEY, member_id TEXT NOT NULL, exp INTEGER NOT NULL, used INTEGER NOT NULL DEFAULT 0)",   // 一次性登入連結（10-26）：只存雜湊
   "CREATE TABLE IF NOT EXISTS livek(k TEXT PRIMARY KEY, ts INTEGER NOT NULL, data TEXT NOT NULL)",   // 訊號區／原型研究盤中即時（10-19 Evans）：s_<代碼>＝那支策略（照訂閱）、adm＝原型研究全部（只給管理者）   // 看盤區盤中即時（10-19 Evans）：本機 tools/live_push.py 每根新K推一次（gzip JSON，base64）
 ];
@@ -68,6 +71,7 @@ async function init(env) {
   if (!cols.includes("subs")) await env.DB.prepare("ALTER TABLE members ADD COLUMN subs TEXT NOT NULL DEFAULT ''").run();   // 10-19 加：舊會員預設沒訂閱
   ready = true;
 }
+const PREF_K = /^[a-z0-9_]{1,30}$/;
 const LIVE_K = /^(adm|tick|s_[A-Za-z0-9_]{1,40})$/;   // tick＝形成中那根（逐筆跳，10-19；所有會員）
 const SUB_RE = /^(\*|[A-Za-z0-9_]{1,40}(,[A-Za-z0-9_]{1,40}){0,49})?$/;
 const subsOf = s => s.admin === 1 ? ["*"] : String(s.subs || "").split(",").filter(Boolean);
@@ -219,7 +223,7 @@ async function adminApi(req, env, url, path) {
     }
     if (req.method === "DELETE") {
       const id = url.searchParams.get("id") || "";
-      await db.batch([db.prepare("DELETE FROM sessions WHERE member_id = ?").bind(id), db.prepare("DELETE FROM members WHERE id = ?").bind(id)]);
+      await db.batch([db.prepare("DELETE FROM sessions WHERE member_id = ?").bind(id), db.prepare("DELETE FROM prefs WHERE member_id = ?").bind(id), db.prepare("DELETE FROM members WHERE id = ?").bind(id)]);
       return json({deleted: id});
     }
   }
@@ -293,7 +297,8 @@ async function serveFile(req, env, s, name) {
   if (!r) return name === "index.html" ? page("GEA 會員區", "<p>網站資料準備中，請稍後再來。</p>", 503) : new Response("找不到", {status: 404, headers: SEC});
   const m = r.meta;
   if (name === "index.html") {
-    const me = JSON.stringify({id: s.id, name: s.name, exp: s.exp, admin: s.admin === 1, subs: subsOf(s), line: !!s.line_sub, lineOn: !!(env.LINE_CHANNEL_ID && env.LINE_CHANNEL_SECRET)}).replace(/</g, "\\u003c");
+    const pr = {}; for (const x of (await env.DB.prepare("SELECT k, v FROM prefs WHERE member_id = ?").bind(s.id).all()).results) { try { pr[x.k] = JSON.parse(x.v); } catch (e) {} }
+    const me = JSON.stringify({id: s.id, name: s.name, exp: s.exp, admin: s.admin === 1, subs: subsOf(s), line: !!s.line_sub, lineOn: !!(env.LINE_CHANNEL_ID && env.LINE_CHANNEL_SECRET), prefs: pr}).replace(/</g, "\\u003c");
     return new Response(r.body.replace("<!--GEA_ME-->", `<script>window.GEA_ME=${me};</script>`), {headers: {"content-type": "text/html; charset=utf-8", "cache-control": "no-store", ...SEC}});
   }
   const etag = m.sha ? `"${m.sha}"` : null;
@@ -349,6 +354,22 @@ export default {
         if (!s) return json({error: "請先登入"}, 401);
         if (!valid(s)) return json({error: "會員已到期或停用", exp: s.exp}, 403);
         if (path === "/api/me") return json({name: s.name, exp: s.exp, admin: s.admin === 1, subs: subsOf(s), line: !!s.line_sub});
+        if (path === "/api/prefs") {                                                // 會員自己的版面：GET 讀、PUT 存（JSON、≤ 64 KB）、DELETE 刪
+          const k = url.searchParams.get("k") || "";
+          if (!PREF_K.test(k)) return json({error: "k 不合法"}, 400);
+          if (req.method === "GET") { const r = await env.DB.prepare("SELECT v, ts FROM prefs WHERE member_id = ? AND k = ?").bind(s.id, k).first(); return json(r ? {k, v: JSON.parse(r.v), ts: r.ts} : {k, v: null}); }
+          if (req.method === "PUT") {
+            if (!(req.headers.get("content-type") || "").startsWith("application/json")) return json({error: "要 application/json"}, 415);
+            const t = await req.text();
+            if (t.length > 65536) return json({error: "版面超過 64 KB"}, 413);
+            try { JSON.parse(t); } catch (e) { return json({error: "不是 JSON"}, 400); }
+            const ts = now();
+            await env.DB.prepare("INSERT INTO prefs(member_id, k, v, ts) VALUES(?,?,?,?) ON CONFLICT(member_id, k) DO UPDATE SET v = excluded.v, ts = excluded.ts").bind(s.id, k, t, ts).run();
+            return json({k, ts, size: t.length});
+          }
+          if (req.method === "DELETE") { await env.DB.prepare("DELETE FROM prefs WHERE member_id = ? AND k = ?").bind(s.id, k).run(); return json({k, deleted: true}); }
+          return json({error: "方法不支援"}, 405);
+        }
         if (path === "/api/strategies") { const r = await env.DB.prepare("SELECT value FROM conf WHERE name = 'strategies'").first(); return json(r ? JSON.parse(r.value) : null); }
         if (path === "/api/live" && url.searchParams.has("k")) {                       // 策略即時：s_<代碼> 照訂閱、adm 只給管理者
           const k = url.searchParams.get("k"), v = url.searchParams.get("v") || "", sm = k.match(/^s_([A-Za-z0-9_]{1,40})$/);

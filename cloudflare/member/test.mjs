@@ -57,6 +57,19 @@ await go("/api/admin/file?name=zz_test/big.js", {method: "DELETE", headers: A});
 r = await go("/api/me", {headers: {cookie: s1.cookie}});
 const me = await r.json();
 t("/api/me 是測試會員", me.name === "自動測試" && me.admin === false);
+// 會員版面（10-26 19:15）：存在帳號、任何裝置一樣
+const PJ = {"content-type": "application/json"};
+r = await go("/api/prefs?k=watch", {headers: {cookie: s1.cookie}});
+t("沒存過的版面＝null", r.status === 200 && (await r.json()).v === null, "HTTP " + r.status);
+const lay = {n: 4, lay: "h", charts: [{p: "5", bs: 2.4}], zz: Date.now()};
+r = await go("/api/prefs?k=watch", {method: "PUT", headers: {cookie: s1.cookie, ...PJ}, body: JSON.stringify(lay)});
+t("存版面", r.status === 200, "HTTP " + r.status);
+r = await go("/api/prefs?k=watch", {method: "PUT", headers: {cookie: s1.cookie, "content-type": "text/plain"}, body: JSON.stringify(lay)});
+t("不是 JSON 型別的存版面被擋", r.status === 415, "HTTP " + r.status);
+r = await go("/api/prefs?k=../x", {headers: {cookie: s1.cookie}});
+t("版面名稱不合法被擋", r.status === 400, "HTTP " + r.status);
+r = await go("/api/prefs?k=watch", {method: "PUT", headers: PJ, body: "{}"});
+t("未登入不能存版面", r.status === 401, "HTTP " + r.status);
 // 一次性登入連結（10-26）：GET 只顯示按鈕 → POST 登入 → 同一個連結再用被擋；用完登出，不影響後面的裝置數測試
 r = await go("/api/admin/otl", {method: "POST", headers: {...A, "content-type": "application/json"}, body: JSON.stringify({id: mem.id})});
 const ot = await r.json();
@@ -68,6 +81,10 @@ const otPost = () => go("/o", {method: "POST", headers: {"content-type": "applic
 r = await otPost();
 const oc = (r.headers.get("set-cookie") || "").match(/gea_s=([0-9a-f]{64})/);
 t("按下進入 → 302＋cookie", r.status === 302 && !!oc, "HTTP " + r.status);
+if (oc) { r = await go("/api/prefs?k=watch", {headers: {cookie: "gea_s=" + oc[1]}}); const pv = (await r.json()).v;
+  t("另一台裝置讀到同一份版面", pv && pv.zz === lay.zz);
+  r = await go("/", {headers: {cookie: "gea_s=" + oc[1]}}); const hh = await r.text();
+  t("網頁送出時帶著版面（GEA_ME.prefs）", !hh.includes("<!--GEA_ME-->") ? hh.includes('"zz":' + lay.zz) : true, hh.includes("<!--GEA_ME-->") ? "正式站還沒有網頁，略過" : ""); }
 r = await otPost();
 t("同一個一次性連結第二次被擋", r.status === 403, "HTTP " + r.status);
 if (oc) await go("/logout", {headers: {cookie: "gea_s=" + oc[1]}});
