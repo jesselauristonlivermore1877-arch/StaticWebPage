@@ -1170,6 +1170,13 @@ footer p{margin:4px 0}
 .ef-t th.ef-sort.on{text-decoration:underline}
 .ef-t td.ef-est,.ef-t th.ef-est{outline:1.5px dashed var(--ink-3);outline-offset:-3px;font-style:italic}
 .ef-st{font-weight:600}
+.ef-fx{white-space:normal;margin:6px 0 8px;font-size:13px;line-height:1.6}
+.ef-t th.ef-hg{text-align:center;font-weight:600;border-bottom:1px solid var(--line)}
+.ef-t tr.ef-mem td,.ef-t tr.ef-mem td a{font-size:12.5px}
+.ef-t tr.ef-mem td:first-child{padding-left:22px}
+.ef-t a.ef-op,.ef-t a.ef-go{color:inherit;text-decoration:none}
+.ef-t a.ef-go:hover{text-decoration:underline}
+.ef-sx{white-space:normal;margin:12px 0}
 .ef-link{white-space:normal;margin:10px 0;padding:8px 12px;border:1px dashed var(--line);border-radius:10px;font-size:13.5px}
 .ef-t td:first-child{white-space:nowrap}
 .ef-t td.ef-v{white-space:nowrap;line-height:1.25}
@@ -9982,75 +9989,168 @@ function sectorMulti() {
    本益比在景氣循環股高峰會誤導（記憶體獲利暴增、本益比反而掉到低檔），所以旁邊並列淨值比。 */
 var _efW = null;
 function efLoad() { if (!_efW) _efW = fetch("data/eps_flow.json" + _dv(), {cache: "force-cache"}).then(r => r.ok ? r.json() : null).catch(() => null); return _efW; }
+// 🟢 10-26 19:15（總指揮雲端 4、5）：公式寫出來、滑過看分子分母；個股版（族群展開成員、個股排行前 50、個股頁小表）。
+//    族群＝成員歸母淨利加總（後端算好、附分子分母）；個股＝近四季 EPS（前端照同一套公式算）。
+const EF_KS = [["yoy", "YoY", "近四季獲利年增率"], ["cagr", "3 年 CAGR", "三年年複合成長率"], ["idx", "指數（期初＝100）", "獲利指數"]];
+const EF_FX = {
+  yoy: "YoY＝（本季往回四季合計 ÷ 去年同季往回四季合計）− 1",
+  cagr: "3 年 CAGR＝（本季近四季合計 ÷ 三年前同季近四季合計）^(1/3) − 1（年複合成長率，不是「近三季」）",
+  idx: "指數＝本季近四季合計 ÷ 期初季近四季合計 × 100（期初虧損就從第一個獲利季起算）"};
+const EF_WHY = {"轉盈": "分母（比較基期）是虧損、分子轉為獲利，算不出百分比", "轉虧": "分子（本季近四季）是虧損，算不出百分比",
+  "虧損縮小": "兩端都是虧損、虧損變小，算不出百分比", "虧損擴大": "兩端都是虧損、虧損變大，算不出百分比"};
+const efStat = (a, b) => b > 0 ? (a <= 0 ? "轉虧" : null) : a > 0 ? "轉盈" : a > b ? "虧損縮小" : "虧損擴大";
+// 個股：e4＝近四季 EPS（對齊 J.qx，視窗第 i 季＝qx 第 i＋12 個）；i＝"e" 時用暫估近四季 EPS
+function efStkCell(J, x, i, K) {
+  const o = J.qx.length - J.qs.length, a = i === "e" ? x.ee : x.e4[i + o], ia = i === "e" ? J.qx.length : i + o;
+  if (a == null) return {};
+  const lag = K === "cagr" ? 12 : 4, b = x.e4[ia - lag];
+  if (b == null) return {a};
+  const st = efStat(a, b);
+  const v = st ? null : K === "cagr" ? (Math.pow(a / b, 1 / 3) - 1) * 100 : (a / b - 1) * 100;
+  return {v, st, a, b, bq: J.qx[ia - lag]};
+}
 function efFlow() {
   const box = el("div", "ef-box");
   box.appendChild(el("div", "sub", "載入獲利流向中…"));
   efLoad().then(J => {
     box.innerHTML = "";
     if (!J || !J.sec) { box.appendChild(el("div", "empty", "載不到 data/eps_flow.json —— 這一班可能還沒產出")); return; }
-    const S = J.sec, G = Object.keys(S);
-    let K = "yoy", NQ = 8, EST = false, SC = -1, DIR = -1, ALL = false;
+    const S = J.sec, G = Object.keys(S), X = J.stk || {};
+    let K = "yoy", NQ = 8, EST = false, SC = -1, DIR = -1, ALL = false, VIEW = "sec";
+    const OPEN = new Set(); let TURN = [];
     const MOB = window.matchMedia && matchMedia("(max-width: 640px)").matches;   // 10-26 17:55：手機預設只看最近 4 季
-    let IB = {};        // SC＝排序欄（-1＝最新一季；"pe"／"pb"＝倍數）
-    const bar = el("div", "if-lgbar"), tb = el("div"), hot = el("div");
-    box.appendChild(bar); box.appendChild(tb); box.appendChild(hot);
-    const KS = [["yoy", "近四季 EPS 年增率"], ["cagr", "EPS 三年年複合成長率"], ["idx", "近四季 EPS（期初＝100）"]];
-    // 顏色：紅＝成長、綠＝衰退（跟全站漲跌同色）；年增率 ±100%、CAGR ±50%、指數以 100 為中心取對數
-    const tone = v => v == null ? 0 : K === "yoy" ? v / 100 : K === "cagr" ? v / 50 : Math.log(v / 100) / Math.log(4);
+    const bar = el("div", "if-lgbar"), fx = el("div", "ef-fx"), tb = el("div"), hot = el("div");
+    box.appendChild(bar); box.appendChild(fx); box.appendChild(tb); box.appendChild(hot);
+    // 顏色：紅＝成長、綠＝衰退（跟全站漲跌同色）；YoY ±100%、CAGR ±50%、指數以 100 為中心取對數
+    const tone = v => v == null ? 0 : K === "yoy" ? v / 100 : K === "cagr" ? v / 50 : Math.log(Math.max(v, 1) / 100) / Math.log(4);
     const bg = t => { t = Math.max(-1, Math.min(1, t)); return t >= 0 ? `background:rgba(229,72,77,${(t * .6).toFixed(2)})` : `background:rgba(18,163,102,${(-t * .6).toFixed(2)})`; };
     const STC = {"轉盈": 1, "虧損縮小": .35, "虧損擴大": -.35, "轉虧": -1};
     const fmt = v => v == null ? "" : K === "idx" ? nf(v, 0) : (v > 0 ? "+" : "") + nf(v, v >= 100 || v <= -100 ? 0 : 1) + "%";
-    const cellv = (g, i) => {                                   // i＝季索引；"e"＝暫估
+    const skey = c => c.v != null ? c.v : c.st === "轉盈" ? 1e6 : c.st === "虧損縮小" ? -1e5 : c.st === "虧損擴大" ? -2e5 : c.st === "轉虧" ? -3e5 : null;
+    let L = J.qs.length, idx = [], cols = [];
+    const qlab = i => i === "e" ? J.est_q + "（暫估）" : J.qs[i];
+    // 族群格：{v, st, a, b, bq, n, unit}
+    const secCell = (g, i) => {
       const r = S[g], e = i === "e" ? r.est : null;
-      let v = e ? e[K] : r[K][i];
-      const st = K === "yoy" ? (e ? e.yst : r.yst[i]) : null;
-      if (K === "idx" && v != null) v = IB[g] ? v / IB[g] * 100 : null;   // 期初＝所選期間第一個獲利為正的季
-      const amt = e ? e.amt : r.amt[i];
-      return {v, st, amt, n: e ? e.n : r.nn[i], sort: v != null ? v : st === "轉盈" ? 1e6 : st === "虧損縮小" ? -1e5 : st === "虧損擴大" ? -2e5 : st === "轉虧" ? -3e5 : null};
+      if (K === "idx") {
+        const bi = idx.find(j => r.idx[j] != null && r.idx[j] > 0), raw = e ? e.idx : r.idx[i];
+        if (bi == null || raw == null) return {n: e ? e.n : r.nn[i]};
+        return {v: raw / r.idx[bi] * 100, a: e ? e.amt : r.amt[i], b: r.amt[bi], bq: J.qs[bi], n: e ? e.n : r.nn[i], u: "億元"};
+      }
+      const ab = e ? e[K === "yoy" ? "yab" : "cab"] : r[K === "yoy" ? "yab" : "cab"][i], st = e ? e[K === "yoy" ? "yst" : "cst"] : r[K === "yoy" ? "yst" : "cst"][i];
+      const iq = i === "e" ? J.qs.length : i, lag = K === "cagr" ? 12 : 4;
+      const bq = iq - lag >= 0 ? J.qs[iq - lag] : J.qx[J.qx.length - J.qs.length + iq - lag];
+      return {v: e ? e[K] : r[K][i], st, a: ab && ab[0], b: ab && ab[1], bq, n: e ? e.n : r.nn[i], u: "億元"};
     };
-    const td = (g, i) => {
-      const c = cellv(g, i);
-      const tip = `${esc(g)} ${i === "e" ? esc(J.est_q) + "（暫估）" : esc(J.qs[i])}：近四季 EPS 合計（歸母淨利）${c.amt == null ? "—" : nf(c.amt, 1) + " 億元"}・${c.n} 檔` +
-        (i === "e" && S[g].est.src.length ? `・來源 ${esc(S[g].est.src.join("、"))}` : "");
+    const stkCell = (c, i) => {
+      if (K !== "idx") return Object.assign(efStkCell(J, X[c], i, K), {u: "元"});
+      const o = J.qx.length - J.qs.length, x = X[c], bi = idx.find(j => x.e4[j + o] != null && x.e4[j + o] > 0);
+      const a = i === "e" ? x.ee : x.e4[i + o];
+      return bi == null || a == null ? {} : {v: a / x.e4[bi + o] * 100, a, b: x.e4[bi + o], bq: J.qs[bi], u: "元"};
+    };
+    const nm = (v, u) => v == null ? "—" : nf(v, u === "元" ? 2 : 1) + " " + u;
+    const tip = (who, i, c) => {
+      if (c.a == null) return `${who} ${qlab(i)}：資料不齊`;
+      const what = c.u === "元" ? "近四季 EPS" : "近四季歸母淨利合計";
+      let s = `${who} ${qlab(i)}｜${EF_KS.find(k => k[0] === K)[1]}\n分子：${qlab(i)} ${what} ${nm(c.a, c.u)}`;
+      if (c.b != null) s += `\n分母：${K === "idx" ? "期初 " : ""}${c.bq || "—"} ${what} ${nm(c.b, c.u)}`;
+      if (c.v != null) s += `\n＝ ${fmt(c.v)}`;
+      if (c.st) s += `\n→ ${c.st}：${EF_WHY[c.st]}`;
+      if (c.n != null) s += `\n成員 ${c.n} 檔`;
+      return esc(s);
+    };
+    const td = (who, i, c) => {
       const body = c.v != null ? fmt(c.v) : c.st ? `<b class="ef-st">${esc(c.st)}</b>` : '<span class="flat">—</span>';
       const t = c.v != null ? tone(c.v) : c.st ? STC[c.st] : 0;
-      return `<td class="r num${i === "e" ? " ef-est" : ""}" style="${c.v != null || c.st ? bg(t) : ""}" title="${tip}">${body}</td>`;
+      return `<td class="r num${i === "e" ? " ef-est" : ""}" data-h="${esc(EF_KS.find(k => k[0] === K)[1] + " " + qlab(i))}" style="${c.v != null || c.st ? bg(t) : ""}" title="${tip(who, i, c)}">${body}</td>`;
     };
-    const pct = p => p == null ? "" : `<small class="flat">第 ${nf(p, 0)} 分位</small>`;
+    const pct = (p, y) => p == null ? "" : `<small class="flat">${y} 年第 ${nf(p, 0)} 分位</small>`;
+    const curCol = () => SC === -1 ? (EST ? "e" : L - 1) : SC;
+    const cmp = (x, y) => (x == null && y == null) ? 0 : x == null ? 1 : y == null ? -1 : DIR < 0 ? y - x : x - y;
+    const stkKey = c => SC === "pe" ? X[c].pe : SC === "pb" ? X[c].pb : skey(stkCell(c, curCol()));
+    const hotS = c => { const z = efStkCell(J, X[c], L - 1, "yoy"); return (z.v != null && z.v > J.hot) || z.st === "轉盈"; };
+    const stkRow = (c, cls) => { const x = X[c];
+      return `<tr class="${cls}"><td><a href="javascript:void 0" class="ef-go" data-c="${esc(c)}" title="開河流圖"><span class="num rv-dim">${esc(c)}</span> ${esc(x.n)}</a>${cls === "ef-rk" ? ` <small class="flat">${esc(x.g)}</small>` : ""}</td>` +
+        `<td class="r num ef-v" data-h="本益比">${hotS(c) ? '<span class="ef-hot" title="EPS 暴增中，本益比偏低可能是景氣高峰">⚠ </span>' : ""}${x.pe == null ? "—" : nf(x.pe, 1)}${pct(x.pe5, 5)}</td>` +
+        `<td class="r num ef-v" data-h="淨值比">${x.pb == null ? "—" : nf(x.pb, 2)}${pct(x.pb5, 5)}</td>` + cols.map(i => td(`${c} ${x.n}`, i, stkCell(c, i))).join("") + `</tr>`; };
     const draw = () => {
       bar.innerHTML = "";
-      KS.forEach(([k, t]) => { const x = el("button", "rv-pill" + (K === k ? " on" : ""), t); x.onclick = () => { K = k; draw(); }; bar.appendChild(x); });
+      [["sec", "族群"], ["stk", "個股排行（前 50）"]].forEach(([k, t]) => { const x = el("button", "rv-pill" + (VIEW === k ? " on" : ""), t); x.onclick = () => { VIEW = k; SC = -1; DIR = -1; draw(); }; bar.appendChild(x); });
+      bar.appendChild(el("span", "submeta", "　"));
+      EF_KS.forEach(([k, t]) => { const x = el("button", "rv-pill" + (K === k ? " on" : ""), t); x.onclick = () => { K = k; draw(); }; bar.appendChild(x); });
       bar.appendChild(el("span", "submeta", "　期間"));
       if (MOB && !ALL) { const x = el("button", "rv-pill on", "最近 4 季"); bar.appendChild(x);
         const y = el("button", "rv-pill", "展開全部"); y.onclick = () => { ALL = true; draw(); }; bar.appendChild(y); }
       else [8, 12].forEach(n => { const x = el("button", "rv-pill" + (NQ === n ? " on" : ""), `${n} 季`); x.onclick = () => { NQ = n; draw(); }; bar.appendChild(x); });
       const ex = el("button", "rv-pill" + (EST ? " on" : ""), `納入暫估 ${J.est_q}`); ex.onclick = () => { EST = !EST; if (!EST && SC === "e") SC = -1; draw(); }; bar.appendChild(ex);
-      const L = J.qs.length, idx = [], nq = MOB && !ALL ? 4 : NQ; for (let i = Math.max(0, L - nq); i < L; i++) idx.push(i);
-      const cols = idx.concat(EST ? ["e"] : []);
-      IB = {}; G.forEach(g => { const b = idx.map(i => S[g].idx[i]).find(v => v != null && v > 0); if (b) IB[g] = b; });
-      const key = g => SC === "pe" ? S[g].pe : SC === "pb" ? S[g].pb : cellv(g, SC === -1 ? (EST ? "e" : L - 1) : SC).sort;
-      const rows = G.slice().sort((a, b) => { const x = key(a), y = key(b);
-        if (x == null && y == null) return 0; if (x == null) return 1; if (y == null) return -1; return DIR < 0 ? y - x : x - y; });
-      const th = (k, t) => `<th class="r ef-sort${SC === k || (SC === -1 && k === (EST ? "e" : L - 1)) ? " on" : ""}${k === "e" ? " ef-est" : ""}" data-k="${k}">${t}</th>`;
-      tb.innerHTML = `<div class="tbl"><table class="mw-t ef-t"><thead><tr><th>大類</th>${th("pe", "本益比")}${th("pb", "淨值比")}${cols.map(i => th(i, i === "e" ? esc(J.est_q) + "<br><small>暫估</small>" : esc(J.qs[i]).replace("Q", "<br>Q"))).join("")}` +
-        `</tr></thead><tbody>` +
-        rows.map(g => { const r = S[g];
-          return `<tr><td>${esc(g)}${r.cyc ? ' <span class="ef-tag">循環</span>' : ""} <small class="flat">${r.n}</small></td>` +
-            `<td class="r num ef-v${r.cyc ? " ef-dim" : ""}">${r.hot ? '<span class="ef-hot" title="EPS 暴增中，本益比偏低可能是景氣高峰">⚠ </span>' : ""}${r.pe == null ? "—" : nf(r.pe, 1)}${pct(r.pe_pct)}</td>` +
-            `<td class="r num ef-v${r.cyc ? " ef-key" : ""}">${r.pb == null ? "—" : nf(r.pb, 2)}${pct(r.pb_pct)}</td>` + cols.map(i => td(g, i)).join("") + `</tr>`; }).join("") + `</tbody></table></div>`;
+      fx.innerHTML = `<b>${esc(EF_FX[K])}</b><br><small>族群獲利＝成員歸母淨利加總，<b>不是 EPS 平均</b>；個股用自己的近四季 EPS。兩端任一 ≤ 0 不算百分比，改標「轉盈／轉虧／虧損縮小／虧損擴大」。滑過格子看分子、分母。</small>`;
+      L = J.qs.length; idx = []; const nq = MOB && !ALL ? 4 : NQ; for (let i = Math.max(0, L - nq); i < L; i++) idx.push(i);
+      cols = idx.concat(EST ? ["e"] : []);
+      const kl = EF_KS.find(k => k[0] === K)[1];
+      const th = (k, t) => `<th class="r ef-sort${curCol() === k ? " on" : ""}${k === "e" ? " ef-est" : ""}" data-k="${k}">${t}</th>`;
+      const head = `<thead><tr><th></th><th colspan="2" class="ef-hg">${VIEW === "sec" ? "族群中位數（近 3 年分位）" : "個股（近 5 年分位）"}</th><th colspan="${cols.length}" class="ef-hg">${esc(kl)}${VIEW === "sec" ? "・族群歸母淨利加總" : "・個股近四季 EPS"}</th></tr>` +
+        `<tr><th>${VIEW === "sec" ? "大類　<small class=\"flat\">點名稱展開成員</small>" : "個股"}</th>${th("pe", "本益比")}${th("pb", "淨值比")}${cols.map(i => th(i, i === "e" ? esc(J.est_q) + "<br><small>暫估</small>" : esc(J.qs[i]).replace("Q", "<br>Q"))).join("")}</tr></thead>`;
+      let body = "";
+      if (VIEW === "sec") {
+        const key = g => SC === "pe" ? S[g].pe : SC === "pb" ? S[g].pb : skey(secCell(g, curCol()));
+        G.slice().sort((a, b) => cmp(key(a), key(b))).forEach(g => { const r = S[g], op = OPEN.has(g);
+          body += `<tr class="ef-g"><td><a href="javascript:void 0" class="ef-op" data-g="${esc(g)}">${op ? "▾" : "▸"} ${esc(g)}</a>${r.cyc ? ' <span class="ef-tag">循環</span>' : ""} <small class="flat">${r.n}</small></td>` +
+            `<td class="r num ef-v${r.cyc ? " ef-dim" : ""}" data-h="本益比">${r.hot ? '<span class="ef-hot" title="EPS 暴增中，本益比偏低可能是景氣高峰">⚠ </span>' : ""}${r.pe == null ? "—" : nf(r.pe, 1)}${pct(r.pe_pct, 3)}</td>` +
+            `<td class="r num ef-v${r.cyc ? " ef-key" : ""}" data-h="淨值比">${r.pb == null ? "—" : nf(r.pb, 2)}${pct(r.pb_pct, 3)}</td>` + cols.map(i => td(g, i, secCell(g, i))).join("") + `</tr>`;
+          if (op) Object.keys(X).filter(c => X[c].g === g).sort((a, b) => cmp(stkKey(a), stkKey(b))).forEach(c => { body += stkRow(c, "ef-mem"); });
+        });
+      } else {
+        // 個股排行：全追蹤池依目前排序欄（預設最新一季；指數模式改依 YoY）取前 50
+        const k0 = K; if (K === "idx") K = "yoy";
+        // 只排算得出百分比的；轉盈／轉虧等狀態沒有數字可比，另列名單（排在一起只會照代號排）
+        const cc = curCol(), byPx = SC === "pe" || SC === "pb";
+        const top = Object.keys(X).filter(c => byPx ? stkKey(c) != null : stkCell(c, cc).v != null).sort((a, b) => cmp(stkKey(a), stkKey(b))).slice(0, 50);
+        TURN = byPx ? [] : Object.keys(X).filter(c => stkCell(c, cc).st === "轉盈");
+        K = k0;
+        top.forEach(c => { body += stkRow(c, "ef-rk"); });
+      }
+      tb.innerHTML = `<div class="tbl"><table class="mw-t ef-t">${head}<tbody>${body}</tbody></table></div>` +
+        (VIEW === "stk" ? `<div class="submeta">全追蹤池 ${Object.keys(X).length} 檔依${K === "idx" ? " YoY" : "目前這一欄"}排序取前 50（只排算得出百分比的）；點個股開河流圖。</div>` +
+          (TURN.length ? `<div class="submeta">這一欄「轉盈」（分母是虧損、算不出百分比，未進排行）${TURN.length} 檔：${TURN.map(c => `<a href="javascript:void 0" class="ef-go" data-c="${esc(c)}">${esc(c)} ${esc(X[c].n)}</a>`).join("、")}</div>` : "") : "");
       tb.querySelectorAll("th.ef-sort").forEach(h => h.onclick = () => { const k = h.dataset.k, v = k === "pe" || k === "pb" ? k : k === "e" ? "e" : +k;
-        const cur = SC === -1 ? (EST ? "e" : L - 1) : SC; if (cur === v) DIR = -DIR; else { SC = v; DIR = (k === "pe" || k === "pb") ? 1 : -1; } draw(); });
+        if (curCol() === v) DIR = -DIR; else { SC = v; DIR = (k === "pe" || k === "pb") ? 1 : -1; } draw(); });
+      tb.querySelectorAll("a.ef-op").forEach(a => a.onclick = () => { const g = a.dataset.g; OPEN.has(g) ? OPEN.delete(g) : OPEN.add(g); draw(); });
+      tb.querySelectorAll("a.ef-go").forEach(a => a.onclick = () => { const c = a.dataset.c; window.GO_TAB && window.GO_TAB("產業研究", "河流圖", () => window.RV_GO && window.RV_GO(c)); });
       const H = G.filter(g => S[g].hot).sort((a, b) => (S[a].pe ?? 999) - (S[b].pe ?? 999));
-      hot.innerHTML = H.length ? `<div class="ef-hotbox"><b>⚠ EPS 暴增中的族群</b>（最新一季近四季 EPS 年增 &gt; ${nf(J.hot, 0)}% 或由虧轉盈）——本益比偏低可能是景氣高峰，循環性族群改看淨值比：` +
+      hot.innerHTML = VIEW === "sec" && H.length ? `<div class="ef-hotbox"><b>⚠ EPS 暴增中的族群</b>（最新一季近四季獲利 YoY &gt; ${nf(J.hot, 0)}% 或由虧轉盈）——本益比偏低可能是景氣高峰，循環性族群改看淨值比：` +
         `<ul>${H.map(g => { const r = S[g], y = r.yoy.at(-1);
-          return `<li><b>${esc(g)}</b>：近四季 EPS ${y != null ? "年增 " + nf(y, 0) + "%" : esc(r.yst.at(-1) || "")}；本益比 ${r.pe == null ? "—" : nf(r.pe, 1)}${r.pe_pct == null ? "" : "（近 3 年第 " + nf(r.pe_pct, 0) + " 分位）"}、` +
+          return `<li><b>${esc(g)}</b>：近四季獲利 ${y != null ? "YoY " + nf(y, 0) + "%" : esc(r.yst.at(-1) || "")}；本益比 ${r.pe == null ? "—" : nf(r.pe, 1)}${r.pe_pct == null ? "" : "（近 3 年第 " + nf(r.pe_pct, 0) + " 分位）"}、` +
             `淨值比 ${r.pb == null ? "—" : nf(r.pb, 2)}${r.pb_pct == null ? "" : "（第 " + nf(r.pb_pct, 0) + " 分位）"}。${r.cyc ? "循環性族群，個股河流圖預設看淨值比。" : ""}</li>`; }).join("")}</ul></div>` : "";
     };
     draw();
     box.appendChild(el("div", "submeta", `財報季 ${esc(J.qs[0])}～${esc(J.qs.at(-1))}（股價資料到 ${esc(J.asof)}）。${esc(J.note)}。` +
-      `點欄名可排序（再點一次反向）；暫估欄虛線框、滑過格子看近四季 EPS 合計與檔數。`));
+      `點欄名可排序（再點一次反向）；暫估欄虛線框。`));
   });
   return box;
+}
+/* 個股頁的「EPS 流向」小表（10-26 19:15 雲端 5）：近四季 EPS、YoY、3 年 CAGR，8／12 季，可納入暫估季 */
+function efSx(J, code) {
+  const x = J && (J.stk || {})[code];
+  if (!x) return null;
+  const w = el("div", "ef-sx"), bar = el("div", "if-lgbar"), tb = el("div");
+  let NQ = 8, EST = !!x.ee;
+  const f = (c, K) => c.v != null ? `<span class="${c.v >= 0 ? "up" : "down"}">${c.v > 0 ? "+" : ""}${nf(c.v, Math.abs(c.v) >= 100 ? 0 : 1)}%</span>` : c.st ? `<b class="ef-st" title="${esc(EF_WHY[c.st])}">${esc(c.st)}</b>` : '<span class="flat">—</span>';
+  const tp = (c, i, K) => c.a == null ? "" : esc(`${K === "yoy" ? "YoY" : "3 年 CAGR"}｜分子：${i === "e" ? J.est_q + "（暫估）" : J.qs[i]} 近四季 EPS ${nf(c.a, 2)} 元\n分母：${c.bq} 近四季 EPS ${c.b == null ? "—" : nf(c.b, 2)} 元${c.st ? "\n→ " + c.st + "：" + EF_WHY[c.st] : ""}`);
+  const draw = () => {
+    bar.innerHTML = `<b>EPS 流向</b>　`;
+    [8, 12].forEach(n => { const b = el("button", "rv-pill" + (NQ === n ? " on" : ""), `${n} 季`); b.onclick = () => { NQ = n; draw(); }; bar.appendChild(b); });
+    if (x.ee != null) { const b = el("button", "rv-pill" + (EST ? " on" : ""), `納入暫估 ${J.est_q}`); b.onclick = () => { EST = !EST; draw(); }; bar.appendChild(b); }
+    const L = J.qs.length, cols = []; for (let i = Math.max(0, L - NQ); i < L; i++) cols.push(i); if (EST && x.ee != null) cols.push("e");
+    const o = J.qx.length - J.qs.length;
+    tb.innerHTML = `<div class="tbl"><table class="mw-t ef-t"><thead><tr><th>季</th>${cols.map(i => `<th class="r${i === "e" ? " ef-est" : ""}">${i === "e" ? esc(J.est_q) + "<br><small>暫估</small>" : esc(J.qs[i]).replace("Q", "<br>Q")}</th>`).join("")}</tr></thead><tbody>` +
+      `<tr><td>近四季 EPS（元）</td>${cols.map(i => { const v = i === "e" ? x.ee : x.e4[i + o]; return `<td class="r num${i === "e" ? " ef-est" : ""}">${v == null ? "—" : nf(v, 2)}</td>`; }).join("")}</tr>` +
+      ["yoy", "cagr"].map(K => `<tr><td>${K === "yoy" ? "YoY" : "3 年 CAGR"}</td>${cols.map(i => { const c = efStkCell(J, x, i, K); return `<td class="r num${i === "e" ? " ef-est" : ""}" title="${tp(c, i, K)}">${f(c, K)}</td>`; }).join("")}</tr>`).join("") +
+      `</tbody></table></div>`;
+  };
+  draw();
+  w.appendChild(bar); w.appendChild(tb);
+  w.appendChild(el("div", "submeta", `${esc(EF_FX.yoy)}；${esc(EF_FX.cagr)}。近四季 EPS＝綜合損益表各季 EPS 相加（各季累計相減得單季）；暫估季${x.es ? "來源：" + esc(x.es === "暫估" ? "河流圖暫估（法人預估 EPS）" : x.es) : ""}。本益比 ${x.pe == null ? "—" : nf(x.pe, 1)}${x.pe5 == null ? "" : "（近 5 年第 " + nf(x.pe5, 0) + " 分位）"}、淨值比 ${x.pb == null ? "—" : nf(x.pb, 2)}${x.pb5 == null ? "" : "（第 " + nf(x.pb5, 0) + " 分位）"}。`));
+  return w;
 }
 
 /* 🟢 10-26 11:15（總指揮雲端 3）：淨值比河流 —— 循環性族群（記憶體、面板、航運、傳產石化、被動元件、鋼鐵）預設看這張；
@@ -16530,6 +16630,7 @@ function sxCard(code, name, mkt, goStock) {
     body.innerHTML = "";
     body.appendChild(sxHead(code, S.x || {}));       // 🟢 10-25 17:10（雲端 6）：個股頁頁首、52 週位置、期間報酬
     iraLoad().then(() => { const d = iraSx(code); if (d) body.insertBefore(d, body.children[1] || null); });   // 🟢 10-26：法說重磅標記
+    efLoad().then(E => { const d = efSx(E, code); if (d) body.appendChild(d); });   // 🟢 10-26 19:15：EPS 流向小表
     const n1 = (v, d) => v == null ? "—" : nf(v, d || 0);
     const sg = v => v == null ? "—" : `<span class="${v > 0 ? "up" : v < 0 ? "down" : ""}">${v > 0 ? "+" : ""}${nf(v, 0)}</span>`;
     // 🟢 10-11（預覽 v6 第 8 項）：重點一覽 —— 已做好的資料都放上來，格子排列（不疊直式卡片）；沒有的格子不出現

@@ -11,6 +11,16 @@ h2{font-size:17px;margin:0 0 6px} .u{margin:0 0 4px;overflow-wrap:anywhere} .u a
 .b{margin:0 0 6px;color:var(--ink2);font-size:13px} ul{margin:6px 0 0;padding-left:20px} li{margin:3px 0}
 </style></head><body><main><h1>待審預覽</h1>
 <p class="m">共 11 項　更新 2026-10-26（台北）　只放公開版會出現的內容；審核通過、套版後就刪掉對應的預覽。</p>
+<section><h2>【10-26 19:15】獲利流向：公式標示＋個股版（19:15 雲端 4～5）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a>（<b>產業 → 產業研究 → 獲利流向</b>；個股版的小表在任一個股卡裡，例：族群展開後點個股、或法說重磅點進去）</p><p class="b">截圖：<a href="v2/ef4_yoy.png">YoY 族群版</a>、<a href="v2/ef4_cagr_open.png">3 年 CAGR＋展開記憶體成員</a>、<a href="v2/ef4_rank.png">個股排行前 50</a>、<a href="v2/ef4_sx.png">個股卡 EPS 流向小表（2408 南亞科）</a>、<a href="v2/ef4_m.png">手機</a></p><ul>
+<li><b>要看</b>：每種切換鈕下方一行公式；第二種是「3 年 CAGR＝（本季近四季 ÷ 三年前同季近四季）^(1/3) − 1」，公式裡直接寫「不是近三季」</li>
+<li><b>要看</b>：欄頭上層寫「YoY／3 年 CAGR／指數（期初＝100）・族群歸母淨利加總」；公式下註明「族群獲利＝成員歸母淨利加總，不是 EPS 平均」</li>
+<li><b>要看</b>：滑鼠停在任一格，顯示分子、分母原始數字（億元或元）、結果；算不出百分比的寫狀態與原因。例：記憶體 2026Q2 YoY 分子 2,600.8 億、分母 −166.1 億 → 轉盈；3 年 CAGR 分子 2,600.8 億、分母 157.5 億 ＝ +155%</li>
+<li>指數：期初＝所選期間第一個獲利季（期初虧損就往後找），滑過格子會寫起算季</li>
+<li><b>族群展開成員</b>：點族群名稱（▸）展開，成員用自己的近四季 EPS 算同三種量，排序跟著族群表；點個股名稱開河流圖</li>
+<li><b>個股排行（前 50）</b>：全追蹤池 197 檔依最新一季（或點的那一欄）排序；指數模式改依 YoY。<b>只排算得出百分比的</b>，「轉盈」那些另列在表下名單（全部擠在最前面只會照代號排，沒意義）。附本益比、淨值比各自近 5 年分位與 ⚠</li>
+<li><b>個股卡「EPS 流向」小表</b>：近四季 EPS、YoY、3 年 CAGR，8／12 季切換，預設納入暫估季（官方 → 法說 → 河流圖暫估）</li>
+<li>口徑：個股近四季 EPS＝綜合損益表各季 EPS 相加（跟河流圖本益比庫的 EPS 可能差一點，例 3264 近四季 7.92 vs 7.66）</li></ul></section>
+
 <section><h2>【10-26】獲利流向＋循環股淨值比河流（11:15 雲端 3；17:55、18:15 修改）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a>（<b>產業 → 產業研究 → 獲利流向</b>，跟河流圖同一層；族群動態 → 族群總覽留一條連結）</p><p class="b">讀正式站的 docs/data/eps_flow.json（每日更新的 eps_flow.py 產出，真資料）。截圖：<a href="v2/ef_flow_d.png">年增率 8 季</a>、<a href="v2/ef_flow_idx12.png">期初＝100、12 季、納入暫估</a>、<a href="v2/ef_flow_m.png">手機（預設 4 季）</a>、<a href="v2/ef_link.png">族群動態的連結</a>、<a href="v2/ef_pb2408.png">南亞科淨值比河流</a>、<a href="v2/ef_pb2327.png">國巨淨值比河流</a>。要看的重點：</p><ul>
 <li>三種切換：近四季 EPS 年增率／EPS 三年年複合成長率／近四季 EPS（所選期間第一季＝100）；期間 8／12 季；點欄名排序（再點反向）</li>
 <li>一年前虧損的算不出百分比，改標「轉盈／虧損縮小／虧損擴大／轉虧」（記憶體：近四季 −166 億 → +2,601 億＝轉盈）</li>
