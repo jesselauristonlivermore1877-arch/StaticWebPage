@@ -1,5 +1,5 @@
 {
- "checked": "2026-10-19",
+ "checked": "2026-10-26",
  "funds": {
   "00981A": {
    "house": "uni",
@@ -210,6 +210,12 @@
    "name": "復華台灣新星主動式ETF基金",
    "house_id": "ETF27",
    "added": "2026-10-05"
+  },
+  "00415A": {
+   "house": "cap",
+   "name": "",
+   "house_id": "500",
+   "added": "2026-10-26"
   }
  },
  "added_log": [
@@ -218,6 +224,12 @@
    "code": "ETF27",
    "name": "復華台灣新星主動式ETF基金",
    "house": "fh"
+  },
+  {
+   "date": "2026-10-26",
+   "code": "00415A",
+   "name": "",
+   "house": "cap"
   }
  ]
 }
