@@ -164,6 +164,7 @@ jobs:
           T python sector_pe.py ../site/data || { echo "::warning::產業本益比分位失敗（流向總覽第四條線這班不更新）"; echo "產業本益比分位失敗（流向總覽第四條線這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python industry_notes.py ../site/data || { echo "::warning::產業動向發布失敗（個股研究 → 產業動向這班不更新）"; echo "產業動向發布失敗（個股研究 → 產業動向這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python is_hist.py ../site/data --max 8 || { echo "::warning::綜合損益表回補失敗（三率、十年季度表這班不更新）"; echo "綜合損益表回補失敗（三率、十年季度表這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          T python fin_status.py ../site/data || { echo "::warning::財報入帳狀態失敗（董事會通過／自結這班不更新）"; echo "財報入帳狀態失敗（董事會通過／自結這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python ir_hist.py ../site/data --max 12 || { echo "::warning::法說歷史回補失敗（法說反應這班不更新）"; echo "法說歷史回補失敗（法說反應這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python contrib.py ../site/data || { echo "::warning::大盤點數貢獻失敗（這班不更新）"; echo "大盤點數貢獻失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python mi_react.py ../site/data || { echo "::warning::重訊反應失敗（這班不更新）"; echo "重訊反應失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
