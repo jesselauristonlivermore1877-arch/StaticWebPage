@@ -10024,8 +10024,12 @@ function sectorFlow(ss, sx) {
                          "aria-label": `${rows.length} 個大類在 ${COLS.length} 個維度上的落點`
                            + (HAS ? `，右邊 ${COLS.length - EX0} 欄不進評分` : "")});
   const t = (x, y, s, o) => {
-    const e = sv("text", Object.assign(
-      {x: x, y: y, "font-size": "12", fill: "currentColor"}, o || {}));
+    const attrs = Object.assign(
+      {x: x, y: y, "font-size": "12", fill: "currentColor"}, o || {});
+    const fontSize = attrs["font-size"];
+    delete attrs["font-size"];
+    attrs.style = (attrs.style ? attrs.style + ";" : "") + `font-size:${fontSize}px`;
+    const e = sv("text", attrs);
     e.textContent = s;
     svg.appendChild(e);
   };
