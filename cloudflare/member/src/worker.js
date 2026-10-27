@@ -72,7 +72,7 @@ async function init(env) {
   ready = true;
 }
 const PREF_K = /^[a-z0-9_]{1,30}$/;
-const LIVE_K = /^(adm|tick|dash|s_[A-Za-z0-9_]{1,40})$/;   // tick＝形成中那根（逐筆跳，10-19；所有會員）；dash＝看盤區盤勢儀表側欄（10-28；所有會員）
+const LIVE_K = /^(adm|tick|dash|dbars|s_[A-Za-z0-9_]{1,40})$/;   // tick＝形成中那根（逐筆跳，10-19；所有會員）；dash＝看盤區盤勢儀表側欄、dbars＝側欄個股當日 1 分線（10-28；所有會員）
 const SUB_RE = /^(\*|[A-Za-z0-9_]{1,40}(,[A-Za-z0-9_]{1,40}){0,49})?$/;
 const subsOf = s => s.admin === 1 ? ["*"] : String(s.subs || "").split(",").filter(Boolean);
 function canFile(s, name) {                                                       // 依訂閱擋檔：策略資料看訂閱、原型研究完整版只給管理者
@@ -374,7 +374,7 @@ export default {
         if (path === "/api/live" && url.searchParams.has("k")) {                       // 策略即時：s_<代碼> 照訂閱、adm 只給管理者
           const k = url.searchParams.get("k"), v = url.searchParams.get("v") || "", sm = k.match(/^s_([A-Za-z0-9_]{1,40})$/);
           if (!LIVE_K.test(k)) return json({error: "沒有這個即時資料"}, 404);
-          if (k === "adm" ? s.admin !== 1 : k !== "tick" && k !== "dash" && !canFile(s, "data_s_" + sm[1] + ".js")) return json({error: "沒有訂閱這支策略"}, 403);
+          if (k === "adm" ? s.admin !== 1 : k !== "tick" && k !== "dash" && k !== "dbars" && !canFile(s, "data_s_" + sm[1] + ".js")) return json({error: "沒有訂閱這支策略"}, 403);
           const m = await env.DB.prepare("SELECT ts FROM livek WHERE k = ?").bind(k).first();
           if (!m) return new Response(null, {status: 204, headers: {"cache-control": "no-store", ...SEC}});
           if (String(m.ts) === v) return new Response(null, {status: 204, headers: {"cache-control": "no-store", "x-live-ts": String(m.ts), ...SEC}});
