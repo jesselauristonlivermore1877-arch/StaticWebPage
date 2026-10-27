@@ -1,7 +1,41 @@
 {
- "asof": "2026-10-27T10:13+00:00",
+ "asof": "2026-10-27T10:20+00:00",
  "rule": "法說高成長指引：翻倍／倍增／成長 N 倍／成長 N%（N≥50）／明年大幅成長／上修財測／創新高指引；同一公司同一場法說只觸發一次；頁首只放即時偵測、觸發後 3 個交易日內的（until），個股頁標記留 30 天",
  "top": [
+  {
+   "code": "5007",
+   "name": "三星",
+   "quote": "輝達攜手欣興、揖斐電、三星電機未來3年載板產能提升2.5倍",
+   "pat": "N倍",
+   "src": "自由時報",
+   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9Gb1owN0t3d1RQaUlUUVhlZTNSZzVvNmozSkhDZlZmbk1TcHBuVnZvWUFmYTY5VG5PS1psYTJNUGlzWk9TREd1eXR3b0tLdXhzRmNiTHNLZ2k?oc=5",
+   "pub": "2026-10-27T09:21+00:00",
+   "seen": "2026-10-27T10:20+00:00",
+   "meeting": null,
+   "px": {
+    "d": "2026-10-27",
+    "close": 55.900001525878906,
+    "chg": 0.0
+   },
+   "mx": {
+    "d": "2026-10-27",
+    "close": 55.900001525878906,
+    "chg": 0.0,
+    "prev": 55.900001525878906,
+    "prev_d": "2026-10-22",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-10-22",
+    "from": 55.900001525878906,
+    "to_d": "2026-10-27",
+    "to": 55.900001525878906,
+    "chg": 0.0
+   },
+   "kind": "news",
+   "n_more": 0,
+   "until": "2026-10-31T00:00+08:00"
+  },
   {
    "code": "3037",
    "name": "欣興",
@@ -72,6 +106,39 @@
   }
  ],
  "by_code": {
+  "5007": {
+   "code": "5007",
+   "name": "三星",
+   "quote": "輝達攜手欣興、揖斐電、三星電機未來3年載板產能提升2.5倍",
+   "pat": "N倍",
+   "src": "自由時報",
+   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9Gb1owN0t3d1RQaUlUUVhlZTNSZzVvNmozSkhDZlZmbk1TcHBuVnZvWUFmYTY5VG5PS1psYTJNUGlzWk9TREd1eXR3b0tLdXhzRmNiTHNLZ2k?oc=5",
+   "pub": "2026-10-27T09:21+00:00",
+   "seen": "2026-10-27T10:20+00:00",
+   "meeting": null,
+   "px": {
+    "d": "2026-10-27",
+    "close": 55.900001525878906,
+    "chg": 0.0
+   },
+   "mx": {
+    "d": "2026-10-27",
+    "close": 55.900001525878906,
+    "chg": 0.0,
+    "prev": 55.900001525878906,
+    "prev_d": "2026-10-22",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-10-22",
+    "from": 55.900001525878906,
+    "to_d": "2026-10-27",
+    "to": 55.900001525878906,
+    "chg": 0.0
+   },
+   "kind": "news",
+   "n_more": 0
+  },
   "3037": {
    "code": "3037",
    "name": "欣興",
