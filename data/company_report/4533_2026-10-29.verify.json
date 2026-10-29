@@ -1,0 +1,38 @@
+{
+ "file": "4533_2026-10-29.md",
+ "code": "4533",
+ "date": "2026-10-29",
+ "show": true,
+ "numbers": {
+  "ok": true,
+  "bad": [],
+  "cited": 26,
+  "facts": 115
+ },
+ "compliance": {
+  "ok": true,
+  "hits": []
+ },
+ "src": {
+  "ok": true,
+  "bad": []
+ },
+ "cross": {
+  "ok": true,
+  "bad": [],
+  "checked": [
+   "close",
+   "eps_q",
+   "mcap",
+   "rev_m"
+  ]
+ },
+ "tables": {
+  "ok": true,
+  "bad": []
+ },
+ "sections": {
+  "ok": true,
+  "missing": []
+ }
+}
