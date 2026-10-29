@@ -1,17 +1,17 @@
 {
  "date": "2026-10-29",
  "data_date": "2026-10-29",
- "made": "2026-10-29T14:20+08:00",
- "built_at": "2026-10-29T14:12:49+08:00",
- "run": "40827666950",
+ "made": "2026-10-29T15:50+08:00",
+ "built_at": "2026-10-29T15:41:34+08:00",
+ "run": "40836928331",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
-  "web_data.market.taiex": "2026-10-28",
+  "web_data.market.taiex": "2026-10-29",
   "web_data.market.otc": "2026-10-29",
   "web_data.market.tsmc": "2026-10-29",
   "web_data.breadth": "2026-10-29",
   "web_data.orders": "2026-10-29",
-  "web_data.inst.summary": "2026-10-28",
+  "web_data.inst.summary": "2026-10-29",
   "web_data.market.margin_balance": "2026-10-28",
   "web_data.elecfin": "2026-10-29",
   "web_data.screen.sector_score": "2026-10-29",
@@ -21,12 +21,55 @@
   "docs/data/etf_flow.json": "2026-10-27"
  },
  "skipped": {
-  "web_data.market.taiex": "來源資料日 2026-10-28 ≠ 資料日 2026-10-29",
-  "web_data.inst.summary": "來源資料日 2026-10-28 ≠ 資料日 2026-10-29",
   "web_data.market.margin_balance": "來源資料日 2026-10-28 ≠ 資料日 2026-10-29",
   "docs/data/chips.json": "來源資料日 2026-10-28 ≠ 資料日 2026-10-29"
  },
  "facts": [
+  {
+   "id": "taiex_close",
+   "sec": "大盤",
+   "label": "加權指數收盤",
+   "value": 46368.33,
+   "unit": " 點",
+   "text": "46368.33 點",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_chg",
+   "sec": "大盤",
+   "label": "加權指數漲跌點",
+   "value": -667.25,
+   "unit": " 點",
+   "text": "-667.25 點",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_r1",
+   "sec": "大盤",
+   "label": "加權指數漲跌幅",
+   "value": -1.42,
+   "unit": "%",
+   "text": "-1.42%",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_dd52",
+   "sec": "大盤",
+   "label": "加權指數距 52 週高點",
+   "value": -7.21,
+   "unit": "%",
+   "text": "-7.21%",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_ma20",
+   "sec": "大盤",
+   "label": "加權指數距 20 日均線",
+   "value": -3.09,
+   "unit": "%",
+   "text": "-3.09%",
+   "src": "web_data.market.taiex"
+  },
   {
    "id": "otc_close",
    "sec": "大盤",
@@ -118,6 +161,33 @@
    "src": "web_data.orders"
   },
   {
+   "id": "inst_外資",
+   "sec": "法人籌碼",
+   "label": "外資買賣超",
+   "value": -688.2,
+   "unit": " 億元",
+   "text": "-688.2 億元",
+   "src": "web_data.inst.summary"
+  },
+  {
+   "id": "inst_投信",
+   "sec": "法人籌碼",
+   "label": "投信買賣超",
+   "value": 86.5,
+   "unit": " 億元",
+   "text": "+86.5 億元",
+   "src": "web_data.inst.summary"
+  },
+  {
+   "id": "inst_自營",
+   "sec": "法人籌碼",
+   "label": "自營買賣超",
+   "value": -215.0,
+   "unit": " 億元",
+   "text": "-215.0 億元",
+   "src": "web_data.inst.summary"
+  },
+  {
    "id": "elecfin",
    "sec": "族群",
    "label": "電金比（電子÷金融）",
@@ -139,45 +209,45 @@
    "id": "sec_top2",
    "sec": "族群",
    "label": "族群評分第 2 名：金融",
-   "value": 56.9,
+   "value": 57.2,
    "unit": " 分",
-   "text": "56.9 分",
+   "text": "57.2 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_top3",
    "sec": "族群",
    "label": "族群評分第 3 名：航運",
-   "value": 54.6,
+   "value": 54.8,
    "unit": " 分",
-   "text": "54.6 分",
+   "text": "54.8 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot1",
    "sec": "族群",
    "label": "族群評分倒數第 1 名：網通與衛星",
-   "value": 9.6,
+   "value": 10.1,
    "unit": " 分",
-   "text": "9.6 分",
+   "text": "10.1 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot2",
    "sec": "族群",
-   "label": "族群評分倒數第 2 名：功率元件",
-   "value": 15.8,
+   "label": "族群評分倒數第 2 名：伺服器電源與儲能",
+   "value": 16.0,
    "unit": " 分",
-   "text": "15.8 分",
+   "text": "16.0 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot3",
    "sec": "族群",
-   "label": "族群評分倒數第 3 名：伺服器電源與儲能",
-   "value": 16.0,
+   "label": "族群評分倒數第 3 名：功率元件",
+   "value": 16.9,
    "unit": " 分",
-   "text": "16.0 分",
+   "text": "16.9 分",
    "src": "web_data.screen.sector_score"
   },
   {
