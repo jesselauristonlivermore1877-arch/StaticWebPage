@@ -1,7 +1,41 @@
 {
- "asof": "2026-10-29T08:44+00:00",
+ "asof": "2026-10-29T23:15+00:00",
  "rule": "法說高成長指引：翻倍／倍增／成長 N 倍／成長 N%（N≥50）／明年大幅成長／上修財測／創新高指引；同一公司同一場法說只觸發一次；頁首只放即時偵測、觸發後 3 個交易日內的（until），個股頁標記留 30 天",
  "top": [
+  {
+   "code": "3711",
+   "name": "日月光投控",
+   "quote": "日月光投控第四度上修今年資本支出 明年先進封測營收目標倍增",
+   "pat": "翻倍",
+   "src": "自由時報",
+   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5EMUl2dU1MakhMY0pXQ0oyWHFuVHVocjdTVnc4VmJ4NVdFd2VUQmQyVmZNN3JIMTA5QmVuWTlldFh2NWJ6UnRzZjhPSmZRVnV2eDFYNXVqMko?oc=5",
+   "pub": "2026-10-29T09:45+00:00",
+   "seen": "2026-10-29T23:15+00:00",
+   "meeting": "2026-10-29",
+   "px": {
+    "d": "2026-10-29",
+    "close": 683.0,
+    "chg": -1.73
+   },
+   "mx": {
+    "d": "2026-10-29",
+    "close": 683.0,
+    "chg": -1.73,
+    "prev": 695.0,
+    "prev_d": "2026-10-28",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-10-28",
+    "from": 695.0,
+    "to_d": "2026-10-29",
+    "to": 683.0,
+    "chg": -1.73
+   },
+   "kind": "news",
+   "n_more": 0,
+   "until": "2026-11-05T00:00+08:00"
+  },
   {
    "code": "3081",
    "name": "聯亞",
@@ -38,6 +72,39 @@
   }
  ],
  "by_code": {
+  "3711": {
+   "code": "3711",
+   "name": "日月光投控",
+   "quote": "日月光投控第四度上修今年資本支出 明年先進封測營收目標倍增",
+   "pat": "翻倍",
+   "src": "自由時報",
+   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5EMUl2dU1MakhMY0pXQ0oyWHFuVHVocjdTVnc4VmJ4NVdFd2VUQmQyVmZNN3JIMTA5QmVuWTlldFh2NWJ6UnRzZjhPSmZRVnV2eDFYNXVqMko?oc=5",
+   "pub": "2026-10-29T09:45+00:00",
+   "seen": "2026-10-29T23:15+00:00",
+   "meeting": "2026-10-29",
+   "px": {
+    "d": "2026-10-29",
+    "close": 683.0,
+    "chg": -1.73
+   },
+   "mx": {
+    "d": "2026-10-29",
+    "close": 683.0,
+    "chg": -1.73,
+    "prev": 695.0,
+    "prev_d": "2026-10-28",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-10-28",
+    "from": 695.0,
+    "to_d": "2026-10-29",
+    "to": 683.0,
+    "chg": -1.73
+   },
+   "kind": "news",
+   "n_more": 0
+  },
   "3081": {
    "code": "3081",
    "name": "聯亞",
