@@ -17644,8 +17644,16 @@
 "err": "JSONDecodeError: Expecting ',' delimiter: line 15 column 2 (char 8245)"
 },
 "gooaye:b86cb101-d4a0-49da-af9c-b1e460f5c89a": {
-"at": "2026-10-28",
+"at": "2026-10-29",
 "err": "RuntimeError: 回應沒有內容：{'promptFeedback': {'blockReason': 'PROHIBITED_CONTENT'}, 'usageMetadata': {'promptTokenCount': 137, 'totalTokenCount': 137, 'promptTokensDetails': [{'mo"
+},
+"gooaye:499a0c9f-1a36-4d5b-b9ca-ee2b2510e0bd": {
+"at": "2026-10-29",
+"err": "ReadTimeout: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=900)"
+},
+"harry_pod:cmvrjbypx07hh01wb52iu8if7": {
+"at": "2026-10-29",
+"err": "ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
 }
 }
 }
