@@ -197,6 +197,18 @@ jobs:
           # 🟢 10-26 02:50（總指揮 雲端 6）：上櫃熱門股證券商進出排行每天存一份（只有當天、沒有歷史；存滿 1～2 個月再做分點分類）→ data/broker_hot/
           T python broker_hot.py ../site/data || { echo "::warning::上櫃熱門股券商進出排行失敗（這班沒存）"; echo "上櫃熱門股券商進出排行失敗（這班沒存）" >> "$RUNNER_TEMP/soft_fail.txt"; }
 
+      # 🟢 10-29 晚（總指揮 雲端 1，Evans 核准）：選股 EDM（網站「市場 → 量化選股」）→ docs/data/pick_edm.json。
+      #    料全部是上面各步剛寫好的檔（web_data、radar、trail、rrg、chips、chips_daily、etf_flow、stock_bars、lookup），不打網路；
+      #    程式用另一份原始資料（daily.npz、chips_daily）重算核對，沒過就不出檔 → 網站沿用上一份。
+      - name: 選股 EDM
+        id: pickedm
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 5
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python tools/pick_edm.py ../site ../site/docs/data/pick_edm.json
+
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
       # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。
       # （只有「不可能的數字」才會 exit 1；缺漏只是警告，不會擋。）
@@ -234,8 +246,8 @@ jobs:
         run: |
           F=0
           if [ -s "$RUNNER_TEMP/soft_fail.txt" ]; then echo "::error::這幾項失敗（資料已用上一份）："; cat "$RUNNER_TEMP/soft_fail.txt"; F=1; fi
-          for s in "corp:${{ steps.corp.outcome }}" "quant:${{ steps.quant.outcome }}" "world:${{ steps.world.outcome }}"; do
-            case "$s" in *:failure) echo "::error::步驟 ${s%%:*} 失敗（處置股行事曆＝corp、量化數字檔＝quant、職位表全球資料＝world）"; F=1;; esac
+          for s in "corp:${{ steps.corp.outcome }}" "quant:${{ steps.quant.outcome }}" "world:${{ steps.world.outcome }}" "pickedm:${{ steps.pickedm.outcome }}"; do
+            case "$s" in *:failure) echo "::error::步驟 ${s%%:*} 失敗（處置股行事曆＝corp、量化數字檔＝quant、職位表全球資料＝world、選股 EDM＝pickedm）"; F=1;; esac
           done
           if [ "$F" = 1 ]; then exit 1; fi
           echo "✓ 這一班沒有被吞掉的失敗"
