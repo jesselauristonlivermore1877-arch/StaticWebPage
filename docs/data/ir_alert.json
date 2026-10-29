@@ -1,28 +1,7 @@
 {
- "asof": "2026-10-29T04:55+00:00",
+ "asof": "2026-10-29T08:44+00:00",
  "rule": "法說高成長指引：翻倍／倍增／成長 N 倍／成長 N%（N≥50）／明年大幅成長／上修財測／創新高指引；同一公司同一場法說只觸發一次；頁首只放即時偵測、觸發後 3 個交易日內的（until），個股頁標記留 30 天",
  "top": [
-  {
-   "code": "2330",
-   "name": "台積電",
-   "quote": "台積電第三季財報報喜上修全年展望 高階晶片需求驅動成長",
-   "pat": "上修財測",
-   "src": "Yahoo 股市",
-   "url": "https://tw.stock.yahoo.com/news/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E7%AC%AC%E4%B8%89%E5%AD%A3%E8%B2%A1%E5%A0%B1%E5%A0%B1%E5%96%9C%E4%B8%8A%E4%BF%AE%E5%85%A8%E5%B9%B4%E5%B1%95%E6%9C%9B-%E9%AB%98%E9%9A%8E%E6%99%B6%E7%89%87%E9%9C%80%E6%B1%82%E9%A9%85%E5%8B%95%E6%88%90%E9%95%B7-014548103.html",
-   "pub": "2026-10-29T01:45+00:00",
-   "seen": "2026-10-29T02:46+00:00",
-   "meeting": null,
-   "px": {
-    "d": "2026-10-28",
-    "close": 2425.0,
-    "chg": 1.04
-   },
-   "mx": null,
-   "pre": null,
-   "kind": "news",
-   "n_more": 0,
-   "until": "2026-11-04T00:00+08:00"
-  },
   {
    "code": "3081",
    "name": "聯亞",
@@ -49,138 +28,16 @@
    "pre": {
     "from_d": "2026-10-27",
     "from": 2500.0,
-    "to_d": "2026-10-28",
-    "to": 2580.0,
-    "chg": 3.2
+    "to_d": "2026-10-29",
+    "to": 2575.0,
+    "chg": 3.0
    },
    "kind": "news",
    "n_more": 2,
    "until": "2026-11-04T00:00+08:00"
-  },
-  {
-   "code": "5007",
-   "name": "三星",
-   "quote": "輝達攜手欣興、揖斐電、三星電機未來3年載板產能提升2.5倍",
-   "pat": "N倍",
-   "src": "自由時報",
-   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9Gb1owN0t3d1RQaUlUUVhlZTNSZzVvNmozSkhDZlZmbk1TcHBuVnZvWUFmYTY5VG5PS1psYTJNUGlzWk9TREd1eXR3b0tLdXhzRmNiTHNLZ2k?oc=5",
-   "pub": "2026-10-27T09:21+00:00",
-   "seen": "2026-10-27T10:20+00:00",
-   "meeting": null,
-   "px": {
-    "d": "2026-10-27",
-    "close": 55.900001525878906,
-    "chg": 0.0
-   },
-   "mx": {
-    "d": "2026-10-27",
-    "close": 55.900001525878906,
-    "chg": 0.0,
-    "prev": 55.900001525878906,
-    "prev_d": "2026-10-22",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-10-22",
-    "from": 55.900001525878906,
-    "to_d": "2026-10-28",
-    "to": 56.0,
-    "chg": 0.18
-   },
-   "kind": "news",
-   "n_more": 1,
-   "until": "2026-10-31T00:00+08:00"
-  },
-  {
-   "code": "3037",
-   "name": "欣興",
-   "quote": "焦點股》欣興：Rubin載板價值較上代大增100％ 載板毛利率挑戰50％",
-   "pat": "N%",
-   "src": "自由時報",
-   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5wcGk0dzk1MUJRcXl6YjZrUmV1eFc3LXl4WFBMS1BHZ2tVT2lTQUd6SW1tcjVPbWI2VUJwc052QU1rV0VOc01DTmVfaXBvVWgwRXVOWnpqeEc?oc=5",
-   "pub": "2026-10-27T02:57+00:00",
-   "seen": "2026-10-27T03:09+00:00",
-   "meeting": null,
-   "px": {
-    "d": "2026-10-22",
-    "close": 1085.0,
-    "chg": -1.36
-   },
-   "mx": {
-    "d": "2026-10-27",
-    "close": 1060.0,
-    "chg": -2.3,
-    "prev": 1085.0,
-    "prev_d": "2026-10-22",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-10-22",
-    "from": 1085.0,
-    "to_d": "2026-10-28",
-    "to": 1100.0,
-    "chg": 1.38
-   },
-   "kind": "news",
-   "n_more": 0,
-   "until": "2026-10-31T00:00+08:00"
-  },
-  {
-   "code": "2382",
-   "name": "廣達",
-   "quote": "廣達Vera Rubin明年Q1放量，ASIC伺服器倍增- 新聞",
-   "pat": "翻倍",
-   "src": "MoneyDJ",
-   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPdFFDcjl6ZUhKUjZvazg5TGZoZVo3RTJ1TVJzZFdXN0NwSEdCZ1pydll0QU90Mzh4TUl0S1gxbmFWVldjcmNwamQtV0JNQ013VXZBVGYxRjdYdlNQUy1WbDBpQzI3T3VPMXNVcjFabmxwZTcwdEItZlpzcEdTUlQxODhYbGh5UEJEaFVLV001ZGw3UQ?oc=5",
-   "pub": "2026-10-27T02:02+00:00",
-   "seen": "2026-10-27T02:35+00:00",
-   "meeting": null,
-   "px": {
-    "d": "2026-10-22",
-    "close": 322.0,
-    "chg": -1.98
-   },
-   "mx": {
-    "d": "2026-10-27",
-    "close": 327.5,
-    "chg": 1.71,
-    "prev": 322.0,
-    "prev_d": "2026-10-22",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-10-22",
-    "from": 322.0,
-    "to_d": "2026-10-28",
-    "to": 330.0,
-    "chg": 2.48
-   },
-   "kind": "news",
-   "n_more": 0,
-   "until": "2026-10-31T00:00+08:00"
   }
  ],
  "by_code": {
-  "2330": {
-   "code": "2330",
-   "name": "台積電",
-   "quote": "台積電第三季財報報喜上修全年展望 高階晶片需求驅動成長",
-   "pat": "上修財測",
-   "src": "Yahoo 股市",
-   "url": "https://tw.stock.yahoo.com/news/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E7%AC%AC%E4%B8%89%E5%AD%A3%E8%B2%A1%E5%A0%B1%E5%A0%B1%E5%96%9C%E4%B8%8A%E4%BF%AE%E5%85%A8%E5%B9%B4%E5%B1%95%E6%9C%9B-%E9%AB%98%E9%9A%8E%E6%99%B6%E7%89%87%E9%9C%80%E6%B1%82%E9%A9%85%E5%8B%95%E6%88%90%E9%95%B7-014548103.html",
-   "pub": "2026-10-29T01:45+00:00",
-   "seen": "2026-10-29T02:46+00:00",
-   "meeting": null,
-   "px": {
-    "d": "2026-10-28",
-    "close": 2425.0,
-    "chg": 1.04
-   },
-   "mx": null,
-   "pre": null,
-   "kind": "news",
-   "n_more": 0
-  },
   "3081": {
    "code": "3081",
    "name": "聯亞",
@@ -207,111 +64,12 @@
    "pre": {
     "from_d": "2026-10-27",
     "from": 2500.0,
-    "to_d": "2026-10-28",
-    "to": 2580.0,
-    "chg": 3.2
+    "to_d": "2026-10-29",
+    "to": 2575.0,
+    "chg": 3.0
    },
    "kind": "news",
    "n_more": 2
-  },
-  "5007": {
-   "code": "5007",
-   "name": "三星",
-   "quote": "輝達攜手欣興、揖斐電、三星電機未來3年載板產能提升2.5倍",
-   "pat": "N倍",
-   "src": "自由時報",
-   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9Gb1owN0t3d1RQaUlUUVhlZTNSZzVvNmozSkhDZlZmbk1TcHBuVnZvWUFmYTY5VG5PS1psYTJNUGlzWk9TREd1eXR3b0tLdXhzRmNiTHNLZ2k?oc=5",
-   "pub": "2026-10-27T09:21+00:00",
-   "seen": "2026-10-27T10:20+00:00",
-   "meeting": null,
-   "px": {
-    "d": "2026-10-27",
-    "close": 55.900001525878906,
-    "chg": 0.0
-   },
-   "mx": {
-    "d": "2026-10-27",
-    "close": 55.900001525878906,
-    "chg": 0.0,
-    "prev": 55.900001525878906,
-    "prev_d": "2026-10-22",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-10-22",
-    "from": 55.900001525878906,
-    "to_d": "2026-10-28",
-    "to": 56.0,
-    "chg": 0.18
-   },
-   "kind": "news",
-   "n_more": 1
-  },
-  "3037": {
-   "code": "3037",
-   "name": "欣興",
-   "quote": "焦點股》欣興：Rubin載板價值較上代大增100％ 載板毛利率挑戰50％",
-   "pat": "N%",
-   "src": "自由時報",
-   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5wcGk0dzk1MUJRcXl6YjZrUmV1eFc3LXl4WFBMS1BHZ2tVT2lTQUd6SW1tcjVPbWI2VUJwc052QU1rV0VOc01DTmVfaXBvVWgwRXVOWnpqeEc?oc=5",
-   "pub": "2026-10-27T02:57+00:00",
-   "seen": "2026-10-27T03:09+00:00",
-   "meeting": null,
-   "px": {
-    "d": "2026-10-22",
-    "close": 1085.0,
-    "chg": -1.36
-   },
-   "mx": {
-    "d": "2026-10-27",
-    "close": 1060.0,
-    "chg": -2.3,
-    "prev": 1085.0,
-    "prev_d": "2026-10-22",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-10-22",
-    "from": 1085.0,
-    "to_d": "2026-10-28",
-    "to": 1100.0,
-    "chg": 1.38
-   },
-   "kind": "news",
-   "n_more": 0
-  },
-  "2382": {
-   "code": "2382",
-   "name": "廣達",
-   "quote": "廣達Vera Rubin明年Q1放量，ASIC伺服器倍增- 新聞",
-   "pat": "翻倍",
-   "src": "MoneyDJ",
-   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPdFFDcjl6ZUhKUjZvazg5TGZoZVo3RTJ1TVJzZFdXN0NwSEdCZ1pydll0QU90Mzh4TUl0S1gxbmFWVldjcmNwamQtV0JNQ013VXZBVGYxRjdYdlNQUy1WbDBpQzI3T3VPMXNVcjFabmxwZTcwdEItZlpzcEdTUlQxODhYbGh5UEJEaFVLV001ZGw3UQ?oc=5",
-   "pub": "2026-10-27T02:02+00:00",
-   "seen": "2026-10-27T02:35+00:00",
-   "meeting": null,
-   "px": {
-    "d": "2026-10-22",
-    "close": 322.0,
-    "chg": -1.98
-   },
-   "mx": {
-    "d": "2026-10-27",
-    "close": 327.5,
-    "chg": 1.71,
-    "prev": 322.0,
-    "prev_d": "2026-10-22",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-10-22",
-    "from": 322.0,
-    "to_d": "2026-10-28",
-    "to": 330.0,
-    "chg": 2.48
-   },
-   "kind": "news",
-   "n_more": 0
   }
  }
 }
