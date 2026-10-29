@@ -10,7 +10,13 @@ section{background:var(--card);border:1px solid var(--line);border-radius:10px;p
 h2{font-size:17px;margin:0 0 6px} .u{margin:0 0 4px;overflow-wrap:anywhere} .u a{color:var(--acc);font-weight:700}
 .b{margin:0 0 6px;color:var(--ink2);font-size:13px} ul{margin:6px 0 0;padding-left:20px} li{margin:3px 0}
 </style></head><body><main><h1>待審預覽</h1>
-<p class="m">共 11 項　更新 2026-10-26（台北）　只放公開版會出現的內容；審核通過、套版後就刪掉對應的預覽。</p>
+<p class="m">共 12 項　更新 2026-10-29（台北）　只放公開版會出現的內容；審核通過、套版後就刪掉對應的預覽。</p>
+<section><h2>【10-29】AI 研究報告下載版改版＋EDM 圖卡（C4，雲端接手 Codex）</h2><p class="u"><a href="report_v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/report_v2/</a></p><p class="b">用正式站最近 5 篇（1303 南亞、2330 台積電、2881 富邦金、2408 南亞科、1301 台塑）重產，每篇有 PDF、逐頁縮圖、EDM 圖卡，也可以按「現場重產」用你的瀏覽器跑同一支程式。下載版是網頁 template.html 在瀏覽器裡產生的（不是本機 industry_note.py／Gemini），只改排版，資料與核對都沒動。要看的重點：</p><ul>
+<li><b>不再切斷</b>：每頁獨立排成 A4，圖、表格列、段落都不會被攔腰切；長表在列與列之間換頁、續頁重複表頭並標「（續）」；太寬的表自動縮字、再不夠就整張縮小</li>
+<li><b>第一頁</b>：標題 → 重點摘要 3～5 點（取自已核對的「總結」）＋估值位階 → 四格關鍵數字 → 營收與 EPS 圖 → 事件摘句；每頁頁首、頁尾、頁碼，浮水印照舊</li>
+<li><b>要你裁示</b>：派工要「評等」，但站上規則是不放評等、目標價（09-28）→ 評等的位置先放「估值位階」（本益比、淨值比、ROE、殖利率）；前言（事件、公司簡介）超過 260 字收進附錄</li>
+<li><b>EDM 圖卡</b>（新，1080×1350 直式）：參考藏鋒兩張圖，大標、四格關鍵數字、營收與 EPS 圖、重點 3 點、後續追蹤 3 點、風險一行、下一步一行</li>
+<li>點頭後：搬進 template.html，「長圖 PNG（手機寬）」按鈕要不要換成 EDM 圖卡，也請一起決定</li></ul></section>
 <section><h2>【10-26 19:15】獲利流向：公式標示＋個股版（19:15 雲端 4～5）</h2><p class="u"><a href="v2/">https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/preview/v2/</a>（<b>產業 → 產業研究 → 獲利流向</b>；個股版的小表在任一個股卡裡，例：族群展開後點個股、或法說重磅點進去）</p><p class="b">截圖：<a href="v2/ef4_yoy.png">YoY 族群版</a>、<a href="v2/ef4_cagr_open.png">3 年 CAGR＋展開記憶體成員</a>、<a href="v2/ef4_rank.png">個股排行前 50</a>、<a href="v2/ef4_sx.png">個股卡 EPS 流向小表（2408 南亞科）</a>、<a href="v2/ef4_m.png">手機</a></p><ul>
 <li><b>要看</b>：每種切換鈕下方一行公式；第二種是「3 年 CAGR＝（本季近四季 ÷ 三年前同季近四季）^(1/3) − 1」，公式裡直接寫「不是近三季」</li>
 <li><b>要看</b>：欄頭上層寫「YoY／3 年 CAGR／指數（期初＝100）・族群歸母淨利加總」；公式下註明「族群獲利＝成員歸母淨利加總，不是 EPS 平均」</li>
