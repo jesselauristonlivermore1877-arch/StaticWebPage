@@ -55,7 +55,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12.14"
-      - run: pip install -c "$GITHUB_WORKSPACE/CustomerServiceANDSales/requirements-lock.txt" requests certifi numpy pypdf
+      # 10-30：法說簡報 PDF 有 AES 加密，pypdf 解密要 cryptography（第一次跑「cryptography>=3.1 is required」整份沒讀到）
+      - run: pip install -c "$GITHUB_WORKSPACE/CustomerServiceANDSales/requirements-lock.txt" requests certifi numpy pypdf cryptography
       - name: 產報告
         working-directory: CustomerServiceANDSales
         env:
