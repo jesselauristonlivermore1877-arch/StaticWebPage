@@ -96,15 +96,17 @@ jobs:
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           CODE: ${{ inputs.code }}
           FOCUS: ${{ inputs.focus }}
+          KIND: ${{ inputs.kind }}
         run: |
           python - <<'PY'
           import json, os, urllib.parse, urllib.request
           code, focus = os.environ["CODE"], os.environ.get("FOCUS", "")
+          sec = "指定報告" if os.environ.get("KIND") == "pick" else "AI 研究報告"
           J = json.load(open("docs/data/company_reports.json", encoding="utf-8"))
           R = [r for r in (J.get("reports") or J.get("items") or []) if str(r.get("code")) == code]
           r = sorted(R, key=lambda r: r.get("date") or "")[-1] if R else {}
-          txt = "GEA：%s（%s）AI 研究報告已上網頁（資料日 %s%s）。\n%s\n網站「產業研究 → AI 研究報告」：https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/" % (
-              r.get("name") or "", code, r.get("date") or "—", "；重點：" + focus if focus else "", r.get("title") or "")
+          txt = "GEA：%s（%s）AI 研究報告已上網頁（資料日 %s%s）。\n%s\n網站「產業研究 → %s」：https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/" % (
+              r.get("name") or "", code, r.get("date") or "—", "；重點：" + focus if focus else "", r.get("title") or "", sec)
           tok, chat = os.environ.get("TG_BOT_TOKEN", "").strip(), os.environ.get("TG_CHAT_ID", "").strip()
           print(txt)
           if tok and chat:
