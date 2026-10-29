@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>⑧ 權證選股預覽</title>
+<style>
+body{margin:0;background:#EDE7DA;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1B2A4A}
+.pw-wrap{max-width:1120px;margin:0 auto;padding:16px}
+.pw-note{font-size:14px;line-height:1.7;background:#fff;border:1px solid #DDD4BF;border-radius:10px;padding:10px 14px;margin-bottom:12px}
+.pw-box{width:100%;overflow:hidden}
+.pe-card{--k:1;width:1080px;height:1350px;box-sizing:border-box;overflow:hidden;background:#F6F2E8;color:#1B2A4A;font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;display:flex;flex-direction:column;gap:16px;padding:0 0 18px}
+.pe-top{position:relative;background:linear-gradient(135deg,#1B2A4A 0%,#26406e 70%,#B8862B 140%);color:#fff;padding:30px 48px 26px 220px;min-height:150px}
+.pe-date{position:absolute;left:44px;top:30px;width:148px;background:#fff;color:#1B2A4A;border-radius:14px;text-align:center;overflow:hidden;border:3px solid #F3E3C0}
+.pe-date small{display:block;background:#C8361E;color:#fff;font-size:20px;font-weight:900;padding:3px 0}
+.pe-date b{display:block;font-size:44px;font-weight:900;line-height:1.15;margin-top:4px}
+.pe-date em{display:block;font-style:normal;font-size:22px;font-weight:900;padding-bottom:6px}
+.pe-tag{display:inline-block;background:#F3E3C0;color:#1B2A4A;font-weight:900;border-radius:8px;padding:3px 14px;font-size:22px}
+.pe-brand{position:absolute;right:48px;top:30px;text-align:right;font-weight:900;font-size:26px;color:#F3E3C0;line-height:1.1}.pe-brand small{display:block;font-size:15px;font-weight:700;opacity:.85}
+.pe-title{font-size:54px;font-weight:900;line-height:1.2;margin-top:10px}
+.pe-title span{color:#FFC35A}
+.pe-subt{font-size:23px;line-height:1.5;margin-top:8px;opacity:.95}
+.pe-kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:0 36px}
+.pe-kpi div{background:#fff;border-radius:14px;border:1px solid #E7DFCC;padding:12px 10px;text-align:center}
+.pe-kpi small{display:block;white-space:nowrap;font-size:20px;font-weight:700;color:#4A4636}
+.pe-kpi b{display:block;font-size:46px;font-weight:900;color:#1B2A4A;line-height:1.2;margin:2px 0;white-space:nowrap}.pe-kpi b u{text-decoration:none;font-size:.48em;margin-left:4px}
+.pe-kpi em{display:block;font-style:normal;font-size:18px;font-weight:700;color:#B8862B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pe-kpi .up b{color:#C8361E}.pe-kpi .dn b{color:#1E7B4F}.pe-kpi .gd b{color:#B8862B}
+.pe-box{background:#fff;border-radius:14px;padding:14px 20px;border:1px solid #E7DFCC;box-sizing:border-box}
+.pe-box h4{margin:0 0 8px;font-size:27px;font-weight:900;color:#1B2A4A;display:flex;align-items:baseline;gap:10px}
+.pe-box h4::before{content:"";display:inline-block;width:8px;height:.9em;background:#B8862B;border-radius:2px;align-self:center}
+.pe-box h4 small{font-size:17px;font-weight:700;color:#6B6452}
+.pe-mx{margin:0 36px}
+.pe-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 36px;flex:1 0 auto}
+.pe-sec{border-top:1px dashed #E7DFCC;padding:7px 0 6px}
+.pe-sec:first-of-type{border-top:0}
+.pe-sec b{display:block;font-size:23px;font-weight:900;line-height:1.3}
+.pe-sec i{font-style:normal;font-size:15px;font-weight:700;color:#fff;background:#B8862B;border-radius:5px;padding:0 6px;margin-left:6px;vertical-align:3px}
+.pe-sec small{display:block;font-size:17px;font-weight:700;color:#6B6452;line-height:1.45}
+.pe-sec span{display:block;font-size:18.5px;font-weight:700;line-height:1.45}
+.pe-hd{display:block;text-align:center;font-size:24px;font-weight:900;color:#fff;border-radius:10px;padding:5px 0;margin:-2px 0 6px}
+.pe-hd.lead{background:#C8361E}.pe-hd.imp{background:#E2802C}.pe-hd.lag{background:#1E7B4F}.pe-hd.f{background:#1B2A4A}.pe-hd.t{background:#7A4FA0}.pe-hd.b{background:#B8862B}
+.pe-card .up{color:#C8361E}.pe-card .dn{color:#1E7B4F}
+.pe-line{margin:0 36px;background:#fff;border-radius:12px;padding:10px 20px;font-size:20px;font-weight:700;line-height:1.5;border:1px solid #E7DFCC}
+.pe-line b{color:#B8862B;margin-right:10px}
+.pe-tb{width:100%;border-collapse:collapse;font-size:21px}
+.pe-tb th{font-size:17px;color:#6B6452;font-weight:700;text-align:left;padding:4px 6px;border-bottom:2px solid #E7DFCC;white-space:nowrap}
+.pe-tb td{padding:7px 6px;border-bottom:1px solid #F0EADB;font-weight:700;vertical-align:middle}
+.pe-tb td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pe-tb td.c{white-space:nowrap}.pe-tb td.c small{color:#6B6452;font-size:16px;margin-right:6px}
+.pe-tb td.fs{font-size:16px;color:#4A4636;line-height:1.35}
+.pe-rk{display:inline-block;width:32px;height:32px;line-height:32px;border-radius:50%;background:#1B2A4A;color:#fff;text-align:center;font-size:17px;font-weight:900}
+.pe-dots{letter-spacing:2px;color:#C8361E;font-size:18px}
+.pe-li{display:flex;align-items:baseline;gap:8px;padding:5px 0;border-bottom:1px solid #F0EADB;font-size:20px;font-weight:700}
+.pe-li:last-child{border-bottom:0}
+.pe-li i{flex:none;font-style:normal;width:26px;height:26px;line-height:26px;border-radius:50%;background:#EFE7D3;text-align:center;font-size:15px;font-weight:900;align-self:center}
+.pe-li em{font-style:normal;color:#6B6452;font-size:16px}
+.pe-li span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pe-li b{white-space:nowrap;font-variant-numeric:tabular-nums}
+.pe-li small{font-size:14px;color:#B8862B;margin-left:4px;white-space:nowrap}
+.pe-foot{margin:auto 36px 0;display:flex;align-items:center;gap:16px}
+.pe-foot b{flex:none;background:#1B2A4A;color:#FFC35A;border-radius:10px;padding:8px 16px;font-size:23px;font-weight:900}
+.pe-foot span{font-size:15px;color:#6B6452;line-height:1.5}
+.pe-empty{font-size:21px;font-weight:700;color:#6B6452;line-height:1.6;padding:6px 0}
+.pe-ph{flex:1;margin:0 36px;border:4px dashed #CFC4AA;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#6B6452;text-align:center}
+.pe-ph b{font-size:46px;color:#1B2A4A}.pe-ph span{font-size:24px;font-weight:700;line-height:1.6}
+.pe-c2 .pe-tb td{padding:11px 6px}.pe-c3 .pe-li{padding:15px 0;font-size:22px}
+.pe-rrg text{font-family:"Noto Sans TC",sans-serif}
+.pe-q4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 36px;flex:1 0 auto}
+.pe-hd.q0{background:#C8361E}.pe-hd.q1{background:#E2802C}.pe-hd.q2{background:#4F8A6A}.pe-hd.q3{background:#1E7B4F}
+.pe-hd.tu{background:#C8361E}.pe-hd.td{background:#1E7B4F}
+.pe-tr{display:grid;grid-template-columns:minmax(0,1fr) 130px;gap:3px 10px;border-top:1px dashed #E7DFCC;padding:9px 0 8px;align-items:center}
+.pe-tr:first-of-type{border-top:0}
+.pe-tr b{font-size:23px;font-weight:900;line-height:1.25;white-space:nowrap;overflow:hidden}
+.pe-tr i{font-style:normal;font-size:15px;font-weight:700;color:#fff;border-radius:5px;padding:0 6px;margin-left:6px;vertical-align:3px}
+.pe-tr i.up{background:#C8361E}.pe-tr i.dn{background:#1E7B4F}
+.pe-tr small{display:block;font-size:16.5px;font-weight:700;color:#4A4636;line-height:1.45;white-space:nowrap}
+.pe-tr span{display:block;font-size:17px;font-weight:700;line-height:1.4;color:#4A4636;white-space:nowrap;overflow:hidden}
+.pe-tr svg{grid-row:1 / span 3;grid-column:2}
+.pe-q4 .pe-sec{padding:5px 0 4px}.pe-q4 .pe-sec b{font-size:22px}.pe-q4 .pe-sec small{font-size:16px}.pe-q4 .pe-sec span{font-size:18px}
+.pe-note{margin:0 36px;font-size:17px;font-weight:700;color:#6B6452;line-height:1.5}
+</style></head><body><div class="pw-wrap">
+<div class="pw-note"><b>預覽：選股 EDM ⑧ 權證</b>（10-29 晚【新】總指揮二：雲端出預覽，<b>Evans 點頭才接進「量化選股」</b>）。版型照 ①～⑦（1080×1350，pe- 樣式），下面是縮小顯示。<br>
+資料＝<code>docs/data/warrant_flow.json</code>（W 盤後重播、前一交易日權證成交金額累計 80%）依標的彙總；三欄＝外盤主動買金額、偏多金額（認購淨買 − 認售淨買）、同時成交檔數（熱度），各前 10。
+數字由 <code>tools/pick_edm.py --warrant</code> 算，並用同一檔的逐檔明細重算核對（<span id="pwN"></span>），核對不過不出檔。</div>
+<div class="pw-box" id="pwBox"></div></div>
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"]/g, m => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[m]));
+const PE_WD = "日一二三四五六";
+const peSg = (v, d) => v == null ? "—" : (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(d);
+const peCls = v => v > 0 ? "up" : v < 0 ? "dn" : "";
+const peYi = (v, d) => (v / 1e8).toFixed(d == null ? 2 : d);               // 元 → 億
+const peYiM = v => (v / 100).toFixed(2);                                     // 百萬 → 億
+const peNm = (t, n) => (t = String(t || "")).length > (n || 5) ? t.slice(0, n || 5) : t;   // 長名稱截短（html2canvas 畫不好省略號）
+const PE_QN = {lead: "領先", imp: "改善", weak: "轉弱", lag: "落後"};
+
+function peTop(date, tag, title, subt) {
+  const d = new Date(date + "T12:00:00Z");
+  return `<div class="pe-top"><div class="pe-date"><small>${d.getUTCFullYear() - 1911} 年</small><b>${d.getUTCMonth() + 1}/${d.getUTCDate()}</b><em>（${PE_WD[d.getUTCDay()]}）</em></div>` +
+    `<div class="pe-brand">GEA 戰情<small>量化選股</small></div><div class="pe-tag">${esc(tag)}</div>` +
+    `<div class="pe-title">${title}</div><div class="pe-subt">${esc(subt)}</div></div>`;
+}
+const peKpi = a => `<div class="pe-kpi">${a.map(k => `<div class="${k.c || ""}"><small>${esc(k.lab)}</small><b>${esc(k.num)}<u>${esc(k.u || "")}</u></b><em>${esc(k.sub || "")}</em></div>`).join("")}</div>`;
+const peFoot = (P, src) => `<div class="pe-foot"><b>${esc(P.foot)}</b><span>${esc(src)}　不含目標價、評等；數字由程式從平台資料計算並重算核對。</span></div>`;
+const peWan = v => Math.round(v).toLocaleString("en-US");                       // 萬元
+/* ⑧ 權證（warrant_flow.json 依標的） */
+function peCard8(W) {
+  const P = {foot: W.foot}, nm = x => `${esc(peNm(x.name))}${peNm(x.name).length < 5 ? ` <em>${esc(x.code)}</em>` : ""}`;
+  const unit = t => `<div style="font-size:15px;color:#6B6452;font-weight:700;text-align:right;margin:-2px 0 2px">${t}</div>`;
+  const li = (a, f, cls) => a.map((x, i) => `<div class="pe-li"><i>${i + 1}</i><span>${nm(x)}</span><b class="${cls}">${f(x)}</b></div>`).join("");
+  const c = document.createElement("div"); c.className = "pe-card pe-c3"; c.dataset.date = W.date;
+  c.innerHTML = peTop(W.date, "選股 EDM ⑧｜權證", `權證資金流：<span>外盤買、偏多、熱度</span>`,
+      `權證多由造市者掛價：外盤＝投資人主動跟造市者買、內盤＝賣回造市者；依標的股彙總（萬元）`) +
+    peKpi([{lab: "外盤主動買合計", num: (W.buy / 1e4).toFixed(2), u: "億", c: "up", sub: `${W.n_under} 個標的有成交`},
+           {lab: "內盤主動賣合計", num: (W.sell / 1e4).toFixed(2), u: "億", c: "dn", sub: "賣回造市者"},
+           {lab: "偏多標的", num: W.n_bull, u: "個", c: "gd", sub: `偏空 ${W.n_bear} 個`},
+           {lab: "資料日", num: W.date.slice(5).replace("-", "/"), sub: "盤後逐筆重播"}]) +
+    `<div class="pe-cols"><div class="pe-box"><span class="pe-hd lead">外盤主動買</span>${unit("萬元")}${li(W.top_buy, x => peWan(x.buy), "up")}</div>` +
+    `<div class="pe-box"><span class="pe-hd b">偏多金額</span>${unit("認購淨買 − 認售淨買（萬元）")}${li(W.top_bull, x => "+" + peWan(x.bias), "up")}</div>` +
+    `<div class="pe-box"><span class="pe-hd f">同時成交（熱度）</span>${unit("有成交的權證檔數")}${li(W.top_heat, x => x.nw + " 檔", "")}</div></div>` +
+    peFoot(P, `資料日 ${W.date}｜名單：前一交易日（${W.list_day}）權證成交金額累計 ${W.coverage}%（${W.n_list} 檔，上市＋上櫃，不含牛熊證）；來源：永豐歷史逐筆 tick_type（1＝外盤、2＝內盤），金額＝價 × 量 × 1000。`);
+  return c;
+}
+fetch("warrant.json", {cache: "no-store"}).then(r => r.json()).then(W => {
+  document.getElementById("pwN").textContent = W.verify.ok ? "核對通過：" + W.verify.checked : "✗ 核對沒過";
+  if (!W.verify.ok) return;
+  const box = document.getElementById("pwBox"), c = peCard8(W);
+  const fit = () => { const k = Math.min(1, box.clientWidth / 1080); c.style.transform = `scale(${k})`; c.style.transformOrigin = "0 0"; box.style.height = 1350 * k + "px"; };
+  box.appendChild(c); fit(); addEventListener("resize", fit);
+});
+</script></body></html>
