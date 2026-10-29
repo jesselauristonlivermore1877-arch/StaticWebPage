@@ -33,6 +33,9 @@ jobs:
           echo "實際啟動 (UTC) : $(date -u +%H:%M)"
           echo "實際啟動 (台北) : $(TZ=Asia/Taipei date +%H:%M)"
           echo "↑ 累積幾天就知道真實延遲分布，再決定要不要把 cron 往前挪。"
+          # 🟢 10-30：選股還原價的事件只用這一班開始前就抓到的（adjpx.load 看 GEA_RUN_T0）；這班 river 新抓的下一班才生效，
+          #    不然前段（market_series、rrg、radar）跟後段（選股 EDM 核對）用到不同批事件、核對對不上（10-30 首班就因此 pickedm 失敗）
+          echo "GEA_RUN_T0=$(date +%s)" >> "$GITHUB_ENV"
 
       - name: 取出網頁 repo（產出物落在這）
         uses: actions/checkout@v4
