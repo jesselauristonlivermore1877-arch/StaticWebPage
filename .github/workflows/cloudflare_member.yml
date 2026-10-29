@@ -3,16 +3,14 @@
 #   secrets：沿用 CLOUDFLARE_API_TOKEN、CLOUDFLARE_ACCOUNT_ID；選用 LINE_CHANNEL_ID、LINE_CHANNEL_SECRET（Evans 建好 LINE Login channel 後設，沒設就不開 LINE 登入）。
 #   ADMIN_TOKEN：第一次部署時產生，存進 D1 gea-member 的 keys 表（Evans 從 Cloudflare 主控台複製，設成本機使用者變數 GEA_MEMBER_ADMIN_TOKEN），
 #     再設成 Worker secret；之後每次部署沿用（mode=rotate 才換）。log 只印遮罩。
-#   mode：deploy＝部署＋自動測試；test＝只測試；rotate＝換 ADMIN_TOKEN 後部署＋測試；usage＝只查 Cloudflare 用量（最近 7 天每支 Worker 每天請求數、方案；10-19 總指揮本機段 4）；
-#         page＝不部署 Worker，只把私有 repo main 的 research/preview_b/index.html（看盤區網頁）上傳到 D1（10-29 晚【新】總指揮零：雲端沒有 token、連不到 workers.dev，
-#               改由這裡上傳；比對 SHA 才傳、要有 <!--GEA_ME--> 注入點，同 tools/member_push.py；資料檔照舊由本機 member_push 傳）。
+#   mode：deploy＝部署＋自動測試；test＝只測試；rotate＝換 ADMIN_TOKEN 後部署＋測試；usage＝只查 Cloudflare 用量（最近 7 天每支 Worker 每天請求數、方案；10-19 總指揮本機段 4）。
 name: Cloudflare 會員區
 
 on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "deploy＝部署＋測試；test＝只測試；rotate＝換管理 token＋部署＋測試；usage＝只查用量；page＝只上傳看盤區網頁"
+        description: "deploy＝部署＋測試；test＝只測試；rotate＝換管理 token＋部署＋測試；usage＝只查用量"
         required: false
         default: "deploy"
 
@@ -104,35 +102,8 @@ jobs:
           fi
           echo "ADMIN_TOKEN=$V" >> "$GITHUB_ENV"
           echo "▶ Evans 複製位置：Cloudflare 主控台 → Storage & databases → D1 SQL database → $DB → Console，執行 SELECT * FROM keys"
-      - name: 取看盤區網頁（私有 repo main）
-        if: inputs.mode == 'page'
-        uses: actions/checkout@v4
-        with:
-          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
-          path: code
-          token: ${{ secrets.CODE_REPO_TOKEN }}
-          sparse-checkout: research/preview_b/index.html
-          sparse-checkout-cone-mode: false
-      - name: 上傳看盤區網頁 index.html
-        if: inputs.mode == 'page'
-        working-directory: code
-        shell: python
-        run: |
-          import hashlib, json, os, sys, urllib.request
-          B, tok = "https://gea-member.jesselauristonlivermore1877.workers.dev", os.environ["ADMIN_TOKEN"]
-          def call(m, path, body=None, h=None):
-              hh = {"authorization": "Bearer " + tok, "user-agent": "gea-member-push"}; hh.update(h or {})
-              with urllib.request.urlopen(urllib.request.Request(B + path, data=body, method=m, headers=hh), timeout=120) as r: return json.loads(r.read() or b"{}")
-          b = open("research/preview_b/index.html", "rb").read(); sha = hashlib.sha256(b).hexdigest()
-          if b"<!--GEA_ME-->" not in b: sys.exit("✗ index.html 沒有 <!--GEA_ME--> 注入點，不上傳")
-          remote = {f["name"]: f.get("sha") for f in call("GET", "/api/admin/files")["files"]}
-          print("本地 %s（%d 位元組）；正式站 %s" % (sha[:12], len(b), (remote.get("index.html") or "沒有")[:12]))
-          if remote.get("index.html") == sha: print("✓ 正式站已是同一版，不用傳"); sys.exit(0)
-          r = call("PUT", "/api/admin/file?name=index.html", b, {"x-ct": "text/html; charset=utf-8"})
-          assert r.get("sha") == sha, "✗ 上傳後雜湊不符"
-          print("✓ 已上傳 index.html", sha[:12])
       - name: 部署＋設定 Worker secret
-        if: inputs.mode != 'test' && inputs.mode != 'page'
+        if: inputs.mode != 'test'
         run: |
           set -o pipefail
           wrangler deploy 2>&1 | tee deploy.log
