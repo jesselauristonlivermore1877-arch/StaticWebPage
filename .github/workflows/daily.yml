@@ -180,6 +180,8 @@ jobs:
           T python ir_hist.py ../site/data --max 12 || { echo "::warning::法說歷史回補失敗（法說反應這班不更新）"; echo "法說歷史回補失敗（法說反應這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python contrib.py ../site/data || { echo "::warning::大盤點數貢獻失敗（這班不更新）"; echo "大盤點數貢獻失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python mi_react.py ../site/data || { echo "::warning::重訊反應失敗（這班不更新）"; echo "重訊反應失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          # 🟢 10-30（【新】總指揮 五）：風險警示（公開資訊觀測站利空事件）→ docs/data/risk_alert.json；新事件推 TG（第一次只記不推）
+          T python risk_alert.py ../site/data || { echo "::warning::風險警示失敗（這班不更新）"; echo "風險警示失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python news_heat.py ../site/data || { echo "::warning::新聞熱度失敗（這班不更新）"; echo "新聞熱度失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python insider.py ../site/data || { echo "::warning::內部人持股失敗（這班不更新）"; echo "內部人持股失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python capital.py ../site/data || { echo "::warning::籌資動態失敗（這班不更新）"; echo "籌資動態失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
