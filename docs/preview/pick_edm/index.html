@@ -79,13 +79,26 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","
 .pe-ph b{font-size:46px;color:#1B2A4A}.pe-ph span{font-size:24px;font-weight:700;line-height:1.6}
 .pe-c2 .pe-tb td{padding:11px 6px}.pe-c3 .pe-li{padding:15px 0;font-size:22px}
 .pe-rrg text{font-family:"Noto Sans TC",sans-serif}
+.pe-q4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 36px;flex:1 0 auto}
+.pe-hd.q0{background:#C8361E}.pe-hd.q1{background:#E2802C}.pe-hd.q2{background:#4F8A6A}.pe-hd.q3{background:#1E7B4F}
+.pe-hd.tu{background:#C8361E}.pe-hd.td{background:#1E7B4F}
+.pe-tr{display:grid;grid-template-columns:minmax(0,1fr) 130px;gap:3px 10px;border-top:1px dashed #E7DFCC;padding:9px 0 8px;align-items:center}
+.pe-tr:first-of-type{border-top:0}
+.pe-tr b{font-size:23px;font-weight:900;line-height:1.25;white-space:nowrap;overflow:hidden}
+.pe-tr i{font-style:normal;font-size:15px;font-weight:700;color:#fff;border-radius:5px;padding:0 6px;margin-left:6px;vertical-align:3px}
+.pe-tr i.up{background:#C8361E}.pe-tr i.dn{background:#1E7B4F}
+.pe-tr small{display:block;font-size:16.5px;font-weight:700;color:#4A4636;line-height:1.45;white-space:nowrap}
+.pe-tr span{display:block;font-size:17px;font-weight:700;line-height:1.4;color:#4A4636;white-space:nowrap;overflow:hidden}
+.pe-tr svg{grid-row:1 / span 3;grid-column:2}
+.pe-q4 .pe-sec{padding:5px 0 4px}.pe-q4 .pe-sec b{font-size:22px}.pe-q4 .pe-sec small{font-size:16px}.pe-q4 .pe-sec span{font-size:18px}
+.pe-note{margin:0 36px;font-size:17px;font-weight:700;color:#6B6452;line-height:1.5}
 </style>
 </head>
 <body>
 <div class="pv-head">
   <h1>選股 EDM 系列預覽（1080×1350）</h1>
   <p>資料全部取自平台現有檔案，由 <code>tools/pick_edm.py</code> 計算，並用另一份原始資料重算核對：<b id="pv-ver">載入中…</b></p>
-  <p>每張右上角「下載 PNG」＝正式上線後網站上的下載鈕（含浮水印）。④ 權證先留版位。</p>
+  <p>族群輪動拆成五張、每張一個主題（①～⑤），口徑與網站上同名的圖表相同；⑥⑦ 保留；⑧ 權證留版位，等覆蓋率 80%。每張右上角「下載 PNG」＝正式上線後網站上的下載鈕（含浮水印）。</p>
 </div>
 <div class="pv-grid" id="pv-grid"></div>
 <script>
@@ -109,7 +122,91 @@ function peTop(date, tag, title, subt) {
 const peKpi = a => `<div class="pe-kpi">${a.map(k => `<div class="${k.c || ""}"><small>${esc(k.lab)}</small><b>${esc(k.num)}<u>${esc(k.u || "")}</u></b><em>${esc(k.sub || "")}</em></div>`).join("")}</div>`;
 const peFoot = (P, src) => `<div class="pe-foot"><b>${esc(P.foot)}</b><span>${esc(src)}　不含目標價、評等；數字由程式從平台資料計算並重算核對。</span></div>`;
 
-/* ① 族群輪動 */
+/* ① 價量四象限（radar.json，同網站「量價象限」） */
+const BRQ = [["價強・資金偏多", "q0", "#C8361E"], ["價強・資金偏空", "q1", "#E2802C"], ["價弱・資金偏多", "q2", "#4F8A6A"], ["價弱・資金偏空", "q3", "#1E7B4F"]];
+function peQuadSvg(Q) {
+  const W = 1008, H = 276, pad = 28, S = Q.secs;
+  const mx = Math.max(...S.map(s => Math.abs(s.x))) * 1.15 || 1, my = Math.max(...S.map(s => Math.abs(s.y))) * 1.15 || 1;
+  const X = v => W / 2 + v / mx * (W / 2 - pad), Y = v => H / 2 - v / my * (H / 2 - pad + 4);
+  const bg = ["#FBE9E4", "#FDF1E2", "#EAF2EC", "#E3F0E8"];
+  let g = `<rect x="${W / 2}" y="0" width="${W / 2}" height="${H / 2}" fill="${bg[0]}"/><rect x="0" y="0" width="${W / 2}" height="${H / 2}" fill="${bg[1]}"/>` +
+    `<rect x="${W / 2}" y="${H / 2}" width="${W / 2}" height="${H / 2}" fill="${bg[2]}"/><rect x="0" y="${H / 2}" width="${W / 2}" height="${H / 2}" fill="${bg[3]}"/>` +
+    `<line x1="${W / 2}" x2="${W / 2}" y1="0" y2="${H}" stroke="#B9AE93" stroke-width="2"/><line x1="0" x2="${W}" y1="${H / 2}" y2="${H / 2}" stroke="#B9AE93" stroke-width="2"/>` +
+    `<text x="${W - 10}" y="28" text-anchor="end" font-size="22" font-weight="900" fill="${BRQ[0][2]}">${BRQ[0][0]}</text>` +
+    `<text x="10" y="28" font-size="22" font-weight="900" fill="${BRQ[1][2]}">${BRQ[1][0]}</text>` +
+    `<text x="${W - 10}" y="${H - 12}" text-anchor="end" font-size="22" font-weight="900" fill="${BRQ[2][2]}">${BRQ[2][0]}</text>` +
+    `<text x="10" y="${H - 12}" font-size="22" font-weight="900" fill="${BRQ[3][2]}">${BRQ[3][0]}</text>` +
+    `<text x="${W / 2 + 8}" y="${H - 12}" font-size="15" fill="#6B6452">資金流向 →</text><text x="${W / 2 + 8}" y="18" font-size="15" fill="#6B6452">↑ ${Q.win} 日漲跌</text>`;
+  const am = Math.max(...S.map(s => s.amt));
+  const lab = [];
+  const named = new Set([0, 1, 2, 3].flatMap(i => S.filter(s => s.q === i).slice(0, 2).map(s => s.sec)));   // 只標下面四格列出的族群，其餘只畫點
+  S.forEach(s => { const r = 5 + 13 * Math.sqrt(s.amt / am);
+    g += `<circle cx="${X(s.x).toFixed(1)}" cy="${Y(s.y).toFixed(1)}" r="${r.toFixed(1)}" fill="${BRQ[s.q][2]}" fill-opacity=".75" stroke="#fff" stroke-width="1.5"/>`;
+    if (named.has(s.sec)) lab.push({x: X(s.x), y: Y(s.y), r, t: s.sec, c: BRQ[s.q][2]}); });
+  lab.sort((a, b) => a.y - b.y).forEach((l, i, A) => {
+    l.ly = l.y;
+    for (let j = 0; j < i; j++) if (Math.abs(A[j].ly - l.ly) < 20 && Math.abs(A[j].x - l.x) < 150) l.ly = A[j].ly + 20;
+    const right = l.x < W - 150;
+    g += `<text x="${right ? l.x + l.r + 4 : l.x - l.r - 4}" y="${l.ly + 6}" text-anchor="${right ? "start" : "end"}" font-size="16" font-weight="900" fill="${l.c}" paint-order="stroke" stroke="#fff" stroke-width="4">${esc(l.t)}</text>`;
+  });
+  return `<svg class="pe-rrg" viewBox="0 0 ${W} ${H}" width="100%" height="${H}">${g}</svg>`;
+}
+function peCardQ(P) {
+  const Q = P.quad, S = Q.secs, by = q => S.filter(s => s.q === q);
+  const sec = s => `<div class="pe-sec"><b>${esc(s.sec)}${s.q5 != null && s.q5 !== s.q ? `<i>5 日前${BRQ[s.q5][0].replace("・", "")}</i>` : ""}</b>` +
+    `<small>${Q.win} 日漲跌中位 <span class="${cls(s.y)}" style="display:inline">${sg(s.y, 2)}%</span>　資金流向 ${sg(s.x, 2)} pp</small>` +
+    `<span>${s.reps.map(r => `${esc(nm5(r.name))} <b class="${cls(r.r3)}" style="display:inline">${sg(r.r3, 1)}%</b>`).join("　")}</span></div>`;
+  const box = i => `<div class="pe-box"><span class="pe-hd ${BRQ[i][1]}">${BRQ[i][0]}（${by(i).length}）</span>${by(i).slice(0, 2).map(sec).join("") || `<div class="pe-empty">沒有族群在這一區</div>`}</div>`;
+  const c = document.createElement("div"); c.className = "pe-card"; c.dataset.date = Q.date;
+  c.innerHTML = peTop(Q.date, "選股 EDM ①｜價量四象限", `價量四象限：<span>錢往哪裡去</span>`,
+      `${S.length} 個族群：近 ${Q.win} 日漲跌（成員中位）× 資金流向；泡泡＝當日成交金額`) +
+    peKpi(BRQ.map((q, i) => ({lab: q[0], num: by(i).length, u: "族群", c: ["up", "gd", "", "dn"][i], sub: by(i)[0] ? by(i)[0].sec : "—"}))) +
+    `<div class="pe-box pe-mx" style="padding:8px 14px">${peQuadSvg(Q)}</div>` +
+    `<div class="pe-q4">${[0, 1, 2, 3].map(box).join("")}</div>` +
+    peFoot(P, `資料日 ${Q.date}｜同網站「量價象限」：資金流向＝近 ${Q.win} 日族群成交占全市場比重減之前 20 日平均（pp）；漲跌＝成員 ${Q.win} 日漲跌幅中位數；代表個股＝成員 ${Q.win} 日漲跌，價強取最強 2 檔、價弱取最弱 2 檔。`);
+  return c;
+}
+
+/* ②③④ 軌跡（trail，同網站「軌跡」頁籤：族群、近 20 日） */
+const TRK = {
+  B: {no: "②", tag: "動能軌跡", title: `動能軌跡：<span>誰改善、誰轉弱</span>`, up: "動能改善", dn: "動能轉弱", u: "%", d: 1,
+      subt: "族群成員每日漲跌幅平均，近 20 日累計；看近 5 日累計往上還是往下", rep: "近 5 日漲跌加總", ru: "%",
+      foot: "動能＝族群成員當日漲跌幅平均（%）"},
+  A: {no: "③", tag: "量能軌跡", title: `量能軌跡：<span>誰放量、誰縮量</span>`, up: "放量", dn: "縮量", u: "pp", d: 2,
+      subt: "族群成交金額占全市場比重，跟自己近 20 日平均比；近 20 日累計", rep: "近 5 日占比變化", ru: "pp",
+      foot: "量能＝成員（當日成交占全市場比重 − 近 20 日平均）加總（pp）"},
+  C: {no: "④", tag: "籌碼軌跡", title: `籌碼軌跡：<span>法人資金流入、流出</span>`, up: "法人流入", dn: "法人流出", u: "%", d: 1,
+      subt: "外資＋投信淨買賣金額占族群成交金額比例，近 20 日累計", rep: "近 5 日法人淨額", ru: "億",
+      foot: "籌碼＝（外資＋投信）淨買賣金額加總 ÷ 族群成交金額加總（%）；ETF 異動已含在投信裡，不重複加"}};
+function peSpark(cum) {
+  const W = 130, H = 70, n = cum.length, lo = Math.min(0, ...cum), hi = Math.max(0, ...cum), sp = (hi - lo) || 1;
+  const X = i => 3 + i / (n - 1) * (W - 6), Y = v => 4 + (hi - v) / sp * (H - 8);
+  const last = cum[n - 1], col = last >= 0 ? "#C8361E" : "#1E7B4F";
+  const pts = cum.map((v, i) => `${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(" ");
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect x="${X(n - 6)}" y="0" width="${X(n - 1) - X(n - 6) + 3}" height="${H}" fill="#F3E3C0" fill-opacity=".6"/>` +
+    `<line x1="0" x2="${W}" y1="${Y(0)}" y2="${Y(0)}" stroke="#B9AE93" stroke-width="1.5" stroke-dasharray="4 3"/>` +
+    `<polyline points="${pts}" fill="none" stroke="${col}" stroke-width="3"/><circle cx="${X(n - 1)}" cy="${Y(last)}" r="4" fill="${col}"/></svg>`;
+}
+function peCardT(P, kind) {
+  const L = P.trail[kind], K = TRK[kind], up = L.up.slice(0, 6), dn = L.dn.slice(0, 6);
+  const row = r => `<div class="pe-tr"><b${r.sec.length >= 9 ? ' style="font-size:20px"' : ""}>${esc(r.sec)}<i class="${r.cum[r.cum.length - 1] >= 0 ? "up" : "dn"}">${esc(r.state)}</i></b>${peSpark(r.cum)}` +
+    `<small>近 5 日 <span class="${cls(r.d5)}" style="display:inline">${sg(r.d5, K.d)}${K.u}</span>｜累計 <span class="${cls(r.cum[r.cum.length - 1])}" style="display:inline">${sg(r.cum[r.cum.length - 1], K.d)}${K.u}</span></small>` +
+    `<span>${r.reps.map(x => `${esc(nm5(x.name))} <b class="${cls(x.v5)}" style="display:inline">${sg(x.v5, 1)}${K.ru}</b>`).join("　")}</span></div>`;
+  const col = (cl, t, a) => `<div class="pe-box"><span class="pe-hd ${cl}">${t}（${a === up ? L.up.length : L.dn.length}）</span>${a.map(row).join("") || `<div class="pe-empty">沒有族群</div>`}</div>`;
+  const turn = (a, re) => a.filter(r => re.test(r.state)).length;
+  const c = document.createElement("div"); c.className = "pe-card"; c.dataset.date = L.date;
+  c.innerHTML = peTop(L.date, `選股 EDM ${K.no}｜${K.tag}`, K.title, K.subt) +
+    peKpi([{lab: K.up, num: L.up.length, u: "族群", c: "up", sub: L.up[0] ? "最大 " + L.up[0].sec : "—"},
+           {lab: K.dn, num: L.dn.length, u: "族群", c: "dn", sub: L.dn[0] ? "最大 " + L.dn[0].sec : "—"},
+           {lab: "近 10 日由負翻正", num: turn(L.up.concat(L.dn), /由負翻正/), u: "族群", c: "gd", sub: "累計穿越零軸"},
+           {lab: "近 10 日由正翻負", num: turn(L.up.concat(L.dn), /由正翻負/), u: "族群", sub: "累計穿越零軸"}]) +
+    `<div class="pe-cols" style="grid-template-columns:repeat(2,minmax(0,1fr))">${col("tu", K.up, up)}${col("td", K.dn, dn)}</div>` +
+    `<div class="pe-note">小圖＝近 20 日累計（虛線＝零軸，金底＝近 5 日）；依近 5 日累計變化排序；代表個股＝${K.rep}最大的 2 檔。</div>` +
+    peFoot(P, `${L.start}～${L.date}｜同網站「軌跡」頁籤（族群、近 20 日）：${K.foot}。狀態＝累計線近 10 日內穿越零軸算翻正／翻負，否則看近 5 日方向。`);
+  return c;
+}
+
+/* ⑤ 族群循環圖（RRG） */
 function peRrg(R) {
   const W = 1008, H = 340, pad = 40, S = R.secs;
   const xs = S.flatMap(s => s.path.map(p => p[0])), ys = S.flatMap(s => s.path.map(p => p[1]));
@@ -151,7 +248,7 @@ function peCard1(P) {
     `<span>${s.reps.map(r => `${esc(r.name)} <b class="${cls(r.r5)}" style="display:inline">${sg(r.r5, 1)}%</b>`).join("　")}</span></div>`;
   const col = (q, t, a) => `<div class="pe-box"><span class="pe-hd ${q}">${t}</span>${a.slice(0, 3).map(sec).join("") || `<div class="pe-empty">沒有族群在這一區</div>`}</div>`;
   const c = document.createElement("div"); c.className = "pe-card"; c.dataset.date = R.date;
-  c.innerHTML = peTop(R.date, "選股 EDM ①｜族群輪動", `族群輪動：<span>誰領漲、誰改善</span>`,
+  c.innerHTML = peTop(R.date, "選股 EDM ⑤｜族群循環圖", `族群循環圖：<span>誰領漲、誰改善</span>`,
       `${S.length} 個族群相對大盤的強弱與變化（RRG 日線），附近 5 日代表個股`) +
     peKpi([{lab: "領先（領漲）", num: n("lead"), u: "族群", c: "up", sub: lead[0] ? "最強 " + lead[0].sec : ""},
            {lab: "改善中", num: n("imp"), u: "族群", c: "gd", sub: imp[0] ? "動能最強 " + imp[0].sec : ""},
@@ -164,12 +261,12 @@ function peCard1(P) {
   return c;
 }
 
-/* ② 主動式 ETF */
+/* ⑥ 主動式 ETF */
 function peCard2(P) {
   const E = P.etf, M = E.multi.slice(0, 10), top = M[0];
   const c = document.createElement("div"); c.className = "pe-card pe-c2"; c.dataset.date = E.date;
   const fs = a => a.length > 3 ? a.slice(0, 3).join("、") + ` 等 ${a.length} 家` : a.join("、");
-  c.innerHTML = peTop(E.date, "選股 EDM ②｜主動式 ETF", `主動式 ETF：<span>多家同時加碼</span>`,
+  c.innerHTML = peTop(E.date, "選股 EDM ⑥｜主動式 ETF", `主動式 ETF：<span>多家同時加碼</span>`,
       `${E.n_funds} 家主動式 ETF 公告當日持股；加碼＝扣掉申購贖回的等比例變化，只算經理人自己加的`) +
     peKpi([{lab: "公告持股", num: E.n_funds, u: "家", sub: "資料日 " + E.date.slice(5)},
            {lab: "≥ 2 家同時加碼", num: E.multi.length, u: "檔", c: "up", sub: "台股"},
@@ -187,14 +284,14 @@ function peCard2(P) {
   return c;
 }
 
-/* ③ 籌碼流向 */
+/* ⑦ 籌碼流向 */
 function peCard3(P) {
   const C = P.chips;
   const li = (a, k, ks) => a.slice(0, 10).map((x, i) => `<div class="pe-li"><i>${i + 1}</i><span>${esc(nm5(x.name))}${nm5(x.name).length < 5 ? ` <em>${esc(x.code)}</em>` : ""}</span><b class="up">${yiM(x[k])}</b>` +
     (ks && x[ks] > 1 ? `<small>連 ${x[ks]} 買</small>` : "") + `</div>`).join("");
   const both = C.both.slice(0, 10).map((x, i) => `<div class="pe-li"><i>${i + 1}</i><span>${esc(nm5(x.name))}${nm5(x.name).length < 5 ? ` <em>${esc(x.code)}</em>` : ""}</span><b class="up">${yiM(x.f)}／${yiM(x.t)}</b></div>`).join("");
   const c = document.createElement("div"); c.className = "pe-card pe-c3"; c.dataset.date = C.date;
-  c.innerHTML = peTop(C.date, "選股 EDM ③｜籌碼流向", `籌碼流向：<span>外資、投信買超</span>`,
+  c.innerHTML = peTop(C.date, "選股 EDM ⑦｜籌碼流向", `籌碼流向：<span>外資、投信買超</span>`,
       `三大法人當日淨買賣金額（億元）；「同買」＝外資、投信同一天都買超，依兩者中較小的那邊排序`) +
     peKpi([{lab: "外資買超第一", num: yiM(C.f[0].f), u: "億", c: "up", sub: C.f[0].name},
            {lab: "投信買超第一", num: yiM(C.t[0].t), u: "億", c: "up", sub: C.t[0].name},
@@ -207,11 +304,11 @@ function peCard3(P) {
   return c;
 }
 
-/* ④ 權證（版位） */
+/* ⑧ 權證（版位） */
 function peCard4(P) {
   const c = document.createElement("div"); c.className = "pe-card";
-  c.innerHTML = peTop(P.chips.date, "選股 EDM ④｜權證", `權證選股：<span>籌備中</span>`, "權證資金流（認購／認售淨買賣、標的集中度）") +
-    `<div class="pe-ph"><b>版位保留</b><span>等 W 的權證盤後資料 docs/data/warrant_flow.json 定案<br>（欄位見 SOURCES）再接上，版型同 ①～③。</span></div>` +
+  c.innerHTML = peTop(P.chips.date, "選股 EDM ⑧｜權證", `權證選股：<span>籌備中</span>`, "權證資金流（認購／認售淨買賣、標的集中度）") +
+    `<div class="pe-ph"><b>版位保留</b><span>等 W 的權證盤後資料（warrant_flow）<br>覆蓋率拉到 80% 再接上，版型同 ①～⑦。</span></div>` +
     peFoot(P, "版位預覽，沒有資料。");
   return c;
 }
@@ -240,7 +337,9 @@ async function pePng(mk, P, name, btn) {
 fetch("pick_edm.json?v=" + Date.now()).then(r => r.json()).then(P => {
   const v = P.verify; document.getElementById("pv-ver").textContent = (v.ok ? "核對通過" : "核對沒過") + "（" + v.checked + "）";
   const G = document.getElementById("pv-grid");
-  [["① 族群輪動", peCard1, "GEA_選股_族群輪動"], ["② 主動式 ETF", peCard2, "GEA_選股_主動ETF"], ["③ 籌碼流向", peCard3, "GEA_選股_籌碼流向"], ["④ 權證（版位）", peCard4, "GEA_選股_權證"]].forEach(([t, mk, fn]) => {
+  [["① 價量四象限", peCardQ, "GEA_選股_價量四象限"], ["② 動能軌跡", P => peCardT(P, "B"), "GEA_選股_動能軌跡"], ["③ 量能軌跡", P => peCardT(P, "A"), "GEA_選股_量能軌跡"],
+   ["④ 籌碼軌跡", P => peCardT(P, "C"), "GEA_選股_籌碼軌跡"], ["⑤ 族群循環圖", peCard1, "GEA_選股_族群循環圖"],
+   ["⑥ 主動式 ETF", peCard2, "GEA_選股_主動ETF"], ["⑦ 籌碼流向", peCard3, "GEA_選股_籌碼流向"], ["⑧ 權證（版位）", peCard4, "GEA_選股_權證"]].forEach(([t, mk, fn]) => {
     const it = document.createElement("div"); it.className = "pv-item";
     it.innerHTML = `<h2><span>${t}</span><button>下載 PNG</button></h2><div class="pv-frame"></div>`;
     it.querySelector(".pv-frame").appendChild(mk(P));
