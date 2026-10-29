@@ -1,0 +1,114 @@
+# company_report_run.yml ─ 指定個股 AI 研究報告（【新】總指揮 10-30 一、六）
+#   手動觸發、輸入股票代號 → 走本機同一套 tools/company_report.py（數字由程式從公開資訊觀測站與站上資料產生、
+#   文字走 GEMINI_API_KEY 那條線、雲端 company_verify 同一道關卡全過才寫檔）→ 打包 company_reports.json → 推上 → TG。
+#   兩個 repo 取到同層的 CustomerServiceANDSales／StaticWebPage，路徑跟本機一樣（gemini_task 的 _inbox、company_report 的 SITE 不用改）。
+name: 指定個股報告
+
+on:
+  workflow_dispatch:
+    inputs:
+      code:
+        description: "股票代號（例 2308）"
+        required: true
+      deck:
+        description: "法說簡報 PDF 網址（選填；不填用 river.json 記的最新簡報）"
+        required: false
+        default: ""
+      focus:
+        description: "重點主題（選填；例：HVDC 高壓直流電源）"
+        required: false
+        default: ""
+      kind:
+        description: "ir＝法說即時報告；pick＝指定報告（網站放「指定報告」區）"
+        required: false
+        default: "ir"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: company-report-run
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: 檢查輸入
+        env:
+          CODE: ${{ inputs.code }}
+          DECK: ${{ inputs.deck }}
+          KIND: ${{ inputs.kind }}
+        run: |
+          [[ "$CODE" =~ ^[0-9]{4,6}[A-Z]?$ ]] || { echo "✗ 股票代號格式不對：$CODE"; exit 1; }
+          [[ -z "$DECK" || "$DECK" =~ ^https://mopsov\.twse\.com\.tw/nas/STR/[0-9A-Za-z_]+\.pdf$ ]] || { echo "✗ 簡報網址只收公開資訊觀測站 mopsov /nas/STR/*.pdf"; exit 1; }
+          [[ "$KIND" == "ir" || "$KIND" == "pick" ]] || { echo "✗ kind 只能 ir 或 pick"; exit 1; }
+      - uses: actions/checkout@v4
+        with:
+          path: StaticWebPage
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: CustomerServiceANDSales
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+      - run: pip install -c "$GITHUB_WORKSPACE/CustomerServiceANDSales/requirements-lock.txt" requests certifi numpy pypdf
+      - name: 產報告
+        working-directory: CustomerServiceANDSales
+        env:
+          PYTHONUNBUFFERED: "1"
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_TASK_ROUTE: api
+          CODE: ${{ inputs.code }}
+          DECK: ${{ inputs.deck }}
+          FOCUS: ${{ inputs.focus }}
+          KIND: ${{ inputs.kind }}
+        run: |
+          args=("$CODE" --no-push)
+          [ -n "$DECK" ] && args+=(--deck "$DECK")
+          [ -n "$FOCUS" ] && args+=(--focus "$FOCUS")
+          [ "$KIND" = "pick" ] && args+=(--kind pick)
+          python tools/company_report.py "${args[@]}"
+      - name: 核對＋打包（同「公司產業報告上網頁」）
+        working-directory: CustomerServiceANDSales
+        run: python company_verify.py ../StaticWebPage/data ../StaticWebPage/docs/data/company_reports.json
+      - name: 提交
+        working-directory: StaticWebPage
+        env:
+          CODE: ${{ inputs.code }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/company_report docs/data/company_reports.json
+          if git diff --staged --quiet; then echo "沒有新報告"; exit 1; fi
+          git commit -m "data: 指定個股報告 $CODE $(TZ=Asia/Taipei date '+%F %H:%M')（雲端 Actions：數字程式產生、文字 Gemini API、關卡全過）"
+          for i in 1 2 3 4; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep $((2 ** i)); done
+          exit 1
+      - name: TG 通知
+        if: success()
+        working-directory: StaticWebPage
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          CODE: ${{ inputs.code }}
+          FOCUS: ${{ inputs.focus }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.parse, urllib.request
+          code, focus = os.environ["CODE"], os.environ.get("FOCUS", "")
+          J = json.load(open("docs/data/company_reports.json", encoding="utf-8"))
+          R = [r for r in (J.get("reports") or J.get("items") or []) if str(r.get("code")) == code]
+          r = sorted(R, key=lambda r: r.get("date") or "")[-1] if R else {}
+          txt = "GEA：%s（%s）AI 研究報告已上網頁（資料日 %s%s）。\n%s\n網站「產業研究 → AI 研究報告」：https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/" % (
+              r.get("name") or "", code, r.get("date") or "—", "；重點：" + focus if focus else "", r.get("title") or "")
+          tok, chat = os.environ.get("TG_BOT_TOKEN", "").strip(), os.environ.get("TG_CHAT_ID", "").strip()
+          print(txt)
+          if tok and chat:
+              urllib.request.urlopen("https://api.telegram.org/bot%s/sendMessage" % tok, urllib.parse.urlencode({"chat_id": chat, "text": txt}).encode(), timeout=15).read()
+              print("（已發 TG）")
+          else:
+              print("（沒設 TG，只印）")
+          PY
