@@ -1,5 +1,5 @@
 {
- "asof": "2026-10-23",
+ "asof": "2026-10-29",
  "src": "Tranco（tranco-list.eu）網站流量排名，網域層級",
  "top": 10,
  "rule": "國內財經媒體依 Tranco 名次取前 10，合併進權威名單（tier＝流量前 10），只用在國內媒體；入口網站轉載不算。",
@@ -10,7 +10,7 @@
     "udn.com"
    ],
    "src_rx": "經濟日報|聯合新聞網|udn",
-   "rank": 4102,
+   "rank": 4088,
    "tier": "流量前10"
   },
   {
@@ -19,7 +19,7 @@
     "chinatimes.com"
    ],
    "src_rx": "中時|中國時報|China Times",
-   "rank": 5354,
+   "rank": 5356,
    "tier": "流量前10"
   },
   {
@@ -28,7 +28,7 @@
     "ltn.com.tw"
    ],
    "src_rx": "自由時報|自由財經|Liberty Times",
-   "rank": 5445,
+   "rank": 5432,
    "tier": "流量前10"
   },
   {
@@ -37,7 +37,7 @@
     "setn.com"
    ],
    "src_rx": "三立",
-   "rank": 6965,
+   "rank": 6868,
    "tier": "流量前10"
   },
   {
@@ -46,7 +46,7 @@
     "storm.mg"
    ],
    "src_rx": "風傳媒|Storm",
-   "rank": 6972,
+   "rank": 6978,
    "tier": "流量前10"
   },
   {
@@ -55,7 +55,7 @@
     "ettoday.net"
    ],
    "src_rx": "ETtoday",
-   "rank": 11064,
+   "rank": 10999,
    "tier": "流量前10"
   },
   {
@@ -64,7 +64,7 @@
     "cmoney.tw"
    ],
    "src_rx": "CMoney",
-   "rank": 12119,
+   "rank": 12051,
    "tier": "流量前10"
   },
   {
@@ -73,7 +73,7 @@
     "ctee.com.tw"
    ],
    "src_rx": "工商時報|ctee",
-   "rank": 14151,
+   "rank": 14239,
    "tier": "流量前10"
   },
   {
@@ -82,16 +82,16 @@
     "nownews.com"
    ],
    "src_rx": "NOWnews|今日新聞",
-   "rank": 15656,
+   "rank": 15445,
    "tier": "流量前10"
   },
   {
-   "name": "鉅亨",
+   "name": "中央社",
    "domains": [
-    "cnyes.com"
+    "cna.com.tw"
    ],
-   "src_rx": "鉅亨|Anue|cnyes",
-   "rank": 20640,
+   "src_rx": "中央社|CNA",
+   "rank": 20466,
    "tier": "流量前10"
   }
  ]
