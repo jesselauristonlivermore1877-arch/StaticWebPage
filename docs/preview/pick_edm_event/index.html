@@ -1,0 +1,208 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>事件觸發選股 EDM 預覽</title><style>
+body{margin:0;background:#EDE7DA;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1B2A4A}
+.ev-wrap{max-width:1120px;margin:0 auto;padding:16px}
+.ev-note{font-size:15px;line-height:1.7;background:#fff;border:1px solid #DDD4BF;border-radius:10px;padding:12px 16px;margin-bottom:14px}
+.ev-note ul{margin:4px 0 0;padding-left:20px}
+.ev-item{background:#fff;border:1px solid #DDD4BF;border-radius:10px;padding:10px;margin-bottom:14px}
+.ev-item h2{font-size:18px;margin:2px 4px 8px}.ev-item h2 a{font-size:14px;margin-left:8px;color:#8A6A2B}
+.ev-frame{width:100%;overflow:hidden;border-radius:8px}.ev-frame>.pe-card{transform-origin:0 0}
+.ev-chk{font-size:13px;color:#6B6452;margin:6px 4px 0;overflow-wrap:anywhere}
+.pe-card{--k:1;width:1080px;height:1350px;box-sizing:border-box;overflow:hidden;background:#F6F2E8;color:#1B2A4A;font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;display:flex;flex-direction:column;gap:16px;padding:0 0 18px}
+.pe-top{position:relative;background:linear-gradient(135deg,#1B2A4A 0%,#26406e 70%,#B8862B 140%);color:#fff;padding:30px 48px 26px 220px;min-height:150px}
+.pe-date{position:absolute;left:44px;top:30px;width:148px;background:#fff;color:#1B2A4A;border-radius:14px;text-align:center;overflow:hidden;border:3px solid #F3E3C0}
+.pe-date small{display:block;background:#C8361E;color:#fff;font-size:20px;font-weight:900;padding:3px 0}
+.pe-date b{display:block;font-size:44px;font-weight:900;line-height:1.15;margin-top:4px}
+.pe-date em{display:block;font-style:normal;font-size:22px;font-weight:900;padding-bottom:6px}
+.pe-tag{display:inline-block;background:#F3E3C0;color:#1B2A4A;font-weight:900;border-radius:8px;padding:3px 14px;font-size:22px}
+.pe-brand{position:absolute;right:48px;top:30px;text-align:right;font-weight:900;font-size:26px;color:#F3E3C0;line-height:1.1}.pe-brand small{display:block;font-size:15px;font-weight:700;opacity:.85}
+.pe-title{font-size:54px;font-weight:900;line-height:1.2;margin-top:10px}
+.pe-title span{color:#FFC35A}
+.pe-subt{font-size:23px;line-height:1.5;margin-top:8px;opacity:.95}
+.pe-kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:0 36px}
+.pe-kpi div{background:#fff;border-radius:14px;border:1px solid #E7DFCC;padding:12px 10px;text-align:center}
+.pe-kpi small{display:block;white-space:nowrap;font-size:20px;font-weight:700;color:#4A4636}
+.pe-kpi b{display:block;font-size:46px;font-weight:900;color:#1B2A4A;line-height:1.2;margin:2px 0;white-space:nowrap}.pe-kpi b u{text-decoration:none;font-size:.48em;margin-left:4px}
+.pe-kpi em{display:block;font-style:normal;font-size:18px;font-weight:700;color:#B8862B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pe-kpi .up b{color:#C8361E}.pe-kpi .dn b{color:#1E7B4F}.pe-kpi .gd b{color:#B8862B}
+.pe-box{background:#fff;border-radius:14px;padding:14px 20px;border:1px solid #E7DFCC;box-sizing:border-box}
+.pe-box h4{margin:0 0 8px;font-size:27px;font-weight:900;color:#1B2A4A;display:flex;align-items:baseline;gap:10px}
+.pe-box h4::before{content:"";display:inline-block;width:8px;height:.9em;background:#B8862B;border-radius:2px;align-self:center}
+.pe-box h4 small{font-size:17px;font-weight:700;color:#6B6452}
+.pe-mx{margin:0 36px}
+.pe-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 36px;flex:1 0 auto}
+.pe-sec{border-top:1px dashed #E7DFCC;padding:7px 0 6px}
+.pe-sec:first-of-type{border-top:0}
+.pe-sec b{display:block;font-size:23px;font-weight:900;line-height:1.3}
+.pe-sec i{font-style:normal;font-size:15px;font-weight:700;color:#fff;background:#B8862B;border-radius:5px;padding:0 6px;margin-left:6px;vertical-align:3px}
+.pe-sec small{display:block;font-size:17px;font-weight:700;color:#6B6452;line-height:1.45}
+.pe-sec span{display:block;font-size:18.5px;font-weight:700;line-height:1.45}
+.pe-hd{display:block;text-align:center;font-size:24px;font-weight:900;color:#fff;border-radius:10px;padding:5px 0;margin:-2px 0 6px}
+.pe-hd.lead{background:#C8361E}.pe-hd.imp{background:#E2802C}.pe-hd.lag{background:#1E7B4F}.pe-hd.f{background:#1B2A4A}.pe-hd.t{background:#7A4FA0}.pe-hd.b{background:#B8862B}
+.pe-card .up{color:#C8361E}.pe-card .dn{color:#1E7B4F}
+.pe-line{margin:0 36px;background:#fff;border-radius:12px;padding:10px 20px;font-size:20px;font-weight:700;line-height:1.5;border:1px solid #E7DFCC}
+.pe-line b{color:#B8862B;margin-right:10px}
+.pe-tb{width:100%;border-collapse:collapse;font-size:21px}
+.pe-tb th{font-size:17px;color:#6B6452;font-weight:700;text-align:left;padding:4px 6px;border-bottom:2px solid #E7DFCC;white-space:nowrap}
+.pe-tb td{padding:7px 6px;border-bottom:1px solid #F0EADB;font-weight:700;vertical-align:middle}
+.pe-tb td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pe-tb td.c{white-space:nowrap}.pe-tb td.c small{color:#6B6452;font-size:16px;margin-right:6px}
+.pe-tb td.fs{font-size:16px;color:#4A4636;line-height:1.35}
+.pe-rk{display:inline-block;width:32px;height:32px;line-height:32px;border-radius:50%;background:#1B2A4A;color:#fff;text-align:center;font-size:17px;font-weight:900}
+.pe-dots{letter-spacing:2px;color:#C8361E;font-size:18px}
+.pe-li{display:flex;align-items:baseline;gap:8px;padding:5px 0;border-bottom:1px solid #F0EADB;font-size:20px;font-weight:700}
+.pe-li:last-child{border-bottom:0}
+.pe-li i{flex:none;font-style:normal;width:26px;height:26px;line-height:26px;border-radius:50%;background:#EFE7D3;text-align:center;font-size:15px;font-weight:900;align-self:center}
+.pe-li em{font-style:normal;color:#6B6452;font-size:16px}
+.pe-li span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pe-li b{white-space:nowrap;font-variant-numeric:tabular-nums}
+.pe-li small{font-size:14px;color:#B8862B;margin-left:4px;white-space:nowrap}
+.pe-foot{margin:auto 36px 0;display:flex;align-items:center;gap:16px}
+.pe-foot b{flex:none;background:#1B2A4A;color:#FFC35A;border-radius:10px;padding:8px 16px;font-size:23px;font-weight:900}
+.pe-foot span{font-size:15px;color:#6B6452;line-height:1.5}
+.pe-empty{font-size:21px;font-weight:700;color:#6B6452;line-height:1.6;padding:6px 0}
+.pe-ph{flex:1;margin:0 36px;border:4px dashed #CFC4AA;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#6B6452;text-align:center}
+.pe-ph b{font-size:46px;color:#1B2A4A}.pe-ph span{font-size:24px;font-weight:700;line-height:1.6}
+.pe-c2 .pe-tb td{padding:11px 6px}.pe-c3 .pe-li{padding:15px 0;font-size:22px}
+.pe-rrg text{font-family:"Noto Sans TC",sans-serif}
+.pe-q4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 36px;flex:1 0 auto}
+.pe-hd.q0{background:#C8361E}.pe-hd.q1{background:#E2802C}.pe-hd.q2{background:#4F8A6A}.pe-hd.q3{background:#1E7B4F}
+.pe-hd.tu{background:#C8361E}.pe-hd.td{background:#1E7B4F}
+.pe-tr{display:grid;grid-template-columns:minmax(0,1fr) 130px;gap:3px 10px;border-top:1px dashed #E7DFCC;padding:9px 0 8px;align-items:center}
+.pe-tr:first-of-type{border-top:0}
+.pe-tr b{font-size:23px;font-weight:900;line-height:1.25;white-space:nowrap;overflow:hidden}
+.pe-tr i{font-style:normal;font-size:15px;font-weight:700;color:#fff;border-radius:5px;padding:0 6px;margin-left:6px;vertical-align:3px}
+.pe-tr i.up{background:#C8361E}.pe-tr i.dn{background:#1E7B4F}
+.pe-tr small{display:block;font-size:16.5px;font-weight:700;color:#4A4636;line-height:1.45;white-space:nowrap}
+.pe-tr span{display:block;font-size:17px;font-weight:700;line-height:1.4;color:#4A4636;white-space:nowrap;overflow:hidden}
+.pe-tr svg{grid-row:1 / span 3;grid-column:2}
+.pe-q4 .pe-sec{padding:5px 0 4px}.pe-q4 .pe-sec b{font-size:22px}.pe-q4 .pe-sec small{font-size:16px}.pe-q4 .pe-sec span{font-size:18px}
+.pe-note{margin:0 36px;font-size:17px;font-weight:700;color:#6B6452;line-height:1.5}
+</style></head><body><div class="ev-wrap">
+<div class="ev-note"><b>預覽：選股 EDM 第二批（事件觸發，有事件才出）</b>（【新】總指揮 10-29 深夜 五第二批 ⑩～⑬）。<b>Evans 點頭才接進每日戰情更新與「量化選股」</b>。資料日 2026-10-29。<ul>
+<li>⑩ 總經數據公布：CPI／PPI／PCE／就業報告公布日、FOMC 決議日（當天或前一天）才出。今天的觸發＝PCE（2026-10-29）。</li>
+<li>⑪ 自由疊圖補 S&amp;P 500：不是卡片，已加進網站「總經 → 自由疊圖」（world_idx.py 加 ^GSPC 月線；下一班國際指數跑過才有線）。</li>
+<li>⑫ 地緣政治＋油價：權威媒體的地緣新聞，且（有標重大的新聞，或 WTI 單日 ±3%／5 日 ±5%）才出。<b>今天未達門檻，這張是強制產生的示範</b>。</li>
+<li>⑬ 內部人新申報：有新的事前申報轉讓（申報日 ≥ 前一個交易日）就出，沒有就不出。</li>
+<li>每張的核對結果寫在圖卡下面；核對不過的那張不出。下載的 PNG 會加浮水印（同第一批）。</li></ul></div>
+<div id="evList"></div></div>
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"]/g, m => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[m]));
+const PE_WD = "日一二三四五六";
+const peSg = (v, d) => v == null ? "—" : (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(d);
+const peNm = (t, n) => (t = String(t || "")).length > (n || 5) ? t.slice(0, n || 5) : t;   // 長名稱截短（html2canvas 畫不好省略號）
+const PE_QN = {lead: "領先", imp: "改善", weak: "轉弱", lag: "落後"};
+
+function peTop(date, tag, title, subt) {
+  const d = new Date(date + "T12:00:00Z");
+  return `<div class="pe-top"><div class="pe-date"><small>${d.getUTCFullYear() - 1911} 年</small><b>${d.getUTCMonth() + 1}/${d.getUTCDate()}</b><em>（${PE_WD[d.getUTCDay()]}）</em></div>` +
+    `<div class="pe-brand">GEA 戰情<small>量化選股</small></div><div class="pe-tag">${esc(tag)}</div>` +
+    `<div class="pe-title">${title}</div><div class="pe-subt">${esc(subt)}</div></div>`;
+}
+function peTop(date, tag, title, subt) {
+  const d = new Date(date + "T12:00:00Z");
+  return `<div class="pe-top"><div class="pe-date"><small>${d.getUTCFullYear() - 1911} 年</small><b>${d.getUTCMonth() + 1}/${d.getUTCDate()}</b><em>（${PE_WD[d.getUTCDay()]}）</em></div>` +
+    `<div class="pe-brand">GEA 戰情<small>量化選股</small></div><div class="pe-tag">${esc(tag)}</div>` +
+    `<div class="pe-title">${title}</div><div class="pe-subt">${esc(subt)}</div></div>`;
+}
+const peKpi = a => `<div class="pe-kpi">${a.map(k => `<div class="${k.c || ""}"><small>${esc(k.lab)}</small><b>${esc(k.num)}<u>${esc(k.u || "")}</u></b><em>${esc(k.sub || "")}</em></div>`).join("")}</div>`;
+const peFoot = (P, src) => `<div class="pe-foot"><b>${esc(P.foot)}</b><span>${esc(src)}　不含目標價、評等；數字由程式從平台資料計算並重算核對。</span></div>`;
+function crNice(lo, hi, n) {   // Y 軸刻度：取 1／2／2.5／5×10^k 的間距
+  const raw = (hi - lo) / (n || 4) || 1, p = Math.pow(10, Math.floor(Math.log10(raw))), m = raw / p;
+  const st = (m <= 1 ? 1 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 5 ? 5 : 10) * p, a = Math.floor(lo / st) * st, b = Math.ceil(hi / st) * st, out = [];
+  for (let v = a; v <= b + st / 2; v += st) out.push(+v.toFixed(6));
+  return out;
+}
+function peCell(x) {
+  if (x == null) return "";
+  if (typeof x === "object" && x.code) return `<small>${esc(x.code)}</small>${esc(peNm(x.name, 6))}`;
+  if (typeof x === "object") return `<span class="${x.c || ""}">${esc(x.v)}</span>`;
+  return esc(String(x));
+}
+function peLineSvg(C) {
+  const v = C.vals, n = v.length, W = 1008, H = 230, L = 74, R = 16, T = 34, B = 34;
+  const lo0 = Math.min(...v.filter(x => x != null)), hi0 = Math.max(...v.filter(x => x != null)), pad = (hi0 - lo0) * 0.08 || 1;
+  const tk = crNice(lo0 - pad, hi0 + pad, 4), lo = tk[0], hi = tk[tk.length - 1];
+  const X = i => L + i * (W - L - R) / Math.max(1, n - 1), Y = y => T + (hi - y) / (hi - lo || 1) * (H - T - B);
+  let g = `<text x="${L}" y="22" font-size="20" font-weight="900" fill="#1B2A4A">${esc(C.name)}</text>`;
+  tk.forEach(t => g += `<line x1="${L}" x2="${W - R}" y1="${Y(t)}" y2="${Y(t)}" stroke="#E7DFCC" stroke-width="1"/><text x="${L - 8}" y="${Y(t) + 6}" text-anchor="end" font-size="16" fill="#6B6452">${Math.round(t).toLocaleString("en")}</text>`);
+  const pts = v.map((y, i) => y == null ? null : `${X(i).toFixed(1)},${Y(y).toFixed(1)}`).filter(Boolean).join(" ");
+  g += `<polyline points="${pts}" fill="none" stroke="#1B2A4A" stroke-width="3"/>`;
+  const lx = X(n - 1), ly = Y(v[n - 1]);
+  g += `<circle cx="${lx}" cy="${ly}" r="6" fill="#C8361E"/><text x="${lx - 10}" y="${ly - 12}" text-anchor="end" font-size="19" font-weight="900" fill="#C8361E">${Math.round(v[n - 1]).toLocaleString("en")}</text>`;
+  [0, Math.floor((n - 1) / 2), n - 1].forEach((i, k) => g += `<text x="${X(i)}" y="${H - 8}" text-anchor="${["start", "middle", "end"][k]}" font-size="16" fill="#6B6452">${esc(C.dates[i].slice(5).replace("-", "/"))}</text>`);
+  return `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" style="display:block">${g}</svg>`;
+}
+function peMultiSvg(C) {
+  const W = 1008, H = 300, L = 64, R = 84, T = 66, B = 34, n = C.dates.length;
+  const ax = a => { const v = C.lines.filter(s => s.ax === a).flatMap(s => s.vals.filter(x => x != null)); if (!v.length) return null;
+    const lo0 = Math.min(...v), hi0 = Math.max(...v), pd = (hi0 - lo0) * 0.08 || 1, tk = crNice(lo0 - pd, hi0 + pd, 4); return {tk, lo: tk[0], hi: tk[tk.length - 1]}; };
+  const A = {L: ax("L"), R: ax("R")};
+  const X = i => L + i * (W - L - R) / Math.max(1, n - 1), Y = (y, a) => T + (A[a].hi - y) / (A[a].hi - A[a].lo || 1) * (H - T - B);
+  let g = `<text x="${L}" y="22" font-size="19" font-weight="900" fill="#1B2A4A">${esc(C.name)}</text>`;
+  let lx = L;
+  C.lines.forEach(s => { g += `<rect x="${lx}" y="42" width="22" height="5" fill="${s.col}"/><text x="${lx + 28}" y="50" font-size="16" font-weight="700" fill="#4A4636">${esc(s.name)}${s.ax === "R" ? "（右）" : ""}</text>`; lx += 40 + s.name.length * 16 + (s.ax === "R" ? 48 : 0); });
+  if (A.L) A.L.tk.forEach(t => g += `<line x1="${L}" x2="${W - R}" y1="${Y(t, "L")}" y2="${Y(t, "L")}" stroke="#E7DFCC" stroke-width="1"/><text x="${L - 8}" y="${Y(t, "L") + 6}" text-anchor="end" font-size="15" fill="#6B6452">${t.toFixed(t % 1 ? 1 : 0)}%</text>`);
+  if (A.R) A.R.tk.forEach(t => g += `<text x="${W - R + 8}" y="${Y(t, "R") + 6}" font-size="15" fill="#6B6452">${Math.round(t).toLocaleString("en")}</text>`);
+  C.lines.forEach(s => {
+    const pts = s.vals.map((y, i) => y == null ? null : `${X(i).toFixed(1)},${Y(y, s.ax).toFixed(1)}`).filter(Boolean).join(" ");
+    g += `<polyline points="${pts}" fill="none" stroke="${s.col}" stroke-width="${s.ax === "R" ? 3 : 2.5}"/>`;
+    const k = s.vals.length - 1, y = s.vals[k];
+    if (y != null) g += `<circle cx="${X(k)}" cy="${Y(y, s.ax)}" r="5" fill="${s.col}"/>`;
+  });
+  [0, Math.floor((n - 1) / 2), n - 1].forEach((i, k) => g += `<text x="${X(i)}" y="${H - 8}" text-anchor="${["start", "middle", "end"][k]}" font-size="15" fill="#6B6452">${esc(C.dates[i].slice(2).replace(/-/g, "/"))}</text>`);
+  return `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" style="display:block">${g}</svg>`;
+}
+function peBox(b, nr) {
+  let h = `<div class="pe-box" style="min-width:0${b.span ? ";grid-column:1 / -1" : ""}"><h4>${esc(b.h)}${b.small ? `<small>${esc(b.small)}</small>` : ""}</h4>`;
+  if (b.bars) {
+    const mx = Math.max(...b.bars.map(x => Math.abs(x.v)), 1e-9);
+    h += b.bars.map(x => `<div class="pe-li"><span>${esc(x.t)}</span><span style="flex:0 0 150px;display:block;height:18px;align-self:center;background:#F0EADB;border-radius:4px;overflow:hidden">` +
+      `<span style="display:block;height:18px;width:${(Math.abs(x.v) / mx * 100).toFixed(1)}%;background:${x.v >= 0 ? "#C8361E" : "#1E7B4F"}"></span></span>` +
+      `<b class="${x.c || ""}" style="flex:0 0 96px;text-align:right">${esc(x.lab)}</b><small style="flex:0 0 70px;text-align:right">${esc(x.sub || "")}</small></div>`).join("");
+  } else if (b.rows && b.rows.length) {
+    const rows = b.rows.slice(0, nr || b.rows.length), al = b.al || [];
+    h += `<table class="pe-tb"><thead><tr>${b.cols.map((c, i) => `<th${al[i] === "n" ? ' style="text-align:right"' : ""}>${esc(c)}</th>`).join("")}</tr></thead><tbody>` +
+      rows.map(r => `<tr>${r.map((x, i) => i === 0 && typeof x === "number" ? `<td><span class="pe-rk">${x}</span></td>` :
+        typeof x === "object" && x && x.code ? `<td class="c" style="text-align:left">${peCell(x)}</td>` : `<td class="${al[i] || ""}">${peCell(x)}</td>`).join("")}</tr>`).join("") + `</tbody></table>`;
+  } else h += `<div class="pe-empty">${esc(b.empty || "今天沒有符合的個股。")}</div>`;
+  return h + `</div>`;
+}
+function peCardG(G) {
+  const c = document.createElement("div"); c.className = "pe-card"; c.dataset.date = G.date;
+  const P0 = {foot: G.foot};
+  c.innerHTML = peTop(G.date, "選股 EDM｜" + G.tag, `${esc(G.title)}<span>${esc(G.hl)}</span>`, G.subt) +
+    (G.kpi || []).map(peKpi).join("") +
+    (G.chart ? `<div class="pe-box pe-mx" style="padding:10px 16px">${G.chart.lines ? peMultiSvg(G.chart) : peLineSvg(G.chart)}</div>` : "") +
+    `<div class="pe-gg" style="display:grid;grid-template-columns:repeat(${G.grid || 1},minmax(0,1fr));gap:14px;margin:0 36px;align-content:start">${(G.boxes || []).map(b => peBox(b)).join("")}</div>` +
+    (G.note ? `<div class="pe-note">${esc(G.note)}</div>` : "") +
+    peFoot(P0, G.src);
+  [...c.children].forEach(x => { x.style.flexShrink = "0"; });    // 內容太高時不讓標題列被壓扁（peFitG 才量得到真正高度）
+  c._G = G;
+  return c;
+}
+async function peFitG(c, G) {
+  const mx = Math.max(0, ...(G.boxes || []).map(b => (b.rows || []).length));
+  for (let nr = mx - 1; nr >= 3; nr--) {
+    if (c.scrollHeight <= 1350) return;
+    const grid = c.querySelector(".pe-gg");
+    if (!grid) return;
+    grid.innerHTML = (G.boxes || []).map(b => peBox(b, nr)).join("");
+  }
+}
+const R = [{"key": "ev_macro", "tag": "總經事件", "title": "總經數據公布：", "hl": "PCE", "subt": "利率上升時科技股估值較易被重估：殖利率、利差 vs 費半", "date": "2026-10-29", "src": "資料日 2026-10-29｜事件：PCE（2026-10-29）｜殖利率、利差、通膨＝FRED；費半＝Yahoo Finance；升降息情境＝聯邦基金期貨自算", "kpi": [[{"lab": "美 10 年殖利率", "num": "4.99", "u": "%", "c": "", "sub": "5 日 −13 bp"}, {"lab": "高收益債利差", "num": "3.14", "u": "%", "c": "", "sub": "5 日 −13 bp"}, {"lab": "費城半導體", "num": "11,583", "u": "", "c": "up", "sub": "5 日 +7.9%"}, {"lab": "聯邦基金利率", "num": "4.00", "u": "% 上限", "c": "gd", "sub": "區間 3.75～4.00%"}]], "boxes": [{"h": "升息／降息情境", "small": "聯邦基金期貨隱含（方法同 CME FedWatch）", "cols": ["決議日", "隱含利率", "vs 目前", "最可能區間", "機率", "降息機率", "升息機率"], "al": ["", "n", "n", "n", "n", "n", "n"], "rows": [["12/09", "4.09%", {"v": "+21 bp", "c": "up"}, "4.00～4.25％", "85%", {"v": "0%", "c": ""}, {"v": "85%", "c": "up"}], ["01/27", "4.18%", {"v": "+30 bp", "c": "up"}, "4.00～4.25％", "60%", {"v": "0%", "c": ""}, {"v": "90%", "c": "up"}], ["03/17", "4.33%", {"v": "+46 bp", "c": "up"}, "4.25～4.50％", "49%", {"v": "0%", "c": ""}, {"v": "96%", "c": "up"}], ["04/28", "4.42%", {"v": "+54 bp", "c": "up"}, "4.25～4.50％", "42%", {"v": "0%", "c": ""}, {"v": "97%", "c": "up"}]]}, {"h": "最新通膨年增", "small": "月資料；變動＝跟前一個月比", "cols": ["指標", "資料月", "年增率", "變動"], "al": ["", "n", "n", "n"], "rows": [["CPI", "2026-09", "3.7%", {"v": "+0.4 個百分點", "c": "up"}], ["核心 CPI", "2026-09", "2.6%", {"v": "+0.1 個百分點", "c": "up"}], ["PCE", "2026-09", "3.6%", {"v": "+0.2 個百分點", "c": "up"}], ["核心 PCE", "2026-09", "3.1%", {"v": "+0.1 個百分點", "c": "up"}], ["PPI", "2026-09", "6.3%", {"v": "+0.8 個百分點", "c": "up"}]]}], "chart": {"name": "近一年：美 10 年殖利率、高收益債利差（左軸 %）vs 費城半導體（右軸）", "dates": ["2025-10-29", "2025-10-30", "2025-10-31", "2025-11-03", "2025-11-04", "2025-11-05", "2025-11-06", "2025-11-07", "2025-11-10", "2025-11-11", "2025-11-12", "2025-11-13", "2025-11-14", "2025-11-17", "2025-11-18", "2025-11-19", "2025-11-20", "2025-11-21", "2025-11-24", "2025-11-25", "2025-11-26", "2025-11-28", "2025-12-01", "2025-12-02", "2025-12-03", "2025-12-04", "2025-12-05", "2025-12-08", "2025-12-09", "2025-12-10", "2025-12-11", "2025-12-12", "2025-12-15", "2025-12-16", "2025-12-17", "2025-12-18", "2025-12-19", "2025-12-22", "2025-12-23", "2025-12-24", "2025-12-26", "2025-12-29", "2025-12-30", "2025-12-31", "2026-01-02", "2026-01-05", "2026-01-06", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-23", "2026-03-24", "2026-03-25", "2026-03-26", "2026-03-27", "2026-03-30", "2026-03-31", "2026-04-01", "2026-04-02", "2026-04-06", "2026-04-07", "2026-04-08", "2026-04-09", "2026-04-10", "2026-04-13", "2026-04-14", "2026-04-15", "2026-04-16", "2026-04-17", "2026-04-20", "2026-04-21", "2026-04-22", "2026-04-23", "2026-04-24", "2026-04-27", "2026-04-28", "2026-04-29", "2026-04-30", "2026-05-01", "2026-05-04", "2026-05-05", "2026-05-06", "2026-05-07", "2026-05-08", "2026-05-11", "2026-05-12", "2026-05-13", "2026-05-14", "2026-05-15", "2026-05-18", "2026-05-19", "2026-05-20", "2026-05-21", "2026-05-22", "2026-05-26", "2026-05-27", "2026-05-28", "2026-05-29", "2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18", "2026-06-22", "2026-06-23", "2026-06-24", "2026-06-25", "2026-06-26", "2026-06-29", "2026-06-30", "2026-07-01", "2026-07-02", "2026-07-06", "2026-07-07", "2026-07-08", "2026-07-09", "2026-07-10", "2026-07-13", "2026-07-14", "2026-07-15", "2026-07-16", "2026-07-17", "2026-07-20", "2026-07-21", "2026-07-22", "2026-07-23", "2026-07-24", "2026-07-27", "2026-07-28", "2026-07-29", "2026-07-30", "2026-07-31", "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06", "2026-08-07", "2026-08-10", "2026-08-11", "2026-08-12", "2026-08-13", "2026-08-14", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20", "2026-08-21", "2026-08-24", "2026-08-25", "2026-08-26", "2026-08-27", "2026-08-28", "2026-08-31", "2026-09-01", "2026-09-02", "2026-09-03", "2026-09-04", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25", "2026-09-28", "2026-09-29", "2026-09-30", "2026-10-01", "2026-10-02", "2026-10-05", "2026-10-06", "2026-10-07", "2026-10-08", "2026-10-09", "2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-19", "2026-10-20", "2026-10-21", "2026-10-22", "2026-10-23", "2026-10-26", "2026-10-27", "2026-10-28", "2026-10-29"], "lines": [{"name": "美 10 年殖利率", "vals": [4.08, 4.11, 4.11, 4.13, 4.1, 4.17, 4.11, 4.11, 4.13, 4.13, 4.08, 4.11, 4.14, 4.13, 4.12, 4.13, 4.1, 4.06, 4.04, 4.01, 4.0, 4.02, 4.09, 4.09, 4.06, 4.11, 4.14, 4.17, 4.18, 4.13, 4.14, 4.19, 4.18, 4.15, 4.16, 4.12, 4.16, 4.17, 4.18, 4.15, 4.14, 4.12, 4.14, 4.18, 4.19, 4.17, 4.18, 4.15, 4.19, 4.18, 4.19, 4.18, 4.15, 4.17, 4.24, 4.3, 4.26, 4.26, 4.24, 4.22, 4.24, 4.26, 4.24, 4.26, 4.29, 4.28, 4.29, 4.21, 4.22, 4.22, 4.16, 4.18, 4.09, 4.04, 4.05, 4.09, 4.08, 4.08, 4.03, 4.04, 4.05, 4.02, 3.97, 4.05, 4.06, 4.09, 4.13, 4.15, 4.12, 4.15, 4.21, 4.27, 4.28, 4.23, 4.2, 4.26, 4.25, 4.39, 4.34, 4.39, 4.33, 4.42, 4.44, 4.35, 4.3, 4.33, 4.31, 4.34, 4.33, 4.29, 4.29, 4.31, 4.3, 4.26, 4.29, 4.32, 4.26, 4.26, 4.3, 4.3, 4.34, 4.31, 4.35, 4.36, 4.42, 4.4, 4.39, 4.45, 4.43, 4.36, 4.41, 4.38, 4.42, 4.46, 4.46, 4.47, 4.59, 4.61, 4.67, 4.57, 4.57, 4.56, 4.5, 4.48, 4.45, 4.45, 4.47, 4.46, 4.49, 4.47, 4.55, 4.56, 4.53, 4.55, 4.45, 4.48, 4.47, 4.43, 4.49, 4.46, 4.51, 4.5, 4.41, 4.4, 4.38, 4.38, 4.44, 4.48, 4.49, 4.48, 4.55, 4.56, 4.54, 4.56, 4.62, 4.58, 4.55, 4.57, 4.55, 4.6, 4.63, 4.67, 4.71, 4.69, 4.65, 4.61, 4.67, 4.68, 4.75, 4.7, 4.63, 4.63, 4.69, 4.65, 4.72, 4.7, 4.68, 4.63, 4.68, 4.72, 4.71, 4.65, 4.69, 4.74, 4.7, 4.64, 4.66, 4.67, 4.73, 4.75, 4.79, 4.79, 4.77, 4.78, 4.8, 4.83, 4.95, 4.96, 4.97, 5.0, 5.01, 4.94, 5.01, 4.96, 4.96, 5.11, 5.18, 5.17, 5.24, 5.26, 5.29, 5.24, 5.28, 5.31, 5.27, 5.28, 5.22, 5.24, 5.24, 5.21, 5.19, 5.1, 5.09, 5.15, 5.12, 5.13, 4.96, 5.0, 5.0, 4.99, 4.99, 4.99], "ax": "L", "col": "#C8361E"}, {"name": "高收益債利差", "vals": [null, null, null, null, null, null, null, null, null, null, null, null, null, 3.13, 3.2, 3.17, 3.17, 3.19, 3.15, 3.1, 3.0, 2.95, 2.94, 2.92, 2.89, 2.88, 2.85, 2.89, 2.89, 2.91, 2.88, 2.91, 2.91, 2.98, 2.99, 2.95, 2.9, 2.88, 2.83, 2.84, 2.86, 2.87, 2.84, 2.81, 2.83, 2.81, 2.79, 2.79, 2.76, 2.74, 2.74, 2.75, 2.76, 2.71, 2.65, 2.73, 2.69, 2.64, 2.68, 2.69, 2.71, 2.72, 2.77, 2.8, 2.81, 2.85, 2.86, 2.97, 2.87, 2.84, 2.86, 2.84, 2.92, 2.95, 2.94, 2.86, 2.88, 2.86, 2.95, 2.97, 2.94, 2.98, 3.1, 3.03, 3.08, 2.97, 3.0, 3.13, 3.19, 3.06, 3.09, 3.17, 3.28, 3.27, 3.22, 3.2, 3.27, 3.24, 3.19, 3.19, 3.17, 3.21, 3.42, 3.46, 3.28, 3.16, 3.17, 3.05, 3.12, 2.94, 2.9, 2.94, 2.95, 2.84, 2.85, 2.86, 2.83, 2.87, 2.85, 2.84, 2.86, 2.86, 2.84, 2.85, 2.82, 2.83, 2.77, 2.78, 2.77, 2.75, 2.79, 2.81, 2.79, 2.82, 2.82, 2.76, 2.8, 2.83, 2.86, 2.8, 2.78, 2.74, 2.72, 2.71, 2.72, 2.72, 2.72, 2.71, 2.75, 2.74, 2.76, 2.75, 2.78, 2.8, 2.78, 2.71, 2.66, 2.71, 2.63, 2.66, 2.65, 2.71, 2.76, 2.78, 2.83, 2.8, 2.75, 2.74, 2.75, 2.72, 2.67, 2.7, 2.7, 2.69, 2.69, 2.72, 2.71, 2.71, 2.73, 2.69, 2.69, 2.68, 2.77, 2.79, 2.81, 2.84, 2.87, 2.84, 2.85, 2.78, 2.73, 2.75, 2.71, 2.7, 2.7, 2.72, 2.71, 2.71, 2.67, 2.7, 2.75, 2.73, 2.75, 2.7, 2.69, 2.7, 2.67, 2.63, 2.6, 2.63, 2.65, 2.66, 2.65, 2.68, 2.67, 2.71, 2.7, 2.65, 2.71, 2.76, 2.7, 2.7, 2.68, 2.66, 2.68, 2.73, 2.8, 2.93, 3.02, 3.08, 3.12, 3.24, 3.1, 3.12, 3.03, 3.09, 3.15, 3.11, 3.11, 3.16, 3.25, 3.23, 3.31, 3.29, 3.33, 3.27, 3.4, 3.38, 3.3, 3.18, 3.14, 3.14], "ax": "L", "col": "#B8862B"}, {"name": "費城半導體", "vals": [7327.93, 7216.0, 7228.66, 7270.97, 6979.57, 7190.27, 7018.39, 6947.36, 7156.95, 6979.7, 7082.13, 6818.74, 6811.2, 6705.74, 6551.03, 6670.03, 6352.07, 6406.43, 6703.2, 6714.18, 6899.46, 7025.15, 7020.53, 7149.47, 7280.51, 7215.97, 7294.84, 7375.22, 7372.51, 7467.49, 7411.48, 7033.57, 6990.41, 6958.44, 6695.31, 6863.63, 7067.87, 7145.57, 7184.54, 7204.37, 7207.64, 7178.27, 7169.1, 7083.13, 7367.47, 7446.45, 7650.93, 7574.87, 7436.1, 7638.78, 7674.84, 7747.99, 7701.47, 7837.3, 7927.41, 7794.19, 8042.07, 8055.17, 7957.93, 7927.04, 8117.18, 8306.74, 8320.39, 7998.47, 8134.49, 7966.33, 7619.16, 7614.64, 8048.62, 8162.58, 8107.13, 8291.86, 8084.7, 8137.86, 8136.05, 8214.35, 8173.3, 8260.42, 8213.46, 8332.34, 8467.43, 8197.26, 8098.37, 8137.36, 7764.88, 7914.48, 7821.76, 7514.74, 7810.4, 7865.12, 7914.57, 7643.17, 7646.64, 7796.24, 7836.83, 7795.13, 7863.3, 7670.61, 7773.13, 7872.71, 7967.75, 7585.87, 7457.67, 7142.33, 7588.2, 7802.31, 7833.39, 7916.11, 8003.87, 8510.92, 8689.53, 8889.83, 9039.52, 9224.12, 9239.29, 9329.35, 9555.88, 9599.21, 9647.21, 9909.27, 10078.57, 10513.66, 10408.04, 10035.58, 10271.3, 10503.7, 10595.34, 10534.66, 10980.58, 11472.75, 11160.99, 11775.5, 12081.04, 11717.26, 12017.98, 12073.78, 11588.46, 11302.52, 11305.5, 11813.29, 11964.08, 12202.54, 12876.91, 12702.19, 12829.14, 12829.38, 12965.65, 13726.27, 13916.96, 13617.5, 12220.76, 12906.69, 12657.81, 12206.46, 13171.44, 13371.47, 14099.62, 13294.22, 13477.07, 14341.78, 14634.72, 13482.51, 13458.2, 13940.87, 13203.57, 13709.66, 14246.96, 13353.28, 12626.22, 12900.14, 12300.52, 12574.97, 12960.0, 12967.16, 12347.78, 12661.93, 12398.89, 11867.5, 11673.89, 11743.85, 12356.16, 12410.67, 12343.84, 11818.88, 11554.88, 11035.68, 10447.49, 11302.99, 11311.08, 11430.35, 12179.26, 12008.88, 12048.69, 12356.79, 11993.86, 12098.47, 12399.38, 12456.0, 12417.05, 12621.0, 11992.46, 11738.23, 11800.02, 11740.37, 11423.17, 11588.04, 11611.24, 11882.17, 11469.66, 11535.05, 11288.61, 11339.25, 11352.13, 11735.26, 11887.87, 11931.32, 11614.17, 11824.0, 11131.28, 11175.55, 11246.11, 11599.49, 11921.69, 12433.17, 12689.82, 12534.28, 12492.54, 12668.93, 12465.24, 12629.16, 12628.62, 12829.0, 13136.67, 13172.74, 13217.82, 13066.15, 12623.71, 12572.42, 12236.79, 12208.79, 11684.38, 11581.21, 11137.29, 11316.34, 11283.81, 11505.56, 10731.98, 10779.46, 11083.47, 11482.5, 11684.0, 11583.34], "ax": "R", "col": "#1B2A4A"}]}, "grid": 1, "note": "同網站「自由疊圖」「Fed 利率預期」；FRED 公布值可能比指數晚 1～2 天。", "verify": {"ok": true, "bad": [], "checked": "殖利率 11 個月、費半 12 個月、利差 10 個月；FedWatch 4 次會議"}, "foot": "量化篩選結果，非投資建議"}, {"key": "ev_geo", "tag": "地緣政治", "title": "地緣政治：", "hl": "重大消息與油價", "subt": "權威媒體的地緣政治新聞（原標題），搭配 WTI 原油近一年走勢", "date": "2026-10-29", "src": "資料日 2026-10-29｜新聞＝網站信息流（總經政治 → 地緣政治、即時新聞），只收權威名單內的媒體，標題照原文；油價＝FRED DCOILWTICO（美國能源資訊署 EIA 公布的 WTI 現貨，可能晚 1～2 天）", "kpi": [[{"lab": "地緣政治新聞", "num": "17", "u": "則", "c": "gd", "sub": "權威來源、近 2 日"}, {"lab": "WTI 原油", "num": "103.37", "u": "美元", "c": "", "sub": "FRED 10/27"}, {"lab": "5 日漲跌", "num": "−4.2", "u": "%", "c": "dn", "sub": "20 日 +7.5%"}, {"lab": "距一年高點", "num": "−9.8", "u": "%", "c": "", "sub": "一年高點 114.58"}]], "boxes": [{"h": "地緣政治新聞", "small": "原標題；依日期新到舊", "cols": ["日期", "標題", "媒體"], "al": ["", "fs", "c"], "rows": [["10/29", "German chancellor says North Korea threatens freedom in Europe", "安納托利亞通訊社"], ["10/29", "烏干達公民加入俄軍赴烏克蘭 官方證實27人陣亡或失聯", "自由財經"], ["10/29", "以色列大選阿拉伯政黨表現亮眼 納坦雅胡批操弄選舉要求調查", "自由財經"], ["10/29", "Top Swiss diplomat arrives in North Korea to reopen diplomatic office, urges dialogue for peace", "安納托利亞通訊社"], ["10/29", "Netanyahu, at risk of losing power, steps up attacks on Israel's Arab parties", "路透"], ["10/29", "邊境恐怖噪音夢魘再起！北韓疑測試心戰廣播南韓說話了", "中時新聞網"], ["10/29", "Iranian president says regional countries can ensure security without US involvement", "安納托利亞通訊社"], ["10/29", "烏干達大使館：27名替俄赴烏克蘭作戰公民確認或推斷死亡", "經濟日報"]]}], "chart": {"name": "WTI 原油現貨（美元／桶，近一年）", "dates": ["2025-10-24", "2025-10-27", "2025-10-28", "2025-10-29", "2025-10-30", "2025-10-31", "2025-11-03", "2025-11-04", "2025-11-05", "2025-11-06", "2025-11-07", "2025-11-10", "2025-11-12", "2025-11-13", "2025-11-14", "2025-11-17", "2025-11-18", "2025-11-19", "2025-11-20", "2025-11-21", "2025-11-24", "2025-11-25", "2025-11-26", "2025-11-28", "2025-12-01", "2025-12-02", "2025-12-03", "2025-12-04", "2025-12-05", "2025-12-08", "2025-12-09", "2025-12-10", "2025-12-11", "2025-12-12", "2025-12-15", "2025-12-16", "2025-12-17", "2025-12-18", "2025-12-19", "2025-12-22", "2025-12-23", "2025-12-24", "2025-12-26", "2025-12-29", "2025-12-30", "2025-12-31", "2026-01-02", "2026-01-05", "2026-01-06", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-23", "2026-03-24", "2026-03-25", "2026-03-26", "2026-03-27", "2026-03-30", "2026-03-31", "2026-04-01", "2026-04-02", "2026-04-06", "2026-04-07", "2026-04-08", "2026-04-09", "2026-04-10", "2026-04-13", "2026-04-14", "2026-04-15", "2026-04-16", "2026-04-17", "2026-04-20", "2026-04-21", "2026-04-22", "2026-04-23", "2026-04-24", "2026-04-27", "2026-04-28", "2026-04-29", "2026-04-30", "2026-05-01", "2026-05-04", "2026-05-05", "2026-05-06", "2026-05-07", "2026-05-08", "2026-05-11", "2026-05-12", "2026-05-13", "2026-05-14", "2026-05-15", "2026-05-18", "2026-05-19", "2026-05-20", "2026-05-21", "2026-05-22", "2026-05-26", "2026-05-27", "2026-05-28", "2026-05-29", "2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18", "2026-06-22", "2026-06-23", "2026-06-24", "2026-06-25", "2026-06-26", "2026-06-29", "2026-06-30", "2026-07-01", "2026-07-02", "2026-07-06", "2026-07-07", "2026-07-08", "2026-07-09", "2026-07-10", "2026-07-13", "2026-07-14", "2026-07-15", "2026-07-16", "2026-07-17", "2026-07-20", "2026-07-21", "2026-07-22", "2026-07-23", "2026-07-24", "2026-07-27", "2026-07-28", "2026-07-29", "2026-07-30", "2026-07-31", "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06", "2026-08-07", "2026-08-10", "2026-08-11", "2026-08-12", "2026-08-13", "2026-08-14", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20", "2026-08-21", "2026-08-24", "2026-08-25", "2026-08-26", "2026-08-27", "2026-08-28", "2026-08-31", "2026-09-01", "2026-09-02", "2026-09-03", "2026-09-04", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25", "2026-09-28", "2026-09-29", "2026-09-30", "2026-10-01", "2026-10-02", "2026-10-05", "2026-10-06", "2026-10-07", "2026-10-08", "2026-10-09", "2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-19", "2026-10-20", "2026-10-21", "2026-10-22", "2026-10-23", "2026-10-26", "2026-10-27"], "vals": [62.27, 62.13, 60.97, 61.26, 61.36, 61.75, 61.79, 61.38, 60.4, 60.24, 60.54, 60.94, 59.3, 59.54, 60.87, 60.66, 61.51, 60.27, 60.07, 58.86, 59.11, 58.25, 58.81, 58.58, 59.47, 58.81, 59.09, 59.82, 60.23, 59.04, 58.4, 58.67, 57.76, 57.61, 56.97, 55.44, 56.07, 56.22, 56.8, 58.18, 58.55, 58.72, 56.6, 57.89, 57.79, 57.26, 57.21, 58.1, 56.97, 56.01, 57.74, 58.96, 59.39, 60.85, 61.84, 59.13, 59.4, 60.3, 60.38, 59.24, 60.7, 60.46, 62.04, 62.75, 64.77, 64.5, 61.6, 62.62, 64.56, 62.9, 63.77, 64.53, 64.2, 64.8, 63.08, 63.05, 62.53, 65.33, 66.66, 66.69, 66.36, 65.62, 65.3, 65.1, 66.96, 71.13, 74.48, 74.58, 80.88, 90.77, 94.65, 83.71, 86.8, 95.61, 98.48, 93.39, 96.01, 96.12, 96.11, 98.71, 89.33, 93.18, 91.51, 96.18, 101.26, 104.69, 102.86, 101.9, 113.23, 114.01, 114.58, 96.17, 99.62, 98.34, 100.72, 93.07, 93.04, 96.46, 85.91, 91.06, 93.64, 94.76, 99.27, 98.42, 99.89, 103.45, 110.47, 108.64, 105.38, 109.76, 105.66, 98.75, 98.38, 98.87, 101.56, 105.78, 104.52, 104.66, 108.99, 112.25, 112.09, 101.69, 100.2, 100.35, 97.63, 92.35, 92.65, 91.16, 95.96, 97.47, 99.76, 96.83, 94.32, 95.0, 91.9, 93.68, 91.58, 88.62, 84.65, 79.8, 80.65, 80.35, 78.94, 74.62, 71.42, 72.67, 70.3, 71.87, 70.56, 69.74, 69.73, 69.6, 71.53, 74.56, 73.15, 72.45, 79.2, 80.44, 80.73, 80.03, 83.43, 84.38, 86.04, 87.66, 93.08, 91.74, 84.25, 80.91, 86.08, 85.15, 86.16, 81.96, 77.33, 76.78, 78.88, 79.77, 83.76, 84.77, 84.97, 82.77, 83.99, 86.04, 86.48, 87.28, 89.75, 87.21, 86.34, 83.9, 83.46, 84.81, 84.57, 87.03, 91.48, 92.15, 92.55, 92.69, 94.21, 97.26, 103.57, 101.27, 102.42, 107.02, 103.62, 103.21, 101.44, 96.97, 96.41, 93.38, 95.88, 85.23, 99.37, 96.16, 97.18, 99.77, 97.89, 96.13, 96.24, 95.02, 98.26, 98.73, 94.99, 95.39, 96.34, 104.71, 108.21, 110.01, 107.89, 103.95, 104.27, 109.72, 105.25, 103.37]}, "grid": 1, "note": "新聞只列事實（原標題、媒體、日期），不推論對個股的影響。", "trigger": "未達觸發門檻（強制產生）", "verify": {"ok": true, "bad": [], "checked": "新聞 17 則（媒體逐一比對權威名單）；WTI 254 天；觸發：未達觸發門檻（強制產生）"}, "foot": "量化篩選結果，非投資建議"}, {"key": "ev_ins", "tag": "內部人申報", "title": "內部人申報：", "hl": "董監經理人轉讓", "subt": "董事、監察人、經理人與大股東事前申報轉讓（申報後才能在申報期間內轉讓）", "date": "2026-10-29", "src": "資料日 2026-10-29｜來源：公開資訊觀測站「董監事持股轉讓事前申報」（同網站「內部人」）；估算市值＝申報張數 × 1000 × 申報日收盤（daily.npz）；申報不等於已經成交", "kpi": [[{"lab": "新申報", "num": "8", "u": "件", "c": "gd", "sub": "4 家公司"}, {"lab": "一般交易", "num": "1", "u": "件", "c": "dn", "sub": "354 張"}, {"lab": "申報張數", "num": "2,436", "u": "張", "c": "", "sub": "贈與、信託等都算"}, {"lab": "估算市值", "num": "1.87", "u": "億", "c": "", "sub": "張數 × 申報日收盤"}]], "boxes": [{"h": "新申報（依估算市值）", "small": "申報日 2026-10-28 以後", "cols": ["", "公司", "身分", "方式", "人數", "張數", "市值（億）"], "al": ["", "", "fs", "", "n", "n", "n"], "rows": [[1, {"code": "3234", "name": "光環"}, "未載明", "信託", "4", "380", "0.66"], [2, {"code": "3303", "name": "岱稜"}, "未載明", "洽特定人", "1", "1,300", "0.66"], [3, {"code": "4919", "name": "新唐"}, "經理人本人", "一般交易", "1", "354", "0.50"], [4, {"code": "2702", "name": "華園"}, "經理人本人", "贈與", "1", "201", "0.02"], [5, {"code": "2702", "name": "華園"}, "法人董事代表人本人", "贈與", "1", "201", "0.02"]]}], "chart": null, "grid": 1, "note": "「一般交易」＝申報在集中市場轉讓；贈與、信託、洽特定人不經過市場。同公司、同身分、同方式併成一列；身分「未載明」＝申報資料沒有填。", "verify": {"ok": true, "bad": [], "checked": "8 件逐件對原始檔 data/insider.json；收盤用 daily.npz"}, "foot": "量化篩選結果，非投資建議"}], NAME = {"ev_macro": "⑩ 總經數據公布", "ev_geo": "⑫ 地緣政治＋油價", "ev_ins": "⑬ 內部人新申報"};
+(async () => {
+  const box = document.getElementById("evList");
+  for (const G of R) {
+    const it = document.createElement("div"); it.className = "ev-item";
+    it.innerHTML = `<h2>${esc(NAME[G.key] || G.key)}<a href="${G.key}.png">原尺寸 1080×1350 截圖</a></h2>`;
+    const fr = document.createElement("div"); fr.className = "ev-frame"; it.appendChild(fr);
+    const c = peCardG(G); c.id = "card_" + G.key; fr.appendChild(c);
+    it.insertAdjacentHTML("beforeend", `<div class="ev-chk">核對：${G.verify.ok ? "✓ 通過" : "✗ 不通過"}　${esc(G.verify.checked)}${G.trigger ? "　觸發：" + esc(G.trigger) : ""}${G.verify.bad.length ? "　" + esc(G.verify.bad.join("；")) : ""}</div>`);
+    box.appendChild(it);
+    await peFitG(c, G);
+  }
+  const fit = () => document.querySelectorAll(".ev-frame").forEach(f => { const k = f.clientWidth / 1080, c = f.firstChild; c.style.transform = `scale(${k})`; f.style.height = 1350 * k + "px"; });
+  fit(); addEventListener("resize", fit);
+})();
+</script></body></html>
