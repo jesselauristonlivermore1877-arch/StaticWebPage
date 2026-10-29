@@ -2,7 +2,7 @@
  "file": "3037_2026-10-05.md",
  "code": "3037",
  "date": "2026-10-05",
- "show": false,
+ "show": true,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,13 +18,8 @@
   "bad": []
  },
  "cross": {
-  "ok": false,
-  "bad": [
-   {
-    "id": "pe_ttm",
-    "why": "數字檔 88.22 倍，站上資料 68.5868"
-   }
-  ],
+  "ok": true,
+  "bad": [],
   "checked": [
    "close",
    "eps_q",
