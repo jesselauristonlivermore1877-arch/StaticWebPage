@@ -1,6 +1,6 @@
 // cloudflare/member/test.mjs ── 會員區自動測試（BASE、ADMIN_TOKEN 由環境變數給；本機 wrangler dev 或正式站都能跑）
 //   流程：未登入擋資料 → 管理 token 上傳測試檔 → 新增測試會員拿連結 → GET 只顯示按鈕 → POST 登入拿 cookie → 讀檔、/api/me
-//         → 第 4 台裝置登入踢掉第 1 台 → 改到期日成昨天被擋 → 重發連結舊的失效 → 刪會員、刪檔 → 錯的管理 token 被擋。
+//         → 第 4 台裝置登入踢掉第 1 台 → 改到期日成昨天被擋 → 重發連結舊的失效 → 防誤刪（自己、Evans、回收桶、救援）→ 刪會員、刪檔 → 錯的管理 token 被擋。
 const BASE = process.env.BASE, TOKEN = process.env.ADMIN_TOKEN;
 if (!BASE || !TOKEN) { console.log("缺 BASE／ADMIN_TOKEN"); process.exit(2); }
 let ok = 0, bad = 0;
@@ -182,9 +182,62 @@ r = await go("/api/admin/members", {method: "PATCH", headers: {...A, "content-ty
 t("管理者拿得到原型研究完整版", (await st("data_adm_zz.js")) === 200);
 for (const n of ["data_s_ZZA.js", "data_s_ZZB.js", "data_adm_zz.js"]) await go("/api/admin/file?name=" + n, {method: "DELETE", headers: A});
 
-r = await go("/api/admin/members?id=" + mem.id, {method: "DELETE", headers: A});
+// 防誤刪（10-29 晚【新】總指揮一）：自己、Evans、最後一個管理員擋下；軟刪除＋回收桶＋還原；救援只認 header 的 ADMIN_TOKEN
+const EV = "c00f2e16a59e", J = {"content-type": "application/json"};
+const patch = (o, h = A) => go("/api/admin/members", {method: "PATCH", headers: {...h, ...J}, body: JSON.stringify(o)});
+r = await go("/api/admin/members", {method: "POST", headers: {...A, ...J}, body: JSON.stringify({name: "自動測試管理員", contact: "test", exp: day(1), admin: true})});
+const adm = await r.json(), sa = await login(adm.link), SA = {cookie: sa.cookie, "x-gea": "1"};
+t("測試管理員登入", sa.st === 302 && !!sa.cookie);
+r = await go("/api/admin/members", {headers: SA});
+let L = r.status === 200 ? await r.json() : {};
+t("名單標出自己與 Evans 受保護", L.me === adm.id && (L.members || []).some(m => m.id === adm.id && m.protect) && (!(L.members || []).some(m => m.id === EV) || L.members.some(m => m.id === EV && m.protect)), "HTTP " + r.status);
+for (const [n, o] of [["停用自己", {on: false}], ["取消自己管理員", {admin: false}], ["自己改成已到期", {exp: day(-1)}]]) {
+  r = await patch({id: adm.id, ...o}, SA); const j = await r.json(); t(n + " → 擋下＋原因", r.status === 403 && /自己/.test(j.error || ""), "HTTP " + r.status + "　" + (j.error || "")); }
+r = await go("/api/admin/members?id=" + adm.id, {method: "DELETE", headers: SA}); let j = await r.json();
+t("刪除自己 → 擋下＋原因", r.status === 403 && /自己/.test(j.error || ""), "HTTP " + r.status + "　" + (j.error || ""));
+const evOn = (L.members || []).some(m => m.id === EV);
+for (const [who, h] of [["管理者", SA], ["ADMIN_TOKEN", A]]) for (const [n, o] of [["停用", {on: false}], ["取消管理員", {admin: false}]]) {
+  r = await patch({id: EV, ...o}, h); j = await r.json(); t(`${who}${n} Evans → 擋下`, evOn ? r.status === 403 && /Evans/.test(j.error || "") : r.status === 404, "HTTP " + r.status + "　" + (j.error || "")); }
+r = await go("/api/admin/members?id=" + EV, {method: "DELETE", headers: A}); j = await r.json();
+t("刪除 Evans → 擋下", evOn ? r.status === 403 && /Evans/.test(j.error || "") : r.status === 404, "HTTP " + r.status + "　" + (j.error || ""));
+r = await go("/api/admin/members", {headers: A}); L = await r.json();
+const ev = (L.members || []).find(m => m.id === EV);
+t("Evans 還是啟用＋管理員", !evOn || (ev && ev.on_ === 1 && ev.admin === 1));
+// 最後一個管理員：只有在 D1 裡沒有其他有效管理員時才會觸發（正式站有 Evans → 改測「另一位管理員可以被停用」不被誤擋）
+const nAdm = (L.members || []).filter(m => m.admin === 1 && m.on_ === 1 && m.exp >= day(0)).length;
+r = await patch({id: mem.id, on: false}, SA);
+t("管理者停用別的管理員（還有其他管理員）→ 可以", r.status === 200, "HTTP " + r.status + "　有效管理員 " + nAdm + " 位");
+await patch({id: mem.id, on: true});
+// 軟刪除＋回收桶＋還原
+r = await go("/api/admin/members?id=" + mem.id, {method: "DELETE", headers: SA}); j = await r.json();
+t("刪除會員＝進回收桶", r.status === 200 && j.soft === true && j.purge_at - Date.now() / 1000 > 6.9 * 86400, "HTTP " + r.status);
 r = await go("/api/me", {headers: {cookie: neu.cookie}});
-t("刪除會員後 session 失效", r.status === 401, "HTTP " + r.status);
+t("回收桶裡的會員登不進來", r.status === 401 || r.status === 403, "HTTP " + r.status);
+r = await go("/api/admin/members", {headers: SA}); L = await r.json();
+t("名單沒有他、已刪除清單有他", !L.members.some(m => m.id === mem.id) && L.trash.some(m => m.id === mem.id));
+r = await patch({id: mem.id, on: false}, SA);
+t("回收桶裡的不能直接改（要先還原）", r.status === 409, "HTTP " + r.status);
+r = await patch({id: mem.id, restore: true}, SA);
+r = await go("/api/me", {headers: {cookie: neu.cookie}});
+t("一鍵還原：原本裝置直接回來", r.status === 200, "HTTP " + r.status);
+r = await go("/api/admin/members?id=" + mem.id, {method: "DELETE", headers: A});
+r = await go("/api/admin/members?purge=1&id=" + mem.id, {method: "DELETE", headers: A}); j = await r.json();
+t("回收桶裡的可立即永久刪除", r.status === 200 && j.purged === true, "HTTP " + r.status);
+r = await go("/api/me", {headers: {cookie: neu.cookie}});
+t("永久刪除後 session 失效", r.status === 401, "HTTP " + r.status);
+// 救援 API：只認 header 的 ADMIN_TOKEN（真的救援會推 TG 給 Evans，自動測試不打；用 workflow mode=rescue 或 W 桌面 bat）
+r = await go("/api/admin/rescue", {method: "POST", headers: SA});
+t("管理者 session 不能叫救援", r.status === 401, "HTTP " + r.status);
+r = await go("/api/admin/rescue?token=" + TOKEN, {method: "POST"});
+t("token 放網址不收", r.status === 401, "HTTP " + r.status);
+r = await go("/api/admin/rescue", {method: "POST", headers: {authorization: "Bearer x" + TOKEN.slice(1)}});
+t("錯的 token 不能救援", r.status === 401, "HTTP " + r.status);
+r = await go("/api/admin/rescue", {headers: A});
+t("救援只收 POST", r.status === 405, "HTTP " + r.status);
+// 收掉測試管理員（用 ADMIN_TOKEN：不是「自己」，Evans 還是管理員 → 不是最後一個）
+r = await go("/api/admin/members?id=" + adm.id, {method: "DELETE", headers: A});
+t("ADMIN_TOKEN 刪測試管理員（還有 Evans）→ 可以", r.status === 200, "HTTP " + r.status);
+await go("/api/admin/members?purge=1&id=" + adm.id, {method: "DELETE", headers: A});
 r = await go("/api/admin/file?name=zz_test/hello.txt", {method: "DELETE", headers: A});
 t("刪測試檔", r.status === 200);
 

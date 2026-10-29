@@ -11,6 +11,10 @@
 //   · 會員自己的版面（10-26 19:15 總指揮本機 2）：prefs 表（會員 × 名稱），看盤區「儲存我的版面」PUT /api/prefs?k=watch；
 //     送 index.html 時直接塞進 GEA_ME.prefs，任何裝置登入都載入同一份；沒存過才用預設。
 //   · 登入連結與 session 只存 SHA-256 雜湊，資料庫外洩也拿不到可用的連結。
+//   · 防誤刪（10-29 晚【新】總指揮一；Evans 誤把自己停用、靠 D1 手改救回）：任何人都不能停用、取消管理員、改成已到期、刪除「自己」和 Evans（EVANS_ID）；
+//     最後一個有效管理員也不能被停用、取消管理員或刪除 —— 擋下回 403＋原因。刪除改軟刪除（members.deleted＝刪除時間），7 天內管理頁「已刪除」可一鍵還原，
+//     超過 7 天才真的刪（管理 API 每次列名單時順手清）。救援：POST /api/admin/rescue（只認 header 的 Bearer ADMIN_TOKEN，不收管理者 session）
+//     把 Evans 設回啟用＋管理員（已刪除的也救回、到期的延到 2099-12-31），並把一次性登入連結推到 Evans 的 TG（Worker secrets TG_BOT_TOKEN／TG_CHAT_ID）。
 const COOKIE = "gea_s", LCOOKIE = "gea_ls", DAY = 86400, SESS_DAYS = 30, MAX_SESS = 3, MAX_SESS_ADMIN = 6, OTL_SEC = 600;
 const enc = new TextEncoder();
 const hex = b => [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join("");
@@ -25,6 +29,7 @@ const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "
 const cookie = (req, n) => { const m = (req.headers.get("cookie") || "").match(new RegExp("(?:^|;\\s*)" + n + "=([^;]+)")); return m ? m[1] : null; };
 const setCookie = (n, v, age) => `${n}=${v}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${age}`;
 const NAME_RE = /^[A-Za-z0-9_\-][A-Za-z0-9_.\-\/]{0,199}$/;
+const EVANS_ID = "c00f2e16a59e", TRASH_DAYS = 7;
 
 const SCHEMA = [
   "CREATE TABLE IF NOT EXISTS members(id TEXT PRIMARY KEY, name TEXT NOT NULL, contact TEXT, exp TEXT NOT NULL, on_ INTEGER NOT NULL DEFAULT 1, admin INTEGER NOT NULL DEFAULT 0, key_hash TEXT UNIQUE, line_sub TEXT UNIQUE, created INTEGER, last_seen INTEGER)",
@@ -69,6 +74,7 @@ async function init(env) {
   await env.DB.batch(SCHEMA.map(s => env.DB.prepare(s)));
   const cols = (await env.DB.prepare("PRAGMA table_info(members)").all()).results.map(c => c.name);
   if (!cols.includes("subs")) await env.DB.prepare("ALTER TABLE members ADD COLUMN subs TEXT NOT NULL DEFAULT ''").run();   // 10-19 加：舊會員預設沒訂閱
+  if (!cols.includes("deleted")) await env.DB.prepare("ALTER TABLE members ADD COLUMN deleted INTEGER").run();               // 10-29 加：軟刪除時間（NULL＝沒刪）
   ready = true;
 }
 const PREF_K = /^[a-z0-9_]{1,30}$/;
@@ -99,10 +105,10 @@ ${line ? `<a class="btn line" href="/auth/line">用 LINE 登入</a><div class="n
        : `<p>請用 GEA 給你的<b>專屬登入連結</b>進入。</p>`}
 <div class="note" style="margin-top:16px;border-top:1px solid var(--line);padding-top:10px">連結遺失、換手機或會員到期，請聯絡 GEA。</div>`, st);
 }
-const expiredPage = m => page("GEA 會員已到期", `<p class="err"><b>${m.on_ ? "會員已到期" : "會員已停用"}</b>${m.on_ ? `（到期日 ${esc(m.exp)}）` : ""}。</p><p class="note">續約後由 GEA 延長到期日，重新整理就能進入。</p><a class="btn go" href="/logout">回登入畫面</a>`, 403);
+const expiredPage = m => page("GEA 會員已到期", `<p class="err"><b>${m.on_ && !m.deleted ? "會員已到期" : "會員已停用"}</b>${m.on_ && !m.deleted ? `（到期日 ${esc(m.exp)}）` : ""}。</p><p class="note">續約後由 GEA 延長到期日，重新整理就能進入。</p><a class="btn go" href="/logout">回登入畫面</a>`, 403);
 
 // ───────── 身分 ─────────
-const valid = m => m && m.on_ === 1 && m.exp >= today();
+const valid = m => m && m.on_ === 1 && !m.deleted && m.exp >= today();
 async function session(req, env) {
   const sid = cookie(req, COOKIE); if (!sid || !/^[0-9a-f]{64}$/.test(sid)) return null;
   const r = await env.DB.prepare("SELECT s.sid, s.created AS s_created, s.last AS s_last, m.* FROM sessions s JOIN members m ON m.id = s.member_id WHERE s.sid = ?").bind(await sha(sid)).first();
@@ -182,8 +188,44 @@ function qrSvg(text) {
   const q = qrcode(0, "M"); q.addData(text); q.make();
   return q.createSvgTag({cellSize: 6, margin: 4, scalable: true});
 }
-async function adminApi(req, env, url, path) {
-  const db = env.DB;
+/* 防誤刪：回 null＝可以；回字串＝擋下的原因。me＝操作的人（管理者 session 的會員 id；用 ADMIN_TOKEN 時是 null）。
+   ch：{off：停用或改成已到期, unadmin：取消管理員, del：刪除} */
+async function guard(db, me, m, ch) {
+  const what = ch.del ? "刪除" : ch.unadmin ? "取消管理員" : "停用";
+  if (m.id === EVANS_ID) return `不能${what} Evans（主管理者）。要救援請用 /api/admin/rescue。`;
+  if (me && m.id === me) return `不能${what}自己（避免把自己鎖在外面）；請由另一位管理者操作。`;
+  if (m.admin === 1 && valid(m)) {
+    const r = await db.prepare("SELECT COUNT(*) AS n FROM members WHERE admin = 1 AND on_ = 1 AND deleted IS NULL AND exp >= ? AND id <> ?").bind(today(), m.id).first();
+    if (!r || r.n < 1) return `「${m.name}」是最後一個有效管理員，不能${what}。請先新增或啟用另一位管理員。`;
+  }
+  return null;
+}
+async function purgeTrash(db) {                                                   // 軟刪除超過 TRASH_DAYS 天的才真的刪（連 session、版面、一次性連結）
+  const cut = now() - TRASH_DAYS * DAY, ids = (await db.prepare("SELECT id FROM members WHERE deleted IS NOT NULL AND deleted < ?").bind(cut).all()).results.map(x => x.id);
+  if (!ids.length) return 0;
+  await db.batch(ids.flatMap(id => [db.prepare("DELETE FROM sessions WHERE member_id = ?").bind(id), db.prepare("DELETE FROM prefs WHERE member_id = ?").bind(id),
+    db.prepare("DELETE FROM otl WHERE member_id = ?").bind(id), db.prepare("DELETE FROM members WHERE id = ? AND deleted IS NOT NULL").bind(id)]));
+  return ids.length;
+}
+async function tgSend(env, text) {
+  if (!env.TG_BOT_TOKEN || !env.TG_CHAT_ID) return false;
+  const r = await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, {method: "POST", headers: {"content-type": "application/json"},
+    body: JSON.stringify({chat_id: env.TG_CHAT_ID, text, disable_web_page_preview: true})}).catch(() => null);
+  return !!(r && r.ok);
+}
+async function rescue(req, env, url) {
+  const db = env.DB, m = await db.prepare("SELECT * FROM members WHERE id = ?").bind(EVANS_ID).first();
+  if (!m) return json({error: "D1 裡找不到 Evans（" + EVANS_ID + "）"}, 404);
+  const exp = m.exp >= today() ? m.exp : "2099-12-31";
+  await db.prepare("UPDATE members SET on_ = 1, admin = 1, deleted = NULL, exp = ? WHERE id = ?").bind(exp, EVANS_ID).run();
+  const t = rand(24), oexp = now() + OTL_SEC;
+  await db.batch([db.prepare("DELETE FROM otl WHERE exp < ? OR used = 1").bind(now()), db.prepare("INSERT INTO otl(h, member_id, exp) VALUES(?,?,?)").bind(await sha(t), EVANS_ID, oexp)]);
+  const sent = await tgSend(env, `🛟 GEA 看盤區救援：${m.name} 已設回「啟用＋管理員」${m.exp !== exp ? `（到期日改 ${exp}）` : ""}。\n一次性登入連結（10 分鐘內、用一次就失效；在要登入的裝置打開、按「進入」）：\n${url.origin}/o?t=${t}`);
+  return json({ok: true, id: EVANS_ID, before: {on: m.on_, admin: m.admin, deleted: m.deleted, exp: m.exp}, after: {on: 1, admin: 1, deleted: null, exp}, tg: sent,
+    note: sent ? "一次性登入連結已推到 TG（回應不含連結）" : "TG 沒推成（Worker 沒有 TG_BOT_TOKEN／TG_CHAT_ID secret 或 TG 失敗）；帳號已救回，原本裝置重新整理即可"});
+}
+async function adminApi(req, env, url, path, s) {
+  const db = env.DB, me = s && s.admin === 1 ? s.id : null;
   if (path === "/api/admin/otl" && req.method === "POST") {                       // 一次性登入連結＋QR（10 分鐘、用一次就失效）
     const b = await req.json().catch(() => ({}));
     const m = await db.prepare("SELECT * FROM members WHERE id = ?").bind(b.id || "").first(); if (!m) return json({error: "沒有這個會員"}, 404);
@@ -195,8 +237,11 @@ async function adminApi(req, env, url, path) {
   }
   if (path === "/api/admin/members") {
     if (req.method === "GET") {
-      const r = await db.prepare("SELECT m.id, m.name, m.contact, m.exp, m.on_, m.admin, m.line_sub IS NOT NULL AS line, m.subs, m.created, m.last_seen, (SELECT COUNT(*) FROM sessions s WHERE s.member_id = m.id) AS devices FROM members m ORDER BY m.created").all();
-      return json({today: today(), members: r.results});
+      const purged = await purgeTrash(db);
+      const r = await db.prepare("SELECT m.id, m.name, m.contact, m.exp, m.on_, m.admin, m.line_sub IS NOT NULL AS line, m.subs, m.created, m.last_seen, m.deleted, (SELECT COUNT(*) FROM sessions s WHERE s.member_id = m.id) AS devices FROM members m ORDER BY m.created").all();
+      const all = r.results.map(x => ({...x, protect: x.id === EVANS_ID || x.id === me}));
+      return json({today: today(), me, evans: EVANS_ID, trash_days: TRASH_DAYS, purged, members: all.filter(x => !x.deleted),
+        trash: all.filter(x => x.deleted).map(x => ({...x, purge_at: x.deleted + TRASH_DAYS * DAY}))});
     }
     const b = await req.json().catch(() => ({}));
     if (req.method === "POST") {
@@ -209,6 +254,14 @@ async function adminApi(req, env, url, path) {
     if (req.method === "PATCH") {
       const m = await db.prepare("SELECT * FROM members WHERE id = ?").bind(b.id || "").first(); if (!m) return json({error: "沒有這個會員"}, 404);
       const st = [], out = {id: m.id};
+      if (b.restore) {                                                             // 回收桶還原
+        if (!m.deleted) return json({error: "這個會員沒有被刪除"}, 400);
+        await db.prepare("UPDATE members SET deleted = NULL WHERE id = ?").bind(m.id).run();
+        return json({id: m.id, restored: true});
+      }
+      if (m.deleted) return json({error: "這個會員在回收桶裡，請先還原再修改"}, 409);
+      const ch = {off: b.on != null && !b.on || b.exp != null && String(b.exp) < today(), unadmin: b.admin != null && !b.admin && m.admin === 1};
+      if (ch.off || ch.unadmin) { const why = await guard(db, me, m, ch); if (why) return json({error: why, blocked: true}, 403); }
       if (b.name != null) st.push(db.prepare("UPDATE members SET name = ? WHERE id = ?").bind(String(b.name).slice(0, 60), m.id));
       if (b.contact != null) st.push(db.prepare("UPDATE members SET contact = ? WHERE id = ?").bind(String(b.contact).slice(0, 120), m.id));
       if (b.exp != null) { if (!/^\d{4}-\d{2}-\d{2}$/.test(b.exp)) return json({error: "到期日格式 YYYY-MM-DD"}, 400); st.push(db.prepare("UPDATE members SET exp = ? WHERE id = ?").bind(b.exp, m.id)); }
@@ -222,9 +275,18 @@ async function adminApi(req, env, url, path) {
       return json(out);
     }
     if (req.method === "DELETE") {
-      const id = url.searchParams.get("id") || "";
-      await db.batch([db.prepare("DELETE FROM sessions WHERE member_id = ?").bind(id), db.prepare("DELETE FROM prefs WHERE member_id = ?").bind(id), db.prepare("DELETE FROM members WHERE id = ?").bind(id)]);
-      return json({deleted: id});
+      const id = url.searchParams.get("id") || "";                                  // 軟刪除：進回收桶 TRASH_DAYS 天，期間登不進來、可還原
+      const m = await db.prepare("SELECT * FROM members WHERE id = ?").bind(id).first(); if (!m) return json({error: "沒有這個會員"}, 404);
+      if (m.deleted) {                                                              // 回收桶裡的才能「立即永久刪除」（?purge=1）
+        if (url.searchParams.get("purge") !== "1") return json({error: "已經在回收桶裡"}, 409);
+        await db.batch([db.prepare("DELETE FROM sessions WHERE member_id = ?").bind(id), db.prepare("DELETE FROM prefs WHERE member_id = ?").bind(id),
+          db.prepare("DELETE FROM otl WHERE member_id = ?").bind(id), db.prepare("DELETE FROM members WHERE id = ? AND deleted IS NOT NULL").bind(id)]);
+        return json({deleted: id, purged: true});
+      }
+      const why = await guard(db, me, m, {del: true}); if (why) return json({error: why, blocked: true}, 403);
+      const t = now();
+      await db.prepare("UPDATE members SET deleted = ? WHERE id = ?").bind(t, id).run();
+      return json({deleted: id, soft: true, purge_at: t + TRASH_DAYS * DAY});
     }
   }
   if (path === "/api/admin/file") {
@@ -347,7 +409,13 @@ export default {
       if (path === "/auth/line") return lineStart(req, env, url);
       if (path === "/auth/line/cb") return lineCallback(req, env, url);
       if (path === "/robots.txt") return new Response("User-agent: *\nDisallow: /\n", {headers: {"content-type": "text/plain"}});
-      if (path.startsWith("/api/admin/")) return (await isAdmin(req, env)) ? adminApi(req, env, url, path) : json({error: "需要管理權限"}, 401);
+      if (path === "/api/admin/rescue") {                                          // 救援：只認 header 的 ADMIN_TOKEN（不收 session、不收網址參數）
+        const a = req.headers.get("authorization") || "";
+        if (req.method !== "POST") return json({error: "請用 POST"}, 405);
+        if (!(a.startsWith("Bearer ") && env.ADMIN_TOKEN && same(a.slice(7), env.ADMIN_TOKEN))) return json({error: "需要 ADMIN_TOKEN（header：Authorization: Bearer …）"}, 401);
+        return rescue(req, env, url);
+      }
+      if (path.startsWith("/api/admin/")) { const as = await session(req, env); return (await isAdmin(req, env, as)) ? adminApi(req, env, url, path, as) : json({error: "需要管理權限"}, 401); }
 
       const s = await session(req, env);
       if (path.startsWith("/api/")) {
