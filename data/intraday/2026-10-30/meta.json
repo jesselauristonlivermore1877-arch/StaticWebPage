@@ -1,0 +1,26 @@
+{
+ "day": "2026-10-30",
+ "made": "2026-10-30 13:33:20",
+ "files": {
+  "flow_min.jsonl.gz": {
+   "n": 272,
+   "first": "2026-10-30 09:00:02",
+   "last": "2026-10-30 13:31:02",
+   "missing_min": []
+  },
+  "wflow_min.jsonl.gz": {
+   "n": 272,
+   "first": "2026-10-30 09:00:03",
+   "last": "2026-10-30 13:31:03",
+   "missing_min": []
+  },
+  "flow_final.json": 91208,
+  "wflow_final.json": 23082,
+  "breadth.csv": 27345,
+  "breadth_bars.csv.gz": 2423361
+ },
+ "events": {
+  "run": 23,
+  "chase": 16
+ }
+}
