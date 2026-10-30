@@ -1,0 +1,75 @@
+# 一次性（【新】總指揮 10-30 Gemini 429 空轉）：下載指定額度日內打 Gemini 的 workflow log，統計請求與 429 次數。用完即刪。
+name: Gemini 用量盤點（一次性）
+
+on:
+  workflow_dispatch:
+    inputs:
+      since:
+        description: "起（UTC，例 2026-10-29T07:00:00Z）"
+        required: true
+      until:
+        description: "迄（UTC）"
+        required: true
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 盤點
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SINCE: ${{ inputs.since }}
+          UNTIL: ${{ inputs.until }}
+          REPO: ${{ github.repository }}
+        run: |
+          python3 - <<'PY'
+          import io, json, os, re, subprocess, zipfile, collections
+          R, S, U = os.environ["REPO"], os.environ["SINCE"], os.environ["UNTIL"]
+          def api(p, raw=False):
+              out = subprocess.run(["gh", "api", p] + ([] if raw else []), capture_output=True)
+              return out.stdout if raw else json.loads(out.stdout or b"{}")
+          MODEL = re.compile(r"gemini-[0-9.]+-flash(?:-lite)?(?:-preview(?:-[0-9-]+)?)?")
+          E429 = re.compile(r"\b429\b|RESOURCE_EXHAUSTED")
+          E5XX = re.compile(r"\b50[0-4]\b|UNAVAILABLE|overloaded")
+          tot = {}
+          samples = collections.defaultdict(list)
+          for w in ["news_live", "macro", "kol", "guidance", "company_report_run", "daily"]:
+              runs = api("repos/%s/actions/workflows/%s.yml/runs?created=%s..%s&per_page=100" % (R, w, S, U)).get("workflow_runs", [])
+              t = collections.Counter(); per_model = collections.Counter(); per_model429 = collections.Counter()
+              for r in runs:
+                  z = api("repos/%s/actions/runs/%d/logs" % (R, r["id"]), raw=True)
+                  try:
+                      zf = zipfile.ZipFile(io.BytesIO(z))
+                  except Exception:
+                      t["log 讀不到"] += 1; continue
+                  t["班數"] += 1
+                  seen = set()
+                  for n in zf.namelist():
+                      base = n.split("/")[-1]
+                      if "/" not in n and base in seen: continue
+                      seen.add(base)
+                      for line in zf.read(n).decode("utf-8", "replace").splitlines():
+                          if "/" not in n: continue          # 只看各步驟檔，不重複算彙總檔
+                          m = MODEL.findall(line)
+                          if not m: continue
+                          t["提到模型的行"] += 1
+                          for x in set(m): per_model[x] += 1
+                          if E429.search(line):
+                              t["429 行"] += 1
+                              for x in set(m): per_model429[x] += 1
+                              if len(samples[w]) < 4: samples[w].append(line[-220:])
+                          elif E5XX.search(line):
+                              t["5xx 行"] += 1
+              tot[w] = (t, per_model, per_model429)
+          for w, (t, pm, p4) in tot.items():
+              print("==== %s：%s" % (w, dict(t)))
+              for m, c in pm.most_common():
+                  print("   %-34s 行 %4d　429 %4d" % (m, c, p4.get(m, 0)))
+              for s in samples[w]:
+                  print("   例：" + s)
+          PY
