@@ -1,0 +1,39 @@
+{
+ "file": "3711_2026-10-29.md",
+ "code": "3711",
+ "date": "2026-10-29",
+ "show": true,
+ "numbers": {
+  "ok": true,
+  "bad": [],
+  "cited": 53,
+  "facts": 231
+ },
+ "compliance": {
+  "ok": true,
+  "hits": []
+ },
+ "src": {
+  "ok": true,
+  "bad": []
+ },
+ "cross": {
+  "ok": true,
+  "bad": [],
+  "checked": [
+   "close",
+   "eps_q",
+   "mcap",
+   "pe_ttm",
+   "rev_m"
+  ]
+ },
+ "tables": {
+  "ok": true,
+  "bad": []
+ },
+ "sections": {
+  "ok": true,
+  "missing": []
+ }
+}
