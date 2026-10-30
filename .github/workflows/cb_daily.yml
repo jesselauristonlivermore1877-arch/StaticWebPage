@@ -1,0 +1,56 @@
+# cb_daily.yml ─ 可轉債每日收市行情（10-30【新】總指揮 CB EDM 規格；SOURCES 六十）
+#   櫃買 RSta0113 CSV → data/cb/cb_daily.json（保留 40 個交易日）；CB EDM 的市價來源。只寫 data/cb/。
+name: 可轉債行情
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "往回補幾個日曆日（預設 7）"
+        required: false
+        default: "7"
+  schedule:
+    - cron: "20 9 * * 1-5"      # 台北 17:20（櫃買約 16:00 後出檔）
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cb_daily
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: site
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+          cache: pip
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests numpy
+      - name: 抓行情
+        working-directory: code
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python cb_daily.py ../site/data --days "${{ inputs.days || '7' }}"
+      - name: 提交
+        working-directory: site
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cb
+          if git diff --staged --quiet; then
+            echo "沒有變動，不提交。"
+          else
+            git commit -m "data: 可轉債行情 $(TZ=Asia/Taipei date +%F)"
+            for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 10; done
+          fi
