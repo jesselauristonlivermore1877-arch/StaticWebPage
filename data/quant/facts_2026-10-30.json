@@ -1,17 +1,17 @@
 {
  "date": "2026-10-30",
  "data_date": "2026-10-30",
- "made": "2026-10-30T14:43+08:00",
- "built_at": "2026-10-30T14:36:39+08:00",
- "run": "41014977659",
+ "made": "2026-10-30T15:49+08:00",
+ "built_at": "2026-10-30T15:41:29+08:00",
+ "run": "41021509865",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
-  "web_data.market.taiex": "2026-10-29",
+  "web_data.market.taiex": "2026-10-30",
   "web_data.market.otc": "2026-10-30",
   "web_data.market.tsmc": "2026-10-30",
   "web_data.breadth": "2026-10-30",
   "web_data.orders": "2026-10-30",
-  "web_data.inst.summary": "2026-10-29",
+  "web_data.inst.summary": "2026-10-30",
   "web_data.market.margin_balance": "2026-10-29",
   "web_data.elecfin": "2026-10-30",
   "web_data.screen.sector_score": "2026-10-30",
@@ -21,12 +21,55 @@
   "docs/data/etf_flow.json": "2026-10-28"
  },
  "skipped": {
-  "web_data.market.taiex": "來源資料日 2026-10-29 ≠ 資料日 2026-10-30",
-  "web_data.inst.summary": "來源資料日 2026-10-29 ≠ 資料日 2026-10-30",
   "web_data.market.margin_balance": "來源資料日 2026-10-29 ≠ 資料日 2026-10-30",
   "docs/data/chips.json": "來源資料日 2026-10-29 ≠ 資料日 2026-10-30"
  },
  "facts": [
+  {
+   "id": "taiex_close",
+   "sec": "大盤",
+   "label": "加權指數收盤",
+   "value": 45211.83,
+   "unit": " 點",
+   "text": "45211.83 點",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_chg",
+   "sec": "大盤",
+   "label": "加權指數漲跌點",
+   "value": -1156.5,
+   "unit": " 點",
+   "text": "-1156.50 點",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_r1",
+   "sec": "大盤",
+   "label": "加權指數漲跌幅",
+   "value": -2.49,
+   "unit": "%",
+   "text": "-2.49%",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_dd52",
+   "sec": "大盤",
+   "label": "加權指數距 52 週高點",
+   "value": -9.52,
+   "unit": "%",
+   "text": "-9.52%",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_ma20",
+   "sec": "大盤",
+   "label": "加權指數距 20 日均線",
+   "value": -5.27,
+   "unit": "%",
+   "text": "-5.27%",
+   "src": "web_data.market.taiex"
+  },
   {
    "id": "otc_close",
    "sec": "大盤",
@@ -116,6 +159,33 @@
    "unit": "",
    "text": "0.58",
    "src": "web_data.orders"
+  },
+  {
+   "id": "inst_外資",
+   "sec": "法人籌碼",
+   "label": "外資買賣超",
+   "value": -1124.7,
+   "unit": " 億元",
+   "text": "-1124.7 億元",
+   "src": "web_data.inst.summary"
+  },
+  {
+   "id": "inst_投信",
+   "sec": "法人籌碼",
+   "label": "投信買賣超",
+   "value": 239.9,
+   "unit": " 億元",
+   "text": "+239.9 億元",
+   "src": "web_data.inst.summary"
+  },
+  {
+   "id": "inst_自營",
+   "sec": "法人籌碼",
+   "label": "自營買賣超",
+   "value": -513.7,
+   "unit": " 億元",
+   "text": "-513.7 億元",
+   "src": "web_data.inst.summary"
   },
   {
    "id": "elecfin",
@@ -220,18 +290,18 @@
    "id": "etf_net",
    "sec": "主動式 ETF",
    "label": "主動式 ETF 合計淨買賣（含申購贖回）（最近一個有資料的交易日）",
-   "value": 67.1,
+   "value": 68.7,
    "unit": " 億元",
-   "text": "+67.1 億元",
+   "text": "+68.7 億元",
    "src": "docs/data/etf_flow.json"
   },
   {
    "id": "etf_xnet",
    "sec": "主動式 ETF",
    "label": "主動式 ETF 經理人自己調整持股的淨額（扣申購贖回）（最近一個有資料的交易日）",
-   "value": 40.2,
+   "value": 41.7,
    "unit": " 億元",
-   "text": "+40.2 億元",
+   "text": "+41.7 億元",
    "src": "docs/data/etf_flow.json"
   },
   {
