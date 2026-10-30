@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
     inputs:
       days:
-        description: "回補幾天（預設 28＝4 週）"
+        description: "回補幾天（預設 14＝2 週；10-30 起回補最多 2 週）"
         required: false
-        default: "28"
+        default: "14"
       max:
         description: "這班最多處理幾集"
         required: false
@@ -55,7 +55,7 @@ jobs:
           GEA_TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}     # 全部模型用完時每個額度日 TG 一次
           GEA_TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           PYTHONUNBUFFERED: "1"
-        run: python kol.py ../site/data --days "${{ inputs.days || '28' }}" --max "${{ inputs.max || '8' }}"
+        run: python kol.py ../site/data --days "${{ inputs.days || '14' }}" --max "${{ inputs.max || '8' }}"
       - name: 提交
         working-directory: site
         run: |
