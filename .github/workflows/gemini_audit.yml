@@ -48,13 +48,11 @@ jobs:
                   except Exception:
                       t["log 讀不到"] += 1; continue
                   t["班數"] += 1
-                  seen = set()
-                  for n in zf.namelist():
-                      base = n.split("/")[-1]
-                      if "/" not in n and base in seen: continue
-                      seen.add(base)
+                  names = zf.namelist()
+                  top = [n for n in names if "/" not in n] or names   # 只讀每個 job 的完整 log，不重複算步驟檔
+                  if t["班數"] == 1: print(w, "log 檔：", names[:8])
+                  for n in top:
                       for line in zf.read(n).decode("utf-8", "replace").splitlines():
-                          if "/" not in n: continue          # 只看各步驟檔，不重複算彙總檔
                           m = MODEL.findall(line)
                           if not m: continue
                           t["提到模型的行"] += 1
