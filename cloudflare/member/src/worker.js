@@ -239,7 +239,8 @@ async function adminApi(req, env, url, path, s) {
     if (req.method === "GET") {
       const purged = await purgeTrash(db);
       const r = await db.prepare("SELECT m.id, m.name, m.contact, m.exp, m.on_, m.admin, m.line_sub IS NOT NULL AS line, m.subs, m.created, m.last_seen, m.deleted, (SELECT COUNT(*) FROM sessions s WHERE s.member_id = m.id) AS devices FROM members m ORDER BY m.created").all();
-      const all = r.results.map(x => ({...x, protect: x.id === EVANS_ID || x.id === me}));
+      const nAdm = r.results.filter(x => x.admin === 1 && valid(x)).length;   // 10-30 收尾輪三：最後一個有效管理員也標受保護（前端反灰）
+      const all = r.results.map(x => ({...x, protect: x.id === EVANS_ID ? "Evans（主管理者）" : x.id === me ? "自己" : x.admin === 1 && valid(x) && nAdm <= 1 ? "最後一個有效管理員" : ""}));
       return json({today: today(), me, evans: EVANS_ID, trash_days: TRASH_DAYS, purged, members: all.filter(x => !x.deleted),
         trash: all.filter(x => x.deleted).map(x => ({...x, purge_at: x.deleted + TRASH_DAYS * DAY}))});
     }
