@@ -189,6 +189,8 @@ jobs:
           T python insider.py ../site/data || { echo "::warning::內部人持股失敗（這班不更新）"; echo "內部人持股失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python capital.py ../site/data || { echo "::warning::籌資動態失敗（這班不更新）"; echo "籌資動態失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python warrant.py ../site/data || { echo "::warning::權證籌碼失敗（這班不更新）"; echo "權證籌碼失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          # 🟢 10-31（【新】總指揮 一）：權證基本資料（證交所＋櫃買 t187ap37：行使比例、履約價、到期日）→ data/warrant_basic.json（不對外），選股 EDM ⑧ 權證籌碼用
+          T python tools/warrant_chip.py --basic ../site || { echo "::warning::權證基本資料失敗（⑧ 權證籌碼沿用上一份基本資料）"; echo "權證基本資料失敗（⑧ 權證籌碼沿用上一份基本資料）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python ps_river.py ../site/data || { echo "::warning::股價營收比河流失敗（這班不更新）"; echo "股價營收比河流失敗（這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python margin_otc.py ../site/data || { echo "::warning::上櫃逐檔信用失敗（搜尋框上櫃融資融券這班不更新）"; echo "上櫃逐檔信用失敗（搜尋框上櫃融資融券這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           T python media_rank.py ../site/data || { echo "::warning::國內財經媒體流量排名失敗（沿用上一份）"; echo "國內財經媒體流量排名失敗（沿用上一份）" >> "$RUNNER_TEMP/soft_fail.txt"; }
