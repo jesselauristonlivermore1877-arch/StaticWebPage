@@ -36,7 +36,7 @@ jobs:
         with:
           python-version: "3.12.14"
           cache: pip
-      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests numpy
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests feedparser numpy
       - name: 抓行情
         working-directory: code
         env:
