@@ -3,12 +3,11 @@
  "name": "台達電",
  "date": "2026-10-29",
  "industry": "伺服器電源與儲能",
- "made": "本機 company_report（2026-10-29T20:08）",
+ "made": "本機 company_report（2026-10-30T13:50）",
  "deck": {
   "url": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
   "date": "2026-10-29"
  },
- "focus": "HVDC 高壓直流電源（營收占比、時程、客戶、產能、毛利影響、與 AI 資料中心電源的關係）",
  "facts": [
   {
    "id": "close",
@@ -1149,6 +1148,206 @@
    "text": "27.8%",
    "src": "https://mopsov.twse.com.tw/mops/web/t163sb05",
    "period": "近四季"
+  },
+  {
+   "id": "prod_1",
+   "sec": "產品線",
+   "label": "Power Electronics 營收占比（3Q25）",
+   "value": 50.0,
+   "unit": "%",
+   "text": "50%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "3Q25"
+  },
+  {
+   "id": "prod_2",
+   "sec": "產品線",
+   "label": "Power Electronics 營收占比（2Q26）",
+   "value": 53.0,
+   "unit": "%",
+   "text": "53%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "2Q26"
+  },
+  {
+   "id": "prod_3",
+   "sec": "產品線",
+   "label": "Power Electronics 營收占比（3Q26）",
+   "value": 54.0,
+   "unit": "%",
+   "text": "54%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "3Q26"
+  },
+  {
+   "id": "prod_4",
+   "sec": "產品線",
+   "label": "Mobility 營收占比（3Q25）",
+   "value": 6.0,
+   "unit": "%",
+   "text": "6%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "3Q25"
+  },
+  {
+   "id": "prod_5",
+   "sec": "產品線",
+   "label": "Mobility 營收占比（2Q26）",
+   "value": 5.0,
+   "unit": "%",
+   "text": "5%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "2Q26"
+  },
+  {
+   "id": "prod_6",
+   "sec": "產品線",
+   "label": "Mobility 營收占比（3Q26）",
+   "value": 5.0,
+   "unit": "%",
+   "text": "5%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "3Q26"
+  },
+  {
+   "id": "prod_7",
+   "sec": "產品線",
+   "label": "Automation 營收占比（3Q25）",
+   "value": 9.0,
+   "unit": "%",
+   "text": "9%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "3Q25"
+  },
+  {
+   "id": "prod_8",
+   "sec": "產品線",
+   "label": "Automation 營收占比（2Q26）",
+   "value": 8.0,
+   "unit": "%",
+   "text": "8%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "2Q26"
+  },
+  {
+   "id": "prod_9",
+   "sec": "產品線",
+   "label": "Automation 營收占比（3Q26）",
+   "value": 8.0,
+   "unit": "%",
+   "text": "8%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "3Q26"
+  },
+  {
+   "id": "prod_10",
+   "sec": "產品線",
+   "label": "Infrastructure 營收占比（3Q25）",
+   "value": 35.0,
+   "unit": "%",
+   "text": "35%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "3Q25"
+  },
+  {
+   "id": "prod_11",
+   "sec": "產品線",
+   "label": "Infrastructure 營收占比（2Q26）",
+   "value": 34.0,
+   "unit": "%",
+   "text": "34%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "2Q26"
+  },
+  {
+   "id": "prod_12",
+   "sec": "產品線",
+   "label": "Infrastructure 營收占比（3Q26）",
+   "value": 33.0,
+   "unit": "%",
+   "text": "33%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "3Q26"
+  },
+  {
+   "id": "prod_13",
+   "sec": "產品線",
+   "label": "Power Electronics 營收占比（YT3Q25）",
+   "value": 51.0,
+   "unit": "%",
+   "text": "51%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "YT3Q25"
+  },
+  {
+   "id": "prod_14",
+   "sec": "產品線",
+   "label": "Power Electronics 營收占比（YT3Q26）",
+   "value": 53.0,
+   "unit": "%",
+   "text": "53%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "YT3Q26"
+  },
+  {
+   "id": "prod_15",
+   "sec": "產品線",
+   "label": "Mobility 營收占比（YT3Q25）",
+   "value": 8.0,
+   "unit": "%",
+   "text": "8%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "YT3Q25"
+  },
+  {
+   "id": "prod_16",
+   "sec": "產品線",
+   "label": "Mobility 營收占比（YT3Q26）",
+   "value": 5.0,
+   "unit": "%",
+   "text": "5%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "YT3Q26"
+  },
+  {
+   "id": "prod_17",
+   "sec": "產品線",
+   "label": "Automation 營收占比（YT3Q25）",
+   "value": 10.0,
+   "unit": "%",
+   "text": "10%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "YT3Q25"
+  },
+  {
+   "id": "prod_18",
+   "sec": "產品線",
+   "label": "Automation 營收占比（YT3Q26）",
+   "value": 9.0,
+   "unit": "%",
+   "text": "9%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "YT3Q26"
+  },
+  {
+   "id": "prod_19",
+   "sec": "產品線",
+   "label": "Infrastructure 營收占比（YT3Q25）",
+   "value": 31.0,
+   "unit": "%",
+   "text": "31%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "YT3Q25"
+  },
+  {
+   "id": "prod_20",
+   "sec": "產品線",
+   "label": "Infrastructure 營收占比（YT3Q26）",
+   "value": 33.0,
+   "unit": "%",
+   "text": "33%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/230820261029M001.pdf",
+   "period": "YT3Q26"
   }
  ],
  "tables": {
@@ -1398,6 +1597,134 @@
       "rel_1m",
       "rel_3m",
       null
+     ]
+    }
+   ]
+  },
+  "products": {
+   "title": "產品線營收占比（法說簡報）",
+   "cols": [
+    "占比"
+   ],
+   "rows": [
+    {
+     "label": "Power Electronics（3Q25）",
+     "cells": [
+      "prod_1"
+     ]
+    },
+    {
+     "label": "Power Electronics（2Q26）",
+     "cells": [
+      "prod_2"
+     ]
+    },
+    {
+     "label": "Power Electronics（3Q26）",
+     "cells": [
+      "prod_3"
+     ]
+    },
+    {
+     "label": "Mobility（3Q25）",
+     "cells": [
+      "prod_4"
+     ]
+    },
+    {
+     "label": "Mobility（2Q26）",
+     "cells": [
+      "prod_5"
+     ]
+    },
+    {
+     "label": "Mobility（3Q26）",
+     "cells": [
+      "prod_6"
+     ]
+    },
+    {
+     "label": "Automation（3Q25）",
+     "cells": [
+      "prod_7"
+     ]
+    },
+    {
+     "label": "Automation（2Q26）",
+     "cells": [
+      "prod_8"
+     ]
+    },
+    {
+     "label": "Automation（3Q26）",
+     "cells": [
+      "prod_9"
+     ]
+    },
+    {
+     "label": "Infrastructure（3Q25）",
+     "cells": [
+      "prod_10"
+     ]
+    },
+    {
+     "label": "Infrastructure（2Q26）",
+     "cells": [
+      "prod_11"
+     ]
+    },
+    {
+     "label": "Infrastructure（3Q26）",
+     "cells": [
+      "prod_12"
+     ]
+    },
+    {
+     "label": "Power Electronics（YT3Q25）",
+     "cells": [
+      "prod_13"
+     ]
+    },
+    {
+     "label": "Power Electronics（YT3Q26）",
+     "cells": [
+      "prod_14"
+     ]
+    },
+    {
+     "label": "Mobility（YT3Q25）",
+     "cells": [
+      "prod_15"
+     ]
+    },
+    {
+     "label": "Mobility（YT3Q26）",
+     "cells": [
+      "prod_16"
+     ]
+    },
+    {
+     "label": "Automation（YT3Q25）",
+     "cells": [
+      "prod_17"
+     ]
+    },
+    {
+     "label": "Automation（YT3Q26）",
+     "cells": [
+      "prod_18"
+     ]
+    },
+    {
+     "label": "Infrastructure（YT3Q25）",
+     "cells": [
+      "prod_19"
+     ]
+    },
+    {
+     "label": "Infrastructure（YT3Q26）",
+     "cells": [
+      "prod_20"
      ]
     }
    ]
