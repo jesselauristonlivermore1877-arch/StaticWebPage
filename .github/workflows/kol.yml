@@ -49,6 +49,11 @@ jobs:
         working-directory: code
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # 10-30 Gemini 429 空轉：撞 429 的模型記在 data/gemini_quota/（各 workflow 一檔、跟著 commit），所有 workflow 讀聯集 → 當天不再打
+          GEMINI_QUOTA_STATE: ${{ github.workspace }}/site/data/gemini_quota/kol.json
+          GEMINI_QUOTA_SHARED: ${{ github.workspace }}/site/data/gemini_quota
+          GEA_TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}     # 全部模型用完時每個額度日 TG 一次
+          GEA_TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           PYTHONUNBUFFERED: "1"
         run: python kol.py ../site/data --days "${{ inputs.days || '28' }}" --max "${{ inputs.max || '8' }}"
       - name: 提交
@@ -56,7 +61,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/kol docs/data/kol.json 2>/dev/null || true
+          git add data/gemini_quota data/kol docs/data/kol.json 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "沒有變動，不提交。"
           else

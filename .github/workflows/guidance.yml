@@ -66,6 +66,11 @@ jobs:
         continue-on-error: true           # 中途出錯也要往下走到 commit，不然整輪白做
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # 10-30 Gemini 429 空轉：撞 429 的模型記在 data/gemini_quota/（各 workflow 一檔、跟著 commit），所有 workflow 讀聯集 → 當天不再打
+          GEMINI_QUOTA_STATE: ${{ github.workspace }}/site/data/gemini_quota/guidance.json
+          GEMINI_QUOTA_SHARED: ${{ github.workspace }}/site/data/gemini_quota
+          GEA_TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}     # 全部模型用完時每個額度日 TG 一次
+          GEA_TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           GUIDANCE_BUDGET_MIN: "90"       # 程式自己在 90 分鐘收工（job 時限 120）
           GUIDANCE_COMPARE: ${{ inputs.compare || '0' }}
         run: python guidance.py ../site/data --max ${{ inputs.max || '150' }}
@@ -81,7 +86,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data/guidance.json docs/data/ir
+          git add -A data/gemini_quota data/guidance.json docs/data/ir
           if git diff --staged --quiet; then
             echo "沒有新東西，不提交。"
           else

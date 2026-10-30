@@ -85,6 +85,11 @@ jobs:
         working-directory: code
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # 10-30 Gemini 429 空轉：撞 429 的模型記在 data/gemini_quota/（各 workflow 一檔、跟著 commit），所有 workflow 讀聯集 → 當天不再打
+          GEMINI_QUOTA_STATE: ${{ github.workspace }}/site/data/gemini_quota/macro.json
+          GEMINI_QUOTA_SHARED: ${{ github.workspace }}/site/data/gemini_quota
+          GEA_TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}     # 全部模型用完時每個額度日 TG 一次
+          GEA_TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           # 新聞來源：空白＝RSS（預設）；開了 Gemini 計費後到 Settings › Variables 設 MACRO_MODE=grounding
           MACRO_MODE: ${{ vars.MACRO_MODE }}
@@ -119,7 +124,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/macro_flow.json docs/data/macro.json docs/data/releases.json data/weekly data/central_banks.json data/news_pool.json data/people_roles.json data/macro_v2_state.json data/registry/geo_ai.json
+          git add data/gemini_quota data/macro_flow.json docs/data/macro.json docs/data/releases.json data/weekly data/central_banks.json data/news_pool.json data/people_roles.json data/macro_v2_state.json data/registry/geo_ai.json
           git add docs/data/world_idx.json data/credit_hist.json 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "沒有變動，不提交。"

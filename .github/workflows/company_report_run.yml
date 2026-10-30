@@ -62,6 +62,11 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # 10-30 Gemini 429 空轉：撞 429 的模型記在 data/gemini_quota/（各 workflow 一檔、跟著 commit），所有 workflow 讀聯集 → 當天不再打
+          GEMINI_QUOTA_STATE: ${{ github.workspace }}/StaticWebPage/data/gemini_quota/company_report_run.json
+          GEMINI_QUOTA_SHARED: ${{ github.workspace }}/StaticWebPage/data/gemini_quota
+          GEA_TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}     # 全部模型用完時每個額度日 TG 一次
+          GEA_TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           GEMINI_TASK_ROUTE: api
           CODE: ${{ inputs.code }}
           DECK: ${{ inputs.deck }}
@@ -83,7 +88,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/company_report docs/data/company_reports.json
+          git add data/gemini_quota data/company_report docs/data/company_reports.json
           if git diff --staged --quiet; then echo "沒有新報告"; exit 1; fi
           git commit -m "data: 指定個股報告 $CODE $(TZ=Asia/Taipei date '+%F %H:%M')（雲端 Actions：數字程式產生、文字 Gemini API、關卡全過）"
           for i in 1 2 3 4; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep $((2 ** i)); done
