@@ -1,0 +1,29 @@
+# 一次性（10-30 第五輪）：2308 報告補訪談節後 TG Evans；發完就刪這支
+name: 一次性 TG 通知（用完刪）
+on:
+  workflow_dispatch:
+    inputs:
+      msg:
+        description: "訊息內容"
+        required: true
+permissions:
+  contents: read
+jobs:
+  tg:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 發 TG
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          MSG: ${{ inputs.msg }}
+        run: |
+          python3 - <<'PY'
+          import os, urllib.parse, urllib.request
+          tok, chat, txt = os.environ.get("TG_BOT_TOKEN", "").strip(), os.environ.get("TG_CHAT_ID", "").strip(), os.environ["MSG"]
+          print(txt)
+          if not (tok and chat):
+              raise SystemExit("沒設 TG")
+          r = urllib.request.urlopen("https://api.telegram.org/bot%s/sendMessage" % tok, urllib.parse.urlencode({"chat_id": chat, "text": txt}).encode(), timeout=15)
+          print("已發 TG，HTTP", r.status)
+          PY
