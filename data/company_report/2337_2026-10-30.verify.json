@@ -1,0 +1,45 @@
+{
+ "file": "2337_2026-10-30.md",
+ "code": "2337",
+ "date": "2026-10-30",
+ "show": true,
+ "numbers": {
+  "ok": true,
+  "bad": [],
+  "cited": 73,
+  "facts": 151
+ },
+ "compliance": {
+  "ok": true,
+  "hits": []
+ },
+ "src": {
+  "ok": true,
+  "bad": []
+ },
+ "cross": {
+  "ok": true,
+  "bad": [],
+  "checked": [
+   "close",
+   "eps_q",
+   "mcap",
+   "pe_ttm",
+   "rev_m"
+  ]
+ },
+ "tables": {
+  "ok": true,
+  "bad": []
+ },
+ "sections": {
+  "ok": true,
+  "missing": []
+ },
+ "eps": {
+  "ok": true,
+  "bad": [],
+  "checked": 8,
+  "skipped": 0
+ }
+}
