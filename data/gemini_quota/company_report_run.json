@@ -4,6 +4,10 @@
    "gemini-3.7-flash": {
     "at": "10-31 12:27",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
+   "gemini-omni-1.1-flash": {
+    "at": "10-31 16:30",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    }
   }
  },
@@ -35,7 +39,7 @@
   },
   "2026-10-31": {
    "gemini-3.8-flash": {
-    "req": 9,
+    "req": 12,
     "tok": 34707
    },
    "gemini-3.7-flash": {
@@ -44,19 +48,36 @@
     "e429": 1
    },
    "gemini-3.6-flash": {
-    "req": 5,
-    "tok": 56631
+    "req": 8,
+    "tok": 82605
    },
    "gemini-3.5-flash": {
-    "req": 1,
+    "req": 2,
     "tok": 19160
+   },
+   "gemini-2.5-flash": {
+    "req": 1,
+    "tok": 0
+   },
+   "gemini-omni-1.1-flash": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-flash-latest": {
+    "req": 1,
+    "tok": 0
+   },
+   "gemini-3-flash-preview": {
+    "req": 1,
+    "tok": 14637
    }
   }
  },
  "tpm": [
   [
-   1793460436.9355721,
-   16036
+   1793464375.700391,
+   21939
   ]
  ]
 }
