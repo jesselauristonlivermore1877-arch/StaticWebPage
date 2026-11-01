@@ -37,7 +37,8 @@
 //       POST /redeem?ch=  {code} 不用 token → 回 {id, token, ch}，開通碼當場作廢（換 token 會踢掉舊連線）；錯太多次（每分鐘 20）回 429。
 //     c 部位快照：每支策略最新一則「已轉送」的已簽章訊號（latest 表）；sub 帶 snap:1 時先送快照，接收端拿來對帳。
 //     d 連續下單風控：同一策略 RISK_WIN 秒內部位變動超過 RISK_MAX 次（預設 60 秒 4 次，POST /admin/risk {max, win} 可調）→ 暫停轉送該策略＋TG Evans；
-//       暫停中照樣存（序號連續），不廣播、不進快照；管理頁按「解除暫停」才恢復（不自動補送，接收端下次對帳會發現差異）。
+//       暫停中照樣存（序號連續、標 held），不廣播、不進快照、斷線補發也不補；管理頁按「解除暫停」才恢復：
+//       解除時把該策略最新一則（暫停期間最後一則）當目標部位，送 {"ctl":"align","strat":…,"items":[原文]} 給有權收的 v2 接收端對齊（11-01 14:15 裁示：不逐筆補送）。
 //     e 客戶端 TG：v=2 接收端送 {"tg":"文字"} → 中繼用 Worker secret TG_BOT_TOKEN 轉發給 Evans（TG_CHAT_ID）；客戶電腦不放 bot token。每人 10 分鐘最多 30 則。
 //       接收端另送 {"hello":{"ver":…}}、{"recon":{"ok":true|false,"detail":…}}，管理頁顯示版本與最後對帳結果。
 //     f 管理頁 GET /admin 或 /console（手機可看）：貼 RELAY_ADMIN_TOKEN 後操作。
@@ -167,7 +168,8 @@ export class Relay extends DurableObject {
                           ["users", "last_seen INTEGER"], ["msgs", "strat TEXT"],
                           ["users", "start TEXT NOT NULL DEFAULT ''"], ["users", "tg TEXT NOT NULL DEFAULT ''"], ["users", "ver TEXT"],
                           ["users", "recon TEXT"], ["users", "recon_at INTEGER"], ["users", "warned TEXT NOT NULL DEFAULT ''"],
-                          ["strategies", "paused INTEGER NOT NULL DEFAULT 0"], ["strategies", "paused_at INTEGER"], ["strategies", "paused_why TEXT"]]) {
+                          ["strategies", "paused INTEGER NOT NULL DEFAULT 0"], ["strategies", "paused_at INTEGER"], ["strategies", "paused_why TEXT"],
+                          ["msgs", "held INTEGER NOT NULL DEFAULT 0"]]) {
       if (!this.sql.exec(`PRAGMA table_info(${t})`).toArray().some(r => r.name === c.split(" ")[0])) this.sql.exec(`ALTER TABLE ${t} ADD COLUMN ${c}`);
     }
   }
@@ -238,6 +240,21 @@ export class Relay extends DurableObject {
     }
     return n;
   }
+  // 風控解除：最新一則（含暫停期間）寫進快照，送 ctl:align 給有權收的 v2 接收端（舊接收端不認得 → 不送，下次連線的快照對帳會發現差異）
+  align(strat) {
+    const last = this.sql.exec("SELECT seq, body FROM msgs WHERE strat=? ORDER BY seq DESC LIMIT 1", strat).toArray()[0];
+    if (!last) return { to: [], seq: null };
+    this.sql.exec("INSERT INTO latest(strat, seq, rts, body) VALUES(?,?,?,?) ON CONFLICT(strat) DO UPDATE SET seq=excluded.seq, rts=excluded.rts, body=excluded.body",
+                  strat, last.seq, Date.now(), last.body);
+    this.sweep();
+    const U = this.users(), S = this.strats(), to = [], msg = '{"ctl":"align","strat":"' + strat + '","items":[' + last.body + "]}";
+    for (const s of this.live("sub")) {
+      const a = s.deserializeAttachment() || {};
+      if (a.v2 && this.why(U[a.id], strat, S) === null) { this.send(s, msg); to.push(a.id); }
+    }
+    return { to, seq: last.seq };
+  }
+
   broadcast(data, strat) {
     this.sweep();
     const U = this.users(), S = this.strats(), to = [];
@@ -326,8 +343,13 @@ export class Relay extends DurableObject {
       this.sql.exec("INSERT INTO strategies(code, name, listed, created) VALUES(?,?,0,?) ON CONFLICT(code) DO NOTHING", code, code, Date.now());
       if ("listed" in body) this.sql.exec("UPDATE strategies SET listed=? WHERE code=?", body.listed ? 1 : 0, code);
       if ("name" in body) this.sql.exec("UPDATE strategies SET name=? WHERE code=?", String(body.name).slice(0, 40), code);
-      if ("paused" in body && !body.paused) { this.sql.exec("UPDATE strategies SET paused=0, paused_why=NULL WHERE code=?", code); this.sql.exec("DELETE FROM risk WHERE strat=?", code); }
-      return J({ ok: true, strategy: this.sql.exec("SELECT * FROM strategies WHERE code=?", code).one() });
+      let aligned = null;
+      if ("paused" in body && !body.paused) {
+        const was = this.sql.exec("SELECT paused FROM strategies WHERE code=?", code).one().paused;
+        this.sql.exec("UPDATE strategies SET paused=0, paused_why=NULL WHERE code=?", code); this.sql.exec("DELETE FROM risk WHERE strat=?", code);
+        if (was) aligned = this.align(code);
+      }
+      return J({ ok: true, strategy: this.sql.exec("SELECT * FROM strategies WHERE code=?", code).one(), aligned });
     }
     if (p === "/admin/risk") {
       const mx = Number(body.max), win = Number(body.win);
@@ -502,7 +524,7 @@ export class Relay extends DurableObject {
     const strat = NAME_RE.test(String(m.Strategy || "")) ? String(m.Strategy) : "";
     this.store(seq, strat, data);
     const paused = strat ? await this.riskCheck(strat) : false;
-    if (paused) return this.send(ws, { ctl: "ack", seq, subs: 0, online: this.live("sub").length, paused: true });
+    if (paused) { this.sql.exec("UPDATE msgs SET held=1 WHERE seq=?", seq); return this.send(ws, { ctl: "ack", seq, subs: 0, online: this.live("sub").length, paused: true }); }
     if (strat) this.sql.exec("INSERT INTO latest(strat, seq, rts, body) VALUES(?,?,?,?) ON CONFLICT(strat) DO UPDATE SET seq=excluded.seq, rts=excluded.rts, body=excluded.body",
                              strat, seq, Date.now(), data);
     const b = this.broadcast(data, strat);
@@ -554,7 +576,7 @@ export class Relay extends DurableObject {
         .filter(r => this.why(user, r.strat, S, true) === null).map(r => r.body);
       this.send(ws, '{"ctl":"snap","n":' + items.length + ',"items":[' + items.join(",") + "]}");
     }
-    const rows = this.sql.exec("SELECT seq, strat, body FROM msgs WHERE seq > ? ORDER BY seq", since).toArray()
+    const rows = this.sql.exec("SELECT seq, strat, body FROM msgs WHERE seq > ? AND held=0 ORDER BY seq", since).toArray()
       .filter(r => this.why(user, r.strat || Relay.stratOf(r.body), S) === null);       // 只補他有權收的
     for (const r of rows) this.send(ws, r.body);
     const oldest = this.sql.exec("SELECT MIN(seq) AS m FROM msgs").one().m;

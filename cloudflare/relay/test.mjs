@@ -273,7 +273,17 @@ const rk = subs.u1.got.slice(n0).filter(m => m.Strategy === "RSK").length;
 const pz = pub.ctl.filter(c => c.ctl === "ack" && c.paused).length;
 st = await admin("state", "GET");
 ok(rk === 4 && pz === 2 && (st.j.strategies || []).some(s => s.code === "RSK" && s.paused), "60 秒內第 5 次起暫停轉送（4 則送出、2 則擋下、ack 帶 paused）", `送出 ${rk}、擋下 ${pz}`);
-await post("strategy?code=RSK", { paused: false });
+const heldA = q - 1, heldB = q;                                          // 被擋下的兩則
+const u1v2 = await connect("sub", "u1", tok.u1, true);
+const un = await post("strategy?code=RSK", { paused: false });
+await until(() => u1v2.ctl.some(c => c.ctl === "align"));
+const al = u1v2.ctl.find(c => c.ctl === "align");
+ok(al && al.strat === "RSK" && al.items[0].Seq === heldB && !subs.u1.ctl.some(c => c.ctl === "align"),
+   "11-01 14:15：解除 → 暫停期間最後一則當目標部位，送 align 給 v2 接收端（舊接收端不送）", JSON.stringify(un.j.aligned));
+u1v2.ws.send(JSON.stringify({ since: heldA - 5 }));
+await until(() => u1v2.ctl.some(c => c.ctl === "replayed"));
+ok(u1v2.got.length > 0 && !u1v2.got.some(m => m.Seq === heldA || m.Seq === heldB), "斷線補發不補暫停期間的訊號（不逐筆補送）", u1v2.got.map(m => m.Seq).join());
+u1v2.ws.close();
 pub.ws.send(sig(++q, { Strategy: "RSK" }));
 await until(() => subs.u1.got.some(m => m.Seq === q));
 ok(subs.u1.got.some(m => m.Seq === q), "管理頁解除暫停 → 下一則照送（暫停期間的不補）");
