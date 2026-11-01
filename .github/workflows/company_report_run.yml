@@ -58,6 +58,7 @@ jobs:
       # 10-30：法說簡報 PDF 有 AES 加密，pypdf 解密要 cryptography（第一次跑「cryptography>=3.1 is required」整份沒讀到）
       - run: pip install -c "$GITHUB_WORKSPACE/CustomerServiceANDSales/requirements-lock.txt" requests certifi numpy pypdf cryptography
       - name: 產報告
+        id: make
         working-directory: CustomerServiceANDSales
         env:
           PYTHONUNBUFFERED: "1"
@@ -73,6 +74,7 @@ jobs:
           FOCUS: ${{ inputs.focus }}
           KIND: ${{ inputs.kind }}
         run: |
+          echo "since=$(date +%s)" >> "$GITHUB_OUTPUT"
           args=("$CODE" --no-push)
           [ -n "$DECK" ] && args+=(--deck "$DECK")
           [ -n "$FOCUS" ] && args+=(--focus "$FOCUS")
@@ -94,29 +96,15 @@ jobs:
           for i in 1 2 3 4; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep $((2 ** i)); done
           exit 1
       - name: TG 通知
-        if: success()
-        working-directory: StaticWebPage
+        # 11-01（【舊】總指揮 18:55 第 1 項）：成功、失敗都發；上架附網址＋代號＋資料日，沒上架寫原因（tools/report_tg.py 判斷，
+        #   不再從 company_reports.json 取「最新一篇」——新報告沒過關時會把舊的那篇報成已上網頁）
+        if: always() && steps.make.outcome != 'skipped'
+        working-directory: CustomerServiceANDSales
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           CODE: ${{ inputs.code }}
           FOCUS: ${{ inputs.focus }}
           KIND: ${{ inputs.kind }}
-        run: |
-          python - <<'PY'
-          import json, os, urllib.parse, urllib.request
-          code, focus = os.environ["CODE"], os.environ.get("FOCUS", "")
-          sec = "指定報告" if os.environ.get("KIND") == "pick" else "AI 研究報告"
-          J = json.load(open("docs/data/company_reports.json", encoding="utf-8"))
-          R = [r for r in (J.get("reports") or J.get("items") or []) if str(r.get("code")) == code]
-          r = sorted(R, key=lambda r: r.get("date") or "")[-1] if R else {}
-          txt = "GEA：%s（%s）AI 研究報告已上網頁（資料日 %s%s）。\n%s\n網站「產業研究 → %s」：https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/" % (
-              r.get("name") or "", code, r.get("date") or "—", "；重點：" + focus if focus else "", r.get("title") or "", sec)
-          tok, chat = os.environ.get("TG_BOT_TOKEN", "").strip(), os.environ.get("TG_CHAT_ID", "").strip()
-          print(txt)
-          if tok and chat:
-              urllib.request.urlopen("https://api.telegram.org/bot%s/sendMessage" % tok, urllib.parse.urlencode({"chat_id": chat, "text": txt}).encode(), timeout=15).read()
-              print("（已發 TG）")
-          else:
-              print("（沒設 TG，只印）")
-          PY
+          SINCE: ${{ steps.make.outputs.since }}
+        run: python tools/report_tg.py "$CODE" --kind "$KIND" --focus "$FOCUS" --since "${SINCE:-0}"
