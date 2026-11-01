@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "deploy＝部署＋測試；test＝只測試；rotate＝換 token＋部署＋測試；stats＝近 24 小時 CPU（GraphQL，Worker＋Durable Object）；subs＝套用正式訂閱（GEA5、GEA6 上架，舊客戶改 GEA5,GEA6）；probe_invite＝測試頻道 t1 產 s_probe 開通碼（可收 GEA_TEST；用 W 的公鑰加密後才印，W 本機解）；conns＝只印連線明細（每條連線的代號、連上時間、閒置秒數、機房）"
+        description: "deploy＝部署＋測試；test＝只測試；rotate＝換 token＋部署＋測試；stats＝近 24 小時 CPU（GraphQL，Worker＋Durable Object）；subs＝套用正式訂閱（GEA5、GEA6 上架，舊客戶改 GEA5,GEA6）；probe_invite＝測試頻道 t1 產 s_probe 開通碼（可收 GEA_TEST；用 W 的公鑰加密後才印，W 本機解）；conns＝只印連線明細（每條連線的代號、連上時間、閒置秒數、機房）；unpause_t1＝解除測試頻道 t1 的 GEA_TEST 連續下單風控暫停（11-01 18:35 第 1 項）"
         required: false
         default: "deploy"
 
@@ -58,7 +58,7 @@ jobs:
           for K in RELAY_PUB_TOKEN RELAY_ADMIN_TOKEN; do
             V=$(get $K)
             if [ -z "$V" ] || [ "${{ inputs.mode }}" = "rotate" ]; then
-              [ "${{ inputs.mode }}" = "test" ] || [ "${{ inputs.mode }}" = "stats" ] || [ "${{ inputs.mode }}" = "subs" ] || [ "${{ inputs.mode }}" = "conns" ] || [ "${{ inputs.mode }}" = "probe_invite" ] && { echo "::error::$K 還沒產生（先跑 deploy）"; exit 1; }
+              [ "${{ inputs.mode }}" = "test" ] || [ "${{ inputs.mode }}" = "stats" ] || [ "${{ inputs.mode }}" = "subs" ] || [ "${{ inputs.mode }}" = "conns" ] || [ "${{ inputs.mode }}" = "probe_invite" ] || [ "${{ inputs.mode }}" = "unpause_t1" ] && { echo "::error::$K 還沒產生（先跑 deploy）"; exit 1; }
               V=$(openssl rand -hex 32)
               echo "::add-mask::$V"
               wrangler d1 execute "$DB" --remote --yes --command "INSERT INTO keys(name,value,created) VALUES('$K','$V',datetime('now')) ON CONFLICT(name) DO UPDATE SET value=excluded.value, created=excluded.created" >/dev/null
@@ -71,7 +71,7 @@ jobs:
           done
           echo "▶ Evans 複製位置：Cloudflare 主控台 → Storage & databases → D1 SQL database → $DB → Console，執行 SELECT * FROM keys"
       - name: 部署＋設定 Worker secret
-        if: inputs.mode != 'test' && inputs.mode != 'stats' && inputs.mode != 'subs' && inputs.mode != 'conns' && inputs.mode != 'probe_invite'
+        if: inputs.mode != 'test' && inputs.mode != 'stats' && inputs.mode != 'subs' && inputs.mode != 'conns' && inputs.mode != 'probe_invite' && inputs.mode != 'unpause_t1'
         run: |
           set -o pipefail
           wrangler deploy 2>&1 | tee deploy.log
@@ -111,7 +111,7 @@ jobs:
           print("✓ 正式訂閱規則套用完成")
           PY
       - name: 自動測試（1 發 3 收；同時 tail 收 CPU）
-        if: inputs.mode != 'stats' && inputs.mode != 'subs' && inputs.mode != 'conns' && inputs.mode != 'probe_invite'
+        if: inputs.mode != 'stats' && inputs.mode != 'subs' && inputs.mode != 'conns' && inputs.mode != 'probe_invite' && inputs.mode != 'unpause_t1'
         run: |
           W=https://gea-signal-relay.jesselauristonlivermore1877.workers.dev
           for i in 1 2 3 4 5 6; do C=$(curl -s -o /dev/null -w "%{http_code}" "$W/"); echo "GET / → $C"; [ "$C" = 200 ] && break; sleep 10; done
@@ -172,6 +172,18 @@ jobs:
           enc = pr.stdout
           print("s_probe 開通碼（加密）到期 %s：" % r["expires"])
           print("ENC:" + base64.b64encode(enc).decode())
+          PY
+      - name: 解除測試頻道 t1 的 GEA_TEST 風控暫停（mode=unpause_t1；11-01 18:35 總指揮第 1 項：W 用管理權限解除，給 S 重跑延遲測試）
+        if: inputs.mode == 'unpause_t1'
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+          W = "https://gea-signal-relay.jesselauristonlivermore1877.workers.dev"
+          H = {"Authorization": "Bearer " + os.environ["RELAY_ADMIN_TOKEN"], "User-Agent": "gea-relay-admin/1.0", "Content-Type": "application/json"}
+          r = json.load(urllib.request.urlopen(urllib.request.Request(W + "/admin/strategy?ch=t1&code=GEA_TEST", json.dumps({"paused": False}).encode(), H), timeout=30))
+          st = r["strategy"]
+          print("t1 GEA_TEST：paused=%s listed=%s；對齊送出：%s" % (st.get("paused"), st.get("listed"), json.dumps(r.get("aligned"), ensure_ascii=False)))
+          if st.get("paused"): raise SystemExit("✗ 還是暫停中")
           PY
       - name: 連線明細（mode=conns；deploy／rotate 跑完也印）
         if: always() && (inputs.mode == 'conns' || inputs.mode == 'deploy' || inputs.mode == 'rotate')
