@@ -1,12 +1,61 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>下單機精靈 0～6 步預覽</title>
-<style>body{margin:0;background:#0b0f14;color:#d5dde7;font:15px/1.6 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}main{max-width:960px;margin:0 auto;padding:16px}h1{font-size:20px;color:#f0b429}h2{font-size:16px;margin:24px 0 4px}p{margin:4px 0 8px;color:#a9b4c2}img{max-width:100%;border:1px solid #26303d;border-radius:6px}</style></head><body><main>
-<h1>GEA 下單機設定精靈 20261101d（0～6 步）預覽</h1><p>【舊】總指揮 11-01 21:00 D 段。畫面是範例假資料（不是真客戶）。最上方固定一行「本下單機只支援國票期貨 API（國內期貨）」；每步通過才亮「下一步」；左邊步驟清單、上方「工具」選單可單獨重跑 1～5（另有模擬模式、開 API 開通精靈、開記錄資料夾）。通過紀錄存 C:\GEA_om\setup_steps.txt，重開精靈接著做。</p>
-<h2>第 0 步 安裝檢查</h2><p>64 位元、.NET 4.8（缺就自動從微軟下載安裝、SHA256 驗過才執行）、國票元件；打開精靈自動檢查</p><a href="step_0.png"><img src="step_0.png" alt="第 0 步 安裝檢查" loading="lazy"></a>
-<h2>第 0 步 這台電腦的角色（兩個角色的樣子；11-01 23:40）</h2><p>一般客戶畫面只有「接收端（客戶）」＋「我有管理者開通碼（GEA 內部用）」連結（上一張）；輸入管理者開通碼（管理頁或 TG「/開通碼 傳送端 …」產生）兌換後，才出現「傳送端（訊號主機）」＋「設定傳送端…」。兩個都勾＝訊號主機：兩個視窗、兩組狀態燈，設定與記錄分開放（C:\GEA_om\transmit\ 與 C:\GEA_om\）。</p><a href="step_0_roles.png"><img src="step_0_roles.png" alt="第 0 步 兩個角色" loading="lazy"></a><h2>GEA 傳送端設定（第 0 步按「設定傳送端…」）</h2><p>訊號檔（預設 Z:\CT\*.txt，CT PRO 9 欄）、頻道、開機自動啟動；「檢查」看訊號檔、簽章私鑰、中繼連線（傳送端正在跑就不測，免得被同代號踢掉）；「啟動」另開「GEA 傳送端」視窗，標題列＝傳送狀態燈。</p><a href="sender.png"><img src="sender.png" alt="GEA 傳送端設定" loading="lazy"></a><h2>第 1 步 憑證檢查</h2><p>選 .pfx＋憑證密碼 → 讀出身分證、到期日；密碼錯／過期／不是國票（主旨沒有 RA-IBFS）／不是 TWCA 發的 → 「無效憑證」＋原因、停在這步；30 天內到期另外提醒</p><a href="step_1.png"><img src="step_1.png" alt="第 1 步 憑證檢查" loading="lazy"></a>
-<h2>第 2 步 國票 API 權限（已開通）</h2><p>正式環境只查詢 → 期貨帳號下拉（沒開 API 的灰字、選不到）；電子交易密碼預設＝憑證密碼</p><a href="step_2.png"><img src="step_2.png" alt="第 2 步 國票 API 權限（已開通）" loading="lazy"></a>
-<h2>第 2 步 國票 API 權限（未開通）</h2><p>顯示開通流程（E 管家簽風險預告書 → 測試環境 → GeaApiCheck 10 筆、測試密碼 000000 → 書號可複製／TG → 正式環境），停在這步；原因不明 → 國票原文＋TG</p><a href="step_2_noapi.png"><img src="step_2_noapi.png" alt="第 2 步 國票 API 權限（未開通）" loading="lazy"></a>
-<h2>第 3 步 開通碼</h2><p>兌換＋綁身分證（只送雜湊）＋連中繼收部位快照、補合約表與策略設定</p><a href="step_3.png"><img src="step_3.png" alt="第 3 步 開通碼" loading="lazy"></a>
-<h2>第 4 步 電腦設定</h2><p>電源、Windows Update、工作排程；一鍵設好、自動登入</p><a href="step_4.png"><img src="step_4.png" alt="第 4 步 電腦設定" loading="lazy"></a>
-<h2>第 5 步 模擬演練</h2><p>假國票跑新倉→加碼→平倉→反手→換月</p><a href="step_5.png"><img src="step_5.png" alt="第 5 步 模擬演練" loading="lazy"></a>
-<h2>第 6 步 啟動</h2><p>摘要＋啟動 GEA 下單機</p><a href="step_6.png"><img src="step_6.png" alt="第 6 步 啟動" loading="lazy"></a>
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>下單機精靈預覽</title>
+<style>
+:root{--bg:#0b0f14;--fg:#d5dde7;--mut:#a9b4c2;--acc:#f0b429;--line:#26303d;--btn:#16202b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:12px 16px 28px}h1{font-size:18px;color:var(--acc);margin:4px 0}
+.top{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}.top .n{color:var(--mut);font-size:13px;margin-left:auto}
+.dots{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0}.dots button{background:var(--btn);color:var(--mut);border:1px solid var(--line);border-radius:12px;padding:2px 9px;font-size:12px;cursor:pointer}
+.dots button.on{background:var(--acc);color:#111;border-color:var(--acc)}
+h2{font-size:17px;margin:6px 0}.br{display:flex;gap:6px;margin:4px 0 8px;flex-wrap:wrap}.br button{background:var(--btn);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:4px 12px;cursor:pointer}
+.br button.on{border-color:var(--acc);color:var(--acc);font-weight:bold}
+.imgs img{display:block;max-width:100%;border:1px solid var(--line);border-radius:6px;margin:0 auto 8px}
+.say{background:#141c26;border-left:4px solid var(--acc);padding:8px 12px;border-radius:4px;margin:8px 0}
+.nav{display:flex;justify-content:space-between;gap:8px;margin-top:10px}.nav button{background:var(--btn);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:8px 18px;font-size:15px;cursor:pointer}
+.nav button:disabled{opacity:.35;cursor:default}.nav .go{border-color:var(--acc);color:var(--acc);font-weight:bold}
+.note{color:var(--mut);font-size:13px}
+</style></head><body><main>
+<h1>GEA 下單機 20261101d：設定精靈＋主畫面（可點預覽）</h1>
+<p class="note">範例畫面、假資料。用「上一步／下一步」（或鍵盤 ← →）照客戶的順序走一遍；第 0 步、第 2 步上面有兩種情況可以切換。</p>
+<div class="dots" id="dots"></div>
+<h2 id="t"></h2><div class="br" id="br"></div>
+<div class="say" id="say"></div>
+<div class="imgs" id="imgs"></div>
+<div class="nav"><button id="prev">← 上一步</button><span class="note" id="pos"></span><button id="next" class="go">下一步 →</button></div>
+<script>
+var S=[
+ {t:"第 0 步　安裝檢查",v:[
+  {k:"一般客戶",img:["step_0.png"],say:"安裝完自動開精靈、自動檢查這台電腦（64 位元、.NET、國票元件）。角色只有「接收端（客戶）」一項，客戶不用動，全部 ✓ 就按「下一步」。"},
+  {k:"有管理者開通碼（GEA 內部）",img:["step_0_roles.png","sender.png"],say:"按下面小字「我有管理者開通碼」輸入後，才多出「傳送端（訊號主機）」。勾起來按「設定傳送端…」（第二張）：選訊號檔、按「檢查」再按「啟動」。一般客戶看不到這些。"}]},
+ {t:"第 1 步　憑證檢查",img:["step_1.png"],say:"按「選擇…」選國票憑證檔（.pfx）、填憑證密碼，按「檢查憑證」。看到身分證與到期日就通過；密碼錯或過期會用紅字說怎麼辦。"},
+ {t:"第 2 步　國票 API 權限",v:[
+  {k:"已開通 API",img:["step_2.png"],say:"按「登入檢查」：用正式環境只查詢、不下單，列出期貨帳號，從下拉選要下單的帳號就通過。沒開通的帳號是灰字、選不到。"},
+  {k:"還沒開通 API",img:["step_2_noapi.png"],say:"畫面下方出現開通流程：E 管家簽風險預告書 → 營業員申請測試環境 → 測試時段按「開啟 API 開通精靈」送 10 筆 → 把書號給營業員 → 正式環境開通後回來再按「登入檢查」。"}]},
+ {t:"第 3 步　開通碼",img:["step_3.png"],say:"填營業員給的 8 碼開通碼，按「開通」。這時電腦綁上客戶的身分證（只送加密雜湊），連上 GEA 中繼、列出訂閱的策略。"},
+ {t:"第 4 步　電腦設定",img:["step_4.png"],say:"檢查電源不睡眠、Windows Update 白天不重開、開機自動啟動。按「檢查電腦設定」，有 ✗ 就按「一鍵設好」，Windows 問「是否允許」按「是」。"},
+ {t:"第 5 步　模擬演練",img:["step_5.png"],say:"按「開始模擬演練」：用假國票跑新倉、加碼、平倉、反手、換月，不會送任何真單。每一步都 ✓ 就通過。"},
+ {t:"第 6 步　啟動",img:["step_6.png"],say:"看一下摘要，按「啟動 GEA 下單機」。以後登入 Windows 就自動開，不用再進精靈。"},
+ {t:"主畫面　首頁",img:["panel_01.png"],say:"右邊狀態燈：綠＝正常、紅＝下面一行寫原因。中間每個商品一列，對帳 ✗ 就用「補」；下面每支策略一列，可開日誌、⚙ 設定。左下角是版本，有新版會出現「更新」按鈕。"},
+ {t:"主畫面　補（部位對不上）",img:["panel_02.png","panel_03.png"],say:"按「補」→ 先提醒會重新向券商查庫存 → 顯示要補幾口 → 客戶確認才送單（範圍市價）。同時 TG 通知 GEA。"},
+ {t:"主畫面　清（全部平掉）",img:["panel_04.png","panel_05.png"],say:"按「清」要確認兩次，第二次要打商品代碼，才平掉這個商品全部庫存，避免誤按。"},
+ {t:"主畫面　換倉編輯",img:["panel_12.png","panel_13.png"],say:"⚙ 設定 →「換倉」分頁，每列右邊按「編輯」改換倉日期、時間。勾「全部套用」會套到同商品所有策略（儲存前會問套幾支、幾個月），第二張是套用後的樣子。"}
+];
+var i=0,v={0:0,2:0};
+function h(x){return document.getElementById(x)}
+function show(){
+ var s=S[i],b=s.v?s.v[v[i]]:s;h("t").textContent=s.t;
+ h("br").innerHTML=s.v?s.v.map(function(x,k){return '<button data-k="'+k+'" class="'+(k==v[i]?"on":"")+'">'+x.k+'</button>'}).join(""):"";
+ h("say").textContent=b.say;
+ h("imgs").innerHTML=b.img.map(function(f){return '<a href="'+f+'" target="_blank"><img src="'+f+'" alt="'+s.t+'"></a>'}).join("");
+ h("prev").disabled=i==0;h("next").disabled=i==S.length-1;h("pos").textContent=(i+1)+"／"+S.length;
+ h("dots").innerHTML=S.map(function(x,k){return '<button data-i="'+k+'" class="'+(k==i?"on":"")+'">'+x.t.split("　")[0]+(x.t.indexOf("主畫面")==0?" "+x.t.split("　")[1].split("（")[0]:"")+'</button>'}).join("");
+ try{location.hash="p"+i}catch(e){}
+}
+h("br").onclick=function(e){var k=e.target.getAttribute("data-k");if(k!=null){v[i]=+k;show()}};
+h("dots").onclick=function(e){var k=e.target.getAttribute("data-i");if(k!=null){i=+k;show();scrollTo(0,0)}};
+h("prev").onclick=function(){if(i>0){i--;show();scrollTo(0,0)}};
+h("next").onclick=function(){if(i<S.length-1){i++;show();scrollTo(0,0)}};
+document.onkeydown=function(e){if(e.key=="ArrowLeft")h("prev").onclick();if(e.key=="ArrowRight")h("next").onclick()};
+var m=/^#p(\d+)$/.exec(location.hash);if(m&&+m[1]<S.length)i=+m[1];
+show();
+</script>
 </main></body></html>
