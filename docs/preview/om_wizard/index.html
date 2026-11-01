@@ -1,0 +1,12 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>下單機精靈 0～6 步預覽</title>
+<style>body{margin:0;background:#0b0f14;color:#d5dde7;font:15px/1.6 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}main{max-width:960px;margin:0 auto;padding:16px}h1{font-size:20px;color:#f0b429}h2{font-size:16px;margin:24px 0 4px}p{margin:4px 0 8px;color:#a9b4c2}img{max-width:100%;border:1px solid #26303d;border-radius:6px}</style></head><body><main>
+<h1>GEA 下單機設定精靈 20261101d（0～6 步）預覽</h1><p>【舊】總指揮 11-01 21:00 D 段。畫面是範例假資料（不是真客戶）。最上方固定一行「本下單機只支援國票期貨 API（國內期貨）」；每步通過才亮「下一步」；左邊步驟清單、上方「工具」選單可單獨重跑 1～5（另有模擬模式、開 API 開通精靈、開記錄資料夾）。通過紀錄存 C:\GEA_om\setup_steps.txt，重開精靈接著做。</p>
+<h2>第 0 步 安裝檢查</h2><p>64 位元、.NET 4.8（缺就自動從微軟下載安裝、SHA256 驗過才執行）、國票元件；打開精靈自動檢查</p><a href="step_0.png"><img src="step_0.png" alt="第 0 步 安裝檢查" loading="lazy"></a>
+<h2>第 1 步 憑證檢查</h2><p>選 .pfx＋憑證密碼 → 讀出身分證、到期日；密碼錯／過期／不是國票（主旨沒有 RA-IBFS）／不是 TWCA 發的 → 「無效憑證」＋原因、停在這步；30 天內到期另外提醒</p><a href="step_1.png"><img src="step_1.png" alt="第 1 步 憑證檢查" loading="lazy"></a>
+<h2>第 2 步 國票 API 權限（已開通）</h2><p>正式環境只查詢 → 期貨帳號下拉（沒開 API 的灰字、選不到）；電子交易密碼預設＝憑證密碼</p><a href="step_2.png"><img src="step_2.png" alt="第 2 步 國票 API 權限（已開通）" loading="lazy"></a>
+<h2>第 2 步 國票 API 權限（未開通）</h2><p>顯示開通流程（E 管家簽風險預告書 → 測試環境 → GeaApiCheck 10 筆、測試密碼 000000 → 書號可複製／TG → 正式環境），停在這步；原因不明 → 國票原文＋TG</p><a href="step_2_noapi.png"><img src="step_2_noapi.png" alt="第 2 步 國票 API 權限（未開通）" loading="lazy"></a>
+<h2>第 3 步 開通碼</h2><p>兌換＋綁身分證（只送雜湊）＋連中繼收部位快照、補合約表與策略設定</p><a href="step_3.png"><img src="step_3.png" alt="第 3 步 開通碼" loading="lazy"></a>
+<h2>第 4 步 電腦設定</h2><p>電源、Windows Update、工作排程；一鍵設好、自動登入</p><a href="step_4.png"><img src="step_4.png" alt="第 4 步 電腦設定" loading="lazy"></a>
+<h2>第 5 步 模擬演練</h2><p>假國票跑新倉→加碼→平倉→反手→換月</p><a href="step_5.png"><img src="step_5.png" alt="第 5 步 模擬演練" loading="lazy"></a>
+<h2>第 6 步 啟動</h2><p>摘要＋啟動 GEA 下單機</p><a href="step_6.png"><img src="step_6.png" alt="第 6 步 啟動" loading="lazy"></a>
+</main></body></html>
