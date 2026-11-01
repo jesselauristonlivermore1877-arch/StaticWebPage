@@ -284,6 +284,8 @@ u1v2.ws.send(JSON.stringify({ since: heldA - 5 }));
 await until(() => u1v2.ctl.some(c => c.ctl === "replayed"));
 ok(u1v2.got.length > 0 && !u1v2.got.some(m => m.Seq === heldA || m.Seq === heldB), "斷線補發不補暫停期間的訊號（不逐筆補送）", u1v2.got.map(m => m.Seq).join());
 u1v2.ws.close();
+subs.u1 = await connect("sub", "u1", tok.u1);                            // 同代號只留一條：剛才 v2 那條把舊的 u1 擠掉了，重連回來
+await sleep(300);
 pub.ws.send(sig(++q, { Strategy: "RSK" }));
 await until(() => subs.u1.got.some(m => m.Seq === q));
 ok(subs.u1.got.some(m => m.Seq === q), "管理頁解除暫停 → 下一則照送（暫停期間的不補）");
