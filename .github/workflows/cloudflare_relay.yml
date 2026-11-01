@@ -166,8 +166,10 @@ jobs:
           code = r["code"]
           print("::add-mask::" + code)
           # 公開 repo 的 log 誰都看得到：開通碼用 W 的公鑰（cloudflare/relay/w_probe_pub.pem）加密後才印，W 本機用私鑰解
-          enc = subprocess.run(["openssl", "pkeyutl", "-encrypt", "-pubin", "-inkey", "cloudflare/relay/w_probe_pub.pem", "-pkeyopt", "rsa_padding_mode:oaep"],
-                               input=code.encode(), capture_output=True, check=True).stdout
+          pr = subprocess.run(["openssl", "pkeyutl", "-encrypt", "-pubin", "-inkey", "w_probe_pub.pem", "-pkeyopt", "rsa_padding_mode:oaep"],
+                              input=code.encode(), capture_output=True)
+          if pr.returncode: print("openssl 失敗：", pr.stderr.decode()[:300]); raise SystemExit(1)
+          enc = pr.stdout
           print("s_probe 開通碼（加密）到期 %s：" % r["expires"])
           print("ENC:" + base64.b64encode(enc).decode())
           PY
