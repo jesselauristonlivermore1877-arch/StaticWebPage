@@ -47,6 +47,10 @@
 //       ① 代號還沒綁 → 第一次帶 idh 的兌換或連線就綁上；已綁 → 帶的對不上（或沒帶）→ 兌換回 403、連線以 4013 關閉（接收端顯示「身分證與開通時不同，請聯絡營業員」）＋TG Evans。
 //       ② 同一個 sh、兩個代號同時在線、訂閱有重疊 → 後連上的以 4014 關閉＋TG；sh 標成管理者（/admin/idadmin）→ 可多台，但重疊的策略同時只能一台 real、其他要 sim。
 //       ③ 一個代號多個身分證：只有 Evans 在管理頁加（POST /admin/bind {idh, idm}，管理頁在瀏覽器算 idh、不送明碼）；POST /admin/unbind {sh} 解除。
+//     h 管理頁登入（11-01 21:00 C）：管理頁按「用 TG 登入」（POST /login_req）或 Evans 傳 bot「/登入」→ 一次性連結 /login?t=…（10 分鐘、用一次；GET 只顯示按鈕，POST 才用掉）
+//       → 12 小時 cookie gea_radm（HttpOnly、SameSite=Strict；寫入動作另要 header x-gea-admin: 1）。Bearer RELAY_ADMIN_TOKEN 照舊可用（Actions 用）。
+//       TG 指令：Telegram webhook POST /tg_hook（header 驗 Worker secret TG_HOOK_SECRET），只認 TG_CHAT_ID（Evans），別人傳的一律不回：
+//       /開通碼 <代號或姓名> <策略逗號分隔或 全部> <到期日>、/客戶 [代號]、/停用 <代號>、/恢復 <代號>、/登入。自動測試用 POST /admin/tgcmd（只限測試頻道、回覆不發 TG）。
 //     免費方案 CPU 10ms：快照、計數都在 Durable Object 的 SQLite（每頻道一個），不掃 D1。
 // 簽章金鑰只在兩端：中繼不驗簽、不改內容，只管轉送與補發。
 import { DurableObject } from "cloudflare:workers";
@@ -113,17 +117,139 @@ function newInvite() {
 const PAGE_HEADERS = { "content-type": "text/html; charset=utf-8", "cache-control": "no-store",
   "x-robots-tag": "noindex", "x-frame-options": "DENY", "referrer-policy": "no-referrer" };
 
+// ── 11-01 21:00 C：管理頁 TG 一次性登入＋TG 指令（只認 Evans 的 chat_id）。登入狀態、一次性連結存在專用的 Durable Object「__admin」的 meta 表（只存雜湊）。
+const ADMIN_COOKIE = "gea_radm";
+const OTL_MS = 10 * 60e3, SESS_MS = 12 * 3600e3;
+const adminDo = env => env.RELAY.get(env.RELAY.idFromName("__admin"));
+const doCall = async (stub, path, body) => (await stub.fetch(new Request("https://relay.internal" + path,
+  { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body || {}) }))).json().catch(() => ({}));
+const cookieOf = (req, n) => { const m = (req.headers.get("cookie") || "").match(new RegExp("(?:^|;\\s*)" + n + "=([0-9a-f]{96})")); return m ? m[1] : null; };
+async function sessOk(req, env) {
+  const sid = cookieOf(req, ADMIN_COOKIE);
+  if (!sid) return false;
+  if (req.method !== "GET" && req.headers.get("x-gea-admin") !== "1") return false;   // cookie 登入的寫入動作要帶自訂 header（擋跨站表單）
+  return !!(await doCall(adminDo(env), "/_sess", { sid })).ok;
+}
+const LOGIN_PAGE = (msg, form) => new Response(`<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>GEA 下單訊號管理登入</title><style>body{margin:0;background:#0b0f14;color:#d5dde7;font:16px/1.6 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center}
+.c{background:#121821;border:1px solid #26303d;border-radius:12px;padding:24px;max-width:420px;margin:16px}button{font:inherit;background:#f0b429;color:#111;font-weight:700;border:0;border-radius:8px;padding:10px 18px;cursor:pointer}a{color:#f0b429}</style></head>
+<body><div class="c"><h3 style="margin-top:0">GEA 下單訊號管理</h3><p>${msg}</p>${form || '<p><a href="/admin">回管理頁</a></p>'}</div></body></html>`, { headers: PAGE_HEADERS });
+
+// TG 指令（Evans 傳給 bot）：回要回覆的訊息陣列。ch＝頻道（正式 gea；自動測試用 t<時間>）
+async function tgCommand(env, origin, text, ch) {
+  const P = String(text || "").trim().split(/\s+/), cmd = (P[0] || "").replace(/@\w+$/, "");
+  const stub = env.RELAY.get(env.RELAY.idFromName(ch));
+  const call = async (path, body) => {
+    const r = await stub.fetch(new Request("https://relay.internal/admin/" + path + (path.includes("?") ? "&" : "?") + "ch=" + ch,
+      body === undefined ? {} : { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) }));
+    return { status: r.status, j: await r.json().catch(() => ({})) };
+  };
+  const st = async () => (await call("state")).j;
+  const find = (S, who) => S.users.find(u => u.id === who) || S.users.find(u => u.note && u.note === who);
+  const HELP = "GEA 下單中繼指令：\n/開通碼 <代號或姓名> <策略逗號分隔或 全部> <到期日 YYYY-MM-DD>\n/客戶 [代號或姓名]\n/停用 <代號>\n/恢復 <代號>\n/登入（管理頁一次性登入連結）";
+  if (cmd === "/開通碼") {
+    if (P.length < 4) return ["格式：/開通碼 <代號或姓名> <策略逗號分隔或 全部> <到期日 YYYY-MM-DD>\n例：/開通碼 王小明 GEA5,GEA6 2027-12-31"];
+    const who = P[1], exp = P[3].replace(/\//g, "-");
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(exp) || !Number.isFinite(Date.parse(exp))) return ["到期日要寫 YYYY-MM-DD（例 2027-12-31）"];
+    const S = await st();
+    let subs;
+    if (["全部", "*", "all"].includes(P[2])) subs = "*";
+    else {
+      subs = P[2].split(/[,，、]/).map(x => x.trim()).filter(Boolean);
+      const listed = S.strategies.filter(s => s.listed).map(s => s.code);
+      const bad = subs.filter(c => !listed.includes(c));
+      if (!subs.length || bad.length) return [`策略 ${bad.join(",") || "（空白）"} 沒有上架。已上架：${listed.join(",") || "（沒有）"}；或寫「全部」`];
+    }
+    let u = find(S, who), id, note;
+    if (u) id = u.id;
+    else if (NAME_RE.test(who)) { id = who; note = who; }
+    else {                                                                    // 姓名 → 自動代號 c<yymmdd><3 碼>
+      const d = today().slice(2).replace(/-/g, "");
+      do { id = "c" + d + String(Math.floor(Math.random() * 1000)).padStart(3, "0"); } while (S.users.some(x => x.id === id));
+      note = who;
+    }
+    const r = await call("invite?id=" + encodeURIComponent(id), { subs, exp, ...(note ? { note } : {}) });
+    if (r.status !== 200) return ["產開通碼失敗：" + (r.j.error || "HTTP " + r.status)];
+    const code = r.j.code.slice(0, 4) + "-" + r.j.code.slice(4);
+    return [`✓ 開通碼 ${code}（${u ? "既有" : "新"}客戶 ${id}${note || (u && u.note) ? "，" + (note || u.note) : ""}；訂閱 ${subs === "*" ? "全部" : subs.join(",")}；到期 ${exp}；開通碼 24 小時內有效、只能用一次）\n下一則可以直接轉給客戶。`,
+            `GEA 下單機開通資料\n1. 下載安裝：${VERSION.url || origin}\n2. 開通碼：${code}（24 小時內有效、只能用一次）\n3. 安裝後打開「GEA 下單機設定精靈」，照畫面一步一步填（需要國票憑證、身分證、電子交易密碼）。\n有問題請聯絡營業員。`];
+  }
+  if (cmd === "/客戶") {
+    const S = await st();
+    if (P.length < 2) return [S.users.length ? "客戶（" + S.users.length + "）：\n" + S.users.map(u => `${u.online ? "●" : "○"} ${u.id}${u.note ? "（" + u.note + "）" : ""} ${u.off || "正常"}｜到期 ${u.exp || "不限"}`).join("\n") : "還沒有客戶"];
+    const u = find(S, P[1]);
+    if (!u) return ["找不到客戶 " + P[1]];
+    const inv = (S.invites || []).find(x => x.id === u.id);
+    return [[`客戶 ${u.id}${u.note ? "（" + u.note + "）" : ""}`, `狀態：${u.off || "正常"}${u.enabled ? "" : "（已停用）"}`, `訂閱：${u.subs === "*" ? "全部" : u.subs || "（沒有）"}`,
+             `期間：${u.start || "不限"} ～ ${u.exp || "不限"}`, `在線：${u.online ? "是（" + u.online + " 條）" : "否"}`, `版本：${u.ver || "—"}`,
+             `身分證：${(u.ids || []).map(x => x.mask + (x.admin ? "（管理者）" : "")).join("、") || "還沒綁"}`, `最後對帳：${u.recon || "—"}`,
+             inv ? `開通碼待用：${new Date(inv.exp_ms + 8 * 3600e3).toISOString().slice(5, 16).replace("T", " ")} 前` : ""].filter(Boolean).join("\n")];
+  }
+  if (cmd === "/停用" || cmd === "/恢復") {
+    if (P.length < 2) return ["格式：" + cmd + " <代號>"];
+    const S = await st(), u = find(S, P[1]);
+    if (!u) return ["找不到客戶 " + P[1]];
+    const r = await call((cmd === "/停用" ? "disable" : "enable") + "?id=" + encodeURIComponent(u.id), {});
+    return [r.status === 200 ? `✓ ${u.id} 已${cmd.slice(1)}` + (cmd === "/停用" ? `（踢掉在線連線 ${r.j.kicked || 0} 條；只停送訊號、不平倉）` : "") : "失敗：" + (r.j.error || r.status)];
+  }
+  if (cmd === "/登入") {
+    const r = await doCall(adminDo(env), "/_otl_new", { origin, quiet: true });
+    return [r.link ? `管理頁一次性登入連結（10 分鐘內、用一次就失效；在要登入的裝置打開、按「進入」）：\n${r.link}` : "產生失敗：" + (r.error || "")];
+  }
+  return [HELP];
+}
+async function tgHook(req, env, u) {
+  if (!env.TG_HOOK_SECRET || !same(req.headers.get("x-telegram-bot-api-secret-token") || "", env.TG_HOOK_SECRET)) return J({ error: "unauthorized" }, 401);
+  const up = await req.json().catch(() => ({})) || {}, m = up.message || {};
+  if (!m.chat || String(m.chat.id) !== String(env.TG_CHAT_ID) || typeof m.text !== "string") return J({ ok: true });   // 只認 Evans：別人傳的一律不回
+  for (const t of await tgCommand(env, u.origin, m.text, "gea"))
+    await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, { method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ chat_id: env.TG_CHAT_ID, text: t.slice(0, 3500), disable_web_page_preview: true }) }).catch(() => null);
+  return J({ ok: true });
+}
+
 export default {
   async fetch(req, env) {
     const u = new URL(req.url);
     const ch = u.searchParams.get("ch") || "";
-    if (u.pathname === "/") return J({ ok: true, name: "gea-signal-relay", paths: ["/ws", "/health", "/redeem", "/contracts", "/tg", "/version", "/admin", "/admin/*", "/console"] });
+    if (u.pathname === "/") return J({ ok: true, name: "gea-signal-relay", paths: ["/ws", "/health", "/redeem", "/contracts", "/tg", "/version", "/admin", "/admin/*", "/console", "/login", "/tg_hook"] });
     if (u.pathname === "/console" || u.pathname === "/admin") return new Response(CONSOLE_HTML, { headers: PAGE_HEADERS });
+    if (u.pathname === "/tg_hook" && req.method === "POST") return tgHook(req, env, u);
+    if (u.pathname === "/login_req" && req.method === "POST") {
+      const r = await doCall(adminDo(env), "/_otl_new", { origin: u.origin });
+      return J(r.ok ? { ok: true, sent: !!r.sent } : { error: r.error || "失敗" }, r.ok ? 200 : 429);
+    }
+    if (u.pathname === "/login") {
+      const again = "請在 TG 傳「/登入」給 bot，或在管理頁按「用 TG 登入」重新產生。";
+      if (req.method === "POST") {
+        const f = await req.formData().catch(() => null), t = f ? String(f.get("t") || "") : "";
+        const r = await doCall(adminDo(env), "/_otl_use", { t });
+        if (!r.sid) return LOGIN_PAGE("這個一次性登入連結已用過或已過期（10 分鐘）。" + again);
+        return new Response(null, { status: 302, headers: { location: "/admin", "cache-control": "no-store",
+          "set-cookie": `${ADMIN_COOKIE}=${r.sid}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${SESS_MS / 1000}` } });
+      }
+      const t = u.searchParams.get("t") || "";
+      const r = /^[0-9a-f]{48}$/.test(t) ? await doCall(adminDo(env), "/_otl_peek", { t }) : {};
+      if (!r.ok) return LOGIN_PAGE("這個一次性登入連結已用過、已過期（10 分鐘）或不完整。" + again);
+      return LOGIN_PAGE(`一次性登入：按下後就失效，${r.min} 分鐘內有效；登入後這台裝置 12 小時內不用再登入。`,
+        `<form method="post" action="/login"><input type="hidden" name="t" value="${t}"><button type="submit">在這台裝置進入管理頁</button></form>`);
+    }
+    if (u.pathname === "/logout") {
+      const sid = cookieOf(req, ADMIN_COOKIE);
+      if (sid) await doCall(adminDo(env), "/_sess_del", { sid });
+      return new Response(null, { status: 302, headers: { location: "/admin", "cache-control": "no-store", "set-cookie": `${ADMIN_COOKIE}=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0` } });
+    }
     if (u.pathname === "/version") return new Response(JSON.stringify(VERSION), { headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });   // 不用 token：內容有簽章，客戶端驗簽才採用
     if (!["/ws", "/health", "/redeem", "/contracts", "/tg"].includes(u.pathname) && !u.pathname.startsWith("/admin/")) return J({ error: "not found" }, 404);
     if (!env.RELAY_PUB_TOKEN || !env.RELAY_ADMIN_TOKEN) return J({ error: "relay secrets not set" }, 503);
     if (!NAME_RE.test(ch)) return J({ error: "bad ch" }, 400);
-    if (u.pathname.startsWith("/admin/") && !same(bearer(req), env.RELAY_ADMIN_TOKEN)) return J({ error: "unauthorized" }, 401);
+    if (u.pathname.startsWith("/admin/") && !same(bearer(req), env.RELAY_ADMIN_TOKEN) && !(await sessOk(req, env))) return J({ error: "unauthorized" }, 401);
+    if (u.pathname === "/admin/tgcmd") {                                      // 自動測試：TG 指令跑在測試頻道、回覆直接回傳（不發 TG）
+      if (!/^t\d+$|^test/.test(ch)) return J({ error: "tgcmd 只限測試頻道" }, 403);
+      const b = await req.json().catch(() => ({})) || {};
+      if (/^\/登入/.test(String(b.text || "").trim())) return J({ replies: ["（測試頻道不產登入連結）"] });
+      return J({ replies: await tgCommand(env, u.origin, b.text, ch) });
+    }
     if (u.pathname === "/redeem" && req.method !== "POST") return J({ error: "POST only" }, 405);
     if (u.pathname === "/contracts" && (!bearer(req) || !NAME_RE.test(u.searchParams.get("id") || ""))) return J({ error: "unauthorized" }, 401);
     // 11-01 21:00 A2：客戶端沒連 WebSocket 的行程（設定精靈、GeaApiCheck）要給 Evans 的 TG → POST /tg?ch=&id=（客戶 token；跟 ws 的 tg 同一套限量）
@@ -366,6 +492,7 @@ export class Relay extends DurableObject {
   async fetch(req) {
     const u = new URL(req.url), p = u.pathname, id = u.searchParams.get("id") || "";
     if (!this.chName && u.searchParams.get("ch")) { this.chName = u.searchParams.get("ch"); if (this.meta("ch") !== this.chName) this.meta("ch", this.chName); }
+    if (p.startsWith("/_")) return this.adminInternal(p, await req.json().catch(() => ({})) || {});   // 只有 Worker 自己呼叫得到（外層白名單沒有 /_ 開頭）
     if (p === "/ws") return this.accept(req, u.searchParams.get("role"), id, u.searchParams.get("v") === "2");
     if (p === "/cron") return this.cron();
     if (p === "/health") {
@@ -506,6 +633,36 @@ export class Relay extends DurableObject {
       const kicked = on ? 0 : this.kick(id, "停用");
       return n ? J({ ok: true, id, enabled: !!on, kicked }) : J({ error: "no such user" }, 404);
     }
+    return J({ error: "not found" }, 404);
+  }
+
+  // 11-01 21:00 C：管理頁一次性登入與 cookie（只在 DO「__admin」用；只存雜湊）
+  async adminInternal(p, b) {
+    const now = Date.now();
+    this.sql.exec("DELETE FROM meta WHERE (k LIKE 'otl:%' OR k LIKE 'sess:%') AND CAST(v AS INTEGER) < ?", now);
+    if (p === "/_otl_new") {
+      const L = JSON.parse(this.meta("otl_rl") || "[]").filter(t => now - t < 600e3);
+      if (L.length >= 5) return J({ error: "10 分鐘內最多產 5 次登入連結" });
+      L.push(now); this.meta("otl_rl", JSON.stringify(L));
+      const t = newToken();
+      this.meta("otl:" + await sha256(t), now + OTL_MS);
+      const link = String(b.origin || "") + "/login?t=" + t;
+      if (b.quiet) return J({ ok: true, link });
+      return J({ ok: true, sent: await this.tg(this.env.TG_CHAT_ID, "GEA 下單訊號管理頁：一次性登入連結（10 分鐘內、用一次就失效；在要登入的裝置打開、按「進入」）：\n" + link) });
+    }
+    if (p === "/_otl_peek" || p === "/_otl_use") {
+      if (!/^[0-9a-f]{48}$/.test(String(b.t || ""))) return J({});
+      const k = "otl:" + await sha256(b.t), e = Number(this.meta(k) || 0);
+      if (e < now) return J({});
+      if (p === "/_otl_peek") return J({ ok: true, min: Math.max(1, Math.round((e - now) / 60e3)) });
+      this.sql.exec("DELETE FROM meta WHERE k=?", k);                          // 用一次就失效
+      const sid = newToken() + newToken();
+      this.meta("sess:" + await sha256(sid), now + SESS_MS);
+      await this.evans("管理頁已用一次性連結登入（12 小時內有效）。不是你登入的話請馬上告訴 W。");
+      return J({ sid });
+    }
+    if (p === "/_sess") return J({ ok: /^[0-9a-f]{96}$/.test(String(b.sid || "")) && Number(this.meta("sess:" + await sha256(b.sid)) || 0) > now });
+    if (p === "/_sess_del") { if (b.sid) this.sql.exec("DELETE FROM meta WHERE k=?", "sess:" + await sha256(String(b.sid))); return J({ ok: true }); }
     return J({ error: "not found" }, 404);
   }
 

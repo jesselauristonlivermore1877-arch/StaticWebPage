@@ -71,8 +71,9 @@ jobs:
           if [ -z "$ID" ]; then echo "第一次：建 D1 $DB"; wrangler d1 create "$DB" >/dev/null; fi
           wrangler d1 execute "$DB" --remote --yes --command "CREATE TABLE IF NOT EXISTS keys(name TEXT PRIMARY KEY, value TEXT NOT NULL, created TEXT NOT NULL)" >/dev/null
           get() { wrangler d1 execute "$DB" --remote --json --command "SELECT value FROM keys WHERE name='$1'" | python3 -c "import json,sys; r=json.load(sys.stdin)[0]['results']; print(r[0]['value'] if r else '')"; }
-          for K in RELAY_PUB_TOKEN RELAY_ADMIN_TOKEN; do
+          for K in RELAY_PUB_TOKEN RELAY_ADMIN_TOKEN TG_HOOK_SECRET; do
             V=$(get $K)
+            if [ -z "$V" ] && [ "$K" = TG_HOOK_SECRET ] && [ "${{ inputs.mode }}" != deploy ] && [ "${{ inputs.mode }}" != rotate ]; then continue; fi   # 11-01 21:00 C：TG webhook 驗證碼，deploy 第一次才產
             if [ -z "$V" ] || [ "${{ inputs.mode }}" = "rotate" ]; then
               [ "${{ inputs.mode }}" = "test" ] || [ "${{ inputs.mode }}" = "stats" ] || [ "${{ inputs.mode }}" = "subs" ] || [ "${{ inputs.mode }}" = "conns" ] || [ "${{ inputs.mode }}" = "probe_invite" ] || [ "${{ inputs.mode }}" = "unpause_t1" ] || [ "${{ inputs.mode }}" = "invite" ] && { echo "::error::$K 還沒產生（先跑 deploy）"; exit 1; }
               V=$(openssl rand -hex 32)
@@ -91,9 +92,29 @@ jobs:
         run: |
           set -o pipefail
           wrangler deploy 2>&1 | tee deploy.log
-          python3 -c "import json,os; json.dump({k: os.environ[k] for k in ('RELAY_PUB_TOKEN','RELAY_ADMIN_TOKEN','TG_BOT_TOKEN','TG_CHAT_ID') if os.environ.get(k)}, open('/tmp/sec.json','w'))"
+          python3 -c "import json,os; json.dump({k: os.environ[k] for k in ('RELAY_PUB_TOKEN','RELAY_ADMIN_TOKEN','TG_BOT_TOKEN','TG_CHAT_ID','TG_HOOK_SECRET') if os.environ.get(k)}, open('/tmp/sec.json','w'))"
           wrangler secret bulk /tmp/sec.json; rm -f /tmp/sec.json
           sleep 15
+      - name: 設定 TG webhook（11-01 21:00 C：Evans 傳 bot 指令 → 中繼 /tg_hook；只在 deploy／rotate）
+        if: inputs.mode == 'deploy' || inputs.mode == 'rotate'
+        run: |
+          [ -n "$TG_BOT_TOKEN" ] && [ -n "$TG_HOOK_SECRET" ] || { echo "沒有 TG_BOT_TOKEN 或 TG_HOOK_SECRET，跳過"; exit 0; }
+          python3 - <<'PY'
+          import json, os, urllib.request, urllib.parse
+          T, W = os.environ["TG_BOT_TOKEN"], "https://gea-signal-relay.jesselauristonlivermore1877.workers.dev/tg_hook"
+          def tg(m, d=None):
+              r = urllib.request.Request("https://api.telegram.org/bot%s/%s" % (T, m), None if d is None else urllib.parse.urlencode(d).encode())
+              return json.load(urllib.request.urlopen(r, timeout=30))
+          cur = tg("getWebhookInfo")["result"].get("url", "")
+          print("目前 webhook：", cur or "（沒有）")
+          if cur and cur != W:
+              raise SystemExit("✗ 這個 bot 已經有別的 webhook（%s），不覆蓋；請總指揮定奪" % cur)
+          r = tg("setWebhook", {"url": W, "secret_token": os.environ["TG_HOOK_SECRET"], "allowed_updates": json.dumps(["message"]), "drop_pending_updates": "false"})
+          print("setWebhook：", r.get("ok"), r.get("description", ""))
+          i = tg("getWebhookInfo")["result"]
+          print("✓ webhook", i.get("url"), "待處理", i.get("pending_update_count"), "最後錯誤", i.get("last_error_message", "（沒有）"))
+          if i.get("url") != W: raise SystemExit("✗ webhook 沒設成功")
+          PY
       - name: 套用正式訂閱規則（mode=subs）
         if: inputs.mode == 'subs'
         run: |

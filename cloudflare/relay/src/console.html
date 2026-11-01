@@ -7,7 +7,9 @@
 <title>GEA 下單訊號管理</title>
 <!-- gea-signal-relay 管理頁（Evans 2026-10-18 20:40 派工第 1 項）：策略上架／下架、客戶新增／停權、勾選訂閱、到期日；測試頻道模擬情境。
      11-01 下單機 1.0：開始／到期時間、接收端版本、最後對帳結果、產開通碼、連續下單風控（暫停／解除、參數）。
-     這頁本身不含任何資料：貼管理 token（RELAY_ADMIN_TOKEN）後才呼叫 /admin/*；token 只存這個分頁（sessionStorage），關掉就沒了。 -->
+     這頁本身不含任何資料：登入後才呼叫 /admin/*。
+     11-01 21:00 C：登入改 TG 一次性連結（按「用 TG 登入」→ Evans 的 TG 收到 10 分鐘、用一次的連結 → 這台裝置 12 小時免登入）；備用仍可貼管理 token（只存這個分頁）。
+       新增客戶畫面（代號、訂閱、開始、到期、備註 → 產生開通碼＋傳給客戶的文字一鍵複製）；客戶列表顯示身分證遮罩、在線、版本、到期；手機版面改成卡片。 -->
 <style>
 :root{--bg:#0b0f14;--panel:#121821;--panel2:#18202b;--line:#26303d;--tx:#d5dde7;--mut:#8593a3;--acc:#f0b429;--up:#e5484d;--dn:#2fb36b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
@@ -21,6 +23,15 @@ table{border-collapse:collapse;width:100%}th,td{padding:4px 8px;border-bottom:1p
 .tag{display:inline-block;padding:0 8px;border-radius:10px;font-size:12px;border:1px solid var(--line)}.on{background:#123222;border-color:#1f6b45}.off{background:#3a1717;border-color:#7a2a2a}
 .test{background:#3a2a05;color:#ffd77a}input[type=checkbox]{accent-color:var(--acc)}
 #tokbox{background:#2b2410;padding:8px;border-radius:8px;margin-top:6px}
+.big{font-size:26px;letter-spacing:3px;color:var(--acc);font-weight:700}textarea{font:inherit;color:var(--tx);background:var(--panel2);border:1px solid var(--line);border-radius:6px;width:100%;padding:6px}
+.nf{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;align-items:end}.nf label{display:flex;flex-direction:column;font-size:12px;color:var(--mut);gap:2px}
+.idm{font-family:Consolas,monospace}details summary{cursor:pointer;color:var(--mut);font-size:12px}
+@media (max-width:760px){
+  header{padding:8px 12px}main{padding:10px 12px}
+  #usT tr:first-child{display:none}#usT tr{display:block;border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:6px}
+  #usT td{display:flex;gap:8px;border:0;white-space:normal;padding:3px 4px}#usT td::before{content:attr(data-l);color:var(--mut);min-width:64px;flex:none}
+  #usT td input{width:100%!important}
+}
 </style>
 </head>
 <body>
@@ -28,7 +39,8 @@ table{border-collapse:collapse;width:100%}th,td{padding:4px 8px;border-bottom:1p
   <b>GEA 下單訊號管理</b>
   <span>頻道</span><select id="ch"><option value="gea">gea（正式）</option><option value="test">test（測試，不影響正式客戶）</option></select>
   <span id="chTag"></span>
-  <span style="margin-left:auto" class="row"><input id="tok" type="password" placeholder="管理 token" style="width:220px"><button onclick="login()">登入</button><button onclick="logout()">登出</button></span>
+  <span style="margin-left:auto" class="row"><button class="pri" id="tgLogin" onclick="tgLogin()">用 TG 登入</button><button onclick="logout()">登出</button>
+    <details><summary>備用：管理 token</summary><input id="tok" type="password" placeholder="管理 token" style="width:200px"><button onclick="login()">登入</button></details></span>
 </header>
 <main>
   <div class="card" id="msg" style="display:none"></div>
@@ -36,6 +48,17 @@ table{border-collapse:collapse;width:100%}th,td{padding:4px 8px;border-bottom:1p
     <div class="scroll"><table id="stT"></table></div>
     <div class="row" style="margin-top:8px"><span>連續下單風控：同一策略</span><input id="rkWin" type="number" min="5" max="3600" style="width:70px"><span>秒內部位變動超過</span><input id="rkMax" type="number" min="1" max="100" style="width:60px"><span>次 → 暫停轉送＋TG</span><button onclick="saveRisk()">儲存</button></div>
     <div class="row" style="margin-top:8px"><input id="stCode" placeholder="代號（例 GEA5）" style="width:140px"><input id="stName" placeholder="名稱" style="width:140px"><button onclick="addStrat()">先登記一支</button></div>
+  </div>
+  <div class="card"><h3>新增客戶 → 產生開通碼</h3>
+    <div class="nf">
+      <label>代號（英數；空白＝自動）<input id="ncId" placeholder="例 cust_001"></label>
+      <label>備註（姓名）<input id="ncNote" placeholder="例 王小明"></label>
+      <label>開始日<input id="ncStart" type="date"></label>
+      <label>到期日<input id="ncExp" type="date"></label>
+    </div>
+    <div class="row" style="margin-top:8px"><span class="note">訂閱（已上架）</span><span id="ncSubs" class="row"></span></div>
+    <div class="row" style="margin-top:8px"><button class="pri" onclick="newCustomer()">產生開通碼</button><span class="note">開通碼 24 小時內有效、只能用一次；客戶在設定精靈填入後綁定他的身分證。</span></div>
+    <div id="ncOut" style="display:none;margin-top:10px"></div>
   </div>
   <div class="card"><h3>客戶（接收端）</h3>
     <div class="note">訂閱打勾＝他會收到這支（策略也要上架）；「全部」＝不管上下架全收（只給 GEA 自己的機器）。開始／到期留空＝不限；可填日期或日期＋時間（台北）。不在服務期間或停用：只停送新訊號、不平倉，接收端顯示「服務期限已到，請聯絡營業員」。到期前 3 天 09:00 TG 給 Evans 和客戶（有填客戶 TG）。<br>新客戶：填代號後按「新增並產開通碼」，把 8 碼開通碼給客戶（24 小時內、用一次）；客戶在安裝精靈填開通碼即可，不用再給 token。</div>
@@ -60,24 +83,32 @@ table{border-collapse:collapse;width:100%}th,td{padding:4px 8px;border-bottom:1p
 const $ = s => document.querySelector(s);
 const esc = v => String(v == null ? "" : v).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
 const ts = t => t ? new Date(t + 8 * 3600e3).toISOString().slice(5, 16).replace("T", " ") : "—";
-let TOK = sessionStorage.getItem("gea_relay_admin") || "", ST = null;
+let TOK = "", ST = null, DL = "";
+try { TOK = sessionStorage.getItem("gea_relay_admin") || ""; } catch (e) { }
+fetch("/version").then(r => r.json()).then(v => { DL = v.url || ""; }).catch(() => { });
 const CH = () => $("#ch").value;
 function say(t, bad) { const m = $("#msg"); m.style.display = t ? "" : "none"; m.innerHTML = t; m.className = "card " + (bad ? "bad" : ""); }
 async function api(path, method, body) {
-  const r = await fetch("/admin/" + path + (path.includes("?") ? "&" : "?") + "ch=" + CH(), {method: method || "GET",
-    headers: Object.assign({authorization: "Bearer " + TOK}, body ? {"content-type": "application/json"} : {}), body: body ? JSON.stringify(body) : undefined});
+  const r = await fetch("/admin/" + path + (path.includes("?") ? "&" : "?") + "ch=" + CH(), {method: method || "GET", credentials: "same-origin",
+    headers: Object.assign(TOK ? {authorization: "Bearer " + TOK} : {"x-gea-admin": "1"}, body ? {"content-type": "application/json"} : {}), body: body ? JSON.stringify(body) : undefined});
   const j = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(j.error || ("HTTP " + r.status));
   return j;
 }
-function login() { TOK = $("#tok").value.trim(); $("#tok").value = ""; sessionStorage.setItem("gea_relay_admin", TOK); load(); }
-function logout() { TOK = ""; sessionStorage.removeItem("gea_relay_admin"); location.reload(); }
+function login() { TOK = $("#tok").value.trim(); $("#tok").value = ""; try { sessionStorage.setItem("gea_relay_admin", TOK); } catch (e) { } load(); }
+function logout() { try { sessionStorage.removeItem("gea_relay_admin"); } catch (e) { } location.href = "/logout"; }
+async function tgLogin() {
+  const b = $("#tgLogin"); b.disabled = true;
+  try { const r = await fetch("/login_req", {method: "POST"}); const j = await r.json().catch(() => ({}));
+    say(r.ok ? (j.sent ? "已把一次性登入連結傳到 Evans 的 TG（10 分鐘內、用一次就失效）。在要登入的裝置打開連結、按「進入」。" : "連結產生了，但 TG 沒送出（中繼沒設 TG），請改用備用管理 token。") : "失敗：" + esc(j.error || r.status), !r.ok);
+  } finally { setTimeout(() => b.disabled = false, 5000); }
+}
 $("#ch").onchange = load;
 async function load() {
   $("#chTag").innerHTML = CH().startsWith("test") ? "<span class='tag test'>測試頻道</span>" : "<span class='tag on'>正式頻道</span>";
   $("#testCard").style.display = CH().startsWith("test") ? "" : "none";
-  if (!TOK) { say("請在右上角貼管理 token（RELAY_ADMIN_TOKEN）後按登入。"); return; }
-  try { ST = await api("state"); say(""); } catch (e) { say("讀取失敗：" + esc(e.message) + (e.message === "unauthorized" ? "（管理 token 不對）" : ""), true); return; }
+  try { ST = await api("state"); say(""); }
+  catch (e) { say(e.message === "unauthorized" ? "請按右上角「用 TG 登入」：Evans 的 TG 會收到一次性登入連結（10 分鐘內、用一次），打開後這台裝置 12 小時內免登入。" + (TOK ? "<br>（備用管理 token 不對）" : "") : "讀取失敗：" + esc(e.message), e.message !== "unauthorized"); return; }
   render();
 }
 function render() {
@@ -96,24 +127,35 @@ function render() {
   const subBox = (u, pre) => "<label><input type='checkbox' data-" + pre + "='*' " + (u && u.subs === "*" ? "checked" : "") + "> 全部</label> " +
     codes.map(c => "<label><input type='checkbox' data-" + pre + "='" + esc(c) + "' " + (u && (u.subs === "*" || u.subs.split(",").includes(c)) ? "checked" : "") + (u && u.subs === "*" ? " disabled" : "") + "> " + esc(c) + "</label>").join(" ");
   const inv = {}; for (const x of ST.invites || []) inv[x.id] = x;
-  $("#usT").innerHTML = "<tr><th>代號</th><th>備註</th><th>訂閱</th><th>開始</th><th>到期</th><th>客戶 TG</th><th>狀態</th><th>在線</th><th>版本</th><th>最後對帳</th><th>最後連線</th><th></th></tr>" + ST.users.map(u => {
+  const L = ["代號", "備註", "訂閱", "開始", "到期", "客戶 TG", "身分證", "狀態", "在線", "版本", "最後對帳", "最後連線", ""];
+  const idCell = u => (u.ids || []).map(x => "<span class='idm'>" + esc(x.mask || "（沒有遮罩）") + "</span>" + (x.admin ? " <span class='tag on'>管理者</span>" : "") +
+      " <button data-adm='" + esc(x.sh) + "' data-on='" + (x.admin ? 0 : 1) + "'>" + (x.admin ? "取消管理者" : "設管理者") + "</button> <button data-unb='" + esc(x.sh) + "'>解除</button>").join("<br>") +
+    ((u.ids || []).length ? "" : "<span class='note'>還沒綁（第一次開通或連線時綁）</span>") + "<br><button class='addid_'>＋身分證</button>";
+  $("#usT").innerHTML = "<tr>" + L.map(x => "<th>" + x + "</th>").join("") + "</tr>" + ST.users.map(u => {
     const st = (u.off ? "<span class='bad'>" + esc(u.off) + "</span>" : "<span class='ok'>正常</span>") + (inv[u.id] ? "<br><span class='note'>開通碼 " + esc(inv[u.id].code) + "（" + ts(inv[u.id].exp_ms) + " 前）</span>" : "");
     const rc = u.recon ? "<span class='" + (u.recon.startsWith("✓") ? "ok" : "bad") + "'>" + esc(u.recon) + "</span><br><span class='note'>" + ts(u.recon_at) + "</span>" : "<span class='note'>—</span>";
-    return "<tr data-u='" + esc(u.id) + "'><td>" + esc(u.id) + "</td><td><input class='note_' value='" + esc(u.note) + "' style='width:110px'></td><td class='row'>" + subBox(u, "s") + "</td>" +
-      "<td><input class='start_' value='" + esc(u.start) + "' placeholder='YYYY-MM-DD' style='width:120px'></td><td><input class='exp_' value='" + esc(u.exp) + "' placeholder='YYYY-MM-DD' style='width:120px'></td>" +
-      "<td><input class='tg_' placeholder='" + (u.tg ? "已設（填新值覆蓋）" : "chat id") + "' style='width:110px'></td>" +
-      "<td>" + st + "</td><td>" + (u.online ? "<span class='ok'>● " + u.online + "</span>" : "<span class='note'>離線</span>") + "</td><td>" + esc(u.ver || "—") + "</td><td style='white-space:normal;min-width:160px'>" + rc + "</td><td>" + ts(u.last_seen) + "</td>" +
-      "<td><button class='save_ pri'>儲存</button> <button class='en_'>" + (u.enabled ? "停用" : "恢復") + "</button> <button class='inv_'>產開通碼</button> <button class='re_'>重發 token</button></td></tr>"; }).join("");
+    const td = (i, h, st) => "<td data-l='" + L[i] + "'" + (st ? " style='" + st + "'" : "") + ">" + h + "</td>";
+    return "<tr data-u='" + esc(u.id) + "'>" + td(0, "<b>" + esc(u.id) + "</b>") + td(1, "<input class='note_' value='" + esc(u.note) + "' style='width:110px'>") + "<td data-l='訂閱' class='row'>" + subBox(u, "s") + "</td>" +
+      td(3, "<input class='start_' value='" + esc(u.start) + "' placeholder='YYYY-MM-DD' style='width:120px'>") + td(4, "<input class='exp_' value='" + esc(u.exp) + "' placeholder='YYYY-MM-DD' style='width:120px'>") +
+      td(5, "<input class='tg_' placeholder='" + (u.tg ? "已設（填新值覆蓋）" : "chat id") + "' style='width:110px'>") + td(6, idCell(u), "white-space:normal;min-width:190px") +
+      td(7, st) + td(8, u.online ? "<span class='ok'>● " + u.online + "</span>" : "<span class='note'>離線</span>") + td(9, esc(u.ver || "—")) + td(10, rc, "white-space:normal;min-width:160px") + td(11, ts(u.last_seen)) +
+      td(12, "<button class='save_ pri'>儲存</button> <button class='en_'>" + (u.enabled ? "停用" : "恢復") + "</button> <button class='inv_'>產開通碼</button> <button class='re_'>重發 token</button>") + "</tr>"; }).join("");
   document.querySelectorAll("tr[data-u]").forEach(tr => {
     const id = tr.dataset.u, u = ST.users.find(x => x.id === id);
     tr.querySelector("[data-s='*']").onchange = e => tr.querySelectorAll("[data-s]:not([data-s='*'])").forEach(c => { c.disabled = e.target.checked; c.checked = e.target.checked || (u.subs !== "*" && u.subs.split(",").includes(c.dataset.s)); });
     tr.querySelector(".save_").onclick = () => { const b = {note: tr.querySelector(".note_").value, start: tr.querySelector(".start_").value.trim(), exp: tr.querySelector(".exp_").value.trim(), subs: pick(tr, "s")};
       const tg = tr.querySelector(".tg_").value.trim(); if (tg) b.tg = tg;
       act(() => api("set?id=" + id, "POST", b), "已儲存 " + id); };
-    tr.querySelector(".inv_").onclick = () => confirm("產生新的開通碼（24 小時有效、一次性）？客戶用它開通後，舊 token 會失效。") && act(async () => showInv(id, await api("invite?id=" + id, "POST", {})));
+    tr.querySelector(".inv_").onclick = () => confirm("產生新的開通碼（24 小時有效、一次性）？客戶用它開通後，舊 token 會失效。") && act(async () => { const r = await api("invite?id=" + id, "POST", {}); showCode($("#tokbox"), id, r); });
     tr.querySelector(".en_").onclick = () => confirm((u.enabled ? "停權" : "復權") + " " + id + "？") && act(() => api((u.enabled ? "disable" : "enable") + "?id=" + id, "POST", {}));
+    tr.querySelectorAll("[data-adm]").forEach(b => b.onclick = () => confirm(b.dataset.on === "1" ? "設成管理者：可訂全部、可多台；同一支策略同時只能一台真單、其他台要模擬。確定？" : "取消管理者？") &&
+      act(() => api("idadmin", "POST", {sh: b.dataset.adm, admin: b.dataset.on === "1"}), "已更新"));
+    tr.querySelectorAll("[data-unb]").forEach(b => b.onclick = () => confirm("解除這個身分證綁定？（解除後，下一台帶身分證開通或連線的會重新綁上）") && act(() => api("unbind?id=" + id, "POST", {sh: b.dataset.unb}), "已解除"));
+    tr.querySelector(".addid_").onclick = () => addId(id);
     tr.querySelector(".re_").onclick = () => confirm("重發後舊 token 立刻失效、他的接收端會被踢掉，要把新 token 給他重設。確定？") && act(async () => showTok(id, (await api("user?id=" + id, "POST", {})).token));
   });
+  $("#ncSubs").innerHTML = "<label><input type='checkbox' data-c='*'> 全部</label> " + S.filter(s => s.listed).map(s => "<label><input type='checkbox' data-c='" + esc(s.code) + "'> " + esc(s.code) + "</label>").join(" ");
+  $("#ncSubs").querySelector("[data-c='*']").onchange = e => $("#ncSubs").querySelectorAll("[data-c]:not([data-c='*'])").forEach(c => { c.disabled = e.target.checked; });
   $("#nuSubs").innerHTML = subBox(null, "n");
   $("#nuSubs").querySelector("[data-n='*']").onchange = e => $("#nuSubs").querySelectorAll("[data-n]:not([data-n='*'])").forEach(c => { c.disabled = e.target.checked; });
   const opt = codes.map(c => "<option>" + esc(c) + "</option>").join("");
@@ -133,6 +175,39 @@ function showInv(id, r) {
   b.innerHTML = "<b>" + esc(id) + " 的開通碼</b>：<span style='font-size:22px;letter-spacing:3px;color:var(--acc)'>" + esc(r.code) + "</span>（" + esc(ts(Date.parse(r.expires))) + " 前有效、用一次就作廢）<div class='row' style='margin-top:6px'><button id='tkC'>複製</button><button id='tkX'>關閉</button></div>";
   $("#tkC").onclick = e => navigator.clipboard.writeText(r.code).then(() => e.target.textContent = "已複製");
   $("#tkX").onclick = () => { b.innerHTML = ""; b.style.display = "none"; };
+}
+// 11-01 21:00 B：一個代號多個身分證（只有 Evans）：身分證在瀏覽器算雜湊、遮罩，明碼不送出
+async function addId(id) {
+  const v = (prompt("幫 " + id + " 加一個身分證（明碼只在這台瀏覽器算雜湊，不會送出）：") || "").trim().toUpperCase();
+  if (!v) return;
+  if (!/^[A-Z][0-9A-Z]\d{8}$/.test(v)) { say("身分證格式不對（1 個英文字母＋9 碼）", true); return; }
+  const h = [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode("GEA-ID|" + v)))].map(x => x.toString(16).padStart(2, "0")).join("");
+  act(() => api("bind?id=" + id, "POST", {idh: h, idm: v.slice(0, 3) + "****" + v.slice(-3)}), "已幫 " + id + " 加身分證 " + v.slice(0, 3) + "****" + v.slice(-3));
+}
+function forwardText(code) {
+  return "GEA 下單機開通資料\n1. 下載安裝：" + (DL || "（請向營業員索取下載網址）") + "\n2. 開通碼：" + code + "（24 小時內有效、只能用一次）\n3. 安裝後打開「GEA 下單機設定精靈」，照畫面一步一步填（需要國票憑證、身分證、電子交易密碼）。\n有問題請聯絡營業員。";
+}
+function showCode(box, id, r) {
+  const code = r.code.slice(0, 4) + "-" + r.code.slice(4), txt = forwardText(code);
+  box.style.display = "";
+  box.innerHTML = "<div>" + esc(id) + " 的開通碼：<span class='big'>" + esc(code) + "</span> <span class='note'>（" + esc(ts(Date.parse(r.expires))) + " 前有效、用一次就作廢）</span></div>" +
+    "<div class='row' style='margin:6px 0'><button class='cp1'>複製開通碼</button><button class='cp2 pri'>複製「傳給客戶的文字」</button><button class='cx'>關閉</button></div><textarea rows='5' readonly>" + esc(txt) + "</textarea>";
+  const cp = (t, b) => navigator.clipboard.writeText(t).then(() => b.textContent = "已複製", () => { box.querySelector("textarea").select(); b.textContent = "請手動複製"; });
+  box.querySelector(".cp1").onclick = e => cp(code, e.target);
+  box.querySelector(".cp2").onclick = e => cp(txt, e.target);
+  box.querySelector(".cx").onclick = () => { box.innerHTML = ""; box.style.display = "none"; };
+}
+function newCustomer() {
+  let id = $("#ncId").value.trim();
+  const note = $("#ncNote").value.trim(), all = $("#ncSubs").querySelector("[data-c='*']");
+  const subs = all && all.checked ? "*" : [...$("#ncSubs").querySelectorAll("[data-c]:checked")].map(c => c.dataset.c).filter(x => x !== "*");
+  if (!id) { const d = new Date(Date.now() + 8 * 3600e3).toISOString().slice(2, 10).replace(/-/g, ""); do { id = "c" + d + String(Math.floor(Math.random() * 1000)).padStart(3, "0"); } while (ST.users.some(u => u.id === id)); }
+  if (!/^[A-Za-z0-9_-]{1,40}$/.test(id)) { say("代號只能用英文、數字、_、-（或留空自動產生）", true); return; }
+  if (ST.users.some(u => u.id === id)) { say("代號 " + esc(id) + " 已存在：要重產開通碼請按客戶列表那一列的「產開通碼」", true); return; }
+  if (subs !== "*" && !subs.length) { say("請勾訂閱策略（或「全部」）", true); return; }
+  if (!$("#ncExp").value && !confirm("沒填到期日＝不限期，確定？")) return;
+  act(async () => { const r = await api("invite?id=" + id, "POST", {note, start: $("#ncStart").value, exp: $("#ncExp").value, subs});
+    showCode($("#ncOut"), id, r); $("#ncId").value = $("#ncNote").value = ""; });
 }
 function saveRisk() { act(() => api("risk", "POST", {win: +$("#rkWin").value, max: +$("#rkMax").value}), "風控參數已儲存"); }
 function addStrat() { const c = $("#stCode").value.trim(); if (!c) return; act(() => api("strategy?code=" + encodeURIComponent(c), "POST", {name: $("#stName").value.trim() || c, listed: false})); $("#stCode").value = $("#stName").value = ""; }

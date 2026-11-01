@@ -356,6 +356,34 @@ n1b.ws.close();
   for (const c of [b1b, b2, b3]) c.ws.close();
 }
 
+// ── 11-01 21:00 C：TG 指令（測試頻道走 /admin/tgcmd，回覆直接回傳、不發 TG）、一次性登入連結防呆、webhook 驗 secret
+{
+  const cmd = async text => (await post("tgcmd", { text })).j.replies || [];
+  await post("strategy?code=GEA5", { listed: true });
+  let R = await cmd("/開通碼 王小明 GEA5 2099-12-31");
+  const m = /開通碼 ([2-9A-HJ-NP-Z]{4})-([2-9A-HJ-NP-Z]{4})/.exec(R[0] || "");
+  ok(m && /新客戶 c\d{9}，王小明/.test(R[0]) && R.length === 2 && R[1].includes(m[1] + "-" + m[2]) && /24 小時內有效/.test(R[1]) && /https:\/\//.test(R[1]),
+     "/開通碼 姓名 策略 到期日 → 8 碼＋可直接轉給客戶的文字（下載網址、24 小時）", (R[0] || "").slice(0, 80));
+  const st = await admin("state", "GET"), cu = (st.j.users || []).find(u => u.note === "王小明") || {};
+  ok(cu.subs === "GEA5" && cu.exp === "2099-12-31" && (st.j.invites || []).some(x => x.id === cu.id), "中繼建好客戶（姓名當備註、自動代號、訂閱、到期、開通碼待用）", cu.id);
+  R = await cmd("/開通碼 王小明 全部 2099-12-31");
+  ok(/既有客戶/.test(R[0] || "") && ((await admin("state", "GET")).j.users || []).find(u => u.id === cu.id).subs === "*", "同一姓名再產 → 沿用同一代號、改訂閱「全部」");
+  ok(/沒有上架/.test((await cmd("/開通碼 x1 NOPE 2099-12-31"))[0] || ""), "策略沒上架 → 不產、列出已上架的");
+  ok(/YYYY-MM-DD/.test((await cmd("/開通碼 x1 GEA5 明年"))[0] || ""), "到期日格式錯 → 不產");
+  ok(/王小明/.test((await cmd("/客戶 王小明"))[0] || "") && /身分證：還沒綁/.test((await cmd("/客戶 " + cu.id))[0] || ""), "/客戶 代號或姓名 → 狀態（身分證只有遮罩）");
+  ok(/已停用/.test((await cmd("/停用 " + cu.id))[0] || "") && ((await admin("state", "GET")).j.users || []).find(u => u.id === cu.id).enabled === false, "/停用");
+  ok(/已恢復/.test((await cmd("/恢復 王小明"))[0] || "") && ((await admin("state", "GET")).j.users || []).find(u => u.id === cu.id).enabled === true, "/恢復");
+  ok(/指令/.test((await cmd("你好"))[0] || ""), "看不懂的 → 回指令說明");
+  ok((await post("tgcmd", { text: "x" }).then(() => fetch(`${BASE}/admin/tgcmd?ch=gea`, { method: "POST", headers: { Authorization: "Bearer " + ADMIN }, body: "{}" }))).status === 403, "tgcmd 不能打正式頻道");
+  const hk = await fetch(`${BASE}/tg_hook`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ message: { chat: { id: 1 }, text: "/客戶" } }) });
+  ok(hk.status === 401, "TG webhook 沒帶 secret → 401（別人偽造的更新不處理）", "HTTP " + hk.status);
+  const lg = await (await fetch(`${BASE}/login?t=${"0".repeat(48)}`)).text();
+  const lp = await (await fetch(`${BASE}/login`, { method: "POST", body: new URLSearchParams({ t: "0".repeat(48) }), redirect: "manual" }));
+  ok(/已用過、已過期/.test(lg) && lp.status === 200 && /已用過或已過期/.test(await lp.text()) && !lp.headers.get("set-cookie"), "假的一次性登入連結：GET 不給按鈕、POST 不發 cookie");
+  const ck = await fetch(`${BASE}/admin/state?ch=${CH}`, { headers: { cookie: "gea_radm=" + "a".repeat(96) } });
+  ok(ck.status === 401, "假的登入 cookie → 401", "HTTP " + ck.status);
+}
+
 // ── 收尾
 for (const c of [subs.u1, u3b, pub]) c.ws.close();
 await sleep(300);
