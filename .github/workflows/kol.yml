@@ -1,6 +1,9 @@
 # kol.yml ─ 信息流「財經意見領袖追蹤」（2026-09-25）
 #   股癌（Podcast 公開 RSS 的 mp3）、游庭皓的財經皓角（YouTube）→ Gemini 擷取提及的產業／個股＋原話與時間點，
 #   原話要對到同一集的語音時間點才上網頁（kol.py）。逐字稿只在記憶體裡查核，不寫檔。
+#   🔴 11-01（【舊】總指揮 14:15 第 5 項）：逐字稿全文只推私有 CustomerServiceANDSales/research/kol_transcripts/（Evans 同意，給他查證），
+#      用部署金鑰（secret KOL_DEPLOY_KEY；公鑰在私有 repo 的 Deploy keys、可寫）。secret 還沒設 → 不設 KOL_TRANSCRIPT_DIR、不寫逐字稿（照舊）。
+#      逐字稿絕不寫進本 repo（公開）；kol.py 另外檢查目的資料夾的遠端一定是 CustomerServiceANDSales。
 #   只寫 data/kol/kol.json 與 docs/data/kol.json；獨立一組 concurrency（跑得久，不卡每日班），push 前 pull --rebase。
 name: 財經意見領袖
 
@@ -29,6 +32,8 @@ jobs:
   run:
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    env:
+      HAS_KOL_KEY: ${{ secrets.KOL_DEPLOY_KEY != '' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,6 +43,15 @@ jobs:
           repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
           token: ${{ secrets.CODE_REPO_TOKEN }}
           path: code
+      - name: 逐字稿私有 repo（有部署金鑰才做；只取最新一版）
+        if: env.HAS_KOL_KEY == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          ssh-key: ${{ secrets.KOL_DEPLOY_KEY }}
+          path: kolpriv
+          fetch-depth: 1
+          sparse-checkout: research/kol_transcripts
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12.14"
@@ -55,6 +69,7 @@ jobs:
           GEA_TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}     # 全部模型用完時每個額度日 TG 一次
           GEA_TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           PYTHONUNBUFFERED: "1"
+          KOL_TRANSCRIPT_DIR: ${{ secrets.KOL_DEPLOY_KEY != '' && format('{0}/kolpriv/research/kol_transcripts', github.workspace) || '' }}
         run: python kol.py ../site/data --days "${{ inputs.days || '14' }}" --max "${{ inputs.max || '8' }}"
       - name: 提交
         working-directory: site
@@ -67,4 +82,18 @@ jobs:
           else
             git commit -m "data: 財經意見領袖 $(TZ=Asia/Taipei date +%F)"
             for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 10; done
+          fi
+      - name: 逐字稿推私有 repo（部署金鑰）
+        if: env.HAS_KOL_KEY == 'true'
+        working-directory: kolpriv
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/kol_transcripts 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "沒有新的逐字稿。"
+          else
+            echo "新增逐字稿 $(git diff --staged --name-only | wc -l) 檔（只列數量，不印內容）"
+            git commit -q -m "data: 意見領袖逐字稿 $(TZ=Asia/Taipei date +%F)（私有，Actions 部署金鑰）"
+            for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 10; done
           fi
