@@ -247,6 +247,8 @@ const ct = await fetch(cu, { headers: { Authorization: "Bearer " + tok.n1 } });
 const ctext = await ct.text(), csig = ct.headers.get("x-gea-sig") || "";
 ok(ct.status === 200 && ctext.includes("TAIFEX.TMF,") && csig.length === 88 && /^\d{12}$/.test(ct.headers.get("x-gea-ver") || ""), "GET /contracts：合約表＋簽章＋版本", `HTTP ${ct.status}、${ctext.split("\n").length - 1} 列、版本 ${ct.headers.get("x-gea-ver")}`);
 ok((await fetch(cu, { headers: { Authorization: "Bearer deadbeef" } })).status === 401 && (await fetch(cu)).status === 401, "GET /contracts 錯 token／沒 token → 401");
+const vr = await fetch(`${BASE}/version`), vj = await vr.json().catch(() => null);
+ok(vr.status === 200 && vj && "ver" in vj && "sha256" in vj && "sig" in vj, "GET /version（不用 token）：版號、SHA256、簽章欄位都在", `HTTP ${vr.status}、ver「${vj && vj.ver}」`);
 await post("set?id=n1", { exp: "2020-01-01" });
 await until(() => kickedCode(n1));
 ok(kickedCode(n1) === 4012, "v2 接收端到期 → 4012（顯示「服務期限已到」，不平倉）", String(kickedCode(n1)));

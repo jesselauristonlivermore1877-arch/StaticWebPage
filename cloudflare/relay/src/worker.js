@@ -46,7 +46,8 @@
 // 簽章金鑰只在兩端：中繼不驗簽、不改內容，只管轉送與補發。
 import { DurableObject } from "cloudflare:workers";
 import CONSOLE_HTML from "./console.html";
-import CONTRACTS from "../contracts.json";        // 11-01 補充三 3：W 用 ordermachine/tools/contracts.py 產表＋簽章；部署時打包
+import CONTRACTS from "../contracts.json";
+import VERSION from "../version.json";            // 11-01 18:35 第 4 項：下單機最新版號／下載網址／SHA256／更新說明＋W 的 ECDSA 簽章（ordermachine make_dist.py --release 產）        // 11-01 補充三 3：W 用 ordermachine/tools/contracts.py 產表＋簽章；部署時打包
 
 const KEEP = 500;               // 每個頻道保留最近幾則
 const MAX_BYTES = 8192;         // 單則訊號上限
@@ -111,8 +112,9 @@ export default {
   async fetch(req, env) {
     const u = new URL(req.url);
     const ch = u.searchParams.get("ch") || "";
-    if (u.pathname === "/") return J({ ok: true, name: "gea-signal-relay", paths: ["/ws", "/health", "/redeem", "/contracts", "/admin", "/admin/*", "/console"] });
+    if (u.pathname === "/") return J({ ok: true, name: "gea-signal-relay", paths: ["/ws", "/health", "/redeem", "/contracts", "/version", "/admin", "/admin/*", "/console"] });
     if (u.pathname === "/console" || u.pathname === "/admin") return new Response(CONSOLE_HTML, { headers: PAGE_HEADERS });
+    if (u.pathname === "/version") return new Response(JSON.stringify(VERSION), { headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });   // 不用 token：內容有簽章，客戶端驗簽才採用
     if (!["/ws", "/health", "/redeem", "/contracts"].includes(u.pathname) && !u.pathname.startsWith("/admin/")) return J({ error: "not found" }, 404);
     if (!env.RELAY_PUB_TOKEN || !env.RELAY_ADMIN_TOKEN) return J({ error: "relay secrets not set" }, 503);
     if (!NAME_RE.test(ch)) return J({ error: "bad ch" }, 400);
