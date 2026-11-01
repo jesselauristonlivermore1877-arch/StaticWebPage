@@ -52,6 +52,7 @@ jobs:
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}        # 11-01 第 2e 項：客戶端 TG 由中繼轉發（客戶電腦不放 bot token）
       TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+      TG_ADMIN_UID: ${{ secrets.TG_ADMIN_UID }}        # 11-02 01:10：TG 指令另比對傳訊者 user id（沒設＝退回比 TG_CHAT_ID）
       DB: gea-relay-keys
     steps:
       - uses: actions/checkout@v4
@@ -92,7 +93,7 @@ jobs:
         run: |
           set -o pipefail
           wrangler deploy 2>&1 | tee deploy.log
-          python3 -c "import json,os; json.dump({k: os.environ[k] for k in ('RELAY_PUB_TOKEN','RELAY_ADMIN_TOKEN','TG_BOT_TOKEN','TG_CHAT_ID','TG_HOOK_SECRET') if os.environ.get(k)}, open('/tmp/sec.json','w'))"
+          python3 -c "import json,os; json.dump({k: os.environ[k] for k in ('RELAY_PUB_TOKEN','RELAY_ADMIN_TOKEN','TG_BOT_TOKEN','TG_CHAT_ID','TG_HOOK_SECRET','TG_ADMIN_UID') if os.environ.get(k)}, open('/tmp/sec.json','w'))"
           wrangler secret bulk /tmp/sec.json; rm -f /tmp/sec.json
           sleep 15
       - name: 設定 TG webhook（11-01 21:00 C：Evans 傳 bot 指令 → 中繼 /tg_hook；只在 deploy／rotate）

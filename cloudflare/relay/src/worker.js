@@ -211,7 +211,9 @@ async function tgCommand(env, origin, text, ch) {
 async function tgHook(req, env, u) {
   if (!env.TG_HOOK_SECRET || !same(req.headers.get("x-telegram-bot-api-secret-token") || "", env.TG_HOOK_SECRET)) return J({ error: "unauthorized" }, 401);
   const up = await req.json().catch(() => ({})) || {}, m = up.message || {};
-  if (!m.chat || String(m.chat.id) !== String(env.TG_CHAT_ID) || typeof m.text !== "string") return J({ ok: true });   // 只認 Evans：別人傳的一律不回
+  // 只認 Evans：chat_id＝TG_CHAT_ID 而且傳訊者 from.id＝TG_ADMIN_UID（11-02 01:10 一、2；沒設 TG_ADMIN_UID 時退回要求 from.id＝TG_CHAT_ID＝私訊本人）；別人傳的一律不回
+  const adminUid = String(env.TG_ADMIN_UID || env.TG_CHAT_ID || "");
+  if (!m.chat || String(m.chat.id) !== String(env.TG_CHAT_ID) || !m.from || String(m.from.id) !== adminUid || typeof m.text !== "string") return J({ ok: true });
   for (const t of await tgCommand(env, u.origin, m.text, "gea"))
     await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, { method: "POST", headers: { "content-type": "application/json" },
       body: JSON.stringify({ chat_id: env.TG_CHAT_ID, text: t.slice(0, 3500), disable_web_page_preview: true }) }).catch(() => null);
