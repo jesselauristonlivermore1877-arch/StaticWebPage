@@ -1,0 +1,42 @@
+{
+ "file": "6269_2026-10-30.md",
+ "code": "6269",
+ "date": "2026-10-30",
+ "show": true,
+ "numbers": {
+  "ok": true,
+  "bad": [],
+  "cited": 72,
+  "facts": 115
+ },
+ "compliance": {
+  "ok": true,
+  "hits": []
+ },
+ "src": {
+  "ok": true,
+  "bad": []
+ },
+ "cross": {
+  "ok": true,
+  "bad": [],
+  "checked": [
+   "eps_q",
+   "rev_m"
+  ]
+ },
+ "tables": {
+  "ok": true,
+  "bad": []
+ },
+ "sections": {
+  "ok": true,
+  "missing": []
+ },
+ "eps": {
+  "ok": true,
+  "bad": [],
+  "checked": 8,
+  "skipped": 0
+ }
+}
