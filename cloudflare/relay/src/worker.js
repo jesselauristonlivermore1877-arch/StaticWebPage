@@ -456,6 +456,20 @@ export class Relay extends DurableObject {
       this.schema();                                                          // 同一個實例清空後還會再用（測試頻道）
       return J({ ok: true });
     }
+    if (p === "/admin/bind" || p === "/admin/unbind" || p === "/admin/idadmin") {    // 11-01 21:00 B：一個代號多個身分證、管理者身分證（只有 Evans）
+      if (p !== "/admin/idadmin" && !this.sql.exec("SELECT id FROM users WHERE id=?", id).toArray().length) return J({ error: "no such user" }, 404);
+      const sh = body.sh && /^[0-9a-f]{64}$/.test(body.sh) ? body.sh : await this.idSh(body.idh);
+      if (!sh) return J({ error: "要給 idh（瀏覽器算好的 SHA-256）或 sh" }, 400);
+      if (p === "/admin/bind") {
+        this.sql.exec("INSERT INTO binds(id, sh, mask, created) VALUES(?,?,?,?) ON CONFLICT(id, sh) DO UPDATE SET mask=excluded.mask", id, sh, Relay.mask(body.idm), Date.now());
+        return J({ ok: true, id, ids: this.binds(id) });
+      }
+      if (p === "/admin/unbind") return J({ ok: true, id, removed: this.sql.exec("DELETE FROM binds WHERE id=? AND sh=?", id, sh).rowsWritten, ids: this.binds(id) });
+      if (body.admin === false) this.sql.exec("DELETE FROM idadmin WHERE sh=?", sh);
+      else this.sql.exec("INSERT INTO idadmin(sh, mask) VALUES(?,?) ON CONFLICT(sh) DO UPDATE SET mask=excluded.mask", sh,
+                         Relay.mask(body.idm) || (this.sql.exec("SELECT mask FROM binds WHERE sh=? LIMIT 1", sh).toArray()[0] || {}).mask || "");
+      return J({ ok: true, sh, admin: this.isIdAdmin(sh) });
+    }
     if (!NAME_RE.test(id)) return J({ error: "bad id" }, 400);
     if (p === "/admin/user" || p === "/admin/invite") {
       const tok = newToken();
@@ -485,22 +499,6 @@ export class Relay extends DurableObject {
       const off = offWhy(y);
       const kicked = off ? this.kick(id, off) : 0;
       return J({ ok: true, user: { id: y.id, subs: y.subs, start: y.start, exp: y.exp, note: y.note, enabled: !!y.enabled, off }, kicked });
-    }
-    if (p === "/admin/bind" || p === "/admin/unbind" || p === "/admin/idadmin") {    // 11-01 21:00 B：一個代號多個身分證、管理者身分證（只有 Evans）
-      const body = await req.json().catch(() => ({})) || {};
-      const id = u.searchParams.get("id") || "";
-      if (p !== "/admin/idadmin" && !this.sql.exec("SELECT id FROM users WHERE id=?", id).toArray().length) return J({ error: "no such user" }, 404);
-      const sh = body.sh && /^[0-9a-f]{64}$/.test(body.sh) ? body.sh : await this.idSh(body.idh);
-      if (!sh) return J({ error: "要給 idh（瀏覽器算好的 SHA-256）或 sh" }, 400);
-      if (p === "/admin/bind") {
-        this.sql.exec("INSERT INTO binds(id, sh, mask, created) VALUES(?,?,?,?) ON CONFLICT(id, sh) DO UPDATE SET mask=excluded.mask", id, sh, Relay.mask(body.idm), Date.now());
-        return J({ ok: true, id, ids: this.binds(id) });
-      }
-      if (p === "/admin/unbind") return J({ ok: true, id, removed: this.sql.exec("DELETE FROM binds WHERE id=? AND sh=?", id, sh).rowsWritten, ids: this.binds(id) });
-      if (body.admin === false) this.sql.exec("DELETE FROM idadmin WHERE sh=?", sh);
-      else this.sql.exec("INSERT INTO idadmin(sh, mask) VALUES(?,?) ON CONFLICT(sh) DO UPDATE SET mask=excluded.mask", sh,
-                         Relay.mask(body.idm) || (this.sql.exec("SELECT mask FROM binds WHERE sh=? LIMIT 1", sh).toArray()[0] || {}).mask || "");
-      return J({ ok: true, sh, admin: this.isIdAdmin(sh) });
     }
     if (p === "/admin/disable" || p === "/admin/enable") {
       const on = p === "/admin/enable" ? 1 : 0;
