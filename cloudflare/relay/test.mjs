@@ -247,6 +247,14 @@ const ct = await fetch(cu, { headers: { Authorization: "Bearer " + tok.n1 } });
 const ctext = await ct.text(), csig = ct.headers.get("x-gea-sig") || "";
 ok(ct.status === 200 && ctext.includes("TAIFEX.TMF,") && csig.length === 88 && /^\d{12}$/.test(ct.headers.get("x-gea-ver") || ""), "GET /contracts：合約表＋簽章＋版本", `HTTP ${ct.status}、${ctext.split("\n").length - 1} 列、版本 ${ct.headers.get("x-gea-ver")}`);
 ok((await fetch(cu, { headers: { Authorization: "Bearer deadbeef" } })).status === 401 && (await fetch(cu)).status === 401, "GET /contracts 錯 token／沒 token → 401");
+{ // 11-01 21:00 A2：沒連 WebSocket 的行程（設定精靈、GeaApiCheck）走 POST /tg
+  const tu = `${BASE}/tg?ch=${CH}&id=n1`, before = (await admin("state", "GET")).j.tg_test;
+  const tr = await fetch(tu, { method: "POST", headers: { Authorization: "Bearer " + tok.n1, "Content-Type": "application/json" }, body: JSON.stringify({ tg: "測試：POST /tg" }) });
+  const tj = await tr.json().catch(() => ({}));
+  const after = (await admin("state", "GET")).j.tg_test;
+  const bad = await fetch(tu, { method: "POST", headers: { Authorization: "Bearer deadbeef" }, body: "{}" });
+  ok(tr.status === 200 && tj.ok !== undefined && after === before + 1 && bad.status === 401, "POST /tg（客戶 token）轉發給 Evans；錯 token → 401", `HTTP ${tr.status}、tg_test ${before}→${after}、錯 token ${bad.status}`);
+}
 const vr = await fetch(`${BASE}/version`), vj = await vr.json().catch(() => null);
 ok(vr.status === 200 && vj && "ver" in vj && "sha256" in vj && "sig" in vj, "GET /version（不用 token）：版號、SHA256、簽章欄位都在", `HTTP ${vr.status}、ver「${vj && vj.ver}」`);
 await post("set?id=n1", { exp: "2020-01-01" });

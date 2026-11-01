@@ -112,15 +112,17 @@ export default {
   async fetch(req, env) {
     const u = new URL(req.url);
     const ch = u.searchParams.get("ch") || "";
-    if (u.pathname === "/") return J({ ok: true, name: "gea-signal-relay", paths: ["/ws", "/health", "/redeem", "/contracts", "/version", "/admin", "/admin/*", "/console"] });
+    if (u.pathname === "/") return J({ ok: true, name: "gea-signal-relay", paths: ["/ws", "/health", "/redeem", "/contracts", "/tg", "/version", "/admin", "/admin/*", "/console"] });
     if (u.pathname === "/console" || u.pathname === "/admin") return new Response(CONSOLE_HTML, { headers: PAGE_HEADERS });
     if (u.pathname === "/version") return new Response(JSON.stringify(VERSION), { headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });   // 不用 token：內容有簽章，客戶端驗簽才採用
-    if (!["/ws", "/health", "/redeem", "/contracts"].includes(u.pathname) && !u.pathname.startsWith("/admin/")) return J({ error: "not found" }, 404);
+    if (!["/ws", "/health", "/redeem", "/contracts", "/tg"].includes(u.pathname) && !u.pathname.startsWith("/admin/")) return J({ error: "not found" }, 404);
     if (!env.RELAY_PUB_TOKEN || !env.RELAY_ADMIN_TOKEN) return J({ error: "relay secrets not set" }, 503);
     if (!NAME_RE.test(ch)) return J({ error: "bad ch" }, 400);
     if (u.pathname.startsWith("/admin/") && !same(bearer(req), env.RELAY_ADMIN_TOKEN)) return J({ error: "unauthorized" }, 401);
     if (u.pathname === "/redeem" && req.method !== "POST") return J({ error: "POST only" }, 405);
     if (u.pathname === "/contracts" && (!bearer(req) || !NAME_RE.test(u.searchParams.get("id") || ""))) return J({ error: "unauthorized" }, 401);
+    // 11-01 21:00 A2：客戶端沒連 WebSocket 的行程（設定精靈、GeaApiCheck）要給 Evans 的 TG → POST /tg?ch=&id=（客戶 token；跟 ws 的 tg 同一套限量）
+    if (u.pathname === "/tg" && (req.method !== "POST" || !bearer(req) || !NAME_RE.test(u.searchParams.get("id") || ""))) return J({ error: "unauthorized" }, 401);
     if (u.pathname === "/ws") {
       if ((req.headers.get("upgrade") || "").toLowerCase() !== "websocket") return J({ error: "expected websocket" }, 426);
       const role = u.searchParams.get("role"), id = u.searchParams.get("id") || "";
@@ -202,6 +204,13 @@ export class Relay extends DurableObject {
     } catch (e) { return false; }
   }
   evans(text) { return this.tg(this.env.TG_CHAT_ID, "【下單中繼】" + text); }
+  // 客戶端給 Evans 的通知（ws 的 tg 與 POST /tg 共用）：每個代號 10 分鐘最多 30 則
+  async relayTg(id, text) {
+    const now = Date.now(), L = (this.tgRate.get(id) || []).filter(t => now - t < 600e3);
+    if (L.length >= 30) { if (L.length === 30) { L.push(now); this.tgRate.set(id, L); await this.evans(`客戶 ${id} 10 分鐘內通知超過 30 則，之後的先不轉發`); } return false; }
+    L.push(now); this.tgRate.set(id, L);
+    return await this.evans(`客戶 ${id}：${String(text || "").slice(0, 1500)}`);
+  }
 
   // ── 路由規則：回 null＝會送；否則回不送的原因（keepPaused＝快照用：風控暫停不算，快照本來就只有暫停前的最新狀態）
   users() { return Object.fromEntries(this.sql.exec("SELECT * FROM users").toArray().map(r => [r.id, r])); }
@@ -317,6 +326,12 @@ export class Relay extends DurableObject {
         signals_1h: n1h, stored: this.sql.exec("SELECT COUNT(*) AS n FROM msgs").one().n });
     }
     if (p === "/redeem") return this.redeem(req);
+    if (p === "/tg") {
+      const a = this.sql.exec("SELECT id, th FROM users WHERE id=?", u.searchParams.get("id")).toArray()[0];
+      if (!a || !same(await sha256(bearer(req)), a.th)) return J({ error: "unauthorized" }, 401);
+      let m; try { m = await req.json(); } catch (e) { return J({ error: "bad json" }, 400); }
+      return J({ ok: await this.relayTg(a.id, m && m.tg) });
+    }
     if (p === "/contracts") {                                                 // 只要 token 對就給（服務期間外也給：合約表不會下單，只是讓到期客戶續約後馬上能用）
       const r = this.sql.exec("SELECT th FROM users WHERE id=?", u.searchParams.get("id")).toArray()[0];
       if (!r || !same(await sha256(bearer(req)), r.th)) return J({ error: "unauthorized" }, 401);
@@ -562,10 +577,7 @@ export class Relay extends DurableObject {
       return;
     }
     if ("tg" in m) {                                                          // 客戶端要給 Evans 的通知：中繼用 Worker secret 轉發
-      const now = Date.now(), L = (this.tgRate.get(a.id) || []).filter(t => now - t < 600e3);
-      if (L.length >= 30) { if (L.length === 30) { L.push(now); this.tgRate.set(a.id, L); await this.evans(`客戶 ${a.id} 10 分鐘內通知超過 30 則，之後的先不轉發`); } return; }
-      L.push(now); this.tgRate.set(a.id, L);
-      const ok = await this.evans(`客戶 ${a.id}：${String(m.tg).slice(0, 1500)}`);
+      const ok = await this.relayTg(a.id, m.tg);
       if (m.ack) this.send(ws, { ctl: "tg", ok });
       return;
     }
