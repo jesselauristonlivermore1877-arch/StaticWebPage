@@ -4,6 +4,7 @@
 //   用法：BASE=https://… RELAY_PUB_TOKEN=… RELAY_ADMIN_TOKEN=… node test.mjs   （需要 npm 套件 ws）
 //   每次用新頻道 t<時間>，測完 /admin/purge 刪掉。任何一項沒過 → exit 1。
 import WebSocket from "ws";
+import { createHash } from "node:crypto";
 
 const BASE = process.env.BASE.replace(/\/$/, "");
 const WSB = BASE.replace(/^http/, "ws");
@@ -19,10 +20,10 @@ async function admin(path, method = "POST") {
 }
 
 // 開連線；回 {ws, got[], ctl[], closed}；握手失敗回 {err: HTTP 狀態}
-function connect(role, id, token, v2 = false) {
+function connect(role, id, token, v2 = false, hdr = {}) {
   return new Promise(res => {
     const c = { got: [], ctl: [], pong: 0, closed: null, t: [] };
-    const ws = new WebSocket(`${WSB}/ws?ch=${CH}&role=${role}&id=${id}${v2 ? "&v=2" : ""}`, { headers: { Authorization: "Bearer " + token } });
+    const ws = new WebSocket(`${WSB}/ws?ch=${CH}&role=${role}&id=${id}${v2 ? "&v=2" : ""}`, { headers: { Authorization: "Bearer " + token, ...hdr } });
     c.ws = ws;
     ws.on("unexpected-response", (req, r) => res({ err: r.statusCode }));
     ws.on("error", e => res({ err: String(e.message || e) }));
@@ -300,6 +301,60 @@ pub.ws.send(sig(++q, { Strategy: "RSK" }));
 await until(() => subs.u1.got.some(m => m.Seq === q));
 ok(subs.u1.got.some(m => m.Seq === q), "管理頁解除暫停 → 下一則照送（暫停期間的不補）");
 n1b.ws.close();
+
+// ── 11-01 21:00 B 身分證綁定：idh＝SHA-256("GEA-ID|"+身分證)；換身分證被擋（4013／開通 403）、同身分證兩代號同策略被擋（4014）、管理者多台一台真單其他模擬可過
+{
+  const idh = x => createHash("sha256").update("GEA-ID|" + x).digest("hex");
+  const H = (x, m, mode = "real") => ({ "X-Gea-Idh": idh(x), "X-Gea-Idm": m, "X-Gea-Mode": mode });
+  const rdi = async (code, x, m) => { const r = await fetch(`${BASE}/redeem?ch=${CH}`, { method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ code, ver: "test", idh: idh(x), idm: m }) }); return { status: r.status, j: await r.json().catch(() => ({})) }; };
+  const A = "A123456789", B = "B223456789";
+  let iv = await post("invite?id=b1", { subs: ["GEA5"], exp: "2099-12-31" });
+  const r1 = await rdi(iv.j.code, A, "A12****789");
+  ok(r1.status === 200, "開通時帶身分證雜湊 → 綁上", "HTTP " + r1.status);
+  tok.b1 = r1.j.token;
+  let st = await admin("state", "GET"), b1s = (st.j.users || []).find(x => x.id === "b1") || {};
+  ok((b1s.ids || []).length === 1 && b1s.ids[0].mask === "A12****789" && !JSON.stringify(st.j).includes(A) && !JSON.stringify(st.j).includes(idh(A)),
+     "管理頁只看到遮罩（不出現明碼、也不出現客戶端雜湊）", JSON.stringify(b1s.ids));
+  iv = await post("invite?id=b1", { subs: ["GEA5"], exp: "2099-12-31" });
+  const r2 = await rdi(iv.j.code, B, "B22****789");
+  ok(r2.status === 403 && /身分證與開通時不同/.test(r2.j.error || ""), "換身分證再開通 → 403「身分證與開通時不同，請聯絡營業員」", "HTTP " + r2.status);
+  st = await admin("state", "GET");
+  ok((st.j.invites || []).some(x => x.code === iv.j.code), "被擋時開通碼不作廢（營業員解除綁定後可再用）");
+  let b1 = await connect("sub", "b1", tok.b1, true, H(B, "B22****789"));
+  await until(() => kickedCode(b1));
+  ok(kickedCode(b1) === 4013, "已綁 A、連線帶 B → 4013", String(kickedCode(b1)));
+  b1 = await connect("sub", "b1", tok.b1, true);
+  await until(() => kickedCode(b1));
+  ok(kickedCode(b1) === 4013, "已綁、連線沒帶身分證（舊版）→ 4013", String(kickedCode(b1)));
+  b1 = await connect("sub", "b1", tok.b1, true, H(A, "A12****789"));
+  await sleep(400);
+  ok(!b1.err && !kickedCode(b1), "帶對的身分證 → 連上");
+  const b2t = (await admin("user?id=b2&subs=GEA5")).j.token, b3t = (await admin("user?id=b3&subs=OTHER")).j.token;
+  let b2 = await connect("sub", "b2", b2t, true, H(A, "A12****789"));
+  await until(() => kickedCode(b2));
+  ok(kickedCode(b2) === 4014, "同身分證、另一個代號、同策略 GEA5、b1 在線 → 後連上的 b2 被拒 4014", String(kickedCode(b2)));
+  const b3 = await connect("sub", "b3", b3t, true, H(A, "A12****789"));
+  await sleep(400);
+  ok(!b3.err && !kickedCode(b3), "同身分證、沒有重疊的策略 → 可以");
+  const sh = (b1s.ids[0] || {}).sh;
+  ok((await post("idadmin", { sh })).j.admin === true, "管理頁把身分證標成管理者");
+  b2 = await connect("sub", "b2", b2t, true, H(A, "A12****789", "real"));
+  await until(() => kickedCode(b2));
+  ok(kickedCode(b2) === 4014, "管理者：b1 真單在線、b2 也要真單 → 4014", String(kickedCode(b2)));
+  b2 = await connect("sub", "b2", b2t, true, H(A, "A12****789", "sim"));
+  await sleep(400);
+  ok(!b2.err && !kickedCode(b2), "管理者：b2 用模擬 → 可以（同策略一台真單、其他模擬）");
+  st = await admin("state", "GET");
+  ok((st.j.conns || []).some(c => c.id === "b2" && c.mode === "sim" && c.idm === "A12****789"), "管理頁連線明細看得到模式與遮罩");
+  ok((await post("bind?id=b1", { idh: idh(B), idm: "B22****789" })).j.ids.length === 2, "Evans 手動幫 b1 加第二個身分證");
+  const b1b = await connect("sub", "b1", tok.b1, true, H(B, "B22****789"));
+  await sleep(400);
+  ok(!b1b.err && !kickedCode(b1b), "加了之後 B 也能連 b1");
+  ok((await post("unbind?id=b1", { idh: idh(B) })).j.removed === 1, "解除綁定");
+  await post("idadmin", { sh, admin: false });
+  for (const c of [b1b, b2, b3]) c.ws.close();
+}
 
 // ── 收尾
 for (const c of [subs.u1, u3b, pub]) c.ws.close();

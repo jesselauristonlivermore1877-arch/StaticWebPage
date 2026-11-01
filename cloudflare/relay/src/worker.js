@@ -42,6 +42,11 @@
 //     e 客戶端 TG：v=2 接收端送 {"tg":"文字"} → 中繼用 Worker secret TG_BOT_TOKEN 轉發給 Evans（TG_CHAT_ID）；客戶電腦不放 bot token。每人 10 分鐘最多 30 則。
 //       接收端另送 {"hello":{"ver":…}}、{"recon":{"ok":true|false,"detail":…}}，管理頁顯示版本與最後對帳結果。
 //     f 管理頁 GET /admin 或 /console（手機可看）：貼 RELAY_ADMIN_TOKEN 後操作。
+//     g 身分證綁定（11-01 21:00 B）：客戶端送 idh＝SHA-256("GEA-ID|"+身分證大寫)（不送明碼）＋本機遮好的 idm（F12****789）＋模式 real|sim
+//       （/redeem body 的 idh／idm；ws 用 header X-Gea-Idh／X-Gea-Idm／X-Gea-Mode）。中繼再加頻道 salt：sh＝SHA-256(salt+"|"+idh)，只存 sh＋遮罩。
+//       ① 代號還沒綁 → 第一次帶 idh 的兌換或連線就綁上；已綁 → 帶的對不上（或沒帶）→ 兌換回 403、連線以 4013 關閉（接收端顯示「身分證與開通時不同，請聯絡營業員」）＋TG Evans。
+//       ② 同一個 sh、兩個代號同時在線、訂閱有重疊 → 後連上的以 4014 關閉＋TG；sh 標成管理者（/admin/idadmin）→ 可多台，但重疊的策略同時只能一台 real、其他要 sim。
+//       ③ 一個代號多個身分證：只有 Evans 在管理頁加（POST /admin/bind {idh, idm}，管理頁在瀏覽器算 idh、不送明碼）；POST /admin/unbind {sh} 解除。
 //     免費方案 CPU 10ms：快照、計數都在 Durable Object 的 SQLite（每頻道一個），不掃 D1。
 // 簽章金鑰只在兩端：中繼不驗簽、不改內容，只管轉送與補發。
 import { DurableObject } from "cloudflare:workers";
@@ -165,7 +170,9 @@ export class Relay extends DurableObject {
                    CREATE TABLE IF NOT EXISTS latest(strat TEXT PRIMARY KEY, seq INTEGER NOT NULL, rts INTEGER NOT NULL, body TEXT NOT NULL);
                    CREATE TABLE IF NOT EXISTS risk(strat TEXT NOT NULL, ts INTEGER NOT NULL);
                    CREATE INDEX IF NOT EXISTS risk_i ON risk(strat, ts);
-                   CREATE TABLE IF NOT EXISTS invites(code TEXT PRIMARY KEY, id TEXT NOT NULL, created INTEGER NOT NULL, exp_ms INTEGER NOT NULL);`);
+                   CREATE TABLE IF NOT EXISTS invites(code TEXT PRIMARY KEY, id TEXT NOT NULL, created INTEGER NOT NULL, exp_ms INTEGER NOT NULL);
+                   CREATE TABLE IF NOT EXISTS binds(id TEXT NOT NULL, sh TEXT NOT NULL, mask TEXT NOT NULL DEFAULT '', created INTEGER NOT NULL, PRIMARY KEY(id, sh));
+                   CREATE TABLE IF NOT EXISTS idadmin(sh TEXT PRIMARY KEY, mask TEXT NOT NULL DEFAULT '');`);
     // 10-18 20:40 升級：users 加訂閱、到期日、備註、最後連線；msgs 加策略欄（舊用戶訂閱＝"*"，照舊全收）
     // 11-01 升級：users 加開始、客戶 TG、版本、最後對帳、到期提醒；strategies 加風控暫停
     for (const [t, c] of [["users", "subs TEXT NOT NULL DEFAULT '*'"], ["users", "exp TEXT NOT NULL DEFAULT ''"], ["users", "note TEXT NOT NULL DEFAULT ''"],
@@ -210,6 +217,51 @@ export class Relay extends DurableObject {
     if (L.length >= 30) { if (L.length === 30) { L.push(now); this.tgRate.set(id, L); await this.evans(`客戶 ${id} 10 分鐘內通知超過 30 則，之後的先不轉發`); } return false; }
     L.push(now); this.tgRate.set(id, L);
     return await this.evans(`客戶 ${id}：${String(text || "").slice(0, 1500)}`);
+  }
+
+  // ── 身分證綁定（11-01 21:00 B）：idh（客戶端算好的 64 位十六進位）→ 加頻道 salt 的 sh；salt 第一次用到時產生、存 meta（不出 DO）
+  async idSh(idh) {
+    if (!/^[0-9a-f]{64}$/.test(String(idh || ""))) return null;
+    let salt = this.meta("id_salt");
+    if (!salt) { salt = newToken(); this.meta("id_salt", salt); }
+    return await sha256(salt + "|" + idh);
+  }
+  static mask(m) { return String(m || "").replace(/[^0-9A-Za-z*]/g, "").slice(0, 12); }
+  binds(id) { return this.sql.exec("SELECT sh, mask FROM binds WHERE id=?", id).toArray(); }
+  isIdAdmin(sh) { return !!sh && this.sql.exec("SELECT sh FROM idadmin WHERE sh=?", sh).toArray().length > 0; }
+  // 對綁定：回 null＝通過（沒綁過就當場綁上）；否則回原因
+  async bindCheck(id, sh, mask, note) {
+    const B = this.binds(id);
+    if (!B.length) {
+      if (!sh) return null;                                                   // 舊版客戶端不帶身分證：照舊放行（等新版第一次帶上來再綁）
+      this.sql.exec("INSERT INTO binds(id, sh, mask, created) VALUES(?,?,?,?) ON CONFLICT DO NOTHING", id, sh, Relay.mask(mask), Date.now());
+      await this.evans(`客戶 ${id}（${note || "沒有備註"}）綁定身分證 ${Relay.mask(mask) || "（沒給遮罩）"}`);
+      return null;
+    }
+    if (sh && B.some(b => b.sh === sh)) return null;
+    return `身分證與開通時不同（開通時 ${B.map(b => b.mask).join("、")}，這次 ${sh ? Relay.mask(mask) || "沒給遮罩" : "沒帶身分證（舊版）"}）`;
+  }
+  static overlap(a, b) {                                                      // 兩份訂閱重疊的策略；"*"＝全部
+    if (!a || !b) return [];
+    if (a === "*" && b === "*") return ["全部"];
+    if (a === "*") return b.split(",").filter(Boolean);
+    if (b === "*") return a.split(",").filter(Boolean);
+    const B = new Set(b.split(","));
+    return a.split(",").filter(x => x && B.has(x));
+  }
+  // 同一身分證、別的代號在線且訂閱重疊 → 回原因（管理者身分證：只擋兩台都是 real）
+  dupCheck(id, sh, mode, U) {
+    if (!sh) return null;
+    const admin = this.isIdAdmin(sh);
+    for (const ws of this.live("sub")) {
+      const a = ws.deserializeAttachment() || {};
+      if (a.id === id || a.sh !== sh) continue;
+      const ov = Relay.overlap(U[id] && U[id].subs, U[a.id] && U[a.id].subs);
+      if (!ov.length) continue;
+      if (admin && (mode !== "real" || a.mode !== "real")) continue;
+      return `同一身分證的代號 ${a.id} 已在線` + (admin ? "且是真單" : "") + `，又訂了同一支策略（${ov.slice(0, 5).join(",")}）` + (admin ? "；管理者多台時其他台要用模擬" : "");
+    }
+    return null;
   }
 
   // ── 路由規則：回 null＝會送；否則回不送的原因（keepPaused＝快照用：風控暫停不算，快照本來就只有暫停前的最新狀態）
@@ -281,7 +333,7 @@ export class Relay extends DurableObject {
   state() {
     const swept = this.sweep(), now = Date.now();
     const conns = this.live().map(ws => { const a = ws.deserializeAttachment() || {};
-      return { role: a.role, id: a.id, v2: !!a.v2, colo: a.colo || null, since: new Date(a.at || 0).toISOString(),
+      return { role: a.role, id: a.id, v2: !!a.v2, mode: a.mode || null, idm: a.idm || null, colo: a.colo || null, since: new Date(a.at || 0).toISOString(),
         idle_s: Math.round((now - this.lastAct(ws)) / 1000) }; });
     const online = {};
     for (const ws of this.live("sub")) { const a = ws.deserializeAttachment() || {}; online[a.id] = (online[a.id] || 0) + 1; }
@@ -290,7 +342,8 @@ export class Relay extends DurableObject {
     return { today: today(), last_seq: this.lastSeq(), pubs_online: this.ctx.getWebSockets("pub").length,
       swept, conns, risk: { max: this.riskMax(), win: this.riskWin() },
       users: this.sql.exec("SELECT id, enabled, subs, start, exp, note, tg, ver, recon, recon_at, created, last_seen FROM users ORDER BY id").toArray()
-        .map(r => ({ ...r, tg: r.tg ? "已設" : "", enabled: !!r.enabled, expired: expired(r), off: offWhy(r), online: online[r.id] || 0 })),
+        .map(r => ({ ...r, tg: r.tg ? "已設" : "", enabled: !!r.enabled, expired: expired(r), off: offWhy(r), online: online[r.id] || 0,
+          ids: this.binds(r.id).map(b => ({ sh: b.sh, mask: b.mask, admin: this.isIdAdmin(b.sh) })) })),
       strategies: this.sql.exec("SELECT * FROM strategies ORDER BY code").toArray()
         .map(r => ({ ...r, listed: !!r.listed, paused: !!r.paused, kept: stat[r.code] ? stat[r.code].n : 0, last: stat[r.code] ? stat[r.code].last : null,
           snap_seq: snap[r.code] ? snap[r.code].seq : null })),
@@ -433,6 +486,22 @@ export class Relay extends DurableObject {
       const kicked = off ? this.kick(id, off) : 0;
       return J({ ok: true, user: { id: y.id, subs: y.subs, start: y.start, exp: y.exp, note: y.note, enabled: !!y.enabled, off }, kicked });
     }
+    if (p === "/admin/bind" || p === "/admin/unbind" || p === "/admin/idadmin") {    // 11-01 21:00 B：一個代號多個身分證、管理者身分證（只有 Evans）
+      const body = await req.json().catch(() => ({})) || {};
+      const id = u.searchParams.get("id") || "";
+      if (p !== "/admin/idadmin" && !this.sql.exec("SELECT id FROM users WHERE id=?", id).toArray().length) return J({ error: "no such user" }, 404);
+      const sh = body.sh && /^[0-9a-f]{64}$/.test(body.sh) ? body.sh : await this.idSh(body.idh);
+      if (!sh) return J({ error: "要給 idh（瀏覽器算好的 SHA-256）或 sh" }, 400);
+      if (p === "/admin/bind") {
+        this.sql.exec("INSERT INTO binds(id, sh, mask, created) VALUES(?,?,?,?) ON CONFLICT(id, sh) DO UPDATE SET mask=excluded.mask", id, sh, Relay.mask(body.idm), Date.now());
+        return J({ ok: true, id, ids: this.binds(id) });
+      }
+      if (p === "/admin/unbind") return J({ ok: true, id, removed: this.sql.exec("DELETE FROM binds WHERE id=? AND sh=?", id, sh).rowsWritten, ids: this.binds(id) });
+      if (body.admin === false) this.sql.exec("DELETE FROM idadmin WHERE sh=?", sh);
+      else this.sql.exec("INSERT INTO idadmin(sh, mask) VALUES(?,?) ON CONFLICT(sh) DO UPDATE SET mask=excluded.mask", sh,
+                         Relay.mask(body.idm) || (this.sql.exec("SELECT mask FROM binds WHERE sh=? LIMIT 1", sh).toArray()[0] || {}).mask || "");
+      return J({ ok: true, sh, admin: this.isIdAdmin(sh) });
+    }
     if (p === "/admin/disable" || p === "/admin/enable") {
       const on = p === "/admin/enable" ? 1 : 0;
       const n = this.sql.exec("UPDATE users SET enabled=? WHERE id=?", on, id).rowsWritten;
@@ -455,9 +524,14 @@ export class Relay extends DurableObject {
       if (r) this.sql.exec("DELETE FROM invites WHERE code=?", code);
       return J({ error: r ? "開通碼已過期（24 小時），請營業員重新產生" : "開通碼不對（或已經用過），請核對 8 碼" }, 404);
     }
-    this.sql.exec("DELETE FROM invites WHERE code=?", code);                 // 一次性：先作廢再發 token
     const user = this.sql.exec("SELECT * FROM users WHERE id=?", r.id).toArray()[0];
-    if (!user) return J({ error: "這個開通碼的用戶已被刪除，請聯絡營業員" }, 404);
+    if (!user) { this.sql.exec("DELETE FROM invites WHERE code=?", code); return J({ error: "這個開通碼的用戶已被刪除，請聯絡營業員" }, 404); }
+    const bad = await this.bindCheck(r.id, await this.idSh(body.idh), body.idm, user.note);   // 11-01 21:00 B：對不上時開通碼不作廢（營業員解除綁定後可再用）
+    if (bad) {
+      await this.evans(`⚠ 客戶 ${r.id}（${user.note || "沒有備註"}）用開通碼開通被擋：${bad}`);
+      return J({ error: "身分證與開通時不同，請聯絡營業員", why: "id mismatch" }, 403);
+    }
+    this.sql.exec("DELETE FROM invites WHERE code=?", code);                 // 一次性：先作廢再發 token
     const tok = newToken();
     this.sql.exec("UPDATE users SET th=? WHERE id=?", await sha256(tok), r.id);
     for (const ws of this.ctx.getWebSockets("s:" + r.id)) ws.close(4003, "token reissued");
@@ -492,6 +566,7 @@ export class Relay extends DurableObject {
   }
 
   async accept(req, role, id, v2) {
+    let sub = {};
     if (role === "sub") {
       const r = this.sql.exec("SELECT * FROM users WHERE id=?", id).toArray()[0];
       const th = await sha256(bearer(req));
@@ -499,6 +574,23 @@ export class Relay extends DurableObject {
       const off = offWhy(r);
       if (off && !v2) return J({ error: r.enabled ? "expired" : "disabled" }, 403);   // 舊接收端：照舊 403（連 3 次就停）
       this.sql.exec("UPDATE users SET last_seen=? WHERE id=?", Date.now(), id);
+      const sh = await this.idSh(req.headers.get("x-gea-idh")), idm = Relay.mask(req.headers.get("x-gea-idm"));
+      const mode = req.headers.get("x-gea-mode") === "sim" ? "sim" : "real";
+      if (!off) {                                                             // 11-01 21:00 B：身分證綁定、同身分證重複在線
+        const bad = await this.bindCheck(id, sh, idm, r.note);
+        let dup = null;
+        if (!bad) { this.sweep(); dup = this.dupCheck(id, sh, mode, this.users()); }
+        if (bad || dup) {
+          const key = (bad ? "idmm_tg:" : "dup_tg:") + id;
+          if (this.meta(key) !== today()) { this.meta(key, today()); await this.evans(`⚠ 客戶 ${id}（${r.note || "沒有備註"}）接收端連線被拒：${bad || dup}`); }
+          if (!v2) return J({ error: bad ? "id mismatch" : "duplicate" }, 403);
+          const pair = new WebSocketPair();
+          pair[1].accept();
+          pair[1].close(bad ? 4013 : 4014, bad ? "id mismatch" : "duplicate: same id online on another code with the same strategy");
+          return new Response(null, { status: 101, webSocket: pair[0] });
+        }
+      }
+      sub = { sh, idm, mode };
       if (off) {                                                              // 新接收端：先接受再以 4012 關閉，讓它顯示「服務期限已到」而不是 token 錯
         if (this.meta("off_tg:" + id) !== today()) {                          // 每人每天只通知 Evans 一次
           this.meta("off_tg:" + id, today());
@@ -515,7 +607,7 @@ export class Relay extends DurableObject {
     for (const old of this.live(tag)) { try { old.close(4009, "replaced"); } catch (e) { } this.dead.add(old); }   // 同代號只留一條：新的贏
     const pair = new WebSocketPair();
     this.ctx.acceptWebSocket(pair[1], [role, tag]);
-    pair[1].serializeAttachment({ role, id, v2: !!v2, at: Date.now(), colo: (req.cf && req.cf.colo) || null });
+    pair[1].serializeAttachment({ role, id, v2: !!v2, at: Date.now(), colo: (req.cf && req.cf.colo) || null, ...sub });
     return new Response(null, { status: 101, webSocket: pair[0] });
   }
 
