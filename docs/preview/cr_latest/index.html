@@ -1,0 +1,46 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>預覽：產業研究「最新報告」＋報告網址</title>
+<style>
+body{font:15px/1.6 system-ui,"Noto Sans TC",sans-serif;background:#F4F1EA;color:#2A2620;margin:0;padding:16px;max-width:980px}
+h1{font-size:20px;margin:0 0 6px}.note{background:#fff;border:1px solid #E2DCCD;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:14px}
+.box{background:#fff;border:1px solid #E2DCCD;border-radius:10px;padding:12px 14px;margin:12px 0}
+.box h3{margin:0 0 8px;font-size:17px}.box h3 small{font-weight:400;color:#7B735F;font-size:13px;margin-left:8px}
+table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:6px 8px;border-bottom:1px solid #EEE8DA;text-align:left;vertical-align:top}
+th{color:#6B6452;font-weight:700;font-size:13px}tr.m{cursor:pointer}tr.m:hover{background:#FBF8F1}tr.on{background:#F3ECDC}
+.k{display:inline-block;font-size:12px;border-radius:4px;padding:0 6px;color:#fff;white-space:nowrap}.k.ai{background:#2F5E8C}.k.pick{background:#8C5A2F}
+.num{font-variant-numeric:tabular-nums;white-space:nowrap}.dim{color:#7B735F}
+.det{background:#FBF8F1;border:1px solid #E2DCCD;border-radius:8px;padding:10px 14px;margin-top:10px}
+.det h4{margin:0 0 4px;font-size:16px}.url{font-family:ui-monospace,monospace;font-size:13px;background:#fff;border:1px dashed #B9AE93;padding:2px 6px;border-radius:4px}
+.pill{border:1px solid #B9AE93;background:#fff;border-radius:999px;padding:2px 12px;font:inherit;font-size:13px;cursor:pointer}
+</style></head><body>
+<h1>預覽：產業研究頁最上方「最新報告」＋報告網址直接開（【舊】總指揮 11-01 18:55 第 5 項）</h1>
+<div class="note">要看的重點：① 產業研究頁最上方多一區「最新報告」：照<strong>產出日</strong>新到舊、前 10 份，每份標「AI 研究報告」或「指定報告」；
+② 點一列＝網址變成 <span class="url">#cr=代號_資料日</span>（例 <span class="url">#cr=2454_2026-10-30</span>），把這個網址貼給別人（或 TG）就直接開到那一份；
+③ 資料是正式網站同一份（docs/data/company_reports.json）。正式版點下去會跳到「AI 研究報告／指定報告」子頁並展開全文，這裡只示意摘要。
+版面確定後才改 template。</div>
+<div class="box"><h3>最新報告<small>照產出日新到舊・前 10 份・點一列打開（網址可分享）</small></h3><div id="t">載入中…</div><div id="d"></div></div>
+<script>
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const rid = r => r.code + "_" + (r.data_date || r.date || "");
+let R = [];
+function open(id) {
+  const r = R.find(x => rid(x) === id), d = document.getElementById("d");
+  document.querySelectorAll("tr.m").forEach(tr => tr.classList.toggle("on", tr.dataset.id === id));
+  if (!r) { d.innerHTML = id ? `<div class="det">找不到 <span class="url">#cr=${esc(id)}</span>（可能已下架或還沒通過核對）</div>` : ""; return; }
+  const S = r.sections || {};
+  const link = location.origin + location.pathname.replace(/preview\/cr_latest\/.*$/, "") + "#cr=" + id;
+  d.innerHTML = `<div class="det"><h4>${esc(r.code)} ${esc(r.name)}｜${esc(S["標題"] || "")}</h4><div class="dim">${esc(S["副標"] || "")}</div>` +
+    `<p>${esc(S["總結"] || "")}</p><div>正式網址：<span class="url">${esc(link)}</span> <button class="pill" id="cp">複製</button></div></div>`;
+  document.getElementById("cp").onclick = e => { navigator.clipboard && navigator.clipboard.writeText(link); e.target.textContent = "已複製"; };
+}
+fetch("../../data/company_reports.json?" + Date.now()).then(r => r.json()).then(J => {
+  R = (J.reports || []).slice().sort((a, b) => String(b.made_date || b.date || "").localeCompare(String(a.made_date || a.date || "")) || String(a.code).localeCompare(String(b.code)));
+  const top = R.slice(0, 10);
+  document.getElementById("t").innerHTML = `<table><thead><tr><th>產出日</th><th>種類</th><th>個股</th><th>資料日</th><th>重點</th></tr></thead><tbody>` +
+    top.map(r => `<tr class="m" data-id="${esc(rid(r))}"><td class="num">${esc(r.made_date || "")}</td><td><span class="k ${r.kind === "pick" ? "pick" : "ai"}">${r.kind === "pick" ? "指定報告" : "AI 研究報告"}</span></td>` +
+      `<td><span class="num dim">${esc(r.code)}</span> ${esc(r.name || "")}</td><td class="num dim">${esc(r.data_date || r.date || "")}</td><td>${esc((r.sections || {})["標題"] || "")}</td></tr>`).join("") + `</tbody></table>`;
+  document.querySelectorAll("tr.m").forEach(tr => tr.onclick = () => { location.hash = "cr=" + tr.dataset.id; });
+  const go = () => { const m = location.hash.match(/cr=([^&]+)/); open(m ? decodeURIComponent(m[1]) : ""); };
+  addEventListener("hashchange", go); go();
+}).catch(() => { document.getElementById("t").textContent = "載不到 company_reports.json"; });
+</script></body></html>

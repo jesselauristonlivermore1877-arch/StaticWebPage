@@ -1,0 +1,48 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>預覽：信息流排序「焦點｜最新」</title>
+<style>
+body{font:15px/1.6 system-ui,"Noto Sans TC",sans-serif;background:#F4F1EA;color:#2A2620;margin:0;padding:16px;max-width:980px}
+h1{font-size:20px;margin:0 0 6px}.note{background:#fff;border:1px solid #E2DCCD;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:14px}
+.bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0}.lab{font-weight:700;color:#6B6452}
+.seg{display:inline-flex;border:1px solid #B9AE93;border-radius:999px;overflow:hidden}
+.seg button{border:0;background:#fff;padding:5px 16px;font:inherit;font-weight:700;color:#6B6452;cursor:pointer}
+.seg button+button{border-left:1px solid #B9AE93}.seg button.on{background:#2A2620;color:#fff}
+.sm{font-size:13px;color:#6B6452}
+.it{background:#fff;border:1px solid #E2DCCD;border-radius:8px;padding:8px 12px;margin:6px 0}
+.it b{font-weight:700}.meta{font-size:12.5px;color:#7B735F}.big{border-left:4px solid #C8361E}.tag{display:inline-block;font-size:12px;background:#C8361E;color:#fff;border-radius:4px;padding:0 6px;margin-right:6px}
+.also{font-size:12.5px;color:#7B735F}
+</style></head><body>
+<h1>預覽：信息流排序改成切換鈕「焦點｜最新」（【舊】總指揮 11-01 18:55 第 4 項）</h1>
+<div class="note">要看的重點：① 原本兩顆按鈕「市場會追的程度」「最新」→ 一組切換鈕「焦點｜最新」；② 右邊一句話講清楚焦點怎麼算；
+③ 下面的清單是<strong>正式網站同一份資料</strong>（docs/data/news_live.json）前 30 則，兩種排法都能切。版面確定後才改 template（nlSortBar），排序邏輯不變。</div>
+<div class="bar"><span class="lab">排序</span><span class="seg"><button data-k="rank" class="on">焦點</button><button data-k="new">最新</button></span>
+<span class="sm" id="ex"></span></div>
+<div id="list"><div class="sm">載入中…</div></div>
+<script>
+const EX = {rank: "焦點＝同一事件合成一則，依「幾家權威媒體同報＋是否屬本週主軸（AI 燒錢、信評、融資…）＋牽涉權值股＋價格反應」加總排序，重磅置頂。",
+            new: "最新＝照發布時間新到舊（重磅、重點仍置頂）。"};
+let K = "rank", D = null;
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+function draw() {
+  document.querySelectorAll(".seg button").forEach(b => b.classList.toggle("on", b.dataset.k === K));
+  document.getElementById("ex").textContent = EX[K];
+  const L = document.getElementById("list"); L.innerHTML = "";
+  if (!D) { L.innerHTML = '<div class="sm">載不到資料</div>'; return; }
+  let A;
+  if (K === "rank") {
+    const G = {};
+    D.forEach(x => { if (x.rg) (G[x.rg] = G[x.rg] || []).push(x); });
+    A = Object.keys(G).map(Number).sort((a, b) => a - b).map(g => { const m = G[g]; const r = m.find(x => x.rr) || m[0]; return Object.assign({}, r, {also: m.filter(x => x !== r)}); });
+  } else A = D.slice().sort((a, b) => String(b.pub).localeCompare(String(a.pub)));
+  A.slice(0, 30).forEach(x => {
+    const d = document.createElement("div"); d.className = "it" + (x.big ? " big" : "");
+    const srcs = [...new Set((x.also || []).map(y => y.src))].filter(s => s !== x.src);
+    d.innerHTML = (x.big ? '<span class="tag">重磅</span>' : "") + `<b>${esc(x.t)}</b><div class="meta">${esc(x.src)}｜${esc(String(x.pub).slice(5, 16).replace("T", " "))}｜${esc(x.l2 || "")}` +
+      (K === "rank" && x.rk != null ? `｜焦點 ${x.rk} 分${x.rkw ? "（" + esc(x.rkw) + "）" : ""}` : "") + `</div>` +
+      (srcs.length ? `<div class="also">另見：${esc(srcs.join("、"))}</div>` : "");
+    L.appendChild(d);
+  });
+}
+document.querySelectorAll(".seg button").forEach(b => b.onclick = () => { K = b.dataset.k; draw(); });
+fetch("../../data/news_live.json?" + Date.now()).then(r => r.json()).then(J => { D = J.items || []; draw(); }).catch(() => draw());
+</script></body></html>
