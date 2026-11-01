@@ -221,8 +221,8 @@ ok(d1b.got.filter(m => m.Seq === q).length === 1 && d1a.got.length === nA, "訊�
 d1b.ws.close();
 
 // ── 11-01 下單機 1.0：開通碼、服務期間（v2 收 4012）、部位快照、hello／recon／tg、連續下單風控、合約表
-const rd = async code => { const r = await fetch(`${BASE}/redeem?ch=${CH}`, { method: "POST", headers: { "content-type": "application/json" },
-  body: JSON.stringify({ code, ver: "test" }) }); return { status: r.status, j: await r.json().catch(() => ({})) }; };
+const rd = async (code, want) => { const r = await fetch(`${BASE}/redeem?ch=${CH}`, { method: "POST", headers: { "content-type": "application/json" },
+  body: JSON.stringify({ code, ver: "test", ...(want ? { want } : {}) }) }); return { status: r.status, j: await r.json().catch(() => ({})) }; };
 const inv = await post("invite?id=n1", { subs: ["GEA5"], exp: "2099-12-31" });
 ok(inv.status === 200 && /^[2-9A-HJ-NP-Z]{8}$/.test(inv.j.code || ""), "產開通碼：8 碼、沒有 0／O／1／I", inv.j.code);
 ok((await rd("AAAAAAAA")).status === 404, "錯的開通碼 → 404");
@@ -388,7 +388,10 @@ n1b.ws.close();
 {
   const cmd = async text => (await post("tgcmd", { text })).j.replies || [];
   const sv = await post("invite?id=r1", { subs: ["GEA5"], exp: "2099-12-31" });
+  const ws1 = await rd(sv.j.code, "pub");
+  ok(ws1.status === 400 && /不是管理者開通碼/.test(ws1.j.error || ""), "客戶開通碼填到「管理者開通碼」→ 400、拿不到傳送端", "HTTP " + ws1.status);
   const rs = await rd(sv.j.code);
+  ok(rs.status === 200, "（同一個客戶開通碼沒被作廢，第 3 步照樣能用）", "HTTP " + rs.status);
   ok(rs.status === 200 && rs.j.role === "sub", "一般開通碼兌換 → role=sub（精靈只顯示接收端）", rs.j.role);
   const xs = await connect("pub", "r1", rs.j.token);
   ok(xs.err === 401, "客戶 token 不能當傳送端連（401）", String(xs.err));
@@ -398,9 +401,11 @@ n1b.ws.close();
   ok(/格式/.test((await cmd("/開通碼 傳送端"))[0] || ""), "/開通碼 傳送端 沒給代號 → 回格式");
   let st = await admin("state", "GET");
   ok((st.j.invites || []).some(x => x.id === "sh2" && x.kind === "pub") && !(st.j.users || []).some(u => u.id === "sh2"), "管理者開通碼不建客戶（不在客戶列表、不收訊號）");
-  const rp = await rd(m ? m[1] + m[2] : "x");
+  const wp = await rd(m ? m[1] + m[2] : "x");
+  ok(wp.status === 400 && /管理者開通碼/.test(wp.j.error || ""), "管理者開通碼填到客戶的第 3 步（舊版沒帶 want）→ 400、不作廢", "HTTP " + wp.status);
+  const rp = await rd(m ? m[1] + m[2] : "x", "pub");
   ok(rp.status === 200 && rp.j.role === "pub" && rp.j.id === "sh2" && /^[0-9a-f]{48}$/.test(rp.j.token || ""), "管理者開通碼兌換 → role=pub＋傳送端 token", "HTTP " + rp.status);
-  ok((await rd(m ? m[1] + m[2] : "x")).status === 404, "管理者開通碼用過就作廢");
+  ok((await rd(m ? m[1] + m[2] : "x", "pub")).status === 404, "管理者開通碼用過就作廢");
   const xp = await connect("sub", "sh2", rp.j.token, true);
   ok(xp.err === 401, "傳送端 token 不能當接收端連（401）", String(xp.err));
   const p2 = await connect("pub", "sh2", rp.j.token);

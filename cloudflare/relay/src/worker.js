@@ -707,6 +707,8 @@ export class Relay extends DurableObject {
       if (r) this.sql.exec("DELETE FROM invites WHERE code=?", code);
       return J({ error: r ? "開通碼已過期（24 小時），請營業員重新產生" : "開通碼不對（或已經用過），請核對 8 碼" }, 404);
     }
+    if ((r.kind === "pub") !== (body.want === "pub"))                        // 11-01 23:40：填錯地方 → 400、開通碼不作廢（舊版客戶端沒帶 want＝客戶開通碼）
+      return J({ error: r.kind === "pub" ? "這是管理者開通碼（傳送端用），請在設定精靈第 0 步「我有管理者開通碼」輸入" : "這不是管理者開通碼（客戶的開通碼請在第 3 步「開通碼」填）", why: "wrong kind" }, 400);
     if (r.kind === "pub") {                                                   // 11-01 23:40：傳送端開通碼 → 傳送端 token（換 token 踢掉同代號舊連線）
       this.sql.exec("DELETE FROM invites WHERE code=?", code);
       const tok = newToken();
