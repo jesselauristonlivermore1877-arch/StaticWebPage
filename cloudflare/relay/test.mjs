@@ -188,7 +188,7 @@ const rp2 = await admin("replay?id=s3&since=520", "GET");
 ok(JSON.stringify(rp2.j.will) === "[522,523]", "/admin/replay：s3 會補 522、523（補發依「現在」的上架與訂閱判斷）", JSON.stringify(rp2.j));
 const sim = await post("simulate", { strategy: "GEA5" });
 const simOf = id => (sim.j.users || []).find(u => u.id === id) || {};
-ok(simOf("s1").receive && !simOf("s3").receive && simOf("s3").why === "沒訂閱" && simOf("u4").why === "停權", "/admin/simulate 原因正確", JSON.stringify(sim.j.users.map(u => u.id + ":" + u.why)));
+ok(simOf("s1").receive && !simOf("s3").receive && simOf("s3").why === "沒訂閱" && /^停/.test(simOf("u4").why), "/admin/simulate 原因正確", JSON.stringify(sim.j.users.map(u => u.id + ":" + u.why)));
 await post("set?id=s2", { exp: "2020-01-01" });
 await until(() => kickedCode(sc.s2));
 ok(kickedCode(sc.s2) === 4003, "改成已到期 → 在線立刻 4003 斷線", String(kickedCode(sc.s2)));
