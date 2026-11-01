@@ -384,6 +384,49 @@ n1b.ws.close();
   ok(ck.status === 401, "假的登入 cookie → 401", "HTTP " + ck.status);
 }
 
+// ── 11-01 23:40：傳送端開通碼（pub）——一般開通碼拿不到傳送端、管理者開通碼才拿得到；兩種 token 不能互換角色；同一台兩角色互不干擾
+{
+  const cmd = async text => (await post("tgcmd", { text })).j.replies || [];
+  const sv = await post("invite?id=r1", { subs: ["GEA5"], exp: "2099-12-31" });
+  const rs = await rd(sv.j.code);
+  ok(rs.status === 200 && rs.j.role === "sub", "一般開通碼兌換 → role=sub（精靈只顯示接收端）", rs.j.role);
+  const xs = await connect("pub", "r1", rs.j.token);
+  ok(xs.err === 401, "客戶 token 不能當傳送端連（401）", String(xs.err));
+  const R = await cmd("/開通碼 傳送端 sh2 測試訊號主機");
+  const m = /傳送端）([2-9A-HJ-NP-Z]{4})-([2-9A-HJ-NP-Z]{4})/.exec(R[0] || "");
+  ok(!!m && /不要轉給客戶/.test(R[0]), "TG「/開通碼 傳送端 代號 備註」→ 管理者開通碼", (R[0] || "").slice(0, 60));
+  ok(/格式/.test((await cmd("/開通碼 傳送端"))[0] || ""), "/開通碼 傳送端 沒給代號 → 回格式");
+  let st = await admin("state", "GET");
+  ok((st.j.invites || []).some(x => x.id === "sh2" && x.kind === "pub") && !(st.j.users || []).some(u => u.id === "sh2"), "管理者開通碼不建客戶（不在客戶列表、不收訊號）");
+  const rp = await rd(m ? m[1] + m[2] : "x");
+  ok(rp.status === 200 && rp.j.role === "pub" && rp.j.id === "sh2" && /^[0-9a-f]{48}$/.test(rp.j.token || ""), "管理者開通碼兌換 → role=pub＋傳送端 token", "HTTP " + rp.status);
+  ok((await rd(m ? m[1] + m[2] : "x")).status === 404, "管理者開通碼用過就作廢");
+  const xp = await connect("sub", "sh2", rp.j.token, true);
+  ok(xp.err === 401, "傳送端 token 不能當接收端連（401）", String(xp.err));
+  const p2 = await connect("pub", "sh2", rp.j.token);
+  ok(!p2.err, "傳送端 token 以 role=pub 連上", String(p2.err || ""));
+  // 同一台兩角色：傳送端 sh2＋接收端 r1（同時在線）；sh2 送的訊號 r1 照訂閱收到、各自的連線不互踢
+  const r1 = await connect("sub", "r1", rs.j.token, true);
+  await sleep(300);
+  r1.ws.send(JSON.stringify({ since: q }));
+  await post("strategy?code=GEA5", { listed: true });
+  p2.ws.send(sigS(++q, "GEA5"));
+  await until(() => p2.ctl.some(c => c.ctl === "ack" && c.seq === q) && r1.got.some(x => x.Seq === q));
+  ok(p2.ctl.some(c => c.ctl === "ack" && c.seq === q) && r1.got.some(x => x.Seq === q) && !p2.closed && !r1.closed, "同一台：傳送端送、接收端收，兩條連線都還在");
+  const n0 = (await admin("state", "GET")).j.tg_test;
+  p2.ws.send(JSON.stringify({ tg: "傳送端測試通知" }));
+  await until(() => p2.ctl.some(c => c.ctl === "tg"));
+  ok(p2.ctl.some(c => c.ctl === "tg" && c.ok) && (await admin("state", "GET")).j.tg_test > n0, "傳送端沒有 bot token → {tg} 經中繼轉給 Evans");
+  st = await admin("state", "GET");
+  ok(((st.j.pubs || []).find(x => x.id === "sh2") || {}).online === 1, "管理頁傳送端列表：sh2 在線");
+  await post("pub_disable?id=sh2", {});
+  await until(() => p2.closed);
+  ok(p2.closed && p2.closed[0] === 4003, "停用傳送端 → 在線的以 4003 關閉", JSON.stringify(p2.closed));
+  ok((await connect("pub", "sh2", rp.j.token)).err === 401, "停用後不能再連");
+  ok(!pub.closed, "現行訊號主機（RELAY_PUB_TOKEN）不受影響");
+  r1.ws.close();
+}
+
 // ── 收尾
 for (const c of [subs.u1, u3b, pub]) c.ws.close();
 await sleep(300);

@@ -51,6 +51,10 @@
 //       → 12 小時 cookie gea_radm（HttpOnly、SameSite=Strict；寫入動作另要 header x-gea-admin: 1）。Bearer RELAY_ADMIN_TOKEN 照舊可用（Actions 用）。
 //       TG 指令：Telegram webhook POST /tg_hook（header 驗 Worker secret TG_HOOK_SECRET），只認 TG_CHAT_ID（Evans），別人傳的一律不回：
 //       /開通碼 <代號或姓名> <策略逗號分隔或 全部> <到期日>、/客戶 [代號]、/停用 <代號>、/恢復 <代號>、/登入。自動測試用 POST /admin/tgcmd（只限測試頻道、回覆不發 TG）。
+//     i 傳送端開通碼（11-01 23:40 第 3 項）：開通碼多一種類型 pub（invites.kind）——只能由管理頁（POST /admin/invite?id=… body {kind:"pub"}）
+//       或 TG「/開通碼 傳送端 <代號> [備註]」產生；/redeem 兌換 pub 開通碼 → 回 {role:"pub", id, token}（中繼只存雜湊在 pubtok 表）。
+//       ws role=pub：Bearer＝RELAY_PUB_TOKEN（訊號主機現行）或 pubtok 裡這個 id 的 token（已停用的不收）；pub 不綁身分證、不受訂閱控管。
+//       sub token 不能當 pub 連、pub token 也不能當 sub 連（各查各的表）。POST /admin/pub_disable|pub_enable?id= 停用／恢復（停用時在線的踢掉）。
 //     免費方案 CPU 10ms：快照、計數都在 Durable Object 的 SQLite（每頻道一個），不掃 D1。
 // 簽章金鑰只在兩端：中繼不驗簽、不改內容，只管轉送與補發。
 import { DurableObject } from "cloudflare:workers";
@@ -146,7 +150,13 @@ async function tgCommand(env, origin, text, ch) {
   };
   const st = async () => (await call("state")).j;
   const find = (S, who) => S.users.find(u => u.id === who) || S.users.find(u => u.note && u.note === who);
-  const HELP = "GEA 下單中繼指令：\n/開通碼 <代號或姓名> <策略逗號分隔或 全部> <到期日 YYYY-MM-DD>\n/客戶 [代號或姓名]\n/停用 <代號>\n/恢復 <代號>\n/登入（管理頁一次性登入連結）";
+  const HELP = "GEA 下單中繼指令：\n/開通碼 <代號或姓名> <策略逗號分隔或 全部> <到期日 YYYY-MM-DD>\n/開通碼 傳送端 <代號> [備註]（管理者開通碼，訊號主機用）\n/客戶 [代號或姓名]\n/停用 <代號>\n/恢復 <代號>\n/登入（管理頁一次性登入連結）";
+  if (cmd === "/開通碼" && P[1] === "傳送端") {                             // 11-01 23:40：管理者（傳送端）開通碼
+    if (P.length < 3 || !NAME_RE.test(P[2])) return ["格式：/開通碼 傳送端 <代號（英數）> [備註]\n例：/開通碼 傳送端 signal_host 訊號主機"];
+    const r = await call("invite?id=" + encodeURIComponent(P[2]), { kind: "pub", note: P.slice(3).join(" ") });
+    if (r.status !== 200) return ["產開通碼失敗：" + (r.j.error || "HTTP " + r.status)];
+    return [`✓ 管理者開通碼（傳送端）${r.j.code.slice(0, 4)}-${r.j.code.slice(4)}｜代號 ${P[2]}｜24 小時內有效、只能用一次。\n在要當傳送端的電腦打開設定精靈，第 0 步「這台電腦的角色」按「我有管理者開通碼」輸入。⚠ 不要轉給客戶。`];
+  }
   if (cmd === "/開通碼") {
     if (P.length < 4) return ["格式：/開通碼 <代號或姓名> <策略逗號分隔或 全部> <到期日 YYYY-MM-DD>\n例：/開通碼 王小明 GEA5,GEA6 2027-12-31"];
     const who = P[1], exp = P[3].replace(/\//g, "-");
@@ -258,7 +268,7 @@ export default {
       if ((req.headers.get("upgrade") || "").toLowerCase() !== "websocket") return J({ error: "expected websocket" }, 426);
       const role = u.searchParams.get("role"), id = u.searchParams.get("id") || "";
       if (!["pub", "sub"].includes(role) || !NAME_RE.test(id)) return J({ error: "bad role or id" }, 400);
-      if (role === "pub" && !same(bearer(req), env.RELAY_PUB_TOKEN)) return J({ error: "unauthorized" }, 401);
+      if (role === "pub" && !bearer(req)) return J({ error: "unauthorized" }, 401);   // 11-01 23:40：RELAY_PUB_TOKEN 或 pubtok（DO 裡驗）
       if (role === "sub" && !bearer(req)) return J({ error: "unauthorized" }, 401);
     }
     const stub = env.RELAY.get(env.RELAY.idFromName(ch));
@@ -298,7 +308,8 @@ export class Relay extends DurableObject {
                    CREATE INDEX IF NOT EXISTS risk_i ON risk(strat, ts);
                    CREATE TABLE IF NOT EXISTS invites(code TEXT PRIMARY KEY, id TEXT NOT NULL, created INTEGER NOT NULL, exp_ms INTEGER NOT NULL);
                    CREATE TABLE IF NOT EXISTS binds(id TEXT NOT NULL, sh TEXT NOT NULL, mask TEXT NOT NULL DEFAULT '', created INTEGER NOT NULL, PRIMARY KEY(id, sh));
-                   CREATE TABLE IF NOT EXISTS idadmin(sh TEXT PRIMARY KEY, mask TEXT NOT NULL DEFAULT '');`);
+                   CREATE TABLE IF NOT EXISTS idadmin(sh TEXT PRIMARY KEY, mask TEXT NOT NULL DEFAULT '');
+                   CREATE TABLE IF NOT EXISTS pubtok(id TEXT PRIMARY KEY, th TEXT NOT NULL, enabled INTEGER NOT NULL DEFAULT 1, note TEXT NOT NULL DEFAULT '', created INTEGER NOT NULL);`);
     // 10-18 20:40 升級：users 加訂閱、到期日、備註、最後連線；msgs 加策略欄（舊用戶訂閱＝"*"，照舊全收）
     // 11-01 升級：users 加開始、客戶 TG、版本、最後對帳、到期提醒；strategies 加風控暫停
     for (const [t, c] of [["users", "subs TEXT NOT NULL DEFAULT '*'"], ["users", "exp TEXT NOT NULL DEFAULT ''"], ["users", "note TEXT NOT NULL DEFAULT ''"],
@@ -306,7 +317,7 @@ export class Relay extends DurableObject {
                           ["users", "start TEXT NOT NULL DEFAULT ''"], ["users", "tg TEXT NOT NULL DEFAULT ''"], ["users", "ver TEXT"],
                           ["users", "recon TEXT"], ["users", "recon_at INTEGER"], ["users", "warned TEXT NOT NULL DEFAULT ''"],
                           ["strategies", "paused INTEGER NOT NULL DEFAULT 0"], ["strategies", "paused_at INTEGER"], ["strategies", "paused_why TEXT"],
-                          ["msgs", "held INTEGER NOT NULL DEFAULT 0"]]) {
+                          ["msgs", "held INTEGER NOT NULL DEFAULT 0"], ["invites", "kind TEXT NOT NULL DEFAULT 'sub'"], ["invites", "note TEXT NOT NULL DEFAULT ''"]]) {
       if (!this.sql.exec(`PRAGMA table_info(${t})`).toArray().some(r => r.name === c.split(" ")[0])) this.sql.exec(`ALTER TABLE ${t} ADD COLUMN ${c}`);
     }
   }
@@ -338,11 +349,11 @@ export class Relay extends DurableObject {
   }
   evans(text) { return this.tg(this.env.TG_CHAT_ID, "【下單中繼】" + text); }
   // 客戶端給 Evans 的通知（ws 的 tg 與 POST /tg 共用）：每個代號 10 分鐘最多 30 則
-  async relayTg(id, text) {
+  async relayTg(id, text, who = "客戶 ") {
     const now = Date.now(), L = (this.tgRate.get(id) || []).filter(t => now - t < 600e3);
     if (L.length >= 30) { if (L.length === 30) { L.push(now); this.tgRate.set(id, L); await this.evans(`客戶 ${id} 10 分鐘內通知超過 30 則，之後的先不轉發`); } return false; }
     L.push(now); this.tgRate.set(id, L);
-    return await this.evans(`客戶 ${id}：${String(text || "").slice(0, 1500)}`);
+    return await this.evans(`${who}${id}：${String(text || "").slice(0, 1500)}`);
   }
 
   // ── 身分證綁定（11-01 21:00 B）：idh（客戶端算好的 64 位十六進位）→ 加頻道 salt 的 sh；salt 第一次用到時產生、存 meta（不出 DO）
@@ -473,7 +484,9 @@ export class Relay extends DurableObject {
       strategies: this.sql.exec("SELECT * FROM strategies ORDER BY code").toArray()
         .map(r => ({ ...r, listed: !!r.listed, paused: !!r.paused, kept: stat[r.code] ? stat[r.code].n : 0, last: stat[r.code] ? stat[r.code].last : null,
           snap_seq: snap[r.code] ? snap[r.code].seq : null })),
-      invites: this.sql.exec("SELECT code, id, exp_ms FROM invites WHERE exp_ms > ? ORDER BY exp_ms", now).toArray(),
+      invites: this.sql.exec("SELECT code, id, exp_ms, kind FROM invites WHERE exp_ms > ? ORDER BY exp_ms", now).toArray(),
+      pubs: this.sql.exec("SELECT id, enabled, note, created FROM pubtok ORDER BY id").toArray()
+        .map(r => ({ ...r, enabled: !!r.enabled, online: this.live("p:" + r.id).length })),
       contracts_ver: CONTRACTS.ver, tg_test: Number(this.meta("tg_test_n") || 0) };
   }
 
@@ -598,6 +611,21 @@ export class Relay extends DurableObject {
       return J({ ok: true, sh, admin: this.isIdAdmin(sh) });
     }
     if (!NAME_RE.test(id)) return J({ error: "bad id" }, 400);
+    if (p === "/admin/invite" && body.kind === "pub") {                     // 11-01 23:40：傳送端開通碼（不建客戶、不綁身分證）
+      this.sql.exec("DELETE FROM invites WHERE (id=? AND kind='pub') OR exp_ms < ?", id, Date.now());
+      let code;
+      do { code = newInvite(); } while (this.sql.exec("SELECT code FROM invites WHERE code=?", code).toArray().length);
+      const exp = Date.now() + 24 * 3600e3;
+      this.sql.exec("INSERT INTO invites(code, id, created, exp_ms, kind, note) VALUES(?,?,?,?,'pub',?)", code, id, Date.now(), exp, String(body.note || "").slice(0, 80));
+      return J({ ok: true, id, code, kind: "pub", expires: new Date(exp).toISOString() });
+    }
+    if (p === "/admin/pub_disable" || p === "/admin/pub_enable") {
+      const on = p === "/admin/pub_enable" ? 1 : 0;
+      const n = this.sql.exec("UPDATE pubtok SET enabled=? WHERE id=?", on, id).rowsWritten;
+      let kicked = 0;
+      if (!on) for (const ws of this.live("p:" + id)) { try { ws.close(4003, "pub disabled"); } catch (e) { } this.dead.add(ws); kicked++; }
+      return n ? J({ ok: true, id, enabled: !!on, kicked }) : J({ error: "no such pub" }, 404);
+    }
     if (p === "/admin/user" || p === "/admin/invite") {
       const tok = newToken();
       const qs = u.searchParams.get("subs");                                  // 新用戶預設什麼都沒訂；body 或 ?subs= 可直接指定
@@ -606,7 +634,7 @@ export class Relay extends DurableObject {
       const bad = this.applyUser(id, body, qs);
       if (bad) { if (isNew) this.sql.exec("DELETE FROM users WHERE id=?", id); return J({ error: bad }, 400); }
       if (p === "/admin/invite") {                                            // 開通碼：token 等客戶用開通碼換（現有 token 不動）
-        this.sql.exec("DELETE FROM invites WHERE id=? OR exp_ms < ?", id, Date.now());
+        this.sql.exec("DELETE FROM invites WHERE (id=? AND kind='sub') OR exp_ms < ?", id, Date.now());
         let code;
         do { code = newInvite(); } while (this.sql.exec("SELECT code FROM invites WHERE code=?", code).toArray().length);
         const exp = Date.now() + 24 * 3600e3;
@@ -679,6 +707,15 @@ export class Relay extends DurableObject {
       if (r) this.sql.exec("DELETE FROM invites WHERE code=?", code);
       return J({ error: r ? "開通碼已過期（24 小時），請營業員重新產生" : "開通碼不對（或已經用過），請核對 8 碼" }, 404);
     }
+    if (r.kind === "pub") {                                                   // 11-01 23:40：傳送端開通碼 → 傳送端 token（換 token 踢掉同代號舊連線）
+      this.sql.exec("DELETE FROM invites WHERE code=?", code);
+      const tok = newToken();
+      this.sql.exec("INSERT INTO pubtok(id, th, enabled, note, created) VALUES(?,?,1,?,?) ON CONFLICT(id) DO UPDATE SET th=excluded.th, enabled=1, note=excluded.note",
+                    r.id, await sha256(tok), r.note || "", Date.now());
+      for (const ws of this.live("p:" + r.id)) { try { ws.close(4003, "token reissued"); } catch (e) { } this.dead.add(ws); }
+      await this.evans(`傳送端 ${r.id}${r.note ? "（" + r.note + "）" : ""} 已用管理者開通碼開通` + (body.ver ? `，版本 ${String(body.ver).slice(0, 20)}` : ""));
+      return J({ ok: true, role: "pub", id: r.id, token: tok, ch: new URL(req.url).searchParams.get("ch") });
+    }
     const user = this.sql.exec("SELECT * FROM users WHERE id=?", r.id).toArray()[0];
     if (!user) { this.sql.exec("DELETE FROM invites WHERE code=?", code); return J({ error: "這個開通碼的用戶已被刪除，請聯絡營業員" }, 404); }
     const bad = await this.bindCheck(r.id, await this.idSh(body.idh), body.idm, user.note);   // 11-01 21:00 B：對不上時開通碼不作廢（營業員解除綁定後可再用）
@@ -691,7 +728,7 @@ export class Relay extends DurableObject {
     this.sql.exec("UPDATE users SET th=? WHERE id=?", await sha256(tok), r.id);
     for (const ws of this.ctx.getWebSockets("s:" + r.id)) ws.close(4003, "token reissued");
     await this.evans(`客戶 ${r.id}（${user.note || "沒有備註"}）已用開通碼開通` + (body.ver ? `，接收端版本 ${String(body.ver).slice(0, 20)}` : ""));
-    return J({ ok: true, id: r.id, token: tok, ch: new URL(req.url).searchParams.get("ch"), off: offWhy(user) });
+    return J({ ok: true, role: "sub", id: r.id, token: tok, ch: new URL(req.url).searchParams.get("ch"), off: offWhy(user) });
   }
 
   // 每小時：踢掉不在服務期間的在線連線；台北 09 點那班：到期前 3 天（含）內、還沒提醒過這個到期日的 → TG Evans＋客戶
@@ -722,6 +759,10 @@ export class Relay extends DurableObject {
 
   async accept(req, role, id, v2) {
     let sub = {};
+    if (role === "pub" && !same(bearer(req), this.env.RELAY_PUB_TOKEN)) {     // 11-01 23:40：不是訊號主機現行 token → 查傳送端開通碼換來的 token
+      const r = this.sql.exec("SELECT th, enabled FROM pubtok WHERE id=?", id).toArray()[0];
+      if (!r || !r.enabled || !same(await sha256(bearer(req)), r.th)) return J({ error: "unauthorized" }, 401);
+    }
     if (role === "sub") {
       const r = this.sql.exec("SELECT * FROM users WHERE id=?", id).toArray()[0];
       const th = await sha256(bearer(req));
@@ -778,6 +819,7 @@ export class Relay extends DurableObject {
     if (!m || typeof m !== "object" || Array.isArray(m)) return this.send(ws, { ctl: "err", why: "not object" });
 
     if (a.role === "sub") return this.subMessage(ws, a, m);
+    if (typeof m.tg === "string" && !("Seq" in m)) return this.send(ws, { ctl: "tg", ok: await this.relayTg(a.id, m.tg, "傳送端 ") });   // 11-01 23:40：精靈裝的傳送端沒有 bot token → 經中繼 TG
 
     // ── 發送端：格式檢查（骨架 Signal：Seq 正整數、TsMs 數字、Sig 非空字串）
     const seq = m.Seq;

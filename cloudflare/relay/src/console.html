@@ -66,6 +66,12 @@ table{border-collapse:collapse;width:100%}th,td{padding:4px 8px;border-bottom:1p
     <div class="row" style="margin-top:8px"><input id="nuId" placeholder="代號（英數，例 cust_001）" style="width:180px"><input id="nuNote" placeholder="備註（姓名）" style="width:160px"><span>開始</span><input id="nuStart" type="date"><span>到期</span><input id="nuExp" type="date"><span id="nuSubs" class="row"></span><button class="pri" onclick="addUser(true)">新增並產開通碼</button><button onclick="addUser(false)">新增（給 token，舊流程）</button></div>
     <div id="tokbox" style="display:none"></div>
   </div>
+  <div class="card"><h3>傳送端（訊號主機；管理者開通碼）</h3>
+    <div class="scroll"><table id="pbT"></table></div>
+    <div class="row" style="margin-top:8px"><input id="pbId" placeholder="代號（英數，例 signal_host）" style="width:200px"><input id="pbNote" placeholder="備註（例 訊號主機）" style="width:160px"><button class="pri" onclick="newPub()">產生管理者開通碼（傳送端）</button>
+      <span class="note">只給要當傳送端的電腦，不要轉給客戶。精靈第 0 步「我有管理者開通碼」輸入後才會出現「傳送端」。也可用 TG「/開通碼 傳送端 &lt;代號&gt; [備註]」。</span></div>
+    <div id="pbOut" style="display:none;margin-top:10px"></div>
+  </div>
   <div class="card"><h3>模擬（不送任何東西）</h3>
     <div class="row"><span>假如送出策略</span><select id="simS"></select><button onclick="simulate()">誰會收到？</button>
       <span style="margin-left:16px">客戶</span><select id="rpU"></select><span>斷線前最後收到序號</span><input id="rpSince" type="number" value="0" style="width:90px"><button onclick="replay()">重連會補哪些？</button></div>
@@ -161,6 +167,23 @@ function render() {
   const opt = codes.map(c => "<option>" + esc(c) + "</option>").join("");
   $("#simS").innerHTML = opt; $("#tpS").innerHTML = opt;
   $("#rpU").innerHTML = ST.users.map(u => "<option>" + esc(u.id) + "</option>").join("");
+  const pinv = (ST.invites || []).filter(x => x.kind === "pub");
+  $("#pbT").innerHTML = "<tr><th>代號</th><th>備註</th><th>狀態</th><th>在線</th><th></th></tr>" + (ST.pubs || []).map(p => "<tr><td><b>" + esc(p.id) + "</b></td><td>" + esc(p.note) + "</td><td>" +
+      (p.enabled ? "<span class='ok'>正常</span>" : "<span class='bad'>停用</span>") + "</td><td>" + (p.online ? "<span class='ok'>● " + p.online + "</span>" : "<span class='note'>離線</span>") +
+      "</td><td><button data-pben='" + esc(p.id) + "' data-on='" + (p.enabled ? 0 : 1) + "'>" + (p.enabled ? "停用" : "恢復") + "</button></td></tr>").join("") +
+    pinv.map(x => "<tr><td>" + esc(x.id) + "</td><td colspan='4' class='note'>管理者開通碼待用（" + esc(ts(x.exp_ms)) + " 前）</td></tr>").join("") +
+    ((ST.pubs || []).length || pinv.length ? "" : "<tr><td colspan='5' class='note'>還沒有用開通碼開通的傳送端（訊號主機現行用 RELAY_PUB_TOKEN，不列在這裡）</td></tr>");
+  document.querySelectorAll("[data-pben]").forEach(b => b.onclick = () => confirm((b.dataset.on === "1" ? "恢復" : "停用（在線的立刻斷線）") + " 傳送端 " + b.dataset.pben + "？") &&
+    act(() => api((b.dataset.on === "1" ? "pub_enable" : "pub_disable") + "?id=" + b.dataset.pben, "POST", {})));
+}
+function newPub() {
+  const id = $("#pbId").value.trim();
+  if (!/^[A-Za-z0-9_-]{1,40}$/.test(id)) { say("傳送端代號只能用英文、數字、_、-", true); return; }
+  if (!confirm("產生管理者開通碼（傳送端 " + id + "）？用這個碼開通的電腦可以送訊號給所有客戶，只給訊號主機。")) return;
+  act(async () => { const r = await api("invite?id=" + id, "POST", {kind: "pub", note: $("#pbNote").value.trim()});
+    const code = r.code.slice(0, 4) + "-" + r.code.slice(4), box = $("#pbOut"); box.style.display = "";
+    box.innerHTML = "<div>傳送端 " + esc(id) + " 的管理者開通碼：<span class='big'>" + esc(code) + "</span> <span class='note'>（" + esc(ts(Date.parse(r.expires))) + " 前有效、用一次就作廢；⚠ 不要轉給客戶）</span> <button class='cx'>關閉</button></div>";
+    box.querySelector(".cx").onclick = () => { box.innerHTML = ""; box.style.display = "none"; }; $("#pbId").value = $("#pbNote").value = ""; });
 }
 function pick(root, pre) { const all = root.querySelector("[data-" + pre + "='*']"); if (all && all.checked) return "*"; return [...root.querySelectorAll("[data-" + pre + "]:checked")].map(c => c.dataset[pre]).filter(x => x !== "*"); }
 async function act(fn, ok) { try { await fn(); if (ok) say(esc(ok)); await load(); } catch (e) { say("失敗：" + esc(e.message), true); } }
