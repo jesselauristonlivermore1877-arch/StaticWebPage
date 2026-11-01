@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>GEA 下單訊號管理</title>
 <!-- gea-signal-relay 管理頁（Evans 2026-10-18 20:40 派工第 1 項）：策略上架／下架、客戶新增／停權、勾選訂閱、到期日；測試頻道模擬情境。
+     11-01 下單機 1.0：開始／到期時間、接收端版本、最後對帳結果、產開通碼、連續下單風控（暫停／解除、參數）。
      這頁本身不含任何資料：貼管理 token（RELAY_ADMIN_TOKEN）後才呼叫 /admin/*；token 只存這個分頁（sessionStorage），關掉就沒了。 -->
 <style>
 :root{--bg:#0b0f14;--panel:#121821;--panel2:#18202b;--line:#26303d;--tx:#d5dde7;--mut:#8593a3;--acc:#f0b429;--up:#e5484d;--dn:#2fb36b}
@@ -33,12 +34,13 @@ table{border-collapse:collapse;width:100%}th,td{padding:4px 8px;border-bottom:1p
   <div class="card" id="msg" style="display:none"></div>
   <div class="card"><h3>策略（新策略第一次送上來會自動出現在這裡，預設「下架」）</h3>
     <div class="scroll"><table id="stT"></table></div>
+    <div class="row" style="margin-top:8px"><span>連續下單風控：同一策略</span><input id="rkWin" type="number" min="5" max="3600" style="width:70px"><span>秒內部位變動超過</span><input id="rkMax" type="number" min="1" max="100" style="width:60px"><span>次 → 暫停轉送＋TG</span><button onclick="saveRisk()">儲存</button></div>
     <div class="row" style="margin-top:8px"><input id="stCode" placeholder="代號（例 GEA5）" style="width:140px"><input id="stName" placeholder="名稱" style="width:140px"><button onclick="addStrat()">先登記一支</button></div>
   </div>
   <div class="card"><h3>客戶（接收端）</h3>
-    <div class="note">訂閱打勾＝他會收到這支（策略也要上架）；「全部」＝不管上下架全收（只給 GEA 自己的機器）。到期日留空＝不到期；到期或停權立刻斷線。</div>
+    <div class="note">訂閱打勾＝他會收到這支（策略也要上架）；「全部」＝不管上下架全收（只給 GEA 自己的機器）。開始／到期留空＝不限；可填日期或日期＋時間（台北）。不在服務期間或停用：只停送新訊號、不平倉，接收端顯示「服務期限已到，請聯絡營業員」。到期前 3 天 09:00 TG 給 Evans 和客戶（有填客戶 TG）。<br>新客戶：填代號後按「新增並產開通碼」，把 8 碼開通碼給客戶（24 小時內、用一次）；客戶在安裝精靈填開通碼即可，不用再給 token。</div>
     <div class="scroll" style="margin-top:6px"><table id="usT"></table></div>
-    <div class="row" style="margin-top:8px"><input id="nuId" placeholder="代號（英數，例 cust_001）" style="width:180px"><input id="nuNote" placeholder="備註（姓名）" style="width:160px"><input id="nuExp" type="date"><span id="nuSubs" class="row"></span><button class="pri" onclick="addUser()">新增客戶</button></div>
+    <div class="row" style="margin-top:8px"><input id="nuId" placeholder="代號（英數，例 cust_001）" style="width:180px"><input id="nuNote" placeholder="備註（姓名）" style="width:160px"><span>開始</span><input id="nuStart" type="date"><span>到期</span><input id="nuExp" type="date"><span id="nuSubs" class="row"></span><button class="pri" onclick="addUser(true)">新增並產開通碼</button><button onclick="addUser(false)">新增（給 token，舊流程）</button></div>
     <div id="tokbox" style="display:none"></div>
   </div>
   <div class="card"><h3>模擬（不送任何東西）</h3>
@@ -80,25 +82,35 @@ async function load() {
 }
 function render() {
   const S = ST.strategies, codes = S.map(s => s.code);
-  $("#stT").innerHTML = "<tr><th>代號</th><th>名稱</th><th>狀態</th><th>中繼保留則數</th><th>最後一則</th><th>訂閱人數</th><th></th></tr>" + S.map(s => {
+  $("#rkWin").value = ST.risk.win; $("#rkMax").value = ST.risk.max;
+  $("#stT").innerHTML = "<tr><th>代號</th><th>名稱</th><th>狀態</th><th>風控</th><th>中繼保留則數</th><th>最後一則</th><th>訂閱人數</th><th></th></tr>" + S.map(s => {
     const n = ST.users.filter(u => u.subs === "*" || u.subs.split(",").includes(s.code)).length;
     return "<tr><td>" + esc(s.code) + "</td><td><input data-name='" + esc(s.code) + "' value='" + esc(s.name) + "' style='width:120px'></td>" +
       "<td><button data-list='" + esc(s.code) + "' class='tag " + (s.listed ? "on" : "off") + "'>" + (s.listed ? "上架中（按一下下架）" : "下架（按一下上架）") + "</button></td>" +
+      "<td>" + (s.paused ? "<span class='bad'>⏸ 暫停：" + esc(s.paused_why) + "（" + ts(s.paused_at) + "）</span> <button data-unpause='" + esc(s.code) + "' class='pri'>解除暫停</button>" : "<span class='ok'>正常</span>") + "</td>" +
       "<td>" + s.kept + "</td><td>" + ts(s.last) + "</td><td>" + n + "</td><td><button data-sdel='" + esc(s.code) + "'>移除登記</button></td></tr>"; }).join("");
+  document.querySelectorAll("[data-unpause]").forEach(b => b.onclick = () => confirm("確認訊號主機正常後解除暫停？（暫停期間的訊號不會補送）") && act(() => api("strategy?code=" + b.dataset.unpause, "POST", {paused: false}), "已解除暫停 " + b.dataset.unpause));
   document.querySelectorAll("[data-list]").forEach(b => b.onclick = () => act(() => api("strategy?code=" + b.dataset.list, "POST", {listed: !S.find(s => s.code === b.dataset.list).listed})));
   document.querySelectorAll("[data-name]").forEach(i => i.onchange = () => act(() => api("strategy?code=" + i.dataset.name, "POST", {name: i.value})));
   document.querySelectorAll("[data-sdel]").forEach(b => b.onclick = () => confirm("移除登記（下次再送上來會重新出現、預設下架）？") && act(() => api("strategy_delete?code=" + b.dataset.sdel, "POST", {})));
   const subBox = (u, pre) => "<label><input type='checkbox' data-" + pre + "='*' " + (u && u.subs === "*" ? "checked" : "") + "> 全部</label> " +
     codes.map(c => "<label><input type='checkbox' data-" + pre + "='" + esc(c) + "' " + (u && (u.subs === "*" || u.subs.split(",").includes(c)) ? "checked" : "") + (u && u.subs === "*" ? " disabled" : "") + "> " + esc(c) + "</label>").join(" ");
-  $("#usT").innerHTML = "<tr><th>代號</th><th>備註</th><th>訂閱</th><th>到期日</th><th>狀態</th><th>在線</th><th>最後連線</th><th></th></tr>" + ST.users.map(u => {
-    const st = !u.enabled ? "<span class='bad'>停權</span>" : u.expired ? "<span class='bad'>已到期</span>" : "<span class='ok'>正常</span>";
+  const inv = {}; for (const x of ST.invites || []) inv[x.id] = x;
+  $("#usT").innerHTML = "<tr><th>代號</th><th>備註</th><th>訂閱</th><th>開始</th><th>到期</th><th>客戶 TG</th><th>狀態</th><th>在線</th><th>版本</th><th>最後對帳</th><th>最後連線</th><th></th></tr>" + ST.users.map(u => {
+    const st = (u.off ? "<span class='bad'>" + esc(u.off) + "</span>" : "<span class='ok'>正常</span>") + (inv[u.id] ? "<br><span class='note'>開通碼 " + esc(inv[u.id].code) + "（" + ts(inv[u.id].exp_ms) + " 前）</span>" : "");
+    const rc = u.recon ? "<span class='" + (u.recon.startsWith("✓") ? "ok" : "bad") + "'>" + esc(u.recon) + "</span><br><span class='note'>" + ts(u.recon_at) + "</span>" : "<span class='note'>—</span>";
     return "<tr data-u='" + esc(u.id) + "'><td>" + esc(u.id) + "</td><td><input class='note_' value='" + esc(u.note) + "' style='width:110px'></td><td class='row'>" + subBox(u, "s") + "</td>" +
-      "<td><input type='date' class='exp_' value='" + esc(u.exp) + "'></td><td>" + st + "</td><td>" + (u.online ? "<span class='ok'>● " + u.online + "</span>" : "<span class='note'>離線</span>") + "</td><td>" + ts(u.last_seen) + "</td>" +
-      "<td><button class='save_ pri'>儲存</button> <button class='en_'>" + (u.enabled ? "停權" : "復權") + "</button> <button class='re_'>重發 token</button></td></tr>"; }).join("");
+      "<td><input class='start_' value='" + esc(u.start) + "' placeholder='YYYY-MM-DD' style='width:120px'></td><td><input class='exp_' value='" + esc(u.exp) + "' placeholder='YYYY-MM-DD' style='width:120px'></td>" +
+      "<td><input class='tg_' placeholder='" + (u.tg ? "已設（填新值覆蓋）" : "chat id") + "' style='width:110px'></td>" +
+      "<td>" + st + "</td><td>" + (u.online ? "<span class='ok'>● " + u.online + "</span>" : "<span class='note'>離線</span>") + "</td><td>" + esc(u.ver || "—") + "</td><td style='white-space:normal;min-width:160px'>" + rc + "</td><td>" + ts(u.last_seen) + "</td>" +
+      "<td><button class='save_ pri'>儲存</button> <button class='en_'>" + (u.enabled ? "停用" : "恢復") + "</button> <button class='inv_'>產開通碼</button> <button class='re_'>重發 token</button></td></tr>"; }).join("");
   document.querySelectorAll("tr[data-u]").forEach(tr => {
     const id = tr.dataset.u, u = ST.users.find(x => x.id === id);
     tr.querySelector("[data-s='*']").onchange = e => tr.querySelectorAll("[data-s]:not([data-s='*'])").forEach(c => { c.disabled = e.target.checked; c.checked = e.target.checked || (u.subs !== "*" && u.subs.split(",").includes(c.dataset.s)); });
-    tr.querySelector(".save_").onclick = () => act(() => api("set?id=" + id, "POST", {note: tr.querySelector(".note_").value, exp: tr.querySelector(".exp_").value, subs: pick(tr, "s")}), "已儲存 " + id);
+    tr.querySelector(".save_").onclick = () => { const b = {note: tr.querySelector(".note_").value, start: tr.querySelector(".start_").value.trim(), exp: tr.querySelector(".exp_").value.trim(), subs: pick(tr, "s")};
+      const tg = tr.querySelector(".tg_").value.trim(); if (tg) b.tg = tg;
+      act(() => api("set?id=" + id, "POST", b), "已儲存 " + id); };
+    tr.querySelector(".inv_").onclick = () => confirm("產生新的開通碼（24 小時有效、一次性）？客戶用它開通後，舊 token 會失效。") && act(async () => showInv(id, await api("invite?id=" + id, "POST", {})));
     tr.querySelector(".en_").onclick = () => confirm((u.enabled ? "停權" : "復權") + " " + id + "？") && act(() => api((u.enabled ? "disable" : "enable") + "?id=" + id, "POST", {}));
     tr.querySelector(".re_").onclick = () => confirm("重發後舊 token 立刻失效、他的接收端會被踢掉，要把新 token 給他重設。確定？") && act(async () => showTok(id, (await api("user?id=" + id, "POST", {})).token));
   });
@@ -116,12 +128,20 @@ function showTok(id, tok) {
   $("#tkC").onclick = e => navigator.clipboard.writeText($("#tkV").value).then(() => e.target.textContent = "已複製");
   $("#tkX").onclick = () => { b.innerHTML = ""; b.style.display = "none"; };
 }
+function showInv(id, r) {
+  const b = $("#tokbox"); b.style.display = "";
+  b.innerHTML = "<b>" + esc(id) + " 的開通碼</b>：<span style='font-size:22px;letter-spacing:3px;color:var(--acc)'>" + esc(r.code) + "</span>（" + esc(ts(Date.parse(r.expires))) + " 前有效、用一次就作廢）<div class='row' style='margin-top:6px'><button id='tkC'>複製</button><button id='tkX'>關閉</button></div>";
+  $("#tkC").onclick = e => navigator.clipboard.writeText(r.code).then(() => e.target.textContent = "已複製");
+  $("#tkX").onclick = () => { b.innerHTML = ""; b.style.display = "none"; };
+}
+function saveRisk() { act(() => api("risk", "POST", {win: +$("#rkWin").value, max: +$("#rkMax").value}), "風控參數已儲存"); }
 function addStrat() { const c = $("#stCode").value.trim(); if (!c) return; act(() => api("strategy?code=" + encodeURIComponent(c), "POST", {name: $("#stName").value.trim() || c, listed: false})); $("#stCode").value = $("#stName").value = ""; }
-function addUser() {
+function addUser(invite) {
   const id = $("#nuId").value.trim();
   if (!/^[A-Za-z0-9_-]{1,40}$/.test(id)) { say("代號只能用英文、數字、_、-", true); return; }
   if (ST.users.some(u => u.id === id)) { say("代號已存在（要換 token 請按那一列的「重發 token」）", true); return; }
-  act(async () => { const r = await api("user?id=" + id, "POST", {note: $("#nuNote").value, exp: $("#nuExp").value, subs: pick($("#nuSubs"), "n")}); showTok(id, r.token); $("#nuId").value = $("#nuNote").value = ""; });
+  act(async () => { const r = await api((invite ? "invite" : "user") + "?id=" + id, "POST", {note: $("#nuNote").value, start: $("#nuStart").value, exp: $("#nuExp").value, subs: pick($("#nuSubs"), "n")});
+    if (invite) showInv(id, r); else showTok(id, r.token); $("#nuId").value = $("#nuNote").value = ""; });
 }
 async function simulate() {
   try { const r = await api("simulate", "POST", {strategy: $("#simS").value});

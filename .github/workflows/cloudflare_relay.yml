@@ -1,6 +1,6 @@
 # cloudflare_relay.yml ─ 部署並測試「下單訊號雲端中繼」gea-signal-relay（Evans 2026-10-11 15:50 派工；協定見 CustomerServiceANDSales TODO.md 同段）
 #   程式：本 repo cloudflare/relay（wrangler.toml、src/worker.js、test.mjs）。跟即時信息流 gea-live 分開部署。
-#   secrets：沿用 CLOUDFLARE_API_TOKEN、CLOUDFLARE_ACCOUNT_ID。
+#   secrets：沿用 CLOUDFLARE_API_TOKEN、CLOUDFLARE_ACCOUNT_ID；TG_BOT_TOKEN、TG_CHAT_ID 設成 Worker secret（11-01：中繼代客戶端發 TG）。
 #   RELAY_PUB_TOKEN／RELAY_ADMIN_TOKEN：第一次部署時產生，存進 D1 資料庫 gea-relay-keys 的 keys 表（Evans 從 Cloudflare 主控台複製，
 #     路徑寫在 TODO 雲端段），再設成 Worker secret；之後每次部署沿用同一組（不會換，除非 mode=rotate）。log 只印遮罩。
 #   mode：deploy＝部署＋自動測試；test＝只測試；rotate＝換新兩組 token 後部署＋測試（換完發送端與管理端要改用新值）。
@@ -34,6 +34,8 @@ jobs:
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}        # 11-01 第 2e 項：客戶端 TG 由中繼轉發（客戶電腦不放 bot token）
+      TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
       DB: gea-relay-keys
     steps:
       - uses: actions/checkout@v4
@@ -73,7 +75,7 @@ jobs:
         run: |
           set -o pipefail
           wrangler deploy 2>&1 | tee deploy.log
-          python3 -c "import json,os; json.dump({k: os.environ[k] for k in ('RELAY_PUB_TOKEN','RELAY_ADMIN_TOKEN')}, open('/tmp/sec.json','w'))"
+          python3 -c "import json,os; json.dump({k: os.environ[k] for k in ('RELAY_PUB_TOKEN','RELAY_ADMIN_TOKEN','TG_BOT_TOKEN','TG_CHAT_ID') if os.environ.get(k)}, open('/tmp/sec.json','w'))"
           wrangler secret bulk /tmp/sec.json; rm -f /tmp/sec.json
           sleep 15
       - name: 套用正式訂閱規則（mode=subs）

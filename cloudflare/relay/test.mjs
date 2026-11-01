@@ -19,10 +19,10 @@ async function admin(path, method = "POST") {
 }
 
 // 開連線；回 {ws, got[], ctl[], closed}；握手失敗回 {err: HTTP 狀態}
-function connect(role, id, token) {
+function connect(role, id, token, v2 = false) {
   return new Promise(res => {
     const c = { got: [], ctl: [], pong: 0, closed: null, t: [] };
-    const ws = new WebSocket(`${WSB}/ws?ch=${CH}&role=${role}&id=${id}`, { headers: { Authorization: "Bearer " + token } });
+    const ws = new WebSocket(`${WSB}/ws?ch=${CH}&role=${role}&id=${id}${v2 ? "&v=2" : ""}`, { headers: { Authorization: "Bearer " + token } });
     c.ws = ws;
     ws.on("unexpected-response", (req, r) => res({ err: r.statusCode }));
     ws.on("error", e => res({ err: String(e.message || e) }));
@@ -44,6 +44,9 @@ const kickedCode = c => c.closed ? c.closed[0] : (c.ws._closeFrameReceived ? c.w
 const until = async (fn, ms = 5000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (fn()) return true; await sleep(20); } return fn(); };
 
 console.log("頻道", CH, "｜", BASE);
+const post = async (path, body) => { const r = await fetch(`${BASE}/admin/${path}${path.includes("?") ? "&" : "?"}ch=${CH}`, { method: "POST",
+  headers: { Authorization: "Bearer " + ADMIN, "content-type": "application/json" }, body: JSON.stringify(body || {}) }); return { status: r.status, j: await r.json().catch(() => ({})) }; };
+ok((await post("risk", { max: 100, win: 5 })).status === 200, "（舊測試連發很多則：連續下單風控先放寬到 5 秒 100 次；風控在最後另測）");
 // ── 建用戶
 const tok = {};
 for (const u of ["u1", "u2", "u3", "u4"]) {
@@ -135,7 +138,7 @@ const us = await admin("users", "GET");
 ok((us.j.users || []).length === 5, "/admin/users 列 5 個用戶", (us.j.users || []).map(u => u.id + (u.enabled ? "" : "(停)")).join(","));
 
 // ── 只留最近 500 則；要補的太舊 → replayed.gap 標出缺段
-for (let i = 16; i <= 520; i++) pub.ws.send(sig(i));
+for (let i = 16; i <= 520; i++) pub.ws.send(sig(i, { Strategy: "B" + (i % 10) }));   // 分 10 支策略送，不碰連續下單風控
 await until(() => pub.ctl.filter(c => c.ctl === "ack" && c.seq === 520).length === 1, 20000);
 tok.r1 = (await admin("user?id=r1&subs=*")).j.token;               // 另開代號：同代號再連會把 u1 踢掉（4009，同代號只留一條）
 const old = await connect("sub", "r1", tok.r1);
@@ -146,8 +149,6 @@ ok(old.got.length === 500 && old.got[0].Seq === 21 && rq.last === 520 && JSON.st
 old.ws.close();
 
 // ── 訂閱控管（10-18 20:40 派工第 1 項）：只轉送訂閱且上架的策略；補發照同一規則；到期踢線；模擬端點；管理頁
-const post = async (path, body) => { const r = await fetch(`${BASE}/admin/${path}${path.includes("?") ? "&" : "?"}ch=${CH}`, { method: "POST",
-  headers: { Authorization: "Bearer " + ADMIN, "content-type": "application/json" }, body: JSON.stringify(body || {}) }); return { status: r.status, j: await r.json().catch(() => ({})) }; };
 let st = await admin("state", "GET");
 ok((st.j.strategies || []).some(s => s.code === "TEST" && !s.listed), "送過的策略自動登記成下架", JSON.stringify(st.j.strategies));
 ok((await post("strategy?code=GEA5", { listed: true })).status === 200 && (await post("strategy?code=GEA6", { listed: false })).status === 200, "登記 GEA5 上架、GEA6 下架");
@@ -217,6 +218,66 @@ pub.ws.send(sig(++q, { Strategy: "GEA5" }));
 await until(() => d1b.got.some(m => m.Seq === q)); await sleep(300);
 ok(d1b.got.filter(m => m.Seq === q).length === 1 && d1a.got.length === nA, "訊號只送新的那條、只一份");
 d1b.ws.close();
+
+// ── 11-01 下單機 1.0：開通碼、服務期間（v2 收 4012）、部位快照、hello／recon／tg、連續下單風控、合約表
+const rd = async code => { const r = await fetch(`${BASE}/redeem?ch=${CH}`, { method: "POST", headers: { "content-type": "application/json" },
+  body: JSON.stringify({ code, ver: "test" }) }); return { status: r.status, j: await r.json().catch(() => ({})) }; };
+const inv = await post("invite?id=n1", { subs: ["GEA5"], exp: "2099-12-31" });
+ok(inv.status === 200 && /^[2-9A-HJ-NP-Z]{8}$/.test(inv.j.code || ""), "產開通碼：8 碼、沒有 0／O／1／I", inv.j.code);
+ok((await rd("AAAAAAAA")).status === 404, "錯的開通碼 → 404");
+const red = await rd(inv.j.code.toLowerCase().slice(0, 4) + "-" + inv.j.code.slice(4));
+ok(red.status === 200 && red.j.id === "n1" && /^[0-9a-f]{48}$/.test(red.j.token || "") && red.j.off === null, "開通碼換 token（小寫、連字號都容許）", "HTTP " + red.status);
+ok((await rd(inv.j.code)).status === 404, "開通碼用過就作廢");
+tok.n1 = red.j.token;
+const n1 = await connect("sub", "n1", tok.n1, true);
+ok(!n1.err, "n1（v2）連上");
+n1.ws.send(JSON.stringify({ hello: { ver: "20261101a" } }));
+n1.ws.send(JSON.stringify({ since: 1e15, snap: 1 }));
+await until(() => n1.ctl.some(c => c.ctl === "replayed"));
+const sn = n1.ctl.find(c => c.ctl === "snap") || {};
+ok(sn.n === 1 && sn.items[0].Strategy === "GEA5" && sn.items[0].Seq === q && n1.got.length === 0, "部位快照：只給他訂的 GEA5 最新一則、since 很大就不補發", JSON.stringify(sn).slice(0, 160));
+n1.ws.send(JSON.stringify({ recon: { ok: false, detail: "GEA5 檔案 1、中繼最新 0" } }));
+n1.ws.send(JSON.stringify({ tg: "測試：接收端 TG 經中繼" }));
+await sleep(500);
+st = await admin("state", "GET");
+const n1s = (st.j.users || []).find(x => x.id === "n1") || {};
+ok(n1s.ver === "20261101a" && /^✗ GEA5/.test(n1s.recon || "") && st.j.tg_test >= 1, "hello／recon 記進管理頁、tg 轉發（測試頻道只計數）", JSON.stringify({ ver: n1s.ver, recon: n1s.recon, tg: st.j.tg_test }));
+const cu = `${BASE}/contracts?ch=${CH}&id=n1`;
+const ct = await fetch(cu, { headers: { Authorization: "Bearer " + tok.n1 } });
+const ctext = await ct.text(), csig = ct.headers.get("x-gea-sig") || "";
+ok(ct.status === 200 && ctext.includes("TAIFEX.TMF,") && csig.length === 88 && /^\d{12}$/.test(ct.headers.get("x-gea-ver") || ""), "GET /contracts：合約表＋簽章＋版本", `HTTP ${ct.status}、${ctext.split("\n").length - 1} 列、版本 ${ct.headers.get("x-gea-ver")}`);
+ok((await fetch(cu, { headers: { Authorization: "Bearer deadbeef" } })).status === 401 && (await fetch(cu)).status === 401, "GET /contracts 錯 token／沒 token → 401");
+await post("set?id=n1", { exp: "2020-01-01" });
+await until(() => kickedCode(n1));
+ok(kickedCode(n1) === 4012, "v2 接收端到期 → 4012（顯示「服務期限已到」，不平倉）", String(kickedCode(n1)));
+let n1b = await connect("sub", "n1", tok.n1, true);
+await until(() => kickedCode(n1b));
+ok(!n1b.err && kickedCode(n1b) === 4012, "到期後 v2 再連 → 先接受再 4012", String(n1b.err || kickedCode(n1b)));
+r = await connect("sub", "n1", tok.n1);
+ok(r.err === 403, "到期後舊接收端再連 → 照舊 403", "HTTP " + r.err);
+await post("set?id=n1", { start: "2099-01-01", exp: "2099-12-31" });
+n1b = await connect("sub", "n1", tok.n1, true);
+await until(() => kickedCode(n1b));
+ok(kickedCode(n1b) === 4012 && /not started/.test(n1b.closed ? n1b.closed[1] : n1b.ws._closeMessage || "not started"), "還沒開始 → 4012", String(kickedCode(n1b)));
+await post("set?id=n1", { start: "", exp: "2099-12-31" });
+n1b = await connect("sub", "n1", tok.n1, true);
+await sleep(500);
+ok(!n1b.err && !kickedCode(n1b), "改回服務期間內 → 可再連");
+// 連續下單風控：60 秒內第 5 次 → 暫停、不轉送；解除後恢復
+await post("risk", { max: 4, win: 60 });
+await post("strategy?code=RSK", { listed: true });
+const n0 = subs.u1.got.length;
+for (let i = 0; i < 6; i++) { pub.ws.send(sig(++q, { Strategy: "RSK" })); await sleep(80); }
+await until(() => pub.ctl.filter(c => c.ctl === "ack" && c.seq === q).length === 1); await sleep(300);
+const rk = subs.u1.got.slice(n0).filter(m => m.Strategy === "RSK").length;
+const pz = pub.ctl.filter(c => c.ctl === "ack" && c.paused).length;
+st = await admin("state", "GET");
+ok(rk === 4 && pz === 2 && (st.j.strategies || []).some(s => s.code === "RSK" && s.paused), "60 秒內第 5 次起暫停轉送（4 則送出、2 則擋下、ack 帶 paused）", `送出 ${rk}、擋下 ${pz}`);
+await post("strategy?code=RSK", { paused: false });
+pub.ws.send(sig(++q, { Strategy: "RSK" }));
+await until(() => subs.u1.got.some(m => m.Seq === q));
+ok(subs.u1.got.some(m => m.Seq === q), "管理頁解除暫停 → 下一則照送（暫停期間的不補）");
+n1b.ws.close();
 
 // ── 收尾
 for (const c of [subs.u1, u3b, pub]) c.ws.close();
