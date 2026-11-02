@@ -67,6 +67,7 @@ const MAX_BYTES = 8192;         // 單則訊號上限
 const NAME_RE = /^[A-Za-z0-9_-]{1,40}$/;
 const WHEN_RE = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?$/;
 const INVITE_ABC = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";   // 排除 0、O、1、I
+const INV_KEEP = 7 * 86400e3;   // 11-02 08:00 二、2：用過（used_at）、過期的開通碼留 7 天，重填時才分得出「已經用過／已過期／不對」
 const today = () => new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10);   // 台北日期
 // 台北時間字串 → UTC 毫秒；日期（沒有時分）：end=true 取那天結束（隔天 00:00），否則那天 00:00
 function tpMs(s, end) {
@@ -319,7 +320,7 @@ export class Relay extends DurableObject {
                           ["users", "start TEXT NOT NULL DEFAULT ''"], ["users", "tg TEXT NOT NULL DEFAULT ''"], ["users", "ver TEXT"],
                           ["users", "recon TEXT"], ["users", "recon_at INTEGER"], ["users", "warned TEXT NOT NULL DEFAULT ''"],
                           ["strategies", "paused INTEGER NOT NULL DEFAULT 0"], ["strategies", "paused_at INTEGER"], ["strategies", "paused_why TEXT"],
-                          ["msgs", "held INTEGER NOT NULL DEFAULT 0"], ["invites", "kind TEXT NOT NULL DEFAULT 'sub'"], ["invites", "note TEXT NOT NULL DEFAULT ''"]]) {
+                          ["msgs", "held INTEGER NOT NULL DEFAULT 0"], ["invites", "kind TEXT NOT NULL DEFAULT 'sub'"], ["invites", "note TEXT NOT NULL DEFAULT ''"], ["invites", "used_at INTEGER"]]) {
       if (!this.sql.exec(`PRAGMA table_info(${t})`).toArray().some(r => r.name === c.split(" ")[0])) this.sql.exec(`ALTER TABLE ${t} ADD COLUMN ${c}`);
     }
   }
@@ -486,7 +487,7 @@ export class Relay extends DurableObject {
       strategies: this.sql.exec("SELECT * FROM strategies ORDER BY code").toArray()
         .map(r => ({ ...r, listed: !!r.listed, paused: !!r.paused, kept: stat[r.code] ? stat[r.code].n : 0, last: stat[r.code] ? stat[r.code].last : null,
           snap_seq: snap[r.code] ? snap[r.code].seq : null })),
-      invites: this.sql.exec("SELECT code, id, exp_ms, kind FROM invites WHERE exp_ms > ? ORDER BY exp_ms", now).toArray(),
+      invites: this.sql.exec("SELECT code, id, exp_ms, kind FROM invites WHERE exp_ms > ? AND used_at IS NULL ORDER BY exp_ms", now).toArray(),
       pubs: this.sql.exec("SELECT id, enabled, note, created FROM pubtok ORDER BY id").toArray()
         .map(r => ({ ...r, enabled: !!r.enabled, online: this.live("p:" + r.id).length })),
       contracts_ver: CONTRACTS.ver, tg_test: Number(this.meta("tg_test_n") || 0) };
@@ -614,7 +615,7 @@ export class Relay extends DurableObject {
     }
     if (!NAME_RE.test(id)) return J({ error: "bad id" }, 400);
     if (p === "/admin/invite" && body.kind === "pub") {                     // 11-01 23:40：傳送端開通碼（不建客戶、不綁身分證）
-      this.sql.exec("DELETE FROM invites WHERE (id=? AND kind='pub') OR exp_ms < ?", id, Date.now());
+      this.sql.exec("DELETE FROM invites WHERE (id=? AND kind='pub' AND used_at IS NULL) OR exp_ms < ?", id, Date.now() - INV_KEEP);
       let code;
       do { code = newInvite(); } while (this.sql.exec("SELECT code FROM invites WHERE code=?", code).toArray().length);
       const exp = Date.now() + 24 * 3600e3;
@@ -636,7 +637,7 @@ export class Relay extends DurableObject {
       const bad = this.applyUser(id, body, qs);
       if (bad) { if (isNew) this.sql.exec("DELETE FROM users WHERE id=?", id); return J({ error: bad }, 400); }
       if (p === "/admin/invite") {                                            // 開通碼：token 等客戶用開通碼換（現有 token 不動）
-        this.sql.exec("DELETE FROM invites WHERE (id=? AND kind='sub') OR exp_ms < ?", id, Date.now());
+        this.sql.exec("DELETE FROM invites WHERE (id=? AND kind='sub' AND used_at IS NULL) OR exp_ms < ?", id, Date.now() - INV_KEEP);
         let code;
         do { code = newInvite(); } while (this.sql.exec("SELECT code FROM invites WHERE code=?", code).toArray().length);
         const exp = Date.now() + 24 * 3600e3;
@@ -704,15 +705,16 @@ export class Relay extends DurableObject {
     const body = await req.json().catch(() => ({})) || {};
     const code = String(body.code || "").toUpperCase().replace(/[^0-9A-Z]/g, "");
     const r = code.length === 8 ? this.sql.exec("SELECT * FROM invites WHERE code=?", code).toArray()[0] : null;
-    if (!r || r.exp_ms < now) {
+    if (!r || r.used_at || r.exp_ms < now) {                                  // 11-02 08:00 二、2：用過／過期／不對分開回（用過、過期的留 7 天才分得出來）
       this.meta("redeem_fail", JSON.stringify([minute, fail[0] === minute ? fail[1] + 1 : 1]));
-      if (r) this.sql.exec("DELETE FROM invites WHERE code=?", code);
-      return J({ error: r ? "開通碼已過期（24 小時），請營業員重新產生" : "開通碼不對（或已經用過），請核對 8 碼" }, 404);
+      if (!r) return J({ error: "開通碼不對，請核對 8 碼（沒有 0、O、1、I）", why: "bad" }, 404);
+      if (r.used_at) return J({ error: "開通碼已經用過（只能用一次）", why: "used" }, 404);
+      return J({ error: "開通碼已過期（超過 24 小時），請營業員重新產生", why: "expired" }, 404);
     }
     if ((r.kind === "pub") !== (body.want === "pub"))                        // 11-01 23:40：填錯地方 → 400、開通碼不作廢（舊版客戶端沒帶 want＝客戶開通碼）
       return J({ error: r.kind === "pub" ? "這是管理者開通碼（傳送端用），請在設定精靈第 0 步「我有管理者開通碼」輸入" : "這不是管理者開通碼（客戶的開通碼請在第 3 步「開通碼」填）", why: "wrong kind" }, 400);
     if (r.kind === "pub") {                                                   // 11-01 23:40：傳送端開通碼 → 傳送端 token（換 token 踢掉同代號舊連線）
-      this.sql.exec("DELETE FROM invites WHERE code=?", code);
+      this.sql.exec("UPDATE invites SET used_at=? WHERE code=?", now, code);
       const tok = newToken();
       this.sql.exec("INSERT INTO pubtok(id, th, enabled, note, created) VALUES(?,?,1,?,?) ON CONFLICT(id) DO UPDATE SET th=excluded.th, enabled=1, note=excluded.note",
                     r.id, await sha256(tok), r.note || "", Date.now());
@@ -727,7 +729,7 @@ export class Relay extends DurableObject {
       await this.evans(`⚠ 客戶 ${r.id}（${user.note || "沒有備註"}）用開通碼開通被擋：${bad}`);
       return J({ error: "身分證與開通時不同，請聯絡營業員", why: "id mismatch" }, 403);
     }
-    this.sql.exec("DELETE FROM invites WHERE code=?", code);                 // 一次性：先作廢再發 token
+    this.sql.exec("UPDATE invites SET used_at=? WHERE code=?", now, code);   // 一次性：先作廢再發 token（11-02：留 used_at 7 天，重填才回得出「已經用過」）
     const tok = newToken();
     this.sql.exec("UPDATE users SET th=? WHERE id=?", await sha256(tok), r.id);
     for (const ws of this.ctx.getWebSockets("s:" + r.id)) ws.close(4003, "token reissued");
@@ -756,7 +758,7 @@ export class Relay extends DurableObject {
         warned.push(x.id);
       }
     }
-    this.sql.exec("DELETE FROM invites WHERE exp_ms < ?", now);
+    this.sql.exec("DELETE FROM invites WHERE exp_ms < ?", now - INV_KEEP);   // 用過、過期的作廢紀錄留 7 天
     this.sql.exec("DELETE FROM risk WHERE ts < ?", now - 3600e3);
     return J({ ok: true, kicked, warned });
   }

@@ -228,7 +228,10 @@ ok(inv.status === 200 && /^[2-9A-HJ-NP-Z]{8}$/.test(inv.j.code || ""), "產開�
 ok((await rd("AAAAAAAA")).status === 404, "錯的開通碼 → 404");
 const red = await rd(inv.j.code.toLowerCase().slice(0, 4) + "-" + inv.j.code.slice(4));
 ok(red.status === 200 && red.j.id === "n1" && /^[0-9a-f]{48}$/.test(red.j.token || "") && red.j.off === null, "開通碼換 token（小寫、連字號都容許）", "HTTP " + red.status);
-ok((await rd(inv.j.code)).status === 404, "開通碼用過就作廢");
+{ const again = await rd(inv.j.code);
+  ok(again.status === 404 && again.j.why === "used" && /已經用過/.test(again.j.error || ""), "開通碼用過就作廢；再填一次回「已經用過」（不是過期）", again.j.error); }
+{ const bad = await rd("ZZZZZZZZ");
+  ok(bad.status === 404 && bad.j.why === "bad" && /不對/.test(bad.j.error || ""), "沒有這組開通碼 → 回「開通碼不對」", bad.j.error); }
 tok.n1 = red.j.token;
 const n1 = await connect("sub", "n1", tok.n1, true);
 ok(!n1.err, "n1（v2）連上");
