@@ -1,7 +1,7 @@
 {
- "ver": "20261101c1",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261101c1/GEA_OM_Setup_20261101c1.exe",
- "sha256": "39e719ab94f3402126a0b64ba33dc5db49372f3891fca21a97bed11a8da20bbc",
- "notes": "20261101c1：設定精靈加「國票登入檢查」（正式環境、只查詢不下單；顯示國票原文與期貨帳號、TG 通知 Evans）",
- "sig": "FgGIDmO/rff3ebJXfC207fsQ6WH0CVJL1ploajCYZMzjPtVTh40ulBsi6+i+yp+EoIRtonuJPJZKJwq6B0aqfQ=="
+ "ver": "20261101d6",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261101d6/GEA_OM_Setup_20261101d6.exe",
+ "sha256": "7c3d39707e93a1e721fed94ccf052ea16937236f9ba5a9db45434c6099d583bb",
+ "notes": "d6：日誌分類修正（設定／開關跟單不算委託成交）、沒設定的策略不算異常、服務到期日、關閉前確認、全部暫停跟單、真單紅底橫幅、取消訂閱自動關跟單（保留部位）",
+ "sig": "49H+VbublSW2jyUsas8ho1ol0inbb7HXDo8EcEgvb5LnS2vOLdvSrDze7wi5ybIcmOhIX1H12MA6jE98HVFHYw=="
 }
