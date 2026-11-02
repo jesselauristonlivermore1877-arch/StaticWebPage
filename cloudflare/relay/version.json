@@ -1,7 +1,7 @@
 {
- "ver": "20261101d6",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261101d6/GEA_OM_Setup_20261101d6.exe",
- "sha256": "7c3d39707e93a1e721fed94ccf052ea16937236f9ba5a9db45434c6099d583bb",
- "notes": "d6：日誌分類修正（設定／開關跟單不算委託成交）、沒設定的策略不算異常、服務到期日、關閉前確認、全部暫停跟單、真單紅底橫幅、取消訂閱自動關跟單（保留部位）",
- "sig": "49H+VbublSW2jyUsas8ho1ol0inbb7HXDo8EcEgvb5LnS2vOLdvSrDze7wi5ybIcmOhIX1H12MA6jE98HVFHYw=="
+ "ver": "20261101d7",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261101d7/GEA_OM_Setup_20261101d7.exe",
+ "sha256": "a83459694a30192cfbfb71b42338d1bafb13e7571c2d1d7dff306dd4dc1d32e2",
+ "notes": "d6＋重開跟單有客戶保留部位時先確認、保留部位併回策略一起對齊；選項 3（只收訊號給 MoneyPrinter／CT PRO）的電腦不強制升級；安裝檔只關 C:\\GEA_om\bin 底下的程式（影子不關）；測試不寫正式 log",
+ "sig": "uXrqq1dAHXMYMZURp9HV+WKMUQoOWwkXSiDPC677p48/viARQd3DuHQkAs/8CQ7lnELAdhwvrLm9LUfzdlkgxA=="
 }
