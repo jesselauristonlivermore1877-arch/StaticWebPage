@@ -51,7 +51,7 @@ ok((await post("risk", { max: 100, win: 5 })).status === 200, "（舊測試連�
 // ── 建用戶
 const tok = {};
 for (const u of ["u1", "u2", "u3", "u4"]) {
-  const r = await admin("user?id=" + u + "&subs=*");                     // 這批用戶訂閱「全部」（舊測試照舊）；訂閱控管在後面另測
+  const r = await admin("user?id=" + u + "&subs=**");                     // 這批用戶訂閱「全部含下架」（11-02 13:45 起「*」只收上架；這批測的是廣播機制）；訂閱控管在後面另測
   tok[u] = r.j.token;
   ok(r.status === 200 && /^[0-9a-f]{48}$/.test(r.j.token || ""), `新增用戶 ${u}`);
 }
@@ -141,7 +141,7 @@ ok((us.j.users || []).length === 5, "/admin/users 列 5 個用戶", (us.j.users 
 // ── 只留最近 500 則；要補的太舊 → replayed.gap 標出缺段
 for (let i = 16; i <= 520; i++) pub.ws.send(sig(i, { Strategy: "B" + (i % 10) }));   // 分 10 支策略送，不碰連續下單風控
 await until(() => pub.ctl.filter(c => c.ctl === "ack" && c.seq === 520).length === 1, 20000);
-tok.r1 = (await admin("user?id=r1&subs=*")).j.token;               // 另開代號：同代號再連會把 u1 踢掉（4009，同代號只留一條）
+tok.r1 = (await admin("user?id=r1&subs=**")).j.token;               // 另開代號：同代號再連會把 u1 踢掉（4009，同代號只留一條）
 const old = await connect("sub", "r1", tok.r1);
 old.ws.send(JSON.stringify({ since: 0 }));
 await until(() => old.ctl.some(c => c.ctl === "replayed"), 20000);
@@ -171,7 +171,7 @@ await until(() => ackS() && ackS().seq === q);
 ok(ackS().subs === 2 + 2 && ackS().online >= 6, "ack 的 subs＝實際送出數（s1、s2＋兩個全部訂閱）", JSON.stringify(ackS()));
 pub.ws.send(sigS(++q, "GEA6"));
 await until(() => subs.u1.got.some(m => m.Seq === q)); await sleep(300);
-ok(got("s2") === "GEA5521" && got("s3") === "" && subs.u1.got.some(m => m.Seq === q), "GEA6（下架）一般客戶都收不到；訂「全部」的照收");
+ok(got("s2") === "GEA5521" && got("s3") === "" && subs.u1.got.some(m => m.Seq === q), "GEA6（下架）一般客戶都收不到；訂「全部含下架」的照收");
 await post("strategy?code=GEA6", { listed: true });
 pub.ws.send(sigS(++q, "GEA6"));
 await until(() => sc.s3.got.length >= 1); await sleep(300);
@@ -205,7 +205,7 @@ ok(cons.status === 200 && (await cons.text()).includes("GEA 下單訊號管理")
 for (const id of ["s1", "s3", "s0"]) sc[id].ws.close();
 
 // ── 同代號只留一條（總指揮 2026-10-19 00:50）：同 id 連兩次 → 舊的以 4009 被踢、新的照收、訊號只送一份
-const dj = await admin("user?id=d1&subs=*");
+const dj = await admin("user?id=d1&subs=**");
 const d1a = await connect("sub", "d1", dj.j.token);
 const d1b = await connect("sub", "d1", dj.j.token);
 await until(() => kickedCode(d1a));
@@ -241,6 +241,7 @@ await until(() => n1.ctl.some(c => c.ctl === "replayed"));
 const sn = n1.ctl.find(c => c.ctl === "snap") || {};
 ok(sn.n === 1 && sn.items[0].Strategy === "GEA5" && sn.items[0].Seq === q && n1.got.length === 0, "部位快照：只給他訂的 GEA5 最新一則、since 很大就不補發", JSON.stringify(sn).slice(0, 160));
 ok(Array.isArray(sn.strats) && sn.strats.includes("GEA5") && sn.strats.every(c => c === "GEA5"), "快照附他訂閱且已上架的策略清單（只訂 GEA5 → [GEA5]）", JSON.stringify(sn.strats));
+ok(typeof sn.exp === "string", "快照附服務到期日（exp；不限＝空字串）", JSON.stringify(sn.exp));
 { const ra = await post("user?id=sall", { subs: "*" }); const sa = await connect("sub", "sall", ra.j.token, true);
   sa.ws.send(JSON.stringify({ since: 1e15, snap: 1 }));
   await until(() => sa.ctl.some(c => c.ctl === "replayed"));
@@ -403,6 +404,7 @@ n1b.ws.close();
   ok(/✅ 上架 GEA5/.test(R[0] || "") && /⛔ 下架 GEA_NEWX/.test(R[0] || "") && /最後訊號/.test(R[0] || "") && /訂閱 \d+ 人/.test(R[0] || ""), "/策略 → 代號、上架／下架、最後訊號、訂閱人數", (R[0] || "").slice(0, 120));
   ok(/沒有策略 NOPE/.test((await cmd("/上架 NOPE"))[0] || ""), "/上架 打錯代號 → 不新增、列出現有的");
   ok(/已上架/.test((await cmd("/上架 GEA_NEWX"))[0] || "") && ((await admin("state", "GET")).j.strategies || []).find(s => s.code === "GEA_NEWX").listed === true, "/上架 GEA_NEWX");
+  await cmd("/訂閱 王小明 GEA5");
   R = await cmd("/訂閱 王小明 GEA5,GEA_NEWX");
   ok(/不用重發開通碼/.test(R[0] || "") && /新增：GEA_NEWX/.test(R[0] || "") && ((await admin("state", "GET")).j.users || []).find(u => u.id === cu.id).subs === "GEA5,GEA_NEWX", "/訂閱 姓名 策略 → 改訂閱、列出新增", (R[0] || "").slice(0, 120));
   R = await cmd("/訂閱 " + cu.id + " GEA5");

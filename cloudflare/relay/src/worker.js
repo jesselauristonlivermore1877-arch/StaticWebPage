@@ -930,7 +930,8 @@ export class Relay extends DurableObject {
         .filter(r => this.why(user, r.strat, S, true) === null).map(r => r.body);
       // 11-02 10:35 第 1 項：快照可能是空的（還沒有任何已轉送的訊號）→ 另給「他訂閱、而且已上架」的策略清單（訂閱全部＝所有已上架），接收端拿來建策略列
       const strats = Object.values(S).filter(x => user.subs === "**" || x.listed && (user.subs === "*" || String(user.subs || "").split(",").includes(x.code))).map(x => x.code).sort();
-      this.send(ws, '{"ctl":"snap","n":' + items.length + ',"strats":' + JSON.stringify(strats) + ',"items":[' + items.join(",") + "]}");
+      // 11-02 13:45 第 2c 項：順便給服務到期日（下單機「服務到期」燈用）
+      this.send(ws, '{"ctl":"snap","n":' + items.length + ',"strats":' + JSON.stringify(strats) + ',"exp":' + JSON.stringify(user.exp || "") + ',"items":[' + items.join(",") + "]}");
     }
     const rows = this.sql.exec("SELECT seq, strat, body FROM msgs WHERE seq > ? AND held=0 ORDER BY seq", since).toArray()
       .filter(r => this.why(user, r.strat || Relay.stratOf(r.body), S) === null);       // 只補他有權收的
