@@ -2,7 +2,7 @@
  "file": "3211_2026-10-30.md",
  "code": "3211",
  "date": "2026-10-30",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 36.06 倍，站上資料 40.0943"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",
