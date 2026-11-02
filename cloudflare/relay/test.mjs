@@ -247,7 +247,20 @@ ok(Array.isArray(sn.strats) && sn.strats.includes("GEA5") && sn.strats.every(c =
   const ss = (sa.ctl.find(c => c.ctl === "snap") || {}).strats || [], all = ((await admin("state", "GET")).j.strategies || []);
   const want = all.filter(x => x.listed).map(x => x.code).sort();
   ok(want.length >= 2 && JSON.stringify(ss) === JSON.stringify(want) && !ss.some(c => all.find(x => x.code === c && !x.listed)), "訂閱全部 → 快照列出所有已上架策略（不含下架的）", JSON.stringify(ss));
-  sa.ws.close(); }
+  sa.ws.close();
+  // 11-02 13:45 第 1 項：「*」＝只收已上架；「**」＝全部含下架（只能管理頁設，開通碼不給）
+  await post("strategy?code=T_OFFX", { listed: false });
+  const r2 = await post("user?id=sall2", { subs: "**" });
+  const sm = (await post("simulate", { strategy: "T_OFFX" })).j.users || [];
+  const s1 = sm.find(x => x.id === "sall") || {}, s2 = sm.find(x => x.id === "sall2") || {};
+  ok(s1.receive === false && /未上架/.test(s1.why || "") && s2.receive === true, "下架策略：訂閱「*」收不到、「**」收得到", JSON.stringify([s1, s2]));
+  const sb = await connect("sub", "sall2", r2.j.token, true);
+  sb.ws.send(JSON.stringify({ since: 1e15, snap: 1 }));
+  await until(() => sb.ctl.some(c => c.ctl === "replayed"));
+  ok(((sb.ctl.find(c => c.ctl === "snap") || {}).strats || []).includes("T_OFFX"), "「**」的快照策略清單含下架的 T_OFFX");
+  sb.ws.close();
+  ok((await post("invite?id=sall3", { subs: "**" })).status === 400, "開通碼不能給「**」");
+  await post("strategy_delete?code=T_OFFX", {}); }
 n1.ws.send(JSON.stringify({ recon: { ok: false, detail: "GEA5 檔案 1、中繼最新 0" } }));
 n1.ws.send(JSON.stringify({ tg: "測試：接收端 TG 經中繼" }));
 await sleep(500);

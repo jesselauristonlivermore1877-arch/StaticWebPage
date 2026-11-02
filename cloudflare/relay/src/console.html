@@ -61,7 +61,7 @@ table{border-collapse:collapse;width:100%}th,td{padding:4px 8px;border-bottom:1p
     <div id="ncOut" style="display:none;margin-top:10px"></div>
   </div>
   <div class="card"><h3>客戶（接收端）</h3>
-    <div class="note">訂閱打勾＝他會收到這支（策略也要上架）；「全部」＝不管上下架全收（只給 GEA 自己的機器）。開始／到期留空＝不限；可填日期或日期＋時間（台北）。不在服務期間或停用：只停送新訊號、不平倉，接收端顯示「服務期限已到，請聯絡營業員」。到期前 3 天 09:00 TG 給 Evans 和客戶（有填客戶 TG）。<br>新客戶：填代號後按「新增並產開通碼」，把 8 碼開通碼給客戶（24 小時內、用一次）；客戶在安裝精靈填開通碼即可，不用再給 token。</div>
+    <div class="note">訂閱打勾＝他會收到這支（策略也要上架）；「全部」＝所有已上架的策略；「全部含下架」＝連下架的也收（只給 GEA 自己的機器，開通碼與 TG 都不能給）。開始／到期留空＝不限；可填日期或日期＋時間（台北）。不在服務期間或停用：只停送新訊號、不平倉，接收端顯示「服務期限已到，請聯絡營業員」。到期前 3 天 09:00 TG 給 Evans 和客戶（有填客戶 TG）。<br>新客戶：填代號後按「新增並產開通碼」，把 8 碼開通碼給客戶（24 小時內、用一次）；客戶在安裝精靈填開通碼即可，不用再給 token。</div>
     <div class="scroll" style="margin-top:6px"><table id="usT"></table></div>
     <div class="row" style="margin-top:8px"><input id="nuId" placeholder="代號（英數，例 cust_001）" style="width:180px"><input id="nuNote" placeholder="備註（姓名）" style="width:160px"><span>開始</span><input id="nuStart" type="date"><span>到期</span><input id="nuExp" type="date"><span id="nuSubs" class="row"></span><button class="pri" onclick="addUser(true)">新增並產開通碼</button><button onclick="addUser(false)">新增（給 token，舊流程）</button></div>
     <div id="tokbox" style="display:none"></div>
@@ -121,7 +121,7 @@ function render() {
   const S = ST.strategies, codes = S.map(s => s.code);
   $("#rkWin").value = ST.risk.win; $("#rkMax").value = ST.risk.max;
   $("#stT").innerHTML = "<tr><th>代號</th><th>名稱</th><th>狀態</th><th>風控</th><th>中繼保留則數</th><th>最後一則</th><th>訂閱人數</th><th></th></tr>" + S.map(s => {
-    const n = ST.users.filter(u => u.subs === "*" || u.subs.split(",").includes(s.code)).length;
+    const n = ST.users.filter(u => u.subs === "**" || s.listed && u.subs === "*" || u.subs.split(",").includes(s.code)).length;
     return "<tr><td>" + esc(s.code) + "</td><td><input data-name='" + esc(s.code) + "' value='" + esc(s.name) + "' style='width:120px'></td>" +
       "<td><button data-list='" + esc(s.code) + "' class='tag " + (s.listed ? "on" : "off") + "'>" + (s.listed ? "上架中（按一下下架）" : "下架（按一下上架）") + "</button></td>" +
       "<td>" + (s.paused ? "<span class='bad'>⏸ 暫停：" + esc(s.paused_why) + "（" + ts(s.paused_at) + "）</span> <button data-unpause='" + esc(s.code) + "' class='pri'>解除暫停</button>" : "<span class='ok'>正常</span>") + "</td>" +
@@ -130,7 +130,8 @@ function render() {
   document.querySelectorAll("[data-list]").forEach(b => b.onclick = () => act(() => api("strategy?code=" + b.dataset.list, "POST", {listed: !S.find(s => s.code === b.dataset.list).listed})));
   document.querySelectorAll("[data-name]").forEach(i => i.onchange = () => act(() => api("strategy?code=" + i.dataset.name, "POST", {name: i.value})));
   document.querySelectorAll("[data-sdel]").forEach(b => b.onclick = () => confirm("移除登記（下次再送上來會重新出現、預設下架）？") && act(() => api("strategy_delete?code=" + b.dataset.sdel, "POST", {})));
-  const subBox = (u, pre) => "<label><input type='checkbox' data-" + pre + "='*' " + (u && u.subs === "*" ? "checked" : "") + "> 全部</label> " +
+  const subBox = (u, pre) => "<label><input type='checkbox' data-" + pre + "x='**' " + (u && u.subs === "**" ? "checked" : "") + "> 全部含下架</label> " +
+    "<label><input type='checkbox' data-" + pre + "='*' " + (u && u.subs === "*" ? "checked" : "") + "> 全部</label> " +
     codes.map(c => "<label><input type='checkbox' data-" + pre + "='" + esc(c) + "' " + (u && (u.subs === "*" || u.subs.split(",").includes(c)) ? "checked" : "") + (u && u.subs === "*" ? " disabled" : "") + "> " + esc(c) + "</label>").join(" ");
   const inv = {}; for (const x of ST.invites || []) inv[x.id] = x;
   const L = ["代號", "備註", "訂閱", "開始", "到期", "客戶 TG", "身分證", "狀態", "在線", "版本", "最後對帳", "最後連線", ""];
@@ -185,7 +186,7 @@ function newPub() {
     box.innerHTML = "<div>傳送端 " + esc(id) + " 的管理者開通碼：<span class='big'>" + esc(code) + "</span> <span class='note'>（" + esc(ts(Date.parse(r.expires))) + " 前有效、用一次就作廢；⚠ 不要轉給客戶）</span> <button class='cx'>關閉</button></div>";
     box.querySelector(".cx").onclick = () => { box.innerHTML = ""; box.style.display = "none"; }; $("#pbId").value = $("#pbNote").value = ""; });
 }
-function pick(root, pre) { const all = root.querySelector("[data-" + pre + "='*']"); if (all && all.checked) return "*"; return [...root.querySelectorAll("[data-" + pre + "]:checked")].map(c => c.dataset[pre]).filter(x => x !== "*"); }
+function pick(root, pre) { const xx = root.querySelector("[data-" + pre + "x='**']"); if (xx && xx.checked) return "**"; const all = root.querySelector("[data-" + pre + "='*']"); if (all && all.checked) return "*"; return [...root.querySelectorAll("[data-" + pre + "]:checked")].map(c => c.dataset[pre]).filter(x => x !== "*"); }
 async function act(fn, ok) { try { await fn(); if (ok) say(esc(ok)); await load(); } catch (e) { say("失敗：" + esc(e.message), true); } }
 function showTok(id, tok) {
   const b = $("#tokbox"); b.style.display = "";

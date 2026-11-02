@@ -19,7 +19,7 @@
 //         POST /admin/reset?ch=        清掉已存訊號（發送端序號重新從 1 開始時用）；POST /admin/purge?ch= 整個頻道刪除（測試用）
 //   訂閱控管（Evans 2026-10-18 20:40 派工第 1 項）：傳送端把所有策略都送上來；中繼依「用戶 → 訂閱清單」只轉送他訂的，
 //         客戶改本機設定也拿不到沒訂的。規則（routing）：
-//           停權 → 不送；不在服務期間（開始前／到期後）→ 不送；連續下單風控暫停的策略 → 不送；訂閱＝"*"（全部，給 Evans 自己的機器）→ 全送（含未上架）；
+//           停權 → 不送；不在服務期間（開始前／到期後）→ 不送；連續下單風控暫停的策略 → 不送；訂閱＝"*"（全部）→ 只送已上架的（11-02 13:45 裁示：即時、快照、補發同一條規則）；"**"（全部含下架）→ 全送，只給 GEA 自己的機器、只能在管理頁設（TG、開通碼不給）；
 //           否則策略要「上架」而且在他的訂閱清單裡才送。補發（since）照同一規則過濾（序號會跳號，接收端只記最大序號，不受影響）。
 //         新策略第一次送上來自動登記成「下架」，管理頁按上架才會送給一般客戶。舊用戶（升級前就有的）訂閱＝"*"；新用戶預設什麼都沒訂。
 //         GET  /admin/state?ch=           用戶（訂閱、服務期間、在線、版本、最後對帳）＋策略（上下架、暫停、最後訊號、保留則數）＋開通碼＋風控參數
@@ -191,7 +191,7 @@ async function tgCommand(env, origin, text, ch) {
     const u = find(S, P[1]);
     if (!u) return ["找不到客戶 " + P[1]];
     const inv = (S.invites || []).find(x => x.id === u.id);
-    return [[`客戶 ${u.id}${u.note ? "（" + u.note + "）" : ""}`, `狀態：${u.off || "正常"}${u.enabled ? "" : "（已停用）"}`, `訂閱：${u.subs === "*" ? "全部" : u.subs || "（沒有）"}`,
+    return [[`客戶 ${u.id}${u.note ? "（" + u.note + "）" : ""}`, `狀態：${u.off || "正常"}${u.enabled ? "" : "（已停用）"}`, `訂閱：${u.subs === "**" ? "全部含下架（GEA 自己的機器）" : u.subs === "*" ? "全部（已上架）" : u.subs || "（沒有）"}`,
              `期間：${u.start || "不限"} ～ ${u.exp || "不限"}`, `在線：${u.online ? "是（" + u.online + " 條）" : "否"}`, `版本：${u.ver || "—"}`,
              `身分證：${(u.ids || []).map(x => x.mask + (x.admin ? "（管理者）" : "")).join("、") || "還沒綁"}`, `最後對帳：${u.recon || "—"}`,
              inv ? `開通碼待用：${new Date(inv.exp_ms + 8 * 3600e3).toISOString().slice(5, 16).replace("T", " ")} 前` : ""].filter(Boolean).join("\n")];
@@ -209,7 +209,8 @@ async function tgCommand(env, origin, text, ch) {
     if (!S.strategies.length) return ["還沒有策略（傳送端送出第一則訊號後會自動登記、預設下架）"];
     const tw = ms => ms ? new Date(ms + 8 * 3600e3).toISOString().slice(5, 16).replace("T", " ") : "—";
     return ["策略（" + S.strategies.length + "）：\n" + S.strategies.map(s => {
-      const n = S.users.filter(u => u.subs !== "*" && String(u.subs || "").split(",").includes(s.code)).length, all = S.users.filter(u => u.subs === "*").length;
+      const n = S.users.filter(u => u.subs !== "*" && u.subs !== "**" && String(u.subs || "").split(",").includes(s.code)).length;
+      const all = S.users.filter(u => u.subs === "**" || s.listed && u.subs === "*").length;
       return `${s.listed ? "✅ 上架" : "⛔ 下架"} ${s.code}${s.paused ? "（⏸ 風控暫停）" : ""}｜最後訊號 ${tw(s.last)}｜訂閱 ${n} 人${all ? "＋全部 " + all + " 人" : ""}`;
     }).join("\n") + "\n\n上架：/上架 <策略>　下架：/下架 <策略>　改客戶訂閱：/訂閱 <代號或姓名> <策略逗號分隔或 全部>"];
   }
@@ -420,8 +421,9 @@ export class Relay extends DurableObject {
     if (sh && B.some(b => b.sh === sh)) return null;
     return `身分證與開通時不同（開通時 ${B.map(b => b.mask).join("、")}，這次 ${sh ? Relay.mask(mask) || "沒給遮罩" : "沒帶身分證（舊版）"}）`;
   }
-  static overlap(a, b) {                                                      // 兩份訂閱重疊的策略；"*"＝全部
+  static overlap(a, b) {                                                      // 兩份訂閱重疊的策略；"*"＝全部（"**" 也當全部算）
     if (!a || !b) return [];
+    if (a === "**") a = "*"; if (b === "**") b = "*";
     if (a === "*" && b === "*") return ["全部"];
     if (a === "*") return b.split(",").filter(Boolean);
     if (b === "*") return a.split(",").filter(Boolean);
@@ -450,13 +452,15 @@ export class Relay extends DurableObject {
     const off = offWhy(user);
     if (off) return off;
     if (!keepPaused && S[strat] && S[strat].paused) return "連續下單風控暫停";
-    if (user.subs === "*") return null;
+    if (user.subs === "**") return null;                                      // 全部含下架（GEA 自己的機器）
     if (!S[strat] || !S[strat].listed) return "策略未上架";
+    if (user.subs === "*") return null;
     if (!user.subs.split(",").includes(strat)) return "沒訂閱";
     return null;
   }
   static stratOf(body) { try { return String(JSON.parse(body).Strategy || ""); } catch (e) { return ""; } }
   parseSubs(v) {
+    if (v === "**" || (Array.isArray(v) && v.includes("**"))) return "**";
     if (v === "*" || (Array.isArray(v) && v.includes("*"))) return "*";
     if (!Array.isArray(v)) v = String(v || "").split(",");
     return v.map(x => String(x).trim()).filter(x => NAME_RE.test(x)).join(",");
@@ -671,6 +675,8 @@ export class Relay extends DurableObject {
     if (p === "/admin/user" || p === "/admin/invite") {
       const tok = newToken();
       const qs = u.searchParams.get("subs");                                  // 新用戶預設什麼都沒訂；body 或 ?subs= 可直接指定
+      if (p === "/admin/invite" && (body.subs === "**" || Array.isArray(body.subs) && body.subs.includes("**") || qs === "**"))
+        return J({ error: "開通碼不能給「全部含下架」（**）；只有 GEA 自己的機器在管理頁設定" }, 400);   // 11-02 13:45 第 1 項
       const isNew = !this.sql.exec("SELECT id FROM users WHERE id=?", id).toArray().length;
       if (isNew) this.sql.exec("INSERT INTO users(id, th, enabled, created, subs) VALUES(?,?,1,?,'')", id, await sha256(tok), Date.now());
       const bad = this.applyUser(id, body, qs);
@@ -923,7 +929,7 @@ export class Relay extends DurableObject {
       const items = this.sql.exec("SELECT strat, body FROM latest ORDER BY strat").toArray()
         .filter(r => this.why(user, r.strat, S, true) === null).map(r => r.body);
       // 11-02 10:35 第 1 項：快照可能是空的（還沒有任何已轉送的訊號）→ 另給「他訂閱、而且已上架」的策略清單（訂閱全部＝所有已上架），接收端拿來建策略列
-      const strats = Object.values(S).filter(x => x.listed && (user.subs === "*" || String(user.subs || "").split(",").includes(x.code))).map(x => x.code).sort();
+      const strats = Object.values(S).filter(x => user.subs === "**" || x.listed && (user.subs === "*" || String(user.subs || "").split(",").includes(x.code))).map(x => x.code).sort();
       this.send(ws, '{"ctl":"snap","n":' + items.length + ',"strats":' + JSON.stringify(strats) + ',"items":[' + items.join(",") + "]}");
     }
     const rows = this.sql.exec("SELECT seq, strat, body FROM msgs WHERE seq > ? AND held=0 ORDER BY seq", since).toArray()
