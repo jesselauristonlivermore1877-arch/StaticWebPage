@@ -414,6 +414,19 @@ n1b.ws.close();
   ok((await post("tgcmd", { text: "x" }).then(() => fetch(`${BASE}/admin/tgcmd?ch=gea`, { method: "POST", headers: { Authorization: "Bearer " + ADMIN }, body: "{}" }))).status === 403, "tgcmd 不能打正式頻道");
   const hk = await fetch(`${BASE}/tg_hook`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ message: { chat: { id: 1 }, text: "/客戶" } }) });
   ok(hk.status === 401, "TG webhook 沒帶 secret → 401（別人偽造的更新不處理）", "HTTP " + hk.status);
+  // 11-02 14:15 二、6：chat_id 和傳訊者 user id 兩個都要是 Evans；群組裡別人下指令 → 不理、TG 給 Evans 一行
+  const gate = async b => (await post("tggate", b)).j;
+  ok((await gate({ chat: "-100777", from: "555", text: "/客戶" })).act === "run", "TG 閘門：Evans（chat＋user id 都對）→ 執行");
+  const gw = await gate({ chat: "-100777", from: "999", name: "someone", text: "/停用 c1 x" });
+  ok(gw.act === "warn" && /user id 999/.test(gw.warn || "") && /「\/停用」/.test(gw.warn || "") && /不理/.test(gw.warn || ""), "TG 閘門：群組裡別人下指令 → 不理、TG 給 Evans 一行", gw.warn || "");
+  ok((await gate({ chat: "-100777", from: "999", text: "大家好" })).act === "drop", "TG 閘門：群組裡別人一般聊天 → 不回、不通知");
+  ok((await gate({ chat: "123", from: "555", text: "/客戶" })).act === "drop", "TG 閘門：別的聊天室（就算 user id 對）→ 不理");
+  ok((await gate({ chat: "-100777", text: "/客戶" })).act === "warn", "TG 閘門：沒有傳訊者（頻道貼文）→ 不理、通知");
+  // 11-02 14:15 三、1：瀏覽器開根網址 → 一個大按鈕「進入管理頁」；程式拿 JSON 照舊；/admin 未登入提示
+  const rh = await (await fetch(`${BASE}/`, { headers: { accept: "text/html,application/xhtml+xml" } })).text();
+  const rj = await (await fetch(`${BASE}/`)).json().catch(() => ({}));
+  ok(/進入管理頁/.test(rh) && /href="\/admin"/.test(rh) && rj.ok === true, "根網址：瀏覽器＝「進入管理頁」按鈕連 /admin；程式＝JSON");
+  ok(/請先按『用 TG 登入』，再打開 TG 收到的連結/.test(await (await fetch(`${BASE}/admin`)).text()), "/admin 有未登入提示「請先按『用 TG 登入』，再打開 TG 收到的連結」");
   const lg = await (await fetch(`${BASE}/login?t=${"0".repeat(48)}`)).text();
   const lp = await (await fetch(`${BASE}/login`, { method: "POST", body: new URLSearchParams({ t: "0".repeat(48) }), redirect: "manual" }));
   ok(/已用過、已過期/.test(lg) && lp.status === 200 && /已用過或已過期/.test(await lp.text()) && !lp.headers.get("set-cookie"), "假的一次性登入連結：GET 不給按鈕、POST 不發 cookie");

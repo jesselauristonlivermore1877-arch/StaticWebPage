@@ -35,6 +35,7 @@ table{border-collapse:collapse;width:100%}th,td{padding:4px 8px;border-bottom:1p
 </style>
 </head>
 <body>
+<div id="needLogin" style="display:none;background:#fff3cd;color:#664d03;padding:10px 14px;font-weight:bold;font-size:16px">請先按『用 TG 登入』，再打開 TG 收到的連結</div>
 <header>
   <b>GEA 下單訊號管理</b>
   <span>頻道</span><select id="ch"><option value="gea">gea（正式）</option><option value="test">test（測試，不影響正式客戶）</option></select>
@@ -113,8 +114,8 @@ $("#ch").onchange = load;
 async function load() {
   $("#chTag").innerHTML = CH().startsWith("test") ? "<span class='tag test'>測試頻道</span>" : "<span class='tag on'>正式頻道</span>";
   $("#testCard").style.display = CH().startsWith("test") ? "" : "none";
-  try { ST = await api("state"); say(""); }
-  catch (e) { say(e.message === "unauthorized" ? "請按右上角「用 TG 登入」：Evans 的 TG 會收到一次性登入連結（10 分鐘內、用一次），打開後這台裝置 12 小時內免登入。" + (TOK ? "<br>（備用管理 token 不對）" : "") : "讀取失敗：" + esc(e.message), e.message !== "unauthorized"); return; }
+  try { ST = await api("state"); say(""); $("#needLogin").style.display = "none"; }
+  catch (e) { $("#needLogin").style.display = e.message === "unauthorized" ? "" : "none"; say(e.message === "unauthorized" ? "請按右上角「用 TG 登入」：Evans 的 TG 會收到一次性登入連結（10 分鐘內、用一次），打開後這台裝置 12 小時內免登入。" + (TOK ? "<br>（備用管理 token 不對）" : "") : "讀取失敗：" + esc(e.message), e.message !== "unauthorized"); return; }
   render();
 }
 function render() {

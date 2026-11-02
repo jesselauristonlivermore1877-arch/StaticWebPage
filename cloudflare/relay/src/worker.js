@@ -59,6 +59,9 @@
 // 簽章金鑰只在兩端：中繼不驗簽、不改內容，只管轉送與補發。
 import { DurableObject } from "cloudflare:workers";
 import CONSOLE_HTML from "./console.html";
+const ROOT_HTML = `<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>GEA 下單訊號中繼</title></head>
+<body style="margin:0;font-family:system-ui,'Microsoft JhengHei',sans-serif;background:#f5f6f8;display:flex;align-items:center;justify-content:center;min-height:100vh">
+<a href="/admin" style="display:block;padding:28px 56px;font-size:28px;font-weight:bold;color:#fff;background:#1f6feb;border-radius:14px;text-decoration:none">進入管理頁</a></body></html>`;
 import CONTRACTS from "../contracts.json";
 import VERSION from "../version.json";            // 11-01 18:35 第 4 項：下單機最新版號／下載網址／SHA256／更新說明＋W 的 ECDSA 簽章（ordermachine make_dist.py --release 產）        // 11-01 補充三 3：W 用 ordermachine/tools/contracts.py 產表＋簽章；部署時打包
 
@@ -249,12 +252,27 @@ async function tgCommand(env, origin, text, ch) {
   }
   return [HELP];
 }
+// 11-02 14:15 二、6：TG 指令閘門——chat_id＝TG_CHAT_ID 而且傳訊者 user id＝TG_ADMIN_UID（Evans）兩個都符合才執行（run）；
+//   同一個群組裡別人下的「/指令」→ warn（不理，TG 給 Evans 一行）；其他（別的聊天室、一般聊天、不是文字）→ drop（不回）。
+export function tgGate(m, env) {
+  const adminUid = String(env.TG_ADMIN_UID || env.TG_CHAT_ID || "");
+  if (!m || !m.chat || String(m.chat.id) !== String(env.TG_CHAT_ID) || typeof m.text !== "string") return { act: "drop" };
+  if (m.from && String(m.from.id) === adminUid) return { act: "run" };
+  if (!m.text.trim().startsWith("/")) return { act: "drop" };
+  const who = String((m.from && (m.from.username || m.from.first_name)) || "不明").slice(0, 40);
+  return { act: "warn", warn: `⚠ TG：${who}（user id ${m.from ? m.from.id : "?"}）下了指令「${m.text.trim().split(/\s+/)[0].slice(0, 30)}」→ 不理（只認 Evans）` };
+}
 async function tgHook(req, env, u) {
   if (!env.TG_HOOK_SECRET || !same(req.headers.get("x-telegram-bot-api-secret-token") || "", env.TG_HOOK_SECRET)) return J({ error: "unauthorized" }, 401);
   const up = await req.json().catch(() => ({})) || {}, m = up.message || {};
-  // 只認 Evans：chat_id＝TG_CHAT_ID 而且傳訊者 from.id＝TG_ADMIN_UID（11-02 01:10 一、2；沒設 TG_ADMIN_UID 時退回要求 from.id＝TG_CHAT_ID＝私訊本人）；別人傳的一律不回
-  const adminUid = String(env.TG_ADMIN_UID || env.TG_CHAT_ID || "");
-  if (!m.chat || String(m.chat.id) !== String(env.TG_CHAT_ID) || !m.from || String(m.from.id) !== adminUid || typeof m.text !== "string") return J({ ok: true });
+  // 只認 Evans：chat_id＝TG_CHAT_ID 而且傳訊者 from.id＝TG_ADMIN_UID（11-02 01:10 一、2；沒設 TG_ADMIN_UID 時退回要求 from.id＝TG_CHAT_ID＝私訊本人）
+  const g = tgGate(m, env);
+  if (g.act === "drop") return J({ ok: true });
+  if (g.act === "warn") {                                           // 11-02 14:15 二、6：群組裡別人下指令 → 不理，TG 給 Evans 一行
+    await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, { method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ chat_id: env.TG_CHAT_ID, text: g.warn }) }).catch(() => null);
+    return J({ ok: true, ignored: true });
+  }
   for (const t of await tgCommand(env, u.origin, m.text, "gea"))
     await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, { method: "POST", headers: { "content-type": "application/json" },
       body: JSON.stringify({ chat_id: env.TG_CHAT_ID, text: t.slice(0, 3500), disable_web_page_preview: true }) }).catch(() => null);
@@ -265,6 +283,8 @@ export default {
   async fetch(req, env) {
     const u = new URL(req.url);
     const ch = u.searchParams.get("ch") || "";
+    // 11-02 14:15 三、1：瀏覽器開根網址（Evans 開成沒有 /admin 的網址）→ 一頁只有一個大按鈕「進入管理頁」；程式照舊拿 JSON
+    if (u.pathname === "/" && (req.headers.get("accept") || "").includes("text/html")) return new Response(ROOT_HTML, { headers: PAGE_HEADERS });
     if (u.pathname === "/") return J({ ok: true, name: "gea-signal-relay", paths: ["/ws", "/health", "/redeem", "/contracts", "/tg", "/version", "/admin", "/admin/*", "/console", "/login", "/tg_hook"] });
     if (u.pathname === "/console" || u.pathname === "/admin") return new Response(CONSOLE_HTML, { headers: PAGE_HEADERS });
     if (u.pathname === "/tg_hook" && req.method === "POST") return tgHook(req, env, u);
@@ -297,6 +317,12 @@ export default {
     if (!env.RELAY_PUB_TOKEN || !env.RELAY_ADMIN_TOKEN) return J({ error: "relay secrets not set" }, 503);
     if (!NAME_RE.test(ch)) return J({ error: "bad ch" }, 400);
     if (u.pathname.startsWith("/admin/") && !same(bearer(req), env.RELAY_ADMIN_TOKEN) && !(await sessOk(req, env))) return J({ error: "unauthorized" }, 401);
+    if (u.pathname === "/admin/tggate") {                                     // 自動測試：TG 指令閘門（假的 chat／from；只回判斷、不發 TG）
+      if (!/^t\d+$|^test/.test(ch)) return J({ error: "tggate 只限測試頻道" }, 403);
+      const b = await req.json().catch(() => ({})) || {};
+      const fake = { TG_CHAT_ID: "-100777", TG_ADMIN_UID: "555" };
+      return J(tgGate({ chat: { id: b.chat }, from: b.from == null ? undefined : { id: b.from, username: b.name }, text: b.text }, fake));
+    }
     if (u.pathname === "/admin/tgcmd") {                                      // 自動測試：TG 指令跑在測試頻道、回覆直接回傳（不發 TG）
       if (!/^t\d+$|^test/.test(ch)) return J({ error: "tgcmd 只限測試頻道" }, 403);
       const b = await req.json().catch(() => ({})) || {};
