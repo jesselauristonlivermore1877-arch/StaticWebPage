@@ -883,7 +883,9 @@ export class Relay extends DurableObject {
     if (m.snap) {                                                             // 部位快照：每支策略最新一則已轉送的原文（他有權收的）
       const items = this.sql.exec("SELECT strat, body FROM latest ORDER BY strat").toArray()
         .filter(r => this.why(user, r.strat, S, true) === null).map(r => r.body);
-      this.send(ws, '{"ctl":"snap","n":' + items.length + ',"items":[' + items.join(",") + "]}");
+      // 11-02 10:35 第 1 項：快照可能是空的（還沒有任何已轉送的訊號）→ 另給「他訂閱、而且已上架」的策略清單（訂閱全部＝所有已上架），接收端拿來建策略列
+      const strats = Object.values(S).filter(x => x.listed && (user.subs === "*" || String(user.subs || "").split(",").includes(x.code))).map(x => x.code).sort();
+      this.send(ws, '{"ctl":"snap","n":' + items.length + ',"strats":' + JSON.stringify(strats) + ',"items":[' + items.join(",") + "]}");
     }
     const rows = this.sql.exec("SELECT seq, strat, body FROM msgs WHERE seq > ? AND held=0 ORDER BY seq", since).toArray()
       .filter(r => this.why(user, r.strat || Relay.stratOf(r.body), S) === null);       // 只補他有權收的

@@ -240,6 +240,14 @@ n1.ws.send(JSON.stringify({ since: 1e15, snap: 1 }));
 await until(() => n1.ctl.some(c => c.ctl === "replayed"));
 const sn = n1.ctl.find(c => c.ctl === "snap") || {};
 ok(sn.n === 1 && sn.items[0].Strategy === "GEA5" && sn.items[0].Seq === q && n1.got.length === 0, "部位快照：只給他訂的 GEA5 最新一則、since 很大就不補發", JSON.stringify(sn).slice(0, 160));
+ok(Array.isArray(sn.strats) && sn.strats.includes("GEA5") && sn.strats.every(c => c === "GEA5"), "快照附他訂閱且已上架的策略清單（只訂 GEA5 → [GEA5]）", JSON.stringify(sn.strats));
+{ const ra = await post("user?id=sall", { subs: "*" }); const sa = await connect("sub", "sall", ra.j.token, true);
+  sa.ws.send(JSON.stringify({ since: 1e15, snap: 1 }));
+  await until(() => sa.ctl.some(c => c.ctl === "replayed"));
+  const ss = (sa.ctl.find(c => c.ctl === "snap") || {}).strats || [], all = ((await admin("state", "GET")).j.strategies || []);
+  const want = all.filter(x => x.listed).map(x => x.code).sort();
+  ok(want.length >= 2 && JSON.stringify(ss) === JSON.stringify(want) && !ss.some(c => all.find(x => x.code === c && !x.listed)), "訂閱全部 → 快照列出所有已上架策略（不含下架的）", JSON.stringify(ss));
+  sa.ws.close(); }
 n1.ws.send(JSON.stringify({ recon: { ok: false, detail: "GEA5 檔案 1、中繼最新 0" } }));
 n1.ws.send(JSON.stringify({ tg: "測試：接收端 TG 經中繼" }));
 await sleep(500);
