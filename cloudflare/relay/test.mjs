@@ -384,6 +384,17 @@ n1b.ws.close();
   ok(/王小明/.test((await cmd("/客戶 王小明"))[0] || "") && /身分證：還沒綁/.test((await cmd("/客戶 " + cu.id))[0] || ""), "/客戶 代號或姓名 → 狀態（身分證只有遮罩）");
   ok(/已停用/.test((await cmd("/停用 " + cu.id))[0] || "") && ((await admin("state", "GET")).j.users || []).find(u => u.id === cu.id).enabled === false, "/停用");
   ok(/已恢復/.test((await cmd("/恢復 王小明"))[0] || "") && ((await admin("state", "GET")).j.users || []).find(u => u.id === cu.id).enabled === true, "/恢復");
+  // 11-02 12:15 第 2 項：/策略、/上架、/下架、/訂閱
+  await post("strategy?code=GEA_NEWX", { listed: false });
+  R = await cmd("/策略");
+  ok(/✅ 上架 GEA5/.test(R[0] || "") && /⛔ 下架 GEA_NEWX/.test(R[0] || "") && /最後訊號/.test(R[0] || "") && /訂閱 \d+ 人/.test(R[0] || ""), "/策略 → 代號、上架／下架、最後訊號、訂閱人數", (R[0] || "").slice(0, 120));
+  ok(/沒有策略 NOPE/.test((await cmd("/上架 NOPE"))[0] || ""), "/上架 打錯代號 → 不新增、列出現有的");
+  ok(/已上架/.test((await cmd("/上架 GEA_NEWX"))[0] || "") && ((await admin("state", "GET")).j.strategies || []).find(s => s.code === "GEA_NEWX").listed === true, "/上架 GEA_NEWX");
+  R = await cmd("/訂閱 王小明 GEA5,GEA_NEWX");
+  ok(/不用重發開通碼/.test(R[0] || "") && /新增：GEA_NEWX/.test(R[0] || "") && ((await admin("state", "GET")).j.users || []).find(u => u.id === cu.id).subs === "GEA5,GEA_NEWX", "/訂閱 姓名 策略 → 改訂閱、列出新增", (R[0] || "").slice(0, 120));
+  R = await cmd("/訂閱 " + cu.id + " GEA5");
+  ok(/取消：GEA_NEWX/.test(R[0] || "") && /不自動平倉/.test(R[0] || ""), "/訂閱 少掉策略 → 列出取消、註明不自動平倉");
+  ok(/已下架/.test((await cmd("/下架 GEA_NEWX"))[0] || "") && /沒有上架/.test((await cmd("/訂閱 王小明 GEA_NEWX"))[0] || ""), "/下架 → 再訂閱下架的策略會被擋");
   ok(/指令/.test((await cmd("你好"))[0] || ""), "看不懂的 → 回指令說明");
   ok((await post("tgcmd", { text: "x" }).then(() => fetch(`${BASE}/admin/tgcmd?ch=gea`, { method: "POST", headers: { Authorization: "Bearer " + ADMIN }, body: "{}" }))).status === 403, "tgcmd 不能打正式頻道");
   const hk = await fetch(`${BASE}/tg_hook`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ message: { chat: { id: 1 }, text: "/客戶" } }) });

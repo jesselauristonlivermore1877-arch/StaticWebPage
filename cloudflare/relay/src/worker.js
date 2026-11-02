@@ -151,7 +151,7 @@ async function tgCommand(env, origin, text, ch) {
   };
   const st = async () => (await call("state")).j;
   const find = (S, who) => S.users.find(u => u.id === who) || S.users.find(u => u.note && u.note === who);
-  const HELP = "GEA 下單中繼指令：\n/開通碼 <代號或姓名> <策略逗號分隔或 全部> <到期日 YYYY-MM-DD>\n/開通碼 傳送端 <代號> [備註]（管理者開通碼，訊號主機用）\n/客戶 [代號或姓名]\n/停用 <代號>\n/恢復 <代號>\n/登入（管理頁一次性登入連結）";
+  const HELP = "GEA 下單中繼指令：\n/開通碼 <代號或姓名> <策略逗號分隔或 全部> <到期日 YYYY-MM-DD>\n/開通碼 傳送端 <代號> [備註]（管理者開通碼，訊號主機用）\n/客戶 [代號或姓名]\n/策略（全部策略：上架／下架、最後訊號、訂閱人數）\n/上架 <策略>　/下架 <策略>\n/訂閱 <代號或姓名> <策略逗號分隔或 全部>（改訂閱，不用重發開通碼）\n/停用 <代號>\n/恢復 <代號>\n/登入（管理頁一次性登入連結）";
   if (cmd === "/開通碼" && P[1] === "傳送端") {                             // 11-01 23:40：管理者（傳送端）開通碼
     if (P.length < 3 || !NAME_RE.test(P[2])) return ["格式：/開通碼 傳送端 <代號（英數）> [備註]\n例：/開通碼 傳送端 signal_host 訊號主機"];
     const r = await call("invite?id=" + encodeURIComponent(P[2]), { kind: "pub", note: P.slice(3).join(" ") });
@@ -202,6 +202,45 @@ async function tgCommand(env, origin, text, ch) {
     if (!u) return ["找不到客戶 " + P[1]];
     const r = await call((cmd === "/停用" ? "disable" : "enable") + "?id=" + encodeURIComponent(u.id), {});
     return [r.status === 200 ? `✓ ${u.id} 已${cmd.slice(1)}` + (cmd === "/停用" ? `（踢掉在線連線 ${r.j.kicked || 0} 條；只停送訊號、不平倉）` : "") : "失敗：" + (r.j.error || r.status)];
+  }
+  // 11-02 12:15 第 2 項：/策略、/上架、/下架、/訂閱（只認 Evans，同 tgHook）
+  if (cmd === "/策略") {
+    const S = await st();
+    if (!S.strategies.length) return ["還沒有策略（傳送端送出第一則訊號後會自動登記、預設下架）"];
+    const tw = ms => ms ? new Date(ms + 8 * 3600e3).toISOString().slice(5, 16).replace("T", " ") : "—";
+    return ["策略（" + S.strategies.length + "）：\n" + S.strategies.map(s => {
+      const n = S.users.filter(u => u.subs !== "*" && String(u.subs || "").split(",").includes(s.code)).length, all = S.users.filter(u => u.subs === "*").length;
+      return `${s.listed ? "✅ 上架" : "⛔ 下架"} ${s.code}${s.paused ? "（⏸ 風控暫停）" : ""}｜最後訊號 ${tw(s.last)}｜訂閱 ${n} 人${all ? "＋全部 " + all + " 人" : ""}`;
+    }).join("\n") + "\n\n上架：/上架 <策略>　下架：/下架 <策略>　改客戶訂閱：/訂閱 <代號或姓名> <策略逗號分隔或 全部>"];
+  }
+  if (cmd === "/上架" || cmd === "/下架") {
+    if (P.length < 2) return ["格式：" + cmd + " <策略>（先用 /策略 看代號）"];
+    const S = await st(), s = S.strategies.find(x => x.code === P[1]);
+    if (!s) return [`沒有策略 ${P[1]}（傳送端還沒送過訊號？）。目前有：${S.strategies.map(x => x.code).join(",") || "（沒有）"}`];
+    const on = cmd === "/上架";
+    if (s.listed === on) return [`${s.code} 本來就是${on ? "上架" : "下架"}`];
+    const r = await call("strategy?code=" + encodeURIComponent(s.code), { listed: on });
+    return [r.status === 200 ? `✓ ${s.code} 已${on ? "上架（訂閱它或訂閱全部的客戶，下單機下次重連的快照會多出這支，預設「不跟單」）" : "下架（客戶下單機不會自動平倉）"}` : "失敗：" + (r.j.error || r.status)];
+  }
+  if (cmd === "/訂閱") {
+    if (P.length < 3) return ["格式：/訂閱 <代號或姓名> <策略逗號分隔或 全部>\n例：/訂閱 王小明 GEA5,GEA_S_V2"];
+    const S = await st(), u = find(S, P[1]);
+    if (!u) return ["找不到客戶 " + P[1] + "（/客戶 看全部）"];
+    let subs;
+    if (["全部", "*", "all"].includes(P[2])) subs = "*";
+    else {
+      subs = P[2].split(/[,，、]/).map(x => x.trim()).filter(Boolean);
+      const listed = S.strategies.filter(s => s.listed).map(s => s.code), bad = subs.filter(c => !listed.includes(c));
+      if (!subs.length || bad.length) return [`策略 ${bad.join(",") || "（空白）"} 沒有上架。已上架：${listed.join(",") || "（沒有）"}；或寫「全部」`];
+    }
+    const listedOf = x => x === "*" ? S.strategies.filter(s => s.listed).map(s => s.code) : String(x || "").split(",").filter(Boolean);
+    const before = listedOf(u.subs), after = listedOf(subs === "*" ? "*" : subs.join(","));
+    const r = await call("set?id=" + encodeURIComponent(u.id), { subs });
+    if (r.status !== 200) return ["失敗：" + (r.j.error || r.status)];
+    const add = after.filter(c => !before.includes(c)), del = before.filter(c => !after.includes(c));
+    return [`✓ ${u.id}${u.note ? "（" + u.note + "）" : ""} 訂閱改成 ${subs === "*" ? "全部" : subs.join(",")}（不用重發開通碼）` +
+      (add.length ? `\n新增：${add.join(",")}（下單機下次重連的快照自動多出，預設「不跟單」）` : "") +
+      (del.length ? `\n取消：${del.join(",")}（不再收訊號；帳上還有部位的照「客戶保留部位」處理，不自動平倉）` : "")];
   }
   if (cmd === "/登入") {
     const r = await doCall(adminDo(env), "/_otl_new", { origin, quiet: true });
