@@ -8,6 +8,26 @@
    "gemini-3.8-flash": {
     "at": "11-03 12:40",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
+   "gemini-flash-latest": {
+    "at": "11-03 14:38",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
+   "gemini-3.6-flash": {
+    "at": "11-03 14:38",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
+   "gemini-3.5-flash": {
+    "at": "11-03 14:41",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
+   "gemini-omni-flash-preview": {
+    "at": "11-03 14:46",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
+   "gemini-3-flash-preview": {
+    "at": "11-03 14:47",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    }
   }
  },
@@ -147,23 +167,48 @@
     "e429": 1
    },
    "gemini-3.6-flash": {
-    "req": 3,
-    "tok": 12362
+    "req": 4,
+    "tok": 12362,
+    "e429": 1
    },
    "gemini-3.5-flash": {
-    "req": 1,
-    "tok": 12786
+    "req": 3,
+    "tok": 12786,
+    "e429": 1
+   },
+   "gemini-2.5-flash": {
+    "req": 4,
+    "tok": 0
+   },
+   "gemini-flash-latest": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-3-flash-preview": {
+    "req": 2,
+    "tok": 74817,
+    "e429": 1
+   },
+   "gemini-omni-flash-preview": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-3.5-flash-lite": {
+    "req": 2,
+    "tok": 24738
    }
   }
  },
  "tpm": [
   [
-   1793709704.4826846,
-   12786
+   1793717255.4153423,
+   10820
   ],
   [
-   1793709735.388971,
-   11483
+   1793717287.207835,
+   13918
   ]
  ]
 }
