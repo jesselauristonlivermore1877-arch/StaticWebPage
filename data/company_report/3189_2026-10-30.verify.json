@@ -2,7 +2,7 @@
  "file": "3189_2026-10-30.md",
  "code": "3189",
  "date": "2026-10-30",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 95.20 倍，站上資料 172.9128"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",
