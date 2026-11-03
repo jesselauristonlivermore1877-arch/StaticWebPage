@@ -3,11 +3,12 @@
  "name": "富世達",
  "date": "2026-11-03",
  "industry": "連接器與機構件",
- "made": "本機 company_report（2026-11-03T17:40）",
+ "made": "本機 company_report（2026-11-03T12:40）",
  "deck": {
   "url": "https://mopsov.twse.com.tw/nas/STR/680520261103M001.pdf",
   "date": "2026-11-03"
  },
+ "kind": "pick",
  "facts": [
   {
    "id": "close",
@@ -123,9 +124,9 @@
    "id": "pe_ttm",
    "sec": "估值",
    "label": "本益比（近四季 EPS，河流圖基本盤 TTM）",
-   "value": 46.203209,
+   "value": 39.387309,
    "unit": " 倍",
-   "text": "46.20 倍",
+   "text": "39.39 倍",
    "src": "site:docs/data/river.json#6805",
    "period": "2026-11-03"
   },
