@@ -86,9 +86,9 @@
    "pre": {
     "from_d": "2026-10-28",
     "from": 695.0,
-    "to_d": "2026-11-02",
-    "to": 674.0,
-    "chg": -3.02
+    "to_d": "2026-11-03",
+    "to": 616.0,
+    "chg": -11.37
    },
    "pre_sent": "略過（觸發太晚或已過太久）"
   },
@@ -133,9 +133,9 @@
    "pre": {
     "from_d": "2026-10-28",
     "from": 1550.0,
-    "to_d": "2026-11-02",
-    "to": 1355.0,
-    "chg": -12.58
+    "to_d": "2026-11-03",
+    "to": 1270.0,
+    "chg": -18.06
    },
    "pre_sent": true
   },
@@ -171,9 +171,9 @@
    "pre": {
     "from_d": "2026-10-29",
     "from": 206.0,
-    "to_d": "2026-11-02",
-    "to": 216.5,
-    "chg": 5.1
+    "to_d": "2026-11-03",
+    "to": 198.5,
+    "chg": -3.64
    },
    "more": [
     {
@@ -218,12 +218,49 @@
    "pre": {
     "from_d": "2026-10-30",
     "from": 405.0,
-    "to_d": "2026-11-02",
-    "to": 417.5,
-    "chg": 3.09
+    "to_d": "2026-11-03",
+    "to": 376.0,
+    "chg": -7.16
    },
    "pre_sent": true
+  },
+  {
+   "code": "6805",
+   "quote": "富世達法說會》明年AI伺服器業務拚倍數成長",
+   "pat": "翻倍",
+   "val": null,
+   "frag": "倍數成長",
+   "src": "Yahoo股市",
+   "url": "https://news.google.com/rss/articles/CBMiowNBVV95cUxNcHFzU202OUV2bl80RlBVWHlzamF2dVRob2l1UDRnUkVTRmhsMTV2WFdUTjdWdWVqcXJRbkJNUTNCV1NudnFHV0dJRDlQbFFlZ2N5MW1WNHprRnBOTndlVy0yV0hCTndpX3lMOFo0UGo4RzFieVlXRkJJa1l5QVpTSWJPdWxuSGRtazBVUlBTNG8yYmFrcEpTa2lOdXBjYWgyWExCY3RNc0hOQU9JVjBxOHVyeGdNcmQxY3JUVWRUdElYcTFlQmhyTjZSUzdjaExaems0Tmh3ckUyZTUyWFVlYTBHS2hPSlVpSmQ5QTdfdllVTm5vUUJLdnlBa2lWVUlnY3ZOSDBNQW5VdTZkdG5YRlJNc1JNWllKSDRGd0lOQkZVQzM0dnhtMUZBMHJKLUpOTGxLOGRqV1JsQm1jRVZEdnBEMGZkaGZ1RENCQzVPdk1uUThCUW1NWl9FSGRMY2NURUpGYjQwV3gtVzZyWnhSb2I2ZG5jZXBGX2ZING5MM2wya1AxOTExLWx1dnk2RWwwXzI2YXh2amNCQmpvV1ZqU1BvUQ?oc=5",
+   "pub": "2026-11-03T08:54+00:00",
+   "kind": "news",
+   "title": "富世達法說會》明年AI伺服器業務拚倍數成長！快接頭產能增5成",
+   "key": "6805_2026-11-03",
+   "name": "富世達",
+   "meeting": "2026-11-03",
+   "seen": "2026-11-03T09:10+00:00",
+   "px": {
+    "d": "2026-11-03",
+    "close": 2160.0,
+    "chg": -8.09
+   },
+   "sent": false,
+   "mx": {
+    "d": "2026-11-03",
+    "close": 2160.0,
+    "chg": -8.09,
+    "prev": 2350.0,
+    "prev_d": "2026-11-02",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-02",
+    "from": 2350.0,
+    "to_d": "2026-11-03",
+    "to": 2160.0,
+    "chg": -8.09
+   }
   }
  ],
- "asof": "2026-11-03T08:11+00:00"
+ "asof": "2026-11-03T09:10+00:00"
 }
