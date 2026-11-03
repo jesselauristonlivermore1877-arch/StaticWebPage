@@ -1,7 +1,41 @@
 {
- "asof": "2026-11-03T12:11+00:00",
+ "asof": "2026-11-03T13:11+00:00",
  "rule": "法說高成長指引：翻倍／倍增／成長 N 倍／成長 N%（N≥50）／明年大幅成長／上修財測／創新高指引；同一公司同一場法說只觸發一次；頁首只放即時偵測、觸發後 3 個交易日內的（until），個股頁標記留 30 天",
  "top": [
+  {
+   "code": "6526",
+   "name": "達發",
+   "quote": "達發看旺2027光通訊再增三倍 200G TIA擬兼攻NPO、可插拔市場",
+   "pat": "N倍",
+   "src": "UDN",
+   "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5KbzEyRDl6RzJnM1lSZjRZbUV3aDA3eTcwVzl4RC11cW9YT3VELVpqajFiaVNub2FwbENDZDhRQXR6X09EWGRBbzk0Y1FZWXZKdHJJbXdB0gFWQVVfeXFMTkpvMTJEOXpHMmczWVJmNFltRXdoMDd5NzBXOXhELXVxb1hPdUQtWmpqMWJpU25vYXBsQ0NkOFFBdHpfT0RYZEFvOTRjUVlZdkp0ckltd0E?oc=5",
+   "pub": "2026-11-03T11:58+00:00",
+   "seen": "2026-11-03T13:11+00:00",
+   "meeting": "2026-11-03",
+   "px": {
+    "d": "2026-11-03",
+    "close": 707.0,
+    "chg": -8.42
+   },
+   "mx": {
+    "d": "2026-11-03",
+    "close": 707.0,
+    "chg": -8.42,
+    "prev": 772.0,
+    "prev_d": "2026-11-02",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-02",
+    "from": 772.0,
+    "to_d": "2026-11-03",
+    "to": 707.0,
+    "chg": -8.42
+   },
+   "kind": "news",
+   "n_more": 0,
+   "until": "2026-11-07T00:00+08:00"
+  },
   {
    "code": "6805",
    "name": "富世達",
@@ -208,6 +242,39 @@
   }
  ],
  "by_code": {
+  "6526": {
+   "code": "6526",
+   "name": "達發",
+   "quote": "達發看旺2027光通訊再增三倍 200G TIA擬兼攻NPO、可插拔市場",
+   "pat": "N倍",
+   "src": "UDN",
+   "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5KbzEyRDl6RzJnM1lSZjRZbUV3aDA3eTcwVzl4RC11cW9YT3VELVpqajFiaVNub2FwbENDZDhRQXR6X09EWGRBbzk0Y1FZWXZKdHJJbXdB0gFWQVVfeXFMTkpvMTJEOXpHMmczWVJmNFltRXdoMDd5NzBXOXhELXVxb1hPdUQtWmpqMWJpU25vYXBsQ0NkOFFBdHpfT0RYZEFvOTRjUVlZdkp0ckltd0E?oc=5",
+   "pub": "2026-11-03T11:58+00:00",
+   "seen": "2026-11-03T13:11+00:00",
+   "meeting": "2026-11-03",
+   "px": {
+    "d": "2026-11-03",
+    "close": 707.0,
+    "chg": -8.42
+   },
+   "mx": {
+    "d": "2026-11-03",
+    "close": 707.0,
+    "chg": -8.42,
+    "prev": 772.0,
+    "prev_d": "2026-11-02",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-02",
+    "from": 772.0,
+    "to_d": "2026-11-03",
+    "to": 707.0,
+    "chg": -8.42
+   },
+   "kind": "news",
+   "n_more": 0
+  },
   "6805": {
    "code": "6805",
    "name": "富世達",
