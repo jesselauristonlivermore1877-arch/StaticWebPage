@@ -1,36 +1,5 @@
 {
- "dead": {
-  "2026-11-03": {
-   "gemini-3.7-flash": {
-    "at": "11-03 12:40",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.8-flash": {
-    "at": "11-03 12:40",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-flash-latest": {
-    "at": "11-03 14:38",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.6-flash": {
-    "at": "11-03 14:38",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.5-flash": {
-    "at": "11-03 14:41",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-omni-flash-preview": {
-    "at": "11-03 14:46",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3-flash-preview": {
-    "at": "11-03 14:47",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   }
-  }
- },
+ "dead": {},
  "count": {
   "2026-10-30": {
    "gemini-3.6-flash": {
@@ -199,12 +168,30 @@
     "req": 12,
     "tok": 114267
    }
+  },
+  "2026-11-04": {
+   "gemini-2.5-flash": {
+    "req": 3,
+    "tok": 0
+   },
+   "gemini-3.5-flash-lite": {
+    "req": 3,
+    "tok": 24645
+   }
   }
  },
  "tpm": [
   [
-   1793730471.3731933,
-   8116
+   1793823831.19094,
+   8221
+  ],
+  [
+   1793823839.7368674,
+   8084
+  ],
+  [
+   1793823849.1988792,
+   8340
   ]
  ]
 }
