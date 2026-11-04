@@ -1,0 +1,45 @@
+{
+ "file": "8464_2026-11-04.md",
+ "code": "8464",
+ "date": "2026-11-04",
+ "show": true,
+ "numbers": {
+  "ok": true,
+  "bad": [],
+  "cited": 12,
+  "facts": 116
+ },
+ "compliance": {
+  "ok": true,
+  "hits": []
+ },
+ "src": {
+  "ok": true,
+  "bad": []
+ },
+ "cross": {
+  "ok": true,
+  "bad": [],
+  "checked": [
+   "close",
+   "eps_q",
+   "mcap",
+   "pe_ttm",
+   "rev_m"
+  ]
+ },
+ "tables": {
+  "ok": true,
+  "bad": []
+ },
+ "sections": {
+  "ok": true,
+  "missing": []
+ },
+ "eps": {
+  "ok": true,
+  "bad": [],
+  "checked": 8,
+  "skipped": 0
+ }
+}
