@@ -1,7 +1,7 @@
 {
- "ver": "20261101d7",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261101d7/GEA_OM_Setup_20261101d7.exe",
- "sha256": "a83459694a30192cfbfb71b42338d1bafb13e7571c2d1d7dff306dd4dc1d32e2",
- "notes": "d6＋重開跟單有客戶保留部位時先確認、保留部位併回策略一起對齊；選項 3（只收訊號給 MoneyPrinter／CT PRO）的電腦不強制升級；安裝檔只關下單機自己 bin 資料夾的程式（影子不關）；測試不寫正式 log",
- "sig": "dt167vL2AtJfJQ95hSIyiO6cCGZn7t4fAHarv6jAKsn+yMbTVvGlsNMvo2UnqRHouYE4W7kNmcyVciJGZwaV2Q=="
+ "ver": "20261101d8",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261101d8/GEA_OM_Setup_20261101d8.exe",
+ "sha256": "b745b590959d13f45add6b5730e683ba624b135041952181603f666baef346b1",
+ "notes": "d8：更新按鈕修正——下載與 SHA256 驗過才關下單機；任何一步失敗都保留原版、自動開回來並通知；交易時段只提示不更新；修正 d7 把已裝 GEA 下單機的電腦誤判成選項 3 而中止安裝",
+ "sig": "CBmLEN8/1vbTkDeXHhVwWHiEKl6wbqsN/118jgrVxjnj5ogSsSkfuBhrqMSxHAm6hDVTuAKp1CD6yyZCtiNlHA=="
 }
