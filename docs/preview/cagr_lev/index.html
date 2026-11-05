@@ -1,39 +1,200 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>年化報酬與淨利率</title><style>
-:root{--bg:#f6f5f1;--ink:#1d1d1b;--ink2:#5c5b57;--line:#dcd9d0;--acc:#b0842f;--card:#fff;--up:#c8361e;--dn:#1e7b4f}
-@media (prefers-color-scheme:dark){:root{--bg:#16171a;--ink:#ecebe7;--ink2:#a4a29c;--line:#34363b;--acc:#d6a54a;--card:#1f2125;--up:#e2604a;--dn:#3fae7a}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.7 system-ui,-apple-system,"Noto Sans TC",sans-serif}
-main{max-width:1000px;margin:0 auto;padding:20px 16px 60px}h1{font-size:22px;margin:0 0 4px}h2{font-size:16px;margin:18px 0 6px}
-.m{color:var(--ink2);font-size:13px;margin:0 0 12px}.note{color:var(--ink2);font-size:12px}
-.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
-.c{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}.c .l{color:var(--ink2);font-size:12px}.c .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
-.c .s{font-size:12px;color:var(--ink2)}.up{color:var(--up)}.dn{color:var(--dn)}
-table{border-collapse:collapse;width:100%;font-size:13px}th,td{border-bottom:1px solid var(--line);padding:4px 6px;white-space:nowrap;text-align:right}th:first-child,td:first-child{text-align:left}
-.wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
-</style></head><body><main>
-<h1>訊號區／原型訊號區：年化報酬（CAGR）與淨利率，分有槓桿／無槓桿（第 5d 項）</h1>
-<p class="m"><b>示意資料</b>（假交易、假保證金）。定義已由 Evans 11-05 定案：<b>無槓桿＝用進場當時一口的名目價值算；有槓桿＝用進場當時期交所原始保證金算；淨利率也分兩種。</b></p>
-<div class="k" id="K"></div>
-<h2>算法（程式算，不用 Gemini）</h2>
-<ul>
-<li>每筆交易的資金基礎：無槓桿＝進場價 × 每點價值 × 口數（台指期 200 元／點、小台 50、微台 10）；有槓桿＝進場那天期交所公告的原始保證金 × 口數（歷史保證金表，不用今天的）。</li>
-<li>年化報酬（CAGR）＝把每筆報酬率（淨利 ÷ 資金基礎）依出場順序連乘 → 期末倍數 ^（1 ÷ 年數）− 1；年數＝第一筆進場到最後一筆出場（或今天）的日曆天 ÷ 365.25。</li>
-<li>淨利率＝累計淨利（扣手續費、交易稅）÷ 平均每筆資金基礎。</li>
-<li>下面明細表每一列都列出這兩個基礎，數字可以逐筆對。</li>
-<li>請注意：有槓桿用「連乘」時，一筆虧損吃掉保證金的三成，下一筆就是從七成開始算 → 淨利是正的，年化報酬仍可能是負的（上面示意就是這樣）。如果 Evans 要的是「固定一口、不複利」，改成 年化報酬＝淨利率 ÷ 年數（單利）；請在回覆時選一種。</li>
-</ul>
-<div class="wrap"><table id="T"><tr><th>進場日</th><th>方向</th><th>進場價</th><th>出場價</th><th>淨利（元）</th><th>名目價值</th><th>當時原始保證金</th><th>報酬（無槓桿）</th><th>報酬（有槓桿）</th></tr></table></div>
-<h2>歷史保證金資料源（還沒建，記進 SOURCES）</h2>
-<p class="note">期交所「保證金一覽表」（taifex.com.tw/cht/5/indexMarging，有 CSV 下載 indexMargingDown）只有<b>現在</b>的金額（今天：臺股期貨 701,000、小型臺指 175,250、微型臺指 35,050，頁面更新 2026-08-12）；歷史要從期交所保證金調整公告（歷史資料區 /cht/11/hisNews、公告 /cht/11/announcement）逐筆整理成「生效日 → 金額」表。整理工作照分工鐵律派 Gemini、程式逐筆打開公告核對，建好之前正式版先不顯示「有槓桿」那兩格。</p>
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>年化報酬與淨利率（預覽）</title>
+<!-- 11-05 重出：下面第一段 <style> 是正式頁原樣（一字未改）；第二段只有這次新功能那一小塊（pv- 前綴）。資料全部是示意。 -->
+<style>
+:root{--bg:#0b0f14;--panel:#121821;--panel2:#18202b;--line:#26303d;--tx:#d5dde7;--mut:#8593a3;--acc:#f0b429;--up:#e5484d;--dn:#2fb36b;--blue:#4c8dff;--cyan:#22c3d6}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+a{color:var(--blue)}
+button,select,input{font:inherit;color:var(--tx);background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:4px 10px}
+button{cursor:pointer}button:hover{border-color:var(--acc)}
+button.on{background:var(--acc);color:#111;border-color:var(--acc);font-weight:700}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+.up{color:var(--up)}.dn{color:var(--dn)}.mut{color:var(--mut)}
+header{display:flex;align-items:center;gap:14px;padding:8px 16px;background:#0e141c;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;flex-wrap:wrap}
+header .logo{font-weight:800;letter-spacing:1px;color:var(--acc)}
+header nav{display:flex;gap:6px;flex-wrap:wrap}
+header nav button{border:none;background:none;padding:6px 12px;border-radius:6px;color:var(--mut)}
+header nav button.on{background:var(--panel2);color:var(--tx);box-shadow:inset 0 -2px 0 var(--acc)}
+header .me{margin-left:auto;display:flex;gap:10px;align-items:center;font-size:13px}
+.badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;background:var(--panel2);border:1px solid var(--line)}
+.pv{background:#3a2a05;color:#ffd77a;border-color:#6b4d0a}
+main{padding:12px 16px}
+.page{display:none}.page.on{display:block}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.card h3{margin:0 0 8px;font-size:15px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:12px;min-width:0}
+.grid2>*{min-width:0}
+@media (max-width:1100px){.grid2{grid-template-columns:1fr}}
+table{border-collapse:collapse;width:100%}
+th,td{padding:4px 8px;border-bottom:1px solid var(--line);font-size:13px;white-space:nowrap}
+th{color:var(--mut);font-weight:500;text-align:left;position:sticky;top:0;background:var(--panel)}
+.scroll{overflow:auto}
+.note{font-size:12px;color:var(--mut)}
+/* 看盤區 */
+.wtop{padding:6px 10px;gap:6px 8px;font-size:13px}.wtop select,.wtop input{padding:2px 6px;font-size:12px}.wtop button{padding:2px 8px;font-size:12px}
+.wgrid{display:grid;gap:6px;height:calc(100vh - 190px);min-height:560px;margin-bottom:10px}
+.wgrid.a4{grid-template-rows:repeat(2,minmax(0,1fr))}.wgrid.v{height:auto}.wgrid.v .wbx{height:82vh}
+.wbx{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:8px;background:var(--panel);min-width:0;min-height:0}
+.wbar{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;padding:4px 6px;font-size:12px;border-bottom:1px solid var(--line)}
+.wbar select{padding:1px 4px;font-size:12px}.wbar .zb{padding:0 7px;font-size:13px;line-height:20px;min-width:24px}
+.wbx .wch{flex:1;min-height:0;position:relative;overflow:hidden}
+.wthumb{position:absolute;right:66px;top:22px;z-index:6;pointer-events:none;color:#0b0f14;background:#f0b429;font-size:11px;font-weight:600;padding:0 5px;border-radius:4px}.wthumb:empty{display:none}
+.wsb{height:12px;margin:2px 6px 5px;position:relative;background:#141b24;border-radius:6px;cursor:pointer;touch-action:none}.wsb .wsbt{position:absolute;top:2px;bottom:2px;min-width:10px;background:#3b4a5c;border-radius:4px;cursor:grab}.wsb .wsbt:hover,.wsb .wsbt.drag{background:#5b7088}
+.wleg{position:absolute;left:0;top:0;right:60px;bottom:0;z-index:5;pointer-events:none;font-size:11px;line-height:15px}
+.wleg .wl0,.wleg .wlp{position:absolute;left:6px;right:0;background:#0b0f14b0;padding:0 4px;border-radius:4px;width:max-content;max-width:100%;white-space:normal}
+.wleg .wl0{top:3px}.wleg i{font-style:normal;margin-right:2px}
+.wside{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:1100px){.wside{grid-template-columns:1fr}}
+@media (max-width:760px){.wgrid{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;height:auto}.wgrid .wbx{height:80vh}}
+/* 盤勢儀表側欄（10-28 上正式站；dh- 前綴） */
+.dh-wrap{display:flex;gap:8px;align-items:stretch}.dh-wrap>.wgrid{flex:1;min-width:0}
+.dh{width:330px;flex:none;height:calc(100vh - 190px);min-height:560px;overflow-y:auto;margin:0 0 10px;padding:8px 10px;font-size:12px;white-space:normal}
+.dh.off{width:34px;padding:8px 4px;overflow:hidden}.dh.off .dh-body{display:none}.dh-hd{display:flex;align-items:center;gap:6px}.dh-hd b{color:#f0b429;font-size:13px}
+.dh h4{margin:10px 0 5px;font-size:12px;color:#f0b429}.dh .dh-tag{font-size:10px;border:1px solid #3b4a5c;border-radius:3px;padding:0 4px;margin-left:4px;color:#9fb0c2;font-weight:normal}
+.dh-g{display:grid;grid-template-columns:1fr 1fr;gap:5px}.dh-c{background:#0b0f14;border:1px solid var(--line);border-radius:6px;padding:5px 7px}.dh-c b{display:block;font-size:16px;margin-top:1px}.dh-c span{color:#8a93a3;font-size:11px}.dh-w{grid-column:1/3}
+.dh .u{color:#e5484d}.dh .d{color:#2fb36b}.dh table{width:100%;border-collapse:collapse}.dh td,.dh th{padding:2px 3px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.dh td:first-child,.dh th:first-child{text-align:left;white-space:normal}.dh th{color:#8a93a3;font-weight:normal}.dh tr.ck{cursor:pointer}.dh tr.ck:hover td{background:#1e2533}
+.dh-tabs{display:flex;flex-wrap:wrap;gap:3px;margin:3px 0}.dh-tabs button{padding:1px 7px;font-size:12px}
+.dh-pop{position:fixed;right:350px;bottom:12px;width:540px;max-width:calc(100vw - 370px);background:var(--panel);border:1px solid #f0b429;border-radius:8px;padding:8px 10px;z-index:50;display:none;box-shadow:0 6px 24px #000a}
+.dh-pop .x{float:right;cursor:pointer;color:#8a93a3}.dh-pc{height:240px;margin-top:6px}.dh-spark{height:46px;margin-top:3px}
+/* 盤中化（10-29 晚【新】總指揮零）：資金流向、權證內外盤；dhf- 前綴 */
+.dhf-sec{display:grid;grid-template-columns:minmax(0,96px) 1fr 58px 44px;gap:4px;align-items:center;padding:2px 2px;cursor:pointer;border-radius:4px}
+.dhf-sec:hover,.dhf-sec.on{background:#1e2533}.dhf-sec .n{text-align:right;white-space:nowrap}.dhf-sec .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dhf-bar{position:relative;height:12px}.dhf-bar:before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:1px solid var(--line)}.dhf-bar i{position:absolute;top:2px;height:8px;border-radius:2px}
+.dhf-sub{margin:2px 0 6px 6px;padding-left:6px;border-left:2px solid #f0b429}
+.dhf-st{font-size:10px;border-radius:3px;padding:0 4px;margin-left:4px;font-weight:normal}.dhf-st.ok{background:#1d3a2a;color:#2fb36b}.dhf-st.late{background:#5a1d22;color:#ffb3b8}.dhf-st.post{background:#2a3242;color:#c6d1de}
+.dhf-old{opacity:.55}
+.pf-wrap{padding:10px 12px;font-size:13px;white-space:normal}.pf-wrap .dh-hd b{font-size:15px}.pf-wrap h4{margin:10px 0 4px}
+.pf-g{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px}.pf-c .dh-g{grid-template-columns:repeat(4,minmax(0,1fr))}.pf-c .dh-w{grid-column:span 2}
+.pf-top{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pf-top table{width:100%}
+.dh.mini:not(.off){width:220px}.dhm-row{display:flex;justify-content:space-between;gap:6px;padding:1px 0}.dhm-go{width:100%;margin:6px 0 2px}
+@media (max-width:900px){.pf-g,.pf-top{grid-template-columns:minmax(0,1fr)}.pf-c .dh-g{grid-template-columns:1fr 1fr}.pf-c .dh-w{grid-column:1/3}}.dhf-tg{font-size:10px;border-radius:3px;padding:0 3px;margin-left:3px;background:#3a2f12;color:#f0b429;white-space:nowrap;cursor:help}
+@media (max-width:900px){.dh-wrap{flex-direction:column}.dh,.dh.off{width:auto;height:auto;min-height:0;max-height:none}.dh.off .dh-body{display:block}.dh-pop{right:8px;left:8px;width:auto;max-width:none}}
+.wbx.rt details.dd[open] .chips{left:auto;right:0}
+.wsub{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:12px;margin:3px 0}
+.wsub select,.wbar select{padding:2px 6px;font-size:12px}.wsub button{padding:1px 8px;font-size:12px}
+/* 10-31 手機 390：＋其他策略… 下拉不超出策略卡；權證表外層可橫向捲、縮字級欄距、購｜售可換行（整頁不橫捲） */
+#labExt,#sigAdd,#hFam{max-width:100%;min-width:0;box-sizing:border-box;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.dhf-tw{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:600px){#labExt,#sigAdd{width:100%}#hFam{max-width:100%}#dhfWBox td,#dhfWBox th{padding:2px 2px;font-size:11px}#dhfWBox td .note{white-space:normal!important;font-size:10px}}
+.chip .x{margin-left:4px;color:var(--mut);cursor:pointer}.chip .x:hover{color:var(--up)}
+details.dd{position:relative}details.dd summary{cursor:pointer;list-style:none;border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:13px;background:var(--panel2)}
+details.dd[open] .chips{position:absolute;z-index:30;top:30px;left:0;width:520px;max-width:80vw;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px;box-shadow:0 8px 24px #000a}
+.gloss h4{margin:12px 0 6px;font-size:14px;color:var(--acc)}.gl{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px 16px}
+.gnote{background:var(--panel2);border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.7}
+.hud td{font-family:Consolas,monospace;font-size:13px;padding:3px 8px;border-bottom:1px solid #0b0f14}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{font-size:12px;padding:2px 8px;border-radius:12px;border:1px solid var(--line);cursor:pointer;user-select:none}
+.chip.on{border-color:var(--acc);color:var(--acc)}
+.slider{display:grid;grid-template-columns:110px 1fr 54px;gap:8px;align-items:center;font-size:13px;margin:4px 0}
+.ftab td:first-child{color:var(--mut)}
+.pat{font-size:16px;font-weight:700}
+.hl td{background:#2b2410}
+/* 訊號區 */
+.heat{display:grid;grid-template-columns:28px repeat(18,minmax(0,1fr));gap:2px;font-size:10px;width:100%;max-width:100%;min-width:0}
+.heat.wide{overflow-x:auto;grid-template-columns:28px repeat(20,minmax(16px,1fr))}
+.heat div{min-width:0;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:3px;cursor:pointer;color:#0008;position:relative}
+.heat .ax{background:none;color:var(--mut);cursor:default;aspect-ratio:auto}
+.heat .ax,.heat .axb{font-variant-numeric:tabular-nums;white-space:nowrap;font-size:9px}
+.heat .sel{outline:2px solid #fff;z-index:2}
+.heat .axb{background:none;color:var(--mut);cursor:default;aspect-ratio:auto;align-items:flex-start}
+.tip{border-bottom:1px dotted var(--mut);cursor:help}
+.heat .pick::after{content:attr(data-p);position:absolute;inset:auto auto -1px -1px;font-size:9px;color:#fff;background:#000a;padding:0 2px;border-radius:2px}
+#sChart{height:520px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+#sEq{height:220px}
+.pager{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-top:6px}.pager button[disabled]{opacity:.4;cursor:default}
+th.srt{cursor:pointer;user-select:none}th.srt:hover{color:var(--acc)}
+.kpi{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.kpi div{background:var(--panel2);border-radius:8px;padding:8px 10px}
+.kpi b{display:block;font-size:18px;font-variant-numeric:tabular-nums}
+.kpi span{font-size:12px;color:var(--mut)}
+.mtx td{text-align:right;font-size:12px;padding:3px 6px}
+.pos{font-size:22px;font-weight:800}
+.tick{transition:background .4s}.flash{background:#3a2a05}
+/* 客戶選單區 */
+.menu td,.menu th{font-size:13px}
+.menu tr.off td{opacity:.45}
+.adm input[type=checkbox],.menu input[type=checkbox]{width:18px;height:18px;accent-color:var(--acc)}
+.pk{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.pk .card{cursor:pointer;margin:0}.pk .card.on{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.big{font-size:22px;font-weight:800}
+.modal{position:fixed;inset:0;background:#000c;display:none;align-items:flex-start;justify-content:center;z-index:50;overflow:auto;padding:30px 10px}
+.modal.on{display:flex}.modal .box{background:var(--panel);border-radius:10px;padding:14px;max-width:1150px;width:100%}
+.modal img{width:100%;border-radius:6px;margin-top:8px;background:#fff}
+/* 登入 */
+#login{position:fixed;inset:0;background:radial-gradient(circle at 30% 20%,#1d2633,#07090c);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
+#login .box{width:420px;max-width:100%;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px}
+#login h1{margin:0 0 4px;font-size:22px;color:var(--acc)}
+.btnline{width:100%;padding:12px;border:none;border-radius:8px;background:#06c755;color:#fff;font-weight:700;font-size:15px;margin-top:14px}
+.btnmail{width:100%;padding:10px;margin-top:8px}
+@media print{header,#login,.noprint{display:none!important}body{background:#fff;color:#000}.card{border-color:#ccc;background:#fff}th{background:#fff}}
+#p-signal:not(.lab) #sGrid{grid-template-columns:1fr}#p-signal:not(.lab) #sRight{display:none}
+</style>
+<style>
+/* 11-05 預覽新增（只有這一塊）：新加的四格標記 */
+.kpi div.pv-new{box-shadow:inset 0 0 0 1px var(--acc)}
+</style>
+</head>
+<body>
+<header>
+  <span class="logo">GEA</span>
+  <nav id="nav"><button data-p="watch">看盤區</button><button data-p="flow">盤中資金</button><button data-p="signal" class="on">訊號區</button><button data-p="lab">原型研究</button><button data-p="menu">客戶選單區</button><button data-p="admin">管理</button></nav>
+  <span class="badge pv"><span>預覽・</span>示意資料（11-05 重出）</span>
+  <span class="me"><span>Evans（示意）</span><span class="badge">到期 2027-10-18</span></span>
+</header>
+<main>
+<section class="page on" id="p-signal">
+  <div class="card"><h3>5d 年化報酬（複利，Evans 11-05 定案）與淨利率，分有槓桿／無槓桿（11-05 重出：正式訊號區樣式）</h3>
+    <div class="note">示意資料（假交易、假保證金）。下面「這段區間的績效」是正式訊號區那張卡，<b>金框四格是新加的</b>，其他格照舊；交易明細只多四欄。<br>
+    算法（程式算，不用 Gemini）：每筆的資金基礎 —— 無槓桿＝進場價 × 每點價值 × 口數（台指期 200 元／點、小台 50、微台 10）；有槓桿＝進場那天期交所公告的原始保證金 × 口數（用歷史保證金表，不用今天的）。<br>
+    年化報酬（複利）＝每筆報酬率（淨利 ÷ 資金基礎）依出場順序連乘 → 期末倍數 ^（1 ÷ 年數）− 1；年數＝第一筆進場到最後一筆出場（或今天）的日曆天 ÷ 365.25。淨利率＝累計淨利（扣手續費、交易稅）÷ 平均每筆資金基礎。<br>
+    提醒：有槓桿連乘時，一筆虧掉保證金三成、下一筆就從七成開始算 → 淨利是正的、年化報酬仍可能是負的（示意剛好是這樣）。<br>
+    歷史保證金表還沒建（期交所「保證金一覽表」只有現在的金額；歷史要從保證金調整公告逐筆整理，派 Gemini、程式逐筆打開公告核對，見 SOURCES）；建好之前正式版不顯示「有槓桿」那兩格。</div></div>
+  <div class="card" style="margin-top:10px"><h3>這段區間的績效</h3><div class="kpi" id="sKpi"></div></div>
+  <div class="card"><h3>交易明細（區間內，新的在上）</h3><div class="scroll" style="max-height:360px"><table id="sTr"></table></div></div>
+</section>
+</main>
 <script>
-let seed=3;const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;
-const M=[["2019-10-01",83000],["2020-03-17",148000],["2021-05-13",167000],["2022-03-08",184000],["2024-07-17",213000],["2025-04-09",339000]];
-const mg=d=>M.filter(m=>m[0]<=d).pop()[1];
-let p=11000,d=new Date("2019-10-02"),R=[];for(let i=0;i<40;i++){d=new Date(+d+(20+rnd()*40)*864e5);const ds=d.toISOString().slice(0,10),dir=rnd()<.5?1:-1,ex=p*(1+(rnd()-0.45)*0.05),pnl=Math.round((ex-p)*dir*200-300);R.push({ds,dir,p,ex,pnl,nom:Math.round(p*200),mg:mg(ds)});p=ex*(1+(rnd()-0.45)*0.03)}
-const yrs=(new Date(R[R.length-1].ds)-new Date(R[0].ds))/864e5/365.25;
-const cagr=k=>Math.pow(R.reduce((a,r)=>a*(1+r.pnl/r[k]),1),1/yrs)-1, net=R.reduce((a,r)=>a+r.pnl,0), avg=k=>R.reduce((a,r)=>a+r[k],0)/R.length;
-const pc=x=>(x>=0?"+":"")+(x*100).toFixed(1)+"%",cls=x=>x>=0?"up":"dn";
-document.getElementById("K").innerHTML=[["年化報酬（無槓桿）",cagr("nom"),"資金＝進場當時一口名目價值"],["年化報酬（有槓桿）",cagr("mg"),"資金＝進場當時原始保證金"],["淨利率（無槓桿）",net/avg("nom"),"累計淨利 ÷ 平均名目價值"],["淨利率（有槓桿）",net/avg("mg"),"累計淨利 ÷ 平均原始保證金"]].map(([l,v,s])=>`<div class="c"><div class="l">${l}</div><div class="v ${cls(v)}">${pc(v)}</div><div class="s">${s}</div></div>`).join("");
-document.getElementById("T").innerHTML+=R.slice(0,12).map(r=>`<tr><td>${r.ds}</td><td>${r.dir>0?"多":"空"}</td><td>${r.p.toFixed(0)}</td><td>${r.ex.toFixed(0)}</td><td class="${cls(r.pnl)}">${r.pnl.toLocaleString()}</td><td>${r.nom.toLocaleString()}</td><td>${r.mg.toLocaleString()}</td><td class="${cls(r.pnl)}">${pc(r.pnl/r.nom)}</td><td class="${cls(r.pnl)}">${pc(r.pnl/r.mg)}</td></tr>`).join("")+`<tr><td colspan="9" style="text-align:left;color:var(--ink2)">（示意只列前 12 筆，共 ${R.length} 筆；期間 ${yrs.toFixed(1)} 年）</td></tr>`;
-</script></main></body></html>
+
+let seed = 3; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+const dhF = (v, d = 0) => v == null || !isFinite(v) ? "—" : Number(v).toLocaleString("zh-TW", {minimumFractionDigits: d, maximumFractionDigits: d});
+const dhCl = v => v > 0 ? "u" : v < 0 ? "d" : "", dhSg = (v, d = 1) => v == null ? "—" : (v > 0 ? "+" : "") + dhF(v, d);
+function dhfSpark(a) {
+  if (!a || !a.length) return ""; const w = 44, h = 14, mx = Math.max(...a.map(Math.abs), 1e-9);
+  const p = a.map((v, i) => `${(i / (a.length - 1) * w).toFixed(1)},${(h / 2 - v / mx * h / 2).toFixed(1)}`).join(" ");
+  return `<svg width="${w}" height="${h}"><line x1="0" x2="${w}" y1="${h / 2}" y2="${h / 2}" stroke="#26303d"/><polyline fill="none" stroke="${a[a.length - 1] >= 0 ? "#e5484d" : "#2fb36b"}" stroke-width="1.2" points="${p}"/></svg>`;
+}
+const NAMES = ["記憶體","晶圓代工與製造","CCL與電子材料","載板與PCB","IC設計","其他","光通訊上游","封裝測試","被動元件","伺服器與品牌","金融","光學鏡頭","測試設備與介面","伺服器電源","散熱與液冷","矽晶圓與化合物","連接器與機構","晶圓耗材","面板","傳產石化","光通訊中下游","航運","網通與衛星","廠務工程","功率元件","電源管理IC","電信與雲端服務","生技醫療"];
+function walk(end, n = 55) { const a = [0]; for (let i = 1; i < n; i++) a.push(a[i - 1] + (rnd() - 0.5) * Math.abs(end || 1) * 0.4); const k = (end - a[n - 1]) / (n - 1); return a.map((v, i) => +(v + k * i).toFixed(3)); }
+
+const fmt = (v, d = 0) => v == null || !isFinite(v) ? "—" : Number(v).toLocaleString("zh-TW", {minimumFractionDigits: d, maximumFractionDigits: d});
+const sgn = (v, d = 0) => (v > 0 ? "+" : "") + fmt(v, d), cls = v => v > 0 ? "up" : v < 0 ? "dn" : "";
+const M = [["2019-10-01",83000],["2020-03-17",148000],["2021-05-13",167000],["2022-03-08",184000],["2024-07-17",213000],["2025-04-09",339000]];
+const mg = d => M.filter(m => m[0] <= d).pop()[1];
+let p = 11000, d = new Date("2019-10-02"), R = [];
+for (let i = 0; i < 40; i++) { d = new Date(+d + (20 + rnd() * 40) * 864e5); const ds = d.toISOString().slice(0, 10), xd = new Date(+d + (1 + rnd() * 5) * 864e5).toISOString().slice(0, 10), dir = rnd() < .5 ? 1 : -1, ex = p * (1 + (rnd() - 0.45) * 0.05), pts = Math.round((ex - p) * dir - 1.5);
+  R.push({ds, xd, dir, p, ex, pts, pnl: pts * 200, nom: Math.round(p * 200), mg: mg(ds)}); p = ex * (1 + (rnd() - 0.45) * 0.03); }
+const yrs = (new Date(R[R.length - 1].xd) - new Date(R[0].ds)) / 864e5 / 365.25;
+const cagr = k => Math.pow(R.reduce((a, r) => a * (1 + r.pnl / r[k]), 1), 1 / yrs) - 1, avg = k => R.reduce((a, r) => a + r[k], 0) / R.length;
+const net = R.reduce((a, r) => a + r.pts, 0), w = R.filter(r => r.pts > 0), l = R.filter(r => r.pts <= 0), gw = w.reduce((a, r) => a + r.pts, 0), gl = -l.reduce((a, r) => a + r.pts, 0);
+let eq = 0, pk = 0, mdd = 0; R.forEach(r => { eq += r.pts; pk = Math.max(pk, eq); mdd = Math.max(mdd, pk - eq); });
+const pc = x => (x > 0 ? "+" : "") + (x * 100).toFixed(1) + "%";
+const K = [["淨利（點）", sgn(net), cls(net)], ["約合新台幣", sgn(net * 200), cls(net)], ["交易筆數", fmt(R.length)], ["勝率", fmt(w.length / R.length * 100, 1) + "%"],
+  ["獲利因子", fmt(gw / gl, 2)], ["賺賠比", fmt((gw / w.length) / (gl / l.length), 2)], ["平均每筆", sgn(net / R.length, 1), cls(net)], ["最大回撤（逐筆）", fmt(-mdd), "dn"],
+  ["年化報酬（無槓桿、複利）", pc(cagr("nom")), cls(cagr("nom")), 1], ["年化報酬（有槓桿、複利）", pc(cagr("mg")), cls(cagr("mg")), 1],
+  ["淨利率（無槓桿）", pc(net * 200 / avg("nom")), cls(net), 1], ["淨利率（有槓桿）", pc(net * 200 / avg("mg")), cls(net), 1],
+  ["最大獲利單", sgn(Math.max(...R.map(r => r.pts))), "up"], ["最大虧損單", sgn(Math.min(...R.map(r => r.pts))), "dn"]];
+document.getElementById("sKpi").innerHTML = K.map(([n, v, c, nw]) => `<div${nw ? ' class="pv-new"' : ""}><span>${n}</span><b class="${c || ""}">${v}</b></div>`).join("");
+document.getElementById("sTr").innerHTML = "<tr><th>策略</th><th>方向</th><th>進場時間</th><th class='num'>進場價</th><th>出場時間</th><th class='num'>出場價</th><th class='num'>淨損益（點）</th><th class='num'>名目價值</th><th class='num'>當時原始保證金</th><th class='num'>報酬（無槓桿）</th><th class='num'>報酬（有槓桿）</th></tr>" +
+  R.slice().reverse().map(r => `<tr><td>GEA5（示意）</td><td class="${r.dir > 0 ? "up" : "dn"}">${r.dir > 0 ? "多" : "空"}</td><td>${r.ds} 09:15</td><td class="num">${fmt(r.p)}</td><td>${r.xd} 13:30</td><td class="num">${fmt(r.ex)}</td><td class="num ${cls(r.pts)}">${sgn(r.pts)}</td><td class="num">${fmt(r.nom)}</td><td class="num">${fmt(r.mg)}</td><td class="num ${cls(r.pts)}">${pc(r.pnl / r.nom)}</td><td class="num ${cls(r.pts)}">${pc(r.pnl / r.mg)}</td></tr>`).join("");
+
+</script>
+</body>
+</html>

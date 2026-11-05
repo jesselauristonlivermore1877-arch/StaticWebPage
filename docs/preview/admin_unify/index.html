@@ -1,65 +1,101 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>管理頁統一</title><style>
-:root{--bg:#f6f5f1;--ink:#1d1d1b;--ink2:#5c5b57;--line:#dcd9d0;--acc:#b0842f;--card:#fff;--up:#c8361e;--dn:#1e7b4f;--chip:#efece4}
-@media (prefers-color-scheme:dark){:root{--bg:#16171a;--ink:#ecebe7;--ink2:#a4a29c;--line:#34363b;--acc:#d6a54a;--card:#1f2125;--up:#e2604a;--dn:#3fae7a;--chip:#2a2c31}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.7 system-ui,-apple-system,"Noto Sans TC",sans-serif}
-main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:22px 0 8px}h3{font-size:15px;margin:0 0 6px}
-.m{color:var(--ink2);font-size:13px;margin:0 0 12px}.note{color:var(--ink2);font-size:12px}
-.frame{border:1px solid var(--line);border-radius:10px;background:var(--card);overflow:hidden;margin-bottom:14px}
-.bar{display:flex;gap:14px;align-items:center;padding:8px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.bar b{color:var(--acc)}.tab{padding:2px 8px;border-radius:6px}.tab.on{background:var(--chip);font-weight:700}.tab.x{text-decoration:line-through;color:var(--ink2)}
-.body{padding:12px 14px}.card{border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:10px}
-table{border-collapse:collapse;width:100%;font-size:13px}th,td{border-bottom:1px solid var(--line);padding:5px 6px;text-align:left;white-space:nowrap}
-.wrap{overflow-x:auto}button{font:inherit;font-size:12px;padding:2px 8px;border:1px solid var(--line);border-radius:5px;background:var(--card);color:var(--ink)}
-button.pri{background:var(--acc);color:#fff;border-color:var(--acc)}.on{color:var(--up);font-weight:700}.off{color:var(--ink2)}
-details summary{cursor:pointer;color:var(--ink2)}.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
-.box{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--card)}.box b{color:var(--acc)}
-.arrow{color:var(--ink2);font-size:12px}ol li,ul li{margin:3px 0}.tag{display:inline-block;padding:0 6px;border-radius:4px;background:var(--chip);font-size:12px}
-</style></head><body><main>
-<h1>管理頁統一（【新】總指揮 11-05 第 2 項）</h1>
-<p class="m">設計預覽：畫面示意＋資料流。<b>所有名字、代號、日期都是示意資料</b>（不是真客戶）。Evans 11-05 已裁示：看盤區會員和下單機客戶合成「同一筆客戶資料」，訂閱只改一次、兩邊都生效。程式要等這份設計點頭才動；部署【待 Evans 同意】。</p>
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>GEA 管理（預覽）</title>
+<!-- 11-05 重出：下面第一段 <style> 是正式頁原樣（一字未改）；第二段只有這次新功能那一小塊（pv- 前綴）。資料全部是示意。 -->
+<style>
+:root{--bg:#0b0f14;--panel:#121821;--panel2:#18202b;--line:#26303d;--tx:#d5dde7;--mut:#8593a3;--acc:#f0b429;--up:#e5484d;--dn:#2fb36b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+header{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:10px 16px;background:#0e141c;border-bottom:1px solid var(--line);position:sticky;top:0}
+header b{color:var(--acc)}main{padding:12px 16px;max-width:1400px}
+button,select,input{font:inherit;color:var(--tx);background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:4px 10px}
+button{cursor:pointer}button:hover{border-color:var(--acc)}button.pri{background:var(--acc);color:#111;font-weight:700}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:12px}.card h3{margin:0 0 8px;font-size:15px}
+table{border-collapse:collapse;width:100%}th,td{padding:4px 8px;border-bottom:1px solid var(--line);font-size:13px;white-space:nowrap;text-align:left}th{color:var(--mut);font-weight:500}
+.scroll{overflow:auto}.note{font-size:12px;color:var(--mut)}.ok{color:var(--dn)}.bad{color:var(--up)}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tag{display:inline-block;padding:0 8px;border-radius:10px;font-size:12px;border:1px solid var(--line)}.on{background:#123222;border-color:#1f6b45}.off{background:#3a1717;border-color:#7a2a2a}
+.test{background:#3a2a05;color:#ffd77a}input[type=checkbox]{accent-color:var(--acc)}
+#tokbox{background:#2b2410;padding:8px;border-radius:8px;margin-top:6px}
+.big{font-size:26px;letter-spacing:3px;color:var(--acc);font-weight:700}textarea{font:inherit;color:var(--tx);background:var(--panel2);border:1px solid var(--line);border-radius:6px;width:100%;padding:6px}
+.nf{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;align-items:end}.nf label{display:flex;flex-direction:column;font-size:12px;color:var(--mut);gap:2px}
+.idm{font-family:Consolas,monospace}details summary{cursor:pointer;color:var(--mut);font-size:12px}
+@media (max-width:760px){
+  header{padding:8px 12px}main{padding:10px 12px}
+  #usT tr:first-child{display:none}#usT tr{display:block;border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:6px}
+  #usT td{display:flex;gap:8px;border:0;white-space:normal;padding:3px 4px}#usT td::before{content:attr(data-l);color:var(--mut);min-width:64px;flex:none}
+  #usT td input{width:100%!important}
+}
+</style>
+<style>
+/* 11-05 預覽新增（只有這一塊）：/admin 頁籤列 */
+.pv-tabs{display:flex;gap:6px;flex-wrap:wrap}.pv-tabs button.on{background:var(--acc);color:#111;font-weight:700;border-color:var(--acc)}
+</style>
+</head>
+<body>
+<header>
+  <b>GEA 管理</b>
+  <span class="pv-tabs"><button class="on">客戶</button><button>策略上下架</button><button>原型研究</button><button>客戶選單（價格／套餐）</button><button>看盤區用量</button></span>
+  <span class="tag test">預覽・示意資料（11-05 重出）</span>
+  <span style="margin-left:auto" class="row"><button class="pri">用 TG 登入</button><button>登出</button></span>
+</header>
+<main>
+  <div class="card"><h3>2 管理頁統一：唯一入口＝中繼 /admin（11-05 重出：中繼管理頁正式樣式）</h3>
+    <div class="note">所有名字、代號、日期都是示意資料。Evans 11-05 已裁示：① 看盤區會員和下單機客戶合成「同一筆客戶資料」，訂閱只改一次、兩邊都生效；② 中繼連不上時，看盤區用最後一份快取、最多 10 分鐘；③ 兩邊資料不一致以中繼為準。<b>程式要等 Evans 看完這份預覽點頭才動</b>；部署【待 Evans 同意】。客戶網址那一頁（會員站樣式）在 <a href="member.html">member.html</a>。</div></div>
+  <div class="card"><h3>新增客戶 → 產生開通碼</h3>
+    <div class="nf">
+      <label>代號（英數；空白＝自動）<input value="c_demo04"></label>
+      <label>備註（姓名）<input value="張示意"></label>
+      <label>聯絡<input value="LINE：demo"></label>
+      <label>開始日<input type="date" value="2026-11-06"></label>
+      <label>到期日<input type="date" value="2027-11-05"></label>
+    </div>
+    <div class="row" style="margin-top:8px"><span class="note">訂閱（已上架）</span><span class="row"><label><input type="checkbox"> 全部</label> <label><input type="checkbox" checked> GEA5</label> <label><input type="checkbox" checked> GEA6</label></span></div>
+    <div class="row" style="margin-top:8px"><button class="pri">產生開通碼</button><span class="note">一次產出兩樣：下單機開通碼（8 碼、24 小時、一次）＋看盤區專屬登入連結；同一個客戶代號。這頁只有這一顆「產生開通碼」。</span></div>
+  </div>
+  <div class="card"><h3>客戶（一個人一列：下單機＋看盤區）</h3>
+    <div class="scroll"><table id="usT">
+      <tr><th>代號</th><th>備註</th><th>訂閱（改一次兩邊生效）</th><th>開始</th><th>到期</th><th>狀態</th><th>下單機</th><th>看盤區裝置</th><th></th></tr>
+      <tr><td data-l="代號"><b>c_demo01</b></td><td data-l="備註">王示意</td><td data-l="訂閱">GEA5、GEA6</td><td data-l="開始">2026-11-01</td><td data-l="到期">2027-12-31</td><td data-l="狀態"><span class="ok">正常</span></td><td data-l="下單機">d8｜<span class="ok">● 在線</span>｜最後對帳 13:46</td><td data-l="看盤區">2 台（手機、筆電）</td><td data-l=""><button>儲存</button> <button>重新產生開通碼</button> <button>踢裝置</button> <button>在新裝置登入</button> <button>停用</button></td></tr>
+      <tr><td data-l="代號"><b>c_demo02</b></td><td data-l="備註">陳示意</td><td data-l="訂閱">GEA5</td><td data-l="開始">2026-11-05</td><td data-l="到期">2026-12-31</td><td data-l="狀態"><span class="ok">正常</span></td><td data-l="下單機"><span class="note">還沒開通（開通碼待用到 11-06 14:00）</span></td><td data-l="看盤區">1 台</td><td data-l=""><button>儲存</button> <button>重新產生開通碼</button> <button>踢裝置</button> <button>在新裝置登入</button> <button>停用</button></td></tr>
+      <tr><td data-l="代號"><b>c_demo03</b></td><td data-l="備註">林示意</td><td data-l="訂閱"><span class="note">（只看盤區，沒訂策略）</span></td><td data-l="開始">2026-01-01</td><td data-l="到期">2026-06-30</td><td data-l="狀態"><span class="bad">已到期</span></td><td data-l="下單機">—</td><td data-l="看盤區">0 台</td><td data-l=""><button>儲存</button> <button>延期</button></td></tr>
+    </table></div>
+    <div class="note">停用／到期：下單機停收新訊號（不平倉）、看盤區登不進去，同一個開關。防誤刪規則照舊（不能停用自己與 Evans、最後一個管理員）；刪除是軟刪除、7 天內可還原。</div>
+  </div>
+  <div class="card"><h3>策略上下架（唯一開關＝中繼 strategies.listed）</h3>
+    <div class="scroll"><table><tr><th>策略</th><th>上架</th><th>訂閱人數</th><th>最後訊號</th></tr>
+      <tr><td><b>GEA5</b></td><td><span class="tag on">上架中</span> <button>下架</button></td><td>12</td><td>11-05 13:44</td></tr>
+      <tr><td><b>GEA_S_V2</b></td><td><span class="tag off">下架</span> <button>上架</button></td><td>0</td><td>11-05 10:12</td></tr></table></div>
+    <div class="note">按一次：下單機（即時、快照、補發）和看盤區訊號區同時生效；看盤區原本自己那份上下架表（會員站 conf「strategies」）停用、改讀這裡。</div>
+  </div>
+  <details class="card"><summary>進階（只給訊號主機）— 預設收起來</summary>
+    <div style="margin-top:8px"><h3>傳送端（訊號主機；管理者開通碼）</h3>
+    <div class="row"><input value="signal_host" style="width:200px"><button class="pri">產生管理者開通碼（傳送端）</button><span class="note">⚠ 只給要當傳送端的電腦，不要轉給客戶。</span></div>
+    <div class="note" style="margin-top:6px">另收在這裡：備用管理 token 登入、重發 token、模擬「誰會收到」、測試頻道、連續下單風控參數（跟現在中繼管理頁同一套）。</div></div></details>
+  <div class="card"><h3>資料流：哪一張表是唯一來源</h3>
+    <div class="scroll"><table>
+      <tr><th>資料</th><th>唯一來源</th><th>誰讀</th></tr>
+      <tr><td>客戶（代號、姓名、聯絡、訂閱、開始／到期、啟用、下單機版本、最後對帳）</td><td>中繼 gea 頻道 <code>users</code>（新增欄位 web_ok、contact）</td><td>下單機轉送；會員站每次從中繼讀（快取 60 秒）</td></tr>
+      <tr><td>策略上下架</td><td>中繼 <code>strategies.listed</code></td><td>下單機轉送／快照／補發；看盤區訊號區（不再讀 conf）</td></tr>
+      <tr><td>登入用的東西（裝置 sessions、登入連結雜湊、LINE 綁定、版面 prefs、檔案）</td><td>會員站 D1</td><td>只有會員站；以同一個客戶代號對應</td></tr>
+    </table></div>
+    <div class="note">改一次、兩邊生效：/admin 改訂閱 → 中繼 users.subs → 下單機下一筆訊號照新訂閱；看盤區 60 秒內照新訂閱開放 data_s_&lt;策略&gt;。<br>
+    <b>中繼連不上（Evans 11-05 定案）</b>：看盤區用最後一份快取，最多 10 分鐘；超過就當「暫時無法驗證」，只給看盤區、不給訊號資料。</div>
+  </div>
+  <div class="card"><h3>會員和下單機客戶合成一筆（Evans 已裁示，照這個做）</h3>
+    <div class="note" style="font-size:13px;color:var(--tx)">
+    1. <b>以中繼 users 為主表</b>，加欄位 web_ok（看盤區能不能登入）、contact；會員站 members 加 cust_id 指向中繼代號，原本的 subs、exp、on_ 改成「只讀快取」。<br>
+    2. <b>會員站讀中繼</b>：Worker 對 Worker 呼叫（service binding，不經公開網路）GET /admin/customer?id=，回訂閱、到期、啟用、上架清單；快取 60 秒。<br>
+    3. <b>合併既有資料（一次性，先乾跑）</b>：用姓名＋聯絡配對，印「配對成功／只在一邊／兩邊訂閱或到期不一樣」三張表給 Evans 看；<b>不一樣的以中繼為準（Evans 11-05 定案）</b>，Evans 點頭才寫入。只在看盤區的會員在中繼補建一筆（subs 照會員站、不發開通碼）。<br>
+    4. <b>管理功能搬家</b>：會員站的會員管理、原型研究、客戶選單都搬到中繼 /admin；會員站管理 API 保留給 /admin 呼叫，管理頁籤拿掉。<br>
+    5. <b>開通碼</b>：/admin 只留「產生開通碼」；客戶列表那顆叫「重新產生開通碼」；傳送端收進「進階」。TG「/開通碼」照舊。<br>
+    6. <b>測試</b>：中繼 test.mjs＋會員站 test.mjs 加：改訂閱一次兩邊生效、下架一次兩邊不見、停用一次兩邊擋、客戶網址看不到三個頁籤（打網址 403）、訊號區只出現已訂閱的策略。全過才請 Evans 同意部署。</div>
+  </div>
+</main>
+<script>
 
-<h2>一、唯一的管理入口：中繼 /admin</h2>
-<div class="frame"><div class="bar"><b>GEA 管理</b><span class="tab on">客戶</span><span class="tab">策略上下架</span><span class="tab">原型研究</span><span class="tab">客戶選單（價格／套餐）</span><span class="tab">看盤區用量</span><span style="margin-left:auto" class="note">Evans（用 TG 登入）</span></div>
-<div class="body">
-<div class="card"><h3>產生開通碼（給新客戶）</h3>
-<div>姓名 <input value="王小明" style="width:90px"> 聯絡 <input value="LINE：wang" style="width:110px"> 訂閱 <label><input type="checkbox" checked>GEA5</label> <label><input type="checkbox" checked>GEA6</label> <label><input type="checkbox">GEA_S_V2</label> 到期 <input value="2027-12-31" style="width:96px"> <button class="pri">產生開通碼</button></div>
-<div class="note">一次產出兩樣：下單機開通碼（8 碼、24 小時、一次）＋看盤區專屬登入連結；同一個客戶代號。這頁只有這一顆「產生開通碼」。</div></div>
-<div class="card"><h3>客戶（一個人一列：下單機＋看盤區）</h3><div class="wrap"><table>
-<tr><th>客戶</th><th>訂閱（改一次兩邊生效）</th><th>到期</th><th>狀態</th><th>下單機</th><th>看盤區裝置</th><th></th></tr>
-<tr><td>c_demo01 王小明</td><td>GEA5、GEA6</td><td>2027-12-31</td><td class="on">啟用</td><td>d8｜在線｜最後對帳 13:46</td><td>2 台（手機、筆電）</td><td><button>編輯</button> <button>重新產生開通碼</button> <button>踢裝置</button> <button>在新裝置登入</button> <button>停用</button></td></tr>
-<tr><td>c_demo02 陳小華</td><td>GEA5</td><td>2026-12-31</td><td class="on">啟用</td><td>還沒開通（開通碼待用到 11-06 14:00）</td><td>1 台</td><td><button>編輯</button> <button>重新產生開通碼</button> <button>踢裝置</button> <button>在新裝置登入</button> <button>停用</button></td></tr>
-<tr><td>c_demo03 林大同</td><td>（只看盤區，沒訂策略）</td><td>2026-06-30</td><td class="off">已到期</td><td>—</td><td>0 台</td><td><button>編輯</button> <button>延期</button></td></tr>
-</table></div><div class="note">停用／到期：下單機停收訊號、看盤區登不進去，同一個開關。防誤刪規則照舊（不能停用自己與 Evans、最後一個管理員）；刪除是軟刪除、7 天內可還原。</div></div>
-<div class="card"><h3>策略上下架（唯一開關＝中繼 strategies.listed）</h3><div class="wrap"><table>
-<tr><th>策略</th><th>上架</th><th>訂閱人數</th><th>最後訊號</th></tr>
-<tr><td>GEA5</td><td><button class="pri">上架中（按一下下架）</button></td><td>12</td><td>11-05 13:44</td></tr>
-<tr><td>GEA_S_V2</td><td><button>下架（按一下上架）</button></td><td>0</td><td>11-05 10:12</td></tr></table></div>
-<div class="note">按一次：下單機（即時、快照、補發）和看盤區訊號區同時生效；看盤區原本自己那份上下架表（會員站 conf「strategies」）停用、改讀這裡。</div></div>
-<details><summary>進階（只給訊號主機）— 預設收起來</summary><div class="card" style="margin-top:8px"><h3>傳送端（管理者開通碼）</h3><div>代號 <input value="signal_host" style="width:110px"> <button>產生管理者開通碼</button> <span class="note">⚠ 不要轉給客戶</span></div><div class="note" style="margin-top:6px">另收在這裡：備用管理 token 登入、重發 token、模擬「誰會收到」、測試頻道、連續下單風控參數。</div></div></details>
-</div></div>
-
-<h2>二、客戶網址（會員區）只剩三個頁籤</h2>
-<div class="frame"><div class="bar"><b>GEA</b><span class="tab on">看盤區</span><span class="tab">訊號區</span><span class="tab">盤中資金</span><span class="tab x">原型研究</span><span class="tab x">客戶選單區</span><span class="tab x">管理</span><span style="margin-left:auto" class="note">王小明｜到期 2027-12-31</span></div>
-<div class="body"><div class="card"><h3>訊號區</h3><div>只顯示這位客戶訂閱的：<span class="tag">GEA5</span> <span class="tag">GEA6</span>（一支一張卡，直接往下排）</div><div class="note">拿掉策略選單與「＋其他策略」；沒訂閱的策略連名稱都不出現。劃線的三個頁籤（原型研究、客戶選單、管理）客戶看不到、網址打進去也 403；Evans 自己的帳號在看盤區右上多一顆「管理」直接跳到中繼 /admin。</div></div></div></div>
-
-<h2>三、資料流：哪一張表是唯一來源</h2>
-<div class="flow">
-<div class="box"><b>客戶資料（唯一來源）</b><br>中繼 gea 頻道 <code>users</code>：代號、姓名、聯絡、訂閱 subs、服務期間 start／exp、啟用、下單機版本、最後對帳<br><span class="arrow">↓ 新增欄位 web_ok（看盤區可登入）</span></div>
-<div class="box"><b>策略上下架（唯一來源）</b><br>中繼 <code>strategies.listed</code><br><span class="arrow">→ 下單機轉送／快照／補發<br>→ 看盤區訊號區（會員站改讀這裡，不再讀 conf）</span></div>
-<div class="box"><b>看盤區只存「登入用」的東西</b><br>會員站 D1：sessions（裝置）、登入連結雜湊、LINE 綁定、版面 prefs、檔案<br><span class="arrow">以同一個客戶代號對應；訂閱、到期、停用每次從中繼讀（快取 60 秒）</span></div>
-<div class="box"><b>改一次、兩邊生效</b><br>/admin 改訂閱 → 中繼 users.subs → 下單機下一筆訊號照新訂閱；看盤區 60 秒內照新訂閱開放 data_s_&lt;策略&gt;</div>
-</div>
-
-<h2>四、「會員」和「下單機客戶」合成一筆（Evans 已裁示，照這個做）</h2>
-<ol>
-<li><b>以中繼 users 為主表</b>，加欄位 <code>web_ok</code>（看盤區能不能登入）、<code>contact</code>；會員站 members 加 <code>cust_id</code> 指向中繼代號，原本的 subs、exp、on_ 欄位改成「只讀快取」，不再當來源。</li>
-<li><b>會員站讀中繼</b>：Worker 對 Worker 呼叫（service binding，不經公開網路）<code>GET /admin/customer?id=</code>，回訂閱、到期、啟用、上架清單；快取 60 秒。中繼連不上時用最後一份快取，最多 10 分鐘，超過就當「暫時無法驗證」只給看盤區、不給訊號資料。</li>
-<li><b>合併既有資料（一次性，先乾跑）</b>：用姓名＋聯絡把會員站 members 和中繼 users 配對，印「配對成功／只在一邊／兩邊訂閱或到期不一樣」三張表給 Evans 看；不一樣的以中繼為準（下單機是真單），Evans 點頭才寫入。只在看盤區的會員（沒裝下單機）在中繼補建一筆（subs 照會員站、不發開通碼）。</li>
-<li><b>管理功能搬家</b>：會員站的會員管理（裝置、踢裝置、在新裝置登入、到期、停用）、原型研究、客戶選單（價格／套餐）都搬到中繼 /admin；會員站的管理 API 保留給 /admin 呼叫，管理頁籤拿掉。</li>
-<li><b>開通碼</b>：/admin 只留「產生開通碼」；客戶列表那顆叫「重新產生開通碼」；傳送端（管理者開通碼）收進「進階（只給訊號主機）」預設收起。TG「/開通碼」照舊、同一套。</li>
-<li><b>測試</b>：中繼 test.mjs＋會員站 test.mjs 加：改訂閱一次兩邊生效、下架一次兩邊不見、停用一次兩邊擋、客戶網址看不到三個頁籤（打網址 403）、訊號區只出現已訂閱的策略。全過才請 Evans 同意部署。</li>
-</ol>
-<p class="note">要 Evans 決定的只剩：① 中繼連不上時看盤區的處理（上面寫的是暫定：快取 10 分鐘）；② 合併時兩邊不一樣以中繼為準（暫定）。</p>
-</main></body></html>
+</script>
+</body>
+</html>

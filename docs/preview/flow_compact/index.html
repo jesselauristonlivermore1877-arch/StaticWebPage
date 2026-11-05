@@ -1,41 +1,200 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>盤中資金精簡版</title><style>
-:root{--bg:#f6f5f1;--ink:#1d1d1b;--ink2:#5c5b57;--line:#dcd9d0;--acc:#b0842f;--card:#fff;--up:#c8361e;--dn:#1e7b4f}
-@media (prefers-color-scheme:dark){:root{--bg:#16171a;--ink:#ecebe7;--ink2:#a4a29c;--line:#34363b;--acc:#d6a54a;--card:#1f2125;--up:#e2604a;--dn:#3fae7a}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 system-ui,-apple-system,"Noto Sans TC",sans-serif}
-main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:20px 0 6px}
-.m{color:var(--ink2);font-size:13px;margin:0 0 10px}.note{color:var(--ink2);font-size:12px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
-/* A：一行一族群，橫條＋流動箭頭（速度＝最近 5 分鐘流速） */
-.a-row{display:grid;grid-template-columns:118px 1fr 64px 58px;align-items:center;gap:8px;height:22px;font-size:13px}
-.a-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.a-track{position:relative;height:10px;border-radius:5px;background:var(--line);overflow:hidden}
-.a-fill{position:absolute;top:0;bottom:0;border-radius:5px;background-size:16px 10px;animation:flow linear infinite}
-.a-fill.in{background-image:repeating-linear-gradient(90deg,var(--up) 0 9px,transparent 9px 16px)}
-.a-fill.out{background-image:repeating-linear-gradient(270deg,var(--dn) 0 9px,transparent 9px 16px);animation-direction:reverse}
-@keyframes flow{from{background-position:0 0}to{background-position:16px 0}}
-.num{text-align:right;font-variant-numeric:tabular-nums}.up{color:var(--up)}.dn{color:var(--dn)}
-.a-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px}@media(max-width:720px){.a-wrap{grid-template-columns:1fr}}
-/* B：泡泡格（大小＝累計淨額、脈動速度＝流速） */
-.b-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:6px}
-.b-cell{border:1px solid var(--line);border-radius:8px;padding:5px 8px;position:relative;overflow:hidden;font-size:12px}
-.b-cell .v{font-size:15px;font-weight:700}.b-cell .s{color:var(--ink2);font-size:11px}
-.b-dot{position:absolute;right:8px;top:8px;width:10px;height:10px;border-radius:50%;animation:pulse ease-in-out infinite}
-@keyframes pulse{0%,100%{transform:scale(.6);opacity:.5}50%{transform:scale(1.4);opacity:1}}
-</style></head><body><main>
-<h1>盤中資金：流向改「動態流速」＋兩種精簡版面（第 5a 項）</h1>
-<p class="m"><b>示意資料</b>（隨機產生，不是真的盤中數字）。流速＝最近 5 分鐘主動淨買的變化（億元／5 分）：箭頭流得越快＝這 5 分鐘進出越猛；方向紅＝流入、綠＝流出。整區高度：原版 28 列約 660 px → A 約 330 px、B 約 260 px。</p>
-<h2>A 版：兩欄橫條（原本的長條改兩欄、每列 22 px）</h2>
-<div class="panel"><div class="a-wrap" id="A"></div><p class="note">欄位：族群｜累計淨額長條（箭頭速度＝流速）｜累計淨額｜流速。點族群看個股（同現在）。</p></div>
-<h2>B 版：泡泡格（只放數字，一格一族群）</h2>
-<div class="panel"><div class="b-grid" id="B"></div><p class="note">每格：族群、累計淨額、流速；右上圓點脈動越快＝流速越大。依累計淨額由流入到流出排。</p></div>
-<p class="note" style="margin-top:14px">資料來源照舊（breadth_live 的 flow_&lt;日&gt;.json，每檔 s5＝每 5 分累計淨額）；流速＝s5 最後一格 − 前一格，程式算、不用 Gemini。</p>
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>盤中資金精簡（預覽）</title>
+<!-- 11-05 重出：下面第一段 <style> 是正式頁原樣（一字未改）；第二段只有這次新功能那一小塊（pv- 前綴）。資料全部是示意。 -->
+<style>
+:root{--bg:#0b0f14;--panel:#121821;--panel2:#18202b;--line:#26303d;--tx:#d5dde7;--mut:#8593a3;--acc:#f0b429;--up:#e5484d;--dn:#2fb36b;--blue:#4c8dff;--cyan:#22c3d6}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+a{color:var(--blue)}
+button,select,input{font:inherit;color:var(--tx);background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:4px 10px}
+button{cursor:pointer}button:hover{border-color:var(--acc)}
+button.on{background:var(--acc);color:#111;border-color:var(--acc);font-weight:700}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+.up{color:var(--up)}.dn{color:var(--dn)}.mut{color:var(--mut)}
+header{display:flex;align-items:center;gap:14px;padding:8px 16px;background:#0e141c;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;flex-wrap:wrap}
+header .logo{font-weight:800;letter-spacing:1px;color:var(--acc)}
+header nav{display:flex;gap:6px;flex-wrap:wrap}
+header nav button{border:none;background:none;padding:6px 12px;border-radius:6px;color:var(--mut)}
+header nav button.on{background:var(--panel2);color:var(--tx);box-shadow:inset 0 -2px 0 var(--acc)}
+header .me{margin-left:auto;display:flex;gap:10px;align-items:center;font-size:13px}
+.badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;background:var(--panel2);border:1px solid var(--line)}
+.pv{background:#3a2a05;color:#ffd77a;border-color:#6b4d0a}
+main{padding:12px 16px}
+.page{display:none}.page.on{display:block}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.card h3{margin:0 0 8px;font-size:15px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:12px;min-width:0}
+.grid2>*{min-width:0}
+@media (max-width:1100px){.grid2{grid-template-columns:1fr}}
+table{border-collapse:collapse;width:100%}
+th,td{padding:4px 8px;border-bottom:1px solid var(--line);font-size:13px;white-space:nowrap}
+th{color:var(--mut);font-weight:500;text-align:left;position:sticky;top:0;background:var(--panel)}
+.scroll{overflow:auto}
+.note{font-size:12px;color:var(--mut)}
+/* 看盤區 */
+.wtop{padding:6px 10px;gap:6px 8px;font-size:13px}.wtop select,.wtop input{padding:2px 6px;font-size:12px}.wtop button{padding:2px 8px;font-size:12px}
+.wgrid{display:grid;gap:6px;height:calc(100vh - 190px);min-height:560px;margin-bottom:10px}
+.wgrid.a4{grid-template-rows:repeat(2,minmax(0,1fr))}.wgrid.v{height:auto}.wgrid.v .wbx{height:82vh}
+.wbx{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:8px;background:var(--panel);min-width:0;min-height:0}
+.wbar{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;padding:4px 6px;font-size:12px;border-bottom:1px solid var(--line)}
+.wbar select{padding:1px 4px;font-size:12px}.wbar .zb{padding:0 7px;font-size:13px;line-height:20px;min-width:24px}
+.wbx .wch{flex:1;min-height:0;position:relative;overflow:hidden}
+.wthumb{position:absolute;right:66px;top:22px;z-index:6;pointer-events:none;color:#0b0f14;background:#f0b429;font-size:11px;font-weight:600;padding:0 5px;border-radius:4px}.wthumb:empty{display:none}
+.wsb{height:12px;margin:2px 6px 5px;position:relative;background:#141b24;border-radius:6px;cursor:pointer;touch-action:none}.wsb .wsbt{position:absolute;top:2px;bottom:2px;min-width:10px;background:#3b4a5c;border-radius:4px;cursor:grab}.wsb .wsbt:hover,.wsb .wsbt.drag{background:#5b7088}
+.wleg{position:absolute;left:0;top:0;right:60px;bottom:0;z-index:5;pointer-events:none;font-size:11px;line-height:15px}
+.wleg .wl0,.wleg .wlp{position:absolute;left:6px;right:0;background:#0b0f14b0;padding:0 4px;border-radius:4px;width:max-content;max-width:100%;white-space:normal}
+.wleg .wl0{top:3px}.wleg i{font-style:normal;margin-right:2px}
+.wside{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:1100px){.wside{grid-template-columns:1fr}}
+@media (max-width:760px){.wgrid{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;height:auto}.wgrid .wbx{height:80vh}}
+/* 盤勢儀表側欄（10-28 上正式站；dh- 前綴） */
+.dh-wrap{display:flex;gap:8px;align-items:stretch}.dh-wrap>.wgrid{flex:1;min-width:0}
+.dh{width:330px;flex:none;height:calc(100vh - 190px);min-height:560px;overflow-y:auto;margin:0 0 10px;padding:8px 10px;font-size:12px;white-space:normal}
+.dh.off{width:34px;padding:8px 4px;overflow:hidden}.dh.off .dh-body{display:none}.dh-hd{display:flex;align-items:center;gap:6px}.dh-hd b{color:#f0b429;font-size:13px}
+.dh h4{margin:10px 0 5px;font-size:12px;color:#f0b429}.dh .dh-tag{font-size:10px;border:1px solid #3b4a5c;border-radius:3px;padding:0 4px;margin-left:4px;color:#9fb0c2;font-weight:normal}
+.dh-g{display:grid;grid-template-columns:1fr 1fr;gap:5px}.dh-c{background:#0b0f14;border:1px solid var(--line);border-radius:6px;padding:5px 7px}.dh-c b{display:block;font-size:16px;margin-top:1px}.dh-c span{color:#8a93a3;font-size:11px}.dh-w{grid-column:1/3}
+.dh .u{color:#e5484d}.dh .d{color:#2fb36b}.dh table{width:100%;border-collapse:collapse}.dh td,.dh th{padding:2px 3px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.dh td:first-child,.dh th:first-child{text-align:left;white-space:normal}.dh th{color:#8a93a3;font-weight:normal}.dh tr.ck{cursor:pointer}.dh tr.ck:hover td{background:#1e2533}
+.dh-tabs{display:flex;flex-wrap:wrap;gap:3px;margin:3px 0}.dh-tabs button{padding:1px 7px;font-size:12px}
+.dh-pop{position:fixed;right:350px;bottom:12px;width:540px;max-width:calc(100vw - 370px);background:var(--panel);border:1px solid #f0b429;border-radius:8px;padding:8px 10px;z-index:50;display:none;box-shadow:0 6px 24px #000a}
+.dh-pop .x{float:right;cursor:pointer;color:#8a93a3}.dh-pc{height:240px;margin-top:6px}.dh-spark{height:46px;margin-top:3px}
+/* 盤中化（10-29 晚【新】總指揮零）：資金流向、權證內外盤；dhf- 前綴 */
+.dhf-sec{display:grid;grid-template-columns:minmax(0,96px) 1fr 58px 44px;gap:4px;align-items:center;padding:2px 2px;cursor:pointer;border-radius:4px}
+.dhf-sec:hover,.dhf-sec.on{background:#1e2533}.dhf-sec .n{text-align:right;white-space:nowrap}.dhf-sec .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dhf-bar{position:relative;height:12px}.dhf-bar:before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:1px solid var(--line)}.dhf-bar i{position:absolute;top:2px;height:8px;border-radius:2px}
+.dhf-sub{margin:2px 0 6px 6px;padding-left:6px;border-left:2px solid #f0b429}
+.dhf-st{font-size:10px;border-radius:3px;padding:0 4px;margin-left:4px;font-weight:normal}.dhf-st.ok{background:#1d3a2a;color:#2fb36b}.dhf-st.late{background:#5a1d22;color:#ffb3b8}.dhf-st.post{background:#2a3242;color:#c6d1de}
+.dhf-old{opacity:.55}
+.pf-wrap{padding:10px 12px;font-size:13px;white-space:normal}.pf-wrap .dh-hd b{font-size:15px}.pf-wrap h4{margin:10px 0 4px}
+.pf-g{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px}.pf-c .dh-g{grid-template-columns:repeat(4,minmax(0,1fr))}.pf-c .dh-w{grid-column:span 2}
+.pf-top{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pf-top table{width:100%}
+.dh.mini:not(.off){width:220px}.dhm-row{display:flex;justify-content:space-between;gap:6px;padding:1px 0}.dhm-go{width:100%;margin:6px 0 2px}
+@media (max-width:900px){.pf-g,.pf-top{grid-template-columns:minmax(0,1fr)}.pf-c .dh-g{grid-template-columns:1fr 1fr}.pf-c .dh-w{grid-column:1/3}}.dhf-tg{font-size:10px;border-radius:3px;padding:0 3px;margin-left:3px;background:#3a2f12;color:#f0b429;white-space:nowrap;cursor:help}
+@media (max-width:900px){.dh-wrap{flex-direction:column}.dh,.dh.off{width:auto;height:auto;min-height:0;max-height:none}.dh.off .dh-body{display:block}.dh-pop{right:8px;left:8px;width:auto;max-width:none}}
+.wbx.rt details.dd[open] .chips{left:auto;right:0}
+.wsub{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:12px;margin:3px 0}
+.wsub select,.wbar select{padding:2px 6px;font-size:12px}.wsub button{padding:1px 8px;font-size:12px}
+/* 10-31 手機 390：＋其他策略… 下拉不超出策略卡；權證表外層可橫向捲、縮字級欄距、購｜售可換行（整頁不橫捲） */
+#labExt,#sigAdd,#hFam{max-width:100%;min-width:0;box-sizing:border-box;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.dhf-tw{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:600px){#labExt,#sigAdd{width:100%}#hFam{max-width:100%}#dhfWBox td,#dhfWBox th{padding:2px 2px;font-size:11px}#dhfWBox td .note{white-space:normal!important;font-size:10px}}
+.chip .x{margin-left:4px;color:var(--mut);cursor:pointer}.chip .x:hover{color:var(--up)}
+details.dd{position:relative}details.dd summary{cursor:pointer;list-style:none;border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:13px;background:var(--panel2)}
+details.dd[open] .chips{position:absolute;z-index:30;top:30px;left:0;width:520px;max-width:80vw;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px;box-shadow:0 8px 24px #000a}
+.gloss h4{margin:12px 0 6px;font-size:14px;color:var(--acc)}.gl{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px 16px}
+.gnote{background:var(--panel2);border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.7}
+.hud td{font-family:Consolas,monospace;font-size:13px;padding:3px 8px;border-bottom:1px solid #0b0f14}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{font-size:12px;padding:2px 8px;border-radius:12px;border:1px solid var(--line);cursor:pointer;user-select:none}
+.chip.on{border-color:var(--acc);color:var(--acc)}
+.slider{display:grid;grid-template-columns:110px 1fr 54px;gap:8px;align-items:center;font-size:13px;margin:4px 0}
+.ftab td:first-child{color:var(--mut)}
+.pat{font-size:16px;font-weight:700}
+.hl td{background:#2b2410}
+/* 訊號區 */
+.heat{display:grid;grid-template-columns:28px repeat(18,minmax(0,1fr));gap:2px;font-size:10px;width:100%;max-width:100%;min-width:0}
+.heat.wide{overflow-x:auto;grid-template-columns:28px repeat(20,minmax(16px,1fr))}
+.heat div{min-width:0;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:3px;cursor:pointer;color:#0008;position:relative}
+.heat .ax{background:none;color:var(--mut);cursor:default;aspect-ratio:auto}
+.heat .ax,.heat .axb{font-variant-numeric:tabular-nums;white-space:nowrap;font-size:9px}
+.heat .sel{outline:2px solid #fff;z-index:2}
+.heat .axb{background:none;color:var(--mut);cursor:default;aspect-ratio:auto;align-items:flex-start}
+.tip{border-bottom:1px dotted var(--mut);cursor:help}
+.heat .pick::after{content:attr(data-p);position:absolute;inset:auto auto -1px -1px;font-size:9px;color:#fff;background:#000a;padding:0 2px;border-radius:2px}
+#sChart{height:520px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+#sEq{height:220px}
+.pager{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-top:6px}.pager button[disabled]{opacity:.4;cursor:default}
+th.srt{cursor:pointer;user-select:none}th.srt:hover{color:var(--acc)}
+.kpi{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.kpi div{background:var(--panel2);border-radius:8px;padding:8px 10px}
+.kpi b{display:block;font-size:18px;font-variant-numeric:tabular-nums}
+.kpi span{font-size:12px;color:var(--mut)}
+.mtx td{text-align:right;font-size:12px;padding:3px 6px}
+.pos{font-size:22px;font-weight:800}
+.tick{transition:background .4s}.flash{background:#3a2a05}
+/* 客戶選單區 */
+.menu td,.menu th{font-size:13px}
+.menu tr.off td{opacity:.45}
+.adm input[type=checkbox],.menu input[type=checkbox]{width:18px;height:18px;accent-color:var(--acc)}
+.pk{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.pk .card{cursor:pointer;margin:0}.pk .card.on{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.big{font-size:22px;font-weight:800}
+.modal{position:fixed;inset:0;background:#000c;display:none;align-items:flex-start;justify-content:center;z-index:50;overflow:auto;padding:30px 10px}
+.modal.on{display:flex}.modal .box{background:var(--panel);border-radius:10px;padding:14px;max-width:1150px;width:100%}
+.modal img{width:100%;border-radius:6px;margin-top:8px;background:#fff}
+/* 登入 */
+#login{position:fixed;inset:0;background:radial-gradient(circle at 30% 20%,#1d2633,#07090c);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
+#login .box{width:420px;max-width:100%;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px}
+#login h1{margin:0 0 4px;font-size:22px;color:var(--acc)}
+.btnline{width:100%;padding:12px;border:none;border-radius:8px;background:#06c755;color:#fff;font-weight:700;font-size:15px;margin-top:14px}
+.btnmail{width:100%;padding:10px;margin-top:8px}
+@media print{header,#login,.noprint{display:none!important}body{background:#fff;color:#000}.card{border-color:#ccc;background:#fff}th{background:#fff}}
+#p-signal:not(.lab) #sGrid{grid-template-columns:1fr}#p-signal:not(.lab) #sRight{display:none}
+</style>
+<style>
+/* 11-05 預覽新增（只有這一塊）：兩欄、流速箭頭、泡泡脈動 */
+.pv-a{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 18px}@media (max-width:900px){.pv-a{grid-template-columns:minmax(0,1fr)}}
+.pv-a .dhf-sec{grid-template-columns:minmax(0,96px) 1fr 58px 70px}
+.dhf-bar i.pv-fl{background-size:14px 8px;animation:pvflow linear infinite}
+.dhf-bar i.pv-fl.in{background-image:repeating-linear-gradient(90deg,#e5484d 0 9px,#e5484d55 9px 14px)}
+.dhf-bar i.pv-fl.out{background-image:repeating-linear-gradient(90deg,#2fb36b 0 9px,#2fb36b55 9px 14px);animation-direction:reverse}
+@keyframes pvflow{from{background-position:0 0}to{background-position:14px 0}}
+.pv-b{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}.pv-b .dh-c{position:relative;cursor:pointer}
+.pv-dot{position:absolute;right:7px;top:7px;width:9px;height:9px;border-radius:50%;animation:pvpulse ease-in-out infinite}
+@keyframes pvpulse{0%,100%{transform:scale(.6);opacity:.5}50%{transform:scale(1.4);opacity:1}}
+/* 正式盤中資金頁 #dhBody 搬進 .pf-wrap 後少了 .dh 祖先，.u／.d 沒上色（正式版的缺漏，另記 TODO）；預覽補同色兩條 */
+.pf-wrap .u{color:#e5484d}.pf-wrap .d{color:#2fb36b}
+</style>
+</head>
+<body>
+<header>
+  <span class="logo">GEA</span>
+  <nav id="nav"><button data-p="watch">看盤區</button><button data-p="flow" class="on">盤中資金</button><button data-p="signal">訊號區</button><button data-p="lab">原型研究</button><button data-p="menu">客戶選單區</button><button data-p="admin">管理</button></nav>
+  <span class="badge pv"><span>預覽・</span>示意資料（11-05 重出）</span>
+  <span class="me"><span>Evans（示意）</span><span class="badge">到期 2027-10-18</span></span>
+</header>
+<main>
+<section class="page on" id="p-flow">
+  <div class="card"><h3>5a 盤中資金精簡＋動態流速（Evans 已看過內容；11-05 只換成正式盤中資金頁的樣式）</h3>
+    <div class="note">示意資料（隨機產生）。流速＝最近 5 分鐘主動淨買的變化（億元／5 分）：箭頭流得越快、圓點跳得越快＝這 5 分鐘進出越猛；紅＝流入、綠＝流出。整區高度：現行 28 列約 660 px → A 約 330 px、B 約 260 px。下面三張卡：A、B 二選一，最後一張是現行版對照。資料來源照舊（breadth_live 的 flow_&lt;日&gt;.json，s5＝每 5 分累計淨額）；流速＝s5 最後一格 − 前一格，程式算、不用 Gemini。</div></div>
+  <div class="card pf-wrap"><div class="dh-hd"><b>盤中資金</b><span class="note">A 版：兩欄橫條＋流速箭頭</span></div>
+    <h4>盤中資金流向（權值 200 檔，依族群）<span class="dhf-st ok">盤中 13:24</span></h4>
+    <div class="note">每筆成交看誰主動：<b class="u">外盤＝買方主動</b>、<b class="d">內盤＝賣方主動</b>；主動淨買＝外盤−內盤成交金額（億元）。欄位：族群｜累計淨額長條（箭頭速度＝流速）｜累計淨額｜流速。點族群看個股（同現在）。</div>
+    <div class="pv-a" id="A"></div></div>
+  <div class="card pf-wrap"><div class="dh-hd"><b>盤中資金</b><span class="note">B 版：泡泡格（一格一族群）</span></div>
+    <h4>盤中資金流向（權值 200 檔，依族群）<span class="dhf-st ok">盤中 13:24</span></h4>
+    <div class="note">每格：族群、累計淨額、流速；右上圓點跳得越快＝流速越大。依累計淨額由流入到流出排。</div>
+    <div class="dh-g pv-b" id="B"></div></div>
+  <div class="card pf-wrap"><div class="dh-hd"><b>盤中資金</b><span class="note">現行版（對照，28 列）</span></div>
+    <h4>盤中資金流向（權值 200 檔，依族群）<span class="dhf-st ok">盤中 13:24</span></h4><div id="C"></div></div>
+</section>
+</main>
 <script>
-let seed=7;const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;
-const names=["記憶體","晶圓代工與製造","CCL與電子材料","載板與PCB","IC設計","其他","光通訊上游","封裝測試","被動元件","伺服器與品牌","金融","光學鏡頭","測試設備與介面","伺服器電源","散熱與液冷","矽晶圓與化合物","連接器與機構","晶圓耗材","面板","傳產石化","光通訊中下游","航運","網通與衛星","廠務工程","功率元件","電源管理IC","電信與雲端服務","生技醫療"];
-const D=names.map(n=>({n,v:+((rnd()-0.62)*160).toFixed(1),s:+((rnd()-0.55)*14).toFixed(1)})).sort((a,b)=>b.v-a.v);
-const mx=Math.max(...D.map(d=>Math.abs(d.v))),sp=x=>Math.max(0.35,3.2-Math.abs(x)/5);
-const fmt=x=>(x>0?"+":"")+x.toFixed(1);
-document.getElementById("A").innerHTML=D.map(d=>`<div class="a-row"><span class="a-name">${d.n}</span><span class="a-track"><span class="a-fill ${d.s>=0?"in":"out"}" style="${d.v>=0?"left:0":"right:0"};width:${(Math.abs(d.v)/mx*100).toFixed(0)}%;animation-duration:${sp(d.s)}s"></span></span><span class="num ${d.v>=0?"up":"dn"}">${fmt(d.v)}</span><span class="num ${d.s>=0?"up":"dn"}" title="最近 5 分鐘流速">${fmt(d.s)}/5分</span></div>`).join("");
-document.getElementById("B").innerHTML=D.map(d=>`<div class="b-cell"><div>${d.n}</div><div class="v ${d.v>=0?"up":"dn"}">${fmt(d.v)} 億</div><div class="s">流速 ${fmt(d.s)}／5分</div><span class="b-dot" style="background:${d.s>=0?"var(--up)":"var(--dn)"};animation-duration:${sp(d.s)}s"></span></div>`).join("");
-</script></main></body></html>
+
+let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+const dhF = (v, d = 0) => v == null || !isFinite(v) ? "—" : Number(v).toLocaleString("zh-TW", {minimumFractionDigits: d, maximumFractionDigits: d});
+const dhCl = v => v > 0 ? "u" : v < 0 ? "d" : "", dhSg = (v, d = 1) => v == null ? "—" : (v > 0 ? "+" : "") + dhF(v, d);
+function dhfSpark(a) {
+  if (!a || !a.length) return ""; const w = 44, h = 14, mx = Math.max(...a.map(Math.abs), 1e-9);
+  const p = a.map((v, i) => `${(i / (a.length - 1) * w).toFixed(1)},${(h / 2 - v / mx * h / 2).toFixed(1)}`).join(" ");
+  return `<svg width="${w}" height="${h}"><line x1="0" x2="${w}" y1="${h / 2}" y2="${h / 2}" stroke="#26303d"/><polyline fill="none" stroke="${a[a.length - 1] >= 0 ? "#e5484d" : "#2fb36b"}" stroke-width="1.2" points="${p}"/></svg>`;
+}
+const NAMES = ["記憶體","晶圓代工與製造","CCL與電子材料","載板與PCB","IC設計","其他","光通訊上游","封裝測試","被動元件","伺服器與品牌","金融","光學鏡頭","測試設備與介面","伺服器電源","散熱與液冷","矽晶圓與化合物","連接器與機構","晶圓耗材","面板","傳產石化","光通訊中下游","航運","網通與衛星","廠務工程","功率元件","電源管理IC","電信與雲端服務","生技醫療"];
+function walk(end, n = 55) { const a = [0]; for (let i = 1; i < n; i++) a.push(a[i - 1] + (rnd() - 0.5) * Math.abs(end || 1) * 0.4); const k = (end - a[n - 1]) / (n - 1); return a.map((v, i) => +(v + k * i).toFixed(3)); }
+
+const D = NAMES.map(n => ({n, c: 3 + Math.floor(rnd() * 12), v: +((rnd() - 0.62) * 160).toFixed(1), s: +((rnd() - 0.55) * 14).toFixed(1)})).map(d => Object.assign(d, {s5: walk(d.v, 55)})).sort((a, b) => b.v - a.v);
+const mx = Math.max(...D.map(d => Math.abs(d.v))), sp = x => Math.max(0.35, 3.2 - Math.abs(x) / 5);
+const bar = (d, fl) => { const w = Math.abs(d.v) / mx * 50; return `<div class="dhf-bar"><i class="${fl ? "pv-fl " + (d.s >= 0 ? "in" : "out") : ""}" style="${d.v >= 0 ? `left:50%;width:${w}%;background-color:#e5484d` : `left:${50 - w}%;width:${w}%;background-color:#2fb36b`};${fl ? `animation-duration:${sp(d.s)}s` : ""}"></i></div>`; };
+document.getElementById("A").innerHTML = [D.slice(0, 14), D.slice(14)].map(col => `<div>${col.map(d => `<div class="dhf-sec"><span class="nm">${d.n} <span class="note">${d.c}</span></span>${bar(d, true)}<span class="n ${dhCl(d.v)}">${dhSg(d.v, 1)}</span><span class="n ${dhCl(d.s)}" title="最近 5 分鐘流速">${dhSg(d.s, 1)}/5分</span></div>`).join("")}</div>`).join("");
+document.getElementById("B").innerHTML = D.map(d => `<div class="dh-c"><span>${d.n}</span><b class="${dhCl(d.v)}">${dhSg(d.v, 1)} 億</b><span>流速 ${dhSg(d.s, 1)}／5分</span><i class="pv-dot" style="background:${d.s >= 0 ? "#e5484d" : "#2fb36b"};animation-duration:${sp(d.s)}s"></i></div>`).join("");
+document.getElementById("C").innerHTML = D.map(d => `<div class="dhf-sec"><span class="nm">${d.n} <span class="note">${d.c}</span></span>${bar(d, false)}<span class="n ${dhCl(d.v)}">${dhSg(d.v, 1)}</span>${dhfSpark(d.s5)}</div>`).join("");
+
+</script>
+</body>
+</html>
