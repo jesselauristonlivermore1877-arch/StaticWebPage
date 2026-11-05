@@ -2,7 +2,7 @@
  "file": "3090_2026-11-04.md",
  "code": "3090",
  "date": "2026-11-04",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 15.80 倍，站上資料 18.1457"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",
