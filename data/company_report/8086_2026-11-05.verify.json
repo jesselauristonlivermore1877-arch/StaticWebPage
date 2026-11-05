@@ -1,0 +1,45 @@
+{
+ "file": "8086_2026-11-05.md",
+ "code": "8086",
+ "date": "2026-11-05",
+ "show": true,
+ "numbers": {
+  "ok": true,
+  "bad": [],
+  "cited": 14,
+  "facts": 89
+ },
+ "compliance": {
+  "ok": true,
+  "hits": []
+ },
+ "src": {
+  "ok": true,
+  "bad": []
+ },
+ "cross": {
+  "ok": true,
+  "bad": [],
+  "checked": [
+   "close",
+   "eps_q",
+   "mcap",
+   "pe_ttm",
+   "rev_m"
+  ]
+ },
+ "tables": {
+  "ok": true,
+  "bad": []
+ },
+ "sections": {
+  "ok": true,
+  "missing": []
+ },
+ "eps": {
+  "ok": true,
+  "bad": [],
+  "checked": 0,
+  "skipped": 8
+ }
+}
