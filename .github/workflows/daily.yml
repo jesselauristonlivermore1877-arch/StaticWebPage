@@ -229,6 +229,14 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: python tools/pick_edm.py ../site ../site/docs/data/pick_edm.json
 
+      # 🟢 11-05 晚（雲端A，總指揮 A3）：疊圖三張（融資維持率 × 指數、委買委賣每筆張數＋電金比、市場結構轉變）→ docs/data/mkt_overlay.json
+      #    只讀上面各步寫好的檔、不打網路；失敗不擋（網站沿用上一份）
+      - name: 疊圖三張（市場動態）
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 5
+        run: python tools/mkt_overlay.py ../site ../site/docs/data/mkt_overlay.json
+
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
       # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。
       # （只有「不可能的數字」才會 exit 1；缺漏只是警告，不會擋。）
