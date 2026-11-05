@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>GEA 下單訊號管理（預覽 v2）</title>
+<!-- 預覽：【新】總指揮 11-06 W2「管理頁重新設計」。Evans：空間利用非常浪費、重複的東西太多，要簡單化。
+     管理頁只做三件事：①客戶與裝置管理 ②產生開通碼（只留一個入口） ③策略上下架。
+     配色、字型、元件沿用正式管理頁 cloudflare/relay/src/console.html 的 CSS（同一組 :root 變數）。
+     這頁全部是假資料、按鈕只改這頁記憶體裡的資料，不連中繼。核准後才搬進 console.html（呼叫的 /admin/* API 不變）。 -->
+<style>
+:root{--bg:#0b0f14;--panel:#121821;--panel2:#18202b;--line:#26303d;--tx:#d5dde7;--mut:#8593a3;--acc:#f0b429;--up:#e5484d;--dn:#2fb36b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+header{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:10px 16px;background:#0e141c;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+header b{color:var(--acc)}main{padding:12px 16px;max-width:1400px}
+button,select,input{font:inherit;color:var(--tx);background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:4px 10px}
+button{cursor:pointer}button:hover{border-color:var(--acc)}button.pri{background:var(--acc);color:#111;font-weight:700}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:12px}.card h3{margin:0 0 8px;font-size:15px}
+table{border-collapse:collapse;width:100%}th,td{padding:5px 8px;border-bottom:1px solid var(--line);font-size:13px;white-space:nowrap;text-align:left;vertical-align:middle}th{color:var(--mut);font-weight:500}
+.scroll{overflow:auto}.note{font-size:12px;color:var(--mut)}.ok{color:var(--dn)}.bad{color:var(--up)}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tag{display:inline-block;padding:0 8px;border-radius:10px;font-size:12px;border:1px solid var(--line)}.on{background:#123222;border-color:#1f6b45}.off{background:#3a1717;border-color:#7a2a2a}
+input[type=checkbox]{accent-color:var(--acc)}.big{font-size:26px;letter-spacing:3px;color:var(--acc);font-weight:700}
+textarea{font:inherit;color:var(--tx);background:var(--panel2);border:1px solid var(--line);border-radius:6px;width:100%;padding:6px}
+.idm{font-family:Consolas,monospace}
+/* ── v2 新增（av- 前綴） ── */
+.av-pv{background:#3a2a05;color:#ffd77a;padding:6px 16px;font-size:13px}
+.av-tabs{display:flex;gap:4px;margin:0 0 12px;border-bottom:1px solid var(--line)}
+.av-tabs button{border:none;background:none;border-radius:6px 6px 0 0;padding:8px 14px;color:var(--mut);font-size:15px}
+.av-tabs button.on{color:var(--tx);background:var(--panel);box-shadow:inset 0 -2px 0 var(--acc)}
+.av-tabs .n{font-size:12px;color:var(--mut);margin-left:4px}
+.av-pg{display:none}.av-pg.av-cur{display:block}
+.av-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px}.av-bar input[type=search]{width:200px}
+.av-sum{color:var(--mut);font-size:12px;margin-left:auto}
+.av-sub{display:inline-block;max-width:260px;overflow:hidden;text-overflow:ellipsis;vertical-align:middle}
+.av-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#4a5563;margin-right:4px;vertical-align:middle}.av-dot.live{background:var(--dn)}
+.av-ed td{background:#0f141b;white-space:normal}
+.av-ed .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px 14px}
+.av-ed label{display:flex;flex-direction:column;font-size:12px;color:var(--mut);gap:2px}
+.av-chips{display:flex;flex-wrap:wrap;gap:4px 10px}.av-chips label{flex-direction:row;color:var(--tx);font-size:13px;align-items:center;gap:4px}
+.av-chips .dim{color:var(--mut)}
+.av-sw{position:relative;display:inline-block;width:38px;height:20px;border-radius:10px;background:#3a1717;border:1px solid #7a2a2a;cursor:pointer;vertical-align:middle;padding:0}
+.av-sw::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#c9d1db;transition:left .15s}
+.av-sw.on{background:#123222;border-color:#1f6b45}.av-sw.on::after{left:20px}
+.av-form{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px 12px;align-items:end}
+.av-form label{display:flex;flex-direction:column;font-size:12px;color:var(--mut);gap:2px}
+.av-out{background:#2b2410;border-radius:8px;padding:10px;margin-top:10px}
+details.av-adv>summary{cursor:pointer;color:var(--mut);font-size:13px;padding:6px 0}
+.av-btns{display:flex;gap:4px;flex-wrap:wrap}.av-btns button{padding:2px 8px;font-size:12px}
+@media (max-width:760px){
+  header{padding:8px 12px}main{padding:10px 12px}
+  .av-tabs{overflow-x:auto}.av-tabs button{padding:8px 10px;font-size:14px;white-space:nowrap}
+  #avCustT thead{display:none}#avCustT tr.av-r{display:grid;grid-template-columns:1fr auto;gap:2px 8px;border:1px solid var(--line);border-radius:8px;margin-bottom:8px;padding:8px}
+  #avCustT tr.av-r td{border:0;padding:0;white-space:normal}#avCustT tr.av-r td.c-act{grid-column:1/3}
+  #avCustT tr.av-ed{display:block}#avCustT tr.av-ed td{display:block;border-radius:8px;margin:-6px 0 8px}
+  .av-sub{max-width:100%}.av-bar input[type=search]{width:100%}.av-sum{margin-left:0}
+}
+</style>
+</head>
+<body>
+<div class="av-pv">預覽 v2（11-06）：全部是假資料，按鈕只改這頁的畫面，不連中繼、不送任何東西。</div>
+<header>
+  <b>GEA 下單訊號管理</b>
+  <span>頻道</span><select id="ch"><option>gea（正式）</option><option>test（測試）</option></select>
+  <span class="tag on">正式頻道</span>
+  <span style="margin-left:auto" class="row"><span class="note">管理者：Evans</span><button>登出</button></span>
+</header>
+<main>
+  <nav class="av-tabs" id="nav">
+    <button data-p="cust" class="on">① 客戶與裝置<span class="n" id="nC"></span></button>
+    <button data-p="code">② 產生開通碼</button>
+    <button data-p="strat">③ 策略上下架<span class="n" id="nS"></span></button>
+  </nav>
+
+  <!-- ① 客戶與裝置：一列一個客戶；按「編輯」才展開訂閱、期間、身分證 -->
+  <section class="av-pg av-cur" id="p-cust">
+    <div class="av-bar">
+      <input type="search" id="q" placeholder="找代號或姓名">
+      <label class="note"><input type="checkbox" id="onlyOn"> 只看在線</label>
+      <span class="av-sum" id="sum"></span>
+    </div>
+    <div class="scroll"><table id="avCustT"><thead><tr><th>客戶</th><th>訂閱</th><th>到期</th><th>裝置</th><th>版本／對帳</th><th>狀態</th><th></th></tr></thead><tbody></tbody></table></div>
+    <div class="note" style="margin-top:6px">訂閱「全部」＝所有已上架策略。停用或過期：只停送新訊號、不平倉；到期前 3 天 09:00 TG 通知。</div>
+  </section>
+
+  <!-- ② 產生開通碼：唯一入口（新客戶、舊客戶重產都在這裡） -->
+  <section class="av-pg" id="p-code">
+    <div class="card">
+      <div class="av-form">
+        <label>客戶代號（空白＝新客戶自動編號；選舊客戶＝重產）<input id="cId" list="cIds" placeholder="例 c261106001"><datalist id="cIds"></datalist></label>
+        <label>姓名（備註）<input id="cNote" placeholder="例 王小明"></label>
+        <label>開始日<input id="cStart" type="date"></label>
+        <label>到期日<input id="cExp" type="date"></label>
+      </div>
+      <div style="margin-top:10px"><div class="note" style="margin-bottom:4px">訂閱（只列已上架）</div><div class="av-chips" id="cSubs"></div></div>
+      <div class="row" style="margin-top:10px"><button class="pri" id="cGo">產生開通碼</button><span class="note" id="cHint">開通碼 24 小時內有效、只能用一次；客戶在設定精靈填入後綁定身分證。</span></div>
+      <div id="cOut" class="av-out" style="display:none"></div>
+    </div>
+  </section>
+
+  <!-- ③ 策略上下架：開關一按即生效；傳送端、模擬、風控收在「進階」 -->
+  <section class="av-pg" id="p-strat">
+    <div class="av-bar"><label class="note"><input type="checkbox" id="onlyListed"> 只看上架</label><span class="av-sum" id="sSum"></span></div>
+    <div class="scroll"><table id="avStT"></table></div>
+    <details class="av-adv card" style="margin-top:12px"><summary>進階：連續下單風控、傳送端、模擬（平常不用動）</summary>
+      <div class="row" style="margin:6px 0"><span>同一策略</span><input type="number" value="60" style="width:70px"><span>秒內部位變動超過</span><input type="number" value="4" style="width:60px"><span>次 → 暫停轉送＋TG</span><button>儲存</button></div>
+      <div class="row" style="margin:6px 0"><span>傳送端</span><span class="note">訊號主機用 RELAY_PUB_TOKEN，目前沒有用開通碼開通的傳送端</span><button>產生管理者開通碼（只給訊號主機）</button></div>
+      <div class="row" style="margin:6px 0"><span>模擬</span><select id="simS"></select><button id="simGo">誰會收到？</button><span class="note" id="simOut"></span></div>
+      <div class="row" style="margin:6px 0"><input placeholder="代號（例 GEA7）" style="width:140px"><button>先登記一支</button><span class="note">新策略第一次送上來會自動出現、預設下架</span></div>
+    </details>
+  </section>
+</main>
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const esc = v => String(v == null ? "" : v).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+// ── 假資料（預覽用；正式版改吃 /admin/state，欄位同名） ──
+const ST = {
+  strategies: [
+    {code: "GEA5", name: "GEA5", listed: true, kept: 21, last: "11-05 08:46", paused: false},
+    {code: "GEA6", name: "GEA6", listed: true, kept: 19, last: "11-01 03:27", paused: false},
+    {code: "GEA_S_V2", name: "GEA_S_V2", listed: true, kept: 7, last: "11-05 08:48", paused: false},
+    ...["GEA_ExpRev_SnipeFlash", "GEA_ExpRev_Swing", "GEA_NORM_S_Hybrid_V2", "GEA_NORM_S_Mode2", "GEA_Pure_FishBody_Chaser", "GEA_SnipeFlash_Max", "GEA_SqBrk_Long_V2", "GEA_SqBrk_Short_V2"]
+      .map((c, i) => ({code: c, name: c, listed: false, kept: 5 + i, last: "11-01 03:27", paused: false}))],
+  users: [
+    {id: "demo_a", note: "範例甲", subs: "*", start: "", exp: "2027-12-31", ids: [{mask: "A12****345"}], online: 1, ver: "20261106a", recon: "✓ 一致 2 支", recon_at: "11-05 16:38", enabled: true},
+    {id: "demo_b", note: "範例乙", subs: "GEA5,GEA6", start: "2026-11-01", exp: "2026-11-08", ids: [{mask: "B22****678"}], online: 0, ver: "20261101d9", recon: "✓ 一致 2 支", recon_at: "11-04 21:10", enabled: true},
+    {id: "demo_c", note: "範例丙", subs: "GEA_S_V2", start: "", exp: "2027-06-30", ids: [], online: 0, ver: "", recon: "", enabled: true, invite: "K7Q2-9XMA（11-07 01:10 前）"},
+    {id: "demo_d", note: "範例丁（停用）", subs: "GEA5", start: "", exp: "2026-10-31", ids: [{mask: "C10****901"}], online: 0, ver: "20261101d8", recon: "✗ 帳上 1、訊號 0", recon_at: "10-31 13:46", enabled: false},
+    {id: "gea_office", note: "GEA 自己的機器", subs: "**", start: "", exp: "", ids: [{mask: "D11****222", admin: true}, {mask: "D11****333", admin: true}], online: 2, ver: "20261106a", recon: "✓ 一致 5 支", recon_at: "11-05 16:40", enabled: true},
+  ]
+};
+const listed = () => ST.strategies.filter(s => s.listed);
+const subsText = u => u.subs === "**" ? "全部含下架" : u.subs === "*" ? "全部（" + listed().length + "）" : u.subs.split(",").filter(Boolean).join("、") || "（沒訂）";
+const today = "2026-11-06";
+const daysLeft = e => e ? Math.round((Date.parse(e) - Date.parse(today)) / 864e5) : null;
+function expCell(u) {
+  if (!u.exp) return "<span class='note'>不限</span>";
+  const d = daysLeft(u.exp);
+  return esc(u.exp) + (d < 0 ? " <span class='bad'>已過期</span>" : d <= 7 ? " <span class='bad'>剩 " + d + " 天</span>" : "");
+}
+function stateCell(u) {
+  if (!u.enabled) return "<span class='tag off'>停用</span>";
+  if (u.exp && daysLeft(u.exp) < 0) return "<span class='tag off'>過期</span>";
+  if (u.invite) return "<span class='tag'>待開通</span>";
+  return "<span class='tag on'>正常</span>";
+}
+let OPEN = "";
+function renderCust() {
+  const q = $("#q").value.trim().toLowerCase(), oo = $("#onlyOn").checked;
+  const U = ST.users.filter(u => (!q || (u.id + u.note).toLowerCase().includes(q)) && (!oo || u.online));
+  $("#nC").textContent = ST.users.length;
+  $("#sum").textContent = "共 " + ST.users.length + " 位｜在線 " + ST.users.filter(u => u.online).length + "｜7 天內到期 " + ST.users.filter(u => u.exp && daysLeft(u.exp) >= 0 && daysLeft(u.exp) <= 7).length;
+  $("#avCustT tbody").innerHTML = U.map(u => {
+    const dev = (u.ids.length ? u.ids.length + " 張身分證" + (u.ids.some(x => x.admin) ? "（管理者）" : "") : "<span class='note'>還沒綁</span>");
+    const rc = u.recon ? "<span class='" + (u.recon.startsWith("✓") ? "ok" : "bad") + "'>" + esc(u.recon) + "</span>" : "";
+    const row = "<tr class='av-r' data-u='" + esc(u.id) + "'><td><b>" + esc(u.id) + "</b> <span class='note'>" + esc(u.note) + "</span></td>" +
+      "<td><span class='av-sub' title='" + esc(subsText(u)) + "'>" + esc(subsText(u)) + "</span></td><td>" + expCell(u) + "</td>" +
+      "<td><span class='av-dot" + (u.online ? " live" : "") + "'></span>" + (u.online ? u.online + " 台在線" : "離線") + "｜" + dev + "</td>" +
+      "<td>" + esc(u.ver || "—") + (rc ? "｜" + rc : "") + "</td><td>" + stateCell(u) + (u.invite ? " <span class='note idm'>" + esc(u.invite) + "</span>" : "") + "</td>" +
+      "<td class='c-act'><div class='av-btns'><button class='ed_'>" + (OPEN === u.id ? "收起" : "編輯") + "</button><button class='re_'>重產開通碼</button></div></td></tr>";
+    return row + (OPEN === u.id ? editRow(u) : "");
+  }).join("") || "<tr><td colspan='7' class='note'>沒有符合的客戶</td></tr>";
+  document.querySelectorAll("tr.av-r").forEach(tr => {
+    const id = tr.dataset.u;
+    tr.querySelector(".ed_").onclick = () => { OPEN = OPEN === id ? "" : id; renderCust(); };
+    tr.querySelector(".re_").onclick = () => { go("code"); $("#cId").value = id; fillFromId(); };
+  });
+  const ed = document.querySelector("tr.av-ed");
+  if (ed) {
+    const u = ST.users.find(x => x.id === OPEN);
+    ed.querySelector(".sv_").onclick = () => { u.note = ed.querySelector(".n_").value; u.start = ed.querySelector(".s_").value; u.exp = ed.querySelector(".e_").value; u.subs = pickSubs(ed); OPEN = ""; renderCust(); renderStrat(); };
+    ed.querySelector(".en_").onclick = () => { if (confirm((u.enabled ? "停用" : "恢復") + " " + u.id + "？")) { u.enabled = !u.enabled; renderCust(); } };
+    wireAll(ed);
+  }
+}
+function subChips(cur, withHidden) {
+  const has = c => cur === "**" || cur === "*" && ST.strategies.find(s => s.code === c).listed || cur.split(",").includes(c);
+  return "<label><input type='checkbox' data-k='*' " + (cur === "*" ? "checked" : "") + "> <b>全部已上架</b></label>" +
+    (withHidden ? "<label><input type='checkbox' data-k='**' " + (cur === "**" ? "checked" : "") + "> 全部含下架（只給 GEA 自己的機器）</label>" : "") +
+    ST.strategies.filter(s => s.listed || withHidden && has(s.code)).map(s => "<label" + (s.listed ? "" : " class='dim'") + "><input type='checkbox' data-k='" + esc(s.code) + "' " + (has(s.code) ? "checked" : "") + "> " + esc(s.code) + (s.listed ? "" : "（下架）") + "</label>").join("");
+}
+function wireAll(root) {
+  const all = root.querySelector("[data-k='*']"), xx = root.querySelector("[data-k='**']");
+  const sync = () => root.querySelectorAll("[data-k]:not([data-k='*']):not([data-k='**'])").forEach(c => { c.disabled = all.checked || (xx && xx.checked); if (c.disabled) c.checked = true; });
+  all.onchange = () => { if (all.checked && xx) xx.checked = false; sync(); }; if (xx) xx.onchange = () => { if (xx.checked) all.checked = false; sync(); }; sync();
+}
+function pickSubs(root) {
+  const xx = root.querySelector("[data-k='**']"); if (xx && xx.checked) return "**";
+  if (root.querySelector("[data-k='*']").checked) return "*";
+  return [...root.querySelectorAll("[data-k]:checked")].map(c => c.dataset.k).join(",");
+}
+function editRow(u) {
+  return "<tr class='av-ed'><td colspan='7'><div class='grid'>" +
+    "<label>姓名（備註）<input class='n_' value='" + esc(u.note) + "'></label><label>開始<input class='s_' type='date' value='" + esc(u.start) + "'></label>" +
+    "<label>到期（空白＝不限）<input class='e_' type='date' value='" + esc(u.exp) + "'></label><label>客戶 TG chat id<input placeholder='已設（填新值覆蓋）'></label></div>" +
+    "<div style='margin:8px 0'><div class='note'>訂閱</div><div class='av-chips'>" + subChips(u.subs, true) + "</div></div>" +
+    "<div class='note'>身分證（綁定的裝置）</div><div class='av-chips' style='margin-bottom:8px'>" + (u.ids.map(x => "<span><span class='idm'>" + esc(x.mask) + "</span>" + (x.admin ? " <span class='tag on'>管理者</span>" : "") + " <button>" + (x.admin ? "取消管理者" : "設管理者") + "</button> <button>解除</button></span>").join("") || "<span class='note'>還沒綁（第一次開通或連線時綁）</span>") + " <button>＋身分證</button></div>" +
+    "<div class='row'><button class='pri sv_'>儲存</button><button class='en_'>" + (u.enabled ? "停用" : "恢復") + "</button><span class='note'>最後對帳 " + esc(u.recon_at || "—") + "</span></div></td></tr>";
+}
+function renderStrat() {
+  const ol = $("#onlyListed").checked, S = ST.strategies.filter(s => !ol || s.listed);
+  const n = s => ST.users.filter(u => u.subs === "**" || s.listed && u.subs === "*" || u.subs.split(",").includes(s.code)).length;
+  $("#nS").textContent = listed().length + "／" + ST.strategies.length;
+  $("#sSum").textContent = "上架 " + listed().length + " 支、下架 " + (ST.strategies.length - listed().length) + " 支";
+  $("#avStT").innerHTML = "<tr><th>上架</th><th>策略</th><th>訂閱人數</th><th>最後訊號</th><th>保留則數</th><th>風控</th><th></th></tr>" +
+    [...S].sort((a, b) => b.listed - a.listed).map(s => "<tr><td><button class='av-sw" + (s.listed ? " on" : "") + "' data-sw='" + esc(s.code) + "' title='" + (s.listed ? "上架中，按一下下架" : "下架中，按一下上架") + "'></button></td>" +
+      "<td><b>" + esc(s.code) + "</b>" + (s.name !== s.code ? " <span class='note'>" + esc(s.name) + "</span>" : "") + "</td><td>" + n(s) + "</td><td>" + esc(s.last) + "</td><td>" + s.kept + "</td>" +
+      "<td>" + (s.paused ? "<span class='bad'>暫停</span> <button>解除</button>" : "<span class='ok'>正常</span>") + "</td><td><button class='note' data-del='" + esc(s.code) + "' style='padding:1px 6px'>移除登記</button></td></tr>").join("");
+  document.querySelectorAll("[data-sw]").forEach(b => b.onclick = () => { const s = ST.strategies.find(x => x.code === b.dataset.sw); s.listed = !s.listed; renderStrat(); renderCust(); renderCode(); });
+  $("#simS").innerHTML = ST.strategies.map(s => "<option>" + esc(s.code) + "</option>").join("");
+}
+function renderCode() {
+  $("#cIds").innerHTML = ST.users.map(u => "<option value='" + esc(u.id) + "'>" + esc(u.note) + "</option>").join("");
+  const u = ST.users.find(x => x.id === $("#cId").value.trim());
+  $("#cSubs").innerHTML = subChips(u ? u.subs : "", false); wireAll($("#cSubs"));
+}
+function fillFromId() {
+  const u = ST.users.find(x => x.id === $("#cId").value.trim());
+  $("#cGo").textContent = u ? "重產 " + u.id + " 的開通碼" : "產生開通碼（新客戶）";
+  $("#cHint").textContent = u ? "舊客戶重產：新開通碼用掉後，他原本的裝置要重新開通。訂閱、期間照下面的設定更新。" : "開通碼 24 小時內有效、只能用一次；客戶在設定精靈填入後綁定身分證。";
+  if (u) { $("#cNote").value = u.note; $("#cStart").value = u.start; $("#cExp").value = u.exp; }
+  renderCode();
+}
+$("#cId").oninput = fillFromId;
+$("#cGo").onclick = () => {
+  let id = $("#cId").value.trim(); const subs = pickSubs($("#cSubs"));
+  if (!subs) { alert("請勾訂閱策略（或「全部已上架」）"); return; }
+  if (!id) id = "c261106" + String(ST.users.length + 1).padStart(3, "0");
+  let u = ST.users.find(x => x.id === id);
+  if (!u) { u = {id, ids: [], online: 0, ver: "", recon: "", enabled: true}; ST.users.push(u); }
+  Object.assign(u, {note: $("#cNote").value.trim(), start: $("#cStart").value, exp: $("#cExp").value, subs, invite: "DEMO-" + Math.random().toString(36).slice(2, 6).toUpperCase() + "（24 小時內）"});
+  const code = u.invite.slice(0, 9);
+  const txt = "GEA 下單機開通資料\n1. 下載安裝：（下載網址）\n2. 開通碼：" + code + "（24 小時內有效、只能用一次）\n3. 安裝後打開「GEA 下單機設定精靈」，照畫面一步一步填。\n有問題請聯絡營業員。";
+  $("#cOut").style.display = "";
+  $("#cOut").innerHTML = "<div>" + esc(id) + "（" + esc(u.note) + "）的開通碼：<span class='big'>" + esc(code) + "</span></div><div class='row' style='margin:6px 0'><button>複製開通碼</button><button class='pri'>複製「傳給客戶的文字」</button></div><textarea rows='4' readonly>" + esc(txt) + "</textarea><div class='note'>預覽：這是假開通碼。</div>";
+  renderCust(); renderCode();
+};
+$("#simGo").onclick = () => { const c = $("#simS").value, s = ST.strategies.find(x => x.code === c);
+  $("#simOut").textContent = "會收到：" + (ST.users.filter(u => u.enabled && (u.subs === "**" || s.listed && (u.subs === "*" || u.subs.split(",").includes(c)))).map(u => u.id).join("、") || "（沒有人）"); };
+function go(p) { document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.p === p)); document.querySelectorAll(".av-pg").forEach(x => x.classList.toggle("av-cur", x.id === "p-" + p)); }
+document.querySelectorAll("#nav button").forEach(b => b.onclick = () => go(b.dataset.p));
+$("#q").oninput = renderCust; $("#onlyOn").onchange = renderCust; $("#onlyListed").onchange = renderStrat;
+renderCust(); renderStrat(); fillFromId();
+</script>
+</body>
+</html>
