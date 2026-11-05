@@ -1,0 +1,18 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>下單機帳戶列預覽</title>
+<style>
+:root{--bg:#0b0f14;--fg:#d5dde7;--mut:#a9b4c2;--acc:#f0b429;--line:#26303d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:12px 16px 28px}h1{font-size:18px;color:var(--acc);margin:4px 0}h2{font-size:16px;margin:18px 0 4px}
+img{display:block;max-width:100%;border:1px solid var(--line);border-radius:6px;margin:6px 0}
+.say{background:#141c26;border-left:4px solid var(--acc);padding:8px 12px;border-radius:4px;margin:8px 0}.note{color:var(--mut);font-size:13px}
+</style></head><body><main>
+<h1>GEA 下單機：主畫面加「帳戶」列＋策略「成本」欄（預覽）</h1>
+<p class="note">GeaOrder.exe --panel-demo --shot 直接截的正式畫面（同一套程式、同一套樣式），資料是假的。版本號還是 d8；Evans 點頭才出 d9。</p>
+<div class="say">要看的地方：① 帳戶區表格上方多一列「帳戶」；② 策略區「部位」右邊多一欄「成本」；③ 三種情況的樣子。<br>
+資料來源（國票 API 操作手冊 V1.18）：權益數＝FuturesRealtimeRightsAndMargin 的 equity；占用保證金＝iamt（原始保證金）；可用保證金＝ordexcess（下單可用保證金）；帳戶區「均價」＝FuturesRealtimeOpenPositionSummary 的 avg_matprice。策略「成本」＝下單機自己用每筆成交價算（加碼依口數加權、減碼不變、翻向用新成交價）。<br>
+更新：開機一次＋每次成交後（10 秒內）＋每 60 秒。</div>
+<h2>① 真單／測試環境：國票回傳</h2><img src="acct_broker.png" alt="帳戶列：權益數、占用保證金、可用保證金">
+<h2>② 查詢失敗：保留上一次的值，整列變灰、標時間（原因寫日誌）</h2><img src="acct_stale.png" alt="帳戶列查詢失敗">
+<h2>③ 模擬模式：沒有券商帳戶 → 保證金＝期交所原始保證金 × 口數，標「估算」</h2><img src="acct_sim.png" alt="帳戶列模擬估算">
+<p class="note">估算用的原始保證金（期交所 2026/08/12 公告）：大台 TXF 701,000、小台 MXF 175,250、微台 TMF 35,050（每口）。策略「成本」：沒部位＝「—」；升級前就有的部位沒有成交紀錄＝灰色「不明」，下一筆成交後開始算。</p>
+</main></body></html>
