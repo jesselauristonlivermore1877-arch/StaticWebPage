@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>盤勢緊急通知條預覽</title>
+<style>
+/* 色票照正式頁 template.html */
+:root{--up:#E5484D;--down:#12A366;--acc:#D9A441;--sans:system-ui,-apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+[data-theme="dark"]{--bg:#000;--surface:#111;--raise:#1E1E1E;--ink-1:#F5F5F5;--ink-2:#A3A3A3;--ink-3:#666;--line:#2A2A2A}
+[data-theme="light"]{--bg:#F4F6F4;--surface:#FFF;--raise:#EDF0EE;--ink-1:#0F161D;--ink-2:#44515E;--ink-3:#68757F;--line:#DDE3E0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink-1);font-family:var(--sans);font-size:15px;line-height:1.6}
+main{max-width:1200px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:6px 0}h2{font-size:16px;margin:26px 0 6px;border-left:4px solid var(--acc);padding-left:8px}
+.note{color:var(--ink-2);font-size:13.5px}.note b{color:var(--ink-1)}
+.frame{border:1px dashed var(--line);border-radius:12px;padding:10px;background:var(--bg)}
+.fake{height:44px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink-3);font-size:12.5px;display:flex;align-items:center;padding:0 12px;margin-top:6px}
+button.tg{border:1px solid var(--line);background:var(--raise);color:var(--ink-1);border-radius:8px;padding:3px 10px;cursor:pointer;font-size:13px}
+
+/* ── 新元件（前綴 ma-）：盤勢緊急通知條 ── */
+.ma-bar{display:flex;align-items:center;gap:10px;margin:6px 0 0;padding:7px 12px;border-radius:10px;font-size:14px;overflow:hidden;white-space:normal}
+.ma-bar.ma-hi{border:2px solid var(--up);background:rgba(229,72,77,.16)}
+.ma-bar.ma-mid{border:2px solid var(--acc);background:rgba(217,164,65,.12)}
+.ma-lv{flex:none;color:#fff;font-weight:800;border-radius:6px;padding:1px 9px;font-size:13px}
+.ma-hi .ma-lv{background:var(--up)}.ma-mid .ma-lv{background:var(--acc);color:#111}
+.ma-px{flex:none;font-weight:700}
+.ma-px .dn{color:var(--down)}.ma-px .up{color:var(--up)}
+.ma-px small,.ma-it small{color:var(--ink-3);font-weight:400;font-size:11.5px;margin-left:4px}
+.ma-vp{flex:1;min-width:0;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}
+.ma-run{display:inline-flex;gap:30px;white-space:nowrap;animation:ma-mq var(--ma-s,50s) linear infinite}
+.ma-bar:hover .ma-run{animation-play-state:paused}
+.ma-it a{color:var(--ink-1);text-decoration:none}.ma-it a:hover{text-decoration:underline}
+.ma-tag{display:inline-block;color:#fff;font-size:11px;font-weight:800;border-radius:4px;padding:0 6px;margin-right:6px;vertical-align:1px}
+.ma-tag.off{background:#2563EB}.ma-tag.md{background:#555}.ma-tag.px{background:var(--up)}
+.ma-x{flex:none;border:0;background:none;color:var(--ink-3);cursor:pointer;font-size:16px;line-height:1}
+@keyframes ma-mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ma-run{animation:none;flex-wrap:wrap;white-space:normal}}
+@media (max-width:640px){.ma-bar{flex-wrap:wrap}.ma-vp{flex-basis:100%}}
+/* 沒觸發時：盤勢相關的官方／媒體則數併進原有頁首跑馬燈（hl-bar），只示意 */
+.hl-bar{display:flex;align-items:center;gap:10px;margin:6px 0 0;padding:6px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:13.5px;overflow:hidden}
+.hl-bar>b{flex:none;color:var(--up);font-size:12.5px}
+</style></head><body><main>
+<h1>盤勢緊急通知條（預覽，D3）</h1>
+<p class="note">資料檔 <code>docs/data/market_alert.json</code>（<code>tools/market_alert.py</code>，每 15 分鐘）。規則：台指期近月（日盤／夜盤）漲跌幅 <b>≥2% 注意（金框）、≥3% 緊急（紅框）</b>，每跨 1% 再推一次 TG；金管會、央行、證交所、期交所新聞稿標題有盤勢字眼＝藍標「官方」；權威媒體標題同時有台股／台指期＋崩跌／暴漲字眼＝灰標「媒體」。只放近 24 小時，每則標時間＋出處連結；滑鼠移上去暫停，右邊 ✕ 本次瀏覽先收起。
+<button class="tg" onclick="document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark'">切換深／淺色</button></p>
+
+<h2>① 緊急（11-06 05:29 實際資料：夜盤 −7.03%）</h2>
+<div class="frame"><div id="s1"></div><div class="fake">（下面是原本的頁首：國際指數列、重點跑馬燈…不動）</div></div>
+
+<h2>② 注意（示意：同一份資料把價格改成 −2.4%）</h2>
+<div class="frame"><div id="s2"></div><div class="fake">（原本頁首）</div></div>
+
+<h2>③ 沒有價格觸發（示意：只有官方／媒體）</h2>
+<p class="note">價格沒過 2% 時不出現通知條；官方表態與權威媒體則數還是有，併進原本的重點跑馬燈最前面（藍標／灰標），不另外佔一列。</p>
+<div class="frame"><div id="s3"></div><div class="fake">（原本頁首其他列）</div></div>
+
+<h2>④ 完全沒有（無觸發）</h2>
+<p class="note">近 24 小時沒有任何一則 → 通知條整個不出現，原本頁首一模一樣。</p>
+<div class="frame"><div id="s4"></div><div class="fake">（原本頁首）</div></div>
+
+<h2>⑤ 即時（讀正式資料檔，排程上線後才有）</h2>
+<div class="frame"><div id="s5"><span class="note">讀取中…</span></div></div>
+
+<p class="note" style="margin-top:24px">要決定：(1) 位置：放頁首最上面（法說重磅紅條之上）還是之下？(2) 緊急條要不要整條固定在畫面頂端（捲動時也看得到）？(3) 24 小時後自動消失可以嗎？(4) 只要官方表態、沒有價格觸發時要不要也單獨亮金框？目前做法＝不亮、併進原跑馬燈。</p>
+</main>
+<script>
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const hm=a=>(a||"").slice(5,16).replace("T"," ").replace("-","/");
+function item(x){
+  const tg=x.kind==="價格"?'<span class="ma-tag px">行情</span>':(x.kind==="官方"||x.kind==="官方表態")?'<span class="ma-tag off">官方</span>':'<span class="ma-tag md">媒體</span>';
+  return '<span class="ma-it">'+tg+'<a href="'+esc(x.u)+'" target="_blank" rel="noopener">'+esc(x.t)+'</a><small>'+esc(x.src)+' '+hm(x.at)+'</small></span>';
+}
+// 正式版前端照這支 render：level＝null 時只回 items 給原跑馬燈用
+function maBar(J,host){
+  const el=document.getElementById(host); if(!J||!J.items||!J.items.length){el.innerHTML="";return}
+  const px=J.items.find(x=>x.kind==="價格"), rest=J.items.filter(x=>x!==px);
+  if(!J.level||!px){
+    el.innerHTML='<div class="hl-bar"><b>重點</b><div class="ma-vp"><div class="ma-run">'+[...rest.map(item),'<span class="ma-it" style="color:var(--ink-3)">（原本的重磅／重點新聞接在後面）</span>'].join("").repeat(2)+'</div></div></div>';return}
+  const q=px.q||{}, cls=q.pct<0?"dn":"up";
+  const pxh='<span class="ma-px"><a href="'+esc(px.u)+'" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">台指期'+esc(q.sess||"")+' <span class="'+cls+'">'+(q.diff>0?"+":"")+Number(q.diff).toLocaleString()+' 點（'+(q.pct>0?"+":"")+q.pct+'%）</span> '+Number(q.last).toLocaleString()+'</a><small>'+esc(q.sym||"")+' '+hm(px.at)+' 期交所行情</small></span>';
+  const run=rest.length?'<div class="ma-vp"><div class="ma-run" style="--ma-s:'+Math.max(30,rest.length*9)+'s">'+rest.map(item).join("").repeat(2)+'</div></div>':'<div class="ma-vp"></div>';
+  el.innerHTML='<div class="ma-bar '+(J.level==="緊急"?"ma-hi":"ma-mid")+'"><span class="ma-lv">'+esc(J.level)+'</span>'+pxh+run+'<button class="ma-x" title="這次先收起" onclick="this.parentNode.remove()">✕</button></div>';
+}
+fetch("sample_1106.json").then(r=>r.json()).then(J=>{
+  maBar(J,"s1");
+  const J2=JSON.parse(JSON.stringify(J)); J2.level="注意"; const p=J2.items.find(x=>x.kind==="價格"); p.q.pct=-2.4; p.q.diff=-1005; p.q.last=40877; p.lv="注意"; maBar(J2,"s2");
+  const J3=JSON.parse(JSON.stringify(J)); J3.level=null; J3.items=J3.items.filter(x=>x.kind!=="價格"); maBar(J3,"s3");
+  maBar({level:null,items:[]},"s4");
+});
+fetch("../../data/market_alert.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(J=>{
+  if(!J){document.getElementById("s5").innerHTML='<span class="note">正式資料檔還沒產生。</span>';return}
+  maBar(J,"s5"); if(!document.getElementById("s5").innerHTML) document.getElementById("s5").innerHTML='<span class="note">目前無觸發（asof '+esc(J.asof)+'）</span>';
+}).catch(()=>{document.getElementById("s5").innerHTML='<span class="note">正式資料檔還沒產生。</span>'});
+</script>
+</body></html>

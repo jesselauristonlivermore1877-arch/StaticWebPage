@@ -1,0 +1,94 @@
+{
+ "asof": "2026-11-06T05:30",
+ "level": "緊急",
+ "keep_h": 24,
+ "rule": "價格＝期交所行情台指期近月（日盤／夜盤）漲跌幅 ≥2% 注意、≥3% 緊急；官方＝金管會、央行、證交所、期交所新聞稿標題有盤勢字眼；媒體＝權威名單（同即時信息流）且標題同時有台股／台指期與崩跌／暴漲字眼，或報導主管機關對盤勢表態。近 24 小時，最新在前。",
+ "items": [
+  {
+   "kind": "官方",
+   "lv": "注意",
+   "t": "臺股展現穩健韌性 經濟及企業基本面強化市場信心",
+   "src": "證交所",
+   "u": "https://www.twse.com.tw/zh/about/news/news/list.html",
+   "at": "2026-11-06T05:30",
+   "id": "off|https://www.twse.com.tw/zh/about/news/news/list.html|臺股展現穩健韌性 經濟及企業基本面強化市場信心"
+  },
+  {
+   "kind": "媒體",
+   "lv": "注意",
+   "t": "14檔熱門ETF績效1表看》台股6天崩5500點 878、919、918、981A、406A…誰站海嘯第1排？達人曝「這3檔」撐住了：回檔不到3％",
+   "src": "MoneyDJ",
+   "u": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1oLVJLS2J1Yl9BSW9CU2wxNndUSlB5UWtfSnIzSkk2cE9CamllVmVYTjFWUV91ek9tVUFrbS1vT2pzd0tBVDZXS25OMFpubW9fLVllbHJXYloxc2pjWTRfcFdkM25wZUktcVE?oc=5",
+   "at": "2026-11-06T05:28",
+   "id": "md|14檔熱門ETF績效1表看台股6天崩5500點878919918981A406A"
+  },
+  {
+   "kind": "媒體",
+   "lv": "注意",
+   "t": "快訊／台指期夜盤崩盤近3000點 台積電期貨夜盤快跌停",
+   "src": "ETtoday",
+   "u": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9Xa0h0aktzb1FkVEJwTWhYNU5pbnF1TGkyUENrMWNhZS1iOEUwT3JMaWw4NTJycXpaTzlMenljZVB2eFRIZkI3cmNPUkJuaTJFU0HSAVBBVV95cUxNYXB0UFJnWEdZV0NEdUN6bEdNWjJXc2NXMHVPVHJqZTZiaDI1cVJ6YkE3aDdtc25TdTZYS3V4dWxKN3BaSkRJa3lYSXh4LWw4Ug?oc=5",
+   "at": "2026-11-06T05:21",
+   "id": "md|快訊台指期夜盤崩盤近3000點台積電期貨夜盤快跌停"
+  },
+  {
+   "kind": "價格",
+   "lv": "緊急",
+   "t": "台指期夜盤重挫 -2,946 點（-7.03%），報 38,936；盤中最低 38,799",
+   "src": "期交所行情",
+   "u": "https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/FuturesDomestic/",
+   "at": "2026-11-06T04:59",
+   "q": {
+    "sess": "夜盤",
+    "sym": "TXFK6-M",
+    "name": "臺指期116",
+    "date": "20261105",
+    "time": "04:59",
+    "last": 38936.0,
+    "ref": 41882.0,
+    "diff": -2946.0,
+    "pct": -7.03,
+    "hi": 42298.0,
+    "lo": 38799.0,
+    "vol": 89277
+   },
+   "id": "px|20261105|夜盤|7|dn"
+  },
+  {
+   "kind": "媒體",
+   "lv": "注意",
+   "t": "TWA00 加權指數- 美國股市重挫，你現在是恐懼還是貪婪- 股市爆料同學會",
+   "src": "CMoney",
+   "u": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBhWHVxMXJhbE5VZGRTeG9xYmZPeTNsMElmTG5RTm01VFBUbjhBSmlMUFRHT1VQUng5T1dEcURvYVR3aDJSY0FoR1FwS2c3MTA5OHA4ZVpMNUQ?oc=5",
+   "at": "2026-11-06T04:40",
+   "id": "md|TWA00加權指數美國股市重挫你現在是恐懼還是貪婪股市爆料同學會"
+  },
+  {
+   "kind": "媒體",
+   "lv": "注意",
+   "t": "台股連日急殺…金融、電信、內需 躍避風港",
+   "src": "聯合新聞網",
+   "u": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9yLVZzYVlDd0JtNjlwZFdhbmdzOVp1RlRiQWtYLUgtYTNJRGYybTdrV1hIcWxEY2lSaFBxWWlWbTR1OXozSktMUWtpbUNGaDhj0gFWQVVfeXFMUFlCQ2JBWHZNRzRJZWdDOUFEZDB5RF84UUh6MXdOMm1sS05GUzQzOFZqNEhtejJWa1RKWXBONWRLcXBWQzdsN1FLTzIwOUpYbXRxMkdvOVE?oc=5",
+   "at": "2026-11-06T04:13",
+   "id": "md|台股連日急殺金融電信內需躍避風港"
+  },
+  {
+   "kind": "媒體",
+   "lv": "注意",
+   "t": "台股重挫主動ETF績效分流- 投資理財- 工商時報",
+   "src": "中時新聞網",
+   "u": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1IRDNrWGVCWGZrYTlsdVlDOXRHd3dsWnZIWkp4TTRWVnZiZjFsOUdkWkxKNjVWNHFVOWdLZjE1M3FrTVBYWWFMLVFoeUpSTWJjSThQT1J3R2lzNlNZVldsUHBrMkFad2l0RmNv?oc=5",
+   "at": "2026-11-06T04:10",
+   "id": "md|台股重挫主動ETF績效分流投資理財工商時報"
+  },
+  {
+   "kind": "媒體",
+   "lv": "注意",
+   "t": "台股重挫它卻拿第一！它近3個月報酬近8%奪冠 規模衝破300億",
+   "src": "Yahoo 股市",
+   "u": "https://news.google.com/rss/articles/CBMi7gJBVV95cUxNdDdPM1N5RFBUbnZ5N0ZETFB3MVUyVEg4Q1R3NndFZUZwZktMSTlMeUd0dnREdlY0NTR1ck1rb2xIMmlUM3BOYS1OLTFCS2FqaktRckdyM0VfVWgwOHUzV18tZ3M2WDA2cHBHYmoySU1EVWNmODNXakRiTGQtV251YWhQNlZ2VzFmTWx4ZThSeGxibEQ1V0h5dEJlLV9fVUVKcE9oMzR3dXJpN2RsNmhUN2Jod3ZrSFB5RUw1aGNsWXdfU3hUVXhIZUkyWE5ZX0JXXzJGLUxvQVJBQk5oQzdObWxuZUtuODduVWN2SGR2YXRkNU1fazVyU2J5a1ZscnZDNWRVQjRLOUJhdFlFZThMdG9JcVoxV3N0MVZwQ3BhNHlqLXJWUmNLZ3NSNFItdUdvaEtVb3g4aGlhRWFndzF3LTVKRlREcG5HdDZlMFpKT21Xel9TR1hXSG5YbWdLQmxEdF9MakU3SWFwT3pVRmc?oc=5",
+   "at": "2026-11-06T04:00",
+   "id": "md|台股重挫它卻拿第一它近3個月報酬近8奪冠規模衝破300億"
+  }
+ ]
+}
