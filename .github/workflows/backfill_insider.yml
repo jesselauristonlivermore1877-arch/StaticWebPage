@@ -3,6 +3,8 @@
 #   整批來源（OpenAPI t187ap11_L／mopsfin_t187ap11_O、t187ap12_L／_O）每日班已經全市場收；這裡只補官方沒有整批的：
 #   過去 12 個月逐人持股（ajax_stapap1）、代持拆項（ajax_query6_1：配偶及未成年子女／他人名義／信託）、事前申報歷史（ajax_t56sb12，一天一張全市場表）。
 #   順序：追蹤池先、事前申報、池外後。每 3 小時一輪，8 片各跑 25 分鐘；全部補完之後每輪只剩新月份，幾分鐘就結束。
+#   🟢 11-06（雲端D D1：申報一家收一家）：每輪先查「今天、昨天」的事前申報（t56sb12）；每月 1～16 日申報期內，還沒申報上月持股異動的公司每輪重查（query6_1），
+#   首次查到的時間＝申報日；最近 14 天的新申報 → docs/data/insider_new.json（網站內部人頁、EDM 用）。
 name: 回補內部人（全市場）
 
 on:
@@ -97,7 +99,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/insider.json data/insider_people.json docs/data/insider.json docs/data/insider_rank.json docs/data/insider_mp.json docs/data/insider
+          git add data/insider.json data/insider_people.json docs/data/insider.json docs/data/insider_rank.json docs/data/insider_mp.json docs/data/insider_new.json docs/data/insider
           if git diff --staged --quiet; then
             echo "內部人沒有變化，不提交。"
           else
