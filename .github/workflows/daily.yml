@@ -229,6 +229,19 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: python tools/pick_edm.py ../site ../site/docs/data/pick_edm.json
 
+      # 🟢 11-05 晚（雲端B，總指揮 B8／B9）：主動式 ETF 每檔日報（主動式ETF → 每日操作）→ docs/data/aetf_daily.json；
+      #    個股融資維持率排行（本站估算）→ docs/data/stock_keep_rank.json。都只讀上面各步寫好的檔（data/pcf、daily.npz、margin*.npz），
+      #    核對沒過就不寫（網站沿用上一份）；失敗不擋。
+      - name: 主動式ETF日報・個股維持率
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 8
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python tools/aetf_daily.py ../site --publish || echo "::warning::主動式 ETF 日報失敗（沿用上一份）"
+          python tools/stock_keep_rank.py ../site --publish || echo "::warning::個股維持率排行失敗（沿用上一份）"
+
       # 🟢 11-05 晚（雲端A，總指揮 A3）：疊圖三張（融資維持率 × 指數、委買委賣每筆張數＋電金比、市場結構轉變）→ docs/data/mkt_overlay.json
       #    只讀上面各步寫好的檔、不打網路；失敗不擋（網站沿用上一份）
       - name: 疊圖三張（市場動態）
