@@ -1,7 +1,41 @@
 {
- "asof": "2026-11-05T08:11+00:00",
+ "asof": "2026-11-05T09:11+00:00",
  "rule": "法說高成長指引：翻倍／倍增／成長 N 倍／成長 N%（N≥50）／明年大幅成長／上修財測／創新高指引；同一公司同一場法說只觸發一次；頁首只放即時偵測、觸發後 3 個交易日內的（until），個股頁標記留 30 天",
  "top": [
+  {
+   "code": "3036",
+   "name": "文曄",
+   "quote": "文曄Q3獲利衝破百億元再創新高 AI資料中心業務明年續高速成長",
+   "pat": "明年大幅成長",
+   "src": "自由時報",
+   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE15QTl0TkVfLWw2UTQ5UVk0bXpERms4d2VWSTRSWms0dXYxbm51QkJrbnpTVVc1Mjh3dGIzcXJ4WTBObXNwbVZmTmNzdHQ2RFZ3YXlmZTYtZ2Y?oc=5",
+   "pub": "2026-11-05T08:57+00:00",
+   "seen": "2026-11-05T09:11+00:00",
+   "meeting": "2026-11-05",
+   "px": {
+    "d": "2026-11-05",
+    "close": 195.0,
+    "chg": -4.65
+   },
+   "mx": {
+    "d": "2026-11-05",
+    "close": 195.0,
+    "chg": -4.65,
+    "prev": 204.5,
+    "prev_d": "2026-11-04",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-04",
+    "from": 204.5,
+    "to_d": "2026-11-05",
+    "to": 195.0,
+    "chg": -4.65
+   },
+   "kind": "news",
+   "n_more": 0,
+   "until": "2026-11-11T00:00+08:00"
+  },
   {
    "code": "3105",
    "name": "穩懋",
@@ -174,6 +208,39 @@
   }
  ],
  "by_code": {
+  "3036": {
+   "code": "3036",
+   "name": "文曄",
+   "quote": "文曄Q3獲利衝破百億元再創新高 AI資料中心業務明年續高速成長",
+   "pat": "明年大幅成長",
+   "src": "自由時報",
+   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE15QTl0TkVfLWw2UTQ5UVk0bXpERms4d2VWSTRSWms0dXYxbm51QkJrbnpTVVc1Mjh3dGIzcXJ4WTBObXNwbVZmTmNzdHQ2RFZ3YXlmZTYtZ2Y?oc=5",
+   "pub": "2026-11-05T08:57+00:00",
+   "seen": "2026-11-05T09:11+00:00",
+   "meeting": "2026-11-05",
+   "px": {
+    "d": "2026-11-05",
+    "close": 195.0,
+    "chg": -4.65
+   },
+   "mx": {
+    "d": "2026-11-05",
+    "close": 195.0,
+    "chg": -4.65,
+    "prev": 204.5,
+    "prev_d": "2026-11-04",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-04",
+    "from": 204.5,
+    "to_d": "2026-11-05",
+    "to": 195.0,
+    "chg": -4.65
+   },
+   "kind": "news",
+   "n_more": 0
+  },
   "3105": {
    "code": "3105",
    "name": "穩懋",
