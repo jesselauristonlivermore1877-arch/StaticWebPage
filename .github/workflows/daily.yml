@@ -36,6 +36,19 @@ jobs:
           # 🟢 10-30：選股還原價的事件只用這一班開始前就抓到的（adjpx.load 看 GEA_RUN_T0）；這班 river 新抓的下一班才生效，
           #    不然前段（market_series、rrg、radar）跟後段（選股 EDM 核對）用到不同批事件、核對對不上（10-30 首班就因此 pickedm 失敗）
           echo "GEA_RUN_T0=$(date +%s)" >> "$GITHUB_ENV"
+          # 🟢 11-05（【舊】總指揮 11-01 20:50 第 1 項）：證交所 www 同一資料日抓成功就沿用快取（twse_oa.cached），一天只打一次
+          echo "GEA_WWW_CACHE=$RUNNER_TEMP/www_cache" >> "$GITHUB_ENV"
+          echo "WWW_CACHE_DAY=$(TZ=Asia/Taipei date +%Y%m%d)" >> "$GITHUB_ENV"
+
+      # 跨班次保存 www 快取：key 每班不同（run_id），restore 取最近一份；程式自己清超過 10 天的檔
+      - name: 取回證交所 www 快取
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/www_cache
+          key: www-cache-${{ env.WWW_CACHE_DAY }}-${{ github.run_id }}
+          restore-keys: |
+            www-cache-${{ env.WWW_CACHE_DAY }}-
+            www-cache-
 
       - name: 取出網頁 repo（產出物落在這）
         uses: actions/checkout@v4
@@ -245,6 +258,14 @@ jobs:
             git pull --rebase -X theirs origin main
             git push origin HEAD:main
           fi
+
+      - name: 保存證交所 www 快取
+        if: always()
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/www_cache
+          key: www-cache-${{ env.WWW_CACHE_DAY }}-${{ github.run_id }}
 
       # 🔴 10-05（Evans：無人值守，每一個失敗都要寄信）：上面「失敗就沿用上一份、不擋上線」的步驟，失敗時網站照常更新，
       #    但以前整個 run 還是綠的、沒人知道。這一步在資料提交之後檢查，有任何一項失敗就讓這次 run 標成失敗 → GitHub 寄信。
