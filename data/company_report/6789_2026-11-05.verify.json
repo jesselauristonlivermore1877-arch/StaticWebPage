@@ -1,0 +1,42 @@
+{
+ "file": "6789_2026-11-05.md",
+ "code": "6789",
+ "date": "2026-11-05",
+ "show": true,
+ "numbers": {
+  "ok": true,
+  "bad": [],
+  "cited": 91,
+  "facts": 91
+ },
+ "compliance": {
+  "ok": true,
+  "hits": []
+ },
+ "src": {
+  "ok": true,
+  "bad": []
+ },
+ "cross": {
+  "ok": true,
+  "bad": [],
+  "checked": [
+   "eps_q",
+   "rev_m"
+  ]
+ },
+ "tables": {
+  "ok": true,
+  "bad": []
+ },
+ "sections": {
+  "ok": true,
+  "missing": []
+ },
+ "eps": {
+  "ok": true,
+  "bad": [],
+  "checked": 0,
+  "skipped": 8
+ }
+}
