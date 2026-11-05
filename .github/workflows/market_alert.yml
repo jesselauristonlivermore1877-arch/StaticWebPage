@@ -1,0 +1,70 @@
+# market_alert.yml ─ 盤勢緊急通知（總指揮 2026-11-06 D3；程式 CustomerServiceANDSales/tools/market_alert.py）
+#   起因：11-05 夜盤台指期 -2,946 點（-7.03%），媒體 22:39 起陸續發文，網站沒有跑馬燈也沒有 TG
+#   （news_live 台北 23:07 之後到隔天 07:07 沒有班次，夜盤新聞又被評為 C 級、沒上頁首跑馬燈）。
+#   每 15 分鐘：① 期交所行情台指期近月（日盤／夜盤）漲跌幅 ≥2% 注意、≥3% 緊急，每跨 1% 通知一次
+#             ② 金管會、央行、證交所、期交所新聞稿標題有盤勢字眼
+#             ③ 權威媒體（同即時信息流名單）標題有台股／台指期＋崩跌／暴漲字眼，或主管機關對盤勢表態
+#   → docs/data/market_alert.json（網站頂端通知條讀這份，前端由雲端 C 接）＋TG。
+#   GitHub 排程會掉班 → 夜盤時段另請 W 在本機排程跑同一支程式（TODO「雲端D 11-06 第二輪」）。
+#   這兩個檔只有這個 workflow 寫 → 推不上時 reset 到最新 main 再把這一班的檔放回去（不重跑，TG 不會重推）。
+name: 盤勢緊急通知
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: market-alert
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: site
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+          cache: pip
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" feedparser requests numpy
+      - name: 盤勢偵測＋TG
+        working-directory: code
+        env:
+          PYTHONUNBUFFERED: "1"
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          echo "觸發：${{ github.event_name }}　排定（UTC）：${{ github.event.schedule }}　實際啟動（台北）：$(TZ=Asia/Taipei date +%H:%M)"
+          python tools/market_alert.py ../site/data
+      - name: 提交
+        working-directory: site
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          F="docs/data/market_alert.json data/market_alert_state.json"
+          git add $F
+          if git diff --staged --quiet; then echo "沒有變動，不提交。"; exit 0; fi
+          git commit -qm "data: 盤勢緊急通知 $(TZ=Asia/Taipei date '+%F %H:%M')"
+          mkdir -p "$RUNNER_TEMP/ma/docs/data" "$RUNNER_TEMP/ma/data"
+          for f in $F; do cp "$f" "$RUNNER_TEMP/ma/$f"; done
+          for i in 1 2 3 4; do
+            git push -q origin HEAD:main && exit 0
+            git fetch -q origin main && git reset -q --hard origin/main
+            for f in $F; do cp "$RUNNER_TEMP/ma/$f" "$f"; done
+            git add $F
+            git diff --staged --quiet || git commit -qm "data: 盤勢緊急通知 $(TZ=Asia/Taipei date '+%F %H:%M')"
+            sleep $((2 ** i))
+          done
+          exit 1
