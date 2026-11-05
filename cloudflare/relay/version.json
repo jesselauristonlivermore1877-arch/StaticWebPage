@@ -1,7 +1,7 @@
 {
- "ver": "20261101d8",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261101d8/GEA_OM_Setup_20261101d8.exe",
- "sha256": "b745b590959d13f45add6b5730e683ba624b135041952181603f666baef346b1",
- "notes": "d8：更新按鈕修正——下載與 SHA256 驗過才關下單機；任何一步失敗都保留原版、自動開回來並通知；交易時段只提示不更新；修正 d7 把已裝 GEA 下單機的電腦誤判成選項 3 而中止安裝",
- "sig": "CBmLEN8/1vbTkDeXHhVwWHiEKl6wbqsN/118jgrVxjnj5ogSsSkfuBhrqMSxHAm6hDVTuAKp1CD6yyZCtiNlHA=="
+ "ver": "20261101d9",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261101d9/GEA_OM_Setup_20261101d9.exe",
+ "sha256": "9f4439acb9fe4cb67506f03406ed689b83d6da9ac6d91fde95b8512b45255d70",
+ "notes": "d9：主畫面帳戶列（權益數、占用保證金、可用保證金；開機、每次成交後、每 60 秒查一次，失敗變灰保留上次值；模擬模式用期交所原始保證金估算）＋策略成本欄；中繼連續斷線 3 分鐘發 TG 並存現場檔",
+ "sig": "jCJ06MoFkLjse6b3HE5eNAuOfoBCq1hTlaIELlAiiDpeyYK/AuwZjCdjy5kl1u3Hv4byd0pCER5gSPI1ibTFsg=="
 }
