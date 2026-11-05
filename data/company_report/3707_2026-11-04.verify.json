@@ -1,0 +1,44 @@
+{
+ "file": "3707_2026-11-04.md",
+ "code": "3707",
+ "date": "2026-11-04",
+ "show": true,
+ "numbers": {
+  "ok": true,
+  "bad": [],
+  "cited": 19,
+  "facts": 130
+ },
+ "compliance": {
+  "ok": true,
+  "hits": []
+ },
+ "src": {
+  "ok": true,
+  "bad": []
+ },
+ "cross": {
+  "ok": true,
+  "bad": [],
+  "checked": [
+   "close",
+   "eps_q",
+   "mcap",
+   "rev_m"
+  ]
+ },
+ "tables": {
+  "ok": true,
+  "bad": []
+ },
+ "sections": {
+  "ok": true,
+  "missing": []
+ },
+ "eps": {
+  "ok": true,
+  "bad": [],
+  "checked": 8,
+  "skipped": 0
+ }
+}
