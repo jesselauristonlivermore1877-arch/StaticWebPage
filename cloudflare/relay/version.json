@@ -1,7 +1,7 @@
 {
- "ver": "20261101d9",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261101d9/GEA_OM_Setup_20261101d9.exe",
- "sha256": "9f4439acb9fe4cb67506f03406ed689b83d6da9ac6d91fde95b8512b45255d70",
- "notes": "d9：主畫面帳戶列（權益數、占用保證金、可用保證金；開機、每次成交後、每 60 秒查一次，失敗變灰保留上次值；模擬模式用期交所原始保證金估算）＋策略成本欄；中繼連續斷線 3 分鐘發 TG 並存現場檔",
- "sig": "jCJ06MoFkLjse6b3HE5eNAuOfoBCq1hTlaIELlAiiDpeyYK/AuwZjCdjy5kl1u3Hv4byd0pCER5gSPI1ibTFsg=="
+ "ver": "20261106a",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261106a/GEA_OM_Setup_20261106a.exe",
+ "sha256": "49fc259c6e5047b0414058cd480498acf9011d59711ea3371bd6059cf7d59c7c",
+ "notes": "d10：任何時間都能更新（有部位會先確認，更新約 30～60 秒不會跟單）",
+ "sig": "ZAadVNUl4VyvIuGiUxheHmVaIrdm+mXiDmrYrLvxF1L+pM507xp0eTjx4CRErdjWBec9jON7noVk5fK2F2Lvjw=="
 }
