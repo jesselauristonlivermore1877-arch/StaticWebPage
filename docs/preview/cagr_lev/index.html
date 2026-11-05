@@ -1,0 +1,39 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>年化報酬與淨利率</title><style>
+:root{--bg:#f6f5f1;--ink:#1d1d1b;--ink2:#5c5b57;--line:#dcd9d0;--acc:#b0842f;--card:#fff;--up:#c8361e;--dn:#1e7b4f}
+@media (prefers-color-scheme:dark){:root{--bg:#16171a;--ink:#ecebe7;--ink2:#a4a29c;--line:#34363b;--acc:#d6a54a;--card:#1f2125;--up:#e2604a;--dn:#3fae7a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.7 system-ui,-apple-system,"Noto Sans TC",sans-serif}
+main{max-width:1000px;margin:0 auto;padding:20px 16px 60px}h1{font-size:22px;margin:0 0 4px}h2{font-size:16px;margin:18px 0 6px}
+.m{color:var(--ink2);font-size:13px;margin:0 0 12px}.note{color:var(--ink2);font-size:12px}
+.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}.c .l{color:var(--ink2);font-size:12px}.c .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.c .s{font-size:12px;color:var(--ink2)}.up{color:var(--up)}.dn{color:var(--dn)}
+table{border-collapse:collapse;width:100%;font-size:13px}th,td{border-bottom:1px solid var(--line);padding:4px 6px;white-space:nowrap;text-align:right}th:first-child,td:first-child{text-align:left}
+.wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+</style></head><body><main>
+<h1>訊號區／原型訊號區：年化報酬（CAGR）與淨利率，分有槓桿／無槓桿（第 5d 項）</h1>
+<p class="m"><b>示意資料</b>（假交易、假保證金）。定義已由 Evans 11-05 定案：<b>無槓桿＝用進場當時一口的名目價值算；有槓桿＝用進場當時期交所原始保證金算；淨利率也分兩種。</b></p>
+<div class="k" id="K"></div>
+<h2>算法（程式算，不用 Gemini）</h2>
+<ul>
+<li>每筆交易的資金基礎：無槓桿＝進場價 × 每點價值 × 口數（台指期 200 元／點、小台 50、微台 10）；有槓桿＝進場那天期交所公告的原始保證金 × 口數（歷史保證金表，不用今天的）。</li>
+<li>年化報酬（CAGR）＝把每筆報酬率（淨利 ÷ 資金基礎）依出場順序連乘 → 期末倍數 ^（1 ÷ 年數）− 1；年數＝第一筆進場到最後一筆出場（或今天）的日曆天 ÷ 365.25。</li>
+<li>淨利率＝累計淨利（扣手續費、交易稅）÷ 平均每筆資金基礎。</li>
+<li>下面明細表每一列都列出這兩個基礎，數字可以逐筆對。</li>
+<li>請注意：有槓桿用「連乘」時，一筆虧損吃掉保證金的三成，下一筆就是從七成開始算 → 淨利是正的，年化報酬仍可能是負的（上面示意就是這樣）。如果 Evans 要的是「固定一口、不複利」，改成 年化報酬＝淨利率 ÷ 年數（單利）；請在回覆時選一種。</li>
+</ul>
+<div class="wrap"><table id="T"><tr><th>進場日</th><th>方向</th><th>進場價</th><th>出場價</th><th>淨利（元）</th><th>名目價值</th><th>當時原始保證金</th><th>報酬（無槓桿）</th><th>報酬（有槓桿）</th></tr></table></div>
+<h2>歷史保證金資料源（還沒建，記進 SOURCES）</h2>
+<p class="note">期交所「保證金一覽表」（taifex.com.tw/cht/5/indexMarging，有 CSV 下載 indexMargingDown）只有<b>現在</b>的金額（今天：臺股期貨 701,000、小型臺指 175,250、微型臺指 35,050，頁面更新 2026-08-12）；歷史要從期交所保證金調整公告（歷史資料區 /cht/11/hisNews、公告 /cht/11/announcement）逐筆整理成「生效日 → 金額」表。整理工作照分工鐵律派 Gemini、程式逐筆打開公告核對，建好之前正式版先不顯示「有槓桿」那兩格。</p>
+<script>
+let seed=3;const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;
+const M=[["2019-10-01",83000],["2020-03-17",148000],["2021-05-13",167000],["2022-03-08",184000],["2024-07-17",213000],["2025-04-09",339000]];
+const mg=d=>M.filter(m=>m[0]<=d).pop()[1];
+let p=11000,d=new Date("2019-10-02"),R=[];for(let i=0;i<40;i++){d=new Date(+d+(20+rnd()*40)*864e5);const ds=d.toISOString().slice(0,10),dir=rnd()<.5?1:-1,ex=p*(1+(rnd()-0.45)*0.05),pnl=Math.round((ex-p)*dir*200-300);R.push({ds,dir,p,ex,pnl,nom:Math.round(p*200),mg:mg(ds)});p=ex*(1+(rnd()-0.45)*0.03)}
+const yrs=(new Date(R[R.length-1].ds)-new Date(R[0].ds))/864e5/365.25;
+const cagr=k=>Math.pow(R.reduce((a,r)=>a*(1+r.pnl/r[k]),1),1/yrs)-1, net=R.reduce((a,r)=>a+r.pnl,0), avg=k=>R.reduce((a,r)=>a+r[k],0)/R.length;
+const pc=x=>(x>=0?"+":"")+(x*100).toFixed(1)+"%",cls=x=>x>=0?"up":"dn";
+document.getElementById("K").innerHTML=[["年化報酬（無槓桿）",cagr("nom"),"資金＝進場當時一口名目價值"],["年化報酬（有槓桿）",cagr("mg"),"資金＝進場當時原始保證金"],["淨利率（無槓桿）",net/avg("nom"),"累計淨利 ÷ 平均名目價值"],["淨利率（有槓桿）",net/avg("mg"),"累計淨利 ÷ 平均原始保證金"]].map(([l,v,s])=>`<div class="c"><div class="l">${l}</div><div class="v ${cls(v)}">${pc(v)}</div><div class="s">${s}</div></div>`).join("");
+document.getElementById("T").innerHTML+=R.slice(0,12).map(r=>`<tr><td>${r.ds}</td><td>${r.dir>0?"多":"空"}</td><td>${r.p.toFixed(0)}</td><td>${r.ex.toFixed(0)}</td><td class="${cls(r.pnl)}">${r.pnl.toLocaleString()}</td><td>${r.nom.toLocaleString()}</td><td>${r.mg.toLocaleString()}</td><td class="${cls(r.pnl)}">${pc(r.pnl/r.nom)}</td><td class="${cls(r.pnl)}">${pc(r.pnl/r.mg)}</td></tr>`).join("")+`<tr><td colspan="9" style="text-align:left;color:var(--ink2)">（示意只列前 12 筆，共 ${R.length} 筆；期間 ${yrs.toFixed(1)} 年）</td></tr>`;
+</script></main></body></html>

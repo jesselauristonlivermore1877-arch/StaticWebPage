@@ -1,0 +1,41 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>盤中資金精簡版</title><style>
+:root{--bg:#f6f5f1;--ink:#1d1d1b;--ink2:#5c5b57;--line:#dcd9d0;--acc:#b0842f;--card:#fff;--up:#c8361e;--dn:#1e7b4f}
+@media (prefers-color-scheme:dark){:root{--bg:#16171a;--ink:#ecebe7;--ink2:#a4a29c;--line:#34363b;--acc:#d6a54a;--card:#1f2125;--up:#e2604a;--dn:#3fae7a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 system-ui,-apple-system,"Noto Sans TC",sans-serif}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:20px 0 6px}
+.m{color:var(--ink2);font-size:13px;margin:0 0 10px}.note{color:var(--ink2);font-size:12px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+/* A：一行一族群，橫條＋流動箭頭（速度＝最近 5 分鐘流速） */
+.a-row{display:grid;grid-template-columns:118px 1fr 64px 58px;align-items:center;gap:8px;height:22px;font-size:13px}
+.a-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.a-track{position:relative;height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.a-fill{position:absolute;top:0;bottom:0;border-radius:5px;background-size:16px 10px;animation:flow linear infinite}
+.a-fill.in{background-image:repeating-linear-gradient(90deg,var(--up) 0 9px,transparent 9px 16px)}
+.a-fill.out{background-image:repeating-linear-gradient(270deg,var(--dn) 0 9px,transparent 9px 16px);animation-direction:reverse}
+@keyframes flow{from{background-position:0 0}to{background-position:16px 0}}
+.num{text-align:right;font-variant-numeric:tabular-nums}.up{color:var(--up)}.dn{color:var(--dn)}
+.a-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px}@media(max-width:720px){.a-wrap{grid-template-columns:1fr}}
+/* B：泡泡格（大小＝累計淨額、脈動速度＝流速） */
+.b-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:6px}
+.b-cell{border:1px solid var(--line);border-radius:8px;padding:5px 8px;position:relative;overflow:hidden;font-size:12px}
+.b-cell .v{font-size:15px;font-weight:700}.b-cell .s{color:var(--ink2);font-size:11px}
+.b-dot{position:absolute;right:8px;top:8px;width:10px;height:10px;border-radius:50%;animation:pulse ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(.6);opacity:.5}50%{transform:scale(1.4);opacity:1}}
+</style></head><body><main>
+<h1>盤中資金：流向改「動態流速」＋兩種精簡版面（第 5a 項）</h1>
+<p class="m"><b>示意資料</b>（隨機產生，不是真的盤中數字）。流速＝最近 5 分鐘主動淨買的變化（億元／5 分）：箭頭流得越快＝這 5 分鐘進出越猛；方向紅＝流入、綠＝流出。整區高度：原版 28 列約 660 px → A 約 330 px、B 約 260 px。</p>
+<h2>A 版：兩欄橫條（原本的長條改兩欄、每列 22 px）</h2>
+<div class="panel"><div class="a-wrap" id="A"></div><p class="note">欄位：族群｜累計淨額長條（箭頭速度＝流速）｜累計淨額｜流速。點族群看個股（同現在）。</p></div>
+<h2>B 版：泡泡格（只放數字，一格一族群）</h2>
+<div class="panel"><div class="b-grid" id="B"></div><p class="note">每格：族群、累計淨額、流速；右上圓點脈動越快＝流速越大。依累計淨額由流入到流出排。</p></div>
+<p class="note" style="margin-top:14px">資料來源照舊（breadth_live 的 flow_&lt;日&gt;.json，每檔 s5＝每 5 分累計淨額）；流速＝s5 最後一格 − 前一格，程式算、不用 Gemini。</p>
+<script>
+let seed=7;const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;
+const names=["記憶體","晶圓代工與製造","CCL與電子材料","載板與PCB","IC設計","其他","光通訊上游","封裝測試","被動元件","伺服器與品牌","金融","光學鏡頭","測試設備與介面","伺服器電源","散熱與液冷","矽晶圓與化合物","連接器與機構","晶圓耗材","面板","傳產石化","光通訊中下游","航運","網通與衛星","廠務工程","功率元件","電源管理IC","電信與雲端服務","生技醫療"];
+const D=names.map(n=>({n,v:+((rnd()-0.62)*160).toFixed(1),s:+((rnd()-0.55)*14).toFixed(1)})).sort((a,b)=>b.v-a.v);
+const mx=Math.max(...D.map(d=>Math.abs(d.v))),sp=x=>Math.max(0.35,3.2-Math.abs(x)/5);
+const fmt=x=>(x>0?"+":"")+x.toFixed(1);
+document.getElementById("A").innerHTML=D.map(d=>`<div class="a-row"><span class="a-name">${d.n}</span><span class="a-track"><span class="a-fill ${d.s>=0?"in":"out"}" style="${d.v>=0?"left:0":"right:0"};width:${(Math.abs(d.v)/mx*100).toFixed(0)}%;animation-duration:${sp(d.s)}s"></span></span><span class="num ${d.v>=0?"up":"dn"}">${fmt(d.v)}</span><span class="num ${d.s>=0?"up":"dn"}" title="最近 5 分鐘流速">${fmt(d.s)}/5分</span></div>`).join("");
+document.getElementById("B").innerHTML=D.map(d=>`<div class="b-cell"><div>${d.n}</div><div class="v ${d.v>=0?"up":"dn"}">${fmt(d.v)} 億</div><div class="s">流速 ${fmt(d.s)}／5分</div><span class="b-dot" style="background:${d.s>=0?"var(--up)":"var(--dn)"};animation-duration:${sp(d.s)}s"></span></div>`).join("");
+</script></main></body></html>

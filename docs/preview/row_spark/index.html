@@ -1,0 +1,38 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>每列走勢小圖</title><style>
+:root{--bg:#f6f5f1;--ink:#1d1d1b;--ink2:#5c5b57;--line:#dcd9d0;--acc:#b0842f;--card:#fff;--up:#c8361e;--dn:#1e7b4f}
+@media (prefers-color-scheme:dark){:root{--bg:#16171a;--ink:#ecebe7;--ink2:#a4a29c;--line:#34363b;--acc:#d6a54a;--card:#1f2125;--up:#e2604a;--dn:#3fae7a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 system-ui,-apple-system,"Noto Sans TC",sans-serif}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}h1{font-size:22px;margin:0 0 4px}h2{font-size:16px;margin:0 0 6px}
+.m{color:var(--ink2);font-size:13px;margin:0 0 12px}.note{color:var(--ink2);font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:12px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}th,td{border-bottom:1px solid var(--line);padding:3px 5px;white-space:nowrap}th{color:var(--ink2);font-weight:400;text-align:left}
+.num{text-align:right;font-variant-numeric:tabular-nums}.up{color:var(--up)}.dn{color:var(--dn)}
+.more{margin-top:6px;font:inherit;font-size:12px;padding:2px 10px;border:1px solid var(--line);border-radius:5px;background:var(--card);color:var(--acc);cursor:pointer}
+svg.sp{display:block}.tag{font-size:11px;color:var(--ink2)}
+</style></head><body><main>
+<h1>每一列附當天走勢小圖（第 5b 項）</h1>
+<p class="m"><b>示意資料</b>。每列右邊一張小圖＝當天從開盤到現在的走勢；點＝現在的值，細線＝當天最高、最低；旁邊一個字「高↓」＝從當天高點下來、「低↑」＝從當天低點上來（離高點或低點比較近的那一邊，程式算）。預設 15 列，按「more」展開其餘。</p>
+<div class="grid">
+<div class="panel"><h2>個股主動淨買前 15</h2><div id="T1"></div></div>
+<div class="panel"><h2>個股主動淨賣前 15</h2><div id="T2"></div></div>
+<div class="panel"><h2>個股盤中貢獻點數</h2><div id="T3"></div></div>
+<div class="panel"><h2>電金比</h2><div id="T4"></div></div>
+</div>
+<p class="note" style="margin-top:12px">資料來源：淨買／淨賣＝flow 每檔 s5（每 5 分累計，55 點）；貢獻點數＝1 分K 換算的每 5 分累計貢獻；電金比＝電子／金融類指數比值每 5 分。都由程式從現有檔算，不新增資料源。</p>
+<script>
+let seed=11;const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;
+function walk(end,n=55){const a=[0];for(let i=1;i<n;i++)a.push(a[i-1]+(rnd()-0.5)*Math.abs(end||1)*0.4);const k=(end-a[n-1])/(n-1);return a.map((v,i)=>+(v+k*i).toFixed(2))}
+function spark(a){const w=96,h=22,mx=Math.max(...a),mn=Math.min(...a),y=v=>h-2-(v-mn)/((mx-mn)||1)*(h-4),x=i=>i/(a.length-1)*(w-6)+1;
+ const last=a[a.length-1],c=last>=a[0]?"var(--up)":"var(--dn)";const fromHi=(mx-last)<(last-mn);
+ return `<span style="display:inline-flex;align-items:center;gap:4px"><svg class="sp" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><line x1="0" x2="${w}" y1="${y(mx)}" y2="${y(mx)}" stroke="var(--line)"/><line x1="0" x2="${w}" y1="${y(mn)}" y2="${y(mn)}" stroke="var(--line)"/><polyline fill="none" stroke="${c}" stroke-width="1.3" points="${a.map((v,i)=>x(i).toFixed(1)+","+y(v).toFixed(1)).join(" ")}"/><circle cx="${x(a.length-1)}" cy="${y(last)}" r="2.5" fill="${c}"/></svg><span class="tag">${fromHi?"高↓":"低↑"}</span></span>`}
+const S=["台積電","鴻海","聯發科","廣達","台達電","日月光投控","緯創","奇鋐","台光電","國巨","金像電","南亞科","華邦電","富邦金","國泰金","中信金","長榮","陽明","世芯-KY","創意","智邦","川湖","華城","士電","大立光","欣興","臻鼎-KY","群聯","力積電","瑞昱"];
+function table(id,sign,unit,n=26){const rows=S.slice(0,n).map(s=>{const v=sign*(rnd()*40+1);return{s,v,a:walk(v)}}).sort((p,q)=>sign*(q.v-p.v));
+ const tr=(r,i)=>`<tr${i>=15?' class="x" hidden':''}><td>${i+1}</td><td>${r.s}</td><td class="num ${r.v>=0?"up":"dn"}">${(r.v>0?"+":"")+r.v.toFixed(2)}${unit}</td><td>${spark(r.a)}</td></tr>`;
+ document.getElementById(id).innerHTML=`<table><tr><th></th><th>個股</th><th class="num">現在</th><th>當天走勢</th></tr>${rows.map(tr).join("")}</table><button class="more" onclick="const t=this.previousElementSibling;const h=t.querySelector('tr.x[hidden]');t.querySelectorAll('tr.x').forEach(r=>r.hidden=!h);this.textContent=h?'收起':'more（還有 ${rows.length-15} 列）'">more（還有 ${rows.length-15} 列）</button>`}
+table("T1",1," 億");table("T2",-1," 億");table("T3",1," 點");
+(function(){const a=walk(0.03).map(v=>+(2.41+v/10).toFixed(3));const b=walk(-0.02).map(v=>+(2.41+v/10).toFixed(3));
+ document.getElementById("T4").innerHTML=`<table><tr><th>指標</th><th class="num">現在</th><th>當天走勢</th></tr><tr><td>電金比</td><td class="num">${a[a.length-1].toFixed(3)}</td><td>${spark(a)}</td></tr><tr><td>電金比（前一日同時間）</td><td class="num">${b[b.length-1].toFixed(3)}</td><td>${spark(b)}</td></tr></table><p class="note">電金比只有一兩列，不需要 more。</p>`})();
+</script></main></body></html>
