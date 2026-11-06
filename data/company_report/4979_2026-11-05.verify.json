@@ -2,7 +2,7 @@
  "file": "4979_2026-11-05.md",
  "code": "4979",
  "date": "2026-11-05",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 50.29 倍，站上資料 56.7103"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",

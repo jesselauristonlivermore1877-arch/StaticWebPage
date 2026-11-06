@@ -2,7 +2,7 @@
  "file": "7769_2026-11-02.md",
  "code": "7769",
  "date": "2026-11-02",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 42.50 倍，站上資料 50.7439"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",

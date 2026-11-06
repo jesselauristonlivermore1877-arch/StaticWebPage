@@ -2,7 +2,7 @@
  "file": "2486_2026-11-03.md",
  "code": "2486",
  "date": "2026-11-03",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 106.36 倍，站上資料 151.2931"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",
