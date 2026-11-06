@@ -68,3 +68,13 @@ jobs:
             sleep $((2 ** i))
           done
           exit 1
+      # 11-06（總指揮）：任何一步失敗就推 TG（掉班＝超過 30 分鐘沒跑，由程式讀 state 的 ran 偵測、下一班推）
+      - name: 失敗警告
+        if: failure()
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          curl -s -o /dev/null -w "TG HTTP %{http_code}\n" "https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TG_CHAT_ID}" \
+            --data-urlencode "text=⚠️ 盤勢緊急通知 workflow 失敗（台北 $(TZ=Asia/Taipei date '+%m/%d %H:%M')），這一班沒有更新、沒有推通知：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
