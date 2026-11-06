@@ -1,0 +1,45 @@
+{
+ "file": "6285_2026-11-06.md",
+ "code": "6285",
+ "date": "2026-11-06",
+ "show": true,
+ "numbers": {
+  "ok": true,
+  "bad": [],
+  "cited": 66,
+  "facts": 103
+ },
+ "compliance": {
+  "ok": true,
+  "hits": []
+ },
+ "src": {
+  "ok": true,
+  "bad": []
+ },
+ "cross": {
+  "ok": true,
+  "bad": [],
+  "checked": [
+   "close",
+   "eps_q",
+   "mcap",
+   "pe_ttm",
+   "rev_m"
+  ]
+ },
+ "tables": {
+  "ok": true,
+  "bad": []
+ },
+ "sections": {
+  "ok": true,
+  "missing": []
+ },
+ "eps": {
+  "ok": true,
+  "bad": [],
+  "checked": 7,
+  "skipped": 0
+ }
+}
