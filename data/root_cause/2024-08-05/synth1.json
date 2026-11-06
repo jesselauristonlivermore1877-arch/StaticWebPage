@@ -1,0 +1,263 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"美國 7 月就業數據疲軟引發衰退恐慌\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2024-08-02\",\n      \"who\": \"美國勞工統計局 (BLS)\",\n      \"event\": \"公布 7 月非農就業人數僅增加 11.4 萬人，遠低於預期，且失業率升至 4.3%\",\n      \"mechanism\": \"數據觸發「薩姆規則」(Sahm Rule) 衰退指標，引發市場對美國經濟硬著陸的強烈恐慌，導致全球風險資產遭到拋售\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"美股重挫導致台股權值股與出口導向型科技股同步遭到外資提款\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Non-farm payrolls\",\n        \"Sahm Rule\",\n        \"Recession fears\",\n        \"非農就業\",\n        \"薩姆規則\",\n        \"經濟衰退\"\n      ],\n      \"evidence\": [\n        \"P58\",\n        \"P62\",\n        \"P91\",\n        \"P107\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"drill\": [\n        \"US July Jobs Report Sahm Rule\",\n        \"美國 7 月 非農就業 薩姆規則\",\n        \"미국 7월 고용지표 경기침체\",\n        \"アメリカ 雇用統計 サーム・ルール\"\n      ]\n    },\n    {\n      \"title\": \"日圓套利交易大規模平倉\",\n      \"layer\": \"放大因素\",\n      \"event_date\": \"2024-07-31\",\n      \"who\": \"日本銀行 (BoJ)\",\n      \"event\": \"日本央行宣布升息並展現鷹派立場，導致日圓大幅升值\",\n      \"mechanism\": \"日圓走強迫使借入低利日圓投資全球資產的套利交易 (Carry Trade) 進行去槓桿平倉，引發全球股市連鎖拋售\",\n      \"industry\": \"金融\",\n      \"tw_link\": \"全球流動性緊縮迫使外資賣出台股等新興市場部位以償還日圓債務\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Carry trade\",\n        \"BoJ rate hike\",\n        \"Yen appreciation\",\n        \"日圓套利\",\n        \"日本央行升息\",\n        \"円キャリー\"\n      ],\n      \"evidence\": [\n        \"P103\",\n        \"P104\",\n        \"P181\",\n        \"P186\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"drill\": [\n        \"Yen carry trade unwind BoJ\",\n        \"日圓套利交易 平倉 日本央行\",\n        \"엔 캐리 트레이드 청산\",\n        \"円キャリー取引 解消 日銀\"\n      ]\n    },\n    {\n      \"title\": \"英特爾財報慘淡與大規模裁員\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2024-08-01\",\n      \"who\": \"英特爾 (Intel)\",\n      \"event\": \"公布 Q2 財報遠遜預期，宣布裁員 1.5 萬人並自 Q4 起停發股利\",\n      \"mechanism\": \"市場對半導體景氣復甦及晶圓代工業務轉型產生疑慮，重挫半導體族群投資信心\",\n      \"industry\": \"半導體\",\n      \"tw_link\": \"引發對台灣半導體供應鏈及成熟製程競爭壓力的擔憂\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"IC設計\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Intel layoffs\",\n        \"Dividend suspension\",\n        \"Intel Foundry\",\n        \"英特爾裁員\",\n        \"停發股利\",\n        \"インテル 決算\"\n      ],\n      \"evidence\": [\n        \"P73\",\n        \"P83\",\n        \"P94\",\n        \"P95\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"drill\": [\n        \"Intel Q2 earnings layoffs dividend\",\n        \"英特爾 財報 裁員 股利\",\n        \"인텔 실적 발표 감원\",\n        \"インテル 決算 解雇\"\n      ]\n    },\n    {\n      \"title\": \"輝達 Blackwell 晶片延遲傳聞與監管壓力\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2024-08-02\",\n      \"who\": \"輝達 (Nvidia)\",\n      \"event\": \"傳出新一代 Blackwell 晶片因設計缺陷延遲出貨，且面臨美國司法部反壟斷調查\",\n      \"mechanism\": \"AI 基礎設施建設進度可能放緩，引發 AI 泡沫破裂擔憂及相關供應鏈估值修正\",\n      \"industry\": \"AI 伺服器\",\n      \"tw_link\": \"台股 AI 伺服器組裝、散熱及代工供應鏈首當其衝\",\n      \"tw_sectors\": [\n        \"伺服器與品牌組裝\",\n        \"晶圓代工與製造\",\n        \"散熱與液冷\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Blackwell delay\",\n        \"Antitrust probe\",\n        \"Nvidia\",\n        \"輝達\",\n        \"晶片延遲\",\n        \"反壟斷\"\n      ],\n      \"evidence\": [\n        \"P82\",\n        \"P93\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\"\n      ],\n      \"drill\": [\n        \"Nvidia Blackwell delay design flaw\",\n        \"輝達 Blackwell 延遲\",\n        \"엔비디아 블랙웰 출시 연기\",\n        \"エヌビディア ブラックウェル 延期\"\n      ]\n    },\n    {\n      \"title\": \"全球股市連鎖崩跌與恐慌情緒\",\n      \"layer\": \"表面\",\n      \"event_date\": \"2024-08-05\",\n      \"who\": \"全球投資人\",\n      \"event\": \"日經指數與台股同步創下史上最大單日跌點，引發亞股全面重挫\",\n      \"mechanism\": \"恐慌性拋售、融資斷頭壓力與程式交易止損觸發，形成惡性循環\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"台股加權指數單日暴跌 1807 點，多檔權值股觸及跌停\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Black Monday\",\n        \"Stock market crash\",\n        \"Margin call\",\n        \"黑色星期一\",\n        \"股災\",\n        \"融資斷頭\"\n      ],\n      \"evidence\": [\n        \"P7\",\n        \"P32\",\n        \"P68\",\n        \"P120\",\n        \"P153\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"此為表面現象，根源於美國經濟衰退預期、日圓套利交易反轉及 AI 科技股估值修正\",\n      \"drill\": [\n        \"Global stock market crash August 2024\",\n        \"台股 史上最大跌點 2024\",\n        \"닛케이 평균 주가 폭락\",\n        \"日経平均株価 暴落 理由\"\n      ]\n    },\n    {\n      \"title\": \"證交所召開記者會信心喊話\",\n      \"layer\": \"政策回應\",\n      \"event_date\": \"2024-08-05\",\n      \"who\": \"臺灣證券交易所\",\n      \"event\": \"針對台股重挫召開記者會，強調基本面穩健並呼籲投資人理性\",\n      \"mechanism\": \"透過官方口頭干預試圖穩定市場信心，並表示將視情況採取救市措施\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"直接針對台股市場波動進行政策性回應\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"不明\",\n      \"keywords\": [\n        \"TWSE\",\n        \"Market stability\",\n        \"證交所\",\n        \"信心喊話\",\n        \"救市措施\"\n      ],\n      \"evidence\": [\n        \"P15\",\n        \"P52\"\n      ],\n      \"langs\": [\n        \"zh\"\n      ],\n      \"drill\": [\n        \"證交所 救市措施 2024\",\n        \"台股 限空令 可能性\",\n        \"Taiwan Stock Exchange market intervention\"\n      ]\n    }\n  ],\n  \"summary\": \"2024年8月5日台股創下史上最大單日跌幅（-8.35%），主因為美國7月就業數據疲軟引發衰退恐慌，疊加日本央行升息導致日圓套利交易大規模平倉。此外，Intel財報利空與Nvidia晶片延遲傳聞重挫AI半導體基本面預期，透過權值股台積電傳導至全市場，引發融資斷頭與恐慌性拋售。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "美國 7 月就業數據疲軟引發衰退恐慌",
+    "layer": "根因",
+    "event_date": "2024-08-02",
+    "who": "美國勞工統計局 (BLS)",
+    "event": "公布 7 月非農就業人數僅增加 11.4 萬人，遠低於預期，且失業率升至 4.3%",
+    "mechanism": "數據觸發「薩姆規則」(Sahm Rule) 衰退指標，引發市場對美國經濟硬著陸的強烈恐慌，導致全球風險資產遭到拋售",
+    "industry": "全市場",
+    "tw_link": "美股重挫導致台股權值股與出口導向型科技股同步遭到外資提款",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Non-farm payrolls",
+     "Sahm Rule",
+     "Recession fears",
+     "非農就業",
+     "薩姆規則",
+     "經濟衰退"
+    ],
+    "evidence": [
+     "P58",
+     "P62",
+     "P91",
+     "P107"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "drill": [
+     "US July Jobs Report Sahm Rule",
+     "美國 7 月 非農就業 薩姆規則",
+     "미국 7월 고용지표 경기침체",
+     "アメリカ 雇用統計 サーム・ルール"
+    ]
+   },
+   {
+    "title": "日圓套利交易大規模平倉",
+    "layer": "放大因素",
+    "event_date": "2024-07-31",
+    "who": "日本銀行 (BoJ)",
+    "event": "日本央行宣布升息並展現鷹派立場，導致日圓大幅升值",
+    "mechanism": "日圓走強迫使借入低利日圓投資全球資產的套利交易 (Carry Trade) 進行去槓桿平倉，引發全球股市連鎖拋售",
+    "industry": "金融",
+    "tw_link": "全球流動性緊縮迫使外資賣出台股等新興市場部位以償還日圓債務",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Carry trade",
+     "BoJ rate hike",
+     "Yen appreciation",
+     "日圓套利",
+     "日本央行升息",
+     "円キャリー"
+    ],
+    "evidence": [
+     "P103",
+     "P104",
+     "P181",
+     "P186"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "drill": [
+     "Yen carry trade unwind BoJ",
+     "日圓套利交易 平倉 日本央行",
+     "엔 캐리 트레이드 청산",
+     "円キャリー取引 解消 日銀"
+    ]
+   },
+   {
+    "title": "英特爾財報慘淡與大規模裁員",
+    "layer": "根因",
+    "event_date": "2024-08-01",
+    "who": "英特爾 (Intel)",
+    "event": "公布 Q2 財報遠遜預期，宣布裁員 1.5 萬人並自 Q4 起停發股利",
+    "mechanism": "市場對半導體景氣復甦及晶圓代工業務轉型產生疑慮，重挫半導體族群投資信心",
+    "industry": "半導體",
+    "tw_link": "引發對台灣半導體供應鏈及成熟製程競爭壓力的擔憂",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "IC設計"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Intel layoffs",
+     "Dividend suspension",
+     "Intel Foundry",
+     "英特爾裁員",
+     "停發股利",
+     "インテル 決算"
+    ],
+    "evidence": [
+     "P73",
+     "P83",
+     "P94",
+     "P95"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "drill": [
+     "Intel Q2 earnings layoffs dividend",
+     "英特爾 財報 裁員 股利",
+     "인텔 실적 발표 감원",
+     "インテル 決算 解雇"
+    ]
+   },
+   {
+    "title": "輝達 Blackwell 晶片延遲傳聞與監管壓力",
+    "layer": "根因",
+    "event_date": "2024-08-02",
+    "who": "輝達 (Nvidia)",
+    "event": "傳出新一代 Blackwell 晶片因設計缺陷延遲出貨，且面臨美國司法部反壟斷調查",
+    "mechanism": "AI 基礎設施建設進度可能放緩，引發 AI 泡沫破裂擔憂及相關供應鏈估值修正",
+    "industry": "AI 伺服器",
+    "tw_link": "台股 AI 伺服器組裝、散熱及代工供應鏈首當其衝",
+    "tw_sectors": [
+     "伺服器與品牌組裝",
+     "晶圓代工與製造",
+     "散熱與液冷"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Blackwell delay",
+     "Antitrust probe",
+     "Nvidia",
+     "輝達",
+     "晶片延遲",
+     "反壟斷"
+    ],
+    "evidence": [
+     "P82",
+     "P93"
+    ],
+    "langs": [
+     "zh",
+     "en"
+    ],
+    "drill": [
+     "Nvidia Blackwell delay design flaw",
+     "輝達 Blackwell 延遲",
+     "엔비디아 블랙웰 출시 연기",
+     "エヌビディア ブラックウェル 延期"
+    ]
+   },
+   {
+    "title": "全球股市連鎖崩跌與恐慌情緒",
+    "layer": "表面",
+    "event_date": "2024-08-05",
+    "who": "全球投資人",
+    "event": "日經指數與台股同步創下史上最大單日跌點，引發亞股全面重挫",
+    "mechanism": "恐慌性拋售、融資斷頭壓力與程式交易止損觸發，形成惡性循環",
+    "industry": "全市場",
+    "tw_link": "台股加權指數單日暴跌 1807 點，多檔權值股觸及跌停",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Black Monday",
+     "Stock market crash",
+     "Margin call",
+     "黑色星期一",
+     "股災",
+     "融資斷頭"
+    ],
+    "evidence": [
+     "P7",
+     "P32",
+     "P68",
+     "P120",
+     "P153"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "此為表面現象，根源於美國經濟衰退預期、日圓套利交易反轉及 AI 科技股估值修正",
+    "drill": [
+     "Global stock market crash August 2024",
+     "台股 史上最大跌點 2024",
+     "닛케이 평균 주가 폭락",
+     "日経平均株価 暴落 理由"
+    ]
+   },
+   {
+    "title": "證交所召開記者會信心喊話",
+    "layer": "政策回應",
+    "event_date": "2024-08-05",
+    "who": "臺灣證券交易所",
+    "event": "針對台股重挫召開記者會，強調基本面穩健並呼籲投資人理性",
+    "mechanism": "透過官方口頭干預試圖穩定市場信心，並表示將視情況採取救市措施",
+    "industry": "全市場",
+    "tw_link": "直接針對台股市場波動進行政策性回應",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "不明",
+    "keywords": [
+     "TWSE",
+     "Market stability",
+     "證交所",
+     "信心喊話",
+     "救市措施"
+    ],
+    "evidence": [
+     "P15",
+     "P52"
+    ],
+    "langs": [
+     "zh"
+    ],
+    "drill": [
+     "證交所 救市措施 2024",
+     "台股 限空令 可能性",
+     "Taiwan Stock Exchange market intervention"
+    ]
+   }
+  ],
+  "summary": "2024年8月5日台股創下史上最大單日跌幅（-8.35%），主因為美國7月就業數據疲軟引發衰退恐慌，疊加日本央行升息導致日圓套利交易大規模平倉。此外，Intel財報利空與Nvidia晶片延遲傳聞重挫AI半導體基本面預期，透過權值股台積電傳導至全市場，引發融資斷頭與恐慌性拋售。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmptb3rk8vt.txt",
+  "附檔": [],
+  "耗時秒": 25.0,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3-flash-preview",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 15710,
+   "prompt_tokens": 9989,
+   "output_tokens": 2393,
+   "thinking_tokens": 3328
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_0805_synth1",
+  "ok": true
+ }
+}

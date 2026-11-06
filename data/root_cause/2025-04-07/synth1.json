@@ -1,0 +1,220 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"川普簽署相互關稅行政命令\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2025-04-02\",\n      \"who\": \"美國總統川普 (Donald Trump)\",\n      \"event\": \"川普簽署「相互關稅」（Reciprocal Tariff）行政命令，旨在對貿易逆差國加徵對等關稅，引發全球貿易戰憂慮。\",\n      \"mechanism\": \"關稅壁壘預期導致出口成本激增，衝擊全球供應鏈基本面，引發半導體等高度依賴出口產業的獲利預期下修。\",\n      \"industry\": \"晶圓代工與製造\",\n      \"tw_link\": \"台積電等權值股因出口依賴度高，遭市場恐慌性拋售，導致台股開盤即面臨巨大賣壓。\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"IC設計\",\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Reciprocal Tariff\",\n        \"Trump\",\n        \"相互關稅\",\n        \"Trade War\"\n      ],\n      \"evidence\": [\n        \"P189\",\n        \"P85\",\n        \"P119\",\n        \"P41\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"drill\": [\n        \"Trump Reciprocal Tariff Executive Order details\",\n        \"川普 相互關稅 行政命令 內容\",\n        \"トランプ 相互関税 影響\",\n        \"트럼프 상호관세 행정명령\"\n      ]\n    },\n    {\n      \"title\": \"台股史詩級崩盤與全球股市恐慌\",\n      \"layer\": \"表面\",\n      \"event_date\": \"2025-04-07\",\n      \"who\": \"全球投資人\",\n      \"event\": \"台股收盤重挫 2065 點（-9.7%），創下史上最大單日跌點與跌幅紀錄，全球股市同步浴血。\",\n      \"mechanism\": \"市場對關稅戰引發全球經濟衰退的極度恐慌，導致信心崩潰，出現無差別拋售潮。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"加權指數開盤即崩跌，超過 1700 家上市櫃公司跌停，市值單日蒸發 6.6 兆元。\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Black Monday\",\n        \"Stock Market Crash\",\n        \"黑色星期一\",\n        \"史上最大跌點\"\n      ],\n      \"evidence\": [\n        \"P1\",\n        \"P2\",\n        \"P120\",\n        \"P124\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"市場恐慌是川普相互關稅政策（P189）發布後，對全球貿易基本面惡化的直接預期反應。\",\n      \"drill\": [\n        \"Taiwan stock market record drop 2025\",\n        \"台股 2065點 崩盤 原因\",\n        \"日経平均 史上最大 下落\",\n        \"코스피 폭락 블랙먼데이\"\n      ]\n    },\n    {\n      \"title\": \"融資斷頭與保證金追繳連鎖反應\",\n      \"layer\": \"放大因素\",\n      \"event_date\": \"2025-04-07\",\n      \"who\": \"融資投資人與證券商\",\n      \"event\": \"股市連續大跌觸發融資維持率不足，引發大規模斷頭賣壓與保證金追繳（Margin Call）。\",\n      \"mechanism\": \"股價跌破維持率 → 觸發強制平倉 → 價格進一步下跌 → 更多融資戶斷頭，形成惡性循環。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"散戶與法人因保證金壓力被迫在跌停板賣出，導致市場流動性枯竭，跌勢失控。\",\n      \"tw_sectors\": [\n        \"全市場\",\n        \"金融\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Margin Call\",\n        \"Forced Liquidation\",\n        \"融資斷頭\",\n        \"追繳壓力\"\n      ],\n      \"evidence\": [\n        \"P7\",\n        \"P162\",\n        \"P174\",\n        \"P145\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"drill\": [\n        \"Stock market margin call liquidation 2025\",\n        \"融資維持率 斷頭 賣壓\",\n        \"マージンコール 追証 暴落\",\n        \"반대매매 마진콜 증시\"\n      ]\n    },\n    {\n      \"title\": \"美股科技巨頭與半導體股重挫\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2025-04-04\",\n      \"who\": \"Nvidia, Apple, TSMC ADR\",\n      \"event\": \"美股科技巨頭（Mag 7）與費城半導體指數因關稅憂慮大幅收黑，台積電 ADR 領跌。\",\n      \"mechanism\": \"全球半導體龍頭評價遭下修，直接拖累台灣半導體供應鏈的資金偏好與股價表現。\",\n      \"industry\": \"晶圓代工與製造\",\n      \"tw_link\": \"台積電 ADR 於 4/4 重挫，導致 4/7 台股現貨開盤即跳空跌停至 848 元。\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"IC設計\",\n        \"伺服器與品牌組裝\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"TSMC ADR\",\n        \"Nvidia plunge\",\n        \"費城半導體\",\n        \"跌停\"\n      ],\n      \"evidence\": [\n        \"P91\",\n        \"P31\",\n        \"P48\",\n        \"P143\"\n      ],\n      \"langs\": [\n        \"en\",\n        \"zh\",\n        \"ja\"\n      ],\n      \"drill\": [\n        \"TSMC ADR price drop April 2025\",\n        \"台積電 ADR 跌停 原因\",\n        \"エヌビディア 株価 急落\",\n        \"필라델피아 반도체 지수 폭락\"\n      ]\n    },\n    {\n      \"title\": \"國安基金進場護盤與政策穩定措施\",\n      \"layer\": \"政策回應\",\n      \"event_date\": \"2025-04-07\",\n      \"who\": \"國安基金、證交所\",\n      \"event\": \"國安基金宣布進場護盤，證交所呼籲投資人理性，試圖穩定市場信心。\",\n      \"mechanism\": \"政府介入提供流動性支持，並透過喊話試圖緩解恐慌情緒，防止市場系統性崩潰。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"國安基金進場試圖支撐權值股，但當日難敵全球性關稅震撼與恐慌賣壓。\",\n      \"tw_sectors\": [\n        \"全市場\",\n        \"金融\"\n      ],\n      \"direction\": \"不明\",\n      \"keywords\": [\n        \"National Security Fund\",\n        \"Market Support\",\n        \"國安基金\",\n        \"護盤\"\n      ],\n      \"evidence\": [\n        \"P20\",\n        \"P45\",\n        \"P57\"\n      ],\n      \"langs\": [\n        \"zh\"\n      ],\n      \"drill\": [\n        \"Taiwan National Security Fund intervention 2025\",\n        \"國安基金 護盤 效果\",\n        \"證交所 穩定股市 措施\"\n      ]\n    }\n  ],\n  \"summary\": \"2025-04-07 台股出現史詩級崩盤，加權指數重挫 2065 點（-9.7%），主要根源於川普政府簽署「相互關稅」行政命令引發全球貿易戰恐慌。此利空導致台積電 ADR 領跌並帶動現貨跳空跌停，隨後觸發大規模融資斷頭與保證金追繳的連鎖反應，造成全市場無差別拋售，單日市值蒸發 6.6 兆元，即便國安基金宣布進場護盤仍難以即刻止跌。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "川普簽署相互關稅行政命令",
+    "layer": "根因",
+    "event_date": "2025-04-02",
+    "who": "美國總統川普 (Donald Trump)",
+    "event": "川普簽署「相互關稅」（Reciprocal Tariff）行政命令，旨在對貿易逆差國加徵對等關稅，引發全球貿易戰憂慮。",
+    "mechanism": "關稅壁壘預期導致出口成本激增，衝擊全球供應鏈基本面，引發半導體等高度依賴出口產業的獲利預期下修。",
+    "industry": "晶圓代工與製造",
+    "tw_link": "台積電等權值股因出口依賴度高，遭市場恐慌性拋售，導致台股開盤即面臨巨大賣壓。",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "IC設計",
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Reciprocal Tariff",
+     "Trump",
+     "相互關稅",
+     "Trade War"
+    ],
+    "evidence": [
+     "P189",
+     "P85",
+     "P119",
+     "P41"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "drill": [
+     "Trump Reciprocal Tariff Executive Order details",
+     "川普 相互關稅 行政命令 內容",
+     "トランプ 相互関税 影響",
+     "트럼프 상호관세 행정명령"
+    ]
+   },
+   {
+    "title": "台股史詩級崩盤與全球股市恐慌",
+    "layer": "表面",
+    "event_date": "2025-04-07",
+    "who": "全球投資人",
+    "event": "台股收盤重挫 2065 點（-9.7%），創下史上最大單日跌點與跌幅紀錄，全球股市同步浴血。",
+    "mechanism": "市場對關稅戰引發全球經濟衰退的極度恐慌，導致信心崩潰，出現無差別拋售潮。",
+    "industry": "全市場",
+    "tw_link": "加權指數開盤即崩跌，超過 1700 家上市櫃公司跌停，市值單日蒸發 6.6 兆元。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Black Monday",
+     "Stock Market Crash",
+     "黑色星期一",
+     "史上最大跌點"
+    ],
+    "evidence": [
+     "P1",
+     "P2",
+     "P120",
+     "P124"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "市場恐慌是川普相互關稅政策（P189）發布後，對全球貿易基本面惡化的直接預期反應。",
+    "drill": [
+     "Taiwan stock market record drop 2025",
+     "台股 2065點 崩盤 原因",
+     "日経平均 史上最大 下落",
+     "코스피 폭락 블랙먼데이"
+    ]
+   },
+   {
+    "title": "融資斷頭與保證金追繳連鎖反應",
+    "layer": "放大因素",
+    "event_date": "2025-04-07",
+    "who": "融資投資人與證券商",
+    "event": "股市連續大跌觸發融資維持率不足，引發大規模斷頭賣壓與保證金追繳（Margin Call）。",
+    "mechanism": "股價跌破維持率 → 觸發強制平倉 → 價格進一步下跌 → 更多融資戶斷頭，形成惡性循環。",
+    "industry": "全市場",
+    "tw_link": "散戶與法人因保證金壓力被迫在跌停板賣出，導致市場流動性枯竭，跌勢失控。",
+    "tw_sectors": [
+     "全市場",
+     "金融"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Margin Call",
+     "Forced Liquidation",
+     "融資斷頭",
+     "追繳壓力"
+    ],
+    "evidence": [
+     "P7",
+     "P162",
+     "P174",
+     "P145"
+    ],
+    "langs": [
+     "zh",
+     "ja",
+     "ko"
+    ],
+    "drill": [
+     "Stock market margin call liquidation 2025",
+     "融資維持率 斷頭 賣壓",
+     "マージンコール 追証 暴落",
+     "반대매매 마진콜 증시"
+    ]
+   },
+   {
+    "title": "美股科技巨頭與半導體股重挫",
+    "layer": "根因",
+    "event_date": "2025-04-04",
+    "who": "Nvidia, Apple, TSMC ADR",
+    "event": "美股科技巨頭（Mag 7）與費城半導體指數因關稅憂慮大幅收黑，台積電 ADR 領跌。",
+    "mechanism": "全球半導體龍頭評價遭下修，直接拖累台灣半導體供應鏈的資金偏好與股價表現。",
+    "industry": "晶圓代工與製造",
+    "tw_link": "台積電 ADR 於 4/4 重挫，導致 4/7 台股現貨開盤即跳空跌停至 848 元。",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "IC設計",
+     "伺服器與品牌組裝"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "TSMC ADR",
+     "Nvidia plunge",
+     "費城半導體",
+     "跌停"
+    ],
+    "evidence": [
+     "P91",
+     "P31",
+     "P48",
+     "P143"
+    ],
+    "langs": [
+     "en",
+     "zh",
+     "ja"
+    ],
+    "drill": [
+     "TSMC ADR price drop April 2025",
+     "台積電 ADR 跌停 原因",
+     "エヌビディア 株価 急落",
+     "필라델피아 반도체 지수 폭락"
+    ]
+   },
+   {
+    "title": "國安基金進場護盤與政策穩定措施",
+    "layer": "政策回應",
+    "event_date": "2025-04-07",
+    "who": "國安基金、證交所",
+    "event": "國安基金宣布進場護盤，證交所呼籲投資人理性，試圖穩定市場信心。",
+    "mechanism": "政府介入提供流動性支持，並透過喊話試圖緩解恐慌情緒，防止市場系統性崩潰。",
+    "industry": "全市場",
+    "tw_link": "國安基金進場試圖支撐權值股，但當日難敵全球性關稅震撼與恐慌賣壓。",
+    "tw_sectors": [
+     "全市場",
+     "金融"
+    ],
+    "direction": "不明",
+    "keywords": [
+     "National Security Fund",
+     "Market Support",
+     "國安基金",
+     "護盤"
+    ],
+    "evidence": [
+     "P20",
+     "P45",
+     "P57"
+    ],
+    "langs": [
+     "zh"
+    ],
+    "drill": [
+     "Taiwan National Security Fund intervention 2025",
+     "國安基金 護盤 效果",
+     "證交所 穩定股市 措施"
+    ]
+   }
+  ],
+  "summary": "2025-04-07 台股出現史詩級崩盤，加權指數重挫 2065 點（-9.7%），主要根源於川普政府簽署「相互關稅」行政命令引發全球貿易戰恐慌。此利空導致台積電 ADR 領跌並帶動現貨跳空跌停，隨後觸發大規模融資斷頭與保證金追繳的連鎖反應，造成全市場無差別拋售，單日市值蒸發 6.6 兆元，即便國安基金宣布進場護盤仍難以即刻止跌。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmpc1c11och.txt",
+  "附檔": [],
+  "耗時秒": 190.8,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3-flash-preview",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 75848,
+   "prompt_tokens": 10811,
+   "output_tokens": 2122,
+   "thinking_tokens": 62915
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_0407_synth1",
+  "ok": true
+ }
+}
