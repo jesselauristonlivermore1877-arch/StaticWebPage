@@ -1,7 +1,41 @@
 {
- "asof": "2026-11-06T14:20+00:00",
+ "asof": "2026-11-06T15:12+00:00",
  "rule": "法說高成長指引：翻倍／倍增／成長 N 倍／成長 N%（N≥50）／明年大幅成長／上修財測／創新高指引；同一公司同一場法說只觸發一次；頁首只放即時偵測、觸發後 3 個交易日內的（until），個股頁標記留 30 天",
  "top": [
+  {
+   "code": "6285",
+   "name": "啟碁",
+   "quote": "越南產能近翻倍，美國廠最慢2028年投產",
+   "pat": "翻倍",
+   "src": "鉅亨網",
+   "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBFMVZYcXNuWld5SWtScU5TQjIzbkNTY24zNFJ4U2J5VUVHVWVNcmR2QWdqZEt3czRJSlJIdVkwcXNQQ2xXZmp4d3p3NGRLRUk?oc=5",
+   "pub": "2026-11-06T15:00+00:00",
+   "seen": "2026-11-06T15:12+00:00",
+   "meeting": "2026-11-05",
+   "px": {
+    "d": "2026-11-06",
+    "close": 164.5,
+    "chg": -9.86
+   },
+   "mx": {
+    "d": "2026-11-05",
+    "close": 182.5,
+    "chg": -9.2,
+    "prev": 201.0,
+    "prev_d": "2026-11-04",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-04",
+    "from": 201.0,
+    "to_d": "2026-11-06",
+    "to": 164.5,
+    "chg": -18.16
+   },
+   "kind": "news",
+   "n_more": 0,
+   "until": "2026-11-12T00:00+08:00"
+  },
   {
    "code": "3714",
    "name": "富采",
@@ -195,6 +229,39 @@
   }
  ],
  "by_code": {
+  "6285": {
+   "code": "6285",
+   "name": "啟碁",
+   "quote": "越南產能近翻倍，美國廠最慢2028年投產",
+   "pat": "翻倍",
+   "src": "鉅亨網",
+   "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBFMVZYcXNuWld5SWtScU5TQjIzbkNTY24zNFJ4U2J5VUVHVWVNcmR2QWdqZEt3czRJSlJIdVkwcXNQQ2xXZmp4d3p3NGRLRUk?oc=5",
+   "pub": "2026-11-06T15:00+00:00",
+   "seen": "2026-11-06T15:12+00:00",
+   "meeting": "2026-11-05",
+   "px": {
+    "d": "2026-11-06",
+    "close": 164.5,
+    "chg": -9.86
+   },
+   "mx": {
+    "d": "2026-11-05",
+    "close": 182.5,
+    "chg": -9.2,
+    "prev": 201.0,
+    "prev_d": "2026-11-04",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-04",
+    "from": 201.0,
+    "to_d": "2026-11-06",
+    "to": 164.5,
+    "chg": -18.16
+   },
+   "kind": "news",
+   "n_more": 0
+  },
   "3714": {
    "code": "3714",
    "name": "富采",
