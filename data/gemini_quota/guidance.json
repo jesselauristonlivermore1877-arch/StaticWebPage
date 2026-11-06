@@ -1,20 +1,12 @@
 {
  "dead": {
-  "2026-11-05": {
+  "2026-11-06": {
+   "gemini-omni-1.2-flash": {
+    "at": "11-06 10:04",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
    "gemini-omni-1.1-flash": {
-    "at": "11-05 09:51",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.6-flash": {
-    "at": "11-05 14:59",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.5-flash": {
-    "at": "11-05 14:59",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-flash-latest": {
-    "at": "11-05 15:01",
+    "at": "11-06 10:04",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    }
   }
@@ -167,12 +159,48 @@
     "req": 3,
     "tok": 100850
    }
+  },
+  "2026-11-06": {
+   "gemini-3.8-flash": {
+    "req": 6,
+    "tok": 42136
+   },
+   "gemini-3.7-flash": {
+    "req": 4,
+    "tok": 0
+   },
+   "gemini-3.6-flash": {
+    "req": 6,
+    "tok": 70489
+   },
+   "gemini-3.5-flash": {
+    "req": 12,
+    "tok": 51534
+   },
+   "gemini-omni-1.2-flash": {
+    "req": 1,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-omni-1.1-flash": {
+    "req": 1,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-flash-latest": {
+    "req": 4,
+    "tok": 0
+   },
+   "gemini-3-flash-preview": {
+    "req": 6,
+    "tok": 76753
+   }
   }
  },
  "tpm": [
   [
-   1793890940.1254892,
-   16108
+   1793960687.059702,
+   17072
   ]
  ]
 }
