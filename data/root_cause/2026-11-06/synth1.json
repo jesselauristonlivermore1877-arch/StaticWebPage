@@ -1,0 +1,301 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"美國期中選舉民主黨大勝（藍色海嘯）引發 AI 監管疑慮\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-05\",\n      \"who\": \"美國民主黨\",\n      \"event\": \"民主黨在期中選舉中取得國會多數席位（Blue Wave），引發市場對其將推動嚴厲 AI 監管法案的預期。\",\n      \"mechanism\": \"政治變天導致政策預期轉向→市場擔憂 AI 發展受限及合規成本增加→科技巨頭與半導體股出現拋售潮→費城半導體指數暴跌 12.25%。\",\n      \"industry\": \"半導體、人工智慧、雲端運算\",\n      \"tw_link\": \"台積電 ADR 重挫 10.8% 導致台股權值股開盤跳空，AI 供應鏈全面承壓。\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"IC設計\",\n        \"伺服器與品牌組裝\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Blue Wave\",\n        \"AI regulation\",\n        \"Democratic sweep\",\n        \"民主黨大勝\",\n        \"AI監管\",\n        \"藍色海嘯\"\n      ],\n      \"evidence\": [\n        \"P122\",\n        \"P128\",\n        \"P198\",\n        \"P217\",\n        \"P376\",\n        \"P384\",\n        \"P385\",\n        \"P444\",\n        \"P513\",\n        \"P753\",\n        \"P787\",\n        \"P833\",\n        \"P960\",\n        \"P1073\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"drill\": [\n        \"US midterm election AI regulation impact\",\n        \"民主黨 AI 監管法案 內容\",\n        \"미국 중간선거 AI 규제 전망\",\n        \"米国中間選挙 AI 規制 強化\"\n      ]\n    },\n    {\n      \"title\": \"AI 基礎設施投資回報（ROI）疑慮與泡沫化擔憂\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-05\",\n      \"who\": \"市場投資人與分析機構\",\n      \"event\": \"投資人開始質疑超大規模資料中心（Hyperscalers）的高額資本支出能否轉化為實際營收，引發「AI 現實檢驗」。\",\n      \"mechanism\": \"對 AI 獲利前景轉向悲觀→資金撤出高估值 AI 硬體股→引發連鎖拋售。\",\n      \"industry\": \"AI 硬體、伺服器、散熱\",\n      \"tw_link\": \"台股 AI 供應鏈（散熱、PCB）因預期訂單可能遞延或下修而重挫。\",\n      \"tw_sectors\": [\n        \"散熱與液冷\",\n        \"載板與PCB\",\n        \"伺服器與品牌組裝\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"AI spending fears\",\n        \"AI reality check\",\n        \"AI bubble\",\n        \"AI投資回報\",\n        \"AI泡沫\",\n        \"資本支出\"\n      ],\n      \"evidence\": [\n        \"P122\",\n        \"P190\",\n        \"P210\",\n        \"P224\",\n        \"P257\",\n        \"P260\",\n        \"P383\",\n        \"P420\",\n        \"P457\",\n        \"P462\",\n        \"P680\",\n        \"P799\",\n        \"P1060\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"drill\": [\n        \"AI infrastructure ROI concerns 2026\",\n        \"AI 資本支出 泡沫化 討論\",\n        \"AI 인프라 투자 수익성 논란\",\n        \"AI インフラ投資 収益性 懸念\"\n      ]\n    },\n    {\n      \"title\": \"德州候任州長主張限制資料中心建設\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-05\",\n      \"who\": \"德州候任州長\",\n      \"event\": \"德州候任州長表示將對資料中心實施限制，以緩解電網壓力。\",\n      \"mechanism\": \"具體政策威脅關鍵科技重鎮→擔憂 AI 資料中心擴張受阻及電力成本上升→能源與伺服器相關股受創。\",\n      \"industry\": \"資料中心、電力設備\",\n      \"tw_link\": \"影響台灣伺服器電源管理與儲能設備供應商的長期訂單預期。\",\n      \"tw_sectors\": [\n        \"伺服器電源與儲能\",\n        \"電源管理IC\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Texas governor-elect\",\n        \"data-center restrictions\",\n        \"power grid\",\n        \"德州州長\",\n        \"資料中心限制\"\n      ],\n      \"evidence\": [\n        \"P401\",\n        \"P421\",\n        \"P773\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"drill\": [\n        \"Texas governor-elect data center policy\",\n        \"德州 資料中心 限制 電力\",\n        \"텍사스 데이터센터 규제 전력망\",\n        \"テキサス州 データセンター 規制 電力\"\n      ]\n    },\n    {\n      \"title\": \"AI 概念股慘遭血洗與市場恐慌性拋售\",\n      \"layer\": \"表面\",\n      \"event_date\": \"2026-11-06\",\n      \"who\": \"全球投資人\",\n      \"event\": \"台、日、韓股市同步出現史詩級跌幅，台股盤中一度崩跌 3737 點。\",\n      \"mechanism\": \"美股重挫引發亞洲市場恐慌→程式交易與停損賣壓湧現→市場進入熊市修正。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"台股加權指數創下史上最大盤中跌點，失守四萬點大關。\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Market crash\",\n        \"Black Friday\",\n        \"panic selling\",\n        \"股災\",\n        \"黑色星期五\",\n        \"恐慌性拋售\"\n      ],\n      \"evidence\": [\n        \"P50\",\n        \"P57\",\n        \"P73\",\n        \"P139\",\n        \"P157\",\n        \"P240\",\n        \"P268\",\n        \"P305\",\n        \"P931\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"受民主黨期中選舉大勝引發的監管疑慮及資料中心限制政策影響，導致市場對 AI 獲利前景重新定價。\",\n      \"drill\": [\n        \"Global stock market crash November 2026\",\n        \"台股 史上最大跌點 原因\",\n        \"글로벌 증시 폭락 원인\",\n        \"世界株価大暴落 理由\"\n      ]\n    },\n    {\n      \"title\": \"融資斷頭潮與槓桿平倉壓力\",\n      \"layer\": \"放大因素\",\n      \"event_date\": \"2026-11-06\",\n      \"who\": \"散戶投資人與對沖基金\",\n      \"event\": \"台股融資維持率逼近斷頭門檻，引發多殺多連鎖反應。\",\n      \"mechanism\": \"股價跌破融資維持率→券商強制平倉→進一步壓低股價→觸發更多斷頭。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"台股融資維持率降至 135% 左右，引發市場對斷頭潮的極度恐慌。\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Margin calls\",\n        \"liquidation\",\n        \"retail traders dump\",\n        \"融資斷頭\",\n        \"斷頭潮\",\n        \"槓桿平倉\"\n      ],\n      \"evidence\": [\n        \"P352\",\n        \"P522\",\n        \"P744\",\n        \"P791\",\n        \"P927\",\n        \"P931\",\n        \"P933\",\n        \"P946\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"drill\": [\n        \"Taiwan stock market margin call levels\",\n        \"台股 融資維持率 斷頭\",\n        \"코스피 반대매매 규모\",\n        \"台湾株 信用取引 追い証\"\n      ]\n    },\n    {\n      \"title\": \"台灣政府啟動國安基金護盤與限空令預期\",\n      \"layer\": \"政策回應\",\n      \"event_date\": \"2026-11-06\",\n      \"who\": \"財政部、金管會\",\n      \"event\": \"國安基金宣布啟動安定市場任務，金管會調整借券賣出數量及融券保證金成數。\",\n      \"mechanism\": \"政府介入提供流動性支撐→限制放空行為以減緩跌勢→提振市場信心。\",\n      \"industry\": \"金融、全市場\",\n      \"tw_link\": \"國安基金宣布進場護盤，金管會祭出救市措施，試圖穩住四萬點關卡。\",\n      \"tw_sectors\": [\n        \"全市場\",\n        \"金融\"\n      ],\n      \"direction\": \"不明\",\n      \"keywords\": [\n        \"National Stabilization Fund\",\n        \"short-selling restrictions\",\n        \"FSC measures\",\n        \"國安基金\",\n        \"限空令\",\n        \"金管會救市\"\n      ],\n      \"evidence\": [\n        \"P72\",\n        \"P80\",\n        \"P98\",\n        \"P1140\",\n        \"P1149\",\n        \"P365\"\n      ],\n      \"langs\": [\n        \"zh\"\n      ],\n      \"drill\": [\n        \"Taiwan National Stabilization Fund entry 2026\",\n        \"國安基金 護盤 歷史紀錄\",\n        \"대만 국가안정기금 투입\",\n        \"台湾 国家安定基金 出動\"\n      ]\n    }\n  ],\n  \"summary\": \"2026-11-06 台股暴跌主因於美國期中選舉「藍色海嘯」引發對 AI 監管與資料中心限制的極度恐慌，導致費半與台積電 ADR 崩跌。此情緒傳導至台股 AI 供應鏈（如散熱、PCB），並因融資斷頭壓力放大跌幅，促使國安基金與金管會緊急介入護盤。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "美國期中選舉民主黨大勝（藍色海嘯）引發 AI 監管疑慮",
+    "layer": "根因",
+    "event_date": "2026-11-05",
+    "who": "美國民主黨",
+    "event": "民主黨在期中選舉中取得國會多數席位（Blue Wave），引發市場對其將推動嚴厲 AI 監管法案的預期。",
+    "mechanism": "政治變天導致政策預期轉向→市場擔憂 AI 發展受限及合規成本增加→科技巨頭與半導體股出現拋售潮→費城半導體指數暴跌 12.25%。",
+    "industry": "半導體、人工智慧、雲端運算",
+    "tw_link": "台積電 ADR 重挫 10.8% 導致台股權值股開盤跳空，AI 供應鏈全面承壓。",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "IC設計",
+     "伺服器與品牌組裝"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Blue Wave",
+     "AI regulation",
+     "Democratic sweep",
+     "民主黨大勝",
+     "AI監管",
+     "藍色海嘯"
+    ],
+    "evidence": [
+     "P122",
+     "P128",
+     "P198",
+     "P217",
+     "P376",
+     "P384",
+     "P385",
+     "P444",
+     "P513",
+     "P753",
+     "P787",
+     "P833",
+     "P960",
+     "P1073"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "drill": [
+     "US midterm election AI regulation impact",
+     "民主黨 AI 監管法案 內容",
+     "미국 중간선거 AI 규제 전망",
+     "米国中間選挙 AI 規制 強化"
+    ]
+   },
+   {
+    "title": "AI 基礎設施投資回報（ROI）疑慮與泡沫化擔憂",
+    "layer": "根因",
+    "event_date": "2026-11-05",
+    "who": "市場投資人與分析機構",
+    "event": "投資人開始質疑超大規模資料中心（Hyperscalers）的高額資本支出能否轉化為實際營收，引發「AI 現實檢驗」。",
+    "mechanism": "對 AI 獲利前景轉向悲觀→資金撤出高估值 AI 硬體股→引發連鎖拋售。",
+    "industry": "AI 硬體、伺服器、散熱",
+    "tw_link": "台股 AI 供應鏈（散熱、PCB）因預期訂單可能遞延或下修而重挫。",
+    "tw_sectors": [
+     "散熱與液冷",
+     "載板與PCB",
+     "伺服器與品牌組裝"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "AI spending fears",
+     "AI reality check",
+     "AI bubble",
+     "AI投資回報",
+     "AI泡沫",
+     "資本支出"
+    ],
+    "evidence": [
+     "P122",
+     "P190",
+     "P210",
+     "P224",
+     "P257",
+     "P260",
+     "P383",
+     "P420",
+     "P457",
+     "P462",
+     "P680",
+     "P799",
+     "P1060"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "drill": [
+     "AI infrastructure ROI concerns 2026",
+     "AI 資本支出 泡沫化 討論",
+     "AI 인프라 투자 수익성 논란",
+     "AI インフラ投資 収益性 懸念"
+    ]
+   },
+   {
+    "title": "德州候任州長主張限制資料中心建設",
+    "layer": "根因",
+    "event_date": "2026-11-05",
+    "who": "德州候任州長",
+    "event": "德州候任州長表示將對資料中心實施限制，以緩解電網壓力。",
+    "mechanism": "具體政策威脅關鍵科技重鎮→擔憂 AI 資料中心擴張受阻及電力成本上升→能源與伺服器相關股受創。",
+    "industry": "資料中心、電力設備",
+    "tw_link": "影響台灣伺服器電源管理與儲能設備供應商的長期訂單預期。",
+    "tw_sectors": [
+     "伺服器電源與儲能",
+     "電源管理IC"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Texas governor-elect",
+     "data-center restrictions",
+     "power grid",
+     "德州州長",
+     "資料中心限制"
+    ],
+    "evidence": [
+     "P401",
+     "P421",
+     "P773"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "drill": [
+     "Texas governor-elect data center policy",
+     "德州 資料中心 限制 電力",
+     "텍사스 데이터센터 규제 전력망",
+     "テキサス州 データセンター 規制 電力"
+    ]
+   },
+   {
+    "title": "AI 概念股慘遭血洗與市場恐慌性拋售",
+    "layer": "表面",
+    "event_date": "2026-11-06",
+    "who": "全球投資人",
+    "event": "台、日、韓股市同步出現史詩級跌幅，台股盤中一度崩跌 3737 點。",
+    "mechanism": "美股重挫引發亞洲市場恐慌→程式交易與停損賣壓湧現→市場進入熊市修正。",
+    "industry": "全市場",
+    "tw_link": "台股加權指數創下史上最大盤中跌點，失守四萬點大關。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Market crash",
+     "Black Friday",
+     "panic selling",
+     "股災",
+     "黑色星期五",
+     "恐慌性拋售"
+    ],
+    "evidence": [
+     "P50",
+     "P57",
+     "P73",
+     "P139",
+     "P157",
+     "P240",
+     "P268",
+     "P305",
+     "P931"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "受民主黨期中選舉大勝引發的監管疑慮及資料中心限制政策影響，導致市場對 AI 獲利前景重新定價。",
+    "drill": [
+     "Global stock market crash November 2026",
+     "台股 史上最大跌點 原因",
+     "글로벌 증시 폭락 원인",
+     "世界株価大暴落 理由"
+    ]
+   },
+   {
+    "title": "融資斷頭潮與槓桿平倉壓力",
+    "layer": "放大因素",
+    "event_date": "2026-11-06",
+    "who": "散戶投資人與對沖基金",
+    "event": "台股融資維持率逼近斷頭門檻，引發多殺多連鎖反應。",
+    "mechanism": "股價跌破融資維持率→券商強制平倉→進一步壓低股價→觸發更多斷頭。",
+    "industry": "全市場",
+    "tw_link": "台股融資維持率降至 135% 左右，引發市場對斷頭潮的極度恐慌。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Margin calls",
+     "liquidation",
+     "retail traders dump",
+     "融資斷頭",
+     "斷頭潮",
+     "槓桿平倉"
+    ],
+    "evidence": [
+     "P352",
+     "P522",
+     "P744",
+     "P791",
+     "P927",
+     "P931",
+     "P933",
+     "P946"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "drill": [
+     "Taiwan stock market margin call levels",
+     "台股 融資維持率 斷頭",
+     "코스피 반대매매 규모",
+     "台湾株 信用取引 追い証"
+    ]
+   },
+   {
+    "title": "台灣政府啟動國安基金護盤與限空令預期",
+    "layer": "政策回應",
+    "event_date": "2026-11-06",
+    "who": "財政部、金管會",
+    "event": "國安基金宣布啟動安定市場任務，金管會調整借券賣出數量及融券保證金成數。",
+    "mechanism": "政府介入提供流動性支撐→限制放空行為以減緩跌勢→提振市場信心。",
+    "industry": "金融、全市場",
+    "tw_link": "國安基金宣布進場護盤，金管會祭出救市措施，試圖穩住四萬點關卡。",
+    "tw_sectors": [
+     "全市場",
+     "金融"
+    ],
+    "direction": "不明",
+    "keywords": [
+     "National Stabilization Fund",
+     "short-selling restrictions",
+     "FSC measures",
+     "國安基金",
+     "限空令",
+     "金管會救市"
+    ],
+    "evidence": [
+     "P72",
+     "P80",
+     "P98",
+     "P1140",
+     "P1149",
+     "P365"
+    ],
+    "langs": [
+     "zh"
+    ],
+    "drill": [
+     "Taiwan National Stabilization Fund entry 2026",
+     "國安基金 護盤 歷史紀錄",
+     "대만 국가안정기금 투입",
+     "台湾 国家安定基金 出動"
+    ]
+   }
+  ],
+  "summary": "2026-11-06 台股暴跌主因於美國期中選舉「藍色海嘯」引發對 AI 監管與資料中心限制的極度恐慌，導致費半與台積電 ADR 崩跌。此情緒傳導至台股 AI 供應鏈（如散熱、PCB），並因融資斷頭壓力放大跌幅，促使國安基金與金管會緊急介入護盤。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmp1rmxnv2g.txt",
+  "附檔": [],
+  "耗時秒": 28.9,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3-flash-preview",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 36836,
+   "prompt_tokens": 30386,
+   "output_tokens": 2794,
+   "thinking_tokens": 3656
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1106_synth1",
+  "ok": true
+ }
+}

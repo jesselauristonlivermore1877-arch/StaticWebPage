@@ -1,0 +1,218 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"德州候任州長 Gina Hinojosa 主張暫停新建資料中心\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-06\",\n      \"who\": \"德州候任州長 Gina Hinojosa\",\n      \"event\": \"Gina Hinojosa 贏得德州州長選舉後，重申將在制定保護居民與電網的法律前，暫停所有新資料中心的審批與建設。\",\n      \"mechanism\": \"德州為美國 AI 基礎設施與資料中心重鎮，此舉直接威脅 AI 硬體需求預期，導致伺服器、散熱與電力設備股遭到拋售。\",\n      \"industry\": \"伺服器與品牌組裝、散熱與液冷、伺服器電源與儲能\",\n      \"tw_link\": \"台股散熱族群（-9.83%）與伺服器組裝族群受美股 AI 基礎設施股重挫拖累，出現踩踏式賣壓。\",\n      \"tw_sectors\": [\n        \"散熱與液冷\",\n        \"伺服器與品牌組裝\",\n        \"伺服器電源與儲能\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Gina Hinojosa\",\n        \"Data Center Moratorium\",\n        \"Texas governor-elect\",\n        \"德州州長\",\n        \"資料中心暫停\"\n      ],\n      \"evidence\": [\n        \"D78\",\n        \"D94\",\n        \"D95\",\n        \"D130\",\n        \"D134\",\n        \"P401\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"drill\": [\n        \"Gina Hinojosa data center policy\",\n        \"德州州長 資料中心 政策\",\n        \"テキサス州知事 データセンター 規制\",\n        \"텍사스 주지사 데이터센터 규제\"\n      ]\n    },\n    {\n      \"title\": \"美國期中選舉「藍色海嘯」引發 AI 監管法案預期\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-05\",\n      \"who\": \"美國民主黨\",\n      \"event\": \"民主黨在期中選舉中取得國會多數席位（Blue Wave），市場預期將推動嚴厲的 AI 監管法案。\",\n      \"mechanism\": \"政治變天導致政策預期轉向，市場擔憂 AI 發展受限及合規成本大幅增加，引發科技巨頭與半導體股估值修正。\",\n      \"industry\": \"晶圓代工與製造、IC設計、封裝測試\",\n      \"tw_link\": \"費城半導體指數暴跌 12.25%，傳導至台股半導體權值股，外資單日賣超晶圓代工族群 486 億元。\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"IC設計\",\n        \"封裝測試\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Blue Wave\",\n        \"AI Regulation\",\n        \"Democratic midterm victory\",\n        \"藍色海嘯\",\n        \"AI 監管\"\n      ],\n      \"evidence\": [\n        \"D41\",\n        \"D58\",\n        \"D65\",\n        \"P122\",\n        \"P198\",\n        \"P217\",\n        \"P753\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"drill\": [\n        \"US midterm AI regulation bills\",\n        \"美國期中選舉 AI 監管\",\n        \"米中間選挙 AI 規制法案\",\n        \"미국 중간선거 AI 규제 법안\"\n      ]\n    },\n    {\n      \"title\": \"AI 基礎設施投資回報（ROI）疑慮引發估值修正\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-05\",\n      \"who\": \"超大規模資料中心（Hyperscalers）與對沖基金\",\n      \"event\": \"市場質疑雲端巨頭的高額資本支出無法轉化為實際營收，引發「AI 現實檢驗」。\",\n      \"mechanism\": \"對 AI 獲利前景轉向悲觀，資金撤出高估值 AI 硬體股，對沖基金出現集體平倉潮（Capitulation）。\",\n      \"industry\": \"矽晶圓與化合物半導體、記憶體、載板與PCB\",\n      \"tw_link\": \"資金撤離高估值電子股，台股矽晶圓（-8.25%）與載板（-7.73%）族群跌幅顯著。\",\n      \"tw_sectors\": [\n        \"矽晶圓與化合物半導體\",\n        \"記憶體\",\n        \"載板與PCB\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"AI ROI\",\n        \"AI Bubble\",\n        \"Hyperscalers\",\n        \"AI 泡沫\",\n        \"投資回報\"\n      ],\n      \"evidence\": [\n        \"D183\",\n        \"D190\",\n        \"D210\",\n        \"P224\",\n        \"P680\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"drill\": [\n        \"AI ROI concerns hyperscalers\",\n        \"AI 投資回報 疑慮\",\n        \"AI 投資収益率 懸念\", \"AI 수익성 우려\"\n      ]\n    },\n    {\n      \"title\": \"台股融資斷頭潮與槓桿平倉壓力\",\n      \"layer\": \"放大因素\",\n      \"event_date\": \"2026-11-06\",\n      \"who\": \"台股融資投資人與券商\",\n      \"event\": \"台股盤中崩跌逾 3700 點，導致大量融資維持率跌破 130-135% 門檻。\",\n      \"mechanism\": \"股價跌破維持率觸發券商強制平倉，多殺多連鎖反應進一步壓低股價，擴大市場跌幅。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"台股盤中跌幅（-9%）遠超收盤跌幅，顯示早盤出現非理性的槓桿清算壓力。\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Margin Call\",\n        \"Forced Liquidation\",\n        \"融資斷頭\",\n        \"維持率\"\n      ],\n      \"evidence\": [\n        \"P352\",\n        \"P522\",\n        \"P744\",\n        \"P931\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"ko\"\n      ]\n    },\n    {\n      \"title\": \"台灣政府啟動國安基金護盤與限空令預期\",\n      \"layer\": \"政策回應\",\n      \"event_date\": \"2026-11-06\",\n      \"who\": \"國安基金、金管會\",\n      \"event\": \"國安基金宣布啟動安定市場任務，金管會調整借券賣出數量及融券保證金成數。\",\n      \"mechanism\": \"政府介入提供流動性支撐並限制放空行為，旨在減緩市場恐慌跌勢並提振信心。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"國安基金與官股券商進場護盤，帶動台股收盤跌幅由 9% 收斂至 4.51%。\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"National Security Fund\",\n        \"國安基金\",\n        \"限空令\",\n        \"金管會\"\n      ],\n      \"evidence\": [\n        \"P80\",\n        \"P1140\",\n        \"P1149\",\n        \"P365\"\n      ],\n      \"langs\": [\n        \"zh\"\n      ]\n    }\n  ],\n  \"summary\": \"2026-11-06 台股大跌主因受美股期中選舉「藍色海嘯」及德州候任州長 Gina Hinojosa 擬暫停資料中心建設影響，引發 AI 監管與基礎設施擴張受阻的恐慌。賣壓透過費半指數暴跌傳導至台股半導體與伺服器族群，並因融資斷頭壓力擴大跌幅，促使政府啟動國安基金護盤。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "德州候任州長 Gina Hinojosa 主張暫停新建資料中心",
+    "layer": "根因",
+    "event_date": "2026-11-06",
+    "who": "德州候任州長 Gina Hinojosa",
+    "event": "Gina Hinojosa 贏得德州州長選舉後，重申將在制定保護居民與電網的法律前，暫停所有新資料中心的審批與建設。",
+    "mechanism": "德州為美國 AI 基礎設施與資料中心重鎮，此舉直接威脅 AI 硬體需求預期，導致伺服器、散熱與電力設備股遭到拋售。",
+    "industry": "伺服器與品牌組裝、散熱與液冷、伺服器電源與儲能",
+    "tw_link": "台股散熱族群（-9.83%）與伺服器組裝族群受美股 AI 基礎設施股重挫拖累，出現踩踏式賣壓。",
+    "tw_sectors": [
+     "散熱與液冷",
+     "伺服器與品牌組裝",
+     "伺服器電源與儲能"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Gina Hinojosa",
+     "Data Center Moratorium",
+     "Texas governor-elect",
+     "德州州長",
+     "資料中心暫停"
+    ],
+    "evidence": [
+     "D78",
+     "D94",
+     "D95",
+     "D130",
+     "D134",
+     "P401"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "drill": [
+     "Gina Hinojosa data center policy",
+     "德州州長 資料中心 政策",
+     "テキサス州知事 データセンター 規制",
+     "텍사스 주지사 데이터센터 규제"
+    ]
+   },
+   {
+    "title": "美國期中選舉「藍色海嘯」引發 AI 監管法案預期",
+    "layer": "根因",
+    "event_date": "2026-11-05",
+    "who": "美國民主黨",
+    "event": "民主黨在期中選舉中取得國會多數席位（Blue Wave），市場預期將推動嚴厲的 AI 監管法案。",
+    "mechanism": "政治變天導致政策預期轉向，市場擔憂 AI 發展受限及合規成本大幅增加，引發科技巨頭與半導體股估值修正。",
+    "industry": "晶圓代工與製造、IC設計、封裝測試",
+    "tw_link": "費城半導體指數暴跌 12.25%，傳導至台股半導體權值股，外資單日賣超晶圓代工族群 486 億元。",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "IC設計",
+     "封裝測試"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Blue Wave",
+     "AI Regulation",
+     "Democratic midterm victory",
+     "藍色海嘯",
+     "AI 監管"
+    ],
+    "evidence": [
+     "D41",
+     "D58",
+     "D65",
+     "P122",
+     "P198",
+     "P217",
+     "P753"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "drill": [
+     "US midterm AI regulation bills",
+     "美國期中選舉 AI 監管",
+     "米中間選挙 AI 規制法案",
+     "미국 중간선거 AI 규제 법안"
+    ]
+   },
+   {
+    "title": "AI 基礎設施投資回報（ROI）疑慮引發估值修正",
+    "layer": "根因",
+    "event_date": "2026-11-05",
+    "who": "超大規模資料中心（Hyperscalers）與對沖基金",
+    "event": "市場質疑雲端巨頭的高額資本支出無法轉化為實際營收，引發「AI 現實檢驗」。",
+    "mechanism": "對 AI 獲利前景轉向悲觀，資金撤出高估值 AI 硬體股，對沖基金出現集體平倉潮（Capitulation）。",
+    "industry": "矽晶圓與化合物半導體、記憶體、載板與PCB",
+    "tw_link": "資金撤離高估值電子股，台股矽晶圓（-8.25%）與載板（-7.73%）族群跌幅顯著。",
+    "tw_sectors": [
+     "矽晶圓與化合物半導體",
+     "記憶體",
+     "載板與PCB"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "AI ROI",
+     "AI Bubble",
+     "Hyperscalers",
+     "AI 泡沫",
+     "投資回報"
+    ],
+    "evidence": [
+     "D183",
+     "D190",
+     "D210",
+     "P224",
+     "P680"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "drill": [
+     "AI ROI concerns hyperscalers",
+     "AI 投資回報 疑慮",
+     "AI 投資収益率 懸念",
+     "AI 수익성 우려"
+    ]
+   },
+   {
+    "title": "台股融資斷頭潮與槓桿平倉壓力",
+    "layer": "放大因素",
+    "event_date": "2026-11-06",
+    "who": "台股融資投資人與券商",
+    "event": "台股盤中崩跌逾 3700 點，導致大量融資維持率跌破 130-135% 門檻。",
+    "mechanism": "股價跌破維持率觸發券商強制平倉，多殺多連鎖反應進一步壓低股價，擴大市場跌幅。",
+    "industry": "全市場",
+    "tw_link": "台股盤中跌幅（-9%）遠超收盤跌幅，顯示早盤出現非理性的槓桿清算壓力。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Margin Call",
+     "Forced Liquidation",
+     "融資斷頭",
+     "維持率"
+    ],
+    "evidence": [
+     "P352",
+     "P522",
+     "P744",
+     "P931"
+    ],
+    "langs": [
+     "zh",
+     "ko"
+    ]
+   },
+   {
+    "title": "台灣政府啟動國安基金護盤與限空令預期",
+    "layer": "政策回應",
+    "event_date": "2026-11-06",
+    "who": "國安基金、金管會",
+    "event": "國安基金宣布啟動安定市場任務，金管會調整借券賣出數量及融券保證金成數。",
+    "mechanism": "政府介入提供流動性支撐並限制放空行為，旨在減緩市場恐慌跌勢並提振信心。",
+    "industry": "全市場",
+    "tw_link": "國安基金與官股券商進場護盤，帶動台股收盤跌幅由 9% 收斂至 4.51%。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "National Security Fund",
+     "國安基金",
+     "限空令",
+     "金管會"
+    ],
+    "evidence": [
+     "P80",
+     "P1140",
+     "P1149",
+     "P365"
+    ],
+    "langs": [
+     "zh"
+    ]
+   }
+  ],
+  "summary": "2026-11-06 台股大跌主因受美股期中選舉「藍色海嘯」及德州候任州長 Gina Hinojosa 擬暫停資料中心建設影響，引發 AI 監管與基礎設施擴張受阻的恐慌。賣壓透過費半指數暴跌傳導至台股半導體與伺服器族群，並因融資斷頭壓力擴大跌幅，促使政府啟動國安基金護盤。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmprgo_g1af.txt",
+  "附檔": [],
+  "耗時秒": 195.9,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3-flash-preview",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 94864,
+   "prompt_tokens": 29797,
+   "output_tokens": 2154,
+   "thinking_tokens": 62913
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1106_synth2",
+  "ok": true
+ }
+}
