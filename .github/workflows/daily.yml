@@ -230,6 +230,17 @@ jobs:
           python tools/aetf_daily.py ../site --publish || echo "::warning::主動式 ETF 日報失敗（沿用上一份）"
           python tools/stock_keep_rank.py ../site --publish || echo "::warning::個股維持率排行失敗（沿用上一份）"
 
+      # 🟢 11-06（雲端E，Evans 11-06 晚交辦）：國安基金＋限空令歷史統計 → docs/data/nsf_history.json（網站「總經政治 > 政策干預」讀這份；11-07 套正式）
+      #    本次（2026-11-06）的 +1～+120 日、見底、收復天數每天自動補；指數＝精誠（code/data/TWSE）＋本班 data/taiex_ohlc.json，Yahoo 重算核對。
+      #    🔴 不可寫進 docs/preview/：提交步驟會因「正式建置動到預覽」整班不提交（11-06 run 42217836346 踩過）。
+      #    出處核對（--check-src）只在預覽／每週跑；每日沿用上一份 docs/data/nsf_history.json 的結果。失敗不擋（沿用上一份）
+      #    11-07：移到「選股 EDM」之前，國安基金 EDM 才讀得到這一班的統計。
+      - name: 國安基金歷史統計
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 3
+        run: python tools/nsf_history.py --site ../site --out ../site/docs/data/nsf_history.json --src-from ../site/docs/data/nsf_history.json
+
       # 🟢 10-29 晚（總指揮 雲端 1，Evans 核准）：選股 EDM（網站「量化 EDM」）→ docs/data/pick_edm.json＋docs/data/edm_hist/<資料日>.json（11-06 C8：歷史只存資料，保留 90 天）。
       #    11-06（C7）：排在主動式 ETF 日報之後，「主動式 ETF 每日操作」卡才讀得到這一班的 aetf_daily.json。
       #    料全部是上面各步剛寫好的檔（web_data、radar、trail、rrg、chips、chips_daily、etf_flow、stock_bars、lookup），不打網路；
@@ -250,16 +261,6 @@ jobs:
         continue-on-error: true
         timeout-minutes: 5
         run: python tools/mkt_overlay.py ../site ../site/docs/data/mkt_overlay.json
-
-      # 🟢 11-06（雲端E，Evans 11-06 晚交辦）：國安基金＋限空令歷史統計 → docs/data/nsf_history.json（預覽頁優先讀這份）
-      #    本次（2026-11-06）的 +1～+120 日、見底、收復天數每天自動補；指數＝精誠（code/data/TWSE）＋本班 data/taiex_ohlc.json，Yahoo 重算核對。
-      #    🔴 不可寫進 docs/preview/：提交步驟會因「正式建置動到預覽」整班不提交（11-06 run 42217836346 踩過）。
-      #    出處核對（--check-src）只在預覽／每週跑；每日沿用預覽 data.json 的上次結果。失敗不擋（沿用上一份）
-      - name: 國安基金歷史統計（預覽）
-        working-directory: code
-        continue-on-error: true
-        timeout-minutes: 3
-        run: python tools/nsf_history.py --site ../site --out ../site/docs/data/nsf_history.json --src-from ../site/docs/preview/nsf_history/data.json
 
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
       # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。
