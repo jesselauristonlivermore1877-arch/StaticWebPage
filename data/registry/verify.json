@@ -1,5 +1,5 @@
 {
-"checked": "2026-10-31",
+"checked": "2026-11-06",
 "src_asof": [
 "2026-10-25",
 "2026-10-25"
@@ -379,8 +379,8 @@
 "id": "au_cb",
 "zh": "米歇爾·布洛克",
 "en": "Michele Bullock",
-"ok": false,
-"why": "出處打不開（HTTP 0）",
+"ok": true,
+"why": "出處頁有名字與職位",
 "src": [
 "https://www.rba.gov.au/about-rba/people/michele-bullock.html"
 ]
@@ -2022,8 +2022,8 @@
 "ticker": "PM",
 "name": "Philip Morris International Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -2478,8 +2478,8 @@
 "ticker": "VLO",
 "name": "Valero Energy Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -2510,8 +2510,8 @@
 "ticker": "PH",
 "name": "Parker-Hannifin Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -2582,8 +2582,8 @@
 "ticker": "601288.SS",
 "name": "Agricultural Bank of China Limited",
 "status": "listed",
-"ok": false,
-"why": "出處打不開（HTTP 403）"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "ch",
@@ -2659,8 +2659,8 @@
 }
 ],
 "n_ok": [
-42,
-248
+43,
+246
 ],
 "n": [
 53,
