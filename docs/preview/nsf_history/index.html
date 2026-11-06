@@ -24,6 +24,8 @@ body{margin:0;background:var(--nh-bg);color:var(--nh-i1);font:15px/1.65 system-u
 .nh-tb th{background:var(--nh-rs);color:var(--nh-i2);font-weight:600;position:sticky;top:0}
 .nh-tb td:first-child,.nh-tb th:first-child{text-align:left;position:sticky;left:0;background:var(--nh-sf)}
 .nh-tb th:first-child{background:var(--nh-rs)}
+.nh-tb td.nh-evc{text-align:left;white-space:normal;min-width:240px;max-width:360px;line-height:1.4}.nh-cz{font-size:12px}
+.nh-chain{margin:10px 0;padding:10px 12px;border-left:3px solid var(--nh-now);background:var(--nh-rs);border-radius:6px;font-size:14px;line-height:1.6}.nh-chain ol{margin:4px 0 0;padding-left:22px}.nh-chain a{color:var(--nh-s2);font-size:12px;text-decoration:none}
 .nh-tb tr.nh-now td{background:color-mix(in srgb,var(--nh-now) 14%,var(--nh-sf))}
 .nh-tb tr.nh-sec td{background:var(--nh-rs);color:var(--nh-i2);font-weight:600;text-align:left}
 .nh-up{color:var(--nh-up)}.nh-dn{color:var(--nh-dn)}.nh-mu{color:var(--nh-i3)}
@@ -45,7 +47,7 @@ body{margin:0;background:var(--nh-bg);color:var(--nh-i1);font:15px/1.65 system-u
 <li>散點圖 x＝事件前距一年高點、y＝+20／+60 日；疊圖決議日＝0，本次只有 0 日以前（之後每天自動補）</li>
 <li>出處等級三色：官方（綠）／權威媒體（藍）／媒體整理（金）；2000～2008 國安基金只有媒體整理的精確日期</li>
 <li>外資、融券、借券欄位：證交所限速中、資料補齊後自動帶入（現在空白的格子顯示「—」）</li>
-<li>EDM 三張（1080×1350，每個數字 Yahoo 重算核對）：<a href="edm/">edm/</a></li></ul></div>
+<li>【11-06 晚補】事件欄改「事件＋根因」兩行；本次另列「根因鏈」6 段，每段附出處並由程式打開核對（財政部、congress.gov、中央社、法新社；費半跌幅由 Yahoo ^SOX 算、用財政部週跌幅 15.7% 核對）</li><li>EDM 三張（1080×1350，每個數字 Yahoo 重算核對）：<a href="edm/">edm/</a></li></ul></div>
 <div id="nh-root" class="nh"></div>
 </div>
 <script>
@@ -104,6 +106,7 @@ function nhSrc(r) { return (r.src || []).map(s => `<a href="${nhEsc(s[0])}" targ
 function nhRank(rows, k, v) {   // 本次在歷次中的位置（數字越小越深）
   const h = rows.filter(r => !r.now && r.m[k] != null).map(r => r.m[k]); return {n: h.length, deeper: h.filter(x => x < v).length};
 }
+const nhEv = r => `${nhEsc(r.date)}　<b>${nhEsc(r.name || r.what)}</b>${r.cause ? `<br><small class="nh-mu nh-cz">根因：${nhEsc(r.cause)}</small>` : ""}`;
 function nhMount(root, D) {
   const now = D.nsf.find(r => r.now), nm = now.m, hist = D.nsf.filter(r => !r.now);
   const st = {g: D.groups[0], sg: D.groups[0], yk: "p20", tab: "nsf"};
@@ -113,7 +116,7 @@ function nhMount(root, D) {
   const NSFK = ["r0", "r5b", "r20b", "dd_ytd", "dd_1y", "fi5", "fi20", "p1", "p5", "p10", "p20", "p60", "p120", "low_day", "low_pct", "rec_base", "rec_hi"];
   const lab = Object.fromEntries(D.nsf_cols.map(c => [c[0], c[1]]).concat(D.short_cols.map(c => [c[0], c[1]])));
   const detail = (rows, keys, extra) => `<div class="nh-tw"><table class="nh-tb"><thead><tr><th>事件（決議／宣布日）</th><th>出處</th>${keys.map(k => `<th>${nhEsc(lab[k])}</th>`).join("")}${extra ? extra.h : ""}</tr></thead><tbody>` +
-    rows.map(r => `<tr class="${r.now ? "nh-now" : ""}"><td>${nhEsc(r.date)}　${nhEsc(r.name || r.what)}</td><td style="text-align:left">${nhG(r.grade)} ${nhSrc(r)}</td>${keys.map(k => `<td>${nhCell(r.m, k)}</td>`).join("")}${extra ? extra.r(r) : ""}</tr>`).join("") + `</tbody></table></div>`;
+    rows.map(r => `<tr class="${r.now ? "nh-now" : ""}"><td class="nh-evc">${nhEv(r)}</td><td style="text-align:left">${nhG(r.grade)} ${nhSrc(r)}</td>${keys.map(k => `<td>${nhCell(r.m, k)}</td>`).join("")}${extra ? extra.r(r) : ""}</tr>`).join("") + `</tbody></table></div>`;
   const misX = {h: "<th>任務期間（官方起訖）</th><th>交易日</th><th>本站算期間漲幅</th><th>財政部公布</th>",
     r: r => r.mission ? `<td>${r.mission[0]}～${r.mission[1]}</td><td>${nhCell(r.m, "mis_days")}</td><td>${nhP(r.m.mis_ret, 2)}</td><td>${nhP(r.off_ret, 2)}</td>` : `<td class="nh-mu">${r.now ? "進行中" : "無官方起訖"}</td><td></td><td></td><td></td>`};
   const credX = {h: "<th>措施</th><th>生效日</th><th>融券 +5日</th><th>融券 +20日</th><th>借券賣出 +5日</th><th>借券賣出 +20日</th>",
@@ -125,6 +128,7 @@ function nhMount(root, D) {
 <h1>國安基金與限空令：歷史統計</h1>
 <p class="nh-sub">政策干預｜資料到 ${nhEsc(D.asof)}（${nhEsc(D.asof_src)}）｜國安基金 ${hist.length} 次＋本次、限空令 ${D.short.length - 1} 次＋本次｜只寫統計事實，不寫高估低估、不給買賣建議</p>
 <div class="nh-card"><h2>本次（${nhEsc(now.date)} 第 131 次臨時委員會）在歷次的位置</h2><p class="nh-d">${nhEsc(now.off_note || "")}</p>
+${(D.chain || []).length ? `<div class="nh-chain"><b>根因鏈</b><ol>${D.chain.map(c => `<li>${nhEsc(c.t)}${(c.src || []).map(x => { const k = ((D.src_check || {})[now.id] || []).find(y => y.url === x[0]); return ` <a href="${nhEsc(x[0])}" target="_blank" rel="noopener" title="${nhEsc(x[1])}">［出處${k ? (k.ok ? "✓" : "✗") : ""}］</a>`; }).join("")}</li>`).join("")}</ol></div>` : ""}
 <div class="nh-kpi">${kp("決議日當日", "r0")}${kp("5 日漲跌", "r5b")}${kp("20 日漲跌", "r20b")}${kp("距年初至今高點", "dd_ytd")}${kp("距一年高點", "dd_1y")}</div>
 <p class="nh-d" style="margin-top:8px">決議日後已過 ${nm.avail} 個交易日；+1～+120 日報酬、見底、收復天數每天收盤後自動補上。</p></div>
 <div class="nh-card"><h2>統計摘要</h2><p class="nh-d">基準＝決議日收盤（國安基金）／生效前一個交易日收盤（限空令）；報酬用收盤；距高點用盤中最高（同財政部新聞稿口徑）；本次不列入統計。* 表示 60 日還沒走完、最低點可能再變。</p>
@@ -142,7 +146,7 @@ ${st.tab === "nsf" ? nhStatTable(D.nsf_stats, D.nsf_cols, st.g) : nhStatTable(D.
   return `<div class="nh-k"><small>${l}（中位數）</small><b style="font-size:18px">國安 ${f(a && a.med)}</b><em>限空令 ${f(b && b.med)}${!d && a && b ? `｜上漲 國安 ${a.up}／${a.n}、限空 ${b.up}／${b.n}` : ""}</em></div>`; }).join("")}</div></div>
 <div class="nh-card"><h2>國安基金歷次明細</h2>${detail(D.nsf, NSFK)}</div>
 <div class="nh-card"><h2>國安基金任務期間（官方起訖）</h2><p class="nh-d">本站用收盤算（任務起日前一個交易日 → 任務止日），跟財政部送立法院的說明數字並列；2000～2008 沒有官方起訖，不算。</p>
-<div class="nh-tw"><table class="nh-tb"><thead><tr><th>事件</th>${misX.h}</tr></thead><tbody>${D.nsf.map(r => `<tr class="${r.now ? "nh-now" : ""}"><td>${nhEsc(r.date)}　${nhEsc(r.name)}</td>${misX.r(r)}</tr>`).join("")}</tbody></table></div></div>
+<div class="nh-tw"><table class="nh-tb"><thead><tr><th>事件</th>${misX.h}</tr></thead><tbody>${D.nsf.map(r => `<tr class="${r.now ? "nh-now" : ""}"><td class="nh-evc">${nhEv(r)}</td>${misX.r(r)}</tr>`).join("")}</tbody></table></div></div>
 <div class="nh-card"><h2>限空令歷次明細</h2><p class="nh-d">融券餘額、借券賣出餘額＝生效前一個交易日 → 生效後第 5、第 20 個交易日的變化（證交所；2005 年 7 月以前沒有借券資料）。</p>${detail(D.short, SK, credX)}</div>
 <div class="nh-card"><h2>出處與方法</h2><ul class="nh-src">
 ${D.nsf.concat(D.short).map(r => `<li>${nhEsc(r.date)} ${nhEsc(r.name || r.what)} ${nhG(r.grade)}${r.date_note ? `（${nhEsc(r.date_note)}）` : ""}：${(r.src || []).map(s => { const c = ((D.src_check || {})[r.id] || []).find(x => x.url === s[0]);
