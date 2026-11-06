@@ -1,0 +1,159 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>國安基金與限空令歷史統計</title>
+<style>
+:root{--nh-bg:#000;--nh-sf:#111;--nh-rs:#1E1E1E;--nh-chip:#2B2B2B;--nh-i1:#F5F5F5;--nh-i2:#A3A3A3;--nh-i3:#666;--nh-ln:#2A2A2A;--nh-up:#E5484D;--nh-dn:#12A366;--nh-acc:#D9A441;--nh-now:#D9A441;--nh-s2:#6fb3d9}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--nh-bg:#F4F6F4;--nh-sf:#fff;--nh-rs:#EDF0EE;--nh-chip:#E4E9E6;--nh-i1:#0F161D;--nh-i2:#44515E;--nh-i3:#68757F;--nh-ln:#DDE3E0;--nh-acc:#A8771F;--nh-now:#B5761A;--nh-s2:#2f73a8}}
+:root[data-theme="light"]{--nh-bg:#F4F6F4;--nh-sf:#fff;--nh-rs:#EDF0EE;--nh-chip:#E4E9E6;--nh-i1:#0F161D;--nh-i2:#44515E;--nh-i3:#68757F;--nh-ln:#DDE3E0;--nh-acc:#A8771F;--nh-now:#B5761A;--nh-s2:#2f73a8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--nh-bg);color:var(--nh-i1);font:15px/1.65 system-ui,-apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.nh-w{max-width:1120px;margin:0 auto;padding:16px}
+.nh-look{background:var(--nh-rs);border:1px dashed var(--nh-acc);border-radius:10px;padding:10px 14px;margin:0 0 14px;font-size:14px}
+.nh-look ul{margin:4px 0 0;padding-left:20px}
+.nh h1{font-size:22px;margin:2px 0}.nh .nh-sub{color:var(--nh-i2);font-size:13px;margin:0 0 12px}
+.nh-card{background:var(--nh-sf);border:1px solid var(--nh-ln);border-radius:12px;padding:14px 16px;margin:0 0 14px;min-width:0}
+.nh-card h2{font-size:17px;margin:0 0 4px}.nh-card .nh-d{color:var(--nh-i2);font-size:13px;margin:0 0 10px}
+.nh-kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.nh-k{background:var(--nh-rs);border-radius:10px;padding:10px 12px}.nh-k small{display:block;color:var(--nh-i2);font-size:12px}
+.nh-k b{font-size:24px;font-variant-numeric:tabular-nums}.nh-k em{display:block;font-style:normal;color:var(--nh-i2);font-size:12px}
+.nh-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.nh-tabs button{border:1px solid var(--nh-ln);background:var(--nh-chip);color:var(--nh-i2);border-radius:16px;padding:3px 12px;font-size:13px;cursor:pointer}
+.nh-tabs button.on{background:var(--nh-acc);border-color:var(--nh-acc);color:#000}
+.nh-tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--nh-ln);border-radius:8px}
+.nh-tb{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.nh-tb th,.nh-tb td{padding:5px 8px;border-bottom:1px solid var(--nh-ln);text-align:right}
+.nh-tb th{background:var(--nh-rs);color:var(--nh-i2);font-weight:600;position:sticky;top:0}
+.nh-tb td:first-child,.nh-tb th:first-child{text-align:left;position:sticky;left:0;background:var(--nh-sf)}
+.nh-tb th:first-child{background:var(--nh-rs)}
+.nh-tb tr.nh-now td{background:color-mix(in srgb,var(--nh-now) 14%,var(--nh-sf))}
+.nh-tb tr.nh-sec td{background:var(--nh-rs);color:var(--nh-i2);font-weight:600;text-align:left}
+.nh-up{color:var(--nh-up)}.nh-dn{color:var(--nh-dn)}.nh-mu{color:var(--nh-i3)}
+.nh-g{display:inline-block;border-radius:4px;padding:0 5px;font-size:11px;line-height:17px;margin-left:4px;border:1px solid var(--nh-ln);color:var(--nh-i2)}
+.nh-g.g1{border-color:var(--nh-dn);color:var(--nh-dn)}.nh-g.g2{border-color:var(--nh-s2);color:var(--nh-s2)}.nh-g.g3{border-color:var(--nh-acc);color:var(--nh-acc)}
+.nh a{color:var(--nh-s2)}
+.nh-2c{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:14px}
+.nh svg{display:block;width:100%;height:auto}
+.nh-lg{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--nh-i2);margin:6px 0 0}
+.nh-lg i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:4px}
+.nh-src{font-size:13px;margin:0;padding-left:18px}.nh-src li{margin:3px 0;overflow-wrap:anywhere}
+.nh-foot{color:var(--nh-i2);font-size:12px;border-top:1px dashed var(--nh-ln);padding-top:8px;margin-top:6px}
+.nh-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+</style></head><body>
+<div class="nh-w">
+<div class="nh-look"><b>預覽（不從網站連過來；Evans 點頭才套進 template）</b>　要看的重點：<ul>
+<li>位置提案：「總經政治」底下新增子頁「政策干預」（產業→總經→消息…照資訊分層，屬總經類的政策事件）</li>
+<li>統計摘要的三組（全部／2011年後／國際事件型）切換、每欄五個數（平均、中位數、最大、最小、上漲次數）</li>
+<li>散點圖 x＝事件前距一年高點、y＝+20／+60 日；疊圖決議日＝0，本次只有 0 日以前（之後每天自動補）</li>
+<li>出處等級三色：官方（綠）／權威媒體（藍）／媒體整理（金）；2000～2008 國安基金只有媒體整理的精確日期</li>
+<li>外資、融券、借券欄位：證交所限速中、資料補齊後自動帶入（現在空白的格子顯示「—」）</li>
+<li>EDM 三張（1080×1350，每個數字 Yahoo 重算核對）：<a href="edm/">edm/</a></li></ul></div>
+<div id="nh-root" class="nh"></div>
+</div>
+<script>
+/* ── 國安基金＋限空令歷史統計（前綴 nh-；資料 nsf_history.json 由 tools/nsf_history.py 產生，正式版同一段程式） ── */
+const nhEsc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const nhP = (x, d = 1) => x == null ? '<span class="nh-mu">—</span>' : `<span class="${x > 0 ? "nh-up" : x < 0 ? "nh-dn" : ""}">${x > 0 ? "+" : ""}${x.toFixed(d)}%</span>`;
+const nhN = (x, u = "") => x == null ? '<span class="nh-mu">—</span>' : Math.round(x).toLocaleString("en") + u;
+const NH_G = {"官方": "g1", "權威媒體": "g2", "媒體整理": "g3"};
+const nhG = g => `<span class="nh-g ${NH_G[g] || ""}">${nhEsc(g)}</span>`;
+const NH_DAYK = {low_day: 1, rec_base: 1, rec_hi: 1, mis_days: 1};
+function nhCell(m, k) {
+  const v = m[k];
+  if (k === "rec_hi" && v == null) return m.rec_hi_open ? '<span class="nh-mu">未收復</span>' : nhP(null);
+  if (k === "rec_base" && v == null) return m.rec_base_open ? '<span class="nh-mu">未收復</span>' : nhP(null);
+  if (k === "fi5" || k === "fi20") return v == null ? nhP(null) : `<span class="${v > 0 ? "nh-up" : "nh-dn"}">${v > 0 ? "+" : ""}${Math.round(v).toLocaleString("en")}</span>`;
+  if (NH_DAYK[k]) return v == null ? nhP(null) : v.toLocaleString("en") + (k === "low_day" && m.low_final === false ? "*" : "");
+  return nhP(v);
+}
+function nhStatTable(S, cols, g) {
+  const T = S[g], isD = k => NH_DAYK[k], fmt = (k, x) => x == null ? nhP(null) : isD(k) ? Math.round(x).toLocaleString("en") + " 日" :
+    (k === "fi5" || k === "fi20") ? `<span class="${x > 0 ? "nh-up" : "nh-dn"}">${x > 0 ? "+" : ""}${Math.round(x).toLocaleString("en")} 億</span>` : nhP(x);
+  return `<div class="nh-tw"><table class="nh-tb"><thead><tr><th>項目（${T.n_ev} 次）</th><th>平均</th><th>中位數</th><th>最大</th><th>最小</th><th>上漲次數／總次數</th></tr></thead><tbody>` +
+    cols.map(([k, lab, u]) => { const s = T.cols[k];
+      return `<tr><td>${nhEsc(lab)}</td>${s ? `<td>${fmt(k, s.mean)}</td><td><b>${fmt(k, s.med)}</b></td><td>${fmt(k, s.max)}</td><td>${fmt(k, s.min)}</td><td>${u ? `${s.up}／${s.n}` : `<span class="nh-mu">${s.n} 次有值</span>`}</td>` : '<td colspan="5" class="nh-mu" style="text-align:center">資料補齊中</td>'}</tr>`; }).join("") +
+    `</tbody></table></div>`;
+}
+function nhScatter(rows, yk) {
+  const W = 520, H = 300, L = 46, R = 14, T = 14, B = 34, pts = rows.filter(r => r.m.dd_1y != null);
+  const xs = pts.map(r => r.m.dd_1y), ys = pts.filter(r => r.m[yk] != null).map(r => r.m[yk]);
+  const x0 = Math.floor(Math.min(...xs, -45) / 10) * 10, x1 = 0, y0 = Math.floor(Math.min(...ys, -10) / 10) * 10, y1 = Math.ceil(Math.max(...ys, 10) / 10) * 10;
+  const X = v => L + (v - x0) / (x1 - x0) * (W - L - R), Y = v => T + (y1 - v) / (y1 - y0) * (H - T - B);
+  let g = "";
+  for (let v = y0; v <= y1; v += 10) g += `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--nh-ln)" ${v === 0 ? 'stroke-width="2"' : ""}/><text x="${L - 6}" y="${Y(v) + 4}" text-anchor="end" font-size="11" fill="var(--nh-i2)">${v}%</text>`;
+  for (let v = x0; v <= x1; v += 10) g += `<text x="${X(v)}" y="${H - 16}" text-anchor="middle" font-size="11" fill="var(--nh-i2)">${v}%</text>`;
+  g += `<text x="${(L + W - R) / 2}" y="${H - 2}" text-anchor="middle" font-size="11" fill="var(--nh-i2)">事件前：距一年高點</text>`;
+  pts.forEach(r => { const now = r.now, y = r.m[yk];
+    if (y == null) { g += `<line x1="${X(r.m.dd_1y)}" x2="${X(r.m.dd_1y)}" y1="${T}" y2="${H - B}" stroke="var(--nh-now)" stroke-dasharray="4 3" stroke-width="2"/><text x="${X(r.m.dd_1y) + 4}" y="${T + 12}" font-size="12" font-weight="700" fill="var(--nh-now)">本次 ${r.m.dd_1y.toFixed(1)}%</text>`; return; }
+    g += `<circle cx="${X(r.m.dd_1y)}" cy="${Y(y)}" r="5.5" fill="${y >= 0 ? "var(--nh-up)" : "var(--nh-dn)"}" opacity=".9"/><text x="${X(r.m.dd_1y) + 7}" y="${Y(y) + 4}" font-size="11" fill="var(--nh-i1)">${r.id.slice(0, 7).replace("S", "")}</text>`; });
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="事件前跌幅與事件後報酬散點">${g}</svg>`;
+}
+const NH_COL = ["#E5484D", "#F08C3A", "#D9A441", "#9BC53D", "#12A366", "#2EC4B6", "#6fb3d9", "#7B8CDE", "#B79CFF", "#E36BAE"];
+function nhPaths(D, ids, nowId) {
+  const W = 520, H = 300, L = 46, R = 14, T = 14, B = 30, k0 = -20, k1 = 120;
+  const all = ids.flatMap(i => D.paths[i] || []).filter(v => v != null), y0 = Math.floor(Math.min(...all, -10) / 10) * 10, y1 = Math.ceil(Math.max(...all, 10) / 10) * 10;
+  const X = k => L + (k - k0) / (k1 - k0) * (W - L - R), Y = v => T + (y1 - v) / (y1 - y0) * (H - T - B);
+  let g = "";
+  for (let v = y0; v <= y1; v += 10) g += `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--nh-ln)" ${v === 0 ? 'stroke-width="2"' : ""}/><text x="${L - 6}" y="${Y(v) + 4}" text-anchor="end" font-size="11" fill="var(--nh-i2)">${v}%</text>`;
+  [-20, 0, 20, 60, 120].forEach(k => g += `<line x1="${X(k)}" x2="${X(k)}" y1="${T}" y2="${H - B}" stroke="var(--nh-ln)" ${k === 0 ? 'stroke-width="2"' : 'stroke-dasharray="2 4"'}/><text x="${X(k)}" y="${H - 12}" text-anchor="middle" font-size="11" fill="var(--nh-i2)">${k > 0 ? "+" : ""}${k}</text>`);
+  ids.forEach((id, n) => { const v = D.paths[id] || [], now = id === nowId;
+    const pts = v.map((y, i) => y == null ? null : `${X(i + k0).toFixed(1)},${Y(y).toFixed(1)}`).filter(Boolean).join(" ");
+    g += `<polyline points="${pts}" fill="none" stroke="${now ? "var(--nh-now)" : NH_COL[n % NH_COL.length]}" stroke-width="${now ? 3.5 : 1.6}" opacity="${now ? 1 : .85}"/>`; });
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="各事件前後走勢疊圖">${g}</svg>` +
+    `<div class="nh-lg">${ids.map((id, n) => `<span><i style="background:${id === nowId ? "var(--nh-now)" : NH_COL[n % NH_COL.length]}"></i>${nhEsc(id.replace("S", ""))}${id === nowId ? "（本次）" : ""}</span>`).join("")}</div>`;
+}
+function nhSrc(r) { return (r.src || []).map(s => `<a href="${nhEsc(s[0])}" target="_blank" rel="noopener" title="${nhEsc(s[1])}">出處</a>`).join(" "); }
+function nhRank(rows, k, v) {   // 本次在歷次中的位置（數字越小越深）
+  const h = rows.filter(r => !r.now && r.m[k] != null).map(r => r.m[k]); return {n: h.length, deeper: h.filter(x => x < v).length};
+}
+function nhMount(root, D) {
+  const now = D.nsf.find(r => r.now), nm = now.m, hist = D.nsf.filter(r => !r.now);
+  const st = {g: D.groups[0], sg: D.groups[0], yk: "p20", tab: "nsf"};
+  const med = (rows, k) => { const v = rows.filter(r => !r.now && r.m[k] != null).map(r => r.m[k]).sort((a, b) => a - b); return v.length ? (v.length % 2 ? v[(v.length - 1) / 2] : (v[v.length / 2 - 1] + v[v.length / 2]) / 2) : null; };
+  const kp = (lab, k, sub) => { const rk = nhRank(D.nsf, k, nm[k]);
+    return `<div class="nh-k"><small>${lab}</small><b>${nhP(nm[k], 2)}</b><em>歷次中位數 ${nhP(med(D.nsf, k))}；比本次更深 ${rk.deeper}／${rk.n} 次</em></div>`; };
+  const NSFK = ["r0", "r5b", "r20b", "dd_ytd", "dd_1y", "fi5", "fi20", "p1", "p5", "p10", "p20", "p60", "p120", "low_day", "low_pct", "rec_base", "rec_hi"];
+  const lab = Object.fromEntries(D.nsf_cols.map(c => [c[0], c[1]]).concat(D.short_cols.map(c => [c[0], c[1]])));
+  const detail = (rows, keys, extra) => `<div class="nh-tw"><table class="nh-tb"><thead><tr><th>事件（決議／宣布日）</th><th>出處</th>${keys.map(k => `<th>${nhEsc(lab[k])}</th>`).join("")}${extra ? extra.h : ""}</tr></thead><tbody>` +
+    rows.map(r => `<tr class="${r.now ? "nh-now" : ""}"><td>${nhEsc(r.date)}　${nhEsc(r.name || r.what)}</td><td style="text-align:left">${nhG(r.grade)} ${nhSrc(r)}</td>${keys.map(k => `<td>${nhCell(r.m, k)}</td>`).join("")}${extra ? extra.r(r) : ""}</tr>`).join("") + `</tbody></table></div>`;
+  const misX = {h: "<th>任務期間（官方起訖）</th><th>交易日</th><th>本站算期間漲幅</th><th>財政部公布</th>",
+    r: r => r.mission ? `<td>${r.mission[0]}～${r.mission[1]}</td><td>${nhCell(r.m, "mis_days")}</td><td>${nhP(r.m.mis_ret, 2)}</td><td>${nhP(r.off_ret, 2)}</td>` : `<td class="nh-mu">${r.now ? "進行中" : "無官方起訖"}</td><td></td><td></td><td></td>`};
+  const credX = {h: "<th>措施</th><th>生效日</th><th>融券 +5日</th><th>融券 +20日</th><th>借券賣出 +5日</th><th>借券賣出 +20日</th>",
+    r: r => `<td style="text-align:left;white-space:normal;min-width:220px">${nhEsc(r.what)}</td><td>${nhEsc(r.eff)}${r.end ? `<br><small class="nh-mu">至 ${nhEsc(r.end)}</small>` : ""}</td>` + ["short+5", "short+20", "sbl+5", "sbl+20"].map(k => `<td>${nhP(r.m[k])}</td>`).join("")};
+  const SK = ["r0", "r5b", "r20b", "dd_1y", "p1", "p5", "p20", "p60", "p120", "low_day", "low_pct", "rec_base"];
+  const pairStat = k => { const a = D.nsf_stats["全部"].cols[k], b = D.short_stats["全部"].cols[k]; return [a, b]; };
+  const pr = D.pair.filter(p => p.nsf !== now.id);
+  const html = () => `
+<h1>國安基金與限空令：歷史統計</h1>
+<p class="nh-sub">政策干預｜資料到 ${nhEsc(D.asof)}（${nhEsc(D.asof_src)}）｜國安基金 ${hist.length} 次＋本次、限空令 ${D.short.length - 1} 次＋本次｜只寫統計事實，不寫高估低估、不給買賣建議</p>
+<div class="nh-card"><h2>本次（${nhEsc(now.date)} 第 131 次臨時委員會）在歷次的位置</h2><p class="nh-d">${nhEsc(now.off_note || "")}</p>
+<div class="nh-kpi">${kp("決議日當日", "r0")}${kp("5 日漲跌", "r5b")}${kp("20 日漲跌", "r20b")}${kp("距年初至今高點", "dd_ytd")}${kp("距一年高點", "dd_1y")}</div>
+<p class="nh-d" style="margin-top:8px">決議日後已過 ${nm.avail} 個交易日；+1～+120 日報酬、見底、收復天數每天收盤後自動補上。</p></div>
+<div class="nh-card"><h2>統計摘要</h2><p class="nh-d">基準＝決議日收盤（國安基金）／生效前一個交易日收盤（限空令）；報酬用收盤；距高點用盤中最高（同財政部新聞稿口徑）；本次不列入統計。* 表示 60 日還沒走完、最低點可能再變。</p>
+<div class="nh-tabs" data-k="tab">${[["nsf", "國安基金"], ["short", "限空令"]].map(([k, l]) => `<button data-v="${k}" class="${st.tab === k ? "on" : ""}">${l}</button>`).join("")}</div>
+<div class="nh-tabs" data-k="g">${D.groups.map(g => `<button data-v="${g}" class="${st.g === g ? "on" : ""}">${g}（${(st.tab === "nsf" ? D.nsf_stats : D.short_stats)[g].n_ev} 次）</button>`).join("")}</div>
+${st.tab === "nsf" ? nhStatTable(D.nsf_stats, D.nsf_cols, st.g) : nhStatTable(D.short_stats, D.short_cols, st.g)}</div>
+<div class="nh-2c">
+<div class="nh-card"><h2>事件前跌多深 vs 事件後報酬</h2><p class="nh-d">每個點＝一次國安基金決議；紅＝之後上漲、綠＝之後下跌；虛線＝本次位置。</p>
+<div class="nh-tabs" data-k="yk">${[["p20", "+20 日"], ["p60", "+60 日"]].map(([k, l]) => `<button data-v="${k}" class="${st.yk === k ? "on" : ""}">${l}</button>`).join("")}</div>${nhScatter(D.nsf, st.yk)}</div>
+<div class="nh-card"><h2>各次 −20～+120 日走勢（決議日＝0）</h2><p class="nh-d">相對決議日收盤的漲跌；本次為粗線（只到今天）。</p>${nhPaths(D, D.nsf.map(r => r.id), now.id)}</div>
+</div>
+<div class="nh-card"><h2>國安基金 vs 限空令</h2><p class="nh-d">兩者宣布日相差 7 天以內：${pr.length} 次（${pr.map(p => p.nsf).join("、")}），本次也是同一天。</p>
+<div class="nh-pair">${[["p20", "+20 日報酬"], ["p60", "+60 日報酬"], ["low_pct", "60 日內最低點再跌"], ["rec_base", "幾日收復基準"]].map(([k, l]) => { const [a, b] = pairStat(k), d = NH_DAYK[k];
+  const f = x => x == null ? nhP(null) : d ? Math.round(x) + " 日" : nhP(x);
+  return `<div class="nh-k"><small>${l}（中位數）</small><b style="font-size:18px">國安 ${f(a && a.med)}</b><em>限空令 ${f(b && b.med)}${!d && a && b ? `｜上漲 國安 ${a.up}／${a.n}、限空 ${b.up}／${b.n}` : ""}</em></div>`; }).join("")}</div></div>
+<div class="nh-card"><h2>國安基金歷次明細</h2>${detail(D.nsf, NSFK)}</div>
+<div class="nh-card"><h2>國安基金任務期間（官方起訖）</h2><p class="nh-d">本站用收盤算（任務起日前一個交易日 → 任務止日），跟財政部送立法院的說明數字並列；2000～2008 沒有官方起訖，不算。</p>
+<div class="nh-tw"><table class="nh-tb"><thead><tr><th>事件</th>${misX.h}</tr></thead><tbody>${D.nsf.map(r => `<tr class="${r.now ? "nh-now" : ""}"><td>${nhEsc(r.date)}　${nhEsc(r.name)}</td>${misX.r(r)}</tr>`).join("")}</tbody></table></div></div>
+<div class="nh-card"><h2>限空令歷次明細</h2><p class="nh-d">融券餘額、借券賣出餘額＝生效前一個交易日 → 生效後第 5、第 20 個交易日的變化（證交所；2005 年 7 月以前沒有借券資料）。</p>${detail(D.short, SK, credX)}</div>
+<div class="nh-card"><h2>出處與方法</h2><ul class="nh-src">
+${D.nsf.concat(D.short).map(r => `<li>${nhEsc(r.date)} ${nhEsc(r.name || r.what)} ${nhG(r.grade)}${r.date_note ? `（${nhEsc(r.date_note)}）` : ""}：${(r.src || []).map(s => { const c = ((D.src_check || {})[r.id] || []).find(x => x.url === s[0]);
+  return `<a href="${nhEsc(s[0])}" target="_blank" rel="noopener">${nhEsc(s[1])}</a>${c ? (c.ok ? ' <span class="nh-dn">✓已打開核對</span>' : ` <span class="nh-up">✗未通過（${nhEsc(c.code)}）</span>`) : ""}`; }).join("；")}</li>`).join("")}</ul>
+<p class="nh-foot">出處等級：官方＝財政部、金管會發布；權威媒體＝中央社、經濟日報、鉅亨（頁面由程式實際打開核對）；媒體整理＝月份與原因經權威媒體確認、精確日期為媒體整理。<br>
+指數：精誠加權指數日線（1987 起）＋證交所（最近幾日），Yahoo ^TWII 整套重算核對：${nhEsc(D.verify.checked)}；${D.verify.ok ? "全部通過" : "有欄位沒過"}${D.verify.notes.length ? `（早年週六盤 Yahoo 沒有，${D.verify.notes.length} 格以主來源為準）` : ""}。<br>
+1998 年限空令以實施日（9/4）計，宣布日不詳。歷史統計，非投資建議。</p></div>`;
+  const draw = () => { root.innerHTML = html();
+    root.querySelectorAll(".nh-tabs").forEach(t => t.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; st[t.dataset.k] = b.dataset.v; draw(); })); };
+  draw();
+}
+fetch("data.json", {cache: "no-store"}).then(r => r.json()).then(D => nhMount(document.getElementById("nh-root"), D))
+  .catch(e => { document.getElementById("nh-root").textContent = "資料載入失敗：" + e; });
+</script></body></html>
