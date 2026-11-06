@@ -25,6 +25,7 @@ body{margin:0;background:var(--nh-bg);color:var(--nh-i1);font:15px/1.65 system-u
 .nh-tb td:first-child,.nh-tb th:first-child{text-align:left;position:sticky;left:0;background:var(--nh-sf)}
 .nh-tb th:first-child{background:var(--nh-rs)}
 .nh-tb td.nh-evc{text-align:left;white-space:normal;min-width:240px;max-width:360px;line-height:1.4}.nh-cz{font-size:12px}
+.nh-tb .nh-nc{background:color-mix(in srgb,var(--nh-now) 14%,var(--nh-sf));font-weight:600;white-space:nowrap}
 .nh-chain{margin:10px 0;padding:10px 12px;border-left:3px solid var(--nh-now);background:var(--nh-rs);border-radius:6px;font-size:14px;line-height:1.6}.nh-chain ol{margin:4px 0 0;padding-left:22px}.nh-chain a{color:var(--nh-s2);font-size:12px;text-decoration:none}
 .nh-tb tr.nh-now td{background:color-mix(in srgb,var(--nh-now) 14%,var(--nh-sf))}
 .nh-tb tr.nh-sec td{background:var(--nh-rs);color:var(--nh-i2);font-weight:600;text-align:left}
@@ -43,6 +44,7 @@ body{margin:0;background:var(--nh-bg);color:var(--nh-i1);font:15px/1.65 system-u
 <div class="nh-w">
 <div class="nh-look"><b>預覽（不從網站連過來；Evans 點頭才套進 template）</b>　要看的重點：<ul>
 <li>位置提案：「總經政治」底下新增子頁「政策干預」（產業→總經→消息…照資訊分層，屬總經類的政策事件）</li>
+<li>【11-06 晚再補】統計摘要每列最前面加「當次（2026-11-06）」欄：事件前欄位有值，並標在該組歷次＋當次裡由小到大排第幾（跌越深、外資賣越多越前面）；事件後欄位每天自動補，還沒到的顯示「—（第 N 日）」。當次外資取網站落地的證交所三大法人序列，10 月合計 −9,943.17 億、11 月 −5,243.76 億，跟財政部新聞稿 9,943.16 億／5,244 億核對通過；歷次外資在證交所補抓中，排名先標「歷次補齊中」</li>
 <li>統計摘要的三組（全部／2011年後／國際事件型）切換、每欄五個數（平均、中位數、最大、最小、上漲次數）</li>
 <li>散點圖 x＝事件前距一年高點、y＝+20／+60 日；疊圖決議日＝0，本次只有 0 日以前（之後每天自動補）</li>
 <li>出處等級三色：官方（綠）／權威媒體（藍）／媒體整理（金）；2000～2008 國安基金只有媒體整理的精確日期</li>
@@ -69,9 +71,12 @@ function nhCell(m, k) {
 function nhStatTable(S, cols, g) {
   const T = S[g], isD = k => NH_DAYK[k], fmt = (k, x) => x == null ? nhP(null) : isD(k) ? Math.round(x).toLocaleString("en") + " 日" :
     (k === "fi5" || k === "fi20") ? `<span class="${x > 0 ? "nh-up" : "nh-dn"}">${x > 0 ? "+" : ""}${Math.round(x).toLocaleString("en")} 億</span>` : nhP(x);
-  return `<div class="nh-tw"><table class="nh-tb"><thead><tr><th>項目（${T.n_ev} 次）</th><th>平均</th><th>中位數</th><th>最大</th><th>最小</th><th>上漲次數／總次數</th></tr></thead><tbody>` +
+  const N = T.now, nc = k => { const o = N.cols[k] || {};
+    if (o.v == null) return `<span class="nh-mu">${o.going ? "進行中" : o.open ? `未收復（第 ${o.day} 日）` : `—（第 ${o.day} 日）`}</span>`;
+    return fmt(k, o.v) + (o.of >= 3 ? `<br><small class="nh-mu">第 ${o.rank}／${o.of}</small>` : '<br><small class="nh-mu">歷次補齊中</small>'); };
+  return `<div class="nh-tw"><table class="nh-tb"><thead><tr><th>項目（${T.n_ev} 次）</th>${N ? `<th class="nh-nc">當次（${N.date}）<br><small>由小到大排第幾</small></th>` : ""}<th>平均</th><th>中位數</th><th>最大</th><th>最小</th><th>上漲次數／總次數</th></tr></thead><tbody>` +
     cols.map(([k, lab, u]) => { const s = T.cols[k];
-      return `<tr><td>${nhEsc(lab)}</td>${s ? `<td>${fmt(k, s.mean)}</td><td><b>${fmt(k, s.med)}</b></td><td>${fmt(k, s.max)}</td><td>${fmt(k, s.min)}</td><td>${u ? `${s.up}／${s.n}` : `<span class="nh-mu">${s.n} 次有值</span>`}</td>` : '<td colspan="5" class="nh-mu" style="text-align:center">資料補齊中</td>'}</tr>`; }).join("") +
+      return `<tr><td>${nhEsc(lab)}</td>${N ? `<td class="nh-nc">${nc(k)}</td>` : ""}${s ? `<td>${fmt(k, s.mean)}</td><td><b>${fmt(k, s.med)}</b></td><td>${fmt(k, s.max)}</td><td>${fmt(k, s.min)}</td><td>${u ? `${s.up}／${s.n}` : `<span class="nh-mu">${s.n} 次有值</span>`}</td>` : '<td colspan="5" class="nh-mu" style="text-align:center">資料補齊中</td>'}</tr>`; }).join("") +
     `</tbody></table></div>`;
 }
 function nhScatter(rows, yk) {
@@ -185,7 +190,7 @@ ${D.nsf.concat(D.short).map(r => `<li>${nhEsc(r.date)} ${nhEsc(r.name || r.what)
     root.querySelectorAll(".nh-tabs").forEach(t => t.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; st[t.dataset.k] = b.dataset.v; draw(); })); };
   draw();
 }
-Promise.all([fetch("data.json", {cache: "no-store"}).then(r => r.json()), fetch("holdings.json", {cache: "no-store"}).then(r => r.ok ? r.json() : null).catch(() => null)])
+Promise.all([fetch("../../data/nsf_history.json", {cache: "no-store"}).then(r => r.ok ? r.json() : Promise.reject()).then(x => x.asof >= "2026-11-06" ? x : Promise.reject()).catch(() => fetch("data.json", {cache: "no-store"}).then(r => r.json())), fetch("holdings.json", {cache: "no-store"}).then(r => r.ok ? r.json() : null).catch(() => null)])
   .then(([D, H]) => { D.hold = H; nhMount(document.getElementById("nh-root"), D); })
   .catch(e => { document.getElementById("nh-root").textContent = "資料載入失敗：" + e; });
 </script></body></html>

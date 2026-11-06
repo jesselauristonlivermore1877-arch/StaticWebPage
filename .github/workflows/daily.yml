@@ -251,14 +251,15 @@ jobs:
         timeout-minutes: 5
         run: python tools/mkt_overlay.py ../site ../site/docs/data/mkt_overlay.json
 
-      # 🟢 11-06（雲端E，Evans 11-06 晚交辦）：國安基金＋限空令歷史統計（預覽階段）→ docs/preview/nsf_history/data.json
+      # 🟢 11-06（雲端E，Evans 11-06 晚交辦）：國安基金＋限空令歷史統計 → docs/data/nsf_history.json（預覽頁優先讀這份）
       #    本次（2026-11-06）的 +1～+120 日、見底、收復天數每天自動補；指數＝精誠（code/data/TWSE）＋本班 data/taiex_ohlc.json，Yahoo 重算核對。
-      #    Evans 點頭套正式版時改寫到 docs/data/nsf_history.json；失敗不擋（沿用上一份）
+      #    🔴 不可寫進 docs/preview/：提交步驟會因「正式建置動到預覽」整班不提交（11-06 run 42217836346 踩過）。
+      #    出處核對（--check-src）只在預覽／每週跑；每日沿用預覽 data.json 的上次結果。失敗不擋（沿用上一份）
       - name: 國安基金歷史統計（預覽）
         working-directory: code
         continue-on-error: true
         timeout-minutes: 3
-        run: python tools/nsf_history.py --site ../site --out ../site/docs/preview/nsf_history/data.json
+        run: python tools/nsf_history.py --site ../site --out ../site/docs/data/nsf_history.json --src-from ../site/docs/preview/nsf_history/data.json
 
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
       # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。
