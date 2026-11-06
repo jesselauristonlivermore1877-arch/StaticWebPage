@@ -214,7 +214,7 @@
     "tok": 0
    },
    "gemini-2.5-flash": {
-    "req": 10,
+    "req": 12,
     "tok": 0
    },
    "gemini-flash-latest": {
@@ -222,8 +222,8 @@
     "tok": 0
    },
    "gemini-3-flash-preview": {
-    "req": 10,
-    "tok": 287402
+    "req": 12,
+    "tok": 319960
    },
    "gemini-omni-1.2-flash": {
     "req": 0,
@@ -234,8 +234,8 @@
  },
  "tpm": [
   [
-   1793903321.264324,
-   67556
+   1793929263.7701101,
+   28569
   ]
  ]
 }
