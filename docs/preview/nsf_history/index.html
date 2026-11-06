@@ -47,7 +47,7 @@ body{margin:0;background:var(--nh-bg);color:var(--nh-i1);font:15px/1.65 system-u
 <li>散點圖 x＝事件前距一年高點、y＝+20／+60 日；疊圖決議日＝0，本次只有 0 日以前（之後每天自動補）</li>
 <li>出處等級三色：官方（綠）／權威媒體（藍）／媒體整理（金）；2000～2008 國安基金只有媒體整理的精確日期</li>
 <li>外資、融券、借券欄位：證交所限速中、資料補齊後自動帶入（現在空白的格子顯示「—」）</li>
-<li>【11-06 晚補】事件欄改「事件＋根因」兩行；本次另列「根因鏈」6 段，每段附出處並由程式打開核對（財政部、congress.gov、中央社、法新社；費半跌幅由 Yahoo ^SOX 算、用財政部週跌幅 15.7% 核對）</li><li>EDM 三張（1080×1350，每個數字 Yahoo 重算核對）：<a href="edm/">edm/</a></li></ul></div>
+<li>【11-06 晚補 2】新增「歷次國安基金持股與成績」：2011～2025 五輪財政部附表逐檔（成本、占比、出售、損益、報酬率、股利）＋跨輪彙總；逐列加總對合計列、合計對內文都核對通過</li><li>【11-06 晚補】事件欄改「事件＋根因」兩行；本次另列「根因鏈」6 段，每段附出處並由程式打開核對（財政部、congress.gov、中央社、法新社；費半跌幅由 Yahoo ^SOX 算、用財政部週跌幅 15.7% 核對）</li><li>EDM 三張（1080×1350，每個數字 Yahoo 重算核對）：<a href="edm/">edm/</a></li></ul></div>
 <div id="nh-root" class="nh"></div>
 </div>
 <script>
@@ -106,10 +106,36 @@ function nhSrc(r) { return (r.src || []).map(s => `<a href="${nhEsc(s[0])}" targ
 function nhRank(rows, k, v) {   // 本次在歷次中的位置（數字越小越深）
   const h = rows.filter(r => !r.now && r.m[k] != null).map(r => r.m[k]); return {n: h.length, deeper: h.filter(x => x < v).length};
 }
+/* 🟢 11-06 晚（Evans：歷次買進持股清單）：財政部附表逐檔＋跨輪彙總；數字都是官方原數（元），核對不過的輪次不出 */
+const nhYi = v => v == null ? "—" : (v / 1e8).toLocaleString("en", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const nhPc = v => v == null ? "—" : `<span class="${v > 0 ? "nh-up" : v < 0 ? "nh-dn" : ""}">${v > 0 ? "+" : ""}${v.toFixed(2)}%</span>`;
+function nhHold(H, st) {
+  const R = H.rounds.find(r => r.id === st.hr), ok = H.rounds.filter(r => r.status === "ok");
+  const tabs = `<div class="nh-tabs" data-k="hr">${H.rounds.map(r => `<button data-v="${r.id}" class="${st.hr === r.id ? "on" : ""}" ${r.status === "ok" ? "" : 'style="opacity:.55"'}>${r.id.slice(0, 7)}${r.status === "ok" ? `（${r.n} 檔）` : ""}</button>`).join("")}</div>`;
+  let body;
+  if (!R || R.status !== "ok") body = `<p class="nh-d">${R ? nhEsc(R.date + " " + R.name + "：" + R.msg) : ""}</p>`;
+  else body = `<div class="nh-kpi">
+<div class="nh-k"><small>總投入（官方買入成本）</small><b>${R.off_cost.toFixed(2)} 億</b><em>${R.n} 檔</em></div>
+<div class="nh-k"><small>總淨利（官方，含股利、扣利息費用）</small><b>${R.off_net.toFixed(2)} 億</b><em>附表處分淨利 ${nhYi(R.tot.pl)} 億</em></div>
+<div class="nh-k"><small>報酬率（官方總淨利÷買入成本）</small><b>${nhPc(R.off_ret)}</b><em>附表處分報酬 ${R.tbl_ret.toFixed(2)}%</em></div>
+<div class="nh-k"><small>任務期間／處分期間</small><b style="font-size:15px">${R.mission.join("～")}</b><em>處分 ${R.dispose.join("～")}</em></div></div>
+${R.note ? `<p class="nh-d">${nhEsc(R.note)}</p>` : ""}
+<div class="nh-tw"><table class="nh-tb"><thead><tr><th>股票</th><th>買進成本（億）</th><th>成本占比</th><th>出售金額（億）</th><th>淨損益（億）</th><th>報酬率</th><th>現金股利（萬）</th><th>股票股利（股）</th></tr></thead><tbody>${
+  R.rows.slice().sort((a, b) => b.cost - a.cost).map(x => `<tr><td style="text-align:left">${nhEsc(x.code || "")} ${nhEsc(x.name)}${x.old ? ' <small class="nh-mu">已不在現行名冊</small>' : ""}</td><td>${nhYi(x.cost)}</td><td>${x.w.toFixed(2)}%</td><td>${nhYi(x.sell)}</td><td>${nhYi(x.pl)}</td><td>${nhPc(x.ret)}</td><td>${x.div == null ? "—" : (x.div / 1e4).toLocaleString("en", {maximumFractionDigits: 0})}</td><td>${x.div_sh == null ? "—" : x.div_sh.toLocaleString("en")}</td></tr>`).join("")
+}<tr style="font-weight:700"><td style="text-align:left">合計（附表合計列）</td><td>${nhYi(R.tot.cost)}</td><td>100%</td><td>${nhYi(R.tot.sell)}</td><td>${nhYi(R.tot.pl)}</td><td>${nhPc(R.tbl_ret)}</td><td>${R.tot.div == null ? "—" : (R.tot.div / 1e4).toLocaleString("en", {maximumFractionDigits: 0})}</td><td></td></tr></tbody></table></div>
+<p class="nh-foot">出處：<a href="${nhEsc(R.src)}" target="_blank" rel="noopener">財政部進場執行安定任務及釋股相關說明（附表出售股票統計表）</a>｜程式核對：逐列加總＝合計列、出售−成本＝淨損益、合計成本＝內文買入成本，全部通過。</p>`;
+  const A = H.agg;
+  return `<div class="nh-card"><h2>歷次國安基金持股與成績</h2><p class="nh-d">財政部公告的每輪出售股票統計表；2000～2008 財政部未公告逐檔明細，不用媒體估計值；本次（第 131 次）進行中，退場後才有明細。報酬率＝淨損益÷成本（不含股利）。</p>
+${tabs}${body}
+<h2 style="margin-top:18px">跨輪彙總（${ok.length} 輪、${A.length} 檔）</h2><p class="nh-d">每檔被買過幾輪、累計成本與淨損益（各輪附表加總）；依輪數、累計成本排序。</p>
+<div class="nh-tw"><table class="nh-tb"><thead><tr><th>股票</th><th>輪數</th><th>哪幾輪</th><th>累計成本（億）</th><th>累計淨損益（億）</th><th>累計報酬率</th><th>累計現金股利（萬）</th></tr></thead><tbody>${
+  A.map(a => `<tr><td style="text-align:left">${nhEsc(a.code || "")} ${nhEsc(a.name)}${a.old ? ' <small class="nh-mu">已不在現行名冊</small>' : ""}</td><td>${a.n}</td><td>${a.rounds.join("、")}</td><td>${nhYi(a.cost)}</td><td>${nhYi(a.pl)}</td><td>${nhPc(a.ret)}</td><td>${a.div ? (a.div / 1e4).toLocaleString("en", {maximumFractionDigits: 0}) : "—"}</td></tr>`).join("")
+}</tbody></table></div><p class="nh-foot">2015 那輪附表沒有逐檔股利，累計股利不含 2015。歷史統計，非投資建議。</p></div>`;
+}
 const nhEv = r => `${nhEsc(r.date)}　<b>${nhEsc(r.name || r.what)}</b>${r.cause ? `<br><small class="nh-mu nh-cz">根因：${nhEsc(r.cause)}</small>` : ""}`;
 function nhMount(root, D) {
   const now = D.nsf.find(r => r.now), nm = now.m, hist = D.nsf.filter(r => !r.now);
-  const st = {g: D.groups[0], sg: D.groups[0], yk: "p20", tab: "nsf"};
+  const H = D.hold, st = {g: D.groups[0], sg: D.groups[0], yk: "p20", tab: "nsf", hr: H ? (H.rounds.filter(r => r.status === "ok").at(-1) || {}).id : null};
   const med = (rows, k) => { const v = rows.filter(r => !r.now && r.m[k] != null).map(r => r.m[k]).sort((a, b) => a - b); return v.length ? (v.length % 2 ? v[(v.length - 1) / 2] : (v[v.length / 2 - 1] + v[v.length / 2]) / 2) : null; };
   const kp = (lab, k, sub) => { const rk = nhRank(D.nsf, k, nm[k]);
     return `<div class="nh-k"><small>${lab}</small><b>${nhP(nm[k], 2)}</b><em>歷次中位數 ${nhP(med(D.nsf, k))}；比本次更深 ${rk.deeper}／${rk.n} 次</em></div>`; };
@@ -148,6 +174,7 @@ ${st.tab === "nsf" ? nhStatTable(D.nsf_stats, D.nsf_cols, st.g) : nhStatTable(D.
 <div class="nh-card"><h2>國安基金任務期間（官方起訖）</h2><p class="nh-d">本站用收盤算（任務起日前一個交易日 → 任務止日），跟財政部送立法院的說明數字並列；2000～2008 沒有官方起訖，不算。</p>
 <div class="nh-tw"><table class="nh-tb"><thead><tr><th>事件</th>${misX.h}</tr></thead><tbody>${D.nsf.map(r => `<tr class="${r.now ? "nh-now" : ""}"><td class="nh-evc">${nhEv(r)}</td>${misX.r(r)}</tr>`).join("")}</tbody></table></div></div>
 <div class="nh-card"><h2>限空令歷次明細</h2><p class="nh-d">融券餘額、借券賣出餘額＝生效前一個交易日 → 生效後第 5、第 20 個交易日的變化（證交所；2005 年 7 月以前沒有借券資料）。</p>${detail(D.short, SK, credX)}</div>
+${H ? nhHold(H, st) : ""}
 <div class="nh-card"><h2>出處與方法</h2><ul class="nh-src">
 ${D.nsf.concat(D.short).map(r => `<li>${nhEsc(r.date)} ${nhEsc(r.name || r.what)} ${nhG(r.grade)}${r.date_note ? `（${nhEsc(r.date_note)}）` : ""}：${(r.src || []).map(s => { const c = ((D.src_check || {})[r.id] || []).find(x => x.url === s[0]);
   return `<a href="${nhEsc(s[0])}" target="_blank" rel="noopener">${nhEsc(s[1])}</a>${c ? (c.ok ? ' <span class="nh-dn">✓已打開核對</span>' : ` <span class="nh-up">✗未通過（${nhEsc(c.code)}）</span>`) : ""}`; }).join("；")}</li>`).join("")}</ul>
@@ -158,6 +185,7 @@ ${D.nsf.concat(D.short).map(r => `<li>${nhEsc(r.date)} ${nhEsc(r.name || r.what)
     root.querySelectorAll(".nh-tabs").forEach(t => t.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; st[t.dataset.k] = b.dataset.v; draw(); })); };
   draw();
 }
-fetch("data.json", {cache: "no-store"}).then(r => r.json()).then(D => nhMount(document.getElementById("nh-root"), D))
+Promise.all([fetch("data.json", {cache: "no-store"}).then(r => r.json()), fetch("holdings.json", {cache: "no-store"}).then(r => r.ok ? r.json() : null).catch(() => null)])
+  .then(([D, H]) => { D.hold = H; nhMount(document.getElementById("nh-root"), D); })
   .catch(e => { document.getElementById("nh-root").textContent = "資料載入失敗：" + e; });
 </script></body></html>
