@@ -1,7 +1,28 @@
 {
- "asof": "2026-11-06T07:11+00:00",
+ "asof": "2026-11-06T08:12+00:00",
  "rule": "法說高成長指引：翻倍／倍增／成長 N 倍／成長 N%（N≥50）／明年大幅成長／上修財測／創新高指引；同一公司同一場法說只觸發一次；頁首只放即時偵測、觸發後 3 個交易日內的（until），個股頁標記留 30 天",
  "top": [
+  {
+   "code": "3714",
+   "name": "富采",
+   "quote": "富采MicroLED全年營收拚倍增，光通訊進入送樣- 新聞",
+   "pat": "翻倍",
+   "src": "MoneyDJ",
+   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPNUpYUC1BdjRSZTdjSlVGblg2anl6ZkFiaEFBTkE0QmZmUGgxbDQzcjJwTklyMWljRVpVVzRaNFdvVlhneExlRHd3NUdMS0txV1RVOVVmbzR6bnc0MlFEV25HSWctdHhudFl0dmF3Q2M0LWNDbXVaZUlWWFd1Nkh2NV9iLVNyQjFTeHhMWXVjUmh4QQ?oc=5",
+   "pub": "2026-11-06T06:48+00:00",
+   "seen": "2026-11-06T08:12+00:00",
+   "meeting": "2026-11-06",
+   "px": {
+    "d": "2026-11-04",
+    "close": 56.70000076293945,
+    "chg": -1.05
+   },
+   "mx": null,
+   "pre": null,
+   "kind": "news",
+   "n_more": 0,
+   "until": "2026-11-12T00:00+08:00"
+  },
   {
    "code": "3036",
    "name": "文曄",
@@ -174,6 +195,26 @@
   }
  ],
  "by_code": {
+  "3714": {
+   "code": "3714",
+   "name": "富采",
+   "quote": "富采MicroLED全年營收拚倍增，光通訊進入送樣- 新聞",
+   "pat": "翻倍",
+   "src": "MoneyDJ",
+   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPNUpYUC1BdjRSZTdjSlVGblg2anl6ZkFiaEFBTkE0QmZmUGgxbDQzcjJwTklyMWljRVpVVzRaNFdvVlhneExlRHd3NUdMS0txV1RVOVVmbzR6bnc0MlFEV25HSWctdHhudFl0dmF3Q2M0LWNDbXVaZUlWWFd1Nkh2NV9iLVNyQjFTeHhMWXVjUmh4QQ?oc=5",
+   "pub": "2026-11-06T06:48+00:00",
+   "seen": "2026-11-06T08:12+00:00",
+   "meeting": "2026-11-06",
+   "px": {
+    "d": "2026-11-04",
+    "close": 56.70000076293945,
+    "chg": -1.05
+   },
+   "mx": null,
+   "pre": null,
+   "kind": "news",
+   "n_more": 0
+  },
   "3036": {
    "code": "3036",
    "name": "文曄",
