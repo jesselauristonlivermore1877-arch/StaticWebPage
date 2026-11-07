@@ -1,0 +1,42 @@
+{
+ "file": "5876_2026-11-06.md",
+ "code": "5876",
+ "date": "2026-11-06",
+ "show": true,
+ "numbers": {
+  "ok": true,
+  "bad": [],
+  "cited": 84,
+  "facts": 84
+ },
+ "compliance": {
+  "ok": true,
+  "hits": []
+ },
+ "src": {
+  "ok": true,
+  "bad": []
+ },
+ "cross": {
+  "ok": true,
+  "bad": [],
+  "checked": [
+   "eps_q",
+   "rev_m"
+  ]
+ },
+ "tables": {
+  "ok": true,
+  "bad": []
+ },
+ "sections": {
+  "ok": true,
+  "missing": []
+ },
+ "eps": {
+  "ok": true,
+  "bad": [],
+  "checked": 8,
+  "skipped": 0
+ }
+}
