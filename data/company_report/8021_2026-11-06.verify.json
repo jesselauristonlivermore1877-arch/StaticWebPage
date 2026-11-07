@@ -1,0 +1,42 @@
+{
+ "file": "8021_2026-11-06.md",
+ "code": "8021",
+ "date": "2026-11-06",
+ "show": true,
+ "numbers": {
+  "ok": true,
+  "bad": [],
+  "cited": 98,
+  "facts": 100
+ },
+ "compliance": {
+  "ok": true,
+  "hits": []
+ },
+ "src": {
+  "ok": true,
+  "bad": []
+ },
+ "cross": {
+  "ok": true,
+  "bad": [],
+  "checked": [
+   "eps_q",
+   "rev_m"
+  ]
+ },
+ "tables": {
+  "ok": true,
+  "bad": []
+ },
+ "sections": {
+  "ok": true,
+  "missing": []
+ },
+ "eps": {
+  "ok": true,
+  "bad": [],
+  "checked": 7,
+  "skipped": 0
+ }
+}
