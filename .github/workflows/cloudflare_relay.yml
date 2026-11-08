@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "deploy＝部署＋測試；test＝只測試；rotate＝換 token＋部署＋測試；stats＝近 24 小時 CPU（GraphQL，Worker＋Durable Object）；subs＝套用正式訂閱（GEA5、GEA6 上架，舊客戶改 GEA5,GEA6）；probe_invite＝測試頻道 t1 產 s_probe 開通碼（可收 GEA_TEST；用 W 的公鑰加密後才印，W 本機解）；conns＝只印連線明細（每條連線的代號、連上時間、閒置秒數、機房）；unpause_t1＝解除測試頻道 t1 的 GEA_TEST 連續下單風控暫停（11-01 18:35 第 1 項）；invite＝產開通碼（下面 invite_* 欄位；開通碼只用 TG 發給 Evans，log 遮罩不印）；who＝只讀查用戶訂閱、策略上架與部位快照（invite_id＝代號，空白＝全部；invite_ch＝頻道）"
+        description: "deploy＝部署＋測試；test＝只測試；rotate＝換 token＋部署＋測試；stats＝近 24 小時 CPU（GraphQL，Worker＋Durable Object）；subs＝套用正式訂閱（GEA5、GEA6 上架，舊客戶改 GEA5,GEA6）；probe_invite＝測試頻道 t1 產 s_probe 開通碼（可收 GEA_TEST；用 W 的公鑰加密後才印，W 本機解）；conns＝只印連線明細（每條連線的代號、連上時間、閒置秒數、機房）；unpause_t1＝解除測試頻道 t1 的 GEA_TEST 連續下單風控暫停（11-01 18:35 第 1 項）；invite＝產開通碼（下面 invite_* 欄位；開通碼只用 TG 發給 Evans，log 遮罩不印）；who＝只讀查用戶訂閱、策略上架與部位快照（invite_id＝代號，空白＝全部；invite_ch＝頻道）；canary_admin＝把 w_office 綁的身分證標成管理者＋w_office 訂閱改全部（Evans 11-09 同意）"
         required: false
         default: "deploy"
       invite_id:
@@ -76,7 +76,7 @@ jobs:
             V=$(get $K)
             if [ -z "$V" ] && [ "$K" = TG_HOOK_SECRET ] && [ "${{ inputs.mode }}" != deploy ] && [ "${{ inputs.mode }}" != rotate ]; then continue; fi   # 11-01 21:00 C：TG webhook 驗證碼，deploy 第一次才產
             if [ -z "$V" ] || [ "${{ inputs.mode }}" = "rotate" ]; then
-              [ "${{ inputs.mode }}" = "test" ] || [ "${{ inputs.mode }}" = "stats" ] || [ "${{ inputs.mode }}" = "subs" ] || [ "${{ inputs.mode }}" = "conns" ] || [ "${{ inputs.mode }}" = "probe_invite" ] || [ "${{ inputs.mode }}" = "unpause_t1" ] || [ "${{ inputs.mode }}" = "invite" ] || [ "${{ inputs.mode }}" = "who" ] && { echo "::error::$K 還沒產生（先跑 deploy）"; exit 1; }
+              [ "${{ inputs.mode }}" = "test" ] || [ "${{ inputs.mode }}" = "stats" ] || [ "${{ inputs.mode }}" = "subs" ] || [ "${{ inputs.mode }}" = "conns" ] || [ "${{ inputs.mode }}" = "probe_invite" ] || [ "${{ inputs.mode }}" = "unpause_t1" ] || [ "${{ inputs.mode }}" = "invite" ] || [ "${{ inputs.mode }}" = "who" ] || [ "${{ inputs.mode }}" = "canary_admin" ] && { echo "::error::$K 還沒產生（先跑 deploy）"; exit 1; }
               V=$(openssl rand -hex 32)
               echo "::add-mask::$V"
               wrangler d1 execute "$DB" --remote --yes --command "INSERT INTO keys(name,value,created) VALUES('$K','$V',datetime('now')) ON CONFLICT(name) DO UPDATE SET value=excluded.value, created=excluded.created" >/dev/null
@@ -89,7 +89,7 @@ jobs:
           done
           echo "▶ Evans 複製位置：Cloudflare 主控台 → Storage & databases → D1 SQL database → $DB → Console，執行 SELECT * FROM keys"
       - name: 部署＋設定 Worker secret
-        if: inputs.mode != 'test' && inputs.mode != 'stats' && inputs.mode != 'subs' && inputs.mode != 'conns' && inputs.mode != 'probe_invite' && inputs.mode != 'unpause_t1' && inputs.mode != 'invite' && inputs.mode != 'who'
+        if: inputs.mode != 'test' && inputs.mode != 'stats' && inputs.mode != 'subs' && inputs.mode != 'conns' && inputs.mode != 'probe_invite' && inputs.mode != 'unpause_t1' && inputs.mode != 'invite' && inputs.mode != 'who' && inputs.mode != 'canary_admin'
         run: |
           set -o pipefail
           wrangler deploy 2>&1 | tee deploy.log
@@ -149,7 +149,7 @@ jobs:
           print("✓ 正式訂閱規則套用完成")
           PY
       - name: 自動測試（1 發 3 收；同時 tail 收 CPU）
-        if: inputs.mode != 'stats' && inputs.mode != 'subs' && inputs.mode != 'conns' && inputs.mode != 'probe_invite' && inputs.mode != 'unpause_t1' && inputs.mode != 'invite' && inputs.mode != 'who'
+        if: inputs.mode != 'stats' && inputs.mode != 'subs' && inputs.mode != 'conns' && inputs.mode != 'probe_invite' && inputs.mode != 'unpause_t1' && inputs.mode != 'invite' && inputs.mode != 'who' && inputs.mode != 'canary_admin'
         run: |
           W=https://gea-signal-relay.jesselauristonlivermore1877.workers.dev
           for i in 1 2 3 4 5 6; do C=$(curl -s -o /dev/null -w "%{http_code}" "$W/"); echo "GET / → $C"; [ "$C" = 200 ] && break; sleep 10; done
@@ -257,6 +257,28 @@ jobs:
           print("t1 GEA_TEST：paused=%s listed=%s；對齊送出：%s" % (st.get("paused"), st.get("listed"), json.dumps(r.get("aligned"), ensure_ascii=False)))
           if st.get("paused"): raise SystemExit("✗ 還是暫停中")
           PY
+      - name: 監控接收端設定（mode=canary_admin；Evans 11-09 在 W 視窗同意「標管理者＋訂全部」）
+        if: inputs.mode == 'canary_admin'
+        run: |
+          python3 - <<'PY2'
+          import json, os, urllib.request
+          W = "https://gea-signal-relay.jesselauristonlivermore1877.workers.dev"
+          H = {"Authorization": "Bearer " + os.environ["RELAY_ADMIN_TOKEN"], "User-Agent": "gea-relay-admin/1.0", "Content-Type": "application/json"}
+          def get(path): return json.load(urllib.request.urlopen(urllib.request.Request(W + path, None, H), timeout=30))
+          def post(path, body): return json.load(urllib.request.urlopen(urllib.request.Request(W + path, json.dumps(body).encode(), H), timeout=30))
+          st = get("/admin/state?ch=gea")
+          u = next(x for x in st["users"] if x["id"] == "w_office")
+          print("改前 w_office：subs=%s、綁定身分證 %s" % (u["subs"], [(b["mask"], "管理者" if b["admin"] else "一般") for b in u["ids"]]))
+          if len(u["ids"]) != 1: raise SystemExit("✗ w_office 綁定的身分證不是剛好 1 個，停下不改")
+          sh = u["ids"][0]["sh"]
+          r = post("/admin/idadmin?ch=gea", {"sh": sh})
+          print("標管理者：", r.get("admin"))
+          r = post("/admin/set?ch=gea&id=w_office", {"subs": "*"})
+          print("w_office 訂閱改：", r["user"]["subs"], "；off=", r["user"]["off"])
+          st = get("/admin/state?ch=gea")
+          u = next(x for x in st["users"] if x["id"] == "w_office")
+          print("改後 w_office：subs=%s、綁定身分證 %s、在線 %s" % (u["subs"], [(b["mask"], "管理者" if b["admin"] else "一般") for b in u["ids"]], u["online"]))
+          PY2
       - name: 查用戶訂閱與部位快照（mode=who；只讀，invite_id＝要查的代號，空白＝全部；11-02 10:35 第 1 項）
         if: inputs.mode == 'who'
         env:
