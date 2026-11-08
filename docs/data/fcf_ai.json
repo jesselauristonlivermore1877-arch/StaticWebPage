@@ -1,0 +1,861 @@
+{
+ "asof": "2026-11-09",
+ "src": "SEC EDGAR companyfacts（10-Q／10-K XBRL）",
+ "unit": "十億美元",
+ "cos": [
+  {
+   "tk": "GOOGL",
+   "nm": "Alphabet",
+   "cik": 1652044,
+   "tags": [
+    "NetCashProvidedByUsedInOperatingActivities",
+    "PaymentsToAcquirePropertyPlantAndEquipment",
+    "RevenueFromContractWithCustomerExcludingAssessedTax"
+   ],
+   "q": [
+    {
+     "end": "2023-03-31",
+     "ocf": 23.509,
+     "capex": 6.289,
+     "rev": 69.787,
+     "fcf": 17.22,
+     "fcf_m": 24.7,
+     "cx_ocf": 26.8
+    },
+    {
+     "end": "2023-06-30",
+     "ocf": 28.666,
+     "capex": 6.888,
+     "rev": 74.604,
+     "fcf": 21.778,
+     "fcf_m": 29.2,
+     "cx_ocf": 24.0
+    },
+    {
+     "end": "2023-09-30",
+     "ocf": 30.656,
+     "capex": 8.055,
+     "rev": 76.693,
+     "fcf": 22.601,
+     "fcf_m": 29.5,
+     "cx_ocf": 26.3
+    },
+    {
+     "end": "2023-12-31",
+     "ocf": 18.915,
+     "capex": 11.019,
+     "rev": 86.31,
+     "fcf": 7.896,
+     "fcf_m": 9.1,
+     "cx_ocf": 58.3
+    },
+    {
+     "end": "2024-03-31",
+     "ocf": 28.848,
+     "capex": 12.012,
+     "rev": 80.539,
+     "fcf": 16.836,
+     "fcf_m": 20.9,
+     "cx_ocf": 41.6
+    },
+    {
+     "end": "2024-06-30",
+     "ocf": 26.64,
+     "capex": 13.186,
+     "rev": 84.742,
+     "fcf": 13.454,
+     "fcf_m": 15.9,
+     "cx_ocf": 49.5
+    },
+    {
+     "end": "2024-09-30",
+     "ocf": 30.698,
+     "capex": 13.061,
+     "rev": 88.268,
+     "fcf": 17.637,
+     "fcf_m": 20.0,
+     "cx_ocf": 42.5
+    },
+    {
+     "end": "2024-12-31",
+     "ocf": 39.113,
+     "capex": 14.276,
+     "rev": 96.469,
+     "fcf": 24.837,
+     "fcf_m": 25.7,
+     "cx_ocf": 36.5
+    },
+    {
+     "end": "2025-03-31",
+     "ocf": 36.15,
+     "capex": 17.197,
+     "rev": 90.234,
+     "fcf": 18.953,
+     "fcf_m": 21.0,
+     "cx_ocf": 47.6
+    }
+   ],
+   "filed": "2026-04-30",
+   "down_run": 1
+  },
+  {
+   "tk": "AMZN",
+   "nm": "Amazon",
+   "cik": 1018724,
+   "tags": [
+    "NetCashProvidedByUsedInOperatingActivities",
+    "PaymentsToAcquireProductiveAssets",
+    "RevenueFromContractWithCustomerExcludingAssessedTax"
+   ],
+   "q": [
+    {
+     "end": "2023-12-31",
+     "ocf": 42.465,
+     "capex": 14.588,
+     "rev": 169.961,
+     "fcf": 27.877,
+     "fcf_m": 16.4,
+     "cx_ocf": 34.4
+    },
+    {
+     "end": "2024-03-31",
+     "ocf": 18.989,
+     "capex": 14.925,
+     "rev": 143.313,
+     "fcf": 4.064,
+     "fcf_m": 2.8,
+     "cx_ocf": 78.6
+    },
+    {
+     "end": "2024-06-30",
+     "ocf": 25.281,
+     "capex": 17.62,
+     "rev": 147.977,
+     "fcf": 7.661,
+     "fcf_m": 5.2,
+     "cx_ocf": 69.7
+    },
+    {
+     "end": "2024-09-30",
+     "ocf": 25.971,
+     "capex": 22.62,
+     "rev": 158.877,
+     "fcf": 3.351,
+     "fcf_m": 2.1,
+     "cx_ocf": 87.1
+    },
+    {
+     "end": "2024-12-31",
+     "ocf": 45.636,
+     "capex": 27.834,
+     "rev": 187.792,
+     "fcf": 17.802,
+     "fcf_m": 9.5,
+     "cx_ocf": 61.0
+    },
+    {
+     "end": "2025-03-31",
+     "ocf": 17.015,
+     "capex": 25.019,
+     "rev": 155.667,
+     "fcf": -8.004,
+     "fcf_m": -5.1,
+     "cx_ocf": 147.0
+    },
+    {
+     "end": "2025-06-30",
+     "ocf": 32.515,
+     "capex": 32.183,
+     "rev": 167.702,
+     "fcf": 0.332,
+     "fcf_m": 0.2,
+     "cx_ocf": 99.0
+    },
+    {
+     "end": "2025-09-30",
+     "ocf": 35.525,
+     "capex": 35.095,
+     "rev": 180.169,
+     "fcf": 0.43,
+     "fcf_m": 0.2,
+     "cx_ocf": 98.8
+    },
+    {
+     "end": "2025-12-31",
+     "ocf": 54.459,
+     "capex": 39.522,
+     "rev": 213.386,
+     "fcf": 14.937,
+     "fcf_m": 7.0,
+     "cx_ocf": 72.6
+    },
+    {
+     "end": "2026-03-31",
+     "ocf": 26.032,
+     "capex": 44.203,
+     "rev": 181.519,
+     "fcf": -18.171,
+     "fcf_m": -10.0,
+     "cx_ocf": 169.8
+    },
+    {
+     "end": "2026-06-30",
+     "ocf": 45.387,
+     "capex": 54.208,
+     "rev": 200.606,
+     "fcf": -8.821,
+     "fcf_m": -4.4,
+     "cx_ocf": 119.4
+    },
+    {
+     "end": "2026-09-30",
+     "ocf": 42.422,
+     "capex": 77.259,
+     "rev": 201.944,
+     "fcf": -34.837,
+     "fcf_m": -17.3,
+     "cx_ocf": 182.1
+    }
+   ],
+   "filed": "2026-10-30",
+   "down_run": 1
+  },
+  {
+   "tk": "MSFT",
+   "nm": "Microsoft",
+   "cik": 789019,
+   "tags": [
+    "NetCashProvidedByUsedInOperatingActivities",
+    "PaymentsToAcquirePropertyPlantAndEquipment",
+    "RevenueFromContractWithCustomerExcludingAssessedTax"
+   ],
+   "q": [
+    {
+     "end": "2023-12-31",
+     "ocf": 18.853,
+     "capex": 9.735,
+     "rev": 62.02,
+     "fcf": 9.118,
+     "fcf_m": 14.7,
+     "cx_ocf": 51.6
+    },
+    {
+     "end": "2024-03-31",
+     "ocf": 31.917,
+     "capex": 10.952,
+     "rev": 61.858,
+     "fcf": 20.965,
+     "fcf_m": 33.9,
+     "cx_ocf": 34.3
+    },
+    {
+     "end": "2024-06-30",
+     "ocf": 37.195,
+     "capex": 13.873,
+     "rev": 64.727,
+     "fcf": 23.322,
+     "fcf_m": 36.0,
+     "cx_ocf": 37.3
+    },
+    {
+     "end": "2024-09-30",
+     "ocf": 34.18,
+     "capex": 14.923,
+     "rev": 65.585,
+     "fcf": 19.257,
+     "fcf_m": 29.4,
+     "cx_ocf": 43.7
+    },
+    {
+     "end": "2024-12-31",
+     "ocf": 22.291,
+     "capex": 15.804,
+     "rev": 69.632,
+     "fcf": 6.487,
+     "fcf_m": 9.3,
+     "cx_ocf": 70.9
+    },
+    {
+     "end": "2025-03-31",
+     "ocf": 37.044,
+     "capex": 16.745,
+     "rev": 70.066,
+     "fcf": 20.299,
+     "fcf_m": 29.0,
+     "cx_ocf": 45.2
+    },
+    {
+     "end": "2025-06-30",
+     "ocf": 42.647,
+     "capex": 17.079,
+     "rev": 76.441,
+     "fcf": 25.568,
+     "fcf_m": 33.4,
+     "cx_ocf": 40.0
+    },
+    {
+     "end": "2025-09-30",
+     "ocf": 45.057,
+     "capex": 19.394,
+     "rev": 77.673,
+     "fcf": 25.663,
+     "fcf_m": 33.0,
+     "cx_ocf": 43.0
+    },
+    {
+     "end": "2025-12-31",
+     "ocf": 35.758,
+     "capex": 29.876,
+     "rev": 81.273,
+     "fcf": 5.882,
+     "fcf_m": 7.2,
+     "cx_ocf": 83.6
+    },
+    {
+     "end": "2026-03-31",
+     "ocf": 46.679,
+     "capex": 30.876,
+     "rev": 82.886,
+     "fcf": 15.803,
+     "fcf_m": 19.1,
+     "cx_ocf": 66.1
+    },
+    {
+     "end": "2026-06-30",
+     "ocf": 55.441,
+     "capex": 35.802,
+     "rev": 90.007,
+     "fcf": 19.639,
+     "fcf_m": 21.8,
+     "cx_ocf": 64.6
+    },
+    {
+     "end": "2026-09-30",
+     "ocf": 58.0,
+     "capex": 39.367,
+     "rev": 92.279,
+     "fcf": 18.633,
+     "fcf_m": 20.2,
+     "cx_ocf": 67.9
+    }
+   ],
+   "filed": "2026-10-28",
+   "down_run": 1
+  },
+  {
+   "tk": "META",
+   "nm": "Meta",
+   "cik": 1326801,
+   "tags": [
+    "NetCashProvidedByUsedInOperatingActivities",
+    "PaymentsToAcquirePropertyPlantAndEquipment",
+    "RevenueFromContractWithCustomerExcludingAssessedTax"
+   ],
+   "q": [
+    {
+     "end": "2023-12-31",
+     "ocf": 19.404,
+     "capex": 7.592,
+     "rev": 40.111,
+     "fcf": 11.812,
+     "fcf_m": 29.4,
+     "cx_ocf": 39.1
+    },
+    {
+     "end": "2024-03-31",
+     "ocf": 19.246,
+     "capex": 6.4,
+     "rev": 36.455,
+     "fcf": 12.846,
+     "fcf_m": 35.2,
+     "cx_ocf": 33.3
+    },
+    {
+     "end": "2024-06-30",
+     "ocf": 19.37,
+     "capex": 8.173,
+     "rev": 39.071,
+     "fcf": 11.197,
+     "fcf_m": 28.7,
+     "cx_ocf": 42.2
+    },
+    {
+     "end": "2024-09-30",
+     "ocf": 24.724,
+     "capex": 8.258,
+     "rev": 40.589,
+     "fcf": 16.466,
+     "fcf_m": 40.6,
+     "cx_ocf": 33.4
+    },
+    {
+     "end": "2024-12-31",
+     "ocf": 27.988,
+     "capex": 14.425,
+     "rev": 48.385,
+     "fcf": 13.563,
+     "fcf_m": 28.0,
+     "cx_ocf": 51.5
+    },
+    {
+     "end": "2025-03-31",
+     "ocf": 24.026,
+     "capex": 12.941,
+     "rev": 42.314,
+     "fcf": 11.085,
+     "fcf_m": 26.2,
+     "cx_ocf": 53.9
+    },
+    {
+     "end": "2025-06-30",
+     "ocf": 25.561,
+     "capex": 16.538,
+     "rev": 47.516,
+     "fcf": 9.023,
+     "fcf_m": 19.0,
+     "cx_ocf": 64.7
+    },
+    {
+     "end": "2025-09-30",
+     "ocf": 29.999,
+     "capex": 18.829,
+     "rev": 51.242,
+     "fcf": 11.17,
+     "fcf_m": 21.8,
+     "cx_ocf": 62.8
+    },
+    {
+     "end": "2025-12-31",
+     "ocf": 36.214,
+     "capex": 21.383,
+     "rev": 59.893,
+     "fcf": 14.831,
+     "fcf_m": 24.8,
+     "cx_ocf": 59.0
+    },
+    {
+     "end": "2026-03-31",
+     "ocf": 32.226,
+     "capex": 18.997,
+     "rev": 56.311,
+     "fcf": 13.229,
+     "fcf_m": 23.5,
+     "cx_ocf": 58.9
+    },
+    {
+     "end": "2026-06-30",
+     "ocf": 31.862,
+     "capex": 30.116,
+     "rev": 60.801,
+     "fcf": 1.746,
+     "fcf_m": 2.9,
+     "cx_ocf": 94.5
+    },
+    {
+     "end": "2026-09-30",
+     "ocf": 32.785,
+     "capex": 33.942,
+     "rev": 64.601,
+     "fcf": -1.157,
+     "fcf_m": -1.8,
+     "cx_ocf": 103.5
+    }
+   ],
+   "filed": "2026-10-22",
+   "down_run": 3
+  },
+  {
+   "tk": "ORCL",
+   "nm": "Oracle",
+   "cik": 1341439,
+   "tags": [
+    "NetCashProvidedByUsedInOperatingActivities",
+    "PaymentsToAcquirePropertyPlantAndEquipment",
+    "RevenueFromContractWithCustomerExcludingAssessedTax"
+   ],
+   "q": [
+    {
+     "end": "2023-11-30",
+     "ocf": 0.143,
+     "capex": 1.08,
+     "rev": 12.941,
+     "fcf": -0.937,
+     "fcf_m": -7.2,
+     "cx_ocf": 755.2
+    },
+    {
+     "end": "2024-02-29",
+     "ocf": 5.475,
+     "capex": 1.674,
+     "rev": 13.28,
+     "fcf": 3.801,
+     "fcf_m": 28.6,
+     "cx_ocf": 30.6
+    },
+    {
+     "end": "2024-05-31",
+     "ocf": 6.081,
+     "capex": 2.798,
+     "rev": 14.287,
+     "fcf": 3.283,
+     "fcf_m": 23.0,
+     "cx_ocf": 46.0
+    },
+    {
+     "end": "2024-08-31",
+     "ocf": 7.427,
+     "capex": 2.303,
+     "rev": 13.307,
+     "fcf": 5.124,
+     "fcf_m": 38.5,
+     "cx_ocf": 31.0
+    },
+    {
+     "end": "2024-11-30",
+     "ocf": 1.304,
+     "capex": 3.97,
+     "rev": 14.059,
+     "fcf": -2.666,
+     "fcf_m": -19.0,
+     "cx_ocf": 304.4
+    },
+    {
+     "end": "2025-02-28",
+     "ocf": 5.933,
+     "capex": 5.862,
+     "rev": 14.13,
+     "fcf": 0.071,
+     "fcf_m": 0.5,
+     "cx_ocf": 98.8
+    },
+    {
+     "end": "2025-05-31",
+     "ocf": 6.157,
+     "capex": 9.08,
+     "rev": 15.903,
+     "fcf": -2.923,
+     "fcf_m": -18.4,
+     "cx_ocf": 147.5
+    },
+    {
+     "end": "2025-08-31",
+     "ocf": 8.14,
+     "capex": 8.502,
+     "rev": 14.926,
+     "fcf": -0.362,
+     "fcf_m": -2.4,
+     "cx_ocf": 104.4
+    },
+    {
+     "end": "2025-11-30",
+     "ocf": 2.066,
+     "capex": 12.033,
+     "rev": 16.058,
+     "fcf": -9.967,
+     "fcf_m": -62.1,
+     "cx_ocf": 582.4
+    },
+    {
+     "end": "2026-02-28",
+     "ocf": 7.151,
+     "capex": 18.635,
+     "rev": 17.19,
+     "fcf": -11.484,
+     "fcf_m": -66.8,
+     "cx_ocf": 260.6
+    },
+    {
+     "end": "2026-05-31",
+     "ocf": 14.62,
+     "capex": 16.493,
+     "rev": 19.184,
+     "fcf": -1.873,
+     "fcf_m": -9.8,
+     "cx_ocf": 112.8
+    },
+    {
+     "end": "2026-08-31",
+     "ocf": 23.103,
+     "capex": 28.499,
+     "rev": 19.345,
+     "fcf": -5.396,
+     "fcf_m": -27.9,
+     "cx_ocf": 123.4
+    }
+   ],
+   "filed": "2026-09-11",
+   "down_run": 1
+  },
+  {
+   "tk": "INTC",
+   "nm": "Intel",
+   "cik": 50863,
+   "tags": [
+    "NetCashProvidedByUsedInOperatingActivities",
+    "PaymentsToAcquirePropertyPlantAndEquipment",
+    "RevenueFromContractWithCustomerExcludingAssessedTax"
+   ],
+   "q": [
+    {
+     "end": "2023-12-30",
+     "ocf": 4.624,
+     "capex": 6.696,
+     "rev": 15.406,
+     "fcf": -2.072,
+     "fcf_m": -13.4,
+     "cx_ocf": 144.8
+    },
+    {
+     "end": "2024-03-30",
+     "ocf": -1.223,
+     "capex": 5.97,
+     "rev": 12.724,
+     "fcf": -7.193,
+     "fcf_m": -56.5,
+     "cx_ocf": null
+    },
+    {
+     "end": "2024-06-29",
+     "ocf": 2.292,
+     "capex": 5.682,
+     "rev": 12.833,
+     "fcf": -3.39,
+     "fcf_m": -26.4,
+     "cx_ocf": 247.9
+    },
+    {
+     "end": "2024-09-28",
+     "ocf": 4.054,
+     "capex": 6.458,
+     "rev": 13.284,
+     "fcf": -2.404,
+     "fcf_m": -18.1,
+     "cx_ocf": 159.3
+    },
+    {
+     "end": "2024-12-28",
+     "ocf": 3.165,
+     "capex": 5.834,
+     "rev": 14.26,
+     "fcf": -2.669,
+     "fcf_m": -18.7,
+     "cx_ocf": 184.3
+    },
+    {
+     "end": "2025-03-29",
+     "ocf": 0.813,
+     "capex": 5.183,
+     "rev": 12.667,
+     "fcf": -4.37,
+     "fcf_m": -34.5,
+     "cx_ocf": 637.5
+    },
+    {
+     "end": "2025-06-28",
+     "ocf": 2.05,
+     "capex": 3.55,
+     "rev": 12.859,
+     "fcf": -1.5,
+     "fcf_m": -11.7,
+     "cx_ocf": 173.2
+    },
+    {
+     "end": "2025-09-27",
+     "ocf": 2.546,
+     "capex": 2.425,
+     "rev": 13.653,
+     "fcf": 0.121,
+     "fcf_m": 0.9,
+     "cx_ocf": 95.2
+    },
+    {
+     "end": "2025-12-27",
+     "ocf": 4.288,
+     "capex": 3.488,
+     "rev": 13.674,
+     "fcf": 0.8,
+     "fcf_m": 5.9,
+     "cx_ocf": 81.3
+    },
+    {
+     "end": "2026-03-28",
+     "ocf": 1.096,
+     "capex": 3.636,
+     "rev": 13.577,
+     "fcf": -2.54,
+     "fcf_m": -18.7,
+     "cx_ocf": 331.8
+    },
+    {
+     "end": "2026-06-27",
+     "ocf": 7.006,
+     "capex": 2.556,
+     "rev": 16.128,
+     "fcf": 4.45,
+     "fcf_m": 27.6,
+     "cx_ocf": 36.5
+    },
+    {
+     "end": "2026-09-26",
+     "ocf": 5.082,
+     "capex": 4.024,
+     "rev": 16.513,
+     "fcf": 1.058,
+     "fcf_m": 6.4,
+     "cx_ocf": 79.2
+    }
+   ],
+   "filed": "2026-10-30",
+   "down_run": 1
+  },
+  {
+   "tk": "NVDA",
+   "nm": "NVIDIA",
+   "cik": 1045810,
+   "tags": [
+    "NetCashProvidedByUsedInOperatingActivities",
+    "PaymentsToAcquireProductiveAssets",
+    "Revenues"
+   ],
+   "q": [
+    {
+     "end": "2023-10-29",
+     "ocf": 7.332,
+     "capex": 0.278,
+     "rev": 18.12,
+     "fcf": 7.054,
+     "fcf_m": 38.9,
+     "cx_ocf": 3.8
+    },
+    {
+     "end": "2024-01-28",
+     "ocf": 11.499,
+     "capex": 0.254,
+     "rev": 22.103,
+     "fcf": 11.245,
+     "fcf_m": 50.9,
+     "cx_ocf": 2.2
+    },
+    {
+     "end": "2024-04-28",
+     "ocf": 15.345,
+     "capex": 0.369,
+     "rev": 26.044,
+     "fcf": 14.976,
+     "fcf_m": 57.5,
+     "cx_ocf": 2.4
+    },
+    {
+     "end": "2024-07-28",
+     "ocf": 14.488,
+     "capex": 0.977,
+     "rev": 30.04,
+     "fcf": 13.511,
+     "fcf_m": 45.0,
+     "cx_ocf": 6.7
+    },
+    {
+     "end": "2024-10-27",
+     "ocf": 17.627,
+     "capex": 0.813,
+     "rev": 35.082,
+     "fcf": 16.814,
+     "fcf_m": 47.9,
+     "cx_ocf": 4.6
+    },
+    {
+     "end": "2025-01-26",
+     "ocf": 16.629,
+     "capex": 1.077,
+     "rev": 39.331,
+     "fcf": 15.552,
+     "fcf_m": 39.5,
+     "cx_ocf": 6.5
+    },
+    {
+     "end": "2025-04-27",
+     "ocf": 27.414,
+     "capex": 1.227,
+     "rev": 44.062,
+     "fcf": 26.187,
+     "fcf_m": 59.4,
+     "cx_ocf": 4.5
+    },
+    {
+     "end": "2025-07-27",
+     "ocf": 15.365,
+     "capex": 1.895,
+     "rev": 46.743,
+     "fcf": 13.47,
+     "fcf_m": 28.8,
+     "cx_ocf": 12.3
+    },
+    {
+     "end": "2025-10-26",
+     "ocf": 23.751,
+     "capex": 1.636,
+     "rev": 57.006,
+     "fcf": 22.115,
+     "fcf_m": 38.8,
+     "cx_ocf": 6.9
+    },
+    {
+     "end": "2026-01-25",
+     "ocf": 36.188,
+     "capex": 1.284,
+     "rev": 68.127,
+     "fcf": 34.904,
+     "fcf_m": 51.2,
+     "cx_ocf": 3.5
+    },
+    {
+     "end": "2026-04-26",
+     "ocf": 50.344,
+     "capex": 1.757,
+     "rev": 81.615,
+     "fcf": 48.587,
+     "fcf_m": 59.5,
+     "cx_ocf": 3.5
+    },
+    {
+     "end": "2026-07-26",
+     "ocf": 24.077,
+     "capex": 2.677,
+     "rev": 96.221,
+     "fcf": 21.4,
+     "fcf_m": 22.2,
+     "cx_ocf": 11.1
+    }
+   ],
+   "filed": "2026-08-26",
+   "down_run": 1
+  }
+ ],
+ "events": [
+  {
+   "tk": "AMZN",
+   "nm": "Amazon",
+   "end": "2026-09-30",
+   "filed": "2026-10-30",
+   "fcf": -34.837,
+   "fcf_prev_y": 0.43,
+   "yoy": -8201.6,
+   "why": "年減超過 30%"
+  },
+  {
+   "tk": "META",
+   "nm": "Meta",
+   "end": "2026-09-30",
+   "filed": "2026-10-22",
+   "fcf": -1.157,
+   "fcf_prev_y": 11.17,
+   "yoy": -110.4,
+   "why": "轉負"
+  }
+ ],
+ "verify": {
+  "ok": true,
+  "bad": [],
+  "checked": "3 家最新申報原表（Financial_Report.xlsx；沒有時用同一份申報的 XBRL 原檔）"
+ }
+}
