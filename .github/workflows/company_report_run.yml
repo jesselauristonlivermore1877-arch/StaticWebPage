@@ -2,6 +2,7 @@
 #   手動觸發、輸入股票代號 → 走本機同一套 tools/company_report.py（數字由程式從公開資訊觀測站與站上資料產生、
 #   文字走 GEMINI_API_KEY 那條線、雲端 company_verify 同一道關卡全過才寫檔）→ 打包 company_reports.json → 推上 → TG。
 #   兩個 repo 取到同層的 CustomerServiceANDSales／StaticWebPage，路徑跟本機一樣（gemini_task 的 _inbox、company_report 的 SITE 不用改）。
+#   11-09（Evans 裁示 C，雲端M）：company_report 先找官方逐字稿（docs/data/ir/tr、research/ir_v2），沒有就回「這家沒有官方逐字稿」不產。
 name: 指定個股報告
 
 on:
@@ -81,7 +82,11 @@ jobs:
           [ "$KIND" = "pick" ] && args+=(--kind pick)
           # 11-08（雲端H）：輸出留一份給「沒上架記錄」抓原因（關卡沒過的清單、Traceback 最後一行）
           set -o pipefail
-          python tools/company_report.py "${args[@]}" 2>&1 | tee "$RUNNER_TEMP/make.log"
+          python tools/company_report.py "${args[@]}" 2>&1 | tee "$RUNNER_TEMP/make.log" || {
+            rc=$?
+            # 11-09（雲端M）：exit 3＝這家沒有官方逐字稿（Evans 11-09：沒逐字稿不產）→ 摘要寫清楚
+            grep -q "這家沒有官方逐字稿" "$RUNNER_TEMP/make.log" && echo "### $CODE：這家沒有官方逐字稿，不產報告" >> "$GITHUB_STEP_SUMMARY"
+            exit $rc; }
       - name: 核對＋打包（同「公司產業報告上網頁」）
         working-directory: CustomerServiceANDSales
         run: python company_verify.py ../StaticWebPage/data ../StaticWebPage/docs/data/company_reports.json
@@ -153,7 +158,12 @@ jobs:
           log, cf = rd("make.log"), rd("commit_fail.txt").strip()
           stage, reasons = "", []
           m = re.search(r"關卡沒過 → 不推：(\[.*\])\s*$", log, re.M)
-          if m:
+          if "這家沒有官方逐字稿" in log:
+              # 11-09（Evans 裁示 C，雲端M）：沒有官方逐字稿不出 Gemini 制式報告 → 每日彙總列「缺逐字稿」
+              stage, reasons = "缺逐字稿", ["這家沒有官方逐字稿"]
+          elif "逐字稿裡挑不到公司人員的原話" in log:
+              stage, reasons = "缺逐字稿", ["逐字稿裡挑不到公司人員的原話"]
+          elif m:
               stage = "本機關卡沒過"
               try: reasons = [str(x) for x in ast.literal_eval(m.group(1))]
               except Exception: reasons = [m.group(1)[:200]]
