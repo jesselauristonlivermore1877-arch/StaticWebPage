@@ -1,36 +1,5 @@
 {
- "dead": {
-  "2026-11-06": {
-   "gemini-3.8-flash": {
-    "at": "11-06 12:10",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.7-flash": {
-    "at": "11-06 12:10",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-flash-latest": {
-    "at": "11-06 12:10",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.6-flash": {
-    "at": "11-06 12:22",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.5-flash": {
-    "at": "11-06 12:22",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-omni-flash-preview": {
-    "at": "11-06 12:47",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3-flash-preview": {
-    "at": "11-06 12:47",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   }
-  }
- },
+ "dead": {},
  "count": {
   "2026-11-06": {
    "gemini-3.8-flash": {
@@ -77,22 +46,24 @@
     "req": 4,
     "tok": 98355
    }
+  },
+  "2026-11-07": {
+   "gemini-2.5-flash": {
+    "req": 1,
+    "tok": 0
+   },
+   "gemini-3.5-flash-lite": {
+    "req": 0,
+    "tok": 0,
+    "e429_web": 1
+   }
   }
  },
- "tpm": [
-  [
-   1793969563.396603,
-   32525
-  ],
-  [
-   1793969576.9060354,
-   34355
-  ]
- ],
+ "tpm": [],
  "search_dead": {
-  "2026-11-06": {
-   "at": "11-06 11:56",
-   "model": "gemini-3.8-flash",
+  "2026-11-07": {
+   "at": "11-08 03:10",
+   "model": "gemini-3.5-flash-lite",
    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
   }
  }
