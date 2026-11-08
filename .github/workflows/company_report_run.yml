@@ -79,26 +79,52 @@ jobs:
           [ -n "$DECK" ] && args+=(--deck "$DECK")
           [ -n "$FOCUS" ] && args+=(--focus "$FOCUS")
           [ "$KIND" = "pick" ] && args+=(--kind pick)
-          python tools/company_report.py "${args[@]}"
+          # 11-08（雲端H）：輸出留一份給「沒上架記錄」抓原因（關卡沒過的清單、Traceback 最後一行）
+          set -o pipefail
+          python tools/company_report.py "${args[@]}" 2>&1 | tee "$RUNNER_TEMP/make.log"
       - name: 核對＋打包（同「公司產業報告上網頁」）
         working-directory: CustomerServiceANDSales
         run: python company_verify.py ../StaticWebPage/data ../StaticWebPage/docs/data/company_reports.json
       - name: 提交
+        # 11-08（雲端H，【舊】總指揮 11-08 第 1 項）：company_reports.json 是整包打包檔，別班（每日建置、公司產業報告上網頁、
+        #   本機推報告）同時推就 pull --rebase 衝突 → 11-07 4904、2451、1326、6213 關卡全過卻推不上，舊版 TG 照報「已上架」。
+        #   改成每次重試都 reset 到最新 main → 放回這一班的報告檔 → 重跑同一道打包關卡 → 確認清單裡真的有這篇 → 推。
+        id: commit
         working-directory: StaticWebPage
         env:
           CODE: ${{ inputs.code }}
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/gemini_quota data/company_report docs/data/company_reports.json
-          if git diff --staged --quiet; then echo "沒有新報告"; exit 1; fi
-          git commit -m "data: 指定個股報告 $CODE $(TZ=Asia/Taipei date '+%F %H:%M')（雲端 Actions：數字程式產生、文字 Gemini API、關卡全過）"
-          for i in 1 2 3 4; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep $((2 ** i)); done
-          exit 1
-      - name: TG 通知
-        # 11-01（【舊】總指揮 18:55 第 1 項）：成功、失敗都發；上架附網址＋代號＋資料日，沒上架寫原因（tools/report_tg.py 判斷，
-        #   不再從 company_reports.json 取「最新一篇」——新報告沒過關時會把舊的那篇報成已上網頁）
-        if: always() && steps.make.outcome != 'skipped'
+          fail() { echo "✗ $1"; echo "$1" > "$RUNNER_TEMP/commit_fail.txt"; exit 1; }
+          keep=$(git status --porcelain --untracked-files=all -- "data/company_report/${CODE}_*" data/gemini_quota/company_report_run.json | cut -c4-)
+          echo "這一班的檔："; echo "$keep"
+          md=$(echo "$keep" | grep -E "^data/company_report/${CODE}_[0-9-]+\.md$" | head -1)
+          [ -n "$md" ] || fail "沒有新報告（data/company_report 沒有新的 ${CODE}_*.md）"
+          rdate=$(basename "$md" .md); rdate=${rdate#${CODE}_}
+          tar -cf "$RUNNER_TEMP/mine.tar" $keep
+          for i in 1 2 3 4 5; do
+            git fetch -q origin main && git reset -q --hard origin/main && git clean -fdq data/company_report
+            tar -xf "$RUNNER_TEMP/mine.tar"
+            (cd ../CustomerServiceANDSales && python company_verify.py ../StaticWebPage/data ../StaticWebPage/docs/data/company_reports.json) > "$RUNNER_TEMP/verify.log" 2>&1 \
+              || { tail -20 "$RUNNER_TEMP/verify.log"; fail "打包關卡失敗（company_verify）"; }
+            python3 -c "import json,sys;d=json.load(open('docs/data/company_reports.json',encoding='utf-8'));sys.exit(0 if any(r.get('code')==sys.argv[1] and r.get('date')==sys.argv[2] for r in d.get('reports',[])) else 1)" "$CODE" "$rdate" \
+              || { tail -20 "$RUNNER_TEMP/verify.log"; fail "打包後清單裡沒有 ${CODE}（${rdate}），打包關卡沒收"; }
+            echo "✓ 打包後清單有 ${CODE}（${rdate}）"
+            git add data/gemini_quota data/company_report docs/data/company_reports.json
+            git diff --staged --quiet && fail "沒有新報告（跟 main 上的一樣）"
+            git commit -qm "data: 指定個股報告 $CODE $(TZ=Asia/Taipei date '+%F %H:%M')（雲端 Actions：數字程式產生、文字 Gemini API、關卡全過）"
+            if git push -q origin HEAD:main; then
+              echo "✓ 第 $i 次推上 main：$(git rev-parse --short HEAD)"
+              echo "pushed=1" >> "$GITHUB_OUTPUT"; echo "rdate=$rdate" >> "$GITHUB_OUTPUT"; exit 0
+            fi
+            echo "第 $i 次推不上（main 有新 commit），reset 重來"; sleep $((2 ** i))
+          done
+          fail "推不上 main（重試 5 次）"
+      - name: TG 通知（只發已上架）
+        # 11-08（雲端H）：TG 只發「已上架」＝提交步驟確認清單裡有這篇且推上 main 才發；沒上架的不逐篇發，記進 data/report_failures/，
+        #   由 report_fail_digest.yml 每天彙總一則（幾篇沒過、原因前 3）。
+        if: always() && steps.commit.outputs.pushed == '1'
         working-directory: CustomerServiceANDSales
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
@@ -108,3 +134,51 @@ jobs:
           KIND: ${{ inputs.kind }}
           SINCE: ${{ steps.make.outputs.since }}
         run: python tools/report_tg.py "$CODE" --kind "$KIND" --focus "$FOCUS" --since "${SINCE:-0}"
+      - name: 沒上架記錄（給每日彙總）
+        if: always() && steps.make.outcome != 'skipped' && steps.commit.outputs.pushed != '1'
+        working-directory: StaticWebPage
+        env:
+          CODE: ${{ inputs.code }}
+          KIND: ${{ inputs.kind }}
+          MAKE_OUTCOME: ${{ steps.make.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          python3 - > "$RUNNER_TEMP/fail.json" <<'PY'
+          import ast, json, os, re, datetime as dt
+          T = os.environ["RUNNER_TEMP"]
+          def rd(n):
+              try: return open(os.path.join(T, n), encoding="utf-8", errors="replace").read()
+              except OSError: return ""
+          log, cf = rd("make.log"), rd("commit_fail.txt").strip()
+          stage, reasons = "", []
+          m = re.search(r"關卡沒過 → 不推：(\[.*\])\s*$", log, re.M)
+          if m:
+              stage = "本機關卡沒過"
+              try: reasons = [str(x) for x in ast.literal_eval(m.group(1))]
+              except Exception: reasons = [m.group(1)[:200]]
+          elif "Traceback (most recent call last)" in log:
+              stage = "程式錯誤"
+              last = [l for l in log.splitlines() if re.match(r"^\w*(Error|Exception)\b", l.strip())]
+              reasons = [last[-1].strip()[:200] if last else "Traceback"]
+          elif os.environ.get("MAKE_OUTCOME") == "success":
+              stage, reasons = "提交失敗", [cf or "提交失敗（原因見 log）"]
+          else:
+              x = [l.strip() for l in log.splitlines() if l.strip().startswith("✗")]
+              stage, reasons = "產報告失敗", [x[-1][:200] if x else "產報告失敗（原因見 log）"]
+          now = dt.datetime.now(dt.timezone(dt.timedelta(hours=8)))
+          print(json.dumps({"at": now.strftime("%Y-%m-%dT%H:%M"), "code": os.environ["CODE"], "kind": os.environ["KIND"],
+                            "event": os.environ["EVENT"], "stage": stage, "reasons": reasons, "run": os.environ["RUN_URL"]}, ensure_ascii=False))
+          PY
+          echo "沒上架記錄："; cat "$RUNNER_TEMP/fail.json"
+          F="data/report_failures/$(TZ=Asia/Taipei date +%F).jsonl"
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for i in 1 2 3 4 5; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            mkdir -p data/report_failures && cat "$RUNNER_TEMP/fail.json" >> "$F"
+            git add "$F" && git commit -qm "data: 指定個股報告沒上架記錄 ${{ inputs.code }} $(TZ=Asia/Taipei date '+%F %H:%M')"
+            git push -q origin HEAD:main && { echo "✓ 已記錄 $F"; exit 0; }
+            sleep $((2 ** i))
+          done
+          exit 1

@@ -3,16 +3,23 @@
 #   輸入台股日（可附美股日）→ 價格／族群觸發 → 免費結構化來源＋Gemini 中英日韓搜尋 → Gemini 歸因 → 程式逐筆打開出處核對＋量化傳導 → 排序
 #   → docs/data/root_cause/<日期>.json；中間檔 data/root_cause/<日期>/（不對外）。最後跑盲測檢查（tests/root_cause_blind.py）。
 #   Gemini 走 GEMINI_API_KEY（api 線、heavy），額度狀態跟其他 workflow 共用 data/gemini_quota/。
-#   預定正式排程（等 Evans 點頭才加）：每天 07:30 台北對前一晚美股跑一次（cron "30 23 * * 0-4"），異常觸發時由 market_alert 叫。
-name: 根因追蹤（手動）
+#   11-08（雲端H，【舊】總指揮 11-08 第 2 項）接正式排程：每天 07:30 台北（週一～五）對前一晚美股跑一次；
+#     market_alert 有新的價格觸發時也會叫一次（同一個台股日已有結果就不重跑）。沒給 cases 時：台股日＝今天（台北），美股日＝前一個平日。
+name: 根因追蹤
 
 on:
+  schedule:
+    - cron: "30 23 * * 0-4"   # 台北週一～五 07:30
   workflow_dispatch:
     inputs:
       cases:
-        description: "台股日[:美股日]，逗號分隔（例 2026-11-06:2026-11-05,2025-04-07,2024-08-05）"
-        required: true
-        default: "2026-11-06:2026-11-05,2025-04-07,2024-08-05"
+        description: "台股日[:美股日]，逗號分隔（例 2026-11-06:2026-11-05）；留空＝今天（台北）＋前一個美股平日"
+        required: false
+        default: ""
+      trigger:
+        description: "誰叫的（排程／market_alert／手動），只寫進 log 與 commit"
+        required: false
+        default: "手動"
       blind:
         description: "跑完是否跑盲測檢查（1／0）"
         required: false
@@ -34,6 +41,14 @@ jobs:
         env:
           CASES: ${{ inputs.cases }}
         run: |
+          if [ -z "$CASES" ]; then
+            tw=$(TZ=Asia/Taipei date +%F); dow=$(TZ=Asia/Taipei date +%u)   # 1＝週一
+            back=1; [ "$dow" = 1 ] && back=3; [ "$dow" = 7 ] && back=2
+            us=$(TZ=Asia/Taipei date -d "$tw -$back day" +%F)
+            CASES="$tw:$us"
+          fi
+          echo "觸發：${{ github.event_name }}（${{ inputs.trigger || '排程' }}）　cases=$CASES　台北 $(TZ=Asia/Taipei date '+%F %H:%M')"
+          echo "CASES=$CASES" >> "$GITHUB_ENV"
           [[ "$CASES" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}(:[0-9]{4}-[0-9]{2}-[0-9]{2})?(,[0-9]{4}-[0-9]{2}-[0-9]{2}(:[0-9]{4}-[0-9]{2}-[0-9]{2})?)*$ ]] || { echo "✗ cases 格式不對：$CASES"; exit 1; }
       - uses: actions/checkout@v4
         with:
@@ -60,7 +75,6 @@ jobs:
           GEA_TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           GEA_TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           GEMINI_TASK_ROUTE: api
-          CASES: ${{ inputs.cases }}
         run: |
           IFS=',' read -ra L <<< "$CASES"
           for c in "${L[@]}"; do
@@ -73,8 +87,6 @@ jobs:
         if: inputs.blind == '1'
         working-directory: CustomerServiceANDSales
         continue-on-error: true
-        env:
-          CASES: ${{ inputs.cases }}
         run: |
           ds=$(echo "$CASES" | tr ',' '\n' | cut -d: -f1 | tr '\n' ' ')
           python tests/root_cause_blind.py ../StaticWebPage $ds
@@ -86,6 +98,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/gemini_quota data/root_cause docs/data/root_cause 2>/dev/null || true
           if git diff --staged --quiet; then echo "沒有變動"; exit 0; fi
-          git commit -qm "data: 根因追蹤（手動）$(TZ=Asia/Taipei date '+%F %H:%M')：${{ inputs.cases }}"
+          git commit -qm "data: 根因追蹤（${{ inputs.trigger || '排程' }}）$(TZ=Asia/Taipei date '+%F %H:%M')：$CASES"
           for i in 1 2 3 4; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep $((2 ** i)); done
           exit 1

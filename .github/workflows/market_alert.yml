@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: write
+  actions: write     # 11-08（雲端H）：有新的價格觸發時叫 root_cause.yml（workflow_dispatch）
 
 concurrency:
   group: market-alert
@@ -39,6 +40,9 @@ jobs:
           python-version: "3.12.14"
           cache: pip
       - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" feedparser requests numpy
+      - name: 記下跑前的價格觸發
+        working-directory: site
+        run: python3 -c "import json;d=json.load(open('data/market_alert_state.json',encoding='utf-8'));print('\n'.join(k for k in d.get('sent',{}) if k.startswith('px|')))" > "$RUNNER_TEMP/px_before.txt" 2>/dev/null || true
       - name: 盤勢偵測＋TG
         working-directory: code
         env:
@@ -68,6 +72,28 @@ jobs:
             sleep $((2 ** i))
           done
           exit 1
+      # 11-08（雲端H，【舊】總指揮 11-08 第 2 項）：這一班有「新的」價格觸發（state.sent 多了 px| 鍵）→ 叫根因追蹤一次；
+      #   同一個台股日已有 docs/data/root_cause/<日期>.json、或根因追蹤已有手動觸發班在跑／排隊，就不叫。
+      - name: 有新的價格觸發就叫根因追蹤
+        if: success()
+        working-directory: site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 -c "import json;d=json.load(open('data/market_alert_state.json',encoding='utf-8'));print('\n'.join(k for k in d.get('sent',{}) if k.startswith('px|')))" > "$RUNNER_TEMP/px_after.txt" || exit 0
+          new=$(comm -13 <(sort -u "$RUNNER_TEMP/px_before.txt") <(sort -u "$RUNNER_TEMP/px_after.txt"))
+          echo "這一班新的價格觸發：${new:-（無）}"
+          [ -n "$new" ] || exit 0
+          tw=$(TZ=Asia/Taipei date +%F)
+          if [ -f "docs/data/root_cause/$tw.json" ]; then echo "台股日 $tw 已有根因追蹤結果，不重叫"; exit 0; fi
+          runs=$(curl -s -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/root_cause.yml/runs?created=>=$(date -u -d '12 hours ago' +%Y-%m-%dT%H:%M:%SZ)&per_page=20" \
+            | python3 -c "import json,sys;print(sum(1 for r in json.load(sys.stdin).get('workflow_runs',[]) if r.get('event')=='workflow_dispatch' and r.get('status')!='completed'))" 2>/dev/null || echo 0)
+          if [ "${runs:-0}" != "0" ]; then echo "根因追蹤已有 $runs 班在跑／排隊，不重叫"; exit 0; fi
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/root_cause.yml/dispatches" \
+            -d '{"ref":"main","inputs":{"cases":"","blind":"0","trigger":"market_alert"}}')
+          echo "叫根因追蹤（台股日 $tw）：HTTP $code（204＝成功）"
       # 11-06（總指揮）：任何一步失敗就推 TG（掉班＝超過 30 分鐘沒跑，由程式讀 state 的 ran 偵測、下一班推）
       - name: 失敗警告
         if: failure()
