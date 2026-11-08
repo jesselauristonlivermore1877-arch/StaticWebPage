@@ -4,7 +4,7 @@
 #   → docs/data/root_cause/<日期>.json；中間檔 data/root_cause/<日期>/（不對外）。最後跑盲測檢查（tests/root_cause_blind.py）。
 #   Gemini 走 GEMINI_API_KEY（api 線、heavy），額度狀態跟其他 workflow 共用 data/gemini_quota/。
 #   11-08（雲端H，【舊】總指揮 11-08 第 2 項）接正式排程：每天 07:30 台北（週一～五）對前一晚美股跑一次；
-#     market_alert 有新的價格觸發時也會叫一次（同一個台股日已有結果就不重跑）。沒給 cases 時：台股日＝今天（台北），美股日＝前一個平日。
+#     market_alert 有新的價格觸發時也會叫一次（同一個台股日已有結果就不重跑）。沒給 cases 時：台股日＝最近一個已收盤的平日（台北 14:00 前取前一個平日），美股日＝台股日的前一個平日。
 name: 根因追蹤
 
 on:
@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
     inputs:
       cases:
-        description: "台股日[:美股日]，逗號分隔（例 2026-11-06:2026-11-05）；留空＝今天（台北）＋前一個美股平日"
+        description: "台股日[:美股日]，逗號分隔（例 2026-11-06:2026-11-05）；留空＝最近已收盤的台股平日＋其前一個美股平日"
         required: false
         default: ""
       trigger:
@@ -41,10 +41,13 @@ jobs:
         env:
           CASES: ${{ inputs.cases }}
         run: |
+          # 11-08 實測（run 42440696476）：root_cause.py 要台股日當天已有加權指數，07:30 用「今天」會「不是台股交易日」→
+          #   台北 14:00 前取前一個平日、14:00 後取今天；美股日＝台股日的前一個平日（國定假日由程式擋，log 會寫）。
+          prevwd() { local d="$1"; while :; do d=$(date -d "$d -1 day" +%F); [ "$(date -d "$d" +%u)" -le 5 ] && { echo "$d"; return; }; done; }
           if [ -z "$CASES" ]; then
-            tw=$(TZ=Asia/Taipei date +%F); dow=$(TZ=Asia/Taipei date +%u)   # 1＝週一
-            back=1; [ "$dow" = 1 ] && back=3; [ "$dow" = 7 ] && back=2
-            us=$(TZ=Asia/Taipei date -d "$tw -$back day" +%F)
+            today=$(TZ=Asia/Taipei date +%F)
+            if [ "$(TZ=Asia/Taipei date +%H%M)" -ge 1400 ] && [ "$(date -d "$today" +%u)" -le 5 ]; then tw=$today; else tw=$(prevwd "$today"); fi
+            us=$(prevwd "$tw")
             CASES="$tw:$us"
           fi
           echo "觸發：${{ github.event_name }}（${{ inputs.trigger || '排程' }}）　cases=$CASES　台北 $(TZ=Asia/Taipei date '+%F %H:%M')"
