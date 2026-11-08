@@ -60,7 +60,7 @@
 
 ### 2. 根因追蹤接正式排程 —— 半成品：缺「寫進今日重點與緊急通知」
 - root_cause.yml：加 `cron "30 23 * * 0-4"`（台北週一～五 07:30）；cases 可留空，留空＝最近已收盤的台股平日（台北 14:00 前取前一個平日）＋其前一個美股平日。
-- 第一次實測 run **42440696476** 抓到問題：用「今天」→ `✗ 2026-11-08 不是台股交易日（加權指數沒有這天）`；已改（commit fc12d27），重跑 run 見 root_cause.yml 最新一班（雲端H 收尾時還在跑）。
+- 第一次實測 run **42440696476** 抓到問題：用「今天」→ `✗ 2026-11-08 不是台股交易日（加權指數沒有這天）`；已改（commit fc12d27），重跑 run **42441327934**（cases=2026-11-06:2026-11-05；雲端H 收尾時已跑數分鐘還在跑、沒有在交易日檢查失敗，結果請總指揮看該班）。
 - market_alert.yml：跑前／跑後比對 state.sent 的 `px|` 鍵，有新的價格觸發就 `workflow_dispatch` root_cause（cases 留空、trigger=market_alert）；同台股日已有 docs/data/root_cause/<日>.json、或已有手動班在跑／排隊就不叫。要 `permissions: actions: write`（已加）。尚未遇到真的價格觸發，**沒有實測 run**。
 - ⚠ 注意：07:30 那班分析的是「前一個台股日＋其前一晚美股」，不是「昨晚美股對今天台股」——root_cause.py 目前必須有台股當天價格。要「昨晚美股 → 今天開盤前」的版本，需雲端F 在 root_cause.py 加只看美股的模式。
 - **缺**：新根因寫進今日重點、緊急通知（market_alert.json 只能由 market_alert workflow 寫，今日重點由程式 repo 產）→ 需要 CustomerServiceANDSales（market_alert.py 讀 docs/data/root_cause/ 最新一份併進 items；今日重點同理）。
