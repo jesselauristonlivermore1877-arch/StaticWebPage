@@ -2,7 +2,7 @@
  "file": "2330_2026-11-06.md",
  "code": "2330",
  "date": "2026-11-06",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 24.75 倍，站上資料 21.7259"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",
