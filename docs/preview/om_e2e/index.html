@@ -27,13 +27,13 @@ code{background:var(--panel2);padding:0 4px;border-radius:4px;font-size:12px}
 </head>
 <body>
 <main>
-<h1>GEA 下單機完整測試清單（以 d9 為準）</h1>
-<div class="note">版本 20261101d9（11-05 晚出）。用同事的帳號從頭到尾走一遍：管理端產生開通碼 → 下載安裝 → 安裝精靈 0～6 步 → 輸入開通碼 → 連上中繼 → 訊號區只看得到有訂閱的策略 → 帳戶列顯示權益數 → 模擬（或同事自己同意的實單）→ 更新與解除安裝。每一步照表打勾；出錯就照「出錯時截什麼」截圖，連同 <code>C:\GEA_om\logs</code> 整個資料夾一起放進 _inbox 給 W。<span class="d9">d9</span> 標記＝d9 才有、d8 沒有的東西。</div>
+<h1>GEA 下單機完整測試清單（以 d10 為準）</h1>
+<div class="note">版本 20261106a（d10，11-06 出）。用同事的帳號從頭到尾走一遍：管理端產生開通碼 → 下載安裝 → 安裝精靈 0～6 步 → 輸入開通碼 → 連上中繼 → 訊號區只看得到有訂閱的策略 → 帳戶列顯示權益數 → 模擬（或同事自己同意的實單）→ 更新與解除安裝。每一步照表打勾；出錯就照「出錯時截什麼」截圖，連同 <code>C:\GEA_om\logs</code> 整個資料夾一起放進 _inbox 給 W。<span class="d9">d9</span> 標記＝d9 才有、d8 沒有的東西（d10 都有）；<span class="d9">d10</span> 標記＝d10 新改的地方。</div>
 
 <div class="stop">🔴 <b>停止點（一定要看）</b><br>
 ① <b>不准用 Evans 的國票正式帳號送任何委託</b>（模擬、實單都不行）；Evans 的帳號只能做第 8 步「帳戶列看權益數」這種只讀查詢。<br>
 ② 同事的帳號：<b>預設只做到第 9 步「模擬演練」就停</b>。第 10 步實單要同事本人在場、口頭同意、只下 1 口微台指（TMF）並當場平倉；沒有同意就跳過第 10 步，直接做第 11 步。<br>
-③ 交易時段（08:45～13:45、15:00～05:00）不要按「更新」，更新只在收盤後測。</div>
+③ d10 起<b>任何時間都能按「更新」</b>（不再擋交易時段）；有部位或在交易時段按，會先跳確認框，寫明更新期間約 30～60 秒不會跟單、裝完自動開回來並對帳。</div>
 
 <h2>測試前準備</h2>
 <div class="card scroll"><table>
@@ -54,7 +54,7 @@ code{background:var(--panel2);padding:0 4px;border-radius:4px;font-size:12px}
 <h2>B. 下載與安裝（同事的電腦）</h2>
 <div class="card scroll"><table>
 <tr><th>#</th><th>要點哪裡</th><th>應該看到什麼</th><th>出錯時截什麼</th><th>✓</th></tr>
-<tr><td>4</td><td>下載 <b>GEA_OM_Setup_20261101d9.exe</b>（Evans 給的連結：GitHub Release <code>om-20261101d9</code>）。按兩下執行；Windows 跳「保護您的電腦」→「其他資訊」→「仍要執行」。</td><td>安裝畫面標題寫 20261101d9；按「下一步」到「完成」，桌面出現「GEA 下單機」捷徑。</td><td>任何錯誤視窗；裝完後的「完成」頁。</td><td><input type="checkbox"></td></tr>
+<tr><td>4</td><td>下載 <b>GEA_OM_Setup_20261106a.exe</b>（Evans 給的連結：GitHub Release <code>om-20261106a</code>）。按兩下執行；Windows 跳「保護您的電腦」→「其他資訊」→「仍要執行」。</td><td>安裝畫面標題寫 20261106a；按「下一步」到「完成」，桌面出現「GEA 下單機」捷徑。</td><td>任何錯誤視窗；裝完後的「完成」頁。</td><td><input type="checkbox"></td></tr>
 </table></div>
 
 <h2>C. 安裝精靈 0～6 步（裝完會自動開；之後也可以從桌面捷徑開）</h2>
@@ -72,10 +72,10 @@ code{background:var(--panel2);padding:0 4px;border-radius:4px;font-size:12px}
 <h2>D. 主畫面</h2>
 <div class="card scroll"><table>
 <tr><th>#</th><th>要點哪裡</th><th>應該看到什麼</th><th>出錯時截什麼</th><th>✓</th></tr>
-<tr><td>6</td><td>看主畫面上方的連線狀態。</td><td>「中繼：已連線」綠燈；左下角版本 20261101d9。斷線會自己重連（1、2、4…最多 30 秒一次）；連續斷 3 分鐘會發 TG <span class="d9">d9</span>。</td><td>連線狀態那一列；日誌「系統」分頁最後 20 行。</td><td><input type="checkbox"></td></tr>
-<tr><td>7</td><td>看策略表（訊號區）。</td><td><b>只有</b>P3 訂閱的策略，其他策略看不到。欄位：策略、商品、部位、<b>成本</b> <span class="d9">d9</span>、倍數、跟單、日誌、設定。</td><td>整張策略表；多出或少了哪支策略寫下來。</td><td><input type="checkbox"></td></tr>
+<tr><td>6</td><td>看主畫面上方的連線狀態。</td><td>「中繼：已連線」綠燈；左下角版本 20261106a。斷線會自己重連（1、2、4…最多 30 秒一次）；連續斷 3 分鐘會發 TG <span class="d9">d9</span>。</td><td>連線狀態那一列；日誌「系統」分頁最後 20 行。</td><td><input type="checkbox"></td></tr>
+<tr><td>7</td><td>看策略表（訊號區）。</td><td><b>只有</b>P3 訂閱的策略，其他策略看不到。欄位：策略、商品、部位、<b>成本</b> <span class="d9">d9</span>、倍數、跟單、日誌、設定。<b>「跟單」關掉的策略，收到訊號也不得有任何委託或拒單</b>（日誌只記收到、不下單）<span class="d9">d10</span>。</td><td>整張策略表；多出或少了哪支策略寫下來。</td><td><input type="checkbox"></td></tr>
 <tr><td>8</td><td>看帳戶區上方的「帳戶」列 <span class="d9">d9</span>。</td><td>模擬模式：「占用保證金 X（估算：期交所原始保證金 × 口數）　權益數 —（模擬沒有券商帳戶）」。切到實單後：「權益數 X　占用保證金 X　可用保證金 X｜HH:mm:ss 更新」，開機、每次成交後、每 60 秒更新。查詢失敗整列變灰，保留上一次的值並寫時間。</td><td>帳戶列＋日誌「系統」分頁（查詢失敗原因在那裡）。</td><td><input type="checkbox"></td></tr>
-<tr><td>9</td><td>模擬：等下一個訊號（或請 Evans 從傳送端送一筆測試訊號）。</td><td>日誌出現「收到訊號 → 模擬下單 → 模擬成交」；策略表部位變了，「成本」欄出現成交價；帳戶列的占用保證金跟著變（估算）。</td><td>策略表＋該策略的日誌。</td><td><input type="checkbox"></td></tr>
+<tr><td>9</td><td>模擬：等下一個訊號（或請 Evans 從傳送端送一筆測試訊號）。</td><td>日誌出現「收到訊號 → 模擬下單 → 模擬成交」；策略表部位變了，「成本」欄出現成交價；帳戶列的占用保證金跟著變（估算）。<b>「跟單」關掉的策略同一筆訊號不得出現任何委託或拒單</b>（只記收到）<span class="d9">d10</span>。</td><td>策略表＋該策略的日誌。</td><td><input type="checkbox"></td></tr>
 </table></div>
 
 <div class="stop">🔴 <b>停止點</b>：沒有同事本人當面同意就到這裡為止，跳到第 11 步。<b>Evans 的帳號永遠不做第 10 步。</b></div>
@@ -85,12 +85,12 @@ code{background:var(--panel2);padding:0 4px;border-radius:4px;font-size:12px}
 <tr><td>10</td><td>（選做，同事本人同意才做）設定 →「跟單」改實單，倍數設最小、商品微台指（TMF）1 口；等訊號或請 Evans 送一筆測試訊號，成交後立刻在國票 App 確認並平倉。</td><td>國票 App 看得到同一筆委託與成交；主畫面部位、成本、帳戶列（權益數、占用保證金）都在 60 秒內更新。平倉後部位 0、成本變「—」。</td><td>主畫面＋國票 App 成交回報（帳號可遮）。</td><td><input type="checkbox"></td></tr>
 </table></div>
 
-<h2>E. 更新與解除安裝（收盤後）</h2>
+<h2>E. 更新與解除安裝（d10 任何時間都能更新）</h2>
 <div class="card scroll"><table>
 <tr><th>#</th><th>要點哪裡</th><th>應該看到什麼</th><th>出錯時截什麼</th><th>✓</th></tr>
-<tr><td>11</td><td>（有新版時）主畫面左下角「更新」。交易時段按只會提示「收盤後再更新」。</td><td>收盤後按：下載 → SHA256 驗證 → 關掉下單機 → 安裝 → 自動開回來，左下角變新版號；TG 收到「✓ 更新完成」。任何一步失敗都會開回舊版並發 TG。</td><td><code>C:\GEA_om\logs</code> 的 upgrade_*.log、order_*.log；%TEMP% 裡最新的「Setup Log *.txt」。</td><td><input type="checkbox"></td></tr>
+<tr><td>11</td><td>（有新版時）主畫面左下角「更新」，任何時間都能按 <span class="d9">d10</span>。<b>帶部位按「更新」會跳確認框，按「取消」就不更新</b>（下單機照常跑、版號不變、部位不動）<span class="d9">d10</span>；先按一次取消確認這點，再按「確定」走完更新。</td><td>按確定後：下載 → SHA256 驗證 → 關掉下單機 → 安裝 → 自動開回來，左下角變新版號；TG 收到「✓ 更新完成」。任何一步失敗都會開回舊版並發 TG。</td><td><code>C:\GEA_om\logs</code> 的 upgrade_*.log、order_*.log；%TEMP% 裡最新的「Setup Log *.txt」。</td><td><input type="checkbox"></td></tr>
 <tr><td>12</td><td>解除安裝：Windows「設定 → 應用程式」→ 找「GEA 下單機」→「解除安裝」。</td><td>程式與捷徑移除；<code>C:\GEA_om\logs</code> 和設定檔保留（方便再裝）。管理頁上這個客戶的裝置會在下次心跳逾時後顯示離線。</td><td>解除安裝的錯誤視窗。</td><td><input type="checkbox"></td></tr>
-<tr><td>13</td><td>（選做）重新安裝 d9 → 精靈第 3 步用同一組開通碼。</td><td>同一台電腦、同一個身分證可以重新綁定；換身分證會被擋（4013）。</td><td>錯誤碼那一頁。</td><td><input type="checkbox"></td></tr>
+<tr><td>13</td><td>（選做）重新安裝 d10 → 精靈第 3 步用同一組開通碼。</td><td>同一台電腦、同一個身分證可以重新綁定；換身分證會被擋（4013）。</td><td>錯誤碼那一頁。</td><td><input type="checkbox"></td></tr>
 </table></div>
 
 <h2>回報方式</h2>
