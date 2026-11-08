@@ -206,7 +206,13 @@
     "prev_d": "2026-11-02",
     "src": "日K庫"
    },
-   "pre": null,
+   "pre": {
+    "from_d": "2026-11-02",
+    "from": 772.0,
+    "to_d": "2026-11-06",
+    "to": 624.0,
+    "chg": -19.17
+   },
    "pre_sent": true
   },
   {
@@ -238,7 +244,13 @@
     "prev_d": "2026-11-03",
     "src": "日K庫"
    },
-   "pre": null,
+   "pre": {
+    "from_d": "2026-11-03",
+    "from": 66.0,
+    "to_d": "2026-11-06",
+    "to": 56.099998474121094,
+    "chg": -15.0
+   },
    "more": [
     {
      "quote": "群電看AI伺服器電源明年倍增，泰國擴產支應需求- 新聞",
@@ -293,7 +305,13 @@
     "prev_d": "2026-11-04",
     "src": "日K庫"
    },
-   "pre": null,
+   "pre": {
+    "from_d": "2026-11-04",
+    "from": 204.5,
+    "to_d": "2026-11-06",
+    "to": 185.5,
+    "chg": -9.29
+   },
    "pre_sent": true
   },
   {
@@ -348,10 +366,16 @@
     "prev_d": "2026-11-04",
     "src": "日K庫"
    },
-   "pre": null
+   "pre": {
+    "from_d": "2026-11-04",
+    "from": 201.0,
+    "to_d": "2026-11-06",
+    "to": 164.5,
+    "chg": -18.16
+   }
   }
  ],
- "asof": "2026-11-08T09:07+00:00",
+ "asof": "2026-11-08T10:11+00:00",
  "body": {
   "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9XMEJTZ3FtNEp3ZDlIMzJoZExULTctZTBSSXU0MmE2YUh0U1M5LWsySEFOalRRQ1RULS11UU52VXJPSlltZlp5SzdxV200UGt00gFWQVVfeXFMUEk4XzhjTEcyWnFHZXVrNHByMklwbHQzSEtTTmZucVpkdnJCekp5YXJUYkhlenhrcmtIZDdXTGFoV3g1ZUdFTWxaZDBkZjQ4Q0JONFQwakE?oc=5": {
    "r": "ok",
