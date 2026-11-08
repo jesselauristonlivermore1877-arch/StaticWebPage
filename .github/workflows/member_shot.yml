@@ -1,0 +1,89 @@
+# member_shot.yml ─ 會員站「雲端驗收」帳號截圖（W 11-08 新窗 A4；【舊】總指揮 11-08 16:40）
+#   登入 → 看盤區、訊號區、盤中資金，各截 390／768／1366 三種寬度 → 上傳 artifact。雲端與總指揮可自己觸發、看圖。
+#   secrets（Evans 同意後由 W 設；值不印進 log）：
+#     MEMBER_SHOT_KEY        一般會員版「雲端驗收」的登入連結 k 值（/login?k=… 的 k）
+#     MEMBER_SHOT_KEY_ADMIN  管理者版的 k 值（who=admin 時用）
+#   登入方式跟真人一樣：開 /login?k=… → 按「進入會員區」→ 拿到 gea_s cookie。每跑一次佔一個裝置名額（上限 3／管理者 6，舊的會被擠掉，不影響別人）。
+#   截圖只在 artifact（保留 7 天）；log 只印頁面標題、頁籤是否看得到、截圖檔名。
+name: 會員站驗收截圖
+
+on:
+  workflow_dispatch:
+    inputs:
+      who:
+        description: "member＝一般會員版（訂 GEA5／GEA6）；admin＝管理者版"
+        required: false
+        default: "member"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: member-shot
+  cancel-in-progress: false
+
+jobs:
+  shot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.23.3"
+      - name: 安裝 Playwright（Chromium）
+        run: |
+          npm i --no-save playwright@1.48.2 >/dev/null 2>&1
+          npx playwright install --with-deps chromium >/dev/null 2>&1
+      - name: 登入並截圖
+        env:
+          K_MEMBER: ${{ secrets.MEMBER_SHOT_KEY }}
+          K_ADMIN: ${{ secrets.MEMBER_SHOT_KEY_ADMIN }}
+          WHO: ${{ inputs.who }}
+        run: |
+          cat > shot.mjs <<'JS'
+          import { chromium } from "playwright";
+          import fs from "fs";
+          const BASE = "https://gea-member.jesselauristonlivermore1877.workers.dev";
+          const who = process.env.WHO === "admin" ? "admin" : "member";
+          const k = (who === "admin" ? process.env.K_ADMIN : process.env.K_MEMBER || "").trim();
+          if (!k) { console.log(`::error::沒設 ${who === "admin" ? "MEMBER_SHOT_KEY_ADMIN" : "MEMBER_SHOT_KEY"}（要 Evans 同意後由 W 設）`); process.exit(1); }
+          fs.mkdirSync("shots", { recursive: true });
+          const b = await chromium.launch();
+          const ctx = await b.newContext({ locale: "zh-TW", timezoneId: "Asia/Taipei" });
+          const pg = await ctx.newPage();
+          const errs = [];
+          pg.on("pageerror", e => errs.push(String(e).slice(0, 200)));
+          await pg.goto(BASE + "/login?k=" + encodeURIComponent(k), { waitUntil: "domcontentloaded" });
+          await Promise.all([pg.waitForNavigation({ waitUntil: "load" }).catch(() => {}), pg.click("form[action='/login'] button")]);
+          const ok = (await ctx.cookies()).some(c => c.name === "gea_s" && c.value);
+          console.log(ok ? "✓ 已登入（取得 session）" : "✗ 沒拿到 session");
+          if (!ok) { await pg.screenshot({ path: "shots/login_fail.png" }); await b.close(); process.exit(1); }
+          const tabs = [["watch", "看盤區"], ["signal", "訊號區"], ["flow", "盤中資金"]];
+          let bad = 0;
+          for (const w of [390, 768, 1366]) {
+            await pg.setViewportSize({ width: w, height: w < 500 ? 844 : w < 1000 ? 1024 : 900 });
+            await pg.goto(BASE + "/", { waitUntil: "networkidle" }).catch(() => {});
+            await pg.waitForTimeout(2500);
+            for (const [p, name] of tabs) {
+              const btn = pg.locator(`nav button[data-p='${p}']`).first();
+              const vis = await btn.isVisible().catch(() => false);
+              if (!vis) { console.log(`✗ ${w}px ${name}：頁籤看不到`); bad++; continue; }
+              await btn.click(); await pg.waitForTimeout(3000);
+              const f = `shots/${who}_${p}_${w}.png`;
+              await pg.screenshot({ path: f, fullPage: true });
+              const sw = await pg.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
+              console.log(`✓ ${w}px ${name} → ${f}${sw ? "（⚠ 有橫向捲動）" : ""}`);
+            }
+          }
+          console.log("頁面 JS 錯誤：", errs.length ? errs.join(" | ") : "無");
+          await b.close();
+          process.exit(bad ? 1 : 0);
+          JS
+          node shot.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: member_shot_${{ inputs.who }}_${{ github.run_id }}
+          path: shots/
+          retention-days: 7
+          if-no-files-found: ignore
