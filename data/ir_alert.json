@@ -93,53 +93,6 @@
    "pre_sent": "略過（觸發太晚或已過太久）"
   },
   {
-   "code": "2308",
-   "quote": "《電零組》台達電AI業務營收占比達50% 液冷散熱今年營收有望倍增- 上市櫃",
-   "pat": "翻倍",
-   "val": null,
-   "frag": "倍增",
-   "src": "旺得富理財網",
-   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5TQmlvNHZnc2dDRFIwWlZqYlFCTHZYQ24wcWh4M2ZmOXNBTmtXRFZoQU95Ml9rT1JsNTN5M0ZhbWtTUm1tTTE1NTNiaDNuUE1kWW9Xb1lxT1pTYXF2ZUlFM2loUzVZdFU2bUE?oc=5",
-   "pub": "2026-10-30T00:39+00:00",
-   "kind": "news",
-   "title": "《電零組》台達電AI業務營收占比達50% 液冷散熱今年營收有望倍增- 上市櫃",
-   "key": "2308_2026-10-29",
-   "name": "台達電",
-   "meeting": "2026-10-29",
-   "seen": "2026-10-30T05:37+00:00",
-   "px": {
-    "d": "2026-10-29",
-    "close": 1480.0,
-    "chg": -4.52
-   },
-   "sent": true,
-   "mx": {
-    "d": "2026-10-29",
-    "close": 1480.0,
-    "chg": -4.52,
-    "prev": 1550.0,
-    "prev_d": "2026-10-28",
-    "src": "日K庫"
-   },
-   "more": [
-    {
-     "quote": "《電零組》台達電AI業務營收占比達50% 液冷散熱今年營收有望倍增",
-     "src": "中時新聞網",
-     "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBxY1Y2V3ZvTUlKM0p5ZDFtSVl3SElyWF9ZQXdhekVIeEtxWXptbVdmcnBJN0FGblhtcll5NzZaOVBadGNFMnZXZmpmckQtYUg2bTNqZ1RMMVN3dUNGSjRZUmViOFkzenp1ZC11VHFR?oc=5",
-     "pub": "2026-10-30T00:39+00:00",
-     "kind": "news"
-    }
-   ],
-   "pre": {
-    "from_d": "2026-10-28",
-    "from": 1550.0,
-    "to_d": "2026-11-03",
-    "to": 1270.0,
-    "chg": -18.06
-   },
-   "pre_sent": true
-  },
-  {
    "code": "6271",
    "quote": "同欣電三大業務齊衝 FAU明年拚高速成長",
    "pat": "明年大幅成長",
@@ -422,7 +375,7 @@
    }
   }
  ],
- "asof": "2026-11-08T06:27+00:00",
+ "asof": "2026-11-08T07:11+00:00",
  "body": {
   "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9XMEJTZ3FtNEp3ZDlIMzJoZExULTctZTBSSXU0MmE2YUh0U1M5LWsySEFOalRRQ1RULS11UU52VXJPSlltZlp5SzdxV200UGt00gFWQVVfeXFMUEk4XzhjTEcyWnFHZXVrNHByMklwbHQzSEtTTmZucVpkdnJCekp5YXJUYkhlenhrcmtIZDdXTGFoV3g1ZUdFTWxaZDBkZjQ4Q0JONFQwakE?oc=5": {
    "r": "ok",
@@ -437,9 +390,9 @@
    "v": 2
   },
   "https://news.google.com/rss/articles/CBMiakFVX3lxTE5TQmlvNHZnc2dDRFIwWlZqYlFCTHZYQ24wcWh4M2ZmOXNBTmtXRFZoQU95Ml9rT1JsNTN5M0ZhbWtTUm1tTTE1NTNiaDNuUE1kWW9Xb1lxT1pTYXF2ZUlFM2loUzVZdFU2bUE?oc=5": {
-   "r": "err",
-   "why": "打不開：ValueError HTTP 403",
-   "at": "2026-11-08T06:27+00:00",
+   "r": "no",
+   "why": "指引句不是公司說的（記者整理／推算或沒有說話的人）：「AI資料中心成為台達電營運高成長主要推手，受惠於AI資料中心電源/散熱(液冷散熱)/零組件/基礎設施需求強勁，四大產品線業績快速成長，其中液冷散熱部分，2025」（https://wantrich.chinatimes.com/news/20261030900101-420101）",
+   "at": "2026-11-08T07:11+00:00",
    "v": 2
   },
   "https://www.ctee.com.tw/news/20261030701598-430502": {
