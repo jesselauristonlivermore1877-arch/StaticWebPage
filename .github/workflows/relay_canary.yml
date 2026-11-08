@@ -1,0 +1,87 @@
+# relay_canary.yml ─ 中繼監控接收端（w_office）比對（W 11-08 新窗 A3；雲端I 盤點第 5 條）
+#   每天台北 08:30、14:50：中繼 gea 頻道「上架策略清單」vs w_office 的訂閱、下單機版號、在線狀態。
+#   不一致或 w_office 離線 → TG（同一份 TG_BOT_TOKEN／TG_CHAT_ID）；一致只印 log。
+#   只讀：只打 /admin/state，不改任何設定、不送訊號。RELAY_ADMIN_TOKEN 跟 cloudflare_relay.yml 一樣從 D1 gea-relay-keys 取，log 遮罩。
+#   版號基準＝本 repo cloudflare/relay/version.json 的 ver（中繼 /version 發的那一版）。
+name: 中繼監控接收端比對
+
+on:
+  schedule:
+    - cron: "30 0 * * *"     # 台北 08:30
+    - cron: "50 6 * * *"     # 台北 14:50
+  workflow_dispatch:
+    inputs:
+      canary_id:
+        description: "監控接收端代號"
+        required: false
+        default: "w_office"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: relay-canary
+  cancel-in-progress: false
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+      TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+      CANARY_ID: ${{ inputs.canary_id || 'w_office' }}
+      DB: gea-relay-keys
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: cloudflare/relay/version.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.23.3"
+      - name: 取 RELAY_ADMIN_TOKEN（D1，只讀）
+        run: |
+          set -o pipefail
+          npm i -g wrangler@4.147.0 >/dev/null 2>&1
+          V=$(wrangler d1 execute "$DB" --remote --json --command "SELECT value FROM keys WHERE name='RELAY_ADMIN_TOKEN'" | python3 -c "import json,sys; r=json.load(sys.stdin)[0]['results']; print(r[0]['value'] if r else '')")
+          [ -n "$V" ] || { echo "::error::D1 沒有 RELAY_ADMIN_TOKEN"; exit 1; }
+          echo "::add-mask::$V"
+          echo "RELAY_ADMIN_TOKEN=$V" >> "$GITHUB_ENV"
+      - name: 比對上架策略 vs 監控接收端
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.parse, urllib.request
+          W = "https://gea-signal-relay.jesselauristonlivermore1877.workers.dev"
+          H = {"Authorization": "Bearer " + os.environ["RELAY_ADMIN_TOKEN"], "User-Agent": "gea-relay-admin/1.0"}
+          cid = os.environ["CANARY_ID"]
+          want_ver = json.load(open("cloudflare/relay/version.json", encoding="utf-8")).get("ver", "")
+          st = json.load(urllib.request.urlopen(urllib.request.Request(W + "/admin/state?ch=gea", None, H), timeout=30))
+          listed = sorted(s["code"] for s in st["strategies"] if s.get("listed"))
+          u = next((x for x in st["users"] if x["id"] == cid), None)
+          bad = []
+          if not u:
+              bad.append("中繼沒有 %s 這個用戶" % cid)
+          else:
+              raw = (u.get("subs") or "").strip()
+              subs = {x.strip() for x in raw.replace("，", ",").split(",") if x.strip()}
+              allsub = raw in ("*", "**") or "*" in subs
+              miss = [] if allsub else [c for c in listed if c not in subs]
+              print("上架策略：%s" % ",".join(listed))
+              print("%s：subs=%s ver=%s online=%s enabled=%s off=%s last_seen=%s" % (cid, raw or "（空）", u.get("ver"), u.get("online"), u.get("enabled"), u.get("off"), u.get("last_seen")))
+              print("版號基準（version.json）：%s" % want_ver)
+              if miss: bad.append("訂閱缺：%s（目前 %s）" % (",".join(miss), raw or "空"))
+              if want_ver and want_ver not in (u.get("ver") or ""): bad.append("版號 %s ≠ 中繼發布版 %s" % (u.get("ver") or "未回報", want_ver))
+              if not u.get("online"): bad.append("離線（最後上線 %s）" % (u.get("last_seen") or "無紀錄"))
+              if not u.get("enabled") or u.get("off"): bad.append("用戶停用／不在服務期（%s）" % (u.get("off") or "enabled=false"))
+          if not bad:
+              print("✓ 一致"); raise SystemExit(0)
+          txt = "✗ 中繼監控接收端 %s 跟上架清單不一致：\n- %s\n上架：%s" % (cid, "\n- ".join(bad), ",".join(listed))
+          print(txt)
+          tok, chat = os.environ.get("TG_BOT_TOKEN", "").strip(), os.environ.get("TG_CHAT_ID", "").strip()
+          if tok and chat:
+              urllib.request.urlopen("https://api.telegram.org/bot%s/sendMessage" % tok, urllib.parse.urlencode({"chat_id": chat, "text": txt}).encode(), timeout=15).read()
+              print("已發 TG")
+          raise SystemExit(1)
+          PY
