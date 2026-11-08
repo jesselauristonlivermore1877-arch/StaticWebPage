@@ -85,7 +85,8 @@ jobs:
           echo "這一班新的價格觸發：${new:-（無）}"
           [ -n "$new" ] || exit 0
           tw=$(TZ=Asia/Taipei date +%F)
-          if [ -f "docs/data/root_cause/$tw.json" ]; then echo "台股日 $tw 已有根因追蹤結果，不重叫"; exit 0; fi
+          # 11-08（雲端H2，第 27 條）：07:30 盤前班寫的是 mode=us_only（只看美股），不算「已有結果」——盤中價格觸發照樣要叫完整班
+          if [ -f "docs/data/root_cause/$tw.json" ] && ! grep -q '"mode": *"us_only"' "docs/data/root_cause/$tw.json"; then echo "台股日 $tw 已有根因追蹤結果，不重叫"; exit 0; fi
           runs=$(curl -s -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
             "https://api.github.com/repos/${{ github.repository }}/actions/workflows/root_cause.yml/runs?created=>=$(date -u -d '12 hours ago' +%Y-%m-%dT%H:%M:%SZ)&per_page=20" \
             | python3 -c "import json,sys;print(sum(1 for r in json.load(sys.stdin).get('workflow_runs',[]) if r.get('event')=='workflow_dispatch' and r.get('status')!='completed'))" 2>/dev/null || echo 0)

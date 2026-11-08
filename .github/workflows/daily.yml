@@ -256,6 +256,9 @@ jobs:
         timeout-minutes: 5
         env:
           PYTHONUNBUFFERED: "1"
+          # 11-09（【舊】總指揮代推，雲端G2（六）2）：edm_fit_check 過半判超出＝檢查異常時要發 TG
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
         run: python tools/pick_edm.py ../site ../site/docs/data/pick_edm.json
 
       # 🟢 11-05 晚（雲端A，總指揮 A3）：疊圖三張（融資維持率 × 指數、委買委賣每筆張數＋電金比、市場結構轉變）→ docs/data/mkt_overlay.json

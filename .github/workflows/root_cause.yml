@@ -44,6 +44,10 @@ jobs:
           # 11-08 實測（run 42440696476）：root_cause.py 要台股日當天已有加權指數，07:30 用「今天」會「不是台股交易日」→
           #   台北 14:00 前取前一個平日、14:00 後取今天；美股日＝台股日的前一個平日（國定假日由程式擋，log 會寫）。
           prevwd() { local d="$1"; while :; do d=$(date -d "$d -1 day" +%F); [ "$(date -d "$d" +%u)" -le 5 ] && { echo "$d"; return; }; done; }
+          # 11-08（雲端H2，第 27 條）：07:30 排程班＝只看昨晚美股（--us-only，台股日＝今天、還沒開盤）；手動／market_alert 照舊
+          if [ "${{ github.event_name }}" = "schedule" ] && [ -z "$CASES" ]; then
+            CASES=$(TZ=Asia/Taipei date +%F); echo "US_ONLY=1" >> "$GITHUB_ENV"
+          fi
           if [ -z "$CASES" ]; then
             today=$(TZ=Asia/Taipei date +%F)
             if [ "$(TZ=Asia/Taipei date +%H%M)" -ge 1400 ] && [ "$(date -d "$today" +%u)" -le 5 ]; then tw=$today; else tw=$(prevwd "$today"); fi
@@ -83,7 +87,7 @@ jobs:
           for c in "${L[@]}"; do
             tw="${c%%:*}"; us=""; [[ "$c" == *:* ]] && us="${c#*:}"
             echo "::group::根因追蹤 $tw ${us:+（美股 $us）}"
-            python tools/root_cause.py --site ../StaticWebPage --tw "$tw" ${us:+--us "$us"} || echo "✗ $tw 失敗（繼續下一個）"
+            python tools/root_cause.py --site ../StaticWebPage --tw "$tw" ${us:+--us "$us"} ${US_ONLY:+--us-only} || echo "✗ $tw 失敗（繼續下一個）"
             echo "::endgroup::"
           done
       - name: 盲測檢查
@@ -101,6 +105,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/gemini_quota data/root_cause docs/data/root_cause 2>/dev/null || true
           if git diff --staged --quiet; then echo "沒有變動"; exit 0; fi
-          git commit -qm "data: 根因追蹤（${{ inputs.trigger || '排程' }}）$(TZ=Asia/Taipei date '+%F %H:%M')：$CASES"
+          git commit -qm "data: 根因追蹤（${{ inputs.trigger || '排程' }}${US_ONLY:+・盤前只看美股}）$(TZ=Asia/Taipei date '+%F %H:%M')：$CASES"
           for i in 1 2 3 4; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep $((2 ** i)); done
           exit 1
