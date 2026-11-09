@@ -45,7 +45,7 @@
 //     g 身分證綁定（11-01 21:00 B）：客戶端送 idh＝SHA-256("GEA-ID|"+身分證大寫)（不送明碼）＋本機遮好的 idm（F12****789）＋模式 real|sim
 //       （/redeem body 的 idh／idm；ws 用 header X-Gea-Idh／X-Gea-Idm／X-Gea-Mode）。中繼再加頻道 salt：sh＝SHA-256(salt+"|"+idh)，只存 sh＋遮罩。
 //       ① 代號還沒綁 → 第一次帶 idh 的兌換或連線就綁上；已綁 → 帶的對不上（或沒帶）→ 兌換回 403、連線以 4013 關閉（接收端顯示「身分證與開通時不同，請聯絡營業員」）＋TG Evans。
-//       ② 同一個 sh、兩個代號同時在線、訂閱有重疊 → 後連上的以 4014 關閉＋TG；sh 標成管理者（/admin/idadmin）→ 可多台，但重疊的策略同時只能一台 real、其他要 sim。
+//       ② 同一個 sh、兩個代號同時在線、訂閱有重疊 → 兩台都是 real 才以 4014 關閉後連上的＋TG（11-09 起不分管理者；其他台用 sim 可以）。
 //       ③ 一個代號多個身分證：只有 Evans 在管理頁加（POST /admin/bind {idh, idm}，管理頁在瀏覽器算 idh、不送明碼）；POST /admin/unbind {sh} 解除。
 //     h 管理頁登入（11-01 21:00 C）：管理頁按「用 TG 登入」（POST /login_req）或 Evans 傳 bot「/登入」→ 一次性連結 /login?t=…（10 分鐘、用一次；GET 只顯示按鈕，POST 才用掉）
 //       → 12 小時 cookie gea_radm（HttpOnly、SameSite=Strict；寫入動作另要 header x-gea-admin: 1）。Bearer RELAY_ADMIN_TOKEN 照舊可用（Actions 用）。
@@ -459,14 +459,14 @@ export class Relay extends DurableObject {
   // 同一身分證、別的代號在線且訂閱重疊 → 回原因（管理者身分證：只擋兩台都是 real）
   dupCheck(id, sh, mode, U) {
     if (!sh) return null;
-    const admin = this.isIdAdmin(sh);
+    // 11-09（Evans 同意）：不分管理者，兩台都是 real 才擋；d11 收到 4014 會自動改 sim 重連
     for (const ws of this.live("sub")) {
       const a = ws.deserializeAttachment() || {};
       if (a.id === id || a.sh !== sh) continue;
       const ov = Relay.overlap(U[id] && U[id].subs, U[a.id] && U[a.id].subs);
       if (!ov.length) continue;
-      if (admin && (mode !== "real" || a.mode !== "real")) continue;
-      return `同一身分證的代號 ${a.id} 已在線` + (admin ? "且是真單" : "") + `，又訂了同一支策略（${ov.slice(0, 5).join(",")}）` + (admin ? "；管理者多台時其他台要用模擬" : "");
+      if (mode !== "real" || a.mode !== "real") continue;
+      return `同一身分證的代號 ${a.id} 已在線且是真單，又訂了同一支策略（${ov.slice(0, 5).join(",")}）；同時只能一台真單，其他台要用模擬`;
     }
     return null;
   }

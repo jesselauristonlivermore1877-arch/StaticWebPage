@@ -1,0 +1,106 @@
+# site_smoke.yml ─ 正式站每日自動巡檢（雲端N 11-09；程式 CustomerServiceANDSales/tools/site_smoke.js）
+#   草稿放在程式 repo 的 ci/，請【舊】總指揮原樣複製到 StaticWebPage/.github/workflows/site_smoke.yml（雲端N 沒有 StaticWebPage 寫入權）。
+#   什麼時候跑：「每日戰情更新」跑完（成功才跑，等 Pages 上線 3 分鐘）＋每天台北 08:00。
+#   做什麼：Playwright 點遍頁籤（1366 全部子列；390／768 頂層＋第一層），跟上一次「通過」的結果比：
+#     某一格新出現 空白／0 則／沒有資料／NaN／undefined／載入中卡住／畫不出來、console 錯、HTTP ≥ 400、
+#     資料日過舊（> 4 天；程式策略 > 10 天）、內容大減（掉 70% 以上）、整格不見 → 發 TG。
+#   產出：docs/data/site_smoke.json（每次）；data/site_smoke_base.json（通過才更新，當下一次的基準；不對外）。
+name: 正式站巡檢
+
+on:
+  workflow_run:
+    workflows: ["每日戰情更新"]
+    types: [completed]
+  schedule:
+    - cron: "0 0 * * *"     # 台北 08:00
+  workflow_dispatch:
+    inputs:
+      widths:
+        description: "要跑的寬度（逗號分隔）"
+        required: false
+        default: "1366,390,768"
+      rebase:
+        description: "1＝這次結果直接當新基準（人工確認過、版面大改後用）"
+        required: false
+        default: "0"
+
+concurrency:
+  group: site-smoke
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  smoke:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: 取網站 repo
+        uses: actions/checkout@v4
+        with:
+          path: site
+      - name: 取程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          path: code
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: 裝 Playwright（只裝 chromium）
+        run: |
+          cd code && npm init -y >/dev/null && npm i --no-save playwright@1 >/dev/null
+          npx playwright install --with-deps chromium
+      - name: 等 Pages 上線
+        if: ${{ github.event_name == 'workflow_run' }}
+        run: sleep 180
+      - name: 巡檢
+        id: run
+        run: |
+          cd code
+          W="${{ github.event.inputs.widths }}"; [ -z "$W" ] && W="1366,390,768"
+          B=""; [ -f ../site/data/site_smoke_base.json ] && [ "${{ github.event.inputs.rebase }}" != "1" ] && B="--baseline ../site/data/site_smoke_base.json"
+          set +e
+          node tools/site_smoke.js --widths "$W" --deep 1366 --out ../site/docs/data/site_smoke.json $B | tee ../smoke.log
+          rc=${PIPESTATUS[0]}
+          set -e
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          [ "$rc" = 2 ] && exit 1 || true
+      - name: 通過 → 更新基準
+        if: ${{ steps.run.outputs.rc == '0' || github.event.inputs.rebase == '1' }}
+        run: |
+          mkdir -p site/data && cp site/docs/data/site_smoke.json site/data/site_smoke_base.json
+      - name: 有新壞的 → 發 TG
+        if: ${{ steps.run.outputs.rc == '1' }}
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          python3 - <<'EOF'
+          import json, os, urllib.request, urllib.parse
+          d = json.load(open("site/docs/data/site_smoke.json", encoding="utf-8"))
+          R = d.get("regress") or []
+          lines = [f"⚠ 正式站巡檢：{len(R)} 格新壞（{d.get('tw','')}）"]
+          for x in R[:15]:
+              why = "；".join([*(x.get("flags") or []), ("過舊 " + x["stale"]) if x.get("stale") else "", *(x.get("http") or [])[:1], *(x.get("console") or [])[:1]])
+              lines.append(f"・[{x['width']}] {x['path']}：{why.strip('；')[:120]}")
+          if len(R) > 15: lines.append(f"…還有 {len(R) - 15} 格，見 docs/data/site_smoke.json")
+          lines.append("先加 print 定位、不要猜；屬雲端的直接修，屬本機的寫 TODO 請 W。")
+          tok, chat = os.environ.get("TG_BOT_TOKEN"), os.environ.get("TG_CHAT_ID")
+          if not tok or not chat:
+              print("沒有 TG_BOT_TOKEN／TG_CHAT_ID，只印出：\n" + "\n".join(lines)); raise SystemExit(0)
+          body = urllib.parse.urlencode({"chat_id": chat, "text": "\n".join(lines)[:4000], "disable_web_page_preview": "true"}).encode()
+          print(urllib.request.urlopen(f"https://api.telegram.org/bot{tok}/sendMessage", body, timeout=30).status)
+          EOF
+      - name: commit＋push
+        run: |
+          cd site
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/site_smoke.json data/site_smoke_base.json 2>/dev/null || git add docs/data/site_smoke.json
+          git diff --cached --quiet && { echo "沒有變動"; exit 0; }
+          git commit -q -m "data: 正式站巡檢（rc=${{ steps.run.outputs.rc }}）"
+          for i in 1 2 3 4; do git pull -q --rebase origin main && git push -q origin HEAD:main && break; sleep $((2**i)); done
