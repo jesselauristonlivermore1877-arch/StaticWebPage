@@ -247,9 +247,9 @@
    "pre": {
     "from_d": "2026-11-03",
     "from": 66.0,
-    "to_d": "2026-11-06",
-    "to": 56.099998474121094,
-    "chg": -15.0
+    "to_d": "2026-11-09",
+    "to": 55.900001525878906,
+    "chg": -15.3
    },
    "more": [
     {
@@ -308,9 +308,9 @@
    "pre": {
     "from_d": "2026-11-04",
     "from": 204.5,
-    "to_d": "2026-11-06",
-    "to": 185.5,
-    "chg": -9.29
+    "to_d": "2026-11-09",
+    "to": 181.5,
+    "chg": -11.25
    },
    "pre_sent": true
   },
@@ -369,14 +369,51 @@
    "pre": {
     "from_d": "2026-11-04",
     "from": 201.0,
-    "to_d": "2026-11-06",
-    "to": 164.5,
-    "chg": -18.16
+    "to_d": "2026-11-09",
+    "to": 180.5,
+    "chg": -10.2
    },
    "pre_sent": true
+  },
+  {
+   "code": "6952",
+   "quote": "大武山看明年營運跳躍成長 加工蛋產能拚倍增",
+   "pat": "翻倍",
+   "val": null,
+   "frag": "倍增",
+   "src": "中央社",
+   "url": "https://www.cna.com.tw/news/afe/202611090203.aspx",
+   "pub": "2026-11-09T09:25+00:00",
+   "kind": "news",
+   "title": "大武山看明年營運跳躍成長 加工蛋產能拚倍增",
+   "key": "6952_2026-11-09",
+   "name": "大武山",
+   "meeting": "2026-11-09",
+   "seen": "2026-11-09T11:11+00:00",
+   "px": {
+    "d": "2026-11-09",
+    "close": 39.95000076293945,
+    "chg": 0.88
+   },
+   "sent": false,
+   "mx": {
+    "d": "2026-11-09",
+    "close": 39.95000076293945,
+    "chg": 0.88,
+    "prev": 39.599998474121094,
+    "prev_d": "2026-11-06",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-06",
+    "from": 39.599998474121094,
+    "to_d": "2026-11-09",
+    "to": 39.95000076293945,
+    "chg": 0.88
+   }
   }
  ],
- "asof": "2026-11-09T10:11+00:00",
+ "asof": "2026-11-09T11:11+00:00",
  "body": {
   "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9XMEJTZ3FtNEp3ZDlIMzJoZExULTctZTBSSXU0MmE2YUh0U1M5LWsySEFOalRRQ1RULS11UU52VXJPSlltZlp5SzdxV200UGt00gFWQVVfeXFMUEk4XzhjTEcyWnFHZXVrNHByMklwbHQzSEtTTmZucVpkdnJCekp5YXJUYkhlenhrcmtIZDdXTGFoV3g1ZUdFTWxaZDBkZjQ4Q0JONFQwakE?oc=5": {
    "r": "ok",
@@ -442,6 +479,18 @@
    "r": "ok",
    "why": "公司說的：「…董事長表示，2026 年下半年與上半年相比，越南廠「幾乎產能翻倍」」",
    "at": "2026-11-08T06:27+00:00",
+   "v": 2
+  },
+  "https://news.google.com/rss/articles/CBMiUEFVX3lxTE16cnd6SV9FZ3hHVUw0Snc0eVpncFR0dFMzVmwwcEpHbEEzVGhYcEhVZlpmSWI3SnE0UHBWT1JVUGhjTVB2eVk3ZF92MzZ5Mkdk0gFWQVVfeXFMTngwYUItSEh2R09mNDhaUjYzRU9BMVBORXVNRDdzSHc2bkwydlItQS1Rck4xZUdleWZjbEQyVnFobkFYbjFWMDhHUjlBSlVjSTN6U1VaNlE?oc=5": {
+   "r": "no",
+   "why": "指引句不是公司說的（記者整理／推算或沒有說話的人）：「佳世達法說會／AI伺服器、1.6T交換器年底小量出貨 明年第2季起放量 開放閱讀\">定穎投控法說會／AI 伺服器板年底認列營收 看2027年營收跳躍式成長 開放」（https://udn.com/news/story/7240/9867439）",
+   "at": "2026-11-09T11:11+00:00",
+   "v": 2
+  },
+  "https://www.cna.com.tw/news/afe/202611090203.aspx": {
+   "r": "ok",
+   "why": "公司說的：「…由於加工蛋品供不應求，大武山旗下福記食品正增購設備，預計明年上半年每日蛋品加工產能將倍增」",
+   "at": "2026-11-09T11:11+00:00",
    "v": 2
   }
  }
