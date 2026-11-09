@@ -1,0 +1,1795 @@
+{
+ "code": "6449",
+ "name": "鈺邦",
+ "date": "2026-11-09",
+ "industry": "被動元件",
+ "made": "本機 company_report（2026-11-09T14:27）",
+ "deck": {
+  "url": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+  "date": "2026-08-25"
+ },
+ "kind": "pick",
+ "transcript": {
+  "date": "2026-08-25",
+  "path": "site:docs/data/ir/tr/6449_2026-08-25.json",
+  "kind": "audio",
+  "speakers": [
+   "林漢元總經理"
+  ],
+  "quotes": [
+   {
+    "cat": "本季實績",
+    "text": "毛利方面，Q2毛利達到4.7億，創單季新高。",
+    "anchor": "06:50",
+    "who": "林漢元總經理",
+    "title": "林漢元總經理",
+    "seg": 8
+   },
+   {
+    "cat": "展望",
+    "text": "下半年的展望，記憶體與晶片價格上漲，對消費類需求造成影響。",
+    "anchor": "08:05",
+    "who": "林漢元總經理",
+    "title": "林漢元總經理",
+    "seg": 10
+   },
+   {
+    "cat": "展望",
+    "text": "NB領域藉由CAPPER產出與高規格導入，下半年NB營收預計持續成長。",
+    "anchor": "08:05",
+    "who": "林漢元總經理",
+    "title": "林漢元總經理",
+    "seg": 10
+   }
+  ],
+  "table": [],
+  "verify": {
+   "quotes_in": 3,
+   "quotes_ok": 3,
+   "rows_in": 0,
+   "rows_ok": 0,
+   "bad": []
+  },
+  "forward": {
+   "rows": [
+    [
+     "本年前 3 季 EPS（實際）",
+     7.45,
+     "river.json 本年累計（MOPS 綜合損益表彙總、2026-11-09 董事會通過）"
+    ],
+    [
+     "最新一季 EPS（115Q3，實際）",
+     3.03,
+     "river.json qx（董事會通過）"
+    ],
+    [
+     "第四季 EPS（推算）",
+     3.03,
+     "公司沒給第四季營收數字 → 假設與本季持平（機械式，不是預測）"
+    ],
+    [
+     "2026 全年 EPS（推算）",
+     10.48,
+     "前三季實際 ＋ 第四季推算"
+    ],
+    [
+     "2025 全年 EPS（實際）",
+     7.38,
+     "is_hist.json 114Q4 累計（MOPS 綜合損益表彙總）"
+    ],
+    [
+     "收盤價",
+     160.0,
+     "daily.npz 2026-11-09 收盤"
+    ],
+    [
+     "前瞻本益比",
+     15.3,
+     "收盤價 ÷ 全年 EPS（推算）"
+    ]
+   ],
+   "eps": 10.48,
+   "pe": 15.3,
+   "how": "持平假設",
+   "note": "數字全部由程式算；法人報告整理的全年 EPS 參考值 10.31（river.json，非本站估計）"
+  },
+  "hl": {
+   "table": {},
+   "forward": {
+    "3": [
+     "up",
+     "前瞻全年 EPS 比 2025 年 7.38 元 年增 +42.0%（門檻 ±20%）"
+    ]
+   }
+  },
+  "hl_note": "標色門檻（程式判定）：下一季營收指引季增 ≥ 10%；毛利率指引比上一季或上年同期 ≥ +2 個百分點；資本支出年增 ≥ 20%；前瞻全年 EPS 年增 ≥ 20%。紅＝明顯往上、綠＝同幅度往下（台股慣例），只標幅度，不代表高估或低估。"
+ },
+ "facts": [
+  {
+   "id": "close",
+   "sec": "關鍵數據",
+   "label": "收盤價",
+   "value": 160.0,
+   "unit": " 元",
+   "text": "160.00 元",
+   "src": "site:docs/data/stock_bars.json#6449",
+   "period": "2026-11-09"
+  },
+  {
+   "id": "mcap",
+   "sec": "關鍵數據",
+   "label": "市值",
+   "value": 147.004822,
+   "unit": " 億元",
+   "text": "147.0 億元",
+   "src": "site:docs/data/company.json#6449",
+   "period": "2026-11-09"
+  },
+  {
+   "id": "amt20",
+   "sec": "關鍵數據",
+   "label": "近 20 日日均成交金額",
+   "value": 5.816409,
+   "unit": " 億元",
+   "text": "5.82 億元",
+   "src": "site:docs/data/stock_bars.json#6449",
+   "period": "2026-11-09"
+  },
+  {
+   "id": "rel_3m",
+   "sec": "關鍵數據",
+   "label": "近 3 個月 相對加權指數",
+   "value": -26.200288,
+   "unit": " 個百分點",
+   "text": "-26.2 個百分點",
+   "src": "site:data/market_series.json",
+   "period": "2026-08-10～2026-11-09"
+  },
+  {
+   "id": "ret_1m",
+   "sec": "報酬",
+   "label": "近 1 個月 漲跌幅",
+   "value": -38.814532,
+   "unit": "%",
+   "text": "-38.8%",
+   "src": "site:docs/data/stock_bars.json#6449",
+   "period": "2026-10-07～2026-11-09"
+  },
+  {
+   "id": "rel_1m",
+   "sec": "報酬",
+   "label": "近 1 個月 相對加權指數",
+   "value": -22.461864,
+   "unit": " 個百分點",
+   "text": "-22.5 個百分點",
+   "src": "site:data/market_series.json",
+   "period": "2026-10-07～2026-11-09"
+  },
+  {
+   "id": "ret_3m",
+   "sec": "報酬",
+   "label": "近 3 個月 漲跌幅",
+   "value": -33.471933,
+   "unit": "%",
+   "text": "-33.5%",
+   "src": "site:docs/data/stock_bars.json#6449",
+   "period": "2026-08-10～2026-11-09"
+  },
+  {
+   "id": "rev_m",
+   "sec": "營收",
+   "label": "2026-09 月營收",
+   "value": 5.07848,
+   "unit": " 億元",
+   "text": "5.08 億元",
+   "src": "site:data/fund.json#6449",
+   "period": "2026-09"
+  },
+  {
+   "id": "rev_cum_yoy",
+   "sec": "營收",
+   "label": "2026 年 1～9 月累計營收年增",
+   "value": 24.042226,
+   "unit": "%",
+   "text": "+24.0%",
+   "src": "site:data/fund.json#6449",
+   "period": "2026-09"
+  },
+  {
+   "id": "rev_cum",
+   "sec": "營收",
+   "label": "2026 年 1～9 月累計營收",
+   "value": 39.75531,
+   "unit": " 億元",
+   "text": "39.8 億元",
+   "src": "site:data/fund.json#6449",
+   "period": "2026-09"
+  },
+  {
+   "id": "eps_q",
+   "sec": "獲利",
+   "label": "2026 年前 2 季累計 EPS",
+   "value": 4.42,
+   "unit": " 元",
+   "text": "4.42 元",
+   "src": "site:data/fund.json#6449",
+   "period": "2026Q2"
+  },
+  {
+   "id": "pe_ttm",
+   "sec": "估值",
+   "label": "本益比（近四季 EPS，河流圖基本盤 TTM）",
+   "value": 15.968064,
+   "unit": " 倍",
+   "text": "15.97 倍",
+   "src": "site:docs/data/river.json#6449",
+   "period": "2026-11-09"
+  },
+  {
+   "id": "q2024s3_rev",
+   "sec": "季度",
+   "label": "2024Q3 營收",
+   "value": 9.21494,
+   "unit": " 億元",
+   "text": "9.21 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q3"
+  },
+  {
+   "id": "q2024s3_gp",
+   "sec": "季度",
+   "label": "2024Q3 營業毛利",
+   "value": 2.78643,
+   "unit": " 億元",
+   "text": "2.79 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q3"
+  },
+  {
+   "id": "q2024s3_op",
+   "sec": "季度",
+   "label": "2024Q3 營業利益",
+   "value": 1.53291,
+   "unit": " 億元",
+   "text": "1.53 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q3"
+  },
+  {
+   "id": "q2024s3_ni",
+   "sec": "季度",
+   "label": "2024Q3 歸屬母公司淨利",
+   "value": 1.1712,
+   "unit": " 億元",
+   "text": "1.17 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q3"
+  },
+  {
+   "id": "q2024s3_eps",
+   "sec": "季度",
+   "label": "2024Q3 EPS",
+   "value": 1.33,
+   "unit": " 元",
+   "text": "1.33 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q3"
+  },
+  {
+   "id": "q2024s3_gm",
+   "sec": "季度",
+   "label": "2024Q3 毛利率",
+   "value": 30.238178,
+   "unit": "%",
+   "text": "30.2%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q3"
+  },
+  {
+   "id": "q2024s3_opm",
+   "sec": "季度",
+   "label": "2024Q3 營益率",
+   "value": 16.635051,
+   "unit": "%",
+   "text": "16.6%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q3"
+  },
+  {
+   "id": "q2024s3_npm",
+   "sec": "季度",
+   "label": "2024Q3 淨利率",
+   "value": 12.709795,
+   "unit": "%",
+   "text": "12.7%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q3"
+  },
+  {
+   "id": "q2024s3_qoq",
+   "sec": "季度",
+   "label": "2024Q3 營收季增",
+   "value": 12.638308,
+   "unit": "%",
+   "text": "+12.6%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q3"
+  },
+  {
+   "id": "q2024s4_rev",
+   "sec": "季度",
+   "label": "2024Q4 營收",
+   "value": 10.34708,
+   "unit": " 億元",
+   "text": "10.35 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q4"
+  },
+  {
+   "id": "q2024s4_gp",
+   "sec": "季度",
+   "label": "2024Q4 營業毛利",
+   "value": 3.20872,
+   "unit": " 億元",
+   "text": "3.21 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q4"
+  },
+  {
+   "id": "q2024s4_op",
+   "sec": "季度",
+   "label": "2024Q4 營業利益",
+   "value": 1.72654,
+   "unit": " 億元",
+   "text": "1.73 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q4"
+  },
+  {
+   "id": "q2024s4_ni",
+   "sec": "季度",
+   "label": "2024Q4 歸屬母公司淨利",
+   "value": 1.70873,
+   "unit": " 億元",
+   "text": "1.71 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q4"
+  },
+  {
+   "id": "q2024s4_eps",
+   "sec": "季度",
+   "label": "2024Q4 EPS",
+   "value": 1.95,
+   "unit": " 元",
+   "text": "1.95 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q4"
+  },
+  {
+   "id": "q2024s4_gm",
+   "sec": "季度",
+   "label": "2024Q4 毛利率",
+   "value": 31.010875,
+   "unit": "%",
+   "text": "31.0%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q4"
+  },
+  {
+   "id": "q2024s4_opm",
+   "sec": "季度",
+   "label": "2024Q4 營益率",
+   "value": 16.686254,
+   "unit": "%",
+   "text": "16.7%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q4"
+  },
+  {
+   "id": "q2024s4_npm",
+   "sec": "季度",
+   "label": "2024Q4 淨利率",
+   "value": 16.514128,
+   "unit": "%",
+   "text": "16.5%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q4"
+  },
+  {
+   "id": "q2024s4_qoq",
+   "sec": "季度",
+   "label": "2024Q4 營收季增",
+   "value": 12.285918,
+   "unit": "%",
+   "text": "+12.3%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024Q4"
+  },
+  {
+   "id": "q2025s1_rev",
+   "sec": "季度",
+   "label": "2025Q1 營收",
+   "value": 9.05019,
+   "unit": " 億元",
+   "text": "9.05 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q1"
+  },
+  {
+   "id": "q2025s1_gp",
+   "sec": "季度",
+   "label": "2025Q1 營業毛利",
+   "value": 2.84285,
+   "unit": " 億元",
+   "text": "2.84 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q1"
+  },
+  {
+   "id": "q2025s1_op",
+   "sec": "季度",
+   "label": "2025Q1 營業利益",
+   "value": 1.3978,
+   "unit": " 億元",
+   "text": "1.40 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q1"
+  },
+  {
+   "id": "q2025s1_ni",
+   "sec": "季度",
+   "label": "2025Q1 歸屬母公司淨利",
+   "value": 1.35322,
+   "unit": " 億元",
+   "text": "1.35 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q1"
+  },
+  {
+   "id": "q2025s1_eps",
+   "sec": "季度",
+   "label": "2025Q1 EPS",
+   "value": 1.54,
+   "unit": " 元",
+   "text": "1.54 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q1"
+  },
+  {
+   "id": "q2025s1_gm",
+   "sec": "季度",
+   "label": "2025Q1 毛利率",
+   "value": 31.412048,
+   "unit": "%",
+   "text": "31.4%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q1"
+  },
+  {
+   "id": "q2025s1_opm",
+   "sec": "季度",
+   "label": "2025Q1 營益率",
+   "value": 15.44498,
+   "unit": "%",
+   "text": "15.4%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q1"
+  },
+  {
+   "id": "q2025s1_npm",
+   "sec": "季度",
+   "label": "2025Q1 淨利率",
+   "value": 14.952393,
+   "unit": "%",
+   "text": "15.0%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q1"
+  },
+  {
+   "id": "q2025s1_qoq",
+   "sec": "季度",
+   "label": "2025Q1 營收季增",
+   "value": -12.533874,
+   "unit": "%",
+   "text": "-12.5%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q1"
+  },
+  {
+   "id": "q2025s2_rev",
+   "sec": "季度",
+   "label": "2025Q2 營收",
+   "value": 11.37616,
+   "unit": " 億元",
+   "text": "11.38 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q2"
+  },
+  {
+   "id": "q2025s2_gp",
+   "sec": "季度",
+   "label": "2025Q2 營業毛利",
+   "value": 4.151,
+   "unit": " 億元",
+   "text": "4.15 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q2"
+  },
+  {
+   "id": "q2025s2_op",
+   "sec": "季度",
+   "label": "2025Q2 營業利益",
+   "value": 2.49139,
+   "unit": " 億元",
+   "text": "2.49 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q2"
+  },
+  {
+   "id": "q2025s2_ni",
+   "sec": "季度",
+   "label": "2025Q2 歸屬母公司淨利",
+   "value": 0.87405,
+   "unit": " 億元",
+   "text": "0.87 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q2"
+  },
+  {
+   "id": "q2025s2_eps",
+   "sec": "季度",
+   "label": "2025Q2 EPS",
+   "value": 0.99,
+   "unit": " 元",
+   "text": "0.99 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q2"
+  },
+  {
+   "id": "q2025s2_gm",
+   "sec": "季度",
+   "label": "2025Q2 毛利率",
+   "value": 36.488587,
+   "unit": "%",
+   "text": "36.5%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q2"
+  },
+  {
+   "id": "q2025s2_opm",
+   "sec": "季度",
+   "label": "2025Q2 營益率",
+   "value": 21.900096,
+   "unit": "%",
+   "text": "21.9%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q2"
+  },
+  {
+   "id": "q2025s2_npm",
+   "sec": "季度",
+   "label": "2025Q2 淨利率",
+   "value": 7.683173,
+   "unit": "%",
+   "text": "7.7%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q2"
+  },
+  {
+   "id": "q2025s2_yoy",
+   "sec": "季度",
+   "label": "2025Q2 營收年增",
+   "value": 39.055861,
+   "unit": "%",
+   "text": "+39.1%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q2"
+  },
+  {
+   "id": "q2025s2_qoq",
+   "sec": "季度",
+   "label": "2025Q2 營收季增",
+   "value": 25.700786,
+   "unit": "%",
+   "text": "+25.7%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q2"
+  },
+  {
+   "id": "q2025s3_rev",
+   "sec": "季度",
+   "label": "2025Q3 營收",
+   "value": 11.62347,
+   "unit": " 億元",
+   "text": "11.62 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q3"
+  },
+  {
+   "id": "q2025s3_gp",
+   "sec": "季度",
+   "label": "2025Q3 營業毛利",
+   "value": 3.9282,
+   "unit": " 億元",
+   "text": "3.93 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q3"
+  },
+  {
+   "id": "q2025s3_op",
+   "sec": "季度",
+   "label": "2025Q3 營業利益",
+   "value": 1.98011,
+   "unit": " 億元",
+   "text": "1.98 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q3"
+  },
+  {
+   "id": "q2025s3_ni",
+   "sec": "季度",
+   "label": "2025Q3 歸屬母公司淨利",
+   "value": 2.00102,
+   "unit": " 億元",
+   "text": "2.00 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q3"
+  },
+  {
+   "id": "q2025s3_eps",
+   "sec": "季度",
+   "label": "2025Q3 EPS",
+   "value": 2.28,
+   "unit": " 元",
+   "text": "2.28 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q3"
+  },
+  {
+   "id": "q2025s3_gm",
+   "sec": "季度",
+   "label": "2025Q3 毛利率",
+   "value": 33.795416,
+   "unit": "%",
+   "text": "33.8%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q3"
+  },
+  {
+   "id": "q2025s3_opm",
+   "sec": "季度",
+   "label": "2025Q3 營益率",
+   "value": 17.035446,
+   "unit": "%",
+   "text": "17.0%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q3"
+  },
+  {
+   "id": "q2025s3_npm",
+   "sec": "季度",
+   "label": "2025Q3 淨利率",
+   "value": 17.215341,
+   "unit": "%",
+   "text": "17.2%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q3"
+  },
+  {
+   "id": "q2025s3_yoy",
+   "sec": "季度",
+   "label": "2025Q3 營收年增",
+   "value": 26.137229,
+   "unit": "%",
+   "text": "+26.1%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q3"
+  },
+  {
+   "id": "q2025s3_qoq",
+   "sec": "季度",
+   "label": "2025Q3 營收季增",
+   "value": 2.173932,
+   "unit": "%",
+   "text": "+2.2%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q3"
+  },
+  {
+   "id": "q2025s4_rev",
+   "sec": "季度",
+   "label": "2025Q4 營收",
+   "value": 12.69686,
+   "unit": " 億元",
+   "text": "12.70 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q4"
+  },
+  {
+   "id": "q2025s4_gp",
+   "sec": "季度",
+   "label": "2025Q4 營業毛利",
+   "value": 4.58633,
+   "unit": " 億元",
+   "text": "4.59 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q4"
+  },
+  {
+   "id": "q2025s4_op",
+   "sec": "季度",
+   "label": "2025Q4 營業利益",
+   "value": 2.43625,
+   "unit": " 億元",
+   "text": "2.44 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q4"
+  },
+  {
+   "id": "q2025s4_ni",
+   "sec": "季度",
+   "label": "2025Q4 歸屬母公司淨利",
+   "value": 2.25851,
+   "unit": " 億元",
+   "text": "2.26 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q4"
+  },
+  {
+   "id": "q2025s4_eps",
+   "sec": "季度",
+   "label": "2025Q4 EPS",
+   "value": 2.57,
+   "unit": " 元",
+   "text": "2.57 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q4"
+  },
+  {
+   "id": "q2025s4_gm",
+   "sec": "季度",
+   "label": "2025Q4 毛利率",
+   "value": 36.121766,
+   "unit": "%",
+   "text": "36.1%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q4"
+  },
+  {
+   "id": "q2025s4_opm",
+   "sec": "季度",
+   "label": "2025Q4 營益率",
+   "value": 19.187815,
+   "unit": "%",
+   "text": "19.2%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q4"
+  },
+  {
+   "id": "q2025s4_npm",
+   "sec": "季度",
+   "label": "2025Q4 淨利率",
+   "value": 17.787941,
+   "unit": "%",
+   "text": "17.8%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q4"
+  },
+  {
+   "id": "q2025s4_yoy",
+   "sec": "季度",
+   "label": "2025Q4 營收年增",
+   "value": 22.709595,
+   "unit": "%",
+   "text": "+22.7%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q4"
+  },
+  {
+   "id": "q2025s4_qoq",
+   "sec": "季度",
+   "label": "2025Q4 營收季增",
+   "value": 9.234678,
+   "unit": "%",
+   "text": "+9.2%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025Q4"
+  },
+  {
+   "id": "q2026s1_rev",
+   "sec": "季度",
+   "label": "2026Q1 營收",
+   "value": 11.28235,
+   "unit": " 億元",
+   "text": "11.28 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q1"
+  },
+  {
+   "id": "q2026s1_gp",
+   "sec": "季度",
+   "label": "2026Q1 營業毛利",
+   "value": 4.15123,
+   "unit": " 億元",
+   "text": "4.15 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q1"
+  },
+  {
+   "id": "q2026s1_op",
+   "sec": "季度",
+   "label": "2026Q1 營業利益",
+   "value": 2.16692,
+   "unit": " 億元",
+   "text": "2.17 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q1"
+  },
+  {
+   "id": "q2026s1_ni",
+   "sec": "季度",
+   "label": "2026Q1 歸屬母公司淨利",
+   "value": 1.86006,
+   "unit": " 億元",
+   "text": "1.86 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q1"
+  },
+  {
+   "id": "q2026s1_eps",
+   "sec": "季度",
+   "label": "2026Q1 EPS",
+   "value": 2.11,
+   "unit": " 元",
+   "text": "2.11 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q1"
+  },
+  {
+   "id": "q2026s1_gm",
+   "sec": "季度",
+   "label": "2026Q1 毛利率",
+   "value": 36.794019,
+   "unit": "%",
+   "text": "36.8%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q1"
+  },
+  {
+   "id": "q2026s1_opm",
+   "sec": "季度",
+   "label": "2026Q1 營益率",
+   "value": 19.206282,
+   "unit": "%",
+   "text": "19.2%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q1"
+  },
+  {
+   "id": "q2026s1_npm",
+   "sec": "季度",
+   "label": "2026Q1 淨利率",
+   "value": 16.486459,
+   "unit": "%",
+   "text": "16.5%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q1"
+  },
+  {
+   "id": "q2026s1_yoy",
+   "sec": "季度",
+   "label": "2026Q1 營收年增",
+   "value": 24.664234,
+   "unit": "%",
+   "text": "+24.7%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q1"
+  },
+  {
+   "id": "q2026s1_qoq",
+   "sec": "季度",
+   "label": "2026Q1 營收季增",
+   "value": -11.140628,
+   "unit": "%",
+   "text": "-11.1%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q1"
+  },
+  {
+   "id": "q2026s2_rev",
+   "sec": "季度",
+   "label": "2026Q2 營收",
+   "value": 13.70089,
+   "unit": " 億元",
+   "text": "13.70 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q2"
+  },
+  {
+   "id": "q2026s2_gp",
+   "sec": "季度",
+   "label": "2026Q2 營業毛利",
+   "value": 4.70811,
+   "unit": " 億元",
+   "text": "4.71 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q2"
+  },
+  {
+   "id": "q2026s2_op",
+   "sec": "季度",
+   "label": "2026Q2 營業利益",
+   "value": 2.1616,
+   "unit": " 億元",
+   "text": "2.16 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q2"
+  },
+  {
+   "id": "q2026s2_ni",
+   "sec": "季度",
+   "label": "2026Q2 歸屬母公司淨利",
+   "value": 2.04206,
+   "unit": " 億元",
+   "text": "2.04 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q2"
+  },
+  {
+   "id": "q2026s2_eps",
+   "sec": "季度",
+   "label": "2026Q2 EPS",
+   "value": 2.31,
+   "unit": " 元",
+   "text": "2.31 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q2"
+  },
+  {
+   "id": "q2026s2_gm",
+   "sec": "季度",
+   "label": "2026Q2 毛利率",
+   "value": 34.363534,
+   "unit": "%",
+   "text": "34.4%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q2"
+  },
+  {
+   "id": "q2026s2_opm",
+   "sec": "季度",
+   "label": "2026Q2 營益率",
+   "value": 15.777077,
+   "unit": "%",
+   "text": "15.8%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q2"
+  },
+  {
+   "id": "q2026s2_npm",
+   "sec": "季度",
+   "label": "2026Q2 淨利率",
+   "value": 14.904579,
+   "unit": "%",
+   "text": "14.9%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q2"
+  },
+  {
+   "id": "q2026s2_yoy",
+   "sec": "季度",
+   "label": "2026Q2 營收年增",
+   "value": 20.435103,
+   "unit": "%",
+   "text": "+20.4%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q2"
+  },
+  {
+   "id": "q2026s2_qoq",
+   "sec": "季度",
+   "label": "2026Q2 營收季增",
+   "value": 21.436492,
+   "unit": "%",
+   "text": "+21.4%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q2"
+  },
+  {
+   "id": "y2021_rev",
+   "sec": "年度",
+   "label": "2021 年營收",
+   "value": 28.22408,
+   "unit": " 億元",
+   "text": "28.2 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2021"
+  },
+  {
+   "id": "y2021_eps",
+   "sec": "年度",
+   "label": "2021 年 EPS",
+   "value": 3.49,
+   "unit": " 元",
+   "text": "3.49 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2021"
+  },
+  {
+   "id": "y2021_ni",
+   "sec": "年度",
+   "label": "2021 年歸屬母公司淨利",
+   "value": 3.06367,
+   "unit": " 億元",
+   "text": "3.1 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2021"
+  },
+  {
+   "id": "y2022_rev",
+   "sec": "年度",
+   "label": "2022 年營收",
+   "value": 24.88694,
+   "unit": " 億元",
+   "text": "24.9 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2022"
+  },
+  {
+   "id": "y2022_eps",
+   "sec": "年度",
+   "label": "2022 年 EPS",
+   "value": 3.82,
+   "unit": " 元",
+   "text": "3.82 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2022"
+  },
+  {
+   "id": "y2022_ni",
+   "sec": "年度",
+   "label": "2022 年歸屬母公司淨利",
+   "value": 3.38432,
+   "unit": " 億元",
+   "text": "3.4 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2022"
+  },
+  {
+   "id": "y2022_epsg",
+   "sec": "年度",
+   "label": "2022 年 EPS 年增",
+   "value": 9.455587,
+   "unit": "%",
+   "text": "+9.5%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2022"
+  },
+  {
+   "id": "y2023_rev",
+   "sec": "年度",
+   "label": "2023 年營收",
+   "value": 29.34913,
+   "unit": " 億元",
+   "text": "29.3 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2023"
+  },
+  {
+   "id": "y2023_eps",
+   "sec": "年度",
+   "label": "2023 年 EPS",
+   "value": 3.73,
+   "unit": " 元",
+   "text": "3.73 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2023"
+  },
+  {
+   "id": "y2023_ni",
+   "sec": "年度",
+   "label": "2023 年歸屬母公司淨利",
+   "value": 3.28378,
+   "unit": " 億元",
+   "text": "3.3 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2023"
+  },
+  {
+   "id": "y2023_epsg",
+   "sec": "年度",
+   "label": "2023 年 EPS 年增",
+   "value": -2.356021,
+   "unit": "%",
+   "text": "-2.4%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2023"
+  },
+  {
+   "id": "y2024_rev",
+   "sec": "年度",
+   "label": "2024 年營收",
+   "value": 34.95668,
+   "unit": " 億元",
+   "text": "35.0 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024"
+  },
+  {
+   "id": "y2024_eps",
+   "sec": "年度",
+   "label": "2024 年 EPS",
+   "value": 6.08,
+   "unit": " 元",
+   "text": "6.08 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024"
+  },
+  {
+   "id": "y2024_ni",
+   "sec": "年度",
+   "label": "2024 年歸屬母公司淨利",
+   "value": 5.34394,
+   "unit": " 億元",
+   "text": "5.3 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024"
+  },
+  {
+   "id": "y2024_epsg",
+   "sec": "年度",
+   "label": "2024 年 EPS 年增",
+   "value": 63.002681,
+   "unit": "%",
+   "text": "+63.0%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2024"
+  },
+  {
+   "id": "y2025_rev",
+   "sec": "年度",
+   "label": "2025 年營收",
+   "value": 44.74668,
+   "unit": " 億元",
+   "text": "44.7 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025"
+  },
+  {
+   "id": "y2025_eps",
+   "sec": "年度",
+   "label": "2025 年 EPS",
+   "value": 7.38,
+   "unit": " 元",
+   "text": "7.38 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025"
+  },
+  {
+   "id": "y2025_ni",
+   "sec": "年度",
+   "label": "2025 年歸屬母公司淨利",
+   "value": 6.4868,
+   "unit": " 億元",
+   "text": "6.5 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025"
+  },
+  {
+   "id": "y2025_epsg",
+   "sec": "年度",
+   "label": "2025 年 EPS 年增",
+   "value": 21.381579,
+   "unit": "%",
+   "text": "+21.4%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2025"
+  },
+  {
+   "id": "cy_rev",
+   "sec": "年度",
+   "label": "2026 前 2 季累計營收",
+   "value": 24.98324,
+   "unit": " 億元",
+   "text": "25.0 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026 前 2 季"
+  },
+  {
+   "id": "cy_ni",
+   "sec": "年度",
+   "label": "2026 前 2 季累計歸屬母公司淨利",
+   "value": 3.90212,
+   "unit": " 億元",
+   "text": "3.9 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026 前 2 季"
+  },
+  {
+   "id": "cy_epsg",
+   "sec": "年度",
+   "label": "2026 前 2 季累計 EPS 年增",
+   "value": 74.703557,
+   "unit": "%",
+   "text": "+74.7%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026 前 2 季"
+  },
+  {
+   "id": "equity",
+   "sec": "估值",
+   "label": "2026Q2 母公司業主權益",
+   "value": 69.25337,
+   "unit": " 億元",
+   "text": "69.3 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb05",
+   "period": "2026Q2"
+  },
+  {
+   "id": "pbr",
+   "sec": "估值",
+   "label": "股價淨值比",
+   "value": 2.12271,
+   "unit": " 倍",
+   "text": "2.12 倍",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb05",
+   "period": "2026-11-09"
+  },
+  {
+   "id": "roe_ttm",
+   "sec": "估值",
+   "label": "ROE（近四季淨利 ÷ 期末母公司權益）",
+   "value": 11.785203,
+   "unit": "%",
+   "text": "11.8%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb05",
+   "period": "近四季"
+  },
+  {
+   "id": "prod_1",
+   "sec": "產品線",
+   "label": "DIP 營收占比（26’H1）",
+   "value": 20.0,
+   "unit": "%",
+   "text": "20%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_2",
+   "sec": "產品線",
+   "label": "SMD(Vchip) 營收占比（26’H1）",
+   "value": 32.0,
+   "unit": "%",
+   "text": "32%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_3",
+   "sec": "產品線",
+   "label": "CAP 營收占比（26’H1）",
+   "value": 44.0,
+   "unit": "%",
+   "text": "44%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_4",
+   "sec": "產品線",
+   "label": "EL-CAP 營收占比（26’H1）",
+   "value": 1.0,
+   "unit": "%",
+   "text": "1%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_5",
+   "sec": "產品線",
+   "label": "Hybrid 營收占比（26’H1）",
+   "value": 3.0,
+   "unit": "%",
+   "text": "3%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_6",
+   "sec": "產品線",
+   "label": "MB(品牌) 營收占比（26’H1）",
+   "value": 18.4,
+   "unit": "%",
+   "text": "18.4%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_7",
+   "sec": "產品線",
+   "label": "MB(代工) 營收占比（26’H1）",
+   "value": 7.1,
+   "unit": "%",
+   "text": "7.1%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_8",
+   "sec": "產品線",
+   "label": "NB 營收占比（26’H1）",
+   "value": 27.5,
+   "unit": "%",
+   "text": "27.5%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_9",
+   "sec": "產品線",
+   "label": "Charger 營收占比（26’H1）",
+   "value": 1.4,
+   "unit": "%",
+   "text": "1.4%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_10",
+   "sec": "產品線",
+   "label": "Power 營收占比（26’H1）",
+   "value": 2.8,
+   "unit": "%",
+   "text": "2.8%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_12",
+   "sec": "產品線",
+   "label": "Server 營收占比（26’H1）",
+   "value": 35.6,
+   "unit": "%",
+   "text": "35.6%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_13",
+   "sec": "產品線",
+   "label": "其他 營收占比（26’H1）",
+   "value": 4.2,
+   "unit": "%",
+   "text": "4.2%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_14",
+   "sec": "產品線",
+   "label": "網通 營收占比（26’H1）",
+   "value": 0.9,
+   "unit": "%",
+   "text": "0.9%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_15",
+   "sec": "產品線",
+   "label": "IPC 營收占比（26’H1）",
+   "value": 1.1,
+   "unit": "%",
+   "text": "1.1%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_16",
+   "sec": "產品線",
+   "label": "Game Console 營收占比（26’H1）",
+   "value": 0.7,
+   "unit": "%",
+   "text": "0.7%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  },
+  {
+   "id": "prod_17",
+   "sec": "產品線",
+   "label": "車用 營收占比（26’H1）",
+   "value": 0.3,
+   "unit": "%",
+   "text": "0.3%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/644920260825M001.pdf",
+   "period": "26’H1"
+  }
+ ],
+ "tables": {
+  "quarters": {
+   "title": "季度表（單季；公開資訊觀測站綜合損益表，累計相減）",
+   "cols": [
+    "2024Q3",
+    "2024Q4",
+    "2025Q1",
+    "2025Q2",
+    "2025Q3",
+    "2025Q4",
+    "2026Q1",
+    "2026Q2"
+   ],
+   "rows": [
+    {
+     "label": "營收（億元）",
+     "cells": [
+      "q2024s3_rev",
+      "q2024s4_rev",
+      "q2025s1_rev",
+      "q2025s2_rev",
+      "q2025s3_rev",
+      "q2025s4_rev",
+      "q2026s1_rev",
+      "q2026s2_rev"
+     ]
+    },
+    {
+     "label": "營業毛利（億元）",
+     "cells": [
+      "q2024s3_gp",
+      "q2024s4_gp",
+      "q2025s1_gp",
+      "q2025s2_gp",
+      "q2025s3_gp",
+      "q2025s4_gp",
+      "q2026s1_gp",
+      "q2026s2_gp"
+     ]
+    },
+    {
+     "label": "營業利益（億元）",
+     "cells": [
+      "q2024s3_op",
+      "q2024s4_op",
+      "q2025s1_op",
+      "q2025s2_op",
+      "q2025s3_op",
+      "q2025s4_op",
+      "q2026s1_op",
+      "q2026s2_op"
+     ]
+    },
+    {
+     "label": "歸屬母公司淨利（億元）",
+     "cells": [
+      "q2024s3_ni",
+      "q2024s4_ni",
+      "q2025s1_ni",
+      "q2025s2_ni",
+      "q2025s3_ni",
+      "q2025s4_ni",
+      "q2026s1_ni",
+      "q2026s2_ni"
+     ]
+    },
+    {
+     "label": "EPS（元）",
+     "cells": [
+      "q2024s3_eps",
+      "q2024s4_eps",
+      "q2025s1_eps",
+      "q2025s2_eps",
+      "q2025s3_eps",
+      "q2025s4_eps",
+      "q2026s1_eps",
+      "q2026s2_eps"
+     ]
+    },
+    {
+     "label": "毛利率",
+     "cells": [
+      "q2024s3_gm",
+      "q2024s4_gm",
+      "q2025s1_gm",
+      "q2025s2_gm",
+      "q2025s3_gm",
+      "q2025s4_gm",
+      "q2026s1_gm",
+      "q2026s2_gm"
+     ]
+    },
+    {
+     "label": "營益率",
+     "cells": [
+      "q2024s3_opm",
+      "q2024s4_opm",
+      "q2025s1_opm",
+      "q2025s2_opm",
+      "q2025s3_opm",
+      "q2025s4_opm",
+      "q2026s1_opm",
+      "q2026s2_opm"
+     ]
+    },
+    {
+     "label": "淨利率",
+     "cells": [
+      "q2024s3_npm",
+      "q2024s4_npm",
+      "q2025s1_npm",
+      "q2025s2_npm",
+      "q2025s3_npm",
+      "q2025s4_npm",
+      "q2026s1_npm",
+      "q2026s2_npm"
+     ]
+    },
+    {
+     "label": "營收年增",
+     "cells": [
+      null,
+      null,
+      null,
+      "q2025s2_yoy",
+      "q2025s3_yoy",
+      "q2025s4_yoy",
+      "q2026s1_yoy",
+      "q2026s2_yoy"
+     ]
+    },
+    {
+     "label": "營收季增",
+     "cells": [
+      "q2024s3_qoq",
+      "q2024s4_qoq",
+      "q2025s1_qoq",
+      "q2025s2_qoq",
+      "q2025s3_qoq",
+      "q2025s4_qoq",
+      "q2026s1_qoq",
+      "q2026s2_qoq"
+     ]
+    }
+   ]
+  },
+  "fin": {
+   "title": "摘要財務表",
+   "cols": [
+    "2023",
+    "2024",
+    "2025",
+    "2026 前 2 季"
+   ],
+   "rows": [
+    {
+     "label": "營收（億元）",
+     "cells": [
+      "y2023_rev",
+      "y2024_rev",
+      "y2025_rev",
+      "cy_rev"
+     ]
+    },
+    {
+     "label": "歸屬母公司淨利（億元）",
+     "cells": [
+      "y2023_ni",
+      "y2024_ni",
+      "y2025_ni",
+      "cy_ni"
+     ]
+    },
+    {
+     "label": "EPS（元）",
+     "cells": [
+      "y2023_eps",
+      "y2024_eps",
+      "y2025_eps",
+      "eps_q"
+     ]
+    },
+    {
+     "label": "EPS 年增",
+     "cells": [
+      "y2023_epsg",
+      "y2024_epsg",
+      "y2025_epsg",
+      "cy_epsg"
+     ]
+    }
+   ]
+  },
+  "valuation": {
+   "title": "估值與報酬（不含目標價；位階看河流圖）",
+   "cols": [
+    "數值"
+   ],
+   "rows": [
+    {
+     "label": "本益比（TTM）",
+     "cells": [
+      "pe_ttm"
+     ]
+    },
+    {
+     "label": "股價淨值比",
+     "cells": [
+      "pbr"
+     ]
+    },
+    {
+     "label": "ROE（近四季）",
+     "cells": [
+      "roe_ttm"
+     ]
+    },
+    {
+     "label": "殖利率",
+     "cells": [
+      null
+     ]
+    }
+   ]
+  },
+  "returns": {
+   "title": "報酬（絕對／相對加權指數）",
+   "cols": [
+    "1 個月",
+    "3 個月",
+    "12 個月"
+   ],
+   "rows": [
+    {
+     "label": "漲跌幅",
+     "cells": [
+      "ret_1m",
+      "ret_3m",
+      null
+     ]
+    },
+    {
+     "label": "相對加權指數（百分點）",
+     "cells": [
+      "rel_1m",
+      "rel_3m",
+      null
+     ]
+    }
+   ]
+  },
+  "products": {
+   "title": "產品線營收占比（法說簡報）",
+   "cols": [
+    "占比"
+   ],
+   "rows": [
+    {
+     "label": "DIP（26’H1）",
+     "cells": [
+      "prod_1"
+     ]
+    },
+    {
+     "label": "SMD(Vchip)（26’H1）",
+     "cells": [
+      "prod_2"
+     ]
+    },
+    {
+     "label": "CAP（26’H1）",
+     "cells": [
+      "prod_3"
+     ]
+    },
+    {
+     "label": "EL-CAP（26’H1）",
+     "cells": [
+      "prod_4"
+     ]
+    },
+    {
+     "label": "Hybrid（26’H1）",
+     "cells": [
+      "prod_5"
+     ]
+    },
+    {
+     "label": "MB(品牌)（26’H1）",
+     "cells": [
+      "prod_6"
+     ]
+    },
+    {
+     "label": "MB(代工)（26’H1）",
+     "cells": [
+      "prod_7"
+     ]
+    },
+    {
+     "label": "NB（26’H1）",
+     "cells": [
+      "prod_8"
+     ]
+    },
+    {
+     "label": "Charger（26’H1）",
+     "cells": [
+      "prod_9"
+     ]
+    },
+    {
+     "label": "Power（26’H1）",
+     "cells": [
+      "prod_10"
+     ]
+    },
+    {
+     "label": "Server（26’H1）",
+     "cells": [
+      "prod_12"
+     ]
+    },
+    {
+     "label": "其他（26’H1）",
+     "cells": [
+      "prod_13"
+     ]
+    },
+    {
+     "label": "網通（26’H1）",
+     "cells": [
+      "prod_14"
+     ]
+    },
+    {
+     "label": "IPC（26’H1）",
+     "cells": [
+      "prod_15"
+     ]
+    },
+    {
+     "label": "Game Console（26’H1）",
+     "cells": [
+      "prod_16"
+     ]
+    },
+    {
+     "label": "車用（26’H1）",
+     "cells": [
+      "prod_17"
+     ]
+    }
+   ]
+  }
+ },
+ "chart": {
+  "rev_eps": [
+   {
+    "period": "2021",
+    "rev_id": "y2021_rev",
+    "eps_id": "y2021_eps"
+   },
+   {
+    "period": "2022",
+    "rev_id": "y2022_rev",
+    "eps_id": "y2022_eps"
+   },
+   {
+    "period": "2023",
+    "rev_id": "y2023_rev",
+    "eps_id": "y2023_eps"
+   },
+   {
+    "period": "2024",
+    "rev_id": "y2024_rev",
+    "eps_id": "y2024_eps"
+   },
+   {
+    "period": "2025",
+    "rev_id": "y2025_rev",
+    "eps_id": "y2025_eps"
+   }
+  ],
+  "milestones": []
+ }
+}
