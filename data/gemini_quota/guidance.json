@@ -1,12 +1,5 @@
 {
- "dead": {
-  "2026-11-08": {
-   "gemini-3-flash-preview": {
-    "at": "11-09 06:23",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   }
-  }
- },
+ "dead": {},
  "count": {
   "2026-10-30": {
    "gemini-3.8-flash": {
@@ -251,24 +244,30 @@
     "req": 7,
     "tok": 8223
    }
+  },
+  "2026-11-09": {
+   "gemini-3.8-flash": {
+    "req": 3,
+    "tok": 45237
+   },
+   "gemini-3.7-flash": {
+    "req": 2,
+    "tok": 0
+   },
+   "gemini-3.6-flash": {
+    "req": 2,
+    "tok": 0
+   },
+   "gemini-3.5-flash": {
+    "req": 7,
+    "tok": 303495
+   }
   }
  },
  "tpm": [
   [
-   1794205468.1819854,
-   930
-  ],
-  [
-   1794205484.738388,
-   995
-  ],
-  [
-   1794205502.412899,
-   1352
-  ],
-  [
-   1794205519.0782967,
-   1372
+   1794215673.4943564,
+   19027
   ]
  ]
 }
