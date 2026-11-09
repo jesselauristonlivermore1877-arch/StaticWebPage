@@ -1,9 +1,36 @@
 {
- "checked_at": "2026-11-09T05:49:29.310Z",
- "date": "2026-11-06",
- "n": 82,
- "n_bad": 0,
- "bad": {},
+ "checked_at": "2026-11-09T10:58:58.320Z",
+ "date": "2026-11-09",
+ "n": 80,
+ "n_bad": 2,
+ "bad": {
+  "GEA_選股_族群循環圖": {
+   "cat": "市場",
+   "title": "族群循環圖",
+   "err": "",
+   "issues": [
+    {
+     "area": "div.pe-top",
+     "dir": "下",
+     "px": 29,
+     "why": "div.pe-top scrollHeight 188＞clientHeight 159（容許 2）"
+    }
+   ]
+  },
+  "GEA_選股_主動ETF": {
+   "cat": "ETF",
+   "title": "主動式 ETF",
+   "err": "",
+   "issues": [
+    {
+     "area": "div.pe-top",
+     "dir": "下",
+     "px": 40,
+     "why": "div.pe-top scrollHeight 202＞clientHeight 162（容許 2）"
+    }
+   ]
+  }
+ },
  "js_errors": [],
  "chrome": "google-chrome",
  "no_cjk_font": false
