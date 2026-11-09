@@ -269,6 +269,15 @@ jobs:
         timeout-minutes: 5
         run: python tools/mkt_overlay.py ../site ../site/docs/data/mkt_overlay.json
 
+      # 🟢 11-09（雲端O，Evans 11-09 核准法說逐字稿預覽「照做」）：法說目標帳本 → docs/data/ir/targets.json（累積）＋data/ir/targets_hist/<日期>.json（當天快照）
+      #    預覽與正式版同一個 ir_targets.ledger()（沒有 force 類參數）；只讀逐字稿、月營收、綜合損益表、日K，不打網路；失敗不擋（網站沿用上一份）
+      - name: 法說目標帳本
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 5
+        run: |
+          python -c "import sys, ir_targets as TG; L = TG.save('../site', sys.argv[1]); print('目標帳本：', L['meta'])" "$(TZ=Asia/Taipei date +%F)"
+
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
       # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。
       # （只有「不可能的數字」才會 exit 1；缺漏只是警告，不會擋。）
