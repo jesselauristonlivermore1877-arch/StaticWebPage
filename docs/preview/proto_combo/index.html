@@ -1,0 +1,141 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>研究組合保存</title>
+<style>
+/* 會員站正式樣式（research/preview_b/index.html 的 :root 與 .card／button），新增的只有 pc- 前綴 */
+:root{--bg:#0b0f14;--panel:#121821;--panel2:#18202b;--line:#26303d;--tx:#d5dde7;--mut:#8593a3;--acc:#f0b429;--up:#e5484d;--dn:#2fb36b;--blue:#4c8dff}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+button,select,input,textarea{font:inherit;color:var(--tx);background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:4px 10px}
+button{cursor:pointer}button:hover{border-color:var(--acc)}
+button.on{background:var(--acc);color:#111;border-color:var(--acc);font-weight:700}
+button:disabled{opacity:.45;cursor:not-allowed}
+main{max-width:1100px;margin:0 auto;padding:12px 16px 40px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.card h3{margin:0 0 8px;font-size:15px}
+.row{display:flex;gap:8px 10px;flex-wrap:wrap;align-items:center}
+.note{font-size:12px;color:var(--mut)}
+.badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;background:var(--panel2);border:1px solid var(--line)}
+.pv{background:#3a2a05;color:#ffd77a;border-color:#6b4d0a}
+.chip{display:inline-flex;gap:4px;align-items:center;padding:2px 8px;border-radius:12px;border:1px solid var(--acc);font-size:13px}
+.chip .x{cursor:pointer;color:var(--mut)}
+table{border-collapse:collapse;width:100%}
+th,td{padding:5px 8px;border-bottom:1px solid var(--line);font-size:13px;text-align:left}
+th{color:var(--mut);font-weight:500}
+.scroll{overflow-x:auto}
+h1{font-size:19px;margin:6px 0 2px}
+.lead{color:var(--mut);font-size:13px;margin:0 0 12px}
+.new{outline:2px dashed var(--acc);outline-offset:3px;border-radius:8px}
+.pc-bar{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--panel2)}
+.pc-sync{font-size:12px;padding:1px 8px;border-radius:10px}
+.pc-sync.ok{color:var(--dn);border:1px solid var(--dn)}
+.pc-sync.loc{color:var(--acc);border:1px solid var(--acc)}
+.pc-tog{min-width:64px}
+.pc-off td{color:var(--mut)}
+.pc-off td b{text-decoration:line-through}
+.pc-packs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.pc-packs .card{margin:0}
+.pc-map td:last-child{white-space:normal}
+.ok{color:var(--dn)}.warn{color:var(--acc)}.bad{color:var(--up)}
+dialog{background:var(--panel);color:var(--tx);border:1px solid var(--acc);border-radius:10px;max-width:min(560px,calc(100vw - 32px));width:100%}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+@media (max-width:600px){main{padding:10px 12px 30px}.pc-bar button,.pc-bar select{font-size:13px;padding:3px 8px}}
+</style></head><body><main>
+<h1>原型研究：研究組合保存＋套餐上下架 <span class="badge pv">預覽・示意資料</span></h1>
+<p class="lead">【舊】總指揮 11-10 01:10 第 5 項。金色虛線框＝這次新加的；其他照會員站正式樣式。策略名稱、績效都是示意，按鈕可以點（存在這台瀏覽器，不連後端）。</p>
+
+<section class="card">
+  <h3>A. 原型研究 › 研究組合（管理者）</h3>
+  <div class="note" style="margin-bottom:6px">現在的問題：組合每次改都有寫進瀏覽器，但開頁時沒讀回來 → 重開一律回到「目前格」。改成：開頁自動帶回上次組合，另外可以把組合命名存起來、存多組、刪除。</div>
+  <div class="row" id="pcStrat"></div>
+  <div class="pc-bar new" style="margin-top:8px" id="pcMine"></div>
+  <div class="note" id="pcMsg" style="margin-top:6px"></div>
+  <div class="row" style="margin-top:10px"><span class="note">示範切換：</span>
+    <button id="pcLogin" class="on">已登入（存在帳號）</button><button id="pcAnon">沒登入（只存這台瀏覽器）</button>
+    <button id="pcReopen">模擬「關掉再開」</button></div>
+</section>
+
+<section class="card">
+  <h3>B. 管理 › 套餐內容（管理者）</h3>
+  <div class="row new" style="padding:6px"><button class="on" id="pcPush">把目前研究組合推出成套餐…</button>
+    <span class="note">成分會先換成可訂閱的策略代碼（格點會先「建立成策略」），再存成一個新套餐，預設<b>下架</b>，確認後才上架。</span></div>
+  <div class="scroll" style="margin-top:8px"><table id="pcPk"></table></div>
+  <div class="note" style="margin-top:6px">下架＝不刪、客戶端「推薦套餐」看不到，管理頁照樣可以改內容、重新上架；「刪除」維持原本的按鈕（要確認）。</div>
+</section>
+
+<section class="card">
+  <h3>客戶選單 › 推薦套餐（客戶看到的）</h3>
+  <div class="pc-packs" id="pcCli"></div>
+  <div class="note" style="margin-top:6px">只列上架的套餐；上面切上架／下架，這裡跟著變。</div>
+</section>
+
+<section class="card">
+  <h3>已訂閱的客戶，套餐下架時怎麼處理（要 Evans 選）</h3>
+  <div class="note">目前會員的訂閱是記「策略代碼」（會員管理的訂閱欄），不是記套餐；所以套餐下架本身不會停掉任何人的訊號。下面是可選的做法：</div>
+  <ol style="margin:6px 0 0;padding-left:20px;font-size:13px">
+    <li><b>照常服務到到期日</b>：已訂閱的照收訊號，只是不能新訂、續訂時請營業員改推別的套餐（程式最少改；W 建議）</li>
+    <li><b>下架即停</b>：下架當下把該套餐的策略從訂閱者身上拿掉（要先記「誰是從哪個套餐訂的」，後端要多一欄）</li>
+    <li><b>指定替代套餐</b>：下架時選一個上架中的套餐，訂閱者自動換過去並發 LINE／TG 通知</li>
+  </ol>
+</section>
+
+<dialog id="pcDlg"><h3 style="margin-top:0">推出成套餐</h3>
+  <div class="scroll"><table class="pc-map" id="pcMap"></table></div>
+  <div class="row" style="margin-top:8px"><input id="pcName" placeholder="套餐名稱" style="flex:1;min-width:180px"><input id="pcYear" type="number" min="0" step="1" placeholder="年費" style="width:110px"></div>
+  <textarea id="pcDesc" rows="2" style="width:100%;margin-top:8px" placeholder="套餐特色說明（可按原本的「依回測命名」）"></textarea>
+  <div class="row" style="margin-top:8px;justify-content:flex-end"><button id="pcCancel">取消</button><button class="on" id="pcOk">建立（先下架）</button></div>
+</dialog>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const NAME = {"m:GEA5": "GEA5", "m:GEA6": "GEA6", "c:12_7": "GEA 12・7", "f:FH:3_4": "魚頭・3・4", "x:FT": "魚尾（MC 明細匯入）"};
+const KIND = id => id.startsWith("m:") ? ["已上架", "ok", id.slice(2)] : id.startsWith("c:") || id.startsWith("f:") ? ["格點：會先建立成策略", "warn", "LAB_" + id.slice(2).replace(/:/g, "_")] : ["MC 匯入：不能推出（沒有逐筆訊號）", "bad", null];
+const ls = (k, v) => { try { if (v === undefined) return JSON.parse(localStorage.getItem(k) || "null"); localStorage.setItem(k, JSON.stringify(v)); } catch (e) { return null; } };
+let login = true;
+let D = ls("pc_demo") || {last: ["m:GEA5", "m:GEA6", "c:12_7"], saved: [{name: "多空對沖・三支", ids: ["m:GEA5", "m:GEA6", "c:12_7"], ts: "11-09 22:14"}, {name: "魚頭魚尾試算", ids: ["f:FH:3_4", "x:FT"], ts: "11-08 10:02"}]};
+let LABS = D.last.slice(), cur = -1;
+let PK = ls("pc_pk") || [{id: "BASE1", name: "穩健多空雙引擎", n: 2, on: true, src: "手動"}, {id: "BASE2", name: "高風報比・2 多＋1 空", n: 3, on: true, src: "手動"}, {id: "PACK_OLD", name: "2025 夏季版（舊）", n: 4, on: false, src: "研究組合"}];
+const save = why => { D.last = LABS.slice(); ls("pc_demo", D); $("#pcMsg").innerHTML = why ? (login ? "✓ " + why + "（存在帳號：/api/prefs?k=lab，換裝置登入也在）" : "✓ " + why + "（沒登入：只存這台瀏覽器）") : ""; };
+function draw() {
+  $("#pcStrat").innerHTML = `<button>目前格 GEA 12・7</button><button class="on">研究組合（${LABS.length} 支）</button>`
+    + LABS.map(id => `<span class="chip">${esc(NAME[id])} <b class="x" data-rm="${id}">×</b></span>`).join("")
+    + `<select id="pcAdd"><option value="">＋其他策略…</option>${Object.keys(NAME).filter(k => !LABS.includes(k)).map(k => `<option value="${k}">${esc(NAME[k])}</option>`).join("")}</select>`
+    + (LABS.length ? `<button id="pcClr">清空組合</button>` : "");
+  $("#pcMine").innerHTML = `<b style="font-size:13px">我的組合</b>`
+    + `<select id="pcSel"><option value="-1">（目前未命名）</option>${D.saved.map((s, i) => `<option value="${i}" ${i === cur ? "selected" : ""}>${esc(s.name)}（${s.ids.length} 支・${s.ts}）</option>`).join("")}</select>`
+    + `<button id="pcLoad" ${cur < 0 ? "disabled" : ""}>載入</button><button id="pcSaveAs">另存新組合</button>`
+    + `<button id="pcOver" ${cur < 0 ? "disabled" : ""}>覆蓋</button><button id="pcDel" ${cur < 0 ? "disabled" : ""}>刪除</button>`
+    + `<span class="pc-sync ${login ? "ok" : "loc"}">${login ? "已存到帳號" : "只存這台瀏覽器"}</span>`;
+  document.querySelectorAll("[data-rm]").forEach(b => b.onclick = () => { LABS = LABS.filter(x => x !== b.dataset.rm); save("組合已更新"); draw(); });
+  $("#pcAdd").onchange = e => { if (e.target.value) { LABS.push(e.target.value); save("組合已更新"); draw(); } };
+  if ($("#pcClr")) $("#pcClr").onclick = () => { LABS = []; save("已清空"); draw(); };
+  $("#pcSel").onchange = e => { cur = +e.target.value; draw(); };
+  $("#pcLoad").onclick = () => { LABS = D.saved[cur].ids.slice(); save("已載入「" + D.saved[cur].name + "」"); draw(); };
+  $("#pcSaveAs").onclick = () => { if (!LABS.length) return alert("組合是空的"); const n = (prompt("組合名稱（最多 30 字）", "我的組合 " + (D.saved.length + 1)) || "").trim().slice(0, 30); if (!n) return;
+    if (D.saved.length >= 20) return alert("最多存 20 組，請先刪掉不用的");
+    D.saved.push({name: n, ids: LABS.slice(), ts: new Date().toLocaleString("zh-TW", {month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false})}); cur = D.saved.length - 1; save("已另存「" + n + "」"); draw(); };
+  $("#pcOver").onclick = () => { if (!confirm("用目前組合覆蓋「" + D.saved[cur].name + "」？")) return; D.saved[cur].ids = LABS.slice(); save("已覆蓋「" + D.saved[cur].name + "」"); draw(); };
+  $("#pcDel").onclick = () => { if (!confirm("刪除「" + D.saved[cur].name + "」？（目前畫面上的組合不受影響）")) return; const n = D.saved[cur].name; D.saved.splice(cur, 1); cur = -1; save("已刪除「" + n + "」"); draw(); };
+  $("#pcPk").innerHTML = `<tr><th>套餐</th><th>支數</th><th>來源</th><th>狀態</th><th></th></tr>` + PK.map((p, i) => `<tr class="${p.on ? "" : "pc-off"}"><td><b>${esc(p.name)}</b></td><td>${p.n}</td><td>${esc(p.src)}</td>`
+    + `<td><button class="pc-tog ${p.on ? "on" : ""}" data-tog="${i}">${p.on ? "上架中" : "已下架"}</button></td><td><button>編輯</button></td></tr>`).join("");
+  document.querySelectorAll("[data-tog]").forEach(b => b.onclick = () => { const p = PK[+b.dataset.tog];
+    if (p.on && !confirm("下架「" + p.name + "」？客戶端推薦套餐看不到；已訂閱的客戶照目前做法不受影響（待 Evans 選處理方式）。")) return; p.on = !p.on; ls("pc_pk", PK); draw(); });
+  $("#pcCli").innerHTML = PK.filter(p => p.on).map(p => `<div class="card"><b>${esc(p.name)}</b><div class="note">${p.n} 支策略</div></div>`).join("") || `<div class="note">目前沒有上架的套餐</div>`;
+}
+$("#pcLogin").onclick = () => { login = true; $("#pcLogin").classList.add("on"); $("#pcAnon").classList.remove("on"); draw(); };
+$("#pcAnon").onclick = () => { login = false; $("#pcAnon").classList.add("on"); $("#pcLogin").classList.remove("on"); draw(); };
+$("#pcReopen").onclick = () => { LABS = (ls("pc_demo") || D).last.slice(); cur = -1; draw(); $("#pcMsg").innerHTML = "↻ 重開：已帶回上次的組合（" + LABS.length + " 支）" + (login ? "，來源＝帳號" : "，來源＝這台瀏覽器"); };
+$("#pcPush").onclick = () => {
+  if (!LABS.length) return alert("研究組合是空的");
+  $("#pcMap").innerHTML = `<tr><th>成分</th><th>推出後</th></tr>` + LABS.map(id => { const [t, c, code] = KIND(id); return `<tr><td>${esc(NAME[id])}</td><td class="${c}">${esc(t)}${code ? "：" + code : ""}</td></tr>`; }).join("");
+  const n = LABS.filter(id => KIND(id)[2]).length; $("#pcName").value = "研究組合・" + n + " 支"; $("#pcYear").value = 0; $("#pcDesc").value = "";
+  $("#pcOk").disabled = !n; $("#pcDlg").showModal();
+};
+$("#pcCancel").onclick = () => $("#pcDlg").close();
+$("#pcOk").onclick = () => { const n = LABS.filter(id => KIND(id)[2]).length; PK.push({id: "PACK_" + Date.now().toString(36).toUpperCase(), name: $("#pcName").value.trim() || "新套餐", n, on: false, src: "研究組合"}); ls("pc_pk", PK); $("#pcDlg").close(); draw(); };
+draw();
+$("#pcMsg").innerHTML = "↻ 開頁：已帶回上次的組合（" + LABS.length + " 支），來源＝帳號";
+</script>
+</main></body></html>
