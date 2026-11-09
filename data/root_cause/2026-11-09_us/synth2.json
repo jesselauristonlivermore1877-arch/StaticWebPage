@@ -1,0 +1,191 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"國安基金啟動護盤與金管會祭出限空令\",\n      \"layer\": \"政策回應\",\n      \"event_date\": \"2026-11-06\",\n      \"who\": \"國安基金、金管會\",\n      \"event\": \"國安基金決議啟動護盤任務，金管會祭出限空令。\",\n      \"mechanism\": \"台股標準差倍數（3.7）為美股（1.4）之2.6倍，顯示本地政策干預為當日超額漲幅的主因。政府強力表態作多並限制空方，引發大規模空單平倉（Short Squeeze）與信心回升。\",\n      \"industry\": \"全產業\",\n      \"tw_link\": \"政策利多直接支撐權值股，帶動加權指數強彈。\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"國安基金\",\n        \"限空令\",\n        \"護盤\",\n        \"安定市場任務\",\n        \"National Stabilization Fund\",\n        \"Short-selling restrictions\"\n      ],\n      \"evidence\": [\n        \"P597\",\n        \"P604\",\n        \"P7\",\n        \"P19\",\n        \"P353\",\n        \"D43\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\"\n      ],\n      \"why_root\": \"台股標準差倍數（3.7）為美股（1.4）之2.6倍，顯示本地政策干預為當日超額漲幅的主因。\",\n      \"drill\": [\n        \"國安基金 護盤 2026\",\n        \"金管會 限空令 2026\",\n        \"National Stabilization Fund Taiwan\"\n      ]\n    },\n    {\n      \"title\": \"超微（AMD）財報強勁帶動美股半導體族群反彈\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-04\",\n      \"who\": \"超微（AMD）\",\n      \"event\": \"AMD發布強勁Q3財報，資料中心營收成長97%。\",\n      \"mechanism\": \"強勁AI需求數據化解泡沫疑慮，吸引資金回流半導體權值股與AI伺服器供應鏈，特別是高瓦數電源與BBU需求。\",\n      \"industry\": \"半導體、AI伺服器\",\n      \"tw_link\": \"帶動台積電ADR強彈與台股AI伺服器族群走勢。\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"伺服器與品牌組裝\",\n        \"伺服器電源與儲能\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"超微\",\n        \"資料中心\",\n        \"Advanced Micro Devices\",\n        \"Data Center\",\n        \"データセンター\",\n        \"AI半導体\"\n      ],\n      \"evidence\": [\n        \"P106\",\n        \"P137\",\n        \"P171\",\n        \"D1\",\n        \"D52\",\n        \"D61\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"why_root\": \"AMD的實質業績是支撐AI產業基本面的核心證據，直接扭轉了選後的恐慌情緒。\",\n      \"drill\": [\n        \"AMD Q3 2026 earnings transcript\",\n        \"超微 財報 2026\",\n        \"AMD データセンター 成長\"\n      ]\n    },\n    {\n      \"title\": \"台股融資餘額單周暴減逾400億元\",\n      \"layer\": \"放大因素\",\n      \"event_date\": \"2026-11-06\",\n      \"who\": \"台股市場投資人\",\n      \"event\": \"台股融資餘額單周暴減423億元，創史上最大減幅。\",\n      \"mechanism\": \"市場籌碼經過劇烈清洗，融資斷頭壓力解除，浮額大幅減少後降低反彈阻力，放大了政策利多的助漲效果。\",\n      \"industry\": \"全產業\",\n      \"tw_link\": \"籌碼面改善有利於大盤在利多下放大漲幅。\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"融資餘額\",\n        \"斷頭\",\n        \"浮額\",\n        \"暴減\",\n        \"籌碼清洗\",\n        \"融資斷頭\"\n      ],\n      \"evidence\": [\n        \"P62\",\n        \"P35\",\n        \"P52\",\n        \"P21\"\n      ],\n      \"langs\": [\n        \"zh\"\n      ],\n      \"why_root\": \"融資大減是市場跌深後的籌碼面特徵，放大了利多消息對股價的推升力道。\",\n      \"drill\": [\n        \"台股 融資餘額 2026\",\n        \"Taiwan margin debt reduction\",\n        \"融資斷頭 2026\"\n      ]\n    },\n    {\n      \"title\": \"民主黨計畫推出大量AI監管法案與維持基建支出\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-04\",\n      \"who\": \"美國民主黨\",\n      \"event\": \"民主黨贏得期中選舉控制國會，市場評估其AI監管與基建政策。\",\n      \"mechanism\": \"初期擔憂監管導致拋售，隨後市場轉向關注其對AI基建與綠能的持續支持，不確定性消除引發空頭回補。\",\n      \"industry\": \"科技、綠能\",\n      \"tw_link\": \"消除台股科技族群對美政策變動的過度擔憂。\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"藍色海嘯\",\n        \"AI監管\",\n        \"Blue Wave\",\n        \"AI Regulation\",\n        \"블루웨이브\",\n        \"인공지능 규제\"\n      ],\n      \"evidence\": [\n        \"D115\",\n        \"D124\",\n        \"D131\",\n        \"D138\",\n        \"D143\",\n        \"D147\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ko\"\n      ],\n      \"why_root\": \"選舉結果（表面）引發的政策預期轉向（根因）是美股科技股先跌後漲的關鍵。\",\n      \"drill\": [\n        \"Democratic AI regulation bills\",\n        \"民主黨 AI 監管 法案\",\n        \"미국 민주당 AI 규제\"\n      ]\n    }\n  ],\n  \"summary\": \"昨晚美股受超微（AMD）強勁財報提振半導體族群，預期傳導到今天台股，配合國安基金啟動護盤與金管會限空令，引發市場空單平倉與權值股報復性反彈。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "國安基金啟動護盤與金管會祭出限空令",
+    "layer": "政策回應",
+    "event_date": "2026-11-06",
+    "who": "國安基金、金管會",
+    "event": "國安基金決議啟動護盤任務，金管會祭出限空令。",
+    "mechanism": "台股標準差倍數（3.7）為美股（1.4）之2.6倍，顯示本地政策干預為當日超額漲幅的主因。政府強力表態作多並限制空方，引發大規模空單平倉（Short Squeeze）與信心回升。",
+    "industry": "全產業",
+    "tw_link": "政策利多直接支撐權值股，帶動加權指數強彈。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "國安基金",
+     "限空令",
+     "護盤",
+     "安定市場任務",
+     "National Stabilization Fund",
+     "Short-selling restrictions"
+    ],
+    "evidence": [
+     "P597",
+     "P604",
+     "P7",
+     "P19",
+     "P353",
+     "D43"
+    ],
+    "langs": [
+     "zh",
+     "en"
+    ],
+    "why_root": "台股標準差倍數（3.7）為美股（1.4）之2.6倍，顯示本地政策干預為當日超額漲幅的主因。",
+    "drill": [
+     "國安基金 護盤 2026",
+     "金管會 限空令 2026",
+     "National Stabilization Fund Taiwan"
+    ]
+   },
+   {
+    "title": "超微（AMD）財報強勁帶動美股半導體族群反彈",
+    "layer": "根因",
+    "event_date": "2026-11-04",
+    "who": "超微（AMD）",
+    "event": "AMD發布強勁Q3財報，資料中心營收成長97%。",
+    "mechanism": "強勁AI需求數據化解泡沫疑慮，吸引資金回流半導體權值股與AI伺服器供應鏈，特別是高瓦數電源與BBU需求。",
+    "industry": "半導體、AI伺服器",
+    "tw_link": "帶動台積電ADR強彈與台股AI伺服器族群走勢。",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "伺服器與品牌組裝",
+     "伺服器電源與儲能"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "超微",
+     "資料中心",
+     "Advanced Micro Devices",
+     "Data Center",
+     "データセンター",
+     "AI半導体"
+    ],
+    "evidence": [
+     "P106",
+     "P137",
+     "P171",
+     "D1",
+     "D52",
+     "D61"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "why_root": "AMD的實質業績是支撐AI產業基本面的核心證據，直接扭轉了選後的恐慌情緒。",
+    "drill": [
+     "AMD Q3 2026 earnings transcript",
+     "超微 財報 2026",
+     "AMD データセンター 成長"
+    ]
+   },
+   {
+    "title": "台股融資餘額單周暴減逾400億元",
+    "layer": "放大因素",
+    "event_date": "2026-11-06",
+    "who": "台股市場投資人",
+    "event": "台股融資餘額單周暴減423億元，創史上最大減幅。",
+    "mechanism": "市場籌碼經過劇烈清洗，融資斷頭壓力解除，浮額大幅減少後降低反彈阻力，放大了政策利多的助漲效果。",
+    "industry": "全產業",
+    "tw_link": "籌碼面改善有利於大盤在利多下放大漲幅。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "融資餘額",
+     "斷頭",
+     "浮額",
+     "暴減",
+     "籌碼清洗",
+     "融資斷頭"
+    ],
+    "evidence": [
+     "P62",
+     "P35",
+     "P52",
+     "P21"
+    ],
+    "langs": [
+     "zh"
+    ],
+    "why_root": "融資大減是市場跌深後的籌碼面特徵，放大了利多消息對股價的推升力道。",
+    "drill": [
+     "台股 融資餘額 2026",
+     "Taiwan margin debt reduction",
+     "融資斷頭 2026"
+    ]
+   },
+   {
+    "title": "民主黨計畫推出大量AI監管法案與維持基建支出",
+    "layer": "根因",
+    "event_date": "2026-11-04",
+    "who": "美國民主黨",
+    "event": "民主黨贏得期中選舉控制國會，市場評估其AI監管與基建政策。",
+    "mechanism": "初期擔憂監管導致拋售，隨後市場轉向關注其對AI基建與綠能的持續支持，不確定性消除引發空頭回補。",
+    "industry": "科技、綠能",
+    "tw_link": "消除台股科技族群對美政策變動的過度擔憂。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "藍色海嘯",
+     "AI監管",
+     "Blue Wave",
+     "AI Regulation",
+     "블루웨이브",
+     "인공지능 규제"
+    ],
+    "evidence": [
+     "D115",
+     "D124",
+     "D131",
+     "D138",
+     "D143",
+     "D147"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ko"
+    ],
+    "why_root": "選舉結果（表面）引發的政策預期轉向（根因）是美股科技股先跌後漲的關鍵。",
+    "drill": [
+     "Democratic AI regulation bills",
+     "民主黨 AI 監管 法案",
+     "미국 민주당 AI 규제"
+    ]
+   }
+  ],
+  "summary": "昨晚美股受超微（AMD）強勁財報提振半導體族群，預期傳導到今天台股，配合國安基金啟動護盤與金管會限空令，引發市場空單平倉與權值股報復性反彈。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmp3yn0ewna.txt",
+  "附檔": [],
+  "耗時秒": 204.6,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3-flash-preview",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 94196,
+   "prompt_tokens": 29518,
+   "output_tokens": 1768,
+   "thinking_tokens": 62910
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1109_synth2",
+  "ok": true
+ }
+}

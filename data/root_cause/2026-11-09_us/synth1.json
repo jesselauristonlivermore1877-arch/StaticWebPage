@@ -1,0 +1,207 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"國安基金啟動護盤與金管會祭出限空令\",\n      \"layer\": \"政策回應\",\n      \"event_date\": \"2026-11-06\",\n      \"who\": \"行政院國安基金、金管會\",\n      \"event\": \"國安基金管理委員會決議啟動安定市場任務，金管會同步宣布調降每日盤中借券賣出委託數量並提高融券保證金成數。\",\n      \"mechanism\": \"政府強力表態作多並限制空方打壓空間，引發市場信心回升與大規模空單平倉（Short Squeeze），直接支撐權值股走勢。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"台股開盤跳空大漲逾千點，台積電、聯發科等權值股領軍收復關鍵點位。\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"國安基金\",\n        \"限空令\",\n        \"安定市場任務\",\n        \"融券保證金\",\n        \"National Stabilization Fund\",\n        \"short selling restrictions\",\n        \"market rout\"\n      ],\n      \"evidence\": [\n        \"P597\",\n        \"P604\",\n        \"P60\",\n        \"P7\",\n        \"P19\",\n        \"P353\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\"\n      ],\n      \"why_root\": \"台股標準差倍數（3.7）遠高於美股（1.4），顯示本地政策干預是驅動當天超額漲幅的核心主因。\",\n      \"drill\": [\n        \"國安基金 護盤 歷史漲幅\",\n        \"金管會 限空令 效果\",\n        \"National Stabilization Fund Taiwan impact 2026\",\n        \"Taiwan short selling ban history\"\n      ]\n    },\n    {\n      \"title\": \"超微（AMD）財報強勁帶動美股半導體族群跌深反彈\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-06\",\n      \"who\": \"超微（AMD）\",\n      \"event\": \"AMD發布第三季財報，營收創歷史新高且資料中心部門成長97%，帶動費城半導體指數強彈4.21%。\",\n      \"mechanism\": \"強勁的AI硬體需求數據化解了市場對AI泡沫與監管的過度擔憂，吸引抄底資金回流半導體權值股。\",\n      \"industry\": \"晶圓代工與製造\",\n      \"tw_link\": \"台積電ADR大漲逾6%，帶動台股半導體供應鏈開盤報復性上漲。\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"IC設計\",\n        \"伺服器與品牌組裝\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"超微\",\n        \"AMD\",\n        \"費城半導體指數\",\n        \"Philadelphia Semiconductor Index\",\n        \"record quarterly revenue\",\n        \"データセンター部門\",\n        \"반도체주 반등\"\n      ],\n      \"evidence\": [\n        \"P106\",\n        \"P137\",\n        \"P187\",\n        \"P171\",\n        \"P344\",\n        \"P408\",\n        \"P430\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"AMD的具體業績數據提供了產業基本面的支撐，是美股半導體指數反彈的直接觸發點。\",\n      \"drill\": [\n        \"AMD Q3 2026 earnings analysis\",\n        \"AMD data center growth sustainability\",\n        \"費城半導體指數 跌深反彈 原因\",\n        \"AMD 決算 データセンター\"\n      ]\n    },\n    {\n      \"title\": \"台股融資餘額單周暴減逾400億元\",\n      \"layer\": \"放大因素\",\n      \"event_date\": \"2026-11-06\",\n      \"who\": \"市場散戶投資人\",\n      \"event\": \"截至11月6日當周，台股融資餘額出現史上最大規模減幅，單周減少約423億元。\",\n      \"mechanism\": \"市場籌碼經過劇烈清洗，融資斷頭壓力解除，浮額大幅減少後，降低了反彈阻力並放大政策利多的助漲效果。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"籌碼面轉趨乾淨，使得少量買盤即可帶動指數大幅跳升。\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"融資暴減\",\n        \"融資餘額\",\n        \"籌碼清洗\",\n        \"margin debt reduction\",\n        \"margin call\",\n        \"信用取引\",\n        \"반대매매\"\n      ],\n      \"evidence\": [\n        \"P62\",\n        \"P35\",\n        \"P52\",\n        \"P21\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"融資餘額的極端變動是市場情緒與槓桿平倉的結果，放大了隨後的反彈幅度。\",\n      \"drill\": [\n        \"台股 融資餘額 歷史新低\",\n        \"融資斷頭 籌碼清洗 統計\",\n        \"Taiwan margin debt reduction data\",\n        \"信用取引 投げ売り 統計\"\n      ]\n    },\n    {\n      \"title\": \"美國期中選舉民主黨大勝引發政策不確定性消除\",\n      \"layer\": \"表面\",\n      \"event_date\": \"2026-11-04\",\n      \"who\": \"美國民主黨\",\n      \"event\": \"民主黨在期中選舉中贏得國會控制權（Blue Wave），市場重新評估政策走向。\",\n      \"mechanism\": \"初期因擔憂AI監管導致科技股暴跌，隨後市場轉向關注民主黨對AI基礎建設與潔淨能源的持續支持，不確定性消除引發空頭回補。\",\n      \"industry\": \"伺服器與品牌組裝\",\n      \"tw_link\": \"市場預期AI伺服器與能源基建訂單將維持穩定，帶動相關供應鏈反彈。\",\n      \"tw_sectors\": [\n        \"伺服器與品牌組裝\",\n        \"伺服器電源與儲能\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"期中選舉\",\n        \"民主黨\",\n        \"藍色海嘯\",\n        \"Midterm Election\",\n        \"Democratic sweep\",\n        \"Blue Wave\",\n        \"中間選挙\",\n        \"블루웨이브\"\n      ],\n      \"evidence\": [\n        \"P142\",\n        \"P143\",\n        \"P152\",\n        \"P186\",\n        \"P195\",\n        \"P530\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"選舉結果是背景事件，具體根因為民主黨對AI基建的預算支持與對科技巨頭政策的明朗化。\",\n      \"drill\": [\n        \"Democratic sweep AI infrastructure spending\",\n        \"US midterm election 2026 tech policy\",\n        \"民主黨 藍色海嘯 AI 影響\",\n        \"미국 중간선거 민주당 승리 반도체\"\n      ]\n    }\n  ],\n  \"summary\": \"昨晚美股半導體族群在超微（AMD）強勁財報與跌深買盤帶動下強勢反彈，費半指數大漲4.21%，預期傳導到今天台股；加上台灣政府啟動國安基金護盤與限空令雙管齊下，配合先前融資餘額大幅清洗後的籌碼優勢，引發台股開盤出現報復性上漲。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "國安基金啟動護盤與金管會祭出限空令",
+    "layer": "政策回應",
+    "event_date": "2026-11-06",
+    "who": "行政院國安基金、金管會",
+    "event": "國安基金管理委員會決議啟動安定市場任務，金管會同步宣布調降每日盤中借券賣出委託數量並提高融券保證金成數。",
+    "mechanism": "政府強力表態作多並限制空方打壓空間，引發市場信心回升與大規模空單平倉（Short Squeeze），直接支撐權值股走勢。",
+    "industry": "全市場",
+    "tw_link": "台股開盤跳空大漲逾千點，台積電、聯發科等權值股領軍收復關鍵點位。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "國安基金",
+     "限空令",
+     "安定市場任務",
+     "融券保證金",
+     "National Stabilization Fund",
+     "short selling restrictions",
+     "market rout"
+    ],
+    "evidence": [
+     "P597",
+     "P604",
+     "P60",
+     "P7",
+     "P19",
+     "P353"
+    ],
+    "langs": [
+     "zh",
+     "en"
+    ],
+    "why_root": "台股標準差倍數（3.7）遠高於美股（1.4），顯示本地政策干預是驅動當天超額漲幅的核心主因。",
+    "drill": [
+     "國安基金 護盤 歷史漲幅",
+     "金管會 限空令 效果",
+     "National Stabilization Fund Taiwan impact 2026",
+     "Taiwan short selling ban history"
+    ]
+   },
+   {
+    "title": "超微（AMD）財報強勁帶動美股半導體族群跌深反彈",
+    "layer": "根因",
+    "event_date": "2026-11-06",
+    "who": "超微（AMD）",
+    "event": "AMD發布第三季財報，營收創歷史新高且資料中心部門成長97%，帶動費城半導體指數強彈4.21%。",
+    "mechanism": "強勁的AI硬體需求數據化解了市場對AI泡沫與監管的過度擔憂，吸引抄底資金回流半導體權值股。",
+    "industry": "晶圓代工與製造",
+    "tw_link": "台積電ADR大漲逾6%，帶動台股半導體供應鏈開盤報復性上漲。",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "IC設計",
+     "伺服器與品牌組裝"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "超微",
+     "AMD",
+     "費城半導體指數",
+     "Philadelphia Semiconductor Index",
+     "record quarterly revenue",
+     "データセンター部門",
+     "반도체주 반등"
+    ],
+    "evidence": [
+     "P106",
+     "P137",
+     "P187",
+     "P171",
+     "P344",
+     "P408",
+     "P430"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "AMD的具體業績數據提供了產業基本面的支撐，是美股半導體指數反彈的直接觸發點。",
+    "drill": [
+     "AMD Q3 2026 earnings analysis",
+     "AMD data center growth sustainability",
+     "費城半導體指數 跌深反彈 原因",
+     "AMD 決算 データセンター"
+    ]
+   },
+   {
+    "title": "台股融資餘額單周暴減逾400億元",
+    "layer": "放大因素",
+    "event_date": "2026-11-06",
+    "who": "市場散戶投資人",
+    "event": "截至11月6日當周，台股融資餘額出現史上最大規模減幅，單周減少約423億元。",
+    "mechanism": "市場籌碼經過劇烈清洗，融資斷頭壓力解除，浮額大幅減少後，降低了反彈阻力並放大政策利多的助漲效果。",
+    "industry": "全市場",
+    "tw_link": "籌碼面轉趨乾淨，使得少量買盤即可帶動指數大幅跳升。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "融資暴減",
+     "融資餘額",
+     "籌碼清洗",
+     "margin debt reduction",
+     "margin call",
+     "信用取引",
+     "반대매매"
+    ],
+    "evidence": [
+     "P62",
+     "P35",
+     "P52",
+     "P21"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "融資餘額的極端變動是市場情緒與槓桿平倉的結果，放大了隨後的反彈幅度。",
+    "drill": [
+     "台股 融資餘額 歷史新低",
+     "融資斷頭 籌碼清洗 統計",
+     "Taiwan margin debt reduction data",
+     "信用取引 投げ売り 統計"
+    ]
+   },
+   {
+    "title": "美國期中選舉民主黨大勝引發政策不確定性消除",
+    "layer": "表面",
+    "event_date": "2026-11-04",
+    "who": "美國民主黨",
+    "event": "民主黨在期中選舉中贏得國會控制權（Blue Wave），市場重新評估政策走向。",
+    "mechanism": "初期因擔憂AI監管導致科技股暴跌，隨後市場轉向關注民主黨對AI基礎建設與潔淨能源的持續支持，不確定性消除引發空頭回補。",
+    "industry": "伺服器與品牌組裝",
+    "tw_link": "市場預期AI伺服器與能源基建訂單將維持穩定，帶動相關供應鏈反彈。",
+    "tw_sectors": [
+     "伺服器與品牌組裝",
+     "伺服器電源與儲能"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "期中選舉",
+     "民主黨",
+     "藍色海嘯",
+     "Midterm Election",
+     "Democratic sweep",
+     "Blue Wave",
+     "中間選挙",
+     "블루웨이브"
+    ],
+    "evidence": [
+     "P142",
+     "P143",
+     "P152",
+     "P186",
+     "P195",
+     "P530"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "選舉結果是背景事件，具體根因為民主黨對AI基建的預算支持與對科技巨頭政策的明朗化。",
+    "drill": [
+     "Democratic sweep AI infrastructure spending",
+     "US midterm election 2026 tech policy",
+     "民主黨 藍色海嘯 AI 影響",
+     "미국 중간선거 민주당 승리 반도체"
+    ]
+   }
+  ],
+  "summary": "昨晚美股半導體族群在超微（AMD）強勁財報與跌深買盤帶動下強勢反彈，費半指數大漲4.21%，預期傳導到今天台股；加上台灣政府啟動國安基金護盤與限空令雙管齊下，配合先前融資餘額大幅清洗後的籌碼優勢，引發台股開盤出現報復性上漲。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmp_d63i7b1.txt",
+  "附檔": [],
+  "耗時秒": 20.8,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3-flash-preview",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 34093,
+   "prompt_tokens": 29501,
+   "output_tokens": 2010,
+   "thinking_tokens": 2582
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1109_synth1",
+  "ok": true
+ }
+}

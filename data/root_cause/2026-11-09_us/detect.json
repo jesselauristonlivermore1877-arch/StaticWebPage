@@ -1,0 +1,131 @@
+{
+ "trig": [
+  {
+   "kind": "價格",
+   "what": "加權指數",
+   "date": "2026-11-09",
+   "pct": 6.55,
+   "z": 3.69,
+   "t": "加權指數 2026-11-09 +6.55%（3.7 個標準差）"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-09",
+   "t": "台指期日盤大漲 +2,459 點（+6.20%），報 42,111；盤中最高 42,317",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-09",
+   "t": "台指期日盤大漲 +2,358 點（+5.95%），報 42,010；盤中最高 42,015",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-09",
+   "t": "台指期日盤大漲 +1,809 點（+4.56%），報 41,461；盤中最高 41,500",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-09",
+   "t": "台指期日盤大漲 +1,417 點（+3.57%），報 41,069；盤中最高 41,337",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-09",
+   "t": "台指期日盤大漲 +1,046 點（+2.64%），報 40,698；盤中最高 40,780",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  }
+ ],
+ "moves": {
+  "TWII": {
+   "date": "2026-11-09",
+   "prev": "2026-11-06",
+   "close": 42302.8594,
+   "prev_close": 39701.6406,
+   "pct": 6.55,
+   "sd": 1.777,
+   "z": 3.69,
+   "n": 250,
+   "key": "TWII",
+   "name": "加權指數",
+   "sym": "^TWII"
+  },
+  "SOX": {
+   "date": "2026-11-06",
+   "prev": "2026-11-05",
+   "close": 9390.25,
+   "prev_close": 9011.1396,
+   "pct": 4.21,
+   "sd": 3.014,
+   "z": 1.4,
+   "n": 250,
+   "key": "SOX",
+   "name": "費城半導體",
+   "sym": "^SOX"
+  },
+  "NQ": {
+   "date": "2026-11-06",
+   "prev": "2026-11-05",
+   "close": 27189.75,
+   "prev_close": 26752.0,
+   "pct": 1.64,
+   "sd": 1.33,
+   "z": 1.23,
+   "n": 250,
+   "key": "NQ",
+   "name": "那斯達克 100 期貨",
+   "sym": "NQ=F"
+  },
+  "SPX": {
+   "date": "2026-11-06",
+   "prev": "2026-11-05",
+   "close": 7376.8599,
+   "prev_close": 7353.73,
+   "pct": 0.31,
+   "sd": 0.855,
+   "z": 0.37,
+   "n": 250,
+   "key": "SPX",
+   "name": "S&P 500",
+   "sym": "^GSPC"
+  },
+  "N225": {
+   "date": "2026-11-09",
+   "prev": "2026-11-06",
+   "close": 59411.3398,
+   "prev_close": 57434.7695,
+   "pct": 3.44,
+   "sd": 1.869,
+   "z": 1.84,
+   "n": 250,
+   "key": "N225",
+   "name": "日經 225",
+   "sym": "^N225"
+  },
+  "KOSPI": {
+   "date": "2026-11-09",
+   "prev": "2026-11-06",
+   "close": 5159.6699,
+   "prev_close": 5059.6899,
+   "pct": 1.98,
+   "sd": 3.552,
+   "z": 0.56,
+   "n": 250,
+   "key": "KOSPI",
+   "name": "韓國綜合",
+   "sym": "^KS11"
+  }
+ },
+ "sec": {
+  "sectors": [],
+  "note": "只看美股：台股 2026-11-09 還沒開盤，不算族群"
+ }
+}
