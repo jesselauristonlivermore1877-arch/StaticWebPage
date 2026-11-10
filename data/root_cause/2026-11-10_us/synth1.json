@@ -1,0 +1,95 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"費城半導體指數大漲帶動全球科技股反彈\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-09\",\n      \"who\": \"美國半導體企業與市場投資人\",\n      \"event\": \"費城半導體指數於2026-11-09強彈6.85%，帶動美股科技股全面回神\",\n      \"mechanism\": \"油價下跌緩解通膨疑慮，加上市場對AI晶片與半導體需求信心回溫，吸引資金進行逢低買進\",\n      \"industry\": \"半導體\",\n      \"tw_link\": \"美股費半強彈直接激勵台股電子權值股與半導體供應鏈在開盤時出現強勢反彈\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"IC設計\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"費半\",\n        \"半導體\",\n        \"Philadelphia Semiconductor\",\n        \"費城半導體\"\n      ],\n      \"evidence\": [\n        \"P149\",\n        \"P167\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\"\n      ],\n      \"drill\": [\n        \"Philadelphia Semiconductor Index rally\",\n        \"費半大漲 輝達\",\n        \"半導體股反彈 美股\"\n      ]\n    },\n    {\n      \"title\": \"政府啟動國安基金護盤與限空令措施\",\n      \"layer\": \"政策回應\",\n      \"event_date\": \"2026-11-09\",\n      \"who\": \"臺灣主管機關與國安基金\",\n      \"event\": \"臺灣政府授權國安基金進場護盤並實施限空令\",\n      \"mechanism\": \"透過政策工具直接干預與穩定資本市場，化解融資賣壓與恐慌情緒\",\n      \"industry\": \"金融市場\",\n      \"tw_link\": \"政策利多強化市場信心，與美股反彈形成共振，推升台股亞股之冠的強烈反彈動能\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"國安基金\",\n        \"限空令\",\n        \"護盤\",\n        \"台股\"\n      ],\n      \"evidence\": [\n        \"P46\",\n        \"P191\"\n      ],\n      \"langs\": [\n        \"zh\"\n      ],\n      \"drill\": [\n        \"國安基金 護盤 台股\",\n        \"限空令 措施 影響\"\n      ]\n    }\n  ],\n  \"summary\": \"昨晚美股費半大漲6.85%與油價回落帶動科技股反彈，預期傳導到今天台股在美股利多與國內政策護盤雙重激勵下，延續強勢反彈走勢。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "費城半導體指數大漲帶動全球科技股反彈",
+    "layer": "根因",
+    "event_date": "2026-11-09",
+    "who": "美國半導體企業與市場投資人",
+    "event": "費城半導體指數於2026-11-09強彈6.85%，帶動美股科技股全面回神",
+    "mechanism": "油價下跌緩解通膨疑慮，加上市場對AI晶片與半導體需求信心回溫，吸引資金進行逢低買進",
+    "industry": "半導體",
+    "tw_link": "美股費半強彈直接激勵台股電子權值股與半導體供應鏈在開盤時出現強勢反彈",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "IC設計"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "費半",
+     "半導體",
+     "Philadelphia Semiconductor",
+     "費城半導體"
+    ],
+    "evidence": [
+     "P149",
+     "P167"
+    ],
+    "langs": [
+     "zh",
+     "en"
+    ],
+    "drill": [
+     "Philadelphia Semiconductor Index rally",
+     "費半大漲 輝達",
+     "半導體股反彈 美股"
+    ]
+   },
+   {
+    "title": "政府啟動國安基金護盤與限空令措施",
+    "layer": "政策回應",
+    "event_date": "2026-11-09",
+    "who": "臺灣主管機關與國安基金",
+    "event": "臺灣政府授權國安基金進場護盤並實施限空令",
+    "mechanism": "透過政策工具直接干預與穩定資本市場，化解融資賣壓與恐慌情緒",
+    "industry": "金融市場",
+    "tw_link": "政策利多強化市場信心，與美股反彈形成共振，推升台股亞股之冠的強烈反彈動能",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "國安基金",
+     "限空令",
+     "護盤",
+     "台股"
+    ],
+    "evidence": [
+     "P46",
+     "P191"
+    ],
+    "langs": [
+     "zh"
+    ],
+    "drill": [
+     "國安基金 護盤 台股",
+     "限空令 措施 影響"
+    ]
+   }
+  ],
+  "summary": "昨晚美股費半大漲6.85%與油價回落帶動科技股反彈，預期傳導到今天台股在美股利多與國內政策護盤雙重激勵下，延續強勢反彈走勢。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmpn6h5ywln.txt",
+  "附檔": [],
+  "耗時秒": 7.1,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.5-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 32194,
+   "prompt_tokens": 30076,
+   "output_tokens": 732,
+   "thinking_tokens": 1386
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1110_synth1",
+  "ok": true
+ }
+}
