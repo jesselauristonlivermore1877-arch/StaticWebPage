@@ -1,7 +1,41 @@
 {
- "asof": "2026-11-10T10:11+00:00",
+ "asof": "2026-11-10T12:15+00:00",
  "rule": "法說高成長指引：翻倍／倍增／成長 N 倍／成長 N%（N≥50）／明年大幅成長／上修財測／創新高指引；同一公司同一場法說只觸發一次；頁首只放即時偵測、觸發後 3 個交易日內的（until），個股頁標記留 30 天",
  "top": [
+  {
+   "code": "1476",
+   "name": "儒鴻",
+   "quote": "儒鴻：看好第四季營運全年拚創新高- 上市櫃",
+   "pat": "創新高指引",
+   "src": "旺得富理財網",
+   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5DX2M2SnVBT1dJYkFaS0pjLV9NR3pmaXBYOFllR2hWWENqMVdrNzZIMTgybXl3cFVBYW82UjBjNENsUjdhMDctQm9LTHFtV251UGEzdFA1SnE4ckxnejRWUTdvR3R3Zm0wVXc?oc=5",
+   "pub": "2026-11-10T11:25+00:00",
+   "seen": "2026-11-10T12:15+00:00",
+   "meeting": "2026-11-10",
+   "px": {
+    "d": "2026-11-10",
+    "close": 348.5,
+    "chg": -2.11
+   },
+   "mx": {
+    "d": "2026-11-10",
+    "close": 348.5,
+    "chg": -2.11,
+    "prev": 356.0,
+    "prev_d": "2026-11-09",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-09",
+    "from": 356.0,
+    "to_d": "2026-11-10",
+    "to": 348.5,
+    "chg": -2.11
+   },
+   "kind": "news",
+   "n_more": 0,
+   "until": "2026-11-14T00:00+08:00"
+  },
   {
    "code": "6531",
    "name": "愛普*",
@@ -195,6 +229,39 @@
   }
  ],
  "by_code": {
+  "1476": {
+   "code": "1476",
+   "name": "儒鴻",
+   "quote": "儒鴻：看好第四季營運全年拚創新高- 上市櫃",
+   "pat": "創新高指引",
+   "src": "旺得富理財網",
+   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5DX2M2SnVBT1dJYkFaS0pjLV9NR3pmaXBYOFllR2hWWENqMVdrNzZIMTgybXl3cFVBYW82UjBjNENsUjdhMDctQm9LTHFtV251UGEzdFA1SnE4ckxnejRWUTdvR3R3Zm0wVXc?oc=5",
+   "pub": "2026-11-10T11:25+00:00",
+   "seen": "2026-11-10T12:15+00:00",
+   "meeting": "2026-11-10",
+   "px": {
+    "d": "2026-11-10",
+    "close": 348.5,
+    "chg": -2.11
+   },
+   "mx": {
+    "d": "2026-11-10",
+    "close": 348.5,
+    "chg": -2.11,
+    "prev": 356.0,
+    "prev_d": "2026-11-09",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-09",
+    "from": 356.0,
+    "to_d": "2026-11-10",
+    "to": 348.5,
+    "chg": -2.11
+   },
+   "kind": "news",
+   "n_more": 0
+  },
   "6531": {
    "code": "6531",
    "name": "愛普*",
