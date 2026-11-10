@@ -369,9 +369,9 @@
    "pre": {
     "from_d": "2026-11-04",
     "from": 201.0,
-    "to_d": "2026-11-09",
-    "to": 180.5,
-    "chg": -10.2
+    "to_d": "2026-11-10",
+    "to": 191.5,
+    "chg": -4.73
    },
    "pre_sent": true
   },
@@ -407,14 +407,51 @@
    "pre": {
     "from_d": "2026-11-06",
     "from": 39.599998474121094,
-    "to_d": "2026-11-09",
-    "to": 39.95000076293945,
-    "chg": 0.88
+    "to_d": "2026-11-10",
+    "to": 40.099998474121094,
+    "chg": 1.26
    },
    "pre_sent": true
+  },
+  {
+   "code": "6531",
+   "quote": "愛普*看旺明年，IPD將拚倍數成長- 新聞",
+   "pat": "翻倍",
+   "val": null,
+   "frag": "倍數成長",
+   "src": "MoneyDJ",
+   "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQdFdMcXByaXppSW1MUTJLWWY4Tl85aEpSUUsyMWNVdGJDb0NwNWlzMXFpcDZOTXNaNDdDVUZJZS1UQklicDZpODlJcG41aGRYakt5cU9rcmlxZDRfOVUyMTU3Qm8xSTRkTm0zVUNGQ08wbndOMFdOcjQxX3pMOHJkRGVR?oc=5",
+   "pub": "2026-11-10T07:42+00:00",
+   "kind": "news",
+   "title": "愛普*看旺明年，IPD將拚倍數成長- 新聞",
+   "key": "6531_2026-11-10",
+   "name": "愛普*",
+   "meeting": "2026-11-10",
+   "seen": "2026-11-10T10:11+00:00",
+   "px": {
+    "d": "2026-11-10",
+    "close": 730.0,
+    "chg": 9.28
+   },
+   "sent": false,
+   "mx": {
+    "d": "2026-11-10",
+    "close": 730.0,
+    "chg": 9.28,
+    "prev": 668.0,
+    "prev_d": "2026-11-09",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-09",
+    "from": 668.0,
+    "to_d": "2026-11-10",
+    "to": 730.0,
+    "chg": 9.28
+   }
   }
  ],
- "asof": "2026-11-10T06:38+00:00",
+ "asof": "2026-11-10T10:11+00:00",
  "body": {
   "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9XMEJTZ3FtNEp3ZDlIMzJoZExULTctZTBSSXU0MmE2YUh0U1M5LWsySEFOalRRQ1RULS11UU52VXJPSlltZlp5SzdxV200UGt00gFWQVVfeXFMUEk4XzhjTEcyWnFHZXVrNHByMklwbHQzSEtTTmZucVpkdnJCekp5YXJUYkhlenhrcmtIZDdXTGFoV3g1ZUdFTWxaZDBkZjQ4Q0JONFQwakE?oc=5": {
    "r": "ok",
@@ -492,6 +529,18 @@
    "r": "ok",
    "why": "公司說的：「…由於加工蛋品供不應求，大武山旗下福記食品正增購設備，預計明年上半年每日蛋品加工產能將倍增」",
    "at": "2026-11-09T11:11+00:00",
+   "v": 2
+  },
+  "https://www.ctee.com.tw/news/20261110701853-430503": {
+   "r": "no",
+   "why": "原文找不到指引句（https://www.ctee.com.tw/news/20261110701853-430503）",
+   "at": "2026-11-10T10:11+00:00",
+   "v": 2
+  },
+  "https://news.google.com/rss/articles/CBMiggFBVV95cUxQdFdMcXByaXppSW1MUTJLWWY4Tl85aEpSUUsyMWNVdGJDb0NwNWlzMXFpcDZOTXNaNDdDVUZJZS1UQklicDZpODlJcG41aGRYakt5cU9rcmlxZDRfOVUyMTU3Qm8xSTRkTm0zVUNGQ08wbndOMFdOcjQxX3pMOHJkRGVR?oc=5": {
+   "r": "ok",
+   "why": "公司說的：「…0）日召開法說會，受惠IoT RAM需求強勁及矽電容出貨增加，樂觀看待第四季營收，預期2027年延續高速成長，其中分離式矽電容（IPD）嵌入基板應用明年可望數倍成長，客戶需求能見度已達2027年下半年」",
+   "at": "2026-11-10T10:11+00:00",
    "v": 2
   }
  }
