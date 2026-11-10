@@ -277,8 +277,37 @@
    "gemini-3-flash-preview": {
     "req": 7,
     "tok": 199003
+   },
+   "gemini-3.5-flash-lite": {
+    "req": 8,
+    "tok": 341040
+   },
+   "gemini-3.1-flash-lite": {
+    "req": 12,
+    "tok": 668313
+   },
+   "gemini-2.5-flash-lite": {
+    "req": 1,
+    "tok": 0
+   },
+   "gemini-flash-lite-latest": {
+    "req": 4,
+    "tok": 41274
    }
   }
  },
- "tpm": []
+ "tpm": [
+  [
+   1794327378.767029,
+   12107
+  ],
+  [
+   1794327412.22073,
+   8048
+  ],
+  [
+   1794327433.9652944,
+   6643
+  ]
+ ]
 }
