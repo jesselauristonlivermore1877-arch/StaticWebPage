@@ -2,7 +2,7 @@
  "file": "2812_2026-11-05.md",
  "code": "2812",
  "date": "2026-11-05",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,10 +18,18 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 11.87 倍，站上資料 10.744"
+   }
+  ],
   "checked": [
+   "close",
    "eps_q",
+   "mcap",
+   "pe_ttm",
    "rev_m"
   ]
  },
