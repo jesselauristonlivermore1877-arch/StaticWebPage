@@ -1,47 +1,17 @@
 {
  "dead": {
-  "2026-11-10": {
+  "2026-11-11": {
    "gemini-3.8-flash": {
-    "at": "11-10 12:51",
+    "at": "11-11 12:44",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    },
    "gemini-3.7-flash": {
-    "at": "11-10 12:58",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.6-flash": {
-    "at": "11-10 13:02",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.5-flash": {
-    "at": "11-10 13:02",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-flash-latest": {
-    "at": "11-10 13:02",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-omni-flash-preview": {
-    "at": "11-10 13:06",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3-flash-preview": {
-    "at": "11-10 13:22",
+    "at": "11-11 12:49",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    }
   }
  },
  "count": {
-  "2026-10-31": {
-   "gemini-2.5-flash": {
-    "req": 1,
-    "tok": 0
-   },
-   "gemini-3.5-flash-lite": {
-    "req": 5,
-    "tok": 57902
-   }
-  },
   "2026-11-01": {
    "gemini-3.8-flash": {
     "req": 7,
@@ -352,20 +322,36 @@
     "req": 15,
     "tok": 394931
    }
+  },
+  "2026-11-11": {
+   "gemini-3.8-flash": {
+    "req": 6,
+    "tok": 74215,
+    "e429": 1
+   },
+   "gemini-3.7-flash": {
+    "req": 3,
+    "tok": 13358,
+    "e429": 1
+   },
+   "gemini-3.6-flash": {
+    "req": 5,
+    "tok": 64071
+   }
   }
  },
  "tpm": [
   [
-   1794317258.5000048,
-   83747
+   1794401397.8205287,
+   13358
   ],
   [
-   1794317282.9399872,
-   11669
+   1794401409.8202388,
+   12503
   ],
   [
-   1794317288.7501261,
-   11868
+   1794401451.2502208,
+   16790
   ]
  ]
 }
