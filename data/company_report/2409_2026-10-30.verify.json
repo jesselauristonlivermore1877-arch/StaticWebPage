@@ -2,7 +2,7 @@
  "file": "2409_2026-10-30.md",
  "code": "2409",
  "date": "2026-10-30",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 383.12 倍，站上資料 127.7083"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",

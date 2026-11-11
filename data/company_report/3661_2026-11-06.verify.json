@@ -2,7 +2,7 @@
  "file": "3661_2026-11-06.md",
  "code": "3661",
  "date": "2026-11-06",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 30.03 倍，站上資料 41.5066"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",
