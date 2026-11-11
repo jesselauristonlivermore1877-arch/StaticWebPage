@@ -1,7 +1,41 @@
 {
- "asof": "2026-11-11T02:02+00:00",
+ "asof": "2026-11-11T21:22+00:00",
  "rule": "法說高成長指引：翻倍／倍增／成長 N 倍／成長 N%（N≥50）／明年大幅成長／上修財測／創新高指引；同一公司同一場法說只觸發一次；頁首只放即時偵測、觸發後 3 個交易日內的（until），個股頁標記留 30 天",
  "top": [
+  {
+   "code": "6414",
+   "name": "樺漢",
+   "quote": "樺漢法說會／在手訂單破2,800億 朱復銓：2027年營收獲利皆迎高速成長",
+   "pat": "明年大幅成長",
+   "src": "UDN",
+   "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE54V2J1ZWpSMDc4TGZHWFozeFEyRjZXZFdfX08zZHFoOTJjdzhhSTBSa1hXR2Y0dmdpWnBoZWU3a1pab1ZPU2dtekxRSF9Mdk1B0gFWQVVfeXFMTmRiT3A4djJfVFdiQjE3dDgwMFlkYVdKSUxXVDBNYlFRUmduXzQza1BLZmNZR01EcVlCXzVFQjl0S3pReUx2STN4ak0tSjFsb08yRkc2VkE?oc=5",
+   "pub": "2026-11-11T09:12+00:00",
+   "seen": "2026-11-11T21:22+00:00",
+   "meeting": "2026-11-11",
+   "px": {
+    "d": "2026-11-11",
+    "close": 326.5,
+    "chg": -2.25
+   },
+   "mx": {
+    "d": "2026-11-11",
+    "close": 326.5,
+    "chg": -2.25,
+    "prev": 334.0,
+    "prev_d": "2026-11-10",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-10",
+    "from": 334.0,
+    "to_d": "2026-11-11",
+    "to": 326.5,
+    "chg": -2.25
+   },
+   "kind": "news",
+   "n_more": 0,
+   "until": "2026-11-18T00:00+08:00"
+  },
   {
    "code": "1476",
    "name": "儒鴻",
@@ -28,9 +62,9 @@
    "pre": {
     "from_d": "2026-11-09",
     "from": 356.0,
-    "to_d": "2026-11-10",
-    "to": 348.5,
-    "chg": -2.11
+    "to_d": "2026-11-11",
+    "to": 352.5,
+    "chg": -0.98
    },
    "kind": "news",
    "n_more": 0,
@@ -62,9 +96,9 @@
    "pre": {
     "from_d": "2026-11-09",
     "from": 668.0,
-    "to_d": "2026-11-10",
-    "to": 730.0,
-    "chg": 9.28
+    "to_d": "2026-11-11",
+    "to": 733.0,
+    "chg": 9.73
    },
    "kind": "news",
    "n_more": 0,
@@ -96,71 +130,49 @@
    "pre": {
     "from_d": "2026-11-06",
     "from": 39.599998474121094,
-    "to_d": "2026-11-10",
-    "to": 40.099998474121094,
-    "chg": 1.26
+    "to_d": "2026-11-11",
+    "to": 40.70000076293945,
+    "chg": 2.78
    },
    "kind": "news",
    "n_more": 0,
    "until": "2026-11-13T00:00+08:00"
-  },
-  {
-   "code": "6285",
-   "name": "啟碁",
-   "quote": "越南產能近翻倍，美國廠最慢2028年投產",
-   "pat": "翻倍",
-   "src": "鉅亨網",
-   "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBFMVZYcXNuWld5SWtScU5TQjIzbkNTY24zNFJ4U2J5VUVHVWVNcmR2QWdqZEt3czRJSlJIdVkwcXNQQ2xXZmp4d3p3NGRLRUk?oc=5",
-   "pub": "2026-11-06T15:00+00:00",
-   "seen": "2026-11-06T15:12+00:00",
-   "meeting": "2026-11-05",
-   "px": {
-    "d": "2026-11-06",
-    "close": 164.5,
-    "chg": -9.86
-   },
-   "mx": {
-    "d": "2026-11-05",
-    "close": 182.5,
-    "chg": -9.2,
-    "prev": 201.0,
-    "prev_d": "2026-11-04",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-11-04",
-    "from": 201.0,
-    "to_d": "2026-11-10",
-    "to": 191.5,
-    "chg": -4.73
-   },
-   "kind": "news",
-   "n_more": 0,
-   "until": "2026-11-12T00:00+08:00"
-  },
-  {
-   "code": "3714",
-   "name": "富采",
-   "quote": "富采MicroLED全年營收拚倍增，光通訊進入送樣- 新聞",
-   "pat": "翻倍",
-   "src": "MoneyDJ",
-   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPNUpYUC1BdjRSZTdjSlVGblg2anl6ZkFiaEFBTkE0QmZmUGgxbDQzcjJwTklyMWljRVpVVzRaNFdvVlhneExlRHd3NUdMS0txV1RVOVVmbzR6bnc0MlFEV25HSWctdHhudFl0dmF3Q2M0LWNDbXVaZUlWWFd1Nkh2NV9iLVNyQjFTeHhMWXVjUmh4QQ?oc=5",
-   "pub": "2026-11-06T06:48+00:00",
-   "seen": "2026-11-06T08:12+00:00",
-   "meeting": "2026-11-06",
-   "px": {
-    "d": "2026-11-04",
-    "close": 56.70000076293945,
-    "chg": -1.05
-   },
-   "mx": null,
-   "pre": null,
-   "kind": "news",
-   "n_more": 0,
-   "until": "2026-11-12T00:00+08:00"
   }
  ],
  "by_code": {
+  "6414": {
+   "code": "6414",
+   "name": "樺漢",
+   "quote": "樺漢法說會／在手訂單破2,800億 朱復銓：2027年營收獲利皆迎高速成長",
+   "pat": "明年大幅成長",
+   "src": "UDN",
+   "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE54V2J1ZWpSMDc4TGZHWFozeFEyRjZXZFdfX08zZHFoOTJjdzhhSTBSa1hXR2Y0dmdpWnBoZWU3a1pab1ZPU2dtekxRSF9Mdk1B0gFWQVVfeXFMTmRiT3A4djJfVFdiQjE3dDgwMFlkYVdKSUxXVDBNYlFRUmduXzQza1BLZmNZR01EcVlCXzVFQjl0S3pReUx2STN4ak0tSjFsb08yRkc2VkE?oc=5",
+   "pub": "2026-11-11T09:12+00:00",
+   "seen": "2026-11-11T21:22+00:00",
+   "meeting": "2026-11-11",
+   "px": {
+    "d": "2026-11-11",
+    "close": 326.5,
+    "chg": -2.25
+   },
+   "mx": {
+    "d": "2026-11-11",
+    "close": 326.5,
+    "chg": -2.25,
+    "prev": 334.0,
+    "prev_d": "2026-11-10",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-10",
+    "from": 334.0,
+    "to_d": "2026-11-11",
+    "to": 326.5,
+    "chg": -2.25
+   },
+   "kind": "news",
+   "n_more": 0
+  },
   "1476": {
    "code": "1476",
    "name": "儒鴻",
@@ -187,9 +199,9 @@
    "pre": {
     "from_d": "2026-11-09",
     "from": 356.0,
-    "to_d": "2026-11-10",
-    "to": 348.5,
-    "chg": -2.11
+    "to_d": "2026-11-11",
+    "to": 352.5,
+    "chg": -0.98
    },
    "kind": "news",
    "n_more": 0
@@ -220,9 +232,9 @@
    "pre": {
     "from_d": "2026-11-09",
     "from": 668.0,
-    "to_d": "2026-11-10",
-    "to": 730.0,
-    "chg": 9.28
+    "to_d": "2026-11-11",
+    "to": 733.0,
+    "chg": 9.73
    },
    "kind": "news",
    "n_more": 0
@@ -253,9 +265,9 @@
    "pre": {
     "from_d": "2026-11-06",
     "from": 39.599998474121094,
-    "to_d": "2026-11-10",
-    "to": 40.099998474121094,
-    "chg": 1.26
+    "to_d": "2026-11-11",
+    "to": 40.70000076293945,
+    "chg": 2.78
    },
    "kind": "news",
    "n_more": 0

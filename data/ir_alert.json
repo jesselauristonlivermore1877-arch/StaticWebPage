@@ -407,9 +407,9 @@
    "pre": {
     "from_d": "2026-11-06",
     "from": 39.599998474121094,
-    "to_d": "2026-11-10",
-    "to": 40.099998474121094,
-    "chg": 1.26
+    "to_d": "2026-11-11",
+    "to": 40.70000076293945,
+    "chg": 2.78
    },
    "pre_sent": true
   },
@@ -445,9 +445,9 @@
    "pre": {
     "from_d": "2026-11-09",
     "from": 668.0,
-    "to_d": "2026-11-10",
-    "to": 730.0,
-    "chg": 9.28
+    "to_d": "2026-11-11",
+    "to": 733.0,
+    "chg": 9.73
    },
    "pre_sent": true
   },
@@ -483,14 +483,51 @@
    "pre": {
     "from_d": "2026-11-09",
     "from": 356.0,
-    "to_d": "2026-11-10",
-    "to": 348.5,
-    "chg": -2.11
+    "to_d": "2026-11-11",
+    "to": 352.5,
+    "chg": -0.98
    },
    "pre_sent": true
+  },
+  {
+   "code": "6414",
+   "quote": "樺漢法說會／在手訂單破2,800億 朱復銓：2027年營收獲利皆迎高速成長",
+   "pat": "明年大幅成長",
+   "val": null,
+   "frag": "2027年營收獲利皆迎高速成長",
+   "src": "UDN",
+   "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE54V2J1ZWpSMDc4TGZHWFozeFEyRjZXZFdfX08zZHFoOTJjdzhhSTBSa1hXR2Y0dmdpWnBoZWU3a1pab1ZPU2dtekxRSF9Mdk1B0gFWQVVfeXFMTmRiT3A4djJfVFdiQjE3dDgwMFlkYVdKSUxXVDBNYlFRUmduXzQza1BLZmNZR01EcVlCXzVFQjl0S3pReUx2STN4ak0tSjFsb08yRkc2VkE?oc=5",
+   "pub": "2026-11-11T09:12+00:00",
+   "kind": "news",
+   "title": "樺漢法說會／在手訂單破2,800億 朱復銓：2027年營收獲利皆迎高速成長",
+   "key": "6414_2026-11-11",
+   "name": "樺漢",
+   "meeting": "2026-11-11",
+   "seen": "2026-11-11T21:22+00:00",
+   "px": {
+    "d": "2026-11-11",
+    "close": 326.5,
+    "chg": -2.25
+   },
+   "sent": false,
+   "mx": {
+    "d": "2026-11-11",
+    "close": 326.5,
+    "chg": -2.25,
+    "prev": 334.0,
+    "prev_d": "2026-11-10",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-10",
+    "from": 334.0,
+    "to_d": "2026-11-11",
+    "to": 326.5,
+    "chg": -2.25
+   }
   }
  ],
- "asof": "2026-11-11T02:02+00:00",
+ "asof": "2026-11-11T21:22+00:00",
  "body": {
   "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9XMEJTZ3FtNEp3ZDlIMzJoZExULTctZTBSSXU0MmE2YUh0U1M5LWsySEFOalRRQ1RULS11UU52VXJPSlltZlp5SzdxV200UGt00gFWQVVfeXFMUEk4XzhjTEcyWnFHZXVrNHByMklwbHQzSEtTTmZucVpkdnJCekp5YXJUYkhlenhrcmtIZDdXTGFoV3g1ZUdFTWxaZDBkZjQ4Q0JONFQwakE?oc=5": {
    "r": "ok",
@@ -586,6 +623,18 @@
    "r": "ok",
    "why": "公司說的：「…儒鴻：看好第四季營運 全年拚創新高 - 上市櫃 - 旺得富理財網 旺得富理財網 中時新聞網 首頁 上市櫃 類股 ETF 基金 期權 新聞 首頁 新聞 台股 上市櫃 訂單能見度高達6個月」",
    "at": "2026-11-10T12:20+00:00",
+   "v": 2
+  },
+  "https://news.google.com/rss/articles/CBMiUEFVX3lxTE54V2J1ZWpSMDc4TGZHWFozeFEyRjZXZFdfX08zZHFoOTJjdzhhSTBSa1hXR2Y0dmdpWnBoZWU3a1pab1ZPU2dtekxRSF9Mdk1B0gFWQVVfeXFMTmRiT3A4djJfVFdiQjE3dDgwMFlkYVdKSUxXVDBNYlFRUmduXzQza1BLZmNZR01EcVlCXzVFQjl0S3pReUx2STN4ak0tSjFsb08yRkc2VkE?oc=5": {
+   "r": "ok",
+   "why": "公司說的：「…示，三大發展綜效將支持樺漢長期成長，同步提升ROE（股東權益報酬率）及TSR（總股東報酬率），展望2027年，目前樺漢在手訂單已超過2,800億元，朱復銓預估明年將高速成長，包含營收、毛利與淨利皆向上」",
+   "at": "2026-11-11T21:23+00:00",
+   "v": 2
+  },
+  "https://news.google.com/rss/articles/CBMikgFBVV95cUxPYkFNTldnN1VhVzJlUzFpZHgzNFcybEtaR3pRaWhieERuRUE4RC1WckhsNUtVRzFua2VCVUVQelNiLXhfb2hFWTcxakRHcmk4c3RpajU1c1Z5VF9GY2hmVk1RQU5OUmFwYjFubXNic2NoS2xKeVVEMVplU0tRVHI0WFhXbUphMTh5Y0xxbTJQZ211dw?oc=5": {
+   "r": "no",
+   "why": "指引句不是公司說的（記者整理／推算或沒有說話的人）：「最新頭條新聞 新聞內文 字級設定： 小 中 大 特   人氣( 0 ) 2026/11/11 10:54 MoneyDJ新聞 2026-11-11 10:54:」（https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=e7e11ab7）",
+   "at": "2026-11-11T21:23+00:00",
    "v": 2
   }
  }
