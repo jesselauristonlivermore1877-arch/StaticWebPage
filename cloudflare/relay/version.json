@@ -1,7 +1,7 @@
 {
- "ver": "20261110b",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261110b/GEA_OM_Setup_20261110b.exe",
- "sha256": "18eca06c7d432e94037909d506dc9343fe8992a17ef21aaf3a8cc0a2437a4781",
- "notes": "d13 客戶端安裝防呆：精靈開啟時重驗憑證檔與正式環境登入紀錄、路徑去隱形字元、老客戶提示 --prod；下單邏輯不變",
- "sig": "bZMB+DbxZOa9Xd9f36twnnNNabOXkmDXa4sgq/qLSm+ZGcnvTD1EyFFJ6jccSXLzMxb/UQh7BAw6wk92/r3nyA=="
+ "ver": "20261111a",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261111a/GEA_OM_Setup_20261111a.exe",
+ "sha256": "05d78f5cc08fdeed7610b73864db0afdb3176507e4d3c7014f06870893192249",
+ "notes": "d14 修模擬模式啟動時缺 GEA_RELAY_TOKEN；訊號主機判斷改看簽章私鑰",
+ "sig": "4nIUK021yH6+HW1PwGYAI2crJaY0lJd311e+deecqc2ytm8xZ7EROeLPGePaL/81ZPyj617f8HzsIdPXw4mTdw=="
 }
