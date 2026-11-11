@@ -1,16 +1,16 @@
 {
- "when": "2026-11-10T21:28:41.230Z",
- "tw": "2026-11-11 05:28",
+ "when": "2026-11-11T05:11:05.550Z",
+ "tw": "2026-11-11 13:11",
  "url": "https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/",
  "max_age": 4,
  "widths": {
   "390": {
    "width": 390,
-   "secs": 100,
+   "secs": 102,
    "blocks": [
     {
      "path": "產業 › 產業信息 › 即時訊息",
-     "len": 1917,
+     "len": 1905,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -18,11 +18,24 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 527 產業與科技 360 台股公司 107 美股公司 60 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體",
+     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 556 產業與科技 360 台股公司 141 美股公司 55 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 台股公司",
+     "len": 1699,
+     "viz": 0,
+     "flags": [],
+     "maxd": null,
+     "age": null,
+     "stale": false,
+     "console": [],
+     "http": [],
+     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 141 公開資訊觀測站重大訊",
+     "leaf": true
+    },
+    {
+     "path": "產業 › 產業信息 › 美股公司",
      "len": 1592,
      "viz": 0,
      "flags": [],
@@ -31,20 +44,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 107 公開資訊觀測站重大訊",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 美股公司",
-     "len": 1630,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "美股公司 美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 60 國內媒體 15 國外媒",
+     "head": "美股公司 美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 55 國內媒體 30 國外媒",
      "leaf": true
     },
     {
@@ -114,7 +114,7 @@
     },
     {
      "path": "產業 › 產業研究 › 指定報告",
-     "len": 3796,
+     "len": 3876,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -140,7 +140,7 @@
     },
     {
      "path": "產業 › 產業研究 › 法人報告與事件",
-     "len": 26435,
+     "len": 26955,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -257,7 +257,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 根因追蹤",
-     "len": 2169,
+     "len": 2262,
      "viz": 0,
      "flags": [
       "沒有資料"
@@ -267,7 +267,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "市場大幅波動時自動找根因：價格／族群觸發 → 中英日韓搜尋＋官方結構化來源 → 歸因 → 程式逐筆打開出處核對＋用族群漲跌與外資量化傳導。只列核對通過的根因。 2026-11-10 2026-11-09 2026-11-06 2025-04-07 2024-08-05 台股 2026-11-10｜美股 2026-11-",
+     "head": "市場大幅波動時自動找根因：價格／族群觸發 → 中英日韓搜尋＋官方結構化來源 → 歸因 → 程式逐筆打開出處核對＋用族群漲跌與外資量化傳導。只列核對通過的根因。 2026-11-11 2026-11-10 2026-11-09 2026-11-06 2025-04-07 2024-08-05 台股 2026-11-11｜",
      "leaf": true
     },
     {
@@ -275,12 +275,12 @@
      "len": 1400,
      "viz": 0,
      "flags": [],
-     "maxd": "2026-11-10",
-     "age": 1,
+     "maxd": "2026-11-11",
+     "age": 0,
      "stale": false,
      "console": [],
      "http": [],
-     "head": "總經行事曆 聯準會與各國央行利率決策、美國重要經濟數據公布日 · 預設只列今天起 含已過去的 2026-11-10 二 美國 CPI 經濟數據 官方公布日程（FRED release calendar） 2026-11-13 五 美國 PPI 經濟數據 官方公布日程（FRED release calendar） 202",
+     "head": "總經行事曆 聯準會與各國央行利率決策、美國重要經濟數據公布日 · 預設只列今天起 含已過去的 2026-11-13 五 美國 PPI 經濟數據 官方公布日程（FRED release calendar） 2026-11-25 三 美國 個人所得與支出（PCE） 經濟數據 官方公布日程（FRED release cale",
      "leaf": true
     },
     {
@@ -1783,203 +1783,203 @@
    "http": [],
    "files": {
     "data/ir/index.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/mkt_overlay.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/risk_alert.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
-    "data/company.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/mkt_overlay.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/disposal.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
-    "data/stock_bars.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/company.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/names.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
+     "st": 200
+    },
+    "data/stock_bars.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/aetf_daily.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/insider_rank.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/warrant.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/tdcc.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/f13.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/news_live.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/capital.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/ir_alert.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/world_idx.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/root_cause/index.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/market_alert.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/insider.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
+     "st": 200
+    },
+    "data/warrant.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
+     "st": 200
+    },
+    "data/capital.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
+     "st": 200
+    },
+    "data/ir_alert.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
+     "st": 200
+    },
+    "data/market_alert.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
+     "st": 200
+    },
+    "data/root_cause/index.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
+     "st": 200
+    },
+    "data/tdcc.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
+     "st": 200
+    },
+    "data/world_idx.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
+     "st": 200
+    },
+    "data/news_live.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/insider/9951.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/insider_mp.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/insider_new.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/macro.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/river.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/kol.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/is_q.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/industry_notes.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/company_reports.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/ir/targets.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/mi_react.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/broker.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
+     "st": 200
+    },
+    "data/mi_react.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/calendar.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/rrg.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/radar.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/trail.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/nsf_holdings.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/nsf_history.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
-    "data/root_cause/2026-11-10.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/nsf_holdings.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
+     "st": 200
+    },
+    "data/root_cause/2026-11-11.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/contrib.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/margin.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/attention.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/pick_edm.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/edm_hist/index.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
+     "st": 200
+    },
+    "data/pick_edm.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/chips.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/chips_daily.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/etf_flow.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/etf_cost.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/lookup/index.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/lookup/23.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/analyst.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     }
    }
@@ -1990,7 +1990,7 @@
    "blocks": [
     {
      "path": "產業 › 產業信息 › 即時訊息",
-     "len": 1917,
+     "len": 1925,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -1998,12 +1998,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 527 產業與科技 360 台股公司 107 美股公司 60 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體",
+     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 547 產業與科技 356 台股公司 137 美股公司 54 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 台股公司",
-     "len": 1592,
+     "len": 1743,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -2011,12 +2011,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 107 公開資訊觀測站重大訊",
+     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 137 公開資訊觀測站重大訊",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 美股公司",
-     "len": 1630,
+     "len": 1586,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -2024,7 +2024,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "美股公司 美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 60 國內媒體 15 國外媒",
+     "head": "美股公司 美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 54 國內媒體 29 國外媒",
      "leaf": true
     },
     {
@@ -2094,7 +2094,7 @@
     },
     {
      "path": "產業 › 產業研究 › 指定報告",
-     "len": 3820,
+     "len": 3900,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -2120,7 +2120,7 @@
     },
     {
      "path": "產業 › 產業研究 › 法人報告與事件",
-     "len": 26435,
+     "len": 26955,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -2237,7 +2237,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 根因追蹤",
-     "len": 2198,
+     "len": 2291,
      "viz": 0,
      "flags": [
       "沒有資料"
@@ -2247,7 +2247,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "市場大幅波動時自動找根因：價格／族群觸發 → 中英日韓搜尋＋官方結構化來源 → 歸因 → 程式逐筆打開出處核對＋用族群漲跌與外資量化傳導。只列核對通過的根因。 2026-11-10 2026-11-09 2026-11-06 2025-04-07 2024-08-05 台股 2026-11-10｜美股 2026-11-",
+     "head": "市場大幅波動時自動找根因：價格／族群觸發 → 中英日韓搜尋＋官方結構化來源 → 歸因 → 程式逐筆打開出處核對＋用族群漲跌與外資量化傳導。只列核對通過的根因。 2026-11-11 2026-11-10 2026-11-09 2026-11-06 2025-04-07 2024-08-05 台股 2026-11-11｜",
      "leaf": true
     },
     {
@@ -2255,12 +2255,12 @@
      "len": 1422,
      "viz": 0,
      "flags": [],
-     "maxd": "2026-11-10",
-     "age": 1,
+     "maxd": "2026-11-11",
+     "age": 0,
      "stale": false,
      "console": [],
      "http": [],
-     "head": "總經行事曆 聯準會與各國央行利率決策、美國重要經濟數據公布日 · 預設只列今天起 含已過去的 日期 星期 事件 類別 備註 依據 2026-11-10 二 美國 CPI 經濟數據 官方公布日程（FRED release calendar） 2026-11-13 五 美國 PPI 經濟數據 官方公布日程（FRED r",
+     "head": "總經行事曆 聯準會與各國央行利率決策、美國重要經濟數據公布日 · 預設只列今天起 含已過去的 日期 星期 事件 類別 備註 依據 2026-11-13 五 美國 PPI 經濟數據 官方公布日程（FRED release calendar） 2026-11-25 三 美國 個人所得與支出（PCE） 經濟數據 官方公布",
      "leaf": true
     },
     {
@@ -3763,214 +3763,214 @@
    "http": [],
    "files": {
     "data/ir/index.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/stock_bars.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/disposal.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/macro.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/mkt_overlay.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/company.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/names.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/risk_alert.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
-    "data/insider_rank.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/mkt_overlay.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
-    "data/capital.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/names.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
+     "st": 200
+    },
+    "data/disposal.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/warrant.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/insider.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/aetf_daily.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
-    "data/f13.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/company.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
-    "data/news_live.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/stock_bars.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
-    "data/ir_alert.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/market_alert.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/world_idx.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/root_cause/index.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/insider_rank.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/tdcc.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
-    "data/insider/9951.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/f13.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
+     "st": 200
+    },
+    "data/capital.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
+     "st": 200
+    },
+    "data/ir_alert.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
+     "st": 200
+    },
+    "data/market_alert.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
+     "st": 200
+    },
+    "data/news_live.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
+     "st": 200
+    },
+    "data/root_cause/index.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
+     "st": 200
+    },
+    "data/insider.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
+     "st": 200
+    },
+    "data/world_idx.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/insider_new.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
+     "st": 200
+    },
+    "data/insider/9951.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/insider_mp.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
+     "st": 200
+    },
+    "data/macro.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/river.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/kol.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/is_q.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/industry_notes.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/company_reports.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/ir/targets.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/broker.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/mi_react.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/calendar.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/rrg.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/radar.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/trail.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/nsf_history.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/nsf_holdings.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
-    "data/root_cause/2026-11-10.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/root_cause/2026-11-11.json": {
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/contrib.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/margin.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/attention.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/edm_hist/index.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/pick_edm.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/chips.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/chips_daily.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/etf_flow.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/etf_cost.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:03 GMT",
      "st": 200
     },
     "data/lookup/index.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/lookup/23.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     },
     "data/analyst.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:16:04 GMT",
      "st": 200
     }
    }
   },
   "1366": {
    "width": 1366,
-   "secs": 291,
+   "secs": 272,
    "blocks": [
     {
      "path": "產業 › 產業信息 › 即時訊息",
-     "len": 1917,
+     "len": 1909,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -3978,12 +3978,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 527 產業與科技 360 台股公司 107 美股公司 60 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體",
+     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 557 產業與科技 361 台股公司 140 美股公司 56 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 全部 › 全球",
-     "len": 566,
+     "len": 819,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -3991,12 +3991,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "焦點股》信驊：外資開出降評第一槍 美國資料中心建置恐延後 2026-11-10 自由財經 ↗ 鴻海(2317) AI伺服器市占衝50%，緯創(3231)等供應鏈受惠？機櫃、資料中心成新戰場｜股市話題｜豐雲學堂2026 年 11 月 2026-11-10 永豐金證券 ↗ AI伺服器帶動10月營收》廣達年增104％ 仁寶成",
+     "head": "CoreWeave上修財測、訂單突破1,300億美元 但龐大資本支出仍考驗資金能力 2026-11-11 優分析UAnalyze ↗ 和碩10月營收創次高，AI伺服器出貨續強 2026-11-11 台視全球資訊網 ↗ 台積電擬入股Anthropic、OpenAI，但未揭露晶片採購或產能承諾 2026-11-11 台視全",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 全部 › 美國",
-     "len": 597,
+     "len": 775,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4004,12 +4004,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "焦點股》信驊：外資開出降評第一槍 美國資料中心建置恐延後 2026-11-10 自由財經 ↗ US Congress gets first post-'Blue Wave' crack at data centers with permitting bill 2026-11-10 Reuters ↗ Will tigh",
+     "head": "CoreWeave上修財測、訂單突破1,300億美元 但龐大資本支出仍考驗資金能力 2026-11-11 優分析UAnalyze ↗ TSMC Just Delivered the AI Growth Shock Wall Street Was Waiting For 2026-11-11 Yahoo! Finance",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 全部 › 台灣",
-     "len": 538,
+     "len": 648,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4017,12 +4017,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Nvidia TSMC partnership — Is South Korea’s Memory Chip Dominance at Risk? 2026-11-10 魏哲家 The Korea Daily ↗ AI晶片SO HOT 進補台股散熱3強 2026-11-10 三立新聞 ↗ 選後資金洗牌2／AI缺電商機擋",
+     "head": "台積電擬入股Anthropic、OpenAI，但未揭露晶片採購或產能承諾 2026-11-11 台視全球資訊網 ↗ TSMC Just Delivered the AI Growth Shock Wall Street Was Waiting For 2026-11-11 Yahoo! Finance Canada ↗",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 全部 › 中國",
-     "len": 247,
+     "len": 125,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4030,12 +4030,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "SemiAnalysis揭中國AI資料中心建設成本僅美國1/5 2026-11-10 iThome ↗ 中國打造 800MW「銀河」AI 巨型資料中心，成本僅美國 1/5、力抗「星際之門」 2026-11-10 TechNews 科技新報 ↗ 輝達要求資料中心減少中國客戶，B300 坐地喊價飆漲 5 倍 2026-11",
+     "head": "輝達要求資料中心減少中國客戶，B300 坐地喊價飆漲 5 倍 2026-11-03 黃仁勳（輝達） 鏈新聞 ABMedia ↗ 記憶體成CSP資本支出主角：2027年占比逾六成，美中雲端巨頭加碼AI看多 2026-10-16 TrendForce ↗",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 全部 › 日本",
-     "len": 177,
+     "len": 68,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4043,12 +4043,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "富士軟片上修全年營收至3.59兆日圓！AI晶片與醫療設備帶動，電子事業上半年獲利年增逾五成| 溫芳瑜 | 財經 2026-11-10 風傳媒 ↗ Masayoshi Son Bets 10 Trillion Yen on AI Amid Debt Concerns中性 孫正義在債務疑慮下押注 10 兆日圓在 AI 上 ",
+     "head": "日本AI半導体製造市場：2nmから3nm生産へ―製造能力、技術ロードマップ、投資展望 2026-11-11 Excite エキサイト ↗",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 全部 › 韓國",
-     "len": 467,
+     "len": 529,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4056,12 +4056,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Nvidia TSMC partnership — Is South Korea’s Memory Chip Dominance at Risk? 2026-11-10 魏哲家 The Korea Daily ↗ 쎄크, 마이크론에 58억원 HBM 검사장비 공급… \"글로벌 팹 공략\" - 머니투데이 2026-1",
+     "head": "LS일렉트릭 초고압변압기 잔고 3조1670억원 2026-11-11 비건뉴스 ↗ Germany's Infineon says AI data center buildout won't slow 2026-11-11 Tech Xplore ↗ Nvidia TSMC partnership — Is Sou",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 全部 › 歐元區",
-     "len": 182,
+     "len": 56,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4069,25 +4069,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Infineon invests €1.1 billion in GaN power chip facility in Europe看多 英飛凌在歐洲投資 11 億歐元建立 GaN 功率晶片設施 2026-11-06 ET Datacenters ↗ 黃仁勳宣布NVIDIA追加投資歐洲20億元 催歐洲加入AI競賽看多 ",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 全部 › 英國",
-     "len": 137,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "UK will not slow down on AI despite backlash in US, says growth minister中性 成長大臣表示，儘管美國出現反彈，英國不會放緩 AI 發展 2026-11-07 成長大臣 Financial Times ↗",
+     "head": "黃仁勳宣布NVIDIA追加投資歐洲20億元 催歐洲加入AI競賽看多 2026-10-14 黃仁勳 世界新聞網 ↗",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 全部 › 德國",
-     "len": 130,
+     "len": 83,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4095,12 +4082,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Infineon to set up high-volume 300 mm GaN power chip production in Austria看多 英飛凌將在奧地利設立高產量300毫米氮化鎵功率晶片生產線 2026-11-05 Charged EVs ↗",
+     "head": "Germany's Infineon says AI data center buildout won't slow 2026-11-11 Tech Xplore ↗",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 全部 › 印度",
-     "len": 302,
+     "len": 100,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4108,7 +4095,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "India's electronics firms face PCB squeeze as AI demand drives up costs 2026-11-10 Nikkei Asia ↗ Vestas wins new wind turbine orders totalling 115 MW in Europe ",
+     "head": "Vestas wins new wind turbine orders totalling 115 MW in Europe 2026-11-10 https://megaproject.com/ ↗",
      "leaf": true
     },
     {
@@ -4135,19 +4122,6 @@
      "console": [],
      "http": [],
      "head": "Russian Central Bank Cites Attacks on Oil Refineries and Data Centres in Explaining Key Rate Decisions 2026-11-09 REFORM.news ↗ 烏克蘭接連襲擊Yandex三座資料中心，俄羅斯多項網路服務中斷看",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 全部 › 墨西哥",
-     "len": 79,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "Mexican Data Center Wave Faces Grid Realities 2026-11-10 Mexico Business News ↗",
      "leaf": true
     },
     {
@@ -4204,7 +4178,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 半導體 › 全球",
-     "len": 516,
+     "len": 609,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4212,12 +4186,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "半導體股暴跌後反彈！大摩點名輝達、SanDisk、美光逢低布局 空方警告還沒跌完 2026-11-10 Sanjay Mehrotra 鉅亨網 ↗ AI晶片、HBM檢測需求旺！閎康前三季本業EPS達9.33元 搶攻客製化記憶體商機 2026-11-10 鏡報 ↗ Nvidia TSMC partnership — Is",
+     "head": "台積電擬入股Anthropic、OpenAI，但未揭露晶片採購或產能承諾 2026-11-11 台視全球資訊網 ↗ TSMC Just Delivered the AI Growth Shock Wall Street Was Waiting For 2026-11-11 Yahoo! Finance Canada ↗",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 半導體 › 美國",
-     "len": 573,
+     "len": 615,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4225,12 +4199,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "AI熱潮點燃先進封裝軍備競賽全球砸近280億美元擴產- 科技新聞 2026-11-09 PChome Online 新聞 ↗ AI晶片卡在載板 英特爾53億美元鎖產能中性 2026-11-08 陳立武 VOCO News ↗ 台積傳砸 450 億美元赴德州建兩座先進晶圓廠，目標 2029 年底前實現量產看多 2026-",
+     "head": "TSMC Just Delivered the AI Growth Shock Wall Street Was Waiting For 2026-11-11 Yahoo! Finance Canada ↗ AI晶片大爆發！世芯營收狂飆515％首破百億、聯發科Q4拚季增32％ 10億美元大單成新引擎 2026-11-11",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 半導體 › 台灣",
-     "len": 436,
+     "len": 633,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4238,20 +4212,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Nvidia TSMC partnership — Is South Korea’s Memory Chip Dominance at Risk? 2026-11-10 魏哲家 The Korea Daily ↗ AI晶片SO HOT 進補台股散熱3強 2026-11-10 三立新聞 ↗ 台積傳砸 450 億美元赴德州",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 半導體 › 日本",
-     "len": 72,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "富士軟片上修全年營收至3.59兆日圓！AI晶片與醫療設備帶動，電子事業上半年獲利年增逾五成| 溫芳瑜 | 財經 2026-11-10 風傳媒 ↗",
+     "head": "台積電擬入股Anthropic、OpenAI，但未揭露晶片採購或產能承諾 2026-11-11 台視全球資訊網 ↗ TSMC Just Delivered the AI Growth Shock Wall Street Was Waiting For 2026-11-11 Yahoo! Finance Canada ↗",
      "leaf": true
     },
     {
@@ -4265,32 +4226,6 @@
      "console": [],
      "http": [],
      "head": "Nvidia TSMC partnership — Is South Korea’s Memory Chip Dominance at Risk? 2026-11-10 魏哲家 The Korea Daily ↗ 馬斯克「Terafab」動工，韓國半導體設備廠迎大單契機…HPSP、Hanmi Semiconductor",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 半導體 › 歐元區",
-     "len": 125,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "Infineon invests €1.1 billion in GaN power chip facility in Europe看多 英飛凌在歐洲投資 11 億歐元建立 GaN 功率晶片設施 2026-11-06 ET Datacenters ↗",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 半導體 › 德國",
-     "len": 130,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "Infineon to set up high-volume 300 mm GaN power chip production in Austria看多 英飛凌將在奧地利設立高產量300毫米氮化鎵功率晶片生產線 2026-11-05 Charged EVs ↗",
      "leaf": true
     },
     {
@@ -4308,7 +4243,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 伺服器與電子 › 全球",
-     "len": 511,
+     "len": 616,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4316,12 +4251,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "鴻海(2317) AI伺服器市占衝50%，緯創(3231)等供應鏈受惠？機櫃、資料中心成新戰場｜股市話題｜豐雲學堂2026 年 11 月 2026-11-10 永豐金證券 ↗ AI伺服器帶動10月營收》廣達年增104％ 仁寶成長40.7％ 2026-11-10 工商時報 ↗ 佳世達AI伺服器 明年Q2放量 2026-1",
+     "head": "和碩10月營收創次高，AI伺服器出貨續強 2026-11-11 台視全球資訊網 ↗ Pegatron revenue falls 12% in October as AI server shipments stay strong 2026-11-11 digitimes ↗ Wistron stock climbs i",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 伺服器與電子 › 美國",
-     "len": 653,
+     "len": 422,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4329,7 +4264,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "US Congress gets first post-'Blue Wave' crack at data centers with permitting bill 2026-11-10 Reuters ↗ Crusoe unveils 3.5 MW modular data centre for Nvidia AI ",
+     "head": "Is AI Networking Driving Cisco Systems (NASDAQ:CSCO) Higher?看多 AI網路正在推升思科系統（NASDAQ:CSCO）走高嗎？ 2026-11-05 Kalkine Media ↗ SpaceX太空資料中心攜手輝達上太空，伺服器規格五大變化，廣達、台達電等8檔成",
      "leaf": true
     },
     {
@@ -4346,19 +4281,6 @@
      "leaf": true
     },
     {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 伺服器與電子 › 日本",
-     "len": 72,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "富士軟片上修全年營收至3.59兆日圓！AI晶片與醫療設備帶動，電子事業上半年獲利年增逾五成| 溫芳瑜 | 財經 2026-11-10 風傳媒 ↗",
-     "leaf": true
-    },
-    {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 伺服器與電子 › 韓國",
      "len": 85,
      "viz": 0,
@@ -4372,21 +4294,8 @@
      "leaf": true
     },
     {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 伺服器與電子 › 印度",
-     "len": 96,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "India's electronics firms face PCB squeeze as AI demand drives up costs 2026-11-10 Nikkei Asia ↗",
-     "leaf": true
-    },
-    {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 記憶體 › 全球",
-     "len": 665,
+     "len": 724,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4394,12 +4303,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "半導體股暴跌後反彈！大摩點名輝達、SanDisk、美光逢低布局 空方警告還沒跌完 2026-11-10 Sanjay Mehrotra 鉅亨網 ↗ AI晶片、HBM檢測需求旺！閎康前三季本業EPS達9.33元 搶攻客製化記憶體商機 2026-11-10 鏡報 ↗ Analysts Debate How AI Memor",
+     "head": "超微找緩解記憶體瓶頸解方 收購新創MEXT 2026-11-11 UDN ↗ NVDA Reportedly Weighs Lower-Memory Rubin Ultra GPU Designs To Ease HBM Bottleneck — Why Retail Is Watching Micron中性 傳輝達考",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 記憶體 › 美國",
-     "len": 127,
+     "len": 323,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4407,7 +4316,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "SK集團會長崔泰源將出任SK海力士在美AI投資機構HYAICO董事長看多 2026-11-05 崔泰源 TradingView ↗ 記憶體成CSP資本支出主角：2027年占比逾六成，美中雲端巨頭加碼AI看多 2026-10-16 TrendForce ↗",
+     "head": "NVDA Reportedly Weighs Lower-Memory Rubin Ultra GPU Designs To Ease HBM Bottleneck — Why Retail Is Watching Micron中性 傳輝達考慮推出較低記憶體規格的 Rubin Ultra GPU 設計以緩解 HBM 瓶",
      "leaf": true
     },
     {
@@ -4438,7 +4347,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 記憶體 › 韓國",
-     "len": 238,
+     "len": 172,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4446,12 +4355,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Nvidia TSMC partnership — Is South Korea’s Memory Chip Dominance at Risk? 2026-11-10 魏哲家 The Korea Daily ↗ 쎄크, 마이크론에 58억원 HBM 검사장비 공급… \"글로벌 팹 공략\" - 머니투데이 2026-1",
+     "head": "Nvidia TSMC partnership — Is South Korea’s Memory Chip Dominance at Risk? 2026-11-10 魏哲家 The Korea Daily ↗ SK集團會長崔泰源將出任SK海力士在美AI投資機構HYAICO董事長看多 2026-11-05 崔泰源 T",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 電力與能源 › 全球",
-     "len": 778,
+     "len": 922,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4459,12 +4368,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "選後資金洗牌2／AI缺電商機擋不住！電力、廠務2大剛需 2檔台股有望受惠 2026-11-10 鏡週刊Mirror Media ↗ 【11/10 產業即時新聞】儲能族群盤中強彈大漲 8.84%，權值雙雄帶頭衝、AI 資料中心不斷電需求點火 2026-11-10 CMoney投資網誌 ↗ AI巨獸撕咬電網：微軟、Nvid",
+     "head": "Rising energy costs from AI data centers land hardest on lower income, rural households, study finds 2026-11-11 CBS News ↗ Anthropic inks $3.4 billion deal for ",
      "leaf": true
     },
     {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 電力與能源 › 台灣",
-     "len": 65,
+     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 電力與能源 › 美國",
+     "len": 268,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4472,33 +4381,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "選後資金洗牌2／AI缺電商機擋不住！電力、廠務2大剛需 2檔台股有望受惠 2026-11-10 鏡週刊Mirror Media ↗",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 電力與能源 › 歐元區",
-     "len": 125,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "Infineon invests €1.1 billion in GaN power chip facility in Europe看多 英飛凌在歐洲投資 11 億歐元建立 GaN 功率晶片設施 2026-11-06 ET Datacenters ↗",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 電力與能源 › 德國",
-     "len": 130,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "Infineon to set up high-volume 300 mm GaN power chip production in Austria看多 英飛凌將在奧地利設立高產量300毫米氮化鎵功率晶片生產線 2026-11-05 Charged EVs ↗",
+     "head": "GE Vernova plans US$34.5M Louisiana transformer-factory expansion 2026-11-11 Mugglehead Investment Magazine ↗ Portugal seeks more US investment in tech, energy ",
      "leaf": true
     },
     {
@@ -4515,21 +4398,8 @@
      "leaf": true
     },
     {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 電力與能源 › 墨西哥",
-     "len": 79,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "Mexican Data Center Wave Faces Grid Realities 2026-11-10 Mexico Business News ↗",
-     "leaf": true
-    },
-    {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 資料中心 › 全球",
-     "len": 784,
+     "len": 974,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4537,12 +4407,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "焦點股》信驊：外資開出降評第一槍 美國資料中心建置恐延後 2026-11-10 自由財經 ↗ 鴻海(2317) AI伺服器市占衝50%，緯創(3231)等供應鏈受惠？機櫃、資料中心成新戰場｜股市話題｜豐雲學堂2026 年 11 月 2026-11-10 永豐金證券 ↗ US Congress gets first po",
+     "head": "Hyperscalers Are Projected to Spend $1.3 Trillion on Capex in 2027. Here's the 1 Industrial Stock That Gets Paid Before a Single AI Token Is Sold. 2026-11-11 Th",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 資料中心 › 美國",
-     "len": 683,
+     "len": 806,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4550,7 +4420,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "焦點股》信驊：外資開出降評第一槍 美國資料中心建置恐延後 2026-11-10 自由財經 ↗ US Congress gets first post-'Blue Wave' crack at data centers with permitting bill 2026-11-10 Reuters ↗ Will tigh",
+     "head": "美國AI資料中心 面臨24至36 個月鄰避效應 2026-11-11 理財周刊 ↗ U.S. electricity demand to hit record as AI data centers drive growth: EIA (XLU:NYSEARCA) 2026-11-11 Seeking Alpha ↗ S",
      "leaf": true
     },
     {
@@ -4568,7 +4438,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 資料中心 › 中國",
-     "len": 185,
+     "len": 63,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4576,12 +4446,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "SemiAnalysis揭中國AI資料中心建設成本僅美國1/5 2026-11-10 iThome ↗ 中國打造 800MW「銀河」AI 巨型資料中心，成本僅美國 1/5、力抗「星際之門」 2026-11-10 TechNews 科技新報 ↗ 輝達要求資料中心減少中國客戶，B300 坐地喊價飆漲 5 倍 2026-11",
+     "head": "輝達要求資料中心減少中國客戶，B300 坐地喊價飆漲 5 倍 2026-11-03 黃仁勳（輝達） 鏈新聞 ABMedia ↗",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 資料中心 › 韓國",
-     "len": 141,
+     "len": 225,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4589,12 +4459,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "AI投資熱潮降溫！南韓雲端商掛牌首日慘跌32%創紀錄、三家資料中心IPO喊卡 2026-10-21 鉅亨網 ↗ LG電子宣布切入輝達AI資料中心冷卻供應鏈 2.6MW CDU通過DSX Ready、年底挑戰4MW看多 2026-09-29 黃仁勳（輝達） 優分析UAnalyze ↗",
+     "head": "Germany's Infineon says AI data center buildout won't slow 2026-11-11 Tech Xplore ↗ AI投資熱潮降溫！南韓雲端商掛牌首日慘跌32%創紀錄、三家資料中心IPO喊卡 2026-10-21 鉅亨網 ↗ LG電子宣布切入輝達AI資料中心冷卻供應",
      "leaf": true
     },
     {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 資料中心 › 印度",
-     "len": 104,
+     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 資料中心 › 德國",
+     "len": 83,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4602,7 +4472,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Shortage of Turbines Drives Market for Second-Hand Market for AI Data Centers 2026-11-10 24/7 Wall St. ↗",
+     "head": "Germany's Infineon says AI data center buildout won't slow 2026-11-11 Tech Xplore ↗",
      "leaf": true
     },
     {
@@ -4619,19 +4489,6 @@
      "leaf": true
     },
     {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 資料中心 › 墨西哥",
-     "len": 79,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "Mexican Data Center Wave Faces Grid Realities 2026-11-10 Mexico Business News ↗",
-     "leaf": true
-    },
-    {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 資料中心 › 烏克蘭",
      "len": 53,
      "viz": 0,
@@ -4645,34 +4502,8 @@
      "leaf": true
     },
     {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 生技醫療 › 全球",
-     "len": 72,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "富士軟片上修全年營收至3.59兆日圓！AI晶片與醫療設備帶動，電子事業上半年獲利年增逾五成| 溫芳瑜 | 財經 2026-11-10 風傳媒 ↗",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 生技醫療 › 日本",
-     "len": 72,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "富士軟片上修全年營收至3.59兆日圓！AI晶片與醫療設備帶動，電子事業上半年獲利年增逾五成| 溫芳瑜 | 財經 2026-11-10 風傳媒 ↗",
-     "leaf": true
-    },
-    {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 金融 › 全球",
-     "len": 213,
+     "len": 609,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4680,7 +4511,20 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Banks, investors grow wary of AI debt, spooked by market selloff 2026-11-10 Reuters ↗ Russian Central Bank Cites Attacks on Oil Refineries and Data Centres in E",
+     "head": "SoftBank Logs $7 Billion Loss After US Data Center Costs Swell 2026-11-11 Bloomberg.com ↗ SoftBank and Grab plan US$1.85 billion investment in Malaysian AI infr",
+     "leaf": true
+    },
+    {
+     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 金融 › 美國",
+     "len": 286,
+     "viz": 0,
+     "flags": [],
+     "maxd": null,
+     "age": null,
+     "stale": false,
+     "console": [],
+     "http": [],
+     "head": "SoftBank Logs $7 Billion Loss After US Data Center Costs Swell 2026-11-11 Bloomberg.com ↗ SoftBank and Grab plan US$1.85 billion investment in Malaysian AI infr",
      "leaf": true
     },
     {
@@ -4698,7 +4542,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 其他 › 全球",
-     "len": 627,
+     "len": 674,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4706,12 +4550,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "INTC Stock Down 57% in the Past 6 Months: Should You Exercise Caution? 2026-11-10 TradingView ↗ Intel's Data-Center Surge Faces a Supply-Chain Reckoning - ad-ho",
+     "head": "CoreWeave上修財測、訂單突破1,300億美元 但龐大資本支出仍考驗資金能力 2026-11-11 優分析UAnalyze ↗ 甲骨文在納什維爾東岸舉行全球總部園區動土典禮 作者 Investing.com - Investing.com 香港 2026-11-11 賴瑞·艾里森 Investing.com 香港",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 其他 › 美國",
-     "len": 908,
+     "len": 732,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4719,12 +4563,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "雲商資本支出1.467兆美元 台股26強接單 2026-11-09 鏡週刊Mirror Media ↗ 馬斯克再拋驚人目標：明年SpaceX年化收入5000億美元、Terafab芯片產能瞄準一太瓦看多 2026-11-08 馬斯克 TradingView ↗ 2026年前三季美股科技公司資本支出TOP5：亞馬遜1722",
+     "head": "CoreWeave上修財測、訂單突破1,300億美元 但龐大資本支出仍考驗資金能力 2026-11-11 優分析UAnalyze ↗ 雲商資本支出1.467兆美元 台股26強接單 2026-11-09 鏡週刊Mirror Media ↗ 馬斯克再拋驚人目標：明年SpaceX年化收入5000億美元、Terafab芯片產能",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 其他 › 台灣",
-     "len": 465,
+     "len": 531,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4732,12 +4576,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "AI資本支出一停台灣GDP成長恐少3個百分點？凱投宏觀警告：2028年轉為下滑 2026-11-09 鉅亨網 ↗ 雲商資本支出1.467兆美元 台股26強接單 2026-11-09 鏡週刊Mirror Media ↗ CPO成本高、良率仍待突破！輝達傳轉向NPO 台廠供應鏈布局曝中性 2026-11-07 TVBS新聞",
+     "head": "AI Cargo Boom Lifts Taiwan's Four Major Airlines to Record October Revenue; STARLUX Jumps 59% 2026-11-11 BigGo Finance ↗ AI資本支出一停台灣GDP成長恐少3個百分點？凱投宏觀警告：2028年轉為下滑",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 其他 › 日本",
-     "len": 104,
+     "len": 68,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4745,7 +4589,20 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Masayoshi Son Bets 10 Trillion Yen on AI Amid Debt Concerns中性 孫正義在債務疑慮下押注 10 兆日圓在 AI 上 2026-11-06 조선일보 ↗",
+     "head": "日本AI半導体製造市場：2nmから3nm生産へ―製造能力、技術ロードマップ、投資展望 2026-11-11 Excite エキサイト ↗",
+     "leaf": true
+    },
+    {
+     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 其他 › 韓國",
+     "len": 43,
+     "viz": 0,
+     "flags": [],
+     "maxd": null,
+     "age": null,
+     "stale": false,
+     "console": [],
+     "http": [],
+     "head": "LS일렉트릭 초고압변압기 잔고 3조1670억원 2026-11-11 비건뉴스 ↗",
      "leaf": true
     },
     {
@@ -4759,19 +4616,6 @@
      "console": [],
      "http": [],
      "head": "黃仁勳宣布NVIDIA追加投資歐洲20億元 催歐洲加入AI競賽看多 2026-10-14 黃仁勳 世界新聞網 ↗",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 其他 › 英國",
-     "len": 137,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "UK will not slow down on AI despite backlash in US, says growth minister中性 成長大臣表示，儘管美國出現反彈，英國不會放緩 AI 發展 2026-11-07 成長大臣 Financial Times ↗",
      "leaf": true
     },
     {
@@ -4828,7 +4672,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 全部 › 全球",
-     "len": 579,
+     "len": 713,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4836,12 +4680,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "AI伺服器帶動10月營收》廣達年增104％ 仁寶成長40.7％ 2026-11-10 工商時報 ↗ 看好AI廣告變現 摩通焦點名單納Meta、移除Alphabet 2026-11-10 鉅亨網 ↗ ‘Big Short’ Investor Steve Eisman Says OpenAI’s Collapse Coul",
+     "head": "和碩10月營收創次高，AI伺服器出貨續強 2026-11-11 台視全球資訊網 ↗ 〈台股盤前要聞〉台積電Q3配息9元同步入股Anthropic與OpenAI、台股連兩日飆漲千點外資卻持續倒貨 2026-11-11 鉅亨網 ↗ Taiwan Semiconductor Sales Jump 60% In October",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 全部 › 美國",
-     "len": 742,
+     "len": 533,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4849,12 +4693,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Anthropic會如期IPO嗎？AI投資熱潮降溫、2兆美元估值恐難實現 2026-11-10 鉅亨網 ↗ Anthropic千億美元IPO面臨考驗！力拚感恩節前掛牌估值恐低至1.1兆美元| 財經 2026-11-10 Newtalk新聞 ↗ 應輝達要求研擬生產3D DRAM？台積電最新回應！中性 2026-11-08",
+     "head": "AI晶片大爆發！世芯營收狂飆515％首破百億、聯發科Q4拚季增32％ 10億美元大單成新引擎 2026-11-11 FTNN 新聞網 ↗ OpenAI第三季營收首破100億美元！季增近50%、年增近3倍 2026-11-11 鉅亨網 ↗ OpenAI第3季營收衝上100億美元，企業端銷售翻倍 2026-11-11 Bi",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 全部 › 台灣",
-     "len": 675,
+     "len": 583,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4862,12 +4706,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "應輝達要求研擬生產3D DRAM？台積電最新回應！中性 2026-11-08 黃仁勳（輝達） 鉅亨網 ↗ 聯發科 AI ASIC 第四季營收上看 25 億美元，蔡力行：AI 投資回收仍有過渡期看多 2026-11-07 蔡力行 TechNews 科技新報 ↗ TSMC is Reportedly Considering",
+     "head": "〈台股盤前要聞〉台積電Q3配息9元同步入股Anthropic與OpenAI、台股連兩日飆漲千點外資卻持續倒貨 2026-11-11 鉅亨網 ↗ Taiwan Semiconductor Sales Jump 60% In October As AI Boom Continues 2026-11-11 Investor'",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 全部 › 中國",
-     "len": 415,
+     "len": 127,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4875,20 +4719,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "US Intel: China Recruited Tech Exec to Spy on Nvidia CEO看空 美國情報：中國招募科技高層間諜以監視輝達執行長 2026-11-08 陳立武 The Tech Buzz ↗ Why Beijing blocked SoftBank’s $5.4 billion AB",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 全部 › 日本",
-     "len": 490,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "富士軟片上修全年營收至3.59兆日圓！AI晶片與醫療設備帶動，電子事業上半年獲利年增逾五成| 溫芳瑜 | 財經 2026-11-10 風傳媒 ↗ Why Beijing blocked SoftBank’s $5.4 billion ABB Robotics deal? Setback for Masayoshi So",
+     "head": "輝達遭美司法部盯上！129億美元併購Hugging Face生變數？反壟斷調查持續中看空 2026-10-29 黃仁勳（輝達） FTNN 新聞網 ↗ 庫克：蘋果AI獲陸批准 傳12月推出Apple智慧平台看多 2026-10-16 提姆·庫克 UDN ↗",
      "leaf": true
     },
     {
@@ -4902,32 +4733,6 @@
      "console": [],
      "http": [],
      "head": "黃仁勳長女黃敏珊訪韓前一天臨時取消行程，Nvidia AI Day照常舉行中性 2026-11-07 黃仁勳（輝達） BigGo 財經 ↗",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 全部 › 歐元區",
-     "len": 109,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "European Stocks Join Global Selloff as AI Concerns Spread看空 隨著 AI 疑慮蔓延，歐洲股市加入全球拋售潮 2026-11-07 Bloomberg.com ↗",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 全部 › 英國",
-     "len": 74,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "AI sell-off costs Softbank £12bn看空 AI拋售潮讓軟銀損失120億英鎊 2026-11-07 The Times ↗",
      "leaf": true
     },
     {
@@ -4971,7 +4776,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 半導體 › 全球",
-     "len": 652,
+     "len": 673,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4979,12 +4784,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "富士軟片上修全年營收至3.59兆日圓！AI晶片與醫療設備帶動，電子事業上半年獲利年增逾五成| 溫芳瑜 | 財經 2026-11-10 風傳媒 ↗ 應輝達要求研擬生產3D DRAM？台積電最新回應！中性 2026-11-08 黃仁勳（輝達） 鉅亨網 ↗ TSMC is Reportedly Considering 3D ",
+     "head": "〈台股盤前要聞〉台積電Q3配息9元同步入股Anthropic與OpenAI、台股連兩日飆漲千點外資卻持續倒貨 2026-11-11 鉅亨網 ↗ Taiwan Semiconductor Sales Jump 60% In October As AI Boom Continues 2026-11-11 Investor'",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 半導體 › 美國",
-     "len": 308,
+     "len": 336,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -4992,12 +4797,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "應輝達要求研擬生產3D DRAM？台積電最新回應！中性 2026-11-08 黃仁勳（輝達） 鉅亨網 ↗ TSMC is Reportedly Considering 3D DRAM Production看多 據報導台積電正考慮生產 3D DRAM 2026-11-07 魏哲家 TechPowerUp ↗ Not Nv",
+     "head": "AI晶片大爆發！世芯營收狂飆515％首破百億、聯發科Q4拚季增32％ 10億美元大單成新引擎 2026-11-11 FTNN 新聞網 ↗ 台積電10月營收創新高 擬投資Anthropic、OpenAI合計最高10億美元 2026-11-11 台灣好新聞 ↗ 應輝達要求研擬生產3D DRAM？台積電最新回應！中性 202",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 半導體 › 台灣",
-     "len": 271,
+     "len": 556,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5005,20 +4810,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "應輝達要求研擬生產3D DRAM？台積電最新回應！中性 2026-11-08 黃仁勳（輝達） 鉅亨網 ↗ TSMC is Reportedly Considering 3D DRAM Production看多 據報導台積電正考慮生產 3D DRAM 2026-11-07 魏哲家 TechPowerUp ↗ 台積電跌停！",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 半導體 › 日本",
-     "len": 72,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "富士軟片上修全年營收至3.59兆日圓！AI晶片與醫療設備帶動，電子事業上半年獲利年增逾五成| 溫芳瑜 | 財經 2026-11-10 風傳媒 ↗",
+     "head": "〈台股盤前要聞〉台積電Q3配息9元同步入股Anthropic與OpenAI、台股連兩日飆漲千點外資卻持續倒貨 2026-11-11 鉅亨網 ↗ Taiwan Semiconductor Sales Jump 60% In October As AI Boom Continues 2026-11-11 Investor'",
      "leaf": true
     },
     {
@@ -5049,7 +4841,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 伺服器與電子 › 全球",
-     "len": 575,
+     "len": 464,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5057,12 +4849,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "AI伺服器帶動10月營收》廣達年增104％ 仁寶成長40.7％ 2026-11-10 工商時報 ↗ 富士軟片上修全年營收至3.59兆日圓！AI晶片與醫療設備帶動，電子事業上半年獲利年增逾五成| 溫芳瑜 | 財經 2026-11-10 風傳媒 ↗ 組裝廠10月營收亮，AI熱、PC冷態勢延續- 新聞 2026-11-10 ",
+     "head": "和碩10月營收創次高，AI伺服器出貨續強 2026-11-11 台視全球資訊網 ↗ Lite-On stock: October sales jump on AI server demand - ad-hoc-news.de 2026-11-11 ad-hoc-news.de ↗ AI伺服器帶動10月營收》廣達年增10",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 伺服器與電子 › 美國",
-     "len": 197,
+     "len": 65,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5070,7 +4862,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Jim Cramer explains why no AI stock seems safe from the market carnage看空 吉姆·克雷默解釋為什麼沒有任何AI股票能在市場大屠殺中倖免 2026-11-06 Jim Cramer CNBC ↗ AI伺服器供電捲入337調查，鴻海台達電廣達出貨會受影響",
+     "head": "AI伺服器供電捲入337調查，鴻海台達電廣達出貨會受影響嗎？-跟著大資走 澤明中性 2026-10-11 CMoney投資網誌 ↗",
      "leaf": true
     },
     {
@@ -5087,21 +4879,8 @@
      "leaf": true
     },
     {
-     "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 伺服器與電子 › 日本",
-     "len": 72,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "富士軟片上修全年營收至3.59兆日圓！AI晶片與醫療設備帶動，電子事業上半年獲利年增逾五成| 溫芳瑜 | 財經 2026-11-10 風傳媒 ↗",
-     "leaf": true
-    },
-    {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 記憶體 › 全球",
-     "len": 778,
+     "len": 677,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5109,12 +4888,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "應輝達要求研擬生產3D DRAM？台積電最新回應！中性 2026-11-08 黃仁勳（輝達） 鉅亨網 ↗ TSMC is Reportedly Considering 3D DRAM Production看多 據報導台積電正考慮生產 3D DRAM 2026-11-07 魏哲家 TechPowerUp ↗ Change",
+     "head": "應輝達要求研擬生產3D DRAM？台積電最新回應！中性 2026-11-08 黃仁勳（輝達） 鉅亨網 ↗ Change. Lead it. Dean Bharat Anand in Conversation with John Furner, President & CEO of Walmart, Inc.中性 改變。",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 記憶體 › 美國",
-     "len": 471,
+     "len": 370,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5122,12 +4901,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "應輝達要求研擬生產3D DRAM？台積電最新回應！中性 2026-11-08 黃仁勳（輝達） 鉅亨網 ↗ TSMC is Reportedly Considering 3D DRAM Production看多 據報導台積電正考慮生產 3D DRAM 2026-11-07 魏哲家 TechPowerUp ↗ Change",
+     "head": "應輝達要求研擬生產3D DRAM？台積電最新回應！中性 2026-11-08 黃仁勳（輝達） 鉅亨網 ↗ Change. Lead it. Dean Bharat Anand in Conversation with John Furner, President & CEO of Walmart, Inc.中性 改變。",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 記憶體 › 台灣",
-     "len": 153,
+     "len": 52,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5135,7 +4914,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "應輝達要求研擬生產3D DRAM？台積電最新回應！中性 2026-11-08 黃仁勳（輝達） 鉅亨網 ↗ TSMC is Reportedly Considering 3D DRAM Production看多 據報導台積電正考慮生產 3D DRAM 2026-11-07 魏哲家 TechPowerUp ↗",
+     "head": "應輝達要求研擬生產3D DRAM？台積電最新回應！中性 2026-11-08 黃仁勳（輝達） 鉅亨網 ↗",
      "leaf": true
     },
     {
@@ -5166,7 +4945,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 資料中心 › 全球",
-     "len": 1025,
+     "len": 702,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5174,12 +4953,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Chamath: SpaceX’s Revenue From Anthropic “Could 2 to 3x” as the Data Center Freeze Bites 2026-11-10 TIKR.com ↗ 台達電10月營收創新高，AI電源/液冷出貨升溫 2026-11-10 台視全球資訊網 ↗ Midt",
+     "head": "Chamath: SpaceX’s Revenue From Anthropic “Could 2 to 3x” as the Data Center Freeze Bites 2026-11-10 TIKR.com ↗ Infineon Boosts AI Sales Outlook Due to Data Cent",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 資料中心 › 美國",
-     "len": 1023,
+     "len": 444,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5191,34 +4970,8 @@
      "leaf": true
     },
     {
-     "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 生技醫療 › 全球",
-     "len": 72,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "富士軟片上修全年營收至3.59兆日圓！AI晶片與醫療設備帶動，電子事業上半年獲利年增逾五成| 溫芳瑜 | 財經 2026-11-10 風傳媒 ↗",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 生技醫療 › 日本",
-     "len": 72,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "富士軟片上修全年營收至3.59兆日圓！AI晶片與醫療設備帶動，電子事業上半年獲利年增逾五成| 溫芳瑜 | 財經 2026-11-10 風傳媒 ↗",
-     "leaf": true
-    },
-    {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 金融 › 全球",
-     "len": 590,
+     "len": 105,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5226,64 +4979,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "SoftBank's OpenAI Bet Is Under Strain as Its Shares Slide Before Earnings 2026-11-10 Startup Fortune ↗ Why Beijing blocked SoftBank’s $5.4 billion ABB Robotics ",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 金融 › 美國",
-     "len": 238,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "American billionaire Elon Musk says Masayoshi Son's SoftBank is defaulting on turbine orders看空 美國億萬富翁伊隆·馬斯克表示孫正義的軟銀正在對渦輪機訂單違約 2026-11-07 Elon Musk Billionaires.",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 金融 › 中國",
-     "len": 173,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "Why Beijing blocked SoftBank’s $5.4 billion ABB Robotics deal? Setback for Masayoshi Son’s physical AI ambitions看空 為什麼北京阻撓軟銀54億美元的ABB機器人交易？孫正義實體AI雄心的挫敗 2026-11-",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 金融 › 日本",
-     "len": 417,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "Why Beijing blocked SoftBank’s $5.4 billion ABB Robotics deal? Setback for Masayoshi Son’s physical AI ambitions看空 為什麼北京阻撓軟銀54億美元的ABB機器人交易？孫正義實體AI雄心的挫敗 2026-11-",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 金融 › 英國",
-     "len": 74,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "AI sell-off costs Softbank £12bn看空 AI拋售潮讓軟銀損失120億英鎊 2026-11-07 The Times ↗",
+     "head": "OpenAI Is SoftBank’s Investment, Customer and Collateral. What Could Go Wrong? 2026-11-10 Open Magazine ↗",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 其他 › 全球",
-     "len": 538,
+     "len": 711,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5291,12 +4992,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "看好AI廣告變現 摩通焦點名單納Meta、移除Alphabet 2026-11-10 鉅亨網 ↗ ‘Big Short’ Investor Steve Eisman Says OpenAI’s Collapse Could Trigger an Immediate Recession 2026-11-10 Yahoo ",
+     "head": "Exclusive | OpenAI Continues to Suffer Heavy Losses as Revenue Rises to $10 Billion 2026-11-11 WSJ ↗ OpenAI posts steep losses even as quarterly revenue rises t",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 其他 › 美國",
-     "len": 729,
+     "len": 536,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5304,7 +5005,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Anthropic會如期IPO嗎？AI投資熱潮降溫、2兆美元估值恐難實現 2026-11-10 鉅亨網 ↗ Anthropic千億美元IPO面臨考驗！力拚感恩節前掛牌估值恐低至1.1兆美元| 財經 2026-11-10 Newtalk新聞 ↗ 馬斯克：得州工廠明年中逐步停產Cybertruck - 20261108 -",
+     "head": "OpenAI第三季營收首破100億美元！季增近50%、年增近3倍 2026-11-11 鉅亨網 ↗ OpenAI第3季營收衝上100億美元，企業端銷售翻倍 2026-11-11 BigGo 財經 ↗ OpenAI單季營收首度突破100億美元，較上一季成長近五成 2026-11-11 Yahoo股市 ↗ 【即時新聞】最新",
      "leaf": true
     },
     {
@@ -5322,7 +5023,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 其他 › 中國",
-     "len": 241,
+     "len": 127,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5330,7 +5031,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "US Intel: China Recruited Tech Exec to Spy on Nvidia CEO看空 美國情報：中國招募科技高層間諜以監視輝達執行長 2026-11-08 陳立武 The Tech Buzz ↗ 輝達遭美司法部盯上！129億美元併購Hugging Face生變數？反壟斷調查持續中看空 2",
+     "head": "輝達遭美司法部盯上！129億美元併購Hugging Face生變數？反壟斷調查持續中看空 2026-10-29 黃仁勳（輝達） FTNN 新聞網 ↗ 庫克：蘋果AI獲陸批准 傳12月推出Apple智慧平台看多 2026-10-16 提姆·庫克 UDN ↗",
      "leaf": true
     },
     {
@@ -5344,19 +5045,6 @@
      "console": [],
      "http": [],
      "head": "黃仁勳長女黃敏珊訪韓前一天臨時取消行程，Nvidia AI Day照常舉行中性 2026-11-07 黃仁勳（輝達） BigGo 財經 ↗",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 其他 › 歐元區",
-     "len": 109,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "European Stocks Join Global Selloff as AI Concerns Spread看空 隨著 AI 疑慮蔓延，歐洲股市加入全球拋售潮 2026-11-07 Bloomberg.com ↗",
      "leaf": true
     },
     {
@@ -5374,7 +5062,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 全部 › 全球",
-     "len": 690,
+     "len": 698,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5382,12 +5070,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "焦點股》信驊：外資開出降評第一槍 美國資料中心建置恐延後 2026-11-10 自由財經 ↗ Many SBA borrowers will feel the squeeze of rising rates 2026-11-10 The Business Journals ↗ New Start Fund Debt A",
+     "head": "How Rising CPI Could Affect Credit Card And HELOC Debt 2026-11-11 Forbes ↗ Fed Official Warns Americans to Brace for Costlier Loans This Winter 2026-11-11 Tradi",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 全部 › 美國",
-     "len": 814,
+     "len": 825,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5395,12 +5083,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "焦點股》信驊：外資開出降評第一槍 美國資料中心建置恐延後 2026-11-10 自由財經 ↗ The market bloodbath just exposed Wall Street's true fears about U.S. debt, top economist warns 2026-11-09 貝森特 Fo",
+     "head": "Fed Official Warns Americans to Brace for Costlier Loans This Winter 2026-11-11 TradingView ↗ CoreWeave Q3 Earnings Preview: Revenue Expected to Grow 159%, Debt",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 全部 › 台灣",
-     "len": 419,
+     "len": 345,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5413,7 +5101,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 全部 › 中國",
-     "len": 304,
+     "len": 109,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5421,12 +5109,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Finance Minister hails Chinese bond issuance as evidence of warming relations 2026-11-10 The Globe and Mail ↗ Trump's midterm defeat gives China, Canada, India ",
+     "head": "Finance Minister hails Chinese bond issuance as evidence of warming relations 2026-11-10 The Globe and Mail ↗",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 全部 › 日本",
-     "len": 470,
+     "len": 196,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5439,7 +5127,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 全部 › 韓國",
-     "len": 169,
+     "len": 70,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5447,20 +5135,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "New Start Fund Debt Adjustments Near 35 Trillion Won 2026-11-10 조선일보 ↗ ECB contender Klaas Knot ‘won’t hesitate’ to act in a debt crisis 2026-11-09 拉加德 Financia",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 全部 › 歐元區",
-     "len": 98,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "ECB contender Klaas Knot ‘won’t hesitate’ to act in a debt crisis 2026-11-09 拉加德 Financial Times ↗",
+     "head": "New Start Fund Debt Adjustments Near 35 Trillion Won 2026-11-10 조선일보 ↗",
      "leaf": true
     },
     {
@@ -5478,7 +5153,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 全部 › 德國",
-     "len": 266,
+     "len": 127,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5486,25 +5161,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Germany's Merz complains about unfair burden sharing, calls EU to prioritize new Ukraine loan 2026-11-10 The Kyiv Independent ↗ Germany Commits €30 Million Conc",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 全部 › 加拿大",
-     "len": 108,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "ADENTRA Reports Strong Q3 2026 Earnings Growth, Margin Expansion and Lower Leverage 2026-11-09 TradingView ↗",
+     "head": "Germany's Merz complains about unfair burden sharing, calls EU to prioritize new Ukraine loan 2026-11-10 The Kyiv Independent ↗",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 全部 › 巴西",
-     "len": 544,
+     "len": 531,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5512,7 +5174,20 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Minerva stock slid as debt and export risks weighed - ad-hoc-news.de 2026-11-10 ad-hoc-news.de ↗ Tupy SA (BSP:TUPY3) (Q3 2026) Earnings Call Highlights: Revenue",
+     "head": "Brazil’s Galipolo says local currency debt shifts risk to investors By Investing.com 2026-11-11 Investing.com ↗ Minerva stock slid as debt and export risks weig",
+     "leaf": true
+    },
+    {
+     "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 全部 › 印尼",
+     "len": 140,
+     "viz": 0,
+     "flags": [],
+     "maxd": null,
+     "age": null,
+     "stale": false,
+     "console": [],
+     "http": [],
+     "head": "Bank Rakyat Indonesia Q3 Profit Surges 16.8% to Rp 48.2 Trillion on Strong Loan Expansion and Cheap Funding Gains 2026-11-09 InvestorTrust ↗",
      "leaf": true
     },
     {
@@ -5543,7 +5218,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 半導體 › 全球",
-     "len": 274,
+     "len": 328,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5551,7 +5226,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "「不是債市太悲觀就是股市太樂觀！」 高盛警告背離近臨界點：AI股恐再跌15% 點名對沖台灣半導體看空 2026-10-19 鉅亨網 ↗ 【即時新聞】CoreWeave(CRWV)爆債務危機！AI雲端股重挫15%，拖累超微等晶片股跳水看空 2026-10-16 CMoney投資網誌 ↗ AI金流大挪移 半導體廠現金流衝5",
+     "head": "AI債務風險轉向晶片商！高盛示警博通、AMD、輝達CDS利差首超雲端巨頭 2026-11-10 鉅亨網 ↗ 「不是債市太悲觀就是股市太樂觀！」 高盛警告背離近臨界點：AI股恐再跌15% 點名對沖台灣半導體看空 2026-10-19 鉅亨網 ↗ 【即時新聞】CoreWeave(CRWV)爆債務危機！AI雲端股重挫15%，",
      "leaf": true
     },
     {
@@ -5581,34 +5256,8 @@
      "leaf": true
     },
     {
-     "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 伺服器與電子 › 全球",
-     "len": 134,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "National Debt Tracker: American taxpayers (you) are now on the hook for $40,556,120,784,983.65 as of 11/6/26 2026-11-07 Fox Business ↗",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 伺服器與電子 › 美國",
-     "len": 134,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "National Debt Tracker: American taxpayers (you) are now on the hook for $40,556,120,784,983.65 as of 11/6/26 2026-11-07 Fox Business ↗",
-     "leaf": true
-    },
-    {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 電力與能源 › 全球",
-     "len": 230,
+     "len": 217,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5616,25 +5265,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Germany Commits €30 Million Concessional Loan to Power Cambodia's Rural Electrification Drive 2026-11-09 三村 Construction & Property News ↗ Aeris Energy seeks R$",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 電力與能源 › 德國",
-     "len": 138,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "Germany Commits €30 Million Concessional Loan to Power Cambodia's Rural Electrification Drive 2026-11-09 三村 Construction & Property News ↗",
+     "head": "Coral Norte FLNG Project: Mozambique Clears $7.2bn Construction Financing Without State Debt 2026-11-10 Construction Review ↗ Aeris Energy seeks R$1.5bn out-of-",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 資料中心 › 全球",
-     "len": 499,
+     "len": 452,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5642,12 +5278,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "焦點股》信驊：外資開出降評第一槍 美國資料中心建置恐延後 2026-11-10 自由財經 ↗ 微軟終止甲骨文 AI 算力合約，雲端市場面臨重整壓力看空 2026-11-07 鏈新聞 ABMedia ↗ Big four hyperscalers raising more than $131 billion in deb",
+     "head": "微軟終止甲骨文 AI 算力合約，雲端市場面臨重整壓力看空 2026-11-07 鏈新聞 ABMedia ↗ Big four hyperscalers raising more than $131 billion in debt and equity for AI buildout 2026-11-03 Data Ce",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 資料中心 › 美國",
-     "len": 377,
+     "len": 330,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5655,12 +5291,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "焦點股》信驊：外資開出降評第一槍 美國資料中心建置恐延後 2026-11-10 自由財經 ↗ 微軟終止甲骨文 AI 算力合約，雲端市場面臨重整壓力看空 2026-11-07 鏈新聞 ABMedia ↗ AI燒錢狂潮！雲端四巨頭砸逾1.6兆美元建算力帝國 自由現金流首見全面失血 2026-11-02 CMoney投資網誌",
+     "head": "微軟終止甲骨文 AI 算力合約，雲端市場面臨重整壓力看空 2026-11-07 鏈新聞 ABMedia ↗ AI燒錢狂潮！雲端四巨頭砸逾1.6兆美元建算力帝國 自由現金流首見全面失血 2026-11-02 CMoney投資網誌 ↗ AI資料中心舉債擴張引疑慮 五大雲端業者遭放空逾170億美元 2026-10-22 優分",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 金融 › 全球",
-     "len": 630,
+     "len": 332,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5668,12 +5304,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Savings Banks' Loans to Large Firms Surpass 5 Trillion 2026-11-10 조선일보 ↗ Banks, investors grow wary of AI debt, spooked by market selloff 2026-11-10 Reuters ↗ E",
+     "head": "Savings Banks' Loans to Large Firms Surpass 5 Trillion 2026-11-10 조선일보 ↗ Randstad’s Jill Eubank on Paying Down Manual Debt to Unlock AI Returns 2026-11-10 Finan",
      "leaf": true
     },
     {
-     "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 金融 › 美國",
-     "len": 333,
+     "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 金融 › 印尼",
+     "len": 140,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5681,25 +5317,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "American billionaire Elon Musk says Masayoshi Son's SoftBank is defaulting on turbine orders看空 美國億萬富翁伊隆·馬斯克表示孫正義的軟銀正在對渦輪機訂單違約 2026-11-07 Elon Musk Billionaires.",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 金融 › 日本",
-     "len": 168,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "American billionaire Elon Musk says Masayoshi Son's SoftBank is defaulting on turbine orders看空 美國億萬富翁伊隆·馬斯克表示孫正義的軟銀正在對渦輪機訂單違約 2026-11-07 Elon Musk Billionaires.",
+     "head": "Bank Rakyat Indonesia Q3 Profit Surges 16.8% to Rp 48.2 Trillion on Strong Loan Expansion and Cheap Funding Gains 2026-11-09 InvestorTrust ↗",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 其他 › 全球",
-     "len": 758,
+     "len": 768,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5707,12 +5330,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Many SBA borrowers will feel the squeeze of rising rates 2026-11-10 The Business Journals ↗ New Start Fund Debt Adjustments Near 35 Trillion Won 2026-11-10 조선일보",
+     "head": "How Rising CPI Could Affect Credit Card And HELOC Debt 2026-11-11 Forbes ↗ Fed Official Warns Americans to Brace for Costlier Loans This Winter 2026-11-11 Tradi",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 其他 › 美國",
-     "len": 1001,
+     "len": 839,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5720,12 +5343,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "The market bloodbath just exposed Wall Street's true fears about U.S. debt, top economist warns 2026-11-09 貝森特 Fortune ↗ CoreWeave Q3 Earnings Preview: Revenue ",
+     "head": "Fed Official Warns Americans to Brace for Costlier Loans This Winter 2026-11-11 TradingView ↗ CoreWeave Q3 Earnings Preview: Revenue Expected to Grow 159%, Debt",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 其他 › 台灣",
-     "len": 351,
+     "len": 277,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5738,7 +5361,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 其他 › 中國",
-     "len": 304,
+     "len": 109,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5746,12 +5369,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Finance Minister hails Chinese bond issuance as evidence of warming relations 2026-11-10 The Globe and Mail ↗ Trump's midterm defeat gives China, Canada, India ",
+     "head": "Finance Minister hails Chinese bond issuance as evidence of warming relations 2026-11-10 The Globe and Mail ↗",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 其他 › 日本",
-     "len": 301,
+     "len": 196,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5764,7 +5387,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 其他 › 韓國",
-     "len": 169,
+     "len": 70,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5772,20 +5395,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "New Start Fund Debt Adjustments Near 35 Trillion Won 2026-11-10 조선일보 ↗ ECB contender Klaas Knot ‘won’t hesitate’ to act in a debt crisis 2026-11-09 拉加德 Financia",
-     "leaf": true
-    },
-    {
-     "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 其他 › 歐元區",
-     "len": 98,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "ECB contender Klaas Knot ‘won’t hesitate’ to act in a debt crisis 2026-11-09 拉加德 Financial Times ↗",
+     "head": "New Start Fund Debt Adjustments Near 35 Trillion Won 2026-11-10 조선일보 ↗",
      "leaf": true
     },
     {
@@ -5815,21 +5425,8 @@
      "leaf": true
     },
     {
-     "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 其他 › 加拿大",
-     "len": 108,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "ADENTRA Reports Strong Q3 2026 Earnings Growth, Margin Expansion and Lower Leverage 2026-11-09 TradingView ↗",
-     "leaf": true
-    },
-    {
      "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 其他 › 巴西",
-     "len": 544,
+     "len": 531,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5837,7 +5434,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Minerva stock slid as debt and export risks weighed - ad-hoc-news.de 2026-11-10 ad-hoc-news.de ↗ Tupy SA (BSP:TUPY3) (Q3 2026) Earnings Call Highlights: Revenue",
+     "head": "Brazil’s Galipolo says local currency debt shifts risk to investors By Investing.com 2026-11-11 Investing.com ↗ Minerva stock slid as debt and export risks weig",
      "leaf": true
     },
     {
@@ -5868,7 +5465,7 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 公司債利差",
-     "len": 253,
+     "len": 255,
      "viz": 4,
      "flags": [],
      "maxd": null,
@@ -5876,12 +5473,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "公司債利差（代替個別公司 CDS） ICE BofA 選擇權調整利差，FRED 美國投資等級公司債利差（ICE BofA OAS） 0.93 百分點 2026-11-06 前一筆 0.00 高 0.94 低 0.73 美國 BBB 級公司債利差（ICE BofA OAS） 1.16 百分點 2026-11-06 前一筆",
+     "head": "公司債利差（代替個別公司 CDS） ICE BofA 選擇權調整利差，FRED 美國投資等級公司債利差（ICE BofA OAS） 0.91 百分點 2026-11-09 前一筆 -0.02 高 0.94 低 0.73 美國 BBB 級公司債利差（ICE BofA OAS） 1.13 百分點 2026-11-09 前一",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 台股公司",
-     "len": 1592,
+     "len": 1699,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5889,12 +5486,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 107 公開資訊觀測站重大訊",
+     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 140 公開資訊觀測站重大訊",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 美股公司",
-     "len": 1630,
+     "len": 1600,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -5902,7 +5499,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "美股公司 美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 60 國內媒體 15 國外媒",
+     "head": "美股公司 美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 56 國內媒體 31 國外媒",
      "leaf": true
     },
     {
@@ -6037,7 +5634,7 @@
     },
     {
      "path": "產業 › 產業研究 › 指定報告",
-     "len": 3820,
+     "len": 3900,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6063,7 +5660,7 @@
     },
     {
      "path": "產業 › 產業研究 › 法人報告與事件",
-     "len": 26435,
+     "len": 26955,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6167,7 +5764,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 即時訊息",
-     "len": 1464,
+     "len": 1487,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6175,7 +5772,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "即時訊息 利率、央行與匯率、經濟指標、台股大盤與政策・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 分類 全部 119 利率、央行與匯率 57 經濟指標 32 台股大盤與政策 30 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」）",
+     "head": "即時訊息 利率、央行與匯率、經濟指標、台股大盤與政策・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 分類 全部 117 利率、央行與匯率 41 經濟指標 29 台股大盤與政策 47 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」）",
      "leaf": true
     },
     {
@@ -6201,12 +5798,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "市場隱含的利率路徑（FedWatch 自算） 目前目標區間 3.75-4.00%，有效利率 3.88%；期貨價格日 2026-11-10 FOMC 決議日 會後隱含利率 較目前 最可能的目標區間 比目前低 維持 比目前高 2026-12-09 4.15% +27 bp 4.00-4.25% 90% 0% 0% 100%",
+     "head": "市場隱含的利率路徑（FedWatch 自算） 目前目標區間 3.75-4.00%，有效利率 3.88%；期貨價格日 2026-11-10 FOMC 決議日 會後隱含利率 較目前 最可能的目標區間 比目前低 維持 比目前高 2026-12-09 4.16% +28 bp 4.00-4.25% 87% 0% 0% 100%",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 美債殖利率",
-     "len": 981,
+     "len": 980,
      "viz": 5,
      "flags": [],
      "maxd": null,
@@ -6214,7 +5811,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "美債殖利率與利差 FRED，近一年；滑過看當天數值 美 2 年期公債殖利率 4.51 % 2026-11-06 前一筆 +0.05 高 4.92 低 3.38 近月全面走降 美 10 年期公債殖利率 4.86 % 2026-11-06 前一筆 +0.02 高 5.31 低 3.97 近月全面走降 美 30 年期公債殖利",
+     "head": "美債殖利率與利差 FRED，近一年；滑過看當天數值 美 2 年期公債殖利率 4.56 % 2026-11-09 前一筆 +0.05 高 4.92 低 3.38 近月全面走降 美 10 年期公債殖利率 4.88 % 2026-11-09 前一筆 +0.02 高 5.31 低 3.97 近月全面走降 美 30 年期公債殖利",
      "leaf": true
     },
     {
@@ -6232,7 +5829,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行目前利率 › 美國",
-     "len": 664,
+     "len": 565,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -6240,12 +5837,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "美國 聯邦基金利率目標區間上限 目前 3.88%（2026-11-03）・最近一次變動 2026-09-17：3.63% → 3.88% -0.30% 2.75% 5.80% 2019-01 2022-12 2026-11 怎麼看這張表 美國央行相關新聞 117 則 《美債》10月CPI牽動Fed升息決策殖利率續揚- ",
+     "head": "美國 聯邦基金利率目標區間上限 目前 3.88%（2026-11-03）・最近一次變動 2026-09-17：3.63% → 3.88% -0.30% 2.75% 5.80% 2019-01 2022-12 2026-11 怎麼看這張表 美國央行相關新聞 131 則 《美債》CPI超預期、標債遇冷 10年債殖利率破5%",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行目前利率 › 台灣",
-     "len": 648,
+     "len": 632,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -6253,12 +5850,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "台灣 重貼現率 目前 2.00%（2024-03-22）・最近一次變動 2024-03-22：1.88% → 2.00% 1.33% 1.69% 2.05% 2022-03 2022-12 2026-11 怎麼看這張表 台灣央行相關新聞 5 則 Taiwan Stocks Surge Nearly 2,000 Poin",
+     "head": "台灣 重貼現率 目前 2.00%（2024-03-22）・最近一次變動 2024-03-22：1.88% → 2.00% 1.33% 1.69% 2.05% 2022-03 2022-12 2026-11 怎麼看這張表 台灣央行相關新聞 6 則 亞股早盤多空拉鋸！台股震盪、台幣近逼33元 Fed升息疑慮、Anthrop",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行目前利率 › 中國",
-     "len": 852,
+     "len": 1002,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -6266,12 +5863,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "中國 一年期貸款市場報價利率（LPR） 目前 3.00%（2026-11-03）・最近一次變動 2025-05-20：3.10% → 3.00% 2.89% 3.68% 4.46% 2019-01 2022-12 2026-11 怎麼看這張表 中國央行相關新聞 16 則 中國央行將美元/人民幣中間價設定為6.7167，",
+     "head": "中國 一年期貸款市場報價利率（LPR） 目前 3.00%（2026-11-03）・最近一次變動 2025-05-20：3.10% → 3.00% 2.89% 3.68% 4.46% 2019-01 2022-12 2026-11 怎麼看這張表 中國央行相關新聞 17 則 Treasury Secretary Scott",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行目前利率 › 日本",
-     "len": 867,
+     "len": 935,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -6279,12 +5876,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "日本 政策利率 目前 1.25%（2026-11-03）・最近一次變動 2026-09-24：1.00% → 1.25% -0.21% 0.58% 1.36% 2019-01 2022-12 2026-11 怎麼看這張表 日本央行相關新聞 35 則 Bank of Japan debated need for fast",
+     "head": "日本 政策利率 目前 1.25%（2026-11-03）・最近一次變動 2026-09-24：1.00% → 1.25% -0.21% 0.58% 1.36% 2019-01 2022-12 2026-11 怎麼看這張表 日本央行相關新聞 29 則 Bank of Japan debated need for fast",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行目前利率 › 韓國",
-     "len": 957,
+     "len": 983,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -6292,12 +5889,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "韓國 基準利率 目前 3.00%（2026-10-08）・最近一次變動 2026-08-27：2.75% → 3.00% 0.26% 2.00% 3.74% 2019-01 2022-11 2026-10 怎麼看這張表 韓國央行相關新聞 10 則 Silicon Valley's billionaires won th",
+     "head": "韓國 基準利率 目前 3.00%（2026-10-08）・最近一次變動 2026-08-27：2.75% → 3.00% 0.26% 2.00% 3.74% 2019-01 2022-11 2026-10 怎麼看這張表 韓國央行相關新聞 13 則 Trump's midterm poll setback won't d",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行目前利率 › 歐元區",
-     "len": 791,
+     "len": 872,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -6305,12 +5902,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "歐元區 存款機制利率 目前 2.50%（2026-11-03）・最近一次變動 2026-09-16：2.25% → 2.50% -0.36% 2.25% 4.86% 2019-01 2022-12 2026-11 怎麼看這張表 歐元區央行相關新聞 49 則 Eurogroup hails 'excellent' ECB",
+     "head": "歐元區 存款機制利率 目前 2.50%（2026-11-03）・最近一次變動 2026-09-16：2.25% → 2.50% -0.36% 2.25% 4.86% 2019-01 2022-12 2026-11 怎麼看這張表 歐元區央行相關新聞 47 則 歐洲央行Lane：利率路徑取決於燃料成本傳導至薪資的程度 20",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行目前利率 › 英國",
-     "len": 1121,
+     "len": 1110,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -6318,12 +5915,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "英國 Bank Rate 目前 3.75%（2026-11-02）・最近一次變動 2025-12-18：4.00% → 3.75% -0.31% 2.68% 5.66% 2019-01 2022-12 2026-11 怎麼看這張表 英國央行相關新聞 13 則 Pound-to-Euro Holds Near €1.20",
+     "head": "英國 Bank Rate 目前 3.75%（2026-11-02）・最近一次變動 2025-12-18：4.00% → 3.75% -0.31% 2.68% 5.66% 2019-01 2022-12 2026-11 怎麼看這張表 英國央行相關新聞 11 則 Andrew Bailey’s Bank of Englan",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行目前利率 › 印度",
-     "len": 1057,
+     "len": 1080,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -6336,7 +5933,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行目前利率 › 加拿大",
-     "len": 1325,
+     "len": 1228,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -6344,12 +5941,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "加拿大 隔夜利率目標 目前 2.50%（2026-11-02）・最近一次變動 2026-10-29：2.25% → 2.50% -0.13% 2.63% 5.38% 2019-01 2022-12 2026-11 怎麼看這張表 加拿大央行相關新聞 10 則 Bank of Canada Governor Tiff Ma",
+     "head": "加拿大 隔夜利率目標 目前 2.50%（2026-11-02）・最近一次變動 2026-10-29：2.25% → 2.50% -0.13% 2.63% 5.38% 2019-01 2022-12 2026-11 怎麼看這張表 加拿大央行相關新聞 11 則 Bank of Canada Officials Say Un",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行目前利率 › 巴西",
-     "len": 1172,
+     "len": 1099,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -6357,7 +5954,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "巴西 SELIC 目標 目前 13.75%（2026-11-03）・最近一次變動 2026-09-17：14.00% → 13.75% 0.96% 8.50% 16.04% 2019-01 2022-12 2026-11 怎麼看這張表 巴西央行相關新聞 12 則 Brazil pauses rate cuts as r",
+     "head": "巴西 SELIC 目標 目前 13.75%（2026-11-03）・最近一次變動 2026-09-17：14.00% → 13.75% 0.96% 8.50% 16.04% 2019-01 2022-12 2026-11 怎麼看這張表 巴西央行相關新聞 11 則 Brazil Central Bank Signals ",
      "leaf": true
     },
     {
@@ -6375,7 +5972,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行目前利率 › 澳洲",
-     "len": 854,
+     "len": 516,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -6383,12 +5980,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "澳洲 現金利率目標 目前 4.60%（2026-10-29）・最近一次變動 2026-09-30：4.35% → 4.60% -0.26% 2.35% 4.96% 2019-01 2022-11 2026-10 怎麼看這張表 澳洲央行相關新聞 10 則 That ‘recession feeling’ is cause",
+     "head": "澳洲 現金利率目標 目前 4.60%（2026-10-29）・最近一次變動 2026-09-30：4.35% → 4.60% -0.26% 2.35% 4.96% 2019-01 2022-11 2026-10 怎麼看這張表 澳洲央行相關新聞 4 則 Australia Central Bank Raises Inte",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行目前利率 › 墨西哥",
-     "len": 585,
+     "len": 671,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -6396,7 +5993,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "墨西哥 銀行間隔夜利率目標 目前 6.50%（2026-11-03）・最近一次變動 2026-05-08：6.75% → 6.50% 3.42% 7.63% 11.83% 2019-01 2022-12 2026-11 怎麼看這張表 墨西哥央行相關新聞 4 則 Mexico’s central bank cuts ra",
+     "head": "墨西哥 銀行間隔夜利率目標 目前 6.50%（2026-11-03）・最近一次變動 2026-05-08：6.75% → 6.50% 3.42% 7.63% 11.83% 2019-01 2022-12 2026-11 怎麼看這張表 墨西哥央行相關新聞 5 則 Banxico’s Governor Rodriguez:",
      "leaf": true
     },
     {
@@ -6414,7 +6011,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行目前利率 › 印尼",
-     "len": 220,
+     "len": 301,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -6422,7 +6019,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "印尼 BI 利率 目前 5.75%（2026-10-19）・最近一次變動 2026-06-18：5.50% → 5.75% 3.28% 4.88% 6.47% 2019-01 2022-11 2026-10 怎麼看這張表 印尼央行相關新聞 1 則 Indonesia's Non-Dollar Transactions ",
+     "head": "印尼 BI 利率 目前 5.75%（2026-10-19）・最近一次變動 2026-06-18：5.50% → 5.75% 3.28% 4.88% 6.47% 2019-01 2022-11 2026-10 怎麼看這張表 印尼央行相關新聞 2 則 How Does a Weaker US Dollar Strength",
      "leaf": true
     },
     {
@@ -6453,7 +6050,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 全球",
-     "len": 563,
+     "len": 421,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6461,12 +6058,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "《美債》10月CPI牽動Fed升息決策殖利率續揚- 新聞 2026-11-10 MoneyDJ ↗ 美國通膨數據將檢驗國債漲勢 市場預期12月加息概率超八成 2026-11-10 Yahoo 財經 ↗ 油價崩跌助攻！黃金站上4100美元 專家憂Fed升息刀未落下 2026-11-10 TVBS ↗ 美國10月CPI今晚",
+     "head": "《美債》CPI超預期、標債遇冷 10年債殖利率破5% 2026-11-11 MoneyDJ ↗ 通膨高於預期 美債殖利率全面跳升、12月恐升息2碼 2026-11-11 自由財經 ↗ 路透調查：一致預期聯準會12月升息25個基點 2026-11-11 www.tmgm.com ↗ 〈紐約匯市〉美CPI火熱、Fed理事鷹",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 美國",
-     "len": 530,
+     "len": 431,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6474,12 +6071,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "《美債》10月CPI牽動Fed升息決策殖利率續揚- 新聞 2026-11-10 MoneyDJ ↗ 美國通膨數據將檢驗國債漲勢 市場預期12月加息概率超八成 2026-11-10 Yahoo 財經 ↗ 油價崩跌助攻！黃金站上4100美元 專家憂Fed升息刀未落下 2026-11-10 TVBS ↗ 美國10月CPI今晚",
+     "head": "《美債》CPI超預期、標債遇冷 10年債殖利率破5% 2026-11-11 MoneyDJ ↗ 通膨高於預期 美債殖利率全面跳升、12月恐升息2碼 2026-11-11 自由財經 ↗ 路透調查：一致預期聯準會12月升息25個基點 2026-11-11 www.tmgm.com ↗ 〈紐約匯市〉美CPI火熱、Fed理事鷹",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 台灣",
-     "len": 525,
+     "len": 509,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6487,12 +6084,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Taiwan Stocks Surge Nearly 2,000 Points but Foreign Investors Still Flee; Taiwan's Central Bank Confirms Over $10 Billion in Outflows in November 2026-11-10 楊金龍",
+     "head": "亞股早盤多空拉鋸！台股震盪、台幣近逼33元 Fed升息疑慮、Anthropic IPO成焦點| 財經 2026-11-11 Newtalk新聞 ↗ Capital outflows weigh on Taiwan dollar 2026-11-11 楊金龍 Taipei Times ↗ 台股狂飆1960點外資卻落跑！楊",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 中國",
-     "len": 716,
+     "len": 866,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6500,12 +6097,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "中國央行將美元/人民幣中間價設定為6.7167，前值為6.7188 2026-11-10 潘功勝 FXStreet ↗ PBOC sets USD/ CNY central rate at 6.7167 (vs. estimate at 6.6655) 2026-11-10 investingLive ↗ Event ",
+     "head": "Treasury Secretary Scott Bessent calls for more balanced US-China trade ties ahead of Trump-Xi talks 2026-11-11 貝森特 Yahoo! Finance Canada ↗ Treasury Secretary S",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 日本",
-     "len": 742,
+     "len": 810,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6513,12 +6110,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Bank of Japan debated need for faster rate hikes, October summary shows 2026-11-10 植田和男 Fresno Bee ↗ BOJ Summary Suggests Good Chance of Near-Term Interest Rate",
+     "head": "Bank of Japan debated need for faster rate hikes, October summary shows 2026-11-10 植田和男 Fresno Bee ↗ Bloomberg’s Top Yen Forecaster Sees Dollar-Yen Falling to 1",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 韓國",
-     "len": 833,
+     "len": 859,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6526,12 +6123,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Silicon Valley's billionaires won the tax battle. The war on wealth is just beginning. 2026-11-10 祖克柏 Business Insider ↗ Kevin Warsh's Expected Rate Hike Is a W",
+     "head": "Trump's midterm poll setback won't derail India-US trade talks: Official 2026-11-11 The Economic Times ↗ Bank of Korea Governor Shin Hyun-song Appointed CPMI Ch",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 歐元區",
-     "len": 662,
+     "len": 743,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6539,12 +6136,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Eurogroup hails 'excellent' ECB president candidates 2026-11-10 拉加德 AzerNews ↗ Eurogroup discusses filling 3 top ECB posts 2026-11-10 楊金龍 https://www.irishsun.c",
+     "head": "歐洲央行Lane：利率路徑取決於燃料成本傳導至薪資的程度 2026-11-11 BigGo 財經 ↗ 歐洲央行首席經濟學家Lane：利率決策取決於薪資與物價的連鎖效應 作者 Investing.com - Investing.com 香港 2026-11-11 Investing.com 香港 - 股市報價& 財經新聞",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 英國",
-     "len": 991,
+     "len": 980,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6552,12 +6149,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Pound-to-Euro Holds Near €1.20 as ECB Leadership Race Begins 2026-11-10 CurrencyNews.co.uk ↗ Central Bank Independence In Today’s World - Speech By Andrew Baile",
+     "head": "Andrew Bailey’s Bank of England Will Have to Grapple With Crude Economics 2026-11-11 Bloomberg.com ↗ Pound-to-Euro Holds Near €1.20 as ECB Leadership Race Begin",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 德國",
-     "len": 327,
+     "len": 232,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6565,12 +6162,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Weekly Recap: ECB hurdle cleared and Orcel rejects German board seats 2026-11-09 TradingView ↗ Bundesbank's Nagel joins ECB chorus backing December rate hike看空 ",
+     "head": "Bundesbank's Nagel joins ECB chorus backing December rate hike看空 德國央行納格爾加入歐洲央行支持12月升息的行列 2026-11-04 納格爾 Reuters ↗ Nagel: December ECB Rate Increase Close to Cer",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 印度",
-     "len": 932,
+     "len": 955,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6583,7 +6180,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 法國",
-     "len": 783,
+     "len": 637,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6591,12 +6188,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "法國勞工部長：政府將最低工資上調1.6%至1502歐元。將最低工資上調提前至12月1日。 2026-11-09 蘿莉·查維斯-德雷默 富途牛牛 ↗ 歐洲央行換帥爭取12月敲定？通脹升至4%，法國債市危機考驗新 2026-11-08 群益期貨 ↗ Central bank governor: France must fi",
+     "head": "France may back Pablo Hernandez de Cos over Klaas Knot for ECB president 2026-11-10 拉加德 Le Monde.fr ↗ France well positioned to claim ECB chief economist post, ",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 加拿大",
-     "len": 1196,
+     "len": 1099,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6604,12 +6201,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Bank of Canada Governor Tiff Macklem before the Senate committee today to discuss economic conditions中性 加拿大央行總裁提夫·麥克勒姆今日出席參議院委員會討論經濟狀況 2026-11-06 提夫·麥克勒姆 arabca",
+     "head": "Bank of Canada Officials Say Uncertainty Doesn’t Rule Out Hikes 2026-11-11 Bloomberg.com ↗ Bank of Canada proceeding carefully with future rate hikes, deliberat",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 巴西",
-     "len": 1040,
+     "len": 967,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6617,7 +6214,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Brazil pauses rate cuts as rising debt and fiscal pressure threaten to keep borrowing costs high 2026-11-06 Latin Times ↗ 巴西央行維持基準利率13.75%不變，盧拉連任後暫停降息週期 作者 Inve",
+     "head": "Brazil Central Bank Signals Caution on Price Rise, Slowdown 2026-11-11 Bloomberg.com ↗ Brazil pauses rate cuts as rising debt and fiscal pressure threaten to ke",
      "leaf": true
     },
     {
@@ -6634,21 +6231,8 @@
      "leaf": true
     },
     {
-     "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 西班牙",
-     "len": 193,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "西班牙經濟部長看好 de Cos有望接任歐洲央行總裁 2026-11-09 拉加德 民視財經網 ↗ Race to Succeed Lagarde Takes Shape as Netherlands, Spain Nominate Knot and de Cos中性 隨著荷蘭和西班牙提名諾特和德科斯，接替拉加德的競選",
-     "leaf": true
-    },
-    {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 澳洲",
-     "len": 727,
+     "len": 390,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6656,12 +6240,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "That ‘recession feeling’ is caused by Canberra and the RBA 2026-11-10 AFR ↗ Treasury pushes cuts to home battery subsidy in savings drive看空 財政部在節約開支行動中推動削減家用電池補",
+     "head": "Australia Central Bank Raises Interest Rates to Highest Level in 18 Years 2026-11-11 WSJ ↗ That ‘recession feeling’ is caused by Canberra and the RBA 2026-11-10",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 墨西哥",
-     "len": 454,
+     "len": 540,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6669,12 +6253,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Mexico’s central bank cuts rate to 6.25% — Mexico News Daily看多 墨西哥央行將利率調降至 6.25% — 墨西哥新聞日報 2026-11-07 墨西哥央行 UA.NEWS ↗ Mexican Peso left vulnerable by Banxico ra",
+     "head": "Banxico’s Governor Rodriguez: Considering rate cut since September – El Financiero 2026-11-10 Mitrade ↗ Since September: Banxico Governor Rodriguez considering ",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 印尼",
-     "len": 96,
+     "len": 177,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6682,12 +6266,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Indonesia's Non-Dollar Transactions More Than Double to $52.6 Billion 2026-11-03 Jakarta Globe ↗",
+     "head": "How Does a Weaker US Dollar Strengthen the Rupiah? 2026-11-05 Tempo.co English ↗ Indonesia's Non-Dollar Transactions More Than Double to $52.6 Billion 2026-11-0",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 荷蘭",
-     "len": 383,
+     "len": 239,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6695,7 +6279,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Netherlands seeks to win over its candidate for the ECB and rejects “political haggling” in order to secure support 2026-11-09 Demócrata ↗ Race to Succeed Lagar",
+     "head": "Netherlands seeks to win over its candidate for the ECB and rejects “political haggling” in order to secure support 2026-11-09 Demócrata ↗ The Netherlands nomin",
      "leaf": true
     },
     {
@@ -6712,8 +6296,8 @@
      "leaf": true
     },
     {
-     "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 伊朗",
-     "len": 508,
+     "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 烏克蘭",
+     "len": 121,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6721,7 +6305,20 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "ECB’s Sleijpen says Iran shock persists, no second-round effects yet中性 歐洲央行官員 Sleijpen 表示伊朗衝擊持續，但尚未出現第二輪效應 2026-11-04 Sleijpen FXStreet ↗ ECB’s Sleijpen: Iran s",
+     "head": "Europe Today: EU joins Ukraine peace talks in Abu Dhabi as race to replace Lagarde heats up 2026-11-10 拉加德 Euronews.com ↗",
+     "leaf": true
+    },
+    {
+     "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 伊朗",
+     "len": 969,
+     "viz": 0,
+     "flags": [],
+     "maxd": null,
+     "age": null,
+     "stale": false,
+     "console": [],
+     "http": [],
+     "head": "US Treasury Secretary Bessent moved to military base after Iranian threats — NYT 2026-11-11 貝森特 The Times of Israel ↗ US Treasury Secretary Scott Bessent moved ",
      "leaf": true
     },
     {
@@ -6739,7 +6336,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 全球",
-     "len": 557,
+     "len": 472,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6747,12 +6344,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Top-Ranked Yen Forecaster Sees Dollar Falling to 147 as BOJ Tightening Outpaces Fed 2026-11-10 BigGo Finance ↗ Bloomberg’s Top Yen Forecaster Sees Dollar-Yen Fa",
+     "head": "〈紐約匯市〉美CPI火熱、Fed理事鷹派談話強化升息預期 美元攀高 2026-11-11 鉅亨網 ↗ 國內匯市：新台幣匯率今晨以32.890元開盤，貶值2.5分 2026-11-11 富聯網 ↗ 《貴金屬/金屬》CPI火熱+12月恐升息兩碼金價摔- 新聞 2026-11-11 MoneyDJ ↗ 中國匯市：路透測算的人",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 美國",
-     "len": 677,
+     "len": 524,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6760,12 +6357,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Top-Ranked Yen Forecaster Sees Dollar Falling to 147 as BOJ Tightening Outpaces Fed 2026-11-10 BigGo Finance ↗ 中東緊張緩和、美元指數跌0.47% 紐約市場「避險買盤」回吐、黃金漲1% 2026-11-10 B",
+     "head": "〈紐約匯市〉美CPI火熱、Fed理事鷹派談話強化升息預期 美元攀高 2026-11-11 鉅亨網 ↗ 中國匯市：路透測算的人民幣中間價料升至6.6855元附近，隔夜美元指數大幅上行 2026-11-11 TradingView ↗ 這原因美元指數重返102！新台幣早盤再貶逾1角見32.968元 2026-11-11 N",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 台灣",
-     "len": 550,
+     "len": 608,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6773,12 +6370,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "10月台幣重貶NEER近7年新低- 日報 2026-11-10 工商時報 ↗ Taiwan headline news中性 台灣頭條新聞 2026-11-10 Focus Taiwan ↗ U.S. dollar down in Taipei trading中性 美元在台北交易中走低 2026-11-10 Focus ",
+     "head": "這原因美元指數重返102！新台幣早盤再貶逾1角見32.968元 2026-11-11 NOWnews今日新聞 ↗ Capital outflows weigh on Taiwan dollar 2026-11-11 楊金龍 Taipei Times ↗ Machinery exports surpass NT$1tn ",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 中國",
-     "len": 547,
+     "len": 577,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6786,12 +6383,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "中國匯市：路透測算的人民幣中間價料升至6.6655元附近，隔夜美元指數大跌 2026-11-10 TradingView ↗ 中國外匯交易中心：10月離岸人民幣(CNH)兌美元即期匯率升值在岸人民幣(CNY)兌美元即期匯率升值作者智通財經 - Investing.com 香港 2026-11-10 Investing.",
+     "head": "中國匯市：路透測算的人民幣中間價料升至6.6855元附近，隔夜美元指數大幅上行 2026-11-11 TradingView ↗ 美國CPI超預期推升美元，人民幣中間價調貶24基點 2026-11-11 FXStreet ↗ 中國人民銀行將美元/人民幣參考匯率設在6.7191，前值為6.7167 2026-11-11 ",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 日本",
-     "len": 560,
+     "len": 623,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6799,12 +6396,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Top-Ranked Yen Forecaster Sees Dollar Falling to 147 as BOJ Tightening Outpaces Fed 2026-11-10 BigGo Finance ↗ Bloomberg’s Top Yen Forecaster Sees Dollar-Yen Fa",
+     "head": "國內匯市：新台幣匯率今晨以32.890元開盤，貶值2.5分 2026-11-11 富聯網 ↗ Yen Falls to Upper 158 Range as US CPI Upside Pushes December Rate-Hike Odds to 90% 2026-11-11 BigGo Finance ↗ ユー",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 韓國",
-     "len": 610,
+     "len": 681,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6812,12 +6409,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Louis Vuitton hit by stock slump, stronger won in South Korea 2026-11-10 KED Global ↗ New Start Fund Debt Adjustments Near 35 Trillion Won 2026-11-10 조선일보 ↗ Gov",
+     "head": "美國CPI意外升溫，韓元兌美元匯率重返1340韓元價位，市場警戒12月大幅升息 2026-11-11 BigGo 財經 ↗ Individuals Sell 1 Trillion Won on KOSPI Surge 2026-11-11 조선일보 ↗ Police Nominee's Family Assets Su",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 歐元區",
-     "len": 881,
+     "len": 843,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6825,12 +6422,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Euro To US Dollar Forecast: EUR/USD Recovers More Than Half Of Friday's Loss 2026-11-10 Exchange Rates UK ↗ Euro and US dollar exchange rates rise against the A",
+     "head": "ユーロ/円【EURJPY】：外国為替相場FXレート・チャートをリアルタイム表示中性 歐元/日圓【EURJPY】：即時顯示外匯匯率與走勢圖 2026-11-11 Yahoo!ファイナンス ↗ Fed官員放鷹+美CPI高於預期 美元攀高 2026-11-11 VOCO News ↗ NBP Issues Exchange ",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 英國",
-     "len": 780,
+     "len": 666,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6838,12 +6435,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Pound-to-Euro Holds Near €1.20 as ECB Leadership Race Begins 2026-11-10 CurrencyNews.co.uk ↗ 伊朗戰爭疑慮緩解，英鎊在美國CPI公布前重返1.3400 2026-11-10 www.tmgm.com ↗ Euro To US D",
+     "head": "Fed官員放鷹+美CPI高於預期 美元攀高 2026-11-11 VOCO News ↗ Pound to Dollar Forecast: Sterling Recovers as ING Warns of Dollar Correction 2026-11-11 CurrencyNews.co.uk ↗ Briti",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 印度",
-     "len": 765,
+     "len": 789,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6851,7 +6448,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Nifty 50 Trails S&P 500 by 3.1 Points Over Decade 2026-11-10 Multibagg AI ↗ IOB launches Central Bank Digital Currency app 2026-11-10 The Times of India ↗ US ET",
+     "head": "NRB issues today’s foreign currency exchange rates 2026-11-11 Khabarhub ↗ India's battered rupee finds an unlikely rescue party in cheaper oil and Wall Street's",
      "leaf": true
     },
     {
@@ -6869,7 +6466,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 加拿大",
-     "len": 710,
+     "len": 716,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6877,12 +6474,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "The Canadian Dollar is missing out on a weaker US Dollar. Here’s why 2026-11-10 FXStreet ↗ Loonie Lagged The G10 Pack As Oil Slid 2026-11-10 Finimize ↗ Pound to",
+     "head": "Magellan Aerospace Corporation Announces Financial Results 2026-11-11 The Globe and Mail ↗ Prairie wheat weekly: Cash prices mixed on U.S. losses, weaker loonie",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 巴西",
-     "len": 929,
+     "len": 869,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6890,12 +6487,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Minerva stock slid as debt and export risks weighed - ad-hoc-news.de 2026-11-10 ad-hoc-news.de ↗ Bank of England outlook coexists with steady pound sterling to ",
+     "head": "Brazil Real Nears Post-Vote Low as Dovish Minutes Add Pressure 2026-11-11 Bloomberg.com ↗ Brazil’s Galipolo says local currency debt shifts risk to investors By",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 俄羅斯",
-     "len": 880,
+     "len": 903,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6908,7 +6505,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 澳洲",
-     "len": 746,
+     "len": 758,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6916,12 +6513,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Australian Dollar Price Forecast: Bulls retarget 0.7000 2026-11-10 FXStreet ↗ AUD/NZD Forecast: Westpac Sees 1.27 Giving Way To 1.15 In 2027 2026-11-10 Exchange",
+     "head": "Pound to Dollar Forecast: Sterling Recovers as ING Warns of Dollar Correction 2026-11-11 CurrencyNews.co.uk ↗ Australian Dollar Price Forecast: Bulls retarget 0",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 墨西哥",
-     "len": 808,
+     "len": 781,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6929,12 +6526,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "USD/MXN Forecast: Banxico Cut Narrows The Peso's Yield Advantage 2026-11-10 Exchange Rates UK ↗ XRP to MXN: XRP Price in Mexican Peso 2026-11-09 CoinGecko ↗ Mex",
+     "head": "USD/MXN Forecast: Banxico Cut Narrows The Peso's Yield Advantage 2026-11-10 Exchange Rates UK ↗ Banxico’s Governor Rodriguez: Considering rate cut since Septemb",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 土耳其",
-     "len": 764,
+     "len": 724,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6942,12 +6539,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Weekly review of Azerbaijani currency market 2026-11-08 Trend News Agency ↗ Convert 1 USDC (USD Coin) to TRY (Turkish Lira)中性 將 1 單位 USDC（USD Coin）兌換為 TRY（土耳其里拉",
+     "head": "Georgian Lari Strengthens Again — Currency Exchange Rates 2026-11-11 Newshub.ge ↗ Weekly review of Azerbaijani currency market 2026-11-08 Trend News Agency ↗ Co",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 印尼",
-     "len": 869,
+     "len": 852,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6955,12 +6552,25 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Rupiah is Predicted to Weaken, Investors Beware of the US Dollar and Geopolitical Turbulence 2026-11-10 VOI.ID ↗ Gold Price Today November 10, 2026: Antam at ID",
+     "head": "Rupiah Today November 11, 2026, US Dollar Exchange Rate at Rp18,059 and Market Strengthening Signals 2026-11-11 Aktualita.co ↗ Rupiah is Predicted to Weaken, In",
+     "leaf": true
+    },
+    {
+     "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 沙烏地阿拉伯",
+     "len": 91,
+     "viz": 0,
+     "flags": [],
+     "maxd": null,
+     "age": null,
+     "stale": false,
+     "console": [],
+     "http": [],
+     "head": "Saudi Liquidity Squeeze Adds to Economic Stress for Crown Prince 2026-11-11 Bloomberg.com ↗",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 匯率新聞 › 瑞士",
-     "len": 774,
+     "len": 688,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6968,7 +6578,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "British couple face losing Limassol home over Swiss-franc mortgage 2026-11-09 Cyprus Mail ↗ British couple faces auction of Limassol home over Swiss franc mortg",
+     "head": "Currency exchange rates in Pakistan today – 10 November 2026 2026-11-10 Pakistan Observer ↗ Exchange rates for November 11 announced 2026-11-10 Zamin.uz ↗ Briti",
      "leaf": true
     },
     {
@@ -6994,7 +6604,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "經濟指標 公布值／前值取自 FRED（BLS、BEA 官方數字） 指標 公布值 前值 預期值 資料期間 本次公布日 下次公布日 FRED 序列 CPI 年增率 3.7% 3.4% — 2026-09 2026-10-14 2026-11-10 CPIAUCSL 核心 CPI 年增率 2.6% 2.4% — 2026-0",
+     "head": "經濟指標 公布值／前值取自 FRED（BLS、BEA 官方數字） 指標 公布值 前值 預期值 資料期間 本次公布日 下次公布日 FRED 序列 CPI 年增率 3.7% 3.4% — 2026-09 2026-11-10 2026-12-10 CPIAUCSL 核心 CPI 年增率 2.6% 2.4% — 2026-0",
      "leaf": true
     },
     {
@@ -7025,7 +6635,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 金融經濟 › 台股大盤與政策",
-     "len": 1267,
+     "len": 1366,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7033,7 +6643,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "台股大盤與政策 台股大盤與政策・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 30 國內媒體 20 ",
+     "head": "台股大盤與政策 台股大盤與政策・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 47 國內媒體 36 ",
      "leaf": true
     },
     {
@@ -7103,7 +6713,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 即時訊息",
-     "len": 1491,
+     "len": 1279,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7111,7 +6721,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "即時訊息 地緣政治、政治・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 分類 全部 38 地緣政治 38 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 ",
+     "head": "即時訊息 地緣政治、政治・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 分類 全部 45 地緣政治 45 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 ",
      "leaf": true
     },
     {
@@ -7129,7 +6739,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 戰線 › 俄烏",
-     "len": 835,
+     "len": 749,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7137,12 +6747,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "俄烏 122 則・新的在上 Trump says US seeing 'strong inclination' to end Russia's war in Ukraine 2026-11-10 Reuters ↗ Russia, Ukraine and US to meet as Zelenskyy claims b",
+     "head": "俄烏 119 則・新的在上 G7外長會議就繼續支援烏克蘭達成一致 2026-11-11 共同網 ↗ 美俄烏睽違9個月重啟會談 澤倫斯基：有實質進展 2026-11-11 公視新聞 ↗ Russia's new attack drones pose a major challenge for Ukraine's air ",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 戰線 › 美伊（含霍爾木茲海峽）",
-     "len": 684,
+     "len": 888,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7150,63 +6760,11 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "美伊（含霍爾木茲海峽） 92 則・新的在上 中東戰局現外交曙光國際油價跌至8月來新低| 產經 2026-11-10 中央社 CNA ↗ 伊朗戰爭疑慮緩解，英鎊在美國CPI公布前重返1.3400 2026-11-10 www.tmgm.com ↗ US-Iran Nuclear Talks Show Promise, A",
+     "head": "美伊（含霍爾木茲海峽） 105 則・新的在上 Iran's top security official says no talks underway with US 2026-11-11 Reuters ↗ Three Iranian-Backed Operatives Indicted for Their Roles",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 戰線 › 以色列與中東",
-     "len": 779,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "以色列與中東 62 則・新的在上 國際｜中東局勢緩和推升風險胃納 美元指數尾市跌逾0.5% 2026-11-10 Fortune Insight ↗ 以色列反對派成功奪下組閣權 總理納坦雅胡19年執政傳奇終結？ 2026-11-10 信傳媒 ↗ 11月10日投資早報 中東局勢趨緩，紐約原油跌到86.85美... - 股",
-     "leaf": true
-    },
-    {
-     "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 戰線 › 美中",
-     "len": 855,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "美中 48 則・新的在上 Nvidia Probes CEO's Affair With Suspected Chinese Spy; Who Is Alice Huang and What Did Megaspeed Do? 2026-11-10 NTD News ↗ China extends pause on U",
-     "leaf": true
-    },
-    {
-     "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 戰線 › 朝鮮半島",
-     "len": 878,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "朝鮮半島 45 則・新的在上 北韓駭客自創 6 枚迷因幣洗錢！43 萬美元幣安贓款流轉 2026-11-10 區塊客 ↗ UN Report Highlights North Korea’s Deepening Repression 2026-11-10 Human Rights Watch ↗ Akron man’s",
-     "leaf": true
-    },
-    {
-     "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 戰線 › 兩岸",
-     "len": 730,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "兩岸 22 則・新的在上 自由廣場》F-16V戰機 撐起台海空防 2026-11-10 自由評論網 ↗ 中共4機8艦擾台 國軍適切應處 2026-11-10 自由軍武頻道 ↗ US Army practices island warfare as China’s shadow looms large over paci",
-     "leaf": true
-    },
-    {
-     "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 全球",
      "len": 870,
      "viz": 0,
      "flags": [],
@@ -7215,12 +6773,64 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "178項產品豁免！中美關稅延期兩個月 券商：出口鏈迎緩衝窗口 A股修復邏輯添外部籌碼 2026-11-10 Yahoo 財經 ↗ China extends pause on US tariffs, rare-earth curbs for another two months 2026-11-10 貝森特 Balti",
+     "head": "以色列與中東 79 則・新的在上 Father, child among eight Palestinians killed in Israeli attacks on Gaza 2026-11-11 Al Jazeera ↗ Gaza Floods Kill 4 2026-11-11 The New York Tim",
+     "leaf": true
+    },
+    {
+     "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 戰線 › 朝鮮半島",
+     "len": 731,
+     "viz": 0,
+     "flags": [],
+     "maxd": null,
+     "age": null,
+     "stale": false,
+     "console": [],
+     "http": [],
+     "head": "朝鮮半島 54 則・新的在上 [Tanee Sangrat] Changes in world order, politics around Korean Peninsula 2026-11-11 The Korea Herald ↗ How Lax Enforcement in Laos Undermines Sec",
+     "leaf": true
+    },
+    {
+     "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 戰線 › 美中",
+     "len": 868,
+     "viz": 0,
+     "flags": [],
+     "maxd": null,
+     "age": null,
+     "stale": false,
+     "console": [],
+     "http": [],
+     "head": "美中 49 則・新的在上 Despite Democrats’ sweeping midterm wins, Carney says Trump remains central to Canada-US trade talks 2026-11-11 Boston Herald ↗ Treasury Secretary ",
+     "leaf": true
+    },
+    {
+     "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 戰線 › 兩岸",
+     "len": 671,
+     "viz": 0,
+     "flags": [],
+     "maxd": null,
+     "age": null,
+     "stale": false,
+     "console": [],
+     "http": [],
+     "head": "兩岸 24 則・新的在上 G7 foreign ministers reiterate opposition to coercion in Taiwan Strait 2026-11-11 Taipei Times ↗ Taiwan tracks 10 Chinese ships, 4 military aircraf",
+     "leaf": true
+    },
+    {
+     "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 全球",
+     "len": 830,
+     "viz": 0,
+     "flags": [],
+     "maxd": null,
+     "age": null,
+     "stale": false,
+     "console": [],
+     "http": [],
+     "head": "Whitmer asks Trump administration to end food tariffs and reimburse Michigan residents 2026-11-11 貝森特 CBS News ↗ Whitmer presses Trump administration on tariffs",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 美國",
-     "len": 767,
+     "len": 828,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7228,12 +6838,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "China extends pause on US tariffs, rare-earth curbs for another two months 2026-11-10 貝森特 Baltimore Sun ↗ Trump Expects Xi Jinping, Putin Meetings on Sidelines ",
+     "head": "Whitmer asks Trump administration to end food tariffs and reimburse Michigan residents 2026-11-11 貝森特 CBS News ↗ Whitmer presses Trump administration on tariffs",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 台灣",
-     "len": 488,
+     "len": 583,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7241,12 +6851,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Lithuanian president confirms talks to rename Taiwan office in diplomatic U-turn 2026-11-09 習近平 South China Morning Post ↗ 美製車零關稅 業界估首批車最快Q3抵台看多 2026-10-18 自由時報",
+     "head": "Beyond a Taiwan Blockade: The Strategic Implications Behind the PLA’s ‘Silent Military Exercise’ - The Diplomat – Asia-Pacific Current Affairs Magazine 2026-11-",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 中國",
-     "len": 939,
+     "len": 831,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7254,12 +6864,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "China extends pause on US tariffs, rare-earth curbs for another two months 2026-11-10 貝森特 Baltimore Sun ↗ Trump Expects Xi Jinping, Putin Meetings on Sidelines ",
+     "head": "Deal vs Deal? US, China trade calls to honour commitments before Trump-Xi summit 2026-11-11 習近平 South China Morning Post ↗ China conducting ‘area denial’ drills",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 日本",
-     "len": 737,
+     "len": 228,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7267,7 +6877,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "To Lam holds summit meeting with Japanese Prime Minister Takaichi Sanae in Tokyo 2026-11-10 高市早苗 en.baochinhphu.vn ↗ Japan Works to Shield Takaichi From Any Xi ",
+     "head": "To Lam holds summit meeting with Japanese Prime Minister Takaichi Sanae in Tokyo 2026-11-10 高市早苗 en.baochinhphu.vn ↗ Kai Katayama Targets S-Cup Future Before Fi",
      "leaf": true
     },
     {
@@ -7285,7 +6895,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 歐元區",
-     "len": 506,
+     "len": 182,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7293,12 +6903,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "EU capitals urge Brussels to ‘swiftly’ sign electricity deal with UK中性 歐盟各國敦促布魯塞爾與英國「迅速」簽署電力協議 2026-11-07 POLITICO.eu ↗ Euro to Mexican peso rate faces tariff r",
+     "head": "稀土反制精準命中！歐盟傳擬解除中企限制 搶救ASML關鍵供應商看多 2026-10-16 中國商務部 鉅亨網 ↗ 英國商貿大臣：不會因歐盟壓力向中國汽車徵關稅 (12:28) - 20261015 - 兩岸 2026-10-15 明報新聞網 ↗ 傳歐盟擬推「歐版301」 中國商務部揚言堅決回應| 陸港經貿| 兩岸看空 ",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 英國",
-     "len": 486,
+     "len": 250,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7306,12 +6916,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Russell Brand police interview footage released after rape conviction中性 羅素·布蘭德性侵罪名成立後警方訊問畫面曝光 2026-11-07 Fox News ↗ EU capitals urge Brussels to ‘swiftly’ sign ",
+     "head": "Governor Bailey Would Like to Bank on Peace, But Knows He Can’t中性 貝利總裁希望寄望於和平，但也知道自己做不到 2026-11-06 Bailey Bloomberg.com ↗ Bailey Says Second BOE Hike More Likel",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 德國",
-     "len": 448,
+     "len": 328,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7324,7 +6934,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 印度",
-     "len": 998,
+     "len": 1012,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7332,12 +6942,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "India Ready to Mediate Black Sea Food Corridors, Zelensky Says 2026-11-10 Kyiv Post ↗ Zelensky, Modi discuss India's mediation role in efforts to unblock grain ",
+     "head": "India Ready to Mediate Black Sea Food Corridors, Zelensky Says 2026-11-10 Kyiv Post ↗ The Impact of US Midterm Elections 2026 on India and Global Policies中性 202",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 法國",
-     "len": 329,
+     "len": 340,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7345,25 +6955,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "Pierrakakis Says Violence Is Never Acceptable Amid French Unrest中性 皮埃拉卡基斯在法國動亂中表示暴力絕不可接受 2026-11-07 tovima.com ↗ French politicians hail Democrats' victory in U",
-     "leaf": true
-    },
-    {
-     "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 義大利",
-     "len": 608,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "Lega (League): northerners absent from the Federal Council meeting. Salvini: “We can hold a vote from April”中性 聯盟黨：北方人缺席聯邦委員會會議。薩爾維尼：「我們最早可以從 4 月開始舉行投票」 2026-11",
+     "head": "Riot-torn France struggles with chaos at home as Macron eyes military mission thousands of miles away 2026-11-11 Fox News ↗ French politicians hail Democrats' v",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 加拿大",
-     "len": 796,
+     "len": 231,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7371,7 +6968,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "加拿大宣布對俄新制裁：新增38實體與24人 2026-11-10 大紀元 ↗ Canada Expands US Tariff Exemptions, Cuts Some Aluminum Relief 2026-11-10 Bloomberg.com ↗ Mark Carney’s Asia Summit Swing",
+     "head": "Canadian PM condemns Houthi attacks on Saudi Arabia 2026-11-10 Arab News ↗ Canadian PM Carney condemns Houthi attacks on Saudi Arabia during call with Crown Pri",
      "leaf": true
     },
     {
@@ -7402,7 +6999,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 墨西哥",
-     "len": 848,
+     "len": 562,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7410,12 +7007,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "People’s Mañanera November 6中性 人民晨會 11月6日 2026-11-07 Mexico Solidarity Media ↗ INE Review / Cultural Programs中性 INE審查／文化節目 2026-11-07 Mexico Business News ↗ Eur",
+     "head": "People’s Mañanera November 6中性 人民晨會 11月6日 2026-11-07 Mexico Solidarity Media ↗ INE Review / Cultural Programs中性 INE審查／文化節目 2026-11-07 Mexico Business News ↗ Mex",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 土耳其",
-     "len": 243,
+     "len": 199,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7423,25 +7020,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "COP31土耳其揭幕 減排難有突破 2026-11-10 信報網站 ↗ 'Terror-free Türkiye' to drive major economic leap: Erdoğan | Daily Sabah 2026-11-10 Daily Sabah ↗ Dutch PM Jetten to skip c",
-     "leaf": true
-    },
-    {
-     "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 荷蘭",
-     "len": 108,
-     "viz": 0,
-     "flags": [],
-     "maxd": null,
-     "age": null,
-     "stale": false,
-     "console": [],
-     "http": [],
-     "head": "Dutch PM Jetten to skip climate summit in Türkiye to focus on getting tax plan support 2026-11-09 NL Times ↗",
+     "head": "Pezeshkian to Travel to Turkey on Wednesday for UN Climate Summit 2026-11-11 裴澤希安 WANA News Agency ↗ 'Terror-free Türkiye' to drive major economic leap: Erdoğan",
      "leaf": true
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 沙烏地阿拉伯",
-     "len": 875,
+     "len": 190,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7558,7 +7142,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 根因追蹤",
-     "len": 2198,
+     "len": 2291,
      "viz": 0,
      "flags": [
       "沒有資料"
@@ -7568,7 +7152,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "市場大幅波動時自動找根因：價格／族群觸發 → 中英日韓搜尋＋官方結構化來源 → 歸因 → 程式逐筆打開出處核對＋用族群漲跌與外資量化傳導。只列核對通過的根因。 2026-11-10 2026-11-09 2026-11-06 2025-04-07 2024-08-05 台股 2026-11-10｜美股 2026-11-",
+     "head": "市場大幅波動時自動找根因：價格／族群觸發 → 中英日韓搜尋＋官方結構化來源 → 歸因 → 程式逐筆打開出處核對＋用族群漲跌與外資量化傳導。只列核對通過的根因。 2026-11-11 2026-11-10 2026-11-09 2026-11-06 2025-04-07 2024-08-05 台股 2026-11-11｜",
      "leaf": true
     },
     {
@@ -7576,12 +7160,12 @@
      "len": 1422,
      "viz": 0,
      "flags": [],
-     "maxd": "2026-11-10",
-     "age": 1,
+     "maxd": "2026-11-11",
+     "age": 0,
      "stale": false,
      "console": [],
      "http": [],
-     "head": "總經行事曆 聯準會與各國央行利率決策、美國重要經濟數據公布日 · 預設只列今天起 含已過去的 日期 星期 事件 類別 備註 依據 2026-11-10 二 美國 CPI 經濟數據 官方公布日程（FRED release calendar） 2026-11-13 五 美國 PPI 經濟數據 官方公布日程（FRED r",
+     "head": "總經行事曆 聯準會與各國央行利率決策、美國重要經濟數據公布日 · 預設只列今天起 含已過去的 日期 星期 事件 類別 備註 依據 2026-11-13 五 美國 PPI 經濟數據 官方公布日程（FRED release calendar） 2026-11-25 三 美國 個人所得與支出（PCE） 經濟數據 官方公布",
      "leaf": true
     },
     {
@@ -9305,207 +8889,207 @@
    "http": [],
    "files": {
     "data/ir/index.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/mkt_overlay.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
      "st": 200
     },
     "data/risk_alert.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:07:42 GMT",
      "st": 200
     },
     "data/disposal.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
      "st": 200
     },
     "data/names.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/stock_bars.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/company.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
      "st": 200
     },
     "data/aetf_daily.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/tdcc.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/f13.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:07:42 GMT",
      "st": 200
     },
     "data/insider_rank.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
      "st": 200
     },
-    "data/warrant.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/stock_bars.json": {
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
+     "st": 200
+    },
+    "data/company.json": {
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
      "st": 200
     },
     "data/capital.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
      "st": 200
     },
-    "data/insider.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/mkt_overlay.json": {
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
+     "st": 200
+    },
+    "data/tdcc.json": {
+     "lm": "Wed, 11 Nov 2026 05:07:42 GMT",
+     "st": 200
+    },
+    "data/f13.json": {
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
      "st": 200
     },
     "data/ir_alert.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
      "st": 200
     },
-    "data/market_alert.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/root_cause/index.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/world_idx.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/insider.json": {
+     "lm": "Wed, 11 Nov 2026 05:07:42 GMT",
      "st": 200
     },
     "data/news_live.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
-    "data/insider_mp.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/world_idx.json": {
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
      "st": 200
     },
-    "data/insider_new.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/root_cause/index.json": {
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
      "st": 200
     },
-    "data/macro.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/warrant.json": {
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
+     "st": 200
+    },
+    "data/market_alert.json": {
+     "lm": "Wed, 11 Nov 2026 05:07:42 GMT",
      "st": 200
     },
     "data/insider/9951.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
+     "st": 200
+    },
+    "data/insider_new.json": {
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
+     "st": 200
+    },
+    "data/insider_mp.json": {
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
+     "st": 200
+    },
+    "data/macro.json": {
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
      "st": 200
     },
     "data/river.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:07:41 GMT",
      "st": 200
     },
     "data/kol.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/is_q.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/industry_notes.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/company_reports.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/ir/targets.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
-     "st": 200
-    },
-    "data/broker.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/mi_react.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
+     "st": 200
+    },
+    "data/broker.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/calendar.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/rrg.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/radar.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/trail.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/world.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/nsf_history.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/nsf_holdings.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
-    "data/root_cause/2026-11-10.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+    "data/root_cause/2026-11-11.json": {
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/contrib.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/margin.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/attention.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/edm_hist/index.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/pick_edm.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/chips.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/chips_daily.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/etf_flow.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/etf_cost.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/lookup/index.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:18 GMT",
      "st": 200
     },
     "data/lookup/23.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     },
     "data/analyst.json": {
-     "lm": "Tue, 10 Nov 2026 21:26:38 GMT",
+     "lm": "Wed, 11 Nov 2026 05:11:19 GMT",
      "st": 200
     }
    }
@@ -9513,6 +9097,42 @@
  },
  "baseline": "../site/data/site_smoke_base.json",
  "regress": [
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 全部 › 印度",
+   "flags": [
+    "內容大減 630→100 字"
+   ],
+   "http": [],
+   "console": [],
+   "stale": null,
+   "before_len": 630,
+   "len": 100
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 其他 › 韓國",
+   "flags": [
+    "內容大減 341→43 字"
+   ],
+   "http": [],
+   "console": [],
+   "stale": null,
+   "before_len": 341,
+   "len": 43
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 全部 › 中國",
+   "flags": [
+    "內容大減 646→127 字"
+   ],
+   "http": [],
+   "console": [],
+   "stale": null,
+   "before_len": 646,
+   "len": 127
+  },
   {
    "width": 1366,
    "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 全部 › 韓國",
@@ -9524,6 +9144,42 @@
    "stale": null,
    "before_len": 235,
    "len": 69
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 伺服器與電子 › 美國",
+   "flags": [
+    "內容大減 448→65 字"
+   ],
+   "http": [],
+   "console": [],
+   "stale": null,
+   "before_len": 448,
+   "len": 65
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 記憶體 › 台灣",
+   "flags": [
+    "內容大減 278→52 字"
+   ],
+   "http": [],
+   "console": [],
+   "stale": null,
+   "before_len": 278,
+   "len": 52
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 金融 › 全球",
+   "flags": [
+    "內容大減 487→105 字"
+   ],
+   "http": [],
+   "console": [],
+   "stale": null,
+   "before_len": 487,
+   "len": 105
   },
   {
    "width": 1366,
@@ -9539,6 +9195,30 @@
   },
   {
    "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 全部 › 韓國",
+   "flags": [
+    "內容大減 394→70 字"
+   ],
+   "http": [],
+   "console": [],
+   "stale": null,
+   "before_len": 394,
+   "len": 70
+  },
+  {
+   "width": 1366,
+   "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 日本",
+   "flags": [
+    "內容大減 993→228 字"
+   ],
+   "http": [],
+   "console": [],
+   "stale": null,
+   "before_len": 993,
+   "len": 228
+  },
+  {
+   "width": 1366,
    "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 韓國",
    "flags": [
     "內容大減 757→116 字"
@@ -9548,6 +9228,54 @@
    "stale": null,
    "before_len": 757,
    "len": 116
+  },
+  {
+   "width": 1366,
+   "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 歐元區",
+   "flags": [
+    "內容大減 916→182 字"
+   ],
+   "http": [],
+   "console": [],
+   "stale": null,
+   "before_len": 916,
+   "len": 182
+  },
+  {
+   "width": 1366,
+   "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 英國",
+   "flags": [
+    "內容大減 928→250 字"
+   ],
+   "http": [],
+   "console": [],
+   "stale": null,
+   "before_len": 928,
+   "len": 250
+  },
+  {
+   "width": 1366,
+   "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 德國",
+   "flags": [
+    "內容大減 1110→328 字"
+   ],
+   "http": [],
+   "console": [],
+   "stale": null,
+   "before_len": 1110,
+   "len": 328
+  },
+  {
+   "width": 1366,
+   "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 加拿大",
+   "flags": [
+    "內容大減 1114→231 字"
+   ],
+   "http": [],
+   "console": [],
+   "stale": null,
+   "before_len": 1114,
+   "len": 231
   },
   {
    "width": 1366,
@@ -9563,6 +9291,18 @@
   },
   {
    "width": 1366,
+   "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 沙烏地阿拉伯",
+   "flags": [
+    "內容大減 973→190 字"
+   ],
+   "http": [],
+   "console": [],
+   "stale": null,
+   "before_len": 973,
+   "len": 190
+  },
+  {
+   "width": 1366,
    "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 伊朗",
    "flags": [
     "內容大減 539→121 字"
@@ -9575,11 +9315,29 @@
   },
   {
    "width": 1366,
-   "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 電力與能源 › 美國",
+   "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 全部 › 英國",
    "flags": [
     "這一格不見了"
    ],
-   "before_len": 474,
+   "before_len": 137,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 半導體 › 歐元區",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 125,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 半導體 › 德國",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 130,
    "len": 0
   },
   {
@@ -9593,11 +9351,38 @@
   },
   {
    "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 電力與能源 › 歐元區",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 125,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 電力與能源 › 德國",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 130,
+   "len": 0
+  },
+  {
+   "width": 1366,
    "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 電力與能源 › 印度",
    "flags": [
     "這一格不見了"
    ],
    "before_len": 406,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 資料中心 › 印度",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 90,
    "len": 0
   },
   {
@@ -9611,6 +9396,15 @@
   },
   {
    "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 生技醫療 › 全球",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 189,
+   "len": 0
+  },
+  {
+   "width": 1366,
    "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 生技醫療 › 美國",
    "flags": [
     "這一格不見了"
@@ -9620,11 +9414,38 @@
   },
   {
    "width": 1366,
-   "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 其他 › 韓國",
+   "path": "產業 › 產業信息 › 產業與科技 › 資本支出與擴產 › 其他 › 英國",
    "flags": [
     "這一格不見了"
    ],
-   "before_len": 341,
+   "before_len": 137,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 全部 › 日本",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 519,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 全部 › 歐元區",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 109,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 全部 › 英國",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 151,
    "len": 0
   },
   {
@@ -9656,11 +9477,56 @@
   },
   {
    "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 金融 › 美國",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 238,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 金融 › 中國",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 173,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 金融 › 日本",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 417,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 金融 › 英國",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 74,
+   "len": 0
+  },
+  {
+   "width": 1366,
    "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 其他 › 日本",
    "flags": [
     "這一格不見了"
    ],
    "before_len": 101,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › AI 變現進度 › 其他 › 歐元區",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 109,
    "len": 0
   },
   {
@@ -9692,6 +9558,15 @@
   },
   {
    "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 全部 › 歐元區",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 150,
+   "len": 0
+  },
+  {
+   "width": 1366,
    "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 全部 › 印度",
    "flags": [
     "這一格不見了"
@@ -9719,11 +9594,56 @@
   },
   {
    "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 伺服器與電子 › 全球",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 134,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 伺服器與電子 › 美國",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 134,
+   "len": 0
+  },
+  {
+   "width": 1366,
    "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 電力與能源 › 英國",
    "flags": [
     "這一格不見了"
    ],
    "before_len": 123,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 電力與能源 › 德國",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 138,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 金融 › 美國",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 333,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 金融 › 日本",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 168,
    "len": 0
   },
   {
@@ -9742,6 +9662,15 @@
     "這一格不見了"
    ],
    "before_len": 123,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "產業 › 產業信息 › 產業與科技 › 財務槓桿與債務風險 › 其他 › 歐元區",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 150,
    "len": 0
   },
   {
@@ -9769,6 +9698,24 @@
     "這一格不見了"
    ],
    "before_len": 134,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "總經政治 › 總經政治 › 金融經濟 › 利率、央行與匯率 › 央行動態 › 西班牙",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 616,
+   "len": 0
+  },
+  {
+   "width": 1366,
+   "path": "總經政治 › 總經政治 › 政治 › 地緣政治 › 其他地緣 › 義大利",
+   "flags": [
+    "這一格不見了"
+   ],
+   "before_len": 1265,
    "len": 0
   },
   {
