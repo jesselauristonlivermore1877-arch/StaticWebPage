@@ -1,0 +1,172 @@
+{
+ "raw": "{\"candidates\":[{\"title\":\"美國10月CPI通膨數據高於預期推升升息疑慮\",\"layer\":\"根因\",\"event\":\"美國公布10月CPI數據高於預期，推升聯準會（Fed）升息機率與公債殖利率攀升。\",\"mechanism\":\"利率預期上揚打壓全球風險偏好與高估值科技股表現。\",\"industry\":\"全市場\",\"tw_link\":\"美國通膨與升息壓力使國際資金動向受限，連動台股開盤震盪。\",\"tw_sectors\":[\"全市場\"],\"direction\":\"跌\",\"keywords\":[\"CPI\",\"Fed\",\"inflation\",\"利率\",\"通膨\",\"聯準會\"],\"evidence\":[\"P213\",\"P209\"],\"langs\":[\"zh\",\"en\"],\"why_root\":\"\",\"drill\":[\"US CPI inflation rate hike\",\"美國CPI通膨升息\",\"米CPI 利上げ\"]},{\"title\":\"國際油價重挫緩解通膨擔憂帶動美股反彈\",\"layer\":\"根因\",\"event\":\"國際油價重挫逾5%，有效緩解整體通膨壓力與市場擔憂。\",\"mechanism\":\"油價下跌減輕成本負擔，推動美股四大指數全面大漲、費半走強，帶動亞股與台股反彈。\",\"industry\":\"傳產石化\",\"tw_link\":\"美股反彈與費半走強直接激勵台股電子權值股與半導體供應鏈買盤回補。\",\"tw_sectors\":[\"傳產石化\",\"全市場\"],\"direction\":\"漲\",\"keywords\":[\"油價\",\"道瓊\",\"費半\",\"oil plunge\",\"Fed\",\"原油安\"],\"evidence\":[\"P159\",\"P101\"],\"langs\":[\"zh\",\"en\",\"ja\"],\"why_root\":\"\",\"drill\":[\"oil prices plunge stock market rally\",\"油價重挫美股反彈\",\"原油安 株高\"]},{\"title\":\"輝達執行長黃仁勳涉入調查致股價逆勢重挫\",\"layer\":\"根因\",\"event\":\"輝達執行長黃仁勳因涉入調查與相關傳聞，導致輝達股價逆勢重挫。\",\"mechanism\":\"龍頭個股利空壓抑AI概念股整體情緒，但其他半導體獲資金青睞走揚。\",\"industry\":\"晶圓代工與製造\",\"tw_link\":\"輝達股價下跌壓抑部分AI供應鏈情緒，但台積電ADR逆勢收漲提供台股支撐。\",\"tw_sectors\":[\"晶圓代工與製造\",\"伺服器與品牌組裝\"],\"direction\":\"跌\",\"keywords\":[\"黃仁勳\",\"輝達\",\"Nvidia\",\"Jensen Huang\",\"spy probe\",\"スパイ\"],\"evidence\":[\"P345\",\"P238\"],\"langs\":[\"zh\",\"en\",\"ja\"],\"why_root\":\"\",\"drill\":[\"Nvidia Jensen Huang spy probe\",\"黃仁勳 輝達 調查\",\"エヌビディア スパイ 調査\"]},{\"title\":\"國安基金啟動護盤與金管會實施限空令\",\"layer\":\"政策回應\",\"event\":\"台灣行政院授權國安基金第10次進場護盤，金管會同步實施限空令等救市措施。\",\"mechanism\":\"政策面強力支撐市場信心，降低恐慌性賣壓，穩定台股籌碼。\",\"industry\":\"全市場\",\"tw_link\":\"政策護盤機制有效穩定投資人信心，支撐台股在面對美股波動時展現抗跌與反彈力道。\",\"tw_sectors\":[\"全市場\",\"金融\"],\"direction\":\"漲\",\"keywords\":[\"國安基金\",\"限空令\",\"金管會\",\"護市\",\"Stabilization Fund\",\"空売り制限\"],\"evidence\":[\"P30\",\"P378\"],\"langs\":[\"zh\",\"en\",\"ja\"],\"why_root\":\"\",\"drill\":[\"Taiwan Stabilization Fund short selling limit\",\"國安基金 限空令\",\"台湾 空売り 制限 安定基金\"]}],\"summary\":\"昨晚美股雖受10月CPI數據高於預期與輝達個股利空影響而震盪，但油價重挫有效緩解通膨擔憂，推動美股四大指數與費半強勢反彈；預期傳導到今天台股，在美股半導體走強與國內政策護盤雙重支撐下，激勵電子權值與整體市場信心回溫。\"}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "美國10月CPI通膨數據高於預期推升升息疑慮",
+    "layer": "根因",
+    "event": "美國公布10月CPI數據高於預期，推升聯準會（Fed）升息機率與公債殖利率攀升。",
+    "mechanism": "利率預期上揚打壓全球風險偏好與高估值科技股表現。",
+    "industry": "全市場",
+    "tw_link": "美國通膨與升息壓力使國際資金動向受限，連動台股開盤震盪。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "CPI",
+     "Fed",
+     "inflation",
+     "利率",
+     "通膨",
+     "聯準會"
+    ],
+    "evidence": [
+     "P213",
+     "P209"
+    ],
+    "langs": [
+     "zh",
+     "en"
+    ],
+    "why_root": "",
+    "drill": [
+     "US CPI inflation rate hike",
+     "美國CPI通膨升息",
+     "米CPI 利上げ"
+    ]
+   },
+   {
+    "title": "國際油價重挫緩解通膨擔憂帶動美股反彈",
+    "layer": "根因",
+    "event": "國際油價重挫逾5%，有效緩解整體通膨壓力與市場擔憂。",
+    "mechanism": "油價下跌減輕成本負擔，推動美股四大指數全面大漲、費半走強，帶動亞股與台股反彈。",
+    "industry": "傳產石化",
+    "tw_link": "美股反彈與費半走強直接激勵台股電子權值股與半導體供應鏈買盤回補。",
+    "tw_sectors": [
+     "傳產石化",
+     "全市場"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "油價",
+     "道瓊",
+     "費半",
+     "oil plunge",
+     "Fed",
+     "原油安"
+    ],
+    "evidence": [
+     "P159",
+     "P101"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "why_root": "",
+    "drill": [
+     "oil prices plunge stock market rally",
+     "油價重挫美股反彈",
+     "原油安 株高"
+    ]
+   },
+   {
+    "title": "輝達執行長黃仁勳涉入調查致股價逆勢重挫",
+    "layer": "根因",
+    "event": "輝達執行長黃仁勳因涉入調查與相關傳聞，導致輝達股價逆勢重挫。",
+    "mechanism": "龍頭個股利空壓抑AI概念股整體情緒，但其他半導體獲資金青睞走揚。",
+    "industry": "晶圓代工與製造",
+    "tw_link": "輝達股價下跌壓抑部分AI供應鏈情緒，但台積電ADR逆勢收漲提供台股支撐。",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "伺服器與品牌組裝"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "黃仁勳",
+     "輝達",
+     "Nvidia",
+     "Jensen Huang",
+     "spy probe",
+     "スパイ"
+    ],
+    "evidence": [
+     "P345",
+     "P238"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "why_root": "",
+    "drill": [
+     "Nvidia Jensen Huang spy probe",
+     "黃仁勳 輝達 調查",
+     "エヌビディア スパイ 調査"
+    ]
+   },
+   {
+    "title": "國安基金啟動護盤與金管會實施限空令",
+    "layer": "政策回應",
+    "event": "台灣行政院授權國安基金第10次進場護盤，金管會同步實施限空令等救市措施。",
+    "mechanism": "政策面強力支撐市場信心，降低恐慌性賣壓，穩定台股籌碼。",
+    "industry": "全市場",
+    "tw_link": "政策護盤機制有效穩定投資人信心，支撐台股在面對美股波動時展現抗跌與反彈力道。",
+    "tw_sectors": [
+     "全市場",
+     "金融"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "國安基金",
+     "限空令",
+     "金管會",
+     "護市",
+     "Stabilization Fund",
+     "空売り制限"
+    ],
+    "evidence": [
+     "P30",
+     "P378"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "why_root": "",
+    "drill": [
+     "Taiwan Stabilization Fund short selling limit",
+     "國安基金 限空令",
+     "台湾 空売り 制限 安定基金"
+    ]
+   }
+  ],
+  "summary": "昨晚美股雖受10月CPI數據高於預期與輝達個股利空影響而震盪，但油價重挫有效緩解通膨擔憂，推動美股四大指數與費半強勢反彈；預期傳導到今天台股，在美股半導體走強與國內政策護盤雙重支撐下，激勵電子權值與整體市場信心回溫。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmpm27w3xp3.txt",
+  "附檔": [],
+  "耗時秒": 15.1,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.5-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 33913,
+   "prompt_tokens": 30610,
+   "output_tokens": 928,
+   "thinking_tokens": 2375
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1111_synth1",
+  "ok": true
+ }
+}

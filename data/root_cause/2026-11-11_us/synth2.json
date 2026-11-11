@@ -1,0 +1,184 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"美國公布10月CPI數據高於預期，推升聯準會升息預期與公債殖利率\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-10\",\n      \"who\": \"美國聯準會官員與勞工部\",\n      \"event\": \"美國10月CPI通膨數據高於預期，推升12月升息機率與公債殖利率攀升。\",\n      \"mechanism\": \"利率預期上揚與殖利率逼近5%打壓全球風險偏好與高估值科技股表現。\",\n      \"industry\": \"半導體\",\n      \"tw_link\": \"美股因CPI數據走低與殖利率攀升而收黑，連帶影響台股對資金成本與通膨的敏感度。\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"CPI\",\n        \"Inflation\",\n        \"Fed\",\n        \"Rate Hike\",\n        \"通膨\",\n        \"升息\",\n        \"聯準會\",\n        \"殖利率\"\n      ],\n      \"evidence\": [\n        \"P213\",\n        \"P209\",\n        \"D7\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\"\n      ],\n      \"why_root\": \"直接由總體經濟數據與央行政策預期改變基本面定價。\",\n      \"drill\": [\n        \"US CPI Fed rate hike\",\n        \"美國 10月 CPI 升息\"\n      ]\n    },\n    {\n      \"title\": \"輝達執行長黃仁勳涉入調查與傳聞導致股價重挫\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-10\",\n      \"who\": \"輝達執行長黃仁勳與公司取締役會\",\n      \"event\": \"輝達執行長黃仁勳涉入與疑似中國間諜有關的調查並坦承不倫，引發市場震動。\",\n      \"mechanism\": \"龍頭個股利空壓抑AI概念股整體情緒與晶片股動能，促使資金在半導體內部進行結構調整。\",\n      \"industry\": \"半導體\",\n      \"tw_link\": \"輝達股價連續重挫透過供應鏈情緒傳導至台股AI與半導體相關族群。\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"伺服器與品牌組裝\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Nvidia\",\n        \"Jensen Huang\",\n        \"Spy Probe\",\n        \"Affair\",\n        \"輝達\",\n        \"黃仁勳\",\n        \"共諜\",\n        \"調查\"\n      ],\n      \"evidence\": [\n        \"P345\",\n        \"D238\",\n        \"D100\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"why_root\": \"個別企業領導層與地緣政治風險直接衝擊AI供應鏈基本面預期。\",\n      \"drill\": [\n        \"Nvidia Jensen Huang FBI probe\",\n        \"エヌビディア 中国スパイ 調査\"\n      ]\n    },\n    {\n      \"title\": \"國際油價重挫超過5%緩解通膨擔憂並帶動美股反彈\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-10\",\n      \"who\": \"國際能源市場與中東局勢相關方\",\n      \"event\": \"國際油價重挫逾5%，有效緩解整體通膨壓力與市場擔憂。\",\n      \"mechanism\": \"油價下跌減輕成本負擔，推動美股部分指數與費半強彈，帶動亞股與台股隨後反彈。\",\n      \"industry\": \"能源與總體經濟\",\n      \"tw_link\": \"美股盤中因油價下跌強彈，激勵台股隔日開盤展現反彈力道。\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"Oil Prices\",\n        \"Crude\",\n        \"Inflation\",\n        \"Stock Rally\",\n        \"油價\",\n        \"通膨\",\n        \"美股反彈\",\n        \"原油\"\n      ],\n      \"evidence\": [\n        \"P159\",\n        \"P101\",\n        \"D87\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\"\n      ],\n      \"why_root\": \"原物料價格變動直接改變企業成本結構與通膨預期路徑。\",\n      \"drill\": [\n        \"oil prices plunge stock rally\",\n        \"原油安 米国株 反発\"\n      ]\n    },\n    {\n      \"title\": \"台灣行政院與金管會祭出限空令與國安基金護盤等救市措施\",\n      \"layer\": \"政策回應\",\n      \"event_date\": \"2026-11-06\",\n      \"who\": \"行政院與金管會\",\n      \"event\": \"台灣行政院授權國安基金進場護盤，金管會同步實施限空令等救市措施。\",\n      \"mechanism\": \"政策面強力支撐市場信心，降低恐慌性賣壓，穩定台股籌碼並扭轉極端跌勢。\",\n      \"industry\": \"金融\",\n      \"tw_link\": \"政策護盤直接提振台股投資人信心，支撐加權指數在後續交易日大幅反彈。\",\n      \"tw_sectors\": [\n        \"金融\",\n        \"全市場\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"國安基金\",\n        \"金管會\",\n        \"限空令\",\n        \"護盤\",\n        \"台股\",\n        \"Stabilization Fund\",\n        \"Short-Selling Limit\"\n      ],\n      \"evidence\": [\n        \"P30\",\n        \"P378\",\n        \"P352\"\n      ],\n      \"langs\": [\n        \"zh\"\n      ],\n      \"why_root\": \"主管機關事後針對股市大幅波動做出政策干預與支撐。\",\n      \"drill\": [\n        \"國安基金 護盤 限空令\",\n        \"Taiwan stabilization fund short selling limit\"\n      ]\n    }\n  ],\n  \"summary\": \"昨晚美股因CPI數據高於預期推升升息疑慮以及輝達執行長涉調查而震盪，但油價重挫緩解通膨壓力帶動美股尾盤跌幅收斂，預期傳導到今天台股在政策護盤與區域資金回補下展現抗跌與反彈動能。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "美國公布10月CPI數據高於預期，推升聯準會升息預期與公債殖利率",
+    "layer": "根因",
+    "event_date": "2026-11-10",
+    "who": "美國聯準會官員與勞工部",
+    "event": "美國10月CPI通膨數據高於預期，推升12月升息機率與公債殖利率攀升。",
+    "mechanism": "利率預期上揚與殖利率逼近5%打壓全球風險偏好與高估值科技股表現。",
+    "industry": "半導體",
+    "tw_link": "美股因CPI數據走低與殖利率攀升而收黑，連帶影響台股對資金成本與通膨的敏感度。",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "CPI",
+     "Inflation",
+     "Fed",
+     "Rate Hike",
+     "通膨",
+     "升息",
+     "聯準會",
+     "殖利率"
+    ],
+    "evidence": [
+     "P213",
+     "P209",
+     "D7"
+    ],
+    "langs": [
+     "zh",
+     "en"
+    ],
+    "why_root": "直接由總體經濟數據與央行政策預期改變基本面定價。",
+    "drill": [
+     "US CPI Fed rate hike",
+     "美國 10月 CPI 升息"
+    ]
+   },
+   {
+    "title": "輝達執行長黃仁勳涉入調查與傳聞導致股價重挫",
+    "layer": "根因",
+    "event_date": "2026-11-10",
+    "who": "輝達執行長黃仁勳與公司取締役會",
+    "event": "輝達執行長黃仁勳涉入與疑似中國間諜有關的調查並坦承不倫，引發市場震動。",
+    "mechanism": "龍頭個股利空壓抑AI概念股整體情緒與晶片股動能，促使資金在半導體內部進行結構調整。",
+    "industry": "半導體",
+    "tw_link": "輝達股價連續重挫透過供應鏈情緒傳導至台股AI與半導體相關族群。",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "伺服器與品牌組裝"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Nvidia",
+     "Jensen Huang",
+     "Spy Probe",
+     "Affair",
+     "輝達",
+     "黃仁勳",
+     "共諜",
+     "調查"
+    ],
+    "evidence": [
+     "P345",
+     "D238",
+     "D100"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "why_root": "個別企業領導層與地緣政治風險直接衝擊AI供應鏈基本面預期。",
+    "drill": [
+     "Nvidia Jensen Huang FBI probe",
+     "エヌビディア 中国スパイ 調査"
+    ]
+   },
+   {
+    "title": "國際油價重挫超過5%緩解通膨擔憂並帶動美股反彈",
+    "layer": "根因",
+    "event_date": "2026-11-10",
+    "who": "國際能源市場與中東局勢相關方",
+    "event": "國際油價重挫逾5%，有效緩解整體通膨壓力與市場擔憂。",
+    "mechanism": "油價下跌減輕成本負擔，推動美股部分指數與費半強彈，帶動亞股與台股隨後反彈。",
+    "industry": "能源與總體經濟",
+    "tw_link": "美股盤中因油價下跌強彈，激勵台股隔日開盤展現反彈力道。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "Oil Prices",
+     "Crude",
+     "Inflation",
+     "Stock Rally",
+     "油價",
+     "通膨",
+     "美股反彈",
+     "原油"
+    ],
+    "evidence": [
+     "P159",
+     "P101",
+     "D87"
+    ],
+    "langs": [
+     "zh",
+     "en"
+    ],
+    "why_root": "原物料價格變動直接改變企業成本結構與通膨預期路徑。",
+    "drill": [
+     "oil prices plunge stock rally",
+     "原油安 米国株 反発"
+    ]
+   },
+   {
+    "title": "台灣行政院與金管會祭出限空令與國安基金護盤等救市措施",
+    "layer": "政策回應",
+    "event_date": "2026-11-06",
+    "who": "行政院與金管會",
+    "event": "台灣行政院授權國安基金進場護盤，金管會同步實施限空令等救市措施。",
+    "mechanism": "政策面強力支撐市場信心，降低恐慌性賣壓，穩定台股籌碼並扭轉極端跌勢。",
+    "industry": "金融",
+    "tw_link": "政策護盤直接提振台股投資人信心，支撐加權指數在後續交易日大幅反彈。",
+    "tw_sectors": [
+     "金融",
+     "全市場"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "國安基金",
+     "金管會",
+     "限空令",
+     "護盤",
+     "台股",
+     "Stabilization Fund",
+     "Short-Selling Limit"
+    ],
+    "evidence": [
+     "P30",
+     "P378",
+     "P352"
+    ],
+    "langs": [
+     "zh"
+    ],
+    "why_root": "主管機關事後針對股市大幅波動做出政策干預與支撐。",
+    "drill": [
+     "國安基金 護盤 限空令",
+     "Taiwan stabilization fund short selling limit"
+    ]
+   }
+  ],
+  "summary": "昨晚美股因CPI數據高於預期推升升息疑慮以及輝達執行長涉調查而震盪，但油價重挫緩解通膨壓力帶動美股尾盤跌幅收斂，預期傳導到今天台股在政策護盤與區域資金回補下展現抗跌與反彈動能。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmpm3qumjhg.txt",
+  "附檔": [],
+  "耗時秒": 9.0,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.5-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 31866,
+   "prompt_tokens": 30209,
+   "output_tokens": 1657,
+   "thinking_tokens": null
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1111_synth2",
+  "ok": true
+ }
+}
