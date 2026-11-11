@@ -1,7 +1,7 @@
 {
- "ver": "20261111a",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261111a/GEA_OM_Setup_20261111a.exe",
- "sha256": "05d78f5cc08fdeed7610b73864db0afdb3176507e4d3c7014f06870893192249",
- "notes": "d14 修模擬模式啟動時缺 GEA_RELAY_TOKEN；訊號主機判斷改看簽章私鑰",
- "sig": "4nIUK021yH6+HW1PwGYAI2crJaY0lJd311e+deecqc2ytm8xZ7EROeLPGePaL/81ZPyj617f8HzsIdPXw4mTdw=="
+ "ver": "20261111b",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261111b/GEA_OM_Setup_20261111b.exe",
+ "sha256": "6a2a8b7cdded0de0a43fe81cb548e2eb68df98ca08fef5c3bc64e72ad946ec8c",
+ "notes": "d15 修模擬模式啟動缺 GEA_RELAY_TOKEN；缺 token 不閃退；修正 d14 安裝檔包到舊程式",
+ "sig": "T/R7XvcIikjDUb0JDMJMmk1ipHgcXzFC2JyDXCHEvUJ1jBWfufpMY5zI+FMYTxKgY8zTkKW1eHzcm/q6yF+R/Q=="
 }
