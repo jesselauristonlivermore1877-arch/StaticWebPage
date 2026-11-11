@@ -2,7 +2,7 @@
  "file": "6691_2026-11-06.md",
  "code": "6691",
  "date": "2026-11-06",
- "show": false,
+ "show": true,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,18 +18,10 @@
   "bad": []
  },
  "cross": {
-  "ok": false,
-  "bad": [
-   {
-    "id": "pe_ttm",
-    "why": "數字檔 13.78 倍，站上資料 17.5733"
-   }
-  ],
+  "ok": true,
+  "bad": [],
   "checked": [
-   "close",
    "eps_q",
-   "mcap",
-   "pe_ttm",
    "rev_m"
   ]
  },
