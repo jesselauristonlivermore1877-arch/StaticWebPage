@@ -1,7 +1,41 @@
 {
- "asof": "2026-11-11T21:22+00:00",
+ "asof": "2026-11-11T23:11+00:00",
  "rule": "法說高成長指引：翻倍／倍增／成長 N 倍／成長 N%（N≥50）／明年大幅成長／上修財測／創新高指引；同一公司同一場法說只觸發一次；頁首只放即時偵測、觸發後 3 個交易日內的（until），個股頁標記留 30 天",
  "top": [
+  {
+   "code": "2347",
+   "name": "聯強",
+   "quote": "聯強法說會釋出樂觀展望，前十月營收年增高達93.5％",
+   "pat": "N%",
+   "src": "CMoney",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9OUTdQd1Vpa1JzRkkxM011NnF5cVNpdzlpdnRtRVhvMTg1WkFSb05vZmo4WjVyOTg4RFV1YkZaTlV5Tnc1WFU1a2tVYVVTWmhzcWJsRDJ2M3UzeS1QRDhNTXdZV2ktUmc?oc=5",
+   "pub": "2026-11-11T22:10+00:00",
+   "seen": "2026-11-11T23:11+00:00",
+   "meeting": "2026-11-11",
+   "px": {
+    "d": "2026-11-11",
+    "close": 79.0999984741211,
+    "chg": 0.0
+   },
+   "mx": {
+    "d": "2026-11-11",
+    "close": 79.0999984741211,
+    "chg": 0.0,
+    "prev": 79.0999984741211,
+    "prev_d": "2026-11-10",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-10",
+    "from": 79.0999984741211,
+    "to_d": "2026-11-11",
+    "to": 79.0999984741211,
+    "chg": 0.0
+   },
+   "kind": "news",
+   "n_more": 0,
+   "until": "2026-11-18T00:00+08:00"
+  },
   {
    "code": "6414",
    "name": "樺漢",
@@ -140,6 +174,39 @@
   }
  ],
  "by_code": {
+  "2347": {
+   "code": "2347",
+   "name": "聯強",
+   "quote": "聯強法說會釋出樂觀展望，前十月營收年增高達93.5％",
+   "pat": "N%",
+   "src": "CMoney",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9OUTdQd1Vpa1JzRkkxM011NnF5cVNpdzlpdnRtRVhvMTg1WkFSb05vZmo4WjVyOTg4RFV1YkZaTlV5Tnc1WFU1a2tVYVVTWmhzcWJsRDJ2M3UzeS1QRDhNTXdZV2ktUmc?oc=5",
+   "pub": "2026-11-11T22:10+00:00",
+   "seen": "2026-11-11T23:11+00:00",
+   "meeting": "2026-11-11",
+   "px": {
+    "d": "2026-11-11",
+    "close": 79.0999984741211,
+    "chg": 0.0
+   },
+   "mx": {
+    "d": "2026-11-11",
+    "close": 79.0999984741211,
+    "chg": 0.0,
+    "prev": 79.0999984741211,
+    "prev_d": "2026-11-10",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-10",
+    "from": 79.0999984741211,
+    "to_d": "2026-11-11",
+    "to": 79.0999984741211,
+    "chg": 0.0
+   },
+   "kind": "news",
+   "n_more": 0
+  },
   "6414": {
    "code": "6414",
    "name": "樺漢",

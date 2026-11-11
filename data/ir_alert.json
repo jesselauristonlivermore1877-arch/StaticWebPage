@@ -525,9 +525,46 @@
     "to": 326.5,
     "chg": -2.25
    }
+  },
+  {
+   "code": "2347",
+   "quote": "聯強法說會釋出樂觀展望，前十月營收年增高達93.5％",
+   "pat": "N%",
+   "val": 93.5,
+   "frag": "年增高達93.5％",
+   "src": "CMoney",
+   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9OUTdQd1Vpa1JzRkkxM011NnF5cVNpdzlpdnRtRVhvMTg1WkFSb05vZmo4WjVyOTg4RFV1YkZaTlV5Tnc1WFU1a2tVYVVTWmhzcWJsRDJ2M3UzeS1QRDhNTXdZV2ktUmc?oc=5",
+   "pub": "2026-11-11T22:10+00:00",
+   "kind": "news",
+   "title": "【即時新聞】最新宣布！聯強法說會釋出樂觀展望，前十月營收年增高達93.5％",
+   "key": "2347_2026-11-11",
+   "name": "聯強",
+   "meeting": "2026-11-11",
+   "seen": "2026-11-11T23:11+00:00",
+   "px": {
+    "d": "2026-11-11",
+    "close": 79.0999984741211,
+    "chg": 0.0
+   },
+   "sent": false,
+   "mx": {
+    "d": "2026-11-11",
+    "close": 79.0999984741211,
+    "chg": 0.0,
+    "prev": 79.0999984741211,
+    "prev_d": "2026-11-10",
+    "src": "日K庫"
+   },
+   "pre": {
+    "from_d": "2026-11-10",
+    "from": 79.0999984741211,
+    "to_d": "2026-11-11",
+    "to": 79.0999984741211,
+    "chg": 0.0
+   }
   }
  ],
- "asof": "2026-11-11T21:22+00:00",
+ "asof": "2026-11-11T23:11+00:00",
  "body": {
   "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9XMEJTZ3FtNEp3ZDlIMzJoZExULTctZTBSSXU0MmE2YUh0U1M5LWsySEFOalRRQ1RULS11UU52VXJPSlltZlp5SzdxV200UGt00gFWQVVfeXFMUEk4XzhjTEcyWnFHZXVrNHByMklwbHQzSEtTTmZucVpkdnJCekp5YXJUYkhlenhrcmtIZDdXTGFoV3g1ZUdFTWxaZDBkZjQ4Q0JONFQwakE?oc=5": {
    "r": "ok",
@@ -635,6 +672,12 @@
    "r": "no",
    "why": "指引句不是公司說的（記者整理／推算或沒有說話的人）：「最新頭條新聞 新聞內文 字級設定： 小 中 大 特   人氣( 0 ) 2026/11/11 10:54 MoneyDJ新聞 2026-11-11 10:54:」（https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=e7e11ab7）",
    "at": "2026-11-11T21:23+00:00",
+   "v": 2
+  },
+  "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9OUTdQd1Vpa1JzRkkxM011NnF5cVNpdzlpdnRtRVhvMTg1WkFSb05vZmo4WjVyOTg4RFV1YkZaTlV5Tnc1WFU1a2tVYVVTWmhzcWJsRDJ2M3UzeS1QRDhNTXdZV2ktUmc?oc=5": {
+   "r": "ok",
+   "why": "公司說的：「…聯強(2347)法說會釋出樂觀展望，受惠AI伺服器與半導體需求，前十月營收年增93.5%創新高，並看好2027年營收再締新猷」",
+   "at": "2026-11-11T23:13+00:00",
    "v": 2
   }
  }
