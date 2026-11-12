@@ -343,8 +343,10 @@ async function adminApi(req, env, url, path, s) {
     const b = await req.json().catch(() => null);
     if (!Array.isArray(b) || b.length > 30 || b.some(p => !p || !/^[A-Za-z0-9_]{1,40}$/.test(p.id || "") || typeof p.name !== "string" || !p.name.trim() || p.name.length > 60 || typeof p.desc !== "string" || p.desc.length > 400 || !Array.isArray(p.codes) || p.codes.length < 1 || p.codes.length > 40 || p.codes.some(c => typeof c !== "string" || !/^[A-Za-z0-9_]{1,40}$/.test(c)) || new Set(p.codes).size !== p.codes.length || !Number.isInteger(p.year) || p.year < 0 || p.year > 1e8)) return json({error: "套餐格式錯誤：需包含代號、名稱、說明、策略代碼與年費"}, 400);
     if (new Set(b.map(p => p.id)).size !== b.length) return json({error:"套餐代號不可重複"},400);
+    // 11-12（雲端P，套餐上下架 B）：on＝上架（布林，沒給＝true，舊資料照常上架）；src＝來源（"手動"｜"研究組合"，選填）
+    if (b.some(p => (p.on != null && typeof p.on !== "boolean") || (p.src != null && !["手動", "研究組合"].includes(p.src)))) return json({error: "on 要是 true／false；src 只能是「手動」或「研究組合」"}, 400);
     if (b.length === 0) { await env.DB.prepare("DELETE FROM conf WHERE name = 'packages'").run(); return json({saved:0,reset:true}); }
-    const clean = b.map(p => ({id:p.id, name:p.name.trim(), desc:p.desc.trim(), codes:p.codes, year:p.year}));
+    const clean = b.map(p => Object.assign({id:p.id, name:p.name.trim(), desc:p.desc.trim(), codes:p.codes, year:p.year, on:p.on !== false}, p.src ? {src:p.src} : {}));
     await env.DB.prepare("INSERT INTO conf(name, value, updated) VALUES('packages', ?, ?) ON CONFLICT(name) DO UPDATE SET value = excluded.value, updated = excluded.updated").bind(JSON.stringify(clean), now()).run();
     return json({saved: clean.length});
   }
@@ -458,7 +460,12 @@ export default {
           return new Response(unb64(r.data), {headers: {"content-type": "application/octet-stream", "cache-control": "no-store", "x-live-ts": String(r.ts), ...SEC}});
         }
         if (path === "/api/prices") { const r = await env.DB.prepare("SELECT value, updated FROM conf WHERE name = 'prices'").first(); return json(r ? Object.assign(JSON.parse(r.value), {updated: r.updated}) : null); }
-        if (path === "/api/packages") { const r = await env.DB.prepare("SELECT value, updated FROM conf WHERE name = 'packages'").first(); return json(r ? {packages: JSON.parse(r.value), updated: r.updated} : null); }
+        if (path === "/api/packages") {   // 11-12（雲端P）：非管理者只看上架的（on !== false）；下架不影響已訂閱者（訂閱記的是策略代碼，照常服務到到期日）
+          const r = await env.DB.prepare("SELECT value, updated FROM conf WHERE name = 'packages'").first();
+          if (!r) return json(null);
+          const all = JSON.parse(r.value);
+          return json({packages: s.admin === 1 ? all : all.filter(p => p.on !== false), updated: r.updated});
+        }
         return json({error: "沒有這個功能"}, 404);
       }
       if (!s) return path === "/" ? loginPage(env) : new Response(null, {status: 302, headers: {location: "/", "cache-control": "no-store"}});
