@@ -1,16 +1,16 @@
 {
- "when": "2026-11-12T18:05:55.027Z",
- "tw": "2026-11-13 02:05",
+ "when": "2026-11-12T18:21:47.002Z",
+ "tw": "2026-11-13 02:21",
  "url": "https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/",
  "max_age": 4,
  "widths": {
   "390": {
    "width": 390,
-   "secs": 100,
+   "secs": 101,
    "blocks": [
     {
      "path": "產業 › 產業信息 › 即時訊息",
-     "len": 1834,
+     "len": 1832,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -18,12 +18,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 589 產業與科技 412 台股公司 93 美股公司 84 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同",
+     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 572 產業與科技 409 台股公司 80 美股公司 83 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 台股公司",
-     "len": 1633,
+     "len": 1631,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -31,12 +31,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 93 公開資訊觀測站重大訊息",
+     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 80 公開資訊觀測站重大訊息",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 美股公司",
-     "len": 1440,
+     "len": 1447,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -44,7 +44,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "美股公司 美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 84 國內媒體 51 國外媒",
+     "head": "美股公司 美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 83 國內媒體 50 國外媒",
      "leaf": true
     },
     {
@@ -1273,7 +1273,7 @@
     },
     {
      "path": "籌碼 › 主動式ETF › 進出（依標的）",
-     "len": 486,
+     "len": 522,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -1770,214 +1770,214 @@
    "http": [],
    "files": {
     "data/ir/index.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
-     "st": 200
-    },
-    "data/risk_alert.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
-     "st": 200
-    },
-    "data/stock_bars.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
-     "st": 200
-    },
-    "data/names.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
-     "st": 200
-    },
-    "data/aetf_daily.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
-     "st": 200
-    },
-    "data/insider_rank.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
-     "st": 200
-    },
-    "data/tdcc.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
-     "st": 200
-    },
-    "data/capital.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
-     "st": 200
-    },
-    "data/f13.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
-     "st": 200
-    },
-    "data/root_cause/index.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
-     "st": 200
-    },
-    "data/insider.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:30 GMT",
-     "st": 200
-    },
-    "data/market_alert.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:30 GMT",
-     "st": 200
-    },
-    "data/world_idx.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
-     "st": 200
-    },
-    "data/ir_alert.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
-     "st": 200
-    },
-    "data/news_live.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
-     "st": 200
-    },
-    "data/disposal.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
-     "st": 200
-    },
-    "data/company.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
-     "st": 200
-    },
-    "data/warrant.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/mkt_overlay.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/risk_alert.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/company.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/disposal.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/names.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/aetf_daily.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/f13.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/insider_rank.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/warrant.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/root_cause/index.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/capital.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/stock_bars.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/market_alert.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/ir_alert.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/world_idx.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/news_live.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/tdcc.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/insider.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/insider/9951.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
-     "st": 200
-    },
-    "data/insider_new.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/insider_mp.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/insider_new.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/macro.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/river.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/kol.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:30 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/is_q.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/industry_notes.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/company_reports.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/ir/targets.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/broker.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/mi_react.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/calendar.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/rrg.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/radar.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/trail.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/nsf_holdings.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/nsf_history.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/root_cause/2026-11-12.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/contrib.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/margin.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/attention.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/edm_hist/index.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/pick_edm.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/chips.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/chips_daily.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/etf_flow.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/etf_cost.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/lookup/index.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/lookup/23.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/analyst.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:30 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     }
    }
   },
   "768": {
    "width": 768,
-   "secs": 100,
+   "secs": 101,
    "blocks": [
     {
      "path": "產業 › 產業信息 › 即時訊息",
-     "len": 1834,
+     "len": 1815,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -1985,12 +1985,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 587 產業與科技 411 台股公司 92 美股公司 84 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同",
+     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 572 產業與科技 409 台股公司 77 美股公司 86 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 台股公司",
-     "len": 1633,
+     "len": 1631,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -1998,12 +1998,12 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 92 公開資訊觀測站重大訊息",
+     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 77 公開資訊觀測站重大訊息",
      "leaf": true
     },
     {
      "path": "產業 › 產業信息 › 美股公司",
-     "len": 1440,
+     "len": 1470,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -2011,7 +2011,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "美股公司 美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 84 國內媒體 51 國外媒",
+     "head": "美股公司 美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 86 國內媒體 49 國外媒",
      "leaf": true
     },
     {
@@ -3214,7 +3214,7 @@
     },
     {
      "path": "籌碼 › 主動式ETF › 進出（依基金）",
-     "len": 412,
+     "len": 413,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -3240,7 +3240,7 @@
     },
     {
      "path": "籌碼 › 主動式ETF › 進出（依標的）",
-     "len": 763,
+     "len": 762,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -3736,204 +3736,204 @@
    "console": [],
    "http": [],
    "files": {
-    "data/ir/index.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+    "data/macro.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
-    "data/risk_alert.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+    "data/ir/index.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/disposal.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:30 GMT",
-     "st": 200
-    },
-    "data/mkt_overlay.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
-     "st": 200
-    },
-    "data/company.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/stock_bars.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
-    "data/names.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+    "data/mkt_overlay.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
-    "data/aetf_daily.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+    "data/risk_alert.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
-    "data/f13.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:29 GMT",
-     "st": 200
-    },
-    "data/capital.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
-     "st": 200
-    },
-    "data/insider.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:30 GMT",
-     "st": 200
-    },
-    "data/warrant.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
-     "st": 200
-    },
-    "data/insider_rank.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
-     "st": 200
-    },
-    "data/market_alert.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
-     "st": 200
-    },
-    "data/world_idx.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
-     "st": 200
-    },
-    "data/root_cause/index.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:29 GMT",
-     "st": 200
-    },
-    "data/news_live.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:29 GMT",
-     "st": 200
-    },
-    "data/ir_alert.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+    "data/company.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/tdcc.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
-    "data/insider/9951.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:29 GMT",
+    "data/names.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/aetf_daily.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/insider_rank.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/insider.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/warrant.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/capital.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/f13.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/news_live.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/ir_alert.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/root_cause/index.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/market_alert.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/world_idx.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/insider_mp.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/insider/9951.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/insider_new.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:29 GMT",
-     "st": 200
-    },
-    "data/macro.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/river.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/kol.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/is_q.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/industry_notes.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/company_reports.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/ir/targets.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:29 GMT",
-     "st": 200
-    },
-    "data/broker.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/mi_react.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/broker.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/calendar.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/rrg.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/radar.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/trail.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/nsf_history.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/nsf_holdings.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/root_cause/2026-11-12.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/contrib.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/margin.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/attention.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:29 GMT",
-     "st": 200
-    },
-    "data/pick_edm.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/edm_hist/index.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
+     "st": 200
+    },
+    "data/pick_edm.json": {
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/chips.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:30 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/chips_daily.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/etf_flow.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/etf_cost.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
-     "st": 200
-    },
-    "data/lookup/index.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/lookup/23.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:30:00 GMT",
      "st": 200
     },
     "data/analyst.json": {
-     "lm": "Thu, 12 Nov 2026 18:11:28 GMT",
+     "lm": "Thu, 12 Nov 2026 18:30:00 GMT",
+     "st": 200
+    },
+    "data/lookup/index.json": {
+     "lm": "Thu, 12 Nov 2026 18:30:00 GMT",
      "st": 200
     }
    }
@@ -3944,7 +3944,7 @@
    "blocks": [
     {
      "path": "產業 › 產業信息 › 即時訊息",
-     "len": 1827,
+     "len": 1834,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -3952,7 +3952,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 603 產業與科技 419 台股公司 99 美股公司 85 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同",
+     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 587 產業與科技 411 台股公司 92 美股公司 84 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同",
      "leaf": true
     },
     {
@@ -6024,15 +6024,15 @@
     },
     {
      "path": "產業 › 產業信息 › 產業與科技 › 公司債利差",
-     "len": 255,
-     "viz": 4,
+     "len": 1390,
+     "viz": 8,
      "flags": [],
-     "maxd": null,
-     "age": null,
+     "maxd": "2026-11-11",
+     "age": 2,
      "stale": false,
      "console": [],
      "http": [],
-     "head": "公司債利差（代替個別公司 CDS） ICE BofA 選擇權調整利差，FRED 美國投資等級公司債利差（ICE BofA OAS） 0.91 百分點 2026-11-09 前一筆 -0.02 高 0.94 低 0.73 美國 BBB 級公司債利差（ICE BofA OAS） 1.13 百分點 2026-11-09 前一",
+     "head": "信用風險：有變化才警示 美國公司債利差近一年走勢＋亮燈日；world_idx.json（FRED） 信用利差 美國高收益債利差 3.30% 位於近一年第 94 百分位（高檔），近 5 日回落（-0.10）；美國投資等級債利差 0.90% 位於近一年第 92 百分位（高檔），近 5 日回落（-0.03） 資料日 2026",
      "leaf": true
     },
     {
@@ -6045,7 +6045,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 99 公開資訊觀測站重大訊息",
+     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 92 公開資訊觀測站重大訊息",
      "leaf": true
     },
     {
@@ -6058,7 +6058,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "美股公司 美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 85 國內媒體 52 國外媒",
+     "head": "美股公司 美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 84 國內媒體 51 國外媒",
      "leaf": true
     },
     {
@@ -6331,7 +6331,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "即時訊息 利率、央行與匯率、經濟指標、台股大盤與政策・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 分類 全部 95 利率、央行與匯率 32 經濟指標 33 台股大盤與政策 30 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），",
+     "head": "即時訊息 利率、央行與匯率、經濟指標、台股大盤與政策・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 分類 全部 97 利率、央行與匯率 34 經濟指標 33 台股大盤與政策 30 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），",
      "leaf": true
     },
     {
@@ -7259,7 +7259,7 @@
     },
     {
      "path": "總經政治 › 總經政治 › 政治 › 即時訊息",
-     "len": 1405,
+     "len": 1442,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -8938,7 +8938,7 @@
     },
     {
      "path": "籌碼 › 主動式ETF › 進出（依基金）",
-     "len": 412,
+     "len": 413,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -8964,7 +8964,7 @@
     },
     {
      "path": "籌碼 › 主動式ETF › 進出（依標的）",
-     "len": 763,
+     "len": 762,
      "viz": 2,
      "flags": [],
      "maxd": null,
@@ -9500,207 +9500,207 @@
    "http": [],
    "files": {
     "data/ir/index.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:39 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/mkt_overlay.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:39 GMT",
-     "st": 200
-    },
-    "data/risk_alert.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:40 GMT",
-     "st": 200
-    },
-    "data/disposal.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:40 GMT",
-     "st": 200
-    },
-    "data/aetf_daily.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:40 GMT",
-     "st": 200
-    },
-    "data/f13.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:40 GMT",
-     "st": 200
-    },
-    "data/insider_rank.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:39 GMT",
-     "st": 200
-    },
-    "data/tdcc.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:40 GMT",
-     "st": 200
-    },
-    "data/capital.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:39 GMT",
-     "st": 200
-    },
-    "data/warrant.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:40 GMT",
-     "st": 200
-    },
-    "data/world_idx.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:39 GMT",
-     "st": 200
-    },
-    "data/market_alert.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:40 GMT",
-     "st": 200
-    },
-    "data/news_live.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
-     "st": 200
-    },
-    "data/root_cause/index.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:40 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/names.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:40 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
-    "data/ir_alert.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:39 GMT",
+    "data/disposal.json": {
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
-    "data/company.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:40 GMT",
+    "data/insider_rank.json": {
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/stock_bars.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:40 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
+     "st": 200
+    },
+    "data/tdcc.json": {
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/insider.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:40 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
+     "st": 200
+    },
+    "data/aetf_daily.json": {
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
+     "st": 200
+    },
+    "data/warrant.json": {
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
+     "st": 200
+    },
+    "data/root_cause/index.json": {
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
+     "st": 200
+    },
+    "data/ir_alert.json": {
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
+     "st": 200
+    },
+    "data/world_idx.json": {
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
+     "st": 200
+    },
+    "data/market_alert.json": {
+     "lm": "Thu, 12 Nov 2026 18:21:24 GMT",
+     "st": 200
+    },
+    "data/capital.json": {
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
+     "st": 200
+    },
+    "data/risk_alert.json": {
+     "lm": "Thu, 12 Nov 2026 18:21:24 GMT",
+     "st": 200
+    },
+    "data/company.json": {
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
+     "st": 200
+    },
+    "data/news_live.json": {
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
+     "st": 200
+    },
+    "data/f13.json": {
+     "lm": "Thu, 12 Nov 2026 18:21:24 GMT",
      "st": 200
     },
     "data/insider/9951.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:39 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/insider_mp.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:39 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/insider_new.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:39 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/macro.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:39 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/river.json": {
-     "lm": "Thu, 12 Nov 2026 18:02:40 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/kol.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:24 GMT",
      "st": 200
     },
     "data/is_q.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/industry_notes.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/company_reports.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:24 GMT",
      "st": 200
     },
     "data/ir/targets.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/broker.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/mi_react.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/calendar.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:30 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:24 GMT",
      "st": 200
     },
     "data/rrg.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/radar.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/trail.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/world.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/nsf_holdings.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/nsf_history.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/root_cause/2026-11-12.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/contrib.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/margin.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:29 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:24 GMT",
      "st": 200
     },
     "data/attention.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/edm_hist/index.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/pick_edm.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/chips.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:30 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/chips_daily.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:26 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/etf_flow.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:21:23 GMT",
      "st": 200
     },
     "data/etf_cost.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/lookup/index.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/lookup/23.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     },
     "data/analyst.json": {
-     "lm": "Thu, 12 Nov 2026 18:06:27 GMT",
+     "lm": "Thu, 12 Nov 2026 18:26:17 GMT",
      "st": 200
     }
    }
