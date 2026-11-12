@@ -1,55 +1,29 @@
 {
  "dead": {
-  "2026-11-11": {
+  "2026-11-12": {
+   "gemini-3.8-flash": {
+    "at": "11-12 16:36",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
    "gemini-omni-1.2-flash": {
-    "at": "11-11 14:39",
+    "at": "11-12 16:37",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    },
    "gemini-omni-1.1-flash": {
-    "at": "11-11 14:39",
+    "at": "11-12 16:37",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
+   "gemini-flash-latest": {
+    "at": "11-12 16:37",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
+   "gemini-3.7-flash": {
+    "at": "11-12 16:37",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    }
   }
  },
  "count": {
-  "2026-11-02": {
-   "gemini-3.8-flash": {
-    "req": 4,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-3.7-flash": {
-    "req": 3,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-3.6-flash": {
-    "req": 9,
-    "tok": 65885
-   },
-   "gemini-3.5-flash": {
-    "req": 4,
-    "tok": 0
-   },
-   "gemini-2.5-flash": {
-    "req": 7,
-    "tok": 0
-   },
-   "gemini-omni-1.1-flash": {
-    "req": 0,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-flash-latest": {
-    "req": 1,
-    "tok": 14924,
-    "e429": 1
-   },
-   "gemini-3-flash-preview": {
-    "req": 6,
-    "tok": 122473
-   }
-  },
   "2026-11-03": {
    "gemini-3.8-flash": {
     "req": 1,
@@ -283,16 +257,55 @@
     "req": 2,
     "tok": 18139
    }
+  },
+  "2026-11-12": {
+   "gemini-3.8-flash": {
+    "req": 2,
+    "tok": 3163,
+    "e429": 1
+   },
+   "gemini-3.7-flash": {
+    "req": 2,
+    "tok": 13940,
+    "e429": 1
+   },
+   "gemini-3.6-flash": {
+    "req": 2,
+    "tok": 24805
+   },
+   "gemini-3.5-flash": {
+    "req": 1,
+    "tok": 0
+   },
+   "gemini-2.5-flash": {
+    "req": 1,
+    "tok": 0
+   },
+   "gemini-omni-1.2-flash": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-omni-1.1-flash": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-flash-latest": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-3-flash-preview": {
+    "req": 1,
+    "tok": 11381
+   }
   }
  },
  "tpm": [
   [
-   1794435850.8660264,
-   4949
-  ],
-  [
-   1794435862.5359302,
-   13190
+   1794501651.5199223,
+   24805
   ]
  ]
 }
