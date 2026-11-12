@@ -1,0 +1,102 @@
+{
+ "trig": [
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-11",
+   "t": "台指期日盤大漲 +1,445 點（+3.39%），報 44,091；盤中最高 44,250",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-11",
+   "t": "台指期日盤大漲 +1,196 點（+2.80%），報 43,842；盤中最高 43,892",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  }
+ ],
+ "moves": {
+  "TWII": {
+   "date": "2026-11-12",
+   "prev": "2026-11-11",
+   "close": 43995.1602,
+   "prev_close": 44257.1484,
+   "pct": -0.59,
+   "sd": 1.817,
+   "z": -0.33,
+   "n": 250,
+   "key": "TWII",
+   "name": "加權指數",
+   "sym": "^TWII"
+  },
+  "SOX": {
+   "date": "2026-11-11",
+   "prev": "2026-11-10",
+   "close": 10564.1113,
+   "prev_close": 9998.3301,
+   "pct": 5.66,
+   "sd": 3.043,
+   "z": 1.86,
+   "n": 250,
+   "key": "SOX",
+   "name": "費城半導體",
+   "sym": "^SOX"
+  },
+  "NQ": {
+   "date": "2026-11-11",
+   "prev": "2026-11-10",
+   "close": 28219.5,
+   "prev_close": 27835.25,
+   "pct": 1.38,
+   "sd": 1.343,
+   "z": 1.03,
+   "n": 250,
+   "key": "NQ",
+   "name": "那斯達克 100 期貨",
+   "sym": "NQ=F"
+  },
+  "SPX": {
+   "date": "2026-11-11",
+   "prev": "2026-11-10",
+   "close": 7619.3799,
+   "prev_close": 7520.9302,
+   "pct": 1.31,
+   "sd": 0.862,
+   "z": 1.52,
+   "n": 250,
+   "key": "SPX",
+   "name": "S&P 500",
+   "sym": "^GSPC"
+  },
+  "N225": {
+   "date": "2026-11-12",
+   "prev": "2026-11-11",
+   "close": 61347.5,
+   "prev_close": 61248.5898,
+   "pct": 0.16,
+   "sd": 1.873,
+   "z": 0.09,
+   "n": 250,
+   "key": "N225",
+   "name": "日經 225",
+   "sym": "^N225"
+  },
+  "KOSPI": {
+   "date": "2026-11-12",
+   "prev": "2026-11-11",
+   "close": 5365.9702,
+   "prev_close": 5375.3599,
+   "pct": -0.17,
+   "sd": 3.562,
+   "z": -0.05,
+   "n": 250,
+   "key": "KOSPI",
+   "name": "韓國綜合",
+   "sym": "^KS11"
+  }
+ },
+ "sec": {
+  "sectors": [],
+  "note": "只看美股：台股 2026-11-12 還沒開盤，不算族群"
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"NVIDIA董事會準備撤換執行長黃仁勳的風波\",\n      \"layer\": \"根因\",\n      \"event\": \"市場傳出NVIDIA董事會因黃仁勳涉入婚外情及其他違紀疑雲而準備撤換執行長\",\n      \"mechanism\": \"引發投資人對NVIDIA領導層與AI晶片龍頭地位的疑慮，導致輝達盤後急殺並壓抑台股早盤抗跌動能\",\n      \"industry\": \"晶圓代工與製造\",\n      \"tw_link\": \"台股早盤受美股盤後輝達暴跌影響開高走低，電子權值股回檔\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Jensen Huang\",\n        \"Nvidia\",\n        \"Board\",\n        \"Oust\",\n        \"CEO\",\n        \"黃仁勳\",\n        \"輝達\",\n        \"解任\",\n        \"董事會\",\n        \"フアン\",\n        \"エヌビディア\",\n        \"解任準備\",\n        \"젠슨 황\",\n        \"엔비디아\",\n        \"해임\"\n      ],\n      \"evidence\": [\n        \"D81\",\n        \"D84\",\n        \"D120\",\n        \"D136\"\n      ],\n      \"langs\": [\n        \"en\",\n        \"zh\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"具體指出具體人物與董事會人事異動傳聞，直接衝擊晶片龍頭預期\"\n    },\n    {\n      \"title\": \"CoreWeave三季報營收暴增與財測調高\",\n      \"layer\": \"根因\",\n      \"event\": \"CoreWeave公布第三季財報營收大幅優於預期並調高全年展望\",\n      \"mechanism\": \"消弭市場對AI基礎設施與算力需求的擔憂，帶動美國費半與科技股大漲，進而激勵美股與隔日台股相關供應鏈\",\n      \"industry\": \"伺服器與品牌組裝\",\n      \"tw_link\": \"美股費半大漲帶動台股相關供應鏈與半導體族群反彈\",\n      \"tw_sectors\": [\n        \"伺服器與品牌組裝\",\n        \"晶圓代工與製造\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"CoreWeave\",\n        \"Q3\",\n        \"Earnings\",\n        \"Guidance\",\n        \"Revenue\",\n        \"財報\",\n        \"營收\",\n        \"展望\",\n        \"AI基礎設施\",\n        \"決算\",\n        \"上方修正\",\n        \"売上高\",\n        \"코어위브\",\n        \"3분기\",\n        \"실적\"\n      ],\n      \"evidence\": [\n        \"P143\",\n        \"P150\",\n        \"P187\",\n        \"P219\"\n      ],\n      \"langs\": [\n        \"en\",\n        \"zh\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"具體公司財報數據優於預期，直接扭轉 AI 需求擔憂的基本面預期\"\n    }\n  ],\n  \"summary\": \"昨晚美股受CoreWeave強勁財報激勵而AI基礎設施擔憂緩解、費半大漲，但同時傳出Nvidia執行長黃仁勳解任風波引發盤後急殺，預期傳導到今天台股呈現開高震盪與產業分化。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "NVIDIA董事會準備撤換執行長黃仁勳的風波",
+    "layer": "根因",
+    "event": "市場傳出NVIDIA董事會因黃仁勳涉入婚外情及其他違紀疑雲而準備撤換執行長",
+    "mechanism": "引發投資人對NVIDIA領導層與AI晶片龍頭地位的疑慮，導致輝達盤後急殺並壓抑台股早盤抗跌動能",
+    "industry": "晶圓代工與製造",
+    "tw_link": "台股早盤受美股盤後輝達暴跌影響開高走低，電子權值股回檔",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Jensen Huang",
+     "Nvidia",
+     "Board",
+     "Oust",
+     "CEO",
+     "黃仁勳",
+     "輝達",
+     "解任",
+     "董事會",
+     "フアン",
+     "エヌビディア",
+     "解任準備",
+     "젠슨 황",
+     "엔비디아",
+     "해임"
+    ],
+    "evidence": [
+     "D81",
+     "D84",
+     "D120",
+     "D136"
+    ],
+    "langs": [
+     "en",
+     "zh",
+     "ja",
+     "ko"
+    ],
+    "why_root": "具體指出具體人物與董事會人事異動傳聞，直接衝擊晶片龍頭預期"
+   },
+   {
+    "title": "CoreWeave三季報營收暴增與財測調高",
+    "layer": "根因",
+    "event": "CoreWeave公布第三季財報營收大幅優於預期並調高全年展望",
+    "mechanism": "消弭市場對AI基礎設施與算力需求的擔憂，帶動美國費半與科技股大漲，進而激勵美股與隔日台股相關供應鏈",
+    "industry": "伺服器與品牌組裝",
+    "tw_link": "美股費半大漲帶動台股相關供應鏈與半導體族群反彈",
+    "tw_sectors": [
+     "伺服器與品牌組裝",
+     "晶圓代工與製造"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "CoreWeave",
+     "Q3",
+     "Earnings",
+     "Guidance",
+     "Revenue",
+     "財報",
+     "營收",
+     "展望",
+     "AI基礎設施",
+     "決算",
+     "上方修正",
+     "売上高",
+     "코어위브",
+     "3분기",
+     "실적"
+    ],
+    "evidence": [
+     "P143",
+     "P150",
+     "P187",
+     "P219"
+    ],
+    "langs": [
+     "en",
+     "zh",
+     "ja",
+     "ko"
+    ],
+    "why_root": "具體公司財報數據優於預期，直接扭轉 AI 需求擔憂的基本面預期"
+   }
+  ],
+  "summary": "昨晚美股受CoreWeave強勁財報激勵而AI基礎設施擔憂緩解、費半大漲，但同時傳出Nvidia執行長黃仁勳解任風波引發盤後急殺，預期傳導到今天台股呈現開高震盪與產業分化。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmporw_zl85.txt",
+  "附檔": [],
+  "耗時秒": 3.5,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.5-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 31763,
+   "prompt_tokens": 30875,
+   "output_tokens": 888,
+   "thinking_tokens": null
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1112_synth2",
+  "ok": true
+ }
+}

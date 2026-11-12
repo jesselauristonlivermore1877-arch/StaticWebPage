@@ -1,0 +1,127 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"CoreWeave三季報營收暴增與財測調高點燃美股AI與半導體股全面反彈\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-12\",\n      \"who\": \"CoreWeave\",\n      \"event\": \"CoreWeave公布第三季財報營收大幅優於預期並調高全年展望\",\n      \"mechanism\": \"消弭市場對AI基礎設施與算力需求的擔憂，帶動美國費半與科技股大漲，進而激勵亞股與台股相關供應鏈\",\n      \"industry\": \"半導體\",\n      \"tw_link\": \"美股AI與半導體強勢反彈傳導至台股，推升相關供應鏈如晶圓代工與記憶體表現\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"記憶體\",\n        \"伺服器與品牌組裝\",\n        \"全市場\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"CoreWeave\",\n        \"費城半導體\",\n        \"NVIDIA\",\n        \"美光\",\n        \"AI\",\n        \"台積電ADR\",\n        \"核心織物\",\n        \"半導體\",\n        \"콜어위브\",\n        \"반도체\",\n        \"코스피\",\n        \"コアウィーブ\",\n        \"半導体\"\n      ],\n      \"evidence\": [\n        \"P143\",\n        \"P150\",\n        \"P187\",\n        \"P219\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"這是直接改變全球AI基礎設施與半導體基本面預期的核心具體事件。\",\n      \"drill\": [\n        \"CoreWeave Q3 earnings revenue guidance\",\n        \"CoreWeave 財報 展望\",\n        \"CoreWeave 決算 見通し\",\n        \"코어위브 실적 반도체\"\n      ]\n    },\n    {\n      \"title\": \"黃仁勳傳出可能遭到撤換的執行長人事風波引發輝達盤後大跌\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-12\",\n      \"who\": \"NVIDIA董事會\",\n      \"event\": \"市場傳出董事會研擬撤換執行長黃仁勳的風波\",\n      \"mechanism\": \"引發投資人對NVIDIA領導層與AI晶片龍頭地位的疑慮，導致輝達盤後急殺並壓抑台股早盤抗跌動能\",\n      \"industry\": \"IC設計\",\n      \"tw_link\": \"輝達高層人事變動疑慮造成台股相關AI權值股與大盤早盤回檔震盪\",\n      \"tw_sectors\": [\n        \"IC設計\",\n        \"晶圓代工與製造\",\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"黃仁勳\",\n        \"輝達\",\n        \"NVIDIA\",\n        \"Jensen Huang\",\n        \"執行長\",\n        \"解任\",\n        \"解任説\",\n        \"젠슨 황\",\n        \"해임\"\n      ],\n      \"evidence\": [\n        \"P75\",\n        \"P84\",\n        \"P127\",\n        \"P643\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"直接衝擊AI龍頭企業公司治理與市場對晶片供應鏈的信心，屬於引發盤面震盪的關鍵根因。\",\n      \"drill\": [\n        \"Nvidia oust Jensen Huang CEO\",\n        \"輝達 黃仁勳 換帥 傳聞\",\n        \"エヌビディア フアン 解任\",\n        \"젠슨 황 해임\"\n      ]\n    }\n  ],\n  \"summary\": \"昨晚美股受CoreWeave財報亮眼激勵推升費半與科技股大漲，但同時傳出輝達執行長黃仁勳可能遭撤換的風波使盤後與隔日亞股出現分化，預期傳導到今天台股呈現開高後震盪、權值股與半導體族群多空交織的表現。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "CoreWeave三季報營收暴增與財測調高點燃美股AI與半導體股全面反彈",
+    "layer": "根因",
+    "event_date": "2026-11-12",
+    "who": "CoreWeave",
+    "event": "CoreWeave公布第三季財報營收大幅優於預期並調高全年展望",
+    "mechanism": "消弭市場對AI基礎設施與算力需求的擔憂，帶動美國費半與科技股大漲，進而激勵亞股與台股相關供應鏈",
+    "industry": "半導體",
+    "tw_link": "美股AI與半導體強勢反彈傳導至台股，推升相關供應鏈如晶圓代工與記憶體表現",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "記憶體",
+     "伺服器與品牌組裝",
+     "全市場"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "CoreWeave",
+     "費城半導體",
+     "NVIDIA",
+     "美光",
+     "AI",
+     "台積電ADR",
+     "核心織物",
+     "半導體",
+     "콜어위브",
+     "반도체",
+     "코스피",
+     "コアウィーブ",
+     "半導体"
+    ],
+    "evidence": [
+     "P143",
+     "P150",
+     "P187",
+     "P219"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "這是直接改變全球AI基礎設施與半導體基本面預期的核心具體事件。",
+    "drill": [
+     "CoreWeave Q3 earnings revenue guidance",
+     "CoreWeave 財報 展望",
+     "CoreWeave 決算 見通し",
+     "코어위브 실적 반도체"
+    ]
+   },
+   {
+    "title": "黃仁勳傳出可能遭到撤換的執行長人事風波引發輝達盤後大跌",
+    "layer": "根因",
+    "event_date": "2026-11-12",
+    "who": "NVIDIA董事會",
+    "event": "市場傳出董事會研擬撤換執行長黃仁勳的風波",
+    "mechanism": "引發投資人對NVIDIA領導層與AI晶片龍頭地位的疑慮，導致輝達盤後急殺並壓抑台股早盤抗跌動能",
+    "industry": "IC設計",
+    "tw_link": "輝達高層人事變動疑慮造成台股相關AI權值股與大盤早盤回檔震盪",
+    "tw_sectors": [
+     "IC設計",
+     "晶圓代工與製造",
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "黃仁勳",
+     "輝達",
+     "NVIDIA",
+     "Jensen Huang",
+     "執行長",
+     "解任",
+     "解任説",
+     "젠슨 황",
+     "해임"
+    ],
+    "evidence": [
+     "P75",
+     "P84",
+     "P127",
+     "P643"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "直接衝擊AI龍頭企業公司治理與市場對晶片供應鏈的信心，屬於引發盤面震盪的關鍵根因。",
+    "drill": [
+     "Nvidia oust Jensen Huang CEO",
+     "輝達 黃仁勳 換帥 傳聞",
+     "エヌビディア フアン 解任",
+     "젠슨 황 해임"
+    ]
+   }
+  ],
+  "summary": "昨晚美股受CoreWeave財報亮眼激勵推升費半與科技股大漲，但同時傳出輝達執行長黃仁勳可能遭撤換的風波使盤後與隔日亞股出現分化，預期傳導到今天台股呈現開高後震盪、權值股與半導體族群多空交織的表現。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmp5v1_nsuz.txt",
+  "附檔": [],
+  "耗時秒": 3.9,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.5-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 31659,
+   "prompt_tokens": 30588,
+   "output_tokens": 1071,
+   "thinking_tokens": null
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1112_synth1",
+  "ok": true
+ }
+}
