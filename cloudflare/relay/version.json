@@ -1,7 +1,7 @@
 {
- "ver": "20261111b",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261111b/GEA_OM_Setup_20261111b.exe",
- "sha256": "6a2a8b7cdded0de0a43fe81cb548e2eb68df98ca08fef5c3bc64e72ad946ec8c",
- "notes": "d15 修模擬模式啟動缺 GEA_RELAY_TOKEN；缺 token 不閃退；修正 d14 安裝檔包到舊程式",
- "sig": "T/R7XvcIikjDUb0JDMJMmk1ipHgcXzFC2JyDXCHEvUJ1jBWfufpMY5zI+FMYTxKgY8zTkKW1eHzcm/q6yF+R/Q=="
+ "ver": "20261112a",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261112a/GEA_OM_Setup_20261112a.exe",
+ "sha256": "f943577f85040aaff560f1448d30adad92b8549ef94c90099826cd4ea712d0e0",
+ "notes": "d16：訊號主機白名單不吃傳送端格式、國票未登入每 30 分 TG、略過與跟單關閉收訊號 TG、真單關跟單一律確認",
+ "sig": "bsACRKA5+gcnKEejA6tbAbKHF/2dQAMCyyTGeClgc626sG7bV2j7eI+t7NW5+TA39kA84bUATr/d5GbuI6EYdw=="
 }
