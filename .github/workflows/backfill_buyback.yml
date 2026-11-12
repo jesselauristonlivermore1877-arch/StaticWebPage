@@ -47,7 +47,7 @@ jobs:
         with:
           python-version: "3.12.14"
           cache: pip
-      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests numpy
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests feedparser pandas numpy
       - name: 公告＋執行結果
         working-directory: code
         run: python buyback.py ../site/data --events ${{ github.event.inputs.full == '1' && '--full' || '' }}
@@ -88,7 +88,7 @@ jobs:
         with:
           python-version: "3.12.14"
           cache: pip
-      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests numpy
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests feedparser pandas numpy
       - uses: actions/download-artifact@v4
         with:
           name: buyback-meta
@@ -124,7 +124,7 @@ jobs:
         with:
           python-version: "3.12.14"
           cache: pip
-      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests numpy
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests feedparser pandas numpy
       - uses: actions/download-artifact@v4
         with:
           name: buyback-meta
