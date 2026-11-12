@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>會員站管理頁整併</title>
+<style>
+:root{--bg:#0b0f14;--card:#111821;--line:#26303d;--ink:#e6edf3;--ink2:#9fb0c2;--acc:#f2b632;--up:#e5484d;--dn:#2fb36b;--bad:#ff6b6b;--warn:#f2b632;--chip:#1a2330}
+:root[data-theme="light"]{--bg:#f6f5f1;--card:#fff;--line:#dcd9d0;--ink:#1d1d1b;--ink2:#5c5b57;--acc:#b0842f;--chip:#efece4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;margin:0 0 4px}h2{font-size:17px;margin:0 0 8px}h3{font-size:15px;margin:14px 0 6px}
+.m{color:var(--ink2);font-size:13px;margin:0 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.note{color:var(--ink2);font-size:12.5px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--ink2);font-weight:600;white-space:nowrap}
+td.num,th.num{text-align:right;white-space:nowrap}
+.ok{color:var(--dn);font-weight:700}.bad{color:var(--bad);font-weight:700}.dup{color:var(--warn);font-weight:700}
+.tag{display:inline-block;border-radius:999px;padding:0 8px;font-size:12px;border:1px solid var(--line);background:var(--chip);white-space:nowrap}
+.tag.fix{border-color:var(--dn);color:var(--dn)}.tag.merge{border-color:var(--warn);color:var(--warn)}.tag.drop{border-color:var(--bad);color:var(--bad)}.tag.ask{border-color:var(--acc);color:var(--acc)}
+button,select,input{font:inherit;color:var(--ink);background:var(--chip);border:1px solid var(--line);border-radius:6px;padding:4px 10px}
+button.on{background:var(--acc);color:#111;border-color:var(--acc);font-weight:700}
+input[type=checkbox]{padding:0}
+nav.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0;display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:12px}
+nav.tabs button{white-space:nowrap}
+.sec{display:none}.sec.on{display:block}
+.pk{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.pk .card{margin:0;padding:10px 12px;cursor:pointer}.pk .card.off{opacity:.55}.pk .card.sel{border-color:var(--acc)}
+.sw{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.q li{margin:4px 0}
+.mut{color:var(--ink2)}
+@media (max-width:640px){main{padding:12px 12px 48px}th,td{padding:5px 6px}.hide-sm{display:none}}
+</style></head><body><main>
+<h1>會員站管理頁整併（預覽）</h1>
+<p class="m">W 11-12。全部是<b>假資料</b>，按鈕只在這頁有反應、不連任何伺服器。健檢是用本機模擬器（真正的 worker.js＋SQLite 假 D1、管理者假帳號）逐一點過；證據與行號在 TODO「W 11-12 會員站管理頁健檢與整併」。</p>
+
+<div class="card">
+<h2>要 Evans 決定</h2>
+<ol class="q">
+<li><b>策略「下架」的意思</b>：現在的上下架表對客戶<b>完全沒作用</b>（下面健檢第 1 列）。建議：下架＝<b>從客戶選單拿掉、不能再買</b>；已訂閱的客戶照常收訊號到到期日（跟套餐下架同一個規則）。另一種是「下架就連已訂閱的也看不到」。選哪個？</li>
+<li><b>「單獨看／加入組合」兩欄拿掉</b>：只影響管理者自己的訊號區按鈕，跟原型研究的研究組合重複。拿掉可以嗎？</li>
+<li><b>客戶開通改成選套餐</b>：現在開通只能手打策略代碼（GEA5,GEA6…）。建議加「選套餐」下拉，選了自動填代碼。要不要做？</li>
+<li><b>分區順序</b>：① 策略 → ② 套餐 → ③ 價格 → ④ 客戶與開通 → ⑤ 系統。客戶與開通要不要放第一個（最常用）？</li>
+</ol>
+</div>
+
+<nav class="tabs" id="tabs">
+<button class="on" data-s="health">健檢結果</button><button data-s="s1">① 策略</button><button data-s="s2">② 套餐</button><button data-s="s3">③ 價格</button><button data-s="s4">④ 客戶與開通</button><button data-s="s5">⑤ 系統</button>
+</nav>
+
+<section class="sec on" id="health">
+<div class="card">
+<h2>健檢結果（每個控制項都實際點過）</h2>
+<p class="note">「API」欄是本機模擬器印出的往返紀錄；「保存」＝重新整理後還在。壞掉的 4 項已經在本機修好、模擬器重測通過，<b>還沒上傳</b>，等這頁核准一起上。</p>
+<div class="scroll"><table>
+<tr><th>區塊</th><th>控制項</th><th>結果</th><th>證據（API／保存）</th><th>原因與位置</th><th>建議</th></tr>
+<tr><td rowspan="3">策略上下架</td><td>上架勾選、多空、單獨看、加入組合、名稱、備註、順序 ↑↓、刪除、新增一列、儲存</td><td class="ok">介面正常</td><td>PUT /api/admin/strategies → 200；重新整理後保存</td><td>—</td><td><span class="tag merge">合併</span> 見下兩列</td></tr>
+<tr><td>「下架」對客戶的效果</td><td class="bad">壞掉</td><td>GEA5 存成下架後，用訂閱 GEA5 的假會員登入，訊號區照樣出現 GEA5</td><td>一般會員的訊號區只看訂閱，完全不讀這張表（index.html <code>buildStrats()</code> 1882～1887 行）</td><td><span class="tag ask">待決定</span> 規則見上面第 1 題</td></tr>
+<tr><td>表上的策略清單</td><td class="bad">壞掉</td><td>正式站 /api/strategies 從沒存過 → 用網頁內建 5 列；實際有資料的 21 支裡只有 GEA5、GEA6 在表上</td><td>內建預設還是 10 月的「魚身／魚頭／魚尾」（index.html <code>REG_DEFAULT</code> 1872 行），這 3 支現在叫 PURE_BODY、MODE3_SNIPE、HYBRID，沒有對上</td><td><span class="tag fix">修</span> 自動列出全部有資料的策略；<span class="tag drop">拿掉</span> 3 列魚系列</td></tr>
+<tr><td>原型研究</td><td>「建立成策略並送管理頁」</td><td class="bad">壞掉 → 已修</td><td>上傳策略檔 PUT /api/admin/file → <b>401 需要管理權限</b>；正式站一個 data_s_LAB_* 都沒有</td><td>沒帶 x-gea、也不是 JSON，被 worker 的防偽造檢查擋下（index.html 2119 行）</td><td><span class="tag fix">修</span> 補 x-gea；修後 200</td></tr>
+<tr><td rowspan="2">價格（年費）</td><td>改策略／基礎必選年費、儲存、全部回到原價</td><td class="ok">正常</td><td>PUT /api/admin/prices → 200；保存</td><td>—</td><td>—</td></tr>
+<tr><td>套餐年費</td><td class="dup">重複 → 已修</td><td>價格表改套餐 99,999、套餐區仍顯示 383,544；之後在套餐區按儲存會蓋回去</td><td>同一個年費兩處都能改、各顯示各的（價格表 2716 行、套餐區 2617 行）</td><td><span class="tag merge">合併</span> 只在套餐區改，價格表不列套餐</td></tr>
+<tr><td rowspan="3">套餐</td><td>切換、依回測命名、改名、上下架、新增、刪除、儲存</td><td class="ok">正常</td><td>PUT /api/admin/packages → 200；保存</td><td>—</td><td>—</td></tr>
+<tr><td>按「新增套餐」沒勾策略就切走</td><td class="bad">壞掉 → 已修</td><td>之後<b>任何</b>套餐都存不進去：PUT → <b>400 套餐格式錯誤</b></td><td>空套餐留在清單裡一起送出，worker 要求每組 1～40 支，一筆不合整批擋（index.html <code>pkNew()</code>／<code>pkSave()</code>）</td><td><span class="tag fix">修</span> 沒勾策略的不送</td></tr>
+<tr><td>把研究組合推出成套餐</td><td class="ok">修後正常</td><td>4+2 七支：4 支用客戶選單代碼、3 支新建 LAB 策略（3 個檔＋策略表 200）、新套餐預設下架 200</td><td>原本卡在上面的 401</td><td><span class="tag merge">合併</span> 推出的套餐在 ② 套餐區管理</td></tr>
+<tr><td rowspan="2">客戶</td><td>新增、改到期日、改訂閱、停用／啟用、在新裝置登入、登出全部裝置、重發連結、刪除、還原</td><td class="ok">正常</td><td>POST／PATCH／DELETE /api/admin/members → 200；保存</td><td>—</td><td>—</td></tr>
+<tr><td>訂閱欄</td><td class="dup">缺口</td><td>只能手打策略代碼；套餐跟訂閱沒有連動</td><td>客戶買套餐後要自己對照代碼</td><td><span class="tag ask">待決定</span> 第 3 題</td></tr>
+<tr><td>系統</td><td>排程狀態、Cloudflare 用量</td><td class="ok">正常</td><td>正式站 data_adm_tasks.json 12:28 有更新；/api/admin/usage 200</td><td>—</td><td>收進最後一區</td></tr>
+</table></div>
+</div>
+</section>
+
+<section class="sec" id="s1"><div class="card">
+<h2>① 策略（客戶選單賣什麼）</h2>
+<p class="note">自動列出<b>全部有資料的策略</b>（客戶選單 21 支＋原型研究建立的 LAB_ 策略），不用再手動新增一列。上架＝出現在客戶選單、可以買；下架＝客戶選單看不到，<b>已訂閱的照常收訊號到到期日</b>（待 Evans 確認）。</p>
+<div class="row" style="margin:8px 0"><input id="q1" placeholder="搜尋代碼或名稱" style="min-width:180px"><span class="note" id="c1"></span></div>
+<div class="scroll"><table id="t1"></table></div>
+<div class="row" style="margin-top:8px"><button class="on" onclick="msg('m1','（預覽）已儲存：上下架改動 '+dirty1+' 項')">儲存</button><span class="note" id="m1"></span></div>
+</div></section>
+
+<section class="sec" id="s2"><div class="card">
+<h2>② 套餐（命名、內容、年費、上下架）</h2>
+<p class="note">年費只在這裡改（不再出現在價格表）。從原型研究「把目前研究組合推出成套餐」建的，會標「研究組合」、預設下架。點一張卡編輯。</p>
+<div class="row" style="margin:8px 0"><button onclick="pkFilter='all';r2()" id="f_all" class="on">全部</button><button onclick="pkFilter='on';r2()" id="f_on">上架中</button><button onclick="pkFilter='off';r2()" id="f_off">已下架</button><button onclick="newPk()">＋新增套餐</button></div>
+<div class="pk" id="pk"></div>
+<div class="card" id="ed" style="margin-top:10px">
+<div class="row"><input id="eName" style="flex:1;min-width:200px"><input id="eYear" type="number" style="width:130px"><label class="sw"><input type="checkbox" id="eOn"> <span id="eOnT">上架中</span></label></div>
+<textarea id="eDesc" rows="2" style="width:100%;margin-top:8px;font:inherit;color:var(--ink);background:var(--chip);border:1px solid var(--line);border-radius:6px"></textarea>
+<div class="row" id="eCodes" style="margin-top:8px;gap:6px"></div>
+<div class="row" style="margin-top:8px"><button onclick="autoName()">依回測命名</button><button class="on" onclick="msg('m2','（預覽）已儲存「'+P[cur].name+'」')">儲存套餐</button><button onclick="delPk()">刪除</button><span class="note" id="m2"></span></div>
+</div>
+</div></section>
+
+<section class="sec" id="s3"><div class="card">
+<h2>③ 價格（策略、基礎必選）</h2>
+<p class="note">空白＝用報價單原價；月費＝年費 ÷ 12。套餐年費在 ② 改。</p>
+<div class="scroll"><table id="t3"></table></div>
+<div class="row" style="margin-top:8px"><button onclick="msg('m3','（預覽）全部回到原價')">全部回到原價</button><button class="on" onclick="msg('m3','（預覽）已儲存價格')">儲存價格</button><span class="note" id="m3"></span></div>
+</div></section>
+
+<section class="sec" id="s4"><div class="card">
+<h2>④ 客戶與開通</h2>
+<p class="note">新增會員產生專屬登入連結（只顯示一次）。訂閱可以<b>選套餐自動帶入代碼</b>（待決定），也可以手打代碼；* ＝全部。</p>
+<div class="row" style="margin:8px 0"><input placeholder="姓名" style="width:110px"><input placeholder="聯絡（LINE 或 Email）" style="width:170px"><input type="date" value="2026-12-31"><select id="subPk"><option value="">選套餐帶入…</option></select><input id="subTxt" placeholder="訂閱代碼" style="width:200px"><button class="on" onclick="msg('m4','（預覽）已新增，登入連結只顯示一次')">新增</button><span class="note" id="m4"></span></div>
+<div class="scroll"><table id="t4"></table></div>
+<p class="note" style="margin-top:8px">回收桶：刪除的會員保留 7 天，期間可一鍵還原。</p>
+</div></section>
+
+<section class="sec" id="s5"><div class="card">
+<h2>⑤ 系統</h2>
+<h3>排程狀態（W 主機）</h3><p class="note">更新於 11-12 12:28｜排程 62 個、常駐 4 個、<span class="ok">全部正常</span>（假資料）</p>
+<h3>Cloudflare 用量</h3><div class="scroll"><table><tr><th>日期（UTC）</th><th class="num">全部</th><th class="num">占額度</th><th class="num">輪詢</th><th class="num">上傳</th></tr><tr><td>2026-11-12</td><td class="num">31,204</td><td class="num">31.2%</td><td class="num">24,880</td><td class="num">5,410</td></tr><tr><td>2026-11-11</td><td class="num">42,118</td><td class="num">42.1%</td><td class="num">33,002</td><td class="num">7,350</td></tr></table></div>
+</div></section>
+
+<p class="m">預覽：只放假資料；核准後套進 CustomerServiceANDSales research/preview_b/index.html 的管理頁，連同 4 個修正一起上傳（上傳要 Evans 在 W 說「同意上傳」）。</p>
+</main>
+<script>
+"use strict";
+const $=s=>document.querySelector(s), esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const msg=(id,t)=>{$("#"+id).textContent=t};
+document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll(".sec").forEach(s=>s.classList.toggle("on",s.id===b.dataset.s));history.replaceState(null,"","#"+b.dataset.s)});
+addEventListener("load",()=>{const b=document.querySelector(`#tabs button[data-s="${location.hash.slice(1)}"]`);if(b)b.click()});
+// 假資料
+const ST=[["GEA5","GEA 5 號 核心波段","多",1],["GEA6","GEA 6 號 波段","多",1],["SWING_1M","ExpRev Swing 1M","多",1],["SWING_5M","ExpRev Swing 5M","多",1],["SWING_5M_HPF","Swing 5M 高獲利因子","多",1],["PROTO_5M_BAL","Proto 5M 平衡","多",1],["SNIPE_STD_1M","SnipeFlash 標準 1M","多",1],["SNIPE_MAX_1M","SnipeFlash Max 1M","多",1],["SNIPE_1M5K_012","SnipeFlash 1M5K 0.12","多",1],["SQ_LONG_V2","SqBrk Long V2","多",1],["HYBRID_V2","空方 Hybrid V2","空",1],["HYBRID_V1","空方 Hybrid V1","空",1],["SQ_SHORT_V2","SqBrk Short V2","空",1],["MODE3_SNIPE","魚頭（Mode3）","空",0],["PURE_BODY","魚身","空",0],["LAB_SFKM_2_15","研究：1M5K Max -55／0.65","多",0],["LAB_SH_9_10","研究：Hybrid V2 0.45／0.5","空",0]].map(([code,name,side,on])=>({code,name,side,on:!!on,subs:Math.floor(Math.random()*6)}));
+let dirty1=0;
+function r1(){const q=($("#q1").value||"").toLowerCase(),L=ST.filter(s=>!q||(s.code+s.name).toLowerCase().includes(q));
+ $("#c1").textContent=`共 ${ST.length} 支，上架 ${ST.filter(s=>s.on).length}`;
+ $("#t1").innerHTML="<tr><th>上架</th><th>代碼</th><th>名稱</th><th>多空</th><th class='num'>訂閱人數</th><th class='hide-sm'>備註</th></tr>"+L.map(s=>`<tr><td><label class="sw"><input type="checkbox" data-c="${s.code}" ${s.on?"checked":""}> <span class="${s.on?"ok":"mut"}">${s.on?"上架":"下架"}</span></label></td><td>${s.code}</td><td>${esc(s.name)}${s.code.startsWith("LAB_")?' <span class="tag">研究</span>':""}</td><td>${s.side}</td><td class="num">${s.subs}</td><td class="hide-sm"><input style="width:140px" placeholder="備註"></td></tr>`).join("");
+ $("#t1").querySelectorAll("[data-c]").forEach(c=>c.onchange=()=>{const s=ST.find(x=>x.code===c.dataset.c);if(!c.checked&&!confirm("下架「"+s.name+"」？客戶選單看不到；已訂閱的 "+s.subs+" 人照常服務到到期日。")){c.checked=true;return}s.on=c.checked;dirty1++;r1();msg("m1","（還沒儲存）")})}
+$("#q1").oninput=r1;r1();
+const P=[{name:"👑 套餐 C1：雙週期旗艦八核心",codes:["GEA5","SWING_1M","SWING_5M","SNIPE_STD_1M","SNIPE_MAX_1M","SNIPE_1M5K_012","HYBRID_V2","SQ_SHORT_V2"],year:383544,on:true},{name:"🔥 套餐 B：跨週期全能五天王",codes:["GEA5","SWING_5M","SNIPE_MAX_1M","SNIPE_1M5K_012","HYBRID_V2"],year:247200,on:true},{name:"🤝 套餐 A：波段雙王拍檔",codes:["GEA5","SWING_5M"],year:179216,on:true},{name:"⚔️ 套餐 S2：GEA5 + V2 雙引擎",codes:["GEA5","HYBRID_V2"],year:139216,on:false},{name:"我的組合 4+2",codes:["GEA5","GEA6","SWING_1M","LAB_SFKM_2_15","HYBRID_V2","LAB_SH_9_10"],year:0,on:false,src:"研究組合"}];
+let cur=0,pkFilter="all";
+function r2(){["all","on","off"].forEach(k=>$("#f_"+k).classList.toggle("on",k===pkFilter));
+ $("#pk").innerHTML=P.map((p,i)=>({p,i})).filter(({p})=>pkFilter==="all"||(pkFilter==="on")===p.on).map(({p,i})=>`<div class="card ${p.on?"":"off"} ${i===cur?"sel":""}" data-i="${i}"><div class="row" style="justify-content:space-between"><b>${esc(p.name)}</b><span class="tag ${p.on?"fix":"drop"}">${p.on?"上架中":"已下架"}</span></div><div class="note">${p.codes.length} 支${p.src?"・研究組合推出":""}・年費 $${p.year.toLocaleString()}</div></div>`).join("");
+ $("#pk").querySelectorAll("[data-i]").forEach(c=>c.onclick=()=>{cur=+c.dataset.i;r2()});
+ const p=P[cur];if(!p)return;$("#eName").value=p.name;$("#eYear").value=p.year;$("#eOn").checked=p.on;$("#eOnT").textContent=p.on?"上架中":"已下架（客戶看不到）";$("#eDesc").value=p.src?"由研究組合推出。歷史估算不代表未來表現。":"";
+ $("#eCodes").innerHTML=ST.map(s=>`<label class="tag"><input type="checkbox" data-pc="${s.code}" ${p.codes.includes(s.code)?"checked":""}> ${esc(s.name)}</label>`).join("");
+ $("#eCodes").querySelectorAll("[data-pc]").forEach(c=>c.onchange=()=>{const k=c.dataset.pc;p.codes=c.checked?[...p.codes,k]:p.codes.filter(x=>x!==k);r2()});
+ $("#subPk").innerHTML='<option value="">選套餐帶入…</option>'+P.filter(x=>x.on).map(x=>`<option>${esc(x.name)}</option>`).join("")}
+$("#eOn").onchange=()=>{const p=P[cur];if(!$("#eOn").checked&&!confirm("下架「"+p.name+"」？已訂閱的客戶照常服務到到期日。")){$("#eOn").checked=true;return}p.on=$("#eOn").checked;r2();msg("m2","（還沒儲存）")};
+$("#eName").oninput=()=>{P[cur].name=$("#eName").value;r2()};$("#eYear").oninput=()=>{P[cur].year=+$("#eYear").value||0;r2()};
+function newPk(){P.push({name:"新套餐",codes:[],year:0,on:true});cur=P.length-1;pkFilter="all";r2();msg("m2","勾至少 1 支策略才會存（沒勾的不送出）")}
+function delPk(){if(confirm("刪除「"+P[cur].name+"」？")){P.splice(cur,1);cur=0;r2()}}
+function autoName(){const p=P[cur],l=p.codes.map(c=>ST.find(s=>s.code===c)).filter(Boolean),L=l.filter(s=>s.side==="多").length;$("#eName").value=P[cur].name=`高風報比・${L} 多＋${l.length-L} 空`;r2()}
+r2();
+$("#subPk").onchange=e=>{const p=P.find(x=>x.name===e.target.value);$("#subTxt").value=p?p.codes.join(","):""};
+$("#t3").innerHTML="<tr><th>類別</th><th>項目</th><th class='num'>報價單年費</th><th>改成年費</th><th class='num'>月費</th></tr>"+ST.slice(0,8).map(s=>{const y=60000+s.code.length*4000;return `<tr><td>策略</td><td>${esc(s.name)}</td><td class="num">$${y.toLocaleString()}</td><td><input type="number" placeholder="${y}" style="width:110px"></td><td class="num">$${Math.round(y/12).toLocaleString()}</td></tr>`}).join("")+[["即時中繼與下單機",36000],["盤中資金與看盤區",24000]].map(([n,y])=>`<tr><td>基礎必選</td><td>${n}</td><td class="num">$${y.toLocaleString()}</td><td><input type="number" placeholder="${y}" style="width:110px"></td><td class="num">$${(y/12).toLocaleString()}</td></tr>`).join("");
+$("#t4").innerHTML="<tr><th>開通</th><th>姓名</th><th>到期日</th><th>訂閱</th><th>狀態</th><th class='hide-sm'>裝置</th><th></th></tr>"+[["王小明","2026-12-31","GEA5,HYBRID_V2",1],["陳大華","2027-03-31","*",1],["林測試","2026-10-31","GEA5",1],["張停用","2026-12-31","GEA6",0]].map(([n,e,s,on])=>{const ok=on&&e>="2026-11-12";return `<tr><td><input type="checkbox" ${on?"checked":""}></td><td>${n}</td><td><input type="date" value="${e}"></td><td><input value="${s}" style="width:130px"></td><td>${ok?'<span class="ok">可登入</span>':on?'<span class="bad">已到期</span>':'<span class="mut">停用</span>'}</td><td class="hide-sm num">2</td><td><button>在新裝置登入</button> <button>更多…</button></td></tr>`}).join("");
+</script>
+</body></html>
