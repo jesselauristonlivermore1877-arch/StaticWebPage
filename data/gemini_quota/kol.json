@@ -1,43 +1,13 @@
 {
  "dead": {
-  "2026-11-11": {
-   "gemini-3.8-flash": {
-    "at": "11-11 12:44",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.7-flash": {
-    "at": "11-11 12:49",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.6-flash": {
-    "at": "11-11 18:39",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.5-flash": {
-    "at": "11-11 18:45",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-flash-latest": {
-    "at": "11-11 18:55",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
+  "2026-11-12": {
    "gemini-3-flash-preview": {
-    "at": "11-11 21:26",
+    "at": "11-12 21:30",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    }
   }
  },
  "count": {
-  "2026-11-01": {
-   "gemini-3.8-flash": {
-    "req": 7,
-    "tok": 34562
-   },
-   "gemini-3.7-flash": {
-    "req": 2,
-    "tok": 27023
-   }
-  },
   "2026-11-02": {
    "gemini-2.5-flash": {
     "req": 1,
@@ -382,16 +352,35 @@
     "req": 4,
     "tok": 268023
    }
+  },
+  "2026-11-12": {
+   "gemini-2.5-flash": {
+    "req": 1,
+    "tok": 0
+   },
+   "gemini-3-flash-preview": {
+    "req": 5,
+    "tok": 433792,
+    "e429": 1
+   },
+   "gemini-3.5-flash-lite": {
+    "req": 17,
+    "tok": 758248
+   }
   }
  },
  "tpm": [
   [
-   1794462394.1161027,
-   7018
+   1794519426.6402328,
+   82820
   ],
   [
-   1794462398.8167012,
-   7960
+   1794519482.8043227,
+   11408
+  ],
+  [
+   1794519485.350386,
+   11627
   ]
  ]
 }
