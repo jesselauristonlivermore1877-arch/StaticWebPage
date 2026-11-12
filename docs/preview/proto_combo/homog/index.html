@@ -38,25 +38,31 @@ svg text{fill:var(--ink2);font-size:10px}
 <section class="pc-how">
 <h2>怎麼看這頁</h2>
 <ol class="b" style="padding-left:18px;margin:4px 0;color:var(--ink)">
-<li><b>格點圖</b>＝同一支策略換不同參數的回測結果，一格一組參數；越紅代表風報比（每年平均賺的 ÷ 最大回撤）越好，細金框是「附近一片都不錯」的高原區。</li>
-<li><b>粗黑框亮起來的格子</b>＝程式挑進組合的參數，每格各下 1 口一起跑；虛線藍框是你手挑的那組，◆ 是客戶選單現在用的參數。</li>
-<li><b>C1／C2／C3</b>＝程式挑出的 3 個候選組合（從不同的起點挑，C1 最推薦）；<b>全期C1</b>＝用 2019～2026 全部資料挑，跟你看全圖手挑的方式一樣。</li>
-<li><b>樣本內／樣本外</b>：C 組合只看 2019～2023 挑（樣本內），再看它沒看過的 2024～2026（樣本外）表現，用來檢查是不是只是剛好配到過去。</li>
-<li><b>例：SFKM</b>　你那組（2 格）全期風報比 0.89、最大回撤每口 2,131 點；程式全期C1（2 格）0.87、回撤 2,340 點，淨利多 987 點 → 打平。只看 2019～2023 挑的 C1，到 2024 之後風報比 0.89，你那組 1.69 → 輸。</li>
-<li>下方表格、曲線都是「每口平均」（組合合計 ÷ 格數），才能跟單一參數公平比。</li>
-<li><b>請你決定 ①</b>：你手挑的兩組到底是哪幾格？我先暫定「客戶選單預設格＋4+2 那一格」。<b>建議</b>：在會員站「我的組合」截圖兩組成分給我，換掉後重跑只要 13 秒。</li>
-<li><b>請你決定 ②</b>：正式用「全期挑」還是「2019～2023 挑」？<b>建議</b>：先用全期挑（跟你手挑一樣，兩組都打平或更好），但把 2019～2023 挑的結果並列當警示；兩者差很多的家族（例 SW5、SQL）代表好參數會隨時間移動，上線先小口數觀察。</li>
+<li><b>格點圖</b>＝同一支策略換不同參數的回測，一格一組參數；越紅＝風報比（每年平均賺的 ÷ 最大回撤）越好，細金框＝「附近一片都不錯」的高原。</li>
+<li><b>粗黑框</b>＝程式挑進組合的格子（每格 1 口）；<b>虛線藍框</b>＝你在會員站「我的組合」挑的那組；◆＝客戶選單現在用的參數。</li>
+<li><b>全期C1／C2／C3</b>＝用 2019～2026 全部資料挑（跟你看全圖挑的方式一樣）；<b>C1／C2／C3</b>＝只看 2019～2023 挑，再看沒看過的 2024～2026（樣本外）撐不撐得住。</li>
+<li><b>這次改了什麼</b>：上一版輸你，是因為①要求 2019～2023 至少 10 筆，把「擴張 0」那一欄（7 年只有 9～17 筆、但賺得多回撤小）整欄排除，你兩組都有用到；②最多只挑 4 格。改成至少 8 筆、最多 8 格後，兩族都贏你（見下表）。</li>
+<li><b>飽和的格子等於多下口數</b>：你 MAX 那組 -55／0.55～0.7 四支每天損益幾乎一樣（相關 ≥ 0.95），等於淨利最高那格下了 4 口，所以你的「每口淨利」比較高；程式每格只下 1 口，這一項會吃虧。</li>
+<li>比較時兩種算法都列：<b>總口數加總</b>（跟會員站「組合成分」表一樣，格數不同時淨利不能直接比）和<b>每口平均</b>（÷ 格數，格數不同也能比）。</li>
+<li><b>請你決定 ①</b>：要不要讓程式也可以「同一格多下幾口」（像你用飽和格加重）？<b>建議</b>：先不要；加重會讓淨利高但回撤也跟著放大，先用每格 1 口，口數另外照資金配。</li>
+<li><b>請你決定 ②</b>：正式用「全期挑」還是「2019～2023 挑」？<b>建議</b>：用全期挑，但「擴張 0」這類筆數少的格子，上線前先小口數跑一段；2019～2023 挑的結果並列當警示。</li>
 </ol>
+</section>
+<section>
+<h2>跟你手挑的兩組比（同一套算法）</h2>
+<p class="b">最大回撤含持倉中的浮動損益（日收盤評價）；風報比＝年均淨利 ÷ 最大回撤；淨利÷回撤＝會員站的算法；去飽和＝每日損益相關 ≥ 0.95 的只留一支。</p>
+<div class="pc-tbl"><table id="pc-ev"></table></div>
+<div class="pc-tbl" style="margin-top:8px"><table id="pc-evy"></table></div>
 </section>
 <section>
 <h2>怎麼挑的</h2>
 <p class="b">每個家族＝一張格點圖，每格 1 口。逐日權益＝每個日曆日最後一根 1 分K 收盤評價持倉＋已實現淨損益（含持倉中的浮動損益，日收盤口徑）。組合數字一律是「每口平均」（合計 ÷ 格數），才能跟單格同尺度比較。</p>
 <ol class="b" style="padding-left:18px;margin:4px 0">
-<li>有效格：樣本內平倉 ≥ 10 筆。</li>
+<li>有效格：挑選用的那段至少平倉 8 筆。</li>
 <li>高原：風報比 ≥ 家族 70 分位，且 3×3 鄰居平均也 ≥ 70 分位，淨利 &gt; 0。</li>
 <li>硬門檻（均衡，用家族淨利 &gt; 0 的格子的分位數）：最大浮動回撤 ≤ 50 分位、最長回撤天數 ≤ 50 分位、淨利 ≥ 25 分位（換算成家族最佳格的 %，每族寫在卡片上）。起點格要單獨過；之後加進來的格子只要「組合」過。</li>
 <li>去飽和：交易明細（進場＋出場時間）重疊 ≥ 95% 算同一群（照分數高到低、跟群首比，不串連），每群取格點中心那格當代表。</li>
-<li>逐一加入：從分數最高的起點開始，「不加」和「加每一格」放在同一組，風報比、淨利、期望值、最大浮動回撤（越小越好）四項排名平均，最好的不是「不加」才加，最多 4 格。C2、C3 換下一個起點。</li>
+<li>逐一加入：從分數最高的起點開始，「不加」和「加每一格」放在同一組，風報比、淨利、期望值、最大浮動回撤（越小越好）四項排名平均，最好的不是「不加」才加，最多 8 格。C2、C3 換下一個起點。</li>
 <li>防過度最佳化：<b>C1～C3 只用 2019～2023 挑</b>，2024 起是樣本外；另外「全期C」用全期挑，只拿來跟 Evans 手挑的比。被選格的 8 個鄰居都列出來。</li>
 </ol>
 <div class="pc-warn" id="pc-verdict"></div>
@@ -77,8 +83,17 @@ $('#pc-made').textContent=`產出 ${D.made}｜樣本內 2019-10-01～${D.is_end}
 const vv=[];
 D.fams.filter(f=>f.ref).forEach(f=>{Object.entries(f.ref.verdict).forEach(([k,v])=>{
   vv.push(`<b>${f.id}</b> ${k}：${v.c} 風報比 ${f2(v.c_m.MAR)}／淨 ${f0(v.c_m.net)}／期望 ${f2(v.c_m.E)}／回撤 ${f0(v.c_m.mdd)} vs 標準答案 ${f2(v.ref_m.MAR)}／${f0(v.ref_m.net)}／${f2(v.ref_m.E)}／${f0(v.ref_m.mdd)} → 平均名次 ${v.rank[0]} vs ${v.rank[1]} <span class="${v.ok?'ok':'ng'}">${v.ok?'✓ 一樣或更好':'✗ 比較差'}</span>`);});});
-$('#pc-verdict').innerHTML='<b>先拿 Evans 手挑的兩組驗證</b>（標準答案暫定＝SFKS：'+D.fams.find(f=>f.id==='SFKS').ref.note+'；SFKM：'+D.fams.find(f=>f.id==='SFKM').ref.note+'）<br>'+vv.join('<br>')+
- '<br>結論：用全期挑，兩族都跟 Evans 一樣或更好；只用 2019～2023 挑，到樣本外都輸給 Evans 那組（他的組合是看過 2024～2026 才挑的，1M5K 在兩段偏好的參數區不同）。';
+$('#pc-verdict').innerHTML='<b>先拿 Evans 手挑的兩組驗證</b>（標準答案＝SFKS：'+D.fams.find(f=>f.id==='SFKS').ref.note+'；SFKM：'+D.fams.find(f=>f.id==='SFKM').ref.note+'）<br>'+vv.join('<br>')+
+ '<br>結論：用全期挑，兩族風報比、回撤、期望值都比 Evans 好或一樣（MAX 每口淨利少一點，原因見上面第 5 點）；只用 2019～2023 挑，到樣本外還是輸 Evans 那組（他是看過 2024～2026 才挑的）。';
+// 跟 Evans 兩組比（總口數／每口平均）
+(function(){const E=D.evans; let h='<tr><th>組合</th><th>格數</th><th>總口數 淨利</th><th>總口數 回撤</th><th>淨利÷回撤</th><th>每口 淨利</th><th>每口 回撤</th><th>風報比</th><th>期望值</th><th>最長回撤天</th><th>樣本外風報比</th></tr>';
+ let y='', ys=null;
+ E.fams.forEach(f=>{h+=`<tr><td colspan="11" style="text-align:left;font-weight:700">${f.id}｜${f.name}</td></tr>`;
+  f.rows.forEach(r=>{const t=r.full.tot,p=r.full.per,ev=r.name.startsWith('Evans');
+   h+=`<tr${ev?' style="background:#3b6fd61a"':''}><td>${r.name}</td><td>${r.members}</td><td class="${cls(t.net)}">${f0(t.net)}</td><td>${f0(t.mdd)}</td><td>${f2(t.net_mdd)}</td><td>${f0(p.net)}</td><td>${f0(p.mdd)}</td><td>${f2(t.MAR)}</td><td>${(+t.E).toFixed(1)}</td><td>${t.ddd}</td><td>${f2(r.oos.tot.MAR)}</td></tr>`;});
+  ys=ys||Object.keys(f.rows[0].yearly_tot);
+  y+=`<tr><td colspan="${ys.length+1}" style="text-align:left;font-weight:700">${f.id} 逐年（總口數：淨利 / 當年回撤）</td></tr>`+f.rows.map(r=>`<tr><td>${r.name}</td>`+ys.map(k=>{const v=r.yearly_tot[k];return v?`<td><span class="${cls(v[0])}">${f0(v[0])}</span> / ${f0(v[1])}</td>`:'<td>—</td>';}).join('')+'</tr>').join('');});
+ $('#pc-ev').innerHTML=h; $('#pc-evy').innerHTML='<tr><th></th>'+ys.map(k=>`<th>${k}</th>`).join('')+'</tr>'+y;})();
 const nav=$('#pc-nav'); let cur=0, mode='is', heat='is', ci=0;
 D.fams.forEach((f,i)=>{const b=document.createElement('button');b.textContent=f.id;b.title=f.name;b.onclick=()=>{cur=i;ci=0;draw();};nav.appendChild(b);});
 function heatColor(v,P,N){ if(v==null||isNaN(v))return '#8884';   // 依分位數上色：正值在正值裡的名次、負值在負值裡的名次
