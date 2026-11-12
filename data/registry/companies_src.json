@@ -3313,26 +3313,31 @@
    "merged_into": null,
    "leaders": [
     {
-     "zh": "黃仁勳",
-     "en": "Jensen Huang",
-     "title": "CEO"
+     "zh": "克瑞斯",
+     "en": "Colette Kress",
+     "title": "Interim CEO（臨時執行長）"
+    },
+    {
+     "zh": "Harvey C. Jones",
+     "en": "Harvey C. Jones",
+     "title": "Chair of the Board（董事長）"
     }
    ],
    "valuation_usd": null,
    "round": null,
    "round_date": null,
    "src": [
+    "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
     "https://investor.nvidia.com/",
-    "https://www.sec.gov/",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEl7MJvJi9p6pJiRTxBt9_GSmZ93LfliT6lPzyHgMZ8wNiqMK5UK-JlitXCk7V-Q2h1l9d4RZ4g7L2Gvxs6Ols76UgML9XAYD5CAMwbPXEvpDzYaKfaa9dJU1kMuaL2VJ_Hx_-bYmp7Eo0B-MXcabpg8G-6-Bl-mpeQloWDagcJ_XQ=",
-    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEpMrMoFFGlb3dCaT8zrEVmR8jasSj8S4oNmgO0MfoARjRv1jrl1TWRWOsXZqvBrKk4DlaudqMX944PZfLGg7p5HXudpKXQm4X4530k7gpFM8SttJ8cX-pVbnq1I27anot6gXNZVhnt4Gd9J-aahk0caR8N6GYO"
+    "https://www.sec.gov/"
    ],
-   "quote": "January 22, 1999: The official date that NVIDIA's common stock began trading publicly on the Nasdaq National Market (under the ticker symbol NVDA), marking its Initial Public Offering (IPO) at $12 per share. Jensen Huang (Jen-Hsun Huang) has served continuously as its President, Chief Executive Officer (CEO), and member of the Board of Directors since its inception.（未開啟原文，依搜尋結果摘要作答）",
-   "checked": "2026-10-25",
+   "quote": "Jensen Huang has resigned as President, Chief Executive Officer, and a member of the Board, effective immediately. Colette Kress, current Executive Vice President and Chief Financial Officer of NVIDIA, has agreed to serve as Interim Chief Executive Officer. The Board of Directors appointed Harvey C. Jones as its first-ever Chair of the Board.（官方新聞稿原文，2026-11-12 21:48 台北時間發布）",
+   "checked": "2026-11-13",
    "verify": {
     "ok": true,
-    "why": "頁面有公司與負責人",
-    "at": "2026-10-25"
+    "why": "官方新聞稿頁面有臨時執行長與董事長姓名（雲端R 程式開頁核對 HTTP 200）",
+    "at": "2026-11-13",
+    "by": "雲端R 手動更正（輝達官方宣布）"
    }
   },
   {
