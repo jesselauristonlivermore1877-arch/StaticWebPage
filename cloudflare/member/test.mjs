@@ -179,6 +179,25 @@ r = await go("/api/admin/members", {headers: A});
 t("會員列表帶訂閱欄", ((await r.json()).members.find(m => m.id === mem.id) || {}).subs === "*");
 r = await go("/api/admin/members", {method: "PATCH", headers: {...A, "content-type": "application/json"}, body: JSON.stringify({id: mem.id, admin: true})});
 t("管理者拿得到原型研究完整版", (await st("data_adm_zz.js")) === 200);
+
+// 套餐上下架 B（雲端P 11-12）：on／src 存得進去；管理者看全部、一般會員只看上架的；最後還原成測試前
+//   這時測試會員已是管理者 → 先用管理者讀完整原資料（含已下架的，還原才不會漏），驗一般會員時暫時取消管理員再改回來
+{ const NC = {cookie: neu.cookie}, setAdm = v => go("/api/admin/members", {method: "PATCH", headers: {...A, "content-type": "application/json"}, body: JSON.stringify({id: mem.id, admin: v})});
+  const ko = await (await go("/api/packages", {headers: NC})).json();
+  const P1 = [{id: "ZZ_ON", name: "測試上架", desc: "", codes: ["ZZA"], year: 1, src: "手動"}, {id: "ZZ_OFF", name: "測試下架", desc: "", codes: ["ZZA"], year: 1, on: false, src: "研究組合"}];
+  r = await go("/api/admin/packages", {method: "PUT", headers: {...A, "content-type": "application/json"}, body: JSON.stringify(P1)});
+  t("套餐（含 on／src）可存", r.status === 200, "HTTP " + r.status);
+  r = await go("/api/packages", {headers: NC}); const pa = ((await r.json()) || {}).packages || [];
+  t("管理者看得到上架＋下架", pa.map(p => p.id).join() === "ZZ_ON,ZZ_OFF" && pa[1].on === false && pa[1].src === "研究組合", JSON.stringify(pa.map(p => [p.id, p.on, p.src])));
+  await setAdm(false);
+  r = await go("/api/packages", {headers: NC}); const pm = ((await r.json()) || {}).packages || [];
+  t("一般會員看不到已下架的套餐", pm.map(p => p.id).join() === "ZZ_ON", JSON.stringify(pm.map(p => p.id)));
+  await setAdm(true);
+  r = await go("/api/admin/packages", {method: "PUT", headers: {...A, "content-type": "application/json"}, body: JSON.stringify([{...P1[0], on: "否"}])});
+  t("套餐 on 不是布林被擋", r.status === 400, "HTTP " + r.status);
+  r = await go("/api/admin/packages", {method: "PUT", headers: {...A, "content-type": "application/json"}, body: JSON.stringify(ko ? ko.packages : [])});
+  const kn = await (await go("/api/packages", {headers: NC})).json();
+  t("套餐還原成測試前", JSON.stringify(kn ? kn.packages : null) === JSON.stringify(ko ? ko.packages.map(p => Object.assign({}, p, {on: p.on !== false})) : null), ko ? ko.packages.length + " 組" : "（原本沒有自訂套餐）"); }
 for (const n of ["data_s_ZZA.js", "data_s_ZZB.js", "data_adm_zz.js"]) await go("/api/admin/file?name=" + n, {method: "DELETE", headers: A});
 
 // 防誤刪（10-29 晚【新】總指揮一）：自己、Evans、最後一個管理員擋下；軟刪除＋回收桶＋還原；救援只認 header 的 ADMIN_TOKEN
