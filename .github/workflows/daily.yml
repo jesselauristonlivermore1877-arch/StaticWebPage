@@ -304,8 +304,12 @@ jobs:
             git commit -m "每日更新 $(TZ=Asia/Taipei date +%F)"
             # 10-25：同一段時間別的排程（即時信息流、國際指數）也改了 docs/index.html、world_idx.json → rebase 衝突整班沒推上（run 372）。
             #        衝突時以這一班剛產出的為準（rebase 的 -X theirs＝正在重放的本班 commit）；其他檔照常合併。
-            git pull --rebase -X theirs origin main
-            git push origin HEAD:main
+            # 11-12（雲端P）：別的排程同一刻推 → 「cannot lock ref」整班沒推上（run 43196363217）→ 最多 4 次，每次先重新 rebase
+            for i in 1 2 3 4; do
+              git pull --rebase -X theirs origin main && git push origin HEAD:main && break
+              [ "$i" = 4 ] && exit 1
+              echo "推送第 $i 次沒成功，$((i * 10)) 秒後重試"; sleep $((i * 10))
+            done
           fi
 
       - name: 保存證交所 www 快取
