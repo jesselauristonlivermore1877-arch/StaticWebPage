@@ -1,5 +1,5 @@
 {
-"checked": "2026-11-06",
+"checked": "2026-11-12",
 "src_asof": [
 "2026-10-25",
 "2026-10-25"
@@ -320,7 +320,7 @@
 "zh": "阿爾卡迪·埃斯帕尼亞",
 "en": "Arcadi España García",
 "ok": false,
-"why": "出處頁找不到名字",
+"why": "出處打不開（HTTP 0）",
 "src": [
 "https://www.hacienda.gob.es/"
 ]
@@ -2022,8 +2022,8 @@
 "ticker": "PM",
 "name": "Philip Morris International Inc.",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
@@ -2374,8 +2374,8 @@
 "ticker": "ISRG",
 "name": "Intuitive Surgical, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 500）"
 },
 {
 "cty": "us",
@@ -2478,8 +2478,8 @@
 "ticker": "VLO",
 "name": "Valero Energy Corporation",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
@@ -2494,8 +2494,8 @@
 "ticker": "NEM",
 "name": "Newmont Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -2510,8 +2510,8 @@
 "ticker": "PH",
 "name": "Parker-Hannifin Corporation",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
@@ -2660,7 +2660,7 @@
 ],
 "n_ok": [
 43,
-246
+247
 ],
 "n": [
 53,
