@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
+<!-- make_dist.py --release 會讀下面這行，跟出版版號比對，不一致就印 ✗ 提醒（不擋出版）；改清單時一起改 -->
+<meta name="om-ver" content="20261112a">
 <title>GEA 下單機完整測試清單</title>
 <style>
 :root{--bg:#0b0f14;--panel:#121821;--panel2:#18202b;--line:#26303d;--tx:#d5dde7;--mut:#8593a3;--acc:#f0b429;--up:#e5484d;--dn:#2fb36b;--blue:#4c8dff}
@@ -13,7 +15,9 @@ main{max-width:1100px;margin:0 auto;padding:16px}
 h1{font-size:20px;color:var(--acc);margin:4px 0 6px}h2{font-size:16px;margin:22px 0 8px;color:var(--acc)}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:12px}
 .stop{background:#3a1216;border:1px solid #7a2a31;color:#ffd0d4;border-radius:10px;padding:10px 14px;margin:10px 0}
+.ver{background:#10261a;border:1px solid #23573a;color:#bff0d2;border-radius:10px;padding:8px 14px;margin:8px 0;font-size:13px}
 .d9{display:inline-block;font-size:11px;padding:0 6px;border-radius:4px;background:#3a2a05;color:#ffd77a;border:1px solid #6b4d0a;margin-left:4px;vertical-align:1px}
+.man{display:inline-block;font-size:11px;padding:0 6px;border-radius:4px;background:#2a1530;color:#f0c4ff;border:1px solid #5a2a6b;margin-left:4px;vertical-align:1px}
 .note{font-size:12px;color:var(--mut)}
 table{border-collapse:collapse;width:100%}
 th,td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left;font-size:13px}
@@ -21,19 +25,21 @@ th{color:var(--mut);font-weight:500;white-space:nowrap}
 td:first-child{white-space:nowrap;color:var(--acc);font-weight:700}
 .scroll{overflow-x:auto}
 input[type=checkbox]{width:18px;height:18px;accent-color:var(--acc)}
-code{background:var(--panel2);padding:0 4px;border-radius:4px;font-size:12px}
-@media (max-width:700px){th,td{font-size:12px;padding:5px 4px}}
+code{background:var(--panel2);padding:0 4px;border-radius:4px;font-size:12px;word-break:break-all}
+@media (max-width:700px){th,td{font-size:12px;padding:5px 4px}td:first-child{white-space:normal}}
 </style>
 </head>
 <body>
 <main>
-<h1>GEA 下單機完整測試清單（以 d10 為準）</h1>
-<div class="note">版本 20261106a（d10，11-06 出）。11-08 更新：加 F 段筆電安裝模擬實測結果、G 段 d11 待改清單。用同事的帳號從頭到尾走一遍：管理端產生開通碼 → 下載安裝 → 安裝精靈 0～6 步 → 輸入開通碼 → 連上中繼 → 訊號區只看得到有訂閱的策略 → 帳戶列顯示權益數 → 模擬（或同事自己同意的實單）→ 更新與解除安裝。每一步照表打勾；出錯就照「出錯時截什麼」截圖，連同 <code>C:\GEA_om\logs</code> 整個資料夾一起放進 _inbox 給 W。<span class="d9">d9</span> 標記＝d9 才有、d8 沒有的東西（d10 都有）；<span class="d9">d10</span> 標記＝d10 新改的地方。</div>
+<h1>GEA 下單機完整測試清單（以 d16 為準）</h1>
+<div class="ver">📌 <b>最後更新版本：20261112a（d16）</b>｜更新日期：2026-11-13｜Release <code>om-20261112a</code>。d9 以後每版改了什麼、哪些有自動測試、哪些要人工驗，見下方 G 段。</div>
+<div class="note">用同事的帳號從頭到尾走一遍：管理端產生開通碼 → 下載安裝 → 安裝精靈 0～6 步 → 輸入開通碼 → 連上中繼 → 訊號區只看得到有訂閱的策略 → 帳戶列顯示權益數 → 模擬（或同事自己同意的實單）→ 更新與解除安裝。每一步照表打勾；出錯就照「出錯時截什麼」截圖，連同 <code>C:\GEA_om\logs</code> 整個資料夾一起放進 _inbox 給 W。標記：<span class="d9">d11</span>～<span class="d9">d16</span>＝那一版新改的地方；<span class="man">人工</span>＝自動測試沒辦法驗、一定要實機看。</div>
 
 <div class="stop">🔴 <b>停止點（一定要看）</b><br>
 ① <b>不准用 Evans 的國票正式帳號送任何委託</b>（模擬、實單都不行）；Evans 的帳號只能做第 8 步「帳戶列看權益數」這種只讀查詢。<br>
-② 同事的帳號：<b>預設只做到第 9 步「模擬演練」就停</b>。第 10 步實單要同事本人在場、口頭同意、只下 1 口微台指（TMF）並當場平倉；沒有同意就跳過第 10 步，直接做第 11 步。<br>
-③ d10 起<b>任何時間都能按「更新」</b>（不再擋交易時段）；有部位或在交易時段按，會先跳確認框，寫明更新期間約 30～60 秒不會跟單、裝完自動開回來並對帳。</div>
+② 同事的帳號：<b>預設只做到第 9 步「模擬」就停</b>。第 10 步實單要同事本人在場、口頭同意、只下 1 口微台指（TMF）並當場平倉；沒有同意就跳過第 10 步，直接做第 11 步。<br>
+③ d10 起<b>任何時間都能按「更新」</b>（不再擋交易時段）；有部位或在交易時段按，會先跳確認框，寫明更新期間約 30～60 秒不會跟單、裝完自動開回來並對帳。<br>
+④ <b>跟單中的策略不要在國票 App 手動平倉</b>（d16 以前的已知問題，見 H 段）：手動成交下單機對不到策略、不會扣帳本，下一個出場訊號會變成反向開倉。要手動處理，先在主畫面把那支的「跟單」關掉，處理完請 W 改帳本再打開。</div>
 
 <h2>測試前準備</h2>
 <div class="card scroll"><table>
@@ -54,68 +60,74 @@ code{background:var(--panel2);padding:0 4px;border-radius:4px;font-size:12px}
 <h2>B. 下載與安裝（同事的電腦）</h2>
 <div class="card scroll"><table>
 <tr><th>#</th><th>要點哪裡</th><th>應該看到什麼</th><th>出錯時截什麼</th><th>✓</th></tr>
-<tr><td>4</td><td>下載 <b>GEA_OM_Setup_20261106a.exe</b>（Evans 給的連結：GitHub Release <code>om-20261106a</code>）。按兩下執行；Windows 跳「保護您的電腦」→「其他資訊」→「仍要執行」。</td><td>安裝畫面標題寫 20261106a；按「下一步」到「完成」，桌面出現「GEA 下單機」捷徑。</td><td>任何錯誤視窗；裝完後的「完成」頁。</td><td><input type="checkbox"></td></tr>
+<tr><td>4</td><td>下載 <b>GEA_OM_Setup_20261112a.exe</b>（Evans 給的連結：GitHub Release <code>om-20261112a</code>；TG 置頂「GEA 常用網址」也有）。按兩下執行；Windows 跳「保護您的電腦」→「其他資訊」→「仍要執行」。</td><td>安裝畫面標題寫 20261112a；按「下一步」到「完成」，桌面出現「GEA 下單機」捷徑。</td><td>任何錯誤視窗；裝完後的「完成」頁。</td><td><input type="checkbox"></td></tr>
 </table></div>
 
 <h2>C. 安裝精靈 0～6 步（裝完會自動開；之後也可以從桌面捷徑開）</h2>
 <div class="card scroll"><table>
 <tr><th>#</th><th>要點哪裡</th><th>應該看到什麼</th><th>出錯時截什麼</th><th>✓</th></tr>
 <tr><td>5-0</td><td>第 0 步「安裝檢查」：按「檢查」。角色保持預設「接收端（客戶）」，<b>不要</b>點「我有管理者開通碼」。</td><td>每一項綠色 ✓（.NET、國票元件、資料夾權限）；畫面上只有「接收端（客戶）」一個角色。</td><td>有紅 ✗ 的那一頁（整個精靈視窗）。</td><td><input type="checkbox"></td></tr>
-<tr><td>5-1</td><td>第 1 步「憑證檢查」：按「瀏覽」選同事的 .pfx → 輸入憑證密碼 → 按「檢查」。</td><td>✓ 顯示憑證到期日、身分證（<b>完整顯示、不遮罩</b>：Evans 11-08 裁示，客戶自己比對方便）。</td><td>錯誤訊息那一頁（密碼欄會自動遮住）。</td><td><input type="checkbox"></td></tr>
+<tr><td>5-1</td><td>第 1 步「憑證檢查」：按「瀏覽」選同事的 .pfx → 輸入憑證密碼 → 按「檢查」。</td><td>✓ 顯示憑證到期日、身分證（<b>完整顯示、不遮罩</b>：Evans 11-08 裁示）。<span class="d9">d13</span> 精靈每次打開都會重驗憑證檔還在、路徑沒有隱形字元；憑證被刪或換新會要求重選。</td><td>錯誤訊息那一頁（密碼欄會自動遮住）。</td><td><input type="checkbox"></td></tr>
 <tr><td>5-2</td><td>第 2 步「國票 API 權限」：填身分證、國票登入密碼 → 按「登入檢查」。</td><td>✓「已開通，可下單帳號：98*****」。若出現「未開通 API」就停，請同事找營業員開通。連續錯 2 次會停用一段時間，畫面會寫到幾點。</td><td>結果那一頁；不要截到密碼。</td><td><input type="checkbox"></td></tr>
-<tr><td>5-3</td><td>第 3 步「開通碼」：貼上第 2 步拿到的開通碼 → 按「驗證」。</td><td>✓ 顯示客戶名字、到期日、訂閱的策略（要跟 P3 一樣）。</td><td>錯誤碼那一頁（例 4013 身分證不符、4014 同策略重複）。</td><td><input type="checkbox"></td></tr>
+<tr><td>5-3</td><td>第 3 步「開通碼」：貼上第 2 步拿到的開通碼 → 按「驗證」。</td><td>✓ 顯示客戶名字、到期日、訂閱的策略（要跟 P3 一樣）。</td><td>錯誤碼那一頁（例 4013 身分證不符）。</td><td><input type="checkbox"></td></tr>
 <tr><td>5-4</td><td>第 4 步「電腦設定」：按「檢查」，照提示修（省電、睡眠、時間同步）。</td><td>全部 ✓；有 ✗ 的照按鈕修好再檢查一次。</td><td>還有 ✗ 的那一頁。</td><td><input type="checkbox"></td></tr>
-<tr><td>5-5</td><td>第 5 步「模擬演練」：按「開始」。</td><td>模擬收到訊號、模擬下單、模擬成交都 ✓（不會送出真單）。</td><td>卡住或 ✗ 的那一頁。</td><td><input type="checkbox"></td></tr>
-<tr><td>5-6</td><td>第 6 步「啟動」：確認 0～5 步都通過 → 按「啟動 GEA 下單機」（精靈<b>不會</b>自己啟動）。真單會先跳「真單啟動確認」，要勾確認再按確定。</td><td>精靈關掉，GEA 下單機主畫面打開。<b>預設是真單</b>（國票正式環境，上方紅底「⚠ 真單模式」）；只有在精靈上方選單勾了「模擬模式（假國票，不登入、不下單）」才是模擬（精靈上方是<b>紅色</b>橫幅「模擬模式中：不登入國票、不會下單」；主畫面右上橙色「模擬券商（不下單）」）。所有策略預設「不跟單」。</td><td>沒打開主畫面時，截精靈最後一頁＋工作列。</td><td><input type="checkbox"></td></tr>
+<tr><td>5-5</td><td>第 5 步「模擬演練」：按「開始」。</td><td>新倉、加碼、平倉、反手、換月都 ✓（不會送出真單）。<span class="d9">d11</span> 通過後精靈<b>自動跳到第 6 步並啟動下單機</b>；真單會先跳「真單啟動確認」，要勾確認再按確定（真錢只多按一次）。</td><td>卡住或 ✗ 的那一頁。</td><td><input type="checkbox"></td></tr>
+<tr><td>5-6</td><td>第 6 步「啟動」：自動啟動沒成功時，手動按「啟動 GEA 下單機」。</td><td>精靈關掉，GEA 下單機主畫面打開。<b>預設是真單</b>（國票正式環境，上方紅底「⚠ 真單模式」）；只有在精靈上方選單勾了「模擬模式（假國票，不登入、不下單）」才是模擬：精靈上方紅色橫幅「模擬模式中：不登入國票、不會下單」，<span class="d9">d11</span> 主畫面視窗標題也加「（模擬，不下單）」。所有策略預設「不跟單」。</td><td>沒打開主畫面時，截精靈最後一頁＋工作列。</td><td><input type="checkbox"></td></tr>
 </table></div>
 
 <h2>D. 主畫面</h2>
 <div class="card scroll"><table>
 <tr><th>#</th><th>要點哪裡</th><th>應該看到什麼</th><th>出錯時截什麼</th><th>✓</th></tr>
-<tr><td>6</td><td>看主畫面上方的連線狀態。</td><td>「中繼：已連線」綠燈；左下角版本 20261106a。斷線會自己重連（1、2、4…最多 30 秒一次）；連續斷 3 分鐘會發 TG <span class="d9">d9</span>。</td><td>連線狀態那一列；日誌「系統」分頁最後 20 行。</td><td><input type="checkbox"></td></tr>
-<tr><td>7</td><td>看策略表（訊號區）。</td><td><b>只有</b>P3 訂閱的策略，其他策略看不到。欄位：策略、商品、部位、<b>成本</b> <span class="d9">d9</span>、倍數、跟單、日誌、設定。<b>「跟單」關掉的策略，收到訊號也不得有任何委託或拒單</b>（日誌只記收到、不下單）<span class="d9">d10</span>。</td><td>整張策略表；多出或少了哪支策略寫下來。</td><td><input type="checkbox"></td></tr>
-<tr><td>8</td><td>看帳戶區上方的「帳戶」列 <span class="d9">d9</span>。</td><td>模擬模式：「占用保證金 X（估算：期交所原始保證金 × 口數）　權益數 —（模擬沒有券商帳戶）」。切到實單後：「權益數 X　占用保證金 X　可用保證金 X｜HH:mm:ss 更新」，開機、每次成交後、每 60 秒更新。查詢失敗整列變灰，保留上一次的值並寫時間。</td><td>帳戶列＋日誌「系統」分頁（查詢失敗原因在那裡）。</td><td><input type="checkbox"></td></tr>
-<tr><td>9</td><td>模擬：等下一個訊號（或請 Evans 從傳送端送一筆測試訊號）。</td><td>日誌出現「收到訊號 → 模擬下單 → 模擬成交」；策略表部位變了，「成本」欄出現成交價；帳戶列的占用保證金跟著變（估算）。<b>「跟單」關掉的策略同一筆訊號不得出現任何委託或拒單</b>（只記收到）<span class="d9">d10</span>。</td><td>策略表＋該策略的日誌。</td><td><input type="checkbox"></td></tr>
+<tr><td>6</td><td>看主畫面上方的狀態燈。</td><td>「中繼：已連線」綠燈；左下角版本 20261112a。斷線會自己重連（1、2、4…最多 30 秒一次）；連續斷 3 分鐘會發 TG。<span class="d9">d16</span> 「券商」燈：國票登入失敗或開機後斷掉會轉<b>紅</b>，交易時段（08:30～13:45、15:00～05:00，休市不算）<b>每 30 分鐘 TG</b>「✗ 券商還沒登入」，恢復時 TG「已恢復」。<span class="man">人工</span> 真的斷線要在實機看（自動測試用假國票）。</td><td>狀態燈那一列；日誌「系統」分頁最後 20 行。</td><td><input type="checkbox"></td></tr>
+<tr><td>7</td><td>看策略表（訊號區）。</td><td><b>只有</b>P3 訂閱的策略，其他策略看不到。<span class="d9">d11</span> 欄位：策略、商品、部位、成本、跟單、日誌、進階（口數、最大持倉、換倉、追價收在「進階」裡）。<span class="d9">d11</span> 取消訂閱且沒部位的策略從畫面拿掉；有部位留到平倉。<b>「跟單」關掉的策略，收到訊號也不得有任何委託或拒單</b>，<span class="d9">d16</span> 但會發 TG「⚠ X 跟單關閉中，收到訊號…沒送單」。</td><td>整張策略表；多出或少了哪支策略寫下來。</td><td><input type="checkbox"></td></tr>
+<tr><td>7b</td><td><span class="d9">d16</span> 真單模式下點某支的「跟單」格關掉（帳上 0 口也一樣）。</td><td><b>一律跳確認框</b>「關掉 X 的跟單？帳上 …」；按取消＝照舊跟單。確定後 panel log 與 TG 都有「主畫面滑鼠點了 X 的「跟單」格：開 → 關」。模擬模式帳上 0 口不跳確認（照舊）。</td><td>確認框；TG 那則。</td><td><input type="checkbox"></td></tr>
+<tr><td>8</td><td>看帳戶區上方的「帳戶」列。</td><td>模擬模式：「占用保證金 X（估算：期交所原始保證金 × 口數）　權益數 —（模擬沒有券商帳戶）」。真單：「權益數 X　占用保證金 X　可用保證金 X｜HH:mm:ss 更新」，開機、每次成交後、每 60 秒更新。查詢失敗整列變灰，保留上一次的值並寫時間。</td><td>帳戶列＋日誌「系統」分頁（查詢失敗原因在那裡）。</td><td><input type="checkbox"></td></tr>
+<tr><td>9</td><td>模擬：等下一個訊號（或請 Evans 從傳送端送一筆測試訊號）。</td><td>日誌出現「收到訊號 → 模擬下單 → 模擬成交」；策略表部位變了，「成本」欄出現成交價；帳戶列的占用保證金跟著變（估算）。「跟單」關掉的策略同一筆訊號不得出現任何委託或拒單（只記收到＋TG）。<span class="d9">d11</span> 第一次啟動補發的舊訊號若驗不過簽章，TG 只發<b>一則彙總</b>，不逐則發。</td><td>策略表＋該策略的日誌。</td><td><input type="checkbox"></td></tr>
 </table></div>
 
 <div class="stop">🔴 <b>停止點</b>：沒有同事本人當面同意就到這裡為止，跳到第 11 步。<b>Evans 的帳號永遠不做第 10 步。</b></div>
 
 <div class="card scroll"><table>
 <tr><th>#</th><th>要點哪裡</th><th>應該看到什麼</th><th>出錯時截什麼</th><th>✓</th></tr>
-<tr><td>10</td><td>（選做，同事本人同意才做）設定 →「跟單」改實單，倍數設最小、商品微台指（TMF）1 口；等訊號或請 Evans 送一筆測試訊號，成交後立刻在國票 App 確認並平倉。</td><td>國票 App 看得到同一筆委託與成交；主畫面部位、成本、帳戶列（權益數、占用保證金）都在 60 秒內更新。平倉後部位 0、成本變「—」。</td><td>主畫面＋國票 App 成交回報（帳號可遮）。</td><td><input type="checkbox"></td></tr>
+<tr><td>10</td><td>（選做，同事本人同意才做）設定 →「跟單」改實單，倍數設最小、商品微台指（TMF）1 口；等訊號或請 Evans 送一筆測試訊號，成交後<b>先在主畫面關掉那支的跟單</b>，再到國票 App 確認並平倉（停止點 ④）。</td><td>國票 App 看得到同一筆委託與成交；主畫面部位、成本、帳戶列（權益數、占用保證金）都在 60 秒內更新。平倉後告訴 W 改帳本。</td><td>主畫面＋國票 App 成交回報（帳號可遮）。</td><td><input type="checkbox"></td></tr>
 </table></div>
 
-<h2>E. 更新與解除安裝（d10 任何時間都能更新）</h2>
+<h2>E. 更新與解除安裝（d10 起任何時間都能更新）</h2>
 <div class="card scroll"><table>
 <tr><th>#</th><th>要點哪裡</th><th>應該看到什麼</th><th>出錯時截什麼</th><th>✓</th></tr>
-<tr><td>11</td><td>（有新版時）主畫面左下角「更新」，任何時間都能按 <span class="d9">d10</span>。<b>帶部位按「更新」會跳確認框，按「取消」就不更新</b>（下單機照常跑、版號不變、部位不動）<span class="d9">d10</span>；先按一次取消確認這點，再按「確定」走完更新。</td><td>按確定後：下載 → SHA256 驗證 → 關掉下單機 → 安裝 → 自動開回來，左下角變新版號；TG 收到「✓ 更新完成」。任何一步失敗都會開回舊版並發 TG。</td><td><code>C:\GEA_om\logs</code> 的 upgrade_*.log、order_*.log；%TEMP% 裡最新的「Setup Log *.txt」。</td><td><input type="checkbox"></td></tr>
+<tr><td>11</td><td>（有新版時）主畫面左下角「更新」，任何時間都能按。<b>帶部位按「更新」會跳確認框，按「取消」就不更新</b>（下單機照常跑、版號不變、部位不動）；先按一次取消確認這點，再按「確定」走完更新。<span class="d9">d15</span> 任何錯誤都不會在「版本檢查／更新」之前閃退（壞版本也能自己更新）。</td><td>按確定後：下載 → SHA256 驗證 → 關掉下單機 → 安裝 → 自動開回來，左下角變新版號；TG 收到「✓ 更新完成」。任何一步失敗都會開回舊版並發 TG。<span class="man">人工</span> 每版都要在 Evans 筆電實機更新、<b>關掉重開 3 次都連上中繼</b>才算過關（教訓 ⑥）。</td><td><code>C:\GEA_om\logs</code> 的 upgrade_*.log、order_*.log；%TEMP% 裡最新的「Setup Log *.txt」。</td><td><input type="checkbox"></td></tr>
 <tr><td>12</td><td>解除安裝：Windows「設定 → 應用程式」→ 找「GEA 下單機」→「解除安裝」。</td><td>程式與捷徑移除；<code>C:\GEA_om\logs</code> 和設定檔保留（方便再裝）。管理頁上這個客戶的裝置會在下次心跳逾時後顯示離線。</td><td>解除安裝的錯誤視窗。</td><td><input type="checkbox"></td></tr>
-<tr><td>13</td><td>（選做）重新安裝 d10 → 精靈第 3 步用同一組開通碼。</td><td>同一台電腦、同一個身分證可以重新綁定；換身分證會被擋（4013）。</td><td>錯誤碼那一頁。</td><td><input type="checkbox"></td></tr>
+<tr><td>13</td><td>（選做）重新安裝 d16 → 精靈第 3 步用同一組開通碼。</td><td>同一台電腦、同一個身分證可以重新綁定；換身分證會被擋（4013）。<span class="d9">d11</span> 同身分證另一台已經真單在線 → 這台<b>自動改模擬</b>（訊號照收、不送單、不斷線），切換時 TG 一次。</td><td>錯誤碼那一頁。</td><td><input type="checkbox"></td></tr>
 </table></div>
 
-<h2>F. 11-08 筆電安裝模擬實測結果（Evans 家裡筆電、d10、模擬模式、代號 c261108751）</h2>
+<h2>F. 訊號主機（S）專用檢查（客戶電腦不用做）</h2>
 <div class="card scroll"><table>
-<tr><th>步驟</th><th>時間</th><th>結果</th></tr>
-<tr><td>0 前置</td><td>15:00 前</td><td>✓ 清掉筆電舊 GEA 環境變數（備份在筆電本機）、C:\GEA_om 改名備份，等於全新客戶電腦。第 0 步安裝檢查：64 位元、.NET 4.8、國票元件載入成功。</td></tr>
-<tr><td>1 憑證</td><td>15:04</td><td>✓ 憑證有效（還有 184 天）。身分證改為完整顯示（裁示見上面 5-1）。</td></tr>
-<tr><td>2 國票</td><td>15:09</td><td>✓ 模擬模式：要先按「登入檢查」才會出現假帳號清單，選帳號 → 通過（不存檔）。</td></tr>
-<tr><td>3 開通碼</td><td>15:12</td><td>✓ 開通成功、開通碼作廢；中繼訂閱 GEA5、GEA6；新增兩支微台 1 口；<b>跟單預設關</b>（只收訊號）。</td></tr>
-<tr><td>4 電腦設定</td><td>15:16</td><td>✓ 電源不睡眠、Windows Update 不在使用時段重開、開機自動啟動排程已建。</td></tr>
-<tr><td>5 模擬演練</td><td>15:23</td><td>✓ 新倉、加碼、平倉一部分、反手、自動換月 五段全過；第 6 步摘要正確。</td></tr>
-<tr><td>6 啟動</td><td>15:27</td><td>✓ 主畫面：模擬券商、狀態綠燈、只有 GEA5／GEA6、跟單都關；中繼在線接收端 1 → 2（沒被 4014 擋）。小差異：視窗標題沒寫「模擬，不下單」、主畫面沒有紅色橫幅（d11 對齊）。</td></tr>
-<tr><td>❗ 簽章</td><td>15:27</td><td>✗ 第一次啟動補發 44 則舊訊號，<b>45 則「拒單：簽章不符」、每則都發 TG</b>。原因：當時正式傳送端只送 HMAC、沒送公鑰簽章（Sig2），新客戶沒有 HMAC 密鑰 → 全部驗不過。<br>處理：S 11-08 16:04 把正式傳送端換成 20261101d6（送公鑰簽章＋HMAC），換版後送出 #324 GEA5、#325 GEA6。<b>結案條件</b>：筆電日誌 #324／#325 與 11-09 開盤第一筆 GEA5／GEA6 沒有「簽章不符」、沒有產生委託（跟單關）——等 Evans 截圖。</td></tr>
+<tr><th>#</th><th>要點哪裡</th><th>應該看到什麼</th><th>✓</th></tr>
+<tr><td>S1</td><td><span class="d9">d12</span> 在訊號主機開通下單機。</td><td>傳送端的中繼變數（GEA_RELAY_*）<b>沒被刪</b>；下單機改用自己的 <code>order_cred.txt</code>。<span class="d9">d14</span> 訊號主機的判斷改看簽章私鑰。</td><td><input type="checkbox"></td></tr>
+<tr><td>S2</td><td><span class="d9">d16</span> 看下單機啟動行的「白名單」。</td><td>「白名單 不限（全收）（來源 中繼訂閱清單；…Z:\CT\*.txt 是傳送端格式，已忽略）」——使用者層 <code>GEA_OM_STRATEGIES=Z:\CT\*.txt</code> 不再把 GEA5、GEA6 擋掉；升 d16 後不用再另設行程變數。</td><td><input type="checkbox"></td></tr>
+<tr><td>S3</td><td><span class="d9">d16</span> 有訊號被白名單略過時。</td><td>log＋TG「⚠ 略過：白名單不含 X（來源 Y）」；主畫面「接收」燈轉黃「有訊號被略過」（當天）。</td><td><input type="checkbox"></td></tr>
 </table></div>
 
-<h2>G. d11 要改的地方（累積中、<b>還沒出版</b>；出版前先回報，換正式待 Evans 同意）</h2>
+<h2>G. d9 之後每版改了什麼（d10～d16）</h2>
 <div class="card scroll"><table>
-<tr><th>#</th><th>改什麼</th><th>測試時要看到</th></tr>
-<tr><td>d11-1</td><td>開機補發的舊訊號簽章不符：<b>不逐則 TG</b>，彙總一則「開機補發 N 則舊訊號無法驗證（不影響之後的即時訊號）」；只有即時訊號拒單才逐則 TG。</td><td>新客戶第一次啟動，TG 最多一則彙總。</td></tr>
-<tr><td>d11-2</td><td>精靈第 6 步通過後<b>自動啟動</b>下單機（真單確認框保留）。</td><td>按完第 6 步主畫面自己打開；真單仍跳確認。</td></tr>
-<tr><td>d11-3</td><td>口數、最大持倉、換倉、追價收進「進階」；主畫面只有「跟／不跟」。</td><td>主畫面策略表沒有口數等欄位；按「進階」才看得到。</td></tr>
-<tr><td>d11-4</td><td>取消訂閱的策略：沒部位就從畫面拿掉；有部位留著到平倉。</td><td>管理頁取消一支沒部位的策略 → 主畫面那列消失。</td></tr>
-<tr><td>d11-5</td><td>同身分證另一台已在線又訂同策略：自動開模擬（待裁示的方案：不再直接 4014 斷線）。</td><td>第二台顯示模擬、不下單、不斷線。</td></tr>
-<tr><td>d11-6</td><td>模擬模式的視窗標題與主畫面也顯示紅色「模擬，不下單」橫幅（跟精靈一致）；精靈第 2 步按鈕文字不再寫「正式環境」。</td><td>模擬模式三個地方都看得到「模擬」。</td></tr>
+<tr><th>版本</th><th>改了什麼</th><th>自動測試涵蓋</th><th>還要人工驗</th></tr>
+<tr><td>d10<br>20261106a<br>11-06</td><td>任何時間都能按「更新」；有部位或交易時段跳確認框（30～60 秒不跟單、裝完自動開回並對帳）。跟單關的策略收到訊號不得有委託或拒單。</td><td>e2e_upgrade（32 項：更新模擬、下載失敗、安裝失敗開回舊版）；GeaIbfTest ㉘ 跟單開關。</td><td>筆電實機更新（11-08 已做，F 段舊紀錄見 TODO）。</td></tr>
+<tr><td>d11<br>20261109a<br>11-09</td><td>主畫面精簡（口數等收進「進階」）；模擬演練通過自動啟動；補發舊訊號拒單彙總一則 TG；取消訂閱且無部位的策略隱藏；同身分證另一台真單中自動改模擬；模擬模式視窗標題標「模擬，不下單」。</td><td>GeaIbfTest（d11 ④ 取消訂閱、強制模擬）；e2e.py（補發彙總、拒單）；GeaSetup walk-sim（自動啟動）。</td><td>筆電：第一次啟動 TG 只有一則彙總；同身分證兩台實機。</td></tr>
+<tr><td>d12<br>20261110a<br>11-10</td><td>訊號主機安裝保護：開通不刪傳送端的中繼變數；下單機改用自己的 order_cred.txt。一般客戶電腦行為不變。</td><td>GeaIbfTest（d12 訊號主機／一般電腦兩種）；e2e_roles。</td><td>S 實機開通後傳送端照常送（S1）。</td></tr>
+<tr><td>d13<br>20261110b<br>11-10</td><td>客戶端安裝防呆：精靈開啟時重驗憑證檔與正式環境登入紀錄、路徑去隱形字元（U+202A）、老客戶提示 --prod。下單邏輯不變。</td><td>GeaIbfTest（全新電腦、d11→d13 升級、舊環境變數、隱形字元、憑證過期、沒帶 --prod 六情境）。</td><td>舊電腦升級（舊環境變數）實機。</td></tr>
+<tr><td>d14<br>20261111a<br>11-11</td><td>修模擬模式啟動時缺 GEA_RELAY_TOKEN；訊號主機判斷改看簽章私鑰。（d14 安裝檔包到舊程式，由 d15 取代，不要裝 d14。）</td><td>GeaIbfTest（d14 共用快取競爭）；e2e_leftover_transmit。</td><td>—（由 d15 取代）</td></tr>
+<tr><td>d15<br>20261111b<br>11-11</td><td>修模擬模式啟動缺 token（共用快取上鎖）；缺 token 不閃退、版本檢查與更新照常；修正 d14 安裝檔包到舊程式（打包前逐一確認 exe 版號）。</td><td>GeaIbfTest（d15 卡死情境）；e2e_stuck_no_token；make_dist 打包前版號檢查。</td><td>筆電實機更新＋關掉重開 3 次連上中繼。</td></tr>
+<tr><td>d16<br>20261112a<br>11-13</td><td>① 白名單不吃傳送端格式（<code>\ / * ? :</code>、<code>.txt</code> 一律忽略）＋啟動行印來源；② 國票未登入／斷掉：券商燈轉紅、交易時段每 30 分鐘 TG、恢復 TG；③ 白名單略過、跟單關閉中收到訊號都發 TG；④ 真單模式關跟單一律確認、單支開關寫 panel log＋TG。</td><td>GeaIbfTest ㉛（17 項：白名單解析、登入失敗轉紅、提醒時段與間隔、休市不提醒、恢復、跟單關閉收訊號 TG、真單確認）；e2e_roles 18／18（情境 6、7）；e2e_ctpro 6／6。</td><td>S 升 d16 後看啟動行白名單（S2）；真的國票斷線時 30 分鐘 TG（實機）；筆電實機更新＋重開 3 次。</td></tr>
 </table></div>
+
+<h2>H. 已知問題與 d17 待改（<b>還沒出版</b>，範圍等 Evans 點頭）</h2>
+<div class="card scroll"><table>
+<tr><th>#</th><th>問題</th><th>現在怎麼避開</th></tr>
+<tr><td>H1</td><td>🔴 <b>在國票 App 手動平倉跟單中的策略</b>：下單機記「成交回報對不到策略」只寫 log、<b>不扣帳本</b> → 下一個出場訊號會變成反向開倉（11-13 S GEA5 第一筆真單實際發生，S 已改帳本、跟單關）。</td><td>停止點 ④：先關跟單再手動處理，請 W 改帳本。</td></tr>
+<tr><td>H2</td><td>國票斷線<b>不會自動重登</b>（CT PRO 會）；d16 只會每 30 分鐘 TG 提醒重開。</td><td>收到「券商還沒登入」TG 就重開下單機。</td></tr>
+<tr><td>H3</td><td>委託逾時直接停這支（不先查庫存）；白名單略過以外，券商沒登入、超過最大持倉時收到訊號沒有逐則 TG；交易時段跟單關著不會定時提醒。</td><td>看主畫面燈與日誌。</td></tr>
+</table></div>
+<div class="note">d17 完整範圍、改哪個檔、測試怎麼補，寫在 CustomerServiceANDSales TODO「W 11-13 下單機清單與 d17 範圍」。11-08 筆電 d10 安裝實測紀錄（舊 F 段）也在 TODO 11-08 段。</div>
 
 <h2>回報方式</h2>
 <div class="card">每一步打勾或寫「✗＋截圖檔名」，最後把截圖與 <code>C:\GEA_om\logs</code> 整個資料夾放進 <code>CustomerServiceANDSales\_inbox\om_e2e_同事名_日期\</code>，W 會逐步看 log 對照。<br><span class="note">這份清單只放公開可看的操作步驟，不含任何帳號、密碼、開通碼、網址金鑰。</span></div>
