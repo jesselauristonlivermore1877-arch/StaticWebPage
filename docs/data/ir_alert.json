@@ -1,109 +1,7 @@
 {
- "asof": "2026-11-12T06:26+00:00",
- "rule": "法說高成長指引：翻倍／倍增／成長 N 倍／成長 N%（N≥50）／明年大幅成長／上修財測／創新高指引；同一公司同一場法說只觸發一次；頁首只放即時偵測、觸發後 3 個交易日內的（until），個股頁標記留 30 天",
+ "asof": "2026-11-12T17:19+00:00",
+ "rule": "法說高成長指引：翻倍／倍增／成長 N 倍／成長 N%（N≥50）／明年大幅成長／上修財測／創新高指引；11-13 起只收 AI／未來產業、且有長約／擴產／資本支出內容的公司人員原話；同一公司同一場法說只觸發一次；頁首只放即時偵測、觸發後 3 個交易日內的（until），個股頁標記留 30 天",
  "top": [
-  {
-   "code": "2347",
-   "name": "聯強",
-   "quote": "聯強法說會釋出樂觀展望，前十月營收年增高達93.5％",
-   "pat": "N%",
-   "src": "CMoney",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9OUTdQd1Vpa1JzRkkxM011NnF5cVNpdzlpdnRtRVhvMTg1WkFSb05vZmo4WjVyOTg4RFV1YkZaTlV5Tnc1WFU1a2tVYVVTWmhzcWJsRDJ2M3UzeS1QRDhNTXdZV2ktUmc?oc=5",
-   "pub": "2026-11-11T22:10+00:00",
-   "seen": "2026-11-11T23:11+00:00",
-   "meeting": "2026-11-11",
-   "px": {
-    "d": "2026-11-11",
-    "close": 79.0999984741211,
-    "chg": 0.0
-   },
-   "mx": {
-    "d": "2026-11-11",
-    "close": 79.0999984741211,
-    "chg": 0.0,
-    "prev": 79.0999984741211,
-    "prev_d": "2026-11-10",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-11-10",
-    "from": 79.0999984741211,
-    "to_d": "2026-11-11",
-    "to": 79.0999984741211,
-    "chg": 0.0
-   },
-   "kind": "news",
-   "n_more": 0,
-   "until": "2026-11-18T00:00+08:00"
-  },
-  {
-   "code": "6414",
-   "name": "樺漢",
-   "quote": "樺漢法說會／在手訂單破2,800億 朱復銓：2027年營收獲利皆迎高速成長",
-   "pat": "明年大幅成長",
-   "src": "UDN",
-   "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE54V2J1ZWpSMDc4TGZHWFozeFEyRjZXZFdfX08zZHFoOTJjdzhhSTBSa1hXR2Y0dmdpWnBoZWU3a1pab1ZPU2dtekxRSF9Mdk1B0gFWQVVfeXFMTmRiT3A4djJfVFdiQjE3dDgwMFlkYVdKSUxXVDBNYlFRUmduXzQza1BLZmNZR01EcVlCXzVFQjl0S3pReUx2STN4ak0tSjFsb08yRkc2VkE?oc=5",
-   "pub": "2026-11-11T09:12+00:00",
-   "seen": "2026-11-11T21:22+00:00",
-   "meeting": "2026-11-11",
-   "px": {
-    "d": "2026-11-11",
-    "close": 326.5,
-    "chg": -2.25
-   },
-   "mx": {
-    "d": "2026-11-11",
-    "close": 326.5,
-    "chg": -2.25,
-    "prev": 334.0,
-    "prev_d": "2026-11-10",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-11-10",
-    "from": 334.0,
-    "to_d": "2026-11-11",
-    "to": 326.5,
-    "chg": -2.25
-   },
-   "kind": "news",
-   "n_more": 0,
-   "until": "2026-11-18T00:00+08:00"
-  },
-  {
-   "code": "1476",
-   "name": "儒鴻",
-   "quote": "儒鴻：看好第四季營運全年拚創新高- 上市櫃",
-   "pat": "創新高指引",
-   "src": "旺得富理財網",
-   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5DX2M2SnVBT1dJYkFaS0pjLV9NR3pmaXBYOFllR2hWWENqMVdrNzZIMTgybXl3cFVBYW82UjBjNENsUjdhMDctQm9LTHFtV251UGEzdFA1SnE4ckxnejRWUTdvR3R3Zm0wVXc?oc=5",
-   "pub": "2026-11-10T11:25+00:00",
-   "seen": "2026-11-10T12:15+00:00",
-   "meeting": "2026-11-10",
-   "px": {
-    "d": "2026-11-10",
-    "close": 348.5,
-    "chg": -2.11
-   },
-   "mx": {
-    "d": "2026-11-10",
-    "close": 348.5,
-    "chg": -2.11,
-    "prev": 356.0,
-    "prev_d": "2026-11-09",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-11-09",
-    "from": 356.0,
-    "to_d": "2026-11-11",
-    "to": 352.5,
-    "chg": -0.98
-   },
-   "kind": "news",
-   "n_more": 0,
-   "until": "2026-11-14T00:00+08:00"
-  },
   {
    "code": "6531",
    "name": "愛普*",
@@ -130,149 +28,16 @@
    "pre": {
     "from_d": "2026-11-09",
     "from": 668.0,
-    "to_d": "2026-11-11",
-    "to": 733.0,
-    "chg": 9.73
+    "to_d": "2026-11-12",
+    "to": 677.0,
+    "chg": 1.35
    },
    "kind": "news",
    "n_more": 0,
    "until": "2026-11-14T00:00+08:00"
-  },
-  {
-   "code": "6952",
-   "name": "大武山",
-   "quote": "大武山看明年營運跳躍成長 加工蛋產能拚倍增",
-   "pat": "翻倍",
-   "src": "中央社",
-   "url": "https://www.cna.com.tw/news/afe/202611090203.aspx",
-   "pub": "2026-11-09T09:25+00:00",
-   "seen": "2026-11-09T11:11+00:00",
-   "meeting": "2026-11-09",
-   "px": {
-    "d": "2026-11-09",
-    "close": 39.95000076293945,
-    "chg": 0.88
-   },
-   "mx": {
-    "d": "2026-11-09",
-    "close": 39.95000076293945,
-    "chg": 0.88,
-    "prev": 39.599998474121094,
-    "prev_d": "2026-11-06",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-11-06",
-    "from": 39.599998474121094,
-    "to_d": "2026-11-11",
-    "to": 40.70000076293945,
-    "chg": 2.78
-   },
-   "kind": "news",
-   "n_more": 0,
-   "until": "2026-11-13T00:00+08:00"
   }
  ],
  "by_code": {
-  "2347": {
-   "code": "2347",
-   "name": "聯強",
-   "quote": "聯強法說會釋出樂觀展望，前十月營收年增高達93.5％",
-   "pat": "N%",
-   "src": "CMoney",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9OUTdQd1Vpa1JzRkkxM011NnF5cVNpdzlpdnRtRVhvMTg1WkFSb05vZmo4WjVyOTg4RFV1YkZaTlV5Tnc1WFU1a2tVYVVTWmhzcWJsRDJ2M3UzeS1QRDhNTXdZV2ktUmc?oc=5",
-   "pub": "2026-11-11T22:10+00:00",
-   "seen": "2026-11-11T23:11+00:00",
-   "meeting": "2026-11-11",
-   "px": {
-    "d": "2026-11-11",
-    "close": 79.0999984741211,
-    "chg": 0.0
-   },
-   "mx": {
-    "d": "2026-11-11",
-    "close": 79.0999984741211,
-    "chg": 0.0,
-    "prev": 79.0999984741211,
-    "prev_d": "2026-11-10",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-11-10",
-    "from": 79.0999984741211,
-    "to_d": "2026-11-11",
-    "to": 79.0999984741211,
-    "chg": 0.0
-   },
-   "kind": "news",
-   "n_more": 0
-  },
-  "6414": {
-   "code": "6414",
-   "name": "樺漢",
-   "quote": "樺漢法說會／在手訂單破2,800億 朱復銓：2027年營收獲利皆迎高速成長",
-   "pat": "明年大幅成長",
-   "src": "UDN",
-   "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE54V2J1ZWpSMDc4TGZHWFozeFEyRjZXZFdfX08zZHFoOTJjdzhhSTBSa1hXR2Y0dmdpWnBoZWU3a1pab1ZPU2dtekxRSF9Mdk1B0gFWQVVfeXFMTmRiT3A4djJfVFdiQjE3dDgwMFlkYVdKSUxXVDBNYlFRUmduXzQza1BLZmNZR01EcVlCXzVFQjl0S3pReUx2STN4ak0tSjFsb08yRkc2VkE?oc=5",
-   "pub": "2026-11-11T09:12+00:00",
-   "seen": "2026-11-11T21:22+00:00",
-   "meeting": "2026-11-11",
-   "px": {
-    "d": "2026-11-11",
-    "close": 326.5,
-    "chg": -2.25
-   },
-   "mx": {
-    "d": "2026-11-11",
-    "close": 326.5,
-    "chg": -2.25,
-    "prev": 334.0,
-    "prev_d": "2026-11-10",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-11-10",
-    "from": 334.0,
-    "to_d": "2026-11-11",
-    "to": 326.5,
-    "chg": -2.25
-   },
-   "kind": "news",
-   "n_more": 0
-  },
-  "1476": {
-   "code": "1476",
-   "name": "儒鴻",
-   "quote": "儒鴻：看好第四季營運全年拚創新高- 上市櫃",
-   "pat": "創新高指引",
-   "src": "旺得富理財網",
-   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5DX2M2SnVBT1dJYkFaS0pjLV9NR3pmaXBYOFllR2hWWENqMVdrNzZIMTgybXl3cFVBYW82UjBjNENsUjdhMDctQm9LTHFtV251UGEzdFA1SnE4ckxnejRWUTdvR3R3Zm0wVXc?oc=5",
-   "pub": "2026-11-10T11:25+00:00",
-   "seen": "2026-11-10T12:15+00:00",
-   "meeting": "2026-11-10",
-   "px": {
-    "d": "2026-11-10",
-    "close": 348.5,
-    "chg": -2.11
-   },
-   "mx": {
-    "d": "2026-11-10",
-    "close": 348.5,
-    "chg": -2.11,
-    "prev": 356.0,
-    "prev_d": "2026-11-09",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-11-09",
-    "from": 356.0,
-    "to_d": "2026-11-11",
-    "to": 352.5,
-    "chg": -0.98
-   },
-   "kind": "news",
-   "n_more": 0
-  },
   "6531": {
    "code": "6531",
    "name": "愛普*",
@@ -299,96 +64,10 @@
    "pre": {
     "from_d": "2026-11-09",
     "from": 668.0,
-    "to_d": "2026-11-11",
-    "to": 733.0,
-    "chg": 9.73
+    "to_d": "2026-11-12",
+    "to": 677.0,
+    "chg": 1.35
    },
-   "kind": "news",
-   "n_more": 0
-  },
-  "6952": {
-   "code": "6952",
-   "name": "大武山",
-   "quote": "大武山看明年營運跳躍成長 加工蛋產能拚倍增",
-   "pat": "翻倍",
-   "src": "中央社",
-   "url": "https://www.cna.com.tw/news/afe/202611090203.aspx",
-   "pub": "2026-11-09T09:25+00:00",
-   "seen": "2026-11-09T11:11+00:00",
-   "meeting": "2026-11-09",
-   "px": {
-    "d": "2026-11-09",
-    "close": 39.95000076293945,
-    "chg": 0.88
-   },
-   "mx": {
-    "d": "2026-11-09",
-    "close": 39.95000076293945,
-    "chg": 0.88,
-    "prev": 39.599998474121094,
-    "prev_d": "2026-11-06",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-11-06",
-    "from": 39.599998474121094,
-    "to_d": "2026-11-11",
-    "to": 40.70000076293945,
-    "chg": 2.78
-   },
-   "kind": "news",
-   "n_more": 0
-  },
-  "6285": {
-   "code": "6285",
-   "name": "啟碁",
-   "quote": "越南產能近翻倍，美國廠最慢2028年投產",
-   "pat": "翻倍",
-   "src": "鉅亨網",
-   "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBFMVZYcXNuWld5SWtScU5TQjIzbkNTY24zNFJ4U2J5VUVHVWVNcmR2QWdqZEt3czRJSlJIdVkwcXNQQ2xXZmp4d3p3NGRLRUk?oc=5",
-   "pub": "2026-11-06T15:00+00:00",
-   "seen": "2026-11-06T15:12+00:00",
-   "meeting": "2026-11-05",
-   "px": {
-    "d": "2026-11-06",
-    "close": 164.5,
-    "chg": -9.86
-   },
-   "mx": {
-    "d": "2026-11-05",
-    "close": 182.5,
-    "chg": -9.2,
-    "prev": 201.0,
-    "prev_d": "2026-11-04",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-11-04",
-    "from": 201.0,
-    "to_d": "2026-11-10",
-    "to": 191.5,
-    "chg": -4.73
-   },
-   "kind": "news",
-   "n_more": 0
-  },
-  "3714": {
-   "code": "3714",
-   "name": "富采",
-   "quote": "富采MicroLED全年營收拚倍增，光通訊進入送樣- 新聞",
-   "pat": "翻倍",
-   "src": "MoneyDJ",
-   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPNUpYUC1BdjRSZTdjSlVGblg2anl6ZkFiaEFBTkE0QmZmUGgxbDQzcjJwTklyMWljRVpVVzRaNFdvVlhneExlRHd3NUdMS0txV1RVOVVmbzR6bnc0MlFEV25HSWctdHhudFl0dmF3Q2M0LWNDbXVaZUlWWFd1Nkh2NV9iLVNyQjFTeHhMWXVjUmh4QQ?oc=5",
-   "pub": "2026-11-06T06:48+00:00",
-   "seen": "2026-11-06T08:12+00:00",
-   "meeting": "2026-11-06",
-   "px": {
-    "d": "2026-11-04",
-    "close": 56.70000076293945,
-    "chg": -1.05
-   },
-   "mx": null,
-   "pre": null,
    "kind": "news",
    "n_more": 0
   },
@@ -523,39 +202,6 @@
    },
    "kind": "news",
    "n_more": 0
-  },
-  "6271": {
-   "code": "6271",
-   "name": "同欣電",
-   "quote": "同欣電三大業務齊衝 FAU明年拚高速成長",
-   "pat": "明年大幅成長",
-   "src": "工商時報",
-   "url": "https://www.ctee.com.tw/news/20261030701598-430502",
-   "pub": "2026-10-30T09:53+00:00",
-   "seen": "2026-10-30T10:45+00:00",
-   "meeting": "2026-10-30",
-   "px": {
-    "d": "2026-10-30",
-    "close": 197.0,
-    "chg": -4.37
-   },
-   "mx": {
-    "d": "2026-10-30",
-    "close": 197.0,
-    "chg": -4.37,
-    "prev": 206.0,
-    "prev_d": "2026-10-29",
-    "src": "日K庫"
-   },
-   "pre": {
-    "from_d": "2026-10-29",
-    "from": 206.0,
-    "to_d": "2026-11-04",
-    "to": 201.5,
-    "chg": -2.18
-   },
-   "kind": "news",
-   "n_more": 1
   },
   "3711": {
    "code": "3711",
