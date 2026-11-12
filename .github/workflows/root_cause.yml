@@ -24,6 +24,10 @@ on:
         description: "跑完是否跑盲測檢查（1／0）"
         required: false
         default: "1"
+      resanitize:
+        description: "只對已發布的根因 JSON 重跑敏感字關卡（日期逗號分隔，all＝全部；不打 Gemini、不跑搜尋）；留空＝照常"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -71,8 +75,13 @@ jobs:
       - run: |
           sudo apt-get install -y -qq poppler-utils >/dev/null || true
           pip install -c "$GITHUB_WORKSPACE/CustomerServiceANDSales/requirements-lock.txt" requests certifi numpy feedparser yfinance curl_cffi googlenewsdecoder
+      - name: 敏感字關卡重跑（resanitize）
+        if: inputs.resanitize != ''
+        working-directory: CustomerServiceANDSales
+        run: python tools/root_cause.py --site ../StaticWebPage --resanitize "${{ inputs.resanitize }}"
       - name: 根因追蹤
         id: rc
+        if: inputs.resanitize == ''
         working-directory: CustomerServiceANDSales
         env:
           PYTHONUNBUFFERED: "1"
@@ -91,7 +100,7 @@ jobs:
             echo "::endgroup::"
           done
       - name: 盲測檢查
-        if: inputs.blind == '1'
+        if: inputs.blind == '1' && inputs.resanitize == ''
         working-directory: CustomerServiceANDSales
         continue-on-error: true
         run: |
@@ -105,6 +114,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/gemini_quota data/root_cause docs/data/root_cause 2>/dev/null || true
           if git diff --staged --quiet; then echo "沒有變動"; exit 0; fi
-          git commit -qm "data: 根因追蹤（${{ inputs.trigger || '排程' }}${US_ONLY:+・盤前只看美股}）$(TZ=Asia/Taipei date '+%F %H:%M')：$CASES"
+          git commit -qm "data: 根因追蹤（${{ inputs.trigger || '排程' }}${{ inputs.resanitize && '・敏感字關卡重跑' || '' }}${US_ONLY:+・盤前只看美股}）$(TZ=Asia/Taipei date '+%F %H:%M')：$CASES"
           for i in 1 2 3 4; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep $((2 ** i)); done
           exit 1
