@@ -1,0 +1,153 @@
+# backfill_buyback.yml ─ 庫藏股買回：公告＋執行結果、歷史日K慢補、事件研究（雲端U 11-13；Evans 11-12 群聯宣布買回 → 單獨頁籤）
+#   程式：CustomerServiceANDSales 的 buyback.py
+#   ① meta：公開資訊觀測站 t35sc09（上市 sii、上櫃 otc，兩個月一段；第一次回補到 2023-11，之後每班重抓近 14 個月＝執行結果期滿才填）
+#           ＋ 加權（FMTQIK 月線）、櫃買指數（Inx_result 月線）
+#   ② crawl：daily.npz 從 2024-09-09 才有，更早那段（2022-11 起，算近一年百分位要用）逐日抓 MI_INDEX＋stk_wn1430，
+#           8 片各自不同 IP、每片證交所 ≤ 100 發（WAF 懸崖 168）；兩邊都到齊的日子才寫（不寫殘缺的一天）。補完之後每班 0 發。
+#   ③ merge：併進 data/buyback/px_hist.npz → 事件研究 data/buyback/study.json（含核對）。
+#   只寫 data/buyback/（不對外）；網頁版 docs/data/buyback*.json 等 Evans 點頭接進每日戰情更新才發布。
+name: 回補庫藏股
+
+on:
+  schedule:
+    - cron: "47 13 * * *"      # 台灣 21:47（董事會決議多半盤後公告）
+  workflow_dispatch:
+    inputs:
+      full:
+        description: "公告整段重抓到 2023-11（1＝是）"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: backfill-buyback
+  cancel-in-progress: false
+
+jobs:
+  meta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          sparse-checkout: |
+            data/buyback
+            data/bars/daily.npz
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+          cache: pip
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests numpy
+      - name: 公告＋執行結果
+        working-directory: code
+        run: python buyback.py ../site/data --events ${{ github.event.inputs.full == '1' && '--full' || '' }}
+      - name: 指數月線
+        working-directory: code
+        run: python buyback.py ../site/data --index
+      - uses: actions/upload-artifact@v4
+        with:
+          name: buyback-meta
+          path: |
+            site/data/buyback/events.json
+            site/data/buyback/index.json
+          retention-days: 1
+
+  crawl:
+    needs: meta
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          sparse-checkout: |
+            data/buyback/px_hist.npz
+            data/bars/daily.npz
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+          cache: pip
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests numpy
+      - uses: actions/download-artifact@v4
+        with:
+          name: buyback-meta
+          path: site/data/buyback
+      - name: 歷史日K 片 ${{ matrix.shard }}
+        working-directory: code
+        run: python buyback.py ../site/data --crawl ../out --shard ${{ matrix.shard }} --of 8 --sec 1500
+      - uses: actions/upload-artifact@v4
+        with:
+          name: buyback-px-${{ matrix.shard }}
+          path: out/
+          if-no-files-found: ignore
+          retention-days: 1
+
+  merge:
+    needs: [meta, crawl]
+    if: always() && needs.meta.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    concurrency:
+      group: daily-build
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+          cache: pip
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests numpy
+      - uses: actions/download-artifact@v4
+        with:
+          name: buyback-meta
+          path: data/buyback
+      - uses: actions/download-artifact@v4
+        with:
+          path: dl
+          pattern: buyback-px-*
+          merge-multiple: true
+      - name: 併進 px_hist.npz、事件研究
+        working-directory: code
+        run: |
+          python buyback.py ../data --merge ../dl
+          python buyback.py ../data --study
+      - name: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/buyback
+          if git diff --staged --quiet; then
+            echo "庫藏股沒有變化，不提交。"
+          else
+            git commit -m "data: 回補庫藏股 $(TZ=Asia/Taipei date '+%F %H:%M')"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
