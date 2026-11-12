@@ -24,7 +24,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 45   # 10-12 晚：35 分讓 job 比 world 步驟（25 分）先到上限 → 整班連提交一起被取消；改成大於各步上限加總，world 超時只砍那步、照樣提交
+    timeout-minutes: 90   # 11-12 雲端P：45 分連兩班被砍（外部網路慢：全球資料 1328s、產出 758s），各步上限加總已 83 分 → 90；10-12 晚：35 分讓 job 比 world 步驟（25 分）先到上限 → 整班連提交一起被取消；改成大於各步上限加總，world 超時只砍那步、照樣提交
 
     steps:
       - name: 排程延遲量測
