@@ -1,0 +1,40 @@
+{
+ "events": [
+  {
+   "co": "NVIDIA",
+   "co_zh": "輝達",
+   "alias": [
+    "NVIDIA",
+    "Nvidia",
+    "輝達",
+    "英偉達",
+    "NVDA",
+    "エヌビディア",
+    "엔비디아"
+   ],
+   "names": {
+    "Jensen Huang": "黃仁勳",
+    "Colette Kress": "Colette Kress"
+   },
+   "t": "NVIDIA Announces CEO Transition",
+   "u": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+   "pub": "2026-11-12T21:48",
+   "src": "NVIDIA 官方新聞稿",
+   "dom": "nvidia.com",
+   "verified": true,
+   "checked": "2026-11-13T00:36",
+   "http": 200,
+   "final": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+   "desc": "NVIDIA (NASDAQ: NVDA) Board of Directors announced today that Jensen Huang has resigned as President, Chief Executive Officer, and a member of the Board, effective immediately.",
+   "out": "Jensen Huang has resigned as President, Chief Executive Officer, and a member of the Board, effective immediately.",
+   "in": "Colette Kress, current Executive Vice President and Chief Financial Officer of NVIDIA, has agreed to serve as Interim Chief Executive Officer",
+   "people": [
+    "Jensen Huang",
+    "Colette Kress"
+   ],
+   "zh_core": "黃仁勳辭去總裁、執行長及董事職務，即刻生效；執行副總裁暨財務長 Colette Kress 任臨時執行長",
+   "zh": "輝達官方宣布：黃仁勳辭去總裁、執行長及董事職務，即刻生效；執行副總裁暨財務長 Colette Kress 任臨時執行長"
+  }
+ ],
+ "rule": "大型公司官網新聞稿標題有 CEO／Chief Executive／leadership transition → 程式打開官方稿，網域對、頁面有 Chief Executive Officer、抓得到辭任／接任原文句子才算；留 7 天"
+}
