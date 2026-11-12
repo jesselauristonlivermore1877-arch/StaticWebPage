@@ -1,0 +1,82 @@
+# root_cause_deep.yml ─ 根因追蹤「深層解讀」（預覽；雲端R 11-12，程式 CustomerServiceANDSales/tools/root_cause_deep.py）
+#   只能手動觸發（Evans 點頭前不接排程、不接正式頁與 EDM）。
+#   輸入台股日（docs/data/root_cause/<日>.json 要已經有）＋第幾名候選 → 新聞列表＋Gemini 中英搜尋＋整併 → 程式逐筆核對分級、敏感字硬關卡
+#   → docs/preview/root_cause_deep/<日>.json；中間檔與擋掉的原文 data/root_cause/<日>_deep/。
+#   Gemini 走 GEMINI_API_KEY（api 線、heavy），額度狀態跟其他 workflow 共用 data/gemini_quota/。
+name: 根因深層解讀（預覽）
+
+on:
+  workflow_dispatch:
+    inputs:
+      tw:
+        description: "台股日 YYYY-MM-DD（根因追蹤已經跑過的那天）"
+        required: true
+      cand:
+        description: "第幾名公開候選（預設 1）"
+        required: false
+        default: "1"
+      days:
+        description: "往前看幾天（預設 6）"
+        required: false
+        default: "6"
+      stage:
+        description: "all＝完整；grade＝只重跑核對與產出（不打 Gemini）"
+        required: false
+        default: "all"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: root-cause
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: 檢查輸入
+        env:
+          TW: ${{ inputs.tw }}
+          CAND: ${{ inputs.cand }}
+          DAYS: ${{ inputs.days }}
+          STAGE: ${{ inputs.stage }}
+        run: |
+          [[ "$TW" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || { echo "✗ tw 格式不對：$TW"; exit 1; }
+          [[ "$CAND" =~ ^[0-9]+$ && "$DAYS" =~ ^[0-9]+$ ]] || { echo "✗ cand／days 要是數字"; exit 1; }
+          [[ "$STAGE" =~ ^(all|grade)$ ]] || { echo "✗ stage 只能 all／grade"; exit 1; }
+      - uses: actions/checkout@v4
+        with:
+          path: StaticWebPage
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: CustomerServiceANDSales
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+      - run: |
+          sudo apt-get install -y -qq poppler-utils >/dev/null || true
+          pip install -c "$GITHUB_WORKSPACE/CustomerServiceANDSales/requirements-lock.txt" requests certifi numpy feedparser yfinance curl_cffi googlenewsdecoder
+      - name: 深層解讀
+        working-directory: CustomerServiceANDSales
+        env:
+          PYTHONUNBUFFERED: "1"
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_QUOTA_STATE: ${{ github.workspace }}/StaticWebPage/data/gemini_quota/root_cause.json
+          GEMINI_QUOTA_SHARED: ${{ github.workspace }}/StaticWebPage/data/gemini_quota
+          GEMINI_TASK_ROUTE: api
+        run: python tools/root_cause_deep.py --site ../StaticWebPage --tw "${{ inputs.tw }}" --cand "${{ inputs.cand }}" --days "${{ inputs.days }}" --stage "${{ inputs.stage }}"
+      - name: 提交
+        if: always()
+        working-directory: StaticWebPage
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/gemini_quota data/root_cause docs/preview/root_cause_deep 2>/dev/null || true
+          if git diff --staged --quiet; then echo "沒有變動"; exit 0; fi
+          git commit -qm "data: 根因深層解讀預覽 ${{ inputs.tw }} 第 ${{ inputs.cand }} 名（$(TZ=Asia/Taipei date '+%F %H:%M')）"
+          for i in 1 2 3 4; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep $((2 ** i)); done
+          exit 1
