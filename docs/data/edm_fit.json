@@ -1,12 +1,24 @@
 {
- "checked_at": "2026-11-12T06:12:45.694Z",
- "date": "2026-11-11",
- "n": 84,
- "n_bad": 0,
- "bad": {},
- "js_errors": [
-  "TypeError: \"<div class=\"s\">指標每天收盤後更新；還沒收盤的那天（夜盤、盤中）先不列入</div></div>\" is not a function"
- ],
+ "checked_at": "2026-11-12T10:53:44.938Z",
+ "date": "2026-11-12",
+ "n": 83,
+ "n_bad": 1,
+ "bad": {
+  "GEA_主動ETF日報_00404A": {
+   "cat": "ETF 各檔",
+   "title": "00404A 聯博動能50",
+   "err": "",
+   "issues": [
+    {
+     "area": "div.pe-top",
+     "dir": "下",
+     "px": 6,
+     "why": "div.pe-top scrollHeight 170＞clientHeight 164（容許 2）"
+    }
+   ]
+  }
+ },
+ "js_errors": [],
  "chrome": "google-chrome",
  "no_cjk_font": false
 }

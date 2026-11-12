@@ -2,7 +2,7 @@
  "file": "3042_2026-11-02.md",
  "code": "3042",
  "date": "2026-11-02",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 25.59 倍，站上資料 28.152"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",

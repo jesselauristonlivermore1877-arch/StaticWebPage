@@ -2,7 +2,7 @@
  "file": "2379_2026-10-30.md",
  "code": "2379",
  "date": "2026-10-30",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 27.60 倍，站上資料 29.1153"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",

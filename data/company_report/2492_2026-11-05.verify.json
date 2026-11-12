@@ -2,7 +2,7 @@
  "file": "2492_2026-11-05.md",
  "code": "2492",
  "date": "2026-11-05",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 24.59 倍，站上資料 31.6292"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",
