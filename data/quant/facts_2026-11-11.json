@@ -1,9 +1,9 @@
 {
  "date": "2026-11-11",
  "data_date": "2026-11-11",
- "made": "2026-11-12T11:40+08:00",
- "built_at": "2026-11-12T11:29:30+08:00",
- "run": "43148357303",
+ "made": "2026-11-12T12:49+08:00",
+ "built_at": "2026-11-12T12:39:11+08:00",
+ "run": "43152628386",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
   "web_data.market.taiex": "2026-11-11",
@@ -29,63 +29,63 @@
    "id": "taiex_close",
    "sec": "大盤",
    "label": "加權指數收盤",
-   "value": 44192.86,
+   "value": 43562.19,
    "unit": " 點",
-   "text": "44192.86 點",
+   "text": "43562.19 點",
    "src": "web_data.market.taiex"
   },
   {
    "id": "taiex_chg",
    "sec": "大盤",
    "label": "加權指數漲跌點",
-   "value": -64.29,
+   "value": -694.96,
    "unit": " 點",
-   "text": "-64.29 點",
+   "text": "-694.96 點",
    "src": "web_data.market.taiex"
   },
   {
    "id": "taiex_r1",
    "sec": "大盤",
    "label": "加權指數漲跌幅",
-   "value": -0.15,
+   "value": -1.57,
    "unit": "%",
-   "text": "-0.15%",
+   "text": "-1.57%",
    "src": "web_data.market.taiex"
   },
   {
    "id": "taiex_dd52",
    "sec": "大盤",
    "label": "加權指數距 52 週高點",
-   "value": -11.18,
+   "value": -12.3,
    "unit": "%",
-   "text": "-11.18%",
+   "text": "-12.30%",
    "src": "web_data.market.taiex"
   },
   {
    "id": "taiex_ma20",
    "sec": "大盤",
    "label": "加權指數距 20 日均線",
-   "value": -1.26,
+   "value": -2.44,
    "unit": "%",
-   "text": "-1.26%",
+   "text": "-2.44%",
    "src": "web_data.market.taiex"
   },
   {
    "id": "otc_close",
    "sec": "大盤",
    "label": "櫃買指數收盤",
-   "value": 348.46,
+   "value": 340.69,
    "unit": " 點",
-   "text": "348.46 點",
+   "text": "340.69 點",
    "src": "web_data.market.otc"
   },
   {
    "id": "otc_r1",
    "sec": "大盤",
    "label": "櫃買指數漲跌幅",
-   "value": 1.26,
+   "value": -0.99,
    "unit": "%",
-   "text": "+1.26%",
+   "text": "-0.99%",
    "src": "web_data.market.otc"
   },
   {

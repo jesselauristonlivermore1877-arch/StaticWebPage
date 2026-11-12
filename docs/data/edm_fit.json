@@ -1,10 +1,12 @@
 {
- "checked_at": "2026-11-12T03:52:37.349Z",
+ "checked_at": "2026-11-12T05:06:23.540Z",
  "date": "2026-11-11",
  "n": 85,
  "n_bad": 0,
  "bad": {},
- "js_errors": [],
+ "js_errors": [
+  "TypeError: \"<div class=\"s\">指標每天收盤後更新；還沒收盤的那天（夜盤、盤中）先不列入</div></div>\" is not a function"
+ ],
  "chrome": "google-chrome",
  "no_cjk_font": false
 }
