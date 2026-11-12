@@ -1,0 +1,123 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>根因深層解讀</title>
+<style>
+/* 預覽：根因追蹤「深層解讀」（雲端R 11-12）。資料＝同資料夾 <日期>.json，由 tools/root_cause_deep.py 產生（正式版同一段程式）。前綴 rd- */
+:root{--bg:#EDE7DA;--card:#fff;--ink:#1B2A4A;--ink2:#5d5a50;--line:#DDD4BF;--acc:#B8862B;--up:#C8361E;--dn:#1F7A4D;
+  --g1:#1F5FA8;--g1b:#E3EEFA;--g2:#8A6A2B;--g2b:#F6EBD3;--g3:#7A4A9C;--g3b:#F0E6F7;--bad:#9A2E1F;--badb:#FBE6E2}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15171b;--card:#1f2228;--ink:#ecebe7;--ink2:#a9a69e;--line:#363a42;--acc:#d6a54a;--up:#ff6b57;--dn:#4cc38a;
+  --g1:#8cbcf5;--g1b:#1d2d42;--g2:#e0bf7a;--g2b:#3a3020;--g3:#cfa6ee;--g3b:#33263f;--bad:#ff9d8f;--badb:#43231f}}
+:root[data-theme="dark"]{--bg:#15171b;--card:#1f2228;--ink:#ecebe7;--ink2:#a9a69e;--line:#363a42;--acc:#d6a54a;--up:#ff6b57;--dn:#4cc38a;
+  --g1:#8cbcf5;--g1b:#1d2d42;--g2:#e0bf7a;--g2b:#3a3020;--g3:#cfa6ee;--g3b:#33263f;--bad:#ff9d8f;--badb:#43231f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 "Noto Sans TC","Microsoft JhengHei","PingFang TC",system-ui,sans-serif}
+.rd-wrap{max-width:980px;margin:0 auto;padding:16px 16px 60px}
+.rd-hd{background:linear-gradient(135deg,#1B2A4A 0%,#26406e 70%,#B8862B 140%);color:#fff;border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.rd-hd small{display:inline-block;background:#F3E3C0;color:#1B2A4A;font-weight:900;border-radius:6px;padding:1px 10px;font-size:13px}
+.rd-hd h1{font-size:22px;line-height:1.35;margin:8px 0 4px}
+.rd-hd p{margin:0;font-size:13px;opacity:.9}
+.rd-sel{margin-top:8px;font-size:13px}.rd-sel select{font:inherit;border-radius:6px;padding:2px 6px}
+.rd-kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 14px}
+.rd-kpi div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center}
+.rd-kpi b{display:block;font-size:24px;line-height:1.2}.rd-kpi span{font-size:12px;color:var(--ink2)}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:14px;min-width:0}
+h2{font-size:17px;margin:0 0 8px;border-left:4px solid var(--acc);padding-left:8px}
+h2 small{font-size:12px;color:var(--ink2);font-weight:400;margin-left:6px}
+.rd-g{display:inline-block;font-size:12px;font-weight:900;border-radius:5px;padding:0 6px;margin-right:6px;white-space:nowrap;vertical-align:1px}
+.rd-g.g1{color:var(--g1);background:var(--g1b)}.rd-g.g2{color:var(--g2);background:var(--g2b)}.rd-g.g3{color:var(--g3);background:var(--g3b)}.rd-g.no{color:var(--bad);background:var(--badb)}
+.rd-li{border-top:1px dashed var(--line);padding:7px 0}.rd-li:first-of-type{border-top:0}
+.rd-t{color:var(--ink2);font-size:12px;margin-right:6px;white-space:nowrap}
+.rd-src{font-size:12px;color:var(--ink2);margin-top:2px;overflow-wrap:anywhere}.rd-src a{color:var(--acc)}
+.rd-hy{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.rd-hy>div{border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+.rd-hy h3{font-size:15px;margin:0 0 4px}.rd-hy h3 small{display:block;font-size:12px;color:var(--acc);font-weight:900}
+.rd-hy p{margin:0 0 6px;font-size:14px}
+.rd-hy ul{margin:2px 0 6px;padding-left:18px;font-size:13px}.rd-hy li{margin:2px 0}
+.rd-lab{font-size:12px;font-weight:900}.rd-lab.s{color:var(--up)}.rd-lab.a{color:var(--dn)}.rd-lab.m{color:var(--ink2)}
+.rd-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;font-size:13px;width:100%;min-width:max-content}
+th,td{padding:3px 7px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:12px;color:var(--ink2);font-weight:700}th:first-child,td:first-child{text-align:left}
+.up{color:var(--up)}.dn{color:var(--dn)}
+.rd-view{background:var(--g2b);border-radius:8px;padding:8px 10px;margin-top:10px;font-size:14px}
+.rd-note{font-size:12px;color:var(--ink2);margin:6px 0 0}
+.rd-foot{font-size:12px;color:var(--ink2);text-align:center;margin-top:18px}
+.rd-rule{font-size:13px;margin:0;padding-left:18px}.rd-rule li{margin:2px 0}
+.rd-empty{color:var(--ink2);font-size:14px}
+@media (max-width:640px){.rd-hy{grid-template-columns:minmax(0,1fr)}.rd-kpi b{font-size:20px}.rd-hd h1{font-size:19px}}
+</style></head><body><div class="rd-wrap" id="rd">載入中…</div>
+<script>
+(async () => {
+  const $ = document.getElementById("rd");
+  const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+  const G = {"已證實": "g1", "媒體報導": "g2", "市場傳聞": "g3"};
+  const badge = g => `<span class="rd-g ${G[g] || "no"}">${esc(g || "未證實")}</span>`;
+  const sgn = (v, d = 2, u = "%") => v == null || isNaN(v) ? "—" : `<span class="${v > 0 ? "up" : v < 0 ? "dn" : ""}">${v > 0 ? "+" : ""}${Number(v).toFixed(d)}${u}</span>`;
+  const srcs = ev => (ev || []).map(e => `<a href="${esc(e.u)}" target="_blank" rel="noopener nofollow">${esc(e.src || "出處")}</a> ${esc(e.pub || "")}${e.auth ? "・" + esc(e.auth) : ""}${e.auto ? "（程式比對官方稿）" : ""}${!e.ok && e.title_ok ? "・標題核對（內文打不開）" : ""}${e.hedged ? "・轉述語氣" : ""}`).join("｜");
+  let idx;
+  try { idx = await (await fetch("index.json", {cache: "no-store"})).json(); } catch (e) { $.textContent = "讀不到 index.json：" + e; return; }
+  const L = (idx.list || []);
+  if (!L.length) { $.textContent = "還沒有資料"; return; }
+  const want = new URLSearchParams(location.search).get("d");
+  const day = (L.find(x => x.date === want) || L[0]).date;
+  let J;
+  try { J = await (await fetch(day + ".json", {cache: "no-store"})).json(); } catch (e) { $.textContent = "讀不到 " + day + ".json：" + e; return; }
+  const C = Object.fromEntries((J.claims || []).map(c => [c.id, c]));
+  const n = J.counts || {};
+  let h = `<div class="rd-hd"><small>預覽・根因追蹤 深層解讀</small><h1>${esc(J.base.title)}</h1>
+    <p>台股 ${esc(J.date_tw)}｜根因追蹤第 ${esc(J.base.rank)} 名（${esc(J.base.status)}${J.base.mode === "us_only" ? "・盤前班" : ""}）｜視窗 ${esc(J.window[0])}～${esc(J.window[1])}｜產出 ${esc((J.built || "").replace("T", " "))}</p>
+    ${L.length > 1 ? `<div class="rd-sel">其他日期：<select onchange="location.search='?d='+this.value">${L.map(x => `<option value="${esc(x.date)}"${x.date === day ? " selected" : ""}>${esc(x.date)} ${esc((x.title || "").slice(0, 24))}</option>`).join("")}</select></div>` : ""}</div>
+  <div class="rd-kpi"><div><b style="color:var(--g1)">${n["已證實"] || 0}</b><span>已證實</span></div><div><b style="color:var(--g2)">${n["媒體報導"] || 0}</b><span>媒體報導</span></div>
+    <div><b style="color:var(--g3)">${n["市場傳聞"] || 0}</b><span>市場傳聞</span></div><div><b style="color:var(--bad)">${n["擋掉"] || 0}</b><span>程式擋掉</span></div></div>`;
+  // 現在的狀態
+  h += `<section><h2>現在的狀態<small>只放有官方或權威媒體、程式核對通過的答案；其餘一律「官方未證實」</small></h2>` +
+    ((J.status || []).map(s => `<div class="rd-li"><b>${esc(s.q)}</b><br>${s.confirmed ? badge("已證實") : '<span class="rd-g no">官方未證實</span>'}${esc(s.text)}${s.claims && s.claims.length ? `<div class="rd-src">依據：${s.claims.map(id => esc(id)).join("、")}</div>` : ""}</div>`).join("") || '<p class="rd-empty">沒有資料</p>') + `</section>`;
+  // 官方發布（程式直接列，不經 AI）
+  if ((J.official_docs || []).length) h += `<section><h2>官方發布<small>程式從公司官網直接列（原文標題照抄、不經 AI）</small></h2>` +
+    J.official_docs.map(d => `<div class="rd-li"><span class="rd-t">${esc(d.pub)}</span>${badge("已證實")}<a href="${esc(d.u)}" target="_blank" rel="noopener nofollow">${esc(d.t)}</a><div class="rd-src">${esc(d.src)}・官方</div></div>`).join("") + `</section>`;
+  // 時間線
+  h += `<section><h2>事件時間線<small>每一句由程式打開出處核對後分級（台北時間）</small></h2>` +
+    ((J.claims || []).map(c => `<div class="rd-li"><span class="rd-t">${esc(c.id)}・${esc(c.time)}</span>${badge(c.grade)}${esc(c.text)}<div class="rd-src">${srcs(c.ev)}</div></div>`).join("") || '<p class="rd-empty">沒有核對通過的句子</p>') + `</section>`;
+  // 假說
+  const ref = ids => (ids || []).map(id => C[id] ? `<li>${badge(C[id].grade)}${esc(C[id].text)}<span class="rd-t"> ${esc(id)}</span></li>` : "").join("");
+  h += `<section><h2>深層解讀：四個假說並列<small>不下結論；每個假說列支持與反對的已核對句子、還缺的證據</small></h2><div class="rd-hy">` +
+    (J.hypotheses || []).map(x => `<div><h3><small>${esc(x.cat)}</small>${x.title ? esc(x.title) : x.title_blocked ? "（標題含敏感字，程式已擋）" : "（這次沒有足夠資料）"}</h3>
+      ${x.summary ? `<p>${esc(x.summary)}</p>` : x.summary_blocked ? '<p class="rd-note">說明含敏感字，程式已擋。</p>' : ""}
+      <div class="rd-lab s">支持的證據</div><ul>${ref(x.support) || "<li>（沒有核對通過的句子）</li>"}</ul>
+      <div class="rd-lab a">反對或對不上的證據</div><ul>${ref(x.against) || "<li>（沒有核對通過的句子）</li>"}</ul>
+      <div class="rd-lab m">還缺的證據</div><ul>${(x.missing || []).map(t => `<li>${esc(t)}</li>`).join("") || "<li>—</li>"}</ul>
+      ${x.dropped_ev ? `<p class="rd-note">另有 ${x.dropped_ev} 筆引用的句子沒通過核對，不列。</p>` : ""}</div>`).join("") + `</div></section>`;
+  // 市場傳聞
+  const rx = r => {
+    const R = r.reaction || {};
+    if (!R.ok) return `<p class="rd-note">市場反應：${esc(R.why || "無資料")}</p>`;
+    const rows = [{lab: R.in_session ? "傳聞出現時" : "下一個交易日開盤", t: R.at, fut: R.fut, breadth: R.breadth, ai: R.ai}].concat(R.pts || []);
+    return `${R.note ? `<p class="rd-note">${esc(R.note)}</p>` : ""}<div class="rd-x"><table><tr><th>時點</th><th>時間</th><th>台指期</th><th>變化</th><th>權值 200 廣度</th><th>AI 核心分數</th></tr>` +
+      rows.map(p => `<tr><td>${esc(p.lab)}</td><td>${esc(R.day)} ${esc(p.t)}</td><td>${p.fut != null ? Number(p.fut).toLocaleString() : "—"}</td><td>${p.chg != null ? sgn(p.chg, 0, " 點") + "（" + sgn(p.pct) + "）" : "—"}</td><td>${p.breadth != null && !isNaN(p.breadth) ? Number(p.breadth).toFixed(2) : "—"}</td><td>${p.ai != null && !isNaN(p.ai) ? Number(p.ai).toFixed(2) : "—"}</td></tr>`).join("") +
+      `</table></div>${R.low ? `<p class="rd-note">之後最低：${esc(R.low.t)} 台指期 ${Number(R.low.fut).toLocaleString()}（${sgn(R.low.chg, 0, " 點")}）</p>` : ""}<p class="rd-note">資料：${esc(R.src)}；廣度＝權值 200 上漲家數減下跌家數占比（−1～+1），AI 核心分數＝AI 核心股當下漲跌的綜合分數（−1～+1）。只描述時間上的先後，不代表傳聞就是原因。</p>`;
+  };
+  h += `<section><h2>市場傳聞<small>只寫「傳聞稱…，官方未證實」；附出現時間與我們盤中資料的市場反應</small></h2>` +
+    ((J.rumors || []).map(r => `<div class="rd-li">${badge("市場傳聞")}${esc(r.text)}<div class="rd-src">出現時間：${esc(r.seen)}（${esc(r.seen_how)}）${r.where ? "｜平台：" + esc(r.where) : ""}</div><div class="rd-src">${srcs(r.ev)}</div>${rx(r)}</div>`).join("") || '<p class="rd-empty">沒有通過格式與核對的傳聞</p>') + `</section>`;
+  // 台灣供應鏈
+  const S = J.supply_chain || {};
+  if ((S.days || []).length) {
+    const ds = S.days;
+    h += `<section><h2>台灣供應鏈：市場怎麼反應<small>只用資料庫算得出的數字；依視窗內累計漲跌由弱到強</small></h2>
+      <div class="rd-x"><table><tr><th>加權指數</th>${ds.map(d => `<th>${esc(d.slice(5))}</th>`).join("")}<th></th><th></th></tr>
+      <tr><td>當日漲跌</td>${(S.twii || []).map(x => `<td>${sgn(x.pct)}</td>`).join("")}<td></td><td></td></tr>
+      <tr><th>族群（漲跌中位數）</th>${ds.map(d => `<th>${esc(d.slice(5))}</th>`).join("")}<th>累計</th><th>外資合計（億）</th></tr>` +
+      S.rows.map(r => `<tr><td>${esc(r.sec)}</td>${r.cells.map(c => `<td>${sgn(c.pct)}</td>`).join("")}<td>${sgn(r.cum)}</td><td>${sgn(r.foreign_sum, 1, "")}</td></tr>`).join("") +
+      `</table></div><p class="rd-note">資料：${esc(S.src)}。${esc(S.note)}</p>` +
+      (J.tw_view ? `<div class="rd-view">${esc(J.tw_view)}<p class="rd-note">這是市場上的一種解讀，不是本站結論；不構成投資建議。</p></div>` : "") + `</section>`;
+  }
+  // 擋掉＋規則
+  const why = n["擋掉原因"] || {};
+  h += `<section><h2>程式擋掉的內容<small>原文只留在不對外的中間檔，這裡只列筆數與原因</small></h2>` +
+    (Object.keys(why).length ? `<ul class="rd-rule">${Object.entries(why).map(([k, v]) => `<li>${esc(k)}：${v} 筆</li>`).join("")}</ul>` : '<p class="rd-empty">沒有</p>') + `</section>`;
+  h += `<section><h2>分級與關卡規則<small>全部由程式判，不採用 Gemini 自己標的等級</small></h2><ul class="rd-rule">${Object.entries(J.rules || {}).map(([k, v]) => `<li><b>${esc(k)}</b>：${esc(v)}</li>`).join("")}</ul>
+    <p class="rd-note">出處：根因已核對 ${J.sources_n.E}、新聞列表 ${J.sources_n.N}、搜尋答案 ${J.sources_n.W}；公司官網網域（yfinance 登記）：${esc((J.official_domains || []).join("、") || "—")}。
+    Gemini：${(J.gemini || []).map(g => `${esc(g.task)} ${g.ok ? "✓" : "✗"} ${g.secs ?? "—"} 秒・${g.tokens ?? "—"} token・${esc(g.model || "")}`).join("｜")}</p></section>`;
+  h += `<p class="rd-foot">整理公開報導與官方文件，非投資建議；不寫目標價、評等、買賣建議。涉及個人的指控以官方證實為準。</p>`;
+  $.innerHTML = h;
+})();
+</script></body></html>
