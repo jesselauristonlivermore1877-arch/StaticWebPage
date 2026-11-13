@@ -3,6 +3,8 @@
 #   不一致或 w_office 離線 → TG（同一份 TG_BOT_TOKEN／TG_CHAT_ID）；一致只印 log。
 #   只讀：只打 /admin/state，不改任何設定、不送訊號。RELAY_ADMIN_TOKEN 跟 cloudflare_relay.yml 一樣從 D1 gea-relay-keys 取，log 遮罩。
 #   版號基準＝本 repo cloudflare/relay/version.json 的 ver（中繼 /version 發的那一版）。
+#   W 11-13（【新】總指揮）：版號分兩級——落後中繼發布版但 ≥ 最低可用版本（MIN_VER）＝⚠ 提醒，每天只在 08:30 那班發一次、不算失敗；
+#     低於 MIN_VER（中繼已不接受，例：d10 以前不送身分證雜湊會被 403）才 ✗。訂閱缺、離線、停用照舊 ✗。
 name: 中繼監控接收端比對
 
 on:
@@ -15,6 +17,10 @@ on:
         description: "監控接收端代號"
         required: false
         default: "w_office"
+      min_ver:
+        description: "最低可用版本（低於它才 ✗；空白＝用預設）"
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -33,6 +39,8 @@ jobs:
       TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
       TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
       CANARY_ID: ${{ inputs.canary_id || 'w_office' }}
+      MIN_VER: ${{ inputs.min_ver || '20261106a' }}   # d10：第一版送身分證雜湊；更舊的中繼會 403
+      EVENT: ${{ github.event_name }}
       DB: gea-relay-keys
     steps:
       - uses: actions/checkout@v4
@@ -52,7 +60,7 @@ jobs:
       - name: 比對上架策略 vs 監控接收端
         run: |
           python3 - <<'PY'
-          import json, os, urllib.parse, urllib.request
+          import datetime, json, os, re, urllib.parse, urllib.request
           W = "https://gea-signal-relay.jesselauristonlivermore1877.workers.dev"
           H = {"Authorization": "Bearer " + os.environ["RELAY_ADMIN_TOKEN"], "User-Agent": "gea-relay-admin/1.0"}
           cid = os.environ["CANARY_ID"]
@@ -60,7 +68,8 @@ jobs:
           st = json.load(urllib.request.urlopen(urllib.request.Request(W + "/admin/state?ch=gea", None, H), timeout=30))
           listed = sorted(s["code"] for s in st["strategies"] if s.get("listed"))
           u = next((x for x in st["users"] if x["id"] == cid), None)
-          bad = []
+          bad = []; warn = []
+          min_ver = os.environ.get("MIN_VER", "").strip()
           if not u:
               bad.append("中繼沒有 %s 這個用戶" % cid)
           else:
@@ -70,16 +79,29 @@ jobs:
               miss = [] if allsub else [c for c in listed if c not in subs]
               print("上架策略：%s" % ",".join(listed))
               print("%s：subs=%s ver=%s online=%s enabled=%s off=%s last_seen=%s" % (cid, raw or "（空）", u.get("ver"), u.get("online"), u.get("enabled"), u.get("off"), u.get("last_seen")))
-              print("版號基準（version.json）：%s" % want_ver)
+              print("版號基準（version.json）：%s；最低可用 %s" % (want_ver, min_ver or "（不檢查）"))
               if miss: bad.append("訂閱缺：%s（目前 %s）" % (",".join(miss), raw or "空"))
-              if want_ver and want_ver not in (u.get("ver") or ""): bad.append("版號 %s ≠ 中繼發布版 %s" % (u.get("ver") or "未回報", want_ver))
+              m = re.search(r"\d{8}[a-z]", u.get("ver") or ""); have = m.group(0) if m else ""
+              if not have: bad.append("版號未回報（%s）" % (u.get("ver") or "空"))
+              elif min_ver and have < min_ver: bad.append("版號 %s 低於最低可用版本 %s（中繼不接受，要更新）" % (have, min_ver))
+              elif want_ver and have < want_ver: warn.append("版號 %s 落後中繼發布版 %s（仍可用；有空再更新）" % (have, want_ver))
               if not u.get("online"): bad.append("離線（最後上線 %s）" % (u.get("last_seen") or "無紀錄"))
               if not u.get("enabled") or u.get("off"): bad.append("用戶停用／不在服務期（%s）" % (u.get("off") or "enabled=false"))
-          if not bad:
-              print("✓ 一致"); raise SystemExit(0)
-          txt = "✗ 中繼監控接收端 %s 跟上架清單不一致：\n- %s\n上架：%s" % (cid, "\n- ".join(bad), ",".join(listed))
-          print(txt)
           tok, chat = os.environ.get("TG_BOT_TOKEN", "").strip(), os.environ.get("TG_CHAT_ID", "").strip()
+          if not bad:
+              if not warn:
+                  print("✓ 一致"); raise SystemExit(0)
+              txt = "⚠ 中繼監控接收端 %s 提醒：\n- %s" % (cid, "\n- ".join(warn))
+              print(txt)
+              tw = datetime.datetime.utcnow() + datetime.timedelta(hours=8)
+              if os.environ.get("EVENT") == "schedule" and tw.hour >= 12:
+                  print("版號落後只在每天 08:30 那班提醒一次 → 這班（台北 %02d:%02d）不發 TG" % (tw.hour, tw.minute)); raise SystemExit(0)
+              if tok and chat:
+                  urllib.request.urlopen("https://api.telegram.org/bot%s/sendMessage" % tok, urllib.parse.urlencode({"chat_id": chat, "text": txt}).encode(), timeout=15).read()
+                  print("已發 TG（提醒）")
+              raise SystemExit(0)
+          txt = "✗ 中繼監控接收端 %s 跟上架清單不一致：\n- %s\n上架：%s" % (cid, "\n- ".join(bad + warn), ",".join(listed))
+          print(txt)
           if tok and chat:
               urllib.request.urlopen("https://api.telegram.org/bot%s/sendMessage" % tok, urllib.parse.urlencode({"chat_id": chat, "text": txt}).encode(), timeout=15).read()
               print("已發 TG")
