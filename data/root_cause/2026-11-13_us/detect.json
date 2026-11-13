@@ -1,0 +1,77 @@
+{
+ "trig": [
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-13",
+   "t": "台指期日盤大漲 +1,075 點（+2.49%），報 44,203；盤中最高 44,824",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-13",
+   "t": "台指期日盤大漲 +1,294 點（+3.00%），報 44,422；盤中最高 44,824",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-13",
+   "t": "台指期夜盤大漲 +869 點（+2.01%），報 43,997；盤中最高 44,010",
+   "u": "https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-12",
+   "t": "台指期日盤重挫 -958 點（-2.17%），報 43,178；盤中最低 43,057",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  }
+ ],
+ "moves": {
+  "SOX": {
+   "date": "2026-11-12",
+   "prev": "2026-11-11",
+   "close": 10506.6738,
+   "prev_close": 10564.1104,
+   "pct": -0.54,
+   "sd": 3.062,
+   "z": -0.18,
+   "n": 250,
+   "key": "SOX",
+   "name": "費城半導體",
+   "sym": "^SOX"
+  },
+  "NQ": {
+   "date": "2026-11-12",
+   "prev": "2026-11-11",
+   "close": 28440.0,
+   "prev_close": 28473.25,
+   "pct": -0.12,
+   "sd": 1.351,
+   "z": -0.09,
+   "n": 250,
+   "key": "NQ",
+   "name": "那斯達克 100 期貨",
+   "sym": "NQ=F"
+  },
+  "SPX": {
+   "date": "2026-11-12",
+   "prev": "2026-11-11",
+   "close": 7592.3999,
+   "prev_close": 7619.3799,
+   "pct": -0.35,
+   "sd": 0.866,
+   "z": -0.41,
+   "n": 250,
+   "key": "SPX",
+   "name": "S&P 500",
+   "sym": "^GSPC"
+  }
+ },
+ "sec": {
+  "sectors": [],
+  "note": "只看美股：台股 2026-11-13 還沒開盤，不算族群"
+ }
+}

@@ -1,0 +1,223 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"輝達執行長黃仁勳辭職\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-12\",\n      \"who\": \"Jensen Huang\",\n      \"event\": \"輝達執行長黃仁勳辭職\",\n      \"mechanism\": \"領導層真空與公司治理危機引發市場對AI產業前景的疑慮\",\n      \"industry\": \"半導體與AI供應鏈\",\n      \"tw_link\": \"輝達為AI供應鏈核心，執行長辭職引發對AI需求與供應鏈穩定性的疑慮，衝擊台股相關族群\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"伺服器與品牌組裝\",\n        \"散熱與液冷\",\n        \"封裝測試\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"黃仁勳\",\n        \"輝達\",\n        \"執行長\",\n        \"辭職\",\n        \"Jensen Huang\",\n        \"Nvidia\",\n        \"CEO\",\n        \"Resignation\",\n        \"ジェンスン・フアン\",\n        \"エヌビディア\",\n        \"젠슨 황\",\n        \"엔비디아\"\n      ],\n      \"evidence\": [\n        \"P229\",\n        \"P231\",\n        \"P228\",\n        \"P215\",\n        \"P214\",\n        \"P218\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"N/A\",\n      \"drill\": [\n        \"Jensen Huang resignation\",\n        \"Nvidia CEO scandal\",\n        \"黃仁勳 辭職\",\n        \"輝達 董事會\",\n        \"ジェンスン・フアン 辞任\",\n        \"젠슨 황 사임\"\n      ]\n    },\n    {\n      \"title\": \"市場恐慌與科技股拋售\",\n      \"layer\": \"表面\",\n      \"event_date\": \"2026-11-12\",\n      \"who\": \"Market participants\",\n      \"event\": \"市場恐慌與科技股拋售\",\n      \"mechanism\": \"投資人恐慌性拋售與融資追繳壓力\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"外資撤離與散戶恐慌導致台股全面性賣壓\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"恐慌\",\n        \"賣壓\",\n        \"獲利了結\",\n        \"估值\",\n        \"Sell-off\",\n        \"Panic\",\n        \"Valuation\",\n        \"Margin call\",\n        \"売り圧力\",\n        \"恐慌\",\n        \"매도세\",\n        \"공포\"\n      ],\n      \"evidence\": [\n        \"P1\",\n        \"P151\",\n        \"P163\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"輝達執行長辭職引發市場對AI產業前景的恐慌，導致投資人拋售科技股。\",\n      \"drill\": [\n        \"AI stock selloff\",\n        \"market panic 2026\",\n        \"台股 賣壓\",\n        \"科技股 拋售\",\n        \"AI株 売り\",\n        \"기술주 매도\"\n      ]\n    },\n    {\n      \"title\": \"期交所調高期貨保證金\",\n      \"layer\": \"放大因素\",\n      \"event_date\": \"2026-11-12\",\n      \"who\": \"Taiwan Futures Exchange\",\n      \"event\": \"期交所調高期貨保證金\",\n      \"mechanism\": \"提高交易成本降低市場槓桿與流動性\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"交易成本上升抑制市場投機與槓桿操作加劇波動\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"期交所\",\n        \"保證金\",\n        \"槓桿\",\n        \"融資\",\n        \"Margin requirement\",\n        \"Leverage\",\n        \"Futures\",\n        \"Liquidity\",\n        \"証拠金\",\n        \"レバレッジ\",\n        \"증거금\",\n        \"레버리지\"\n      ],\n      \"evidence\": [\n        \"P877\",\n        \"P878\",\n        \"P879\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"輝達事件引發市場恐慌，期交所為控管風險調高保證金，進一步壓縮槓桿空間。\",\n      \"drill\": [\n        \"期交所 保證金 調高\",\n        \"期貨 槓桿\",\n        \"Margin requirement hike\",\n        \"証拠金 引き上げ\",\n        \"증거금 인상\"\n      ]\n    },\n    {\n      \"title\": \"MSCI指數權重調整\",\n      \"layer\": \"表面\",\n      \"event_date\": \"2026-11-12\",\n      \"who\": \"MSCI\",\n      \"event\": \"MSCI指數權重調整\",\n      \"mechanism\": \"被動資金進行部位調整引發市場波動\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"被動資金調整部位造成特定權值股與全市場波動\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"MSCI\",\n        \"權重調整\",\n        \"指數\",\n        \"換股\",\n        \"Index adjustment\",\n        \"Rebalancing\",\n        \"Passive funds\",\n        \"指数調整\",\n        \"リバランス\",\n        \"지수 조정\",\n        \"리밸런싱\"\n      ],\n      \"evidence\": [\n        \"P858\",\n        \"P876\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"MSCI權重調整導致被動資金被迫進行部位調整，加劇市場波動。\",\n      \"drill\": [\n        \"MSCI index adjustment 2026\",\n        \"MSCI 權重調整\",\n        \"MSCI 指数調整\",\n        \"MSCI 지수 조정\"\n      ]\n    }\n  ],\n  \"summary\": \"昨晚美股因輝達執行長黃仁勳辭職引發市場恐慌，導致科技股全面重挫，預期傳導到今天台股，AI供應鏈與半導體族群將面臨沉重賣壓，市場波動加劇。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "輝達執行長黃仁勳辭職",
+    "layer": "根因",
+    "event_date": "2026-11-12",
+    "who": "Jensen Huang",
+    "event": "輝達執行長黃仁勳辭職",
+    "mechanism": "領導層真空與公司治理危機引發市場對AI產業前景的疑慮",
+    "industry": "半導體與AI供應鏈",
+    "tw_link": "輝達為AI供應鏈核心，執行長辭職引發對AI需求與供應鏈穩定性的疑慮，衝擊台股相關族群",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "伺服器與品牌組裝",
+     "散熱與液冷",
+     "封裝測試"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "黃仁勳",
+     "輝達",
+     "執行長",
+     "辭職",
+     "Jensen Huang",
+     "Nvidia",
+     "CEO",
+     "Resignation",
+     "ジェンスン・フアン",
+     "エヌビディア",
+     "젠슨 황",
+     "엔비디아"
+    ],
+    "evidence": [
+     "P229",
+     "P231",
+     "P228",
+     "P215",
+     "P214",
+     "P218"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "N/A",
+    "drill": [
+     "Jensen Huang resignation",
+     "Nvidia CEO scandal",
+     "黃仁勳 辭職",
+     "輝達 董事會",
+     "ジェンスン・フアン 辞任",
+     "젠슨 황 사임"
+    ]
+   },
+   {
+    "title": "市場恐慌與科技股拋售",
+    "layer": "表面",
+    "event_date": "2026-11-12",
+    "who": "Market participants",
+    "event": "市場恐慌與科技股拋售",
+    "mechanism": "投資人恐慌性拋售與融資追繳壓力",
+    "industry": "全市場",
+    "tw_link": "外資撤離與散戶恐慌導致台股全面性賣壓",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "恐慌",
+     "賣壓",
+     "獲利了結",
+     "估值",
+     "Sell-off",
+     "Panic",
+     "Valuation",
+     "Margin call",
+     "売り圧力",
+     "恐慌",
+     "매도세",
+     "공포"
+    ],
+    "evidence": [
+     "P1",
+     "P151",
+     "P163"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "輝達執行長辭職引發市場對AI產業前景的恐慌，導致投資人拋售科技股。",
+    "drill": [
+     "AI stock selloff",
+     "market panic 2026",
+     "台股 賣壓",
+     "科技股 拋售",
+     "AI株 売り",
+     "기술주 매도"
+    ]
+   },
+   {
+    "title": "期交所調高期貨保證金",
+    "layer": "放大因素",
+    "event_date": "2026-11-12",
+    "who": "Taiwan Futures Exchange",
+    "event": "期交所調高期貨保證金",
+    "mechanism": "提高交易成本降低市場槓桿與流動性",
+    "industry": "全市場",
+    "tw_link": "交易成本上升抑制市場投機與槓桿操作加劇波動",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "期交所",
+     "保證金",
+     "槓桿",
+     "融資",
+     "Margin requirement",
+     "Leverage",
+     "Futures",
+     "Liquidity",
+     "証拠金",
+     "レバレッジ",
+     "증거금",
+     "레버리지"
+    ],
+    "evidence": [
+     "P877",
+     "P878",
+     "P879"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "輝達事件引發市場恐慌，期交所為控管風險調高保證金，進一步壓縮槓桿空間。",
+    "drill": [
+     "期交所 保證金 調高",
+     "期貨 槓桿",
+     "Margin requirement hike",
+     "証拠金 引き上げ",
+     "증거금 인상"
+    ]
+   },
+   {
+    "title": "MSCI指數權重調整",
+    "layer": "表面",
+    "event_date": "2026-11-12",
+    "who": "MSCI",
+    "event": "MSCI指數權重調整",
+    "mechanism": "被動資金進行部位調整引發市場波動",
+    "industry": "全市場",
+    "tw_link": "被動資金調整部位造成特定權值股與全市場波動",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "MSCI",
+     "權重調整",
+     "指數",
+     "換股",
+     "Index adjustment",
+     "Rebalancing",
+     "Passive funds",
+     "指数調整",
+     "リバランス",
+     "지수 조정",
+     "리밸런싱"
+    ],
+    "evidence": [
+     "P858",
+     "P876"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "MSCI權重調整導致被動資金被迫進行部位調整，加劇市場波動。",
+    "drill": [
+     "MSCI index adjustment 2026",
+     "MSCI 權重調整",
+     "MSCI 指数調整",
+     "MSCI 지수 조정"
+    ]
+   }
+  ],
+  "summary": "昨晚美股因輝達執行長黃仁勳辭職引發市場恐慌，導致科技股全面重挫，預期傳導到今天台股，AI供應鏈與半導體族群將面臨沉重賣壓，市場波動加劇。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmp21bdg70i.txt",
+  "附檔": [],
+  "耗時秒": 109.4,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.1-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 95577,
+   "prompt_tokens": 30990,
+   "output_tokens": 1673,
+   "thinking_tokens": 62914
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1113_synth1",
+  "ok": true
+ }
+}
