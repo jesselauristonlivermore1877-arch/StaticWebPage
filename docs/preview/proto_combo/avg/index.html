@@ -1,8 +1,9 @@
 <!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>多指標平均組合</title><style>
-:root{--bg:#f6f5f1;--ink:#1d1d1b;--ink2:#5c5b57;--line:#dcd9d0;--acc:#b0842f;--card:#fff;--ev:#fbf3e2}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16171a;--ink:#ecebe7;--ink2:#a4a29c;--line:#34363b;--acc:#d6a54a;--card:#1f2125;--ev:#2c2618}}
+<title>多指標平均組合</title>
+<style>
+:root{--bg:#f6f5f1;--ink:#1d1d1b;--ink2:#5c5b57;--line:#dcd9d0;--acc:#b0842f;--card:#fff;--up:#d64545;--dn:#2f9e5b;--sel:#1d1d1b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16171a;--ink:#ecebe7;--ink2:#a4a29c;--line:#34363b;--acc:#d6a54a;--card:#1f2125;--sel:#fff}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.65 system-ui,-apple-system,"Noto Sans TC",sans-serif}
 main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}
@@ -10,22 +11,157 @@ h1{font-size:22px;margin:0 0 4px}.m{color:var(--ink2);font-size:13px;margin:0 0 
 section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:14px}
 h2{font-size:17px;margin:0 0 6px}h3{font-size:14px;margin:12px 0 4px}
 .b{color:var(--ink2);font-size:13px;margin:4px 0}
-.t{width:100%;overflow-x:auto}
+.pc-nav{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.pc-nav button,.pc-tg button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:6px;padding:4px 10px;font:inherit;font-size:13px;cursor:pointer}
+.pc-nav button.on,.pc-tg button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.pc-tg{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;align-items:center}
+.pc-tg span{color:var(--ink2);font-size:12px}
+.pc-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:820px){.pc-wrap{grid-template-columns:minmax(0,1fr)}}
+.pc-heat{width:100%;overflow-x:auto}
+canvas{display:block;max-width:100%}
+.pc-tbl{width:100%;overflow-x:auto}
 table{border-collapse:collapse;font-size:12.5px;width:100%}
-th,td{border-bottom:1px solid var(--line);padding:4px 6px;text-align:right;white-space:nowrap}
-th:first-child,td:first-child,.l{text-align:left}
-td.l{white-space:normal;min-width:160px}
+th,td{border-bottom:1px solid var(--line);padding:3px 6px;text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
 th{color:var(--ink2);font-weight:600}
-tr.grp td{font-weight:700;background:var(--bg);padding-top:8px}
-tr.ev td{background:var(--ev)}
-.s{color:var(--ink2);font-size:11.5px}
-.w{border-left:3px solid var(--acc);padding:4px 10px;margin:8px 0;font-size:13px}
+.up{color:var(--up)}.dn{color:var(--dn)}
+.ok{color:var(--dn);font-weight:700}.ng{color:var(--up);font-weight:700}
+.pc-lg{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--ink2);margin:4px 0}
+.pc-lg i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:4px}
+.pc-steps{font-size:12px;color:var(--ink2);margin:4px 0 0;padding-left:18px}
+svg text{fill:var(--ink2);font-size:10px}
+.pc-warn{border-left:3px solid var(--acc);padding:4px 10px;margin:6px 0;font-size:13px}
 </style></head><body><main>
-<h1>多指標平均組合（W2 預覽）</h1>
-<p class='m'>產生時間 2026-11-14 02:44｜資料＝會員站原型研究同一份格點檔（2019-10～2026-11-07，含持倉浮動損益）｜每支 1 口相加｜數字已用逐筆交易＋台指期 1 分K 重算核對，差 0 點</p>
-<section><h2>平均組合 vs 你手挑的兩組</h2><div class='t'><table><tr><th>組合</th><th>支數</th><th>全期淨利</th><th>每支平均淨利</th><th>最大回撤</th><th>風報比</th><th>獲利因子</th><th>勝率</th><th>2019～2023 淨利</th><th>2019～2023 風報比</th><th>2024～2026 淨利</th><th>2024～2026 風報比</th></tr><tr class="grp"><td colspan="12">SnipeFlash 1M5K 標準（核狙）</td></tr><tr><td>平均組合（每個指標取第 1 名）<div class='s'>跟Evans 6 支同一格 1 支</div></td><td>4</td><td>37,892</td><td>9,473</td><td>11,835</td><td><b>0.45</b></td><td>1.45</td><td>43%</td><td>9,725</td><td>0.28</td><td>28,167</td><td>0.83</td></tr><tr><td>平均組合（每個指標取前 2 名）<div class='s'>跟Evans 6 支同一格 2 支、同飽和區 1 支</div></td><td>8</td><td>73,818</td><td>9,227</td><td>23,592</td><td><b>0.44</b></td><td>1.40</td><td>43%</td><td>15,881</td><td>0.23</td><td>57,937</td><td>0.86</td></tr><tr class='ev'><td>Evans 6 支（你手挑）</td><td>6</td><td>46,670</td><td>7,778</td><td>9,186</td><td><b>0.71</b></td><td>2.86</td><td>60%</td><td>8,074</td><td>0.22</td><td>38,596</td><td>1.48</td></tr><tr class="grp"><td colspan="12">SnipeFlash 1M5K Max（核狙極限）</td></tr><tr><td>平均組合（每個指標取第 1 名）<div class='s'>跟Evans 9 支同一格 1 支</div></td><td>3</td><td>59,649</td><td>19,883</td><td>12,550</td><td><b>0.67</b></td><td>1.56</td><td>40%</td><td>14,095</td><td>0.29</td><td>45,554</td><td>1.27</td></tr><tr><td>平均組合（每個指標取前 2 名）<div class='s'>跟Evans 9 支同一格 2 支</div></td><td>7</td><td>121,783</td><td>17,398</td><td>26,251</td><td><b>0.65</b></td><td>1.55</td><td>40%</td><td>32,139</td><td>0.35</td><td>89,644</td><td>1.20</td></tr><tr class='ev'><td>Evans 9 支（你手挑）</td><td>9</td><td>112,058</td><td>12,451</td><td>17,906</td><td><b>0.88</b></td><td>2.10</td><td>42%</td><td>24,594</td><td>0.46</td><td>87,464</td><td>1.71</td></tr></table></div>
-<p class='w'><b>結論</b>：照五個指標各挑前段再去掉飽和區，兩族都<b>輸你手挑的</b>（SFKS 風報比 0.45／0.44 vs 你 0.71；SFKM 風報比 0.67／0.65 vs 你 0.88），2024～2026 差更多。原因：單看一個指標的第一名，常是「這一項最高、其他項普通」的格子（淨利第一的回撤也大、勝率第一的淨利少），合起來回撤疊加；你是看整張圖挑「每一項都不差」的格子。重疊只有 1～2 支。</p>
-<p class='b'>風報比＝年均淨利 ÷ 最大回撤（回撤含持倉中的浮動損益）；獲利因子＝總賺 ÷ 總賠；期望值＝每筆平均淨利（點）；淨利、回撤單位都是點。</p></section>
-<section><h2>SnipeFlash 1M5K 標準（核狙）：每支被哪個指標選進來</h2><p class='b'>候選池＝全期有賺且 2019～2023 也有賺：949／966 格。筆數門檻＝候選池筆數的 25 分位 132 筆；獲利因子只比淨利 ≥ 75 分位（10,056 點）的；勝率只比淨利 ≥ 中位數（9,149 點）的。</p><div class='t'><table><tr><th>挑法</th><th>格子</th><th class='l'>被哪個指標選進來</th><th>淨利</th><th>最大回撤</th><th>風報比</th><th>獲利因子</th><th>期望值</th><th>勝率</th><th>筆數</th><th class='l'>跟你比</th></tr><tr><td>每個指標第 1 名</td><td>7_16</td><td class='l'>淨利、獲利因子</td><td>11,744</td><td>7,303</td><td>0.23</td><td>1.25</td><td>46</td><td>41%</td><td>232</td><td class='l'></td></tr><tr><td>每個指標第 1 名</td><td>6_1</td><td class='l'>風報比</td><td>7,290</td><td>1,531</td><td>0.67</td><td>3.19</td><td>394</td><td>69%</td><td>16</td><td class='l'>✓ 你也選了</td></tr><tr><td>每個指標第 1 名</td><td>12_6</td><td class='l'>勝率</td><td>10,370</td><td>4,188</td><td>0.35</td><td>1.88</td><td>174</td><td>54%</td><td>54</td><td class='l'></td></tr><tr><td>每個指標第 1 名</td><td>2_16</td><td class='l'>期望值</td><td>8,488</td><td>3,440</td><td>0.35</td><td>1.38</td><td>57</td><td>39%</td><td>132</td><td class='l'></td></tr><tr><td>每個指標前 2 名</td><td>7_16</td><td class='l'>淨利、獲利因子</td><td>11,744</td><td>7,303</td><td>0.23</td><td>1.25</td><td>46</td><td>41%</td><td>232</td><td class='l'></td></tr><tr><td>每個指標前 2 名</td><td>12_6</td><td class='l'>淨利、勝率</td><td>10,370</td><td>4,188</td><td>0.35</td><td>1.88</td><td>174</td><td>54%</td><td>54</td><td class='l'></td></tr><tr><td>每個指標前 2 名</td><td>6_1</td><td class='l'>風報比</td><td>7,290</td><td>1,531</td><td>0.67</td><td>3.19</td><td>394</td><td>69%</td><td>16</td><td class='l'>✓ 你也選了</td></tr><tr><td>每個指標前 2 名</td><td>2_1</td><td class='l'>風報比</td><td>6,524</td><td>1,531</td><td>0.60</td><td>5.07</td><td>615</td><td>67%</td><td>9</td><td class='l'>✓ 你也選了</td></tr><tr><td>每個指標前 2 名</td><td>13_18</td><td class='l'>獲利因子</td><td>10,056</td><td>8,965</td><td>0.16</td><td>1.16</td><td>31</td><td>44%</td><td>294</td><td class='l'></td></tr><tr><td>每個指標前 2 名</td><td>8_4</td><td class='l'>勝率</td><td>9,973</td><td>2,382</td><td>0.59</td><td>2.44</td><td>281</td><td>53%</td><td>32</td><td class='l'>≈ 跟你選的同飽和區</td></tr><tr><td>每個指標前 2 名</td><td>2_16</td><td class='l'>期望值</td><td>8,488</td><td>3,440</td><td>0.35</td><td>1.38</td><td>57</td><td>39%</td><td>132</td><td class='l'></td></tr><tr><td>每個指標前 2 名</td><td>3_15</td><td class='l'>期望值</td><td>9,373</td><td>5,434</td><td>0.24</td><td>1.34</td><td>52</td><td>40%</td><td>161</td><td class='l'></td></tr></table></div><h3>Evans 6 支每一支的情況</h3><ul class='b'><li><b>13_4</b>：五個指標的前 2 名都沒排到</li><li><b>13_3</b>：五個指標的前 2 名都沒排到</li><li><b>4_1</b>：五個指標的前 2 名都沒排到</li><li><b>2_1</b>：前 2 名也選到（風報比）</li><li><b>6_1</b>：前 2 名也選到（風報比）</li><li><b>3_3</b>：五個指標的前 2 名都沒排到</li></ul></section><section><h2>SnipeFlash 1M5K Max（核狙極限）：每支被哪個指標選進來</h2><p class='b'>候選池＝全期有賺且 2019～2023 也有賺：963／966 格。筆數門檻＝候選池筆數的 25 分位 140 筆；獲利因子只比淨利 ≥ 75 分位（19,023 點）的；勝率只比淨利 ≥ 中位數（17,230 點）的。</p><div class='t'><table><tr><th>挑法</th><th>格子</th><th class='l'>被哪個指標選進來</th><th>淨利</th><th>最大回撤</th><th>風報比</th><th>獲利因子</th><th>期望值</th><th>勝率</th><th>筆數</th><th class='l'>跟你比</th></tr><tr><td>每個指標第 1 名</td><td>3_15</td><td class='l'>淨利、獲利因子、期望值</td><td>21,295</td><td>4,591</td><td>0.65</td><td>1.75</td><td>118</td><td>40%</td><td>172</td><td class='l'></td></tr><tr><td>每個指標第 1 名</td><td>2_15</td><td class='l'>風報比、獲利因子（同飽和區）、期望值（同飽和區）</td><td>19,331</td><td>3,440</td><td>0.79</td><td>1.90</td><td>132</td><td>40%</td><td>139</td><td class='l'>✓ 你也選了</td></tr><tr><td>每個指標第 1 名</td><td>13_18</td><td class='l'>勝率</td><td>19,023</td><td>8,006</td><td>0.33</td><td>1.33</td><td>66</td><td>41%</td><td>272</td><td class='l'></td></tr><tr><td>每個指標前 2 名</td><td>3_15</td><td class='l'>淨利、獲利因子、期望值</td><td>21,295</td><td>4,591</td><td>0.65</td><td>1.75</td><td>118</td><td>40%</td><td>172</td><td class='l'></td></tr><tr><td>每個指標前 2 名</td><td>7_16</td><td class='l'>淨利、獲利因子</td><td>20,100</td><td>8,006</td><td>0.35</td><td>1.41</td><td>81</td><td>39%</td><td>237</td><td class='l'></td></tr><tr><td>每個指標前 2 名</td><td>2_15</td><td class='l'>風報比、獲利因子（同飽和區）、期望值（同飽和區）</td><td>19,331</td><td>3,440</td><td>0.79</td><td>1.90</td><td>132</td><td>40%</td><td>139</td><td class='l'>✓ 你也選了</td></tr><tr><td>每個指標前 2 名</td><td>6_1</td><td class='l'>風報比</td><td>7,723</td><td>1,531</td><td>0.71</td><td>3.09</td><td>396</td><td>71%</td><td>17</td><td class='l'>✓ 你也選了</td></tr><tr><td>每個指標前 2 名</td><td>13_18</td><td class='l'>獲利因子、勝率</td><td>19,023</td><td>8,006</td><td>0.33</td><td>1.33</td><td>66</td><td>41%</td><td>272</td><td class='l'></td></tr><tr><td>每個指標前 2 名</td><td>4_15</td><td class='l'>勝率</td><td>18,467</td><td>6,755</td><td>0.39</td><td>1.51</td><td>88</td><td>41%</td><td>199</td><td class='l'></td></tr><tr><td>每個指標前 2 名</td><td>3_11</td><td class='l'>期望值</td><td>15,844</td><td>4,591</td><td>0.49</td><td>1.62</td><td>104</td><td>40%</td><td>143</td><td class='l'></td></tr></table></div><h3>Evans 9 支每一支的情況</h3><ul class='b'><li><b>2_1</b>：五個指標的前 2 名都沒排到</li><li><b>2_16</b>：五個指標的前 2 名都沒排到</li><li><b>2_15</b>：前 2 名也選到（風報比、獲利因子（同飽和區）、期望值（同飽和區））</li><li><b>2_14</b>：五個指標的前 2 名都沒排到</li><li><b>2_13</b>：五個指標的前 2 名都沒排到</li><li><b>13_1</b>：五個指標的前 2 名都沒排到</li><li><b>6_1</b>：前 2 名也選到（風報比）</li><li><b>5_1</b>：五個指標的前 2 名都沒排到</li><li><b>3_1</b>：五個指標的前 2 名都沒排到</li></ul></section>
-<section><h2>其他家族（沒有你的組合可比，只列結果）</h2><div class='t'><table><tr><th>家族</th><th>挑法</th><th class='l'>成員（被哪個指標選進來）</th><th>全期淨利</th><th>最大回撤</th><th>全期風報比</th><th>2019～2023 風報比</th><th>2024～2026 風報比</th><th>支數</th></tr><tr><td>ExpRev Swing 1M（擺盪波段）</td><td>前 1 名</td><td class='l'>12_7（淨利）、5_9（風報比）、13_13（勝率）</td><td>90,632</td><td>14,710</td><td>0.87</td><td>0.33</td><td>1.82</td><td>3</td></tr><tr><td></td><td>前 2 名</td><td class='l'>12_7（淨利）、13_9（淨利）、5_9（風報比）、6_7（風報比）、9_9（獲利因子）、13_13（勝率）、6_13（勝率）、5_11（期望值）</td><td>232,714</td><td>40,789</td><td>0.80</td><td>0.33</td><td>1.70</td><td>8</td></tr><tr><td>Proto 5M（原型 5 分圖）</td><td>前 1 名</td><td class='l'>12_7（淨利）、5_7（風報比）、6_7（獲利因子）、14_13（勝率）、7_11（期望值）</td><td>131,573</td><td>23,351</td><td>0.79</td><td>0.47</td><td>1.59</td><td>5</td></tr><tr><td></td><td>前 2 名</td><td class='l'>12_7（淨利）、10_7（淨利）、5_7（風報比）、6_7（風報比）、7_5（獲利因子）、14_13（勝率）、8_12（勝率）、6_11（期望值）、11_14（期望值）</td><td>231,635</td><td>45,704</td><td>0.71</td><td>0.43</td><td>1.44</td><td>9</td></tr><tr><td>ExpRev Swing 5M（擺盪 5 分圖）</td><td>前 1 名</td><td class='l'>12_7（淨利）、5_9（獲利因子）、14_13（勝率）</td><td>88,787</td><td>15,271</td><td>0.82</td><td>0.34</td><td>1.66</td><td>3</td></tr><tr><td></td><td>前 2 名</td><td class='l'>12_7（淨利）、10_8（淨利）、6_2（風報比）、5_9（獲利因子）、6_7（獲利因子）、14_13（勝率）、7_12（勝率）、6_9（期望值）</td><td>229,858</td><td>40,691</td><td>0.80</td><td>0.31</td><td>1.68</td><td>8</td></tr><tr><td>SnipeFlash 標準 1M（擴張魚頭）</td><td colspan='8' class='l'>略過：格點檔 data_adm_f_SF1S_11.bin 壞了（11-13 06:40 會員區更新中斷）</td></tr><tr><td>SnipeFlash Max 1M（擴張波段）</td><td>前 1 名</td><td class='l'>13_12（淨利）、6_6（風報比）、6_8（獲利因子）、10_7（勝率）</td><td>57,001</td><td>11,019</td><td>0.73</td><td>0.14</td><td>1.70</td><td>4</td></tr><tr><td></td><td>前 2 名</td><td class='l'>13_12（淨利）、7_12（淨利）、6_6（風報比）、6_8（風報比）、10_9（獲利因子）、10_7（勝率）、10_10（勝率）、3_7（期望值）</td><td>110,587</td><td>24,211</td><td>0.64</td><td>0.12</td><td>1.50</td><td>8</td></tr><tr><td>SnipeFlash 標準 5M</td><td>前 1 名</td><td class='l'>13_8（淨利）、11_6（風報比）、11_2（期望值）</td><td>22,047</td><td>4,442</td><td>0.70</td><td>0.35</td><td>1.51</td><td>3</td></tr><tr><td></td><td>前 2 名</td><td class='l'>13_8（淨利）、12_10（淨利）、11_6（風報比）、6_7（風報比）、5_8（獲利因子）、11_5（勝率）、11_2（期望值）、9_4（期望值）</td><td>53,630</td><td>12,706</td><td>0.59</td><td>0.12</td><td>1.36</td><td>8</td></tr><tr><td>SnipeFlash Max 5M</td><td>前 1 名</td><td class='l'>8_12（淨利）、9_7（風報比）、12_9（獲利因子）</td><td>43,068</td><td>10,641</td><td>0.57</td><td>0.06</td><td>1.36</td><td>3</td></tr><tr><td></td><td>前 2 名</td><td class='l'>8_12（淨利）、9_13（淨利）、9_7（風報比）、9_6（風報比）、12_9（獲利因子）、12_10（獲利因子）、7_8（勝率）、10_5（期望值）</td><td>100,737</td><td>23,767</td><td>0.60</td><td>0.09</td><td>1.40</td><td>8</td></tr><tr><td>SqBrk Long V2（壓縮突破多）</td><td>前 1 名</td><td class='l'>13_26（淨利）、21_33（風報比）、15_31（獲利因子）、16_32（勝率）、21_1（期望值）</td><td>50,562</td><td>6,489</td><td>1.10</td><td>0.26</td><td>2.45</td><td>5</td></tr><tr><td></td><td>前 2 名</td><td class='l'>13_26（淨利）、16_26（淨利）、21_33（風報比）、21_27（風報比）、15_31（獲利因子）、16_31（獲利因子）、11_32（勝率）、21_1（期望值）、20_27（期望值）</td><td>90,870</td><td>11,161</td><td>1.15</td><td>0.29</td><td>2.55</td><td>9</td></tr><tr><td>空方 Hybrid V2（魚頭＋魚身）</td><td>前 1 名</td><td class='l'>9_9（淨利）、13_10（風報比）、17_11（勝率）、14_17（期望值）</td><td>47,268</td><td>6,160</td><td>1.08</td><td>0.40</td><td>2.30</td><td>4</td></tr><tr><td></td><td>前 2 名</td><td class='l'>9_9（淨利）、9_1（淨利）、13_10（風報比）、17_11（風報比）、14_12（獲利因子）、13_17（勝率）、13_12（期望值）</td><td>87,919</td><td>13,667</td><td>0.91</td><td>0.39</td><td>1.91</td><td>7</td></tr><tr><td>空方魚頭（Mode3）</td><td>前 1 名</td><td class='l'>9_1（淨利）、13_10（風報比）、13_17（勝率）</td><td>25,428</td><td>9,277</td><td>0.39</td><td>0.14</td><td>0.91</td><td>3</td></tr><tr><td></td><td>前 2 名</td><td class='l'>9_1（淨利）、10_9（淨利）、13_10（風報比）、12_10（風報比）、13_12（獲利因子）、13_17（勝率）、11_17（勝率）、12_12（期望值）</td><td>59,561</td><td>33,775</td><td>0.25</td><td>0.15</td><td>0.56</td><td>8</td></tr><tr><td>空方純追魚身</td><td>前 1 名</td><td class='l'>6_9（淨利）、3_9（風報比）、3_4（勝率）</td><td>12,615</td><td>973</td><td>1.82</td><td>1.45</td><td>2.67</td><td>3</td></tr><tr><td></td><td>前 2 名</td><td class='l'>6_9（淨利）、9_9（淨利）、3_9（風報比）、3_11（風報比）、3_15（獲利因子）、3_4（勝率）、4_2（勝率）、5_11（期望值）</td><td>31,990</td><td>3,580</td><td>1.26</td><td>1.12</td><td>1.82</td><td>8</td></tr><tr><td>SqBrk Short V2（壓縮破位空）</td><td>前 1 名</td><td class='l'>14_3（淨利）、16_6（風報比）</td><td>19,278</td><td>5,571</td><td>0.49</td><td>0.07</td><td>1.13</td><td>2</td></tr><tr><td></td><td>前 2 名</td><td class='l'>14_3（淨利）、16_6（淨利）、16_3（風報比）</td><td>26,643</td><td>7,967</td><td>0.47</td><td>0.07</td><td>1.08</td><td>3</td></tr></table></div></section>
-<section><h2>挑法細節</h2><ol class='b' style='padding-left:18px'><li>候選池：全期淨利 &gt; 0，而且 2019～2023 淨利也 &gt; 0（前幾年也要有賺；那幾年指數低、波動小，所以只要求有賺，不要求跟近年一樣多）。</li><li>五個指標各自排序：淨利、風報比、獲利因子（筆數夠多、淨利在前 25%）、勝率（淨利不低於中位數）、期望值（筆數夠多）。筆數門檻用每族資料的 25 分位定。</li><li>每個指標取第 1 名（或前 2 名）；已經被別的指標選中、或跟已選的每日損益相關 ≥ 0.95（飽和區）就往下找下一名。</li><li>合併去重＝這個類型的平均組合；「淨利、獲利因子」表示兩個指標都選到同一支，「（同飽和區）」表示那個指標選到的是同一飽和區的另一格。</li><li>SF1S 那族的格點檔 11-13 06:40 會員區更新時寫壞（檔頭是 0），這次略過；已回報總指揮。</li></ol></section></main></body></html>
+<h1>多指標平均組合・修正版（W2 預覽）</h1>
+<p class="m" id="pc-made"></p>
+<section class="pc-how">
+<h2>怎麼看這頁</h2>
+<ol class="b" style="padding-left:18px;margin:4px 0;color:var(--ink)">
+<li><b>這版照你 11-14 的話改</b>：五個指標各取前 10 名，再用風報比、淨利的分位<b>剃除</b>（不是各指標第一名直接合起來）；版型改回上一版。</li>
+<li><b>平均75／平均80</b>＝淨利、獲利因子前 10 名用「風報比 ≥ 75 分位」或「≥ 80 分位」剃除，兩種並列；分位都在同一族的候選池裡算。</li>
+<li><b>格點圖</b>＝同一支策略換不同參數的回測，一格一組參數；越紅＝風報比（每年平均賺的 ÷ 最大回撤）越好。<b>粗黑框</b>＝挑進組合的格子（每格 1 口）；<b>虛線藍框</b>＝你在會員站「我的組合」挑的那組；◆＝客戶選單現在用的參數。</li>
+<li><b>每年報酬％</b>＝當年賺的點數 ÷ 當年台指期年初價（2019～2023 一萬多點、2024～2026 兩三萬點，用比例才比得起來）；「2026 佔比」＝2026 佔各年賺錢合計的比例，太高＝只靠 2026 撐。</li>
+<li><b>跟大盤相關</b>＝2020～2026 每年報酬％ 跟台指期每年漲跌％ 的相關係數（7 個點，只當參考）：越接近 1＝越亦步亦趨。</li>
+<li><b>請你決定 ①</b>：「前 10 名」我是用 10 個不同飽和區來數（相鄰格幾乎一樣，不這樣前 10 名常是同一片、剃完一支不剩）。可以嗎？</li>
+<li><b>請你決定 ②</b>：還是輸你，差在你挑的是筆數少、風報比很高的格子。要不要把「筆數門檻」拿掉（獲利因子、期望值也讓少筆數的格子進來），或剃除改用「風報比 ≥ 90 分位」？</li>
+</ol>
+</section>
+<section>
+<h2>跟你手挑的兩組比（同一套算法）</h2>
+<p class="b">最大回撤含持倉中的浮動損益（日收盤評價）；風報比＝年均淨利 ÷ 最大回撤；淨利÷回撤＝會員站的算法；去飽和＝每日損益相關 ≥ 0.95 的只留一支。</p>
+<div class="pc-tbl"><table id="pc-ev"></table></div>
+<div class="pc-tbl" style="margin-top:8px"><table id="pc-evy"></table></div>
+</section>
+<section>
+<h2>怎麼挑的</h2>
+<p class="b">每個家族＝一張格點圖，每格 1 口。逐日權益＝每個日曆日最後一根 1 分K 收盤評價持倉＋已實現淨損益（含持倉中的浮動損益，日收盤口徑）。組合數字一律是「每口平均」（合計 ÷ 格數），才能跟單格同尺度比較。</p>
+<ol class="b" style="padding-left:18px;margin:4px 0">
+<li>候選池：全期淨利 &gt; 0，而且 2019～2023 淨利也 &gt; 0（前幾年也要有賺；只要求有賺，不要求跟近年一樣多）。筆數門檻＝候選池筆數的 25 分位。</li>
+<li>風報比前 10：不另剃除。</li>
+<li>淨利前 10：風報比 &lt; 75（或 80）分位的剃除。</li>
+<li>獲利因子（總賺 ÷ 總賠，筆數 ≥ 門檻）前 10：風報比 &lt; 75（或 80）分位的剃除。</li>
+<li>勝率前 10：淨利 &lt; 50 分位的剃除（至少捕捉一半以上的利潤）。</li>
+<li>期望值（勝率 × 賺賠比 − 敗率，筆數 ≥ 門檻）前 10：風報比或淨利 &lt; 50 分位的剃除。</li>
+<li>逐年：每年報酬％（2019 只有 10～12 月，不算）；2026 佔各年賺錢合計超過門檻（候選池 75 分位與 50% 取大的）就剃除；有一年虧的不剃除、標 ⚠。</li>
+<li>合併去重、扣飽和區：照風報比高到低放進來，跟已選的每日損益相關 ≥ 0.95 就不放（記在「同飽和區」）。</li>
+</ol>
+<div class="pc-warn" id="pc-verdict"></div>
+<p class="b">⚠ 點數損益偏重近期：台指期 2019 約 1 萬點、2026 約 4～5 萬點，同樣百分比的行情點數放大好幾倍，所以逐年改看報酬％；整段看風報比（年均淨利 ÷ 最大回撤）比較公平。浮動回撤是日收盤評價，盤中更深的回撤沒算進去。格子只標「列_欄」編號，真實參數值只在管理者資料（私有 repo）。</p>
+</section>
+<div class="pc-nav" id="pc-nav"></div>
+<section id="pc-fam"></section>
+<p class="b">歷史回測，不代表未來績效；量化統計，非投資建議。</p>
+</main>
+<script src="data.js"></script>
+<script>
+(function(){
+const D=window.PC, $=s=>document.querySelector(s);
+const f0=v=>v==null?'—':Math.round(v).toLocaleString('en-US'), f2=v=>v==null?'—':(+v).toFixed(2);
+const cls=v=>v>0?'up':v<0?'dn':'';
+$('#pc-made').textContent=`產出 ${D.made}｜樣本內 2019-10-01～${D.is_end}、樣本外 ${D.oos_start}～${D.wdays[D.wdays.length-1]}｜${D.fams.length} 個家族、總跑時 ${D.sec} 秒｜單位：${D.unit}`;
+$('#pc-verdict').innerHTML=D.verdict;
+// 跟 Evans 兩組比（總口數／每口平均）
+(function(){const E=D.evans; let h='<tr><th>組合</th><th>格數</th><th>總口數 淨利</th><th>總口數 回撤</th><th>淨利÷回撤</th><th>每口 淨利</th><th>每口 回撤</th><th>風報比</th><th>期望值</th><th>最長回撤天</th><th>樣本外風報比</th><th>跟你同一格</th></tr>';
+ let y='', ys=null; const YS=['2020','2021','2022','2023','2024','2025','2026'];
+ E.fams.forEach(f=>{h+=`<tr><td colspan="12" style="text-align:left;font-weight:700">${f.id}｜${f.name}</td></tr>`;
+  f.rows.forEach(r=>{const t=r.full.tot,p=r.full.per,ev=r.name.startsWith('Evans');
+   h+=`<tr${ev?' style="background:#3b6fd61a"':''}><td>${r.name}</td><td>${r.members}</td><td class="${cls(t.net)}">${f0(t.net)}</td><td>${f0(t.mdd)}</td><td>${f2(t.net_mdd)}</td><td>${f0(p.net)}</td><td>${f0(p.mdd)}</td><td>${f2(t.MAR)}</td><td>${(+t.E).toFixed(1)}</td><td>${t.ddd}</td><td>${f2(r.oos.tot.MAR)}</td><td>${r.same==null?'—':r.same+(r.same_sat?'（＋同飽和區 '+r.same_sat+'）':'')}</td></tr>`;});
+  ys=YS;
+  y+=`<tr><td colspan="${ys.length+4}" style="text-align:left;font-weight:700">${f.id} 每年報酬％（每口：當年淨點數 ÷ 當年台指期年初價）</td></tr>`+f.rows.map(r=>`<tr${r.name.startsWith('Evans')?' style="background:#3b6fd61a"':''}><td>${r.name}</td>`+ys.map(k=>`<td class="${cls(r.yp[k])}">${(+r.yp[k]).toFixed(1)}%</td>`).join('')+`<td>${Math.round(r.s26*100)}%</td><td>${r.mcorr==null?'—':f2(r.mcorr)}</td><td style="text-align:left">${r.neg.length?'⚠ '+r.neg.join('、')+' 虧':'每年都賺'}</td></tr>`).join('');});
+ $('#pc-ev').innerHTML=h; $('#pc-evy').innerHTML='<tr><th></th>'+ys.map(k=>`<th>${k}</th>`).join('')+'<th>2026 佔比</th><th>跟大盤相關</th><th>虧的年</th></tr>'+`<tr><td>台指期（大盤）</td>`+ys.map(k=>`<td class="${cls(D.mkt[k])}">${(+D.mkt[k]).toFixed(1)}%</td>`).join('')+'<td></td><td></td><td></td></tr>'+y;})();
+const nav=$('#pc-nav'); let cur=0, mode='full', heat='is', ci=0;
+D.fams.forEach((f,i)=>{const b=document.createElement('button');b.textContent=f.id;b.title=f.name;b.onclick=()=>{cur=i;ci=0;draw();};nav.appendChild(b);});
+function heatColor(v,P,N){ if(v==null||isNaN(v))return '#8884';   // 依分位數上色：正值在正值裡的名次、負值在負值裡的名次
+  if(v>=0){const t=P.length?P.filter(q=>q<=v).length/P.length:1;return `rgba(214,69,69,${0.06+0.9*t*t})`;} const t=N.length?N.filter(q=>q>=v).length/N.length:1;return `rgba(47,158,91,${0.1+0.8*t})`;}
+function draw(){
+  [...nav.children].forEach((b,i)=>b.classList.toggle('on',i===cur));
+  const f=D.fams[cur], el=$('#pc-fam');
+  if(f.skip){el.innerHTML=`<h2>${f.id} ${f.name}</h2><p class="b">略過：${f.skip}</p>`;return;}
+  const cs=mode==='is'?f.combos:f.fcombos; if(ci>=cs.length)ci=0; const C=cs[ci]; const S=f.sel[mode];
+  el.innerHTML=`<h2>${f.id}｜${f.name}（${f.side}）</h2>
+  <p class="b">${f.nr}×${f.nc} 格、候選池 ${f.n_valid} 格；跑時 ${f.sec} 秒；核對 ${f.check.n} 格（逐筆交易＋TXF 1 分K 重算逐日權益）：${f.check.ok?'<span class="ok">✓ 全部相符</span>':'<span class="ng">✗ 有不符</span>'}（逐日最大差 ${f.check.max_diff} 點）</p>
+  <div class="pc-tg"><span>組合</span>${cs.map((c,i)=>`<button data-c="${i}">${c.name.replace(f.id+'-','')}（${c.members.length} 格）</button>`).join('')}</div>
+  <p class="b">${f.rule}</p>
+  <div class="pc-wrap"><div>
+   <div class="pc-tg"><span>格點顏色＝風報比</span><button data-h="is">樣本內</button><button data-h="oos">樣本外</button><button data-h="full">全期</button></div>
+   <div class="pc-heat"><canvas id="pc-cv"></canvas></div>
+   <div class="pc-lg"><span>粗黑框＝${C.name} 選中</span><span>◆＝客戶選單預設格</span>${f.ref?'<span>虛線框＝標準答案</span>':''}<span>●＝單格最佳（樣本內風報比最高）</span></div>
+  </div><div>
+   <h3>${C.name}：${C.members.length} 支（被哪個指標選進來）</h3><ol class="pc-steps">${C.steps.map(s=>'<li>'+s+'</li>').join('')}</ol>
+   <div class="pc-tbl"><table id="pc-cmp"></table></div>
+  </div></div>
+  <h3>權益曲線（點，每口平均；每週最後一天）</h3><div class="pc-lg" id="pc-lg2"></div><div id="pc-eq"></div>
+  <h3>逐年（淨利／當年最大浮動回撤，點，每口平均）</h3><div class="pc-tbl"><table id="pc-yr"></table></div>
+  <h3>被選格的鄰居（風報比：樣本內／樣本外）</h3><div class="pc-tbl"><table id="pc-nb"></table></div>`;
+  el.querySelectorAll('[data-m]').forEach(b=>{b.classList.toggle('on',b.dataset.m===mode);b.onclick=()=>{mode=b.dataset.m;ci=0;draw();};});
+  el.querySelectorAll('[data-c]').forEach(b=>{b.classList.toggle('on',+b.dataset.c===ci);b.onclick=()=>{ci=+b.dataset.c;draw();};});
+  el.querySelectorAll('[data-h]').forEach(b=>{b.classList.toggle('on',b.dataset.h===heat);b.onclick=()=>{heat=b.dataset.h;draw();};});
+  // 格點圖
+  const cv=$('#pc-cv'), W=Math.min(el.clientWidth>820?(el.clientWidth-60)/2:el.clientWidth-34, 520), cw=Math.max(6,Math.floor(W/f.nc)), ch=Math.max(6,Math.min(cw*1.4,Math.floor(380/f.nr)));
+  const dpr=window.devicePixelRatio||1; cv.width=(f.nc*cw+24)*dpr; cv.height=(f.nr*ch+16)*dpr; cv.style.width=(f.nc*cw+24)+'px'; cv.style.height=(f.nr*ch+16)+'px';
+  const x=cv.getContext('2d'); x.scale(dpr,dpr); const hi=['is','oos','full'].indexOf(heat);
+  const vals=Object.values(f.grid).map(g=>g[hi]).filter(v=>v!=null); const sv=vals.slice().sort((a,b)=>a-b);
+  const PV=sv.filter(v=>v>=0), NV=sv.filter(v=>v<0);
+  const plat=new Set(S?S.plat:[]), sel=new Set(C.members), pre=new Set(f.presets), ref=new Set(f.ref?f.ref.members:[]);
+  x.font='9px sans-serif'; x.fillStyle=getComputedStyle(document.body).color;
+  for(let i=1;i<=f.nr;i++)for(let j=1;j<=f.nc;j++){const k=i+'_'+j,g=f.grid[k],X=20+(j-1)*cw,Y=(i-1)*ch;
+    x.fillStyle=heatColor(g[hi],PV,NV); x.fillRect(X,Y,cw-1,ch-1);
+    if(plat.has(k)){x.strokeStyle='#b0842f';x.lineWidth=1;x.strokeRect(X+.5,Y+.5,cw-2,ch-2);}
+    if(ref.has(k)){x.setLineDash([3,2]);x.strokeStyle='#3b6fd6';x.lineWidth=2;x.strokeRect(X+1,Y+1,cw-3,ch-3);x.setLineDash([]);}
+    if(sel.has(k)){x.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--sel');x.lineWidth=2.5;x.strokeRect(X+1,Y+1,cw-3,ch-3);}
+    if(pre.has(k)){x.fillStyle='#3b6fd6';x.fillText('◆',X+cw/2-4,Y+ch/2+3);}
+    if(k===f.single.cell){x.fillStyle='#e0a526';x.beginPath();x.arc(X+cw/2,Y+ch/2,Math.min(cw,ch)/4,0,7);x.fill();}
+  }
+  x.fillStyle=getComputedStyle(document.body).color;
+  for(let i=1;i<=f.nr;i+=Math.ceil(f.nr/10))x.fillText(i,0,(i-1)*ch+ch/2+3);
+  for(let j=1;j<=f.nc;j+=Math.ceil(f.nc/10))x.fillText(j,20+(j-1)*cw,f.nr*ch+12);
+  cv.onclick=e=>{const r=cv.getBoundingClientRect(),j=Math.floor((e.clientX-r.left-20)/cw)+1,i=Math.floor((e.clientY-r.top)/ch)+1,g=f.grid[i+'_'+j];
+    if(g)cv.title=`${i}_${j}：風報比 樣本內 ${f2(g[0])}／樣本外 ${f2(g[1])}／全期 ${f2(g[2])}；樣本內 ${g[3]} 筆`;};
+  cv.onmousemove=cv.onclick;
+  // 比較表
+  const rows=[[C.name,C.m]]; rows.push(['單格最佳 '+f.single.cell,f.single.m]); if(mode==='full')rows.push(['全期單格最佳 '+f.single_full.cell,f.single_full.m]);
+  if(f.ref)rows.push(['標準答案 '+f.ref.members.join('＋'),f.ref.m]);
+  const seg=[['is','樣本內'],['oos','樣本外'],['full','全期']];
+  $('#pc-cmp').innerHTML='<tr><th>（每口平均）</th><th>區段</th><th>風報比</th><th>淨利</th><th>期望值</th><th>最大浮動回撤</th><th>最長回撤天</th><th>筆數</th><th>勝率</th></tr>'+
+   rows.map(([n,m])=>seg.map(([s,l],q)=>`<tr><td>${q?'':n}</td><td>${l}</td><td>${f2(m[s].MAR)}</td><td class="${cls(m[s].net)}">${f0(m[s].net)}</td><td>${f2(m[s].E)}</td><td>${f0(m[s].mdd)}</td><td>${m[s].ddd}</td><td>${m[s].trades}</td><td>${m[s].win}%</td></tr>`).join('')).join('');
+  // 權益曲線
+  const L=[[C.name,D.fams[cur].curves[C.name],'#d64545'],['單格最佳 '+f.single.cell,f.curves.single,'#888']]; if(f.ref)L.push(['標準答案',f.curves.ref,'#3b6fd6']);
+  $('#pc-lg2').innerHTML=L.map(l=>`<span><i style="background:${l[2]}"></i>${l[0]}</span>`).join('')+'<span>｜灰色區＝樣本外</span>';
+  const n=D.wdays.length, all=L.flatMap(l=>l[1]), mn=Math.min(0,...all), mx=Math.max(...all), VW=1000, VH=260, px=i=>40+i*(VW-50)/(n-1), py=v=>10+(VH-30)*(1-(v-mn)/((mx-mn)||1));
+  const oi=D.wdays.findIndex(d=>d>=D.oos_start);
+  let sv2=`<svg viewBox="0 0 ${VW} ${VH}" width="100%" preserveAspectRatio="none" style="height:240px"><rect x="${px(oi)}" y="0" width="${px(n-1)-px(oi)}" height="${VH-20}" fill="#8882"/>`;
+  [mn,0,mx].forEach(v=>{sv2+=`<line x1="40" x2="${VW-10}" y1="${py(v)}" y2="${py(v)}" stroke="#8885"/><text x="0" y="${py(v)+3}">${f0(v)}</text>`;});
+  for(let y=2020;y<=2026;y++){const i=D.wdays.findIndex(d=>d>=y+'-01-01');if(i>0)sv2+=`<text x="${px(i)-12}" y="${VH-4}">${y}</text>`;}
+  L.forEach(l=>{sv2+=`<polyline fill="none" stroke="${l[2]}" stroke-width="1.6" vector-effect="non-scaling-stroke" points="${l[1].map((v,i)=>px(i).toFixed(1)+','+py(v).toFixed(1)).join(' ')}"/>`;});
+  $('#pc-eq').innerHTML=sv2+'</svg>';
+  // 逐年
+  const ys=Object.keys(C.yearly), Y=[[C.name,C.yearly],['單格最佳 '+f.single.cell,f.single.yearly]]; if(f.ref)Y.push(['標準答案',f.ref.yearly]);
+  $('#pc-yr').innerHTML='<tr><th></th>'+ys.map(y=>`<th>${y}</th>`).join('')+'</tr>'+Y.map(([n,yr])=>`<tr><td>${n}</td>`+ys.map(y=>yr[y]?`<td><span class="${cls(yr[y][0])}">${f0(yr[y][0])}</span> / ${f0(yr[y][1])}</td>`:'<td>—</td>').join('')+'</tr>').join('');
+  // 鄰居
+  $('#pc-nb').innerHTML='<tr><th>格</th><th>自己</th><th>鄰居中位數</th><th>8 個鄰居（樣本內／樣本外）</th></tr>'+Object.entries(C.neighbors).map(([k,v])=>
+   `<tr><td>${k}</td><td>${f2(v.self.is[0])} / ${f2(v.self.oos[0])}</td><td>${f2(v.nb_med.is)} / ${f2(v.nb_med.oos)}</td><td style="text-align:left;white-space:normal">${Object.entries(v.nb).map(([q,w])=>`${q}：${f2(w.is[0])}/${f2(w.oos[0])}`).join('、')}</td></tr>`).join('');
+}
+draw(); window.addEventListener('resize',()=>{clearTimeout(window.__pcR);window.__pcR=setTimeout(draw,200);});
+})();
+</script></body></html>
