@@ -2,7 +2,7 @@
  "file": "5483_2026-11-06.md",
  "code": "5483",
  "date": "2026-11-06",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 15.64 倍，站上資料 16.1093"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",

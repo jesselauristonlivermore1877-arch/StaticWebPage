@@ -2,7 +2,7 @@
  "file": "2454_2026-11-10.md",
  "code": "2454",
  "date": "2026-11-10",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 61.44 倍，站上資料 63.2525"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",
