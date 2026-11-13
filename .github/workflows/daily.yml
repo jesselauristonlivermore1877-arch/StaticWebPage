@@ -245,6 +245,21 @@ jobs:
         timeout-minutes: 3
         run: python tools/nsf_history.py --site ../site --out ../site/docs/data/nsf_history.json --src-from ../site/docs/data/nsf_history.json
 
+      # 🟢 11-14（雲端U，Evans 11-14 核准）：庫藏股買回 → docs/data/buyback.json＋docs/data/buyback/<代號>.json（網站「籌碼 > 庫藏股」）。
+      #    ① 公開資訊觀測站 t35sc09 近 14 個月公告（約 16 發，每段失敗就不動那段）→ data/buyback/events.json
+      #    ② 事件研究（px_hist.npz＋本班 daily.npz）→ data/buyback/study.json；③ 核對（另一份原始資料重算）沒過就不發布、網站沿用上一份。
+      #    排在「選股 EDM」之前：EDM 的「庫藏股新公告」卡讀這一班的 study.json。歷史日K回補在 backfill_buyback.yml（每天 21:47）。失敗不擋。
+      - name: 庫藏股買回
+        id: buyback
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 8
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python buyback.py ../site/data --events || { echo "::warning::庫藏股公告抓取失敗（沿用上一份公告）"; echo "庫藏股公告抓取失敗（沿用上一份公告）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          python buyback.py ../site/data --study --publish ../site/docs/data || { echo "::warning::庫藏股事件研究／發布失敗（網站沿用上一份）"; echo "庫藏股事件研究／發布失敗（網站沿用上一份）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+
       # 🟢 10-29 晚（總指揮 雲端 1，Evans 核准）：選股 EDM（網站「量化 EDM」）→ docs/data/pick_edm.json＋docs/data/edm_hist/<資料日>.json（11-06 C8：歷史只存資料，保留 90 天）。
       #    11-06（C7）：排在主動式 ETF 日報之後，「主動式 ETF 每日操作」卡才讀得到這一班的 aetf_daily.json。
       #    料全部是上面各步剛寫好的檔（web_data、radar、trail、rrg、chips、chips_daily、etf_flow、stock_bars、lookup），不打網路；
