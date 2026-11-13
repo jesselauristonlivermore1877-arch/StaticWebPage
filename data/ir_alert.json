@@ -306,7 +306,7 @@
    "pre_sent": true
   }
  ],
- "asof": "2026-11-12T23:12+00:00",
+ "asof": "2026-11-13T00:06+00:00",
  "body": {
   "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9XMEJTZ3FtNEp3ZDlIMzJoZExULTctZTBSSXU0MmE2YUh0U1M5LWsySEFOalRRQ1RULS11UU52VXJPSlltZlp5SzdxV200UGt00gFWQVVfeXFMUEk4XzhjTEcyWnFHZXVrNHByMklwbHQzSEtTTmZucVpkdnJCekp5YXJUYkhlenhrcmtIZDdXTGFoV3g1ZUdFTWxaZDBkZjQ4Q0JONFQwakE?oc=5": {
    "r": "ok",
@@ -425,16 +425,16 @@
   "/11181102?utm_source=rss": {
    "r": "err",
    "why": "打不開：MissingSchema Invalid URL '/11181102?utm_source=rss': No scheme supplied. Perhaps you meant ht",
-   "at": "2026-11-12T23:12+00:00",
+   "at": "2026-11-13T00:06+00:00",
    "v": 2,
-   "n": 6
+   "n": 8
   },
   "/11181100?utm_source=rss": {
    "r": "err",
    "why": "打不開：MissingSchema Invalid URL '/11181100?utm_source=rss': No scheme supplied. Perhaps you meant ht",
-   "at": "2026-11-12T23:12+00:00",
+   "at": "2026-11-13T00:06+00:00",
    "v": 2,
-   "n": 6
+   "n": 8
   },
   "https://www.ctee.com.tw/news/20261112702312-430502": {
    "r": "no",
@@ -476,6 +476,18 @@
    "r": "ok",
    "why": "公司說的：「…W )12日召開線上法說會並釋出最新AI伺服器營運展望，財務長吳長榮表示，受惠於強勁的訂單動能與部分第三季遞延訂單出貨，預估第四季伺服器業務營收將迎來爆發性增長，單季季增達150%，年增更高達280%」",
    "at": "2026-11-12T21:56+00:00",
+   "v": 2
+  },
+  "https://news.google.com/rss/articles/CBMiakFVX3lxTE8yQUJqR01PS193V3hSeVMwa1pIT2FfRUQwcDdTdkNZd1Vad0hHR2owNWZEV3FkNzlvdFpiUkJYbVloazdhblBQX00tdXRxVndpdVdsQ0YyNFFPT0pfQ3JfTkw1LXhMYzFES1E?oc=5": {
+   "r": "ok",
+   "why": "公司說的：「…華碩預期第四季伺服器表現續強，可望季增100%、年增280%，全年伺服器營收成長150%的目標不變，明年將有高雙位數...」",
+   "at": "2026-11-13T00:06+00:00",
+   "v": 2
+  },
+  "https://news.google.com/rss/articles/CBMibkFVX3lxTE9oVURLazhHdE8yMl84QmRCMXhiaGxYTVlpUkNURnl1S1g1QWkxNWd3OGZrbUpHcXFlY2kzWG1RUUJWTHhQUTFST0pHcHlzLXlCTlBvRkc1WjFmZE9fdFpBSWZRcXkzYTlEeFpidThR?oc=5": {
+   "r": "ok",
+   "why": "公司說的：「…華碩預期第四季伺服器表現續強，可望季增100%、年增280%，全年伺服器營」",
+   "at": "2026-11-13T00:06+00:00",
    "v": 2
   }
  },
