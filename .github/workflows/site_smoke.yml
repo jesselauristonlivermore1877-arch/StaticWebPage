@@ -4,7 +4,10 @@
 #   做什麼：Playwright 點遍頁籤（1366 全部子列；390／768 頂層＋第一層），跟上一次「通過」的結果比：
 #     某一格新出現 空白／0 則／沒有資料／NaN／undefined／載入中卡住／畫不出來、console 錯、HTTP ≥ 400、
 #     資料日過舊（> 4 天；程式策略 > 10 天）、內容大減（掉 70% 以上）、整格不見 → 發 TG。
-#   產出：docs/data/site_smoke.json（每次）；data/site_smoke_base.json（通過才更新，當下一次的基準；不對外）。
+#   產出：docs/data/site_smoke.json（每次）；data/site_smoke_base.json（基準，不對外）。
+#   雲端X 11-13 改：① 基準改成每班滾動更新（沒壞的格換新、壞的格留舊值；以前只有全過才更新，11-10 之後一次都沒全過，
+#     基準卡在 11-10，同一批誤報每班重發）；② TG 只發「第一次出現」的 ✗（上一班報過的標 repeat 不重發），
+#     每天 08:00 那一班另外把還沒修好的全部列一次；③ 動態格（帶則數的按鈕）不見了／內容大減不算壞（見 site_smoke.js 開頭）。
 name: 正式站巡檢
 
 on:
@@ -53,7 +56,8 @@ jobs:
       - name: 裝 Playwright（只裝 chromium）
         run: |
           cd code && npm init -y >/dev/null && npm i --no-save playwright@1 >/dev/null
-          npx playwright install --with-deps chromium
+          # 雲端X 11-13：11-11 13:52 那班 apt 解析 security.ubuntu.com 暫時失敗、整班沒跑 → 失敗等 30 秒重試一次
+          npx playwright install --with-deps chromium || { sleep 30; npx playwright install --with-deps chromium; }
       - name: 等 Pages 上線
         if: ${{ github.event_name == 'workflow_run' }}
         run: sleep 180
@@ -64,31 +68,49 @@ jobs:
           W="${{ github.event.inputs.widths }}"; [ -z "$W" ] && W="1366,390,768"
           B=""; [ -f ../site/data/site_smoke_base.json ] && [ "${{ github.event.inputs.rebase }}" != "1" ] && B="--baseline ../site/data/site_smoke_base.json"
           set +e
-          node tools/site_smoke.js --widths "$W" --deep 1366 --out ../site/docs/data/site_smoke.json $B | tee ../smoke.log
+          P=""; [ -f ../site/docs/data/site_smoke.json ] && P="--prev ../site/docs/data/site_smoke.json"
+          node tools/site_smoke.js --widths "$W" --deep 1366 --out ../site/docs/data/site_smoke.json $B $P --base-out ../site_smoke_base.new.json | tee ../smoke.log
           rc=${PIPESTATUS[0]}
           set -e
           echo "rc=$rc" >> "$GITHUB_OUTPUT"
           [ "$rc" = 2 ] && exit 1 || true
-      - name: 通過 → 更新基準
-        if: ${{ steps.run.outputs.rc == '0' || github.event.inputs.rebase == '1' }}
+      - name: 更新基準（滾動；rebase=1 時整份換成這次結果）
+        if: ${{ steps.run.outputs.rc == '0' || steps.run.outputs.rc == '1' }}
         run: |
-          mkdir -p site/data && cp site/docs/data/site_smoke.json site/data/site_smoke_base.json
+          mkdir -p site/data
+          if [ "${{ github.event.inputs.rebase }}" = "1" ] || [ ! -f site_smoke_base.new.json ]; then
+            cp site/docs/data/site_smoke.json site/data/site_smoke_base.json
+          else
+            cp site_smoke_base.new.json site/data/site_smoke_base.json
+          fi
       - name: 有新壞的 → 發 TG
         if: ${{ steps.run.outputs.rc == '1' }}
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          EV: ${{ github.event_name }}
+          SRV: ${{ github.server_url }}
+          REPO: ${{ github.repository }}
+          RID: ${{ github.run_id }}
         run: |
           python3 - <<'EOF'
           import json, os, urllib.request, urllib.parse
           d = json.load(open("site/docs/data/site_smoke.json", encoding="utf-8"))
-          R = d.get("regress") or []
-          lines = [f"⚠ 正式站巡檢：{len(R)} 格新壞（{d.get('tw','')}）"]
+          ALL = d.get("regress") or []
+          NEW = [x for x in ALL if not x.get("repeat")]
+          daily = os.environ.get("EV") == "schedule"
+          if not NEW and not daily:
+              print(f"{len(ALL)} 格都是上一班報過的，這班不發 TG"); raise SystemExit(0)
+          R = ALL if daily else NEW
+          run = f"{os.environ.get('SRV')}/{os.environ.get('REPO')}/actions/runs/{os.environ.get('RID')}"
+          lines = [(f"⚠ 正式站巡檢（每日總表）：還有 {len(ALL)} 格壞，其中 {len(NEW)} 格這班新出現" if daily else
+                    f"⚠ 正式站巡檢：{len(NEW)} 格新壞（另 {len(ALL) - len(NEW)} 格之前報過、還沒修）") + f"（{d.get('tw','')}）"]
           for x in R[:15]:
               why = "；".join([*(x.get("flags") or []), ("過舊 " + x["stale"]) if x.get("stale") else "", *(x.get("http") or [])[:1], *(x.get("console") or [])[:1]])
               lines.append(f"・[{x['width']}] {x['path']}：{why.strip('；')[:120]}")
           if len(R) > 15: lines.append(f"…還有 {len(R) - 15} 格，見 docs/data/site_smoke.json")
-          lines.append("先加 print 定位、不要猜；屬雲端的直接修，屬本機的寫 TODO 請 W。")
+          lines.append("run：" + run)
+          lines.append("先加 print 定位、不要猜；屬雲端的直接修，屬本機的寫 TODO 請 W。判讀方法見 TODO「雲端X 11-13 巡檢錯誤」。")
           tok, chat = os.environ.get("TG_BOT_TOKEN"), os.environ.get("TG_CHAT_ID")
           if not tok or not chat:
               print("沒有 TG_BOT_TOKEN／TG_CHAT_ID，只印出：\n" + "\n".join(lines)); raise SystemExit(0)
