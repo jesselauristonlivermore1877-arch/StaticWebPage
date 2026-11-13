@@ -1,9 +1,9 @@
 {
  "date": "2026-11-12",
  "data_date": "2026-11-12",
- "made": "2026-11-13T05:33+08:00",
- "built_at": "2026-11-13T05:28:05+08:00",
- "run": "43310175835",
+ "made": "2026-11-13T09:19+08:00",
+ "built_at": "2026-11-13T09:09:15+08:00",
+ "run": "43342506313",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
   "web_data.market.taiex": "2026-11-12",
@@ -71,18 +71,18 @@
    "id": "otc_close",
    "sec": "大盤",
    "label": "櫃買指數收盤",
-   "value": 335.73,
+   "value": 349.13,
    "unit": " 點",
-   "text": "335.73 點",
+   "text": "349.13 點",
    "src": "web_data.market.otc"
   },
   {
    "id": "otc_r1",
    "sec": "大盤",
    "label": "櫃買指數漲跌幅",
-   "value": -2.44,
+   "value": 3.99,
    "unit": "%",
-   "text": "-2.44%",
+   "text": "+3.99%",
    "src": "web_data.market.otc"
   },
   {
@@ -260,36 +260,36 @@
    "id": "sec_top3",
    "sec": "族群",
    "label": "族群評分第 3 名：光學鏡頭與元件",
-   "value": 35.7,
+   "value": 35.3,
    "unit": " 分",
-   "text": "35.7 分",
+   "text": "35.3 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot1",
    "sec": "族群",
    "label": "族群評分倒數第 1 名：電源管理IC",
-   "value": 2.8,
+   "value": 2.6,
    "unit": " 分",
-   "text": "2.8 分",
+   "text": "2.6 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot2",
    "sec": "族群",
    "label": "族群評分倒數第 2 名：記憶體",
-   "value": 9.4,
+   "value": 9.0,
    "unit": " 分",
-   "text": "9.4 分",
+   "text": "9.0 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot3",
    "sec": "族群",
    "label": "族群評分倒數第 3 名：晶圓耗材／設備",
-   "value": 13.8,
+   "value": 11.1,
    "unit": " 分",
-   "text": "13.8 分",
+   "text": "11.1 分",
    "src": "web_data.screen.sector_score"
   },
   {
@@ -368,9 +368,9 @@
    "id": "disp_hot",
    "sec": "處置股",
    "label": "再一次注意就處置的個股數",
-   "value": 3,
+   "value": 2,
    "unit": " 檔",
-   "text": "3 檔",
+   "text": "2 檔",
    "src": "docs/data/disposal.json"
   },
   {
