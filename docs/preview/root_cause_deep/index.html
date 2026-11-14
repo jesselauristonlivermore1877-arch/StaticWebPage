@@ -44,6 +44,22 @@ th{font-size:12px;color:var(--ink2);font-weight:700}th:first-child,td:first-chil
 .rd-foot{font-size:12px;color:var(--ink2);text-align:center;margin-top:18px}
 .rd-rule{font-size:13px;margin:0;padding-left:18px}.rd-rule li{margin:2px 0}
 .rd-empty{color:var(--ink2);font-size:14px}
+.rd-f-stage{font-size:13px;font-weight:900;color:var(--acc);margin:10px 0 2px;letter-spacing:.05em}
+.rd-f-stage:first-child{margin-top:0}
+.rd-f-tag{display:inline;font-size:11px;font-weight:700;border:1px solid var(--g1);color:var(--g1);border-radius:5px;padding:0 5px;margin-left:4px;overflow-wrap:anywhere;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.rd-f-g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.rd-f-g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.rd-f-card{border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+.rd-f-card h3{font-size:15px;margin:0 0 4px}
+.rd-f-card p{margin:0 0 6px;font-size:14px}
+.rd-f-q{font-size:13px;color:var(--ink2);margin:0 0 6px}
+.rd-f-off{background:var(--g1b);border-radius:6px;padding:6px 8px;margin:4px 0;font-size:14px}
+.rd-f-off details{font-size:12px;color:var(--ink2);margin-top:2px}.rd-f-off summary{cursor:pointer}
+.rd-f-ul{margin:2px 0 6px;padding-left:18px;font-size:13px}.rd-f-ul li{margin:3px 0;overflow-wrap:anywhere}
+.rd-f-key{background:var(--g2b);border-radius:8px;padding:8px 10px;margin-top:10px;font-size:14px}
+.rd-f-mk{font-size:11px;font-weight:900;color:var(--bad);white-space:nowrap}
+tr.rd-f-ev td{background:var(--badb)}
+@media (max-width:640px){.rd-f-g2,.rd-f-g3{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){.rd-hy{grid-template-columns:minmax(0,1fr)}.rd-kpi b{font-size:20px}.rd-hd h1{font-size:19px}}
 </style></head><body><div class="rd-wrap" id="rd">載入中…</div>
 <script>
@@ -69,6 +85,74 @@ th{font-size:12px;color:var(--ink2);font-weight:700}th:first-child,td:first-chil
     ${L.length > 1 ? `<div class="rd-sel">其他日期：<select onchange="location.search='?d='+this.value">${L.map(x => `<option value="${esc(x.date)}"${x.date === day ? " selected" : ""}>${esc(x.date)} ${esc((x.title || "").slice(0, 24))}</option>`).join("")}</select></div>` : ""}</div>
   <div class="rd-kpi"><div><b style="color:var(--g1)">${n["已證實"] || 0}</b><span>已證實</span></div><div><b style="color:var(--g2)">${n["媒體報導"] || 0}</b><span>媒體報導</span></div>
     <div><b style="color:var(--g3)">${n["市場傳聞"] || 0}</b><span>市場傳聞</span></div><div><b style="color:var(--bad)">${n["擋掉"] || 0}</b><span>程式擋掉</span></div></div>`;
+  // 事件完整版（tools/rc_dossier.py → <日期>_full.json；沒有這個檔就不顯示）
+  let F = null;
+  try { const r = await fetch(day + "_full.json", {cache: "no-store"}); if (r.ok) F = await r.json(); } catch (e) { F = null; }
+  if (F) {
+    const A = (u, t) => `<a href="${esc(u)}" target="_blank" rel="noopener nofollow">${esc(t)}</a>`;
+    const conf = r => r.conf ? `<span class="rd-f-tag">官方已證實：${esc(r.conf.split("、").map(x => x.replace("官方已證實：", "")).join("、"))}（其餘為媒體報導）</span>` : "";
+    const med = r => `<li><span class="rd-t">${esc(r.t)}</span>${esc(r.text)}${conf(r)}<div class="rd-src">${A(r.u, r.src)}・權威媒體・${esc(r.check || "")}</div></li>`;
+    const offq = o => `<div class="rd-f-off">${badge("已證實")}${esc(o.zh)}<details><summary>官方原文（程式逐字核對）</summary>“${esc(o.quote)}” — ${A(o.u, o.src)}${o.date_us ? "（美國日期 " + esc(o.date_us) + "）" : ""}</details></div>`;
+    h += `<section><h2>事件完整版<small>傳聞 → 董事會 → 官方宣布 → 接任安排；官方原文核到 ${F.official_n}／${F.official_total} 句・產出 ${esc((F.built || "").replace("T", " "))}</small></h2>`;
+    let cur = "";
+    for (const r of F.timeline || []) {
+      if (r.stage !== cur) { cur = r.stage; h += `<div class="rd-f-stage">▍${esc(cur)}</div>`; }
+      h += `<div class="rd-li"><span class="rd-t">${esc(r.t)}</span>${r.kind === "官方" ? badge("已證實") : '<span class="rd-g g2">權威媒體</span>'}${esc(r.text)}${conf(r)}` +
+        (r.quotes ? `<details class="rd-src"><summary>官方原文（${r.quotes.length} 句，程式逐字核對）</summary>${r.quotes.map(q => "“" + esc(q) + "”").join("<br>")}</details>` : "") +
+        `<div class="rd-src">${A(r.u, r.src)}・${esc(r.kind)}・${esc(r.check || "")}</div></div>`;
+    }
+    h += `<p class="rd-note">時間＝台北時間（官方稿只有美國日期的標「美國日期」）。含敏感字的媒體標題一律寫成「據〈媒體〉報導…官方未證實」；標「官方已證實」的，是標題裡的敏感字都已由官方原文核到。</p></section>`;
+    // 兩條起因
+    h += `<section><h2>兩條起因：各自的出處與查證狀態<small>官方原文核到才用肯定語氣；其餘只寫「據〈媒體〉報導」</small></h2><div class="rd-f-g2">` +
+      (F.causes || []).map(c => `<div class="rd-f-card"><h3>${esc(c.name)} ${c.status !== "官方核到" ? '<span class="rd-g no">官方未證實</span>' : c.note ? '<span class="rd-g g2">官方只證實部分</span>' : badge("已證實")}</h3>
+        ${c.note ? `<p class="rd-f-q">${esc(c.note)}</p>` : ""}
+        <div class="rd-lab s">官方怎麼說</div>${(c.official || []).map(offq).join("") || '<p class="rd-empty">官方沒有說法</p>'}
+        ${(c.rows || []).length ? `<div class="rd-lab m">其他說法（只有媒體報導）</div><ul class="rd-f-ul">${c.rows.map(r => `<li>${badge("媒體報導")}${esc(r.text)}<div class="rd-src">${r.srcs.map(g => A(g.u, g.src) + " " + esc(g.t)).join("｜")}</div></li>`).join("")}</ul>` : ""}
+        <div class="rd-lab m">權威媒體報導</div><p class="rd-f-q">證據池裡共 ${c.media_n} 則、${c.media_src_n} 家權威媒體。${c.earliest ? `最早一則：${esc(c.earliest.t)}・${A(c.earliest.u, c.earliest.src)}` : ""}</p>
+        <ul class="rd-f-ul">${(c.media || []).map(med).join("")}</ul></div>`).join("") + `</div>` +
+      (F.cause_link ? `<div class="rd-f-key"><b>辭任跟這兩條起因的關係：</b>${esc(F.cause_link.text)}<div class="rd-src">${A(F.cause_link.u, F.cause_link.src)}（程式查新聞稿全文）</div></div>` : "") + `</section>`;
+    // 影響路徑
+    const M = F.market || {}, T = M.tw || {}, V = F.valuation || {};
+    const pdata = p => p.data === "tw" && T.ok ? `<div class="rd-f-key">本站資料：台廠供應鏈 ${T.n} 檔，${esc(T.base)}→${esc(T.days[T.days.length - 1])} 累計漲跌中位數 ${sgn(T.med_cum)}（同期加權指數 ${sgn(T.twii_cum)}）；官方宣布後第一個台股交易日（${esc(T.days[T.days.length - 1])}）上漲 ${T.n_up_last} 檔、下跌 ${T.n_dn_last} 檔。逐檔見下方「市場反應」。</div>`
+      : p.data === "val" && V.ok ? `<div class="rd-f-key">本站資料：${V.n} 檔有法人前瞻 EPS，事件前版本 ${esc(V.base_ver)} 到現在，${V.n_same} 檔沒變、${V.n_moved} 檔有變（見下方「前瞻估值」）。到目前為止，看不到法人因為這件事集體下修台廠前瞻 EPS。</div>`
+      : `<div class="rd-f-key">本站資料：這條路徑沒有可以量化的資料，只列權威報導。</div>`;
+    h += `<section><h2>對台廠供應鏈的影響路徑<small>官方說法＋權威報導＋本站資料；不寫推論、不寫本站目標價或買賣建議</small></h2><div class="rd-f-g3">` +
+      (F.paths || []).map(p => `<div class="rd-f-card"><h3>${esc(p.name)}</h3><p class="rd-f-q">${esc(p.q)}</p>
+        ${(p.official || []).map(offq).join("")}
+        <div class="rd-lab m">權威報導（候選 ${p.media_n} 則，列核對通過的 ${p.media.length} 則）</div><ul class="rd-f-ul">${p.media.map(med).join("") || "<li>沒有核對通過的權威報導</li>"}</ul>${pdata(p)}</div>`).join("") +
+      `</div><p class="rd-note">報導裡提到的分析師目標價、市值估計，是整理他人公開的說法（標出處與日期），非本站建議。</p></section>`;
+    // 市場反應
+    const mk = M.marks || {};
+    const usMark = d => Object.values(mk).filter(m => m.date_us && d === (M.us[0].rows.find(r => r.d >= m.date_us) || {}).d).map(m => m.lab);
+    const twMark = d => Object.values(mk).filter(m => m.date_us && d === ((T.days || []).find(x => x > m.date_us))).map(m => m.lab.split("（")[0] + "後");
+    h += `<section><h2>市場反應<small>只描述時間上的先後，不代表因果</small></h2>`;
+    for (const u of M.us || []) {
+      h += `<div class="rd-f-stage">▍${esc(u.name)}（${esc(u.sym)}，美股）</div><div class="rd-x"><table><tr><th>美國日期</th><th>開盤</th><th>開盤跳空</th><th>盤中最低</th><th>收盤</th><th>當日漲跌</th><th></th></tr>` +
+        u.rows.map(r => { const m = usMark(r.d); return `<tr class="${m.length ? "rd-f-ev" : ""}"><td>${esc(r.d)}</td><td>${r.o ?? "—"}</td><td>${sgn(r.gap)}</td><td>${r.l ?? "—"}（${sgn(r.low_pct)}）</td><td>${r.c}</td><td>${sgn(r.pct)}</td><td class="rd-f-mk">${esc(m.join("、"))}</td></tr>`; }).join("") +
+        `</table></div><p class="rd-note">${esc(u.check)}；跳空、盤中最低都是跟前一天收盤比。</p>`;
+    }
+    if ((M.sox || []).length) h += `<p class="rd-note">費城半導體指數：${M.sox.map(r => `${esc(r.d.slice(5))} ${sgn(r.pct)}`).join("、")}（yfinance）</p>`;
+    if (T.ok) {
+      const ds = T.days.slice(1);
+      h += `<div class="rd-f-stage">▍台廠供應鏈（${T.n} 檔，依 ${esc(T.base)}→${esc(T.days[T.days.length - 1])} 累計由弱到強）</div><div class="rd-x"><table>
+        <tr><th>個股</th><th>細類</th>${ds.map(d => `<th>${esc(d.slice(5))}${twMark(d).length ? `<br><span class="rd-f-mk">${esc(twMark(d).join("、"))}</span>` : ""}</th>`).join("")}<th>累計</th><th>${esc(T.base.slice(5))} 收盤</th><th>最新收盤</th></tr>
+        <tr><td><b>加權指數</b></td><td></td>${T.twii.slice(1).map(v => `<td>${sgn(v)}</td>`).join("")}<td>${sgn(T.twii_cum)}</td><td></td><td></td></tr>` +
+        T.rows.map(r => `<tr><td>${esc(r.code)} ${esc(r.name)}</td><td style="text-align:left">${esc(r.sub)}</td>${r.daily.slice(1).map(v => `<td>${sgn(v)}</td>`).join("")}<td>${sgn(r.cum)}</td><td>${r.base}</td><td>${r.last}</td></tr>`).join("") +
+        `</table></div><p class="rd-note">${esc(T.note)} ${esc(T.check)}。資料：daily.npz（證交所、櫃買中心日 K）。</p>`;
+    }
+    h += `</section>`;
+    // 前瞻估值
+    if (V.ok) {
+      const ys = V.years || [], mv = V.rows.filter(r => r.moved), st = V.rows.filter(r => !r.moved);
+      h += `<section><h2>前瞻估值：法人前瞻 EPS 有沒有下修<small>${esc(V.src)}</small></h2>
+        <p>事件前版本 ${esc(V.base_ver)} 跟現在（${esc(V.now_ver)}）比：${V.n} 檔有資料，<b>${V.n_same} 檔完全沒變</b>、${V.n_moved} 檔有變。</p>` +
+        (mv.length ? `<div class="rd-x"><table><tr><th>個股</th>${ys.map(y => `<th>${esc(y)} 年 EPS（家數）</th>`).join("")}</tr>` +
+          mv.map(r => `<tr><td>${esc(r.code)} ${esc(r.name)}</td>${r.cells.map(c => c ? `<td>${c.e0 ?? "—"}（${c.n0 ?? 0}）→ ${c.e1 ?? "—"}（${c.n1 ?? 0}）${c.d ? " " + sgn(c.d) : ""}</td>` : "<td>—</td>").join("")}</tr>`).join("") + `</table></div>` : "") +
+        `<p class="rd-note">有變的那幾檔，家數也變了＝新增或更新了報告，平均值才變動，不能直接歸因於這件事。沒變的：${st.map(r => esc(r.name)).join("、")}。</p></section>`;
+    }
+    if ((F.next || []).length) h += `<section><h2>接下來看什麼<small>只列官方已公布的時程</small></h2><ul class="rd-f-ul">${F.next.map(x => `<li>${badge("已證實")}${esc(x.t)}<div class="rd-src">${A(x.u, x.src)}</div></li>`).join("")}</ul></section>`;
+    h += `<section><h2>事件完整版的規則</h2><ul class="rd-rule">${Object.entries(F.rules || {}).map(([k, v]) => `<li><b>${esc(k)}</b>：${esc(v)}</li>`).join("")}</ul></section>`;
+  }
   // 現在的狀態
   h += `<section><h2>現在的狀態<small>只放有官方或權威媒體、程式核對通過的答案；其餘一律「官方未證實」</small></h2>` +
     ((J.status || []).map(s => `<div class="rd-li"><b>${esc(s.q)}</b><br>${s.confirmed ? badge("已證實") : '<span class="rd-g no">官方未證實</span>'}${esc(s.text)}${s.claims && s.claims.length ? `<div class="rd-src">依據：${s.claims.map(id => esc(id)).join("、")}</div>` : ""}</div>`).join("") || '<p class="rd-empty">沒有資料</p>') + `</section>`;

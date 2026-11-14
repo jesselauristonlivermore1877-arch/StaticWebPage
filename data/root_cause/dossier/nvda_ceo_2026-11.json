@@ -1,0 +1,223 @@
+{
+  "_說明": "根因追蹤「事件完整版」設定（雲端R 11-14，【新】總指揮 11-14 派工）。這裡只放：哪一個官方人事稿觸發、兩條起因怎麼分類（正規式）、官方原文要引哪幾句。官方原文每一句都由 tools/rc_dossier.py 實際打開官方頁逐字核對，核不到就不顯示；媒體出處全部由程式從證據池挑、打開核對。中文說明（zh）只翻譯核到的那一句，不加推論。",
+  "key": "nvda_ceo_2026-11",
+  "trigger_u": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+  "who_rx": "(?i)huang|黃仁勳|nvidia|輝達|英偉達",
+  "verify_kws": [
+    "Jensen",
+    "Huang",
+    "Nvidia",
+    "黃仁勳",
+    "輝達",
+    "英偉達"
+  ],
+  "start": "2026-11-06",
+  "official_docs": [
+    {
+      "id": "O1",
+      "u": "https://nvidianews.nvidia.com/news/statement-from-nvidia-board-of-directors",
+      "date_us": "2026-11-08",
+      "src": "NVIDIA 董事會聲明（官方新聞室）",
+      "title": "Statement From NVIDIA Board of Directors"
+    },
+    {
+      "id": "O2",
+      "u": "https://nvidianews.nvidia.com/news/a-message-to-our-company",
+      "date_us": "2026-11-08",
+      "src": "黃仁勳致員工信（官方新聞室）",
+      "title": "A Message to Our Company"
+    },
+    {
+      "id": "O3",
+      "u": "https://nvidianews.nvidia.com/news/statement-from-the-independent-members-of-the-nvidia-board",
+      "date_us": "2026-11-10",
+      "src": "NVIDIA 獨立董事聲明（官方新聞室）",
+      "title": "Statement From the Independent Members of the NVIDIA Board"
+    },
+    {
+      "id": "O4",
+      "u": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+      "date_us": "2026-11-12",
+      "src": "NVIDIA 執行長異動新聞稿（官方新聞室）",
+      "title": "NVIDIA Announces CEO Transition"
+    }
+  ],
+  "quotes": {
+    "q_affair": {
+      "doc": "O2",
+      "quote": "I was unfaithful to my wife.",
+      "zh": "黃仁勳在官方新聞室公開的致員工信中承認對妻子不忠，並向家人、同事與股東道歉。"
+    },
+    "q_target": {
+      "doc": "O1",
+      "quote": "in light of recent reporting that founder and CEO Jensen Huang has been the target of a foreign intelligence effort",
+      "zh": "董事會表示，因為媒體報導黃仁勳成為外國情報行動的「目標」，啟動獨立調查。"
+    },
+    "q_nocomp": {
+      "doc": "O1",
+      "quote": "the Board has no reason to believe that either national security or NVIDIA secrets were compromised",
+      "zh": "董事會表示沒有理由認為國家安全或輝達機密外洩，但調查會檢視所有資訊。"
+    },
+    "q_counsel": {
+      "doc": "O3",
+      "quote": "retained former acting U.S. Attorney of the Southern District of New York Joon H. Kim and his firm Wachtell, Lipton, Rosen & Katz",
+      "zh": "獨立董事聘請前紐約南區代理聯邦檢察官 Joon H. Kim 與 Wachtell, Lipton, Rosen & Katz 律師事務所主持調查。"
+    },
+    "q_email_ns": {
+      "doc": "O2",
+      "quote": "Regarding the national security concerns raised in news reports, NVIDIA’s Board of Directors has initiated an independent investigation",
+      "zh": "黃仁勳信中說，針對媒體提出的國安疑慮，董事會已啟動獨立調查，他會全力配合。"
+    },
+    "q_resign": {
+      "doc": "O4",
+      "quote": "Jensen Huang has resigned as President, Chief Executive Officer, and a member of the Board, effective immediately",
+      "zh": "董事會宣布黃仁勳辭去總裁、執行長及董事職務，即刻生效。"
+    },
+    "q_interim": {
+      "doc": "O4",
+      "quote": "Colette Kress, current Executive Vice President and Chief Financial Officer of NVIDIA, has agreed to serve as Interim Chief Executive Officer",
+      "zh": "執行副總裁暨財務長 Colette Kress（克瑞斯）擔任臨時執行長，同時續任財務長。"
+    },
+    "q_search": {
+      "doc": "O4",
+      "quote": "The Board is initiating a search for a permanent Chief Executive Officer and will consider internal and external candidates",
+      "zh": "董事會開始物色正式執行長，內部與外部人選都會考慮。"
+    },
+    "q_chair": {
+      "doc": "O4",
+      "quote": "appointed Harvey C. Jones as its first-ever Chair of the Board",
+      "zh": "董事會任命 Harvey C. Jones 為首位董事長（曾任 Synopsys 執行長暨執行董事長）。"
+    },
+    "q_orders": {
+      "doc": "O4",
+      "quote": "we expect the company’s operations, customer commitments and product roadmap to continue without interruption",
+      "zh": "董事長 Harvey Jones：預期公司營運、對客戶的承諾與產品路線圖不會中斷。"
+    },
+    "q_earn": {
+      "doc": "O4",
+      "quote": "will report its third-quarter fiscal 2027 financial results on Tuesday, November 17",
+      "zh": "第三季（2027 會計年度）財報照原訂 11/17（美國時間週二）公布。"
+    }
+  },
+  "no_reason_rx": "(?i)unfaithful|affair|foreign intelligence|investigation|national security",
+  "causes": [
+    {
+      "name": "桃色風暴",
+      "rx": "(?i)affair|unfaithful|infidelity|romantic|relationship|婚外情|外遇|出軌|不忠|桃色|小三|小四|戀情|緋聞",
+      "official": [
+        "q_affair"
+      ],
+      "media_rows": []
+    },
+    {
+      "name": "國安疑慮（外國情報行動）",
+      "note": "媒體標題多以「中國間諜」稱之；官方說法是黃仁勳成為外國情報行動的「目標」，對方身分、是否涉及機密外洩，官方未證實。",
+      "rx": "(?i)spy|spies|espionage|intelligence|national security|間諜|情報|國安|共諜|FBI|聯邦調查局",
+      "official": [
+        "q_target",
+        "q_nocomp",
+        "q_counsel",
+        "q_email_ns"
+      ],
+      "media_rows": [
+        {
+          "text": "美國聯邦調查局（FBI）就此事啟動調查",
+          "rx": "(?i)FBI|聯邦調查局"
+        },
+        {
+          "text": "美國國會議員要求說明或調查",
+          "rx": "(?i)congress|lawmakers?|senators?|國會|參議員|眾議員|議員"
+        },
+        {
+          "text": "台灣行政院表示台美已展開合作調查",
+          "rx": "行政院"
+        }
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "name": "傳聞與報導",
+      "until": "O1",
+      "rx": "(?i)memo|備忘錄|spy|間諜|intelligence|情報|relationship|romantic|affair|婚外情|congress|lawmakers?|國會|參議員|議員"
+    },
+    {
+      "name": "董事會調查",
+      "from": "O1",
+      "until": "O4",
+      "rx": "(?i)board|董事會|investigat|調查|FBI|聯邦調查局|行政院|國會|議員|vote|投票|過半|撤換|去留|oust|wachtell"
+    },
+    {
+      "name": "官方宣布",
+      "from": "O4",
+      "rx": "(?i)resign|steps? down|辭|下台|卸任|exit|departure",
+      "max": 3
+    },
+    {
+      "name": "接任安排",
+      "from": "O4",
+      "rx": "(?i)successor|succession|search|interim|kress|harvey jones|chair|CFO|turns to|接班|繼任|人選|臨時執行長|代理執行長|暫代|接任|接掌|克瑞斯|柯蕾絲|財務長|董事長"
+    }
+  ],
+  "paths": [
+    {
+      "name": "訂單",
+      "q": "台廠訂單與出貨節奏會不會受影響",
+      "official": [
+        "q_orders"
+      ],
+      "data": "tw",
+      "rx": "訂單|拉貨|出貨|下單|產能|供應鏈|orders?\\b|suppl(?:y|iers?)"
+    },
+    {
+      "name": "人脈",
+      "q": "黃仁勳與台灣供應鏈的個人連結（出生地、長年合作的台廠經營者）",
+      "official": [],
+      "data": null,
+      "rx": "(?i)出生地|故鄉|台灣之光|台灣人|人脈|鄉親|老友|林百里|魏哲家|郭台銘|劉揚偉|童子賢|梁見後|夜市|birthplace|hometown|Taiwan's|Taiwanese"
+    },
+    {
+      "name": "前瞻估值",
+      "q": "法人對台廠的前瞻 EPS 會不會下修；輝達自己的估值與目標價",
+      "official": [
+        "q_earn"
+      ],
+      "data": "val",
+      "rx": "(?i)估值|本益比|下修|目標價|評價|評等|valuation|price target|downgrade|target price"
+    }
+  ],
+  "chain": {
+    "tag_rx": "AI伺服器|GB200|NVL72|Rubin|CoWoS|CDU|液冷",
+    "sub": [
+      "AI伺服器與EMS代工"
+    ],
+    "codes": [
+      "2330"
+    ],
+    "note": "依本站族群表（題材標籤含 AI伺服器、GB200、NVL72、Rubin、CoWoS、CDU、液冷，或細類＝AI伺服器與EMS代工，加台積電）；不是輝達官方供應商名單。"
+  },
+  "us": [
+    {
+      "sym": "NVDA",
+      "name": "輝達"
+    }
+  ],
+  "marks": {
+    "O1": "董事會聲明（週末）後第一個交易日",
+    "O4": "官方宣布辭任（美股盤前）"
+  },
+  "confirmed_sens": [
+    {
+      "rx": "(?i)辭任|辭去|請辭|辭職|卸任|下台|下臺|resign(?:s|ed|ation)?|step(?:s|ped)? down|stepping down",
+      "quote": "q_resign",
+      "after": "O4",
+      "lab": "辭任"
+    },
+    {
+      "rx": "(?i)婚外情|外遇|出軌|不忠|affair|infidelity|unfaithful",
+      "quote": "q_affair",
+      "after": "O2",
+      "lab": "本人承認婚外情"
+    }
+  ]
+}
