@@ -1,28 +1,6 @@
 {
  "dead": {},
  "count": {
-  "2026-11-04": {
-   "gemini-3.5-flash-lite": {
-    "req": 16,
-    "tok": 72397
-   },
-   "gemini-3.1-flash-lite": {
-    "req": 8,
-    "tok": 31569
-   },
-   "gemini-2.5-flash-lite": {
-    "req": 4,
-    "tok": 0
-   },
-   "gemini-flash-lite-latest": {
-    "req": 4,
-    "tok": 5431
-   },
-   "gemini-3.1-flash-lite-preview": {
-    "req": 1,
-    "tok": 11577
-   }
-  },
   "2026-11-05": {
    "gemini-3.5-flash-lite": {
     "req": 24,
@@ -112,16 +90,18 @@
     "req": 1,
     "tok": 10706
    }
+  },
+  "2026-11-14": {
+   "gemini-3.5-flash-lite": {
+    "req": 1,
+    "tok": 1069
+   }
   }
  },
  "tpm": [
   [
-   1794628159.2210405,
-   2590
-  ],
-  [
-   1794628160.7913363,
-   1312
+   1794700482.1464458,
+   1069
   ]
  ]
 }
