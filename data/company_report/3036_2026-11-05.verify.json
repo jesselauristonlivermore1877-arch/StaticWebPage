@@ -2,7 +2,7 @@
  "file": "3036_2026-11-05.md",
  "code": "3036",
  "date": "2026-11-05",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,10 +18,18 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 7.96 倍，站上資料 10.0103"
+   }
+  ],
   "checked": [
+   "close",
    "eps_q",
+   "mcap",
+   "pe_ttm",
    "rev_m"
   ]
  },

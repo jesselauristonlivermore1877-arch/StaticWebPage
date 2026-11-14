@@ -1,0 +1,625 @@
+{
+"meta": {
+"at": "2026-11-15",
+"n": 19,
+"status": {
+"待年報": 8,
+"待財報": 5,
+"超過": 1,
+"達成": 2,
+"待公布": 1,
+"進度超前": 2
+},
+"n_transcripts": 65,
+"note": "法說目標帳本：原話逐字取自官方逐字稿；對帳數字由程式從 MOPS 月營收、綜合損益表算，第二份資料重算核對；非投資建議"
+},
+"items": {
+"2301|2026-10-30|資本支出|2026": {
+"key": "2301|2026-10-30|資本支出|2026",
+"code": "2301",
+"name": "光寶科",
+"date": "2026-10-30",
+"who": "財務長 林進中",
+"anchor": "35:23",
+"quote": "Capex 原先提過今年大約 180 億，因為最近的額外佈局，今年 Capex 支出會提升到 197 億。",
+"metric": "資本支出",
+"period": "2026",
+"lo": 197.0,
+"hi": 197.0,
+"unit": "億元",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "待年報",
+"rows": [
+[
+"年度資本支出",
+"要等 2026 年報現金流量表",
+""
+]
+]
+}
+},
+"2351|2026-08-25|資本支出|2026": {
+"key": "2351|2026-08-25|資本支出|2026",
+"code": "2351",
+"name": "順德",
+"date": "2026-08-25",
+"who": "發言人",
+"anchor": "16:41",
+"quote": "我們原本預估大概今年資本支出大概會有 13 億啦，不過剛剛有提到說我們近期因為客戶比較確認的訊號，所以我們有多下沖床以及 CNC 的機台數，所以目前應該會往 14 億的方向。",
+"metric": "資本支出",
+"period": "2026",
+"lo": 14.0,
+"hi": 14.0,
+"unit": "億元",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "待年報",
+"rows": [
+[
+"年度資本支出",
+"要等 2026 年報現金流量表",
+""
+]
+]
+}
+},
+"2409|2026-10-29|資本支出|2026": {
+"key": "2409|2026-10-29|資本支出|2026",
+"code": "2409",
+"name": "友達",
+"date": "2026-10-29",
+"who": "董事長彭双浪",
+"anchor": "00:14:10",
+"quote": "今年的董事會已經累計通過新增超過 240 億的資本支出，今天董事會再通過 57 億元。",
+"metric": "資本支出",
+"period": "2026",
+"lo": 240.0,
+"hi": 240.0,
+"unit": "億元",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "待年報",
+"rows": [
+[
+"年度資本支出",
+"要等 2026 年報現金流量表",
+""
+]
+]
+}
+},
+"2451|2026-11-06|毛利率|2026Q4": {
+"key": "2451|2026-11-06|毛利率|2026Q4",
+"code": "2451",
+"name": "創見",
+"date": "2026-11-06",
+"who": "董事長",
+"anchor": "00:25:01",
+"quote": "我們過去在沒有漲價之前，毛利率大概在30到40之間，所以我想我們第四季或者明年第一季應該還是維持在30到40之間，這才是我們正常因為經營效率產生的獲利，而不是因為零件漲價產生的利潤。",
+"metric": "毛利率",
+"period": "2026Q4",
+"lo": 30.0,
+"hi": 40.0,
+"unit": "%",
+"better": "high",
+"first_seen": "2026-11-14",
+"check": {
+"status": "待財報",
+"rows": [
+[
+"2026Q4 財報",
+"還沒公布",
+"data/is_hist.json"
+]
+]
+}
+},
+"2454|2026-07-31|單季營收|2026Q3": {
+"key": "2454|2026-07-31|單季營收|2026Q3",
+"code": "2454",
+"name": "聯發科",
+"date": "2026-07-31",
+"who": "執行長 Rick Tsai",
+"anchor": "第 2 頁",
+"quote": "We expect our third quarter revenue to be in the range of NT$152.2 billion dollars to NT$159.8 billion dollars, flat to up 5% sequentially, and up 7% to 12% year-over-year at a forecasted exchange rate of 32 NT dollars to 1 US dollar.",
+"metric": "單季營收",
+"period": "2026Q3",
+"lo": 152.2,
+"hi": 159.8,
+"unit": "十億元",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "超過",
+"actual": 168.06,
+"diff": 8.26,
+"rows": [
+[
+"2026Q3 營收（月營收相加）",
+168.06,
+"MOPS 月營收彙總 7～9 月（data/mrev_hist.json，千元 → 十億元）"
+],
+[
+"2026Q3 營收（第二份）",
+168.06,
+"MOPS 綜合損益表 is_hist.json 累計相減"
+]
+],
+"announce": "2026-10-10",
+"announce_why": "該季最後一個月營收法定公布期限（次月 10 日，實際可能更早）",
+"reaction": {
+"day": "2026-10-10",
+"base": "2026-10-08",
+"n": {
+"1": {
+"rel": -1.36,
+"stk": -1.39,
+"mkt": -0.02,
+"end": "2026-10-12",
+"checked": "個股 daily.npz＝stock_bars、指數 taiex_ohlc＝taiex_series"
+},
+"5": {
+"rel": -4.92,
+"stk": -9.38,
+"mkt": -4.47,
+"end": "2026-10-16",
+"checked": "個股 daily.npz＝stock_bars、指數 taiex_ohlc＝taiex_series"
+},
+"20": {
+"rel": -4.95,
+"stk": -18.34,
+"mkt": -13.39,
+"end": "2026-11-10",
+"checked": "個股 daily.npz＝stock_bars、指數 taiex_ohlc＝taiex_series"
+}
+}
+}
+}
+},
+"2454|2026-07-31|毛利率|2026Q3": {
+"key": "2454|2026-07-31|毛利率|2026Q3",
+"code": "2454",
+"name": "聯發科",
+"date": "2026-07-31",
+"who": "執行長 Rick Tsai",
+"anchor": "第 2 頁",
+"quote": "Gross margin is forecasted at 46%, plus or minus 1.5 percentage points, and operating expense ratio is forecasted at 31%, plus or minus 2 percentage points.",
+"metric": "毛利率",
+"period": "2026Q3",
+"lo": 44.5,
+"hi": 47.5,
+"unit": "%",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "達成",
+"actual": 46.32,
+"diff": 0,
+"rows": [
+[
+"2026Q3 毛利率（財報）",
+"46.32%",
+"MOPS 綜合損益表 is_hist.json（毛利 ÷ 營收）"
+],
+[
+"公司口述（第二份）",
+"46.3%",
+"2026-10-30 法說 第 1 頁"
+]
+]
+}
+},
+"2454|2026-07-31|營業費用率|2026Q3": {
+"key": "2454|2026-07-31|營業費用率|2026Q3",
+"code": "2454",
+"name": "聯發科",
+"date": "2026-07-31",
+"who": "執行長 Rick Tsai",
+"anchor": "第 2 頁",
+"quote": "Gross margin is forecasted at 46%, plus or minus 1.5 percentage points, and operating expense ratio is forecasted at 31%, plus or minus 2 percentage points.",
+"metric": "營業費用率",
+"period": "2026Q3",
+"lo": 29.0,
+"hi": 33.0,
+"unit": "%",
+"better": "low",
+"first_seen": "2026-11-09",
+"check": {
+"status": "達成",
+"actual": 30.2,
+"diff": 0,
+"rows": [
+[
+"2026Q3 營業費用率（財報）",
+"30.20%",
+"MOPS 綜合損益表 is_hist.json（毛利 − 營益 ÷ 營收）"
+]
+]
+}
+},
+"2454|2026-10-30|單季營收|2026Q4": {
+"key": "2454|2026-10-30|單季營收|2026Q4",
+"code": "2454",
+"name": "聯發科",
+"date": "2026-10-30",
+"who": "執行長 Rick Tsai",
+"anchor": "第 2 頁",
+"quote": "We expect our fourth quarter revenue to be in the range of NT$210.1 billion dollars to NT$221.8 billion dollars, grow 25% to 32% sequentially, and up 40% to 48% year-over-year at a forecasted exchange rate of 31.7 NT dollars to 1 US dollar.",
+"metric": "單季營收",
+"period": "2026Q4",
+"lo": 210.1,
+"hi": 221.8,
+"unit": "十億元",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "待公布",
+"rows": [
+[
+"月營收",
+"2026 年 10～12 月還沒全部公布",
+"data/mrev_hist.json"
+]
+]
+}
+},
+"2454|2026-10-30|毛利率|2026Q4": {
+"key": "2454|2026-10-30|毛利率|2026Q4",
+"code": "2454",
+"name": "聯發科",
+"date": "2026-10-30",
+"who": "執行長 Rick Tsai",
+"anchor": "第 2 頁",
+"quote": "Gross margin is forecasted at 45%, plus or minus 1.5 percentage points, and operating expense ratio is forecasted at 26%, plus or minus 2 percentage points.",
+"metric": "毛利率",
+"period": "2026Q4",
+"lo": 43.5,
+"hi": 46.5,
+"unit": "%",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "待財報",
+"rows": [
+[
+"2026Q4 財報",
+"還沒公布",
+"data/is_hist.json"
+]
+]
+}
+},
+"2454|2026-10-30|營業費用率|2026Q4": {
+"key": "2454|2026-10-30|營業費用率|2026Q4",
+"code": "2454",
+"name": "聯發科",
+"date": "2026-10-30",
+"who": "執行長 Rick Tsai",
+"anchor": "第 2 頁",
+"quote": "Gross margin is forecasted at 45%, plus or minus 1.5 percentage points, and operating expense ratio is forecasted at 26%, plus or minus 2 percentage points.",
+"metric": "營業費用率",
+"period": "2026Q4",
+"lo": 24.0,
+"hi": 28.0,
+"unit": "%",
+"better": "low",
+"first_seen": "2026-11-09",
+"check": {
+"status": "待財報",
+"rows": [
+[
+"2026Q4 財報",
+"還沒公布",
+"data/is_hist.json"
+]
+]
+}
+},
+"3017|2026-11-10|資本支出|2026": {
+"key": "3017|2026-11-10|資本支出|2026",
+"code": "3017",
+"name": "奇鋐",
+"date": "2026-11-10",
+"who": "財務長 的問題",
+"anchor": "00:42:39",
+"quote": "那我們今年度預計的total的Capex會是150億左右。",
+"metric": "資本支出",
+"period": "2026",
+"lo": 150.0,
+"hi": 150.0,
+"unit": "億元",
+"better": "high",
+"first_seen": "2026-11-11",
+"check": {
+"status": "待年報",
+"rows": [
+[
+"年度資本支出",
+"要等 2026 年報現金流量表",
+""
+]
+]
+}
+},
+"3707|2026-10-07|下半年營收較上半年|2026H2": {
+"key": "3707|2026-10-07|下半年營收較上半年|2026H2",
+"code": "3707",
+"name": "漢磊",
+"date": "2026-10-07",
+"who": "總經理 你們好",
+"anchor": "26:52",
+"quote": "所以以revenue來看的話，下半年看起來好像是flat，跟上半年比是flat，大概3到5%成長而已，但是我想這是我們等下會報告為什麼，其實應該要有更好的成長。",
+"metric": "下半年營收較上半年",
+"period": "2026H2",
+"lo": 3.0,
+"hi": 5.0,
+"unit": "%",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "進度超前",
+"rows": [
+[
+"上半年營收",
+"33.30 億元",
+"MOPS 月營收彙總 1～6 月"
+],
+[
+"下半年已公布（7～9 月）",
+"19.70 億元（已達下緣目標的 57%）",
+"MOPS 月營收彙總"
+],
+[
+"剩下 3 個月合計需",
+"14.59 億元以上",
+"上半年 × (1＋3%) − 已公布"
+]
+]
+}
+},
+"4979|2026-08-28|資本支出|2027": {
+"key": "4979|2026-08-28|資本支出|2027",
+"code": "4979",
+"name": "華星光",
+"date": "2026-08-28",
+"who": "簡特助",
+"anchor": "31:21",
+"quote": "27年的資本支出保守估計會超過30億台幣，還是延續廠房、無塵室跟設備的擴增。",
+"metric": "資本支出",
+"period": "2027",
+"lo": 30.0,
+"hi": 30.0,
+"unit": "億元",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "待年報",
+"rows": [
+[
+"年度資本支出",
+"要等 2027 年報現金流量表",
+""
+]
+]
+}
+},
+"4991|2026-11-03|毛利率|2026Q4": {
+"key": "4991|2026-11-03|毛利率|2026Q4",
+"code": "4991",
+"name": "環宇-KY",
+"date": "2026-11-03",
+"who": "CFO Claire",
+"anchor": "05:32",
+"quote": "Gross margin的部分也因為我們的主力產品仍然放在AOC，因此gross margin我們預期可以達到46到50%區間。",
+"metric": "毛利率",
+"period": "2026Q4",
+"lo": 46.0,
+"hi": 50.0,
+"unit": "%",
+"better": "high",
+"first_seen": "2026-11-14",
+"check": {
+"status": "待財報",
+"rows": [
+[
+"2026Q4 財報",
+"還沒公布",
+"data/is_hist.json"
+]
+]
+}
+},
+"6173|2026-09-10|資本支出|2026": {
+"key": "6173|2026-09-10|資本支出|2026",
+"code": "6173",
+"name": "信昌電",
+"date": "2026-09-10",
+"who": "陳純賢",
+"anchor": "03:35",
+"quote": "另外一個是今年投資的，資本支出將近15億，直接在我們的楊梅二廠，未來我們會主要去生產高壓、低損耗還有高溫穩定型的MLCC，也是一樣在明年的7月就會開始量產。",
+"metric": "資本支出",
+"period": "2026",
+"lo": 15.0,
+"hi": 15.0,
+"unit": "億元",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "待年報",
+"rows": [
+[
+"年度資本支出",
+"要等 2026 年報現金流量表",
+""
+]
+]
+}
+},
+"6271|2026-10-30|毛利率|2026Q4": {
+"key": "6271|2026-10-30|毛利率|2026Q4",
+"code": "6271",
+"name": "同欣電",
+"date": "2026-10-30",
+"who": "呂紹萍",
+"anchor": "29:18",
+"quote": "毛利率的看法就是剛剛跟各位報告的30到35之間，這個我們應該是沒有問題的。",
+"metric": "毛利率",
+"period": "2026Q4",
+"lo": 30.0,
+"hi": 35.0,
+"unit": "%",
+"better": "high",
+"first_seen": "2026-11-14",
+"check": {
+"status": "待財報",
+"rows": [
+[
+"2026Q4 財報",
+"還沒公布",
+"data/is_hist.json"
+]
+]
+}
+},
+"6691|2026-11-06|全年營收年增率|2026": {
+"key": "6691|2026-11-06|全年營收年增率|2026",
+"code": "6691",
+"name": "洋基工程",
+"date": "2026-11-06",
+"who": "劉士元",
+"anchor": "00:51:30",
+"quote": "所以總體預計 呃 26 年的營收應該 呃 將算起來，應該可以比 25 年大約成長大約將近就是 100% 的這個數字左右。",
+"metric": "全年營收年增率",
+"period": "2026",
+"lo": 100.0,
+"hi": 100.0,
+"unit": "%",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "進度超前",
+"actual": 113.03,
+"rows": [
+[
+"2026 年 1～9 月營收年增率",
+"113.0%",
+"MOPS 月營收彙總（data/mrev_hist.json）2026 年與 2025 年同期相加"
+],
+[
+"要達到目標下緣，剩下 3 個月合計需",
+"119.5 億元（去年同期 69.7 億元，年增 71.3%）",
+"（去年全年 × (1＋100%) − 今年已公布）"
+]
+]
+}
+},
+"6781|2026-11-06|資本支出|2026": {
+"key": "6781|2026-11-06|資本支出|2026",
+"code": "6781",
+"name": "AES-KY",
+"date": "2026-11-06",
+"who": "財務長 Amy Zhang",
+"anchor": "35:40",
+"quote": "2026年資本支出大概是台幣6億元，預計明年度資本支出預算大概在8到10億元。",
+"metric": "資本支出",
+"period": "2026",
+"lo": 6.0,
+"hi": 6.0,
+"unit": "億元",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "待年報",
+"rows": [
+[
+"年度資本支出",
+"要等 2026 年報現金流量表",
+""
+]
+]
+}
+},
+"6781|2026-11-06|資本支出|2027": {
+"key": "6781|2026-11-06|資本支出|2027",
+"code": "6781",
+"name": "AES-KY",
+"date": "2026-11-06",
+"who": "財務長 Amy Zhang",
+"anchor": "35:40",
+"quote": "2026年資本支出大概是台幣6億元，預計明年度資本支出預算大概在8到10億元。",
+"metric": "資本支出",
+"period": "2027",
+"lo": 8.0,
+"hi": 10.0,
+"unit": "億元",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "待年報",
+"rows": [
+[
+"年度資本支出",
+"要等 2027 年報現金流量表",
+""
+]
+]
+}
+},
+"6510|2026-10-28|資本支出|2026": {
+"key": "6510|2026-10-28|資本支出|2026",
+"code": "6510",
+"name": "精測",
+"date": "2026-10-28",
+"who": "CFO",
+"anchor": "00:23:49",
+"quote": "今年機台設備CapEx由3億調整為4億，廠房修繕工程款由5000萬調整到1億，今年CapEx投資是5億。",
+"metric": "資本支出",
+"period": "2026",
+"lo": 5.0,
+"hi": 5.0,
+"unit": "億元",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "待年報",
+"rows": [
+[
+"年度資本支出",
+"要等 2026 年報現金流量表",
+""
+]
+]
+}
+},
+"6510|2026-10-28|毛利率|2026Q4": {
+"key": "6510|2026-10-28|毛利率|2026Q4",
+"code": "6510",
+"name": "精測",
+"date": "2026-10-28",
+"who": "CFO",
+"anchor": "00:37:43",
+"quote": "第四季是有可能回歸到長期目標50到55%，取決於product mix影響，新產品Burn-in Board銷售初期毛利率低於公司平均。",
+"metric": "毛利率",
+"period": "2026Q4",
+"lo": 50.0,
+"hi": 55.0,
+"unit": "%",
+"better": "high",
+"first_seen": "2026-11-09",
+"check": {
+"status": "待財報",
+"rows": [
+[
+"2026Q4 財報",
+"還沒公布",
+"data/is_hist.json"
+]
+]
+}
+}
+}
+}
