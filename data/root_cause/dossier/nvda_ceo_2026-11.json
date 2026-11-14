@@ -40,6 +40,24 @@
       "date_us": "2026-11-12",
       "src": "NVIDIA 執行長異動新聞稿（官方新聞室）",
       "title": "NVIDIA Announces CEO Transition"
+    },
+    {
+      "id": "O5",
+      "u": "https://www.mha.gov.sg/media-room/newsroom/clarification-statement-on-wall-street-journals-article/",
+      "date_us": "2026-10-31",
+      "date_lab": "新加坡日期",
+      "timeline": false,
+      "src": "新加坡內政部澄清聲明（官方）",
+      "title": "Clarification Statement on Wall Street Journal’s Article"
+    },
+    {
+      "id": "O6",
+      "u": "https://www.mha.gov.sg/media-room/newsroom/singapore-investigations-into-alice-huang-huang-le-and-megaspeed-international-pte-ltd/",
+      "date_us": "2026-11-12",
+      "date_lab": "新加坡日期",
+      "timeline": false,
+      "src": "新加坡內政部聲明（官方）",
+      "title": "Singapore’s Investigations into Alice Huang (Huang Le) and Megaspeed International Pte Ltd"
     }
   ],
   "quotes": {
@@ -97,6 +115,16 @@
       "doc": "O4",
       "quote": "will report its third-quarter fiscal 2027 financial results on Tuesday, November 17",
       "zh": "第三季（2027 會計年度）財報照原訂 11/17（美國時間週二）公布。"
+    },
+    "q_sg_clar": {
+      "doc": "O5",
+      "quote": "neither the Singapore Government nor its officials said this. And there were no such investigations conducted in respect of Alice Huang",
+      "zh": "新加坡內政部澄清：《華爾街日報》引述「新加坡官員擔憂、並曾調查該名女商人與中國關係」，新加坡政府與官員從未這樣說，也沒有做過這樣的調查。"
+    },
+    "q_sg_noesp": {
+      "doc": "O6",
+      "quote": "Huang was not based in Singapore, and was not investigated for espionage",
+      "zh": "新加坡內政部：該名女商人在新加坡被調查的是伺服器採購不實申報相關罪嫌，並未因間諜罪被調查。"
     }
   },
   "no_reason_rx": "(?i)unfaithful|affair|foreign intelligence|investigation|national security",
@@ -117,7 +145,8 @@
         "q_target",
         "q_nocomp",
         "q_counsel",
-        "q_email_ns"
+        "q_email_ns",
+        "q_sg_noesp"
       ],
       "media_rows": [
         {
@@ -270,6 +299,110 @@
       "quote": "q_affair",
       "after": "O2",
       "lab": "本人承認婚外情"
+    }
+  ],
+  "rumors": [
+    {
+      "key": "behind_hunt",
+      "title": "逼黃仁勳辭職幕後黑手浮出水面？全部線索都指向他！",
+      "u": "https://tw.news.yahoo.com/%E9%80%BC%E9%BB%83%E4%BB%81%E5%8B%B3%E8%BE%AD%E8%81%B7%E5%B9%95%E5%BE%8C%E9%BB%91%E6%89%8B%E6%B5%AE%E5%87%BA%E6%B0%B4%E9%9D%A2-%E5%85%A8%E9%83%A8%E7%B7%9A%E7%B4%A2%E9%83%BD%E6%8C%87%E5%90%91%E4%BB%96-035813152.html",
+      "pub": "2026-11-14 12:05",
+      "orig_kws": [
+        "Who Is Really Behind the Hunt for Jensen Huang",
+        "X 用戶"
+      ],
+      "orig": "台灣好報編譯自 X 平台個人用戶 2026-11-12 的長文（文末註明「僅代表作者觀點」）",
+      "summary": "文章把逼退黃仁勳的輿論攻勢，歸因於 AI 公司 Anthropic 透過人脈、政治捐款與媒體關係在幕後推動；並把華府對中國強硬派、部分議員、智庫與媒體記者跟該公司的交集列為「線索」。原作者自己也寫：這些聯繫是否構成有組織的輿論行動，不能僅憑人員交集和政治捐款得出結論。",
+      "note": "本區只呈現查證結果：核心指控與大部分線索沒有官方或權威媒體證實；有官方紀錄核到的，只代表那一件事屬實，不代表指控成立。不點名個人。",
+      "clues": [
+        {
+          "text": "核心指控：該公司是逼退黃仁勳的幕後推手",
+          "why": "沒有任何官方或權威媒體報導支持；原作者也承認無法據此下結論。"
+        },
+        {
+          "text": "最早報導間諜疑雲的記者，長期引用該公司一位共同創辦人當消息來源",
+          "why": "原作者自己的推論；查不到權威媒體報導。"
+        },
+        {
+          "text": "公開批評黃仁勳的一位參議員、公開要求他辭職的一位參議員、要求他向國會說明的眾院委員會主席，2026 年 7 月都收過該公司政治行動委員會的捐款",
+          "why": "捐款紀錄屬實（美國聯邦選舉委員會官方資料），但同一個委員會同期捐款給兩黨數十個對象；捐款跟他們對黃仁勳的立場有沒有關係，沒有任何證據，未證實。",
+          "check": {
+            "type": "fec",
+            "committee": "C00946111",
+            "src": "美國聯邦選舉委員會（FEC）官方申報資料",
+            "u": "https://www.fec.gov/data/committee/C00946111/",
+            "recipients": [
+              {
+                "name": "CHRIS COONS FOR DELAWARE",
+                "amount": 2500,
+                "role": "公開批評的參議員"
+              },
+              {
+                "name": "CRAMER FOR SENATE",
+                "amount": 1000,
+                "role": "要求辭職的參議員"
+              },
+              {
+                "name": "MAST FOR CONGRESS",
+                "amount": 2500,
+                "role": "眾院外交委員會主席"
+              }
+            ]
+          }
+        },
+        {
+          "text": "該公司一位共同創辦人個人捐款 5,000 美元給該政治行動委員會",
+          "why": "捐款紀錄屬實（FEC 官方資料）；跟黃仁勳事件的關聯未證實。",
+          "check": {
+            "type": "fec",
+            "committee": "C00946111",
+            "src": "美國聯邦選舉委員會（FEC）官方申報資料",
+            "u": "https://www.fec.gov/data/committee/C00946111/",
+            "contributors": [
+              {
+                "q": "clark",
+                "amount": 5000,
+                "role": "共同創辦人個人捐款（收入）"
+              }
+            ]
+          }
+        },
+        {
+          "text": "公開反對黃仁勳的多位人士，跟同一所大學的研究中心、同一個基金會有交集",
+          "why": "原作者整理的人脈關係；查不到權威媒體報導，本站不逐一追查個人經歷。"
+        },
+        {
+          "text": "推動戀情報導的某財經報記者，所屬媒體先前曾拿到該公司的獨家消息",
+          "why": "原作者推論；「拿到獨家」不代表有利益關係，查不到權威媒體報導。"
+        },
+        {
+          "text": "一則粉絲約 1.2 萬的 X 貼文獲得 900 萬次瀏覽，成為輿論風暴中心",
+          "why": "X 平台數字本站不抓、無法核對。"
+        },
+        {
+          "text": "該公司投入約 4,000 萬美元給一個倡議 AI 晶片出口管制的政治組織",
+          "why": "這類組織不向 FEC 申報捐款來源；查不到權威媒體報導，未證實。"
+        },
+        {
+          "text": "新加坡政府否認《華爾街日報》「新加坡官員擔憂、並調查該名女商人與中國關係」的說法",
+          "why": "這一條官方核到；但它只證明新加坡沒說過、也沒查過間諜嫌疑，不能推出「有人在幕後操縱」。",
+          "check": {
+            "type": "official",
+            "quotes": [
+              "q_sg_clar",
+              "q_sg_noesp"
+            ]
+          }
+        },
+        {
+          "text": "多名美國兩黨前政府官員加入該公司",
+          "why": "人事資料本站未逐一查證；就算屬實，也不代表跟本事件有關。"
+        },
+        {
+          "text": "輝達市值蒸發後，該公司即將以約 610 億美元估值上市",
+          "why": "查不到官方公告或權威媒體報導，未證實。"
+        }
+      ]
     }
   ]
 }

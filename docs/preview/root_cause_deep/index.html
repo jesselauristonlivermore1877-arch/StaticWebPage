@@ -92,7 +92,7 @@ tr.rd-f-ev td{background:var(--badb)}
     const A = (u, t) => `<a href="${esc(u)}" target="_blank" rel="noopener nofollow">${esc(t)}</a>`;
     const conf = r => r.conf ? `<span class="rd-f-tag">官方已證實：${esc(r.conf.split("、").map(x => x.replace("官方已證實：", "")).join("、"))}（其餘為媒體報導）</span>` : "";
     const med = r => `<li><span class="rd-t">${esc(r.t)}</span>${esc(r.text)}${conf(r)}<div class="rd-src">${A(r.u, r.src)}・權威媒體・${esc(r.check || "")}</div></li>`;
-    const offq = o => `<div class="rd-f-off">${badge("已證實")}${esc(o.zh)}<details><summary>官方原文（程式逐字核對）</summary>“${esc(o.quote)}” — ${A(o.u, o.src)}${o.date_us ? "（美國日期 " + esc(o.date_us) + "）" : ""}</details></div>`;
+    const offq = o => `<div class="rd-f-off">${badge("已證實")}${esc(o.zh)}<details><summary>官方原文（程式逐字核對）</summary>“${esc(o.quote)}” — ${A(o.u, o.src)}${o.date_us ? "（" + esc(o.date_lab || "美國日期") + " " + esc(o.date_us) + "）" : ""}</details></div>`;
     h += `<section><h2>事件完整版<small>傳聞 → 董事會 → 官方宣布 → 接任安排；官方原文核到 ${F.official_n}／${F.official_total} 句・產出 ${esc((F.built || "").replace("T", " "))}</small></h2>`;
     let cur = "";
     for (const r of F.timeline || []) {
@@ -111,6 +111,21 @@ tr.rd-f-ev td{background:var(--badb)}
         <div class="rd-lab m">權威媒體報導</div><p class="rd-f-q">證據池裡共 ${c.media_n} 則、${c.media_src_n} 家權威媒體。${c.earliest ? `最早一則：${esc(c.earliest.t)}・${A(c.earliest.u, c.earliest.src)}` : ""}</p>
         <ul class="rd-f-ul">${(c.media || []).map(med).join("")}</ul></div>`).join("") + `</div>` +
       (F.cause_link ? `<div class="rd-f-key"><b>辭任跟這兩條起因的關係：</b>${esc(F.cause_link.text)}<div class="rd-src">${A(F.cause_link.u, F.cause_link.src)}（程式查新聞稿全文）</div></div>` : "") + `</section>`;
+    // 市場傳聞（未證實）：逐條查證
+    for (const R of F.rumors || []) {
+      const st = c => c.status === "官方核到" || c.status === "官方紀錄核到" ? `<span class="rd-g g1">${esc(c.status)}</span>` : c.status === "權威媒體有報導" ? '<span class="rd-g g2">權威媒體有報導</span>' : '<span class="rd-g no">未證實</span>';
+      const S = R.src || {};
+      h += `<section><h2>市場傳聞（未證實）<small>非權威來源的說法，只列查證結果；不用肯定語氣、不點名個人</small></h2>
+        <div class="rd-f-card"><h3>據${esc(S.provider || "網路媒體")}報導「${esc(R.title)}」，官方未證實</h3>
+        <p class="rd-f-q">來源：${A(R.u, (S.provider || "") + "（Yahoo 新聞轉載）")}・${esc(R.pub || "")}・${esc(R.orig || "")}。${S.provider ? `「${esc(S.provider)}」${S.authority ? "在" : "<b>不在</b>"}本站共用權威名單。` : ""}</p>
+        <div class="rd-f-key" style="margin:0 0 8px"><b>傳聞內容摘要：</b>${esc(R.summary)}</div>
+        <div class="rd-lab m">文中線索逐條查證（${R.clues.length} 條；${R.clues.filter(c => c.status !== "未證實").length} 條有官方或權威出處）</div><ul class="rd-f-ul">` +
+        R.clues.map(c => `<li>${st(c)} ${esc(c.text)}<div class="rd-f-q" style="margin:2px 0 0">${esc(c.why)}</div>` +
+          (c.official || []).map(o => `<div class="rd-src">“${esc(o.quote)}” — ${A(o.u, o.src)}（${esc(o.date_lab || "")} ${esc(o.date_us || "")}）</div>`).join("") +
+          (c.fec ? `<div class="rd-src">${(c.fec.rows || []).map(x => `${esc(x.who)}：${x.amount.toLocaleString()} 美元（${esc(x.date)}）`).join("；")}${c.fec.ctx ? `。同一委員會同期直接捐款共 ${c.fec.ctx.n} 筆、${c.fec.ctx.sum.toLocaleString()} 美元${c.fec.ctx.both ? "，兩黨都有" : ""}` : ""}${c.fec.err ? "（FEC 查詢失敗：" + esc(c.fec.err) + "）" : ""} — ${A(c.fec.u, c.fec.src)}</div>` : "") +
+          (c.media || []).map(m => `<div class="rd-src">${esc(m.t)} ${A(m.u, m.src)}：${esc(m.text)}</div>`).join("") + `</li>`).join("") +
+        `</ul><p class="rd-note">${esc(R.note || "")}</p></div></section>`;
+    }
     // 影響路徑
     const M = F.market || {}, T = M.tw || {}, V = F.valuation || {};
     const pdata = p => p.data === "tw" && T.ok ? `<div class="rd-f-key">本站資料：台廠供應鏈 ${T.n} 檔，${esc(T.base)}→${esc(T.days[T.days.length - 1])} 累計漲跌中位數 ${sgn(T.med_cum)}（同期加權指數 ${sgn(T.twii_cum)}）；官方宣布後第一個台股交易日（${esc(T.days[T.days.length - 1])}）上漲 ${T.n_up_last} 檔、下跌 ${T.n_dn_last} 檔。逐檔見下方「市場反應」。</div>`
