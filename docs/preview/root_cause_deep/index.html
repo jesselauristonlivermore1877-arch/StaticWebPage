@@ -116,9 +116,11 @@ tr.rd-f-ev td{background:var(--badb)}
     const pdata = p => p.data === "tw" && T.ok ? `<div class="rd-f-key">本站資料：台廠供應鏈 ${T.n} 檔，${esc(T.base)}→${esc(T.days[T.days.length - 1])} 累計漲跌中位數 ${sgn(T.med_cum)}（同期加權指數 ${sgn(T.twii_cum)}）；官方宣布後第一個台股交易日（${esc(T.days[T.days.length - 1])}）上漲 ${T.n_up_last} 檔、下跌 ${T.n_dn_last} 檔。逐檔見下方「市場反應」。</div>`
       : p.data === "val" && V.ok ? `<div class="rd-f-key">本站資料：${V.n} 檔有法人前瞻 EPS，事件前版本 ${esc(V.base_ver)} 到現在，${V.n_same} 檔沒變、${V.n_moved} 檔有變（見下方「前瞻估值」）。到目前為止，看不到法人因為這件事集體下修台廠前瞻 EPS。</div>`
       : `<div class="rd-f-key">本站資料：這條路徑沒有可以量化的資料，只列權威報導。</div>`;
-    h += `<section><h2>對台廠供應鏈的影響路徑<small>官方說法＋權威報導＋本站資料；不寫推論、不寫本站目標價或買賣建議</small></h2><div class="rd-f-g3">` +
-      (F.paths || []).map(p => `<div class="rd-f-card"><h3>${esc(p.name)}</h3><p class="rd-f-q">${esc(p.q)}</p>
+    h += `<section><h2>對台廠供應鏈的影響路徑<small>官方說法＋權威報導＋本站資料；不寫推論、不寫本站目標價或買賣建議</small></h2><div class="${(F.paths || []).length === 3 ? "rd-f-g3" : "rd-f-g2"}">` +
+      (F.paths || []).map(p => `<div class="rd-f-card"><h3>${esc(p.name)} ${p.infer ? '<span class="rd-g no">推論・非事實</span>' : ""}</h3><p class="rd-f-q">${esc(p.q)}</p>
+        ${p.note ? `<div class="rd-f-key" style="margin:0 0 6px">${esc(p.note)}</div>` : ""}
         ${(p.official || []).map(offq).join("")}
+        ${(p.kol || []).length ? `<div class="rd-lab m">意見領袖怎麼說（個人觀點、不是事實；原話由程式對逐字稿逐字核對，逐字稿是語音轉寫、可能有錯字）</div><ul class="rd-f-ul">${p.kol.map(k => `<li>${k.lab ? `<span class="rd-f-tag">${esc(k.lab)}</span> ` : ""}「${esc(k.quote)}」<div class="rd-src">${k.u ? A(k.u, k.src + " " + (k.ep || "")) : esc(k.src + " " + (k.ep || ""))}・${esc(k.date || "")}・節目時間 ${esc(k.t)}</div></li>`).join("")}</ul>` : ""}
         <div class="rd-lab m">權威報導（候選 ${p.media_n} 則，列核對通過的 ${p.media.length} 則）</div><ul class="rd-f-ul">${p.media.map(med).join("") || "<li>沒有核對通過的權威報導</li>"}</ul>${pdata(p)}</div>`).join("") +
       `</div><p class="rd-note">報導裡提到的分析師目標價、市值估計，是整理他人公開的說法（標出處與日期），非本站建議。</p></section>`;
     // 市場反應
