@@ -1,64 +1,17 @@
 {
  "dead": {
-  "2026-11-13": {
-   "gemini-3-flash-preview": {
-    "at": "11-13 14:32",
+  "2026-11-14": {
+   "gemini-3.7-flash": {
+    "at": "11-14 11:42",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    },
-   "gemini-omni-flash-preview": {
-    "at": "11-13 14:32",
+   "gemini-3.8-flash": {
+    "at": "11-14 11:48",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    }
   }
  },
  "count": {
-  "2026-11-03": {
-   "gemini-3.6-flash": {
-    "req": 2,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-3.5-flash": {
-    "req": 1,
-    "tok": 89947,
-    "e429": 1
-   },
-   "gemini-2.5-flash": {
-    "req": 5,
-    "tok": 0
-   },
-   "gemini-flash-latest": {
-    "req": 3,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-omni-flash-preview": {
-    "req": 0,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-3.5-flash-lite": {
-    "req": 67,
-    "tok": 2045290
-   },
-   "gemini-3-flash-preview": {
-    "req": 13,
-    "tok": 295088,
-    "e429": 1
-   },
-   "gemini-3.1-flash-lite": {
-    "req": 8,
-    "tok": 258429
-   },
-   "gemini-2.5-flash-lite": {
-    "req": 1,
-    "tok": 0
-   },
-   "gemini-flash-lite-latest": {
-    "req": 2,
-    "tok": 96443
-   }
-  },
   "2026-11-04": {
    "gemini-3.8-flash": {
     "req": 7,
@@ -375,28 +328,40 @@
     "req": 6,
     "tok": 394432
    }
+  },
+  "2026-11-14": {
+   "gemini-3.8-flash": {
+    "req": 3,
+    "tok": 27532,
+    "e429": 1
+   },
+   "gemini-3.7-flash": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-3.6-flash": {
+    "req": 8,
+    "tok": 192405
+   }
   }
  },
  "tpm": [
   [
-   1794639818.2584357,
-   27789
+   1794657077.3915322,
+   25154
   ],
   [
-   1794639822.6451287,
-   23900
+   1794657101.3456864,
+   13274
   ],
   [
-   1794639852.7320027,
-   10672
+   1794657112.9315283,
+   11408
   ],
   [
-   1794639859.2833705,
-   11224
-  ],
-  [
-   1794639868.2452748,
-   16323
+   1794657132.2107244,
+   19287
   ]
  ]
 }
