@@ -384,13 +384,13 @@
 },
 {
 "cty": "us",
-"ticker": "TJX",
-"name": "The TJX Companies, Inc."
+"ticker": "BX",
+"name": "Blackstone Inc."
 },
 {
 "cty": "us",
-"ticker": "BX",
-"name": "Blackstone Inc."
+"ticker": "TJX",
+"name": "The TJX Companies, Inc."
 },
 {
 "cty": "us",
@@ -1084,11 +1084,6 @@
 },
 {
 "cty": "de",
-"ticker": "FRE.DE",
-"name": "Fresenius SE & Co. KGaA"
-},
-{
-"cty": "de",
 "ticker": "ADS.DE",
 "name": "adidas AG"
 },
@@ -1101,6 +1096,11 @@
 "cty": "de",
 "ticker": "HLAG.DE",
 "name": "Hapag-Lloyd Aktiengesellschaft"
+},
+{
+"cty": "de",
+"ticker": "EBK.DE",
+"name": "EnBW Energie Baden-Württemberg AG"
 },
 {
 "cty": "fr",
@@ -1159,11 +1159,6 @@
 },
 {
 "cty": "fr",
-"ticker": "CDI.PA",
-"name": "Christian Dior SE"
-},
-{
-"cty": "fr",
 "ticker": "ENGI.PA",
 "name": "Engie SA"
 },
@@ -1214,11 +1209,6 @@
 },
 {
 "cty": "fr",
-"ticker": "PUB.PA",
-"name": "Publicis Groupe S.A."
-},
-{
-"cty": "fr",
 "ticker": "VIE.PA",
 "name": "Veolia Environnement SA"
 },
@@ -1251,6 +1241,16 @@
 "cty": "fr",
 "ticker": "RI.PA",
 "name": "Pernod Ricard SA"
+},
+{
+"cty": "fr",
+"ticker": "EN.PA",
+"name": "Bouygues SA"
+},
+{
+"cty": "fr",
+"ticker": "IPN.PA",
+"name": "Ipsen S.A."
 },
 {
 "cty": "nl",
@@ -1364,13 +1364,13 @@
 },
 {
 "cty": "nl",
-"ticker": "VPK.AS",
-"name": "Koninklijke Vopak N.V."
+"ticker": "IMCD.AS",
+"name": "IMCD N.V."
 },
 {
 "cty": "nl",
-"ticker": "IMCD.AS",
-"name": "IMCD N.V."
+"ticker": "VPK.AS",
+"name": "Koninklijke Vopak N.V."
 },
 {
 "cty": "nl",
@@ -1519,11 +1519,6 @@
 },
 {
 "cty": "it",
-"ticker": "SPM.MI",
-"name": "Saipem SpA"
-},
-{
-"cty": "it",
 "ticker": "CPR.MI",
 "name": "Davide Campari-Milano N.V."
 },
@@ -1551,6 +1546,11 @@
 "cty": "it",
 "ticker": "CE.MI",
 "name": "Credito Emiliano S.p.A."
+},
+{
+"cty": "it",
+"ticker": "BGN.MI",
+"name": "Banca Generali S.p.A."
 },
 {
 "cty": "es",
@@ -1669,11 +1669,6 @@
 },
 {
 "cty": "es",
-"ticker": "FCC.MC",
-"name": "Fomento de Construcciones y Contratas, S.A."
-},
-{
-"cty": "es",
 "ticker": "LOG.MC",
 "name": "Logista Integral, S.A."
 },
@@ -1701,6 +1696,11 @@
 "cty": "es",
 "ticker": "SCYR.MC",
 "name": "Sacyr, S.A."
+},
+{
+"cty": "es",
+"ticker": "CIRSA.MC",
+"name": "Cirsa Enterprises, S.A."
 },
 {
 "cty": "ch",
@@ -1854,7 +1854,7 @@
 },
 {
 "cty": "in",
-"ticker": "RELIANCE.NS",
+"ticker": "RELIANCE.BO",
 "name": "Reliance Industries Limited"
 },
 {
@@ -2324,18 +2324,8 @@
 },
 {
 "cty": "au",
-"ticker": "ANZ.AX",
-"name": "ANZ Group Holdings Limited"
-},
-{
-"cty": "au",
 "ticker": "CSL.AX",
 "name": "CSL Limited"
-},
-{
-"cty": "au",
-"ticker": "MQG.AX",
-"name": "Macquarie Group Limited"
 },
 {
 "cty": "au",
@@ -2359,18 +2349,13 @@
 },
 {
 "cty": "au",
-"ticker": "WOW.AX",
-"name": "Woolworths Group Limited"
-},
-{
-"cty": "au",
 "ticker": "TCL.AX",
 "name": "Transurban Group"
 },
 {
 "cty": "au",
-"ticker": "FMG.AX",
-"name": "Fortescue Ltd"
+"ticker": "TCL.AX",
+"name": "Transurban Group"
 },
 {
 "cty": "au",
@@ -2404,18 +2389,8 @@
 },
 {
 "cty": "au",
-"ticker": "STO.AX",
-"name": "Santos Limited"
-},
-{
-"cty": "au",
 "ticker": "EVN.AX",
 "name": "Evolution Mining Limited"
-},
-{
-"cty": "au",
-"ticker": "CPU.AX",
-"name": "Computershare Limited"
 },
 {
 "cty": "au",
@@ -2453,6 +2428,31 @@
 "name": "Scentre Group"
 },
 {
+"cty": "au",
+"ticker": "SOL.AX",
+"name": "Washington H. Soul Pattinson and Company Limited"
+},
+{
+"cty": "au",
+"ticker": "WTC.AX",
+"name": "WiseTech Global Limited"
+},
+{
+"cty": "au",
+"ticker": "APA.AX",
+"name": "APA Group"
+},
+{
+"cty": "au",
+"ticker": "MPL.AX",
+"name": "Medibank Private Limited"
+},
+{
+"cty": "au",
+"ticker": "QAN.AX",
+"name": "Qantas Airways Limited"
+},
+{
 "cty": "mx",
 "ticker": "AMXB.MX",
 "name": "América Móvil, S.A.B. de C.V."
@@ -2469,11 +2469,6 @@
 },
 {
 "cty": "mx",
-"ticker": "GFNORTEO.MX",
-"name": "Grupo Financiero Banorte, S.A.B. de C.V."
-},
-{
-"cty": "mx",
 "ticker": "AC.MX",
 "name": "Arca Continental, S.A.B. de C.V."
 },
@@ -2486,6 +2481,11 @@
 "cty": "mx",
 "ticker": "BIMBOA.MX",
 "name": "Grupo Bimbo, S.A.B. de C.V."
+},
+{
+"cty": "mx",
+"ticker": "GFINBURO.MX",
+"name": "Grupo Financiero Inbursa, S.A.B. de C.V."
 },
 {
 "cty": "mx",
@@ -3074,8 +3074,8 @@
 },
 {
 "cty": "cn",
-"ticker": "601288.SS",
-"name": "Agricultural Bank of China Limited"
+"ticker": "601988.SS",
+"name": "Bank of China Limited"
 },
 {
 "cty": "cn",
@@ -3094,8 +3094,8 @@
 },
 {
 "cty": "cn",
-"ticker": "600519.SS",
-"name": "Kweichow Moutai Co., Ltd."
+"ticker": "1288.HK",
+"name": "Agricultural Bank of China Limited"
 },
 {
 "cty": "cn",
@@ -3129,11 +3129,6 @@
 },
 {
 "cty": "cn",
-"ticker": "601318.SS",
-"name": "Ping An Insurance (Group) Company of China, Ltd."
-},
-{
-"cty": "cn",
 "ticker": "688981.SS",
 "name": "Semiconductor Manufacturing International Corporation"
 },
@@ -3141,6 +3136,11 @@
 "cty": "cn",
 "ticker": "601138.SS",
 "name": "Foxconn Industrial Internet Co., Ltd."
+},
+{
+"cty": "cn",
+"ticker": "2318.HK",
+"name": "Ping An Insurance (Group) Company of China, Ltd."
 },
 {
 "cty": "cn",
