@@ -1,7 +1,7 @@
 {
- "ver": "20261112a",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261112a/GEA_OM_Setup_20261112a.exe",
- "sha256": "f943577f85040aaff560f1448d30adad92b8549ef94c90099826cd4ea712d0e0",
- "notes": "d16：訊號主機白名單不吃傳送端格式、國票未登入每 30 分 TG、略過與跟單關閉收訊號 TG、真單關跟單一律確認",
- "sig": "bsACRKA5+gcnKEejA6tbAbKHF/2dQAMCyyTGeClgc626sG7bV2j7eI+t7NW5+TA39kA84bUATr/d5GbuI6EYdw=="
+ "ver": "20261115a",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261115a/GEA_OM_Setup_20261115a.exe",
+ "sha256": "5e60641654d7ead4d3639f3a5c022ca562ab33625cd13b4862c3c9f409b8b32d",
+ "notes": "d17：① 國票斷線自動重新登入（3 秒後、每 30 秒、一輪 200 次、10 分鐘再一輪）；② 對不到策略的成交（例：國票 App 手動平倉）會查庫存，跟帳本不符就停該商品跟單並 TG；③ 斷線期間收到訊號逐則 TG，恢復後對帳不一致就停、由您按「補」決定。",
+ "sig": "caFccTxm8IT3vB7uEhJRw1zneLL4O5XejcUGbO/8meAlrQeazq9nK0DLyd/MFT26DdLota5k9sfrdSPqIggVaw=="
 }
