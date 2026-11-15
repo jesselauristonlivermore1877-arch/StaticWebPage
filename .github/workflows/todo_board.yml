@@ -1,0 +1,74 @@
+# todo_board.yml ─ TODO 總表同步（雲端舊1 2026-11-15；Evans 11-15 晚同意「總表自動同步」）
+#
+#   每 30 分鐘（＋手動）讀 CustomerServiceANDSales main 的 TODO.md，
+#   用 tools/todo_slim.py board-html 重產 docs/preview/todo_board/index.html。
+#   頁上的「總表更新時間」＝TODO.md 最後一個 commit 的時間 → TODO 沒變就產出完全相同、不 commit。
+#   不掛進每日戰情更新，失敗不擋上線；只准寫 docs/preview/todo_board/（斷言），其他變動一律失敗、不推。
+name: TODO 總表同步
+
+on:
+  schedule:
+    - cron: "7,37 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: todo-board
+  cancel-in-progress: false
+
+env:
+  OUT_DIR: docs/preview/todo_board/
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: site
+      - uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          ref: main
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+          fetch-depth: 0
+          filter: blob:none
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+
+      - name: 產生總表頁
+        working-directory: code
+        run: |
+          echo "程式：CustomerServiceANDSales @ $(git rev-parse --short HEAD)；TODO.md 最後 commit：$(git log -1 --format='%h %ci' -- TODO.md)"
+          python tools/todo_slim.py board-html ../site
+
+      - name: 斷言只動到 docs/preview/todo_board/
+        working-directory: site
+        run: |
+          git status --porcelain --untracked-files=all > "$RUNNER_TEMP/changed.txt"
+          cat "$RUNNER_TEMP/changed.txt"
+          BAD=$(cut -c4- "$RUNNER_TEMP/changed.txt" | sed 's/ -> /\n/' | sed 's/^"//; s/"$//' | grep -v "^${OUT_DIR}" || true)
+          if [ -n "$BAD" ]; then
+            echo "::error::動到 ${OUT_DIR} 以外的檔案，不提交："; echo "$BAD"; exit 1
+          fi
+
+      - name: 有變才提交
+        working-directory: site
+        run: |
+          if [ -z "$(git status --porcelain -- "$OUT_DIR")" ]; then
+            echo "總表沒變，不提交"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$OUT_DIR"
+          git commit -m "data: TODO 總表同步（$(cd ../code && git log -1 --format='%h' -- TODO.md)）"
+          for i in 1 2 3 4; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep $((i*10))
+          done
+          exit 1
