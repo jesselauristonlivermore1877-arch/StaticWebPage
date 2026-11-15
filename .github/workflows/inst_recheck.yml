@@ -2,7 +2,10 @@
 # inst_recheck.yml ─ 法人買賣超校正（手動，雲端舊7 11-16）
 #   每日班裡已經有「法人隔日校正」一步（自動校正前一交易日）；這支是手動版：乾跑驗證、或指定某幾天校正。
 #   程式＝CustomerServiceANDSales inst_recheck.py（跟 inst.npz／dealer.npz 逐格比，不同就覆寫；抓不完整不寫）。
-#   dates 留空＝用 last（最近幾個交易日）；dry=true 只印不寫。
+#   dates 留空＝用 last（最近幾個交易日）；dates 可寫「起:迄」區間（只取 inst.npz 有的日子）；dry=true 只印不寫。
+#   寫入時一律帶 --guard：外資或自營有任何一格改就停（exit 3）、不寫（【舊】11-16：只有投信不同才寫）。
+#   verify_lag＞0＝驗證模式（重抓最近 N 個交易日、只印不寫，看已隔日校正過的日子是否 0 格改）。
+#   🔴 證交所單一 IP 約 87 發就被擋：一次別超過約 35 天（每天上市一發）。
 # ============================================================================
 name: 法人買賣超校正（手動）
 
@@ -10,7 +13,7 @@ on:
   workflow_dispatch:
     inputs:
       dates:
-        description: "指定日子（逗號分隔 YYYY-MM-DD）；留空用 last"
+        description: "指定日子（逗號分隔 YYYY-MM-DD，或 起:迄 區間）；留空用 last"
         required: false
         default: ""
       last:
@@ -21,6 +24,10 @@ on:
         description: "true＝乾跑只印不寫"
         required: true
         default: "true"
+      verify_lag:
+        description: "驗證隔天是否已是最終版：重抓最近 N 個交易日（只印不寫）；0＝不用"
+        required: false
+        default: "0"
 
 permissions:
   contents: write
@@ -30,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     concurrency:
-      group: ${{ inputs.dry == 'true' && format('inst-recheck-dry-{0}', github.run_id) || 'daily-build' }}
+      group: ${{ (inputs.dry == 'true' || inputs.verify_lag != '0') && format('inst-recheck-dry-{0}', github.run_id) || 'daily-build' }}
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
@@ -57,14 +64,16 @@ jobs:
           DATES: ${{ inputs.dates }}
           LAST: ${{ inputs.last }}
           DRY: ${{ inputs.dry }}
+          LAG: ${{ inputs.verify_lag }}
         run: |
+          if [ "${LAG:-0}" != "0" ]; then python inst_recheck.py ../site/data --verify-lag "$LAG"; exit $?; fi
           A=""
           if [ -n "$DATES" ]; then A="--date $DATES"; else A="--last $LAST"; fi
-          if [ "$DRY" = "true" ]; then A="$A --dry"; else A="$A --force"; fi
+          if [ "$DRY" = "true" ]; then A="$A --dry"; else A="$A --force --guard"; fi
           python inst_recheck.py ../site/data $A
 
       - name: commit
-        if: inputs.dry != 'true'
+        if: inputs.dry != 'true' && inputs.verify_lag == '0'
         working-directory: site
         run: |
           git config user.name  "github-actions[bot]"
