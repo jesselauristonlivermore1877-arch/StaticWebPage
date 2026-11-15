@@ -1,107 +1,29 @@
 {
  "dead": {
-  "2026-11-14": {
-   "gemini-3.7-flash": {
-    "at": "11-14 11:42",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.8-flash": {
-    "at": "11-14 11:48",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
+  "2026-11-15": {
    "gemini-3.6-flash": {
-    "at": "11-15 07:13",
+    "at": "11-15 11:28",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    },
    "gemini-3.5-flash": {
-    "at": "11-15 07:15",
+    "at": "11-15 11:28",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    },
    "gemini-omni-1.2-flash": {
-    "at": "11-15 07:15",
+    "at": "11-15 11:28",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    },
    "gemini-omni-1.1-flash": {
-    "at": "11-15 07:15",
+    "at": "11-15 11:28",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    },
    "gemini-flash-latest": {
-    "at": "11-15 07:17",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-omni-flash-preview": {
-    "at": "11-15 07:27",
+    "at": "11-15 11:36",
     "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    }
   }
  },
  "count": {
-  "2026-11-04": {
-   "gemini-3.8-flash": {
-    "req": 7,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-3.7-flash": {
-    "req": 7,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-3.6-flash": {
-    "req": 13,
-    "tok": 172971,
-    "e429": 1
-   },
-   "gemini-3.5-flash": {
-    "req": 7,
-    "tok": 178150,
-    "e429": 1
-   },
-   "gemini-2.5-flash": {
-    "req": 2,
-    "tok": 0
-   },
-   "gemini-omni-1.1-flash": {
-    "req": 0,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-flash-latest": {
-    "req": 2,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-3-flash-preview": {
-    "req": 22,
-    "tok": 71345,
-    "e429": 1
-   },
-   "gemini-omni-flash-preview": {
-    "req": 0,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-3.5-flash-lite": {
-    "req": 18,
-    "tok": 358193
-   },
-   "gemini-3.1-flash-lite": {
-    "req": 8,
-    "tok": 12947
-   },
-   "gemini-2.5-flash-lite": {
-    "req": 1,
-    "tok": 0
-   },
-   "gemini-flash-lite-latest": {
-    "req": 5,
-    "tok": 88764
-   },
-   "gemini-3.1-flash-lite-preview": {
-    "req": 4,
-    "tok": 0
-   }
-  },
   "2026-11-06": {
    "gemini-2.5-flash": {
     "req": 1,
@@ -406,20 +328,51 @@
     "req": 1,
     "tok": 10713
    }
+  },
+  "2026-11-15": {
+   "gemini-3.6-flash": {
+    "req": 8,
+    "tok": 220229,
+    "e429": 1
+   },
+   "gemini-3.5-flash": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-2.5-flash": {
+    "req": 1,
+    "tok": 0
+   },
+   "gemini-omni-1.2-flash": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-omni-1.1-flash": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-flash-latest": {
+    "req": 1,
+    "tok": 27787,
+    "e429": 1
+   },
+   "gemini-3-flash-preview": {
+    "req": 1,
+    "tok": 20046
+   }
   }
  },
  "tpm": [
   [
-   1794727654.4239762,
-   10713
+   1794742591.5971303,
+   27787
   ],
   [
-   1794727695.4156897,
-   18704
-  ],
-  [
-   1794727712.0586932,
-   18032
+   1794742608.6650739,
+   20046
   ]
  ]
 }
