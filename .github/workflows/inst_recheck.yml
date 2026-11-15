@@ -3,7 +3,8 @@
 #   每日班裡已經有「法人隔日校正」一步（自動校正前一交易日）；這支是手動版：乾跑驗證、或指定某幾天校正。
 #   程式＝CustomerServiceANDSales inst_recheck.py（跟 inst.npz／dealer.npz 逐格比，不同就覆寫；抓不完整不寫）。
 #   dates 留空＝用 last（最近幾個交易日）；dates 可寫「起:迄」區間（只取 inst.npz 有的日子）；dry=true 只印不寫。
-#   寫入時一律帶 --guard：外資或自營有任何一格改就停（exit 3）、不寫（【舊】11-16：只有投信不同才寫）。
+#   寫入時預設帶 --guard（外資或自營有任何一格改就停、exit 3、不寫）；guard=false 三欄都照現行 T86 寫（【舊】11-16 裁示 09-14～11-12）。
+#   log_csv：寫入前把每格改動存成 CSV；spot：直接抓原始回應核對指定格（只讀）。
 #   verify_lag＞0＝驗證模式（重抓最近 N 個交易日、只印不寫，看已隔日校正過的日子是否 0 格改）。
 #   🔴 證交所單一 IP 約 87 發就被擋：一次別超過約 35 天（每天上市一發）。
 # ============================================================================
@@ -24,6 +25,18 @@ on:
         description: "true＝乾跑只印不寫"
         required: true
         default: "true"
+      guard:
+        description: "寫入時 true＝外資或自營有改就停；false＝三欄都照現行 T86 寫（【舊】11-16 裁示 09-14～11-12 用 false）"
+        required: false
+        default: "true"
+      log_csv:
+        description: "寫入前存每格改動清單的路徑（相對 StaticWebPage，例 data/research/inst_recheck_log/2026-09-14_11-12.csv）；留空不存"
+        required: false
+        default: ""
+      spot:
+        description: "核對指定格（日期:代號:欄，欄＝foreign／trust／self／hedge，逗號分隔）；有填就只做核對、不寫"
+        required: false
+        default: ""
       verify_lag:
         description: "驗證隔天是否已是最終版：重抓最近 N 個交易日（只印不寫）；0＝不用"
         required: false
@@ -37,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     concurrency:
-      group: ${{ (inputs.dry == 'true' || inputs.verify_lag != '0') && format('inst-recheck-dry-{0}', github.run_id) || 'daily-build' }}
+      group: ${{ (inputs.dry == 'true' || inputs.verify_lag != '0' || inputs.spot != '') && format('inst-recheck-dry-{0}', github.run_id) || 'daily-build' }}
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
@@ -65,20 +78,26 @@ jobs:
           LAST: ${{ inputs.last }}
           DRY: ${{ inputs.dry }}
           LAG: ${{ inputs.verify_lag }}
+          GUARD: ${{ inputs.guard }}
+          LOGCSV: ${{ inputs.log_csv }}
+          SPOT: ${{ inputs.spot }}
         run: |
+          if [ -n "$SPOT" ]; then python inst_recheck.py ../site/data --spot "$SPOT"; exit $?; fi
           if [ "${LAG:-0}" != "0" ]; then python inst_recheck.py ../site/data --verify-lag "$LAG"; exit $?; fi
           A=""
           if [ -n "$DATES" ]; then A="--date $DATES"; else A="--last $LAST"; fi
-          if [ "$DRY" = "true" ]; then A="$A --dry"; else A="$A --force --guard"; fi
+          if [ "$DRY" = "true" ]; then A="$A --dry"; else A="$A --force"; [ "$GUARD" != "false" ] && A="$A --guard"; fi
+          [ -n "$LOGCSV" ] && A="$A --log-csv ../site/$LOGCSV"
           python inst_recheck.py ../site/data $A
 
       - name: commit
-        if: inputs.dry != 'true' && inputs.verify_lag == '0'
+        if: inputs.dry != 'true' && inputs.verify_lag == '0' && inputs.spot == ''
         working-directory: site
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/bars/inst.npz data/bars/dealer.npz data/bars/inst_recheck.json
+          [ -d data/research/inst_recheck_log ] && git add data/research/inst_recheck_log
           if git diff --staged --quiet; then
             echo "沒有變化，不提交。"
           else
