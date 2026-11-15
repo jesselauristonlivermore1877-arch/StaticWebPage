@@ -1,7 +1,7 @@
 {
- "ver": "20261115a",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261115a/GEA_OM_Setup_20261115a.exe",
- "sha256": "5e60641654d7ead4d3639f3a5c022ca562ab33625cd13b4862c3c9f409b8b32d",
- "notes": "d17：① 國票斷線自動重新登入（3 秒後、每 30 秒、一輪 200 次、10 分鐘再一輪）；② 對不到策略的成交（例：國票 App 手動平倉）會查庫存，跟帳本不符就停該商品跟單並 TG；③ 斷線期間收到訊號逐則 TG，恢復後對帳不一致就停、由您按「補」決定。",
- "sig": "caFccTxm8IT3vB7uEhJRw1zneLL4O5XejcUGbO/8meAlrQeazq9nK0DLyd/MFT26DdLota5k9sfrdSPqIggVaw=="
+ "ver": "20261115b",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261115b/GEA_OM_Setup_20261115b.exe",
+ "sha256": "294927bead9c3fbb85dc92462c8066d792efea9b7bdf20fdc48d141631999dd2",
+ "notes": "d18：主畫面最上方顯示「主機代號」＋「複製」按鈕，找 GEA 改訂閱或處理問題時直接貼代號；其他同 d17。",
+ "sig": "ISD3s/oJrZu1ZiQQel3uGWSSYxkgCuZ3huOt9m4FYEgLWEN2yfSWuDKlvXKPMSO32mORE9fYQCMeDwrgreMybw=="
 }
