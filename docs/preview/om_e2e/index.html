@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <!-- make_dist.py --release 會讀下面這行，跟出版版號比對，不一致就印 ✗ 提醒（不擋出版）；改清單時一起改 -->
-<meta name="om-ver" content="20261112a">
+<meta name="om-ver" content="20261115a">
 <title>GEA 下單機完整測試清單</title>
 <style>
 :root{--bg:#0b0f14;--panel:#121821;--panel2:#18202b;--line:#26303d;--tx:#d5dde7;--mut:#8593a3;--acc:#f0b429;--up:#e5484d;--dn:#2fb36b;--blue:#4c8dff}
@@ -32,7 +32,7 @@ code{background:var(--panel2);padding:0 4px;border-radius:4px;font-size:12px;wor
 <body>
 <main>
 <h1>GEA 下單機完整測試清單（以 d16 為準）</h1>
-<div class="ver">📌 <b>最後更新版本：20261112a（d16）</b>｜更新日期：2026-11-13｜Release <code>om-20261112a</code>。d9 以後每版改了什麼、哪些有自動測試、哪些要人工驗，見下方 G 段。</div>
+<div class="ver">📌 <b>最後更新版本：20261115a（d17）</b>｜更新日期：2026-11-15｜Release <code>om-20261115a</code>。d9 以後每版改了什麼、哪些有自動測試、哪些要人工驗，見下方 G 段。</div>
 <div class="note">用同事的帳號從頭到尾走一遍：管理端產生開通碼 → 下載安裝 → 安裝精靈 0～6 步 → 輸入開通碼 → 連上中繼 → 訊號區只看得到有訂閱的策略 → 帳戶列顯示權益數 → 模擬（或同事自己同意的實單）→ 更新與解除安裝。每一步照表打勾；出錯就照「出錯時截什麼」截圖，連同 <code>C:\GEA_om\logs</code> 整個資料夾一起放進 _inbox 給 W。標記：<span class="d9">d11</span>～<span class="d9">d16</span>＝那一版新改的地方；<span class="man">人工</span>＝自動測試沒辦法驗、一定要實機看。</div>
 
 <div class="stop">🔴 <b>停止點（一定要看）</b><br>
@@ -108,7 +108,7 @@ code{background:var(--panel2);padding:0 4px;border-radius:4px;font-size:12px;wor
 <tr><td>S3</td><td><span class="d9">d16</span> 有訊號被白名單略過時。</td><td>log＋TG「⚠ 略過：白名單不含 X（來源 Y）」；主畫面「接收」燈轉黃「有訊號被略過」（當天）。</td><td><input type="checkbox"></td></tr>
 </table></div>
 
-<h2>G. d9 之後每版改了什麼（d10～d16）</h2>
+<h2>G. d9 之後每版改了什麼（d10～d17）</h2>
 <div class="card scroll"><table>
 <tr><th>版本</th><th>改了什麼</th><th>自動測試涵蓋</th><th>還要人工驗</th></tr>
 <tr><td>d10<br>20261106a<br>11-06</td><td>任何時間都能按「更新」；有部位或交易時段跳確認框（30～60 秒不跟單、裝完自動開回並對帳）。跟單關的策略收到訊號不得有委託或拒單。</td><td>e2e_upgrade（32 項：更新模擬、下載失敗、安裝失敗開回舊版）；GeaIbfTest ㉘ 跟單開關。</td><td>筆電實機更新（11-08 已做，F 段舊紀錄見 TODO）。</td></tr>
@@ -118,13 +118,14 @@ code{background:var(--panel2);padding:0 4px;border-radius:4px;font-size:12px;wor
 <tr><td>d14<br>20261111a<br>11-11</td><td>修模擬模式啟動時缺 GEA_RELAY_TOKEN；訊號主機判斷改看簽章私鑰。（d14 安裝檔包到舊程式，由 d15 取代，不要裝 d14。）</td><td>GeaIbfTest（d14 共用快取競爭）；e2e_leftover_transmit。</td><td>—（由 d15 取代）</td></tr>
 <tr><td>d15<br>20261111b<br>11-11</td><td>修模擬模式啟動缺 token（共用快取上鎖）；缺 token 不閃退、版本檢查與更新照常；修正 d14 安裝檔包到舊程式（打包前逐一確認 exe 版號）。</td><td>GeaIbfTest（d15 卡死情境）；e2e_stuck_no_token；make_dist 打包前版號檢查。</td><td>筆電實機更新＋關掉重開 3 次連上中繼。</td></tr>
 <tr><td>d16<br>20261112a<br>11-13</td><td>① 白名單不吃傳送端格式（<code>\ / * ? :</code>、<code>.txt</code> 一律忽略）＋啟動行印來源；② 國票未登入／斷掉：券商燈轉紅、交易時段每 30 分鐘 TG、恢復 TG；③ 白名單略過、跟單關閉中收到訊號都發 TG；④ 真單模式關跟單一律確認、單支開關寫 panel log＋TG。</td><td>GeaIbfTest ㉛（17 項：白名單解析、登入失敗轉紅、提醒時段與間隔、休市不提醒、恢復、跟單關閉收訊號 TG、真單確認）；e2e_roles 18／18（情境 6、7）；e2e_ctpro 6／6。</td><td>S 升 d16 後看啟動行白名單（S2）；真的國票斷線時 30 分鐘 TG（實機）；筆電實機更新＋重開 3 次。</td></tr>
+<tr><td>d17<br>20261115a<br>11-15</td><td>① 國票斷線自動重登（照 CT PRO：3 秒後第一次、每 30 秒、一輪 200 次、一輪失敗休息 10 分鐘再一輪，只在交易時段；主畫面券商燈顯示「自動重連中（第 N 次）」）；② 對不到策略的成交（例：國票 App 手動平倉）→ 幾秒內查國票庫存、跟帳本＋客戶保留比，不符就停該商品所有跟單中的策略＋TG（不自動恢復），連續 3 次查不到也全停；③ 券商沒登入時收到訊號逐則 TG，登入恢復後照開機對帳（訊號≠帳上 → 停、TG、不追單，由用戶按「補」決定）；重登後國票補送舊回報不重複記帳。</td><td>GeaIbfTest ㉜（30 項：自動重登節奏、一輪上限與 10 分鐘再一輪、休市不重登、斷線收訊號 TG、恢復對帳、手動平倉查庫存不符停、3 次查不到全停、重送回報去重、停了不自動恢復）；GeaRollSimTest；GeaOrder selftest；e2e。</td><td>真的國票斷線看自動重登與 TG（實機）；S 升 d17 後在國票 App 手動平倉一口確認會停＋TG（Evans 在場）；筆電實機更新＋關掉重開 3 次連上中繼。</td></tr>
 </table></div>
 
-<h2>H. 已知問題與 d17 待改（<b>還沒出版</b>，範圍等 Evans 點頭）</h2>
+<h2>H. 已知問題（H1、H2 已在 d17 修好）</h2>
 <div class="card scroll"><table>
 <tr><th>#</th><th>問題</th><th>現在怎麼避開</th></tr>
-<tr><td>H1</td><td>🔴 <b>在國票 App 手動平倉跟單中的策略</b>：下單機記「成交回報對不到策略」只寫 log、<b>不扣帳本</b> → 下一個出場訊號會變成反向開倉（11-13 S GEA5 第一筆真單實際發生，S 已改帳本、跟單關）。</td><td>停止點 ④：先關跟單再手動處理，請 W 改帳本。</td></tr>
-<tr><td>H2</td><td>國票斷線<b>不會自動重登</b>（CT PRO 會）；d16 只會每 30 分鐘 TG 提醒重開。</td><td>收到「券商還沒登入」TG 就重開下單機。</td></tr>
+<tr><td>H1</td><td>🔴 <b>在國票 App 手動平倉跟單中的策略</b>：下單機記「成交回報對不到策略」只寫 log、<b>不扣帳本</b> → 下一個出場訊號會變成反向開倉（11-13 S GEA5 第一筆真單實際發生，S 已改帳本、跟單關）。</td><td>✅ d17 修好：成交對不到策略 → 查庫存、不符就停＋TG。仍建議先關跟單再手動處理。</td></tr>
+<tr><td>H2</td><td>國票斷線<b>不會自動重登</b>（CT PRO 會）；d16 只會每 30 分鐘 TG 提醒重開。</td><td>✅ d17 修好：自動重登（3 秒、每 30 秒、一輪 200 次、10 分鐘再一輪）。</td></tr>
 <tr><td>H3</td><td>委託逾時直接停這支（不先查庫存）；白名單略過以外，券商沒登入、超過最大持倉時收到訊號沒有逐則 TG；交易時段跟單關著不會定時提醒。</td><td>看主畫面燈與日誌。</td></tr>
 </table></div>
 <div class="note">d17 完整範圍、改哪個檔、測試怎麼補，寫在 CustomerServiceANDSales TODO「W 11-13 下單機清單與 d17 範圍」。11-08 筆電 d10 安裝實測紀錄（舊 F 段）也在 TODO 11-08 段。</div>
