@@ -1,0 +1,149 @@
+# ============================================================================
+# research_backfill.yml ─ 選股回測研究用回補（一次性，雲端舊7 11-16；M7）
+#
+#   只有 workflow_dispatch，不排程。研究用：寫 data/research/，不動正式 inst.npz、corp_actions.json。
+#   兩件事：
+#   ① 外資／投信逐日（證交所 T86＋櫃買 3itrade_hedge）→ data/research/inst_hist/inst_hist.npz
+#      抓取＝CustomerServiceANDSales backfill_inst.py（--start/--end 或 --days），打包＝research/stock_bt/pack_inst_hist.py
+#   ② 上市除權息／面額參考價（TWT49U、TWTB8U，一年一發）→ data/research/corp_px_hist/px_2021_2024.json
+#      （上櫃那半 11-16 已在雲端容器抓好推上；這裡只補證交所，容器連不到證交所）
+#
+#   怎麼跑（照順序）：
+#     1. mode=sample：只抓 days 那幾天（預設 3 天、都在 inst.npz 2024-09-16 以後），跟 inst.npz 逐格比，不寫檔。
+#     2. 比對一致率 ≥ 99.9% 才跑 mode=full：2021-09-22～2024-09-13，十二片平行（每片約 63 發，低於 TWSE 懸崖 87 發），
+#        每發間隔 1.5 秒＋亂數；撞牆（連 3 發失敗）就停，重跑會接著補。
+#   併發：merge 掛 daily-build 群組，提交排在每日班後面。
+# ============================================================================
+name: 研究回補（外資與除權息，一次性）
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "sample＝抽樣比對不寫檔；full＝整批回補並寫入 data/research/"
+        required: true
+        default: "sample"
+      days:
+        description: "sample 用的日子（逗號分隔）"
+        required: false
+        default: "2024-09-20,2025-03-14,2026-10-15"
+      start:
+        description: "full 起日"
+        required: false
+        default: "2021-09-22"
+      end:
+        description: "full 迄日"
+        required: false
+        default: "2024-09-13"
+      corp:
+        description: "full 時順便補上市除權息參考價（true／false）"
+        required: false
+        default: "true"
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    steps:
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+          cache: pip
+
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" requests feedparser certifi
+
+      - name: 抓片 ${{ matrix.shard }}
+        working-directory: code
+        env:
+          MODE: ${{ inputs.mode }}
+          DAYS: ${{ inputs.days }}
+          START: ${{ inputs.start }}
+          END: ${{ inputs.end }}
+        run: |
+          if [ "$MODE" = "full" ]; then
+            ARGS="--start $START --end $END"
+          else
+            ARGS="--days $DAYS"
+          fi
+          python backfill_inst.py --shard ${{ matrix.shard }} --of 12 --sleep 1.5 $ARGS --out ../out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rinst-${{ matrix.shard }}
+          path: out/
+          if-no-files-found: warn
+          retention-days: 3
+
+  merge:
+    needs: crawl
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: daily-build
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: checkout 程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+          cache: pip
+
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" numpy requests feedparser certifi
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: dl
+          pattern: rinst-*
+          merge-multiple: true
+
+      - name: 比對 inst.npz 重疊段（sample）／打包（full）
+        env:
+          MODE: ${{ inputs.mode }}
+        run: |
+          if [ "$MODE" = "full" ]; then
+            python code/research/stock_bt/pack_inst_hist.py --raw dl --compare data/bars/inst.npz --out data/research/inst_hist
+          else
+            python code/research/stock_bt/pack_inst_hist.py --raw dl --compare data/bars/inst.npz
+          fi
+
+      - name: 上市除權息參考價（TWT49U、TWTB8U 2021～2024）
+        if: inputs.mode == 'full' && inputs.corp == 'true'
+        working-directory: code
+        run: python research/stock_bt/backfill_corp_px.py --out ../data/research/corp_px_hist --only twse
+
+      - name: commit
+        if: inputs.mode == 'full'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/research
+          if git diff --staged --quiet; then
+            echo "data/research 沒有變化，不提交。"
+          else
+            git commit -m "data: 研究回補 外資逐日 2021-09～2024-09＋上市除權息參考價 2021～2024（M7，不進正式 npz）"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
