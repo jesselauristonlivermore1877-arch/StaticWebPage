@@ -94,7 +94,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     concurrency:
-      group: daily-build
+      group: ${{ inputs.mode == 'full' && 'daily-build' || format('research-sample-{0}', github.run_id) }}   # sample 不寫檔、不用排每日班
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
