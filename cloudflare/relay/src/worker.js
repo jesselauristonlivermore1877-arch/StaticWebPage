@@ -243,7 +243,7 @@ async function tgCommand(env, origin, text, ch) {
     if (r.status !== 200) return ["失敗：" + (r.j.error || r.status)];
     const add = after.filter(c => !before.includes(c)), del = before.filter(c => !after.includes(c));
     return [`✓ ${u.id}${u.note ? "（" + u.note + "）" : ""} 訂閱改成 ${subs === "*" ? "全部" : subs.join(",")}（不用重發開通碼）` +
-      (add.length ? `\n新增：${add.join(",")}（下單機下次重連的快照自動多出，預設「不跟單」）` : "") +
+      (add.length ? `\n新增：${add.join(",")}（在線的下單機已即時推送 ${r.j.pushed || 0} 台；不在線的下次連上時多出；預設「只收訊號、不跟單」）` : "") +
       (del.length ? `\n取消：${del.join(",")}（不再收訊號；帳上還有部位的照「客戶保留部位」處理，不自動平倉）` : "")];
   }
   if (cmd === "/登入") {
@@ -562,6 +562,34 @@ export class Relay extends DurableObject {
       contracts_ver: CONTRACTS.ver, tg_test: Number(this.meta("tg_test_n") || 0) };
   }
 
+  // 部位快照：每支策略最新一則已轉送的原文（他有權收的）。連上時（sub 帶 snap:1）與 /訂閱 改完（11-15 A5）共用同一段
+  snapMsg(user, S) {
+    const items = this.sql.exec("SELECT strat, body FROM latest ORDER BY strat").toArray()
+      .filter(r => this.why(user, r.strat, S, true) === null).map(r => r.body);
+    // 11-02 10:35 第 1 項：快照可能是空的（還沒有任何已轉送的訊號）→ 另給「他訂閱、而且已上架」的策略清單（訂閱全部＝所有已上架），接收端拿來建策略列
+    // 11-02 13:45 第 2c 項：順便給服務到期日（下單機「服務到期」燈用）
+    return '{"ctl":"snap","n":' + items.length + ',"strats":' + JSON.stringify(this.stratsOf(user, S)) + ',"exp":' + JSON.stringify(user.exp || "") + ',"items":[' + items.join(",") + "]}";
+  }
+  stratsOf(user, S) {
+    return Object.values(S).filter(x => user.subs === "**" || x.listed && (user.subs === "*" || String(user.subs || "").split(",").includes(x.code))).map(x => x.code).sort();
+  }
+  // 11-15 A5：/訂閱 改完 → 對這個客戶在線的新接收端（v=2）立刻推新快照（下單機收到就跑新增／移除訂閱，不用等重連），再 TG 給 Evans＋客戶
+  async subsChanged(id, before) {
+    const user = this.users()[id], S = this.strats();
+    if (!user) return { pushed: 0 };
+    const after = this.stratsOf(user, S), add = after.filter(c => !before.includes(c)), del = before.filter(c => !after.includes(c));
+    if (!add.length && !del.length) return { pushed: 0, add, del };
+    let pushed = 0;
+    for (const ws of this.live("s:" + id)) {
+      const a = ws.deserializeAttachment() || {};
+      if (!a.v2) continue;                                                    // 舊接收端不認得中途快照 → 照舊等重連
+      try { this.send(ws, this.snapMsg(user, S)); pushed++; } catch (e) { }
+    }
+    const txt = `訂閱已更新：${add.length ? "新增 " + add.join("、") + "（預設只收訊號、不跟單；要跟單請在下單機主畫面自己打開）" : ""}${add.length && del.length ? "；" : ""}${del.length ? "移除 " + del.join("、") + "（不再收訊號；帳上還有部位的不自動平倉）" : ""}`;
+    await this.evans(`客戶 ${id}${user.note ? "（" + user.note + "）" : ""} ${txt}｜在線下單機 ${pushed} 台已即時更新${pushed ? "" : "（不在線，下次連上時更新）"}`);
+    if (user.tg) await this.tg(user.tg, "【GEA 下單機】" + txt);
+    return { pushed, add, del };
+  }
   // 新增或改用戶欄位（/admin/user、/admin/set、/admin/invite 共用）；回錯誤字串或 null
   applyUser(id, body, qs) {
     for (const k of ["start", "exp"]) if (k in body && body[k] && !WHEN_RE.test(body[k])) return k + " 格式 YYYY-MM-DD 或 YYYY-MM-DDTHH:MM";
@@ -722,12 +750,14 @@ export class Relay extends DurableObject {
     if (p === "/admin/set") {
       const x = this.sql.exec("SELECT * FROM users WHERE id=?", id).toArray()[0];
       if (!x) return J({ error: "no such user" }, 404);
+      const before = this.stratsOf(x, this.strats());
       const bad = this.applyUser(id, body, null);
       if (bad) return J({ error: bad }, 400);
       const y = this.sql.exec("SELECT * FROM users WHERE id=?", id).one();
       const off = offWhy(y);
       const kicked = off ? this.kick(id, off) : 0;
-      return J({ ok: true, user: { id: y.id, subs: y.subs, start: y.start, exp: y.exp, note: y.note, enabled: !!y.enabled, off }, kicked });
+      const sc = !off && "subs" in body ? await this.subsChanged(id, before) : { pushed: 0 };   // 11-15 A5：訂閱一改就推新快照＋TG
+      return J({ ok: true, user: { id: y.id, subs: y.subs, start: y.start, exp: y.exp, note: y.note, enabled: !!y.enabled, off }, kicked, pushed: sc.pushed, add: sc.add || [], del: sc.del || [] });
     }
     if (p === "/admin/disable" || p === "/admin/enable") {
       const on = p === "/admin/enable" ? 1 : 0;
@@ -951,14 +981,7 @@ export class Relay extends DurableObject {
     const since = Number(m.since);
     if (!Number.isFinite(since) || since < 0) return this.send(ws, { ctl: "err", why: "bad since" });
     const user = this.users()[a.id], S = this.strats();
-    if (m.snap) {                                                             // 部位快照：每支策略最新一則已轉送的原文（他有權收的）
-      const items = this.sql.exec("SELECT strat, body FROM latest ORDER BY strat").toArray()
-        .filter(r => this.why(user, r.strat, S, true) === null).map(r => r.body);
-      // 11-02 10:35 第 1 項：快照可能是空的（還沒有任何已轉送的訊號）→ 另給「他訂閱、而且已上架」的策略清單（訂閱全部＝所有已上架），接收端拿來建策略列
-      const strats = Object.values(S).filter(x => user.subs === "**" || x.listed && (user.subs === "*" || String(user.subs || "").split(",").includes(x.code))).map(x => x.code).sort();
-      // 11-02 13:45 第 2c 項：順便給服務到期日（下單機「服務到期」燈用）
-      this.send(ws, '{"ctl":"snap","n":' + items.length + ',"strats":' + JSON.stringify(strats) + ',"exp":' + JSON.stringify(user.exp || "") + ',"items":[' + items.join(",") + "]}");
-    }
+    if (m.snap) this.send(ws, this.snapMsg(user, S));                       // 部位快照（連上時；/訂閱 改完也會推，見 /admin/set）
     const rows = this.sql.exec("SELECT seq, strat, body FROM msgs WHERE seq > ? AND held=0 ORDER BY seq", since).toArray()
       .filter(r => this.why(user, r.strat || Relay.stratOf(r.body), S) === null);       // 只補他有權收的
     for (const r of rows) this.send(ws, r.body);
