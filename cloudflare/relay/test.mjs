@@ -435,6 +435,17 @@ n1b.ws.close();
   R = await cmd("/訂閱 " + cu.id + " GEA5");
   ok(/取消：GEA_NEWX/.test(R[0] || "") && /不自動平倉/.test(R[0] || ""), "/訂閱 少掉策略 → 列出取消、註明不自動平倉");
   ok(/已下架/.test((await cmd("/下架 GEA_NEWX"))[0] || "") && /沒有上架/.test((await cmd("/訂閱 王小明 GEA_NEWX"))[0] || ""), "/下架 → 再訂閱下架的策略會被擋");
+  // 11-15 晚（總指揮「客戶代號好找」）：/客戶 列表帶訂閱；/訂閱 等接受代號末 4 碼；多筆符合列出來、不猜
+  await post("user?id=c900004321", { subs: ["GEA5"], note: "尾碼甲" }); await post("user?id=c900014321", { subs: ["GEA5"], note: "尾碼乙" });
+  R = await cmd("/客戶");
+  ok(/c900004321（尾碼甲） .*｜訂閱 GEA5｜到期/.test(R[0] || "") && /● 在線　○ 離線/.test(R[0] || ""), "/客戶 列表 → 代號、名稱、在線、訂閱", (R[0] || "").slice(0, 160));
+  R = await cmd("/訂閱 4321 全部");
+  ok(/2 位客戶符合/.test(R[0] || "") && /c900004321/.test(R[0] || "") && /c900014321/.test(R[0] || "") && ((await admin("state", "GET")).j.users || []).filter(u => /4321$/.test(u.id)).every(u => u.subs === "GEA5"), "/訂閱 末 4 碼多筆符合 → 列出候選、什麼都不改");
+  const tail = cu.id.slice(-4), dup = ((await admin("state", "GET")).j.users || []).filter(u => u.id.endsWith(tail)).length;
+  R = await cmd("/訂閱 " + tail + " GEA5");
+  ok(dup > 1 ? /位客戶符合/.test(R[0] || "") : /不用重發開通碼|本來就是/.test(R[0] || "") || /c\d{9}/.test(R[0] || ""), "/訂閱 末 4 碼唯一 → 直接改那位", (R[0] || "").slice(0, 100));
+  ok(/尾碼乙/.test((await cmd("/客戶 014321"))[0] || "") && /找不到客戶/.test((await cmd("/訂閱 999999 GEA5"))[0] || "") && /找不到客戶/.test((await cmd("/客戶 321"))[0] || ""), "/客戶 末 6 碼唯一 → 詳細；找不到、少於 4 碼 → 不猜");
+  ok(/2 位客戶符合/.test((await cmd("/停用 4321"))[0] || "") && ((await admin("state", "GET")).j.users || []).filter(u => /4321$/.test(u.id)).every(u => u.enabled !== false), "/停用 多筆符合 → 不停任何人");
   ok(/指令/.test((await cmd("你好"))[0] || ""), "看不懂的 → 回指令說明");
   ok((await post("tgcmd", { text: "x" }).then(() => fetch(`${BASE}/admin/tgcmd?ch=gea`, { method: "POST", headers: { Authorization: "Bearer " + ADMIN }, body: "{}" }))).status === 403, "tgcmd 不能打正式頻道");
   const hk = await fetch(`${BASE}/tg_hook`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ message: { chat: { id: 1 }, text: "/客戶" } }) });

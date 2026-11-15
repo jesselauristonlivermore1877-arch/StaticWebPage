@@ -154,7 +154,21 @@ async function tgCommand(env, origin, text, ch) {
   };
   const st = async () => (await call("state")).j;
   const find = (S, who) => S.users.find(u => u.id === who) || S.users.find(u => u.note && u.note === who);
-  const HELP = "GEA 下單中繼指令：\n/開通碼 <代號或姓名> <策略逗號分隔或 全部> <到期日 YYYY-MM-DD>\n/開通碼 傳送端 <代號> [備註]（管理者開通碼，訊號主機用）\n/客戶 [代號或姓名]\n/策略（全部策略：上架／下架、最後訊號、訂閱人數）\n/上架 <策略>　/下架 <策略>\n/訂閱 <代號或姓名> <策略逗號分隔或 全部>（改訂閱，不用重發開通碼）\n/停用 <代號>\n/恢復 <代號>\n/登入（管理頁一次性登入連結）";
+  // 11-15 晚（總指揮「客戶代號好找」）：完整代號 → 備註名稱（完全相同）→ 代號末 4 碼以上；多筆符合就列出來請 Evans 選，不猜。/開通碼 仍用 find（只認完全相同）
+  const findAll = (S, who) => {
+    const w = String(who || "").trim(); if (!w) return [];
+    let r = S.users.filter(u => u.id === w); if (r.length) return r;
+    r = S.users.filter(u => u.note && u.note === w); if (r.length) return r;
+    return w.length >= 4 ? S.users.filter(u => String(u.id).toLowerCase().endsWith(w.toLowerCase())) : [];
+  };
+  const subsTxt = u => u.subs === "**" ? "全部含下架" : u.subs === "*" ? "全部" : u.subs || "（沒有）";
+  const pick = (S, who) => {
+    const r = findAll(S, who);
+    if (!r.length) return { msg: "找不到客戶 " + who + "（/客戶 看全部；可用完整代號、備註名稱或代號末 4 碼）" };
+    if (r.length > 1) return { msg: `「${who}」有 ${r.length} 位客戶符合，請改用完整代號：\n` + r.map(u => `${u.online ? "●" : "○"} ${u.id}${u.note ? "（" + u.note + "）" : ""}｜訂閱 ${subsTxt(u)}`).join("\n") };
+    return { u: r[0] };
+  };
+  const HELP = "GEA 下單中繼指令：\n/開通碼 <代號或姓名> <策略逗號分隔或 全部> <到期日 YYYY-MM-DD>\n/開通碼 傳送端 <代號> [備註]（管理者開通碼，訊號主機用）\n/客戶 [代號、姓名或代號末 4 碼]（不加＝全部：代號、名稱、在線、訂閱）\n/策略（全部策略：上架／下架、最後訊號、訂閱人數）\n/上架 <策略>　/下架 <策略>\n/訂閱 <代號、姓名或代號末 4 碼> <策略逗號分隔或 全部>（改訂閱，不用重發開通碼）\n/停用 <代號、姓名或末 4 碼>\n/恢復 <代號、姓名或末 4 碼>\n/登入（管理頁一次性登入連結）";
   if (cmd === "/開通碼" && P[1] === "傳送端") {                             // 11-01 23:40：管理者（傳送端）開通碼
     if (P.length < 3 || !NAME_RE.test(P[2])) return ["格式：/開通碼 傳送端 <代號（英數）> [備註]\n例：/開通碼 傳送端 signal_host 訊號主機"];
     const r = await call("invite?id=" + encodeURIComponent(P[2]), { kind: "pub", note: P.slice(3).join(" ") });
@@ -190,9 +204,9 @@ async function tgCommand(env, origin, text, ch) {
   }
   if (cmd === "/客戶") {
     const S = await st();
-    if (P.length < 2) return [S.users.length ? "客戶（" + S.users.length + "）：\n" + S.users.map(u => `${u.online ? "●" : "○"} ${u.id}${u.note ? "（" + u.note + "）" : ""} ${u.off || "正常"}｜到期 ${u.exp || "不限"}`).join("\n") : "還沒有客戶"];
-    const u = find(S, P[1]);
-    if (!u) return ["找不到客戶 " + P[1]];
+    if (P.length < 2) return [S.users.length ? "客戶（" + S.users.length + "）：\n" + S.users.map(u => `${u.online ? "●" : "○"} ${u.id}${u.note ? "（" + u.note + "）" : ""} ${u.off || "正常"}｜訂閱 ${subsTxt(u)}｜到期 ${u.exp || "不限"}`).join("\n") + "\n\n● 在線　○ 離線；/客戶、/訂閱、/停用、/恢復 可用完整代號、名稱或代號末 4 碼" : "還沒有客戶"];
+    const pk = pick(S, P[1]); if (pk.msg) return [pk.msg];
+    const u = pk.u;
     const inv = (S.invites || []).find(x => x.id === u.id);
     return [[`客戶 ${u.id}${u.note ? "（" + u.note + "）" : ""}`, `狀態：${u.off || "正常"}${u.enabled ? "" : "（已停用）"}`, `訂閱：${u.subs === "**" ? "全部含下架（GEA 自己的機器）" : u.subs === "*" ? "全部（已上架）" : u.subs || "（沒有）"}`,
              `期間：${u.start || "不限"} ～ ${u.exp || "不限"}`, `在線：${u.online ? "是（" + u.online + " 條）" : "否"}`, `版本：${u.ver || "—"}`,
@@ -201,8 +215,9 @@ async function tgCommand(env, origin, text, ch) {
   }
   if (cmd === "/停用" || cmd === "/恢復") {
     if (P.length < 2) return ["格式：" + cmd + " <代號>"];
-    const S = await st(), u = find(S, P[1]);
-    if (!u) return ["找不到客戶 " + P[1]];
+    const S = await st(), pk = pick(S, P[1]);
+    if (pk.msg) return [pk.msg];
+    const u = pk.u;
     const r = await call((cmd === "/停用" ? "disable" : "enable") + "?id=" + encodeURIComponent(u.id), {});
     return [r.status === 200 ? `✓ ${u.id} 已${cmd.slice(1)}` + (cmd === "/停用" ? `（踢掉在線連線 ${r.j.kicked || 0} 條；只停送訊號、不平倉）` : "") : "失敗：" + (r.j.error || r.status)];
   }
@@ -227,9 +242,10 @@ async function tgCommand(env, origin, text, ch) {
     return [r.status === 200 ? `✓ ${s.code} 已${on ? "上架（訂閱它或訂閱全部的客戶，下單機下次重連的快照會多出這支，預設「不跟單」）" : "下架（客戶下單機不會自動平倉）"}` : "失敗：" + (r.j.error || r.status)];
   }
   if (cmd === "/訂閱") {
-    if (P.length < 3) return ["格式：/訂閱 <代號或姓名> <策略逗號分隔或 全部>\n例：/訂閱 王小明 GEA5,GEA_S_V2"];
-    const S = await st(), u = find(S, P[1]);
-    if (!u) return ["找不到客戶 " + P[1] + "（/客戶 看全部）"];
+    if (P.length < 3) return ["格式：/訂閱 <代號、姓名或代號末 4 碼> <策略逗號分隔或 全部>\n例：/訂閱 王小明 GEA5,GEA_S_V2　或　/訂閱 8751 GEA5\n（/客戶 看全部客戶的代號與訂閱）"];
+    const S = await st(), pk = pick(S, P[1]);
+    if (pk.msg) return [pk.msg];
+    const u = pk.u;
     let subs;
     if (["全部", "*", "all"].includes(P[2])) subs = "*";
     else {
