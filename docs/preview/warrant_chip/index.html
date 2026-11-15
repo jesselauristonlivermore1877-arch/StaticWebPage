@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>權證籌碼卡預覽（11-15）</title><style>
+body{margin:0;background:#EDE7DA;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1B2A4A}
+.w{max-width:1120px;margin:0 auto;padding:16px}
+.n{font-size:15px;line-height:1.7;background:#fff;border:1px solid #DDD4BF;border-radius:10px;padding:12px 16px;margin-bottom:14px}
+.n ul{margin:4px 0 0;padding-left:20px}
+.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(520px,100%),1fr));gap:14px}
+.i{background:#fff;border:1px solid #DDD4BF;border-radius:10px;padding:10px;min-width:0}
+.i h2{font-size:17px;margin:2px 4px 8px}
+.i img{width:100%;height:auto;display:block;border-radius:8px}
+.c{font-size:13px;color:#6B6452;margin:6px 4px 0;overflow-wrap:anywhere}.c b.ok{color:#1E7B4F}.c b.ng{color:#C8361E}
+</style></head><body><div class="w"><h1 style="font-size:22px">權證籌碼卡：加「連鎖追擊、連續大單」（11-15 預覽）</h1>
+<div class="n"><b>要看的重點</b><ul>
+<li>量化 EDM「權證籌碼：等同現股淨買最多」表格多兩欄：<b>連鎖追擊</b>（10 分鐘內 ≥ 3 檔不同權證外盤大單，格內＝次數・最多同時幾檔）、<b>連續大單</b>（單檔權證外盤大單 ≥ 100 張連 ≥ 3 筆的次數）。算法＝盤中同一套（雲端AC fbf81267，warrant_flow 盤後檔）。</li>
+<li><b>沒值</b>（左）：11-13 正式資料，盤後檔還沒有這兩項 → 顯示「—」，說明寫「11-16（週一）14:30 第一班起才有值」。</li>
+<li><b>有值</b>（右）：同一天正式資料，只把盤後檔換成加了<b>示範值</b>的副本（6706、6944、6245、3029，數字是假的，只看版面）。</li>
+<li>兩張都呼叫正式版同一段程式（tools/warrant_chip.edm()＋網站的 peCardG／peRender 出圖）；核對多一項：上榜標的連續大單次數＝逐檔 run_n 重加、連鎖追擊最多檔數 ≤ chase_max。</li>
+<li>表格變 10 欄，最右「偏多」貼邊，要不要拿掉「偏外盤檔數」騰空間請總指揮定。</li>
+</ul></div><div class="g">
+<div class="i"><h2>沒值（11-13 正式資料）</h2><a href="wchip_none.png"><img src="wchip_none.png" alt="沒值"></a><p class="c">核對：<b class="ok">通過</b>（5489 檔權證逐檔（官方成交上限、波動率代回）；上榜 11 檔標的：外盤內盤（含認購／認售四欄）對已發布檔 11 檔、收盤對 stock_bars 1 檔、等同現股逐檔重加）</p></div>
+<div class="i"><h2>有值（示範值）</h2><a href="wchip_demo.png"><img src="wchip_demo.png" alt="有值"></a><p class="c">核對：<b class="ok">通過</b>（5489 檔權證逐檔（官方成交上限、波動率代回）；上榜 11 檔標的：外盤內盤（含認購／認售四欄）對已發布檔 11 檔、收盤對 stock_bars 1 檔、等同現股逐檔重加）</p></div>
+</div></div></body></html>
