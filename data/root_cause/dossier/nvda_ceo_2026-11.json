@@ -228,39 +228,47 @@
           "ep": "EP714",
           "date": "2026-11-14",
           "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
-          "t": "0:27:01",
-          "quote": "老黃帶動的那些技術要錢的公司，就是走在最前面，每次跟著老黃衝、打拼的"
+          "t": "0:21:30",
+          "quote": "我覺得要比較小心的是老黃帶動的那種技術躍遷的公司。就是走在最前面每次跟著老黃衝、打拼的"
         },
         {
           "src": "股癌",
           "ep": "EP714",
           "date": "2026-11-14",
           "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
-          "t": "0:27:43",
-          "quote": "可能那些規格的技術提升上，就不會像過去這麼的順利啦"
+          "t": "0:22:00",
+          "quote": "可能那些規格的技術提升上就不會像過去這麼的順利啦"
         },
         {
           "src": "股癌",
           "ep": "EP714",
           "date": "2026-11-14",
           "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
-          "t": "0:27:43",
-          "quote": "過去我會相信你這家公司，我給你這麼高的一個倍數，是因為我知道每次老黃開什麼規格你就會跟，那可是現在可能就是這個說法就會被動搖"
+          "t": "0:22:00",
+          "quote": "過去我會相信你這家公司我給你這麼高的一個倍數，是因為我知道每次老黃開什麼規格你就會跟"
         },
         {
           "src": "股癌",
           "ep": "EP714",
           "date": "2026-11-14",
           "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
-          "t": "0:30:58",
-          "quote": "如果說老黃最後面決定要創業的話，這個是不是對於市場影響最大的東西，就他如果要創業，那真的是所有的東西都要重新改寫過"
+          "t": "0:22:30",
+          "quote": "那可是現在可能就是這個說法就會被動搖"
         },
         {
           "src": "股癌",
           "ep": "EP714",
           "date": "2026-11-14",
           "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
-          "t": "0:26:28",
+          "t": "0:24:00",
+          "quote": "我覺得如果說老黃最後面決定要創業的話，這個是會對於市場影響最大的東西。就是他如果要創業，那真的是所有的東西都要重新地改寫過"
+        },
+        {
+          "src": "股癌",
+          "ep": "EP714",
+          "date": "2026-11-14",
+          "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
+          "t": "0:21:30",
           "quote": "所以你說因為可能老黃假設他下台之後，然後台灣的供應鏈就可能不會被青睞，這個又是扯太遠，這就想太多",
           "lab": "反方觀點"
         }
@@ -404,5 +412,270 @@
         }
       ]
     }
-  ]
+  ],
+  "topic": {
+    "title": "黃仁勳案：從間諜疑雲到辭任",
+    "lead": "從 10 月底美國媒體報導間諜疑雲，到 11/12 輝達宣布黃仁勳辭任，再到各國政府與國會的表態。本專題把每一步依可信度分三級：官方證實、權威媒體報導、市場傳聞（未證實），全部附出處，由程式打開核對。",
+    "start": "2026-10-28",
+    "who_rx": "(?i)huang|黃仁勳|黃樂|nvidia|輝達|英偉達",
+    "gnews": [
+      "Blanche Alice Huang spy",
+      "美國司法部 黃樂 間諜",
+      "Justice Department Alice Huang Chinese spy",
+      "New York Times Jensen Huang Chinese intelligence target",
+      "紐約時報 黃仁勳 間諜行動",
+      "Wall Street Journal Alice Huang Megaspeed",
+      "China foreign ministry Jensen Huang",
+      "中國外交部 黃仁勳",
+      "Trump Jensen Huang resign",
+      "川普 黃仁勳 辭職",
+      "Sacks Alice Huang intelligence leak",
+      "Nvidia employees petition Jensen Huang",
+      "輝達員工 連署 黃仁勳",
+      "Schumer Nvidia Huang",
+      "Congress subpoena Jensen Huang",
+      "Singapore Alice Huang barred entry"
+    ],
+    "doj": {
+      "kw": [
+        "Alice Huang",
+        "Huang Le"
+      ],
+      "rx": "(?i)blanche|布蘭奇|justice department|司法部|\\bDOJ\\b",
+      "label": "美國司法部長被記者問到時表示，司法部尚未認定該名女商人是中國間諜（媒體轉述）",
+      "who_rx": "(?i)alice huang|黃樂|huang le\\b"
+    },
+    "events": [
+      {
+        "name": "首篇報導",
+        "rx": "(?i)new york times|紐約時報|紐時|wall street journal|華爾街日報|target of|目標",
+        "n": 3,
+        "hi": "2026-11-06"
+      },
+      {
+        "name": "中國回應",
+        "rx": "(?i)foreign ministry|外交部|中方|抹黑|smear",
+        "n": 2
+      },
+      {
+        "name": "白宮表態",
+        "rx": "(?i)trump|川普|特朗普|white house|白宮|sacks|薩克斯",
+        "n": 3
+      },
+      {
+        "name": "員工連署",
+        "rx": "(?i)petition|連署",
+        "n": 2
+      },
+      {
+        "name": "新加坡處置",
+        "rx": "(?i)singapore|新加坡",
+        "n": 2
+      }
+    ],
+    "parties": [
+      {
+        "group": "公司",
+        "name": "輝達董事會",
+        "role": "啟動獨立調查、宣布執行長異動",
+        "official": [
+          "q_target",
+          "q_nocomp",
+          "q_counsel",
+          "q_resign",
+          "q_interim"
+        ],
+        "rx": "(?i)board|董事會",
+        "n": 2
+      },
+      {
+        "group": "公司",
+        "name": "黃仁勳本人",
+        "role": "致員工信承認婚外情、配合調查；之後辭任",
+        "official": [
+          "q_affair",
+          "q_email_ns"
+        ],
+        "rx": "(?i)petition|連署|fight|復出",
+        "n": 2
+      },
+      {
+        "group": "美國政府",
+        "name": "美國司法部／FBI",
+        "role": "調查中；司法部長表示尚未認定間諜身分",
+        "rx": "(?i)blanche|布蘭奇|justice department|司法部|\\bDOJ\\b|FBI|聯邦調查局",
+        "n": 3,
+        "doj": true
+      },
+      {
+        "group": "美國政府",
+        "name": "白宮（總統、AI 顧問）",
+        "role": "公開表態（依權威報導）",
+        "rx": "(?i)trump|川普|特朗普|white house|白宮|sacks|薩克斯",
+        "n": 3
+      },
+      {
+        "group": "國會",
+        "name": "美國國會（兩黨議員）",
+        "role": "要求說明、傳喚、推動晶片出口管制",
+        "rx": "(?i)congress|lawmakers?|senators?|schumer|subpoena|國會|參議員|眾議員|議員|傳喚",
+        "n": 3
+      },
+      {
+        "group": "外國政府",
+        "name": "新加坡政府",
+        "role": "澄清與處置（官方聲明）",
+        "official": [
+          "q_sg_clar",
+          "q_sg_noesp"
+        ],
+        "rx": "(?i)singapore|新加坡",
+        "n": 1
+      },
+      {
+        "group": "外國政府",
+        "name": "中國政府",
+        "role": "公開回應（依權威報導）",
+        "rx": "(?i)foreign ministry|外交部|中方|抹黑|smear",
+        "n": 2
+      },
+      {
+        "group": "媒體",
+        "name": "美國主要報紙（首發報導）",
+        "role": "揭露間諜疑雲與婚外情；本站只列報導本身，不評斷動機",
+        "rx": "(?i)new york times|紐約時報|紐時|wall street journal|華爾街日報",
+        "n": 2
+      },
+      {
+        "group": "競爭對手",
+        "name": "AMD、博通",
+        "role": "沒有公開表態；只有股價反應（依權威報導）",
+        "rx": "(?i)\\bAMD\\b|(?<!美)超微|博通|broadcom",
+        "n": 2
+      },
+      {
+        "group": "市場傳聞",
+        "name": "「幕後角力」說法",
+        "role": "非權威來源，逐條查證見下方「市場傳聞（未證實）」",
+        "note": "rumor"
+      }
+    ],
+    "market": {
+      "q": "規格標準過去由黃仁勳一人定義；換人之後，規格節奏與「跟著輝達衝最前面」的台廠會怎樣？",
+      "points": [
+        "輝達官方（董事長 Harvey Jones）：預期對客戶的承諾與產品路線圖不會中斷。",
+        "權威媒體報導過的只有：輝達沒有明確接班人；事件期間 AMD、博通股價上漲。",
+        "「黃仁勳另起爐灶」「台廠被改規格」：目前沒有權威媒體報導，只是意見領袖的假設情境。"
+      ],
+      "kol": [
+        {
+          "src": "股癌",
+          "ep": "EP714",
+          "date": "2026-11-14",
+          "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
+          "t": "0:15:00",
+          "quote": "那其實就是要像有老黃這樣的一個狂人在那邊推，才有辦法",
+          "g": "規格由誰定義"
+        },
+        {
+          "src": "股癌",
+          "ep": "EP714",
+          "date": "2026-11-14",
+          "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
+          "t": "0:15:00",
+          "quote": "反正就大家都會參考老黃現在在推什麼東西，就去跟他合作",
+          "g": "規格由誰定義"
+        },
+        {
+          "src": "股癌",
+          "ep": "EP714",
+          "date": "2026-11-14",
+          "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
+          "t": "0:16:00",
+          "quote": "你如果讓他們去重新來過，就沒有老黃在前面帶路的話，他願不願意丟這麼多錢去開這些規格，要不要這樣去拼，那不一定。我覺得那個速度一定會有所減緩",
+          "g": "換人後的規格節奏"
+        },
+        {
+          "src": "股癌",
+          "ep": "EP714",
+          "date": "2026-11-14",
+          "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
+          "t": "0:22:00",
+          "quote": "可能那些規格的技術提升上就不會像過去這麼的順利啦",
+          "g": "換人後的規格節奏"
+        },
+        {
+          "src": "股癌",
+          "ep": "EP714",
+          "date": "2026-11-14",
+          "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
+          "t": "0:24:30",
+          "quote": "如果說你派一個那種供應鏈管理大師進來做這一塊的話，那我覺得就會加速供應鏈之間的競爭",
+          "g": "換人後的規格節奏"
+        },
+        {
+          "src": "股癌",
+          "ep": "EP714",
+          "date": "2026-11-14",
+          "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
+          "t": "0:25:00",
+          "quote": "所以他會比較龜一點啦，那比較標準化一點。如果是這樣子的話，其實對整個 supply chain 也不是什麼太好的事情",
+          "g": "換人後的規格節奏"
+        },
+        {
+          "src": "股癌",
+          "ep": "EP714",
+          "date": "2026-11-14",
+          "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
+          "t": "0:21:30",
+          "quote": "我覺得要比較小心的是老黃帶動的那種技術躍遷的公司。就是走在最前面每次跟著老黃衝、打拼的",
+          "g": "衝最前面的台廠"
+        },
+        {
+          "src": "股癌",
+          "ep": "EP714",
+          "date": "2026-11-14",
+          "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
+          "t": "0:22:00",
+          "quote": "過去我會相信你這家公司我給你這麼高的一個倍數，是因為我知道每次老黃開什麼規格你就會跟",
+          "g": "衝最前面的台廠"
+        },
+        {
+          "src": "股癌",
+          "ep": "EP714",
+          "date": "2026-11-14",
+          "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
+          "t": "0:22:30",
+          "quote": "那可是現在可能就是這個說法就會被動搖",
+          "g": "衝最前面的台廠"
+        },
+        {
+          "src": "股癌",
+          "ep": "EP714",
+          "date": "2026-11-14",
+          "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
+          "t": "0:24:00",
+          "quote": "我覺得如果說老黃最後面決定要創業的話，這個是會對於市場影響最大的東西。就是他如果要創業，那真的是所有的東西都要重新地改寫過",
+          "g": "另起爐灶"
+        },
+        {
+          "src": "股癌",
+          "ep": "EP714",
+          "date": "2026-11-14",
+          "file": "research/kol_transcripts/gooaye_2026-11-14_EP714_.json",
+          "t": "0:21:30",
+          "quote": "所以你說因為可能老黃假設他下台之後，然後台灣的供應鏈就可能不會被青睞，這個又是扯太遠，這就想太多",
+          "lab": "反方觀點",
+          "g": "反方觀點"
+        }
+      ]
+    },
+    "rules": {
+      "三級": "官方證實＝官方原文由程式逐字核對；權威媒體報導＝共用權威名單內的媒體、程式打開核對；市場傳聞（未證實）＝非權威來源，只列查證結果。",
+      "司法部": "先用 justice.gov 新聞稿 API 找官方原文；找不到就標「媒體轉述、未見官方原文」，只列權威媒體的轉述。",
+      "敏感字": "標題含敏感字一律寫成「據〈媒體〉報導…，官方未證實」；只有官方原文核到的才用肯定語氣。",
+      "各方角力": "只寫角色＋公開表態＋出處；不點名指控個人為事實；陰謀論論點只在權威媒體報導過時才放，並標未證實。",
+      "意見領袖": "原話由程式對逐字稿逐字核對，標為意見領袖觀點、不是事實；逐字稿是語音轉寫，可能有錯字。"
+    }
+  }
 }
