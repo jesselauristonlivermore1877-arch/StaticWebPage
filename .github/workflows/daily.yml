@@ -293,6 +293,16 @@ jobs:
         run: |
           python -c "import sys, ir_targets as TG; L = TG.save('../site', sys.argv[1]); print('目標帳本：', L['meta'])" "$(TZ=Asia/Taipei date +%F)"
 
+      # 🟢 11-16（雲端舊7，【舊】總指揮 TODO 26bcc29）：法人買賣超隔日校正 —— 證交所 T86 會事後修正（2026-10-15 投信 59 格），
+      #    重抓 inst.npz 裡「台灣今天以前」最新一天的上市 T86＋上櫃三大法人（各一發），跟 inst.npz（外資、投信）與 dealer.npz（自營自行、避險）逐格比，
+      #    不同就覆寫那一天；同一天校正過記在 data/bars/inst_recheck.json，之後班次不再打。抓不完整（exit 2）不寫、記 soft_fail、不擋上線。
+      - name: 法人隔日校正
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          python inst_recheck.py ../site/data || { echo "::warning::法人隔日校正沒完成（前一交易日法人數字沿用當晚那一版）"; echo "法人隔日校正沒完成（前一交易日法人數字沿用當晚那一版）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+
       # 🟢 11-16（雲端舊5，總表 M6：時點正確的因子庫）：網站產出之後，把當天看得到的非價格因子存一份
       #    → data/factors/<台灣今天>/（stocks.json.gz、sectors.json.gz、manifest.json；同一天重跑覆蓋同一天、不改舊日子）。
       #    只讀上面各步寫好的檔、不打網路；回測只能用 code/tools/factor_pit.py 讀。排在健康檢查前面：check_web 看得到這一班的快照。

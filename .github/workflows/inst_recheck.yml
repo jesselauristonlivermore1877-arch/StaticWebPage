@@ -1,0 +1,79 @@
+# ============================================================================
+# inst_recheck.yml ─ 法人買賣超校正（手動，雲端舊7 11-16）
+#   每日班裡已經有「法人隔日校正」一步（自動校正前一交易日）；這支是手動版：乾跑驗證、或指定某幾天校正。
+#   程式＝CustomerServiceANDSales inst_recheck.py（跟 inst.npz／dealer.npz 逐格比，不同就覆寫；抓不完整不寫）。
+#   dates 留空＝用 last（最近幾個交易日）；dry=true 只印不寫。
+# ============================================================================
+name: 法人買賣超校正（手動）
+
+on:
+  workflow_dispatch:
+    inputs:
+      dates:
+        description: "指定日子（逗號分隔 YYYY-MM-DD）；留空用 last"
+        required: false
+        default: ""
+      last:
+        description: "最近幾個交易日"
+        required: false
+        default: "5"
+      dry:
+        description: "true＝乾跑只印不寫"
+        required: true
+        default: "true"
+
+permissions:
+  contents: write
+
+jobs:
+  recheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: ${{ inputs.dry == 'true' && format('inst-recheck-dry-{0}', github.run_id) || 'daily-build' }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: site
+
+      - name: 取出程式 repo
+        uses: actions/checkout@v4
+        with:
+          repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
+          token: ${{ secrets.CODE_REPO_TOKEN }}
+          path: code
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+          cache: pip
+
+      - run: pip install -c "$GITHUB_WORKSPACE/code/requirements-lock.txt" numpy requests feedparser certifi
+
+      - name: 校正
+        working-directory: code
+        env:
+          DATES: ${{ inputs.dates }}
+          LAST: ${{ inputs.last }}
+          DRY: ${{ inputs.dry }}
+        run: |
+          A=""
+          if [ -n "$DATES" ]; then A="--date $DATES"; else A="--last $LAST"; fi
+          if [ "$DRY" = "true" ]; then A="$A --dry"; else A="$A --force"; fi
+          python inst_recheck.py ../site/data $A
+
+      - name: commit
+        if: inputs.dry != 'true'
+        working-directory: site
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/bars/inst.npz data/bars/dealer.npz data/bars/inst_recheck.json
+          if git diff --staged --quiet; then
+            echo "沒有變化，不提交。"
+          else
+            git commit -m "data: 法人買賣超校正（手動 $(TZ=Asia/Taipei date +%F)）"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
