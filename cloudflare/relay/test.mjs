@@ -199,6 +199,26 @@ await post("set?id=s1", { subs: [] });
 pub.ws.send(sigS(++q, "GEA5"));
 await until(() => subs.u1.got.some(m => m.Seq === q)); await sleep(300);
 ok(got("s1") === "GEA5521", "s1 取消訂閱後收不到 GEA5（不用重連，下一則就生效）");
+// 11-15 A5：/訂閱 改完 → 在線的新接收端（v=2）立刻收到新快照（不用重連）；舊接收端不推
+{
+  const t5 = (await post("user?id=s5", { subs: [] })).j.token;
+  const c5 = await connect("sub", "s5", t5, true), c5o = await connect("sub", "s5o", (await post("user?id=s5o", { subs: [] })).j.token);
+  ok(!c5.err && !c5o.err, "A5：v2 接收端 s5、舊接收端 s5o 連上");
+  const r5 = await post("set?id=s5", { subs: ["GEA5"] });
+  await until(() => c5.ctl.some(c => c.ctl === "snap"));
+  const sn = c5.ctl.find(c => c.ctl === "snap");
+  ok(r5.j.pushed === 1 && (r5.j.add || []).join() === "GEA5" && sn && (sn.strats || []).join() === "GEA5", "A5：改訂閱 → 在線 v2 立刻收到新快照（strats＝GEA5）、回 pushed=1／add=GEA5", JSON.stringify({ pushed: r5.j.pushed, add: r5.j.add, strats: sn && sn.strats }));
+  const r5o = await post("set?id=s5o", { subs: ["GEA5"] }); await sleep(500);
+  ok(r5o.j.pushed === 0 && !c5o.ctl.some(c => c.ctl === "snap") && !c5o.closed, "A5：舊接收端不推中途快照、也不斷線", JSON.stringify(r5o.j));
+  const n1 = c5.ctl.filter(c => c.ctl === "snap").length;
+  const r5b = await post("set?id=s5", { subs: [] });
+  await until(() => c5.ctl.filter(c => c.ctl === "snap").length > n1);
+  const sn2 = c5.ctl.filter(c => c.ctl === "snap").pop();
+  ok((r5b.j.del || []).join() === "GEA5" && sn2 && (sn2.strats || []).length === 0 && !c5.closed, "A5：取消訂閱 → 新快照 strats 空、del=GEA5、連線不斷", JSON.stringify(r5b.j));
+  const r5c = await post("set?id=s5", { note: "只改備註" }); await sleep(300);
+  ok(r5c.j.pushed === 0 && c5.ctl.filter(c => c.ctl === "snap").length === n1 + 1, "A5：沒改訂閱（只改備註）不推");
+  c5.ws.close(); c5o.ws.close();
+}
 ok((await post("testpub", { strategy: "GEA5" })).status === 403, "testpub 只限 test 開頭頻道（正式頻道 403）");
 const cons = await fetch(`${BASE}/console`);
 ok(cons.status === 200 && (await cons.text()).includes("GEA 下單訊號管理"), "管理頁 /console 開得起來（不含資料）");
