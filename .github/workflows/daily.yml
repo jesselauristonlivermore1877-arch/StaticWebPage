@@ -293,6 +293,17 @@ jobs:
         run: |
           python -c "import sys, ir_targets as TG; L = TG.save('../site', sys.argv[1]); print('目標帳本：', L['meta'])" "$(TZ=Asia/Taipei date +%F)"
 
+      # 🟢 11-16（雲端舊5，總表 M6：時點正確的因子庫）：網站產出之後，把當天看得到的非價格因子存一份
+      #    → data/factors/<台灣今天>/（stocks.json.gz、sectors.json.gz、manifest.json；同一天重跑覆蓋同一天、不改舊日子）。
+      #    只讀上面各步寫好的檔、不打網路；回測只能用 code/tools/factor_pit.py 讀。排在健康檢查前面：check_web 看得到這一班的快照。
+      #    失敗記 soft_fail、不擋上線（exit 3＝部分來源沒抽到、其他照存，也記 soft_fail）。
+      - name: 因子快照
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          python tools/factor_snapshot.py ../site || { echo "::warning::因子快照失敗或部分來源沒抽到（看這一步的 log）"; echo "因子快照失敗或部分來源沒抽到（回測樣本這天缺欄）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+
       # 健康檢查放在提交之前，而且允許它擋下這次更新：
       # 數字荒謬時，寧可網站停在昨天的正確資料，也不要蓋上今天的錯誤資料。
       # （只有「不可能的數字」才會 exit 1；缺漏只是警告，不會擋。）
