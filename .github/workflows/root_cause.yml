@@ -27,6 +27,10 @@ on:
         description: "跑完是否跑盲測檢查（1／0）"
         required: false
         default: "1"
+      us_only:
+        description: "1＝盤前班（只看昨晚美股，台股日＝今天）；W 本機 07:25 打 dispatch 用這個（11-16【舊】裁示：07:30 GitHub 排程延遲 3～4.5 小時，改由 W 打、排程留備援）"
+        required: false
+        default: "0"
       resanitize:
         description: "只對已發布的根因 JSON 重跑敏感字關卡（日期逗號分隔，all＝全部；不打 Gemini、不跑搜尋）；留空＝照常"
         required: false
@@ -53,9 +57,11 @@ jobs:
           prevwd() { local d="$1"; while :; do d=$(date -d "$d -1 day" +%F); [ "$(date -d "$d" +%u)" -le 5 ] && { echo "$d"; return; }; done; }
           # 11-08（雲端H2，第 27 條）：07:30 排程班＝只看昨晚美股（--us-only，台股日＝今天、還沒開盤）；手動／market_alert 照舊
           #   11-16：只有 07:30 那個 cron 是盤前班；15:40 那個 cron 走下面「沒給 cases」的完整班（14:00 後台股日＝今天）
-          if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" = "30 23 * * 0-4" ] && [ -z "$CASES" ]; then
-            CASES=$(TZ=Asia/Taipei date +%F); echo "US_ONLY=1" >> "$GITHUB_ENV"
+          if { [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" = "30 23 * * 0-4" ]; } || [ "${{ inputs.us_only }}" = "1" ]; then
+            if [ -z "$CASES" ]; then CASES=$(TZ=Asia/Taipei date +%F); echo "US_ONLY=1" >> "$GITHUB_ENV"; fi
           fi
+          #   11-16：07:30 GitHub 排程只當備援 —— W 07:25 已打過盤前班（同台股日已有任何結果）就跳過，兩邊不重複跑
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" = "30 23 * * 0-4" ]; then echo "PRE_SCHED=1" >> "$GITHUB_ENV"; fi
           if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" = "40 7 * * 1-5" ]; then echo "FULL_SCHED=1" >> "$GITHUB_ENV"; fi
           if [ -z "$CASES" ]; then
             today=$(TZ=Asia/Taipei date +%F)
@@ -74,6 +80,13 @@ jobs:
           repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
           token: ${{ secrets.CODE_REPO_TOKEN }}
           path: CustomerServiceANDSales
+      - name: 盤前備援班：同台股日已有結果（W 07:25 跑過）就跳過
+        if: env.PRE_SCHED == '1'
+        working-directory: StaticWebPage
+        run: |
+          tw="${CASES%%:*}"; f="docs/data/root_cause/$tw.json"
+          if [ -f "$f" ]; then echo "台股日 $tw 已有根因結果（W 早班或其他班跑過），07:30 備援班跳過"; echo "RC_SKIP=1" >> "$GITHUB_ENV"
+          else echo "台股日 $tw 還沒有結果 → 備援班照跑盤前（W 早班沒跑到）"; fi
       - name: 盤後完整班：同台股日已有完整結果就跳過
         if: env.FULL_SCHED == '1'
         working-directory: StaticWebPage
