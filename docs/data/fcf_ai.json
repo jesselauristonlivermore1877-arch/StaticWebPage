@@ -10,36 +10,9 @@
    "tags": [
     "NetCashProvidedByUsedInOperatingActivities",
     "PaymentsToAcquirePropertyPlantAndEquipment",
-    "RevenueFromContractWithCustomerExcludingAssessedTax"
+    "RevenueFromContractWithCustomerExcludingAssessedTax+Revenues"
    ],
    "q": [
-    {
-     "end": "2023-03-31",
-     "ocf": 23.509,
-     "capex": 6.289,
-     "rev": 69.787,
-     "fcf": 17.22,
-     "fcf_m": 24.7,
-     "cx_ocf": 26.8
-    },
-    {
-     "end": "2023-06-30",
-     "ocf": 28.666,
-     "capex": 6.888,
-     "rev": 74.604,
-     "fcf": 21.778,
-     "fcf_m": 29.2,
-     "cx_ocf": 24.0
-    },
-    {
-     "end": "2023-09-30",
-     "ocf": 30.656,
-     "capex": 8.055,
-     "rev": 76.693,
-     "fcf": 22.601,
-     "fcf_m": 29.5,
-     "cx_ocf": 26.3
-    },
     {
      "end": "2023-12-31",
      "ocf": 18.915,
@@ -93,10 +66,64 @@
      "fcf": 18.953,
      "fcf_m": 21.0,
      "cx_ocf": 47.6
+    },
+    {
+     "end": "2025-06-30",
+     "ocf": 27.747,
+     "capex": 22.446,
+     "rev": 96.428,
+     "fcf": 5.301,
+     "fcf_m": 5.5,
+     "cx_ocf": 80.9
+    },
+    {
+     "end": "2025-09-30",
+     "ocf": 48.414,
+     "capex": 23.953,
+     "rev": 102.346,
+     "fcf": 24.461,
+     "fcf_m": 23.9,
+     "cx_ocf": 49.5
+    },
+    {
+     "end": "2025-12-31",
+     "ocf": 52.402,
+     "capex": 27.851,
+     "rev": 113.829,
+     "fcf": 24.551,
+     "fcf_m": 21.6,
+     "cx_ocf": 53.1
+    },
+    {
+     "end": "2026-03-31",
+     "ocf": 45.79,
+     "capex": 35.674,
+     "rev": 109.896,
+     "fcf": 10.116,
+     "fcf_m": 9.2,
+     "cx_ocf": 77.9
+    },
+    {
+     "end": "2026-06-30",
+     "ocf": 39.069,
+     "capex": 44.924,
+     "rev": 119.796,
+     "fcf": -5.855,
+     "fcf_m": -4.9,
+     "cx_ocf": 115.0
+    },
+    {
+     "end": "2026-09-30",
+     "ocf": 42.29,
+     "capex": 51.355,
+     "rev": 127.577,
+     "fcf": -9.065,
+     "fcf_m": -7.1,
+     "cx_ocf": 121.4
     }
    ],
-   "filed": "2026-04-30",
-   "down_run": 1
+   "filed": "2026-10-29",
+   "down_run": 3
   },
   {
    "tk": "AMZN",
@@ -832,6 +859,16 @@
   }
  ],
  "events": [
+  {
+   "tk": "GOOGL",
+   "nm": "Alphabet",
+   "end": "2026-09-30",
+   "filed": "2026-10-29",
+   "fcf": -9.065,
+   "fcf_prev_y": 24.461,
+   "yoy": -137.1,
+   "why": "年減超過 30%"
+  },
   {
    "tk": "AMZN",
    "nm": "Amazon",
