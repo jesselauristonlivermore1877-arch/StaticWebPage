@@ -1,22 +1,22 @@
 {
  "version": 1,
  "date": "2026-11-16",
- "built_at": "2026-11-16T17:00:48+08:00",
+ "built_at": "2026-11-16T17:53:15+08:00",
  "builder": "CustomerServiceANDSales/tools/factor_snapshot.py",
- "run": "43826076108",
+ "run": "43835984342",
  "rule": "只存當天看得到的值；回測一律用 tools/factor_pit.py load(date, factors) 讀，不讀現在的 docs/data。",
  "files": {
   "stocks.json.gz": {
-   "bytes": 124505,
-   "raw": 1082047,
-   "sha256": "a622a0eb6e591a4a3fc2cd49f97d519ce2f413c980e58a949f9bc09f096a5dff",
+   "bytes": 124482,
+   "raw": 1081999,
+   "sha256": "5be27ec128f9de1492c2970ee4298b6d062277a9b7272bd9a141f1310112f0f7",
    "n_rows": 3353,
    "n_cols": 59
   },
   "sectors.json.gz": {
-   "bytes": 1846,
-   "raw": 3643,
-   "sha256": "035e87dfdaf6a3c627338cbe266485d1fbfe682d14d73e3a6a10a7b9680bd305",
+   "bytes": 1822,
+   "raw": 3593,
+   "sha256": "2486090a960efac479d12c4e926fcd244cde5c666adc7fe174bb782773bab16f",
    "n_rows": 27,
    "n_cols": 20
   }
@@ -111,8 +111,8 @@
    "name": "量化評分",
    "file": "data/web_data.json",
    "ok": true,
-   "bytes": 1571840,
-   "sha256": "b31eeeaf5162d91fb451f583028ef6c8d8ebef1a0c9aa2be9dfe9eb5cdff2bc2",
+   "bytes": 1583456,
+   "sha256": "e0ced13dfc5abadab122caaad1b10ac5c704029e4405e0e69f17ec6d3fdf275d",
    "asof": "2026-11-16",
    "cols": null,
    "n": 253,
@@ -122,9 +122,9 @@
    "name": "河流圖位階",
    "file": "docs/data/river.json",
    "ok": true,
-   "bytes": 586418,
-   "sha256": "46c9aee710d95f0ac8b3a7cf9cc2842df50cdc1af4f910119f293eb21ee26c8e",
-   "asof": "2026-11-13",
+   "bytes": 584415,
+   "sha256": "681517bff94e868529877b1f7b7b02272a74b1a5719eec4224c881d48db8432c",
+   "asof": "2026-11-16",
    "cols": null,
    "n": 253,
    "n_sec": 27
@@ -199,11 +199,11 @@
    "name": "AI研究報告",
    "file": "docs/data/company_reports.json",
    "ok": true,
-   "bytes": 3171669,
-   "sha256": "34eee58565d9ce7cd25246a59933a445eb3d32f71dd635aafec6a822076fc88a",
+   "bytes": 3050263,
+   "sha256": "da4c763e5d243c59b3d31a2a66f34341a28b6ef9c56b2cbcf4b2ca716222d5df",
    "asof": "2026-11-16",
    "cols": null,
-   "n": 108,
+   "n": 104,
    "n_sec": 0
   }
  ]

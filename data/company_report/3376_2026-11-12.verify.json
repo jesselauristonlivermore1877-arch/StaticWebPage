@@ -2,7 +2,7 @@
  "file": "3376_2026-11-12.md",
  "code": "3376",
  "date": "2026-11-12",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 138.61 倍，站上資料 75.5172"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",
