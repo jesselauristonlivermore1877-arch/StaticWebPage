@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>產業消息與盤中資金回放</title>
+<link rel="icon" href="data:,">
+<style>
+:root{
+  --nf-bg:#fcfcfb;--nf-card:#ffffff;--nf-ink:#0b0b0b;--nf-ink2:#52514e;--nf-mute:#8a8984;--nf-line:#e4e3de;--nf-grid:#efeeea;
+  --nf-s1:#2a78d6;--nf-s2:#eb6834;--nf-s3:#1baf7a;--nf-s4:#eda100;--nf-s5:#e87ba4;--nf-s6:#008300;--nf-med:#8a8984;
+  --nf-neg:#2a78d6;--nf-pos:#e34948;--nf-mark:#6250d6;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --nf-bg:#1a1a19;--nf-card:#222221;--nf-ink:#f0efec;--nf-ink2:#c3c2b7;--nf-mute:#8d8c86;--nf-line:#3a3a37;--nf-grid:#2c2c2a;
+  --nf-s1:#3987e5;--nf-s2:#d95926;--nf-s3:#199e70;--nf-s4:#c98500;--nf-s5:#d55181;--nf-s6:#0ca30c;--nf-med:#8d8c86;
+  --nf-neg:#3987e5;--nf-pos:#e66767;--nf-mark:#9085e9;}}
+:root[data-theme="dark"]{
+  --nf-bg:#1a1a19;--nf-card:#222221;--nf-ink:#f0efec;--nf-ink2:#c3c2b7;--nf-mute:#8d8c86;--nf-line:#3a3a37;--nf-grid:#2c2c2a;
+  --nf-s1:#3987e5;--nf-s2:#d95926;--nf-s3:#199e70;--nf-s4:#c98500;--nf-s5:#d55181;--nf-s6:#0ca30c;--nf-med:#8d8c86;
+  --nf-neg:#3987e5;--nf-pos:#e66767;--nf-mark:#9085e9;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--nf-bg);color:var(--nf-ink);font:15px/1.6 system-ui,-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+.nf-wrap{max-width:1180px;margin:0 auto;padding:16px}
+.nf-wrap h1{font-size:22px;margin:4px 0 2px}
+.nf-wrap h2{font-size:17px;margin:26px 0 8px}
+.nf-sub{color:var(--nf-ink2);font-size:13px;margin:0 0 12px}
+.nf-card{background:var(--nf-card);border:1px solid var(--nf-line);border-radius:10px;padding:14px;margin:10px 0}
+.nf-concl li{margin:4px 0}
+.nf-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.nf-kpi{background:var(--nf-card);border:1px solid var(--nf-line);border-radius:10px;padding:10px 12px}
+.nf-kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums}
+.nf-kpi span{color:var(--nf-ink2);font-size:12px}
+.nf-tl{list-style:none;padding:0;margin:0}
+.nf-tl li{display:grid;grid-template-columns:86px 1fr;gap:8px;padding:8px 0;border-top:1px solid var(--nf-line)}
+.nf-tl li:first-child{border-top:0}
+.nf-tl .nf-t{font-variant-numeric:tabular-nums;color:var(--nf-ink2);font-size:13px}
+.nf-tl .nf-t b{color:var(--nf-ink);font-size:15px}
+.nf-tag{display:inline-block;font-size:12px;border:1px solid var(--nf-line);border-radius:999px;padding:0 8px;margin:2px 4px 0 0;color:var(--nf-ink2)}
+.nf-tag.nf-dn::before{content:"▼ ";color:var(--nf-neg)}
+.nf-tag.nf-up::before{content:"▲ ";color:var(--nf-pos)}
+.nf-chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.nf-chip{font:inherit;font-size:13px;border:1px solid var(--nf-line);background:var(--nf-card);color:var(--nf-ink2);border-radius:999px;padding:3px 10px;cursor:pointer}
+.nf-chip[aria-pressed="true"]{color:var(--nf-ink);border-color:var(--nf-ink2)}
+.nf-chip i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.nf-chart{position:relative;width:100%}
+.nf-chart svg{display:block;width:100%;height:auto;overflow:visible}
+.nf-chart text{fill:var(--nf-ink2);font-size:11px}
+.nf-tip{position:absolute;pointer-events:none;background:var(--nf-card);border:1px solid var(--nf-line);border-radius:8px;padding:6px 9px;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,.12);display:none;white-space:nowrap;z-index:2}
+.nf-tip b{font-variant-numeric:tabular-nums}
+.nf-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--nf-ink2);margin-top:4px}
+.nf-legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:4px;vertical-align:3px}
+.nf-tblw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.nf-tbl{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+.nf-tbl th,.nf-tbl td{border-bottom:1px solid var(--nf-line);padding:5px 6px;text-align:right;white-space:nowrap}
+.nf-tbl th{color:var(--nf-ink2);font-weight:600;position:sticky;top:0;background:var(--nf-card)}
+.nf-tbl td.nf-l,.nf-tbl th.nf-l{text-align:left}
+.nf-tbl td.nf-title{white-space:normal;min-width:220px;max-width:380px;text-align:left}
+.nf-hit{color:var(--nf-ink)}
+.nf-miss{color:var(--nf-mute)}
+.nf-sel{font:inherit;font-size:14px;padding:4px 8px;border-radius:6px;border:1px solid var(--nf-line);background:var(--nf-card);color:var(--nf-ink)}
+.nf-note{color:var(--nf-ink2);font-size:13px}
+.nf-note li{margin:4px 0}
+code{font-size:12px}
+</style>
+</head>
+<body>
+<div class="nf-wrap">
+  <h1>產業消息 → 盤中資金 → 價格：回放驗證</h1>
+  <p class="nf-sub">N2 第 4 步雲端部分（預覽，不是正式頁）。數字全部由程式 <code>research/news_flow/replay.py</code> 從新聞池、盤中每分鐘資金、1 分K 算出，未用 AI。<span id="nf-made"></span></p>
+
+  <div class="nf-card nf-concl">
+    <b>先講結論</b>
+    <ul id="nf-concl"></ul>
+  </div>
+  <div class="nf-kpis" id="nf-kpis"></div>
+
+  <h2>11-16 時間軸：消息 → 族群資金 → 價格</h2>
+  <p class="nf-sub">時間＝台北；「收到」＝我們的新聞池第一次抓到（每 30 分鐘一班），「發布」＝來源發布時間。盤前收到的消息從開盤（前一日收盤）起算。</p>
+  <div class="nf-card"><ul class="nf-tl" id="nf-tl"></ul></div>
+
+  <h2>11-16 各族群盤中資金與價格</h2>
+  <p class="nf-sub">點族群切換（最多 6 個）；灰線＝全部 25 個族群的中位數。紫色直線＝盤中收到產業消息的時間（編號對照上面時間軸）。</p>
+  <div class="nf-chips" id="nf-chips"></div>
+  <div class="nf-card">
+    <b>累計淨主動買比</b><span class="nf-note">（開盤起外盤−內盤 ÷ 外盤＋內盤，族群成員加總）</span>
+    <div class="nf-chart" id="nf-c1"></div>
+    <div class="nf-legend" id="nf-lg1"></div>
+  </div>
+  <div class="nf-card">
+    <b>族群等權平均漲跌（%，對前一日收盤）</b>
+    <div class="nf-chart" id="nf-c2"></div>
+    <div class="nf-legend" id="nf-lg2"></div>
+  </div>
+
+  <h2>每則消息之後 15／30 分鐘</h2>
+  <p class="nf-sub">「超額」＝本族群減同時段全部族群中位數；排名＝依消息方向（偏空由弱到強）第幾名。黑字＝方向對（命中），灰字＝方向錯。同一天同族群同方向 60 分鐘內只算第一則。</p>
+  <div style="margin:4px 0 8px"><label class="nf-note">交易日 <select class="nf-sel" id="nf-day"></select></label></div>
+  <div class="nf-card nf-tblw"><table class="nf-tbl" id="nf-ev"></table></div>
+
+  <h2>現有分類漏了多少（11-16）</h2>
+  <p class="nf-sub">對照表對到的標題 vs 新聞池現有的 <code>tw_grp</code>（族群）與 <code>gd</code>（多空）。</p>
+  <div class="nf-card nf-tblw"><table class="nf-tbl" id="nf-miss"></table></div>
+
+  <h2>產業鏈對照表 v0</h2>
+  <div class="nf-card nf-note" id="nf-map"></div>
+
+  <h2>限制</h2>
+  <div class="nf-card nf-note"><ul id="nf-lim"></ul></div>
+</div>
+<div class="nf-tip" id="nf-tip"></div>
+<script>
+(function(){
+"use strict";
+var COLORS=["--nf-s1","--nf-s2","--nf-s3","--nf-s4","--nf-s5","--nf-s6"];
+var DEF=["散熱與液冷","CCL與電子材料","伺服器與品牌組裝","封裝測試","記憶體","晶圓代工與製造"];
+var D=null, sel=DEF.slice(), slot={};
+DEF.forEach(function(g,i){slot[g]=i;});
+function $(id){return document.getElementById(id);}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function f(v,d,pct){if(v==null)return "—";var s=(v>0?"+":"")+v.toFixed(d);return pct?s+"%":s;}
+function cv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+
+fetch("data.json").then(function(r){return r.json();}).then(function(d){D=d;init();}).catch(function(e){$("nf-concl").innerHTML="<li>資料讀取失敗："+esc(e)+"</li>";});
+
+function rate(o){return o&&o.n?Math.round(o["命中率"]*100)+"%（"+o["命中"]+"／"+o.n+"）":"—";}
+
+function init(){
+  $("nf-made").textContent="　產生："+D.made+"（台北）";
+  var S=D.summary, L=D.lead, M=D.miss;
+  var nd=D.days.length, nd0=D.days[0]["日"], nd1=D.days[nd-1]["日"];
+  var leadR=L["收到"], leadP=L["發布"];
+  var lr=(leadR["資金先動"]||0)+(leadR["資金在消息後轉向"]||0)+(leadR["資金沒反應"]||0);
+  var lp=(leadP["資金先動"]||0)+(leadP["資金在消息後轉向"]||0)+(leadP["資金沒反應"]||0);
+  var gdN=0,gdR=0;D.days.forEach(function(x){gdN+=x["現有gd有方向"];gdR+=x["現有gd有方向且結果型"];});
+  var c=[
+    "11-16 消息確實在開盤前就有：「輝達VR傳延後放量 牽動台鏈」08:01 發布、08:31 收到；SK 海力士建測試廠 08:43 發布、09:01 收到。但現有分類一則都沒判方向（VR 那則族群、多空都空白；SK 那幾則判「中性」）。",
+    "11-16 是全面殺盤（25 個族群收盤中位數 "+medAt("ret","13:31")+"），被點名的 AI 鏈與封測跌得多，但其他族群也一起跌；跟同時段中位數比，對照表點名的族群 15 分鐘價格命中 "+rate(S["11-16"]["價格15"])+"、資金命中 "+rate(S["11-16"]["資金15"])+"。",
+    nd+" 個交易日（"+nd0+"～"+nd1+"）合計 "+S["全部"]["事件"]+" 個事件：15 分鐘資金命中 "+rate(S["全部"]["資金15"])+"、價格命中 "+rate(S["全部"]["價格15"])+"；30 分鐘資金 "+rate(S["全部"]["資金30"])+"、價格 "+rate(S["全部"]["價格30"])+"——都在 50% 左右，等於亂猜。",
+    "「消息領先資金」拿不出證據：盤中收到的 "+lr+" 個事件裡，資金在收到之前 15 分鐘就已往同方向動的有 "+(leadR["資金先動"]||0)+" 個，收到後才轉向的只有 "+(leadR["資金在消息後轉向"]||0)+" 個；改用發布時間（假設 0 延遲）也一樣（"+(leadP["資金先動"]||0)+" 對 "+(leadP["資金在消息後轉向"]||0)+"，共 "+lp+"）。亂猜基準約 50%／25%。",
+    "現有分類漏得很多：對照表對到的 "+M["對到標題（不重複）"]+" 則不重複標題，現有 gd 完全沒判方向的 "+M["不重複標題中現有完全沒判方向"]+" 則；新聞池裡現有 gd 判了多空的 "+gdN+" 則標題裡，"+gdR+" 則（"+Math.round(gdR/gdN*100)+"%）是「台股崩 X 點」這類結果型。→ 對照表補得上「分類」缺口，但「速度」與「訊號有沒有用」還要 W 盤中快速新聞＋更多樣本才能判斷。"
+  ];
+  $("nf-concl").innerHTML=c.map(function(s){return "<li>"+esc(s)+"</li>";}).join("");
+  var k=[
+    ["回放交易日",nd+" 天",nd0+"～"+nd1],
+    ["對到的事件",S["全部"]["事件"]+" 個","盤前 "+S["盤前"]["事件"]+"／盤中 "+S["盤中"]["事件"]],
+    ["15 分資金命中",rate(S["全部"]["資金15"]).split("（")[0],"亂猜＝50%"],
+    ["15 分價格命中",rate(S["全部"]["價格15"]).split("（")[0],"亂猜＝50%"],
+    ["收到後才轉向",(leadR["資金在消息後轉向"]||0)+"／"+lr,"資金先動 "+(leadR["資金先動"]||0)],
+    ["現有沒判方向",M["不重複標題中現有完全沒判方向"]+"／"+M["對到標題（不重複）"],"對到的不重複標題"]
+  ];
+  $("nf-kpis").innerHTML=k.map(function(x){return '<div class="nf-kpi"><span>'+esc(x[0])+'</span><b>'+esc(x[1])+'</b><span>'+esc(x[2])+'</span></div>';}).join("");
+  timeline(); chips(); draw();
+  var days=D.days.map(function(x){return x["日"];});
+  $("nf-day").innerHTML='<option value="">全部</option>'+days.slice().reverse().map(function(d){return '<option'+(d===D.focus?" selected":"")+'>'+d+'</option>';}).join("");
+  $("nf-day").addEventListener("change",evTable); evTable();
+  missTable(); mapInfo(); limits();
+  window.addEventListener("resize",function(){clearTimeout(window.__nfR);window.__nfR=setTimeout(draw,150);});
+}
+
+function idx(t){return D.curves.min.indexOf(t);}
+function medAt(key,t){var i=idx(t),a=[];D.curves.groups.forEach(function(g){var v=D.curves[key][g][i];if(v!=null)a.push(v);});a.sort(function(x,y){return x-y;});var m=a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2;return key==="ret"?f(m,2,true):f(m,3);}
+
+function newsList(){
+  var seen={},out=[];
+  D.titles.forEach(function(t){
+    if(t["日"]!==D.focus)return;
+    var k=t["標題"];
+    if(!seen[k]){seen[k]={t:t,groups:[]};out.push(seen[k]);}
+    seen[k].groups.push([t["族群"],t["方向"]]);
+  });
+  var n=0;
+  out.forEach(function(o){var h=+o.t["收到"].slice(0,2)*60+ +o.t["收到"].slice(3,5);o.pre=h<540;o.no=o.pre?null:++n;});
+  return out;
+}
+function timeline(){
+  var L=newsList(), c=D.curves, i15=idx("09:15");
+  var h=L.map(function(o){
+    var t=o.t, g=o.groups.map(function(x){return '<span class="nf-tag '+(x[1]==="偏空"?"nf-dn":"nf-up")+'">'+esc(x[0])+'</span>';}).join("");
+    var cur=(t["現有族群"]||"空白")+"／"+(t["現有多空"]||"空白");
+    return '<li><div class="nf-t">收到 <b>'+esc(t["收到"])+'</b><br>發布 '+esc(t["發布"].slice(6))+(o.no?'<br>標記 '+o.no:'<br>盤前')+'</div><div><div>'+esc(t["標題"])+' <span class="nf-note">— '+esc(t["來源"])+'</span></div><div>'+g+'</div><div class="nf-note">現有分類：'+esc(cur)+'</div></div></li>';
+  });
+  var g0=["散熱與液冷","CCL與電子材料","載板與PCB","封裝測試","記憶體","伺服器與品牌組裝"];
+  var rows=g0.map(function(g){return esc(g)+" "+f(c.ret[g][idx("09:01")],1,true)+" → "+f(c.ret[g][i15],1,true);}).join("；");
+  h.push('<li><div class="nf-t"><b>09:01～09:15</b></div><div>開盤第一根 → 09:15 族群等權漲跌：'+rows+'；全部族群中位數 '+medAt("ret","09:01")+" → "+medAt("ret","09:15")+'。</div></li>');
+  $("nf-tl").innerHTML=h.join("");
+}
+
+function chips(){
+  var c=D.curves;
+  var order=c.groups.slice().sort(function(a,b){return (DEF.indexOf(a)<0?99:DEF.indexOf(a))-(DEF.indexOf(b)<0?99:DEF.indexOf(b))||a.localeCompare(b);});
+  $("nf-chips").innerHTML=order.map(function(g){var on=sel.indexOf(g)>=0;return '<button class="nf-chip" aria-pressed="'+on+'" data-g="'+esc(g)+'">'+(on?'<i style="background:var('+COLORS[slot[g]]+')"></i>':'')+esc(g)+'<span class="nf-note"> '+c.members[g]+'檔</span></button>';}).join("");
+  Array.prototype.forEach.call($("nf-chips").children,function(b){b.addEventListener("click",function(){
+    var g=b.getAttribute("data-g"),k=sel.indexOf(g);
+    if(k>=0){sel.splice(k,1);delete slot[g];}
+    else{if(sel.length>=6)return;var used={};sel.forEach(function(x){used[slot[x]]=1;});for(var s=0;s<6;s++)if(!used[s]){slot[g]=s;break;}sel.push(g);}
+    chips();draw();
+  });});
+}
+
+function draw(){
+  chart("nf-c1","nf-lg1","ratio",function(v){return f(v,2);});
+  chart("nf-c2","nf-lg2","ret",function(v){return f(v,1,true);});
+}
+function chart(id,lgId,key,fmt){
+  var c=D.curves, el=$(id), W=Math.max(320,el.clientWidth||700), H=W<500?240:300;
+  var m={l:44,r:12,t:22,b:26}, iw=W-m.l-m.r, ih=H-m.t-m.b, n=c.min.length;
+  var med=c.min.map(function(_,i){var a=[];c.groups.forEach(function(g){var v=c[key][g][i];if(v!=null)a.push(v);});a.sort(function(x,y){return x-y;});return a.length?(a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2):null;});
+  var series=sel.map(function(g){return {g:g,v:c[key][g],col:"var("+COLORS[slot[g]]+")"};});
+  var lo=Infinity,hi=-Infinity;
+  series.concat([{v:med}]).forEach(function(s){s.v.forEach(function(v){if(v!=null){lo=Math.min(lo,v);hi=Math.max(hi,v);}});});
+  lo=Math.min(lo,0);hi=Math.max(hi,0);var pad=(hi-lo)*0.06||1;lo-=pad;hi+=pad;
+  function X(i){return m.l+iw*i/(n-1);} function Y(v){return m.t+ih*(hi-v)/(hi-lo);}
+  var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+(key==="ret"?"族群漲跌":"淨主動買比")+'">';
+  var step=niceStep((hi-lo)/5);
+  for(var v=Math.ceil(lo/step)*step;v<=hi;v+=step){var y=Y(v);s+='<line x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+y+'" y2="'+y+'" stroke="var(--nf-grid)"/><text x="'+(m.l-6)+'" y="'+(y+4)+'" text-anchor="end">'+(key==="ret"?Math.round(v*10)/10+"%":Math.round(v*100)/100)+'</text>';}
+  s+='<line x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+Y(0)+'" y2="'+Y(0)+'" stroke="var(--nf-mute)" stroke-width="1"/>';
+  ["09:30","10:30","11:30","12:30","13:30"].forEach(function(t){var i=idx(t);if(i<0)return;s+='<text x="'+X(i)+'" y="'+(H-6)+'" text-anchor="middle">'+t+'</text>';});
+  var mk={};newsList().forEach(function(o){if(o.pre)return;var i=idx(o.t["收到"]);if(i<0)i=0;(mk[i]=mk[i]||[]).push(o.no);});
+  Object.keys(mk).forEach(function(i){var x=X(+i);s+='<line x1="'+x+'" x2="'+x+'" y1="'+m.t+'" y2="'+(m.t+ih)+'" stroke="var(--nf-mark)" stroke-width="1.5" stroke-dasharray="3 3"/><text x="'+x+'" y="'+(m.t-6)+'" text-anchor="middle" style="fill:var(--nf-mark);font-weight:600">'+mk[i].join("·")+'</text>';});
+  function path(v){var d="",pen=false;v.forEach(function(y,i){if(y==null){pen=false;return;}d+=(pen?"L":"M")+X(i).toFixed(1)+" "+Y(y).toFixed(1);pen=true;});return d;}
+  s+='<path d="'+path(med)+'" fill="none" stroke="var(--nf-med)" stroke-width="2" stroke-dasharray="5 4"/>';
+  series.forEach(function(se){s+='<path d="'+path(se.v)+'" fill="none" stroke="'+se.col+'" stroke-width="2" stroke-linejoin="round"/>';});
+  s+='<line class="nf-x" x1="0" x2="0" y1="'+m.t+'" y2="'+(m.t+ih)+'" stroke="var(--nf-ink2)" stroke-width="1" style="display:none"/>';
+  s+='<rect x="'+m.l+'" y="'+m.t+'" width="'+iw+'" height="'+ih+'" fill="transparent" class="nf-hit-area"/></svg>';
+  el.innerHTML=s;
+  $(lgId).innerHTML=series.map(function(se){return '<span><i style="background:'+se.col+'"></i>'+esc(se.g)+'</span>';}).join("")+'<span><i style="background:var(--nf-med)"></i>全部族群中位數</span>';
+  var svg=el.querySelector("svg"), xl=svg.querySelector(".nf-x"), tip=$("nf-tip");
+  function move(ev){
+    var r=svg.getBoundingClientRect(), sx=(ev.touches?ev.touches[0].clientX:ev.clientX)-r.left, px=sx*W/r.width;
+    var i=Math.round((px-m.l)/iw*(n-1)); if(i<0||i>=n){tip.style.display="none";xl.style.display="none";return;}
+    xl.setAttribute("x1",X(i));xl.setAttribute("x2",X(i));xl.style.display="";
+    var rows=series.map(function(se){return [se.g,se.v[i],se.col];}).sort(function(a,b){return (b[1]==null?-1e9:b[1])-(a[1]==null?-1e9:a[1]);});
+    tip.innerHTML="<div><b>"+c.min[i]+"</b></div>"+rows.map(function(x){return '<div><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+x[2]+';margin-right:5px"></i>'+esc(x[0])+' <b>'+fmt(x[1])+'</b></div>';}).join("")+'<div class="nf-note">中位數 <b>'+fmt(med[i])+'</b></div>';
+    tip.style.display="block";
+    var pr=document.documentElement.getBoundingClientRect(), tx=r.left+X(i)*r.width/W-pr.left+12, ty=r.top-pr.top+20;
+    if(tx+tip.offsetWidth>document.documentElement.clientWidth-8)tx=r.left+X(i)*r.width/W-pr.left-tip.offsetWidth-12;
+    tip.style.left=Math.max(4,tx)+"px";tip.style.top=ty+"px";
+  }
+  svg.addEventListener("mousemove",move);svg.addEventListener("touchstart",move,{passive:true});svg.addEventListener("touchmove",move,{passive:true});
+  svg.addEventListener("mouseleave",function(){tip.style.display="none";xl.style.display="none";});
+}
+function niceStep(r){var p=Math.pow(10,Math.floor(Math.log10(r)));var x=r/p;return (x<1.5?1:x<3?2:x<7?5:10)*p;}
+
+function cell(v,ex,rk,d,pct){
+  if(v==null)return '<td class="nf-miss">—</td><td class="nf-miss">—</td>';
+  var hit=ex!=null&&((ex<0)===(d==="偏空"));
+  return '<td class="'+(hit?"nf-hit":"nf-miss")+'">'+(pct?f(v,2,true):f(v,3))+'<br><span class="nf-note">超額 '+(pct?f(ex,2,true):f(ex,3))+'</span></td><td class="'+(hit?"nf-hit":"nf-miss")+'">'+(rk||"—")+'</td>';
+}
+function evTable(){
+  var day=$("nf-day").value;
+  var ev=D.events.filter(function(e){return !day||e["日"]===day;});
+  var h='<thead><tr><th class="nf-l">日</th><th>收到</th><th>起算</th><th class="nf-l">族群</th><th class="nf-l">方向</th><th class="nf-l">標題（第一則）</th><th>則數</th><th>資金15</th><th>排名</th><th>價格15</th><th>排名</th><th>資金30</th><th>排名</th><th>價格30</th><th>排名</th><th class="nf-l">領先（收到）</th></tr></thead><tbody>';
+  h+=ev.map(function(e){return '<tr><td class="nf-l">'+e["日"].slice(5)+'</td><td>'+e["收到"]+'</td><td>'+(e["盤前"]?"前日收盤":e["事件分"])+'</td><td class="nf-l">'+esc(e["族群"])+'</td><td class="nf-l">'+esc(e["方向"])+'</td><td class="nf-title">'+esc(e["標題"])+' <span class="nf-note">'+esc(e["來源"])+'</span></td><td>'+e["則數"]+'</td>'+
+    cell(e["資金15"],e["資金15超額"],e["資金15排名"],e["方向"])+cell(e["價格15"],e["價格15超額"],e["價格15排名"],e["方向"],1)+
+    cell(e["資金30"],e["資金30超額"],e["資金30排名"],e["方向"])+cell(e["價格30"],e["價格30超額"],e["價格30排名"],e["方向"],1)+
+    '<td class="nf-l">'+esc(e["領先"]||"—")+'</td></tr>';}).join("");
+  $("nf-ev").innerHTML=h+'</tbody>';
+}
+function missTable(){
+  var L=newsList();
+  var h='<thead><tr><th>收到</th><th class="nf-l">標題</th><th class="nf-l">對照表：族群＋方向</th><th class="nf-l">現有族群</th><th class="nf-l">現有多空</th></tr></thead><tbody>';
+  h+=L.map(function(o){var t=o.t;return '<tr><td>'+t["收到"]+'</td><td class="nf-title">'+esc(t["標題"])+'</td><td class="nf-l" style="white-space:normal;min-width:160px">'+o.groups.map(function(x){return esc(x[0])+x[1].slice(1);}).join("、")+'</td><td class="nf-l">'+esc(t["現有族群"]||"（空白）")+'</td><td class="nf-l">'+esc(t["現有多空"]||"（空白）")+'</td></tr>';}).join("");
+  $("nf-miss").innerHTML=h+'</tbody>';
+}
+function mapInfo(){
+  var m=D.map, hits=Object.keys(m.rule_hits).sort().map(function(k){return k+" "+m.rule_hits[k];}).join("、");
+  $("nf-map").innerHTML="<p><b>v0 手寫，之後由 W 用 Gemini 擴充、Evans 看過才用。</b> 檔案 <code>research/news_flow/chain_map.csv</code>："+m.rows+" 列、"+m.rules.length+" 條規則，涵蓋 "+m.groups.length+" 個族群（"+esc(m.groups.join("、"))+"）。族群名一律是 sector_map 的大類，程式檢查，不在表內就停。</p><p>範圍：AI 伺服器鏈（輝達、GB／VR 平台：延後、砍單、放緩 → 組裝、電源、散熱、PCB、CCL、連接器、IC設計偏空；放量、拉貨、追單 → 偏多）、記憶體（海力士、三星、美光：自建測試 → 封測、測試介面偏空；擴產、漲價 → 記憶體偏多；跌價 → 偏空）、晶圓代工（台積電漲價、上修、擴產 → 代工、設備、廠務偏多；下修、砍單 → 偏空；成熟製程）、封測（CoWoS 擴產、封測漲價／砍單）。</p><p>各規則命中標題數（"+D.days.length+" 天）："+esc(hits)+"。</p>";
+}
+function limits(){
+  var st=D.days.map(function(d){return d["日"].slice(5)+" 候選 "+d["產業事件候選"]+"→對到 "+d["對到"];}).join("、");
+  var L=[
+    "新聞池是 Actions 每 30 分鐘一班，「收到」比「發布」晚 0～30 分鐘；盤中要 ≤ 5 分鐘得靠 W 本機快速抓。",
+    "只看台北 07:00～13:30 收到的新聞；前一晚（美股時段）的消息沒算進來，但它們多半已反映在開盤。",
+    "11-13 以前的新聞取自 news_live.json 的 GitHub 歷史版本（每天收盤後第一版）；"+D.days.length+" 個交易日都有盤中資料。",
+    "盤中資金只有權值 200 檔（sector_map 197 檔裡約 139 檔在內），族群成員 ≥ 2 檔才算；光通訊、被動元件等部分族群成員少。",
+    "對照表 v0 只有手寫 14 條規則，每天產業事件候選 2,300～3,200 則只對到 3～11 則；會漏，也會誤對（例：標題同時講消息與結果）。",
+    "同一事件常有多個族群一起被點名，又是同一天同方向，彼此不獨立；事件數 "+D.summary["全部"]["事件"]+" 看起來多，實際獨立的消息只有幾十則，樣本少。",
+    "跌停鎖死時只有內盤成交、價格不動：11-16 12:02 散熱與液冷之後 15 分鐘淨主動買比 −1.00、價格 0.00%，價格命中會被算成「沒跑輸」；資金欄比價格欄更能反映這種情況。",
+    "11-16 這種全面殺盤日，跟「全部族群中位數」比會把大盤效果扣掉，被點名族群跌得多但不一定跑輸中位數。",
+    "結果型標題規則：寫在 replay.py 檔頭，先定後看結果；之後只加了「台股…X 點」一條（11-16「台股血洗逾1800點」漏網）。",
+    "每天篩選數："+st+"。"
+  ];
+  $("nf-lim").innerHTML=L.map(function(s){return "<li>"+esc(s)+"</li>";}).join("");
+}
+})();
+</script>
+</body>
+</html>
