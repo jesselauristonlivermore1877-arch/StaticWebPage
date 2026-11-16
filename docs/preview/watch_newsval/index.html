@@ -1,0 +1,38 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>看盤區：產業快訊＋估值（預覽）</title>
+<style>
+:root{--bg:#0d1117;--card:#161c24;--ink:#e6e8eb;--ink2:#9aa3ad;--line:#26303d;--acc:#d6a54a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 system-ui,-apple-system,"Noto Sans TC",sans-serif}
+.wn-main{max-width:1100px;margin:0 auto;padding:14px 16px 40px}
+.wn-pv{background:#2e2715;border:1px solid #a67c2c;border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:10px}
+.wn-nav{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
+.wn-nav button{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 14px;font-size:14px;cursor:pointer}
+.wn-nav button.on{background:var(--acc);border-color:var(--acc);color:#111;font-weight:700}
+.wn-nav button[disabled]{opacity:.45;cursor:default}
+.wn-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.wn-pg{display:none}.wn-pg.on{display:block}
+.wn-note{color:var(--ink2);font-size:12.5px}
+</style></head><body><main class="wn-main">
+<div class="wn-pv"><b>預覽（Evans 看）</b>：會員站看盤區的兩個新東西——① 「盤中資金」頁併入產業快訊（族群資金曲線＋消息時間線＋多空燈號）；② 新標籤「估值」。
+頁籤列照會員站順序，灰色的是現有頁籤（預覽不放）。資料是 <span id="wnAt"></span> 的快照；正式版盤中每分鐘跟著盤中資金更新。</div>
+<nav class="wn-nav"><button disabled>看盤區</button><button data-p="flow" class="on">盤中資金</button><button data-p="val">估值</button><button disabled>訊號區</button></nav>
+<section class="wn-pg on" id="p-flow"><div class="wn-card" id="nfRoot">載入中…</div></section>
+<section class="wn-pg" id="p-val"><div id="vdRoot">載入中…</div></section>
+</main>
+<script src="watch_ext.js"></script>
+<script>
+document.querySelectorAll(".wn-nav button[data-p]").forEach(function (b) { b.onclick = function () {
+  document.querySelectorAll(".wn-nav button[data-p]").forEach(function (x) { x.classList.toggle("on", x === b); });
+  document.querySelectorAll(".wn-pg").forEach(function (s) { s.classList.toggle("on", s.id === "p-" + b.dataset.p); }); }; });
+fetch("data.json", {cache: "no-store"}).then(function (r) { return r.json(); }).then(function (d) {
+  document.getElementById("wnAt").textContent = d.flow.day + " " + (d.flow.made || "").slice(11, 16) + "（資金）、產業快訊抓到 " + (d.news.made || "—").slice(11);
+  nfMount(document.getElementById("nfRoot"), d.flow, d.news);
+}).catch(function (e) { document.getElementById("nfRoot").textContent = "資料載入失敗：" + e; });
+var SRC = "正式檔";
+fetch("../../data/val_decomp.json", {cache: "no-store"}).then(function (r) { if (!r.ok) throw r.status; return r.json(); })
+  .catch(function () { SRC = "預覽快照"; return fetch("../val_decomp/data.json", {cache: "no-store"}).then(function (r) { return r.json(); }); })
+  .then(function (d) { vdMount(document.getElementById("vdRoot"), d, SRC); })
+  .catch(function (e) { document.getElementById("vdRoot").textContent = "估值資料載入失敗：" + e; });
+</script></body></html>
