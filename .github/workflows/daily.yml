@@ -316,6 +316,16 @@ jobs:
         run: |
           python tools/val_decomp.py --swp ../site --out ../site/docs/data/val_decomp.json || { echo "::warning::估值拆解核對沒過或失敗（網站沿用上一份 val_decomp.json）"; echo "估值拆解核對沒過或失敗（網站沿用上一份 val_decomp.json）" >> "$RUNNER_TEMP/soft_fail.txt"; }
 
+      # 🟢 11-16 C36（W，【新】派工；Evans：做好的都快推上站）：議題式產業分析 → docs/data/topic_industry.json（主站「產業 › 產業議題」）
+      #    讀上一步的 val_decomp.json、data/guidance.json、docs/data/industry_notes.json；不打網路、不用 Gemini。
+      #    程式第二條路核對（每檔拆解重算、環節中位數對 val_decomp、法說引句逐字在 guidance.json），沒過 exit 1、不寫檔 → 網站沿用上一份；只記 ⚠ 不擋上線。
+      - name: 議題式產業
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          python tools/topic_industry.py --swp ../site --vd ../site/docs/data/val_decomp.json --out ../site/docs/data/topic_industry.json || { echo "::warning::議題式產業核對沒過或失敗（網站沿用上一份 topic_industry.json）"; echo "議題式產業核對沒過或失敗（網站沿用上一份 topic_industry.json）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+
       # 🟢 11-16（雲端舊7，【舊】總指揮 TODO 26bcc29）：法人買賣超隔日校正 —— 證交所 T86 會事後修正（2026-10-15 投信 59 格），
       #    重抓 inst.npz 裡「台灣今天以前」最新一天的上市 T86＋上櫃三大法人（各一發），跟 inst.npz（外資、投信）與 dealer.npz（自營自行、避險）逐格比，
       #    不同就覆寫那一天；同一天校正過記在 data/bars/inst_recheck.json，之後班次不再打。抓不完整（exit 2）不寫、記 soft_fail、不擋上線。
