@@ -31,6 +31,10 @@ on:
         description: "1＝盤前班（只看昨晚美股，台股日＝今天）；W 本機 07:25 打 dispatch 用這個（11-16【舊】裁示：07:30 GitHub 排程延遲 3～4.5 小時，改由 W 打、排程留備援）"
         required: false
         default: "0"
+      hints:
+        description: "指定必查的候選原因（分號分隔；11-17 加：一樣搜尋＋出處核對，沒通過不上卡）；留空＝照常"
+        required: false
+        default: ""
       resanitize:
         description: "只對已發布的根因 JSON 重跑敏感字關卡（日期逗號分隔，all＝全部；不打 Gemini、不跑搜尋）；留空＝照常"
         required: false
@@ -116,12 +120,13 @@ jobs:
           GEA_TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           GEA_TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           GEMINI_TASK_ROUTE: api
+          RC_HINTS: ${{ inputs.hints }}
         run: |
           IFS=',' read -ra L <<< "$CASES"
           for c in "${L[@]}"; do
             tw="${c%%:*}"; us=""; [[ "$c" == *:* ]] && us="${c#*:}"
             echo "::group::根因追蹤 $tw ${us:+（美股 $us）}"
-            python tools/root_cause.py --site ../StaticWebPage --tw "$tw" ${us:+--us "$us"} ${US_ONLY:+--us-only} || echo "✗ $tw 失敗（繼續下一個）"
+            python tools/root_cause.py --site ../StaticWebPage --tw "$tw" ${us:+--us "$us"} ${US_ONLY:+--us-only} ${RC_HINTS:+--hints "$RC_HINTS"} || echo "✗ $tw 失敗（繼續下一個）"
             echo "::endgroup::"
           done
       - name: 盲測檢查
