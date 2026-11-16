@@ -276,6 +276,17 @@ jobs:
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
         run: python tools/pick_edm.py ../site ../site/docs/data/pick_edm.json
 
+      # 🟢 11-16（雲端舊13，Evans「借券每天存：要做」）：上市 TWT93U＋上櫃 margin/sbl 借券賣出餘額 → data/sbl/<資料日>.json（不對外）
+      #    證交所約 20:30／22:30 才更新當天 → 15:40、18:40 班抓不到就跳過，21:20／22:05 班補；往回看 5 天缺的補上。
+      #    逐檔官方公式＋跨日核對，沒過不寫那天；失敗不擋上線。
+      - name: 借券賣出餘額每天存
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 10
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python tools/sbl_daily.py ../site --days 5
+
       # 🟢 11-05 晚（雲端A，總指揮 A3）：疊圖三張（融資維持率 × 指數、委買委賣每筆張數＋電金比、市場結構轉變）→ docs/data/mkt_overlay.json
       #    只讀上面各步寫好的檔、不打網路；失敗不擋（網站沿用上一份）
       - name: 疊圖三張（市場動態）
