@@ -3,12 +3,11 @@
  "name": "貿聯-KY",
  "date": "2026-11-16",
  "industry": "連接器與機構件",
- "made": "本機 company_report（2026-11-16T17:29）",
+ "made": "本機 company_report（2026-11-17T03:09）",
  "deck": {
-  "url": "https://mopsov.twse.com.tw/nas/STR/366520261113M002.pdf",
-  "date": "2026-11-27"
+  "url": "https://mopsov.twse.com.tw/nas/STR/366520261113M001.pdf",
+  "date": "2026-11-13"
  },
- "kind": "pick",
  "transcript": {
   "date": "2026-11-13",
   "path": "site:docs/data/ir/tr/3665_2026-11-13.json",
@@ -1293,101 +1292,101 @@
   {
    "id": "prod_1",
    "sec": "產品線",
-   "label": "電器用 營收占比（2026 3Q）",
+   "label": "電器用 營收占比（3Q26）",
    "value": 12.0,
    "unit": "%",
    "text": "12%",
-   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M002.pdf",
-   "period": "2026 3Q"
+   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M001.pdf",
+   "period": "3Q26"
   },
   {
    "id": "prod_2",
    "sec": "產品線",
-   "label": "資訊科技與數據傳輸 營收占比（2026 3Q）",
+   "label": "資訊科技與數據傳輸 營收占比（3Q26）",
    "value": 48.0,
    "unit": "%",
    "text": "48%",
-   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M002.pdf",
-   "period": "2026 3Q"
+   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M001.pdf",
+   "period": "3Q26"
   },
   {
    "id": "prod_3",
    "sec": "產品線",
-   "label": "車用 營收占比（2026 3Q）",
+   "label": "車用 營收占比（3Q26）",
    "value": 8.0,
    "unit": "%",
    "text": "8%",
-   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M002.pdf",
-   "period": "2026 3Q"
+   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M001.pdf",
+   "period": "3Q26"
   },
   {
    "id": "prod_4",
    "sec": "產品線",
-   "label": "工業用 營收占比（2026 3Q）",
+   "label": "工業用 營收占比（3Q26）",
    "value": 31.0,
    "unit": "%",
    "text": "31%",
-   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M002.pdf",
-   "period": "2026 3Q"
+   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M001.pdf",
+   "period": "3Q26"
   },
   {
    "id": "prod_5",
-   "sec": "產品線",
-   "label": "Others 營收占比（3Q25）",
-   "value": 49.0,
-   "unit": "%",
-   "text": "49%",
-   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M002.pdf",
-   "period": "3Q25"
-  },
-  {
-   "id": "prod_6",
-   "sec": "產品線",
-   "label": "SPE 營收占比（3Q25）",
-   "value": 11.0,
-   "unit": "%",
-   "text": "11%",
-   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M002.pdf",
-   "period": "3Q25"
-  },
-  {
-   "id": "prod_7",
-   "sec": "產品線",
-   "label": "HPC 營收占比（3Q25）",
-   "value": 40.0,
-   "unit": "%",
-   "text": "40%",
-   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M002.pdf",
-   "period": "3Q25"
-  },
-  {
-   "id": "prod_8",
-   "sec": "產品線",
-   "label": "Others 營收占比（3Q26）",
-   "value": 41.0,
-   "unit": "%",
-   "text": "41%",
-   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M002.pdf",
-   "period": "3Q26"
-  },
-  {
-   "id": "prod_9",
-   "sec": "產品線",
-   "label": "SPE 營收占比（3Q26）",
-   "value": 13.0,
-   "unit": "%",
-   "text": "13%",
-   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M002.pdf",
-   "period": "3Q26"
-  },
-  {
-   "id": "prod_10",
    "sec": "產品線",
    "label": "HPC 營收占比（3Q26）",
    "value": 46.0,
    "unit": "%",
    "text": "46%",
-   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M002.pdf",
+   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M001.pdf",
+   "period": "3Q26"
+  },
+  {
+   "id": "prod_6",
+   "sec": "產品線",
+   "label": "Others 營收占比（3Q25）",
+   "value": 49.0,
+   "unit": "%",
+   "text": "49%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M001.pdf",
+   "period": "3Q25"
+  },
+  {
+   "id": "prod_7",
+   "sec": "產品線",
+   "label": "SPE 營收占比（3Q25）",
+   "value": 11.0,
+   "unit": "%",
+   "text": "11%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M001.pdf",
+   "period": "3Q25"
+  },
+  {
+   "id": "prod_8",
+   "sec": "產品線",
+   "label": "HPC 營收占比（3Q25）",
+   "value": 40.0,
+   "unit": "%",
+   "text": "40%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M001.pdf",
+   "period": "3Q25"
+  },
+  {
+   "id": "prod_9",
+   "sec": "產品線",
+   "label": "Others 營收占比（3Q26）",
+   "value": 41.0,
+   "unit": "%",
+   "text": "41%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M001.pdf",
+   "period": "3Q26"
+  },
+  {
+   "id": "prod_10",
+   "sec": "產品線",
+   "label": "SPE 營收占比（3Q26）",
+   "value": 13.0,
+   "unit": "%",
+   "text": "13%",
+   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M001.pdf",
    "period": "3Q26"
   },
   {
@@ -1397,7 +1396,7 @@
    "value": 44.0,
    "unit": "%",
    "text": "44%",
-   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M002.pdf",
+   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M001.pdf",
    "period": "2Q26"
   },
   {
@@ -1407,7 +1406,7 @@
    "value": 14.0,
    "unit": "%",
    "text": "14%",
-   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M002.pdf",
+   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M001.pdf",
    "period": "2Q26"
   },
   {
@@ -1417,7 +1416,7 @@
    "value": 42.0,
    "unit": "%",
    "text": "42%",
-   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M002.pdf",
+   "src": "https://mopsov.twse.com.tw/nas/STR/366520261113M001.pdf",
    "period": "2Q26"
   }
  ],
@@ -1679,61 +1678,61 @@
    ],
    "rows": [
     {
-     "label": "電器用（2026 3Q）",
+     "label": "電器用（3Q26）",
      "cells": [
       "prod_1"
      ]
     },
     {
-     "label": "資訊科技與數據傳輸（2026 3Q）",
+     "label": "資訊科技與數據傳輸（3Q26）",
      "cells": [
       "prod_2"
      ]
     },
     {
-     "label": "車用（2026 3Q）",
+     "label": "車用（3Q26）",
      "cells": [
       "prod_3"
      ]
     },
     {
-     "label": "工業用（2026 3Q）",
+     "label": "工業用（3Q26）",
      "cells": [
       "prod_4"
      ]
     },
     {
-     "label": "Others（3Q25）",
+     "label": "HPC（3Q26）",
      "cells": [
       "prod_5"
      ]
     },
     {
-     "label": "SPE（3Q25）",
+     "label": "Others（3Q25）",
      "cells": [
       "prod_6"
      ]
     },
     {
-     "label": "HPC（3Q25）",
+     "label": "SPE（3Q25）",
      "cells": [
       "prod_7"
      ]
     },
     {
-     "label": "Others（3Q26）",
+     "label": "HPC（3Q25）",
      "cells": [
       "prod_8"
      ]
     },
     {
-     "label": "SPE（3Q26）",
+     "label": "Others（3Q26）",
      "cells": [
       "prod_9"
      ]
     },
     {
-     "label": "HPC（3Q26）",
+     "label": "SPE（3Q26）",
      "cells": [
       "prod_10"
      ]
