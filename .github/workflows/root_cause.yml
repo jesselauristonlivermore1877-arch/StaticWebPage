@@ -9,7 +9,10 @@ name: 根因追蹤
 
 on:
   schedule:
-    - cron: "30 23 * * 0-4"   # 台北週一～五 07:30
+    - cron: "30 23 * * 0-4"   # 台北週一～五 07:30（盤前，只看昨晚美股）
+    # 🟢 11-16（雲端舊13；【舊】裁示「15:40 補跑完整班：要」）：盤後固定補一班完整班，蓋掉早上的 us_only；
+    #   同一個台股日已有完整結果（market_alert 叫過、或手動跑過）就跳過，不重打 Gemini。
+    - cron: "40 7 * * 1-5"    # 台北週一～五 15:40（盤後完整班）
   workflow_dispatch:
     inputs:
       cases:
@@ -49,9 +52,11 @@ jobs:
           #   台北 14:00 前取前一個平日、14:00 後取今天；美股日＝台股日的前一個平日（國定假日由程式擋，log 會寫）。
           prevwd() { local d="$1"; while :; do d=$(date -d "$d -1 day" +%F); [ "$(date -d "$d" +%u)" -le 5 ] && { echo "$d"; return; }; done; }
           # 11-08（雲端H2，第 27 條）：07:30 排程班＝只看昨晚美股（--us-only，台股日＝今天、還沒開盤）；手動／market_alert 照舊
-          if [ "${{ github.event_name }}" = "schedule" ] && [ -z "$CASES" ]; then
+          #   11-16：只有 07:30 那個 cron 是盤前班；15:40 那個 cron 走下面「沒給 cases」的完整班（14:00 後台股日＝今天）
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" = "30 23 * * 0-4" ] && [ -z "$CASES" ]; then
             CASES=$(TZ=Asia/Taipei date +%F); echo "US_ONLY=1" >> "$GITHUB_ENV"
           fi
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" = "40 7 * * 1-5" ]; then echo "FULL_SCHED=1" >> "$GITHUB_ENV"; fi
           if [ -z "$CASES" ]; then
             today=$(TZ=Asia/Taipei date +%F)
             if [ "$(TZ=Asia/Taipei date +%H%M)" -ge 1400 ] && [ "$(date -d "$today" +%u)" -le 5 ]; then tw=$today; else tw=$(prevwd "$today"); fi
@@ -69,6 +74,13 @@ jobs:
           repository: jesselauristonlivermore1877-arch/CustomerServiceANDSales
           token: ${{ secrets.CODE_REPO_TOKEN }}
           path: CustomerServiceANDSales
+      - name: 盤後完整班：同台股日已有完整結果就跳過
+        if: env.FULL_SCHED == '1'
+        working-directory: StaticWebPage
+        run: |
+          tw="${CASES%%:*}"; tw="${tw%%,*}"; f="docs/data/root_cause/$tw.json"
+          if [ -f "$f" ] && ! grep -q '"mode": *"us_only"' "$f"; then echo "台股日 $tw 已有完整根因結果，15:40 班跳過"; echo "RC_SKIP=1" >> "$GITHUB_ENV"
+          else echo "台股日 $tw：$( [ -f "$f" ] && echo '只有盤前 us_only' || echo '還沒有結果' ) → 跑完整班"; fi
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12.14"
@@ -81,7 +93,7 @@ jobs:
         run: python tools/root_cause.py --site ../StaticWebPage --resanitize "${{ inputs.resanitize }}"
       - name: 根因追蹤
         id: rc
-        if: inputs.resanitize == ''
+        if: inputs.resanitize == '' && env.RC_SKIP != '1'
         working-directory: CustomerServiceANDSales
         env:
           PYTHONUNBUFFERED: "1"
@@ -100,7 +112,7 @@ jobs:
             echo "::endgroup::"
           done
       - name: 盲測檢查
-        if: inputs.blind == '1' && inputs.resanitize == ''
+        if: inputs.blind == '1' && inputs.resanitize == '' && env.RC_SKIP != '1'
         working-directory: CustomerServiceANDSales
         continue-on-error: true
         run: |
@@ -114,6 +126,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/gemini_quota data/root_cause docs/data/root_cause 2>/dev/null || true
           if git diff --staged --quiet; then echo "沒有變動"; exit 0; fi
-          git commit -qm "data: 根因追蹤（${{ inputs.trigger || '排程' }}${{ inputs.resanitize && '・敏感字關卡重跑' || '' }}${US_ONLY:+・盤前只看美股}）$(TZ=Asia/Taipei date '+%F %H:%M')：$CASES"
+          git commit -qm "data: 根因追蹤（${{ inputs.trigger || '排程' }}${FULL_SCHED:+・盤後完整班}${{ inputs.resanitize && '・敏感字關卡重跑' || '' }}${US_ONLY:+・盤前只看美股}）$(TZ=Asia/Taipei date '+%F %H:%M')：$CASES"
           for i in 1 2 3 4; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep $((2 ** i)); done
           exit 1
