@@ -309,6 +309,8 @@ function tfCard(url) {
   const INK2 = css("--ink-2") || "#a3a3a3", LINE = css("--line") || "#2a2a2a";
   const LIGHT = document.documentElement.getAttribute("data-theme") === "light";
   const TURN = LIGHT ? "#1A4FD8" : "#4DB2FF", TFBG = css("--bg") || (LIGHT ? "#F4F6F4" : "#000");
+  // 🟢 11-17（雲端新1 C44 追加，Evans「不想用紅綠K棒，用會員站看盤區的黑白配色」）：會員站 THEMES.bw＝漲空心白框、跌實心灰；淺色主題換深框
+  const KUP = LIGHT ? "#1F2937" : "#E6E6E6", KDN = LIGHT ? "#9AA3AE" : "#7C8591", KBG = css("--surface") || (LIGHT ? "#FFF" : "#111");
   const pct = v => v == null ? "—" : (v * 100).toFixed(0) + "%";
   const sg = v => v == null ? "—" : (v > 0 ? "+" : "") + v.toFixed(2) + "%";
   const md = d => d.slice(5).replace("-", "/");
@@ -399,11 +401,15 @@ function tfCard(url) {
             for (let i = 0; i < n; i += Math.ceil(n / (WW < 600 ? 4 : 6))) {
         const t = sv("text", {x: X(i), y: H - 6, "font-size": 12, fill: INK2, "text-anchor": "middle"}); t.textContent = J.dates[i].slice(2, 7).replace("-", "/"); if (!i) t.setAttribute("text-anchor", "start"); s.appendChild(t);
       }
+      // 轉折日藍色虛線（跟熱力格同一色），畫在K棒後面
+      (J.turns || []).forEach(t => { if (!K[t[0]]) return; const x = X(t[0]);
+        s.appendChild(sv("line", {x1: x, x2: x, y1: TOP, y2: H - BOT, stroke: TURN, "stroke-width": 2, "stroke-dasharray": "6 4", opacity: .9})); });
       K.forEach((b, i) => {
         if (!b) return;
-        const c = b[3] >= b[0] ? UP : DN;
+        const up = b[3] >= b[0], c = up ? KUP : KDN, hb = Math.max(1, Math.abs(Y(b[0]) - Y(b[3])));
         s.appendChild(sv("line", {x1: X(i), x2: X(i), y1: Y(b[1]), y2: Y(b[2]), stroke: c, "stroke-width": 1}));
-        s.appendChild(sv("rect", {x: X(i) - bw / 2, y: Y(Math.max(b[0], b[3])), width: bw, height: Math.max(1, Math.abs(Y(b[0]) - Y(b[3]))), fill: c}));
+        s.appendChild(up && bw >= 3 ? sv("rect", {x: X(i) - bw / 2 + .5, y: Y(Math.max(b[0], b[3])) + .5, width: bw - 1, height: Math.max(1, hb - 1), fill: KBG, stroke: c, "stroke-width": 1})
+                                    : sv("rect", {x: X(i) - bw / 2, y: Y(Math.max(b[0], b[3])), width: bw, height: hb, fill: c}));
       });
       (J.turns || []).forEach(t => {
         const b = K[t[0]]; if (!b) return;
@@ -433,7 +439,7 @@ function tfCard(url) {
       };
       s.addEventListener("mousemove", mv); s.addEventListener("touchstart", mv, {passive: true});
       kbox.appendChild(s);
-      const lg = mk("div", "tf-sub", `<span class="tf-dn">▼</span> 全面向下轉折　<span class="tf-up">▲</span> 全面向上轉折` +
+      const lg = mk("div", "tf-sub", `<b style="color:${TURN}">┆ 藍色虛線</b>＝全面轉折日：<span class="tf-dn">▼</span> 向下　<span class="tf-up">▲</span> 向上｜K棒：空心＝收漲、實心灰＝收跌` +
         Object.keys(LY).filter(k => LY[k]).map(k => `<br>［${LN[k].ch}］${LN[k].name}：${LN[k].rule}`).join("") +
         (SRC === "txf" ? `　｜台指期日K到 ${J.txf_last}（每週更新，最新幾天可能還沒有）` : ""));
       kbox.appendChild(lg);
