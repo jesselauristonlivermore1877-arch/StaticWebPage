@@ -1,9 +1,23 @@
 {
- "checked_at": "2026-11-16T06:22:36.471Z",
+ "checked_at": "2026-11-16T08:06:25.057Z",
  "date": "2026-11-13",
- "n": 84,
- "n_bad": 0,
- "bad": {},
+ "n": 79,
+ "n_bad": 1,
+ "bad": {
+  "GEA_選股_族群循環圖": {
+   "cat": "市場",
+   "title": "族群循環圖",
+   "err": "",
+   "issues": [
+    {
+     "area": "div.pe-top",
+     "dir": "下",
+     "px": 29,
+     "why": "div.pe-top scrollHeight 188＞clientHeight 159（容許 2）"
+    }
+   ]
+  }
+ },
  "js_errors": [],
  "chrome": "google-chrome",
  "no_cjk_font": false
