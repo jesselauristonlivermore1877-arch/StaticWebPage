@@ -16,13 +16,34 @@ on:
 
 permissions:
   contents: write           # 要把產出 commit 回這個 repo
+  actions: read             # P12：備援排程查前 60 分鐘有沒有成功班
 
 concurrency:
   group: daily-build
   cancel-in-progress: false
 
 jobs:
+  # 🟢 11-17（P12，【舊】已裁「要」）：GitHub 排程（16:25、22:05）只是 cron-job.org 15:40／21:20 的備援 →
+  #    前 60 分鐘內已有成功的「每日戰情更新」就整班跳過，不重複跑；手動／cron-job.org（workflow_dispatch）照常跑
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.chk.outputs.skip }}
+    steps:
+      - id: chk
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then echo "觸發＝${{ github.event_name }} → 照常跑"; echo "skip=0" >> "$GITHUB_OUTPUT"; exit 0; fi
+          since=$(date -u -d '-60 min' +%Y-%m-%dT%H:%M:%SZ)
+          n=$(gh api "repos/${{ github.repository }}/actions/workflows/daily.yml/runs?status=success&per_page=20" \
+                --jq "[.workflow_runs[] | select(.id != ${{ github.run_id }} and .updated_at >= \"$since\")] | length" || echo 0)
+          echo "備援排程：$since（UTC）以後成功的班次 $n 個"
+          if [ "${n:-0}" -gt 0 ]; then echo "→ 前 60 分鐘已有成功班，這班跳過"; echo "skip=1" >> "$GITHUB_OUTPUT"; else echo "→ 沒有，照跑"; echo "skip=0" >> "$GITHUB_OUTPUT"; fi
+
   build:
+    needs: gate
+    if: needs.gate.outputs.skip != '1'
     runs-on: ubuntu-latest
     timeout-minutes: 90   # 11-12 雲端P：45 分連兩班被砍（外部網路慢：全球資料 1328s、產出 758s），各步上限加總已 83 分 → 90；10-12 晚：35 分讓 job 比 world 步驟（25 分）先到上限 → 整班連提交一起被取消；改成大於各步上限加總，world 超時只砍那步、照樣提交
 
