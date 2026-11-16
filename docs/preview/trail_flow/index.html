@@ -58,8 +58,9 @@ function tfCard(url) {
     const narrow = (root.clientWidth || window.innerWidth) < 700;
     let RNG = narrow ? 60 : 240;
     const view = k => { const o = Math.max(0, N0 - k), cut = a => a.slice(o), sh = a => a.filter(t => t[0] >= o).map(t => [t[0] - o].concat(t.slice(1)));
-      const L2 = {}; Object.keys(J0.layers || {}).forEach(q => { L2[q] = Object.assign({}, J0.layers[q], {idx: J0.layers[q].idx.filter(i => i >= o).map(i => i - o)}); });
-      return Object.assign({}, J0, {dates: cut(J0.dates), taiex: cut(J0.taiex), txf: cut(J0.txf), pos: cut(J0.pos), dn: cut(J0.dn), up: cut(J0.up),
+      const mv2 = a => (a || []).filter(i => i >= o).map(i => i - o);
+      const L2 = (J0.layers || []).map(q => Object.assign({}, q, {idx: mv2(q.idx), up: mv2(q.up), dn: mv2(q.dn)}));
+      return Object.assign({}, J0, {off: o, dates: cut(J0.dates), taiex: cut(J0.taiex), txf: cut(J0.txf), pos: cut(J0.pos), dn: cut(J0.dn), up: cut(J0.up),
         heat: J0.heat.map(cut), turns: sh(J0.turns || []), layers: L2}); };
 
     // ── 摘要 ──
@@ -81,7 +82,8 @@ function tfCard(url) {
     root.appendChild(body);
     let SRC = "taiex";
     const LY = {};
-    Object.keys(J0.layers || {}).forEach(k => { LY[k] = false; });
+    (J0.layers || []).forEach(q => { LY[q.key] = false; });
+    const LN = {}; (J0.layers || []).forEach(q => { LN[q.key] = q; });
     function draw() {
     body.innerHTML = "";
     const J = view(RNG), n = J.dates.length;
@@ -94,12 +96,26 @@ function tfCard(url) {
     const bT = mk("button", "tf-btn" + (SRC === "taiex" ? " on" : ""), "加權指數"), bF = mk("button", "tf-btn" + (SRC === "txf" ? " on" : ""), "台指期");
     bar.append(bT, bF);
     const lyBtn = {};
-    Object.keys(LY).forEach(k => { const b = mk("button", "tf-btn" + (LY[k] ? " on" : ""), "＋" + k); lyBtn[k] = b; bar.appendChild(b); });
+    Object.keys(LY).forEach(k => { const b = mk("button", "tf-btn" + (LY[k] ? " on" : ""), "＋" + LN[k].name); lyBtn[k] = b; bar.appendChild(b); });
     root2.appendChild(bar);
     const kread = mk("div", "tf-read", "移到圖上看任一天");
     const kbox = mk("div", "tf-box");
     root2.appendChild(kbox);
 
+    // 圖層標記：[索引, 方向(+1 紅／−1 綠), 圖層, 說明]；爆量依「這張圖」收盤比前一日收盤分漲跌（不看 K 棒紅綠）
+    function layerMarks(J, K) {
+      const out = [];
+      const prevC = i => { if (i > 0) return K[i - 1] ? K[i - 1][3] : null;
+        const a = J0[SRC], g = J.off - 1; return g >= 0 && a[g] ? a[g][3] : (J0[SRC + "_prev"] ?? null); };
+      (J.layers || []).forEach(q => {
+        if (!LY[q.key]) return;
+        if (q.by_close) (q.idx || []).forEach(i => { const b = K[i], p = prevC(i); if (!b || p == null) return;
+          const r = (b[3] / p - 1) * 100; out.push([i, r >= 0 ? 1 : -1, q, `${q.name}收${r >= 0 ? "漲" : "跌"} ${(r >= 0 ? "+" : "") + r.toFixed(2)}%`]); });
+        (q.up || []).forEach(i => out.push([i, 1, q, q.rows[0][0]]));
+        (q.dn || []).forEach(i => out.push([i, -1, q, q.rows[1][0]]));
+      });
+      return out;
+    }
     function drawK() {
       kbox.innerHTML = "";
       kbox.appendChild(kread);
@@ -108,7 +124,7 @@ function tfCard(url) {
       let lo = Infinity, hi = -Infinity;
       K.forEach(b => { if (b) { lo = Math.min(lo, b[2]); hi = Math.max(hi, b[1]); } });
       if (!isFinite(lo)) { kbox.appendChild(mk("div", "tf-sub", "這段期間沒有資料。")); return; }
-      const pad = (hi - lo) * 0.08; lo -= pad; hi += pad;
+      const nOn = Object.keys(LY).filter(k => LY[k]).length, pad = (hi - lo) * (0.08 + 0.05 * nOn); lo -= pad; hi += pad;
       const X = i => L + (i + 0.5) * PW / n, Y = v => TOP + (hi - v) / (hi - lo) * PH, bw = Math.max(1, PW / n * 0.62);
       const s = sv("svg", {class: "tf-svg", viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": (SRC === "txf" ? "台指期" : "加權指數") + "日K與動能轉折日"});
       for (let g = 0; g <= 4; g++) {
@@ -131,12 +147,15 @@ function tfCard(url) {
         if (t[1] < 0) { const y = Y(b[1]) - 6; s.appendChild(sv("path", {d: `M${x - 6},${y - 10}L${x + 6},${y - 10}L${x},${y}Z`, fill: DN})); }
         else { const y = Y(b[2]) + 6; s.appendChild(sv("path", {d: `M${x - 6},${y + 10}L${x + 6},${y + 10}L${x},${y}Z`, fill: UP})); }
       });
-      Object.keys(LY).forEach(k => {
-        if (!LY[k]) return;
-        (J.layers[k].idx || []).forEach(i => { const b = K[i]; if (!b) return;
-          const x = X(i), y = Y(b[2]) + 22;
-          s.appendChild(sv("path", {d: `M${x},${y - 6}L${x + 6},${y}L${x},${y + 6}L${x - 6},${y}Z`, fill: ACC})); });
-      });
+      const marks = layerMarks(J, K);
+      const slotU = {}, slotD = {};
+      marks.forEach(([i, dir, q]) => { const b = K[i]; if (!b) return;
+        const x = X(i);
+        let y;
+        if (dir > 0) { const k2 = slotU[i] = (slotU[i] || 0) + 1; y = Y(b[2]) + 6 + (tmap[i] && tmap[i][1] > 0 ? 12 : 0) + k2 * 17 - 8; }
+        else { const k2 = slotD[i] = (slotD[i] || 0) + 1; y = Y(b[1]) - 6 - (tmap[i] && tmap[i][1] < 0 ? 12 : 0) - k2 * 17 + 8; }
+        s.appendChild(sv("circle", {cx: x, cy: y, r: 8, fill: dir > 0 ? UP : DN, stroke: "rgba(0,0,0,.55)", "stroke-width": 1}));
+        const t = sv("text", {x, y: y + 3.6, "font-size": 10, fill: "#fff", "text-anchor": "middle", "font-weight": 700}); t.textContent = q.ch; s.appendChild(t); });
       const hl = sv("line", {x1: 0, x2: 0, y1: TOP, y2: H - BOT, stroke: INK2, "stroke-dasharray": "3 3", opacity: 0});
       s.appendChild(hl);
       const mv = ev => {
@@ -146,12 +165,12 @@ function tfCard(url) {
         const t = tmap[i];
         kread.innerHTML = `${J.dates[i]}　` + (b ? `開 ${b[0].toLocaleString()}　高 ${b[1].toLocaleString()}　低 ${b[2].toLocaleString()}　收 ${b[3].toLocaleString()}` : "（無資料）") +
           (t ? `　<b class="${t[1] > 0 ? "tf-up" : "tf-dn"}">${t[1] > 0 ? "▲ 全面向上轉折" : "▼ 全面向下轉折"} ${pct(t[2])}</b>` : "") +
-          Object.keys(LY).filter(k => LY[k] && J.layers[k].idx.includes(i)).map(k => `　<b style="color:${ACC}">◆ ${k}</b>`).join("");
+          marks.filter(m => m[0] === i).map(m => `　<b class="${m[1] > 0 ? "tf-up" : "tf-dn"}">［${m[2].ch}］${m[3]}</b>`).join("");
       };
       s.addEventListener("mousemove", mv); s.addEventListener("touchstart", mv, {passive: true});
       kbox.appendChild(s);
       const lg = mk("div", "tf-sub", `<span class="tf-dn">▼</span> 全面向下轉折　<span class="tf-up">▲</span> 全面向上轉折` +
-        Object.keys(LY).filter(k => LY[k]).map(k => `　<span style="color:${ACC}">◆</span> ${k}（${J.layers[k].rule}）`).join("") +
+        Object.keys(LY).filter(k => LY[k]).map(k => `<br>［${LN[k].ch}］${LN[k].name}：${LN[k].rule}`).join("") +
         (SRC === "txf" ? `　｜台指期日K到 ${J.txf_last}（每週更新，最新幾天可能還沒有）` : ""));
       kbox.appendChild(lg);
     }
@@ -236,15 +255,18 @@ function tfCard(url) {
 
     // ── 歷史統計 ──
     root.appendChild(mk("div", "tf-h", `歷史統計（${J.first}～${J.asof}，${J.days} 個交易日）`));
-    const st = J.stat || {}, row = (nm, o) => o ? `<tr><td>${nm}</td><td>${o.n}</td><td>${sg(o.m5)}</td><td>${o.up5 ?? "—"}%</td><td>${sg(o.m20)}</td><td>${o.up20 ?? "—"}%</td></tr>` : "";
+    const pc = v => v == null ? "—" : (v >= 90 || v <= 10 ? `<b>${v}</b>` : v);
+    const st = J.stat || {}, row = (nm, o) => o ? `<tr><td>${nm}</td><td>${o.n}</td><td>${sg(o.m5)}</td><td>${o.up5 ?? "—"}%</td><td>${pc(o.pct5)}</td><td>${sg(o.m20)}</td><td>${o.up20 ?? "—"}%</td><td>${pc(o.pct20)}</td></tr>` : "";
     const base = st.down || {};
-    const tb = mk("div", "tf-scroll", `<table class="tf-tbl"><thead><tr><th>之後的加權指數</th><th>次數</th><th>5 日平均</th><th>5 日上漲機率</th><th>20 日平均</th><th>20 日上漲機率</th></tr></thead><tbody>` +
+    const tb = mk("div", "tf-scroll", `<table class="tf-tbl"><thead><tr><th>之後的加權指數</th><th>次數</th><th>5 日平均</th><th>5 日上漲機率</th><th>比隨機（分位）</th><th>20 日平均</th><th>20 日上漲機率</th><th>比隨機（分位）</th></tr></thead><tbody>` +
       row("▼ 全面向下轉折日", st.down) + row("▲ 全面向上轉折日", st.up) +
-      Object.keys(J.layers || {}).map(k => row("◆ " + k, J.layers[k].stat)).join("") +
-      `<tr><td>（對照）所有交易日</td><td>—</td><td>${sg(base.bm5)}</td><td>${base.bup5 ?? "—"}%</td><td>${sg(base.bm20)}</td><td>${base.bup20 ?? "—"}%</td></tr></tbody></table>`);
+      (J.layers || []).map(q => q.rows.map(r => row(`［${q.ch}］${r[0]}`, r[1])).join("")).join("") +
+      `<tr><td>（對照）所有交易日</td><td>—</td><td>${sg(base.bm5)}</td><td>${base.bup5 ?? "—"}%</td><td>50</td><td>${sg(base.bm20)}</td><td>${base.bup20 ?? "—"}%</td><td>50</td></tr></tbody></table>`);
     root.appendChild(tb);
-    root.appendChild(mk("div", "tf-sub", "怎麼看：動能轉折日描述的是「族群同時轉向」這件事本身；歷史上全面向下轉折之後指數並沒有比一般日子更容易跌（兩段交叉檢驗都沒有贏隨機抽樣），所以它是看盤時的結構提示，不是單獨的方向訊號。" +
-      "◆ 疊加圖層只放事件研究通過的指標。" + (J.foot ? "　" + J.foot : "")));
+    const p3 = J.pre3 || {};
+    root.appendChild(mk("div", "tf-sub", "怎麼看：「比隨機」＝事件之後的平均漲跌，放在同樣次數隨機抽日子（2,000 次）的第幾分位；50 附近＝跟隨便哪一天差不多，粗體（≥ 90 或 ≤ 10）才算明顯偏多或偏空。" +
+      `動能轉折日描述的是「族群同時轉向」這件事本身，之後的漲跌跟一般日子分不太出來：3 日平均要等動能真的翻過來才確認，向上轉折前 3 天加權平均已經先漲 ${sg(p3.up)}、向下轉折前 3 天已經先跌 ${sg(p3.down)}（一般 3 天 ${sg(p3.all)}），確認時大半段已經走完，所以是看盤時的結構提示，不是單獨的方向訊號。` +
+      (J.foot ? "　" + J.foot : "")));
   });
   return root;
 }

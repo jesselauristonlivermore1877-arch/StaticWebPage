@@ -295,6 +295,14 @@ jobs:
         timeout-minutes: 5
         run: python tools/mkt_overlay.py ../site ../site/docs/data/mkt_overlay.json
 
+      # 🟢 11-16（雲端舊14，Evans 看過預覽 OK）：軌跡流向（動能轉折日＋族群動能流向＋量能／籌碼／估值／爆量圖層）→ docs/data/trail_flow.json
+      #    只讀日K、法人、本益比與指數檔，不打網路；預覽同一支 tools/trail_flow.py；失敗不擋（網站沿用上一份）
+      - name: 軌跡流向（市場）
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 5
+        run: python tools/trail_flow.py ../site ../site/docs/data/trail_flow.json
+
       # 🟢 11-09（雲端O，Evans 11-09 核准法說逐字稿預覽「照做」）：法說目標帳本 → docs/data/ir/targets.json（累積）＋data/ir/targets_hist/<日期>.json（當天快照）
       #    預覽與正式版同一個 ir_targets.ledger()（沒有 force 類參數）；只讀逐字稿、月營收、綜合損益表、日K，不打網路；失敗不擋（網站沿用上一份）
       - name: 法說目標帳本
