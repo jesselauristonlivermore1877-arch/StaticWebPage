@@ -1,0 +1,248 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"輝達執行長黃仁勳辭職引發市場恐慌\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-16\",\n      \"who\": \"輝達執行長黃仁勳 (Jensen Huang)\",\n      \"event\": \"輝達執行長黃仁勳辭職消息震撼華爾街，引發市場對AI產業領導地位及未來治理的疑慮。\",\n      \"mechanism\": \"黃仁勳辭職引發市場對輝達未來戰略與AI產業前景的極度不安，導致輝達股價大跌並拖累費城半導體指數狂瀉5.28%。\",\n      \"industry\": \"晶圓代工與製造\",\n      \"tw_link\": \"台積電ADR重挫6.34%預期帶動台股權值股補跌。\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"伺服器與品牌組裝\",\n        \"IC設計\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"黃仁勳\",\n        \"辭職\",\n        \"Jensen Huang\",\n        \"Resignation\",\n        \"ジェンスン・フアン\",\n        \"辞任\",\n        \"젠슨 황\",\n        \"사임\"\n      ],\n      \"evidence\": [\n        \"P126\",\n        \"P127\",\n        \"P135\",\n        \"P153\",\n        \"P59\",\n        \"P168\",\n        \"P223\",\n        \"P407\",\n        \"P659\",\n        \"P324\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"執行長辭職直接改變了市場對AI龍頭企業基本面與治理穩定性的預期。\",\n      \"drill\": [\n        \"Nvidia CEO resignation impact\",\n        \"黃仁勳 辭職 原因\",\n        \"ジェンスン・フアン 辞任 理由\",\n        \"젠슨 황 사임 이유\"\n      ]\n    },\n    {\n      \"title\": \"市場靜待輝達財報與 Anthropic IPO 引發估值修正\",\n      \"layer\": \"表面\",\n      \"event_date\": \"2026-11-16\",\n      \"who\": \"全球科技投資人\",\n      \"event\": \"在輝達財報公布前夕及 Anthropic 即將上市之際，市場出現避險賣壓。\",\n      \"mechanism\": \"投資人對 AI 投資採算性產生疑慮，在重大事件前選擇獲利了結，導致科技股與半導體族群集體下挫。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"高估值AI概念股面臨獲利了結壓力，拖累加權指數。\",\n      \"tw_sectors\": [\n        \"全市場\",\n        \"伺服器與品牌組裝\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"輝達財報\",\n        \"Anthropic IPO\",\n        \"Valuation reset\",\n        \"採算懸念\",\n        \"실적 발표\"\n      ],\n      \"evidence\": [\n        \"P115\",\n        \"P302\",\n        \"P257\",\n        \"P119\",\n        \"P418\",\n        \"P467\",\n        \"P493\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"具體根因為對 AI 投資回報率（ROI）的採算疑慮及重大事件前的風險規避心理。\",\n      \"drill\": [\n        \"Anthropic IPO date\",\n        \"Nvidia earnings expectations Nov 2026\",\n        \"AI bubble valuation reset\",\n        \"AI 투자 채산성\"\n      ]\n    },\n    {\n      \"title\": \"美國商務部擬限制 AI 半導體遠端訪問\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-16\",\n      \"who\": \"美國商務部\",\n      \"event\": \"美國政府推動新的半導體限制措施，擬限制對 AI 晶片的遠端訪問。\",\n      \"mechanism\": \"出口管制範圍擴大至雲端遠端訪問，加深市場對半導體產業營收受阻的擔憂，衝擊晶片股表現。\",\n      \"industry\": \"IC設計\",\n      \"tw_link\": \"影響台廠AI晶片設計與代工訂單之長期出口預期。\",\n      \"tw_sectors\": [\n        \"IC設計\",\n        \"晶圓代工與製造\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"出口限制\",\n        \"遠端訪問\",\n        \"Export restrictions\",\n        \"Remote access\",\n        \"対中規制\"\n      ],\n      \"evidence\": [\n        \"P247\",\n        \"P524\",\n        \"P137\",\n        \"P344\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"why_root\": \"政策直接限制了產業的市場准入與營收來源。\",\n      \"drill\": [\n        \"US AI chip remote access restrictions\",\n        \"美國商務部 AI 晶片 限制\",\n        \"米商務省 AI半導体 規制\"\n      ]\n    },\n    {\n      \"title\": \"英特爾面臨股東訴訟與 PC 市場低迷雙重打擊\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-16\",\n      \"who\": \"英特爾 (Intel) 股東與美國政府\",\n      \"event\": \"英特爾因隱瞞 PC 市場低迷資訊面臨集體訴訟，且政府持股價值大幅縮水。\",\n      \"mechanism\": \"法律訴訟與基本面疲弱雙重壓力導致英特爾股價重挫，拖累整體半導體板塊情緒。\",\n      \"industry\": \"IC設計\",\n      \"tw_link\": \"PC供應鏈與相關載板族群預期受需求疲軟拖累。\",\n      \"tw_sectors\": [\n        \"IC設計\",\n        \"載板與PCB\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"英特爾\",\n        \"訴訟\",\n        \"Intel\",\n        \"Lawsuit\",\n        \"集団訴訟\",\n        \"인텔\"\n      ],\n      \"evidence\": [\n        \"P132\",\n        \"P383\",\n        \"P424\",\n        \"P470\",\n        \"P399\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"why_root\": \"具體法律訴訟與市場需求數據揭露改變了對該公司的基本面評價。\",\n      \"drill\": [\n        \"Intel shareholder lawsuit PC market\",\n        \"英特爾 訴訟 原因\",\n        \"インテル 株主訴訟\"\n      ]\n    },\n    {\n      \"title\": \"加密貨幣市場崩盤拖累相關概念股\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-16\",\n      \"who\": \"加密貨幣市場投資人\",\n      \"event\": \"比特幣單月跌幅逾兩成，引發加密貨幣市場血洗。\",\n      \"mechanism\": \"比特幣價格暴跌導致加密貨幣相關概念股（如 Coinbase）重挫，並影響半導體中挖礦晶片的需求預期。\",\n      \"industry\": \"載板與PCB\",\n      \"tw_link\": \"挖礦相關板卡與晶片需求預期轉弱，影響相關族群。\",\n      \"tw_sectors\": [\n        \"IC設計\",\n        \"載板與PCB\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"比特幣\",\n        \"加密貨幣\",\n        \"Bitcoin\",\n        \"Crypto market crash\",\n        \"暗号資産\",\n        \"비트코인\"\n      ],\n      \"evidence\": [\n        \"P93\",\n        \"P350\",\n        \"P239\",\n        \"P450\",\n        \"P447\",\n        \"P498\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"資產價格大幅波動直接影響相關產業鏈的獲利預期。\",\n      \"drill\": [\n        \"Bitcoin crash reason Nov 2026\",\n        \"比特幣 暴跌 原因\",\n        \"비트코인 급락 이유\"\n      ]\n    }\n  ],\n  \"summary\": \"昨晚美股受輝達執行長黃仁勳辭職震撼、AI 投資採算疑慮及美國半導體出口新限制影響，費城半導體指數重挫逾 5%，預期傳導到今天台股將由台積電 ADR 領跌，衝擊 AI 伺服器供應鏈及半導體族群。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "輝達執行長黃仁勳辭職引發市場恐慌",
+    "layer": "根因",
+    "event_date": "2026-11-16",
+    "who": "輝達執行長黃仁勳 (Jensen Huang)",
+    "event": "輝達執行長黃仁勳辭職消息震撼華爾街，引發市場對AI產業領導地位及未來治理的疑慮。",
+    "mechanism": "黃仁勳辭職引發市場對輝達未來戰略與AI產業前景的極度不安，導致輝達股價大跌並拖累費城半導體指數狂瀉5.28%。",
+    "industry": "晶圓代工與製造",
+    "tw_link": "台積電ADR重挫6.34%預期帶動台股權值股補跌。",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "伺服器與品牌組裝",
+     "IC設計"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "黃仁勳",
+     "辭職",
+     "Jensen Huang",
+     "Resignation",
+     "ジェンスン・フアン",
+     "辞任",
+     "젠슨 황",
+     "사임"
+    ],
+    "evidence": [
+     "P126",
+     "P127",
+     "P135",
+     "P153",
+     "P59",
+     "P168",
+     "P223",
+     "P407",
+     "P659",
+     "P324"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "執行長辭職直接改變了市場對AI龍頭企業基本面與治理穩定性的預期。",
+    "drill": [
+     "Nvidia CEO resignation impact",
+     "黃仁勳 辭職 原因",
+     "ジェンスン・フアン 辞任 理由",
+     "젠슨 황 사임 이유"
+    ]
+   },
+   {
+    "title": "市場靜待輝達財報與 Anthropic IPO 引發估值修正",
+    "layer": "表面",
+    "event_date": "2026-11-16",
+    "who": "全球科技投資人",
+    "event": "在輝達財報公布前夕及 Anthropic 即將上市之際，市場出現避險賣壓。",
+    "mechanism": "投資人對 AI 投資採算性產生疑慮，在重大事件前選擇獲利了結，導致科技股與半導體族群集體下挫。",
+    "industry": "全市場",
+    "tw_link": "高估值AI概念股面臨獲利了結壓力，拖累加權指數。",
+    "tw_sectors": [
+     "全市場",
+     "伺服器與品牌組裝"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "輝達財報",
+     "Anthropic IPO",
+     "Valuation reset",
+     "採算懸念",
+     "실적 발표"
+    ],
+    "evidence": [
+     "P115",
+     "P302",
+     "P257",
+     "P119",
+     "P418",
+     "P467",
+     "P493"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "具體根因為對 AI 投資回報率（ROI）的採算疑慮及重大事件前的風險規避心理。",
+    "drill": [
+     "Anthropic IPO date",
+     "Nvidia earnings expectations Nov 2026",
+     "AI bubble valuation reset",
+     "AI 투자 채산성"
+    ]
+   },
+   {
+    "title": "美國商務部擬限制 AI 半導體遠端訪問",
+    "layer": "根因",
+    "event_date": "2026-11-16",
+    "who": "美國商務部",
+    "event": "美國政府推動新的半導體限制措施，擬限制對 AI 晶片的遠端訪問。",
+    "mechanism": "出口管制範圍擴大至雲端遠端訪問，加深市場對半導體產業營收受阻的擔憂，衝擊晶片股表現。",
+    "industry": "IC設計",
+    "tw_link": "影響台廠AI晶片設計與代工訂單之長期出口預期。",
+    "tw_sectors": [
+     "IC設計",
+     "晶圓代工與製造"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "出口限制",
+     "遠端訪問",
+     "Export restrictions",
+     "Remote access",
+     "対中規制"
+    ],
+    "evidence": [
+     "P247",
+     "P524",
+     "P137",
+     "P344"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "why_root": "政策直接限制了產業的市場准入與營收來源。",
+    "drill": [
+     "US AI chip remote access restrictions",
+     "美國商務部 AI 晶片 限制",
+     "米商務省 AI半導体 規制"
+    ]
+   },
+   {
+    "title": "英特爾面臨股東訴訟與 PC 市場低迷雙重打擊",
+    "layer": "根因",
+    "event_date": "2026-11-16",
+    "who": "英特爾 (Intel) 股東與美國政府",
+    "event": "英特爾因隱瞞 PC 市場低迷資訊面臨集體訴訟，且政府持股價值大幅縮水。",
+    "mechanism": "法律訴訟與基本面疲弱雙重壓力導致英特爾股價重挫，拖累整體半導體板塊情緒。",
+    "industry": "IC設計",
+    "tw_link": "PC供應鏈與相關載板族群預期受需求疲軟拖累。",
+    "tw_sectors": [
+     "IC設計",
+     "載板與PCB"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "英特爾",
+     "訴訟",
+     "Intel",
+     "Lawsuit",
+     "集団訴訟",
+     "인텔"
+    ],
+    "evidence": [
+     "P132",
+     "P383",
+     "P424",
+     "P470",
+     "P399"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "why_root": "具體法律訴訟與市場需求數據揭露改變了對該公司的基本面評價。",
+    "drill": [
+     "Intel shareholder lawsuit PC market",
+     "英特爾 訴訟 原因",
+     "インテル 株主訴訟"
+    ]
+   },
+   {
+    "title": "加密貨幣市場崩盤拖累相關概念股",
+    "layer": "根因",
+    "event_date": "2026-11-16",
+    "who": "加密貨幣市場投資人",
+    "event": "比特幣單月跌幅逾兩成，引發加密貨幣市場血洗。",
+    "mechanism": "比特幣價格暴跌導致加密貨幣相關概念股（如 Coinbase）重挫，並影響半導體中挖礦晶片的需求預期。",
+    "industry": "載板與PCB",
+    "tw_link": "挖礦相關板卡與晶片需求預期轉弱，影響相關族群。",
+    "tw_sectors": [
+     "IC設計",
+     "載板與PCB"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "比特幣",
+     "加密貨幣",
+     "Bitcoin",
+     "Crypto market crash",
+     "暗号資産",
+     "비트코인"
+    ],
+    "evidence": [
+     "P93",
+     "P350",
+     "P239",
+     "P450",
+     "P447",
+     "P498"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "資產價格大幅波動直接影響相關產業鏈的獲利預期。",
+    "drill": [
+     "Bitcoin crash reason Nov 2026",
+     "比特幣 暴跌 原因",
+     "비트코인 급락 이유"
+    ]
+   }
+  ],
+  "summary": "昨晚美股受輝達執行長黃仁勳辭職震撼、AI 投資採算疑慮及美國半導體出口新限制影響，費城半導體指數重挫逾 5%，預期傳導到今天台股將由台積電 ADR 領跌，衝擊 AI 伺服器供應鏈及半導體族群。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmpoqg3h3kl.txt",
+  "附檔": [],
+  "耗時秒": 21.2,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3-flash-preview",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 37225,
+   "prompt_tokens": 31573,
+   "output_tokens": 2232,
+   "thinking_tokens": 3420
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1117_synth1",
+  "ok": true
+ }
+}

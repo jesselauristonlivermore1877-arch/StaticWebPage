@@ -1,0 +1,210 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"輝達執行長黃仁勳辭職風波擴大且董事會拒絕其回任\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-16\",\n      \"who\": \"輝達 (Nvidia) 董事會與黃仁勳\",\n      \"event\": \"輝達董事會明確表示未考慮讓黃仁勳回任，且內部爆發工程師離職潮\",\n      \"mechanism\": \"黃仁勳辭職引發的治理危機持續發酵，市場對 AI 產業領導地位及未來戰略產生極度不安，導致輝達股價重挫 4.12% 並拖累費城半導體指數狂瀉 5.28%\",\n      \"industry\": \"晶圓代工與製造\",\n      \"tw_link\": \"輝達為台積電與 AI 伺服器供應鏈核心客戶，其治理動盪直接衝擊台灣 AI 族群預期\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"伺服器與品牌組裝\",\n        \"散熱與液冷\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Jensen Huang\",\n        \"resignation\",\n        \"黃仁勳\",\n        \"辭職\",\n        \"ジェンスン・フアン\",\n        \"辞任\",\n        \"젠슨 황\",\n        \"사임\"\n      ],\n      \"evidence\": [\n        \"P168\",\n        \"P135\",\n        \"D137\",\n        \"D127\",\n        \"D58\",\n        \"D89\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"drill\": [\n        \"Nvidia board Jensen Huang return\",\n        \"輝達董事會 黃仁勳 回任\",\n        \"エヌビディア 取締役会 ジェンスン・フアン 復帰\",\n        \"엔비디아 이사회 젠슨 황 복귀\"\n      ]\n    },\n    {\n      \"title\": \"美國商務部發布新規限制中國透過海外資料中心遠端存取 AI 晶片\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-16\",\n      \"who\": \"美國商務部 (Department of Commerce)\",\n      \"event\": \"發布新規限制中企透過海外資料中心遠端存取先進 AI 晶片與伺服器\",\n      \"mechanism\": \"此舉旨在堵住出口管制漏洞，限制中國繞道租用算力，加深市場對半導體產業海外訂單能見度下滑與地緣政治風險的擔憂\",\n      \"industry\": \"IC 設計\",\n      \"tw_link\": \"限制範圍擴大至雲端存取，影響台廠 AI 晶片代工與伺服器出貨預期\",\n      \"tw_sectors\": [\n        \"IC 設計\",\n        \"晶圓代工與製造\",\n        \"伺服器與品牌組裝\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Commerce Department\",\n        \"remote access\",\n        \"loophole\",\n        \"商務部\",\n        \"遠端存取\",\n        \"漏洞\",\n        \"リモートアクセス\",\n        \"원격 액세스\"\n      ],\n      \"evidence\": [\n        \"D153\",\n        \"D180\",\n        \"D184\",\n        \"D188\",\n        \"D152\",\n        \"D161\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ko\"\n      ],\n      \"drill\": [\n        \"US Commerce Department AI chip remote access rule\",\n        \"美國商務部 AI 晶片 遠端存取 新規\",\n        \"미국 상무부 AI 칩 원격 액세스 규제\"\n      ]\n    },\n    {\n      \"title\": \"英特爾因隱瞞 PC 市場疲軟遭股東集體訴訟\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-16\",\n      \"who\": \"英特爾 (Intel) 股東\",\n      \"event\": \"股東控告英特爾隱瞞 PC 市場低迷資訊，導致股價單日暴跌 29% 並造成 1400 億美元市值損失\",\n      \"mechanism\": \"法律訴訟揭露了 PC 市場基本面疲弱的嚴重性，打擊投資人對半導體板塊復甦的信心，導致英特爾股價持續承壓\",\n      \"industry\": \"封裝測試\",\n      \"tw_link\": \"英特爾為台灣封測與載板廠重要客戶，其基本面惡化影響相關供應鏈訂單預期\",\n      \"tw_sectors\": [\n        \"封裝測試\",\n        \"載板與PCB\",\n        \"IC 設計\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Intel\",\n        \"shareholder lawsuit\",\n        \"PC market slowdown\",\n        \"英特爾\",\n        \"集體訴訟\",\n        \"インテル\",\n        \"集団訴訟\",\n        \"인텔\",\n        \"집단 소송\"\n      ],\n      \"evidence\": [\n        \"D201\",\n        \"D202\",\n        \"D224\",\n        \"D230\",\n        \"D211\",\n        \"D218\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"drill\": [\n        \"Intel shareholder class action PC slowdown\",\n        \"英特爾 股東訴訟 PC 市場衰退\",\n        \"インテル 株主訴訟 PC市場低迷\",\n        \"인텔 주주 소송 PC 시장 둔화\"\n      ]\n    },\n    {\n      \"title\": \"市場靜待輝達財報與 Anthropic IPO 引發科技股估值修正\",\n      \"layer\": \"表面\",\n      \"event_date\": \"2026-11-16\",\n      \"who\": \"全球投資人\",\n      \"event\": \"在輝達 11/17 財報公布前夕及 Anthropic 即將 IPO 之際，市場出現避險賣壓\",\n      \"mechanism\": \"Anthropic IPO 吸引大量資金從現有科技股與加密貨幣流出，加上對 AI 投資回報率的疑慮，導致投資人在重大事件前選擇獲利了結\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"美股科技股集體下挫，導致台股開盤面臨系統性拋售壓力\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Nvidia earnings\",\n        \"Anthropic IPO\",\n        \"valuation correction\",\n        \"輝達財報\",\n        \"估值修正\",\n        \"アンソロピック\",\n        \"앤트로픽\"\n      ],\n      \"evidence\": [\n        \"D115\",\n        \"D129\",\n        \"D265\",\n        \"P115\",\n        \"P302\",\n        \"D123\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"資金流向具備更高成長預期的新標的 (Anthropic)，且輝達在失去黃仁勳後的首份財報面臨極高不確定性，引發結構性資金移轉。\",\n      \"drill\": [\n        \"Anthropic IPO impact on Nvidia stock\",\n        \"Anthropic 上市 輝達 股價 影響\",\n        \"앤트로픽 IPO 비트코인 급락\"\n      ]\n    }\n  ],\n  \"summary\": \"昨晚美股受輝達執行長黃仁勳辭職風波擴大、美國商務部收緊 AI 晶片遠端存取限制，以及英特爾面臨集體訴訟等多重利空衝擊，費半指數重挫 5.28%，預期傳導到今天台股將由台積電領跌，AI 伺服器與半導體供應鏈將面臨劇烈估值修正壓力。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "輝達執行長黃仁勳辭職風波擴大且董事會拒絕其回任",
+    "layer": "根因",
+    "event_date": "2026-11-16",
+    "who": "輝達 (Nvidia) 董事會與黃仁勳",
+    "event": "輝達董事會明確表示未考慮讓黃仁勳回任，且內部爆發工程師離職潮",
+    "mechanism": "黃仁勳辭職引發的治理危機持續發酵，市場對 AI 產業領導地位及未來戰略產生極度不安，導致輝達股價重挫 4.12% 並拖累費城半導體指數狂瀉 5.28%",
+    "industry": "晶圓代工與製造",
+    "tw_link": "輝達為台積電與 AI 伺服器供應鏈核心客戶，其治理動盪直接衝擊台灣 AI 族群預期",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "伺服器與品牌組裝",
+     "散熱與液冷"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Jensen Huang",
+     "resignation",
+     "黃仁勳",
+     "辭職",
+     "ジェンスン・フアン",
+     "辞任",
+     "젠슨 황",
+     "사임"
+    ],
+    "evidence": [
+     "P168",
+     "P135",
+     "D137",
+     "D127",
+     "D58",
+     "D89"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "drill": [
+     "Nvidia board Jensen Huang return",
+     "輝達董事會 黃仁勳 回任",
+     "エヌビディア 取締役会 ジェンスン・フアン 復帰",
+     "엔비디아 이사회 젠슨 황 복귀"
+    ]
+   },
+   {
+    "title": "美國商務部發布新規限制中國透過海外資料中心遠端存取 AI 晶片",
+    "layer": "根因",
+    "event_date": "2026-11-16",
+    "who": "美國商務部 (Department of Commerce)",
+    "event": "發布新規限制中企透過海外資料中心遠端存取先進 AI 晶片與伺服器",
+    "mechanism": "此舉旨在堵住出口管制漏洞，限制中國繞道租用算力，加深市場對半導體產業海外訂單能見度下滑與地緣政治風險的擔憂",
+    "industry": "IC 設計",
+    "tw_link": "限制範圍擴大至雲端存取，影響台廠 AI 晶片代工與伺服器出貨預期",
+    "tw_sectors": [
+     "IC 設計",
+     "晶圓代工與製造",
+     "伺服器與品牌組裝"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Commerce Department",
+     "remote access",
+     "loophole",
+     "商務部",
+     "遠端存取",
+     "漏洞",
+     "リモートアクセス",
+     "원격 액세스"
+    ],
+    "evidence": [
+     "D153",
+     "D180",
+     "D184",
+     "D188",
+     "D152",
+     "D161"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ko"
+    ],
+    "drill": [
+     "US Commerce Department AI chip remote access rule",
+     "美國商務部 AI 晶片 遠端存取 新規",
+     "미국 상무부 AI 칩 원격 액세스 규제"
+    ]
+   },
+   {
+    "title": "英特爾因隱瞞 PC 市場疲軟遭股東集體訴訟",
+    "layer": "根因",
+    "event_date": "2026-11-16",
+    "who": "英特爾 (Intel) 股東",
+    "event": "股東控告英特爾隱瞞 PC 市場低迷資訊，導致股價單日暴跌 29% 並造成 1400 億美元市值損失",
+    "mechanism": "法律訴訟揭露了 PC 市場基本面疲弱的嚴重性，打擊投資人對半導體板塊復甦的信心，導致英特爾股價持續承壓",
+    "industry": "封裝測試",
+    "tw_link": "英特爾為台灣封測與載板廠重要客戶，其基本面惡化影響相關供應鏈訂單預期",
+    "tw_sectors": [
+     "封裝測試",
+     "載板與PCB",
+     "IC 設計"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Intel",
+     "shareholder lawsuit",
+     "PC market slowdown",
+     "英特爾",
+     "集體訴訟",
+     "インテル",
+     "集団訴訟",
+     "인텔",
+     "집단 소송"
+    ],
+    "evidence": [
+     "D201",
+     "D202",
+     "D224",
+     "D230",
+     "D211",
+     "D218"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "drill": [
+     "Intel shareholder class action PC slowdown",
+     "英特爾 股東訴訟 PC 市場衰退",
+     "インテル 株主訴訟 PC市場低迷",
+     "인텔 주주 소송 PC 시장 둔화"
+    ]
+   },
+   {
+    "title": "市場靜待輝達財報與 Anthropic IPO 引發科技股估值修正",
+    "layer": "表面",
+    "event_date": "2026-11-16",
+    "who": "全球投資人",
+    "event": "在輝達 11/17 財報公布前夕及 Anthropic 即將 IPO 之際，市場出現避險賣壓",
+    "mechanism": "Anthropic IPO 吸引大量資金從現有科技股與加密貨幣流出，加上對 AI 投資回報率的疑慮，導致投資人在重大事件前選擇獲利了結",
+    "industry": "全市場",
+    "tw_link": "美股科技股集體下挫，導致台股開盤面臨系統性拋售壓力",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Nvidia earnings",
+     "Anthropic IPO",
+     "valuation correction",
+     "輝達財報",
+     "估值修正",
+     "アンソロピック",
+     "앤트로픽"
+    ],
+    "evidence": [
+     "D115",
+     "D129",
+     "D265",
+     "P115",
+     "P302",
+     "D123"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "資金流向具備更高成長預期的新標的 (Anthropic)，且輝達在失去黃仁勳後的首份財報面臨極高不確定性，引發結構性資金移轉。",
+    "drill": [
+     "Anthropic IPO impact on Nvidia stock",
+     "Anthropic 上市 輝達 股價 影響",
+     "앤트로픽 IPO 비트코인 급락"
+    ]
+   }
+  ],
+  "summary": "昨晚美股受輝達執行長黃仁勳辭職風波擴大、美國商務部收緊 AI 晶片遠端存取限制，以及英特爾面臨集體訴訟等多重利空衝擊，費半指數重挫 5.28%，預期傳導到今天台股將由台積電領跌，AI 伺服器與半導體供應鏈將面臨劇烈估值修正壓力。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmpju6_1f98.txt",
+  "附檔": [],
+  "耗時秒": 16.1,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3-flash-preview",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 34090,
+   "prompt_tokens": 30014,
+   "output_tokens": 2000,
+   "thinking_tokens": 2076
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1117_synth2",
+  "ok": true
+ }
+}
