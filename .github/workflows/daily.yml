@@ -293,6 +293,18 @@ jobs:
         run: |
           python -c "import sys, ir_targets as TG; L = TG.save('../site', sys.argv[1]); print('目標帳本：', L['meta'])" "$(TZ=Asia/Taipei date +%F)"
 
+      # 🟢 11-16（雲端AM，Evans 同意 N1 估值拆解放進看盤區；W 做會員站「估值」標籤）：估值拆解 → docs/data/val_decomp.json
+      #    股價＝EPS × 本益比：讀 data/broker_consensus.json（上面「產出資料與網頁」build_web 剛更新）、data/bars/daily.npz、
+      #    data/guidance.json（法說擷取 guidance.yml 每天 10:00 推上的最新一份）、docs/data/stock_bars.json、company.json；不打網路。
+      #    程式用第二條路重算核對（stock_bars 收盤、拆解閉合、中位數／市值加權重算、法說引句逐字），沒過 exit 1、不寫檔 → 網站沿用上一份；
+      #    這步只記 ⚠（soft_fail），不擋上線；check_web 看落後天數。
+      - name: 估值拆解
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          python tools/val_decomp.py --swp ../site --out ../site/docs/data/val_decomp.json || { echo "::warning::估值拆解核對沒過或失敗（網站沿用上一份 val_decomp.json）"; echo "估值拆解核對沒過或失敗（網站沿用上一份 val_decomp.json）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+
       # 🟢 11-16（雲端舊7，【舊】總指揮 TODO 26bcc29）：法人買賣超隔日校正 —— 證交所 T86 會事後修正（2026-10-15 投信 59 格），
       #    重抓 inst.npz 裡「台灣今天以前」最新一天的上市 T86＋上櫃三大法人（各一發），跟 inst.npz（外資、投信）與 dealer.npz（自營自行、避險）逐格比，
       #    不同就覆寫那一天；同一天校正過記在 data/bars/inst_recheck.json，之後班次不再打。抓不完整（exit 2）不寫、記 soft_fail、不擋上線。

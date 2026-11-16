@@ -160,9 +160,11 @@ function members(r){
     return h;
   }).join("")+'<div class="vd-txt">個股為絕對值。左：股價拆解（收盤至 '+md(D.periods[cur].t1)+'）　右：分析師目標價拆解（共識至 '+md(D.periods[cur].c1)+'）　條長為對數尺度、全寬 ±'+sc+'（對數 %）；上條 EPS、下條本益比接在 EPS 後面，終點＝黑線＝股價</div>';
 }
-fetch("data.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){
-  D=d;
-  document.getElementById("vd-asof").textContent="收盤資料至 "+d.asof_px+"、分析師共識至 "+d.asof_cons+"；"+Object.keys(d.stocks).length+" 檔（目標價與明年 EPS 家數皆 ≥ "+d.rule.MIN_N+"）。「自 9/25」的股價起點是日K庫第一個 ≥ 9/25 的交易日（"+d.periods.base.t0+"）。";
+// 11-16：改讀正式檔 docs/data/val_decomp.json（每日戰情更新產出）；讀不到才退回本資料夾的 v2 快照 data.json
+var SRC="正式檔";
+fetch("../../data/val_decomp.json",{cache:"no-store"}).then(function(r){if(!r.ok)throw r.status;return r.json()}).catch(function(){SRC="預覽快照";return fetch("data.json",{cache:"no-store"}).then(function(r){return r.json()})}).then(function(d){
+  D=d;if(d.default){mode=d.default.mode||mode;agg=d.default.agg||agg}
+  document.getElementById("vd-asof").textContent="收盤資料至 "+d.asof_px+"、分析師共識至 "+d.asof_cons+"；"+Object.keys(d.stocks).length+" 檔（目標價與明年 EPS 家數皆 ≥ "+d.rule.MIN_N+"）。「自 9/25」的股價起點是日K庫第一個 ≥ 9/25 的交易日（"+d.periods.base.t0+"）。資料來源："+SRC+"。";
   var t=document.getElementById("vd-tabs");
   Object.keys(d.periods).forEach(function(k){var b=document.createElement("button");b.className="vd-tab";b.dataset.k=k;b.textContent=d.periods[k].label;b.onclick=function(){cur=k;render()};t.appendChild(b)});
   sw("vd-mode",[["rel","相對大盤"],["abs","絕對值"]],null,function(v){mode=v});
