@@ -68,13 +68,18 @@ code{font-size:12px}
 <body>
 <div class="nf-wrap">
   <h1>產業消息 → 盤中資金 → 價格：回放驗證</h1>
-  <p class="nf-sub">N2 第 4 步雲端部分（預覽，不是正式頁）。數字全部由程式 <code>research/news_flow/replay.py</code> 從新聞池、盤中每分鐘資金、1 分K 算出，未用 AI。<span id="nf-made"></span></p>
+  <p class="nf-sub">N2 第 4 步雲端部分（預覽，不是正式頁）。下面曲線與明細用<b>對照表 v1</b>（W 11-16 併入，59 列），v0／v1 對照見「對照表版本比較」。數字全部由程式 <code>research/news_flow/replay.py</code> 從新聞池、盤中每分鐘資金、1 分K 算出，未用 AI。<span id="nf-made"></span></p>
 
   <div class="nf-card nf-concl">
     <b>先講結論</b>
     <ul id="nf-concl"></ul>
   </div>
   <div class="nf-kpis" id="nf-kpis"></div>
+
+  <h2>對照表版本比較：v0 ↔ v1</h2>
+  <p class="nf-sub">同一套規則、同 12 個交易日、同一份歷史新聞快取，只換對照表。「落後資料」＝v1 標記的財報／營收創高類（公司已公告實績），另外排除或單獨算。命中＝方向對（跟同時段全部族群中位數比），亂猜≈50%。</p>
+  <div class="nf-card nf-concl"><b>比較結論</b><ul id="nf-cmpc"></ul></div>
+  <div class="nf-card nf-tblw"><table class="nf-tbl" id="nf-cmp"></table></div>
 
   <h2>11-16 時間軸：消息 → 族群資金 → 價格</h2>
   <p class="nf-sub">時間＝台北；「收到」＝我們的新聞池第一次抓到（每 30 分鐘一班），「發布」＝來源發布時間。盤前收到的消息從開盤（前一日收盤）起算。</p>
@@ -103,7 +108,7 @@ code{font-size:12px}
   <p class="nf-sub">對照表對到的標題 vs 新聞池現有的 <code>tw_grp</code>（族群）與 <code>gd</code>（多空）。</p>
   <div class="nf-card nf-tblw"><table class="nf-tbl" id="nf-miss"></table></div>
 
-  <h2>產業鏈對照表 v0</h2>
+  <h2>產業鏈對照表</h2>
   <div class="nf-card nf-note" id="nf-map"></div>
 
   <h2>限制</h2>
@@ -115,14 +120,14 @@ code{font-size:12px}
 "use strict";
 var COLORS=["--nf-s1","--nf-s2","--nf-s3","--nf-s4","--nf-s5","--nf-s6"];
 var DEF=["散熱與液冷","CCL與電子材料","伺服器與品牌組裝","封裝測試","記憶體","晶圓代工與製造"];
-var D=null, sel=DEF.slice(), slot={};
+var CMP=null, D=null, sel=DEF.slice(), slot={};
 DEF.forEach(function(g,i){slot[g]=i;});
 function $(id){return document.getElementById(id);}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
 function f(v,d,pct){if(v==null)return "—";var s=(v>0?"+":"")+v.toFixed(d);return pct?s+"%":s;}
 function cv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
 
-fetch("data.json").then(function(r){return r.json();}).then(function(d){D=d;init();}).catch(function(e){$("nf-concl").innerHTML="<li>資料讀取失敗："+esc(e)+"</li>";});
+Promise.all([fetch("data.json").then(function(r){return r.json();}),fetch("compare.json").then(function(r){return r.json();})]).then(function(a){D=a[0];CMP=a[1];init();cmp();}).catch(function(e){$("nf-concl").innerHTML="<li>資料讀取失敗："+esc(e)+"</li>";});
 
 function rate(o){return o&&o.n?Math.round(o["命中率"]*100)+"%（"+o["命中"]+"／"+o.n+"）":"—";}
 
@@ -266,7 +271,26 @@ function missTable(){
 }
 function mapInfo(){
   var m=D.map, hits=Object.keys(m.rule_hits).sort().map(function(k){return k+" "+m.rule_hits[k];}).join("、");
-  $("nf-map").innerHTML="<p><b>v0 手寫，之後由 W 用 Gemini 擴充、Evans 看過才用。</b> 檔案 <code>research/news_flow/chain_map.csv</code>："+m.rows+" 列、"+m.rules.length+" 條規則，涵蓋 "+m.groups.length+" 個族群（"+esc(m.groups.join("、"))+"）。族群名一律是 sector_map 的大類，程式檢查，不在表內就停。</p><p>範圍：AI 伺服器鏈（輝達、GB／VR 平台：延後、砍單、放緩 → 組裝、電源、散熱、PCB、CCL、連接器、IC設計偏空；放量、拉貨、追單 → 偏多）、記憶體（海力士、三星、美光：自建測試 → 封測、測試介面偏空；擴產、漲價 → 記憶體偏多；跌價 → 偏空）、晶圓代工（台積電漲價、上修、擴產 → 代工、設備、廠務偏多；下修、砍單 → 偏空；成熟製程）、封測（CoWoS 擴產、封測漲價／砍單）。</p><p>各規則命中標題數（"+D.days.length+" 天）："+esc(hits)+"。</p>";
+  $("nf-map").innerHTML="<p><b>v0 雲端AN 手寫（29 列）；v1＝W 用 Gemini 擴充、照【新】改過後併入（Evans 11-16「照你改」）。</b>族群名一律是 sector_map 的大類，程式檢查，不在表內就停。v1 多了「落後資料」欄（財報／營收創高類）與「例句」欄（Gemini 那列對到的真實標題，程式核對）。</p><p>本頁曲線與明細用的版本：<code>"+esc(D.map_file||"chain_map.csv")+"</code>，"+m.rows+" 列、"+m.rules.length+" 條規則，涵蓋 "+m.groups.length+" 個族群（"+esc(m.groups.join("、"))+"）。</p><p>各規則命中標題數（"+D.days.length+" 天）："+esc(hits)+"。</p>";
+}
+function cmp(){
+  var K=["v0","v1","v1x","v1lag"], H=[["資金15","15 分資金"],["價格15","15 分價格"],["資金30","30 分資金"],["價格30","30 分價格"]];
+  function r(o){return o&&o.n?Math.round(o["命中率"]*100)+'%<br><span class="nf-note">'+o["命中"]+"／"+o.n+"</span>":"—";}
+  var h='<thead><tr><th class="nf-l">版本</th><th>規則／族群</th><th>事件<br><span class="nf-note">盤前／盤中</span></th>'+H.map(function(x){return "<th>"+x[1]+"</th>";}).join("")+'<th>11-16 事件<br><span class="nf-note">15 分資金／價格</span></th><th>資金先動<br><span class="nf-note">收到前已動</span></th><th>消息後轉向</th><th>沒反應</th><th>發布時間算<br><span class="nf-note">先動／轉向</span></th><th>現有沒判方向</th></tr></thead><tbody>';
+  h+=K.map(function(k){var c=CMP[k],S=c.summary,L=c.lead["收到"],P=c.lead["發布"],g=S["11-16"];
+    return '<tr><td class="nf-l">'+esc(c.lab)+'</td><td>'+c.rules+"／"+c.groups+'</td><td>'+S["全部"]["事件"]+'<br><span class="nf-note">'+S["盤前"]["事件"]+"／"+S["盤中"]["事件"]+'</span></td>'+H.map(function(x){return "<td>"+r(S["全部"][x[0]])+"</td>";}).join("")+
+    '<td>'+g["事件"]+'<br><span class="nf-note">'+(g["資金15"].n?g["資金15"]["命中"]+"／"+g["資金15"].n:"—")+"、"+(g["價格15"].n?g["價格15"]["命中"]+"／"+g["價格15"].n:"—")+'</span></td><td>'+(L["資金先動"]||0)+'</td><td>'+(L["資金在消息後轉向"]||0)+'</td><td>'+(L["資金沒反應"]||0)+'</td><td>'+(P["資金先動"]||0)+"／"+(P["資金在消息後轉向"]||0)+'</td><td>'+c.miss["不重複標題中現有完全沒判方向"]+"／"+c.miss["對到標題（不重複）"]+'</td></tr>';}).join("");
+  $("nf-cmp").innerHTML=h+"</tbody>";
+  function pc(o){return Math.round(o["命中率"]*100)+"%";}
+  var a=CMP.v0.summary["全部"],b=CMP.v1.summary["全部"],x=CMP.v1x.summary["全部"],l=CMP.v1lag.summary["全部"];
+  var la=CMP.v1.lead["收到"],lx=CMP.v1x.lead["收到"];
+  var t=[
+    "v1 把對到的事件從 "+a["事件"]+" 個加到 "+b["事件"]+" 個、族群從 "+CMP.v0.groups+" 擴到 "+CMP.v1.groups+" 個，現有分類沒判方向的不重複標題從 "+CMP.v0.miss["不重複標題中現有完全沒判方向"]+" 則變 "+CMP.v1.miss["不重複標題中現有完全沒判方向"]+" 則（涵蓋變廣）。",
+    "命中率沒有變好：v0 15 分資金 "+pc(a["資金15"])+"／價格 "+pc(a["價格15"])+"，v1 "+pc(b["資金15"])+"／"+pc(b["價格15"])+"，排除落後資料 "+pc(x["資金15"])+"／"+pc(x["價格15"])+"；30 分也都在 50% 上下，仍等於亂猜。",
+    "落後資料（財報創高類）只對到 "+l["事件"]+" 個事件，15 分資金 "+l["資金15"]["命中"]+"／"+l["資金15"].n+"、價格 "+l["價格15"]["命中"]+"／"+l["價格15"].n+"，樣本太少、不能下結論；排除與否對整體數字影響很小。",
+    "領先檢查仍是「資金先動」多：v1 盤中收到的事件 資金先動 "+(la["資金先動"]||0)+"、收到後才轉向 "+(la["資金在消息後轉向"]||0)+"、沒反應 "+(la["資金沒反應"]||0)+"；排除落後資料 "+(lx["資金先動"]||0)+"／"+(lx["資金在消息後轉向"]||0)+"／"+(lx["資金沒反應"]||0)+"。拿不出「消息領先資金」證據。"
+  ];
+  $("nf-cmpc").innerHTML=t.map(function(z){return "<li>"+esc(z)+"</li>";}).join("");
 }
 function limits(){
   var st=D.days.map(function(d){return d["日"].slice(5)+" 候選 "+d["產業事件候選"]+"→對到 "+d["對到"];}).join("、");
@@ -275,7 +299,7 @@ function limits(){
     "只看台北 07:00～13:30 收到的新聞；前一晚（美股時段）的消息沒算進來，但它們多半已反映在開盤。",
     "11-13 以前的新聞取自 news_live.json 的 GitHub 歷史版本（每天收盤後第一版）；"+D.days.length+" 個交易日都有盤中資料。",
     "盤中資金只有權值 200 檔（sector_map 197 檔裡約 139 檔在內），族群成員 ≥ 2 檔才算；光通訊、被動元件等部分族群成員少。",
-    "對照表 v0 只有手寫 14 條規則，每天產業事件候選 2,300～3,200 則只對到 3～11 則；會漏，也會誤對（例：標題同時講消息與結果）。",
+    "對照表規則是關鍵字比對，每天產業事件候選 2,300～3,200 則只對到少數；會漏，也會誤對（例：標題同時講消息與結果；v1 的「輝達走私案」類與「升息 → 金融偏多」類一天就對到幾十則，多是同一事件重複報導）。",
     "同一事件常有多個族群一起被點名，又是同一天同方向，彼此不獨立；事件數 "+D.summary["全部"]["事件"]+" 看起來多，實際獨立的消息只有幾十則，樣本少。",
     "跌停鎖死時只有內盤成交、價格不動：11-16 12:02 散熱與液冷之後 15 分鐘淨主動買比 −1.00、價格 0.00%，價格命中會被算成「沒跑輸」；資金欄比價格欄更能反映這種情況。",
     "11-16 這種全面殺盤日，跟「全部族群中位數」比會把大盤效果扣掉，被點名族群跌得多但不一定跑輸中位數。",
