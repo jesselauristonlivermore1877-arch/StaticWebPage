@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>預覽：估值拆解（Market Insight 產業組）</title>
+<style>
+[data-theme="dark"]{
+  --bg:#000000; --surface:#111111; --raise:#1E1E1E; --chip:#2B2B2B;
+  --ink-1:#F5F5F5; --ink-2:#A3A3A3; --ink-3:#666666; --line:#2A2A2A;
+  --barbg:#1F1F1F;
+}
+[data-theme="light"]{
+  --bg:#F4F6F4; --surface:#FFFFFF; --raise:#EDF0EE; --chip:#E4E9E6;
+  --ink-1:#0F161D; --ink-2:#44515E; --ink-3:#68757F; --line:#DDE3E0;
+  --barbg:#E7ECE9;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink-1);font:15px/1.6 system-ui,-apple-system,"Noto Sans TC",sans-serif}
+.pv-top{padding:10px 16px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:13px;color:var(--ink-2)}
+.pv-top button{background:var(--raise);color:var(--ink-1);border:1px solid var(--line);border-radius:6px;padding:3px 10px;cursor:pointer}
+.pv-main{padding:8px 16px;max-width:1180px;margin:0 auto}
+.empty{color:var(--ink-2);padding:12px 0}
+/* 🟢 11-17 C45（雲端新6；Evans：估值頁籤要放 Market Insight）：產業 → 估值拆解。程式＝watch_ext.js 的 vdMount（跟會員站同一支），
+   這裡只把 vd- 色票接到站上深淺色變數、拿掉外框留白；vdmi- 前綴，不碰既有樣式 */
+.vdmi{white-space:normal}
+.vdmi .vd-root{--vd-bg:transparent;--vd-ink:var(--ink-1);--vd-ink2:var(--ink-2);--vd-line:var(--line);--vd-card:var(--surface);background:transparent;border-radius:0}
+.vdmi .vd-main{max-width:1100px;margin:0;padding:4px 0 24px}
+[data-theme="light"] .vdmi .vd-root{--vd-acc:#b0842f;--vd-up:#c8372d;--vd-dn:#1f8a4c;--vd-eps:#2f6fc8;--vd-pe:#b0842f;--vd-hl:#fff4dc;--vd-hlb:#e3b65a}
+[data-theme="light"] .vdmi .vd-s0{color:#6b4a0e;background:#fff0c9;border-color:#e3b65a}
+.vdmi .vdmi-wait{color:var(--ink-2);padding:12px 0}
+
+</style></head><body>
+<div class="pv-top"><b style="color:var(--ink-1)">預覽 C45：Market Insight → 產業 → 估值拆解</b>
+<span>（產業信息、產業議題、<b>估值拆解</b>、產業研究…；程式＝assets/watch_ext.js 的 vdMount，跟會員站同一支；資料＝data/val_decomp.json）</span>
+<button id="pv-th">切換深淺色</button></div>
+<div class="pv-main"><div class="vdmi" id="pv"></div></div>
+<script>
+function vdmiMount(root, base, dv) {
+  base = base || ""; dv = dv || "";
+  root.innerHTML = `<div class="vdmi-wait">估值拆解載入中…</div>`;
+  const js = base + "assets/watch_ext.js";
+  const sc = new Promise((ok, no) => { if (window.vdMount) return ok(); const t = document.createElement("script"); t.src = js + dv; t.onload = ok; t.onerror = no; document.head.appendChild(t); });
+  const dj = fetch(base + "data/val_decomp.json" + dv, {cache: "force-cache"}).then(r => r.ok ? r.json() : null).catch(() => null);
+  return Promise.all([sc, dj]).then(([, d]) => {
+    if (!d || !d.groups || !window.vdMount) { root.innerHTML = `<div class="empty">估值拆解建置中：每日戰情更新產出 data/val_decomp.json 後在這裡顯示。</div>`; return; }
+    window.vdMount(root, d, "每日戰情更新正式檔 data/val_decomp.json");
+  }).catch(() => { root.innerHTML = `<div class="empty">估值拆解程式（assets/watch_ext.js）沒有載入成功，請重新整理。</div>`; });
+}
+
+document.getElementById("pv-th").onclick = () => { const h = document.documentElement; h.dataset.theme = h.dataset.theme === "dark" ? "light" : "dark"; };
+vdmiMount(document.getElementById("pv"), "../../", "?v=" + Date.now());
+</script></body></html>
