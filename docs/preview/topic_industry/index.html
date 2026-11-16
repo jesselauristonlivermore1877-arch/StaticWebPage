@@ -1,0 +1,136 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>議題式產業分析（預覽）</title>
+<style>
+:root{--ti-bg:#f6f5f1;--ti-ink:#1d1d1b;--ti-ink2:#5c5b57;--ti-line:#dcd9d0;--ti-card:#fff;--ti-acc:#b0842f;
+  --ti-up:#c8372d;--ti-dn:#1f8a4c;--ti-eps:#3d6fb6;--ti-pe:#b0842f;--ti-hl:#fff4dc;--ti-hlb:#e3b65a;--ti-todo:#f0efea}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ti-bg:#16171a;--ti-ink:#ecebe7;--ti-ink2:#a4a29c;--ti-line:#34363b;--ti-card:#1f2125;--ti-acc:#d6a54a;
+  --ti-up:#ef6a5e;--ti-dn:#4cbf7b;--ti-eps:#6f9be0;--ti-pe:#d6a54a;--ti-hl:#3a2f18;--ti-hlb:#a67c2c;--ti-todo:#24262a}}
+:root[data-theme="dark"]{--ti-bg:#16171a;--ti-ink:#ecebe7;--ti-ink2:#a4a29c;--ti-line:#34363b;--ti-card:#1f2125;--ti-acc:#d6a54a;
+  --ti-up:#ef6a5e;--ti-dn:#4cbf7b;--ti-eps:#6f9be0;--ti-pe:#d6a54a;--ti-hl:#3a2f18;--ti-hlb:#a67c2c;--ti-todo:#24262a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ti-bg);color:var(--ti-ink);font:15px/1.6 system-ui,-apple-system,"Noto Sans TC",sans-serif}
+.ti-main{max-width:1000px;margin:0 auto;padding:20px 16px 48px}
+.ti-h1{font-size:21px;margin:0 0 4px}
+.ti-q{font-size:15px;margin:0 0 6px;font-weight:600}
+.ti-m{color:var(--ti-ink2);font-size:13px;margin:0 0 12px}
+.ti-sum{background:var(--ti-hl);border:1px solid var(--ti-hlb);border-radius:10px;padding:10px 14px;margin:8px 0 16px;font-size:14px}
+.ti-sum li{margin:2px 0}
+.ti-sec{margin:22px 0 8px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.ti-sec h2{font-size:17px;margin:0}
+.ti-step{background:var(--ti-acc);color:#fff;border-radius:12px;padding:1px 9px;font-size:12px;font-weight:700}
+.ti-card{background:var(--ti-card);border:1px solid var(--ti-line);border-radius:10px;padding:10px 14px;margin:8px 0}
+.ti-todo{background:var(--ti-todo);border:1px dashed var(--ti-line);border-radius:10px;padding:10px 14px;margin:8px 0;color:var(--ti-ink2);font-size:14px}
+.ti-link{border-bottom:1px solid var(--ti-line);padding:8px 0}
+.ti-link:last-child{border-bottom:0}
+.ti-lh{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-weight:700}
+.ti-lh small{font-weight:400;color:var(--ti-ink2)}
+.ti-bar{height:8px;border-radius:4px;background:var(--ti-line);overflow:hidden;margin:4px 0}
+.ti-bar i{display:block;height:100%;background:var(--ti-acc)}
+details.ti-d{margin:4px 0 0}
+details.ti-d summary{cursor:pointer;color:var(--ti-ink2);font-size:13px}
+.ti-qt{font-size:13.5px;margin:4px 0 4px 10px;padding-left:8px;border-left:3px solid var(--ti-hlb)}
+.ti-qt b{font-weight:600}
+.ti-src{font-size:12px;color:var(--ti-ink2)}
+.ti-src a{color:var(--ti-ink2)}
+.ti-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.ti-tab{border:1px solid var(--ti-line);background:var(--ti-card);color:var(--ti-ink);border-radius:18px;padding:4px 13px;font-size:13.5px;cursor:pointer}
+.ti-tab[aria-pressed="true"]{background:var(--ti-acc);border-color:var(--ti-acc);color:#fff;font-weight:700}
+.ti-tw{overflow-x:auto}
+table.ti-t{border-collapse:collapse;width:100%;font-size:13.5px;min-width:520px}
+.ti-t th,.ti-t td{padding:6px 8px;border-bottom:1px solid var(--ti-line);text-align:right;white-space:nowrap}
+.ti-t th:first-child,.ti-t td:first-child{text-align:left}
+.ti-t th{font-weight:600;color:var(--ti-ink2);font-size:12.5px}
+.ti-t tr.ti-bm td{background:var(--ti-hl);font-weight:600}
+.ti-up{color:var(--ti-up)}.ti-dn{color:var(--ti-dn)}
+.ti-cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+.ti-cmp .ti-card{margin:0}
+.ti-big{font-size:22px;font-weight:700}
+.ti-foot{margin-top:24px;font-size:12.5px;color:var(--ti-ink2)}
+</style></head><body><main class="ti-main" id="ti-app"><p class="ti-m">載入中…</p></main>
+<script>
+(function(){
+  var app=document.getElementById('ti-app');
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  // 對數 % → 一般 %（顯示用）
+  function pc(x){return x==null?null:(Math.exp(x/100)-1)*100}
+  function fp(x,cls){if(x==null)return'—';var v=pc(x),s=(v>0?'+':'')+v.toFixed(1)+'%';
+    return cls===false?s:'<span class="'+(v>0.05?'ti-up':v<-0.05?'ti-dn':'')+'">'+s+'</span>'}
+  function md(s){return esc(s).replace(/(\d{4})-(\d\d)-(\d\d)/,'$2/$3')}
+  fetch('data.json',{cache:'no-store'}).then(function(r){return r.json()}).then(render).catch(function(e){
+    app.innerHTML='<p class="ti-m">資料載入失敗：'+esc(e)+'</p>'});
+  var P='base';
+  function render(J){
+    var T=J.topic,B=J.periods.base,ch=J.chain.base,bm=J.bench.base,sp=J.split.base;
+    var nCap=J.links.reduce(function(a,L){return a+L.n_cap},0),nAll=J.check.stocks;
+    var h='<h1 class="ti-h1">議題：'+esc(T.title)+'</h1><p class="ti-q">'+esc(T.q)+'</p>'+
+      '<p class="ti-m">股價資料日 '+md(J.asof_px)+'｜券商共識 EPS '+md(J.asof_cons)+'｜鏈上 '+nAll+' 檔（7 個環節）｜示範版：只用平台現有資料，沒有 AI 起草的段落</p>';
+    // 摘要：每句都是程式從 data.json 組的
+    h+='<div class="ti-sum"><b>重點（程式依資料組句）</b><ul style="margin:4px 0 0;padding-left:20px">'+
+      '<li>產業前瞻：鏈上 '+nAll+' 檔中 '+nCap+' 檔最近一次法說（90 天內）有講到產能、擴產或資本支出。</li>'+
+      '<li>估值修正：'+md(B.t0)+' 以來，整條鏈共識 EPS 中位數 '+fp(ch.dE,false)+'、本益比 '+fp(ch.dPE,false)+'、股價 '+fp(ch.dP,false)+
+      '；同期大盤（'+bm.n+' 檔）本益比 '+fp(bm.dPE,false)+'。</li>'+
+      '<li>對照：法說有提產能的 '+sp.cap.n+' 檔本益比 '+fp(sp.cap.dPE,false)+'，沒提的 '+sp.nocap.n+' 檔 '+fp(sp.nocap.dPE,false)+
+      '（只是兩組並列，不代表因果）。</li></ul></div>';
+    // ① 產業前瞻
+    h+='<div class="ti-sec"><span class="ti-step">1</span><h2>產業前瞻：產能開出</h2><span class="ti-src">法說引句逐字取自法說簡報／錄音整理，程式逐字核對</span></div><div class="ti-card">';
+    J.links.forEach(function(L){
+      var n=L.rows.length,w=n?Math.round(L.n_cap/n*100):0;
+      h+='<div class="ti-link"><div class="ti-lh"><span>'+esc(L.name)+' <small>'+esc(L.subs.join('、'))+'</small></span><span>'+L.n_cap+'／'+n+' 檔提到產能</span></div>'+
+        '<div class="ti-bar"><i style="width:'+w+'%"></i></div>';
+      var qs=L.rows.filter(function(r){return r.cap});
+      if(qs.length){
+        h+='<details class="ti-d"><summary>看法說原句（'+qs.length+' 檔）</summary>';
+        qs.forEach(function(r){
+          h+='<div class="ti-src" style="margin-top:6px"><b style="color:var(--ti-ink)">'+esc(r.c+' '+r.nm)+'</b>　法說 '+md(r.ir.date)+
+            (r.ir.src||[]).map(function(s){return s.url?' · <a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.src)+'</a>':''}).join('')+'</div>';
+          r.ir.q.forEach(function(q){h+='<div class="ti-qt">'+esc(q.t)+'</div>'});
+        });
+        h+='</details>';
+      }
+      h+='</div>';
+    });
+    h+='</div>';
+    // ② 總經／政策
+    h+='<div class="ti-sec"><span class="ti-step">2</span><h2>總經／政策風險</h2></div>'+
+      '<div class="ti-todo">正式版：由本機 W 用 Gemini 從新聞池挑出跟這條鏈有關的總經、政策事件（例：美國選舉、出口管制、利率），'+
+      '每則附原標題、媒體、日期、出處連結，程式打開出處核對後才上。示範版不填。</div>';
+    // ③ 公司事件
+    h+='<div class="ti-sec"><span class="ti-step">3</span><h2>公司事件</h2><span class="ti-src">目前只有法說整理；新聞事件待正式版</span></div><div class="ti-card">';
+    var nn=0;
+    J.links.forEach(function(L){L.rows.forEach(function(r){(r.notes||[]).forEach(function(x){
+      nn++;h+='<div class="ti-link"><div class="ti-src">'+md(x.date)+'　'+esc(L.name)+'　'+esc(x.kind||'')+'</div>'+
+        '<div>'+(x.url?'<a href="'+esc(x.url)+'" target="_blank" rel="noopener" style="color:var(--ti-ink)">'+esc(x.title)+'</a>':esc(x.title))+'</div></div>';
+    })})});
+    if(!nn)h+='<p class="ti-m">鏈上個股目前沒有法說整理。</p>';
+    h+='</div><div class="ti-todo">正式版：再加 W 用 Gemini 從新聞池挑的公司事件（遞延出貨、訂單、董事會、調查…），同樣逐則核對出處；沒核對過的不上。</div>';
+    // ④ 估值修正
+    h+='<div class="ti-sec"><span class="ti-step">4</span><h2>估值修正：股價＝EPS × 本益比</h2></div>'+
+      '<div class="ti-tabs" id="ti-ptab"></div><div id="ti-val"></div>';
+    h+='<p class="ti-foot">量化整理，非投資建議；不評價高估或低估。EPS＝券商共識（明年度）中位數；本益比＝股價 ÷ 共識 EPS；'+
+      '各環節取成員中位數，三欄分別取中位數，所以股價不一定等於 EPS 加本益比。資料：'+esc(J.src)+'。</p>';
+    app.innerHTML=h;
+    var tb=document.getElementById('ti-ptab');
+    Object.keys(J.periods).forEach(function(k){
+      var b=document.createElement('button');b.className='ti-tab';b.type='button';b.textContent=J.periods[k].label;
+      b.setAttribute('aria-pressed',k===P?'true':'false');
+      b.onclick=function(){P=k;[].forEach.call(tb.children,function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');val(J)};
+      tb.appendChild(b);
+    });
+    val(J);
+  }
+  function val(J){
+    var pr=J.periods[P],ch=J.chain[P],bm=J.bench[P],sp=J.split[P];
+    var h='<p class="ti-m">'+md(pr.t0)+' → '+md(pr.t1)+'（共識 EPS 到 '+md(pr.c1)+'）</p><div class="ti-tw"><table class="ti-t"><thead><tr><th>環節</th><th>檔數</th><th>共識 EPS</th><th>本益比</th><th>股價</th></tr></thead><tbody>';
+    J.links.forEach(function(L){var a=L.agg[P];h+='<tr><td>'+esc(L.name)+'</td><td>'+a.n+'</td><td>'+fp(a.dE)+'</td><td>'+fp(a.dPE)+'</td><td>'+fp(a.dP)+'</td></tr>'});
+    h+='<tr class="ti-bm"><td>整條鏈</td><td>'+ch.n+'</td><td>'+fp(ch.dE)+'</td><td>'+fp(ch.dPE)+'</td><td>'+fp(ch.dP)+'</td></tr>';
+    h+='<tr><td>大盤（全體有效個股）</td><td>'+bm.n+'</td><td>'+fp(bm.dE)+'</td><td>'+fp(bm.dPE)+'</td><td>'+fp(bm.dP)+'</td></tr></tbody></table></div>';
+    h+='<div class="ti-cmp" style="margin-top:10px"><div class="ti-card"><div class="ti-src">法說有提產能（'+sp.cap.n+' 檔）本益比</div><div class="ti-big">'+fp(sp.cap.dPE)+'</div>'+
+      '<div class="ti-src">EPS '+fp(sp.cap.dE,false)+'｜股價 '+fp(sp.cap.dP,false)+'</div></div>'+
+      '<div class="ti-card"><div class="ti-src">沒提（'+sp.nocap.n+' 檔）本益比</div><div class="ti-big">'+fp(sp.nocap.dPE)+'</div>'+
+      '<div class="ti-src">EPS '+fp(sp.nocap.dE,false)+'｜股價 '+fp(sp.nocap.dP,false)+'</div></div></div>'+
+      '<p class="ti-src">兩組並列只是描述，不代表「提產能」造成本益比變動；樣本小，正式版會加更長的期間與更多議題再看。</p>';
+    document.getElementById('ti-val').innerHTML=h;
+  }
+})();
+</script></body></html>
