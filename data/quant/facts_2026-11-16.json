@@ -1,9 +1,9 @@
 {
  "date": "2026-11-16",
  "data_date": "2026-11-16",
- "made": "2026-11-16T20:56+08:00",
- "built_at": "2026-11-16T20:42:43+08:00",
- "run": "43868166297",
+ "made": "2026-11-16T21:36+08:00",
+ "built_at": "2026-11-16T21:22:15+08:00",
+ "run": "43873366896",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
   "web_data.market.taiex": "2026-11-16",
@@ -12,7 +12,7 @@
   "web_data.breadth": "2026-11-16",
   "web_data.orders": "2026-11-16",
   "web_data.inst.summary": "2026-11-16",
-  "web_data.market.margin_balance": "2026-11-13",
+  "web_data.market.margin_balance": "2026-11-16",
   "web_data.elecfin": "2026-11-16",
   "web_data.screen.sector_score": "2026-11-16",
   "docs/data/rrg.json": "2026-11-16",
@@ -20,9 +20,7 @@
   "docs/data/disposal.json": "2026-11-16",
   "docs/data/etf_flow.json": "2026-11-13"
  },
- "skipped": {
-  "web_data.market.margin_balance": "來源資料日 2026-11-13 ≠ 資料日 2026-11-16"
- },
+ "skipped": {},
  "facts": [
   {
    "id": "taiex_close",
@@ -221,6 +219,15 @@
    "unit": " 億元",
    "text": "-259.0 億元",
    "src": "web_data.inst.summary"
+  },
+  {
+   "id": "margin_twse",
+   "sec": "信用交易",
+   "label": "上市融資餘額",
+   "value": 5245.0,
+   "unit": " 億元",
+   "text": "5245.0 億元",
+   "src": "web_data.market.margin_balance"
   },
   {
    "id": "elecfin",
