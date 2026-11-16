@@ -1,4 +1,4 @@
-/* research/preview_b/watch_ext.js ── 看盤區兩個新區塊（11-16 晚【新】裁示；W 出預覽 docs/preview/watch_newsval/，Evans 點頭才接進 index.html）
+/* research/preview_b/watch_ext.js ── 看盤區兩個新區塊（11-16 晚【新】裁示；W 出預覽 docs/preview/watch_newsval/，11-16 晚 Evans「通通先上」→ 已接進會員站 index.html）
    預覽與正式版載入同一支檔、呼叫同一個函式，不另寫：
    ① nfMount(root, F, NV)：「盤中資金」併「產業快訊」——族群資金曲線（F＝dash.flow，s1 每分鐘累計主動淨買，億元）＋消息直線（NV＝dash_live.news_view()）＋族群多空燈號。
    ② vdMount(root, D, SRC)：看盤區新標籤「估值」——雲端AM 估值拆解 v2（70a99b89）同一段程式，只把資料改成參數傳入（正式檔 docs/data/val_decomp.json）。
@@ -120,7 +120,7 @@ function item(x, sec) {
   return '<div class="nf-it"><span class="nf-t">' + esc(x.hm) + '</span><a href="' + esc(x.u) + '" target="_blank" rel="noopener">' + esc(x.t) + '</a><span class="nf-src">' + esc(x.s) + "</span>" + (ch ? "<div>" + ch + "</div>" : "") + "</div>";
 }
 window.nfMount = function (root, F, NV) {
-  addCss(); NV = NV || {items: [], lamps: {}}; var open = root._nfOpen || null, K = 12;
+  addCss(); NV = NV || {items: [], lamps: {}}; var open = window.__nfOpen || null, K = 12;   /* 會員站每分鐘重畫、root 會換 → 展開的族群記在全域 */
   if (!F || F.err || !F.sectors) { root.innerHTML = '<div class="nf-wrap"><div class="nf-note">還沒有資金流向資料。</div></div>'; return; }
   var secs = F.sectors.slice().sort(function (p, q) { return q.net - p.net; });
   var h = '<div class="nf-wrap"><h4>盤中資金＋產業快訊（依族群）</h4><div class="nf-note">曲線＝當天 09:00 起每分鐘累計主動淨買（外盤−內盤成交金額，億元）；直線＝該族群產業消息的發布時間（<b class="nf-u">紅＝對照表判偏多</b>、<b class="nf-d">綠＝偏空</b>、黃＝方向不明；盤前、盤後的消息不畫線、列在清單）。燈號＝今天對到產業鏈對照表的「領先」消息偏多／偏空則數（財報創高等落後資料不計），只是標記、不下結論。點族群看消息。</div>';
@@ -134,7 +134,7 @@ window.nfMount = function (root, F, NV) {
   h += '<h4>產業快訊（全部，新到舊）</h4><div class="nf-note">來源：經濟日報、工商時報、MoneyDJ、中央社、鉅亨（只取標題與連結）；每 3 分鐘更新' + (NV.made ? "，最後抓取 " + esc(NV.made.slice(11)) : "") + "；只留產業／公司事件。</div>";
   h += "<div>" + (all.length ? all.map(function (x, i) { return (i >= K ? '<div class="nf-x" hidden>' : "<div>") + item(x) + "</div>"; }).join("") : '<div class="nf-note">今天還沒有產業消息。</div>') + "</div>" + (all.length > K ? '<button class="nf-more">more（還有 ' + (all.length - K) + " 則）</button>" : "") + "</div>";
   root.innerHTML = h;
-  root.querySelectorAll(".nf-row").forEach(function (r) { r.onclick = function () { root._nfOpen = root._nfOpen === r.dataset.s ? null : r.dataset.s; window.nfMount(root, F, NV); }; });
+  root.querySelectorAll(".nf-row").forEach(function (r) { r.onclick = function () { window.__nfOpen = window.__nfOpen === r.dataset.s ? null : r.dataset.s; window.nfMount(root, F, NV); }; });
   var mb = root.querySelector(".nf-more"); if (mb) mb.onclick = function () { var xs = root.querySelectorAll(".nf-x"), hid = xs.length && xs[0].hidden; xs.forEach(function (e) { e.hidden = !hid; }); mb.textContent = hid ? "收起" : "more（還有 " + xs.length + " 則）"; };
 };
 /* ── ② 估值（雲端AM val_decomp v2 同一段程式；資料由參數傳入） ── */
