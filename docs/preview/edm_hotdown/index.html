@@ -1,0 +1,14 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>爆量收跌事件卡預覽（正式版同一段程式）</title><style>
+body{margin:0;background:#EDE7DA;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1B2A4A}
+.w{max-width:1120px;margin:0 auto;padding:16px}
+.n{font-size:15px;line-height:1.7;background:#fff;border:1px solid #DDD4BF;border-radius:10px;padding:12px 16px;margin-bottom:14px}
+.n ul{margin:4px 0 0;padding-left:20px}
+.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(520px,100%),1fr));gap:14px}
+.i{background:#fff;border:1px solid #DDD4BF;border-radius:10px;padding:10px;min-width:0}
+.i h2{font-size:17px;margin:2px 4px 8px}.i h2 a{font-size:13px;margin-left:8px;color:#8A6A2B}
+.i img{width:100%;height:auto;display:block;border-radius:8px}
+.c{font-size:13px;color:#6B6452;margin:6px 4px 0;overflow-wrap:anywhere}.c b.ok{color:#1E7B4F}.c b.ng{color:#C8361E}
+.c ul{margin:2px 0 0;padding-left:18px}
+</style></head><body><div class="w"><h1 style="font-size:22px">爆量收跌事件卡預覽（正式版同一段程式）</h1>
+<div class="n"><b>要看的重點</b><ul><li>規則跟網站「市場 → 軌跡流向」爆量圖層同一段程式（tools/trail_flow.py hot_days），門檻 v2 先定（cff2d850）</li><li>有發生才出：最近 5 個交易日內有爆量收跌才出卡；列歷史前 10 大（依成交金額倍數）</li><li>今天（2026-11-16）：最近 5 個交易日沒有爆量收跌 → 不出卡（正式版這天不會有這張）</li><li>最近一次有發生（2026-10-15）：出卡</li></ul></div><div class="g"><div class="i"><h2>爆量收跌・最近一次有發生（2026-10-15）<a href="hot_dn.png" download>下載 PNG</a></h2><a href="hot_dn.png"><img src="hot_dn.png" alt="爆量收跌" loading="lazy"></a><div class="c"><b class="ok">核對通過</b>　加權收盤 22 筆對官方 market_series；最近一次成交金額倍數用官方上市＋上櫃金額重算<br>・正式版同一段 build()，只把資料截到 2026-10-15；沒有 force 參數</div></div></div></div></body></html>

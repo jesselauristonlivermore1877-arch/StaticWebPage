@@ -263,6 +263,8 @@ function tfCard(url) {
       (J.layers || []).map(q => q.rows.map(r => row(`［${q.ch}］${r[0]}`, r[1])).join("")).join("") +
       `<tr><td>（對照）所有交易日</td><td>—</td><td>${sg(base.bm5)}</td><td>${base.bup5 ?? "—"}%</td><td>50</td><td>${sg(base.bm20)}</td><td>${base.bup20 ?? "—"}%</td><td>50</td></tr></tbody></table>`);
     root.appendChild(tb);
+    const nts = (J.layers || []).flatMap(q => (q.notes || []).map(t => `［${q.ch}］${t}`));
+    if (nts.length) root.appendChild(mk("div", "tf-sub", nts.join("<br>")));
     const p3 = J.pre3 || {};
     root.appendChild(mk("div", "tf-sub", "怎麼看：「比隨機」＝事件之後的平均漲跌，放在同樣次數隨機抽日子（2,000 次）的第幾分位；50 附近＝跟隨便哪一天差不多，粗體（≥ 90 或 ≤ 10）才算明顯偏多或偏空。" +
       `動能轉折日描述的是「族群同時轉向」這件事本身，之後的漲跌跟一般日子分不太出來：3 日平均要等動能真的翻過來才確認，向上轉折前 3 天加權平均已經先漲 ${sg(p3.up)}、向下轉折前 3 天已經先跌 ${sg(p3.down)}（一般 3 天 ${sg(p3.all)}），確認時大半段已經走完，所以是看盤時的結構提示，不是單獨的方向訊號。` +
