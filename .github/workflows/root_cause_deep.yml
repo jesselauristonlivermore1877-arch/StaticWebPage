@@ -75,7 +75,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/gemini_quota data/root_cause docs/preview/root_cause_deep 2>/dev/null || true
+          git add data/gemini_quota data/root_cause docs/preview/root_cause_deep docs/data/rc_topic 2>/dev/null || true
           if git diff --staged --quiet; then echo "沒有變動"; exit 0; fi
           git commit -qm "data: 根因深層解讀預覽 ${{ inputs.tw }} 第 ${{ inputs.cand }} 名（$(TZ=Asia/Taipei date '+%F %H:%M')）"
           for i in 1 2 3 4; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep $((2 ** i)); done
