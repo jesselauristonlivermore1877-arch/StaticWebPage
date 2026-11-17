@@ -355,6 +355,15 @@ jobs:
         run: |
           python tools/topic_industry.py --swp ../site --vd ../site/docs/data/val_decomp.json --out ../site/docs/data/topic_industry.json || { echo "::warning::議題式產業核對沒過或失敗（網站沿用上一份 topic_industry.json）"; echo "議題式產業核對沒過或失敗（網站沿用上一份 topic_industry.json）" >> "$RUNNER_TEMP/soft_fail.txt"; }
 
+      # 🟢 11-17（雲端舊21，【舊】總指揮派工；Evans：「還原多少點誠誠實實幫我做上去」）：台指期換月價差還原紀錄 → docs/data/roll_tx.csv（策略績效頁）
+      #    讀程式 repo data/roll/roll_spread.xlsx 的 TX 分頁（W／datafeed 換月後更新 xlsx，這步每班重產）；csv 每列跟 xlsx 原值逐格核對，沒過 exit 1、不寫檔 → 沿用上一份；只記 ⚠ 不擋上線。
+      - name: 換月價差還原紀錄
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 2
+        run: |
+          python tools/roll_publish.py --swp ../site || { echo "::warning::換月價差還原紀錄核對沒過或失敗（網站沿用上一份 roll_tx.csv）"; echo "換月價差還原紀錄核對沒過或失敗（網站沿用上一份 roll_tx.csv）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+
       # 🟢 11-16（雲端舊7，【舊】總指揮 TODO 26bcc29）：法人買賣超隔日校正 —— 證交所 T86 會事後修正（2026-10-15 投信 59 格），
       #    重抓 inst.npz 裡「台灣今天以前」最新一天的上市 T86＋上櫃三大法人（各一發），跟 inst.npz（外資、投信）與 dealer.npz（自營自行、避險）逐格比，
       #    不同就覆寫那一天；同一天校正過記在 data/bars/inst_recheck.json，之後班次不再打。抓不完整（exit 2）不寫、記 soft_fail、不擋上線。
