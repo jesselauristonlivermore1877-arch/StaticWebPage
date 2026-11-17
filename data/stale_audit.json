@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-18 02:04",
+ "asof": "2026-11-18 05:28",
  "first_stale": {
   "docs/data/pcf/00989A|主動 ETF 持股 00989A": "2026-11-18",
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-18"
@@ -380,11 +380,11 @@
   {
    "name": "正式站巡檢",
    "path": "docs/data/site_smoke.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 site_smoke.yml",
    "note": ""
@@ -416,11 +416,11 @@
   {
    "name": "意見領袖",
    "path": "docs/data/kol.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 kol.yml",
    "note": ""
