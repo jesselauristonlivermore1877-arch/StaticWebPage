@@ -22208,6 +22208,323 @@
 }
 ],
 "area_v": 1
+},
+"harry_yt:_OSlEd2Ohck": {
+"src": "harry_yt",
+"name": "哈利說（科技浪）",
+"kind": "youtube",
+"title": "EP162 - AI 產品護城河、海外市場拓展、企業 AI 應用與人才｜專訪 Speak 營運長 Colton Gyulay",
+"date": "2026-11-16",
+"url": "https://www.youtube.com/watch?v=_OSlEd2Ohck",
+"dur_s": 3600,
+"tr_v": 2,
+"seg_n": 293,
+"full": true,
+"gaps": [],
+"keypoints": [
+{
+"text": "創業者可以從一開始就抱持全球化思維，放眼世界並尋找全球各地的大問題來解決。",
+"sec": 2567,
+"seg": 165
+},
+{
+"text": "進入新市場時可透過 MVP 進行多地軟發布，觀察漏斗表現找出自然需求強勁的市場再行深耕。",
+"sec": 2725,
+"seg": 177
+}
+],
+"models": [
+"gemini-3.5-flash-lite"
+],
+"at": "2026-11-17",
+"n_seg": 293,
+"len_s": 3538,
+"mentions": [
+{
+"t": "0:33:55",
+"sec": 2035,
+"quote": "2026 has been a really interesting year for voice. Lots of the research over the past handful of years has been very text-focused.",
+"point": "講者提到 2026 年是語音 AI 研究快速發展的一年，過去幾年研發重心較偏向文字與圖像。",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）",
+"tone": "多",
+"tone_on": "大盤",
+"tone_why": "語音 AI 技術在 2026 年迎來顯著進展與大量研發資源。",
+"seg": 129
+},
+{
+"t": "0:42:05",
+"sec": 2525,
+"quote": "So I think maybe before I answer that question, I'll share an overall thought on the opportunity for Taiwanese founders.",
+"point": "講者準備分享對台灣創業家海外市場機會的整體看法。",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 0.99,
+"status": "通過",
+"reason": "原話對得上（重疊 99%）",
+"tone": "多",
+"tone_on": "大盤",
+"tone_why": "看好台灣創辦人具備全球化發展的良好契機。",
+"seg": 162
+},
+{
+"t": "0:42:39",
+"sec": 2559,
+"quote": "I think speak is an interesting company in the sense that from the beginning we did not seek to do that. We actually looked globally and found what we thought was a very interesting and important problem to solve.",
+"point": "講者指出 Speak 從一開始就不是先專注本土市場，而是直接從全球視角尋找重要痛點。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 1.0,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落",
+"seg": 164
+},
+{
+"t": "0:43:10",
+"sec": 2590,
+"quote": "we knew that English learning in particular was a really big opportunity and this combination of demand for English learning and willingness to pay and technological savvy all lined up in a way that made East Asian markets like Korea, which was our first market actually, or Japan, or Taiwan, very interesting places for speak to play.",
+"point": "講者分析東亞市場（韓國、日本、台灣）具備強烈的英語學習需求、付費意願與科技成熟度，是極佳的切入點。",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 0.99,
+"status": "通過",
+"reason": "原話對得上（重疊 99%）",
+"tone": "多",
+"tone_on": "大盤",
+"tone_why": "東亞市場對英語學習有高度需求與付費能力。",
+"seg": 167
+},
+{
+"t": "0:43:41",
+"sec": 2621,
+"quote": "I think I would encourage people to think globally from the beginning, to think about, you know, not just what are the problems directly in front of you, but what are the problem the big problems that are facing people over the world",
+"point": "講者建議創辦人從一開始就要思考全球性問題，而非僅看眼前的本地市場。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 1.0,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落",
+"seg": 168
+},
+{
+"t": "0:44:02",
+"sec": 2642,
+"quote": "Now, again, maybe still easier to solve the problem that's, you know, locally here in Taiwan, but um, but I think it's very doable to, especially in today's world, um, to start businesses that help people in a bunch of different places.",
+"point": "講者認為雖然在地解決台灣本地問題相對簡單，但在當今世界，打造跨國服務也是完全可行的。",
+"sectors": [],
+"stocks": [],
+"area": "總經",
+"match": 1.0,
+"status": "通過",
+"reason": "原話對得上（重疊 100%）",
+"tone": "多",
+"tone_on": "大盤",
+"tone_why": "現代環境讓企業更有利於推動全球化業務。",
+"seg": 169
+},
+{
+"t": "0:44:19",
+"sec": 2659,
+"quote": "In terms of how speak is thought about market entry, building off of what I said, I think we always started from first principles more of what's the problem that we're solving? Where is that problem most sort of painful?",
+"point": "講者說明 Speak 的市場進入策略是從第一原理出發，尋找痛點最強烈的地方。",
+"sectors": [],
+"stocks": [],
+"area": "",
+"match": 0.99,
+"status": "失敗",
+"reason": "對不到 26 大類也對不到台股代號，也不是總經或政治段落",
+"seg": 170
+}
+],
+"n_pass": 4,
+"n_fail": 3,
+"context": [
+{
+"stage": "主張",
+"t0": "0:02:51",
+"t1": "0:03:47",
+"sec0": 171,
+"summary": "AI 消費者市場雖然機會多，但爆發成功的案例並不多。Speak 成功的關鍵在於鎖定特定利基市場，疊加適當的技術與產品體驗來解決具體問題。",
+"quotes": [
+{
+"t": "0:02:51",
+"sec": 171,
+"quote": "there's been a lot of opportunity, but also not really a huge number of breakout successes in consumer AI",
+"match": 1.0
+},
+{
+"t": "0:03:19",
+"sec": 199,
+"quote": "I think where Speak was able to find success was was through identifying, you know, a specific niche that we thought that we could, um, layer on additional technology",
+"match": 1.0
+}
+],
+"status": "通過"
+},
+{
+"stage": "操作",
+"t0": "0:04:57",
+"t1": "0:06:01",
+"sec0": 297,
+"summary": "建立消費者 AI 新創時，建議從解決使用者面臨的實際問題出發，同時保持對新技術發展的敏感度，兩者相輔相成。",
+"quotes": [
+{
+"t": "0:04:57",
+"sec": 297,
+"quote": "almost always I would recommend that people start with the problem first. You know, what is the what is the consumer or the user problem that you're trying to solve",
+"match": 1.0
+},
+{
+"t": "0:05:38",
+"sec": 338,
+"quote": "I think it's still useful to really be familiar with the technology and its capabilities and use that to understand where to go.",
+"match": 1.0
+}
+],
+"status": "通過"
+},
+{
+"stage": "主張",
+"t0": "0:06:31",
+"t1": "0:07:47",
+"sec0": 391,
+"summary": "現今打造原型雖然變容易了，但「最後一哩路」極具挑戰。能提供可靠、高品質且建立信任體驗的產品，才是真正的護城河。",
+"quotes": [
+{
+"t": "0:06:41",
+"sec": 401,
+"quote": "what we're finding internally and what we see from other companies is that the last mile is still pretty hard.",
+"match": 1.0
+},
+{
+"t": "0:06:55",
+"sec": 415,
+"quote": "building something that works every time, that solves the customer's problem in a predictable and high-trust way over and over again, is still really challenging.",
+"match": 1.0
+}
+],
+"status": "通過"
+},
+{
+"stage": "主張",
+"t0": "0:08:11",
+"t1": "0:09:22",
+"sec0": 491,
+"summary": "儘管大型基礎模型不斷進步，但在應用層針對特定工作流程與數據進行深度投資，依然能與水平通用產品區隔並創造巨大的機會。",
+"quotes": [
+{
+"t": "0:08:26",
+"sec": 506,
+"quote": "we still really believe that there's a ton of opportunity in the application layer and to solve specific problems.",
+"match": 1.0
+},
+{
+"t": "0:08:38",
+"sec": 518,
+"quote": "there's still feels like there is, uh, tremendous, uh, tremendously higher ceiling in terms of the quality of product experience you can build",
+"match": 1.0
+}
+],
+"status": "通過"
+},
+{
+"stage": "依據",
+"t0": "0:20:26",
+"t1": "0:23:09",
+"sec0": 1226,
+"summary": "在平衡 AI 成本與毛利時，初期不應過度專注於優化 Token 成本，而是優先打造能為使用者帶來轉變的價值，隨後再針對不同情境配置合適的智慧模型。",
+"quotes": [
+{
+"t": "0:21:24",
+"sec": 1284,
+"quote": "we're not really focused out of the gate on optimizing our token costs. What we're really more focused on is can we develop an experience that feels transformative for people?",
+"match": 1.0
+},
+{
+"t": "0:22:59",
+"sec": 1379,
+"quote": "what is the level of intelligence that's required for this specific problem that we're solving and applying the right level for that.",
+"match": 1.0
+}
+],
+"status": "通過"
+},
+{
+"stage": "主張",
+"t0": "0:42:30",
+"t1": "0:43:55",
+"sec0": 2550,
+"summary": "台灣創業者在拓展海外市場時，不妨從一開始就抱持全球化思維，去尋找並解決世界各地人們面臨的大問題，而東亞市場對英文學習的需求與付費意願便是一個很好的例子。",
+"quotes": [
+{
+"t": "0:42:47",
+"sec": 2567,
+"quote": "I think a lot of people most most companies try to solve problems in your home market first. I think that's very valid. Uh I think speak is an interesting company in the sense that from the beginning we did not seek to do that.",
+"match": 1.0
+},
+{
+"t": "0:43:38",
+"sec": 2618,
+"quote": "bring this back to founders thinking about this, I think I would encourage people to think globally from the beginning to think about, you know, not just what are the problems directly in front of you, but what are the problems the big problems that are facing people over the world",
+"match": 1.0
+}
+],
+"status": "通過"
+},
+{
+"stage": "操作",
+"t0": "0:44:19",
+"t1": "0:46:20",
+"sec0": 2659,
+"summary": "Speak 在進行新市場擴張時，會先打造數位產品的 MVP 並進行多地軟性發布，透過測試與觀察漏斗轉化數據，找出自然需求強勁的市場後再進行深耕。",
+"quotes": [
+{
+"t": "0:45:25",
+"sec": 2725,
+"quote": "our approach was how do we reduce the time and cost of the first sort of localization of our product, the MVP, put that into a number of different markets and then find where the organic pockets of demand were happening.",
+"match": 1.0
+},
+{
+"t": "0:45:50",
+"sec": 2750,
+"quote": "When it came to a market like Japan or Taiwan, we saw quite you know maybe fortunately out of the box the product was being discovered more organically.",
+"match": 1.0
+}
+],
+"status": "通過"
+},
+{
+"stage": "操作",
+"t0": "0:51:33",
+"t1": "0:52:48",
+"sec0": 3093,
+"summary": "在地化團隊的建立至關重要，且總部必須給予當地團隊高度的自主權與信任，才能推出真正符合當地消費者需求的在地化行銷與內容。",
+"quotes": [
+{
+"t": "0:51:53",
+"sec": 3113,
+"quote": "common mistake that a lot of big companies make, especially American companies, are that they hire some of these local teams and then they just have them run US centric campaigns.",
+"match": 1.0
+},
+{
+"t": "0:52:05",
+"sec": 3125,
+"quote": "a really key thing that speak has always done is we've had a really high degree of trust and given a high degree of autonomy to our local teams to come up with concepts that felt really really localized",
+"match": 0.99
+}
+],
+"status": "通過"
+}
+],
+"area_v": 1
 }
 },
 "fail": {
@@ -22261,6 +22578,14 @@
 },
 "yutinghao:Vgi26nHgnpM": {
 "at": "2026-11-13",
+"err": "RuntimeError: HTTP 400 { \"error\": { \"code\": 400, \"message\": \"Request contains an invalid argument.\", \"status\": \"INVALID_ARGUMENT\" } } "
+},
+"yutinghao:zl_0SAhU3YU": {
+"at": "2026-11-17",
+"err": "RuntimeError: HTTP 400 { \"error\": { \"code\": 400, \"message\": \"Request contains an invalid argument.\", \"status\": \"INVALID_ARGUMENT\" } } "
+},
+"yutinghao:_h0gpc8s5jM": {
+"at": "2026-11-17",
 "err": "RuntimeError: HTTP 400 { \"error\": { \"code\": 400, \"message\": \"Request contains an invalid argument.\", \"status\": \"INVALID_ARGUMENT\" } } "
 }
 }
