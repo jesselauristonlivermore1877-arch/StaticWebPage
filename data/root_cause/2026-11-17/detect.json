@@ -4,6 +4,13 @@
    "kind": "台指期",
    "what": "期交所行情",
    "date": "2026-11-17",
+   "t": "台指期夜盤重挫 -918 點（-2.29%），報 39,093；盤中最低 39,010",
+   "u": "https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-17",
    "t": "台指期日盤重挫 -954 點（-2.34%），報 39,827；盤中最低 39,825",
    "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
   },
@@ -47,7 +54,7 @@
   "TWII": {
    "date": "2026-11-17",
    "prev": "2026-11-16",
-   "close": 40092.1094,
+   "close": 40092.11,
    "prev_close": 41040.0781,
    "pct": -2.31,
    "sd": 1.869,
@@ -132,7 +139,7 @@
     "n": 5,
     "pct": -9.97,
     "z": -2.67,
-    "foreign": null,
+    "foreign": 33.04,
     "c_sox": 0.32,
     "c_nq": 0.34,
     "members": [
@@ -168,7 +175,7 @@
     "n": 10,
     "pct": -9.14,
     "z": -2.41,
-    "foreign": null,
+    "foreign": 38.69,
     "c_sox": 0.41,
     "c_nq": 0.39,
     "members": [
@@ -229,7 +236,7 @@
     "n": 7,
     "pct": -8.22,
     "z": -1.73,
-    "foreign": null,
+    "foreign": 13.66,
     "c_sox": 0.43,
     "c_nq": 0.39,
     "members": [
@@ -275,7 +282,7 @@
     "n": 14,
     "pct": -7.91,
     "z": -2.16,
-    "foreign": null,
+    "foreign": 30.17,
     "c_sox": 0.36,
     "c_nq": 0.32,
     "members": [
@@ -356,7 +363,7 @@
     "n": 8,
     "pct": -7.57,
     "z": -1.91,
-    "foreign": null,
+    "foreign": 22.12,
     "c_sox": 0.47,
     "c_nq": 0.43,
     "members": [
@@ -407,7 +414,7 @@
     "n": 10,
     "pct": -6.56,
     "z": -1.46,
-    "foreign": null,
+    "foreign": 15.81,
     "c_sox": 0.42,
     "c_nq": 0.39,
     "members": [
@@ -468,7 +475,7 @@
     "n": 5,
     "pct": -5.73,
     "z": -1.61,
-    "foreign": null,
+    "foreign": 16.59,
     "c_sox": 0.23,
     "c_nq": 0.22,
     "members": [
@@ -504,7 +511,7 @@
     "n": 16,
     "pct": -5.47,
     "z": -1.81,
-    "foreign": null,
+    "foreign": 5.18,
     "c_sox": 0.49,
     "c_nq": 0.44,
     "members": [
@@ -595,7 +602,7 @@
     "n": 14,
     "pct": -5.24,
     "z": -1.6,
-    "foreign": null,
+    "foreign": -7.21,
     "c_sox": 0.5,
     "c_nq": 0.45,
     "members": [
@@ -676,7 +683,7 @@
     "n": 6,
     "pct": -5.15,
     "z": -1.17,
-    "foreign": null,
+    "foreign": 16.5,
     "c_sox": 0.46,
     "c_nq": 0.46,
     "members": [
@@ -717,7 +724,7 @@
     "n": 14,
     "pct": -4.7,
     "z": -1.13,
-    "foreign": null,
+    "foreign": 31.69,
     "c_sox": 0.35,
     "c_nq": 0.34,
     "members": [
@@ -798,7 +805,7 @@
     "n": 4,
     "pct": -4.31,
     "z": -1.05,
-    "foreign": null,
+    "foreign": 0.61,
     "c_sox": 0.39,
     "c_nq": 0.38,
     "members": [
@@ -829,7 +836,7 @@
     "n": 13,
     "pct": -4.08,
     "z": -1.68,
-    "foreign": null,
+    "foreign": 10.01,
     "c_sox": 0.43,
     "c_nq": 0.41,
     "members": [
@@ -905,7 +912,7 @@
     "n": 8,
     "pct": -4.07,
     "z": -1.3,
-    "foreign": null,
+    "foreign": -0.75,
     "c_sox": 0.32,
     "c_nq": 0.29,
     "members": [
@@ -956,7 +963,7 @@
     "n": 7,
     "pct": -3.31,
     "z": -1.09,
-    "foreign": null,
+    "foreign": -2.05,
     "c_sox": 0.44,
     "c_nq": 0.4,
     "members": [
@@ -1002,7 +1009,7 @@
     "n": 3,
     "pct": -2.03,
     "z": -0.63,
-    "foreign": null,
+    "foreign": -320.38,
     "c_sox": 0.41,
     "c_nq": 0.37,
     "members": [
@@ -1028,7 +1035,7 @@
     "n": 4,
     "pct": -1.75,
     "z": -0.86,
-    "foreign": null,
+    "foreign": 4.3,
     "c_sox": 0.16,
     "c_nq": 0.21,
     "members": [
@@ -1059,7 +1066,7 @@
     "n": 7,
     "pct": -1.69,
     "z": -0.63,
-    "foreign": null,
+    "foreign": -2.12,
     "c_sox": 0.48,
     "c_nq": 0.44,
     "members": [
@@ -1105,7 +1112,7 @@
     "n": 9,
     "pct": -1.39,
     "z": -0.31,
-    "foreign": null,
+    "foreign": 4.14,
     "c_sox": 0.41,
     "c_nq": 0.37,
     "members": [
@@ -1161,7 +1168,7 @@
     "n": 16,
     "pct": -1.23,
     "z": -0.61,
-    "foreign": null,
+    "foreign": -14.04,
     "c_sox": 0.31,
     "c_nq": 0.35,
     "members": [
@@ -1252,7 +1259,7 @@
     "n": 19,
     "pct": -0.87,
     "z": -0.88,
-    "foreign": null,
+    "foreign": -15.8,
     "c_sox": 0.3,
     "c_nq": 0.25,
     "members": [
@@ -1358,7 +1365,7 @@
     "n": 14,
     "pct": -0.58,
     "z": -0.23,
-    "foreign": null,
+    "foreign": -113.38,
     "c_sox": 0.46,
     "c_nq": 0.43,
     "members": [
@@ -1439,7 +1446,7 @@
     "n": 5,
     "pct": -0.46,
     "z": -0.56,
-    "foreign": null,
+    "foreign": -7.27,
     "c_sox": 0.03,
     "c_nq": 0.01,
     "members": [
@@ -1475,7 +1482,7 @@
     "n": 7,
     "pct": -0.19,
     "z": -0.15,
-    "foreign": null,
+    "foreign": 2.48,
     "c_sox": 0.16,
     "c_nq": 0.17,
     "members": [
@@ -1521,7 +1528,7 @@
     "n": 20,
     "pct": -0.14,
     "z": -0.13,
-    "foreign": null,
+    "foreign": -21.26,
     "c_sox": 0.32,
     "c_nq": 0.3,
     "members": [
@@ -1632,7 +1639,7 @@
     "n": 5,
     "pct": 0.0,
     "z": 0.0,
-    "foreign": null,
+    "foreign": -3.85,
     "c_sox": 0.34,
     "c_nq": 0.29,
     "members": [
@@ -1668,7 +1675,7 @@
     "n": 3,
     "pct": 2.79,
     "z": 0.71,
-    "foreign": null,
+    "foreign": -7.58,
     "c_sox": 0.39,
     "c_nq": 0.41,
     "members": [
@@ -1695,70 +1702,70 @@
     "code": "2330",
     "name": "台積電",
     "pct": -2.03,
-    "foreign": null,
+    "foreign": -316.95,
     "c_sox": 0.54
    },
    {
     "code": "2454",
     "name": "聯發科",
     "pct": 1.19,
-    "foreign": null,
+    "foreign": -82.31,
     "c_sox": 0.48
    },
    {
     "code": "1303",
     "name": "南亞",
     "pct": -4.56,
-    "foreign": null,
+    "foreign": -11.41,
     "c_sox": 0.31
    },
    {
     "code": "3037",
     "name": "欣興",
     "pct": -9.9,
-    "foreign": null,
+    "foreign": 28.06,
     "c_sox": 0.46
    },
    {
     "code": "2308",
     "name": "台達電",
     "pct": -5.8,
-    "foreign": null,
+    "foreign": 2.73,
     "c_sox": 0.42
    },
    {
     "code": "2408",
     "name": "南亞科",
     "pct": -3.24,
-    "foreign": null,
+    "foreign": 3.63,
     "c_sox": 0.39
    },
    {
     "code": "2327",
     "name": "國巨*",
     "pct": -3.48,
-    "foreign": null,
+    "foreign": 9.61,
     "c_sox": 0.38
    },
    {
     "code": "3443",
     "name": "創意",
     "pct": -10.0,
-    "foreign": null,
+    "foreign": -16.55,
     "c_sox": 0.37
    },
    {
     "code": "1815",
     "name": "富喬",
     "pct": -9.92,
-    "foreign": null,
+    "foreign": -9.71,
     "c_sox": 0.24
    },
    {
     "code": "2383",
     "name": "台光電",
     "pct": -6.72,
-    "foreign": null,
+    "foreign": 41.66,
     "c_sox": 0.3
    }
   ],
