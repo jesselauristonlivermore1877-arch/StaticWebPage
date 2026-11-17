@@ -1,0 +1,161 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"輝達執行長黃仁勳辭職與接班人選引發科技股治理風暴\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-16\",\n      \"who\": \"黃仁勳\",\n      \"event\": \"黃仁勳無預警辭去輝達執行長職務，引發華爾街對 AI 領導階層與公司治理的疑慮。\",\n      \"mechanism\": \"科技巨頭領導層變動動搖市場對 AI 成長的信心，導致美股費城半導體指數大跌超過 5%，並擴散至全球半導體與 AI 供應鏈。\",\n      \"industry\": \"半導體\",\n      \"tw_link\": \"外資與投資人恐慌拋售權值股與半導體供應鏈，導致台股加權指數於 11 月 16 日創下歷史第二大跌點 2,635 點，11 月 17 日續跌 947 點。\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"伺服器與品牌組裝\",\n        \"載板與PCB\",\n        \"散熱與液冷\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"黃仁勳\",\n        \"輝達\",\n        \"辭職\",\n        \"Jensen Huang\",\n        \"Nvidia\",\n        \"Resignation\",\n        \"Jensen Huang 辞任\",\n        \"エヌビディア\",\n        \"젠슨 황\",\n        \"엔비디아\"\n      ],\n      \"evidence\": [\n        \"P136\",\n        \"P148\",\n        \"P252\",\n        \"P273\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"這是直接引發全球 AI 晶片股與台股半導體供應鏈重挫的最上游核心事件。\",\n      \"drill\": [\n        \"Jensen Huang resignation Nvidia CEO successor\",\n        \"黃仁勳 辭職 輝達 接班人\",\n        \"エヌビディア ジェンスン・フアン 辞任\",\n        \"젠슨 황 사퇴 엔비디아\"\n      ]\n    },\n    {\n      \"title\": \"美國商務部收緊 AI 晶片遠端存取與出口管制\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-16\",\n      \"who\": \"美國商務部\",\n      \"event\": \"美國商務部宣佈收緊對中國企業海外租用 AI 算力及晶片遠端存取的限制。\",\n      \"mechanism\": \"出口管制升級直接打擊資料中心與雲端服務的海外算力需求，削弱上游半導體設備與晶片廠的營收預期。\",\n      \"industry\": \"半導體及雲端算力\",\n      \"tw_link\": \"台灣作為全球 AI 硬體製造與晶片代工樞紐，受制裁擴大影響，相關晶片與伺服器供應鏈面臨訂單不確定性。\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"網通與衛星\",\n        \"伺服器電源與儲能\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"美國商務部\",\n        \"AI晶片\",\n        \"出口管制\",\n        \"US Commerce Department\",\n        \"AI chip restrictions\",\n        \"米商務省\",\n        \"AI半導体規制\",\n        \"미 상무부\",\n        \"AI 반도체 규제\"\n      ],\n      \"evidence\": [\n        \"P261\",\n        \"P330\",\n        \"P560\",\n        \"P668\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"這是針對 AI 產業的實質政策與地緣政治限制，對基本面造成實質衝擊。\",\n      \"drill\": [\n        \"US Commerce Department AI chip export controls remote access\",\n        \"美國商務部 AI晶片 出口管制 遠端存取\",\n        \"米商務省 AI半導体 輸出規制 遠隔アクセス\",\n        \"미 상무부 AI 반도체 수출 규제\"\n      ]\n    },\n    {\n      \"title\": \"金管會與證交所信心喊話與必要時穩定市場措施\",\n      \"layer\": \"政策回應\",\n      \"event_date\": \"2026-11-16\",\n      \"who\": \"金管會與證交所\",\n      \"event\": \"面對台股連日暴跌，金管會與證交所公開喊話，強調基本面無虞，並表示將視市場狀況採取必要穩定措施。\",\n      \"mechanism\": \"主管機關透過信心喊話與研議穩定機制，企圖遏止恐慌性賣壓與融資斷頭潮，協助台股在 4 萬點關卡附近展開多空激戰。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"政策表態引動盤中神祕買盤及公股行庫護盤動作，使加權指數在跌破 4 萬點後數度急拉。\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"不明\",\n      \"keywords\": [\n        \"金管會\",\n        \"證交所\",\n        \"安定化措置\",\n        \"Financial Supervisory Commission\",\n        \"Taiwan Stock Exchange\"\n      ],\n      \"evidence\": [\n        \"P86\",\n        \"P100\",\n        \"P463\",\n        \"P805\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"why_root\": \"這是台股暴跌後主管機關針對市場波動所作出的政策回應。\",\n      \"drill\": [\n        \"金管會 證交所 股市 安定措施 國安基金\",\n        \"Taiwan Stock Exchange market stabilization measures\"\n      ]\n    }\n  ],\n  \"summary\": \"2026年11月17日台股大幅波動的主要根因受美股科技股重挫拖累，其核心源於輝達執行長黃仁勳無預警辭職引發的 AI 領導階層與治理風暴，以及美國商務部收緊 AI 晶片遠端存取與出口管制。這兩大因素重創全球半導體與 AI 供應鏈預期，透過外資拋售與權值股領跌傳導至台股，促使主管機關隨後發聲穩定市場。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "輝達執行長黃仁勳辭職與接班人選引發科技股治理風暴",
+    "layer": "根因",
+    "event_date": "2026-11-16",
+    "who": "黃仁勳",
+    "event": "黃仁勳無預警辭去輝達執行長職務，引發華爾街對 AI 領導階層與公司治理的疑慮。",
+    "mechanism": "科技巨頭領導層變動動搖市場對 AI 成長的信心，導致美股費城半導體指數大跌超過 5%，並擴散至全球半導體與 AI 供應鏈。",
+    "industry": "半導體",
+    "tw_link": "外資與投資人恐慌拋售權值股與半導體供應鏈，導致台股加權指數於 11 月 16 日創下歷史第二大跌點 2,635 點，11 月 17 日續跌 947 點。",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "伺服器與品牌組裝",
+     "載板與PCB",
+     "散熱與液冷"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "黃仁勳",
+     "輝達",
+     "辭職",
+     "Jensen Huang",
+     "Nvidia",
+     "Resignation",
+     "Jensen Huang 辞任",
+     "エヌビディア",
+     "젠슨 황",
+     "엔비디아"
+    ],
+    "evidence": [
+     "P136",
+     "P148",
+     "P252",
+     "P273"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "這是直接引發全球 AI 晶片股與台股半導體供應鏈重挫的最上游核心事件。",
+    "drill": [
+     "Jensen Huang resignation Nvidia CEO successor",
+     "黃仁勳 辭職 輝達 接班人",
+     "エヌビディア ジェンスン・フアン 辞任",
+     "젠슨 황 사퇴 엔비디아"
+    ]
+   },
+   {
+    "title": "美國商務部收緊 AI 晶片遠端存取與出口管制",
+    "layer": "根因",
+    "event_date": "2026-11-16",
+    "who": "美國商務部",
+    "event": "美國商務部宣佈收緊對中國企業海外租用 AI 算力及晶片遠端存取的限制。",
+    "mechanism": "出口管制升級直接打擊資料中心與雲端服務的海外算力需求，削弱上游半導體設備與晶片廠的營收預期。",
+    "industry": "半導體及雲端算力",
+    "tw_link": "台灣作為全球 AI 硬體製造與晶片代工樞紐，受制裁擴大影響，相關晶片與伺服器供應鏈面臨訂單不確定性。",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "網通與衛星",
+     "伺服器電源與儲能"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "美國商務部",
+     "AI晶片",
+     "出口管制",
+     "US Commerce Department",
+     "AI chip restrictions",
+     "米商務省",
+     "AI半導体規制",
+     "미 상무부",
+     "AI 반도체 규제"
+    ],
+    "evidence": [
+     "P261",
+     "P330",
+     "P560",
+     "P668"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "這是針對 AI 產業的實質政策與地緣政治限制，對基本面造成實質衝擊。",
+    "drill": [
+     "US Commerce Department AI chip export controls remote access",
+     "美國商務部 AI晶片 出口管制 遠端存取",
+     "米商務省 AI半導体 輸出規制 遠隔アクセス",
+     "미 상무부 AI 반도체 수출 규제"
+    ]
+   },
+   {
+    "title": "金管會與證交所信心喊話與必要時穩定市場措施",
+    "layer": "政策回應",
+    "event_date": "2026-11-16",
+    "who": "金管會與證交所",
+    "event": "面對台股連日暴跌，金管會與證交所公開喊話，強調基本面無虞，並表示將視市場狀況採取必要穩定措施。",
+    "mechanism": "主管機關透過信心喊話與研議穩定機制，企圖遏止恐慌性賣壓與融資斷頭潮，協助台股在 4 萬點關卡附近展開多空激戰。",
+    "industry": "全市場",
+    "tw_link": "政策表態引動盤中神祕買盤及公股行庫護盤動作，使加權指數在跌破 4 萬點後數度急拉。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "不明",
+    "keywords": [
+     "金管會",
+     "證交所",
+     "安定化措置",
+     "Financial Supervisory Commission",
+     "Taiwan Stock Exchange"
+    ],
+    "evidence": [
+     "P86",
+     "P100",
+     "P463",
+     "P805"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "why_root": "這是台股暴跌後主管機關針對市場波動所作出的政策回應。",
+    "drill": [
+     "金管會 證交所 股市 安定措施 國安基金",
+     "Taiwan Stock Exchange market stabilization measures"
+    ]
+   }
+  ],
+  "summary": "2026年11月17日台股大幅波動的主要根因受美股科技股重挫拖累，其核心源於輝達執行長黃仁勳無預警辭職引發的 AI 領導階層與治理風暴，以及美國商務部收緊 AI 晶片遠端存取與出口管制。這兩大因素重創全球半導體與 AI 供應鏈預期，透過外資拋售與權值股領跌傳導至台股，促使主管機關隨後發聲穩定市場。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmp7odvd5iu.txt",
+  "附檔": [],
+  "耗時秒": 9.3,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.5-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 32603,
+   "prompt_tokens": 30981,
+   "output_tokens": 1622,
+   "thinking_tokens": null
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1117_synth1",
+  "ok": true
+ }
+}
