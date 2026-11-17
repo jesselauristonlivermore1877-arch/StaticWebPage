@@ -21,13 +21,13 @@ body{margin:0;background:var(--bg);color:var(--ink-1);font:15px/1.6 system-ui,-a
 .pv-top button{background:var(--raise);color:var(--ink-1);border:1px solid var(--line);border-radius:6px;padding:3px 10px;cursor:pointer}
 .pv-main{padding:8px 16px;max-width:1180px;margin:0 auto}
 .empty{color:var(--ink-2);padding:12px 0}
-/* 🟢 11-17 C45（雲端新6；Evans：估值頁籤要放 Market Insight）：產業 → 估值拆解。程式＝watch_ext.js 的 vdMount（跟會員站同一支），
-   這裡只把 vd- 色票接到站上深淺色變數、拿掉外框留白；vdmi- 前綴，不碰既有樣式 */
+/* 🟢 11-17 C45（雲端新6；Evans：估值頁籤要放 Market Insight）：產業 → 估值拆解。
+   🟢 11-17 雲端舊21（Evans：「可以 去套版」）：改用 v3 圖版 assets/vd3.js 的 vd3Mount（原預覽 preview/val_decomp/v3）；
+   圖表色票由 vd3.js 自己依 data-theme 切深淺色，這裡只把底色、字色、框線接到站上變數、拿掉外框留白。
+   html 前綴：vd3.js 的樣式是載入時才插進 head、排在後面，同權重會蓋過這裡；vdmi- 前綴，不碰既有樣式 */
 .vdmi{white-space:normal}
-.vdmi .vd-root{--vd-bg:transparent;--vd-ink:var(--ink-1);--vd-ink2:var(--ink-2);--vd-line:var(--line);--vd-card:var(--surface);background:transparent;border-radius:0}
-.vdmi .vd-main{max-width:1100px;margin:0;padding:4px 0 24px}
-[data-theme="light"] .vdmi .vd-root{--vd-acc:#b0842f;--vd-up:#c8372d;--vd-dn:#1f8a4c;--vd-eps:#2f6fc8;--vd-pe:#b0842f;--vd-hl:#fff4dc;--vd-hlb:#e3b65a}
-[data-theme="light"] .vdmi .vd-s0{color:#6b4a0e;background:#fff0c9;border-color:#e3b65a}
+html .vdmi .vd-v3{--vd-ink:var(--ink-1);--vd-ink2:var(--ink-2);--vd-line:var(--line);--vd-card:var(--surface);background:transparent}
+html .vdmi .vd-v3 .vd-main{max-width:1100px;margin:0;padding:4px 0 24px}
 .vdmi .vdmi-wait{color:var(--ink-2);padding:12px 0}
 
 </style></head><body>
@@ -39,13 +39,13 @@ body{margin:0;background:var(--bg);color:var(--ink-1);font:15px/1.6 system-ui,-a
 function vdmiMount(root, base, dv) {
   base = base || ""; dv = dv || "";
   root.innerHTML = `<div class="vdmi-wait">估值拆解載入中…</div>`;
-  const js = base + "assets/watch_ext.js";
-  const sc = new Promise((ok, no) => { if (window.vdMount) return ok(); const t = document.createElement("script"); t.src = js + dv; t.onload = ok; t.onerror = no; document.head.appendChild(t); });
+  const js = base + "assets/vd3.js";
+  const sc = new Promise((ok, no) => { if (window.vd3Mount) return ok(); const t = document.createElement("script"); t.src = js + dv; t.onload = ok; t.onerror = no; document.head.appendChild(t); });
   const dj = fetch(base + "data/val_decomp.json" + dv, {cache: "force-cache"}).then(r => r.ok ? r.json() : null).catch(() => null);
   return Promise.all([sc, dj]).then(([, d]) => {
-    if (!d || !d.groups || !window.vdMount) { root.innerHTML = `<div class="empty">估值拆解建置中：每日戰情更新產出 data/val_decomp.json 後在這裡顯示。</div>`; return; }
-    window.vdMount(root, d, "每日戰情更新正式檔 data/val_decomp.json");
-  }).catch(() => { root.innerHTML = `<div class="empty">估值拆解程式（assets/watch_ext.js）沒有載入成功，請重新整理。</div>`; });
+    if (!d || !d.groups || !window.vd3Mount) { root.innerHTML = `<div class="empty">估值拆解建置中：每日戰情更新產出 data/val_decomp.json 後在這裡顯示。</div>`; return; }
+    window.vd3Mount(root, d, "每日戰情更新正式檔 data/val_decomp.json");
+  }).catch(() => { root.innerHTML = `<div class="empty">估值拆解程式（assets/vd3.js）沒有載入成功，請重新整理。</div>`; });
 }
 
 document.getElementById("pv-th").onclick = () => { const h = document.documentElement; h.dataset.theme = h.dataset.theme === "dark" ? "light" : "dark"; };
