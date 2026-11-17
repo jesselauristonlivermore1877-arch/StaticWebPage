@@ -239,8 +239,7 @@ jobs:
           T python stock_lookup.py ../site/data || { echo "::warning::個股查詢資料失敗（搜尋框資訊框這班不更新）"; echo "個股查詢資料失敗（搜尋框資訊框這班不更新）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           # 🟢 10-25：頁首國際指數＋公司債利差「信用風險升溫」紅標（TG 兩個 secret 沒設時只上網頁）
           T python world_idx.py ../site/data || { echo "::warning::國際指數／公司債利差失敗（沿用上一份）"; echo "國際指數／公司債利差失敗（沿用上一份）" >> "$RUNNER_TEMP/soft_fail.txt"; }
-          # 🟢 10-26 02:50（總指揮 雲端 6）：上櫃熱門股證券商進出排行每天存一份（只有當天、沒有歷史；存滿 1～2 個月再做分點分類）→ data/broker_hot/
-          T python broker_hot.py ../site/data || { echo "::warning::上櫃熱門股券商進出排行失敗（這班沒存）"; echo "上櫃熱門股券商進出排行失敗（這班沒存）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+          # 11-17 Evans 廢掉（分點不做了）：broker_hot.py 這一步拿掉；已存的 data/broker_hot/ 不刪（【舊】總指揮 11-17 20:3x）
 
       # 🟢 11-05 晚（雲端B，總指揮 B8／B9）：主動式 ETF 每檔日報（主動式ETF → 每日操作）→ docs/data/aetf_daily.json；
       #    個股融資維持率排行（本站估算）→ docs/data/stock_keep_rank.json。都只讀上面各步寫好的檔（data/pcf、daily.npz、margin*.npz），
