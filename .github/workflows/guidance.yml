@@ -29,8 +29,10 @@ on:
 permissions:
   contents: write
 
+# 🔴 11-17（【舊】總指揮）：原本跟 daily.yml 共用 daily-build，排隊中的班會被每日戰情更新擠掉（11-16～17 連 3 班 cancelled）
+#    → 改用自己的群組；跟 daily 的推送撞車由下面 commit 步驟的重試處理。
 concurrency:
-  group: daily-build
+  group: guidance
   cancel-in-progress: false
 
 jobs:
@@ -86,13 +88,20 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data/gemini_quota data/guidance.json docs/data/ir
+          # 🔴 11-17（【舊】總指揮）：逐字稿 docs/data/ir/tr 由 W ir_transcribe_one 持續推上；這裡一跑近 2 小時，拿的是開跑時的舊快照，
+          #    publish 清檔會把 W 之後推的逐字稿當成「沒用到」刪掉 → tr 只加不刪（--ignore-removal），推送撞車重試 4 次。
+          git add -A data/gemini_quota data/guidance.json -- docs/data/ir ':!docs/data/ir/tr'
+          git add --ignore-removal docs/data/ir/tr
           if git diff --staged --quiet; then
             echo "沒有新東西，不提交。"
           else
             git commit -m "data: 法說與報告擷取 $(TZ=Asia/Taipei date +%F)"
-            git pull --rebase origin main
-            git push origin HEAD:main
+            ok=0
+            for i in 1 2 3 4; do
+              git pull --rebase origin main && git push origin HEAD:main && { ok=1; break; }
+              echo "推送第 $i 次失敗，$((i*15)) 秒後重試"; git rebase --abort 2>/dev/null; sleep $((i*15))
+            done
+            [ "$ok" = 1 ] || { echo "::error::推送 4 次都失敗"; exit 1; }
           fi
 
       # 🔴 10-05（Evans：無人值守）：擷取失敗時照樣存回已做完的，但這次 run 要標失敗 → GitHub 寄信
