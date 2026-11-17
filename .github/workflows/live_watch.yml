@@ -37,7 +37,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
       - name: 安裝 wrangler
         run: npm i -g wrangler@4.147.0 >/dev/null 2>&1 && wrangler --version
       - name: 讀 D1 盤中資金（k=dash）
