@@ -1,0 +1,138 @@
+# live_watch.yml ─ 盤中資金停更監看（雲端舊20，【舊】總指揮 11-17 12:5x：會員站盤中即時資金 08:45～09:00 停在前一天，W 已修 40a0dcae；
+#   「盤中（08:45～13:45）每小時檢查一次資料時間，落後 > 15 分鐘就 TG」）。
+#   讀法：不登入會員站（不佔會員裝置名額），用既有 CLOUDFLARE_API_TOKEN 以 wrangler 直接讀 D1 gea-member 的 livek（k=dash），
+#   解 gzip JSON → 資料時間＝max(現貨 breadth 最後一列時間, 台指期最後一分鐘)，日期＝live.date。
+#   比較基準：min(現在, 13:45)。資料日不是今天、或落後 > 15 分鐘 → TG；結果寫 data/live_watch.json（停更總表 tools/stale_audit.py 讀）。
+#   休市日：先查證交所 OpenAPI 休市表，休市就不檢查（查不到當開市）。
+name: 盤中資金停更監看
+
+on:
+  schedule:
+    - cron: "52 0-5 * * 1-5"   # 台北週一～五 08:52、09:52、10:52、11:52、12:52、13:52（GitHub 排程可能延遲，延遲照實記）
+  workflow_dispatch:
+    inputs:
+      tg:
+        description: "1＝落後就發 TG（預設）；0＝只看 log"
+        required: false
+        default: "1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: live-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+      TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+      SEND_TG: ${{ inputs.tg || '1' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: 安裝 wrangler
+        run: npm i -g wrangler@4.147.0 >/dev/null 2>&1 && wrangler --version
+      - name: 讀 D1 盤中資金（k=dash）
+        working-directory: cloudflare/member
+        run: |
+          ID=$(wrangler d1 list --json | python3 -c "import json,sys; print(next((d['uuid'] for d in json.load(sys.stdin) if d['name']=='gea-member'), ''))")
+          [ -n "$ID" ] || { echo "✗ 找不到 D1 gea-member"; exit 1; }
+          sed -i "s/__D1_ID__/$ID/" wrangler.toml
+          wrangler d1 execute gea-member --remote --json --command "SELECT ts, data FROM livek WHERE k = 'dash'" > "$RUNNER_TEMP/dash.json"
+          echo "取回 $(wc -c < "$RUNNER_TEMP/dash.json") bytes"
+      - name: 判斷資料時間
+        run: |
+          python3 - <<'EOF'
+          import base64, datetime as dt, gzip, json, os, urllib.parse, urllib.request
+          now = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=8)
+          today = now.date()
+          out = {"checked": now.strftime("%Y-%m-%d %H:%M"), "today": today.isoformat()}
+          def tg(msg):
+              tok, chat = os.environ.get("TG_BOT_TOKEN"), os.environ.get("TG_CHAT_ID")
+              if os.environ.get("SEND_TG") != "1" or not tok or not chat:
+                  print("（不發 TG）", msg); return
+              urllib.request.urlopen("https://api.telegram.org/bot%s/sendMessage" % tok,
+                                     urllib.parse.urlencode({"chat_id": chat, "text": msg}).encode(), timeout=15).read()
+          # 休市日（證交所 OpenAPI；查不到當開市）
+          closed = False
+          try:
+              H = json.load(urllib.request.urlopen("https://openapi.twse.com.tw/v1/holidaySchedule/holidaySchedule", timeout=20))
+              roc = "%d%02d%02d" % (today.year - 1911, today.month, today.day)
+              hit = [h for h in H if str(h.get("Date", "")) == roc]
+              closed = bool(hit) and not any("開始交易" in str(h.get("Name", "")) or "最後交易" in str(h.get("Name", "")) for h in hit)
+              print("休市表：%s" % (hit or "今天不在表上"))
+          except Exception as e:
+              print("休市表查不到（當開市）：%r" % e)
+          if closed:
+              out["status"] = "休市"; print("今天休市，不檢查")
+          else:
+              R = json.load(open(os.path.join(os.environ["RUNNER_TEMP"], "dash.json")))
+              rows = (R[0].get("results") if isinstance(R, list) and R else []) or []
+              if not rows:
+                  out.update(status="讀不到", why="D1 livek 沒有 dash")
+              else:
+                  ts = int(rows[0]["ts"]); D = json.loads(gzip.decompress(base64.b64decode(rows[0]["data"])))
+                  up = dt.datetime.fromtimestamp(ts / 1000, dt.timezone.utc) + dt.timedelta(hours=8)
+                  live = D.get("live") or {}
+                  day = str(live.get("date") or "")
+                  cols = live.get("cols") or []
+                  ti = cols.index("time") if "time" in cols else 0
+                  r = live.get("rows") or []
+                  spot = str(r[-1][ti]) if r else ""
+                  fut = live.get("fut")
+                  ft = ""
+                  # 除錯：印台指期欄位的形狀（不同版本格式可能不同）
+                  if isinstance(fut, dict):
+                      print("fut 欄位：", list(fut.keys())[:10])
+                      for k in ("t", "time", "hm"):
+                          v = fut.get(k)
+                          if isinstance(v, list) and v:
+                              ft = str(v[-1])[-5:]; break
+                      if not ft and isinstance(fut.get("rows"), list) and fut["rows"]:
+                          ft = str(fut["rows"][-1][0])[-5:]
+                  elif isinstance(fut, list) and fut:
+                      x = fut[-1]; ft = str(x[0] if isinstance(x, (list, tuple)) else (x.get("t") if isinstance(x, dict) else x))[-5:]
+                  hm = max([x for x in (spot, ft) if len(x) == 5 and x[2] == ":"] or [""])
+                  out.update(upload=up.strftime("%Y-%m-%d %H:%M"), day=day, spot_last=spot, fut_last=ft, data_hm=hm, made=D.get("made"))
+                  print("上傳 %s｜資料日 %s｜現貨最後 %s｜台指期最後 %s" % (out["upload"], day, spot or "—", ft or "—"))
+                  ref = min(now.replace(tzinfo=None), dt.datetime.combine(today, dt.time(13, 45)))
+                  if day != today.strftime("%Y%m%d"):
+                      out.update(status="停", lag_min=None, why="資料日 %s 不是今天" % day)
+                  elif not hm:
+                      out.update(status="停", lag_min=None, why="今天的檔沒有任何分鐘資料")
+                  else:
+                      t = dt.datetime.combine(today, dt.time(int(hm[:2]), int(hm[3:])))
+                      lag = int((ref - t).total_seconds() // 60)
+                      out.update(lag_min=lag, status="停" if lag > 15 else "正常",
+                                 why=("落後 %d 分鐘（> 15）" % lag) if lag > 15 else "")
+              print("結果：", out.get("status"), out.get("why", ""))
+              if out.get("status") in ("停", "讀不到"):
+                  tg("GEA 盤中資金停更（%s 檢查）：%s；資料日 %s、最後資料 %s、最後上傳 %s。負責：W 本機 live_push／dash_live" % (
+                      out["checked"][11:], out.get("why", ""), out.get("day", "—"), out.get("data_hm") or "—", out.get("upload", "—")))
+          P = "data/live_watch.json"
+          try:
+              S = json.load(open(P, encoding="utf-8"))
+          except Exception:
+              S = {}
+          S["last"] = out
+          S.setdefault("log", []).append({k: out.get(k) for k in ("checked", "status", "day", "data_hm", "lag_min")})
+          S["log"] = S["log"][-60:]
+          json.dump(S, open(P, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+          EOF
+      - name: 提交
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/live_watch.json
+          git diff --staged --quiet && { echo "沒有變動"; exit 0; }
+          git commit -qm "data: 盤中資金停更監看 $(TZ=Asia/Taipei date '+%F %H:%M')"
+          for i in 1 2 3 4; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep $((2 ** i)); done
+          exit 1
