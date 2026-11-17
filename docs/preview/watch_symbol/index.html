@@ -1,0 +1,70 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>看盤區切換商品（預覽）</title>
+<style>
+:root{--bg:#0d1117;--card:#161c24;--ink:#e6e8eb;--ink2:#9aa3ad;--line:#26303d;--acc:#d6a54a;--ax:#5080ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 system-ui,-apple-system,"Noto Sans TC",sans-serif}
+.ws-main{max-width:1200px;margin:0 auto;padding:14px 16px 40px}
+.ws-pv{background:#2e2715;border:1px solid #a67c2c;border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:10px}
+.ws-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.ws-bar select{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:15px}
+.ws-bar button{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:5px 12px;font-size:14px;cursor:pointer}
+.ws-bar button.on{background:var(--acc);border-color:var(--acc);color:#111;font-weight:700}
+.ws-bar label{color:var(--ink2);font-size:13px;display:flex;gap:4px;align-items:center}
+#wsChart{height:560px;background:var(--card);border:1px solid var(--line);border-radius:10px}
+.ws-note{color:var(--ink2);font-size:12.5px;margin-top:8px;white-space:normal}
+.ws-lg{display:inline-block;width:18px;height:3px;background:var(--ax);vertical-align:middle;margin-right:4px}
+@media (max-width:600px){#wsChart{height:420px}}
+</style></head><body><main class="ws-main">
+<div class="ws-pv"><b>預覽（Evans 看）</b>：看盤區台指期圖加商品選單，切換後畫同樣的 K 線＋GEA 重力軸（同一套計算、參數不變），目視重力軸突破位置。資料到 <span id="wsAt"></span>。</div>
+<div class="ws-bar">
+  <select id="wsSym"></select>
+  <span id="wsPer"></span>
+  <label><input type="checkbox" id="wsX" checked>標出收盤上穿／下穿重力軸</label>
+</div>
+<div id="wsChart"></div>
+<div class="ws-note"><span class="ws-lg"></span>重力軸（長期高低點的正中間，價格在上偏多、在下偏空）。▲＝收盤由下往上穿過重力軸、▼＝由上往下。<br>
+<span id="wsSrc"></span><br>
+個股一天只有日盤約 270 根 1 分K，台指期日夜盤約 1,140 根；同樣的根數長度在個股上涵蓋的天數比較多（這次照 Evans 指示先不改參數）。重力軸前段算不滿長度的部分留白。</div>
+</main>
+<script src="lw.js"></script>
+<script>
+var D, chart, cs, ax, sym = "TXF", per = "5";
+function fmt(t) { var d = new Date(t * 1000); function z(n) { return (n < 10 ? "0" : "") + n; }
+  return (d.getUTCMonth() + 1) + "/" + d.getUTCDate() + " " + z(d.getUTCHours()) + ":" + z(d.getUTCMinutes()); }
+function draw() {
+  var S = D.syms[sym], P = S.p[per];
+  var k = [], a = [], m = [];
+  for (var i = 0; i < P.t.length; i++) {
+    k.push({time: P.t[i], open: P.o[i], high: P.h[i], low: P.l[i], close: P.c[i]});
+    if (P.ax[i] != null) a.push({time: P.t[i], value: P.ax[i]});
+    if (P.x[i] && document.getElementById("wsX").checked)
+      m.push(P.x[i] > 0 ? {time: P.t[i], position: "belowBar", color: "#ff5a5a", shape: "arrowUp", text: ""}
+                        : {time: P.t[i], position: "aboveBar", color: "#3cc878", shape: "arrowDown", text: ""});
+  }
+  cs.setData(k); ax.setData(a);
+  if (window._mk) window._mk.setMarkers(m); else window._mk = LightweightCharts.createSeriesMarkers(cs, m);
+  chart.timeScale().fitContent();
+  document.getElementById("wsSrc").textContent = S.name + "：" + S.src;
+}
+fetch("data.json", {cache: "no-store"}).then(function (r) { return r.json(); }).then(function (d) {
+  D = d; document.getElementById("wsAt").textContent = d.made;
+  var sel = document.getElementById("wsSym");
+  d.order.forEach(function (c) { var o = document.createElement("option"); o.value = c; o.textContent = d.syms[c].name; sel.appendChild(o); });
+  sel.onchange = function () { sym = sel.value; draw(); };
+  var pb = document.getElementById("wsPer");
+  d.periods.forEach(function (p) { var b = document.createElement("button"); b.textContent = p + " 分"; b.className = String(p) === per ? "on" : "";
+    b.onclick = function () { per = String(p); [].forEach.call(pb.children, function (x) { x.className = x === b ? "on" : ""; }); draw(); }; pb.appendChild(b); });
+  document.getElementById("wsX").onchange = draw;
+  var el = document.getElementById("wsChart");
+  chart = LightweightCharts.createChart(el, {autoSize: true, layout: {background: {color: "#161c24"}, textColor: "#9aa3ad"},
+    grid: {vertLines: {color: "#1f2733"}, horzLines: {color: "#1f2733"}}, rightPriceScale: {borderColor: "#26303d"},
+    timeScale: {borderColor: "#26303d", timeVisible: true, tickMarkFormatter: function (t) { return fmt(t); }},
+    localization: {timeFormatter: fmt}});
+  cs = chart.addSeries(LightweightCharts.CandlestickSeries, {upColor: "#ff5a5a", downColor: "#3cc878", borderUpColor: "#ff5a5a",
+    borderDownColor: "#3cc878", wickUpColor: "#ff5a5a", wickDownColor: "#3cc878"});
+  ax = chart.addSeries(LightweightCharts.LineSeries, {color: "#5080ff", lineWidth: 2, priceLineVisible: false, lastValueVisible: true});
+  draw();
+}).catch(function (e) { document.getElementById("wsChart").textContent = "資料載入失敗：" + e; });
+</script></body></html>
