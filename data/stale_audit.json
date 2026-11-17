@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-17 15:15",
+ "asof": "2026-11-17 16:18",
  "first_stale": {
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-17"
  },
@@ -31,11 +31,11 @@
   {
    "name": "主動 ETF 每日",
    "path": "docs/data/aetf_daily.json",
-   "date": "2026-11-16",
+   "date": "2026-11-17",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -307,11 +307,11 @@
   {
    "name": "權證資金流",
    "path": "docs/data/warrant_flow.json",
-   "date": "2026-11-16",
+   "date": "2026-11-17",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機 tools/warrant_flow.py（盤後）",
    "note": ""
@@ -559,11 +559,11 @@
   {
    "name": "主動 ETF 持股 00402A",
    "path": "docs/data/pcf/00402A",
-   "date": "2026-11-13",
+   "date": "2026-11-16",
    "freq": "td",
    "allow": 2,
-   "lag_td": 1,
-   "days": 4,
+   "lag_td": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": "海外持股／美債：官網揭露本來就晚 2 個交易日"
@@ -655,11 +655,11 @@
   {
    "name": "主動 ETF 持股 00412A",
    "path": "docs/data/pcf/00412A",
-   "date": "2026-11-13",
+   "date": "2026-11-16",
    "freq": "td",
    "allow": 2,
-   "lag_td": 1,
-   "days": 4,
+   "lag_td": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": "海外持股／美債：官網揭露本來就晚 2 個交易日"
@@ -667,11 +667,11 @@
   {
    "name": "主動 ETF 持股 00415A",
    "path": "docs/data/pcf/00415A",
-   "date": "2026-11-16",
+   "date": "2026-11-17",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -835,11 +835,11 @@
   {
    "name": "主動 ETF 持股 00992A",
    "path": "docs/data/pcf/00992A",
-   "date": "2026-11-16",
+   "date": "2026-11-17",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -895,11 +895,11 @@
   {
    "name": "主動 ETF 持股 00997A",
    "path": "docs/data/pcf/00997A",
-   "date": "2026-11-13",
+   "date": "2026-11-16",
    "freq": "td",
    "allow": 2,
-   "lag_td": 1,
-   "days": 4,
+   "lag_td": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": "海外持股／美債：官網揭露本來就晚 2 個交易日"
