@@ -1,0 +1,256 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>盤中資金三欄（預覽）</title>
+<style>
+:root{--bg:#0d1117;--card:#161c24;--ink:#e6e8eb;--ink2:#9aa3ad;--line:#26303d;--acc:#d6a54a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 system-ui,-apple-system,"Noto Sans TC",sans-serif}
+.wf-main{max-width:1600px;margin:0 auto;padding:12px 16px 40px}
+.wf-pv{background:#2e2715;border:1px solid #a67c2c;border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:10px}
+.note{color:var(--ink2);font-size:12px}.num{text-align:right}.fx-u{color:#ff5a5f}.fx-d{color:#2fd27a}
+.rs-more{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:3px 12px;font-size:12px;cursor:pointer}
+h4{margin:0;font-size:16px}
+#pfFx{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.rs-sp{display:inline-flex;align-items:center;gap:3px;vertical-align:middle}.rs-sp svg{display:block}.rs-hl{font-size:10px;color:var(--mut)}.rs-more{margin-top:4px;padding:1px 8px;font-size:12px}   /* 11-05 晚 row_spark */
+.fx-hd{display:flex;align-items:flex-start;gap:10px}.fx-hd h4{margin:0;font-size:17px;color:var(--tx)}.fx-hd .note{margin-top:2px}
+.fx-clk{margin-left:auto;font:700 30px/1 Consolas,"Noto Sans Mono",monospace;color:#c9e265;font-variant-numeric:tabular-nums;white-space:nowrap}
+.fx-sum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 6px}
+.fx-sum>div{background:#0b0f14;border:1px solid var(--line);border-radius:8px;padding:7px 10px;min-width:0}
+.fx-sum span{display:block;font-size:11px;color:var(--mut)}.fx-sum b{display:block;font-size:20px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.fx-sum b.s{font-size:14px;line-height:1.35}.fx-sum em{display:block;font-style:normal;font-size:13px}
+.fx-lg{display:grid;grid-template-columns:118px 1fr 84px;font-size:11px;color:var(--mut);margin:2px 0}.fx-lg div{display:flex;justify-content:center;gap:16px}
+.fx-list{position:relative;transition:height .35s}
+.fx-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr);grid-template-areas:"l m r";gap:0 14px;align-items:start}.fx-l{grid-area:l}.fx-mid{grid-area:m;min-width:0}.fx-r{grid-area:r;min-width:0}.fx-r .fx-st+.fx-st{margin-top:12px}.fx-mid .fx-fs{margin:0}.fx-st .fx-sc{white-space:nowrap}.fx-l,.fx-st{min-width:0}   /* 11-07 即時資金流雙欄：左族群、右個股 */
+.fx-sth{display:flex;gap:8px;align-items:baseline;font-size:13px;height:22px;border-bottom:1px solid var(--line);margin-bottom:2px}.fx-stt{width:100%;border-collapse:collapse}.fx-stt td{height:16px;line-height:16px;padding:0 4px;font-size:12px;border-bottom:1px solid #1b232e;white-space:nowrap}.fx-stt td.num{text-align:right;font-variant-numeric:tabular-nums}.fx-stt tr.ck{cursor:pointer}.fx-stt tr.ck:hover{background:#1e2533}.fx-more{display:block;margin:6px auto 0}
+.fx-fs{margin:2px 0 10px;background:#0b0f14;border:1px solid var(--line);border-radius:8px;padding:6px 10px 4px}.fx-fs .fx-fsh{display:flex;flex-wrap:wrap;gap:2px 14px;align-items:baseline;font-size:12px}.fx-fsh b{font-size:14px;font-variant-numeric:tabular-nums}.fx-fs svg{display:block;width:100%;touch-action:pan-y}.fx-fs svg text{font-size:10.5px;paint-order:stroke;stroke:#0b0f14;stroke-width:3px}   /* 11-12 Evans 方案 B：權值 200 合計＋台指期橫條，下面電金比／廣度／AI 核心細列 */
+.fx-fs svg polyline[data-s]{cursor:pointer}
+.fx-lgd{display:flex;flex-wrap:wrap;gap:3px 4px;margin:4px 0 2px}.fx-lgd button{background:#121922;border:1px solid #26303d;color:#c9d1db;border-radius:11px;padding:1px 8px;font-size:11.5px;cursor:pointer;line-height:18px;font-variant-numeric:tabular-nums}.fx-lgd button.off{opacity:.38}.fx-lgd button.op{border-color:#9fb0c2}.fx-lgd button i{display:inline-block;width:12px;height:3px;border-radius:2px;margin-right:4px;vertical-align:3px}.fx-lgd button.ct{border-style:dashed;color:#8a96a6}   /* 11-17 三欄：中欄走勢圖圖例（點開關） */
+@media (max-width:900px){.fx-2{grid-template-columns:minmax(0,1fr);grid-template-areas:"m" "l" "r"}.fx-l,.fx-r{margin-top:12px}}@media (max-width:1600px){.fx-st .fx-sc{display:none}}
+.fx-row{position:absolute;left:0;right:0;display:grid;grid-template-columns:118px 1fr 84px;align-items:center;gap:0 6px;padding:0 4px;border-radius:5px;cursor:pointer;transition:top .4s ease}
+.fx-row:hover,.fx-row.on{background:#1e2533}.fx-row.top{background:#2a1a20}
+.fx-nm{white-space:nowrap;font-size:13px}
+.fx-tr{position:relative;height:100%}.fx-tr:before{content:"";position:absolute;left:50%;top:3px;bottom:3px;border-left:1px dashed #2d3846}
+.fx-tr svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.fx-v{text-align:right;font-variant-numeric:tabular-nums;font-size:13px;white-space:nowrap}
+.fx-sub{position:absolute;left:0;right:0;padding:4px 8px 6px 18px;border-left:2px solid var(--acc);background:#0f151d;font-size:12px;transition:top .4s ease}
+.fx-sub table td{padding:1px 6px;border-bottom:1px solid #1b232e;font-size:12px}
+.fx-tl{display:grid;grid-template-columns:34px 44px 1fr 44px;align-items:center;gap:8px;margin-top:8px;font-size:11px;color:var(--mut)}
+.fx-tl button{padding:0 6px;font-size:13px;line-height:22px}
+.fx-tl input[type=range]{width:100%;accent-color:#c9e265;padding:0;border:none;background:none}
+.fx-ft{font-size:11px;color:var(--mut);margin-top:6px}
+.fx-u{color:var(--up)}.fx-d{color:var(--dn)}
+.fx-grid{--fxc:5;display:grid;grid-template-columns:repeat(var(--fxc),minmax(0,1fr));gap:8px;margin-top:10px}   /* 11-06 第四輪（Evans：一排 3 格頁面太長）：桌機 5 格、平板 3～4 格、手機 2 格；格數由 --fxc 控制 */
+.fx-cell{background:#0b0f14;border:1px solid var(--line);border-radius:8px;padding:7px 8px}
+.fx-ch{display:flex;justify-content:space-between;align-items:baseline;gap:6px;font-size:14px;line-height:1.3}.fx-cell{min-width:0;overflow:hidden}.fx-ch>span{min-width:0;white-space:normal;overflow-wrap:anywhere;font-weight:700}.fx-ch>span .note{font-weight:400;font-size:12px}.fx-ch b{font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.fx-cell svg{display:block;width:100%;height:110px;margin-top:4px}
+@media (max-width:1100px){.fx-grid{--fxc:4}}@media (max-width:900px){.fx-grid{--fxc:3}}
+@media (max-width:600px){.fx-row,.fx-lg{grid-template-columns:92px 1fr 70px}.fx-sum{gap:5px}.fx-sum>div{padding:6px 7px}.fx-sum b{font-size:16px}.fx-sum b.s{font-size:12px}.fx-sum em{font-size:12px}.fx-clk{font-size:24px}.fx-nm{font-size:12px}.fx-grid{--fxc:2;gap:6px}.fx-cell{padding:6px}.fx-ch{flex-direction:column;gap:0}.fx-cell svg{height:90px}}
+</style></head><body><main class="wf-main">
+<div class="wf-pv"><b>預覽（Evans 看）</b>：會員站看盤區「盤中資金」改三欄——左＝族群流入流出、中＝大盤與產業走勢（前 N 檔合計、台指期最粗，疊各產業線，預設流入／流出前 3，點圖例開關）、右＝主動淨買賣個股；手機改上下：走勢 → 族群 → 個股。
+資料是 <span id="wfAt"></span> 的盤中快照（正式版每分鐘更新）；個股預覽只放買賣各前 12 檔。程式跟會員站正式頁同一段。</div>
+<div id="pfFx">載入中…</div>
+</main>
+<script>
+let DASH = null; const $ = s => document.querySelector(s); function dhPop() { }
+const BRN = () => { try { const L = DASH && DASH.live, r = L && L.rows, i = L && L.cols ? L.cols.indexOf("n") : -1;
+  if (r && r.length && i >= 0 && r[r.length - 1][i]) return r[r.length - 1][i]; const F = DASH && DASH.flow; if (F && F.stocks && F.stocks.length) return F.stocks.length; } catch (e) {} return "N"; };
+const BRNOTE = () => `依市值與成交金額取前 ${BRN()} 檔（含 AI 核心股）即時計算`;
+
+const pvOne = F => !!((F.sectors || [])[0] || {}).s1;
+const pvF1 = F => pvOne(F) ? Object.assign({}, F, {sectors: (F.sectors || []).map(s => Object.assign({}, s, {s5: s.s1})), stocks: (F.stocks || []).map(t => Object.assign({}, t, {s5: t.s1 || t.s5}))}) : F;
+
+function pvFutOnly() {
+  let L = null; try { L = DASH && DASH.live; } catch (e) { }
+  const fu = (L && Array.isArray(L.fut) ? L.fut : []).filter(q => isFinite(q[1]));
+  const head = `<div class="note">股票 09:00 開盤後接上資金流向；台指期 08:45 起每分鐘更新${fu.length ? `（最新 ${fu[fu.length - 1][0]}　${Math.round(fu[fu.length - 1][1])}，開盤 ${Math.round(fu[0][1])}）` : "（還沒有K）"}。</div>`;
+  if (fu.length < 2) return head;
+  const W = 640, H = 140, PL = 6, PR = 52, hm = t => +t.slice(0, 2) * 60 + +t.slice(3, 5), T0 = 525, T1 = 825;
+  const v = fu.map(q => q[1]), lo = Math.min(...v), hi = Math.max(...v), X = m => PL + (Math.min(T1, Math.max(T0, m)) - T0) / (T1 - T0) * (W - PL - PR), Y = u => 8 + (hi - u) / ((hi - lo) || 1) * (H - 24);
+  let g = `<polyline fill="none" stroke="#f0d000" stroke-width="1.6" points="${fu.map(q => X(hm(q[0])).toFixed(1) + "," + Y(q[1]).toFixed(1)).join(" ")}"/>`;
+  [hi, (hi + lo) / 2, lo].forEach(u => g += `<text x="${W - PR + 4}" y="${(Y(u) + 3.5).toFixed(1)}" fill="#f0d000" font-size="11">${Math.round(u)}</text>`);
+  [["08:45", 525], ["09:00", 540], ["11:00", 660], ["13:45", 825]].forEach(([t, m]) => g += `<text x="${X(m).toFixed(1)}" y="${H - 2}" fill="#8a8f98" font-size="10" text-anchor="middle">${t}</text>`);
+  return head + `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:${H}px;display:block">${g}</svg>`;
+}
+
+function pvFlowMount(root, F, opt) {
+  opt = opt || {}; const STEP = pvOne(F) ? 1 : 5; F = pvF1(F); if (window._fxStop) { try { window._fxStop(); } catch (e) { } }   // 11-06 W5：正式頁每分鐘重畫，先停掉上一次的重播計時器
+  const RH = matchMedia("(max-width:900px)").matches ? 26 : 17, GAP = 8, TAIL = STEP === 1 ? 300 : 99, RS = 17;   // 11-07 雙欄：桌機族群列縮成 17px（1366×768 不捲動看完個股），右欄個股同列高   // 尾巴＝從 09:00（0）一路到現在的整條軌跡（同錄影）
+  const fmt = (v, d) => v == null || !isFinite(v) ? "—" : (v > 0 ? "+" : "") + Number(v).toLocaleString("zh-TW", {minimumFractionDigits: d, maximumFractionDigits: d});
+  const cl = v => v > 0 ? "fx-u" : v < 0 ? "fx-d" : "";
+  const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+  const S = (F.sectors || []).filter(s => s.s5 && s.s5.length);
+  if (!S.length) { root.innerHTML = F.pre ? pvFutOnly() : `<div class="note">還沒有資金流向資料（盤中每分鐘一格）。</div>`; return; }
+  const N = S[0].s5.length;
+  let last = 0;                                                            // 最後一格有變動的（盤中後面的格子是前值延伸）
+  for (let k = 0; k < N; k++) if (S.some(s => k === 0 ? s.s5[0] !== 0 : s.s5[k] !== s.s5[k - 1])) last = k;
+  const lab = k => { const m = 9 * 60 + Math.min(STEP * (k + 1), 270); return String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0"); };
+  const COL = ["#c9e265", "#a78bfa", "#60a5fa", "#f0b429", "#22c3d6", "#f472b6", "#ff8c1a", "#4ade80", "#e879f9", "#94a3b8", "#fde047", "#38bdf8"];   // 11-12 疊圖：12 色，避免相鄰族群同色
+  const ci = {}; S.forEach((s, i) => ci[s.sector] = COL[i % COL.length]);
+  const dot = s => `<i style="display:inline-block;width:7px;height:7px;border-radius:50%;background:${ci[s.sector]};margin-right:5px;vertical-align:1px"></i>`;
+  const day = String(F.day || "").replace(/-/g, "/");
+  root.innerHTML = `<div class="fx-hd"><div><h4>即時資金流</h4><div class="note">${esc(day)}・全天的主動買賣淨額（${BRNOTE()}，依證交所產業類別；只算 09:00～13:25 連續撮合，13:30 收盤撮合、14:30 盤後定價不計入主動買賣）</div></div><div class="fx-clk"></div></div>
+    <div class="fx-sum"><div><span>前 ${BRN()} 檔合計・開盤到現在</span><b class="fx-tot"></b></div><div><span>吸金最多</span><b class="s fx-best"></b></div><div><span>失血最多</span><b class="s fx-worst"></b></div></div>
+    <div class="fx-2"><div class="fx-mid"><div class="fx-fs"></div></div><div class="fx-l"><div class="fx-lg"><span></span><div><span class="fx-d">← 流出</span><span class="fx-u">流入 →</span></div><span></span></div>
+    <div class="fx-list"></div></div>
+    <div class="fx-r"><div class="fx-st" data-k="u"><div class="fx-sth"><b class="fx-u">主動淨買個股</b><span class="note fx-stn"></span></div><table class="fx-stt"></table><button class="rs-more fx-more"></button></div>
+    <div class="fx-st" data-k="d"><div class="fx-sth"><b class="fx-d">主動淨賣個股</b><span class="note fx-stn"></span></div><table class="fx-stt"></table><button class="rs-more fx-more"></button></div></div></div>
+    <div class="fx-tl"><button class="fx-play" title="從 09:00 重播">▶</button><span>09:00</span><input type="range" min="0" max="${last}" value="${last}"><span>${lab(last)}</span></div>
+    <div class="fx-ft">主動買賣＝外盤成交金額 − 內盤成交金額（億元）；外盤＝買方主動、內盤＝賣方主動。橫軸以當下絕對值最大的產業撐滿半邊（開根號，小的也看得出來）；圓點＝現在，尾巴＝從 0（09:00）拉到現在位置的粒子帶，越靠近圓點越亮。點產業看個股。</div>`;
+  const $ = s => root.querySelector(s), list = $(".fx-list"), rng = $(".fx-tl input");
+  const rows = {}, sub = document.createElement("div"); sub.className = "fx-sub"; sub.style.display = "none";
+  let cur = last, open = null, timer = null;
+  S.forEach(s => {
+    const r = document.createElement("div"); r.className = "fx-row"; r.style.height = RH + "px";
+    r.innerHTML = `<span class="fx-nm">${dot(s)}${esc(s.sector)}</span><div class="fx-tr"><svg></svg></div><span class="fx-v"></span>`;
+    r.onclick = () => { open = open === s.sector ? null : s.sector; draw(cur); };
+    list.appendChild(r); rows[s.sector] = r;
+  });
+  list.appendChild(sub);
+  function draw(k) {
+    cur = k; rng.value = k;
+    const v = s => s.s5[k], sorted = S.slice().sort((a, b) => v(b) - v(a));
+    const mx = Math.max(1e-9, ...S.map(s => Math.abs(v(s))));                 // 當下絕對值最大的產業撐滿半邊
+    const x = val => 50 + Math.sign(val) * Math.sqrt(Math.min(1, Math.abs(val) / mx)) * 47;
+    const tot = S.reduce((a, s) => a + v(s), 0), best = sorted[0], worst = sorted[sorted.length - 1];
+    $(".fx-clk").textContent = lab(k);
+    $(".fx-tot").className = "fx-tot " + cl(tot); $(".fx-tot").textContent = fmt(tot, 1) + " 億";
+    $(".fx-best").innerHTML = v(best) > 0 ? `${dot(best)}${esc(best.sector)}<em class="fx-u">${fmt(v(best), 2)} 億</em>` : "—";
+    $(".fx-worst").innerHTML = v(worst) < 0 ? `${dot(worst)}${esc(worst.sector)}<em class="fx-d">${fmt(v(worst), 2)} 億</em>` : "—";
+    let y = 0, gap = false;
+    sorted.forEach((s, i) => {
+      if (!gap && v(s) <= 0 && i > 0 && v(sorted[i - 1]) > 0) { y += GAP; gap = true; }
+      const r = rows[s.sector], hot = (i === 0 && v(s) > 0) || (i === sorted.length - 1 && v(s) < 0);
+      r.style.top = y + "px"; r.classList.toggle("on", open === s.sector); r.classList.toggle("top", hot);
+      const c = v(s) >= 0 ? "#e5484d" : "#2fb36b", pts = [];
+      pts.push(50); for (let j = Math.max(0, k - TAIL); j <= k; j++) pts.push(x(s.s5[j]));
+      const n = pts.length - 1, head = pts[n];
+      /* 尾巴（同錄影）：中線（09:00＝0）到圓點的一條粒子帶，越靠近圓點越亮越粗；粒子位置固定（每列用同一組亂數），停住也看得到 */
+      const L = head - 50; let tail = "";
+      if (Math.abs(L) > 0.3) {
+        tail += `<line x1="50%" x2="${head}%" y1="50%" y2="50%" stroke="${c}" stroke-width="3" stroke-linecap="round" opacity=".22"/>`;
+        tail += `<line x1="${(50 + L * 0.45).toFixed(2)}%" x2="${head}%" y1="50%" y2="50%" stroke="${c}" stroke-width="4.5" stroke-linecap="round" opacity=".45"/>`;
+        let sd = 0; for (const ch of s.sector) sd = (sd * 31 + ch.charCodeAt(0)) % 9973;
+        const rnd = () => (sd = (sd * 9301 + 49297) % 233280) / 233280;
+        const np = Math.max(6, Math.min(26, Math.round(Math.abs(L) / 1.5)));
+        for (let q = 0; q < np; q++) { const a = Math.pow(rnd(), 0.7), px = 50 + L * a, py = 50 + (rnd() - 0.5) * 34 * (1 - a * 0.5);
+          tail += `<circle cx="${px.toFixed(2)}%" cy="${py.toFixed(1)}%" r="${(0.6 + a * 1.3).toFixed(1)}" fill="${a > 0.8 ? "#ffffff" : c}" opacity="${(0.15 + a * 0.7).toFixed(2)}"/>`; }
+      }      r.querySelector("svg").innerHTML = 
+        tail + `<circle cx="${head}%" cy="50%" r="${hot ? 6 : 4.2}" fill="${c}" style="filter:drop-shadow(0 0 4px ${c})"><animate attributeName="r" values="${hot ? "5;7;5" : "3.6;5;3.6"}" dur="1.4s" repeatCount="indefinite"/></circle>`;
+      const val = r.querySelector(".fx-v"); val.className = "fx-v " + cl(v(s)); val.textContent = fmt(v(s), 2) + " 億";
+      y += RH;
+      if (false) {   // 11-07 雙欄：點族群改成右欄只看這個族群，不在下面展開
+        const st = (F.stocks || []).filter(t => t.sector === s.sector && t.s5).sort((a, b) => b.s5[k] - a.s5[k]);
+        sub.style.display = ""; sub.style.top = y + "px";
+        sub.innerHTML = `<table>${st.map(t => `<tr><td>${esc(t.code)} ${esc(t.name)}</td><td class="num ${cl(t.s5[k])}">${fmt(t.s5[k], 2)} 億</td></tr>`).join("") || `<tr><td class="note">這個產業沒有訂閱的個股</td></tr>`}</table>`;
+        y += sub.offsetHeight + 4;
+      }
+    });
+    if (!open) sub.style.display = "none";
+    list.style.height = y + "px";
+    try { fsDraw(fsHov != null ? fsHov : 540 + STEP * (k + 1)); } catch (e) { console.warn("橫條", e); }
+    stDraw(k, y);
+  }
+  /* 11-12 Evans 方案 B：四等分上面一條橫長條——主圖＝權值 200 合計（紅綠面積，左）＋台指期（黃線，右刻度）；下面三條細列＝電金比、廣度、AI 核心，
+     共用時間軸（有台指期 08:45～13:45，沒有 09:00～13:30）；游標＝時間滑桿位置，滑鼠／手指移上去看那一分鐘，四塊一起走。
+     資料：合計＝族群 s5（有 s1 就每分鐘）加總；台指期＝DASH.live.fut（11-13 起，鏡像 1 分K 08:46～13:45）→ 沒有用 fut_close 欄（09:00～13:30）→ 再沒有用看盤區 1 分K（WBARS["1"]）；
+     廣度、AI 核心＝DASH.live rows；電金比＝DASH.lc.elecfin.s5（每 5 分）。日期跟 F.day 不同的不用。 */
+  let fsHov = null, fsSel = null; const fsShow = {tot: true, fut: true};   // fsSel＝null：自動顯示流入前 3＋流出前 3；點圖例後改成手選
+  const fsAuto = () => { const by = S.slice().sort((a, b) => b.s5[cur] - a.s5[cur]); return new Set([...by.slice(0, 3).filter(s => s.s5[cur] > 0), ...by.slice(-3).filter(s => s.s5[cur] < 0)].map(s => s.sector)); };
+  const FS = (() => {
+    const day = String(F.day || ""), dk = day.replace(/-/g, ""), hm2 = t => +t.slice(0, 2) * 60 + +t.slice(3, 5);
+    const tot = []; for (let j = 0; j <= last; j++) tot.push([540 + STEP * (j + 1), S.reduce((a, s) => a + (s.s5[j] || 0), 0)]);
+    const out = {tot, fut: [], br: [], ai: [], ef: [], efp: null, sec: {}};
+    S.forEach(s => { const a = []; for (let j = 0; j <= last; j++) a.push([540 + STEP * (j + 1), s.s5[j] || 0]); out.sec[s.sector] = a; });   // 11-17 三欄：中欄疊族群線，跟左欄同一份 s5／s1
+    let L = null; try { L = typeof DASH !== "undefined" && DASH && DASH.live; } catch (e) { }
+    if (L && L.date === dk && L.rows) { const C = L.cols, it = C.indexOf("time"), pick = (nm, a) => { const i = C.indexOf(nm); if (i >= 0) L.rows.forEach(r => { if (r[i] != null && isFinite(r[i])) a.push([hm2(r[it]), +r[i]]); }); };
+      if (Array.isArray(L.fut) && L.fut.length) L.fut.forEach(q => { const m = hm2(q[0]); if (m >= 525 && m <= 825 && isFinite(q[1])) out.fut.push([m, +q[1]]); });   // 11-13 雲端Y：台指期日盤 08:46～13:45（dash_live 讀鏡像）
+      else pick("fut_close", out.fut);                                                                                  // 舊檔沒有 fut：退回 breadth 每分鐘的 fut_close（09:00～13:30）
+      pick("breadth_net", out.br); pick("ai_score", out.ai);
+      try { const e = DASH.lc && DASH.lc.elecfin; if (e && e.s5) { e.s5.forEach((v, j) => { if (v != null) out.ef.push([540 + 5 * (j + 1), +v]); }); out.efp = e.prev; } } catch (e) { } }
+    if (!out.fut.length) try { const b = window.WBARS && window.WBARS["1"]; if (b && b.t) for (let i = b.t.length - 1; i >= 0; i--) { const s0 = new Date(b.t[i] * 1000).toISOString(); if (s0.slice(0, 10) < day) break;
+      if (s0.slice(0, 10) === day) { const m = hm2(s0.slice(11, 16)); if (m >= 525 && m <= 825) out.fut.unshift([m, b.c[i]]); } } } catch (e) { }
+    return out; })();
+  function fsDraw(cm) {
+    const box = root.querySelector(".fx-fs"); if (!box) return;
+    const mob = matchMedia("(max-width:900px)").matches, W = Math.max(280, Math.round(box.clientWidth - 20 || 900)), PL = 4, PR = 50, PB = 15, LH = mob ? 30 : 34;
+    const lh = parseFloat(list.style.height) || 420, MH = mob ? 260 : Math.max(300, Math.min(560, lh - 3 * (LH + 3) - 110));   // 11-17 三欄：中欄大圖，高度跟左欄族群列對齊
+    const on = new Set(fsSel || fsAuto()); if (open) on.add(open);
+    const vis = S.filter(s => on.has(s.sector));
+    const T0 = FS.fut.length ? 525 : 540, T1 = FS.fut.length ? 825 : 810, X = m => PL + (Math.min(T1, Math.max(T0, m)) - T0) / (T1 - T0) * (W - PL - PR);
+    const at = (a, m) => { let r = null; for (const q of a) { if (q[0] > m) break; r = q[1]; } return r; };
+    const pts = (a, y) => a.map(q => X(q[0]).toFixed(1) + "," + y(q[1]).toFixed(1)).join(" ");
+    const mx = Math.max(1e-9, ...FS.tot.map(q => Math.abs(q[1]))), yT = v => (MH - PB) / 2 - v / mx * ((MH - PB) / 2 - 6);
+    const mxS = Math.max(1e-9, ...vis.map(s => Math.max(...FS.sec[s.sector].map(q => Math.abs(q[1]))))), yS = v => (MH - PB) / 2 - v / mxS * ((MH - PB) / 2 - 6);   // 產業線自己一把刻度（0 軸跟合計同一條），不然被合計壓扁
+    let g = `<line x1="${PL}" x2="${W - PR}" y1="${yT(0)}" y2="${yT(0)}" stroke="#2d3846" stroke-dasharray="3 3"/>`;
+    for (let h = 9; h <= 13; h++) g += `<line x1="${X(h * 60)}" x2="${X(h * 60)}" y1="0" y2="${MH - PB}" stroke="#1b232e"/><text x="${X(h * 60)}" y="${MH - 3}" fill="#6b7a8c" text-anchor="middle">${h}:00</text>`;
+    if (T0 === 525 && X(540) - X(525) > 44) g += `<text x="${X(525) + 1}" y="${MH - 3}" fill="#6b7a8c" text-anchor="start">8:45</text>`;   // 11-13：期貨日盤 08:45 開盤
+    vis.slice().sort((a, b) => (open === a.sector) - (open === b.sector)).forEach(s => { const op = open === s.sector, p = pts(FS.sec[s.sector], yS);   // 族群線（產業刻度）；左欄點選的那條加粗
+      g += `<polyline data-s="${esc(s.sector)}" fill="none" stroke="${ci[s.sector]}" stroke-width="${op ? 2.6 : 1.5}" opacity="${open && !op ? .45 : .9}" stroke-linejoin="round" points="${p}"><title>${esc(s.sector)}</title></polyline><polyline data-s="${esc(s.sector)}" fill="none" stroke="transparent" stroke-width="8" points="${p}"/>`; });
+    if (FS.tot.length && fsShow.tot) { const pl = `${X(FS.tot[0][0] - STEP)},${yT(0)} ${pts(FS.tot, yT)} ${X(FS.tot[FS.tot.length - 1][0])},${yT(0)}`, id = "fxc" + Math.round(Math.random() * 1e6);
+      g += `<clipPath id="${id}u"><rect x="0" y="0" width="${W}" height="${yT(0)}"/></clipPath><clipPath id="${id}d"><rect x="0" y="${yT(0)}" width="${W}" height="${MH}"/></clipPath>
+        <polygon points="${pl}" fill="#e5484d" opacity=".14" clip-path="url(#${id}u)"/><polygon points="${pl}" fill="#2fb36b" opacity=".14" clip-path="url(#${id}d)"/><polyline fill="none" stroke="#ff6b6b" stroke-width="3.2" stroke-linejoin="round" points="${pts(FS.tot, yT)}"/>
+        `; }
+    const r0 = v => v >= 10 ? Math.round(v) : v.toFixed(1);
+    if (fsShow.tot) g += `<text x="${PL + 2}" y="12" fill="#ff8080">合計 +${r0(mx)} 億</text><text x="${PL + 2}" y="${MH - PB - 4}" fill="#ff8080">合計 −${r0(mx)} 億</text>`;
+    if (vis.length) g += `<text x="${PL + 2}" y="25" fill="#9aa3ad">產業 +${r0(mxS)}</text><text x="${PL + 2}" y="${MH - PB - 17}" fill="#9aa3ad">產業 −${r0(mxS)}</text>`;
+    if (FS.fut.length && fsShow.fut) { const v = FS.fut.map(q => q[1]), lo = Math.min(...v), hi = Math.max(...v), yX = u => 6 + (hi - u) / ((hi - lo) || 1) * (MH - PB - 12);
+      g += `<polyline fill="none" stroke="#f0d000" stroke-width="3.2" stroke-linejoin="round" points="${pts(FS.fut, yX)}"/>`; [hi, (hi + lo) / 2, lo].forEach(u => g += `<text x="${W - PR + 4}" y="${(yX(u) + 3.5).toFixed(1)}" fill="#f0d000">${Math.round(u)}</text>`); }
+    else if (!FS.fut.length) g += `<text x="${W - PR - 4}" y="14" fill="#6b7a8c" text-anchor="end">台指期：還沒有一分鐘資料</text>`;
+    const cx = X(cm); g += `<line x1="${cx}" x2="${cx}" y1="0" y2="${MH - PB}" stroke="#9fb0c2" stroke-dasharray="2 3"/>`;
+    let H = MH; const val = {};
+    [["ef", "電金比", "#22c3d6", 3], ["br", "廣度", "#ff8c1a", 2], ["ai", "AI 核心", "#c27bff", 2]].forEach(([k, n, c, dg]) => {
+      const a = FS[k], top = H + 3; g += `<rect x="${PL}" y="${top}" width="${W - PL - PR}" height="${LH}" fill="#0f151d"/><text x="${PL + 4}" y="${top + 12}" fill="${c}">${n}</text>`;
+      if (a.length > 1) { const v = a.map(q => q[1]), ref = k === "ef" ? FS.efp : 0, all = ref != null ? [...v, ref] : v, lo = Math.min(...all), hi = Math.max(...all), y = u => top + 4 + (hi - u) / ((hi - lo) || 1) * (LH - 8);
+        if (ref != null) g += `<line x1="${PL}" x2="${W - PR}" y1="${y(ref).toFixed(1)}" y2="${y(ref).toFixed(1)}" stroke="#56606e" stroke-dasharray="3 3"/>`;
+        g += `<polyline fill="none" stroke="${c}" stroke-width="1.5" points="${pts(a, y)}"/>`; const w = at(a, cm); val[k] = w; if (w != null) g += `<text x="${W - PR + 4}" y="${top + LH / 2 + 4}" fill="${c}">${w.toFixed(dg)}</text>`; }
+      else g += `<text x="${(W - PR) / 2}" y="${top + LH / 2 + 4}" fill="#56606e" text-anchor="middle">還沒有資料</text>`;
+      g += `<line x1="${cx}" x2="${cx}" y1="${top}" y2="${top + LH}" stroke="#9fb0c2" stroke-dasharray="2 3"/>`; H = top + LH; });
+    const tv = at(FS.tot, cm), fv = at(FS.fut, cm), f0 = FS.fut.length ? FS.fut[0][1] : null, mm = String(Math.floor(cm / 60)).padStart(2, "0") + ":" + String(cm % 60).padStart(2, "0");
+    const chip = (k, nm, c, v, offc, cls) => `<button data-g="${esc(k)}" class="${offc ? "off" : ""}${cls || ""}"><i style="background:${c}${k[0] === "_" ? ";height:4px" : ""}"></i>${esc(nm)}${v == null ? "" : " " + v}</button>`;
+    const lgd = chip("_tot", `前 ${BRN()} 檔合計`, "#ff6b6b", null, !fsShow.tot) + chip("_fut", "台指期", "#f0d000", null, !fsShow.fut) +
+      S.slice().sort((a, b) => (at(FS.sec[b.sector], cm) || 0) - (at(FS.sec[a.sector], cm) || 0)).map(s => { const w = at(FS.sec[s.sector], cm); return chip(s.sector, s.sector, ci[s.sector], w == null ? null : fmt(w, 1), !on.has(s.sector), open === s.sector ? " op" : ""); }).join("") +
+      `<button data-g="_auto" class="ct">${fsSel ? "回預設（流入／流出前 3）" : "預設：流入／流出前 3"}</button><button data-g="_all" class="ct">全部</button><button data-g="_none" class="ct">只看大盤</button>`;
+    box.innerHTML = `<div class="fx-fsh"><span><b>大盤與產業走勢</b>　<span class="note">${mm}（滑鼠移上去看每一分鐘）</span></span>
+      <span style="color:#ff6b6b">前 ${BRN()} 檔合計 <b>${tv == null ? "—" : fmt(tv, 1) + " 億"}</b></span><span style="color:#f0d000">台指期 <b>${fv == null ? "—" : Math.round(fv)}</b>${fv != null && f0 != null ? ` <small>${fmt(fv - f0, 0)}</small>` : ""}</span></div>
+      <svg viewBox="0 0 ${W} ${H}" style="height:${H}px">${g}</svg><div class="fx-lgd">${lgd}</div><div class="note">粗紅線＝前 ${BRN()} 檔（依市值與成交金額）開盤到現在的累計主動淨額；細彩線＝各產業累計主動淨額（跟左欄同一份）；兩者 0 軸同一條、各用自己的刻度（左上角「合計」「產業」，億元）；粗黃線＝台指期一分鐘收盤（期貨 08:45 開盤起，現貨 09:00 起；右刻度，括號＝跟期貨開盤第一分鐘比）。點圖例開關線，點線＝跟點左欄族群一樣。下面三條各自縮放，虛線＝0（電金比＝前一日）。</div>`;
+    box.querySelectorAll(".fx-lgd button").forEach(b => b.onclick = () => { const k = b.dataset.g;
+      if (k === "_tot" || k === "_fut") fsShow[k.slice(1)] = !fsShow[k.slice(1)];
+      else if (k === "_auto") fsSel = null; else if (k === "_all") fsSel = new Set(S.map(s => s.sector)); else if (k === "_none") { fsSel = new Set(); open = null; }
+      else { if (!fsSel) fsSel = fsAuto(); if (fsSel.has(k)) { fsSel.delete(k); if (open === k) open = null; } else fsSel.add(k); }
+      draw(cur); });
+    const sv = box.querySelector("svg"), mv = e => { const r = sv.getBoundingClientRect(), p = e.touches ? e.touches[0] : e, m = Math.round(T0 + ((p.clientX - r.left) / r.width * W - PL) / (W - PL - PR) * (T1 - T0));
+      fsHov = Math.min(T1, Math.max(T0, m)); fsDraw(fsHov); };
+    sv.onmousemove = mv; sv.ontouchmove = mv; sv.onclick = e => { const pl = e.target.closest("polyline[data-s]"); if (!pl) return; open = open === pl.dataset.s ? null : pl.dataset.s; draw(cur); }; sv.onmouseleave = () => { fsHov = null; fsDraw(540 + STEP * (cur + 1)); };
+  }
+  if (window._fxRs) removeEventListener("resize", window._fxRs);   // 切到這個子標籤（或改視窗大小）時，疊圖照新寬度重畫
+  window._fxRs = () => { if (root.isConnected) try { fsDraw(540 + STEP * (cur + 1)); } catch (e) { } }; addEventListener("resize", window._fxRs);
+  /* 11-07 Evans 拍板（總指揮第 4 項）：三等份——左族群、中＝主動淨買個股、右＝主動淨賣個股；每欄列數跟左欄族群等高（1366×768 一個畫面），MORE 展開全部；點族群＝中右兩欄只看該族群；點個股開當日 1 分走勢 */
+  const stAll = {u: false, d: false};
+  root.querySelectorAll(".fx-st").forEach(b => b.querySelector(".fx-more").onclick = () => { stAll[b.dataset.k] = !stAll[b.dataset.k]; draw(cur); });
+  function stDraw(k, h) {
+    const pool = (F.stocks || []).filter(t => t.s5 && t.s5[k] != null && (!open || t.sector === open));
+    const n = Math.max(6, Math.floor((h - 2 * 26 - 12) / 2 / RS));   // 11-17 三欄：右欄買、賣上下疊，各占一半高度
+    const L = {u: pool.filter(t => t.s5[k] > 0).sort((a, b) => b.s5[k] - a.s5[k]), d: pool.filter(t => t.s5[k] < 0).sort((a, b) => a.s5[k] - b.s5[k])};
+    root.querySelectorAll(".fx-st").forEach(b => { const K2 = b.dataset.k, a = L[K2], show = stAll[K2] ? a : a.slice(0, n), btn = b.querySelector(".fx-more");
+      b.querySelector(".fx-stn").textContent = (open ? `「${open}」` : "") + `${a.length} 檔` + (open ? "（再點族群看全部）" : "");
+      b.querySelector(".fx-stt").innerHTML = show.map((t, i) => `<tr class="ck" data-c="${esc(t.code)}"><td class="note" style="width:18px">${i + 1}</td><td><i style="display:inline-block;width:6px;height:6px;border-radius:50%;background:${ci[t.sector] || "#555"};margin-right:4px"></i>${esc(t.name)}<span class="note"> ${esc(t.code)}</span></td><td class="note fx-sc">${esc(t.sector)}</td><td class="num ${cl(t.s5[k])}">${fmt(t.s5[k], 2)}</td></tr>`).join("") || `<tr><td class="note">沒有</td></tr>`;
+      btn.style.display = a.length > n ? "" : "none"; btn.textContent = stAll[K2] ? "收起" : `MORE（全部 ${a.length} 檔）`;
+      b.querySelectorAll("tr.ck").forEach(tr => tr.onclick = () => { try { dhPop(tr.dataset.c); } catch (e) { } }); });
+  }
+  const stop = () => { if (timer) clearInterval(timer); timer = null; $(".fx-play").textContent = "▶"; }; window._fxStop = () => { if (timer) clearInterval(timer); timer = null; };
+  rng.oninput = () => { stop(); draw(+rng.value); };
+  $(".fx-play").onclick = () => {
+    if (timer) return stop();
+    let k = cur >= last ? 0 : cur; draw(k); $(".fx-play").textContent = "❚❚";
+    timer = setInterval(() => { if (k >= last) return stop(); draw(++k); }, STEP === 1 ? 130 : 650);
+  };
+  const at = opt.at ? S[0].s5.findIndex((_, k) => lab(k) >= opt.at) : -1;
+  draw(at >= 0 ? Math.min(at, last) : last);
+  if (!opt.live && !opt.at) $(".fx-play").click();                         // 預覽一打開就從 09:00 重播一次（像錄影）
+}
+
+fetch("data.json", {cache: "no-store"}).then(r => r.json()).then(d => {
+  DASH = d; document.getElementById("wfAt").textContent = d.flow.day + " " + new Date(d.made * 1000).toTimeString().slice(0, 5);
+  pvFlowMount($("#pfFx"), d.flow, {live: true});
+}).catch(e => { $("#pfFx").textContent = "資料載入失敗：" + e; });
+</script></body></html>
