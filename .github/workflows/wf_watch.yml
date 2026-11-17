@@ -28,9 +28,9 @@ jobs:
           # 檔名：(名稱, 平日最多幾小時沒成功, 週末最多幾小時)
           W = {
             "daily.yml": ("每日戰情更新", 14, 14), "guidance.yml": ("法說與報告擷取", 30, 30),
-            "ir_watch.yml": ("法說偵測", 4, 30), "kol.yml": ("財經意見領袖", 30, 30),
+            "ir_watch.yml": ("法說偵測", 13, 30), "kol.yml": ("財經意見領袖", 30, 30),
             "macro.yml": ("世界趨勢", 16, 30), "news_live.yml": ("即時信息流", 3, 3),
-            "market_alert.yml": ("盤勢緊急通知", 2, 2), "root_cause.yml": ("根因追蹤", 30, 80),
+            "market_alert.yml": ("盤勢緊急通知", 6, 6), "root_cause.yml": ("根因追蹤", 30, 80),
             "site_smoke.yml": ("正式站巡檢", 30, 30), "cb_daily.yml": ("可轉債行情", 30, 80),
             "relay_canary.yml": ("中繼監控接收端比對", 20, 20), "live_watch.yml": ("盤中資金停更監看", 24, 80),
             "report_fail_digest.yml": ("指定報告沒上架彙總", 30, 30), "todo_board.yml": ("TODO 總表同步", 3, 3),
