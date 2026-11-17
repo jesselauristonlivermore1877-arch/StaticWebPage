@@ -1,0 +1,94 @@
+{
+ "at": "2026-11-17 00:49 UTC",
+ "funds": {
+  "0001067983": {
+   "zh": "波克夏海瑟威",
+   "rd": "2026-09-30",
+   "ok": false,
+   "n": 15,
+   "bad": [
+    "src 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/1067983/000119312526463399/60471.xml",
+    "src0 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/1067983/000119312526352200/56757.xml"
+   ],
+   "dg": "b2b2649dc8115204"
+  },
+  "0001350694": {
+   "zh": "橋水基金",
+   "rd": "2026-09-30",
+   "ok": false,
+   "n": 61,
+   "bad": [
+    "src 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/1350694/000135069426000004/infotable.xml",
+    "src0 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/1350694/000135069426000003/infotable.xml"
+   ],
+   "dg": "0066ddbfbddc036e"
+  },
+  "0002026053": {
+   "zh": "潘興廣場（Bill Ackman）",
+   "rd": "2026-09-30",
+   "ok": false,
+   "n": 12,
+   "bad": [
+    "src 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/2026053/000117266126005427/infotable.xml",
+    "src0 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/2026053/000117266126003790/infotable.xml"
+   ],
+   "dg": "7e6bdb5175981b21"
+  },
+  "0001037389": {
+   "zh": "文藝復興科技",
+   "rd": "2026-09-30",
+   "ok": false,
+   "n": 57,
+   "bad": [
+    "src 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/1037389/000103738926000062/renaissance13Fq32026_holding.xml",
+    "src0 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/1037389/000103738926000059/renaissance13Fq22026_holding.xml"
+   ],
+   "dg": "8daf95cf37a55a48"
+  },
+  "0001029160": {
+   "zh": "索羅斯基金",
+   "rd": "2026-09-30",
+   "ok": false,
+   "n": 34,
+   "bad": [
+    "src 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/1029160/000090266426004530/infotable.xml",
+    "src0 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/1029160/000090266426003507/infotable.xml"
+   ],
+   "dg": "e7a9c75fe2c1cc8b"
+  },
+  "0001536411": {
+   "zh": "Duquesne（Druckenmiller）",
+   "rd": "2026-09-30",
+   "ok": false,
+   "n": 29,
+   "bad": [
+    "src 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/1536411/000153641126000011/form13f_20260930.xml",
+    "src0 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/1536411/000153641126000006/form13f_20260630.xml"
+   ],
+   "dg": "40c7dcc1632fdd11"
+  },
+  "0001656456": {
+   "zh": "Appaloosa（David Tepper）",
+   "rd": "2026-09-30",
+   "ok": false,
+   "n": 20,
+   "bad": [
+    "src 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/1656456/000165645626000004/Form13FInfoTable.xml",
+    "src0 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/1656456/000165645626000003/Form13FInfoTable.xml"
+   ],
+   "dg": "c312e985c7cb4ccd"
+  },
+  "0001167483": {
+   "zh": "老虎環球",
+   "rd": "2026-09-30",
+   "ok": false,
+   "n": 21,
+   "bad": [
+    "src 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/1167483/000091957426008062/infotable.xml",
+    "src0 下載失敗：HTTP 403 https://www.sec.gov/Archives/edgar/data/1167483/000091957426005427/infotable.xml"
+   ],
+   "dg": "ca5e00ffe70abf2a"
+  }
+ },
+ "where": "GitHub Actions（run 43990556117，SEC 回 403）"
+}
