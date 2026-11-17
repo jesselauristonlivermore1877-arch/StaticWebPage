@@ -1,0 +1,72 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"美股受輝達財報與收緊AI晶片限制影響震盪下跌\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-17\",\n      \"who\": \"美國科技企業與監管機構\",\n      \"event\": \"2026年11月17日美股因迎來輝達財報及美國收緊AI晶片遠端存取限制而走跌\",\n      \"mechanism\": \"市場對AI產業前景與晶片出口規範收緊產生疑慮，引發科技與半導體類股賣壓\",\n      \"industry\": \"半導體與人工智慧\",\n      \"tw_link\": \"透過國際供應鏈連動，預期影響台股相關科技與半導體族群\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"IC設計\",\n        \"伺服器與品牌組裝\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"輝達\",\n        \"Nvidia\",\n        \"AI晶片\",\n        \"半導體\",\n        \"エヌビディア\",\n        \"엔비디아\"\n      ],\n      \"evidence\": [\n        \"P66\",\n        \"P72\",\n        \"P288\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"直接反映美股科技巨頭財報前夕的籌碼調整與政策緊縮\",\n      \"drill\": [\n        \"Nvidia earnings AI chip rules\",\n        \"輝達財報 晶片管制\",\n        \"エヌビディア 決算 規制\",\n        \"엔비디아 실적 규제\"\n      ]\n    }\n  ],\n  \"summary\": \"昨晚美股因輝達財報與晶片管制疑慮走跌，預期傳導到今天台股將牽動半導體與AI供應鏈表現。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "美股受輝達財報與收緊AI晶片限制影響震盪下跌",
+    "layer": "根因",
+    "event_date": "2026-11-17",
+    "who": "美國科技企業與監管機構",
+    "event": "2026年11月17日美股因迎來輝達財報及美國收緊AI晶片遠端存取限制而走跌",
+    "mechanism": "市場對AI產業前景與晶片出口規範收緊產生疑慮，引發科技與半導體類股賣壓",
+    "industry": "半導體與人工智慧",
+    "tw_link": "透過國際供應鏈連動，預期影響台股相關科技與半導體族群",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "IC設計",
+     "伺服器與品牌組裝"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "輝達",
+     "Nvidia",
+     "AI晶片",
+     "半導體",
+     "エヌビディア",
+     "엔비디아"
+    ],
+    "evidence": [
+     "P66",
+     "P72",
+     "P288"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "直接反映美股科技巨頭財報前夕的籌碼調整與政策緊縮",
+    "drill": [
+     "Nvidia earnings AI chip rules",
+     "輝達財報 晶片管制",
+     "エヌビディア 決算 規制",
+     "엔비디아 실적 규제"
+    ]
+   }
+  ],
+  "summary": "昨晚美股因輝達財報與晶片管制疑慮走跌，預期傳導到今天台股將牽動半導體與AI供應鏈表現。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmpozb1_2ln.txt",
+  "附檔": [],
+  "耗時秒": 7.2,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.5-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 24218,
+   "prompt_tokens": 21888,
+   "output_tokens": 488,
+   "thinking_tokens": 1842
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1118_synth1",
+  "ok": true
+ }
+}
