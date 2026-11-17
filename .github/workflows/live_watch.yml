@@ -131,6 +131,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -- cloudflare/member/wrangler.toml   # 還原上一步填進去的 D1 id，免得 pull --rebase 因工作區不乾淨失敗
           git add data/live_watch.json
           git diff --staged --quiet && { echo "沒有變動"; exit 0; }
           git commit -qm "data: 盤中資金停更監看 $(TZ=Asia/Taipei date '+%F %H:%M')"
