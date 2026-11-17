@@ -1,0 +1,70 @@
+# wf_watch.yml ─ 排程健康監看（【舊】總指揮 2026-11-17；Evans：「網頁和看盤區進入維護，只要注意更新不能斷，你要派監控去查」）
+#   停更總表（daily.yml stale_audit）看的是「資料日期」；這支看的是「每支排程最近一次成功是多久以前、最近幾班是不是全失敗／被取消」。
+#   11-17 法說擷取連 4 班沒成功（3 班排隊被擠掉、1 班推送撞車），資料日期卻因為 W 另外推逐字稿而一直在動，停更總表沒抓到 → 補這一層。
+#   只讀、不 commit；有問題才發 TG（一則彙總）。台北 08:40、13:40、20:40 各查一次。
+name: 排程健康監看
+on:
+  schedule:
+    - cron: "40 0,5,12 * * *"
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+      TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+    steps:
+      - name: 檢查
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess, datetime as dt, urllib.request, urllib.parse
+          R = os.environ["GITHUB_REPOSITORY"]
+          now = dt.datetime.now(dt.timezone.utc); tw = now + dt.timedelta(hours=8)
+          # 檔名：(名稱, 平日最多幾小時沒成功, 週末最多幾小時)
+          W = {
+            "daily.yml": ("每日戰情更新", 14, 14), "guidance.yml": ("法說與報告擷取", 30, 30),
+            "ir_watch.yml": ("法說偵測", 4, 30), "kol.yml": ("財經意見領袖", 30, 30),
+            "macro.yml": ("世界趨勢", 16, 30), "news_live.yml": ("即時信息流", 3, 3),
+            "market_alert.yml": ("盤勢緊急通知", 2, 2), "root_cause.yml": ("根因追蹤", 30, 80),
+            "site_smoke.yml": ("正式站巡檢", 30, 30), "cb_daily.yml": ("可轉債行情", 30, 80),
+            "relay_canary.yml": ("中繼監控接收端比對", 20, 20), "live_watch.yml": ("盤中資金停更監看", 24, 80),
+            "report_fail_digest.yml": ("指定報告沒上架彙總", 30, 30), "todo_board.yml": ("TODO 總表同步", 3, 3),
+          }
+          wkend = tw.weekday() >= 5 or (tw.weekday() == 0 and tw.hour < 12)
+          bad = []
+          for f, (nm, h_wd, h_we) in W.items():
+              lim = h_we if wkend else h_wd
+              try:
+                  out = subprocess.run(["gh", "run", "list", "-R", R, "--workflow", f, "-L", "12",
+                                        "--json", "conclusion,status,createdAt,databaseId"],
+                                       capture_output=True, text=True, timeout=60).stdout
+                  runs = json.loads(out or "[]")
+              except Exception as e:
+                  print("讀不到 %s：%r" % (f, e)); continue
+              done = [r for r in runs if r["status"] == "completed"]
+              ok = [r for r in done if r["conclusion"] == "success"]
+              last_ok = max((dt.datetime.fromisoformat(r["createdAt"].replace("Z", "+00:00")) for r in ok), default=None)
+              age = (now - last_ok).total_seconds() / 3600 if last_ok else None
+              tail = [r["conclusion"] for r in done[:3]]
+              why = []
+              if age is None: why.append("最近 12 班沒有一班成功")
+              elif age > lim: why.append("已 %.0f 小時沒成功（上限 %d）" % (age, lim))
+              if len(tail) == 3 and all(c != "success" for c in tail): why.append("最近 3 班：%s" % "／".join(tail))
+              print("%-22s %-14s 最後成功 %s 小時前｜最近：%s %s" % (f, nm, "—" if age is None else "%.1f" % age,
+                    ",".join(r["conclusion"] or r["status"] for r in runs[:5]), "← " + "；".join(why) if why else ""))
+              if why: bad.append("・%s：%s" % (nm, "；".join(why)))
+          if not bad:
+              print("✓ 全部排程正常"); raise SystemExit(0)
+          msg = "⚠️ 排程健康監看（%s）\n%s\n看：https://github.com/%s/actions" % (tw.strftime("%m-%d %H:%M"), "\n".join(bad), R)
+          print(msg)
+          for b in bad: print("::warning::" + b)
+          tok, chat = os.environ.get("TG_BOT_TOKEN"), os.environ.get("TG_CHAT_ID")
+          if tok and chat:
+              urllib.request.urlopen("https://api.telegram.org/bot%s/sendMessage" % tok,
+                  urllib.parse.urlencode({"chat_id": chat, "text": msg}).encode(), timeout=15).read()
+          PY
