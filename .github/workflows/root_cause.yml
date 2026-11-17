@@ -12,7 +12,9 @@ on:
     - cron: "30 23 * * 0-4"   # 台北週一～五 07:30（盤前，只看昨晚美股）
     # 🟢 11-16（雲端舊13；【舊】裁示「15:40 補跑完整班：要」）：盤後固定補一班完整班，蓋掉早上的 us_only；
     #   同一個台股日已有完整結果（market_alert 叫過、或手動跑過）就跳過，不重打 Gemini。
-    - cron: "40 7 * * 1-5"    # 台北週一～五 15:40（盤後完整班）
+    # 🟢 11-17（雲端舊20）：15:40 → 16:10。Gemini 搜尋額度台灣 16:00（冬令）才重置；11-17 早班四語搜尋全部「額度用完」，
+    #   15:40 再跑一樣打不到 → 改在重置後跑，才算「額度恢復後自動補跑」。
+    - cron: "10 8 * * 1-5"    # 台北週一～五 16:10（盤後完整班）
   workflow_dispatch:
     inputs:
       cases:
@@ -66,7 +68,7 @@ jobs:
           fi
           #   11-16：07:30 GitHub 排程只當備援 —— W 07:25 已打過盤前班（同台股日已有任何結果）就跳過，兩邊不重複跑
           if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" = "30 23 * * 0-4" ]; then echo "PRE_SCHED=1" >> "$GITHUB_ENV"; fi
-          if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" = "40 7 * * 1-5" ]; then echo "FULL_SCHED=1" >> "$GITHUB_ENV"; fi
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" = "10 8 * * 1-5" ]; then echo "FULL_SCHED=1" >> "$GITHUB_ENV"; fi
           if [ -z "$CASES" ]; then
             today=$(TZ=Asia/Taipei date +%F)
             if [ "$(TZ=Asia/Taipei date +%H%M)" -ge 1400 ] && [ "$(date -d "$today" +%u)" -le 5 ]; then tw=$today; else tw=$(prevwd "$today"); fi
@@ -96,8 +98,10 @@ jobs:
         working-directory: StaticWebPage
         run: |
           tw="${CASES%%:*}"; tw="${tw%%,*}"; f="docs/data/root_cause/$tw.json"
-          if [ -f "$f" ] && ! grep -q '"mode": *"us_only"' "$f"; then echo "台股日 $tw 已有完整根因結果，15:40 班跳過"; echo "RC_SKIP=1" >> "$GITHUB_ENV"
-          else echo "台股日 $tw：$( [ -f "$f" ] && echo '只有盤前 us_only' || echo '還沒有結果' ) → 跑完整班"; fi
+          # 11-17（雲端舊20）：已有完整結果、但那一份的 Gemini 四語搜尋全部失敗（額度用完時只靠免費新聞池）→ 不跳過，重跑一次
+          deg=$( [ -f "$f" ] && python3 -c "import json,sys; g=[x for x in json.load(open(sys.argv[1])).get('gemini') or [] if str(x.get('task','')).startswith('搜尋')]; print(1 if g and not any(x.get('ok') for x in g) else 0)" "$f" || echo 0)
+          if [ -f "$f" ] && ! grep -q '"mode": *"us_only"' "$f" && [ "$deg" != "1" ]; then echo "台股日 $tw 已有完整根因結果，16:10 班跳過"; echo "RC_SKIP=1" >> "$GITHUB_ENV"
+          else echo "台股日 $tw：$( [ -f "$f" ] && { [ "$deg" = "1" ] && echo '已有結果但搜尋全失敗（降級）' || echo '只有盤前 us_only'; } || echo '還沒有結果' ) → 跑完整班"; fi
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12.14"

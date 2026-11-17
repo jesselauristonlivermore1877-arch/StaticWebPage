@@ -383,6 +383,22 @@ jobs:
         working-directory: code
         run: python check_web.py ../site/data/web_data.json
 
+      # 🟢 11-17（雲端舊20，Evans 11-17「到底有多少東西不會自己更新」）：停更總表 —— 讀每份產出的檔內資料日、對照預期頻率，
+      #    停了就 ::warning:: 列「停 N 天、負責誰」；寫 data/stale_audit.json（每項第一次判停的日期）。
+      #    台北 08:00 後第一班發一則 TG 彙總（同一天只發一次；新停整段、持續停一行）。只警告、不擋上線、不記 soft_fail。
+      #    程式 repo 還沒推上 tools/stale_audit.py 時直接跳過。
+      - name: 停更總表（soft 警告）
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 2
+        env:
+          GEA_TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          GEA_TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          if [ ! -f tools/stale_audit.py ]; then echo "程式 repo 還沒有 tools/stale_audit.py，跳過"; exit 0; fi
+          TG=""; [ "$(TZ=Asia/Taipei date +%H)" -ge 8 ] && TG=--tg
+          python tools/stale_audit.py ../site --write $TG
+
       - name: 提交
         working-directory: site
         run: |
