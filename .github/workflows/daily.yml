@@ -99,7 +99,13 @@ jobs:
 
       # 11-08【舊】總指揮：EDM 截斷檢查要用中文字型量高度（沒裝的話只會警告、擋不下），雲端G2 待定奪裁示裝。
       - name: 安裝中文字型
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk && fc-list :lang=zh | head -3
+        # 🔴 11-17（【舊】總指揮）：16:13 那班 apt 一時失敗就整班失敗、盤後資料晚到 20:13 → 重試 4 次
+        run: |
+          for i in 1 2 3 4; do
+            sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk && break
+            echo "字型安裝第 $i 次失敗，$((i*20)) 秒後重試"; sleep $((i*20))
+          done
+          fc-list :lang=zh | head -3 | grep . || { echo "::error::中文字型裝不起來"; exit 1; }
 
       # 10-11（總指揮 15:50 第 3 項）：族群分類改動照生效日 —— sector_map_pending.csv 裡已到生效日的列先併進工作區的
       #   sector_map.csv（不 commit；正式併入由 tools/sector_map_apply.py --commit 做），生效日前的班照舊分類。
