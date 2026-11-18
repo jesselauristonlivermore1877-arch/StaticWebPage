@@ -2,7 +2,7 @@
  "file": "1102_2026-11-17.md",
  "code": "1102",
  "date": "2026-11-17",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -43,8 +43,15 @@
   "skipped": 0
  },
  "transcript": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "why": "原話：預期大概今年的需求大概跌幅大概8到10個percent左右。"
+   },
+   {
+    "why": "原話：第四季跟2027年的對毛利展望，剛剛第四季有報告，就是煤價大概是維持在一個相對高"
+   }
+  ],
   "has": true
  }
 }
