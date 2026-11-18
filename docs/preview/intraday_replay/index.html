@@ -32,11 +32,26 @@ body{margin:0;background:var(--ir2-bg);color:var(--ir2-ink);font:15px/1.6 system
 .ir2-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--ir2-ink2);margin:4px 0 0}
 .ir2-legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:4px}
 .ir2-tblwrap{overflow-x:auto}
+.ir2-obs{border-left:3px solid var(--ir2-acc);padding:6px 10px;margin:0 0 10px;background:var(--ir2-seg);border-radius:0 8px 8px 0}
+.ir2-obs q{display:block;font-weight:700;quotes:"「" "」"}
+.ir2-obs p{margin:4px 0 0;font-size:14px}
+.ir2-obs .ir2-see{color:var(--ir2-ink2);font-size:12px}
+.ir2-dom{display:inline-block;margin-left:4px;padding:0 5px;border-radius:4px;font-size:11px;background:#f59e0b22;color:#b45309;white-space:nowrap}
+.ir2-tag{display:inline-block;padding:0 6px;border-radius:4px;font-size:12px;white-space:nowrap}
+.ir2-tag.t0{background:#64748b22}.ir2-tag.t1{background:#2563eb22}.ir2-tag.t2{background:#d9770622}
+.ir2-m28{margin:6px 0 0;padding-left:18px;font-size:13px}
+.ir2-m28 li{margin:2px 0}
 </style></head>
 <body><main class="ir2-main">
 <h1 class="ir2-h1">盤中復盤：指數轉折段 × 族群／個股資金與價格</h1>
 <p class="ir2-sub">先看台指期當天被切成哪幾段，點一段看那段錢流進、流出哪些族群和個股、誰漲誰跌、有沒有一進一出的「蹺蹺板」；下方疊個股軌跡比強弱先後。</p>
 <div class="ir2-bar"><label>日期 <select id="ir2Day"></select></label><span id="ir2Info" class="ir2-sub" style="margin:0"></span></div>
+
+<section class="ir2-card" id="ir2ObsCard" hidden>
+<h2>Evans 盤中觀察 × 資料對照</h2>
+<div id="ir2Obs"></div>
+<p class="ir2-note">「帶我看」會切到對應的段落、把相關個股放進下方軌跡圖。觀察是單日描述，能不能當訊號看研究報告（research/seesaw/report.md）。</p>
+</section>
 
 <section class="ir2-card">
 <h2>台指期 1 分走勢與轉折段</h2>
@@ -56,7 +71,24 @@ body{margin:0;background:var(--ir2-bg);color:var(--ir2-ink);font:15px/1.6 system
 </div>
 <h2 style="margin-top:12px">蹺蹺板配對（同段一進一出、一強一弱）</h2>
 <div class="ir2-tblwrap"><table class="ir2-tbl" id="ir2Pairs"></table></div>
-<p class="ir2-note">淨買＝外盤成交金額減內盤（億元），段尾累計減段首前一分鐘累計；族群＝大類，漲跌取成員等權平均。蹺蹺板＝淨買前 10 名且漲幅高於全部中位 × 淨賣前 10 名且漲幅低於中位。點表格裡的個股可加到下方軌跡圖。</p>
+<p class="ir2-note">淨買＝外盤成交金額減內盤（億元），段尾累計減段首前一分鐘累計；族群＝大類，漲跌取成員等權平均。「由 XX 主導」＝這一檔淨買超過整個族群淨額（同會員站即時資金流口徑）。漲停／跌停鎖住時的排隊成交也被算成外盤／內盤，會把一檔撐得很大。蹺蹺板＝淨買前 10 名且漲幅高於全部中位 × 淨賣前 10 名且漲幅低於中位。點表格裡的個股可加到下方軌跡圖。</p>
+</section>
+
+<section class="ir2-card">
+<h2>台指期 × 台積電：轉折誰先（M28 盤中部分併入）</h2>
+<p class="ir2-note" id="ir2LagSum" style="margin:0 0 6px"></p>
+<div class="ir2-tblwrap"><table class="ir2-tbl" id="ir2Lag"></table></div>
+<ul class="ir2-m28">
+<li>長期（2024～2026，M28）：同一分鐘一起動最多；有先後時<b>台指期先動、台積電後跟</b>（台積電起漲／起跌時台指期約 6～7 成已先動），台積電不是盤中領先指標。</li>
+<li>「台積電被壓／有撐」只說明<b>現在</b>指數漲跌是不是台積電帶的（台指期 30 分漲跌約一半由台積電解釋），預告接下來 15～60 分鐘樣本外沒過，扣成本沒有優勢 → 只當溫度計，不當進出場訊號。</li>
+<li>指數破底、台積電沒破 → 反拉機率跟一般破底一樣（約 85～90%），不是訊號。</li>
+</ul>
+</section>
+
+<section class="ir2-card" id="ir2W8Card" hidden>
+<h2>Evans 關注 8 檔 × 15 分 EMA23</h2>
+<div class="ir2-tblwrap"><table class="ir2-tbl" id="ir2W8"></table></div>
+<p class="ir2-note" id="ir2W8Note"></p>
 </section>
 
 <section class="ir2-card">
@@ -83,14 +115,30 @@ function nm(c){var s=D.stocks[c];return s?s.n:c}
 function load(day){
   fetch("data/"+day+".json").then(function(r){return r.json()}).then(function(j){
     D=j;seg=0;
-    var best=0;D.segs.forEach(function(s,i){if(Math.abs(s.fut)>Math.abs(D.segs[best].fut))best=i});seg=best;
+    var best=0;D.segs.forEach(function(s,i){if(!s.whole&&Math.abs(s.fut)>Math.abs(D.segs[best].fut))best=i});seg=best;
     var dl=$("ir2List");dl.innerHTML="";
     Object.keys(D.stocks).forEach(function(c){var o=document.createElement("option");o.value=c+" "+D.stocks[c].n;dl.appendChild(o)});
-    $("ir2Info").textContent="轉折門檻：台指期反向 "+(D.zz*100).toFixed(1)+"%；共 "+D.segs.length+" 段";
+    $("ir2Info").textContent="轉折門檻：台指期反向 "+(D.zz*100).toFixed(1)+"%；共 "+D.segs.filter(function(s){return !s.whole}).length+" 段";
+    drawObs();drawLag();drawW8();
     $("ir2Check").textContent="核對：全日淨買 vs flow_final（"+D.check.full_n+" 檔）最大差 "+D.check.full_max+" 億；各段前 3 進／前 3 出淨買 vs flow_final 逐分累計（"+D.check.seg_n+" 筆）平均差 "+D.check.seg_mean+" 億、相對差中位 "+(D.check.seg_rel_med*100).toFixed(1)+"%（同一來源、分鐘內取樣秒數不同）。EMA271："+D.ema_src+"。";
     resetPicks();render();
   });
 }
+function drawObs(){var N=D.notes||[];$("ir2ObsCard").hidden=!N.length;var h="";
+  N.forEach(function(o,k){h+='<div class="ir2-obs"><q>'+esc(o.q)+'</q><p>'+esc(o.a)+'</p><p class="ir2-see">頁上看：'+esc(o.see)+(o.picks.length||o.seg!=null?' <button type="button" class="ir2-chip" data-o="'+k+'">帶我看</button>':'')+'</p></div>'});
+  $("ir2Obs").innerHTML=h;Array.prototype.forEach.call($("ir2Obs").querySelectorAll("button[data-o]"),function(b){b.addEventListener("click",function(){var o=N[+b.getAttribute("data-o")];
+    if(o.seg!=null)seg=o.seg;render();if(o.picks.length){picks=o.picks.slice();drawStk()}var t=o.seg!=null?$("ir2SegTitle"):$("ir2Stk");t.scrollIntoView({behavior:"smooth",block:"start"})})});}
+function drawLag(){var L=D.lag||[],c={};L.forEach(function(r){c[r[4]]=(c[r[4]]||0)+1});
+  $("ir2LagSum").textContent=L.length?("今天 "+L.length+" 個轉折：台積電先 "+(c["台積電先"]||0)+"、同時 "+(c["同時"]||0)+"、台指期先 "+(c["台指期先"]||0)+"、±15 分沒對到 "+(c["沒對到"]||0)+"。台積電一檔 5 元常在同價位停幾分鐘，所以台積電轉折記成一段時間；台指期轉折落在段內＝同時。"):"今天沒有可比的轉折。";
+  var h='<tr><th>台指期轉折</th><th>台積電同向轉折</th><th>判定</th></tr>';
+  L.forEach(function(r){var k=r[4]=="台積電先"?"t2":(r[4]=="台指期先"?"t1":"t0");h+='<tr><td>'+r[0]+' '+r[1]+'點</td><td>'+(r[2]?(r[2]==r[3]?r[2]:r[2]+'–'+r[3]):'—')+'</td><td><span class="ir2-tag '+k+'">'+r[4]+'</span></td></tr>'});
+  $("ir2Lag").innerHTML=h;}
+function drawW8(){var W=D.w8||[];$("ir2W8Card").hidden=!W.length;if(!W.length)return;
+  var h='<tr><th>個股</th><th>高點後最低(分)</th><th>離線(ATR)</th><th>離線%</th><th>站回</th><th>收盤離線(ATR)</th></tr>';
+  W.forEach(function(r){var d=r[3],tag=d==null?"":(Math.abs(d)<=0.5?' <span class="ir2-tag t1">在線附近</span>':(d>0.5?' <span class="ir2-tag t0">一直在線上</span>':' <span class="ir2-tag t2">跌穿</span>'));
+    h+='<tr'+(D.stocks[r[0]]?' class="ir2-click" data-c="'+r[0]+'"':'')+'><td>'+esc(r[1])+tag+'</td><td>'+(r[2]||"")+'</td><td class="'+cls(d||0)+'">'+(d==null?"":f2(d))+'</td><td>'+(r[4]==null?"":f2(r[4])+'%')+'</td><td>'+esc(r[5]||"")+'</td><td class="'+cls(r[6]||0)+'">'+(r[6]==null?"":f2(r[6]))+'</td></tr>'});
+  $("ir2W8").innerHTML=h;Array.prototype.forEach.call($("ir2W8").querySelectorAll("tr[data-c]"),function(tr){tr.addEventListener("click",function(){addPick(tr.getAttribute("data-c"))})});
+  var t=D.t271;$("ir2W8Note").textContent="離線＝當天高點之後的最低點減 15 分 EMA23（盤中當下看得到的那條），以 15 分 ATR 為單位；±0.5 內算「在線附近」。站回＝之後第一根 15 分K 收盤在線上。"+(t?" 台指期 1 分 EMA271："+t["碰線"]+" 第一次碰線，"+t["最低點"]+" 最低 "+Math.round(t["低點"])+"，離線 "+Math.round(t["距離點"])+" 點（"+t["距離ATR"].toFixed(1)+" 個 15 分 ATR）。":"");}
 function resetPicks(){var s=D.segs[seg];picks=[];
   s.stop.slice(0,3).forEach(function(r){picks.push(r[0])});s.sbot.slice(0,3).forEach(function(r){if(picks.indexOf(r[0])<0)picks.push(r[0])});
   if(D.stocks["2330"]&&picks.indexOf("2330")<0)picks.unshift("2330");}
@@ -100,7 +148,7 @@ function drawFut(){
   var svg=$("ir2Fut"),W=1000,H=300,pad={l:56,r:10,t:14,b:24},n=D.t.length,ink=css("--ir2-ink"),ink2=css("--ir2-ink2");
   var vals=D.fut.slice();if(D.ema)vals=vals.concat(D.ema);var lo=Math.min.apply(null,vals),hi=Math.max.apply(null,vals);var m=(hi-lo)*0.06;lo-=m;hi+=m;
   var P=xy(n,W,H,pad),s="";
-  D.segs.forEach(function(g,k){var x0=P(Math.max(g.a-0.5,0),lo,lo,hi)[0],x1=P(Math.min(g.b+0.5,n-1),lo,lo,hi)[0];
+  D.segs.forEach(function(g,k){if(g.whole)return;var x0=P(Math.max(g.a-0.5,0),lo,lo,hi)[0],x1=P(Math.min(g.b+0.5,n-1),lo,lo,hi)[0];
     s+='<rect data-seg="'+k+'" x="'+x0+'" y="'+pad.t+'" width="'+Math.max(x1-x0,1)+'" height="'+(H-pad.t-pad.b)+'" fill="'+(k==seg?css("--ir2-sel"):(k%2?css("--ir2-seg"):"transparent"))+'" style="cursor:pointer"/>'});
   s+=axisT(svg,n,W,H,pad,ink2);
   for(var q=0;q<=4;q++){var v=lo+(hi-lo)*q/4,y=P(0,v,lo,hi)[1];s+='<text x="'+(pad.l-4)+'" y="'+(y+4)+'" font-size="11" text-anchor="end" fill="'+ink2+'">'+Math.round(v)+'</text>'}
@@ -114,14 +162,15 @@ function drawFut(){
   var em=D.ema?D.ema:null;
   $("ir2FutNote").textContent=em?("收盤 "+D.fut[n-1]+"，1 分 EMA271 "+Math.round(em[n-1])+"（"+(D.fut[n-1]>=em[n-1]?"線上":"線下")+"）"):"EMA271 算不出";
 }
-function drawSegs(){var h="";D.segs.forEach(function(g,k){h+='<button type="button" class="ir2-chip'+(k==seg?" on":"")+'" data-k="'+k+'">'+g.ta+'–'+g.tb+' <span class="'+cls(g.fut)+'">'+f2(g.fut)+'%</span></button>'});
+function drawSegs(){var h="";var ord=D.segs.map(function(g,k){return k});ord.sort(function(a,b){return (D.segs[b].whole?1:0)-(D.segs[a].whole?1:0)||a-b});
+  ord.forEach(function(k){var g=D.segs[k];h+='<button type="button" class="ir2-chip'+(k==seg?" on":"")+'" data-k="'+k+'">'+(g.whole?"全日":g.ta+'–'+g.tb)+' <span class="'+cls(g.fut)+'">'+f2(g.fut)+'%</span></button>'});
   $("ir2Segs").innerHTML=h;Array.prototype.forEach.call($("ir2Segs").children,function(b){b.addEventListener("click",function(){pickSeg(+b.getAttribute("data-k"))})});}
 function tbl(id,title,rows,kind){var h='<caption style="text-align:left;font-weight:700;padding-bottom:4px">'+title+'</caption><tr><th>'+(kind=="g"?"族群（檔數）":"個股")+'</th><th>淨買(億)</th><th>段內漲跌</th></tr>';
-  rows.forEach(function(r){if(kind=="g")h+='<tr><td>'+esc(r[0])+'（'+r[3]+'）</td><td class="'+cls(r[1])+'">'+f2(r[1])+'</td><td class="'+cls(r[2])+'">'+f2(r[2])+'%</td></tr>';
+  rows.forEach(function(r){if(kind=="g")h+='<tr><td>'+esc(r[0])+'（'+r[3]+'）'+(r[4]?'<span class="ir2-dom" title="這一檔的淨買超過整個族群淨額（其餘成員合計反方向）">由 '+esc(nm(r[4]))+' 主導</span>':'')+'</td><td class="'+cls(r[1])+'">'+f2(r[1])+'</td><td class="'+cls(r[2])+'">'+f2(r[2])+'%</td></tr>';
     else h+='<tr class="ir2-click" data-c="'+r[0]+'"><td>'+r[0]+' '+esc(nm(r[0]))+'</td><td class="'+cls(r[1])+'">'+f2(r[1])+'</td><td class="'+cls(r[2])+'">'+f2(r[2])+'%</td></tr>'});
   $(id).innerHTML=h;Array.prototype.forEach.call($(id).querySelectorAll("tr[data-c]"),function(tr){tr.addEventListener("click",function(){addPick(tr.getAttribute("data-c"))})});}
 function drawTables(){var g=D.segs[seg];
-  $("ir2SegTitle").innerHTML="段內資金與漲跌："+g.ta+"–"+g.tb+"（台指期 <span class=\""+cls(g.fut)+"\">"+f2(g.fut)+"%、"+(g.pts>0?"+":"")+g.pts+" 點</span>；200 檔漲跌中位 "+f2(g.med)+"%）";
+  $("ir2SegTitle").innerHTML="段內資金與漲跌："+(g.whole?"全日 ":"")+g.ta+"–"+g.tb+"（台指期 <span class=\""+cls(g.fut)+"\">"+f2(g.fut)+"%、"+(g.pts>0?"+":"")+g.pts+" 點</span>；200 檔漲跌中位 "+f2(g.med)+"%）";
   tbl("ir2Gtop","族群淨買最多",g.gtop,"g");tbl("ir2Gbot","族群淨買最少",g.gbot,"g");tbl("ir2Stop","個股淨買最多",g.stop,"s");tbl("ir2Sbot","個股淨買最少",g.sbot,"s");
   var h='<tr><th>進（淨買、漲幅高於中位）</th><th>出（淨賣、漲幅低於中位）</th><th>淨買差(億)</th><th>漲跌差</th></tr>';
   if(!g.pairs.length)h+='<tr><td colspan="4" style="text-align:left">這段沒有符合條件的配對（錢跟價格同方向，不是一進一出）</td></tr>';
