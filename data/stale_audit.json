@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-18 19:04",
+ "asof": "2026-11-18 21:43",
  "first_stale": {},
  "rows": [
   {
@@ -221,11 +221,11 @@
   {
    "name": "個股融資維持率排行",
    "path": "docs/data/stock_keep_rank.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/stock_keep_rank.py",
    "note": ""
@@ -449,11 +449,11 @@
   {
    "name": "法說逐字稿",
    "path": "docs/data/ir/tr",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "ev",
    "allow": 5,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 ir_transcribe_one",
    "note": "有法說才有"
@@ -485,11 +485,11 @@
   {
    "name": "AI 研究報告（公司產業報告）",
    "path": "data/company_report",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "ev",
    "allow": 5,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 ir_report_watch",
    "note": ""
