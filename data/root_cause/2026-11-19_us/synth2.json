@@ -1,0 +1,148 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"輝達公布強勁Q3財報並預期AI成長，引動美台半導體股反彈\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-18\",\n      \"who\": \"輝達\",\n      \"event\": \"輝達公布第三季營收達1158億美元且第四季財測優於預期\",\n      \"mechanism\": \"輝達財報亮眼帶動美國與亞洲半導體供應鏈期待，引發台股相關族群反彈\",\n      \"industry\": \"半導體\",\n      \"tw_link\": \"輝達財報利多激勵台股供應鏈如台積電等反彈\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"封裝測試\",\n        \"伺服器與品牌組裝\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"Nvidia\",\n        \"Q3\",\n        \"Revenue\",\n        \"輝達\",\n        \"財報\",\n        \"營收\",\n        \"エヌビディア\",\n        \"決算\"\n      ],\n      \"evidence\": [\n        \"P27\",\n        \"P39\",\n        \"P43\",\n        \"D3\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"why_root\": \"直接由企業基本面與財報數據帶動產業預期\",\n      \"drill\": [\n        \"Nvidia Q3 earnings guidance Taiwan suppliers\",\n        \"輝達 財報 台積電 供應鏈\"\n      ]\n    },\n    {\n      \"title\": \"輝達董事會拒絕黃仁勳回鍋與執行長離職後續效應引發市場接班疑慮\",\n      \"layer\": \"表面\",\n      \"event_date\": \"2026-11-18\",\n      \"who\": \"輝達董事會\",\n      \"event\": \"董事會重申黃仁勳不回任CEO，引發市場對管理層變動的持續觀望與震盪\",\n      \"mechanism\": \"執行長離職與接班不確定性引發投資人擔憂，導致美股盤後與隔日震盪，傳導至台股盤中劇烈波動\",\n      \"industry\": \"半導體\",\n      \"tw_link\": \"輝達高層異動與接班疑慮透過美股情緒傳導至台股，造成盤中大幅震盪\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"全市場\"\n      ],\n      \"direction\": \"不明\",\n      \"keywords\": [\n        \"Jensen Huang\",\n        \"CEO\",\n        \"Resignation\",\n        \"黃仁勳\",\n        \"辭任\",\n        \"接班\",\n        \"フアン\",\n        \"辞任\"\n      ],\n      \"evidence\": [\n        \"P1\",\n        \"P2\",\n        \"P41\",\n        \"D1\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"why_root\": \"市場對執行長離職的擔憂屬於心理與表象波動，實際基本面反映在財報上\",\n      \"drill\": [\n        \"Jensen Huang Nvidia board CEO return\",\n        \"黃仁勳 輝達 董事會 離職\"\n      ]\n    },\n    {\n      \"title\": \"外資持續在台股進行大舉賣超與期指結算壓力\",\n      \"layer\": \"放大因素\",\n      \"event_date\": \"2026-11-18\",\n      \"who\": \"外資\",\n      \"event\": \"外資連續多周且在結算日大幅賣超台股\",\n      \"mechanism\": \"外資賣壓與期指結算放大台股盤中上下震盪幅度，使台股未能完全複製單純受惠於輝達利多的走勢\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"外資籌碼面賣壓與結算機制加劇台股波動\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"外資\",\n        \"賣超\",\n        \"期指結算\",\n        \"Foreign investors\",\n        \"Sell off\"\n      ],\n      \"evidence\": [\n        \"P51\",\n        \"P541\",\n        \"P35\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\"\n      ],\n      \"why_root\": \"籌碼與結算因素放大了市場波動幅度\",\n      \"drill\": [\n        \"外資 賣超 台股 結算\",\n        \"foreign investors Taiwan stocks selloff\"\n      ]\n    }\n  ],\n  \"summary\": \"昨晚美股受輝達亮眼財報與高层變動疑慮影響而震盪，預期傳導到今天台股呈現高低震盪、權值股與半導體供應鏈受惠利多但受外資結算與籌碼面影響。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "輝達公布強勁Q3財報並預期AI成長，引動美台半導體股反彈",
+    "layer": "根因",
+    "event_date": "2026-11-18",
+    "who": "輝達",
+    "event": "輝達公布第三季營收達1158億美元且第四季財測優於預期",
+    "mechanism": "輝達財報亮眼帶動美國與亞洲半導體供應鏈期待，引發台股相關族群反彈",
+    "industry": "半導體",
+    "tw_link": "輝達財報利多激勵台股供應鏈如台積電等反彈",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "封裝測試",
+     "伺服器與品牌組裝"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "Nvidia",
+     "Q3",
+     "Revenue",
+     "輝達",
+     "財報",
+     "營收",
+     "エヌビディア",
+     "決算"
+    ],
+    "evidence": [
+     "P27",
+     "P39",
+     "P43",
+     "D3"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "why_root": "直接由企業基本面與財報數據帶動產業預期",
+    "drill": [
+     "Nvidia Q3 earnings guidance Taiwan suppliers",
+     "輝達 財報 台積電 供應鏈"
+    ]
+   },
+   {
+    "title": "輝達董事會拒絕黃仁勳回鍋與執行長離職後續效應引發市場接班疑慮",
+    "layer": "表面",
+    "event_date": "2026-11-18",
+    "who": "輝達董事會",
+    "event": "董事會重申黃仁勳不回任CEO，引發市場對管理層變動的持續觀望與震盪",
+    "mechanism": "執行長離職與接班不確定性引發投資人擔憂，導致美股盤後與隔日震盪，傳導至台股盤中劇烈波動",
+    "industry": "半導體",
+    "tw_link": "輝達高層異動與接班疑慮透過美股情緒傳導至台股，造成盤中大幅震盪",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "全市場"
+    ],
+    "direction": "不明",
+    "keywords": [
+     "Jensen Huang",
+     "CEO",
+     "Resignation",
+     "黃仁勳",
+     "辭任",
+     "接班",
+     "フアン",
+     "辞任"
+    ],
+    "evidence": [
+     "P1",
+     "P2",
+     "P41",
+     "D1"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "why_root": "市場對執行長離職的擔憂屬於心理與表象波動，實際基本面反映在財報上",
+    "drill": [
+     "Jensen Huang Nvidia board CEO return",
+     "黃仁勳 輝達 董事會 離職"
+    ]
+   },
+   {
+    "title": "外資持續在台股進行大舉賣超與期指結算壓力",
+    "layer": "放大因素",
+    "event_date": "2026-11-18",
+    "who": "外資",
+    "event": "外資連續多周且在結算日大幅賣超台股",
+    "mechanism": "外資賣壓與期指結算放大台股盤中上下震盪幅度，使台股未能完全複製單純受惠於輝達利多的走勢",
+    "industry": "全市場",
+    "tw_link": "外資籌碼面賣壓與結算機制加劇台股波動",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "外資",
+     "賣超",
+     "期指結算",
+     "Foreign investors",
+     "Sell off"
+    ],
+    "evidence": [
+     "P51",
+     "P541",
+     "P35"
+    ],
+    "langs": [
+     "zh",
+     "en"
+    ],
+    "why_root": "籌碼與結算因素放大了市場波動幅度",
+    "drill": [
+     "外資 賣超 台股 結算",
+     "foreign investors Taiwan stocks selloff"
+    ]
+   }
+  ],
+  "summary": "昨晚美股受輝達亮眼財報與高层變動疑慮影響而震盪，預期傳導到今天台股呈現高低震盪、權值股與半導體供應鏈受惠利多但受外資結算與籌碼面影響。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmpcs1dd0m2.txt",
+  "附檔": [],
+  "耗時秒": 4.5,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.5-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 31987,
+   "prompt_tokens": 30750,
+   "output_tokens": 1237,
+   "thinking_tokens": null
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1119_synth2",
+  "ok": true
+ }
+}

@@ -1,0 +1,107 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"輝達公布強勁Q3財報並預期AI成長，引動美台半導體股反彈與震盪\",\n      \"layer\": \"根因\",\n      \"who\": \"輝達\",\n      \"event\": \"輝達公布優於預期的第三季財報與第四季財測\",\n      \"mechanism\": \"輝達財報帶動美國半導體與AI供應鏈期待，隨後引發市場對接班與交棒疑慮導致美股盤後與隔日震盪，進而傳導至台股盤中劇烈震盪\",\n      \"industry\": \"半導體及AI供應鏈\",\n      \"tw_link\": \"台股受輝達財報激勵開盤大漲後隨外資賣壓與美股震盪拉回，終場小漲作收\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"IC設計\",\n        \"載板與PCB\",\n        \"散熱與液冷\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"Nvidia\",\n        \"輝達\",\n        \"Q3 revenue\",\n        \"財報\",\n        \"Jensen Huang\",\n        \"黃仁勳\",\n        \"半導體\",\n        \"AI\"\n      ],\n      \"evidence\": [\n        \"P72\",\n        \"P61\",\n        \"P19\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"why_root\": \"直接由輝達財報發布與高層動向觸發晶圓代工與AI供應鏈基本面預期變化\",\n      \"drill\": [\n        \"Nvidia Q3 earnings guidance Jensen Huang\",\n        \"輝達 財報 黃仁勳 供應鏈\",\n        \"エヌビディア 決算 業績見通し\"\n      ]\n    },\n    {\n      \"title\": \"外資持續在台股進行大舉賣超與期指結算壓力\",\n      \"layer\": \"放大因素\",\n      \"who\": \"外資\",\n      \"event\": \"外資連續多周且在結算日大幅賣超台股\",\n      \"mechanism\": \"外資賣壓與期指結算放大台股盤中上下震盪幅度，使台股未能完全複製美股或單純受惠於輝達利多\",\n      \"industry\": \"金融與全市場\",\n      \"tw_link\": \"加劇台股盤中劇烈震盪及萬點大關保衛戰的壓力\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"外資\",\n        \"賣超\",\n        \"台指期\",\n        \"結算\",\n        \"foreign investors\",\n        \"sell\",\n        \"settlement\"\n      ],\n      \"evidence\": [\n        \"P541\",\n        \"P51\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\"\n      ],\n      \"why_root\": \"屬於資金面與籌碼面的放大因素，影響台股對美股利多的吸收程度\",\n      \"drill\": [\n        \"外資 賣超 台股 結算\",\n        \"foreign investors Taiwan stocks sell settlement\"\n      ]\n    }\n  ],\n  \"summary\": \"昨晚美股受輝達財報優於預期與盤後震盪影響交錯，預期傳導到今天台股呈現開高後震盪劇烈、多空拉鋸的走勢。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "輝達公布強勁Q3財報並預期AI成長，引動美台半導體股反彈與震盪",
+    "layer": "根因",
+    "who": "輝達",
+    "event": "輝達公布優於預期的第三季財報與第四季財測",
+    "mechanism": "輝達財報帶動美國半導體與AI供應鏈期待，隨後引發市場對接班與交棒疑慮導致美股盤後與隔日震盪，進而傳導至台股盤中劇烈震盪",
+    "industry": "半導體及AI供應鏈",
+    "tw_link": "台股受輝達財報激勵開盤大漲後隨外資賣壓與美股震盪拉回，終場小漲作收",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "IC設計",
+     "載板與PCB",
+     "散熱與液冷"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "Nvidia",
+     "輝達",
+     "Q3 revenue",
+     "財報",
+     "Jensen Huang",
+     "黃仁勳",
+     "半導體",
+     "AI"
+    ],
+    "evidence": [
+     "P72",
+     "P61",
+     "P19"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "why_root": "直接由輝達財報發布與高層動向觸發晶圓代工與AI供應鏈基本面預期變化",
+    "drill": [
+     "Nvidia Q3 earnings guidance Jensen Huang",
+     "輝達 財報 黃仁勳 供應鏈",
+     "エヌビディア 決算 業績見通し"
+    ]
+   },
+   {
+    "title": "外資持續在台股進行大舉賣超與期指結算壓力",
+    "layer": "放大因素",
+    "who": "外資",
+    "event": "外資連續多周且在結算日大幅賣超台股",
+    "mechanism": "外資賣壓與期指結算放大台股盤中上下震盪幅度，使台股未能完全複製美股或單純受惠於輝達利多",
+    "industry": "金融與全市場",
+    "tw_link": "加劇台股盤中劇烈震盪及萬點大關保衛戰的壓力",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "外資",
+     "賣超",
+     "台指期",
+     "結算",
+     "foreign investors",
+     "sell",
+     "settlement"
+    ],
+    "evidence": [
+     "P541",
+     "P51"
+    ],
+    "langs": [
+     "zh",
+     "en"
+    ],
+    "why_root": "屬於資金面與籌碼面的放大因素，影響台股對美股利多的吸收程度",
+    "drill": [
+     "外資 賣超 台股 結算",
+     "foreign investors Taiwan stocks sell settlement"
+    ]
+   }
+  ],
+  "summary": "昨晚美股受輝達財報優於預期與盤後震盪影響交錯，預期傳導到今天台股呈現開高後震盪劇烈、多空拉鋸的走勢。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmpqz4hd2c1.txt",
+  "附檔": [],
+  "耗時秒": 4.7,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.5-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 28527,
+   "prompt_tokens": 27674,
+   "output_tokens": 853,
+   "thinking_tokens": null
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1119_synth1",
+  "ok": true
+ }
+}
