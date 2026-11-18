@@ -1,50 +1,6 @@
 {
  "dead": {},
  "count": {
-  "2026-11-08": {
-   "gemini-3.6-flash": {
-    "req": 17,
-    "tok": 733494,
-    "e429": 1
-   },
-   "gemini-3.5-flash": {
-    "req": 0,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-2.5-flash": {
-    "req": 2,
-    "tok": 0
-   },
-   "gemini-omni-1.2-flash": {
-    "req": 0,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-omni-1.1-flash": {
-    "req": 0,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-flash-latest": {
-    "req": 2,
-    "tok": 170471,
-    "e429": 1
-   },
-   "gemini-3-flash-preview": {
-    "req": 15,
-    "tok": 454776
-   },
-   "gemini-omni-flash-preview": {
-    "req": 0,
-    "tok": 0,
-    "e429": 1
-   },
-   "gemini-3.5-flash-lite": {
-    "req": 1,
-    "tok": 0
-   }
-  },
   "2026-11-09": {
    "gemini-3.8-flash": {
     "req": 10,
@@ -392,23 +348,37 @@
   },
   "2026-11-17": {
    "gemini-2.5-flash": {
-    "req": 1,
+    "req": 2,
     "tok": 0
    },
    "gemini-3.5-flash-lite": {
-    "req": 27,
-    "tok": 1209717
+    "req": 32,
+    "tok": 1315244
+   },
+   "gemini-3.1-flash-lite": {
+    "req": 1,
+    "tok": 27723
+   }
+  },
+  "2026-11-18": {
+   "gemini-3.5-flash-lite": {
+    "req": 50,
+    "tok": 1763973
+   },
+   "gemini-3.1-flash-lite": {
+    "req": 2,
+    "tok": 112048
    }
   }
  },
  "tpm": [
   [
-   1794947935.2530599,
-   45088
+   1794990989.083455,
+   45152
   ],
   [
-   1794947956.985926,
-   44563
+   1794990995.583862,
+   45205
   ]
  ]
 }
