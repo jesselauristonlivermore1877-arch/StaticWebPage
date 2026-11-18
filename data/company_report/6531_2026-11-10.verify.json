@@ -2,7 +2,7 @@
  "file": "6531_2026-11-10.md",
  "code": "6531",
  "date": "2026-11-10",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "mcap",
+    "why": "數字檔 1191.0 億元，站上資料 1299.0283"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",

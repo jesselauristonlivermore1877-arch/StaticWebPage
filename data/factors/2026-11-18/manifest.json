@@ -1,22 +1,22 @@
 {
  "version": 1,
  "date": "2026-11-18",
- "built_at": "2026-11-18T14:34:49+08:00",
+ "built_at": "2026-11-18T16:18:41+08:00",
  "builder": "CustomerServiceANDSales/tools/factor_snapshot.py",
- "run": "44247155174",
+ "run": "44260704551",
  "rule": "只存當天看得到的值；回測一律用 tools/factor_pit.py load(date, factors) 讀，不讀現在的 docs/data。",
  "files": {
   "stocks.json.gz": {
-   "bytes": 124375,
-   "raw": 1081998,
-   "sha256": "bcc699dc6848bf9be2697641eb26afeb97bcae4bb18452857b5a308ee13f6bdd",
+   "bytes": 124424,
+   "raw": 1082016,
+   "sha256": "be77157fb5fad73c407678c7b76e56b33dcdf17c541c39a3115f5cfb8bd5dab2",
    "n_rows": 3353,
    "n_cols": 59
   },
   "sectors.json.gz": {
-   "bytes": 1872,
+   "bytes": 1865,
    "raw": 3660,
-   "sha256": "8c7dfd938505bde0e20aae70d20b2afac8cc5962d4d4932108fa9695c3d58ccc",
+   "sha256": "89a6e52245df0d2aa55b3eb24b3dffd34571fcad6f870d8de0164eb3eb4579fa",
    "n_rows": 27,
    "n_cols": 20
   }
@@ -111,8 +111,8 @@
    "name": "量化評分",
    "file": "data/web_data.json",
    "ok": true,
-   "bytes": 1564546,
-   "sha256": "f8caed903d4c5c6cca6bbdd0c5980864e1355c826076a5bea738f8426f060a02",
+   "bytes": 1580626,
+   "sha256": "d5466cfbd8a5595d267a2eb581fca8c481e963769f89438af0dce63b8cf77dc9",
    "asof": "2026-11-18",
    "cols": null,
    "n": 253,
@@ -122,8 +122,8 @@
    "name": "河流圖位階",
    "file": "docs/data/river.json",
    "ok": true,
-   "bytes": 595831,
-   "sha256": "598012668d5eddd0a8eb706787443475b9ee5fbef5eed79af7dc2711568d1e87",
+   "bytes": 595830,
+   "sha256": "69321520b09a14ccdd5df425d3bb36fdad2d89204f0c9a4914dc685e7eece693",
    "asof": "2026-11-17",
    "cols": null,
    "n": 253,
@@ -199,11 +199,11 @@
    "name": "AI研究報告",
    "file": "docs/data/company_reports.json",
    "ok": true,
-   "bytes": 3155541,
-   "sha256": "956736fe75ef635d931a3e5303392b198e9f2480b5d1abc226cacb1da6e19d3e",
+   "bytes": 3126177,
+   "sha256": "d6b2658bac270b414d0b314b57216799bede22df43bc0a628df030154e612fb6",
    "asof": "2026-11-18",
    "cols": null,
-   "n": 107,
+   "n": 106,
    "n_sec": 0
   }
  ]
