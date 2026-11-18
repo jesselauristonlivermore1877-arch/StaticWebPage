@@ -1,43 +1,6 @@
 {
- "dead": {
-  "2026-11-17": {
-   "gemini-3.7-flash": {
-    "at": "11-17 15:12",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-3.5-flash": {
-    "at": "11-17 15:12",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-omni-1.2-flash": {
-    "at": "11-17 15:12",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-omni-1.1-flash": {
-    "at": "11-17 15:12",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-flash-latest": {
-    "at": "11-17 15:12",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   },
-   "gemini-omni-flash-preview": {
-    "at": "11-17 15:14",
-    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
-   }
-  }
- },
+ "dead": {},
  "count": {
-  "2026-11-08": {
-   "gemini-3.5-flash-lite": {
-    "req": 100,
-    "tok": 256662
-   },
-   "gemini-3.1-flash-lite": {
-    "req": 3,
-    "tok": 6469
-   }
-  },
   "2026-11-09": {
    "gemini-3.5-flash-lite": {
     "req": 108,
@@ -298,24 +261,34 @@
     "tok": 0,
     "e429": 1
    }
+  },
+  "2026-11-18": {
+   "gemini-3.5-flash-lite": {
+    "req": 4,
+    "tok": 7700
+   },
+   "gemini-3.1-flash-lite": {
+    "req": 1,
+    "tok": 3192
+   }
   }
  },
  "tpm": [
   [
-   1794985830.3090656,
-   686
+   1794989452.4681256,
+   1677
   ],
   [
-   1794985844.999389,
-   3339
+   1794989466.0989673,
+   3278
   ],
   [
-   1794985849.7197988,
-   3091
+   1794989500.9884899,
+   3192
   ],
   [
-   1794985855.6747563,
-   2995
+   1794989504.7755048,
+   2745
   ]
  ]
 }
