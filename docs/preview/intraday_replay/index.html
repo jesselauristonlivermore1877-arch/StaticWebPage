@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>盤中復盤</title>
+<style>
+:root{--ir2-bg:#f6f5f1;--ir2-card:#fff;--ir2-ink:#1d1d1b;--ir2-ink2:#5c5b57;--ir2-line:#dcd9d0;--ir2-acc:#b0842f;--ir2-up:#c62828;--ir2-dn:#1b7f3b;--ir2-seg:#f1ede3;--ir2-sel:#f6e3b8;--ir2-ema:#7c3aed}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ir2-bg:#16171a;--ir2-card:#1f2125;--ir2-ink:#ecebe7;--ir2-ink2:#a4a29c;--ir2-line:#34363b;--ir2-acc:#d6a54a;--ir2-up:#ef5350;--ir2-dn:#4caf50;--ir2-seg:#26282d;--ir2-sel:#4a3f22;--ir2-ema:#b794f6}}
+:root[data-theme="dark"]{--ir2-bg:#16171a;--ir2-card:#1f2125;--ir2-ink:#ecebe7;--ir2-ink2:#a4a29c;--ir2-line:#34363b;--ir2-acc:#d6a54a;--ir2-up:#ef5350;--ir2-dn:#4caf50;--ir2-seg:#26282d;--ir2-sel:#4a3f22;--ir2-ema:#b794f6}
+body{margin:0;background:var(--ir2-bg);color:var(--ir2-ink);font:15px/1.6 system-ui,-apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.ir2-main{max-width:1100px;margin:0 auto;padding:18px 16px 50px}
+.ir2-h1{font-size:21px;margin:0 0 2px}
+.ir2-sub{color:var(--ir2-ink2);font-size:13px;margin:0 0 12px}
+.ir2-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 10px}
+.ir2-bar select,.ir2-bar input{font:inherit;padding:4px 8px;border:1px solid var(--ir2-line);border-radius:6px;background:var(--ir2-card);color:var(--ir2-ink)}
+.ir2-card{background:var(--ir2-card);border:1px solid var(--ir2-line);border-radius:10px;padding:12px 14px;margin:0 0 12px}
+.ir2-card h2{font-size:16px;margin:0 0 6px}
+.ir2-svg{width:100%;height:auto;display:block;touch-action:manipulation}
+.ir2-chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.ir2-chip{border:1px solid var(--ir2-line);background:var(--ir2-card);color:var(--ir2-ink);border-radius:999px;padding:3px 10px;font-size:13px;cursor:pointer;white-space:nowrap}
+.ir2-chip.on{background:var(--ir2-sel);border-color:var(--ir2-acc)}
+.ir2-chip .x{margin-left:4px;color:var(--ir2-ink2)}
+.ir2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.ir2-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.ir2-tbl th,.ir2-tbl td{padding:3px 4px;border-bottom:1px solid var(--ir2-line);text-align:right;white-space:nowrap}
+.ir2-tbl th:first-child,.ir2-tbl td:first-child{text-align:left;white-space:normal}
+.ir2-tbl tr.ir2-click{cursor:pointer}
+.ir2-tbl tr.ir2-click:hover{background:var(--ir2-seg)}
+.ir2-up{color:var(--ir2-up)} .ir2-dn{color:var(--ir2-dn)}
+.ir2-note{color:var(--ir2-ink2);font-size:12px;margin:6px 0 0}
+.ir2-foot{color:var(--ir2-ink2);font-size:12px;margin-top:18px;border-top:1px solid var(--ir2-line);padding-top:10px}
+.ir2-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--ir2-ink2);margin:4px 0 0}
+.ir2-legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:4px}
+.ir2-tblwrap{overflow-x:auto}
+</style></head>
+<body><main class="ir2-main">
+<h1 class="ir2-h1">盤中復盤：指數轉折段 × 族群／個股資金與價格</h1>
+<p class="ir2-sub">先看台指期當天被切成哪幾段，點一段看那段錢流進、流出哪些族群和個股、誰漲誰跌、有沒有一進一出的「蹺蹺板」；下方疊個股軌跡比強弱先後。</p>
+<div class="ir2-bar"><label>日期 <select id="ir2Day"></select></label><span id="ir2Info" class="ir2-sub" style="margin:0"></span></div>
+
+<section class="ir2-card">
+<h2>台指期 1 分走勢與轉折段</h2>
+<svg id="ir2Fut" class="ir2-svg" viewBox="0 0 1000 300" role="img" aria-label="台指期 1 分走勢"></svg>
+<div class="ir2-legend"><span><i style="background:var(--ir2-ink)"></i>台指期（近月 1 分收盤）</span><span><i style="background:var(--ir2-ema)"></i>1 分 EMA271</span><span>底色＝轉折段（點選）</span></div>
+<div id="ir2Segs" class="ir2-chips"></div>
+<p class="ir2-note" id="ir2FutNote"></p>
+</section>
+
+<section class="ir2-card">
+<h2 id="ir2SegTitle">段內資金與漲跌</h2>
+<div class="ir2-grid">
+<div class="ir2-tblwrap"><table class="ir2-tbl" id="ir2Gtop"></table></div>
+<div class="ir2-tblwrap"><table class="ir2-tbl" id="ir2Gbot"></table></div>
+<div class="ir2-tblwrap"><table class="ir2-tbl" id="ir2Stop"></table></div>
+<div class="ir2-tblwrap"><table class="ir2-tbl" id="ir2Sbot"></table></div>
+</div>
+<h2 style="margin-top:12px">蹺蹺板配對（同段一進一出、一強一弱）</h2>
+<div class="ir2-tblwrap"><table class="ir2-tbl" id="ir2Pairs"></table></div>
+<p class="ir2-note">淨買＝外盤成交金額減內盤（億元），段尾累計減段首前一分鐘累計；族群＝大類，漲跌取成員等權平均。蹺蹺板＝淨買前 10 名且漲幅高於全部中位 × 淨賣前 10 名且漲幅低於中位。點表格裡的個股可加到下方軌跡圖。</p>
+</section>
+
+<section class="ir2-card">
+<h2>個股軌跡（相對開盤 %）與 15 分 EMA23</h2>
+<div class="ir2-bar"><input id="ir2Add" list="ir2List" placeholder="輸入代號或名稱加入" style="min-width:200px"><datalist id="ir2List"></datalist><button class="ir2-chip" id="ir2Reset" type="button">重設成本段前 3 進／前 3 出＋台積電</button></div>
+<div id="ir2Pick" class="ir2-chips"></div>
+<svg id="ir2Stk" class="ir2-svg" viewBox="0 0 1000 320" role="img" aria-label="個股相對開盤報酬"></svg>
+<p class="ir2-note">實線＝相對當天第一筆成交價的漲跌；虛線＝同色 15 分 EMA23（每根 15 分K 收盤時的值，換成相對開盤 %）。實線變成一直線＝鎖漲跌停或那段沒成交。底色＝目前選的轉折段。</p>
+</section>
+
+<p class="ir2-note" id="ir2Check"></p>
+<div class="ir2-foot">資料：StaticWebPage data/intraday 盤中留底（權值 200 檔 1 分K、每分鐘外盤／內盤累計、breadth.csv 台指期）。程式：CustomerServiceANDSales research/seesaw/replay_build.py。量化整理，非投資建議。</div>
+</main>
+<script>
+(function(){
+var COLORS=["#2563eb","#d97706","#059669","#db2777","#7c3aed","#0891b2","#b45309","#4b5563","#dc2626","#65a30d"];
+var D=null, seg=0, picks=[];
+var $=function(id){return document.getElementById(id)};
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}
+function cls(v){return v>0?"ir2-up":(v<0?"ir2-dn":"")}
+function f2(v){return (v>0?"+":"")+v.toFixed(2)}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function nm(c){var s=D.stocks[c];return s?s.n:c}
+function load(day){
+  fetch("data/"+day+".json").then(function(r){return r.json()}).then(function(j){
+    D=j;seg=0;
+    var best=0;D.segs.forEach(function(s,i){if(Math.abs(s.fut)>Math.abs(D.segs[best].fut))best=i});seg=best;
+    var dl=$("ir2List");dl.innerHTML="";
+    Object.keys(D.stocks).forEach(function(c){var o=document.createElement("option");o.value=c+" "+D.stocks[c].n;dl.appendChild(o)});
+    $("ir2Info").textContent="轉折門檻：台指期反向 "+(D.zz*100).toFixed(1)+"%；共 "+D.segs.length+" 段";
+    $("ir2Check").textContent="核對：全日淨買 vs flow_final（"+D.check.full_n+" 檔）最大差 "+D.check.full_max+" 億；各段前 3 進／前 3 出淨買 vs flow_final 逐分累計（"+D.check.seg_n+" 筆）平均差 "+D.check.seg_mean+" 億、相對差中位 "+(D.check.seg_rel_med*100).toFixed(1)+"%（同一來源、分鐘內取樣秒數不同）。EMA271："+D.ema_src+"。";
+    resetPicks();render();
+  });
+}
+function resetPicks(){var s=D.segs[seg];picks=[];
+  s.stop.slice(0,3).forEach(function(r){picks.push(r[0])});s.sbot.slice(0,3).forEach(function(r){if(picks.indexOf(r[0])<0)picks.push(r[0])});
+  if(D.stocks["2330"]&&picks.indexOf("2330")<0)picks.unshift("2330");}
+function xy(n,W,H,pad){return function(i,v,lo,hi){return [pad.l+(W-pad.l-pad.r)*i/(n-1), pad.t+(H-pad.t-pad.b)*(1-(v-lo)/(hi-lo||1))]}}
+function axisT(svg,n,W,H,pad,ink2){var out="";for(var i=0;i<n;i++){var t=D.t[i];if(t.slice(3)=="00"||i==0){var x=pad.l+(W-pad.l-pad.r)*i/(n-1);out+='<line x1="'+x+'" x2="'+x+'" y1="'+pad.t+'" y2="'+(H-pad.b)+'" stroke="'+css("--ir2-line")+'" stroke-width="0.6"/><text x="'+x+'" y="'+(H-6)+'" font-size="12" text-anchor="middle" fill="'+ink2+'">'+t+'</text>'}}return out}
+function drawFut(){
+  var svg=$("ir2Fut"),W=1000,H=300,pad={l:56,r:10,t:14,b:24},n=D.t.length,ink=css("--ir2-ink"),ink2=css("--ir2-ink2");
+  var vals=D.fut.slice();if(D.ema)vals=vals.concat(D.ema);var lo=Math.min.apply(null,vals),hi=Math.max.apply(null,vals);var m=(hi-lo)*0.06;lo-=m;hi+=m;
+  var P=xy(n,W,H,pad),s="";
+  D.segs.forEach(function(g,k){var x0=P(Math.max(g.a-0.5,0),lo,lo,hi)[0],x1=P(Math.min(g.b+0.5,n-1),lo,lo,hi)[0];
+    s+='<rect data-seg="'+k+'" x="'+x0+'" y="'+pad.t+'" width="'+Math.max(x1-x0,1)+'" height="'+(H-pad.t-pad.b)+'" fill="'+(k==seg?css("--ir2-sel"):(k%2?css("--ir2-seg"):"transparent"))+'" style="cursor:pointer"/>'});
+  s+=axisT(svg,n,W,H,pad,ink2);
+  for(var q=0;q<=4;q++){var v=lo+(hi-lo)*q/4,y=P(0,v,lo,hi)[1];s+='<text x="'+(pad.l-4)+'" y="'+(y+4)+'" font-size="11" text-anchor="end" fill="'+ink2+'">'+Math.round(v)+'</text>'}
+  function path(a,col,dash){var d="";a.forEach(function(v,i){if(v==null)return;var p=P(i,v,lo,hi);d+=(d?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)});return '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="'+(dash?1.6:1.8)+'"'+(dash?' stroke-dasharray="5 4"':'')+' pointer-events="none"/>'}
+  if(D.ema)s+=path(D.ema,css("--ir2-ema"),true);
+  s+=path(D.fut,ink,false);
+  D.turns.forEach(function(i,k){if(k==0||k==D.turns.length-1)return;var p=P(i,D.fut[i],lo,hi),up=D.fut[i]>D.fut[D.turns[k-1]];
+    s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3.5" fill="'+(up?css("--ir2-up"):css("--ir2-dn"))+'" pointer-events="none"/><text x="'+p[0]+'" y="'+(up?p[1]-7:p[1]+15)+'" font-size="11" text-anchor="middle" fill="'+ink2+'" pointer-events="none">'+D.t[i]+'</text>'});
+  svg.innerHTML=s;
+  Array.prototype.forEach.call(svg.querySelectorAll("rect[data-seg]"),function(r){r.addEventListener("click",function(){pickSeg(+r.getAttribute("data-seg"))})});
+  var em=D.ema?D.ema:null;
+  $("ir2FutNote").textContent=em?("收盤 "+D.fut[n-1]+"，1 分 EMA271 "+Math.round(em[n-1])+"（"+(D.fut[n-1]>=em[n-1]?"線上":"線下")+"）"):"EMA271 算不出";
+}
+function drawSegs(){var h="";D.segs.forEach(function(g,k){h+='<button type="button" class="ir2-chip'+(k==seg?" on":"")+'" data-k="'+k+'">'+g.ta+'–'+g.tb+' <span class="'+cls(g.fut)+'">'+f2(g.fut)+'%</span></button>'});
+  $("ir2Segs").innerHTML=h;Array.prototype.forEach.call($("ir2Segs").children,function(b){b.addEventListener("click",function(){pickSeg(+b.getAttribute("data-k"))})});}
+function tbl(id,title,rows,kind){var h='<caption style="text-align:left;font-weight:700;padding-bottom:4px">'+title+'</caption><tr><th>'+(kind=="g"?"族群（檔數）":"個股")+'</th><th>淨買(億)</th><th>段內漲跌</th></tr>';
+  rows.forEach(function(r){if(kind=="g")h+='<tr><td>'+esc(r[0])+'（'+r[3]+'）</td><td class="'+cls(r[1])+'">'+f2(r[1])+'</td><td class="'+cls(r[2])+'">'+f2(r[2])+'%</td></tr>';
+    else h+='<tr class="ir2-click" data-c="'+r[0]+'"><td>'+r[0]+' '+esc(nm(r[0]))+'</td><td class="'+cls(r[1])+'">'+f2(r[1])+'</td><td class="'+cls(r[2])+'">'+f2(r[2])+'%</td></tr>'});
+  $(id).innerHTML=h;Array.prototype.forEach.call($(id).querySelectorAll("tr[data-c]"),function(tr){tr.addEventListener("click",function(){addPick(tr.getAttribute("data-c"))})});}
+function drawTables(){var g=D.segs[seg];
+  $("ir2SegTitle").innerHTML="段內資金與漲跌："+g.ta+"–"+g.tb+"（台指期 <span class=\""+cls(g.fut)+"\">"+f2(g.fut)+"%、"+(g.pts>0?"+":"")+g.pts+" 點</span>；200 檔漲跌中位 "+f2(g.med)+"%）";
+  tbl("ir2Gtop","族群淨買最多",g.gtop,"g");tbl("ir2Gbot","族群淨買最少",g.gbot,"g");tbl("ir2Stop","個股淨買最多",g.stop,"s");tbl("ir2Sbot","個股淨買最少",g.sbot,"s");
+  var h='<tr><th>進（淨買、漲幅高於中位）</th><th>出（淨賣、漲幅低於中位）</th><th>淨買差(億)</th><th>漲跌差</th></tr>';
+  if(!g.pairs.length)h+='<tr><td colspan="4" style="text-align:left">這段沒有符合條件的配對（錢跟價格同方向，不是一進一出）</td></tr>';
+  g.pairs.forEach(function(p){var a=g.stop.concat([]).filter(function(r){return r[0]==p[0]})[0],b=g.sbot.filter(function(r){return r[0]==p[1]})[0];
+    var rb=a?a[2]:null,ra=b?b[2]:null;
+    h+='<tr class="ir2-click" data-a="'+p[0]+'" data-b="'+p[1]+'"><td>'+p[0]+' '+esc(nm(p[0]))+(rb!=null?' <span class="'+cls(rb)+'">'+f2(rb)+'%</span>':'')+'</td><td>'+p[1]+' '+esc(nm(p[1]))+(ra!=null?' <span class="'+cls(ra)+'">'+f2(ra)+'%</span>':'')+'</td><td>'+p[2].toFixed(2)+'</td><td>'+(rb!=null&&ra!=null?f2(rb-ra)+'%':'')+'</td></tr>'});
+  $("ir2Pairs").innerHTML=h;Array.prototype.forEach.call($("ir2Pairs").querySelectorAll("tr[data-a]"),function(tr){tr.addEventListener("click",function(){picks=[tr.getAttribute("data-a"),tr.getAttribute("data-b")];if(D.stocks["2330"]&&picks.indexOf("2330")<0)picks.push("2330");drawStk()})});}
+function addPick(c){if(!D.stocks[c])return;if(picks.indexOf(c)<0){picks.push(c);if(picks.length>10)picks.shift()}drawStk()}
+function drawStk(){
+  var h="";picks.forEach(function(c,i){h+='<span class="ir2-chip" style="border-color:'+COLORS[i%10]+'"><b style="color:'+COLORS[i%10]+'">●</b> '+c+' '+esc(nm(c))+'<span class="x" data-c="'+c+'" role="button" aria-label="移除">✕</span></span>'});
+  $("ir2Pick").innerHTML=h;Array.prototype.forEach.call($("ir2Pick").querySelectorAll(".x"),function(x){x.addEventListener("click",function(){picks=picks.filter(function(c){return c!=x.getAttribute("data-c")});drawStk()})});
+  var svg=$("ir2Stk"),W=1000,H=320,pad={l:46,r:10,t:12,b:24},n=D.t.length,ink2=css("--ir2-ink2");
+  var all=[];picks.forEach(function(c){var s=D.stocks[c];s.r.forEach(function(v){if(v!=null)all.push(v)});s.e.forEach(function(e){all.push(e[1])})});
+  if(!all.length){svg.innerHTML="";return}
+  var lo=Math.min.apply(null,all.concat([0])),hi=Math.max.apply(null,all.concat([0]));var m=(hi-lo)*0.06||0.5;lo-=m;hi+=m;
+  var P=xy(n,W,H,pad),s="",g=D.segs[seg];
+  var x0=P(Math.max(g.a-0.5,0),0,lo,hi)[0],x1=P(Math.min(g.b+0.5,n-1),0,lo,hi)[0];
+  s+='<rect x="'+x0+'" y="'+pad.t+'" width="'+(x1-x0)+'" height="'+(H-pad.t-pad.b)+'" fill="'+css("--ir2-sel")+'" opacity="0.7"/>';
+  s+=axisT(svg,n,W,H,pad,ink2);
+  var y0=P(0,0,lo,hi)[1];s+='<line x1="'+pad.l+'" x2="'+(W-pad.r)+'" y1="'+y0+'" y2="'+y0+'" stroke="'+ink2+'" stroke-width="0.8"/>';
+  for(var q=0;q<=4;q++){var v=lo+(hi-lo)*q/4,y=P(0,v,lo,hi)[1];s+='<text x="'+(pad.l-4)+'" y="'+(y+4)+'" font-size="11" text-anchor="end" fill="'+ink2+'">'+v.toFixed(1)+'%</text>'}
+  picks.forEach(function(c,k){var st=D.stocks[c],col=COLORS[k%10],d="";
+    st.r.forEach(function(v,i){if(v==null)return;var p=P(i,v,lo,hi);d+=(d?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)});
+    s+='<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="1.7"/>';
+    var e="";st.e.forEach(function(q){var i=Math.min((q[0]+1)*15-1,n-1);var p=P(i,q[1],lo,hi);e+=(e?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)});
+    if(e)s+='<path d="'+e+'" fill="none" stroke="'+col+'" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.9"/>';
+    var last=null;for(var i=st.r.length-1;i>=0;i--){if(st.r[i]!=null){last=i;break}}
+    if(last!=null){var p=P(last,st.r[last],lo,hi);s+='<text x="'+Math.min(p[0]+2,W-40)+'" y="'+(p[1]-3)+'" font-size="11" fill="'+col+'">'+esc(nm(c)).slice(0,4)+'</text>'}});
+  svg.innerHTML=s;
+}
+function pickSeg(k){seg=k;resetPicks();render()}
+function render(){drawFut();drawSegs();drawTables();drawStk()}
+$("ir2Add").addEventListener("change",function(){var v=this.value.trim().split(/\s+/)[0];var c=D.stocks[v]?v:Object.keys(D.stocks).filter(function(k){return D.stocks[k].n.indexOf(v)>=0})[0];if(c)addPick(c);this.value=""});
+$("ir2Reset").addEventListener("click",function(){resetPicks();drawStk()});
+$("ir2Day").addEventListener("change",function(){load(this.value)});
+fetch("data/days.json").then(function(r){return r.json()}).then(function(days){var sel=$("ir2Day");days.slice().reverse().forEach(function(d){var o=document.createElement("option");o.value=o.textContent=d;sel.appendChild(o)});load(days[days.length-1])});
+if(window.matchMedia){var mq=window.matchMedia("(prefers-color-scheme: dark)");(mq.addEventListener?mq.addEventListener("change",function(){if(D)render()}):mq.addListener(function(){if(D)render()}))}
+})();
+</script>
+</body></html>
