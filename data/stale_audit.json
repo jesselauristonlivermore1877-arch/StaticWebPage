@@ -1,18 +1,17 @@
 {
- "asof": "2026-11-18 05:28",
+ "asof": "2026-11-18 14:34",
  "first_stale": {
-  "docs/data/pcf/00989A|主動 ETF 持股 00989A": "2026-11-18",
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-18"
  },
  "rows": [
   {
    "name": "庫藏股（日K／事件研究）",
    "path": "docs/data/buyback.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） buyback.py",
    "note": ""
@@ -32,11 +31,11 @@
   {
    "name": "主動 ETF 每日",
    "path": "docs/data/aetf_daily.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -80,11 +79,11 @@
   {
    "name": "處置股",
    "path": "docs/data/disposal.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -128,11 +127,11 @@
   {
    "name": "ETF 成本",
    "path": "docs/data/etf_cost.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -152,11 +151,11 @@
   {
    "name": "總經",
    "path": "docs/data/macro.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -164,11 +163,11 @@
   {
    "name": "股價營收比河流",
    "path": "docs/data/ps_river.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） ps_river.py",
    "note": ""
@@ -188,11 +187,11 @@
   {
    "name": "RRG 輪動",
    "path": "docs/data/rrg.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -212,11 +211,11 @@
   {
    "name": "個股日K",
    "path": "docs/data/stock_bars.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -248,11 +247,11 @@
   {
    "name": "資金軌跡",
    "path": "docs/data/trail.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -260,11 +259,11 @@
   {
    "name": "資金軌跡（流向）",
    "path": "docs/data/trail_flow.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -272,11 +271,11 @@
   {
    "name": "族群題材",
    "path": "docs/data/topic_industry.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -284,11 +283,11 @@
   {
    "name": "估值拆解",
    "path": "docs/data/val_decomp.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -296,11 +295,11 @@
   {
    "name": "權證",
    "path": "docs/data/warrant.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） warrant.py",
    "note": ""
@@ -320,11 +319,11 @@
   {
    "name": "財報公告",
    "path": "docs/data/releases.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -332,11 +331,11 @@
   {
    "name": "國安基金／限空令歷史",
    "path": "docs/data/nsf_history.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/nsf_history.py",
    "note": ""
@@ -344,11 +343,11 @@
   {
    "name": "即時信息流",
    "path": "docs/data/news_live.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 news_live.yml",
    "note": ""
@@ -356,11 +355,11 @@
   {
    "name": "國際指數",
    "path": "docs/data/world_idx.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 macro.yml（世界趨勢）＋daily.yml world_idx.py",
    "note": ""
@@ -392,11 +391,11 @@
   {
    "name": "13F 機構持股",
    "path": "docs/data/f13.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "q",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） thirteenf.py",
    "note": "季報；asof 是建置日"
@@ -404,11 +403,11 @@
   {
    "name": "AI 自由現金流（GEA AI FCF）",
    "path": "docs/data/fcf_ai.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 fcf_ai.bat",
    "note": ""
@@ -440,11 +439,11 @@
   {
    "name": "根因追蹤",
    "path": "docs/data/root_cause",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 root_cause.yml＋W 07:25 盤前班",
    "note": ""
@@ -464,11 +463,11 @@
   {
    "name": "新聞分類",
    "path": "data/macro_tags.json",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 macro_tags_daily",
    "note": ""
@@ -500,11 +499,11 @@
   {
    "name": "產業動向",
    "path": "data/industry_notes",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "ev",
    "allow": 5,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 ir_report_watch",
    "note": ""
@@ -512,11 +511,11 @@
   {
    "name": "世界趨勢日報",
    "path": "data/daily/gemini_daily_*.md",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "off",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 daily_news",
    "note": "11-15 總指揮裁示日報停掉（text_health 不再催）"
@@ -764,11 +763,11 @@
   {
    "name": "主動 ETF 持股 00986A",
    "path": "docs/data/pcf/00986A",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -800,23 +799,23 @@
   {
    "name": "主動 ETF 持股 00989A",
    "path": "docs/data/pcf/00989A",
-   "date": "2026-11-16",
+   "date": "2026-11-17",
    "freq": "td",
    "allow": 0,
-   "lag_td": 1,
-   "days": 2,
-   "stale": true,
+   "lag_td": 0,
+   "days": 1,
+   "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
   },
   {
    "name": "主動 ETF 持股 00990A",
    "path": "docs/data/pcf/00990A",
-   "date": "2026-11-16",
+   "date": "2026-11-17",
    "freq": "td",
    "allow": 2,
-   "lag_td": 1,
-   "days": 2,
+   "lag_td": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": "海外持股／美債：官網揭露本來就晚 2 個交易日"
@@ -942,6 +941,6 @@
    "note": "最後檢查 2026-11-17 22:55：正常 資料到 13:45"
   }
  ],
- "n_stale": 2,
- "tg_day": "2026-11-17"
+ "n_stale": 1,
+ "tg_day": "2026-11-18"
 }
