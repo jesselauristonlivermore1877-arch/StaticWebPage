@@ -1,22 +1,22 @@
 {
  "version": 1,
  "date": "2026-11-19",
- "built_at": "2026-11-19T16:42:43+08:00",
+ "built_at": "2026-11-19T19:25:26+08:00",
  "builder": "CustomerServiceANDSales/tools/factor_snapshot.py",
- "run": "44481414341",
+ "run": "44507825904",
  "rule": "只存當天看得到的值；回測一律用 tools/factor_pit.py load(date, factors) 讀，不讀現在的 docs/data。",
  "files": {
   "stocks.json.gz": {
-   "bytes": 124156,
-   "raw": 1081840,
-   "sha256": "fbffb3e100943b8de52c5c18fddc4edb0c1a18172547a6d61d22243ea7c47079",
+   "bytes": 123979,
+   "raw": 1081648,
+   "sha256": "fcf4fe174d40b621485eb1eff6be76efc9b3861204d970bb42fff1ce700b0265",
    "n_rows": 3353,
    "n_cols": 59
   },
   "sectors.json.gz": {
-   "bytes": 1849,
-   "raw": 3647,
-   "sha256": "110f6c213372f96721b78f96eb26e756f559cb4e90cbbe9c36b948997f96e85a",
+   "bytes": 1816,
+   "raw": 3606,
+   "sha256": "77bc3c05fb87e0b1175d23590714f50ad2d987ea64ba721b17767eeaf298f2cb",
    "n_rows": 27,
    "n_cols": 20
   }
@@ -111,8 +111,8 @@
    "name": "量化評分",
    "file": "data/web_data.json",
    "ok": true,
-   "bytes": 1600108,
-   "sha256": "7b11debfb0c20108e5e24dc236f77dd4802ce01f5087f0760948cbb94831e86d",
+   "bytes": 1577740,
+   "sha256": "186af847eed604a070f173690c45b9d802bb0d26ca16545344080cfd8359b1b1",
    "asof": "2026-11-19",
    "cols": null,
    "n": 253,
@@ -122,9 +122,9 @@
    "name": "河流圖位階",
    "file": "docs/data/river.json",
    "ok": true,
-   "bytes": 595761,
-   "sha256": "078493c83c0215aa0890bfe13a81b22503101beca1ce331ccc7cf311519ee38e",
-   "asof": "2026-11-18",
+   "bytes": 595894,
+   "sha256": "900622cc96d5d7ce695b369064cce3bd15f516c5211a99e7a0a7d18038971d03",
+   "asof": "2026-11-19",
    "cols": null,
    "n": 253,
    "n_sec": 27
