@@ -1,0 +1,240 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"美國商務部發布新規限制遠端存取先進半導體並收緊出口管制\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-19\",\n      \"who\": \"美國商務部\",\n      \"event\": \"美國商務部於聯邦公報發布「Addressing Remote Access to Advanced Semiconductors」規定，擴大對先進半導體遠端存取的限制與出口管制措施。\",\n      \"mechanism\": \"新規直接切斷並嚴格審查海外與中國實體取得美系先進運算晶片及遠端雲端算力資源的管道，引發市場對全球半導體硬體需求下滑與供應鏈重組的恐慌。\",\n      \"industry\": \"晶圓代工與製造\",\n      \"tw_link\": \"台灣AI供應鏈高度依賴美系晶片與全球算力需求，新規導致訂單不確定性大增，外資恐慌性拋售。\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"IC設計\",\n        \"伺服器與品牌組裝\",\n        \"矽晶圓與化合物半導體\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Addressing Remote Access\",\n        \"Advanced Semiconductors\",\n        \"Federal Register\",\n        \"遠端存取\",\n        \"先進半導體\",\n        \"輸出規制\",\n        \"遠隔アクセス\"\n      ],\n      \"evidence\": [\n        \"P882\",\n        \"D2\",\n        \"D3\",\n        \"D15\",\n        \"D56\",\n        \"D66\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"drill\": [\n        \"Addressing Remote Access to Advanced Semiconductors\",\n        \"US Commerce Department chip export controls\",\n        \"美國商務部 遠端存取 新規\",\n        \"米商務省 半導体 遠隔アクセス 規制\"\n      ]\n    },\n    {\n      \"title\": \"輝達執行長黃仁勳辭職風波與新平台遞延傳聞\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-19\",\n      \"who\": \"輝達董事會\",\n      \"event\": \"輝達董事會確認黃仁勳辭職且不回任，市場傳出Vera Rubin新平台延後放量。\",\n      \"mechanism\": \"AI指標股領導層動盪引發市場對AI基礎建設成長路徑的信心崩潰，導致高估值供應鏈遭到修正。\",\n      \"industry\": \"伺服器與品牌組裝\",\n      \"tw_link\": \"台灣AI供應鏈與輝達高度綁定，領導層不確定性導致市場對2027年AI資本支出預期下修。\",\n      \"tw_sectors\": [\n        \"伺服器與品牌組裝\",\n        \"封裝測試\",\n        \"散熱與液冷\",\n        \"載板與PCB\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Jensen Huang\",\n        \"Nvidia\",\n        \"resignation\",\n        \"Vera Rubin\",\n        \"黃仁勳\",\n        \"輝達\",\n        \"辭職\",\n        \"ジェンスン・ファン\",\n        \"エヌビディア\",\n        \"辞任\",\n        \"젠슨 황\",\n        \"엔비디아\",\n        \"사임\"\n      ],\n      \"evidence\": [\n        \"D90\",\n        \"D100\",\n        \"D104\",\n        \"D107\",\n        \"D125\",\n        \"D132\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"drill\": [\n        \"Jensen Huang resignation Nvidia\",\n        \"Vera Rubin delay\",\n        \"黃仁勳 辭職 輝達\",\n        \"ジェンスン・ファン 辞任 エヌビディア\",\n        \"젠슨 황 사임 엔비디아\"\n      ]\n    },\n    {\n      \"title\": \"國際銅價急跌破7個月新低\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-19\",\n      \"who\": \"倫敦金屬交易所\",\n      \"event\": \"倫敦金屬交易所（LME）期銅價格重挫摜破1.3萬美元，創下7個月新低。\",\n      \"mechanism\": \"銅價被視為AI資料中心與電力基礎建設的晴雨表，其暴跌加深市場對AI基礎建設需求放緩與資本支出緊縮的疑慮。\",\n      \"industry\": \"伺服器電源與儲能\",\n      \"tw_link\": \"銅價下跌直接衝擊AI電力基礎建設相關族群，引發原物料與電子零組件供應鏈拋售。\",\n      \"tw_sectors\": [\n        \"伺服器電源與儲能\",\n        \"網通與衛星\",\n        \"傳產石化\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Copper Prices\",\n        \"7-month low\",\n        \"AI infrastructure\",\n        \"銅價\",\n        \"7個月新低\",\n        \"AI基礎建設\"\n      ],\n      \"evidence\": [\n        \"D141\",\n        \"D143\",\n        \"D144\",\n        \"D145\",\n        \"D146\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\"\n      ],\n      \"drill\": [\n        \"Copper price plunge 7-month low\",\n        \"AI infrastructure copper demand\",\n        \"銅價 暴跌 AI需求\"\n      ]\n    },\n    {\n      \"title\": \"新台幣重貶加劇外資撤出與匯率避險賣壓\",\n      \"layer\": \"放大因素\",\n      \"event_date\": \"2026-11-19\",\n      \"who\": \"外資\",\n      \"event\": \"新台幣盤中重貶貶破33元關卡，創1.5年新低。\",\n      \"mechanism\": \"股匯雙殺形成流動性螺旋緊縮，外資在匯價貶值預期下加速調節台股權值股與高流動性ETF。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"外資匯出壓力導致權值股遭提款，加劇大盤跌勢。\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"新台幣\",\n        \"重貶\",\n        \"外資\",\n        \"匯率避險\",\n        \"流動性螺旋\",\n        \"股匯雙殺\"\n      ],\n      \"evidence\": [\n        \"P67\",\n        \"P354\",\n        \"P475\",\n        \"P239\"\n      ],\n      \"langs\": [\n        \"zh\"\n      ],\n      \"why_root\": \"匯率貶值是市場對基本面惡化與地緣政治風險的反應，放大並加速了資金撤離的力道。\",\n      \"drill\": [\n        \"新台幣 貶值 外資 賣超\",\n        \"台股 匯率 關聯\",\n        \"Taiwan dollar depreciation foreign outflow\"\n      ]\n    },\n    {\n      \"title\": \"金管會實施「限空令2.0」穩定股市\",\n      \"layer\": \"政策回應\",\n      \"event_date\": \"2026-11-19\",\n      \"who\": \"金管會\",\n      \"event\": \"金管會宣布當日收盤價跌幅達3.5%以上，次一交易日不得低於前一交易日收盤價放空，並調整每日盤中借券賣出委託數量。\",\n      \"mechanism\": \"主管機關限制放空及大幅限縮借券委託數量，以抑制空方槓桿交易與多殺多投機套利。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"試圖緩解市場超跌情緒並提供下檔支撐。\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"金管會\",\n        \"限空令\",\n        \"借券賣出\",\n        \"穩定股市\",\n        \"跌幅限制\"\n      ],\n      \"evidence\": [\n        \"P978\",\n        \"P5\",\n        \"P10\",\n        \"P330\"\n      ],\n      \"langs\": [\n        \"zh\"\n      ],\n      \"drill\": [\n        \"金管會 限空令 2.0\",\n        \"台股 穩定股市措施\",\n        \"FSC Taiwan short selling restriction\"\n      ]\n    }\n  ],\n  \"summary\": \"2026-11-19台股重挫主要受美國商務部發布先進半導體遠端存取限制新規、輝達執行長黃仁勳辭職風波及新平台遞延傳聞，以及國際銅價急跌影響，導致AI供應鏈基本面預期修正。隨後新台幣重貶引發外資匯出與流動性螺旋，金管會緊急祭出限空令2.0試圖穩定市場。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "美國商務部發布新規限制遠端存取先進半導體並收緊出口管制",
+    "layer": "根因",
+    "event_date": "2026-11-19",
+    "who": "美國商務部",
+    "event": "美國商務部於聯邦公報發布「Addressing Remote Access to Advanced Semiconductors」規定，擴大對先進半導體遠端存取的限制與出口管制措施。",
+    "mechanism": "新規直接切斷並嚴格審查海外與中國實體取得美系先進運算晶片及遠端雲端算力資源的管道，引發市場對全球半導體硬體需求下滑與供應鏈重組的恐慌。",
+    "industry": "晶圓代工與製造",
+    "tw_link": "台灣AI供應鏈高度依賴美系晶片與全球算力需求，新規導致訂單不確定性大增，外資恐慌性拋售。",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "IC設計",
+     "伺服器與品牌組裝",
+     "矽晶圓與化合物半導體"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Addressing Remote Access",
+     "Advanced Semiconductors",
+     "Federal Register",
+     "遠端存取",
+     "先進半導體",
+     "輸出規制",
+     "遠隔アクセス"
+    ],
+    "evidence": [
+     "P882",
+     "D2",
+     "D3",
+     "D15",
+     "D56",
+     "D66"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "drill": [
+     "Addressing Remote Access to Advanced Semiconductors",
+     "US Commerce Department chip export controls",
+     "美國商務部 遠端存取 新規",
+     "米商務省 半導体 遠隔アクセス 規制"
+    ]
+   },
+   {
+    "title": "輝達執行長黃仁勳辭職風波與新平台遞延傳聞",
+    "layer": "根因",
+    "event_date": "2026-11-19",
+    "who": "輝達董事會",
+    "event": "輝達董事會確認黃仁勳辭職且不回任，市場傳出Vera Rubin新平台延後放量。",
+    "mechanism": "AI指標股領導層動盪引發市場對AI基礎建設成長路徑的信心崩潰，導致高估值供應鏈遭到修正。",
+    "industry": "伺服器與品牌組裝",
+    "tw_link": "台灣AI供應鏈與輝達高度綁定，領導層不確定性導致市場對2027年AI資本支出預期下修。",
+    "tw_sectors": [
+     "伺服器與品牌組裝",
+     "封裝測試",
+     "散熱與液冷",
+     "載板與PCB"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Jensen Huang",
+     "Nvidia",
+     "resignation",
+     "Vera Rubin",
+     "黃仁勳",
+     "輝達",
+     "辭職",
+     "ジェンスン・ファン",
+     "エヌビディア",
+     "辞任",
+     "젠슨 황",
+     "엔비디아",
+     "사임"
+    ],
+    "evidence": [
+     "D90",
+     "D100",
+     "D104",
+     "D107",
+     "D125",
+     "D132"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "drill": [
+     "Jensen Huang resignation Nvidia",
+     "Vera Rubin delay",
+     "黃仁勳 辭職 輝達",
+     "ジェンスン・ファン 辞任 エヌビディア",
+     "젠슨 황 사임 엔비디아"
+    ]
+   },
+   {
+    "title": "國際銅價急跌破7個月新低",
+    "layer": "根因",
+    "event_date": "2026-11-19",
+    "who": "倫敦金屬交易所",
+    "event": "倫敦金屬交易所（LME）期銅價格重挫摜破1.3萬美元，創下7個月新低。",
+    "mechanism": "銅價被視為AI資料中心與電力基礎建設的晴雨表，其暴跌加深市場對AI基礎建設需求放緩與資本支出緊縮的疑慮。",
+    "industry": "伺服器電源與儲能",
+    "tw_link": "銅價下跌直接衝擊AI電力基礎建設相關族群，引發原物料與電子零組件供應鏈拋售。",
+    "tw_sectors": [
+     "伺服器電源與儲能",
+     "網通與衛星",
+     "傳產石化"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Copper Prices",
+     "7-month low",
+     "AI infrastructure",
+     "銅價",
+     "7個月新低",
+     "AI基礎建設"
+    ],
+    "evidence": [
+     "D141",
+     "D143",
+     "D144",
+     "D145",
+     "D146"
+    ],
+    "langs": [
+     "zh",
+     "en"
+    ],
+    "drill": [
+     "Copper price plunge 7-month low",
+     "AI infrastructure copper demand",
+     "銅價 暴跌 AI需求"
+    ]
+   },
+   {
+    "title": "新台幣重貶加劇外資撤出與匯率避險賣壓",
+    "layer": "放大因素",
+    "event_date": "2026-11-19",
+    "who": "外資",
+    "event": "新台幣盤中重貶貶破33元關卡，創1.5年新低。",
+    "mechanism": "股匯雙殺形成流動性螺旋緊縮，外資在匯價貶值預期下加速調節台股權值股與高流動性ETF。",
+    "industry": "全市場",
+    "tw_link": "外資匯出壓力導致權值股遭提款，加劇大盤跌勢。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "新台幣",
+     "重貶",
+     "外資",
+     "匯率避險",
+     "流動性螺旋",
+     "股匯雙殺"
+    ],
+    "evidence": [
+     "P67",
+     "P354",
+     "P475",
+     "P239"
+    ],
+    "langs": [
+     "zh"
+    ],
+    "why_root": "匯率貶值是市場對基本面惡化與地緣政治風險的反應，放大並加速了資金撤離的力道。",
+    "drill": [
+     "新台幣 貶值 外資 賣超",
+     "台股 匯率 關聯",
+     "Taiwan dollar depreciation foreign outflow"
+    ]
+   },
+   {
+    "title": "金管會實施「限空令2.0」穩定股市",
+    "layer": "政策回應",
+    "event_date": "2026-11-19",
+    "who": "金管會",
+    "event": "金管會宣布當日收盤價跌幅達3.5%以上，次一交易日不得低於前一交易日收盤價放空，並調整每日盤中借券賣出委託數量。",
+    "mechanism": "主管機關限制放空及大幅限縮借券委託數量，以抑制空方槓桿交易與多殺多投機套利。",
+    "industry": "全市場",
+    "tw_link": "試圖緩解市場超跌情緒並提供下檔支撐。",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "金管會",
+     "限空令",
+     "借券賣出",
+     "穩定股市",
+     "跌幅限制"
+    ],
+    "evidence": [
+     "P978",
+     "P5",
+     "P10",
+     "P330"
+    ],
+    "langs": [
+     "zh"
+    ],
+    "drill": [
+     "金管會 限空令 2.0",
+     "台股 穩定股市措施",
+     "FSC Taiwan short selling restriction"
+    ]
+   }
+  ],
+  "summary": "2026-11-19台股重挫主要受美國商務部發布先進半導體遠端存取限制新規、輝達執行長黃仁勳辭職風波及新平台遞延傳聞，以及國際銅價急跌影響，導致AI供應鏈基本面預期修正。隨後新台幣重貶引發外資匯出與流動性螺旋，金管會緊急祭出限空令2.0試圖穩定市場。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmp75z70qje.txt",
+  "附檔": [],
+  "耗時秒": 32.1,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.1-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 36546,
+   "prompt_tokens": 31533,
+   "output_tokens": 2247,
+   "thinking_tokens": 2766
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1119_synth2",
+  "ok": true
+ }
+}

@@ -1,17 +1,41 @@
 {
- "dead": {},
- "count": {
-  "2026-11-08": {
-   "gemini-2.5-flash": {
-    "req": 3,
-    "tok": 0
+ "dead": {
+  "2026-11-19": {
+   "gemini-3.7-flash": {
+    "at": "11-19 17:23",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    },
-   "gemini-3-flash-preview": {
-    "req": 2,
-    "tok": 128289,
-    "e429_web": 1
+   "gemini-3.5-flash": {
+    "at": "11-19 17:23",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
+   "gemini-omni-1.2-flash": {
+    "at": "11-19 17:23",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
+   "gemini-omni-1.1-flash": {
+    "at": "11-19 17:23",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
+   "gemini-3.8-flash": {
+    "at": "11-19 17:28",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
+   "gemini-3.6-flash": {
+    "at": "11-19 17:28",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
+   "gemini-flash-latest": {
+    "at": "11-19 17:28",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
+   },
+   "gemini-omni-flash-preview": {
+    "at": "11-19 17:28",
+    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
    }
-  },
+  }
+ },
+ "count": {
   "2026-11-09": {
    "gemini-2.5-flash": {
     "req": 3,
@@ -154,22 +178,77 @@
     "req": 2,
     "tok": 60514
    }
+  },
+  "2026-11-19": {
+   "gemini-3.8-flash": {
+    "req": 1,
+    "tok": 0,
+    "e429_web": 1,
+    "e429": 1
+   },
+   "gemini-3.7-flash": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-3.6-flash": {
+    "req": 1,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-3.5-flash": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-2.5-flash": {
+    "req": 2,
+    "tok": 0
+   },
+   "gemini-omni-1.2-flash": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-omni-1.1-flash": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-flash-latest": {
+    "req": 1,
+    "tok": 34709,
+    "e429": 1
+   },
+   "gemini-3-flash-preview": {
+    "req": 1,
+    "tok": 0
+   },
+   "gemini-omni-flash-preview": {
+    "req": 0,
+    "tok": 0,
+    "e429": 1
+   },
+   "gemini-3.5-flash-lite": {
+    "req": 1,
+    "tok": 0
+   },
+   "gemini-3.1-flash-lite": {
+    "req": 1,
+    "tok": 36546
+   }
   }
  },
  "tpm": [
   [
-   1795044492.1773427,
-   28527
-  ],
-  [
-   1795044499.725008,
-   31987
+   1795109346.4568834,
+   36546
   ]
  ],
  "search_dead": {
-  "2026-11-18": {
-   "at": "11-18 17:13",
-   "model": "gemini-3-flash-preview",
+  "2026-11-19": {
+   "at": "11-19 17:22",
+   "model": "gemini-3.8-flash",
    "why": "{ \"error\": { \"code\": 429, \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: "
   }
  }
