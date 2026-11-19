@@ -1,0 +1,147 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"空機構指控超微(AMD)涉及中國出口管制風險導致股價重挫\",\n      \"layer\": \"根因\",\n      \"event\": \"空機構Hunterbrook指控超微(AMD)與多個美國實體清單企業有關聯並面臨中國出口管制風險\",\n      \"mechanism\": \"引發市場對半導體供應鏈及 AI 晶片出口限制擴大的擔憂，拖動美股與台股半導體類股下挫\",\n      \"industry\": \"半導體\",\n      \"tw_link\": \"美股半導體與AMD重挫傳導至台股晶圓代工與製造、IC設計等族群\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"IC設計\",\n        \"矽晶圓與化合物半導體\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"AMD\",\n        \"Hunterbrook\",\n        \"超微\",\n        \"出口管制\",\n        \"輸出規制\"\n      ],\n      \"evidence\": [\n        \"P378\",\n        \"P560\",\n        \"P612\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"why_root\": \"具體事件直接衝擊半導體基本面與出口預期。\",\n      \"drill\": [\n        \"AMD short seller Hunterbrook China export controls\",\n        \"超微 沽空 中國 出口管制\",\n        \"AMD 空売り 中国 輸出規制\"\n      ]\n    },\n    {\n      \"title\": \"Anthropic上市未能提振市場信心並引發AI泡沫疑慮\",\n      \"layer\": \"根因\",\n      \"event\": \"Anthropic完成史上最大IPO但首日未能消弭市場對AI回報的疑慮，加上輝達財報後漲勢消退\",\n      \"mechanism\": \"投資人質疑AI巨額資本支出與實際獲利回收速度，引發全球科技股與AI概念股拋售潮\",\n      \"industry\": \"AI科技與半導體\",\n      \"tw_link\": \"美股科技巨頭與AI概念股重挫連動台股伺服器、封裝測試、光學等供應鏈\",\n      \"tw_sectors\": [\n        \"伺服器與品牌組裝\",\n        \"封裝測試\",\n        \"光學鏡頭與元件\",\n        \"散熱與液冷\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Anthropic\",\n        \"IPO\",\n        \"Nvidia\",\n        \"AI sentiment\",\n        \"Anthropic\",\n        \"上市\",\n        \"輝達\",\n        \"AI熱潮\",\n        \"アンソロピック\",\n        \"エヌビディア\",\n        \"앤트로픽\",\n        \"엔비디아\"\n      ],\n      \"evidence\": [\n        \"P191\",\n        \"P300\",\n        \"P545\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\",\n        \"ko\"\n      ],\n      \"why_root\": \"AI需求與評價面受到直接挑戰。\",\n      \"drill\": [\n        \"Anthropic IPO AI stock selloff\",\n        \"Anthropic 上場 AI株 下落\",\n        \"앤트로픽 상장 AI 증시\"\n      ]\n    },\n    {\n      \"title\": \"金管會宣布跌幅達3.5%以上次一交易日不得低於前一交易日收盤價放空等穩定措施\",\n      \"layer\": \"政策回應\",\n      \"event\": \"金管會針對台股大幅波動宣布祭出有條件禁空令與調整借券賣出委託數量等措施\",\n      \"mechanism\": \"透過限制平盤以下放空及調降借券賣出量來抑制恐慌性賣壓與追繳斷頭風險\",\n      \"industry\": \"金融市場\",\n      \"tw_link\": \"政策介入影響全市場交易機制，緩解賣壓並牽動台股後續流動性\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"金管會\",\n        \"限空令\",\n        \"平盤以下\",\n        \"借券賣出\",\n        \"FSC\",\n        \"short-selling\",\n        \"restrictions\"\n      ],\n      \"evidence\": [\n        \"P978\",\n        \"P5\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\"\n      ],\n      \"why_root\": \"針對台股大跌的直接主管機關政策回應。\",\n      \"drill\": [\n        \"金管會 限空令 禁空令\",\n        \"Taiwan FSC short selling restriction\"\n      ]\n    }\n  ],\n  \"summary\": \"昨晚美股Anthropic上市難救AI熱潮與超微出口管制疑慮引發科技股重挫，預期傳導到今天台股科技與半導體族群面臨龐大賣壓與修正壓力。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "空機構指控超微(AMD)涉及中國出口管制風險導致股價重挫",
+    "layer": "根因",
+    "event": "空機構Hunterbrook指控超微(AMD)與多個美國實體清單企業有關聯並面臨中國出口管制風險",
+    "mechanism": "引發市場對半導體供應鏈及 AI 晶片出口限制擴大的擔憂，拖動美股與台股半導體類股下挫",
+    "industry": "半導體",
+    "tw_link": "美股半導體與AMD重挫傳導至台股晶圓代工與製造、IC設計等族群",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "IC設計",
+     "矽晶圓與化合物半導體"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "AMD",
+     "Hunterbrook",
+     "超微",
+     "出口管制",
+     "輸出規制"
+    ],
+    "evidence": [
+     "P378",
+     "P560",
+     "P612"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "why_root": "具體事件直接衝擊半導體基本面與出口預期。",
+    "drill": [
+     "AMD short seller Hunterbrook China export controls",
+     "超微 沽空 中國 出口管制",
+     "AMD 空売り 中国 輸出規制"
+    ]
+   },
+   {
+    "title": "Anthropic上市未能提振市場信心並引發AI泡沫疑慮",
+    "layer": "根因",
+    "event": "Anthropic完成史上最大IPO但首日未能消弭市場對AI回報的疑慮，加上輝達財報後漲勢消退",
+    "mechanism": "投資人質疑AI巨額資本支出與實際獲利回收速度，引發全球科技股與AI概念股拋售潮",
+    "industry": "AI科技與半導體",
+    "tw_link": "美股科技巨頭與AI概念股重挫連動台股伺服器、封裝測試、光學等供應鏈",
+    "tw_sectors": [
+     "伺服器與品牌組裝",
+     "封裝測試",
+     "光學鏡頭與元件",
+     "散熱與液冷"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Anthropic",
+     "IPO",
+     "Nvidia",
+     "AI sentiment",
+     "Anthropic",
+     "上市",
+     "輝達",
+     "AI熱潮",
+     "アンソロピック",
+     "エヌビディア",
+     "앤트로픽",
+     "엔비디아"
+    ],
+    "evidence": [
+     "P191",
+     "P300",
+     "P545"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja",
+     "ko"
+    ],
+    "why_root": "AI需求與評價面受到直接挑戰。",
+    "drill": [
+     "Anthropic IPO AI stock selloff",
+     "Anthropic 上場 AI株 下落",
+     "앤트로픽 상장 AI 증시"
+    ]
+   },
+   {
+    "title": "金管會宣布跌幅達3.5%以上次一交易日不得低於前一交易日收盤價放空等穩定措施",
+    "layer": "政策回應",
+    "event": "金管會針對台股大幅波動宣布祭出有條件禁空令與調整借券賣出委託數量等措施",
+    "mechanism": "透過限制平盤以下放空及調降借券賣出量來抑制恐慌性賣壓與追繳斷頭風險",
+    "industry": "金融市場",
+    "tw_link": "政策介入影響全市場交易機制，緩解賣壓並牽動台股後續流動性",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "金管會",
+     "限空令",
+     "平盤以下",
+     "借券賣出",
+     "FSC",
+     "short-selling",
+     "restrictions"
+    ],
+    "evidence": [
+     "P978",
+     "P5"
+    ],
+    "langs": [
+     "zh",
+     "en"
+    ],
+    "why_root": "針對台股大跌的直接主管機關政策回應。",
+    "drill": [
+     "金管會 限空令 禁空令",
+     "Taiwan FSC short selling restriction"
+    ]
+   }
+  ],
+  "summary": "昨晚美股Anthropic上市難救AI熱潮與超微出口管制疑慮引發科技股重挫，預期傳導到今天台股科技與半導體族群面臨龐大賣壓與修正壓力。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmplq61l1fa.txt",
+  "附檔": [],
+  "耗時秒": 10.7,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.5-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 34834,
+   "prompt_tokens": 30933,
+   "output_tokens": 1208,
+   "thinking_tokens": 2693
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1120_synth1",
+  "ok": true
+ }
+}
