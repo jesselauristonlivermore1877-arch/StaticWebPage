@@ -1,0 +1,16 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>金管會二度限空 EDM（11-19 發布日才出；預覽）</title><style>
+body{margin:0;background:#EDE7DA;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#1B2A4A}
+.w{max-width:1120px;margin:0 auto;padding:16px}
+.n{font-size:15px;line-height:1.7;background:#fff;border:1px solid #DDD4BF;border-radius:10px;padding:12px 16px;margin-bottom:14px}
+.n ul{margin:4px 0 0;padding-left:20px}
+.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(520px,100%),1fr));gap:14px}
+.i{background:#fff;border:1px solid #DDD4BF;border-radius:10px;padding:10px;min-width:0}
+.i h2{font-size:17px;margin:2px 4px 8px}.i h2 a{font-size:13px;margin-left:8px;color:#8A6A2B}
+.i img{width:100%;height:auto;display:block;border-radius:8px}
+.c{font-size:13px;color:#6B6452;margin:6px 4px 0;overflow-wrap:anywhere}.c b.ok{color:#1E7B4F}.c b.ng{color:#C8361E}
+.c ul{margin:2px 0 0;padding-left:18px}
+</style></head><body><div class="w"><h1 style="font-size:22px">金管會二度限空 EDM（11-19 發布日才出；預覽）</h1>
+<div class="n"><b>要看的重點</b><ul><li>11-19 資料日那份 EDM 出「金管會二度限空」一張（第一次核對全過就凍結成 data/edm_frozen/short_2026-11-19.json，同一天重跑不重算）</li><li>11-20 起的資料日：這張不出；11-06 國安基金＋限空令四張也從 11-19 起不再出（快照留著、網站「政策干預」頁照常每天更新）</li><li>下面兩段是同一段程式分別用資料日 11-19、11-20 跑的實際輸出</li><li>措施原文：<a href="https://www.fsc.gov.tw/ch/home.jsp?id=96&parentpath=0,2&mcustomize=news_view.jsp&dataserno=202611190001&dtable=News">金管會 2026-11-19 新聞稿</a></li></ul></div><h3>資料日 2026-11-19：policy_cards 輸出 1 張</h3><pre style="white-space:pre-wrap">  · 政策事件 EDM nsf_2026-11-06：發布日 2026-11-06 ≠ 本份資料日 2026-11-19 → 不出（只在發布當天那份出一次；快照留著）
+  ✓ nsf_short2：卡上 44 個數字逐一用 Yahoo 重算比對</pre><h3>資料日 2026-11-20：policy_cards 輸出 0 張</h3><pre style="white-space:pre-wrap">  · 政策事件 EDM nsf_2026-11-06：發布日 2026-11-06 ≠ 本份資料日 2026-11-20 → 不出（只在發布當天那份出一次；快照留著）
+  · 政策事件 EDM short_2026-11-19：發布日 2026-11-19 ≠ 本份資料日 2026-11-20 → 不出（只在發布當天那份出一次；快照留著）</pre><div class="g"><div class="i"><h2>資料日 2026-11-19（發布日）那份 EDM：出這張<a href="nsf_short2.png" download>下載 PNG</a></h2><a href="nsf_short2.png"><img src="nsf_short2.png" alt="政策干預" loading="lazy"></a><div class="c"><b class="ok">核對通過</b>　卡上 44 個數字逐一用 Yahoo 重算比對<br>・同一段程式 nsf_edm.policy_cards（pick_edm 正式版也呼叫它）<br>・核對：卡上 44 個數字逐一用 Yahoo 重算比對</div></div></div></div></body></html>
