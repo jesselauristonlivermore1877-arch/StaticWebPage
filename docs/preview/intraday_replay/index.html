@@ -56,7 +56,7 @@ body{margin:0;background:var(--ir2-bg);color:var(--ir2-ink);font:15px/1.6 system
 <section class="ir2-card">
 <h2>台指期 1 分走勢與轉折段</h2>
 <svg id="ir2Fut" class="ir2-svg" viewBox="0 0 1000 300" role="img" aria-label="台指期 1 分走勢"></svg>
-<div class="ir2-legend"><span><i style="background:var(--ir2-ink)"></i>台指期（近月 1 分收盤）</span><span><i style="background:var(--ir2-ema)"></i>1 分 EMA271</span><span>底色＝轉折段（點選）</span></div>
+<div class="ir2-legend"><span><i style="background:var(--ir2-ink)"></i>台指期（近月 1 分收盤）</span><span><i style="background:var(--ir2-ema)"></i>1 分 EMA271（含夜盤）</span><span id="ir2LgDay" hidden><i style="background:var(--ir2-ink2)"></i>對照：只算日盤</span><span>底色＝轉折段（點選）</span></div>
 <div id="ir2Segs" class="ir2-chips"></div>
 <p class="ir2-note" id="ir2FutNote"></p>
 </section>
@@ -138,7 +138,7 @@ function drawW8(){var W=D.w8||[];$("ir2W8Card").hidden=!W.length;if(!W.length)re
   W.forEach(function(r){var d=r[3],tag=d==null?"":(Math.abs(d)<=0.5?' <span class="ir2-tag t1">在線附近</span>':(d>0.5?' <span class="ir2-tag t0">一直在線上</span>':' <span class="ir2-tag t2">跌穿</span>'));
     h+='<tr'+(D.stocks[r[0]]?' class="ir2-click" data-c="'+r[0]+'"':'')+'><td>'+esc(r[1])+tag+'</td><td>'+(r[2]||"")+'</td><td class="'+cls(d||0)+'">'+(d==null?"":f2(d))+'</td><td>'+(r[4]==null?"":f2(r[4])+'%')+'</td><td>'+esc(r[5]||"")+'</td><td class="'+cls(r[6]||0)+'">'+(r[6]==null?"":f2(r[6]))+'</td></tr>'});
   $("ir2W8").innerHTML=h;Array.prototype.forEach.call($("ir2W8").querySelectorAll("tr[data-c]"),function(tr){tr.addEventListener("click",function(){addPick(tr.getAttribute("data-c"))})});
-  var t=D.t271;$("ir2W8Note").textContent="離線＝當天高點之後的最低點減 15 分 EMA23（盤中當下看得到的那條），以 15 分 ATR 為單位；±0.5 內算「在線附近」。站回＝之後第一根 15 分K 收盤在線上。"+(t?" 台指期 1 分 EMA271："+t["碰線"]+" 第一次碰線，"+t["最低點"]+" 最低 "+Math.round(t["低點"])+"，離線 "+Math.round(t["距離點"])+" 點（"+t["距離ATR"].toFixed(1)+" 個 15 分 ATR）。":"");}
+  var t=D.t271;$("ir2W8Note").textContent="離線＝當天高點之後的最低點減 15 分 EMA23（盤中當下看得到的那條），以 15 分 ATR 為單位；±0.5 內算「在線附近」。站回＝之後第一根 15 分K 收盤在線上。"+(t?" 台指期 1 分 EMA271（這行是只算日盤口徑；上圖紫線是含夜盤）："+t["碰線"]+" 第一次碰線，"+t["最低點"]+" 最低 "+Math.round(t["低點"])+"，離線 "+Math.round(t["距離點"])+" 點（"+t["距離ATR"].toFixed(1)+" 個 15 分 ATR）。":"");}
 function resetPicks(){var s=D.segs[seg];picks=[];
   s.stop.slice(0,3).forEach(function(r){picks.push(r[0])});s.sbot.slice(0,3).forEach(function(r){if(picks.indexOf(r[0])<0)picks.push(r[0])});
   if(D.stocks["2330"]&&picks.indexOf("2330")<0)picks.unshift("2330");}
@@ -146,13 +146,14 @@ function xy(n,W,H,pad){return function(i,v,lo,hi){return [pad.l+(W-pad.l-pad.r)*
 function axisT(svg,n,W,H,pad,ink2){var out="";for(var i=0;i<n;i++){var t=D.t[i];if(t.slice(3)=="00"||i==0){var x=pad.l+(W-pad.l-pad.r)*i/(n-1);out+='<line x1="'+x+'" x2="'+x+'" y1="'+pad.t+'" y2="'+(H-pad.b)+'" stroke="'+css("--ir2-line")+'" stroke-width="0.6"/><text x="'+x+'" y="'+(H-6)+'" font-size="12" text-anchor="middle" fill="'+ink2+'">'+t+'</text>'}}return out}
 function drawFut(){
   var svg=$("ir2Fut"),W=1000,H=300,pad={l:56,r:10,t:14,b:24},n=D.t.length,ink=css("--ir2-ink"),ink2=css("--ir2-ink2");
-  var vals=D.fut.slice();if(D.ema)vals=vals.concat(D.ema);var lo=Math.min.apply(null,vals),hi=Math.max.apply(null,vals);var m=(hi-lo)*0.06;lo-=m;hi+=m;
+  var vals=D.fut.slice();if(D.ema)vals=vals.concat(D.ema);if(D.ema_day)vals=vals.concat(D.ema_day);$("ir2LgDay").hidden=!D.ema_day;var lo=Math.min.apply(null,vals),hi=Math.max.apply(null,vals);var m=(hi-lo)*0.06;lo-=m;hi+=m;
   var P=xy(n,W,H,pad),s="";
   D.segs.forEach(function(g,k){if(g.whole)return;var x0=P(Math.max(g.a-0.5,0),lo,lo,hi)[0],x1=P(Math.min(g.b+0.5,n-1),lo,lo,hi)[0];
     s+='<rect data-seg="'+k+'" x="'+x0+'" y="'+pad.t+'" width="'+Math.max(x1-x0,1)+'" height="'+(H-pad.t-pad.b)+'" fill="'+(k==seg?css("--ir2-sel"):(k%2?css("--ir2-seg"):"transparent"))+'" style="cursor:pointer"/>'});
   s+=axisT(svg,n,W,H,pad,ink2);
   for(var q=0;q<=4;q++){var v=lo+(hi-lo)*q/4,y=P(0,v,lo,hi)[1];s+='<text x="'+(pad.l-4)+'" y="'+(y+4)+'" font-size="11" text-anchor="end" fill="'+ink2+'">'+Math.round(v)+'</text>'}
   function path(a,col,dash){var d="";a.forEach(function(v,i){if(v==null)return;var p=P(i,v,lo,hi);d+=(d?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)});return '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="'+(dash?1.6:1.8)+'"'+(dash?' stroke-dasharray="5 4"':'')+' pointer-events="none"/>'}
+  if(D.ema_day)s+=path(D.ema_day,ink2,true).replace('stroke-dasharray="5 4"','stroke-dasharray="2 4" opacity="0.8"');
   if(D.ema)s+=path(D.ema,css("--ir2-ema"),true);
   s+=path(D.fut,ink,false);
   D.turns.forEach(function(i,k){if(k==0||k==D.turns.length-1)return;var p=P(i,D.fut[i],lo,hi),up=D.fut[i]>D.fut[D.turns[k-1]];
@@ -160,7 +161,7 @@ function drawFut(){
   svg.innerHTML=s;
   Array.prototype.forEach.call(svg.querySelectorAll("rect[data-seg]"),function(r){r.addEventListener("click",function(){pickSeg(+r.getAttribute("data-seg"))})});
   var em=D.ema?D.ema:null;
-  $("ir2FutNote").textContent=em?("收盤 "+D.fut[n-1]+"，1 分 EMA271 "+Math.round(em[n-1])+"（"+(D.fut[n-1]>=em[n-1]?"線上":"線下")+"）"):"EMA271 算不出";
+  $("ir2FutNote").textContent=em?("收盤 "+D.fut[n-1]+"，1 分 EMA271 "+Math.round(em[n-1])+"（"+(D.fut[n-1]>=em[n-1]?"線上":"線下")+"）"+(D.ema_day?"；只算日盤版 "+Math.round(D.ema_day[n-1]):"")):"EMA271 算不出";
 }
 function drawSegs(){var h="";var ord=D.segs.map(function(g,k){return k});ord.sort(function(a,b){return (D.segs[b].whole?1:0)-(D.segs[a].whole?1:0)||a-b});
   ord.forEach(function(k){var g=D.segs[k];h+='<button type="button" class="ir2-chip'+(k==seg?" on":"")+'" data-k="'+k+'">'+(g.whole?"全日":g.ta+'–'+g.tb)+' <span class="'+cls(g.fut)+'">'+f2(g.fut)+'%</span></button>'});
