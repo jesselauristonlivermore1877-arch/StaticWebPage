@@ -1,9 +1,23 @@
 {
- "checked_at": "2026-11-18T21:26:33.326Z",
+ "checked_at": "2026-11-19T06:41:28.910Z",
  "date": "2026-11-18",
- "n": 77,
- "n_bad": 0,
- "bad": {},
+ "n": 75,
+ "n_bad": 1,
+ "bad": {
+  "GEA_選股_主動ETF每日操作": {
+   "cat": "ETF",
+   "title": "主動式 ETF 每日操作",
+   "err": "",
+   "issues": [
+    {
+     "area": "整張卡",
+     "dir": "空",
+     "px": 0,
+     "why": "每個區塊都沒有內容（4 格都是空狀態）"
+    }
+   ]
+  }
+ },
  "js_errors": [],
  "chrome": "google-chrome",
  "no_cjk_font": false
