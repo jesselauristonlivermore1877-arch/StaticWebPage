@@ -1,0 +1,521 @@
+{
+ "file": "gemini_daily_2026-11-19.md",
+ "checked_at": "2026-11-19T00:03:44+00:00",
+ "offline": false,
+ "min_rate": 0.7,
+ "n": 28,
+ "summary": {
+  "通過": 27,
+  "失敗": 1,
+  "無法驗證": 0
+ },
+ "rate": 0.964,
+ "show": true,
+ "items": [
+  {
+   "id": "1.1",
+   "event": "美中俄領袖將展開歷史性三方峰會",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面含 DW.com、Trump",
+   "url": "https://www.dw.com/en/trump-kicks-off-asia-tour-ahead-of-major-talks-with-putin-xi-in-china/live-79964719",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "APEC summit: Xi, Trump and Putin gather in Shenzhen, China ‖ APEC summit: Xi, Trump and Putin gather in Shenzhen, China",
+   "keywords": [
+    "DW.com",
+    "Trump"
+   ],
+   "matched": [
+    "DW.com",
+    "Trump"
+   ],
+   "quotes": [],
+   "quote_found": null,
+   "text": "Trump kicks off Asia tour ahead of major talks with Putin, Xi in China（DW.com）"
+  },
+  {
+   "id": "1.2",
+   "event": "美中俄領袖將展開歷史性三方峰會",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.cnn.com/2026/11/17/world/video/putin-arrives-china-unprecedented-meeting-trump-and-xi-digvid-vrtc",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "Putin arrives in China for unprecedented meeting with Trump and Xi | CNN ‖ Putin arrives in China for unprecedented meeting with Trump and Xi \\n'+(null!=(t=p(e,\"if\").call(r,(p(e,\"compare\")||l&&p(l,\"compare\")||c).call(r,null!=l?p(l,\"componentVariation\"):l,\"===\",\"headline_underscored\",{name:\"compare\",hash:{},data:a,loc:{start:{line:41,column:10},end:{line:41,column:67}}}),{name:\"if\",hash:{},fn:n.program(10,a,0),inverse:n.program(11,a,0),data:a,loc:{start:{line:41,column:4}",
+   "keywords": [
+    "CNN",
+    "Trump"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "Putin arrives in China for unprecedented meeting with Trump and Xi（CNN）"
+  },
+  {
+   "id": "2.1",
+   "event": "美國10月零售銷售溫和成長",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://udn.com/news/story/6811/9885172",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "美零售增溫！10月銷售成長0.2% Fed鷹波變強 | 全球財經 | 全球 | 聯合新聞網 ‖ 美零售增溫！10月銷售成長0.2% Fed鷹波變強 美零售增溫！10月銷售成長0.2% Fed鷹波變強 | 聯合新聞網 美國10月整體零售銷售持續溫和成長，潛在需求指標更意外升抵8月以來新高，凸顯美國經濟維持正向動能，強化聯準會（Fed）12月升息的預期。對Fed利率最敏感的2年期公債殖利率，以及基準的10年期公債殖利率，17日同步上揚。 美國10月整體零售銷售持續溫和成長，潛在需求指標更意外升抵8月以來新高，凸顯美國經濟維持正向動能，強化聯準會（Fed）12月升息的預期。對Fed利率最敏感的2年期公債殖利率，以及基準的10年期公債殖利率，17日同步上揚。 美零售增溫！10月銷售成長0.2% Fed鷹波變強 | 聯合新聞網",
+   "keywords": [
+    "UDN"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "美零售增溫！10月銷售成長0.2% Fed鷹波變強| 全球財經| 全球（UDN）"
+  },
+  {
+   "id": "2.2",
+   "event": "美國10月零售銷售溫和成長",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.fxstreet.hk/news/ling-shou-xiao-shou-ji-zeng-hou-mei-yuan-zhi-shu-cong-19ge-yue-gao-dian-hui-luo-202611171824",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "零售銷售激增後，美元指數從19個月高點回落 ‖ 零售銷售激增後，美元指數從19個月高點回落 美元指數（DXY）創下的19個月新高未能保持到下一項數據公布前，該指數週二有望終結連續五個交易日的漲勢。 零售銷售激增後，美元指數從19個月高點回落 | FXStreet 美元指數（DXY）創下的19個月新高未能保持到下一項數據公布前，該指數週二有望終結連續五個交易日的漲勢。 零售銷售激增後，美元指數從19個月高點回落 | FXStreet",
+   "keywords": [
+    "FXStreet"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "零售銷售激增後，美元指數從19個月高點回落（FXStreet）"
+  },
+  {
+   "id": "3.1",
+   "event": "美債殖利率高檔逼近歷史紀錄",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://finance.biggo.com.tw/news/2c539a44-8b31-4aea-ab87-84d0dfef5f01",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "美國10年期公債殖利率突破5%天數達27日，逼近2007年紀錄，聯準會續升息預期拉長高利率環境 — BigGo 財經 ‖ 美國10年期公債殖利率突破5%天數達27日，逼近2007年紀錄，聯準會續升息預期拉長高利率環境 美國10年期公債殖利率收在5%以上的天數在2026年將達27日，逼近2007年創下的29日紀錄。10月美國消費者物價指數超出市場預期，使聯準會進一步升息的預期升溫，12月… 美國10年期公債殖利率突破5%天數達27日，逼近2007年紀錄，聯準會續升息預期拉長高利率環境 — BigGo 財經 美國10年期公債殖利率收在5%以上的天數在2026年將達27日，逼近2007年創下的29日紀錄。10月美國消費者物價指數超出市場預期，使聯準會進一步升息的預期升溫，12月… 美國10年期公債殖利率突破5%天數達27日，逼近2007年紀錄，聯準會續升息預期拉長高利率環境 — BigGo 財經",
+   "keywords": [
+    "FOMC",
+    "Fed ",
+    "Federal Reserve",
+    "yield"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "美國10年期公債殖利率突破5%天數達27日，逼近2007年紀錄，聯準會續升息預期拉長高利率環境（BigGo 財經）"
+  },
+  {
+   "id": "3.2",
+   "event": "美債殖利率高檔逼近歷史紀錄",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://hk.finance.yahoo.com/news/%E7%BE%8E%E5%9C%8B10%E5%B9%B4%E6%9C%9F%E5%9C%8B%E5%82%B5%E6%AE%96%E5%88%A9%E7%8E%87%E4%BB%8A%E5%B9%B4%E4%BB%A5%E4%BE%86%E7%B6%AD%E6%8C%81%E5%9C%A85-%E4%BB%A5%E4%B8%8A%E7%9A%84%E5%A4%A9%E6%95%B8%E9%80%BC%E8%BF%912007%E5%B9%B4%E7%9A%84%E7%B4%80%E9%8C%84-160455200.html",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "美國10年期國債殖利率今年以來維持在5%以上的天數逼近2007年的紀錄 ‖ 美國10年期國債殖利率今年以來維持在5%以上的天數逼近2007年的紀錄 【彭博】-- 隨著投資者押注聯儲會將在通膨持續高企之際進一步加息，美國10年期國債殖利率位於5%以上的時間正在接近近20年以來的最長。美國借貸成本的這一基準，今年勢將第27個交易日收於5%以上，距離2007年錄得的29個交易日僅一步之遙。美國10月零售銷售增速放緩後，10年期國債殖利率上漲約1個基點，至5.14%。殖利率面臨上行壓力，此前10月通膨高於預期，迫使聯儲會決策者開始考慮比此前預期更為激進的貨幣政策收緊路徑。交易員目前已完全計入聯儲會在12月9日會議上加息25個基點的可能性，並預計到2027年9月累計收緊幅度將超過80個基點；而在上周之前，市場預期約為50個基點。摩根資產管理投資組合經理Priya Misra表示，殖利率重新升至5%以上，反映出「圍繞聯儲會不確定性所帶來的風險溢價」。她還表示，經濟保持韌性，以",
+   "keywords": [
+    "yield"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "美國10年期國債殖利率今年以來維持在5%以上的天數逼近2007年的紀錄（Yahoo 財經）"
+  },
+  {
+   "id": "4.1",
+   "event": "黃仁勳表態願回鍋 輝達董事會拒絕",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://tw.stock.yahoo.com/news/%E3%80%8C%E8%BC%9D%E9%81%94%E6%98%AF%E6%88%91%E7%95%A2%E7%94%9F%E5%BF%83%E8%A1%80%E3%80%8D%E9%BB%83%E4%BB%81%E5%8B%B3%E6%89%93%E7%A0%B4%E6%B2%89%E9%BB%98-%E8%8B%A5%E8%91%A3%E4%BA%8B%E6%9C%83%E5%90%8C%E6%84%8F%E9%A1%98%E5%9B%9E%E9%8D%8B%E6%93%94%E4%BB%BBceo-164236299.html",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "「輝達是我畢生心血」黃仁勳打破沉默 若董事會同意願回鍋擔任CEO ‖ 「輝達是我畢生心血」黃仁勳打破沉默 若董事會同意願回鍋擔任CEO 輝達（NVIDIA）前執行長黃仁勳卸任後首度公開發聲，坦承在個人生活中犯下嚴重錯誤，對造成董事會困擾深感懊悔，並承諾配合獨立調查。他強調，「輝達是我畢生的心血」，離任後持續收到員工、投資人、商業夥伴及客戶呼籲回歸的聲音，若董事會認定符合股東、員工、公司及美國的最佳利益，他願意重新擔任執行長。 「輝達是我畢生心血」黃仁勳打破沉默 若董事會同意願回鍋擔任CEO 輝達（NVIDIA）前執行長黃仁勳卸任後首度公開發聲，坦承在個人生活中犯下嚴重錯誤，對造成董事會困擾深感懊悔，並承諾配合獨立調查。他強調，「輝達是我畢生的心血」，離任後持續收到員工、投資人、商業夥伴及客戶呼籲回歸的聲音，若董事會認定符合股東、員工、公司及美國的最佳利益，他願意重新擔任執行長。 「輝達是我畢生心血」黃仁勳打破沉默 若董事會同意願回鍋擔任CEO",
+   "keywords": [
+    "Huang",
+    "Jensen Huang",
+    "NVIDIA",
+    "Nvidia"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "「輝達是我畢生心血」黃仁勳打破沉默 若董事會同意願回鍋擔任CEO（Yahoo股市）"
+  },
+  {
+   "id": "4.2",
+   "event": "黃仁勳表態願回鍋 輝達董事會拒絕",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://tw.stock.yahoo.com/news/%E8%B2%A1%E5%A0%B1-%E8%BC%9D%E9%81%94q3%E8%B6%85%E9%A0%90%E6%9C%9F%E8%B2%A1%E6%B8%AC%E5%BC%B7%E7%9B%A4%E5%BE%8C%E8%B5%B0%E6%8F%9A-%E8%91%A3%E4%BA%8B%E6%9C%83%E7%84%A1%E6%84%8F%E8%AE%93%E9%BB%83%E4%BB%81%E5%8B%B3%E5%9B%9E%E4%BB%BB-221742211.html",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "〈財報〉輝達Q3超預期財測強盤後走揚 董事會無意讓黃仁勳回任 ‖ 〈財報〉輝達Q3超預期財測強盤後走揚 董事會無意讓黃仁勳回任 輝達Q3營收1158.4億美元、EPS 2.68美元雙雙優於預期，資料中心營收1076億美元年增110%。 公司估Q4營收1300億美元、上下浮動3%，且財測未納入任何中國資料中心業務收入。 董事會稱無意讓黃仁勳回任執行長；股價盤後漲約2%，但中國禁令與AI放緩疑慮壓抑股價。 〈財報〉輝達Q3超預期財測強盤後走揚 董事會無意讓黃仁勳回任 輝達Q3營收1158.4億美元、EPS 2.68美元雙雙優於預期，資料中心營收1076億美元年增110%。 公司估Q4營收1300億美元、上下浮動3%，且財測未納入任何中國資料中心業務收入。 董事會稱無意讓黃仁勳回任執行長；股價盤後漲約2%，但中國禁令與AI放緩疑慮壓抑股價。 〈財報〉輝達Q3超預期財測強盤後走揚 董事會無意讓黃仁勳回任",
+   "keywords": [
+    "Huang",
+    "Jensen Huang",
+    "NVIDIA",
+    "Nvidia"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "〈財報〉輝達Q3超預期財測強盤後走揚 董事會無意讓黃仁勳回任（Yahoo股市）"
+  },
+  {
+   "id": "5.1",
+   "event": "美伊持續交火 布蘭特原油站上高價",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（74%）",
+   "url": "https://www.cnn.com/2026/11/17/politics/us-iran-self-defense-strikes",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "Iran widens Gulf attacks after US strikes missile launch site | CNN Politics ‖ Iran widens Gulf attacks after US strikes missile launch site \\n'+(null!=(t=p(e,\"if\").call(r,(p(e,\"compare\")||l&&p(l,\"compare\")||c).call(r,null!=l?p(l,\"componentVariation\"):l,\"===\",\"headline_underscored\",{name:\"compare\",hash:{},data:a,loc:{start:{line:41,column:10},end:{line:41,column:67}}}),{name:\"if\",hash:{},fn:n.program(10,a,0),inverse:n.program(11,a,0),data:a,loc:{start:{line:41,column:4},end:",
+   "keywords": [
+    "CNN"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "US carries out ‘self-defense’ strikes on Iranian missile launch site（CNN）"
+  },
+  {
+   "id": "5.2",
+   "event": "美伊持續交火 布蘭特原油站上高價",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=d293cf59-20ae-44d4-8fb6-7e15ac2db18a",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "《油價》美伊再度交火 布蘭特原油站上93美元 - MoneyDJ理財網 ‖ 《油價》美伊再度交火 布蘭特原油站上93美元  《油價》美伊再度交火 布蘭特原油站上93美元。 MoneyDJ新聞 2026-11-18 07:59:39 李彥瑾 發佈中東地緣政治緊張情勢持續升溫，加上市場預期美國原油庫存將下降，帶動國際油價17日 《油價》美伊再度交火 布蘭特原油站上93美元-MoneyDJ理財網 中東地緣政治緊張情勢持續升溫，加上市場預期美國原油庫存將下降，帶動國際油價17日反彈收高。不過，國際能源總署（IEA）預估全球石油供給將重返過剩局面，限制油價漲幅。 路透社報導，歐洲ICE期貨交易所（ICE Futures...",
+   "keywords": [
+    "MoneyDJ"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "《油價》美伊再度交火 布蘭特原油站上93美元（MoneyDJ）"
+  },
+  {
+   "id": "6.1",
+   "event": "美國祭出AI晶片新規與出口管制",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.ctee.com.tw/news/20261118700080-439901",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "BIS強化AI晶片管制》全球半導體大震撼！美國大刀衝擊 台廠怎麼看？ - 日報 - 工商時報 ‖ BIS強化AI晶片管制》全球半導體大震撼！美國大刀衝擊 台廠怎麼看？ BIS強化AI晶片管制》全球半導體大震撼！美國大刀衝擊 台廠怎麼看？ 美國商務部工業暨安全局（BIS）出重拳，擴大先進AI晶片與海外遠端算力管制，並進一步收緊晶圓代工與封測廠的豁免門檻，震撼全球半導體供應鏈，對此，台積電17日表示，正評估研議新規，將遵循適用法令。 經濟部強調，持續與美方交換意見、共同防堵違規轉運，並與產業合作關注美國出口管制法規調整。經濟部指出，美國... 美國商務部工業暨安全局（BIS）出重拳，擴大先進AI晶片與海外遠端算力管制，並進一步收緊晶圓代工與封測廠的豁免門檻，震撼全球半導體供應鏈，對此，台積電17日表示，正評估研議新規，將遵循適用法令。 經濟部強調，持續與美方交換意見、共同防堵違規轉運，並與產業合作關注美國出口管制法規調整。經濟部指出，美國...",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "BIS強化AI晶片管制》全球半導體大震撼！美國大刀衝擊 台廠怎麼看？（工商時報）"
+  },
+  {
+   "id": "6.2",
+   "event": "美國祭出AI晶片新規與出口管制",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://casrai.org/news/us-ai-chip-export-rule-5-countries-90-days",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "US AI Chip Export Rule: 5 Countries, 90 Days — CASRAI ‖ US AI Chip Export Rule: 5 Countries, 90 Days New US chip export rule impacts research procurement in 5 countries including Thailand, Singapore, and Indonesia, with 90-day compliance requirements. US AI Chip Export Rule: 5 Countries, 90 Days — CASRAI New US chip export rule impacts research procurement in 5 countries including Thailand, Singapore, and Indonesia, with 90-day compliance requirements.",
+   "keywords": [
+    "CASRAI"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "US AI Chip Export Rule: 5 Countries, 90 Days（CASRAI）"
+  },
+  {
+   "id": "7.1",
+   "event": "波克夏公布最新持倉 調整科技股佈局",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.ctee.com.tw/news/20261118700177-439901",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "不再加碼Alphabet！波克夏 Q3狂買房產、航空股 - 日報 - 工商時報 ‖ 不再加碼Alphabet！波克夏 Q3狂買房產、航空股 不再加碼Alphabet！波克夏 Q3狂買房產、航空股 根據波克夏向美國證券交易委員會（SEC）提交的2026年第三季13F文件，公司持續加碼美國房屋建築商Lennar及達美航空，金融股則成為減碼重點，至於曾連兩季大舉買進的Alphabet，第三季則暫停加碼。 持股申報顯示，波克夏第三季持有的Lennar A類股從第二季末的1,311.17萬股增加至2,... 根據波克夏向美國證券交易委員會（SEC）提交的2026年第三季13F文件，公司持續加碼美國房屋建築商Lennar及達美航空，金融股則成為減碼重點，至於曾連兩季大舉買進的Alphabet，第三季則暫停加碼。 持股申報顯示，波克夏第三季持有的Lennar A類股從第二季末的1,311.17萬股增加至2,...",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "不再加碼Alphabet！波克夏Q3狂買房產、航空股- 日報（工商時報）"
+  },
+  {
+   "id": "7.2",
+   "event": "波克夏公布最新持倉 調整科技股佈局",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://money.udn.com/money/amp/story/123398/9885181",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "波克夏大買庫藏股、加碼航空股... 股東仍看不懂亞伯投資風格 | 美股動態 | 國際 | 經濟日報 ‖ 波克夏大買庫藏股、加碼航空股... 股東仍看不懂亞伯投資風格 波克夏大買庫藏股、加碼航空股... 股東仍看不懂亞伯投資風格 曾由「股神」巴菲特執掌的波克夏（Berkshire Hathaway）揭露最新持股狀況！該公司第3季加碼達美航空與美國住宅建商、持續減碼金融股，並砸下創紀錄的約96億美元，買回自家股票。不過，現金部位仍增至3,774億美元，新任執行長亞伯（Greg Abel）如何運用這筆巨款，備受關注。",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "波克夏大買庫藏股、加碼航空股... 股東仍看不懂亞伯投資風格（經濟日報）"
+  },
+  {
+   "id": "8.1",
+   "event": "央行力守關卡 新台幣匯率重貶暫收",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://ww2.money-link.com.tw/realtimenews/NewsContent.aspx?SN=2447138002&PU=0009",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "國內匯市：新台幣匯率中午以32.988元暫收，重貶1.38角_富聯網 ‖ 證期權 ETF MONEY-LINK 富聯網首創「看懂財經、解讀資訊」，幫助投資人看懂、讀懂、聽懂全球股市/債市/匯市財經訊息，係台灣最大財經軟體資訊商精誠資訊旗下唯一開放式資訊平台。",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "國內匯市：新台幣匯率中午以32.988元暫收，重貶1.38角（富聯網）"
+  },
+  {
+   "id": "8.2",
+   "event": "央行力守關卡 新台幣匯率重貶暫收",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://udn.com/news/story/7238/9885116",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "央行力守33關卡！台幣逆勢走高 17日收32.85元全日最高價 | 財經焦點 | 產經 | 聯合新聞網 ‖ 央行力守33關卡！台幣逆勢走高 17日收32.85元全日最高價 央行力守33關卡！台幣逆勢走高 17日收32.85元全日最高價 | 聯合新聞網 外資持續賣超台股，新台幣匯率卻出現反轉，外資昨（17）日賣超台股380.9億元，不過，新台幣兌美元匯率並未跟著走貶，反而在午後出現外資匯入，終場以32.85元、當日最高價作收，升值3.6分，成交金額達38億美元。 外資持續賣超台股，新台幣匯率卻出現反轉，外資昨（17）日賣超台股380.9億元，不過，新台幣兌美元匯率並未跟著走貶，反而在午後出現外資匯入，終場以32.85元、當日最高價作收，升值3.6分，成交金額達38億美元。 央行力守33關卡！台幣逆勢走高 17日收32.85元全日最高價 | 聯合新聞網",
+   "keywords": [
+    "UDN"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "央行力守33關卡！台幣逆勢走高 17日收32.85元全日最高價（UDN）"
+  },
+  {
+   "id": "9.1",
+   "event": "中國人行調升美元兌人民幣中間價",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.fxstreet.hk/news/zhong-guo-ren-min-yin-xing-jiang-mei-yuan-ren-min-bi-zhong-jian-jia-she-ding-wei-67118-qian-zhi-wei-67132-202611180116",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "中國人民銀行將美元/人民幣中間價設定為6.7118，前值為6.7132 ‖ 中國人民銀行將美元/人民幣中間價設定為6.7118，前值為6.7132 週三，中國人民銀行（PBOC）將下一交易時段美元/人民幣中間價設定為6.7118，前一交易日中間價為6.7132，路透預估為6.6654】【。 中國人民銀行將美元/人民幣中間價設定為6.7118，前值為6.7132 | FXStreet 週三，中國人民銀行（PBOC）將下一交易時段美元/人民幣中間價設定為6.7118，前一交易日中間價為6.7132，路透預估為6.6654】【。 中國人民銀行將美元/人民幣中間價設定為6.7118，前值為6.7132 | FXStreet",
+   "keywords": [
+    "FXStreet"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "中國人民銀行將美元/人民幣中間價設定為6.7118，前值為6.7132（FXStreet）"
+  },
+  {
+   "id": "9.2",
+   "event": "中國人行調升美元兌人民幣中間價",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.tradingview.com/news/binance_news:b95321b86094b:0-pboc-raises-yuan-reference-rate-to-strongest-since-2022/",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "PBOC Raises Yuan Reference Rate to Strongest Since 2022 — TradingView News ‖ PBOC Raises Yuan Reference Rate to Strongest Since 2022 According to Bloomberg, China’s central bank raised its daily yuan reference rate to its strongest level since 2022, signaling a willingness to allow further gradual appreciation. PBOC Raises Yuan Reference Rate to Strongest Since 2022 According to Bloomberg, China’s central bank raised its daily yuan reference rate to its strongest level sin",
+   "keywords": [
+    "TradingView"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "PBOC Raises Yuan Reference Rate to Strongest Since 2022（TradingView）"
+  },
+  {
+   "id": "10.1",
+   "event": "日銀總裁植田和男重申將繼續加息",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.tradingview.com/news/binance_news:e739b4c92094b:0-kazuo-ueda-says-bank-of-japan-will-continue-rate-hikes-based-on-economic-and-price-conditions/",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "Kazuo Ueda Says Bank of Japan Will Continue Rate Hikes Based on Economic and Price Conditions — TradingView News ‖ Kazuo Ueda Says Bank of Japan Will Continue Rate Hikes Based on Economic and Price Conditions According to ChainCatcher, Bank of Japan Governor Kazuo Ueda said the central bank will continue raising its policy rate based on developments in the economy, prices and financial conditions. Kazuo Ueda Says Bank of Japan Will Continue Rate Hikes Based on Economic and Price Conditions According to ChainCa",
+   "keywords": [
+    "TradingView"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "Kazuo Ueda Says Bank of Japan Will Continue Rate Hikes Based on Economic and Price Conditions（TradingView）"
+  },
+  {
+   "id": "10.2",
+   "event": "日銀總裁植田和男重申將繼續加息",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://finance.biggo.jp/news/577b1a24-877a-4300-a879-87c14b00e9f9",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "植田和男総裁、利上げ継続の姿勢を再表明 円安が食品価格を押し上げる恐れに警告 — BigGo ファイナンス ‖ 植田和男総裁、利上げ継続の姿勢を再表明 円安が食品価格を押し上げる恐れに警告 日本銀行の植田和男総裁は18日、参議院特別委員会で、現在の金融環境はなお緩和的であり、日銀は経済・物価・金融情勢に応じて政策金利を引き続き引き上げる方針… 植田和男総裁、利上げ継続の姿勢を再表明 円安が食品価格を押し上げる恐れに警告 — BigGo ファイナンス 日本銀行の植田和男総裁は18日、参議院特別委員会で、現在の金融環境はなお緩和的であり、日銀は経済・物価・金融情勢に応じて政策金利を引き続き引き上げる方針… 植田和男総裁、利上げ継続の姿勢を再表明 円安が食品価格を押し上げる恐れに警告 — BigGo ファイナンス",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "植田和男総裁、利上げ継続の姿勢を再表明 円安が食品価格を押し上げる恐れに警告（BigGo ファイナンス）"
+  },
+  {
+   "id": "11.1",
+   "event": "韓國股市受輝達財報激勵開高反彈",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.koreaherald.com/article/10940774",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "Seoul stocks open sharply higher on bargain hunting after upbeat Nvidia earnings - The Korea Herald ‖ Seoul stocks open sharply higher on bargain hunting after upbeat Nvidia earnings South Korean stocks opened sharply higher Wednesday on bargain hunting after four consecutive sessions of losses, buoyed by US chip giant Nvidia&apos;s upbeat earnin Seoul stocks open sharply higher on bargain hunting after upbeat Nvidia earnings South Korean stocks opened sharply higher Wednesday on bargain hunting a",
+   "keywords": [
+    "Nvidia",
+    "The Korea Herald"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "Seoul stocks open sharply higher on bargain hunting after upbeat Nvidia earnings（The Korea Herald）"
+  },
+  {
+   "id": "11.2",
+   "event": "韓國股市受輝達財報激勵開高反彈",
+   "sub": "發生了什麼",
+   "status": "失敗",
+   "reason": "頁面主題不符：人名／關鍵字只出現在內文或側欄，標題是「三星電子、SK海力士股價因「AI恐慌」腰斬，KB證券：「供給短缺將證明業績」 — BigGo 財經」",
+   "url": "https://finance.biggo.com.tw/news/e13f55ed-f761-4111-bd34-f48b91722d7e",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "三星電子、SK海力士股價因「AI恐慌」腰斬，KB證券：「供給短缺將證明業績」 — BigGo 財經 ‖ 三星電子、SK海力士股價因「AI恐慌」腰斬，KB證券：「供給短缺將證明業績」 三星電子與SK海力士股價較高點平均下跌55%，AI半導體投資信心急速降溫。KB證券分析，這波重挫並非AI產業成長性受損，而是輝達領導層變動、美國AI監管疑慮，加上… 三星電子、SK海力士股價因「AI恐慌」腰斬，KB證券：「供給短缺將證明業績」 — BigGo 財經 三星電子與SK海力士股價較高點平均下跌55%，AI半導體投資信心急速降溫。KB證券分析，這波重挫並非AI產業成長性受損，而是輝達領導層變動、美國AI監管疑慮，加上… 三星電子、SK海力士股價因「AI恐慌」腰斬，KB證券：「供給短缺將證明業績」 — BigGo 財經",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "三星電子、SK海力士股價因「AI恐慌」腰斬，KB證券：「供給短缺將證明業績」（BigGo 財經）"
+  },
+  {
+   "id": "12.1",
+   "event": "歐元區經濟保持穩健 歐盟上修預測",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://ww2.money-link.com.tw/realtimenews/NewsContent.aspx?SN=2447064002&PU=0031",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "國際財經：歐元區經濟保持穩健成長，歐盟上修今年經濟成長預測至1.2%_富聯網 ‖ 證期權 ETF MONEY-LINK 富聯網首創「看懂財經、解讀資訊」，幫助投資人看懂、讀懂、聽懂全球股市/債市/匯市財經訊息，係台灣最大財經軟體資訊商精誠資訊旗下唯一開放式資訊平台。",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "國際財經：歐元區經濟保持穩健成長，歐盟上修今年經濟成長預測至1.2%（富聯網）"
+  },
+  {
+   "id": "12.2",
+   "event": "歐元區經濟保持穩健 歐盟上修預測",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.fxstreet.hk/news/mei-yuan-zou-ruan-zhi-ji-ou-yuan-cong-19ge-yue-di-dian-xiao-fu-hui-sheng-zhi-110shui-ping-202611172147",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "美元未能守住19個月高點，這是歐元連續五個交易日下跌走勢有望結束的主要原因。歐元/美元跌至略高於1.0950的水平，為19個月以來最低，目前交投於1.1000附近，基本回到週一收盤水平。英鎊則以更大幅度打破了同樣的連跌走勢。 ‖ 美元走軟之際，歐元從19個月低點小幅回升至1.10水平 美元未能守住19個月高點，這是歐元連續五個交易日下跌走勢有望結束的主要原因。歐元/美元跌至略高於1.0950的水平，為19個月以來最低，目前交投於1.1000附近，基本回到週一收盤水平。英鎊則以更大幅度打破了同樣的連跌走勢。 美元未能守住19個月高點，這是歐元連續五個交易日下跌走勢有望結束的主要原因。歐元/美元跌至略高於1.0950的水平，為19個月以來最低，目前交投於1.1000附近，基本回到週一收盤水平。英鎊則以更大幅度打破了同樣的連跌走勢。 | FXStreet 美元未能守住19個月高點，這是歐元連續五個交易日下跌走勢有望結束的主要原因。歐元/美元跌至略高於1.0950的水平，為19個月以來最低，目前交投於1.1000附近，基本回到週一收盤水平。英鎊則以更大幅度打破了同樣的連跌走勢。 美元未能守住19個月高點，這是歐元連續五個交",
+   "keywords": [
+    "FXStreet"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "美元走軟之際，歐元從19個月低點小幅回升至1.10水平（FXStreet）"
+  },
+  {
+   "id": "13.1",
+   "event": "英國CPI通膨率預計將進一步上升",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面含 FXStreet",
+   "url": "https://www.fxstreet.hk/news/ying-guo-cpijiang-xian-shi-tong-zhang-lu-sheng-zhi-13ge-yue-gao-dian-yin-ran-liao-cheng-ben-shang-zhang-202611180301",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "英國10月CPI通脹同比升至3.6%，不及預期 ‖ 英國10月CPI通脹同比升至3.6%，不及預期 英國國家統計局（ONS）週三公佈的數據顯示，英國（UK）10月份整體消費者物價指數（CPI）同比上漲3.6%，而9月份為上漲3.5%。 英國10月CPI通脹同比升至3.6%，不及預期 | FXStreet 英國國家統計局（ONS）週三公佈的數據顯示，英國（UK）10月份整體消費者物價指數（CPI）同比上漲3.6%，而9月份為上漲3.5%。 英國10月CPI通脹同比升至3.6%，不及預期 | FXStreet",
+   "keywords": [
+    "FXStreet"
+   ],
+   "matched": [
+    "FXStreet"
+   ],
+   "quotes": [],
+   "quote_found": null,
+   "text": "英國CPI通脹率預計將從9月份的3.5%上升至10月份的3.7%（FXStreet）"
+  },
+  {
+   "id": "13.2",
+   "event": "英國CPI通膨率預計將進一步上升",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.fxstreet.hk/news/ying-guo-tong-zhang-bao-gao-gong-bu-qian-ying-bang-dui-kan-zhang-mei-yuan-xiao-fu-xia-die-zhi-13200-202611180120",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "交易員關注英國CPI，英鎊兌強勢美元小幅走低 ‖ 英國通脹報告公布前，英鎊兌看漲美元小幅下跌至1.3200 週三亞洲時段，英鎊/美元小幅走低，前一天從1.3170區域，即一個多月低點溫和復甦的走勢暫時停滯。不過，現貨價格缺乏後續拋售，目前交投於1.3200關口附近，日內僅下跌0.05%，交易員正等待最新的英國消費者通膨數據以尋找新的推動力。 交易員關注英國CPI，英鎊兌強勢美元小幅走低 | FXStreet 週三亞洲時段，英鎊/美元小幅走低，前一天從1.3170區域，即一個多月低點溫和復甦的走勢暫時停滯。不過，現貨價格缺乏後續拋售，目前交投於1.3200關口附近，日內僅下跌0.05%，交易員正等待最新的英國消費者通膨數據以尋找新的推動力。 交易員關注英國CPI，英鎊兌強勢美元小幅走低 | FXStreet",
+   "keywords": [
+    "FXStreet"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "交易員關注英國CPI，英鎊兌強勢美元小幅走低（FXStreet）"
+  },
+  {
+   "id": "14.1",
+   "event": "俄羅斯股市指數收盤全面走高",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（80%）",
+   "url": "https://www.ad-hoc-news.de/boerse/news/marktberichte/rts-index-gains-1-09-percent-to-955-91-points-on-tuesday-close/70528807",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "RTS Index gains 1.09 percent to 955.91 points on Tuesday close ‖ BÖRSE   BÖRSE  The RTS Index gained 1.09 percent to 955.91 points at the close of Tuesday RTS Index gains 1.09 percent to 955.91 points on Tuesday close The RTS Index gained 1.09 percent to 955.91 points at the close of Tuesday",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "RTS Index gains 1.09 percent to 955.91 points on Tuesday close - ad-hoc-news.de（ad-hoc-news.de）"
+  },
+  {
+   "id": "14.2",
+   "event": "俄羅斯股市指數收盤全面走高",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（79%）",
+   "url": "https://www.ad-hoc-news.de/boerse/news/marktberichte/moex-russia-index-rises-1-01-to-2-501-98-points-at-close/70528768",
+   "date": "2026-11-18",
+   "http": 200,
+   "title": "MOEX Russia Index rises 1.01% to 2,501.98 points at close ‖ BÖRSE   BÖRSE  The MOEX Russia Index gained 1.01% to 2,501.98 points at the close of Tuesday MOEX Russia Index rises 1.01% to 2,501.98 points at close The MOEX Russia Index gained 1.01% to 2,501.98 points at the close of Tuesday",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "MOEX Russia Index rises 1.01% to 2,501.98 points at close - ad-hoc-news.de（ad-hoc-news.de）"
+  }
+ ],
+ "md_sha": "c1080ee9ce488430f406cbfce235925731b8db56",
+ "v": 3
+}
