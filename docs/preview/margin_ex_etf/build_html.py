@@ -28,7 +28,7 @@ def md(s):
 
 rows = ''.join(
     f'<tr><td>{md(x["date"])}</td><td>{f(x["amt_ex"], 1)}</td><td>{sg(x["chg_ex"]) if "chg_ex" in x else "—"}</td>'
-    f'<td>{f(x["maint_all"], 2)}%</td><td>{f(x["maint_ex"], 2)}%</td><td>{f(x["short_ex"], 0)}</td></tr>' for x in reversed(T20))
+    f'<td>{f(x["maint_all"], 2)}%</td><td>{f(x["maint_ex"], 2)}%</td><td>約 {f(x["etf_amt_est"] / x["amt_all"] * 100, 1)}%</td><td>{f(x["short_ex"], 0)}</td></tr>' for x in reversed(T20))
 
 MM = {'twse': {'2026-11-19': 147.9, '2026-11-20': 140.4}, 'otc': {'2026-11-19': 139.59, '2026-11-20': 131.94}}   # 財經M平方（總指揮 11-20 轉述）
 OTC_ME = {'2026-11-19': 139.59, '2026-11-20': 131.94}   # 本站含 ETF 上櫃（site_tools/etf_margin.py 同一算法；櫃買逐檔融資＋收盤）
@@ -116,18 +116,23 @@ th{{color:var(--ink2);font-weight:600;font-size:13px;background:var(--raise)}} s
 .kpi .num{{font-size:28px;font-weight:700;line-height:1.2}} .kpi .num small{{font-size:14px;color:var(--ink2);margin-left:2px}} .kpi .sub{{font-size:12px;color:var(--ink2)}}
 .kpi .sub2{{font-size:13px;margin-top:4px;padding-top:4px;border-top:1px dashed var(--line)}}
 .opt{{display:inline-block;background:var(--acc);color:#fff;border-radius:6px;padding:0 8px;font-size:13px;margin-right:6px}}
+.how{{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:10px}} .hi{{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--raise)}} .ht{{display:flex;justify-content:space-between;gap:8px;align-items:baseline}} .hv{{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}} .hm{{font-size:13px;color:var(--ink2);margin-top:4px;overflow-wrap:anywhere}}
 .foot{{font-size:12px;color:var(--ink2);margin-top:8px;overflow-wrap:anywhere}}
 </style></head><body><div class="w"><h1>上市台股扣除 ETF 資券進出（預覽）</h1>
 <div class="n"><b>要看的重點</b><ul>
 <li>位置：籌碼組「融資×指數＋市場體感」頁籤，第一張「上市融資維持率 × 加權指數」圖下面，加一張近 20 個交易日的表（下面第 1 段）</li>
 <li>維持率卡要不要多一個「扣除 ETF」數字：第 2 段有 A、B 兩種版面請選</li>
 <li>融資張數、融券張數是證交所逐檔加總，不是估算；<b>融資金額扣除 ETF 是本站估算</b>（證交所只公布全市場融資金額，不分股票／ETF），算法與誤差寫在第 3 段</li>
-<li>第 4 段：ETF 融資拆解（總指揮追加）</li><li>基準：財經M平方（融資買進市值含 ETF ÷ 融資金額）。上市 11/19、11/20 本站 vs M平方差 0.03 個百分點以內（正式程式用本站日K收盤算 147.89／140.40）；上櫃兩天完全一致（第 3 段）</li></ul></div>
+<li>第 4 段：ETF 融資拆解（總指揮追加）</li><li>最上面「本站怎麼算」：哪些是證交所實際數字、哪些是推估，逐項標清楚</li><li>對照：財經M平方（融資買進市值含 ETF ÷ 融資金額）。上市 11/19、11/20 本站 vs M平方差 0.03 個百分點以內（正式程式用本站日K收盤算 147.89／140.40）；上櫃兩天完全一致（第 3 段）</li></ul></div>
+
+<div class="card"><h2>本站怎麼算（兩個數字都是本站自己算的）</h2><p class="m">{md(last["date"])} 的值；標「推估」的是大概值。</p>
+<div class="how"><div class="hi"><div class="ht"><b>融資維持率（含 ETF）</b><span class="hv">{f(last["maint_all"], 2)}%</span></div><div class="hm">算法：全部上市證券（含 ETF）融資張數 × 1000 × 收盤 ÷ 證交所公布的上市融資金額</div><div class="hm">準確度：分子分母都是證交所公布數字，<b>不是推估</b>；跟財經M平方 11/19、11/20 差 0.03 個百分點以內</div></div><div class="hi"><div class="ht"><b>ETF 融資金額</b><span class="hv">約 {f(last["etf_amt_est"], 0)} 億</span></div><div class="hm">算法：逐檔追蹤：舊部位依剩餘張數保留，當天新買進按成交均價 × 60% 加入</div><div class="hm">準確度：<b>推估</b>（證交所只公布全市場融資金額，不分股票／ETF）；同算法套在全市場，誤差 {f(min(e20), 1)}%～{f(max(e20), 1)}%，ETF 這塊約 ±{f(max(abs(v) for v in e20) / 100 * last["etf_amt_est"], 0)} 億</div></div><div class="hi"><div class="ht"><b>ETF 占融資金額</b><span class="hv">約 {f(last["etf_amt_est"] / last["amt_all"] * 100, 1)}%</span></div><div class="hm">算法：ETF 融資金額推估 ÷ 上市融資金額</div><div class="hm">準確度：<b>推估</b>，看比例大小用</div></div><div class="hi"><div class="ht"><b>ETF 占融資市值</b><span class="hv">{f(last["mv_etf"] / (last["mv_etf"] + last["mv_ex"]) * 100, 1)}%</span></div><div class="hm">算法：ETF 融資張數 × 收盤 ÷ 全部融資市值</div><div class="hm">準確度：證交所逐檔數字，<b>不是推估</b></div></div><div class="hi"><div class="ht"><b>融資維持率（扣除 ETF）</b><span class="hv">約 {f(last["maint_ex"], 1)}%</span></div><div class="hm">算法：股票（扣代號 00 開頭）融資張數 × 1000 × 收盤 ÷（上市融資金額 − ETF 融資金額推估）</div><div class="hm">準確度：分子是實際數字，<b>分母含推估</b>，所以是大概值</div></div></div>
+<div class="foot">只用證交所公開資料（MI_MARGN 逐檔融資融券、MI_INDEX 收盤）；其他網站的數字只拿來對照，不拿來調整算法（玩股網來源不明，不採用）。歷史統計，不構成買賣建議。</div></div>
 
 <div class="card"><h2>① 表格放在圖下面</h2>
 <div class="ph">（正式頁這裡是「上市融資維持率 × 加權指數」圖，預覽不重畫）</div>
 <h3>近 20 個交易日 上市資券進出（扣除 ETF）</h3>{'' if len(T20) >= 20 else f'<p class="m">目前有 {len(T20)} 個交易日（{md(T20[0]["date"])}～{md(T20[-1]["date"])}）；更早的日子資料補齊中（證交所歷史端點回補改由 GitHub Actions 慢速補）。</p>'}
-<div class="tw"><table><thead><tr><th>日期</th><th>融資餘額（億）</th><th>融資增減（億）</th><th>融資維持率（含 ETF）</th><th>融資維持率（扣除 ETF）</th><th>融券餘額（張）</th></tr></thead><tbody>{rows}</tbody></table></div>
+<div class="tw"><table><thead><tr><th>日期</th><th>融資餘額（億）</th><th>融資增減（億）</th><th>融資維持率（含 ETF）</th><th>融資維持率（扣除 ETF）</th><th>ETF 占融資金額（推估）</th><th>融券餘額（張）</th></tr></thead><tbody>{rows}</tbody></table></div>
 <div class="foot">扣除 ETF＝排除代號 00 開頭的證券（與證交所 MI_MARGN「ETF」類別合計一致）。融資增減紅＝增加、綠＝減少。融資餘額（億）與維持率為<b>本站估算</b>：融資金額＝證交所公布上市全市場融資金額 − ETF 融資金額估算；維持率（含 ETF）＝Σ 全部融資張數 × 1000 × 收盤 ÷ 證交所公布融資金額（同財經M平方）；維持率（扣除 ETF）＝Σ 股票融資張數 × 1000 × 收盤 ÷ 扣除 ETF 融資金額。融券餘額＝證交所逐檔融券今日餘額加總。資料來源：證交所 MI_MARGN、MI_INDEX。扣除 ETF 維持率近 20 日最高 {f(mx, 2)}%、最低 {f(mn, 2)}%。<b>歷史統計，非預測，不構成買賣建議。</b></div></div>
 
 <div class="card"><h2>② 維持率卡：兩種版面</h2>
