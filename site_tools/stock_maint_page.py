@@ -140,6 +140,7 @@ td.l,th.l{{text-align:left}} td.nm{{max-width:8em;overflow:hidden;text-overflow:
 tr.sec{{cursor:pointer}} tr.sec:hover td{{background:var(--raise)}} tr.sub td{{background:var(--raise);font-size:13px}}
 .more{{font:inherit;font-size:13px;margin-top:8px;padding:5px 14px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}}
 details{{margin:6px 0}} summary{{cursor:pointer;font-size:14px;font-weight:600}} details .in{{padding:4px 0 0}}
+.src{{font-size:11px;color:var(--ink2);border:1px solid var(--line);border-radius:4px;padding:0 4px;margin-left:4px;font-weight:400}}
 .foot{{font-size:12px;color:var(--ink2);margin-top:8px;overflow-wrap:anywhere}}
 </style></head><body><div class="w"><h1>個股／族群融資維持率（本站推估）</h1>
 <p class="alert"><b>130% 斷頭是「整戶」計算，不是單一股票</b>；本表是每檔股票全體融資戶的平均推估，個別投資人成本不同。</p>
@@ -161,12 +162,12 @@ details{{margin:6px 0}} summary{{cursor:pointer;font-size:14px;font-weight:600}}
 <section class="pane" id="pG">
 <div class="bar"><span class="seg" data-g="mkt"><button data-v="twse" class="on">上市</button><button data-v="otc">上櫃</button></span>
 <span class="seg" data-g="gsrt"><button data-v="5" class="on">族群維持率</button><button data-v="6">&lt; 130% 檔數</button><button data-v="3">融資市值</button></span>
-<span class="seg" data-g="unc"><button data-v="0" class="on">隱藏未分類</button><button data-v="1">含未分類</button></span></div>
-<p class="m">族群只含本站追蹤池已分類的股票（融資 ≥ 100 張中：上市 {d["sector_cov"]["twse"]} 檔、上櫃 {d["sector_cov"]["otc"]} 檔），其餘歸「未分類」，預設隱藏。</p><p class="m" id="ginfo"></p>
+<span class="seg" data-g="src"><button data-v="all" class="on">全部</button><button data-v="本站">本站族群</button><button data-v="官方">官方產業別</button></span></div>
+<p class="m">分類來源：本站追蹤池有分類的股票用本站族群（融資 ≥ 100 張中上市 {d["sector_cov"]["twse"]["本站"]} 檔、上櫃 {d["sector_cov"]["otc"]["本站"]} 檔），其他用證交所／櫃買公布的官方產業別（標「官方」；上市 {d["sector_cov"]["twse"]["官方"]} 檔、上櫃 {d["sector_cov"]["otc"]["官方"]} 檔）；未分類剩上市 {d["sector_cov"]["twse"]["未分類"]} 檔、上櫃 {d["sector_cov"]["otc"]["未分類"]} 檔。</p><p class="m" id="ginfo"></p>
 <div class="tw"><table class="stk" id="gt"><thead><tr>
 <th class="s l" data-k="0">族群</th><th class="s" data-k="5">族群維持率</th><th class="s" data-k="6">&lt; 130% 檔數</th><th class="s" data-k="2">檔數</th><th class="s" data-k="3">融資市值（億）</th><th class="s" data-k="4">推估金額（億）</th><th class="s l" data-k="1">大類</th></tr></thead><tbody></tbody></table></div>
 <button class="more" id="gmore" hidden></button>
-<p class="foot">點一列展開成分股。族群＝本站族群表「細類」（目前 {d["sector_n"]} 檔有分類）；族群維持率＝族群融資市值合計 ÷ 族群推估融資金額合計。本站推估，歷史統計，非預測。</p>
+<p class="foot">點一列展開成分股。族群＝本站族群表「細類」，沒有的用官方產業別；族群維持率＝族群融資市值合計 ÷ 族群推估融資金額合計。本站推估，歷史統計，非預測。</p>
 </section>
 
 <section class="pane" id="pH">
@@ -185,7 +186,7 @@ details{{margin:6px 0}} summary{{cursor:pointer;font-size:14px;font-weight:600}}
 </div>
 <script>
 const D={js_data};
-const S={{mkt:'twse',flt:'all',sk:6,sd:1,lim:30,gk:5,gd:1,glim:30,unc:'0'}};const open=new Set();
+const S={{mkt:'twse',flt:'all',sk:6,sd:1,lim:30,gk:5,gd:1,glim:30,src:'all'}};const open=new Set();
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const fm=(v,n)=>v==null?'—':v.toLocaleString('zh-TW',{{minimumFractionDigits:n,maximumFractionDigits:n}});
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}})[c]);
@@ -200,11 +201,11 @@ const lo=rs.filter(r=>r[6]<130).length,mid=rs.filter(r=>r[6]>=130&&r[6]<150).len
 if(S.flt==='lt')rs=rs.filter(r=>r[6]<130);else if(S.flt==='mid')rs=rs.filter(r=>r[6]>=130&&r[6]<150);
 rs.sort(cmp(S.sk,S.sd));
 $('#info').textContent=`資料日 ${{D[S.mkt].date}}・融資 ≥ 100 張 ${{D[S.mkt].rows.filter(r=>r[3]>=100).length}} 檔：< 130% ${{lo}} 檔、130～150% ${{mid}} 檔・校準成數約 ${{(D[S.mkt].ratio*100).toFixed(1)}}%`;
-$('#st tbody').innerHTML=rs.slice(0,S.lim).map(r=>`<tr class="${{cls(r[6])}}"><td>${{esc(r[0])}}</td><td class="l nm" title="${{esc(r[1])}}">${{esc(r[1])}}</td><td class="${{r[6]<130?'bad':''}}">${{fm(r[6],1)}}%</td><td>${{gap(r)}}</td><td>${{fm(r[4],2)}}</td><td>${{fm(r[3],0)}}</td><td>${{fm(r[5],2)}}</td><td>${{fm(r[9],2)}}</td><td>${{r[8]==null?'—':(r[8]>0?'+':'')+fm(r[8],0)}}</td><td class="l">${{esc(r[2])}}</td></tr>`).join('')||'<tr><td colspan="10" class="l m">沒有符合的股票</td></tr>';
+$('#st tbody').innerHTML=rs.slice(0,S.lim).map(r=>`<tr class="${{cls(r[6])}}"><td>${{esc(r[0])}}</td><td class="l nm" title="${{esc(r[1])}}">${{esc(r[1])}}</td><td class="${{r[6]<130?'bad':''}}">${{fm(r[6],1)}}%</td><td>${{gap(r)}}</td><td>${{fm(r[4],2)}}</td><td>${{fm(r[3],0)}}</td><td>${{fm(r[5],2)}}</td><td>${{fm(r[9],2)}}</td><td>${{r[8]==null?'—':(r[8]>0?'+':'')+fm(r[8],0)}}</td><td class="l">${{esc(r[2])}}${{r[11]==='官方'?'<small class="src">官方</small>':''}}</td></tr>`).join('')||'<tr><td colspan="10" class="l m">沒有符合的股票</td></tr>';
 const mb=$('#more');mb.hidden=rs.length<=S.lim;mb.textContent=`顯示更多（${{Math.min(S.lim,rs.length)}} / ${{rs.length}}）`;arrows('#st',S.sk,S.sd);segSync()}}
-function drawG(){{const by=Object.fromEntries(D[S.mkt].rows.map(r=>[r[0],r]));let gs=D[S.mkt].sec.filter(g=>S.unc==='1'||g[0]!=='未分類').sort(cmp(S.gk,S.gd));
+function drawG(){{const by=Object.fromEntries(D[S.mkt].rows.map(r=>[r[0],r]));let gs=D[S.mkt].sec.filter(g=>S.src==='all'||g[8]===S.src).sort(cmp(S.gk,S.gd));
 $('#ginfo').textContent=`資料日 ${{D[S.mkt].date}}・${{gs.length}} 個族群`;let h='';
-for(const g of gs.slice(0,S.glim)){{h+=`<tr class="sec" data-g="${{esc(g[0])}}"><td>${{open.has(g[0])?'▾':'▸'}} ${{esc(g[0])}}</td><td class="${{g[5]<130?'bad':''}}">${{fm(g[5],1)}}%</td><td>${{g[6]}}</td><td>${{g[2]}}</td><td>${{fm(g[3],2)}}</td><td>${{fm(g[4],2)}}</td><td class="l">${{esc(g[1])}}</td></tr>`;
+for(const g of gs.slice(0,S.glim)){{h+=`<tr class="sec" data-g="${{esc(g[0])}}"><td>${{open.has(g[0])?'▾':'▸'}} ${{esc(g[0])}}${{g[8]==='官方'?'<small class="src">官方</small>':''}}</td><td class="${{g[5]<130?'bad':''}}">${{fm(g[5],1)}}%</td><td>${{g[6]}}</td><td>${{g[2]}}</td><td>${{fm(g[3],2)}}</td><td>${{fm(g[4],2)}}</td><td class="l">${{esc(g[1])}}</td></tr>`;
 if(open.has(g[0])){{const cs=g[7].map(c=>by[c]).filter(Boolean).sort(cmp(6,1));h+=cs.map(r=>`<tr class="sub"><td>　${{esc(r[0])}} ${{esc(r[1])}}</td><td class="${{r[6]<130?'bad':''}}">${{fm(r[6],1)}}%</td><td>${{gap(r)}}</td><td></td><td>${{fm(r[4],2)}}</td><td>${{fm(r[10],2)}}</td><td class="l"></td></tr>`).join('')}}}}
 $('#gt tbody').innerHTML=h;const mb=$('#gmore');mb.hidden=gs.length<=S.glim;mb.textContent=`顯示更多（${{Math.min(S.glim,gs.length)}} / ${{gs.length}}）`;arrows('#gt',S.gk,S.gd);segSync()}}
 $('#tabs').onclick=e=>{{const b=e.target.closest('button');if(!b)return;$$('#tabs button').forEach(x=>x.classList.toggle('on',x===b));$$('.pane').forEach(p=>p.classList.toggle('on',p.id===b.dataset.p))}};

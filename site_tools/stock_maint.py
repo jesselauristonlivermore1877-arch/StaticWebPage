@@ -96,6 +96,24 @@ def load_sector(path):
     return m
 
 
+def load_industry(site):
+    """官方產業別（data/industry_official.json：證交所 t187ap03_L、櫃買 mopsfin_t187ap03_O 公司基本資料的產業別代碼＋代碼表名稱）"""
+    p = os.path.join(site, 'data/industry_official.json')
+    if not os.path.exists(p):
+        return {}
+    d = json.load(open(p))
+    return {c: d['names'].get(v[0], v[0]) for c, v in d['map'].items()}
+
+
+def classify(code, smap, ind):
+    """族群：本站 sector_map 有分類就用「細類」（來源＝本站）；沒有就用官方產業別（來源＝官方）；都沒有＝未分類"""
+    if code in smap and smap[code][0] != '未分類':
+        return smap[code][0], smap[code][1], '本站'
+    if code in ind:
+        return ind[code], '官方產業別', '官方'
+    return '未分類', '未分類', '未分類'
+
+
 def run_market(site, mkt, daily, official, ca=None):
     npz = np.load(os.path.join(site, 'data/bars', 'margin.npz' if mkt == 'twse' else 'margin_otc.npz'), allow_pickle=True)
     ncodes = [str(c) for c in npz['codes']]; nnames = [str(x) for x in npz['names']]
@@ -322,16 +340,16 @@ def summarize(res):
     return s
 
 
-def sectors(rows, smap):
+def sectors(rows):
+    """rows：[代號, 族群, 大類, 來源, 融資市值億, 推估維持率, 推估金額億]"""
     g = {}
-    for r in rows:
-        sec, big = smap.get(r[0], ('未分類', '未分類'))
-        x = g.setdefault(sec, {'big': big, 'n': 0, 'mv': 0.0, 'amt': 0.0, 'lt130': 0, 'codes': []})
-        x['n'] += 1; x['mv'] += r[3]; x['amt'] += r[9]; x['lt130'] += r[5] < 130; x['codes'].append(r[0])
+    for c, sec, big, src, mv, mt, amt in rows:
+        x = g.setdefault((src, sec), {'big': big, 'n': 0, 'mv': 0.0, 'amt': 0.0, 'lt130': 0, 'codes': []})
+        x['n'] += 1; x['mv'] += mv; x['amt'] += amt; x['lt130'] += mt < 130; x['codes'].append(c)
     out = []
-    for sec, x in g.items():
+    for (src, sec), x in g.items():
         out.append([sec, x['big'], x['n'], round(x['mv'], 2), round(x['amt'], 2),
-                    round(x['mv'] / x['amt'] * 100, 1) if x['amt'] else None, x['lt130'], x['codes']])
+                    round(x['mv'] / x['amt'] * 100, 1) if x['amt'] else None, x['lt130'], x['codes'], src])
     return out
 
 
@@ -353,22 +371,27 @@ def main():
     daily = load_daily(site)
     official, off_cmp = load_official(site)
     ca = load_ca(site)
+    ind = load_industry(site)
     smap = load_sector(os.path.join(site, a.sector) if not os.path.isabs(a.sector) else a.sector)
     out = {'gen': 'site_tools/stock_maint.py', 'mkts': {}}
     for mkt in ('twse', 'otc'):
         res = run_market(site, mkt, daily, official, ca)
         res['summary'] = summarize(res)
+        cls = {}
         for r in res['rows']:
-            sec, big = smap.get(r[0], ('未分類', '未分類'))
-            r.insert(2, sec)
-        res['sectors'] = sectors([[r[0], r[1]] + r[3:] for r in res['rows']], smap)
+            sec, big, src = classify(r[0], smap, ind)
+            cls[r[0]] = (big, src)
+            r.insert(2, sec); r.append(src)
+        # 族群表只算融資 ≥ 100 張（同個股表預設）
+        res['sectors'] = sectors([[r[0], r[2], cls[r[0]][0], r[11], r[4], r[6], r[10]] for r in res['rows'] if r[3] >= 100])
         out['mkts'][mkt] = res
         print(mkt, json.dumps(res['summary'], ensure_ascii=False))
     out['fields'] = ['代號', '名稱', '族群', '融資張數', '融資市值億', '推估成本', '推估維持率', '離130%', '近5日增減', '收盤', '推估金額億']
     out['sector_fields'] = ['族群', '大類', '檔數', '融資市值億', '推估金額億', '族群維持率', '低於130檔數', '成分股']
     out['sector_n'] = len(smap)
     out['off_cmp'] = off_cmp
-    out['sector_cov'] = {m: sum(1 for r in out['mkts'][m]['rows'] if r[3] >= 100 and r[2] != '未分類') for m in out['mkts']}
+    out['sector_cov'] = {m: {k: sum(1 for r in out['mkts'][m]['rows'] if r[3] >= 100 and r[11] == k) for k in ('本站', '官方', '未分類')}
+                         for m in out['mkts']}
     os.makedirs(os.path.join(site, a.out), exist_ok=True)
     json.dump(out, open(os.path.join(site, a.out, 'data.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
     print('✓', os.path.join(a.out, 'data.json'))
