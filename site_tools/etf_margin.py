@@ -57,6 +57,16 @@ def etf_dir(site):
     return d
 
 
+def write_full(site, mkt, date, src, rows):
+    """🟢 11-20 夜（【新】總指揮）：同一個回應裡的全部逐檔（股票＋ETF）另存，給個股／族群融資維持率用（要融資買進、賣出、償還），
+    不必再打一輪證交所。欄位同 ETF 檔：買進、賣出、現金償還、前日餘額、今日餘額、融券今日餘額（張）。"""
+    d = os.path.join(site, 'data', 'margin_full'); os.makedirs(d, exist_ok=True)
+    p = os.path.join(d, f'{mkt}_{date}.json')
+    json.dump({'date': date, 'src': src, 'fields': ['買進', '賣出', '現金償還', '前日餘額', '今日餘額', '融券今日餘額'],
+               'rows': {c: [int(x) for x in r] for c, r in rows.items()}}, open(p, 'w'), ensure_ascii=False, separators=(',', ':'))
+    print(f'  ✓ {p}：全部 {len(rows)} 檔')
+
+
 def write(site, mkt, date, src, rows):
     p = os.path.join(etf_dir(site), f'{mkt}_{date}.json')
     json.dump({'date': date, 'src': src, 'fields': ['買進', '賣出', '現金償還', '前日餘額', '今日餘額', '融券今日餘額'],
@@ -65,11 +75,11 @@ def write(site, mkt, date, src, rows):
 
 
 # ---------------- 上市 ----------------
-def twse_rows_rwd(js):
+def twse_rows_rwd(js, etf_only=True):
     rows = {}
     for r in js['tables'][1]['data']:
         c = r[0].strip()
-        if c.startswith('00'):
+        if c and c != '合計' and (c.startswith('00') or not etf_only):
             rows[c] = [num(r[2]), num(r[3]), num(r[4]), num(r[5]), num(r[6]), num(r[12])]
     return rows
 
@@ -116,8 +126,9 @@ def land_twse(site):
             print('  ⚠ 上市 OpenAPI 資料日對不上 margin.npz 最近 5 天，不落地')
         else:
             rows = {x['股票代號']: [num(x['融資買進']), num(x['融資賣出']), num(x['融資現金償還']), num(x['融資前日餘額']),
-                                    num(x['融資今日餘額']), num(x['融券今日餘額'])] for x in js if x['股票代號'].startswith('00')}
-            write(site, 'twse', d, 'openapi.twse.com.tw/v1/exchangeReport/MI_MARGN', rows)
+                                    num(x['融資今日餘額']), num(x['融券今日餘額'])] for x in js}
+            write(site, 'twse', d, 'openapi.twse.com.tw/v1/exchangeReport/MI_MARGN', {c: v for c, v in rows.items() if c.startswith('00')})
+            write_full(site, 'twse', d, 'openapi.twse.com.tw/v1/exchangeReport/MI_MARGN', rows)
     except Exception as e:  # noqa: BLE001
         print('  ⚠ 上市 ETF 融資落地失敗：', e)
 
@@ -127,8 +138,9 @@ def tpex_land(site, d):
     t = js['tables'][0]
     if t.get('date', '').replace('/', '') != f'{int(d[:4]) - 1911}{d[5:7]}{d[8:]}':
         print(f'  ⚠ 櫃買回傳資料日 {t.get("date")} ≠ {d}，不落地'); return
-    rows = {r[0].strip(): [num(r[3]), num(r[4]), num(r[5]), num(r[2]), num(r[6]), num(r[14])] for r in t['data'] if r[0].strip().startswith('00')}
-    write(site, 'tpex', d, 'www.tpex.org.tw/www/zh-tw/margin/balance', rows)
+    allr = {r[0].strip(): [num(r[3]), num(r[4]), num(r[5]), num(r[2]), num(r[6]), num(r[14])] for r in t['data'] if r[0].strip()}
+    write(site, 'tpex', d, 'www.tpex.org.tw/www/zh-tw/margin/balance', {c: v for c, v in allr.items() if c.startswith('00')})
+    write_full(site, 'tpex', d, 'www.tpex.org.tw/www/zh-tw/margin/balance', allr)
 
 
 def backfill(site, start, end, sleep):
@@ -138,7 +150,7 @@ def backfill(site, start, end, sleep):
     print(f'回補 {len(days)} 個交易日（{start}～{end}），間隔 {sleep} 秒')
     for d in days:
         for mkt in ('twse', 'tpex'):
-            if os.path.exists(os.path.join(etf_dir(site), f'{mkt}_{d}.json')):
+            if os.path.exists(os.path.join(etf_dir(site), f'{mkt}_{d}.json')) and os.path.exists(os.path.join(site, 'data', 'margin_full', f'{mkt}_{d}.json')):
                 continue
             try:
                 if mkt == 'twse':
@@ -147,6 +159,7 @@ def backfill(site, start, end, sleep):
                         print(f'  · {d} 上市無資料（{js.get("stat")}）')
                     else:
                         write(site, 'twse', d, 'www.twse.com.tw/rwd/zh/marginTrading/MI_MARGN', twse_rows_rwd(js))
+                        write_full(site, 'twse', d, 'www.twse.com.tw/rwd/zh/marginTrading/MI_MARGN', twse_rows_rwd(js, False))
                 else:
                     tpex_land(site, d)
             except Exception as e:  # noqa: BLE001

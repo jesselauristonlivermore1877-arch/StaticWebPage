@@ -50,9 +50,9 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/margin_etf
+          git add data/margin_etf data/margin_full
           if git diff --staged --quiet; then echo "沒有新檔"; exit 0; fi
-          git commit -m "data: ETF 逐檔融資回補 $(ls data/margin_etf | wc -l) 檔"
+          git commit -m "data: ETF／全部逐檔融資回補 $(ls data/margin_etf | wc -l)／$(ls data/margin_full | wc -l) 檔"
           for i in 1 2 3 4; do
             git pull --rebase origin main && git push origin HEAD:main && break
             [ "$i" = 4 ] && exit 1
