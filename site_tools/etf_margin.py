@@ -22,6 +22,7 @@ UA = {'User-Agent': 'Mozilla/5.0 (StaticWebPage daily build)'}
 # 基準（Evans 11-20 提供財經M平方截圖數字，總指揮轉述）：核對用，差 > TOL 就不改
 MM_REF = {'twse': {'2026-11-19': 147.9, '2026-11-20': 140.4}, 'otc': {'2026-11-19': 139.59, '2026-11-20': 131.94}}
 TOL = 0.2
+ETF_RATIO = 0.6   # ETF 融資推估成數（同預覽 build_preview.py RATIO）
 
 
 def num(s):
@@ -195,6 +196,36 @@ def patch(site):
             print(f'✗ 上市 {d} 本站 {x[1]} vs M平方 {ref} 差 {x[1] - ref:+.2f} > {TOL}，不改'); return 1
         if x:
             print(f'  ✓ 上市 {d} 本站 {x[1]} vs M平方 {ref}（差 {x[1] - ref:+.2f}）')
+    # 🟢 11-20 夜（【新】總指揮，Evans 選 A 版：卡上第二行「扣除 ETF」）：ETF 融資金額逐檔推估（同預覽 build_preview.py 算法）
+    #   今日金額＝昨日金額×(今日餘額−今日買進)÷昨日餘額＋今日買進張×1000×當日均價×成數；起點＝餘額×收盤×成數
+    #   扣除 ETF 維持率＝(含 ETF 融資市值 − ETF 融資市值) ÷ (融資金額 − ETF 融資金額推估)；推估值，頁面註明
+    A, ex = {}, {}
+    for r in new:
+        d = r[0]; i = BD.index(d)
+        rows = json.load(open(os.path.join(site, 'data', 'margin_etf', f'twse_{d}.json')))['rows']
+        cl, vo, am = b['close'][i], b['vol'][i], b['amt'][i]
+        amt_e = mv_e = 0.0
+        for c, x in rows.items():
+            buy, prev, bal = x[0], x[3], x[4]
+            k = bc.get(c)
+            px = float(cl[k]) if k is not None and cl[k] == cl[k] else float('nan')
+            vw = float(am[k]) / float(vo[k]) if k is not None and vo[k] == vo[k] and vo[k] > 0 and am[k] == am[k] and am[k] > 0 else px
+            if px != px:
+                px = vw
+            if px != px:
+                A[c] = A.get(c, 0.0); continue
+            if c not in A:
+                a = bal * 1000 * px * ETF_RATIO
+            else:
+                a = (A[c] * max(bal - buy, 0) / prev if prev else 0.0) + buy * 1000 * vw * ETF_RATIO
+            A[c] = a; amt_e += a / 1e8; mv_e += bal * 1000 * px / 1e8
+        mv_all = r[1] * r[3] / 100
+        ex[d] = (round((mv_all - mv_e) / (r[3] - amt_e) * 100, 2), round(r[3] - amt_e, 1), round(amt_e, 1))
+    for r in new:
+        r.extend(ex[r[0]])
+    T['fields'] = ['date', 'est', 'taiex', 'margin_yi', 'est_ex', 'margin_ex_yi', 'etf_amt_yi']
+    T['ex_how'] = ('扣除 ETF＝股票（代號 00 開頭以外）融資市值 ÷（上市融資金額 − ETF 融資金額推估）；證交所只公布全市場融資金額、不分股票／ETF，'
+                   'ETF 那塊由本站逐檔推估（新買進按當日均價 × %d%%、舊部位依剩餘張數保留，起點 %s），所以扣除 ETF 是大概值' % (round(ETF_RATIO * 100), new[0][0]))
     T['rows'] = new
     vals = [r[1] for r in new]
     T['last'] = new[-1]
