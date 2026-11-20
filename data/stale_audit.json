@@ -1,7 +1,12 @@
 {
- "asof": "2026-11-20 21:44",
+ "asof": "2026-11-21 01:23",
  "first_stale": {
-  "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-20"
+  "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-20",
+  "docs/data/warrant_flow.json|權證資金流": "2026-11-21",
+  "data/macro_tags.json|新聞分類": "2026-11-21",
+  "docs/data/pcf/00984A|主動 ETF 持股 00984A": "2026-11-21",
+  "docs/data/pcf/00989A|主動 ETF 持股 00989A": "2026-11-21",
+  "docs/data/pcf/00993A|主動 ETF 持股 00993A": "2026-11-21"
  },
  "rows": [
   {
@@ -11,7 +16,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） buyback.py",
    "note": ""
@@ -23,7 +28,7 @@
    "freq": "ev",
    "allow": 5,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） buyback.py",
    "note": "官方 t35sc09 彙總表；沒有新公告不會變"
@@ -35,7 +40,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -47,7 +52,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -59,7 +64,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -71,7 +76,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） contrib.py",
    "note": ""
@@ -83,7 +88,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -95,7 +100,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -107,7 +112,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -119,7 +124,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） eps_flow.py",
    "note": ""
@@ -131,7 +136,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -143,7 +148,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -155,7 +160,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -167,7 +172,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） ps_river.py",
    "note": ""
@@ -179,7 +184,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） river.py",
    "note": ""
@@ -191,7 +196,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -203,7 +208,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） sector_pe.py",
    "note": ""
@@ -215,7 +220,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -227,7 +232,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/stock_keep_rank.py",
    "note": ""
@@ -238,8 +243,8 @@
    "date": "2026-11-13",
    "freq": "wk",
    "allow": 0,
-   "lag_td": 4,
-   "days": 7,
+   "lag_td": 5,
+   "days": 8,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） tdcc.py",
    "note": "集保每週五更新"
@@ -251,7 +256,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -263,7 +268,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -275,7 +280,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -287,7 +292,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -299,7 +304,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） warrant.py",
    "note": ""
@@ -310,9 +315,9 @@
    "date": "2026-11-19",
    "freq": "td",
    "allow": 0,
-   "lag_td": 0,
-   "days": 1,
-   "stale": false,
+   "lag_td": 1,
+   "days": 2,
+   "stale": true,
    "owner": "W 本機 tools/warrant_flow.py（盤後）",
    "note": ""
   },
@@ -323,7 +328,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -335,7 +340,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/nsf_history.py",
    "note": ""
@@ -347,7 +352,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 news_live.yml",
    "note": ""
@@ -359,7 +364,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 macro.yml（世界趨勢）＋daily.yml world_idx.py",
    "note": ""
@@ -367,7 +372,7 @@
   {
    "name": "盤勢緊急通知",
    "path": "docs/data/market_alert.json",
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
@@ -383,7 +388,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 site_smoke.yml",
    "note": ""
@@ -394,8 +399,8 @@
    "date": "2026-11-19",
    "freq": "q",
    "allow": 0,
-   "lag_td": 0,
-   "days": 1,
+   "lag_td": 1,
+   "days": 2,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） thirteenf.py",
    "note": "季報；asof 是建置日"
@@ -407,7 +412,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "W 本機排程 fcf_ai.bat",
    "note": ""
@@ -415,7 +420,7 @@
   {
    "name": "意見領袖",
    "path": "docs/data/kol.json",
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
@@ -427,7 +432,7 @@
   {
    "name": "現任官員名單（查核日）",
    "path": "docs/data/officials.json",
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "freq": "wk",
    "allow": 0,
    "lag_td": 0,
@@ -443,7 +448,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 root_cause.yml＋W 07:25 盤前班",
    "note": ""
@@ -455,7 +460,7 @@
    "freq": "ev",
    "allow": 5,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "W 本機排程 ir_transcribe_one",
    "note": "有法說才有"
@@ -466,9 +471,9 @@
    "date": "2026-11-19",
    "freq": "td",
    "allow": 0,
-   "lag_td": 0,
-   "days": 1,
-   "stale": false,
+   "lag_td": 1,
+   "days": 2,
+   "stale": true,
    "owner": "W 本機排程 macro_tags_daily",
    "note": ""
   },
@@ -478,8 +483,8 @@
    "date": "2026-11-15",
    "freq": "wk",
    "allow": 0,
-   "lag_td": 4,
-   "days": 5,
+   "lag_td": 5,
+   "days": 6,
    "stale": false,
    "owner": "W 本機排程 registry",
    "note": ""
@@ -491,7 +496,7 @@
    "freq": "ev",
    "allow": 5,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "W 本機排程 ir_report_watch",
    "note": ""
@@ -503,7 +508,7 @@
    "freq": "ev",
    "allow": 5,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "W 本機排程 ir_report_watch",
    "note": ""
@@ -515,7 +520,7 @@
    "freq": "off",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "W 本機排程 daily_news",
    "note": "11-15 總指揮裁示日報停掉（text_health 不再催）"
@@ -526,8 +531,8 @@
    "date": "2026-11-10",
    "freq": "off",
    "allow": 0,
-   "lag_td": 7,
-   "days": 10,
+   "lag_td": 8,
+   "days": 11,
    "stale": false,
    "owner": "W 本機排程 quant_daily",
    "note": "11-15 裁示停掉"
@@ -539,7 +544,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -551,7 +556,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -562,8 +567,8 @@
    "date": "2026-11-18",
    "freq": "td",
    "allow": 2,
-   "lag_td": 1,
-   "days": 2,
+   "lag_td": 2,
+   "days": 3,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": "海外持股／美債：官網揭露本來就晚 2 個交易日"
@@ -575,7 +580,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -587,7 +592,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -599,7 +604,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -611,7 +616,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -623,7 +628,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -635,7 +640,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -646,8 +651,8 @@
    "date": "2026-11-19",
    "freq": "td",
    "allow": 2,
-   "lag_td": 0,
-   "days": 1,
+   "lag_td": 1,
+   "days": 2,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": "海外持股／美債：官網揭露本來就晚 2 個交易日"
@@ -658,8 +663,8 @@
    "date": "2026-11-18",
    "freq": "td",
    "allow": 2,
-   "lag_td": 1,
-   "days": 2,
+   "lag_td": 2,
+   "days": 3,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": "海外持股／美債：官網揭露本來就晚 2 個交易日"
@@ -671,7 +676,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -683,7 +688,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -695,7 +700,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -706,8 +711,8 @@
    "date": "2026-11-19",
    "freq": "td",
    "allow": 2,
-   "lag_td": 0,
-   "days": 1,
+   "lag_td": 1,
+   "days": 2,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": "海外持股／美債：官網揭露本來就晚 2 個交易日"
@@ -719,7 +724,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -730,8 +735,8 @@
    "date": "2026-11-19",
    "freq": "td",
    "allow": 2,
-   "lag_td": 0,
-   "days": 1,
+   "lag_td": 1,
+   "days": 2,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": "海外持股／美債：官網揭露本來就晚 2 個交易日"
@@ -742,9 +747,9 @@
    "date": "2026-11-19",
    "freq": "td",
    "allow": 0,
-   "lag_td": 0,
-   "days": 1,
-   "stale": false,
+   "lag_td": 1,
+   "days": 2,
+   "stale": true,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
   },
@@ -755,7 +760,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -767,7 +772,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -779,7 +784,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -790,8 +795,8 @@
    "date": "2026-11-19",
    "freq": "td",
    "allow": 2,
-   "lag_td": 0,
-   "days": 1,
+   "lag_td": 1,
+   "days": 2,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": "海外持股／美債：官網揭露本來就晚 2 個交易日"
@@ -802,9 +807,9 @@
    "date": "2026-11-19",
    "freq": "td",
    "allow": 0,
-   "lag_td": 0,
-   "days": 1,
-   "stale": false,
+   "lag_td": 1,
+   "days": 2,
+   "stale": true,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
   },
@@ -814,8 +819,8 @@
    "date": "2026-11-19",
    "freq": "td",
    "allow": 2,
-   "lag_td": 0,
-   "days": 1,
+   "lag_td": 1,
+   "days": 2,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": "海外持股／美債：官網揭露本來就晚 2 個交易日"
@@ -827,7 +832,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -839,7 +844,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -850,9 +855,9 @@
    "date": "2026-11-19",
    "freq": "td",
    "allow": 0,
-   "lag_td": 0,
-   "days": 1,
-   "stale": false,
+   "lag_td": 1,
+   "days": 2,
+   "stale": true,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
   },
@@ -863,7 +868,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -875,7 +880,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -886,8 +891,8 @@
    "date": "2026-11-18",
    "freq": "td",
    "allow": 0,
-   "lag_td": 1,
-   "days": 2,
+   "lag_td": 2,
+   "days": 3,
    "stale": true,
    "owner": "W 本機排程 tools/pcf_local.py（兆豐官網擋雲端 IP）",
    "note": ""
@@ -898,8 +903,8 @@
    "date": "2026-11-19",
    "freq": "td",
    "allow": 2,
-   "lag_td": 0,
-   "days": 1,
+   "lag_td": 1,
+   "days": 2,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": "海外持股／美債：官網揭露本來就晚 2 個交易日"
@@ -911,7 +916,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -923,7 +928,7 @@
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -941,6 +946,6 @@
    "note": "最後檢查 2026-11-20 15:48：正常 資料到 13:45"
   }
  ],
- "n_stale": 1,
+ "n_stale": 6,
  "tg_day": "2026-11-20"
 }
