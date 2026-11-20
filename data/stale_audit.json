@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-21 02:30",
+ "asof": "2026-11-21 04:02",
  "first_stale": {
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-20",
   "docs/data/warrant_flow.json|權證資金流": "2026-11-21",
@@ -240,11 +240,11 @@
   {
    "name": "集保股權分散",
    "path": "docs/data/tdcc.json",
-   "date": "2026-11-13",
+   "date": "2026-11-20",
    "freq": "wk",
    "allow": 0,
-   "lag_td": 5,
-   "days": 8,
+   "lag_td": 0,
+   "days": 1,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） tdcc.py",
    "note": "集保每週五更新"
