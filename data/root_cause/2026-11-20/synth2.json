@@ -1,0 +1,176 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"超微遭做空機構狙擊與中國暴露疑慮導致半導體股重挫\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-20\",\n      \"who\": \"Hunterbrook Media\",\n      \"event\": \"超微（AMD）遭做空機構 Hunterbrook Media 狙擊，指其中國業務與出口管制存在漏洞並進行放空，導致股價大跌\",\n      \"mechanism\": \"超微與半導體類股遭做空重挫，透過供應鏈與外資資金移轉連動拖累亞股與台股，引發晶片與半導體族群骨牌效應\",\n      \"industry\": \"半導體\",\n      \"tw_link\": \"外資與法人因超微等美國半導體利空同步砍倉台股半導體與權值股，造成台積電與相關供應鏈大跌\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"IC設計\",\n        \"封裝測試\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"AMD\",\n        \"Hunterbrook\",\n        \"Short Report\",\n        \"China\",\n        \"超微\",\n        \"做空\",\n        \"中國\"\n      ],\n      \"evidence\": [\n        \"D24\",\n        \"D36\"\n      ],\n      \"langs\": [\n        \"en\",\n        \"zh\"\n      ],\n      \"why_root\": \"\",\n      \"drill\": [\n        \"AMD short report Hunterbrook China\",\n        \"超微 做空 中國 漏洞\"\n      ]\n    },\n    {\n      \"title\": \"Anthropic上市未能消弭市場對AI泡沫與資本支出的疑慮\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-20\",\n      \"who\": \"Anthropic\",\n      \"event\": \"Anthropic 進行史上最大規模 IPO，雖然首日收高但未能消弭市場對 AI 泡沫與資本支出回收期過長的疑慮\",\n      \"mechanism\": \"美股科技股與半導體類股全面走跌，透過供應鏈與外資資金移轉連動拖累亞股與台股\",\n      \"industry\": \"科技\",\n      \"tw_link\": \"美股科技股大跌透過全球AI供應鏈連結直接衝擊台股電子權值股與AI概念股\",\n      \"tw_sectors\": [\n        \"伺服器與品牌組裝\",\n        \"散熱與液冷\",\n        \"CCL與電子材料\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Anthropic\",\n        \"IPO\",\n        \"AI\",\n        \"bubble\",\n        \"Anthropic\",\n        \"上市\",\n        \"AI泡沫\"\n      ],\n      \"evidence\": [\n        \"D11\",\n        \"P301\"\n      ],\n      \"langs\": [\n        \"en\",\n        \"zh\"\n      ],\n      \"why_root\": \"\",\n      \"drill\": [\n        \"Anthropic IPO AI bubble selloff\",\n        \"Anthropic 上市 AI 泡沫 賣壓\"\n      ]\n    },\n    {\n      \"title\": \"台股融資斷頭潮與流動性危機擴大跌勢\",\n      \"layer\": \"放大因素\",\n      \"event_date\": \"2026-11-20\",\n      \"who\": \"散戶與融資投資人\",\n      \"event\": \"台股連續重挫導致融資擔保維持率跌破160%，斷頭令齊發引發多殺多\",\n      \"mechanism\": \"斷頭賣壓迫使券商強制平盤或投資人恐慌性拋售，進一步加劇市場流動性風險\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"融資維持率跌破水準引發連環強制平盤，加劇台股跌幅大於美股的現象\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"融資\",\n        \"斷頭\",\n        \"維持率\",\n        \"多殺多\",\n        \"Margin call\",\n        \"Liquidation\"\n      ],\n      \"evidence\": [\n        \"P97\",\n        \"P88\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\"\n      ],\n      \"why_root\": \"市場連續重挫使融資戶擔保維持率急速惡化，屬於放大跌幅的次生結構性機制\",\n      \"drill\": [\n        \"台股 融資斷頭 維持率 多殺多\",\n        \"Taiwan margin call liquidation\"\n      ]\n    },\n    {\n      \"title\": \"金管會祭出限空令等穩定措施\",\n      \"layer\": \"政策回應\",\n      \"event_date\": \"2026-11-19\",\n      \"who\": \"金融監督管理委員會\",\n      \"event\": \"金管會宣布當日收盤價跌幅達3.5%以上次一交易日不得低於前一交易日收盤價放空等措施\",\n      \"mechanism\": \"主管機關介入調節市場放空行為，企圖遏止空方氣焰但面臨龐大賣壓挑戰\",\n      \"industry\": \"金融\",\n      \"tw_link\": \"主管機關實施限空令2.0企圖支撐信心，但盤中賣壓過大效果受限\",\n      \"tw_sectors\": [\n        \"金融\",\n        \"全市場\"\n      ],\n      \"direction\": \"不明\",\n      \"keywords\": [\n        \"金管會\",\n        \"限空令\",\n        \"平盤下\",\n        \"放空\",\n        \"FSC\",\n        \"Short-selling\"\n      ],\n      \"evidence\": [\n        \"P1013\",\n        \"P74\"\n      ],\n      \"langs\": [\n        \"zh\"\n      ],\n      \"why_root\": \"\",\n      \"drill\": [\n        \"金管會 限空令 措施\",\n        \"Taiwan FSC short-selling restriction\"\n      ]\n    }\n  ],\n  \"summary\": \"2026年11月20日台股暴跌主要源於美股Anthropic上市未能消弭AI泡沫疑慮，加上超微（AMD）遭做空機構狙擊引發半導體股重挫；同時，國內融資斷頭潮與流動性危機放大了跌幅，使台股跌幅與標準差顯著大於前一晚美股。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "超微遭做空機構狙擊與中國暴露疑慮導致半導體股重挫",
+    "layer": "根因",
+    "event_date": "2026-11-20",
+    "who": "Hunterbrook Media",
+    "event": "超微（AMD）遭做空機構 Hunterbrook Media 狙擊，指其中國業務與出口管制存在漏洞並進行放空，導致股價大跌",
+    "mechanism": "超微與半導體類股遭做空重挫，透過供應鏈與外資資金移轉連動拖累亞股與台股，引發晶片與半導體族群骨牌效應",
+    "industry": "半導體",
+    "tw_link": "外資與法人因超微等美國半導體利空同步砍倉台股半導體與權值股，造成台積電與相關供應鏈大跌",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "IC設計",
+     "封裝測試"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "AMD",
+     "Hunterbrook",
+     "Short Report",
+     "China",
+     "超微",
+     "做空",
+     "中國"
+    ],
+    "evidence": [
+     "D24",
+     "D36"
+    ],
+    "langs": [
+     "en",
+     "zh"
+    ],
+    "why_root": "",
+    "drill": [
+     "AMD short report Hunterbrook China",
+     "超微 做空 中國 漏洞"
+    ]
+   },
+   {
+    "title": "Anthropic上市未能消弭市場對AI泡沫與資本支出的疑慮",
+    "layer": "根因",
+    "event_date": "2026-11-20",
+    "who": "Anthropic",
+    "event": "Anthropic 進行史上最大規模 IPO，雖然首日收高但未能消弭市場對 AI 泡沫與資本支出回收期過長的疑慮",
+    "mechanism": "美股科技股與半導體類股全面走跌，透過供應鏈與外資資金移轉連動拖累亞股與台股",
+    "industry": "科技",
+    "tw_link": "美股科技股大跌透過全球AI供應鏈連結直接衝擊台股電子權值股與AI概念股",
+    "tw_sectors": [
+     "伺服器與品牌組裝",
+     "散熱與液冷",
+     "CCL與電子材料"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Anthropic",
+     "IPO",
+     "AI",
+     "bubble",
+     "Anthropic",
+     "上市",
+     "AI泡沫"
+    ],
+    "evidence": [
+     "D11",
+     "P301"
+    ],
+    "langs": [
+     "en",
+     "zh"
+    ],
+    "why_root": "",
+    "drill": [
+     "Anthropic IPO AI bubble selloff",
+     "Anthropic 上市 AI 泡沫 賣壓"
+    ]
+   },
+   {
+    "title": "台股融資斷頭潮與流動性危機擴大跌勢",
+    "layer": "放大因素",
+    "event_date": "2026-11-20",
+    "who": "散戶與融資投資人",
+    "event": "台股連續重挫導致融資擔保維持率跌破160%，斷頭令齊發引發多殺多",
+    "mechanism": "斷頭賣壓迫使券商強制平盤或投資人恐慌性拋售，進一步加劇市場流動性風險",
+    "industry": "全市場",
+    "tw_link": "融資維持率跌破水準引發連環強制平盤，加劇台股跌幅大於美股的現象",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "融資",
+     "斷頭",
+     "維持率",
+     "多殺多",
+     "Margin call",
+     "Liquidation"
+    ],
+    "evidence": [
+     "P97",
+     "P88"
+    ],
+    "langs": [
+     "zh",
+     "en"
+    ],
+    "why_root": "市場連續重挫使融資戶擔保維持率急速惡化，屬於放大跌幅的次生結構性機制",
+    "drill": [
+     "台股 融資斷頭 維持率 多殺多",
+     "Taiwan margin call liquidation"
+    ]
+   },
+   {
+    "title": "金管會祭出限空令等穩定措施",
+    "layer": "政策回應",
+    "event_date": "2026-11-19",
+    "who": "金融監督管理委員會",
+    "event": "金管會宣布當日收盤價跌幅達3.5%以上次一交易日不得低於前一交易日收盤價放空等措施",
+    "mechanism": "主管機關介入調節市場放空行為，企圖遏止空方氣焰但面臨龐大賣壓挑戰",
+    "industry": "金融",
+    "tw_link": "主管機關實施限空令2.0企圖支撐信心，但盤中賣壓過大效果受限",
+    "tw_sectors": [
+     "金融",
+     "全市場"
+    ],
+    "direction": "不明",
+    "keywords": [
+     "金管會",
+     "限空令",
+     "平盤下",
+     "放空",
+     "FSC",
+     "Short-selling"
+    ],
+    "evidence": [
+     "P1013",
+     "P74"
+    ],
+    "langs": [
+     "zh"
+    ],
+    "why_root": "",
+    "drill": [
+     "金管會 限空令 措施",
+     "Taiwan FSC short-selling restriction"
+    ]
+   }
+  ],
+  "summary": "2026年11月20日台股暴跌主要源於美股Anthropic上市未能消弭AI泡沫疑慮，加上超微（AMD）遭做空機構狙擊引發半導體股重挫；同時，國內融資斷頭潮與流動性危機放大了跌幅，使台股跌幅與標準差顯著大於前一晚美股。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmpnih_fwtr.txt",
+  "附檔": [],
+  "耗時秒": 131.3,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.5-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 32652,
+   "prompt_tokens": 31077,
+   "output_tokens": 1575,
+   "thinking_tokens": null
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1120_synth2",
+  "ok": true
+ }
+}
