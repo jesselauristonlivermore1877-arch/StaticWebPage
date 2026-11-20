@@ -53,17 +53,22 @@ kpi_a = f'''<div class="kpi"><div class="lab">上市融資維持率</div><div cl
 kpi_b = f'''<div class="kpi"><div class="lab">上市融資維持率（含 ETF）</div><div class="num">{f(last["maint_all"], 1)}<small>%</small></div><div class="sub">本站估算・同財經M平方定義</div></div>
 <div class="kpi"><div class="lab">上市融資維持率（扣除 ETF）</div><div class="num">{f(last["maint_ex"], 1)}<small>%</small></div><div class="sub">本站估算・融資 {f(last["amt_ex"], 0)} 億・{md(last["date"])} 單日 {sg(last["chg_ex"])} 億</div></div>'''
 
-GORD = ['台股正2', '其他槓桿', '反向', '股票型（市值、高息等）', '主動型', '債券型']
+PASSIVE = ['股票型（市值、高息等）', '台股正2', '其他槓桿', '反向', '債券型']
 L = last; tot_lots = L['lots_ex'] + L['lots_etf']; tot_mv = L['mv_ex'] + L['mv_etf']
 pct = lambda a, b: a / b * 100 if b else 0
-grp_rows = ''.join(
-    f'<tr><td>{k}</td><td>{L["grp"][k]["n"]}</td><td>{f(L["grp"][k]["lots"], 0)}</td><td>{f(pct(L["grp"][k]["lots"], tot_lots), 1)}%</td>'
-    f'<td>{f(L["grp"][k]["mv"], 1)}</td><td>{f(pct(L["grp"][k]["mv"], tot_mv), 1)}%</td><td>{f(L["grp"][k]["amt"], 1)}</td></tr>'
-    for k in GORD if k in L['grp'])
-grp_rows += (f'<tr><th>ETF 合計</th><th>{sum(v["n"] for v in L["grp"].values())}</th><th>{f(L["lots_etf"], 0)}</th><th>{f(pct(L["lots_etf"], tot_lots), 1)}%</th>'
-             f'<th>{f(L["mv_etf"], 1)}</th><th>{f(pct(L["mv_etf"], tot_mv), 1)}%</th><th>{f(L["etf_amt_est"], 1)}</th></tr>'
-             f'<tr><td>股票（扣除 ETF）</td><td></td><td>{f(L["lots_ex"], 0)}</td><td>{f(pct(L["lots_ex"], tot_lots), 1)}%</td>'
-             f'<td>{f(L["mv_ex"], 1)}</td><td>{f(pct(L["mv_ex"], tot_mv), 1)}%</td><td>{f(L["amt_ex"], 1)}</td></tr>')
+def gsum(keys):
+    z = {'n': 0, 'lots': 0, 'mv': 0.0, 'amt': 0.0}
+    for k in keys:
+        for kk in z:
+            z[kk] += L['grp'].get(k, {}).get(kk, 0)
+    return z
+def grow(name, v, tag='td', ind=False):
+    nm = f'{"　" if ind else ""}{name}'
+    return (f'<tr><{tag}>{nm}</{tag}><{tag}>{v["n"] if v["n"] else ""}</{tag}><{tag}>{f(v["lots"], 0)}</{tag}><{tag}>{f(pct(v["lots"], tot_lots), 1)}%</{tag}>'
+            f'<{tag}>{f(v["mv"], 1)}</{tag}><{tag}>{f(pct(v["mv"], tot_mv), 1)}%</{tag}><{tag}>{f(v["amt"], 1)}</{tag}><{tag}>{f(pct(v["mv"], v["amt"]), 1) + "%" if v["amt"] else "—"}</{tag}></tr>')
+ACT = gsum(['主動型']); PAS = gsum(PASSIVE); ALL = gsum(PASSIVE + ['主動型'])
+grp_rows = grow('主動式 ETF', ACT, 'th') + grow('被動式 ETF', PAS, 'th') + ''.join(grow(k, L['grp'][k], ind=True) for k in PASSIVE if k in L['grp'])
+grp_rows += grow('ETF 合計', ALL, 'th') + grow('股票（扣除 ETF）', {'n': 0, 'lots': L['lots_ex'], 'mv': L['mv_ex'], 'amt': L['amt_ex']})
 g2 = lambda x, k='台股正2': x['grp'].get(k, {'lots': 0, 'mv': 0, 'amt': 0})
 trend_rows = ''.join(
     f'<tr><td>{md(x["date"])}</td><td>{f(x["etf_amt_est"], 1)}</td><td>{f(x["mv_etf"], 1)}</td><td>{f(pct(x["mv_etf"], x["mv_ex"] + x["mv_etf"]), 1)}%</td>'
@@ -83,13 +88,20 @@ if W0:
 else:
     wave, wtxt = '<tr><td colspan="5">資料補齊中（需要 10-06 起的逐檔融資，證交所歷史端點回補改由 GitHub Actions 慢速補）</td></tr>', '這波（10-06 起）台股正2 vs 個股：資料補齊中。'
 z = g2(L)
-concl = (f'<li>ETF 融資「金額」小、「張數」大：{md(L["date"])} ETF 融資 {f(L["lots_etf"], 0)} 張，占全上市融資張數 {f(pct(L["lots_etf"], tot_lots), 1)}%；'
+GM = {k: pct(v['mv'], v['amt']) for k, v in L['grp'].items() if v['amt']}
+lo = sorted([k for k in GM if GM[k] < pct(L['mv_ex'], L['amt_ex'])], key=lambda k: GM[k]); hi = sorted([k for k in GM if GM[k] >= pct(L['mv_ex'], L['amt_ex'])], key=lambda k: -GM[k])
+nm = lambda k: {'股票型（市值、高息等）': '市值高息型', '主動型': '主動型', '台股正2': '台股正2', '其他槓桿': '其他槓桿', '反向': '反向', '債券型': '債券型'}[k]
+odd = (f'<li><b>為什麼扣掉 ETF 維持率反而略高？</b>{md(L["date"])} 扣除 ETF {f(L["maint_ex"], 2)}%、含 ETF {f(L["maint_all"], 2)}%，只差 {f(L["maint_ex"] - L["maint_all"], 2)} 個百分點。'
+       f'因為 ETF 整體推估維持率約 {f(pct(ALL["mv"], ALL["amt"]), 1)}%，比股票（{f(pct(L["mv_ex"], L["amt_ex"]), 1)}%）略低，扣掉它平均值就略為上升。'
+       f'ETF 裡面 {"、".join(f"{nm(k)}約 {GM[k]:.1f}%" for k in lo)} 偏低，被 {"、".join(f"{nm(k)}約 {GM[k]:.1f}%" for k in hi)} 拉回來，所以整體跟股票差不多。'
+       f'（ETF 各組融資金額是本站推估，維持率也是推估。）</li>')
+concl = odd + (f'<li>ETF 融資「金額」小、「張數」大：{md(L["date"])} ETF 融資 {f(L["lots_etf"], 0)} 張，占全上市融資張數 {f(pct(L["lots_etf"], tot_lots), 1)}%；'
          f'但 ETF 融資平均一張只值約 {f(L["mv_etf"] * 1e8 / L["lots_etf"] / 1e4, 2)} 萬元（股票平均 {f(L["mv_ex"] * 1e8 / L["lots_ex"] / 1e4, 2)} 萬元），換成市值只有 {f(L["mv_etf"], 0)} 億，占 {f(pct(L["mv_etf"], tot_mv), 1)}%；融資金額估算 {f(L["etf_amt_est"], 0)} 億。所以看金額，ETF 確實只有三、四百億的量級。</li>'
          f'<li>台股正2 四檔融資 {f(z["lots"], 0)} 張、市值 {f(z["mv"], 1)} 億，占全上市融資市值 {f(pct(z["mv"], tot_mv), 2)}%。占比小，市場的融資斷頭壓力主要在個股（股票融資市值 {f(L["mv_ex"], 0)} 億）。</li>'
          f'<li>{wtxt}</li><li>以上是融資餘額的統計描述，不代表後續走勢，不構成買賣建議。</li>')
 etf_sec = f'''<div class="card"><h2>④ ETF 融資拆解（Evans：「ETF 才三百多億？正2 占融資總量不多？」）</h2>
-<h3>{md(L["date"])} 分組</h3><div class="tw"><table><thead><tr><th>分組</th><th>有融資檔數</th><th>融資張數</th><th>占全上市張數</th><th>融資市值（億）</th><th>占全上市市值</th><th>融資金額估算（億）</th></tr></thead><tbody>{grp_rows}</tbody></table></div>
-<div class="foot">融資市值＝融資張數 × 1000 × 收盤（證交所逐檔資料，不是估算）；融資金額估算見第 3 段。分組依代號：台股正2＝00631L、00663L、00675L、00685L；其他槓桿＝其餘 L 結尾（海外正2 等）；反向＝R 結尾；主動型＝A 結尾；債券型＝B 結尾；其餘歸股票型（市值、高息、產業等）。</div>
+<h3>{md(L["date"])} 分組（先分主動式／被動式）</h3><div class="tw"><table><thead><tr><th>分組</th><th>有融資檔數</th><th>融資張數</th><th>占全上市張數</th><th>融資市值（億）</th><th>占全上市市值</th><th>融資金額（推估，億）</th><th>融資維持率（推估）</th></tr></thead><tbody>{grp_rows}</tbody></table></div>
+<div class="foot"><b>ETF 融資金額為本站推估，官方只公布總額</b>；各組融資維持率（推估）＝該組融資市值 ÷ 該組融資金額推估。融資市值＝融資張數 × 1000 × 收盤（證交所逐檔資料，不是推估）。分組依代號：台股正2＝00631L、00663L、00675L、00685L；其他槓桿＝其餘 L 結尾（海外正2 等）；反向＝R 結尾；主動型＝A 結尾；債券型＝B 結尾；其餘歸股票型（市值、高息、產業等）。</div>
 <h3>白話結論（數字由程式算）</h3><ul>{concl}</ul>
 <h3>這波（{md(W0["date"]) if W0 else "10/06"} 起）台股正2 vs 個股</h3><div class="tw"><table><thead><tr><th></th><th>融資張數</th><th>張數變化</th><th>融資市值（億）</th><th>市值變化</th></tr></thead><tbody>{wave}</tbody></table></div>
 <h3>近 20 個交易日 ETF 融資{"" if len(T20) >= 20 else f"（目前 {len(T20)} 日，資料補齊中）"}</h3><div class="tw"><table><thead><tr><th>日期</th><th>ETF 融資金額估算（億）</th><th>ETF 融資市值（億）</th><th>占全上市市值</th><th>台股正2 張數</th><th>台股正2 市值（億）</th><th>台股正2 占比</th></tr></thead><tbody>{trend_rows}</tbody></table></div>
@@ -126,7 +138,7 @@ th{{color:var(--ink2);font-weight:600;font-size:13px;background:var(--raise)}} s
 <li>第 4 段：ETF 融資拆解（總指揮追加）</li><li>最上面「本站怎麼算」：哪些是證交所實際數字、哪些是推估，逐項標清楚</li><li>對照：財經M平方（融資買進市值含 ETF ÷ 融資金額）。上市 11/19、11/20 本站 vs M平方差 0.03 個百分點以內（正式程式用本站日K收盤算 147.89／140.40）；上櫃兩天完全一致（第 3 段）</li></ul></div>
 
 <div class="card"><h2>本站怎麼算（兩個數字都是本站自己算的）</h2><p class="m">{md(last["date"])} 的值；標「推估」的是大概值。</p>
-<div class="how"><div class="hi"><div class="ht"><b>融資維持率（含 ETF）</b><span class="hv">{f(last["maint_all"], 2)}%</span></div><div class="hm">算法：全部上市證券（含 ETF）融資張數 × 1000 × 收盤 ÷ 證交所公布的上市融資金額</div><div class="hm">準確度：分子分母都是證交所公布數字，<b>不是推估</b>；跟財經M平方 11/19、11/20 差 0.03 個百分點以內</div></div><div class="hi"><div class="ht"><b>ETF 融資金額</b><span class="hv">約 {f(last["etf_amt_est"], 0)} 億</span></div><div class="hm">算法：逐檔追蹤：舊部位依剩餘張數保留，當天新買進按成交均價 × 60% 加入</div><div class="hm">準確度：<b>推估</b>（證交所只公布全市場融資金額，不分股票／ETF）；同算法套在全市場，誤差 {f(min(e20), 1)}%～{f(max(e20), 1)}%，ETF 這塊約 ±{f(max(abs(v) for v in e20) / 100 * last["etf_amt_est"], 0)} 億</div></div><div class="hi"><div class="ht"><b>ETF 占融資金額</b><span class="hv">約 {f(last["etf_amt_est"] / last["amt_all"] * 100, 1)}%</span></div><div class="hm">算法：ETF 融資金額推估 ÷ 上市融資金額</div><div class="hm">準確度：<b>推估</b>，看比例大小用</div></div><div class="hi"><div class="ht"><b>ETF 占融資市值</b><span class="hv">{f(last["mv_etf"] / (last["mv_etf"] + last["mv_ex"]) * 100, 1)}%</span></div><div class="hm">算法：ETF 融資張數 × 收盤 ÷ 全部融資市值</div><div class="hm">準確度：證交所逐檔數字，<b>不是推估</b></div></div><div class="hi"><div class="ht"><b>融資維持率（扣除 ETF）</b><span class="hv">約 {f(last["maint_ex"], 1)}%</span></div><div class="hm">算法：股票（扣代號 00 開頭）融資張數 × 1000 × 收盤 ÷（上市融資金額 − ETF 融資金額推估）</div><div class="hm">準確度：分子是實際數字，<b>分母含推估</b>，所以是大概值</div></div></div>
+<div class="how"><div class="hi"><div class="ht"><b>融資維持率（含 ETF）</b><span class="hv">{f(last["maint_all"], 2)}%</span></div><div class="hm">算法：全部上市證券（含 ETF）融資張數 × 1000 × 收盤 ÷ 證交所公布的上市融資金額</div><div class="hm">準確度：分子分母都是證交所公布數字，<b>不是推估</b>；跟財經M平方 11/19、11/20 差 0.03 個百分點以內</div></div><div class="hi"><div class="ht"><b>ETF 融資金額</b><span class="hv">約 {f(last["etf_amt_est"], 0)} 億</span></div><div class="hm">算法：逐檔追蹤：舊部位依剩餘張數保留，當天新買進按成交均價 × 60% 加入</div><div class="hm">準確度：<b>推估</b>（證交所只公布全市場融資金額，不分股票／ETF）；同算法套在全市場，誤差 {f(min(e20), 1)}%～{f(max(e20), 1)}%，ETF 這塊約 ±{f(max(abs(v) for v in e20) / 100 * last["etf_amt_est"], 0)} 億</div></div><div class="hi"><div class="ht"><b>ETF 占融資金額</b><span class="hv">約 {f(last["etf_amt_est"] / last["amt_all"] * 100, 1)}%</span></div><div class="hm"><b>全部 ETF</b>（含 0050 等市值型、主動型、正2、反向、債券），台股正2 四檔只占融資金額約 {f(g2(last)["amt"] / last["amt_all"] * 100, 1)}%（推估）、融資市值 {f(g2(last)["mv"] / (last["mv_ex"] + last["mv_etf"]) * 100, 1)}%</div><div class="hm">算法：ETF 融資金額推估 ÷ 上市融資金額</div><div class="hm">準確度：<b>推估</b>，看比例大小用</div></div><div class="hi"><div class="ht"><b>ETF 占融資市值</b><span class="hv">{f(last["mv_etf"] / (last["mv_etf"] + last["mv_ex"]) * 100, 1)}%</span></div><div class="hm">算法：ETF 融資張數 × 收盤 ÷ 全部融資市值</div><div class="hm">準確度：證交所逐檔數字，<b>不是推估</b></div></div><div class="hi"><div class="ht"><b>融資維持率（扣除 ETF）</b><span class="hv">約 {f(last["maint_ex"], 1)}%</span></div><div class="hm">算法：股票（扣代號 00 開頭）融資張數 × 1000 × 收盤 ÷（上市融資金額 − ETF 融資金額推估）</div><div class="hm">準確度：分子是實際數字，<b>分母含推估</b>，所以是大概值</div></div></div>
 <div class="foot">只用證交所公開資料（MI_MARGN 逐檔融資融券、MI_INDEX 收盤）；其他網站的數字只拿來對照，不拿來調整算法（玩股網來源不明，不採用）。歷史統計，不構成買賣建議。</div></div>
 
 <div class="card"><h2>① 表格放在圖下面</h2>
