@@ -33,10 +33,24 @@ def ver_block(d):
                   f'{s["within2"]}/{s["n_pred"]} 天誤差 &lt; 2%，近 20 個校準日最大誤差 <b>{f(s["err20_max"], 2)}%</b>，'
                   f'最近一天 {f(s["err_pred_last"], 2)}%；不校準（直接套 {int(x["r0"] * 10)} 成）最近一天差 {f(s["err_r0_last"], 1)}%。'
                   f'目前校準後實際平均成數約 <b>{f(s["ratio"] * 100, 1)}%</b>（{md(s["k_from"])} 校準）')
+            # 近 20 個校準日超標的日子逐一寫明（含官方金額單日變化），照實標示、不另設例外
+            c20 = cal[-20:]
+            bad = []
+            for i, c in enumerate(c20):
+                e = c.get('err_pred')
+                if e is not None and abs(e) >= 2:
+                    j = cal.index(c)
+                    chg = (c['official'] / cal[j - 1]['official'] - 1) * 100 if j > 0 and cal[j - 1]['official'] else None
+                    bad.append(f'{md(c["date"])}（誤差 {f(e, 2)}%' + (f'，官方{nm}融資金額單日 {f(chg, 1)}%' if chg is not None else '') + '）')
+            if bad:
+                n_ok = sum(1 for c in c20 if c.get('err_pred') is not None and abs(c['err_pred']) < 2)
+                n_all = sum(1 for c in c20 if c.get('err_pred') is not None)
+                v2 += (f'。<b>近 20 個校準日 {n_ok}/{n_all} 天 &lt; 2%，超標的是：{"、".join(bad)}</b>；'
+                       '照實標「未過」，不改門檻、不設急跌例外，之後每天自動重算')
         else:
             v2 = '尚無可校準日'
         ok = (s.get('bal_match') or 0) >= 99.9 and (s['err20_max'] or 99) < 2
-        out.append(f'<div class="hi"><div class="ht"><b>{nm}</b><span class="tag {"ok" if ok else "ng"}">{"兩條都過" if ok else "未過／未驗"}</span></div>'
+        out.append(f'<div class="hi"><div class="ht"><b>{nm}</b><span class="tag {"ok" if ok else "ng"}">{"兩條都過" if ok else ("②未過" if (s.get("bal_match") or 0) >= 99.9 and cal else "未過／未驗")}</span></div>'
                    f'<div class="hm">① 另一份原始資料重算：{v1}</div><div class="hm">② 全市場推估合計 vs 官方融資金額：{v2}</div></div>')
     return '<div class="how">' + ''.join(out) + '</div>'
 
