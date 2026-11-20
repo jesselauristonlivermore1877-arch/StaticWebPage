@@ -226,7 +226,7 @@ button.theme svg{width:15px; height:15px}
 .rdev b{position:absolute; top:-3px; bottom:-3px; width:1.5px; left:50%;
   background:var(--acc); opacity:.7}
 /* 🟢 N-12（2026-09-07）：折線 hover 的浮標。
-   Evans 2026-09-06：「就像財經 M 平方那樣，可以看前面的數值。
+   Evans 2026-09-06：「就像外部財經網站那樣，可以看前面的數值。
    不然我只有看折線變化，不知道某個日期的數值也可惜」。
    ⚠️ 這一組 class 是全站折線圖共用的樣板 —— 之後 ETF 與籌碼的折線
       照抄同一段互動邏輯，不要各寫一份。 */
@@ -4971,7 +4971,7 @@ function insMonthly(S, B, ds) {
     (PM[m] = PM[m] || []).push({ti: String(ti).replace(/本人$/, ""), who, d, t}); });
   // 🔴 10-25 20:45：股本變動（分割、減資，insider.py split＝[[月, 持股倍率]]）→ 那個月以前的收盤除以倍率，線與期間漲跌才接得起來；金額照原價算（張數也是原單位）
   const adj = m => (S.split || []).reduce((a, [sm, f]) => sm > m ? a * f : a, 1);
-  // 🟢 10-26 01:00（總指揮裁示 1、2，ToAlpha 口徑）：淨買賣＝集中市場買進－賣出（S.mk[月]＝[集中買股, 集中賣股, 其他增股, 其他減股, [買進人], [賣出人]]，
+  // 🟢 10-26 01:00（總指揮裁示 1、2，外站參考 口徑）：淨買賣＝集中市場買進－賣出（S.mk[月]＝[集中買股, 集中賣股, 其他增股, 其他減股, [買進人], [賣出人]]，
   //   insider.py 依姓名去重、股數加總）→ 這裡才換張，不逐人四捨五入；贈與、繼承、信託、私募、員工酬勞＝其他原因，另列灰色、不算淨買賣。
   //   還沒回補拆分的月份（沒有 S.mk[月]）pend＝持股月差（含其他原因），只畫灰色空心點、不計入合計。
   const MK = S.mk || {};
@@ -4985,9 +4985,9 @@ function insMonthly(S, B, ds) {
     return Object.assign(base, {mk: true, pend: false, bl, sl, ba: bl * avg * 1000, sa: sl * avg * 1000, net: nl * avg * 1000, nl, nb: k[4].length, ns: k[5].length,
       oi: k[2] / 1000, od: -k[3] / 1000, top: Object.entries(tiN).sort((a, b) => b[1] - a[1]).map(x => x[0])[0] || "", nside: side.length, B: k[4], S: k[5]}); });
 }
-/* 🟢 10-25 16:30（Evans 雲端 2，ToAlpha 那張）：內部人買賣 K 線圖（月）——
+/* 🟢 10-25 16:30（Evans 雲端 2，外站參考 那張）：內部人買賣 K 線圖（月）——
    月底收盤線＋當月內部人集中市場淨買（紅）／淨賣（綠）圓點（面積＝金額）；金額最大的幾個月標框「職稱＋人數＋均價＋淨額」；
-   下方每月集中市場買進（往上紅）／賣出（往下綠）金額柱，其他原因增加／減少疊在外側用灰色（🟢 10-26 01:00 改 ToAlpha 口徑）；近 6／12 個月合計＋白話。ink- 前綴。 */
+   下方每月集中市場買進（往上紅）／賣出（往下綠）金額柱，其他原因增加／減少疊在外側用灰色（🟢 10-26 01:00 改 外站參考 口徑）；近 6／12 個月合計＋白話。ink- 前綴。 */
 const INK_GRAY = "#8a8f98";
 function insKMonth(S, B, ds, nm, code) {
   const box = el("div", "ink-box");
@@ -5050,7 +5050,7 @@ function insKMonth(S, B, ds, nm, code) {
     `<span><i style="background:${INK_GRAY}"></i>其他原因增減（贈與、繼承、信託、私募、員工酬勞等，不算買賣）</span>` +
     `<small class="rv-dim">　圓點外加虛線圈＝當月有他人名義（紫）或信託（金）變動；灰色虛線空心圈＋「待補」＝還沒回補集中市場拆分的月份${Object.keys(S.mk_d || {}).length ? "；月份上方「申報日 mm/dd」＝該月持股異動本站首次查到的時間（官方月表沒有申報日欄位；「最晚」＝機制上線前已收）" : ""}${(S.split || []).length ? `；${S.split.map(([m, f]) => `${m} 股本變動（持股 ×${nf(f, 3)}）`).join("、")}，之前的收盤已除以倍率還原` : ""}</small>`));
   // 近 6／12 個月合計（只算已拆分的月份）＋白話
-  // 窗口結束在最後一個有申報的月份（每月 15 日前申報上個月；當月還沒申報 → 不算進近 6／12 個月，跟 ToAlpha 一樣）
+  // 窗口結束在最後一個有申報的月份（每月 15 日前申報上個月；當月還沒申報 → 不算進近 6／12 個月，跟 外站參考 一樣）
   const sum = k => { const T = R.slice(0, LAST + 1).slice(-k), D = T.filter(r => r.mk);
     return {a: D.reduce((x, r) => x + r.net, 0), l: D.reduce((x, r) => x + r.nl, 0), b: D.reduce((x, r) => x + r.bl, 0), s: D.reduce((x, r) => x + r.sl, 0),
       ba: D.reduce((x, r) => x + r.ba, 0), sa: D.reduce((x, r) => x + r.sa, 0), oi: D.reduce((x, r) => x + r.oi, 0), od: D.reduce((x, r) => x + r.od, 0),
@@ -7351,7 +7351,7 @@ function ifPersonCC(r) {
   const hit = IF_CC_RX.find(([, rx]) => rx.test(t));
   return hit ? hit[0] : null;
 }
-const IF_SRC_CC = [["tw", /經濟日報|工商時報|中央社|鉅亨|聯合新聞|聯合報|UDN|自由時報|自由財經|中時|中國時報|ETtoday|TVBS|三立|民視|天下|商業周刊|商周|財訊|今周刊|風傳媒|Yahoo奇摩|Yahoo股市|MoneyDJ|數位時代|科技新報|TechNews|Taipei Times|Focus Taiwan|台視|華視|公視|東森|匯流|INSIDE|CMoney|經理人|遠見|報導者|新頭殼|NOWnews|鏡週刊|鏡新聞|中廣|Rti|中央廣播|壹蘋|太報|Anue|Smart自學|理財周刊|財經M平方|MacroMicro|ESG遠見|動區|DIGITIMES|電子時報|經濟部|金管會/i],
+const IF_SRC_CC = [["tw", /經濟日報|工商時報|中央社|鉅亨|聯合新聞|聯合報|UDN|自由時報|自由財經|中時|中國時報|ETtoday|TVBS|三立|民視|天下|商業周刊|商周|財訊|今周刊|風傳媒|Yahoo奇摩|Yahoo股市|MoneyDJ|數位時代|科技新報|TechNews|Taipei Times|Focus Taiwan|台視|華視|公視|東森|匯流|INSIDE|經理人|遠見|報導者|新頭殼|NOWnews|鏡週刊|鏡新聞|中廣|Rti|中央廣播|壹蘋|太報|Anue|Smart自學|理財周刊|ESG遠見|動區|DIGITIMES|電子時報|經濟部|金管會/i],
   ["hk", /SCMP|South China Morning|明報|信報|香港經濟日報|星島|東方日報|HK01|香港01|RTHK|香港電台|am730|大紀元香港|AASTOCKS|阿思達克|富途|Futu|Investing\.com 香港/i],
   ["cn", /新華|人民日報|人民網|財新|央視|環球時報|第一財經|澎湃|證券時報|新浪|騰訊|網易|中新網|觀察者|界面|21世紀經濟|每日經濟|華爾街見聞|格隆匯|金十|東方財富|同花順/i],
   ["jp", /Nikkei|日經|日本經濟|NHK|朝日|讀賣|読売|毎日|每日新聞|産経|產經|時事通信|共同社|Kyodo|Japan Times|東洋経済|ダイヤモンド|日刊|Yomiuri|Asahi|Mainichi|Bloomberg\.co\.jp|ロイター|Yahoo!ニュース|みんかぶ|株探|テレ東|TBS|ITmedia/i],
@@ -13187,7 +13187,7 @@ function tabRiver() {
 /* 🟢 D-2（2026-09-22）：法說會。版面照 preview_ir.html（Evans 09-22「完美」）。
    料：docs/data/ir/index.json（列表）、ir/<代號>.json（近 4 場）、ir/tr/<檔>.json（逐字稿，點開才載）。
    來源全部是 MOPS 法說一覽的官方錄音／簡報，由 AI 生成 —— 每場都標「以原始錄音為準」。
-   🔴 逐字稿只給看、不給下載或一鍵複製（Evans：比照 alphamemo，限制程式撈，robots.txt 在使用者站）。 */
+   🔴 逐字稿只給看、不給下載或一鍵複製（Evans：比照外部逐字稿服務的做法，限制程式撈，robots.txt 在使用者站）。 */
 var _irIdx = null, _irIdxErr = null, _irStk = {};
 function irLoadIdx() {
   if (_irIdx || _irIdxErr) return Promise.resolve(_irIdx);
@@ -18980,7 +18980,7 @@ setTimeout(() => dpLoad().then(J => {
 
 /* 🟢 10-11（Evans P1-6）：個股資訊框 —— 近期重大訊息（現金增資附認股基準日、繳款期間、最後過戶日、撥券日）＋融資融券（單日或區間）。
    資料＝stock_lookup.py 的 docs/data/lookup/<代號前兩碼>.json；全市場個股都查得到（上櫃信用要等 margin_otc 累積）。 */
-/* 🟢 10-25 17:10（雲端 6，ToAlpha「部分」1、3、10）：資訊框升級成個股頁 ——
+/* 🟢 10-25 17:10（雲端 6，外站參考「部分」1、3、10）：資訊框升級成個股頁 ——
    頁首（收盤、漲跌、本益比、淨值比、殖利率、資料日、加入自選）、52 週區間位置條、1／3／6／12 個月 vs 大盤（上市比加權、上櫃比櫃買指數），
    上方一排分頁鈕跳到各段（分頁內容就是原本的模組）；每段標題下一行白話（sx-say）。料：lookup 的 x.hd（stock_lookup.py ⑫）。 */
 function sxWatch() { try { return JSON.parse(localStorage.getItem("gea_watch") || "[]"); } catch (e) { return []; } }
@@ -19019,7 +19019,7 @@ function sxNav(body) {
   secs.forEach(sc => { const t = sc.querySelector("h4").firstChild.textContent.trim(); const b = el("button", "rv-pill", esc(t)); b.onclick = () => sc.scrollIntoView({behavior: "smooth", block: "start"}); nav.appendChild(b); });
   body.insertBefore(nav, body.querySelector(".sx-hd") ? body.querySelector(".sx-hd").nextSibling : body.firstChild);
 }
-/* 🟢 10-25 17:10（雲端 6，ToAlpha 部分 9）：公司概況＋基本資料變動紀錄。料：lookup x.co、x.cg（corp_events.py 公司基本資料，公開資訊觀測站 OpenAPI）。 */
+/* 🟢 10-25 17:10（雲端 6，外站參考 部分 9）：公司概況＋基本資料變動紀錄。料：lookup x.co、x.cg（corp_events.py 公司基本資料，公開資訊觀測站 OpenAPI）。 */
 function sxProfile(X) {
   const C = X.co, G = X.cg || [];
   if (!C && !G.length) return null;
@@ -19036,7 +19036,7 @@ function sxProfile(X) {
     "10-25 起每天比對董事長、總經理、發言人、簽證會計師、股務代理、資本額，有變動會列在這裡；目前沒有變動。")));
   return sec;
 }
-/* 🟢 10-25 17:10（雲端 6，ToAlpha 部分 2d、8a、8b）：籌碼結構與股利 —— 外資持股比（現在 vs 20 個資料日前）、融資使用率、股東人數近 4 週、近 5 年現金股利與殖利率。
+/* 🟢 10-25 17:10（雲端 6，外站參考 部分 2d、8a、8b）：籌碼結構與股利 —— 外資持股比（現在 vs 20 個資料日前）、融資使用率、股東人數近 4 週、近 5 年現金股利與殖利率。
    料：lookup x.fq、x.mu、x.sh、x.dv（stock_extra.py：證交所 MI_QFIIS／MI_MARGN／TWT49U、櫃買 qfii／margin_bal／exDailyQ；tdcc.py 股權分散表）。 */
 function sxStruct(X) {
   const fq = X.fq, mu = X.mu, sh = (X.sh || []).filter(r => r[1] != null), dv = X.dv;

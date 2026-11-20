@@ -263,7 +263,7 @@ function rvStockNode(R, SB, code, win, cust) {
   if (pn) wrap.appendChild(pn);
   return wrap;
 }
-/* 🟢 10-05（toalpha 補強第 3 項）：股價營收比河流 —— docs/data/ps_river.json（ps_river.py）；虧損或獲利波動大的公司用 */
+/* 🟢 10-05（外站參考 補強第 3 項）：股價營收比河流 —— docs/data/ps_river.json（ps_river.py）；虧損或獲利波動大的公司用 */
 var _psW = null;
 function psNode(code) {
   const w = el("div", "rv-ps");
@@ -289,7 +289,7 @@ function psNode(code) {
   });
   return w;
 }
-/* 🟢 10-05（toalpha 補強第 2 項）：同業估值倍數排名 —— 同大類、市值最接近的 8 家（含自己），倍數越低名次越前；只排名、不評價 */
+/* 🟢 10-05（外站參考 補強第 2 項）：同業估值倍數排名 —— 同大類、市值最接近的 8 家（含自己），倍數越低名次越前；只排名、不評價 */
 function rvPeerNode(R, code) {
   const st = (R.stocks || {})[code];
   if (!st || !st.peer || !(st.peer.codes || []).length) return null;
