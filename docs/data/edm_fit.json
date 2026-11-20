@@ -1,25 +1,12 @@
 {
- "checked_at": "2026-11-20T06:24:18.779Z",
+ "checked_at": "2026-11-20T08:21:18.423Z",
  "date": "2026-11-19",
- "n": 70,
- "n_bad": 2,
+ "n": 72,
+ "n_bad": 1,
  "bad": {
   "GEA_主動ETF日報_00411A": {
    "cat": "ETF 各檔",
    "title": "00411A 統一前沿科技",
-   "err": "",
-   "issues": [
-    {
-     "area": "div.pe-top",
-     "dir": "下",
-     "px": 6,
-     "why": "div.pe-top scrollHeight 201＞clientHeight 195（容許 2）"
-    }
-   ]
-  },
-  "GEA_主動ETF日報_00990A": {
-   "cat": "ETF 各檔",
-   "title": "00990A 元大AI新經濟",
    "err": "",
    "issues": [
     {
