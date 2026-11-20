@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-20 19:01",
+ "asof": "2026-11-20 21:44",
  "first_stale": {
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-20"
  },
@@ -223,11 +223,11 @@
   {
    "name": "個股融資維持率排行",
    "path": "docs/data/stock_keep_rank.json",
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/stock_keep_rank.py",
    "note": ""
@@ -451,11 +451,11 @@
   {
    "name": "法說逐字稿",
    "path": "docs/data/ir/tr",
-   "date": "2026-11-18",
+   "date": "2026-11-20",
    "freq": "ev",
    "allow": 5,
-   "lag_td": 1,
-   "days": 2,
+   "lag_td": 0,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 ir_transcribe_one",
    "note": "有法說才有"
@@ -487,11 +487,11 @@
   {
    "name": "AI 研究報告（公司產業報告）",
    "path": "data/company_report",
-   "date": "2026-11-18",
+   "date": "2026-11-20",
    "freq": "ev",
    "allow": 5,
-   "lag_td": 1,
-   "days": 2,
+   "lag_td": 0,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 ir_report_watch",
    "note": ""
@@ -535,11 +535,11 @@
   {
    "name": "主動 ETF 持股 00400A",
    "path": "docs/data/pcf/00400A",
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
