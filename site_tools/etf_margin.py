@@ -184,10 +184,11 @@ def etf_mv(site, mkt, d, close, bc):
     return v / 1e8, miss
 
 
-def patch(site):
+def adjust(site, M):
+    """把 ETF 融資市值加進 maint（tools/mkt_overlay.maint() 的回傳 dict，記憶體內直接改）；成功回 0，沒改回 1。
+    🟢 11-21（雲端新14）：從 patch() 拆出來，讓選股 EDM（tools/pick_edm_ext.py margin_credit，daily 裡比 patch 早跑）用同一段算法。"""
     import numpy as np
-    pj = os.path.join(site, 'docs', 'data', 'mkt_overlay.json')
-    J = json.load(open(pj)); M = J['maint']; T = M['twse']
+    T = M['twse']
     if T.get('etf_in'):
         print('已經是含 ETF 版（etf_in），不重複修正'); return 0
     b = np.load(os.path.join(site, 'data', 'bars', 'daily.npz'), allow_pickle=True)
@@ -274,10 +275,22 @@ def patch(site):
             if x and x[ie] is not None:
                 print(f'  · 上櫃 {d} 本站估算 {x[ie]} vs M平方 {ref}（差 {x[ie] - ref:+.2f}）')
         O['est_etf_days'] = n_ok
+    print(f'✓ 上市 {len(new)} 天改含 ETF，最新 {new[-1][0]} {new[-1][1]}%，第 {T["pct"]} 百分位')
+    return 0
+
+
+def patch(site):
+    pj = os.path.join(site, 'docs', 'data', 'mkt_overlay.json')
+    J = json.load(open(pj)); T = J['maint']['twse']
+    if T.get('etf_in'):
+        print('已經是含 ETF 版（etf_in），不重複修正'); return 0
+    rc = adjust(site, J['maint'])
+    if rc:
+        return rc
     tmp = pj + '.tmp'
     json.dump(J, open(tmp, 'w'), ensure_ascii=False)   # 先寫暫存檔，成功才換掉（寫到一半出錯不會留下壞檔）
     json.load(open(tmp)); os.replace(tmp, pj)
-    print(f'✓ 已修正 {pj}：上市 {len(new)} 天改含 ETF，最新 {new[-1][0]} {new[-1][1]}%，第 {T["pct"]} 百分位')
+    print(f'✓ 已修正 {pj}')
     return 0
 
 
