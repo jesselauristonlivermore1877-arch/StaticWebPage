@@ -29,14 +29,29 @@ TRACE_N = 5
 
 
 def load_official(site):
-    """官方融資金額（億）。上市：docs/data/mkt_overlay.json maint.twse 第 4 欄優先，缺的用 data/margin_amt_hist.json；
+    """官方融資金額（億）。
+    上市：data/margin_amt_hist.json（證交所 MI_MARGN 逐日官方值）優先；沒有的日子才用 docs/data/mkt_overlay.json maint.twse 第 4 欄
+         （總指揮 11-21 裁示）；兩者重疊日的差異另外輸出到 off_cmp，列在「說明與驗證」。
     上櫃：mkt_overlay maint.otc 第 5 欄優先，缺的用 data/margin_dash_hist.json marginBalance（櫃買台股儀表板）。"""
     mo = json.load(open(os.path.join(site, 'docs/data/mkt_overlay.json')))['maint']
-    tw = {k: v for k, v in json.load(open(os.path.join(site, 'data/margin_amt_hist.json'))).items()}
-    tw_src = {k: 'margin_amt_hist' for k in tw}
-    for r in mo['twse']['rows']:
-        if r[3]:
-            tw[r[0]] = r[3]; tw_src[r[0]] = 'mkt_overlay'
+    hist = json.load(open(os.path.join(site, 'data/margin_amt_hist.json')))
+    ovl = {r[0]: r[3] for r in mo['twse']['rows'] if r[3]}
+    tw = dict(ovl); tw.update(hist)
+    both = sorted(d for d in hist if d in ovl)
+    diffs = [(d, (ovl[d] / hist[d] - 1) * 100) for d in both]
+    cmp_ = {'n': len(both), 'start': both[0] if both else None, 'end': both[-1] if both else None,
+            'only_overlay': sorted(d for d in ovl if d not in hist)}
+    if diffs:
+        big = [x for x in diffs if abs(x[1]) > 0.1]
+        mx = max(diffs, key=lambda x: abs(x[1]))
+        cmp_.update({'first_gt01': big[0][0] if big else None, 'n_gt01': len(big),
+                     'max_date': mx[0], 'max_pct': round(mx[1], 3),
+                     'mean_abs': round(sum(abs(x[1]) for x in diffs) / len(diffs), 3),
+                     'last_date': diffs[-1][0], 'last_pct': round(diffs[-1][1], 3),
+                     'monthly': {}})
+        for d, v in diffs:
+            cmp_['monthly'].setdefault(d[:7], []).append(v)
+        cmp_['monthly'] = {k: round(max(v, key=abs), 3) for k, v in cmp_['monthly'].items()}
     otc = {}
     p = os.path.join(site, 'data/margin_dash_hist.json')
     if os.path.exists(p):
@@ -46,7 +61,22 @@ def load_official(site):
     for r in mo['otc']['rows']:
         if r[4]:
             otc[r[0]] = r[4]
-    return {'twse': tw, 'otc': otc}, tw_src
+    return {'twse': tw, 'otc': otc}, cmp_
+
+
+def load_ca(site):
+    """除權息／減資／面額變更（data/corp_actions.json）。只取會改變融資張數的事件：
+    實測（雲端新13，11-21）：面額變更、減資當天證交所／櫃買會把融資餘額張數 × f（例：2327 面額 4 倍 6526→26429 張；
+    3290 減資 0.7 → 18942→14150 張含當天買賣），所以當天先把昨日餘額 × f，不把張數跳動當成買賣；融資金額（貸款）不變。
+    配股：融資張數不調整（例：1519 配 1.1 倍張數沒跳），貸款也不變 → 不調整（配到的股票不在融資擔保品裡，維持率照實下降；列待定奪）。"""
+    p = os.path.join(site, 'data/corp_actions.json')
+    out = {}
+    if os.path.exists(p):
+        for c, evs in json.load(open(p))['events'].items():
+            for e in evs:
+                if e.get('k') in ('面額', '減資') and e.get('f'):
+                    out.setdefault(c, []).append((e['d'], float(e['f']), e['k']))
+    return out
 
 
 def load_rows(site, sub, mkt, d):
@@ -66,7 +96,7 @@ def load_sector(path):
     return m
 
 
-def run_market(site, mkt, daily, official):
+def run_market(site, mkt, daily, official, ca=None):
     npz = np.load(os.path.join(site, 'data/bars', 'margin.npz' if mkt == 'twse' else 'margin_otc.npz'), allow_pickle=True)
     ncodes = [str(c) for c in npz['codes']]; nnames = [str(x) for x in npz['names']]
     ndates = [str(x) for x in npz['dates']]
@@ -159,6 +189,21 @@ def run_market(site, mkt, daily, official):
 
     r0 = R0[mkt]
 
+    # 減資／面額變更：事件生效的交易日，昨日餘額 × f（張數換算），不當成買賣
+    adj = np.ones((T, n)); ca_applied = []
+    for c, evs in (ca or {}).items():
+        j = ci.get(c)
+        if j is None:
+            continue
+        for ed, fct, kd in evs:
+            t = next((i for i, d in enumerate(D) if d >= ed), None)
+            if t is None or t == 0:
+                continue
+            adj[t, j] *= fct
+            ca_applied.append([c, names.get(c, c), kd, ed, D[t], fct,
+                               None if np.isnan(bal[t - 1, j]) else int(bal[t - 1, j]),
+                               None if np.isnan(bal[t, j]) else int(bal[t, j])])
+
     def accumulate(use_real):
         V = np.full((T, n), np.nan)
         restart = np.zeros((T, n), bool)
@@ -166,7 +211,7 @@ def run_market(site, mkt, daily, official):
             b = bal[t]; px = close[t]
             if t == 0:
                 V[t] = b * 1000 * px * r0; restart[t] = ~np.isnan(b); continue
-            pb = bal[t - 1]; pv = V[t - 1]
+            pb = bal[t - 1] * adj[t]; pv = V[t - 1]
             approx = np.maximum(b - pb, 0)
             bu = np.where(use_real & ~np.isnan(buy_real[t]), buy_real[t], approx) if use_real else approx
             bu = np.minimum(bu, b)
@@ -226,7 +271,7 @@ def run_market(site, mkt, daily, official):
         amt = kk * V[t, j]
         mt = mv[t, j] / amt * 100
         cost = V[t, j] / (r0 * b * 1000)          # 推估融資成本（每股均價）＝ 推估買進成本 ÷ 股數
-        b5 = bal[t - 5, j] if t >= 5 else np.nan
+        b5 = bal[t - 5, j] * float(np.prod(adj[t - 4:t + 1, j])) if t >= 5 else np.nan
         rows.append([c, names[c], int(b), round(float(mv[t, j]) / 1e8, 3), round(float(cost), 2),
                      round(float(mt), 1), round((mt - 130) / mt * 100, 1),
                      None if np.isnan(b5) else int(b - b5), round(float(close[t, j]), 2), round(float(amt) / 1e8, 3)])
@@ -252,7 +297,7 @@ def run_market(site, mkt, daily, official):
         traces.append({'code': c, 'name': names[c], 'steps': steps})
 
     # 驗證：真的買進 vs 近似買進（只算 margin_full 有資料的區段）
-    return {'date': D[-1], 'start': D[0], 'skipped': skipped, 'r0': r0, 'rows': rows, 'cal': cal, 'chk': chk, 'traces': traces,
+    return {'date': D[-1], 'start': D[0], 'skipped': skipped, 'ca': ca_applied, 'r0': r0, 'rows': rows, 'cal': cal, 'chk': chk, 'traces': traces,
             'n_full': int(full_ok.sum()), 'n_etf': int(etf_ok.sum()), 'n_days': T}
 
 
@@ -306,11 +351,12 @@ def main():
     a = ap.parse_args()
     site = a.site
     daily = load_daily(site)
-    official, tw_src = load_official(site)
+    official, off_cmp = load_official(site)
+    ca = load_ca(site)
     smap = load_sector(os.path.join(site, a.sector) if not os.path.isabs(a.sector) else a.sector)
     out = {'gen': 'site_tools/stock_maint.py', 'mkts': {}}
     for mkt in ('twse', 'otc'):
-        res = run_market(site, mkt, daily, official)
+        res = run_market(site, mkt, daily, official, ca)
         res['summary'] = summarize(res)
         for r in res['rows']:
             sec, big = smap.get(r[0], ('未分類', '未分類'))
@@ -321,6 +367,8 @@ def main():
     out['fields'] = ['代號', '名稱', '族群', '融資張數', '融資市值億', '推估成本', '推估維持率', '離130%', '近5日增減', '收盤', '推估金額億']
     out['sector_fields'] = ['族群', '大類', '檔數', '融資市值億', '推估金額億', '族群維持率', '低於130檔數', '成分股']
     out['sector_n'] = len(smap)
+    out['off_cmp'] = off_cmp
+    out['sector_cov'] = {m: sum(1 for r in out['mkts'][m]['rows'] if r[3] >= 100 and r[2] != '未分類') for m in out['mkts']}
     os.makedirs(os.path.join(site, a.out), exist_ok=True)
     json.dump(out, open(os.path.join(site, a.out, 'data.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
     print('✓', os.path.join(a.out, 'data.json'))

@@ -51,6 +51,31 @@ def skip_note(d):
     return out
 
 
+def ca_block(d):
+    rows = ''
+    for m, nm in MKT_NAME.items():
+        for c, n, k, ed, td, fct, pb, b in d['mkts'][m].get('ca', []):
+            if pb:
+                rows += f'<tr><td>{nm} {html.escape(c)}</td><td class="l">{html.escape(n)}</td><td class="l">{k}</td><td>{md(td)}</td><td>×{fct:g}</td><td>{f(pb, 0)}</td><td>{f(b, 0)}</td></tr>'
+    n_all = sum(len(d['mkts'][m].get('ca', [])) for m in MKT_NAME)
+    return ('<details class="card"><summary>減資／面額變更調整紀錄</summary><div class="in">'
+            f'<p class="m">資料期間共 {n_all} 件減資、面額變更（來源 data/corp_actions.json），下表列出事件前一日仍有融資餘額的股票；其餘當天融資已歸零，不影響推估。</p>'
+            '<div class="tw"><table><thead><tr><th>股票</th><th class="l">名稱</th><th class="l">事件</th><th>生效日</th><th>張數換算</th><th>前一日張數</th><th>當天張數</th></tr></thead>'
+            f'<tbody>{rows}</tbody></table></div></div></details>')
+
+
+def off_block(d):
+    c = d.get('off_cmp') or {}
+    if not c.get('n'):
+        return ''
+    mon = '、'.join(f'{k}：{v:+.2f}%' for k, v in c['monthly'].items())
+    return ('<details class="card"><summary>上市官方融資金額：兩份資料比對</summary><div class="in"><p class="m">'
+            '上市融資金額優先用證交所逐日公布值（data/margin_amt_hist.json）；那份沒有的日子（'
+            f'{md(c["only_overlay"][0]) if c["only_overlay"] else "—"} 起共 {len(c["only_overlay"])} 天）才用本站維持率資料檔（docs/data/mkt_overlay.json）的融資金額。'
+            f'兩份重疊 {c["n"]} 天（{md(c["start"])}～{md(c["end"])}）：差異超過 0.1% 的有 {c["n_gt01"]} 天，從 {md(c["first_gt01"]) if c["first_gt01"] else "—"} 開始；'
+            f'最大差 {c["max_pct"]:+.2f}%（{md(c["max_date"])}），平均 {c["mean_abs"]:.2f}%；最近一個重疊日 {md(c["last_date"])} 差 {c["last_pct"]:+.2f}%。各月最大差：{mon}。</p></div></details>')
+
+
 def cal_table(d, m):
     x = d['mkts'][m]
     cal = [c for c in x['cal'] if c['k_raw'] is not None][-20:]
@@ -137,7 +162,7 @@ details{{margin:6px 0}} summary{{cursor:pointer;font-size:14px;font-weight:600}}
 <div class="bar"><span class="seg" data-g="mkt"><button data-v="twse" class="on">上市</button><button data-v="otc">上櫃</button></span>
 <span class="seg" data-g="gsrt"><button data-v="5" class="on">族群維持率</button><button data-v="6">&lt; 130% 檔數</button><button data-v="3">融資市值</button></span>
 <span class="seg" data-g="unc"><button data-v="0" class="on">隱藏未分類</button><button data-v="1">含未分類</button></span></div>
-<p class="m" id="ginfo"></p>
+<p class="m">族群只含本站追蹤池已分類的股票（融資 ≥ 100 張中：上市 {d["sector_cov"]["twse"]} 檔、上櫃 {d["sector_cov"]["otc"]} 檔），其餘歸「未分類」，預設隱藏。</p><p class="m" id="ginfo"></p>
 <div class="tw"><table class="stk" id="gt"><thead><tr>
 <th class="s l" data-k="0">族群</th><th class="s" data-k="5">族群維持率</th><th class="s" data-k="6">&lt; 130% 檔數</th><th class="s" data-k="2">檔數</th><th class="s" data-k="3">融資市值（億）</th><th class="s" data-k="4">推估金額（億）</th><th class="s l" data-k="1">大類</th></tr></thead><tbody></tbody></table></div>
 <button class="more" id="gmore" hidden></button>
@@ -152,7 +177,7 @@ details{{margin:6px 0}} summary{{cursor:pointer;font-size:14px;font-weight:600}}
 <li>「今日買進」有證交所／櫃買逐檔融資買進的日子用真的買進；沒有的日子用退路：買進 ≈ max(今日餘額 − 昨日餘額, 0)（會低估週轉，下跌時推估成本偏高、維持率偏低）。</li>
 <li><b>成數為本站校準推估</b>：法規上限上市 6 成、上櫃 5 成，但券商可只借 4、3 成，所以先用 6／5 成累推，再用證交所／櫃買公布的融資總金額（含 ETF，分子也含 ETF）逐日校準出「實際平均成數」，套回各股。上市目前約 {f(tw["summary"]["ratio"] * 100, 1)}%、上櫃約 {f(ot["summary"]["ratio"] * 100, 1)}%。</li>
 <li>個股推估維持率＝融資張數 × 1000 × 收盤 ÷ 推估融資金額；「再跌幾 % 到 130%」＝（維持率 − 130）÷ 維持率。族群維持率＝族群融資市值合計 ÷ 族群推估金額合計。</li>
-<li>已知限制：除權息、減資、分割造成的張數變動會被當成買賣；新上市／斷檔後重新起算時，成本先以當天收盤代入。</li></ol></div></details>
+<li>減資、面額變更：生效當天證交所／櫃買會把融資張數換算（例：面額變更 1 換 4 張），本站先把前一日張數照比例換算再累推，不當成買賣；融資金額不變。配股：融資張數不會調整、融資金額也不變，所以不調整（配到的股票不在融資擔保品裡）。現金股利不調整。</li><li>已知限制：新上市／斷檔後重新起算時，成本先以當天收盤代入；沒有逐檔融資買進資料的日子用退路（買進 ≈ 餘額增加量）。</li></ol></div></details>{ca_block(d)}{off_block(d)}
 <details class="card"><summary>校準紀錄（近 20 個校準日）</summary><div class="in"><p class="m">上市</p>{cal_table(d, "twse")}<p class="m">上櫃</p>{cal_table(d, "otc")}</div></details>
 <details class="card"><summary>抽樣 5 檔逐日累推過程（前 3 天＋最後 3 天）</summary><div class="in">{traces}</div></details>
 <p class="foot">資料：證交所 MI_MARGN、櫃買融資融券餘額（逐檔融資張數）、本站日K（收盤、成交金額、成交股數）、證交所／櫃買公布融資金額。資料日：上市 {md(tw["date"])}、上櫃 {md(ot["date"])}。<b>歷史統計，非預測，不構成買賣建議。</b></p>
