@@ -82,7 +82,7 @@ if W0:
     wtxt = (f'這波從 {md(W0["date"])} 起：台股正2 融資張數 {"增加" if a1["lots"] > a0["lots"] else "減少"} {f(abs(pct(a1["lots"] - a0["lots"], a0["lots"])), 1)}%，'
             f'股票融資張數 {"增加" if L["lots_ex"] > W0["lots_ex"] else "減少"} {f(abs(pct(L["lots_ex"] - W0["lots_ex"], W0["lots_ex"])), 1)}%。')
 else:
-    wave, wtxt = '<tr><td colspan="5">原始資料還沒回補到 10-06，這段暫缺</td></tr>', '這波（10-06 起）對照：原始資料還沒回補到 10-06。'
+    wave, wtxt = '<tr><td colspan="5">資料補齊中（需要 10-06 起的逐檔融資，證交所歷史端點回補改由 GitHub Actions 慢速補）</td></tr>', '這波（10-06 起）台股正2 vs 個股：資料補齊中。'
 z = g2(L)
 concl = (f'<li>ETF 融資「金額」小、「張數」大：{md(L["date"])} ETF 融資 {f(L["lots_etf"], 0)} 張，占全上市融資張數 {f(pct(L["lots_etf"], tot_lots), 1)}%；'
          f'但 ETF 融資平均一張只值約 {f(L["mv_etf"] * 1e8 / L["lots_etf"] / 1e4, 2)} 萬元（股票平均 {f(L["mv_ex"] * 1e8 / L["lots_ex"] / 1e4, 2)} 萬元），換成市值只有 {f(L["mv_etf"], 0)} 億，占 {f(pct(L["mv_etf"], tot_mv), 1)}%；融資金額估算 {f(L["etf_amt_est"], 0)} 億。所以看金額，ETF 確實只有三、四百億的量級。</li>'
@@ -105,7 +105,7 @@ etf_sec = f'''<div class="card"><h2>④ ETF 融資拆解（Evans：「ETF 才三
 <div class="foot">融資市值＝融資張數 × 1000 × 收盤（證交所逐檔資料，不是估算）；融資金額估算見第 3 段。分組依代號：台股正2＝00631L、00663L、00675L、00685L；其他槓桿＝其餘 L 結尾（海外正2 等）；反向＝R 結尾；主動型＝A 結尾；債券型＝B 結尾；其餘歸股票型（市值、高息、產業等）。</div>
 <h3>白話結論（數字由程式算）</h3><ul>{concl}</ul>
 <h3>這波（{md(W0["date"]) if W0 else "10/06"} 起）台股正2 vs 個股</h3><div class="tw"><table><thead><tr><th></th><th>融資張數</th><th>張數變化</th><th>融資市值（億）</th><th>市值變化</th></tr></thead><tbody>{wave}</tbody></table></div>
-<h3>近 20 個交易日 ETF 融資</h3><div class="tw"><table><thead><tr><th>日期</th><th>ETF 融資金額估算（億）</th><th>ETF 融資市值（億）</th><th>占全上市市值</th><th>台股正2 張數</th><th>台股正2 市值（億）</th><th>台股正2 占比</th></tr></thead><tbody>{trend_rows}</tbody></table></div>
+<h3>近 20 個交易日 ETF 融資{"" if len(T20) >= 20 else f"（目前 {len(T20)} 日，資料補齊中）"}</h3><div class="tw"><table><thead><tr><th>日期</th><th>ETF 融資金額估算（億）</th><th>ETF 融資市值（億）</th><th>占全上市市值</th><th>台股正2 張數</th><th>台股正2 市值（億）</th><th>台股正2 占比</th></tr></thead><tbody>{trend_rows}</tbody></table></div>
 <div class="foot">歷史日子用證交所 MI_MARGN 歷史端點（rwd/zh/marginTrading/MI_MARGN?date=…&selectType=ALL）逐日回補，含全部 ETF；收盤用本站日K庫（與證交所 MI_INDEX 逐檔核對一致）。</div>
 <h3>{md(L["date"])} ETF 融資市值前 10 名</h3><div class="tw"><table><thead><tr><th>代號</th><th style="text-align:left">名稱</th><th>融資張數</th><th>融資市值（億）</th><th>占全上市市值</th></tr></thead><tbody>{top_rows}</tbody></table></div></div>'''
 
@@ -117,7 +117,7 @@ page = f'''<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta
 *{{box-sizing:border-box}} body{{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif}}
 .w{{max-width:1120px;margin:0 auto;padding:16px}} h1{{font-size:22px;margin:4px 0 10px}} h2{{font-size:18px;margin:0 0 6px}} h3{{font-size:15px;margin:14px 0 6px}}
 .n,.card{{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:14px;min-width:0}}
-.n ul{{margin:4px 0 0;padding-left:20px}} .m{{color:var(--ink2);font-size:13px}}
+.n ul{{margin:4px 0 0;padding-left:20px}} li,p{{overflow-wrap:anywhere}} .m{{color:var(--ink2);font-size:13px}}
 .up{{color:var(--up)}} .dn{{color:var(--dn)}}
 .ph{{border:1px dashed var(--line);border-radius:8px;padding:28px 12px;text-align:center;color:var(--ink2);font-size:13px;background:var(--raise)}}
 .tw{{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}}
@@ -139,7 +139,7 @@ th{{color:var(--ink2);font-weight:600;font-size:13px;background:var(--raise)}} s
 
 <div class="card"><h2>① 表格放在圖下面</h2>
 <div class="ph">（正式頁這裡是「上市融資維持率 × 加權指數」圖，預覽不重畫）</div>
-<h3>近 20 個交易日 上市資券進出（扣除 ETF）</h3>
+<h3>近 20 個交易日 上市資券進出（扣除 ETF）</h3>{'' if len(T20) >= 20 else f'<p class="m">目前有 {len(T20)} 個交易日（{md(T20[0]["date"])}～{md(T20[-1]["date"])}）；更早的日子資料補齊中（證交所歷史端點回補改由 GitHub Actions 慢速補）。</p>'}
 <div class="tw"><table><thead><tr><th>日期</th><th>融資餘額（億）</th><th>融資增減（億）</th><th>融資維持率</th><th>融券餘額（張）</th></tr></thead><tbody>{rows}</tbody></table></div>
 <div class="foot">扣除 ETF＝排除代號 00 開頭的證券（與證交所 MI_MARGN「ETF」類別合計一致）。融資增減紅＝增加、綠＝減少。融資餘額（億）與維持率為<b>本站估算</b>：融資金額＝證交所公布上市全市場融資金額 − ETF 融資金額估算；維持率＝Σ 股票融資張數 × 1000 × 收盤 ÷ 扣除 ETF 融資金額。融券餘額＝證交所逐檔融券今日餘額加總。資料來源：證交所 MI_MARGN、MI_INDEX。近 20 日最高 {f(mx, 2)}%、最低 {f(mn, 2)}%。<b>歷史統計，非預測，不構成買賣建議。</b></div></div>
 
@@ -153,7 +153,8 @@ th{{color:var(--ink2);font-weight:600;font-size:13px;background:var(--raise)}} s
 <div class="foot">附圖只拿到 11/19、11/20 兩列數字（總指揮轉述；附圖原檔在 CustomerServiceANDSales/_inbox，這個雲端窗沒有權限讀，11/12～11/18 待補比對）。</div>
 <h3>差在哪</h3><ul>
 <li><b>融券張數</b>：11/19 本站 {f(REF["2026-11-19"]["short"], 0)} 張、11/20 {f(REF["2026-11-20"]["short"], 0)} 張＝附圖，一致（＝證交所 MI_MARGN「股票」類別合計）。</li>
-{diff_li}<li><b>本站估算的驗證</b>：同一套逐檔追蹤算法套在全部證券上，跟證交所公布的全市場融資金額比，近 60 日誤差絕對值平均 {f(err_avg, 2)}%、最大 {f(err_max, 2)}%；近 20 日 {f(min(e20), 2)}%～{f(max(e20), 2)}%。張數核對（股票＋ETF＝全市場）{"每天都一致" if chk_ok else "有對不上的日子"}。</li>
+{diff_li}<li><b>本站估算的驗證</b>：同一套逐檔追蹤算法套在全部證券上，跟證交所公布的全市場融資金額比，{len(errs)} 個交易日誤差 {f(min(e20), 2)}%～{f(max(e20), 2)}%（模型都偏高）。目前起點只能放在 {md(R[0]["date"])}（假設起點那天每檔維持率都是 166.7%），起點太近、誤差偏大；歷史補齊後起點往前拉，誤差應會縮小，屆時再判斷能不能上線。誤差只影響 ETF 那塊（約三、四百億），對扣除 ETF 融資金額的影響約 ±{f(max(abs(x["model_err_pct"]) for x in T20) / 100 * max(x["etf_amt_est"] for x in T20), 0)} 億。張數核對（股票＋ETF＝全市場）{"每天都一致" if chk_ok else "有對不上的日子"}。</li>
+<li><b>第二份原始資料核對</b>：證交所 OpenAPI（openapi.twse.com.tw/v1/exchangeReport/MI_MARGN，只有最新一天＝11/19）跟本頁用的 rwd 歷史端點 11/19 逐檔比對：1,311 檔融資餘額、融券餘額、融資買進全部一致（2026-11-20 核對）。ETF 類別合計（selectType=0099P）3,251,700 張、股票類別 5,695,919 張，與本頁分法一致。收盤價：本站日K庫與證交所 MI_INDEX 11/12、11/19、11/20 各約 1,380 檔全部一致。</li>
 <li><b>本站現有維持率</b>（{md(last["date"])} {OLD.get(last["date"])}%）：分子用逐檔資料庫（只有股票、沒有 ETF），分母用全市場融資金額（含 ETF），所以偏低；這也是頁面上「比櫃買官方平均低 7 個百分點」的一部分原因。</li></ul></div>
 
 {etf_sec}
