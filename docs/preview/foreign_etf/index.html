@@ -4838,7 +4838,7 @@ function worldTrend(M) {
 }
 /* 🟢 2026-09-26（總清單 7）：信息流時間軸 —— 法說（重點句）、券商報告（評等／目標價）、世界趨勢新聞（有族群標籤的），
    依個股或族群分組。料全部是已公開的檔：data/ir/index.json、data/broker.json、data/macro.json。點開才載。tl- 前綴。 */
-/* 🟢 10-05（toalpha 補強第 10 項）：內部人持股與董監質押 —— docs/data/insider.json（insider.py；官方只給最新一期，歷史從 2026-10 起累積） */
+/* 🟢 10-05（外站參考補強第 10 項）：內部人持股與董監質押 —— docs/data/insider.json（insider.py；官方只給最新一期，歷史從 2026-10 起累積） */
 var _insW = null;
 function insNode(code) {
   const w = el("div", "ins-box");
@@ -4860,7 +4860,7 @@ function insNode(code) {
 /* 🟢 10-11（Evans P2-9）：內部人申報頁籤（籌碼組）—— 事前申報轉讓、未轉讓、董監大股東持股月異動、質押／解質、關係人（配偶、未成年子女、利用他人名義）持股。
    資料：insider.py（證交所／櫃買 OpenAPI t187ap11／12／13，SOURCES 五十一），追蹤名單。 */
 /* 🟢 10-11（預覽 v6 第 9～11 項）：內部人申報個股頁 —— 搜尋框選股後：K 線（收盤）標事件點（申報轉讓、質押、解質、代持增減、
-   大股東持股異動）、折線（董監持股比、質押比、代持比，每月）、逐人明細。照 toalpha 的呈現；註明僅供參考。 ins- 前綴。 */
+   大股東持股異動）、折線（董監持股比、質押比、代持比，每月）、逐人明細。照外站參考的呈現；註明僅供參考。 ins- 前綴。 */
 var _insCo = null, _insSB = null, _insMP = null, _insRK = null;
 /* 🟢 10-25 22:30（總指揮雲端 1：資料池＝全市場）：追蹤池在 insider.json；池外每檔一份 data/insider/<代號>.json（點開才載）＋ insider_mp.json（月均價） */
 function insGet(J, code) {
@@ -5811,7 +5811,7 @@ function tabWarrant() {
   }; draw(); });
   return root;
 }
-/* 🟢 10-05（toalpha 補強第 8 項）：個股新聞熱度 —— docs/data/news_heat.json（news_heat.py）。則數＋異常日當天漲跌，只是統計。 */
+/* 🟢 10-05（外站參考補強第 8 項）：個股新聞熱度 —— docs/data/news_heat.json（news_heat.py）。則數＋異常日當天漲跌，只是統計。 */
 var _nhW = null;
 function nhNode(code) {
   const w = el("div", "nh-box");
@@ -5854,7 +5854,7 @@ function infoTimeline() {
       else (m.sectors || []).forEach(sec => EV.push({d: e.date, k: "kl", code: null, name: null, big: sec, t, url, extra: ""}));
     }));
     // 🟢 10-05（Evans 1）：類型加「重大訊息」（公開資訊觀測站，官方原文；來自即時信息流）
-    // 10-05（toalpha 補強第 6 項）：近 200 天的重訊用 mi_react.json（類別＋首日漲跌、相對 0050），即時信息流補當天剛出的
+    // 10-05（外站參考補強第 6 項）：近 200 天的重訊用 mi_react.json（類別＋首日漲跌、相對 0050），即時信息流補當天剛出的
     const miSeen = new Set();
     Object.entries((MI || {}).stocks || {}).forEach(([c, L]) => L.forEach(e => { if (e[2] === "例行") return; miSeen.add(c + e[0] + e[3].slice(0, 20));
       EV.push({d: e[0], k: "mi", code: c, name: nm(c), big: BM[c] || "其他", t: `【${e[2]}】${e[3]}`, url: tlMops("ajax_t05st01", c, e[0]),
@@ -6926,7 +6926,7 @@ function nlList(F, empty) {
   w.appendChild(ifMore(L, x => nlItem(x), 8));
   return w;
 }
-/* 🟢 10-05（toalpha 補強第 9 項）：重大訊息依主旨分類（由上往下第一個對到的） */
+/* 🟢 10-05（外站參考補強第 9 項）：重大訊息依主旨分類（由上往下第一個對到的） */
 const NL_MI_KIND = [["財報營收", /營收|財報|財務報告|自結|損益|盈餘/], ["股利", /股利|除息|除權|配息|配股/],
   ["資本與股權", /增資|減資|可轉債|轉換公司債|庫藏股|私募|股權|股份/], ["人事異動", /(?:董事長|總經理|發言人|財務主管|會計主管|稽核主管|研發主管|獨立董事|董事|監察人|經理人).{0,10}(?:異動|辭任|委任|解任|新任|改選|補選|退休)|辭任|解任/],
   ["合約與資產", /合約|訂單|取得|處分|簽訂|採購|設備|不動產|土地|廠房|投資/]];
@@ -12867,7 +12867,7 @@ function rvStockNode(R, SB, code, win, cust) {
   if (pn) wrap.appendChild(pn);
   return wrap;
 }
-/* 🟢 10-05（toalpha 補強第 3 項）：股價營收比河流 —— docs/data/ps_river.json（ps_river.py）；虧損或獲利波動大的公司用 */
+/* 🟢 10-05（外站參考補強第 3 項）：股價營收比河流 —— docs/data/ps_river.json（ps_river.py）；虧損或獲利波動大的公司用 */
 var _psW = null;
 function psNode(code) {
   const w = el("div", "rv-ps");
@@ -12893,7 +12893,7 @@ function psNode(code) {
   });
   return w;
 }
-/* 🟢 10-05（toalpha 補強第 2 項）：同業估值倍數排名 —— 同大類、市值最接近的 8 家（含自己），倍數越低名次越前；只排名、不評價 */
+/* 🟢 10-05（外站參考補強第 2 項）：同業估值倍數排名 —— 同大類、市值最接近的 8 家（含自己），倍數越低名次越前；只排名、不評價 */
 function rvPeerNode(R, code) {
   const st = (R.stocks || {})[code];
   if (!st || !st.peer || !(st.peer.codes || []).length) return null;
@@ -13491,7 +13491,7 @@ function calList(EV, C) {
   return box;
 }
 
-/* 🟢 10-05（toalpha 補強第 1 項，Evans 照雲端排序）：財務體質 —— 公開資訊觀測站綜合損益表 40 季（is_hist.py → docs/data/is_q.json）。
+/* 🟢 10-05（外站參考補強第 1 項，Evans 照雲端排序）：財務體質 —— 公開資訊觀測站綜合損益表 40 季（is_hist.py → docs/data/is_q.json）。
    選個股：最新一季三率與近 20 季百分位、營收＋毛利率雙軸（近 20 季）、毛利率季節性熱力圖（年 × 季）、十年季度表（8 列＋展開）。
    沒選個股：追蹤名單最新一季三率與百分位排行。fn- 前綴。只呈現財報數字，不做評價。 */
 var _fnW = null;
@@ -14138,7 +14138,7 @@ function tabIndustryNotes() {
   });
   return card("產業動向", "依 26 大類整理的產業訊息", root);
 }
-/* 🟢 10-05（toalpha 補強第 7 項）：法說會節奏與會後股價反應 —— docs/data/ir_react.json（ir_hist.py）。只列數字，不做評價。 */
+/* 🟢 10-05（外站參考補強第 7 項）：法說會節奏與會後股價反應 —— docs/data/ir_react.json（ir_hist.py）。只列數字，不做評價。 */
 var _irrW = null;
 function irrLoad() { if (!_irrW) _irrW = jfLoad("data/ir_react.json").then(v => { if (!v) _irrW = null; return v; }); return _irrW; }
 function irReactNode(code) {
