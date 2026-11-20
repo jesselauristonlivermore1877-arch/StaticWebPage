@@ -321,6 +321,21 @@ jobs:
         timeout-minutes: 5
         run: python tools/mkt_overlay.py ../site ../site/docs/data/mkt_overlay.json
 
+      # 🟢 11-20 晚（雲端新12，【新】總指揮依 Evans：基準＝財經M平方「融資買進市值（含 ETF）÷ 融資金額」）：
+      #    margin.npz／margin_otc.npz 沒有 ETF → 上市維持率分子少了 ETF 市值（11/19 136.4 → 應為 147.9）。
+      #    ① 每天落地 ETF 逐檔融資（證交所 OpenAPI 一個請求＋櫃買 margin/balance 一個請求；同一資料日已落地就不再打）→ data/margin_etf/
+      #    ② 把 ETF 融資市值加進 mkt_overlay.json 上市維持率（＋上櫃本站估算）；上市有任何一天缺 ETF 檔就整段不改，
+      #       11/19、11/20 跟 M平方差 > 0.2 個百分點也不改（網站沿用舊值）。歷史由 backfill_etf_margin.yml 慢速補。
+      - name: 融資維持率改含 ETF（同財經M平方定義）
+        working-directory: site
+        continue-on-error: true
+        timeout-minutes: 5
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python site_tools/etf_margin.py land . || echo "::warning::ETF 逐檔融資落地失敗（明天再補）"
+          python site_tools/etf_margin.py patch . || echo "::warning::維持率含 ETF 修正沒套用（ETF 歷史未補齊或核對沒過，沿用舊值）"
+
       # 🟢 11-16（雲端舊14，Evans 看過預覽 OK）：軌跡流向（動能轉折日＋族群動能流向＋量能／籌碼／估值／爆量圖層）→ docs/data/trail_flow.json
       #    只讀日K、法人、本益比與指數檔，不打網路；預覽同一支 tools/trail_flow.py；失敗不擋（網站沿用上一份）
       - name: 軌跡流向（市場）

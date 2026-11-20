@@ -1,0 +1,60 @@
+# ============================================================================
+# backfill_etf_margin.yml ─ ETF 逐檔融資歷史慢速回補（雲端新12，2026-11-20）
+#
+#   為什麼：data/bars/margin.npz、margin_otc.npz 沒有 ETF；融資維持率要改成同財經M平方的「含 ETF」定義，
+#           需要 2025-09-22 起每天的 ETF 逐檔融資餘額 → data/margin_etf/twse_<日期>.json、tpex_<日期>.json
+#   怎麼跑：GitHub → StaticWebPage → Actions →「回補 ETF 逐檔融資」→ Run workflow
+#   規矩：每次請求間隔 ≥ 5 秒（預設 6）；證交所回 HTML 擋頁就立刻停、不重打，已抓到的照樣提交，下次接著補。
+#         補完不用另外做事：每日班的「融資維持率改含 ETF」那一步看到歷史齊了就會自動套用（核對過才套）。
+# ============================================================================
+name: 回補 ETF 逐檔融資
+
+on:
+  workflow_dispatch:
+    inputs:
+      start:
+        description: "起日（YYYY-MM-DD）"
+        required: false
+        default: "2025-09-22"
+      end:
+        description: "迄日（YYYY-MM-DD）"
+        required: false
+        default: "9999-12-31"
+      sleep:
+        description: "每次請求間隔秒數（最少 5）"
+        required: false
+        default: "6"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-build
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+      - run: pip install numpy
+      - name: 回補
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python site_tools/etf_margin.py backfill . --start "${{ inputs.start }}" --end "${{ inputs.end }}" --sleep "${{ inputs.sleep }}"
+      - name: 提交
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/margin_etf
+          if git diff --staged --quiet; then echo "沒有新檔"; exit 0; fi
+          git commit -m "data: ETF 逐檔融資回補 $(ls data/margin_etf | wc -l) 檔"
+          for i in 1 2 3 4; do
+            git pull --rebase origin main && git push origin HEAD:main && break
+            [ "$i" = 4 ] && exit 1
+            sleep $((i * 10))
+          done

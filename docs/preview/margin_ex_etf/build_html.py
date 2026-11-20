@@ -8,12 +8,9 @@ d = json.load(open(sys.argv[1]))
 R = d['rows']
 T20 = R[-20:]
 last = R[-1]
-REF = {'2026-11-19': {'amt': 4457.0, 'chg': -256.72, 'maint': 128.31, 'short': 122448},   # 附圖 ref_margin_table_1119（總指揮轉述）
-       '2026-11-20': {'amt': 4024.0, 'chg': -433.21, 'maint': 119.53, 'short': 99912}}    # 附圖 11/20（總指揮 11-20 追加轉述）
 import os
 _MO = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../data/mkt_overlay.json')))['maint']['twse']
 OLD = {r[0]: r[1] for r in _MO['rows']}   # 本站現有維持率（docs/data/mkt_overlay.json maint.twse）
-PCT = _MO.get('pct')
 
 
 def f(v, n=1):
@@ -31,17 +28,19 @@ def md(s):
 
 rows = ''.join(
     f'<tr><td>{md(x["date"])}</td><td>{f(x["amt_ex"], 1)}</td><td>{sg(x["chg_ex"]) if "chg_ex" in x else "—"}</td>'
-    f'<td>{f(x["maint_ex"], 2)}%</td><td>{f(x["short_ex"], 0)}</td></tr>' for x in reversed(T20))
+    f'<td>{f(x["maint_all"], 2)}%</td><td>{f(x["maint_ex"], 2)}%</td><td>{f(x["short_ex"], 0)}</td></tr>' for x in reversed(T20))
 
+MM = {'twse': {'2026-11-19': 147.9, '2026-11-20': 140.4}, 'otc': {'2026-11-19': 139.59, '2026-11-20': 131.94}}   # 財經M平方（總指揮 11-20 轉述）
+OTC_ME = {'2026-11-19': 139.59, '2026-11-20': 131.94}   # 本站含 ETF 上櫃（site_tools/etf_margin.py 同一算法；櫃買逐檔融資＋收盤）
+OTC_OLD = {'2026-11-19': 138.48}; OTC_OFF = {'2026-11-18': 163.15, '2026-11-19': 156.18}
+dif = lambda a, b: f'{"+" if a - b > 0.005 else "−" if a - b < -0.005 else "±"}{f(abs(a - b), 2)}'
 cmp_rows = ''
-for x in R:
-    if not ('2026-11-12' <= x['date'] <= '2026-11-20'):
-        continue
-    ref = REF.get(x['date'])
-    cell = lambda a, b, n, u='': (f'{f(a, n)}{u}' + (f'<br><small>附圖 {f(b, n)}{u}・差 {"+" if a - b > 0 else "−" if a - b < 0 else ""}{f(abs(a - b), n)}</small>' if b is not None else ''))
-    cmp_rows += (f'<tr><td>{md(x["date"])}</td><td>{cell(x["amt_ex"], ref and ref["amt"], 1)}</td>'
-                 f'<td>{cell(x.get("chg_ex", 0), ref and ref["chg"], 2)}</td><td>{cell(x["maint_ex"], ref and ref["maint"], 2, "%")}</td>'
-                 f'<td>{cell(x["short_ex"], ref and ref["short"], 0)}</td><td>{f(x["maint_all"], 2)}%</td><td>{OLD.get(x["date"], "—")}</td></tr>')
+for dd, v in MM['twse'].items():
+    x = next((y for y in R if y['date'] == dd), None)
+    if x:
+        cmp_rows += f'<tr><td>上市 {md(dd)}</td><td>{f(x["maint_all"], 2)}%</td><td>{v}%</td><td>{dif(x["maint_all"], v)}</td><td>{OLD.get(dd, "—")}%</td><td>—</td></tr>'
+for dd, v in MM['otc'].items():
+    cmp_rows += f'<tr><td>上櫃 {md(dd)}</td><td>{f(OTC_ME[dd], 2)}%</td><td>{v}%</td><td>{dif(OTC_ME[dd], v)}</td><td>{OTC_OLD.get(dd, "—")}{"%" if dd in OTC_OLD else ""}</td><td>{OTC_OFF.get(dd, "未公布")}{"%" if dd in OTC_OFF else ""}</td></tr>'
 
 errs = [abs(x['model_err_pct']) for x in R[-60:]]
 err_max, err_avg = max(errs), sum(errs) / len(errs)
@@ -49,9 +48,9 @@ e20 = [x['model_err_pct'] for x in T20]
 chk_ok = all(x['chk_lots'] == 0 and x['chk_short'] == 0 for x in R)
 mx = max(x['maint_ex'] for x in T20); mn = min(x['maint_ex'] for x in T20)
 
-kpi_a = f'''<div class="kpi"><div class="lab">上市融資維持率</div><div class="num">{f(OLD.get(last["date"], last["maint_all"]), 1)}<small>%</small></div>
-<div class="sub">本站估算・位於歷史第 {PCT} 百分位</div><div class="sub2">扣除 ETF：<b>{f(last["maint_ex"], 1)}%</b>（融資 {f(last["amt_ex"], 0)} 億）</div></div>'''
-kpi_b = f'''<div class="kpi"><div class="lab">上市融資維持率（含 ETF）</div><div class="num">{f(OLD.get(last["date"], last["maint_all"]), 1)}<small>%</small></div><div class="sub">本站估算・位於歷史第 {PCT} 百分位</div></div>
+kpi_a = f'''<div class="kpi"><div class="lab">上市融資維持率</div><div class="num">{f(last["maint_all"], 1)}<small>%</small></div>
+<div class="sub">本站估算・同財經M平方定義</div><div class="sub2">扣除 ETF：<b>{f(last["maint_ex"], 1)}%</b>（融資 {f(last["amt_ex"], 0)} 億）</div></div>'''
+kpi_b = f'''<div class="kpi"><div class="lab">上市融資維持率（含 ETF）</div><div class="num">{f(last["maint_all"], 1)}<small>%</small></div><div class="sub">本站估算・同財經M平方定義</div></div>
 <div class="kpi"><div class="lab">上市融資維持率（扣除 ETF）</div><div class="num">{f(last["maint_ex"], 1)}<small>%</small></div><div class="sub">本站估算・融資 {f(last["amt_ex"], 0)} 億・{md(last["date"])} 單日 {sg(last["chg_ex"])} 億</div></div>'''
 
 GORD = ['台股正2', '其他槓桿', '反向', '股票型（市值、高息等）', '主動型', '債券型']
@@ -88,28 +87,6 @@ concl = (f'<li>ETF 融資「金額」小、「張數」大：{md(L["date"])} ETF
          f'但 ETF 融資平均一張只值約 {f(L["mv_etf"] * 1e8 / L["lots_etf"] / 1e4, 2)} 萬元（股票平均 {f(L["mv_ex"] * 1e8 / L["lots_ex"] / 1e4, 2)} 萬元），換成市值只有 {f(L["mv_etf"], 0)} 億，占 {f(pct(L["mv_etf"], tot_mv), 1)}%；融資金額估算 {f(L["etf_amt_est"], 0)} 億。所以看金額，ETF 確實只有三、四百億的量級。</li>'
          f'<li>台股正2 四檔融資 {f(z["lots"], 0)} 張、市值 {f(z["mv"], 1)} 億，占全上市融資市值 {f(pct(z["mv"], tot_mv), 2)}%。占比小，市場的融資斷頭壓力主要在個股（股票融資市值 {f(L["mv_ex"], 0)} 億）。</li>'
          f'<li>{wtxt}</li><li>以上是融資餘額的統計描述，不代表後續走勢，不構成買賣建議。</li>')
-diff_li = ''
-for dd, ref in REF.items():
-    x = next((y for y in R if y['date'] == dd), None)
-    if not x:
-        continue
-    imp_etf = x['amt_all'] - ref['amt']; imp_mv = ref['maint'] / 100 * ref['amt']
-    diff_li += (f'<li><b>{md(dd)} 融資金額</b>：全上市 {f(x["amt_all"], 1)} 億（證交所公布）。附圖扣 ETF {f(ref["amt"], 0)} 億 → 隱含 ETF 融資 {f(imp_etf, 1)} 億；'
-                f'本站估 ETF 融資 {f(x["etf_amt_est"], 1)} 億（ETF 融資市值 {f(x["mv_etf"], 1)} 億）。證交所不分類公布融資金額，兩邊都是估的，附圖估法不明。</li>'
-                f'<li><b>{md(dd)} 維持率</b>：附圖 {ref["maint"]}% × {f(ref["amt"], 0)} 億 → 隱含股票融資市值約 {f(imp_mv, 0)} 億；'
-                f'證交所逐檔張數 × 收盤＝{f(x["mv_ex"], 1)} 億，差 {f(x["mv_ex"] - imp_mv, 0)} 億（附圖分子約是本站的 {f(imp_mv / x["mv_ex"] * 100, 1)}%）。'
-                f'試過前一日收盤、隔日收盤、前一日張數都對不上，附圖分子算法查不出來，照實寫、不硬湊。</li>')
-
-HY = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'hyp.json')))
-hyp_rows = ''.join(f'<tr><td>{html.escape(h[0])}</td><td>{h[1]:.4f}</td><td>{(h[1] - 1) * 128.31:+.1f}</td><td>{h[2]:.4f}</td><td>{(h[2] - 1) * 119.53:+.1f}</td></tr>' for h in HY['rows'])
-hyp_sec = f'''<h3>Evans「差距要修好」：分子定義假說測試（{len(HY["rows"])} 種）</h3>
-<div class="tw"><table><thead><tr><th>假說</th><th>11/19 比值</th><th>維持率差（百分點）</th><th>11/20 比值</th><th>維持率差（百分點）</th></tr></thead><tbody>{hyp_rows}</tbody></table></div>
-<div class="foot">比值＝本站用該定義算的股票融資市值 ÷ 附圖隱含分子（附圖維持率 × 附圖扣 ETF 融資金額）；1＝對上。過關標準：兩天維持率差都 &lt; 1 個百分點。<b>結果：沒有一種過關。</b>最接近的是「排除前 2 大」（−4.9／−2.4 個百分點），但沒有道理支持這樣算，不採用。
-④ 固定打折：公式原文沒有任何折算係數（數位時代 2026-11-06〈融資維持率 130〉引用的整戶擔保維持率公式：（融資擔保品證券市值＋融券擔保品及保證金＋抵繳有價證券市值）÷（融資金額＋融券標的證券市值）× 100%）；整戶公式加進融券，只會讓比值更大、不會更小。
-① 分母：若分子用本站的值，附圖要對上，分母得是 11/19 約 5,149 億、11/20 約 4,740 億，都比全上市含 ETF 的融資金額（4,843.7／4,352.3 億）還大，不合理。
-⑤ 錯一天：前一日收盤、前一日張數都讓差距更大。<br>
-只有附圖兩天可比（玩股網被 Cloudflare 驗證擋下，只試一次就沒再抓；財經M平方 403）。總指揮手上的 30 天玩股網數字若給我，可以用同一支程式擴大測試。</div>'''
-
 etf_sec = f'''<div class="card"><h2>④ ETF 融資拆解（Evans：「ETF 才三百多億？正2 占融資總量不多？」）</h2>
 <h3>{md(L["date"])} 分組</h3><div class="tw"><table><thead><tr><th>分組</th><th>有融資檔數</th><th>融資張數</th><th>占全上市張數</th><th>融資市值（億）</th><th>占全上市市值</th><th>融資金額估算（億）</th></tr></thead><tbody>{grp_rows}</tbody></table></div>
 <div class="foot">融資市值＝融資張數 × 1000 × 收盤（證交所逐檔資料，不是估算）；融資金額估算見第 3 段。分組依代號：台股正2＝00631L、00663L、00675L、00685L；其他槓桿＝其餘 L 結尾（海外正2 等）；反向＝R 結尾；主動型＝A 結尾；債券型＝B 結尾；其餘歸股票型（市值、高息、產業等）。</div>
@@ -145,30 +122,30 @@ th{{color:var(--ink2);font-weight:600;font-size:13px;background:var(--raise)}} s
 <li>位置：籌碼組「融資×指數＋市場體感」頁籤，第一張「上市融資維持率 × 加權指數」圖下面，加一張近 20 個交易日的表（下面第 1 段）</li>
 <li>維持率卡要不要多一個「扣除 ETF」數字：第 2 段有 A、B 兩種版面請選</li>
 <li>融資張數、融券張數是證交所逐檔加總，不是估算；<b>融資金額扣除 ETF 是本站估算</b>（證交所只公布全市場融資金額，不分股票／ETF），算法與誤差寫在第 3 段</li>
-<li>第 4 段：ETF 融資拆解（總指揮追加）</li><li>跟附圖比：11/19、11/20 融券完全一致；融資金額與維持率對不上，原因寫在第 3 段，沒有硬湊</li></ul></div>
+<li>第 4 段：ETF 融資拆解（總指揮追加）</li><li>基準：財經M平方（融資買進市值含 ETF ÷ 融資金額）。上市 11/19、11/20 本站 vs M平方差 0.03 個百分點以內（正式程式用本站日K收盤算 147.89／140.40）；上櫃兩天完全一致（第 3 段）</li></ul></div>
 
 <div class="card"><h2>① 表格放在圖下面</h2>
 <div class="ph">（正式頁這裡是「上市融資維持率 × 加權指數」圖，預覽不重畫）</div>
 <h3>近 20 個交易日 上市資券進出（扣除 ETF）</h3>{'' if len(T20) >= 20 else f'<p class="m">目前有 {len(T20)} 個交易日（{md(T20[0]["date"])}～{md(T20[-1]["date"])}）；更早的日子資料補齊中（證交所歷史端點回補改由 GitHub Actions 慢速補）。</p>'}
-<div class="tw"><table><thead><tr><th>日期</th><th>融資餘額（億）</th><th>融資增減（億）</th><th>融資維持率</th><th>融券餘額（張）</th></tr></thead><tbody>{rows}</tbody></table></div>
-<div class="foot">扣除 ETF＝排除代號 00 開頭的證券（與證交所 MI_MARGN「ETF」類別合計一致）。融資增減紅＝增加、綠＝減少。融資餘額（億）與維持率為<b>本站估算</b>：融資金額＝證交所公布上市全市場融資金額 − ETF 融資金額估算；維持率＝Σ 股票融資張數 × 1000 × 收盤 ÷ 扣除 ETF 融資金額。融券餘額＝證交所逐檔融券今日餘額加總。資料來源：證交所 MI_MARGN、MI_INDEX。近 20 日最高 {f(mx, 2)}%、最低 {f(mn, 2)}%。<b>歷史統計，非預測，不構成買賣建議。</b></div></div>
+<div class="tw"><table><thead><tr><th>日期</th><th>融資餘額（億）</th><th>融資增減（億）</th><th>融資維持率（含 ETF）</th><th>融資維持率（扣除 ETF）</th><th>融券餘額（張）</th></tr></thead><tbody>{rows}</tbody></table></div>
+<div class="foot">扣除 ETF＝排除代號 00 開頭的證券（與證交所 MI_MARGN「ETF」類別合計一致）。融資增減紅＝增加、綠＝減少。融資餘額（億）與維持率為<b>本站估算</b>：融資金額＝證交所公布上市全市場融資金額 − ETF 融資金額估算；維持率（含 ETF）＝Σ 全部融資張數 × 1000 × 收盤 ÷ 證交所公布融資金額（同財經M平方）；維持率（扣除 ETF）＝Σ 股票融資張數 × 1000 × 收盤 ÷ 扣除 ETF 融資金額。融券餘額＝證交所逐檔融券今日餘額加總。資料來源：證交所 MI_MARGN、MI_INDEX。扣除 ETF 維持率近 20 日最高 {f(mx, 2)}%、最低 {f(mn, 2)}%。<b>歷史統計，非預測，不構成買賣建議。</b></div></div>
 
 <div class="card"><h2>② 維持率卡：兩種版面</h2>
 <p><span class="opt">A</span>原卡不動，下面多一行「扣除 ETF」</p><div class="kpis">{kpi_a}</div>
 <p style="margin-top:16px"><span class="opt">B</span>拆成兩張卡並排（含 ETF／扣除 ETF）</p><div class="kpis">{kpi_b}</div>
-<div class="foot">卡上「含 ETF」數字沿用正式頁現值（{md(last["date"])} {OLD.get(last["date"])}%）。注意第 3 段：現值的分子只有股票、分母含 ETF，口徑不一致；若照同一算法把 ETF 市值也算進分子，{md(last["date"])} 是 {f(last["maint_all"], 2)}%。要不要一起修，請 Evans 決定。</div></div>
+<div class="foot">「含 ETF」＝財經M平方同一定義（{md(last["date"])} {f(last["maint_all"], 2)}%）。正式頁現值 {OLD.get(last["date"])}% 是舊口徑（分子只有股票、分母含 ETF），偏低；正式頁改成含 ETF 的程式已寫好，等 ETF 歷史資料用 GitHub Actions 補齊、核對過才會自動換（第 3 段）。百分位等歷史補齊後重算。A／B 等 Evans 選，正式頁版面不動。</div></div>
 
-<div class="card"><h2>③ 核對：11/12～11/20 本站算的值 vs 附圖</h2>
-<div class="tw"><table><thead><tr><th>日期</th><th>扣 ETF 融資（億）</th><th>增減（億）</th><th>扣 ETF 維持率</th><th>扣 ETF 融券（張）</th><th>含 ETF 維持率（同口徑）</th><th>本站現值</th></tr></thead><tbody>{cmp_rows}</tbody></table></div>
-<div class="foot">附圖只拿到 11/19、11/20 兩列數字（總指揮轉述；附圖原檔在 CustomerServiceANDSales/_inbox，這個雲端窗沒有權限讀，11/12～11/18 待補比對）。</div>
+<div class="card"><h2>③ 核對：本站 vs 財經M平方（基準）</h2>
+<div class="tw"><table><thead><tr><th>市場／日期</th><th>本站（含 ETF）</th><th>財經M平方</th><th>差（百分點）</th><th>本站舊口徑</th><th>櫃買官方</th></tr></thead><tbody>{cmp_rows}</tbody></table></div>
+<div class="foot">定義同財經M平方：融資買進市值（含 ETF）÷ 融資金額。上市分子＝證交所 MI_MARGN 逐檔融資張數（含 ETF）× 1000 × 收盤；分母＝證交所公布上市融資金額。上櫃分子＝櫃買中心逐檔融資餘額（含 ETF）× 1000 × 收盤；分母＝櫃買中心公布融資金額。過關標準：兩天差都 ≤ 0.2 個百分點 → 上市、上櫃都過。</div>
 <h3>差在哪</h3><ul>
-<li><b>融券張數</b>：11/19 本站 {f(REF["2026-11-19"]["short"], 0)} 張、11/20 {f(REF["2026-11-20"]["short"], 0)} 張＝附圖，一致（＝證交所 MI_MARGN「股票」類別合計）。</li>
-{diff_li}<li><b>本站估算的驗證</b>：同一套逐檔追蹤算法套在全部證券上，跟證交所公布的全市場融資金額比，{len(errs)} 個交易日誤差 {f(min(e20), 2)}%～{f(max(e20), 2)}%（模型都偏高）。目前起點只能放在 {md(R[0]["date"])}（假設起點那天每檔維持率都是 166.7%），起點太近、誤差偏大；歷史補齊後起點往前拉，誤差應會縮小，屆時再判斷能不能上線。誤差只影響 ETF 那塊（約三、四百億），對扣除 ETF 融資金額的影響約 ±{f(max(abs(x["model_err_pct"]) for x in T20) / 100 * max(x["etf_amt_est"] for x in T20), 0)} 億。張數核對（股票＋ETF＝全市場）{"每天都一致" if chk_ok else "有對不上的日子"}。</li>
-<li><b>第二份原始資料核對</b>：證交所 OpenAPI（openapi.twse.com.tw/v1/exchangeReport/MI_MARGN，只有最新一天＝11/19）跟本頁用的 rwd 歷史端點 11/19 逐檔比對：1,311 檔融資餘額、融券餘額、融資買進全部一致（2026-11-20 核對）。ETF 類別合計（selectType=0099P）3,251,700 張、股票類別 5,695,919 張，與本頁分法一致。收盤價：本站日K庫與證交所 MI_INDEX 11/12、11/19、11/20 各約 1,380 檔全部一致。</li>
-<li><b>本站現有維持率</b>（{md(last["date"])} {OLD.get(last["date"])}%）：分子用逐檔資料庫（只有股票、沒有 ETF），分母用全市場融資金額（含 ETF），所以偏低；這也是頁面上「比櫃買官方平均低 7 個百分點」的一部分原因。</li></ul>{hyp_sec}</div>
+<li><b>本站舊口徑為什麼偏低</b>：正式頁的分子用本站逐檔資料庫（只有股票、沒有 ETF），分母卻是全市場融資金額（含 ETF），分子分母口徑不一致。上市 {md(last["date"])} 舊口徑 {OLD.get(last["date"])}%，同口徑 {f(last["maint_all"], 2)}%，差約 {f(last["maint_all"] - OLD.get(last["date"], 0), 1)} 個百分點；上櫃 11/19 舊口徑 138.48% vs 含 ETF 139.59%（上櫃 ETF 融資市值較小）。</li>
+<li><b>上櫃：本站／M平方 139.59% vs 櫃買官方 156.18%（11/19），差 16.6 個百分點</b>：櫃買中心台股儀表板的融資維持率（keepRate）沒有找到公開的計算定義。同一筆資料還有追繳戶數、追繳金額、處分戶數等欄位，推測是券商申報的「整戶擔保維持率」口徑（含融券擔保品與保證金、抵繳有價證券），不是單純融資市值 ÷ 融資金額。用公開的整戶公式近似（融資市值 2,057.8 億＋融券擔保品約 1.9 倍融券市值 42.7 億）只得到約 141.0%；官方 156.18% 需要分子約 2,302 億＝融資市值的 111.9%，多出來的部分推測是抵繳有價證券市值，公開資料沒有，<b>原因查不出來，照實寫</b>。整戶公式出處：數位時代〈融資維持率 130〉https://www.bnext.com.tw/article/91649/margin-maintenance-ratio-130；整戶管理：經濟日報 https://money.udn.com/money/story/5607/9668304；櫃買中心信用交易餘額概況表 https://www.tpex.org.tw/web/stock/margin_trading/marginspot/mgratio.php?l=zh-tw（查核日期 2026-11-20）。</li>
+<li><b>扣除 ETF 版（第二個數字）的估算驗證</b>：扣 ETF 的分母要估 ETF 融資金額（證交所不分類公布）。同一套逐檔追蹤算法套在全部證券上，跟證交所公布的全市場融資金額比，{len(errs)} 個交易日誤差 {f(min(e20), 2)}%～{f(max(e20), 2)}%（模型都偏高）。目前起點只能放在 {md(R[0]["date"])}，起點太近、誤差偏大；歷史補齊後起點往前拉，誤差應會縮小。誤差只影響 ETF 那塊（約三、四百億），對扣除 ETF 融資金額的影響約 ±{f(max(abs(x["model_err_pct"]) for x in T20) / 100 * max(x["etf_amt_est"] for x in T20), 0)} 億。張數核對（股票＋ETF＝全市場）{"每天都一致" if chk_ok else "有對不上的日子"}。</li>
+<li><b>第二份原始資料核對</b>：證交所 OpenAPI（openapi.twse.com.tw/v1/exchangeReport/MI_MARGN，只有最新一天）跟 rwd 歷史端點 11/19 逐檔比對：1,311 檔融資餘額、融券餘額、融資買進全部一致（2026-11-20 核對）。ETF 類別合計（selectType=0099P）3,251,700 張、股票類別 5,695,919 張，與本頁分法一致。收盤價：本站日K庫與證交所 MI_INDEX 11/12、11/19、11/20 各約 1,380 檔全部一致。</li></ul></div>
 
 {etf_sec}
-<div class="foot">本站估算。口徑：上市、扣除代號 00 開頭的 ETF。資料來源：臺灣證券交易所 MI_MARGN（融資融券彙總、信用交易統計）、MI_INDEX（每日收盤行情）。融資金額扣除 ETF 為估算（逐檔追蹤：舊部位依剩餘張數保留、當日新買進按成交均價 × 60% 加入）。歷史統計，非預測，不構成買賣建議。產生程式：本資料夾 build_preview.py、build_html.py（預覽，不連正式網站）。</div>
+<div class="foot">本站估算。定義同財經M平方：融資買進市值（含 ETF）÷ 融資金額。扣除 ETF 版口徑：上市、扣除代號 00 開頭的 ETF。資料來源：臺灣證券交易所 MI_MARGN（融資融券彙總、信用交易統計）、MI_INDEX（每日收盤行情）。融資金額扣除 ETF 為估算（逐檔追蹤：舊部位依剩餘張數保留、當日新買進按成交均價 × 60% 加入）。歷史統計，非預測，不構成買賣建議。產生程式：本資料夾 build_preview.py、build_html.py（預覽，不連正式網站）。</div>
 </div></body></html>'''
 open(sys.argv[2], 'w').write(page)
 print('寫出', sys.argv[2])
