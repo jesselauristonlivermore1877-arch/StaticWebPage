@@ -207,9 +207,9 @@ def adjust(site, M):
     for d, ref in MM_REF['twse'].items():
         x = next((r for r in new if r[0] == d), None)
         if x and abs(x[1] - ref) > TOL:
-            print(f'✗ 上市 {d} 本站 {x[1]} vs M平方 {ref} 差 {x[1] - ref:+.2f} > {TOL}，不改'); return 1
+            print(f'✗ 上市 {d} 本站 {x[1]} vs 外部參考 {ref} 差 {x[1] - ref:+.2f} > {TOL}，不改'); return 1
         if x:
-            print(f'  ✓ 上市 {d} 本站 {x[1]} vs M平方 {ref}（差 {x[1] - ref:+.2f}）')
+            print(f'  ✓ 上市 {d} 本站 {x[1]} vs 外部參考 {ref}（差 {x[1] - ref:+.2f}）')
     # 🟢 11-20 夜（【新】總指揮，Evans 選 A 版：卡上第二行「扣除 ETF」）：ETF 融資金額逐檔推估（同預覽 build_preview.py 算法）
     #   今日金額＝昨日金額×(今日餘額−今日買進)÷昨日餘額＋今日買進張×1000×當日均價×成數；起點＝餘額×收盤×成數
     #   扣除 ETF 維持率＝(含 ETF 融資市值 − ETF 融資市值) ÷ (融資金額 − ETF 融資金額推估)；推估值，頁面註明
@@ -244,7 +244,7 @@ def adjust(site, M):
     vals = [r[1] for r in new]
     T['last'] = new[-1]
     T['pct'] = round(100 * sum(v <= vals[-1] for v in vals) / len(vals))
-    T['how'] = 'Σ 各檔融資張數 × 1000 × 收盤（股票＋ETF）÷ 上市融資金額（證交所 MI_MARGN）；定義同財經M平方：融資買進市值（含 ETF）÷ 融資金額；官方未公布上市整體維持率'
+    T['how'] = 'Σ 各檔融資張數 × 1000 × 收盤（股票＋ETF）÷ 上市融資金額（證交所 MI_MARGN）；定義：融資買進市值（含 ETF）÷ 融資金額；官方未公布上市整體維持率'
     T['etf_in'] = True
     W = M.get('wave')
     if W and W.get('high') and W.get('low'):
@@ -273,7 +273,7 @@ def adjust(site, M):
         for d, ref in MM_REF['otc'].items():
             x = next((r for r in O['rows'] if r[0] == d), None)
             if x and x[ie] is not None:
-                print(f'  · 上櫃 {d} 本站估算 {x[ie]} vs M平方 {ref}（差 {x[ie] - ref:+.2f}）')
+                print(f'  · 上櫃 {d} 本站估算 {x[ie]} vs 外部參考 {ref}（差 {x[ie] - ref:+.2f}）')
         O['est_etf_days'] = n_ok
     print(f'✓ 上市 {len(new)} 天改含 ETF，最新 {new[-1][0]} {new[-1][1]}%，第 {T["pct"]} 百分位')
     return 0
