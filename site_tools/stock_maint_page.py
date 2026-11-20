@@ -41,6 +41,16 @@ def ver_block(d):
     return '<div class="how">' + ''.join(out) + '</div>'
 
 
+def skip_note(d):
+    out = ''
+    for m, nm in MKT_NAME.items():
+        sk = d['mkts'][m].get('skipped') or []
+        if sk:
+            out += (f'{nm}本站日K 有 {len(sk)} 天缺（覆蓋不到一半，最近：{"、".join(md(x) for x in sk[-3:])}），這些日子不當交易日、'
+                    f'當天的融資買進併入下一個交易日；{nm}資料日為 {md(d["mkts"][m]["date"])}。')
+    return out
+
+
 def cal_table(d, m):
     x = d['mkts'][m]
     cal = [c for c in x['cal'] if c['k_raw'] is not None][-20:]
@@ -107,7 +117,7 @@ details{{margin:6px 0}} summary{{cursor:pointer;font-size:14px}}
 全部數字都是<b>本站推估</b>（證交所、櫃買只公布全市場融資金額，不公布個股），不構成買賣建議。</div>
 
 <div class="card"><h2>驗證結果（照實寫）</h2>{ver_block(d)}
-<p class="m">{"" if nfull else "目前 margin_full（逐檔融資買進）還沒進 repo，上市 ETF 逐檔只有 7/16～8/25 與 11/11～11/20 零星日子、上櫃只有 11/19～11/20，所以能校準的日子很少；回補進來後重跑即更新。"}</p></div>
+<p class="m">{skip_note(d)}{"" if nfull else "目前 margin_full（逐檔融資買進）還沒進 repo，上市 ETF 逐檔只有 7/16～8/25 與 11/11～11/20 零星日子、上櫃只有 11/19～11/20，所以能校準的日子很少；回補進來後重跑即更新。"}</p></div>
 
 <div class="card"><h2>① 個股融資維持率</h2>
 <div class="bar"><span class="seg" id="mk"><button data-m="twse" class="on">上市</button><button data-m="otc">上櫃</button></span>

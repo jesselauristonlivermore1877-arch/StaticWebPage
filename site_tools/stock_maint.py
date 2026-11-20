@@ -71,7 +71,16 @@ def run_market(site, mkt, daily, official):
     ncodes = [str(c) for c in npz['codes']]; nnames = [str(x) for x in npz['names']]
     ndates = [str(x) for x in npz['dates']]
     dd = {d: i for i, d in enumerate(daily['dates'])}
-    D = [d for d in ndates if d in dd]                     # 有日K的融資日
+    # 有日K的融資日；該市場日K覆蓋 < 50% 的日子（例：上櫃 11/18、11/20 日K 尚未進）不當交易日，照實列在 skipped
+    msk = daily['mkt'] == FILE_MKT[mkt]
+    cov = (~np.isnan(daily['close'][:, msk])).sum(1) / max(int(msk.sum()), 1)
+    D = [d for d in ndates if d in dd and cov[dd[d]] >= 0.5]
+    skipped = [d for d in ndates if d in dd and cov[dd[d]] < 0.5]
+    carry = {}                                               # 被跳過那天的真買進併入下一個交易日
+    for d in skipped:
+        nxt = next((x for x in D if x > d), None)
+        if nxt:
+            carry.setdefault(nxt, []).append(d)
     nidx = {d: i for i, d in enumerate(ndates)}
 
     # 每天的逐檔原始資料：margin_full（全部，含買進）＞ margin_etf（只有 ETF）
@@ -123,6 +132,12 @@ def run_market(site, mkt, daily, official):
                             bad.append([c, int(bal[t, j]), td])
                 bal[t, j] = td; buy_real[t, j] = b
             chk.append({'date': d, 'same': same, 'diff': diff, 'bad': bad, 'flow_bad': flow_bad})
+            for d2 in carry.get(d, []):
+                r2 = load_rows(site, 'margin_full', mkt, d2) or {}
+                for c, r in r2.items():
+                    j = ci.get(c)
+                    if j is not None and not np.isnan(buy_real[t, j]):
+                        buy_real[t, j] += r[0]
         er = rows if rows else etf[d]
         if er:
             got = 0
@@ -237,7 +252,7 @@ def run_market(site, mkt, daily, official):
         traces.append({'code': c, 'name': names[c], 'steps': steps})
 
     # 驗證：真的買進 vs 近似買進（只算 margin_full 有資料的區段）
-    return {'date': D[-1], 'start': D[0], 'r0': r0, 'rows': rows, 'cal': cal, 'chk': chk, 'traces': traces,
+    return {'date': D[-1], 'start': D[0], 'skipped': skipped, 'r0': r0, 'rows': rows, 'cal': cal, 'chk': chk, 'traces': traces,
             'n_full': int(full_ok.sum()), 'n_etf': int(etf_ok.sum()), 'n_days': T}
 
 
@@ -280,7 +295,7 @@ def load_daily(site):
     codes = [str(c) for c in z['codes']]
     return {'dates': [str(d) for d in z['dates']], 'ci': {c: i for i, c in enumerate(codes)},
             'name': dict(zip(codes, [str(x) for x in z['names']])),
-            'close': z['close'], 'vol': z['vol'], 'amt': z['amt']}
+            'close': z['close'], 'vol': z['vol'], 'amt': z['amt'], 'mkt': np.array([str(x) for x in z['mkt']])}
 
 
 def main():
