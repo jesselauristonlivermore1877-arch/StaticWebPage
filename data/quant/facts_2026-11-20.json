@@ -1,9 +1,9 @@
 {
  "date": "2026-11-20",
  "data_date": "2026-11-20",
- "made": "2026-11-20T15:59+08:00",
- "built_at": "2026-11-20T15:41:35+08:00",
- "run": "44696684279",
+ "made": "2026-11-20T18:51+08:00",
+ "built_at": "2026-11-20T18:42:54+08:00",
+ "run": "44721205679",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
   "web_data.market.taiex": "2026-11-20",
@@ -16,13 +16,12 @@
   "web_data.elecfin": "2026-11-20",
   "web_data.screen.sector_score": "2026-11-20",
   "docs/data/rrg.json": "2026-11-20",
-  "docs/data/chips.json": "2026-11-19",
+  "docs/data/chips.json": "2026-11-20",
   "docs/data/disposal.json": "2026-11-20",
-  "docs/data/etf_flow.json": "2026-11-18"
+  "docs/data/etf_flow.json": "2026-11-19"
  },
  "skipped": {
-  "web_data.market.margin_balance": "來源資料日 2026-11-19 ≠ 資料日 2026-11-20",
-  "docs/data/chips.json": "來源資料日 2026-11-19 ≠ 資料日 2026-11-20"
+  "web_data.market.margin_balance": "來源資料日 2026-11-19 ≠ 資料日 2026-11-20"
  },
  "facts": [
   {
@@ -140,6 +139,42 @@
    "value": 179,
    "unit": " 家",
    "text": "179 家",
+   "src": "web_data.breadth"
+  },
+  {
+   "id": "br_tp_0",
+   "sec": "市場廣度",
+   "label": "上櫃上漲家數",
+   "value": 49,
+   "unit": " 家",
+   "text": "49 家",
+   "src": "web_data.breadth"
+  },
+  {
+   "id": "br_tp_1",
+   "sec": "市場廣度",
+   "label": "上櫃下跌家數",
+   "value": 815,
+   "unit": " 家",
+   "text": "815 家",
+   "src": "web_data.breadth"
+  },
+  {
+   "id": "br_tp_3",
+   "sec": "市場廣度",
+   "label": "上櫃漲停家數",
+   "value": 6,
+   "unit": " 家",
+   "text": "6 家",
+   "src": "web_data.breadth"
+  },
+  {
+   "id": "br_tp_4",
+   "sec": "市場廣度",
+   "label": "上櫃跌停家數",
+   "value": 186,
+   "unit": " 家",
+   "text": "186 家",
    "src": "web_data.breadth"
   },
   {
@@ -290,36 +325,54 @@
    "id": "etf_net",
    "sec": "主動式 ETF",
    "label": "主動式 ETF 合計淨買賣（含申購贖回）（最近一個有資料的交易日）",
-   "value": 5.2,
+   "value": 44.1,
    "unit": " 億元",
-   "text": "+5.2 億元",
+   "text": "+44.1 億元",
    "src": "docs/data/etf_flow.json"
   },
   {
    "id": "etf_xnet",
    "sec": "主動式 ETF",
    "label": "主動式 ETF 經理人自己調整持股的淨額（扣申購贖回）（最近一個有資料的交易日）",
-   "value": -8.3,
+   "value": 34.5,
    "unit": " 億元",
-   "text": "-8.3 億元",
+   "text": "+34.5 億元",
    "src": "docs/data/etf_flow.json"
+  },
+  {
+   "id": "dl_self",
+   "sec": "法人籌碼",
+   "label": "自營商自行買賣（個股加總估算）",
+   "value": -50.4,
+   "unit": " 億元",
+   "text": "-50.4 億元",
+   "src": "docs/data/chips.json"
+  },
+  {
+   "id": "dl_hedge",
+   "sec": "法人籌碼",
+   "label": "自營商避險（個股加總估算）",
+   "value": -280.4,
+   "unit": " 億元",
+   "text": "-280.4 億元",
+   "src": "docs/data/chips.json"
   },
   {
    "id": "disp_hot",
    "sec": "處置股",
    "label": "再一次注意就處置的個股數",
-   "value": 6,
+   "value": 23,
    "unit": " 檔",
-   "text": "6 檔",
+   "text": "23 檔",
    "src": "docs/data/disposal.json"
   },
   {
    "id": "disp_now",
    "sec": "處置股",
    "label": "處置中的個股數",
-   "value": 13,
+   "value": 16,
    "unit": " 檔",
-   "text": "13 檔",
+   "text": "16 檔",
    "src": "docs/data/disposal.json"
   }
  ],
