@@ -25,8 +25,6 @@ import argparse, csv, json, os, glob, random
 import sys
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import etf_margin                                  # ETF 融資金額逐檔推估（市場動態卡同一段）
-from etf_margin import ETF_RATIO
 
 R0 = {'twse': 0.6, 'otc': 0.5}
 FILE_MKT = {'twse': 'twse', 'otc': 'tpex'}
@@ -139,7 +137,7 @@ def classify(code, smap, ind):
     return '未分類', '未分類', '未分類'
 
 
-def run_market(site, mkt, daily, official, ca=None, ebook=None):
+def run_market(site, mkt, daily, official, ca=None):
     npz = np.load(os.path.join(site, 'data/bars', 'margin.npz' if mkt == 'twse' else 'margin_otc.npz'), allow_pickle=True)
     ncodes = [str(c) for c in npz['codes']]; nnames = [str(x) for x in npz['names']]
     ndates = [str(x) for x in npz['dates']]
@@ -302,9 +300,17 @@ def run_market(site, mkt, daily, official, ca=None, ebook=None):
                     'err_r0': None if not o else round(float(sumV[t] / o - 1) * 100, 3),
                     'err_pred': None if (prev_k is None or np.isnan(k_raw[t])) else round(float(prev_k * sumV[t] / o - 1) * 100, 3)})
 
+    # 每日 ETF 融資金額（校準版）＝ k × Σ ETF V；ETF 融資市值＝Σ ETF 張數 × 1000 × 收盤（億）
+    # 🟢 11-21（雲端新18 追加，Evans 裁示 3）：ETF 改用跟股票同一套校準成數，市場動態卡「扣除 ETF」、「大盤」子頁、個股／ETF 表三處都讀這一串
+    em = is_etf[None, :] & ok_px
+    sVe = np.where(em, V, 0).sum(1); sMe = np.nansum(np.where(em, mv, 0), 1)
+    eser = {D[t]: [None if np.isnan(k[t]) else float(k[t] * sVe[t]) / 1e8, float(sMe[t]) / 1e8,
+                   None if np.isnan(k[t]) else float(k[t] * r0)] for t in range(T)}
+
     # 最新一天的個股表
     t = T - 1; kk = k[t]
     rows = []
+    legal = {}   # 「以法定成數計」維持率（上市 6 成、上櫃 5 成，不校準的累推值）＝ 融資市值 ÷ V；主數字 ＝ 這個 × 法定成數 ÷ 校準成數
     for j, c in enumerate(codes):
         if is_etf[j] or not has_px[j]:
             continue
@@ -315,31 +321,30 @@ def run_market(site, mkt, daily, official, ca=None, ebook=None):
         mt = mv[t, j] / amt * 100
         cost = V[t, j] / (r0 * b * 1000)          # 推估融資成本（每股均價）＝ 推估買進成本 ÷ 股數
         b5 = bal[t - 5, j] * float(np.prod(adj[t - 4:t + 1, j])) if t >= 5 else np.nan
+        legal[c] = round(float(mv[t, j] / V[t, j] * 100), 1)
         rows.append([c, names[c], int(b), round(float(mv[t, j]) / 1e8, 3), round(float(cost), 2),
                      round(float(mt), 1), round((mt - 130) / mt * 100, 1),
                      None if np.isnan(b5) else int(b - b5), round(float(close[t, j]), 2), round(float(amt) / 1e8, 3)])
 
-    # ETF 個別推估維持率（雲端新18）：ETF 融資金額用市場動態卡「扣除 ETF」同一段（etf_margin.etf_book，逐檔 6 成、不校準），
-    # 全部 ETF 金額合計＝卡上的 ETF 融資金額，兩處不會不一致；欄位跟個股表同一組（第 3 欄族群由 build() 換成 ETF 細類）；
-    # 全部有融資的 ETF 都列（不設 100 張門檻，搜得到）。ebook＝該市場最後一天的 etf_book 結果，沒有（資料日對不上）就不列、照實標
+    # ETF 個別推估維持率：🟢 11-21（雲端新18 追加，Evans 裁示 3）改用跟股票同一套校準成數（推估金額＝k × V），不再用 6 成另算；
+    # 全部 ETF 推估金額合計＝eser 最新一天＝市場動態卡 ETF 融資金額。全部有融資的 ETF 都列（不設 100 張門檻，搜得到）
     etf_rows = []
-    eb = (ebook or {}).get(D[-1])
     for j, c in enumerate(codes):
-        if not eb or not is_etf[j] or c not in eb['codes']:
+        if not is_etf[j] or not has_px[j]:
             continue
-        a_y, b, px = eb['codes'][c]
-        if not (b > 0) or not (a_y > 0):
+        b = bal[t, j]
+        if not (b > 0) or not (V[t, j] > 0) or np.isnan(close[t, j]):
             continue
-        mvj = b * 1000 * px
-        mt = mvj / a_y * 100
-        cost = a_y / (ETF_RATIO * b * 1000)
+        amt = kk * V[t, j]
+        mt = mv[t, j] / amt * 100
+        cost = V[t, j] / (r0 * b * 1000)
         b5 = bal[t - 5, j] if t >= 5 else np.nan
-        etf_rows.append([c, names[c], int(b), round(mvj / 1e8, 3), round(float(cost), 2),
+        legal[c] = round(float(mv[t, j] / V[t, j] * 100), 1)
+        etf_rows.append([c, names[c], int(b), round(float(mv[t, j]) / 1e8, 3), round(float(cost), 2),
                          round(float(mt), 1), round(float((mt - 130) / mt * 100), 1),
-                         None if np.isnan(b5) else int(b - b5), round(float(px), 2), round(a_y / 1e8, 3)])
+                         None if np.isnan(b5) else int(b - b5), round(float(close[t, j]), 2), round(float(amt) / 1e8, 3)])
 
-    # ETF 合計若改用全市場校準成數（個股表那套）會是多少（億）——「大盤」頁 ETF 占比的範圍說明用
-    etf_cal = float(kk * np.nansum(np.where(is_etf & has_px, V[t], np.nan))) / 1e8 if not np.isnan(kk) else None
+    etf_cal = eser[D[-1]][0]
 
     # 「大盤」子頁 20 日資券進出（雲端新18）：逐檔原始資料加總（張），含 ETF／扣除 ETF 兩組；margin_full 沒有的日子只有融資（npz＋ETF 檔），融券寫 None
     board = []
@@ -375,7 +380,7 @@ def run_market(site, mkt, daily, official, ca=None, ebook=None):
         traces.append({'code': c, 'name': names[c], 'steps': steps})
 
     # 驗證：真的買進 vs 近似買進（只算 margin_full 有資料的區段）
-    return {'date': D[-1], 'start': D[0], 'skipped': skipped, 'ca': ca_applied, 'r0': r0, 'rows': rows, 'etf_rows': etf_rows, 'etf_cal': None if etf_cal is None else round(etf_cal, 1), 'board': board, 'cal': cal, 'chk': chk, 'traces': traces,
+    return {'date': D[-1], 'start': D[0], 'skipped': skipped, 'ca': ca_applied, 'r0': r0, 'rows': rows, 'etf_rows': etf_rows, 'legal': legal, 'eser': eser, 'etf_cal': None if etf_cal is None else round(etf_cal, 1), 'board': board, 'cal': cal, 'chk': chk, 'traces': traces,
             'n_full': int(full_ok.sum()), 'n_etf': int(etf_ok.sum()), 'n_days': T}
 
 
@@ -438,10 +443,10 @@ def etf_sectors(etf_rows, last, n_stock):
     return out
 
 
-def board_rows(mkt, raw, mo, book):
+def board_rows(mkt, raw, mo, eser):
     """「大盤」子頁 20 日資券進出：維持率、融資金額直接取 docs/data/mkt_overlay.json（市場動態卡同一份），張數、融券取逐檔原始資料加總。
     上市：maint.twse.rows ＝ [日期, 含 ETF 維持率, 加權, 融資金額億, 扣除 ETF 維持率, 扣除 ETF 金額億, ETF 金額億]（etf_margin.adjust 寫的）
-    上櫃：maint.otc.rows 第 3 欄＝本站含 ETF 維持率、第 5 欄＝融資金額億；扣除 ETF 用同一段 etf_book 照上市公式算（卡上沒有，本站推估）
+    上櫃：maint.otc.rows 第 3 欄＝本站含 ETF 維持率、第 5 欄＝融資金額億；扣除 ETF 用同一串校準版 ETF 金額（eser）照上市公式算（卡上沒有，本站推估）
     回傳近 21 日（最舊→最新；頁面只顯示最近 20 日，第 21 日只拿來算最舊那天的增減，總指揮 11-21 裁示），每列：date、lots、lots_etf、short、short_etf、amt、amt_ex、amt_etf、maint、maint_ex"""
     rw = {x['date']: x for x in raw}
     out = []
@@ -453,23 +458,28 @@ def board_rows(mkt, raw, mo, book):
             maint, amt, maint_ex, amt_ex, amt_etf = r[1], r[3], r[4], r[5], r[6]
         else:
             maint, amt = r[2], r[4]
-            bk = book.get(d)
-            if maint is None or not amt or not bk:
+            bk = eser.get(d)
+            if maint is None or not amt or not bk or bk[0] is None:
                 continue
-            amt_etf = round(bk['amt'], 1); amt_ex = round(amt - bk['amt'], 1)
-            maint_ex = round((maint * amt / 100 - bk['mv']) / (amt - bk['amt']) * 100, 2)
+            amt_etf = round(bk[0], 1); amt_ex = round(amt - bk[0], 1)
+            maint_ex = round((maint * amt / 100 - bk[1]) / (amt - bk[0]) * 100, 2)
         x = rw.get(d, {})
         out.append({'date': d, 'lots': x.get('lots'), 'lots_etf': x.get('lots_etf'), 'short': x.get('short'), 'short_etf': x.get('short_etf'),
                     'amt': round(amt, 1), 'amt_ex': amt_ex, 'amt_etf': amt_etf, 'maint': maint, 'maint_ex': maint_ex})
     return out[-21:]
 
 
-def etf_books(site):
-    """ETF 逐檔融資金額（etf_margin.etf_book）：日期序列跟 docs/data/mkt_overlay.json 維持率同一份
-    （上市＝maint.twse.rows，市場動態卡「扣除 ETF」就是這串算出來的；上櫃＝maint.otc.rows），起點相同 → 金額相同"""
-    mo = json.load(open(os.path.join(site, 'docs/data/mkt_overlay.json')))['maint']
-    return {'twse': etf_margin.etf_book(site, 'twse', [r[0] for r in mo['twse']['rows']]),
-            'otc': etf_margin.etf_book(site, 'tpex', [r[0] for r in mo['otc']['rows']])}
+def etf_series(site, extra_twse=None):
+    """校準版 ETF 融資金額逐日序列（etf_margin.adjust 寫市場動態卡「扣除 ETF」用這一段；build() 也用同一段 run_market 算，數字相同）。
+    extra_twse：{日期: 上市融資金額億}，只補 load_official 沒有的日子（daily 裡 pick_edm 比 mkt_overlay.json 落地早跑時用）。
+    回傳 {'twse'／'otc': {日期: [ETF 金額億, ETF 融資市值億, 校準成數]}}"""
+    daily = load_daily(site)
+    official, _ = load_official(site)
+    for d, v in (extra_twse or {}).items():
+        if v and d not in official['twse']:
+            official['twse'][d] = v
+    ca = load_ca(site)
+    return {m: run_market(site, m, daily, official, ca)['eser'] for m in ('twse', 'otc')}
 
 
 def load_daily(site):
@@ -488,27 +498,27 @@ def build(site, sector):
     ind = load_industry(site)
     smap = load_sector(sector)
     out = {'gen': 'site_tools/stock_maint.py', 'mkts': {}}
-    books = etf_books(site)
     mo = json.load(open(os.path.join(site, 'docs/data/mkt_overlay.json')))['maint']
     for mkt in ('twse', 'otc'):
-        res = run_market(site, mkt, daily, official, ca, books[mkt])
+        res = run_market(site, mkt, daily, official, ca)
         res['summary'] = summarize(res)
         cls = {}
         for r in res['rows']:
             sec, big, src = classify(r[0], smap, ind)
             cls[r[0]] = (big, src)
-            r.insert(2, sec); r.append(src)
+            r.insert(2, sec); r.append(src); r.append(res['legal'].get(r[0]))
         # 族群表只算融資 ≥ 100 張（同個股表預設）
         res['sectors'] = sectors([[r[0], r[2], cls[r[0]][0], r[11], r[4], r[6], r[10]] for r in res['rows'] if r[3] >= 100])
         # ETF：第 3 欄＝ETF 細類、最後一欄來源＝'ETF'；分組維持率＝Σ融資市值 ÷ Σ推估金額（全部有融資的 ETF，不設張數門檻）
         for r in res['etf_rows']:
             top, sub = etf_group(r[0])
-            r.insert(2, sub); r.append('ETF')
-        res['board'] = board_rows(mkt, res['board'], mo[mkt], books[mkt])
+            r.insert(2, sub); r.append('ETF'); r.append(res['legal'].get(r[0]))
+        res['board'] = board_rows(mkt, res['board'], mo[mkt], res['eser'])
+        del res['legal'], res['eser']
         res['etf_sec'] = etf_sectors(res['etf_rows'], res['board'][-1] if res['board'] else None, len(res['rows']))
         out['mkts'][mkt] = res
         print(mkt, json.dumps(res['summary'], ensure_ascii=False))
-    out['fields'] = ['代號', '名稱', '族群', '融資張數', '融資市值億', '推估成本', '推估維持率', '離130%', '近5日增減', '收盤', '推估金額億']
+    out['fields'] = ['代號', '名稱', '族群', '融資張數', '融資市值億', '推估成本', '推估維持率', '離130%', '近5日增減', '收盤', '推估金額億', '來源', '以法定成數計維持率']
     out['sector_fields'] = ['族群', '大類', '檔數', '融資市值億', '推估金額億', '族群維持率', '低於130檔數', '成分股']
     out['sector_n'] = len(smap)
     out['etf_groups'] = [list(x) for x in ETF_GROUPS]

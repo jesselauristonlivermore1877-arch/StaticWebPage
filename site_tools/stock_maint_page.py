@@ -107,6 +107,26 @@ def passed(d):
     return all((d['mkts'][m]['summary'].get('bal_match') or 0) >= 99.9 and (d['mkts'][m]['summary']['err20_max'] or 99) < 2 for m in MKT_NAME)
 
 
+def legal_block(d):
+    """白話：為什麼以法定成數計會低估維持率、本站怎麼回推實際成數、限制（Evans 11-21 裁示 4）。數字全由程式帶入"""
+    li = []
+    for m, nm in MKT_NAME.items():
+        x = d['mkts'][m]; c = next((y for y in reversed(x['cal']) if y['official'] and y['k_raw'] is not None), None)
+        if not c:
+            continue
+        li.append(f'{nm} {md(c["date"])}：全部證券照法定 {int(x["r0"] * 10)} 成累推，融資金額合計約 {f(c["sumV"], 0)} 億，'
+                  f'但{"證交所" if m == "twse" else "櫃買中心"}公布的融資總金額只有 {f(c["official"], 0)} 億（{"多" if c["sumV"] >= c["official"] else "少"}約 {f(abs(c["sumV"] / c["official"] - 1) * 100, 1)}%）'
+                  f'→ 回推實際平均成數約 {f(c["ratio"] * 100, 1)}%（＝{int(x["r0"] * 10)} 成 × {f(c["official"], 0)} ÷ {f(c["sumV"], 0)}）')
+    return ('<div class="card"><h2>為什麼本站維持率比「以法定成數計」高</h2><ul class="m" style="padding-left:20px;margin:4px 0">'
+            '<li>官方只公布全市場融資總金額，不公布每一檔借了多少錢，所以各家都要自己推估。常見做法是假設每筆融資都借到法定上限（上市 6 成、上櫃 5 成）。'
+            '但券商實際常只借 4、5 成，借得少 → 欠款少 → 維持率其實比較高；照上限算會把欠款算多、維持率算低。</li>'
+            + ''.join(f'<li>{t}。</li>' for t in li) +
+            '<li>本站主數字用這個回推出來的實際平均成數（逐日校準，上市、上櫃分開，股票和 ETF 同一個成數），所以加總起來剛好等於官方融資總金額；'
+            '個股／ETF 表另附「以法定成數計」一欄（不校準），方便跟其他來源對照：主數字 ＝ 以法定成數計 × 法定成數 ÷ 實際平均成數。</li>'
+            '<li><b>限制</b>：實際平均成數是全市場平均值，每家券商、每個客戶借的成數都不同；某一檔股票的融資戶如果多半借滿上限，'
+            '真實維持率會比本站主數字低、接近「以法定成數計」那一欄。兩欄都是推估，可以當範圍看。</li></ul></div>')
+
+
 def help_html(d):
     """「說明與驗證」整段（預覽頁與網站「籌碼 → 維持率」共用同一段；網站版由 public() 加 mt- 前綴）"""
     tw = d['mkts']['twse']; ot = d['mkts']['otc']
@@ -122,14 +142,14 @@ def help_html(d):
                        '<th>日期</th><th>昨日餘額</th><th>今日餘額</th><th>真的買進</th><th>近似買進</th><th>均價</th><th>收盤</th>'
                        '<th>累推（百萬，法規成數）</th><th>推估金額（百萬）</th><th>推估維持率</th><th></th></tr></thead>'
                        f'<tbody>{tr}</tbody></table></div></details>')
-    return f'''<div class="card"><h2>驗證結果（照實寫）</h2>{ver_block(d)}
+    return f'''{legal_block(d)}<div class="card"><h2>驗證結果（照實寫）</h2>{ver_block(d)}
 <p class="m">{skip_note(d)}{"" if nfull else "目前 margin_full（逐檔融資買進）還沒進 repo，上市 ETF 逐檔只有 7/16～8/25 與 11/11～11/20 零星日子、上櫃只有 11/19～11/20，所以能校準的日子很少；回補進來後重跑即更新。"}</p></div>
 <details class="card"><summary>怎麼算（本站推估）</summary><div class="in"><ol class="m" style="padding-left:20px;margin:4px 0">
 <li>證交所、櫃買不公布個股融資金額，本站逐檔逐日累推：今日金額＝昨日金額 ×（今日餘額 − 今日買進）÷ 昨日餘額 ＋ 今日買進張數 × 1000 × 當日均價（成交金額 ÷ 成交股數）× 成數；起點（{md(tw["start"])}）＝ 餘額 × 1000 × 收盤 × 成數。</li>
 <li>「今日買進」有證交所／櫃買逐檔融資買進的日子用真的買進；沒有的日子用退路：買進 ≈ max(今日餘額 − 昨日餘額, 0)（會低估週轉，下跌時推估成本偏高、維持率偏低）。</li>
 <li><b>成數為本站校準推估</b>：法規上限上市 6 成、上櫃 5 成，但券商可只借 4、3 成，所以先用 6／5 成累推，再用證交所／櫃買公布的融資總金額（含 ETF，分子也含 ETF）逐日校準出「實際平均成數」，套回各股。上市目前約 {f(tw["summary"]["ratio"] * 100, 1)}%、上櫃約 {f(ot["summary"]["ratio"] * 100, 1)}%。</li>
 <li>個股推估維持率＝融資張數 × 1000 × 收盤 ÷ 推估融資金額；「再跌幾 % 到 130%」＝（維持率 − 130）÷ 維持率。族群維持率＝族群融資市值合計 ÷ 族群推估金額合計。</li>
-<li><b>ETF（雲端新18）</b>：ETF 融資金額不用上面的校準成數，改用市場動態「上市融資維持率」卡「扣除 ETF」同一段算法（逐檔累推、成數固定 6 成、上市起點 {md((d.get('etf_start') or {}).get('twse'))}、上櫃起點 {md((d.get('etf_start') or {}).get('otc'))}），所以全部 ETF 推估金額合計＝卡上的 ETF 融資金額，兩處數字一致；ETF 推估維持率＝融資張數 × 1000 × 收盤 ÷ ETF 推估融資金額。分組：主動式＝代號 A、D、T 結尾；被動式再分台股正2（00631L、00663L、00675L、00685L）、其他槓桿（其餘 L 結尾）、反向（R）、債券（B）、期貨商品（U）、市值高息等（其餘）。</li>
+<li><b>ETF</b>：跟股票同一套（逐檔累推、同一個校準成數），全部 ETF 推估金額合計＝市場動態「上市融資維持率」卡「扣除 ETF」用的 ETF 融資金額，卡、「大盤」、個股／ETF 表三處同一份數字；ETF 推估維持率＝融資張數 × 1000 × 收盤 ÷ ETF 推估融資金額。分組：主動式＝代號 A、D、T 結尾；被動式再分台股正2（00631L、00663L、00675L、00685L）、其他槓桿（其餘 L 結尾）、反向（R）、債券（B）、期貨商品（U）、市值高息等（其餘）。</li>
 <li>減資、面額變更：生效當天證交所／櫃買會把融資張數換算（例：面額變更 1 換 4 張），本站先把前一日張數照比例換算再累推，不當成買賣；融資金額不變。配股：融資張數不會調整、融資金額也不變，所以不調整（配到的股票不在融資擔保品裡）。現金股利不調整。</li><li>已知限制：新上市／斷檔後重新起算時，成本先以當天收盤代入；沒有逐檔融資買進資料的日子用退路（買進 ≈ 餘額增加量）。</li></ol></div></details>{ca_block(d)}{off_block(d)}
 <details class="card"><summary>校準紀錄（近 20 個校準日）</summary><div class="in"><p class="m">上市</p>{cal_table(d, "twse")}<p class="m">上櫃</p>{cal_table(d, "otc")}</div></details>
 <details class="card"><summary>抽樣 5 檔逐日累推過程（前 3 天＋最後 3 天）</summary><div class="in">{traces}</div></details>
@@ -255,7 +275,7 @@ def public(d):
     """正式檔 docs/data/stock_maint.json 的內容（網站讀這份）：表格資料＋說明與驗證 HTML"""
     return {'gen': 'site_tools/stock_maint.py', 'passed': passed(d), 'sector_cov': d['sector_cov'],
             'mkts': {m: {'date': d['mkts'][m]['date'], 'rows': d['mkts'][m]['rows'], 'sec': d['mkts'][m]['sectors'],
-                         'ratio': d['mkts'][m]['summary']['ratio'],
+                         'ratio': d['mkts'][m]['summary']['ratio'], 'r0': d['mkts'][m]['r0'],
                          # 雲端新18：ETF 個別（欄位同 rows）、ETF 分組、「大盤」20 日資券進出
                          'etf': d['mkts'][m].get('etf_rows', []), 'esec': d['mkts'][m].get('etf_sec', []),
                          'board': d['mkts'][m].get('board', []), 'etf_cal': d['mkts'][m].get('etf_cal')} for m in MKT_NAME},

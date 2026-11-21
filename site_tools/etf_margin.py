@@ -185,7 +185,7 @@ def etf_mv(site, mkt, d, close, bc):
 
 
 def etf_book(site, mkt, dates, b=None):
-    """ETF 融資金額逐檔推估（市場動態卡「扣除 ETF」、維持率頁籤 ETF 個別／分組、「大盤」子頁共用這一段，雲端新18 從 adjust() 抽出，算法不變）。
+    """ETF 融資金額逐檔推估（固定 6 成版）。🟢 11-21 起卡與維持率頁籤改用 stock_maint.etf_series（校準版），這段只留作對照（前後數字比較用）。
     今日金額＝昨日金額×(今日餘額−今日買進)÷昨日餘額＋今日買進張×1000×當日均價×成數；起點（dates 第一天，或該檔第一次出現）＝餘額×收盤×成數。
     mkt：'twse'／'tpex'（data/margin_etf/<mkt>_<日期>.json）；dates 要從頭依序給（起點不同，金額就不同）。
     回傳 {日期: {'amt': ETF 金額合計（億）, 'mv': ETF 融資市值合計（億）, 'codes': {代號: [推估金額（元）, 融資張數, 收盤]}}}；缺檔的日子跳過"""
@@ -250,17 +250,35 @@ def adjust(site, M):
     # 🟢 11-20 夜（【新】總指揮，Evans 選 A 版：卡上第二行「扣除 ETF」）：ETF 融資金額逐檔推估（同預覽 build_preview.py 算法）
     #   今日金額＝昨日金額×(今日餘額−今日買進)÷昨日餘額＋今日買進張×1000×當日均價×成數；起點＝餘額×收盤×成數
     #   扣除 ETF 維持率＝(含 ETF 融資市值 − ETF 融資市值) ÷ (融資金額 − ETF 融資金額推估)；推估值，頁面註明
-    book = etf_book(site, 'twse', [r[0] for r in new], b)
+    # 🟢 11-21（雲端新18 追加，Evans 裁示 3）：ETF 融資金額改用跟個股表同一套校準成數（site_tools/stock_maint.etf_series：
+    #   全市場〔股票＋ETF〕逐檔累推 V，逐日用官方融資金額校準 k，ETF 金額＝k × Σ ETF V），不再用固定 6 成；
+    #   卡、「大盤」子頁、個股／ETF 表三處同一串數字。含 ETF 維持率（分母＝官方融資金額）不變。
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import stock_maint
+    try:
+        ser = stock_maint.etf_series(site, {r[0]: r[3] for r in new})['twse']
+    except Exception as e:  # noqa: BLE001
+        print(f'⚠ 校準版 ETF 金額算不出來（{type(e).__name__} {e}），卡上不放「扣除 ETF」'); ser = {}
     ex = {}
     for r in new:
-        d = r[0]; amt_e, mv_e = book[d]['amt'], book[d]['mv']
+        d = r[0]; z = ser.get(d)
+        if not z or z[0] is None:
+            continue
+        amt_e, mv_e = z[0], z[1]
         mv_all = r[1] * r[3] / 100
         ex[d] = (round((mv_all - mv_e) / (r[3] - amt_e) * 100, 2), round(r[3] - amt_e, 1), round(amt_e, 1))
-    for r in new:
-        r.extend(ex[r[0]])
-    T['fields'] = ['date', 'est', 'taiex', 'margin_yi', 'est_ex', 'margin_ex_yi', 'etf_amt_yi']
-    T['ex_how'] = ('扣除 ETF＝股票（代號 00 開頭以外）融資市值 ÷（上市融資金額 − ETF 融資金額推估）；證交所只公布全市場融資金額、不分股票／ETF，'
-                   'ETF 那塊由本站逐檔推估（新買進按當日均價 × %d%%、舊部位依剩餘張數保留，起點 %s），所以扣除 ETF 是大概值' % (round(ETF_RATIO * 100), new[0][0]))
+    if len(ex) < len(new):
+        print(f'⚠ 校準版 ETF 金額缺 {len(new) - len(ex)} 天，「扣除 ETF」整段不放（含 ETF 照常）'); ex = {}
+    if ex:
+        for r in new:
+            r.extend(ex[r[0]])
+        T['fields'] = ['date', 'est', 'taiex', 'margin_yi', 'est_ex', 'margin_ex_yi', 'etf_amt_yi']
+        rt = ser[new[-1][0]][2]
+        T['ex_how'] = ('扣除 ETF＝股票（代號 00 開頭以外）融資市值 ÷（上市融資金額 − ETF 融資金額推估）；證交所只公布全市場融資金額、不分股票／ETF，'
+                       'ETF 那塊由本站逐檔推估（舊部位依剩餘張數保留、新買進按當日均價，成數用證交所融資總金額逐日校準出的實際平均成數，'
+                       '最新約 %.1f%%，跟「籌碼 → 維持率」個股表同一套），所以扣除 ETF 是大概值' % (rt * 100))
+    else:
+        T['fields'] = ['date', 'est', 'taiex', 'margin_yi']
     T['rows'] = new
     vals = [r[1] for r in new]
     T['last'] = new[-1]
