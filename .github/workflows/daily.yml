@@ -286,22 +286,6 @@ jobs:
           python buyback.py ../site/data --events || { echo "::warning::庫藏股公告抓取失敗（沿用上一份公告）"; echo "庫藏股公告抓取失敗（沿用上一份公告）" >> "$RUNNER_TEMP/soft_fail.txt"; }
           python buyback.py ../site/data --study --publish ../site/docs/data || { echo "::warning::庫藏股事件研究／發布失敗（網站沿用上一份）"; echo "庫藏股事件研究／發布失敗（網站沿用上一份）" >> "$RUNNER_TEMP/soft_fail.txt"; }
 
-      # 🟢 10-29 晚（總指揮 雲端 1，Evans 核准）：選股 EDM（網站「量化 EDM」）→ docs/data/pick_edm.json＋docs/data/edm_hist/<資料日>.json（11-06 C8：歷史只存資料，保留 90 天）。
-      #    11-06（C7）：排在主動式 ETF 日報之後，「主動式 ETF 每日操作」卡才讀得到這一班的 aetf_daily.json。
-      #    料全部是上面各步剛寫好的檔（web_data、radar、trail、rrg、chips、chips_daily、etf_flow、stock_bars、lookup），不打網路；
-      #    程式用另一份原始資料（daily.npz、chips_daily）重算核對，沒過就不出檔 → 網站沿用上一份。
-      - name: 選股 EDM
-        id: pickedm
-        working-directory: code
-        continue-on-error: true
-        timeout-minutes: 5
-        env:
-          PYTHONUNBUFFERED: "1"
-          # 11-09（【舊】總指揮代推，雲端G2（六）2）：edm_fit_check 過半判超出＝檢查異常時要發 TG
-          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
-        run: python tools/pick_edm.py ../site ../site/docs/data/pick_edm.json
-
       # 🟢 11-16（雲端舊13，Evans「借券每天存：要做」）：上市 TWT93U＋上櫃 margin/sbl 借券賣出餘額 → data/sbl/<資料日>.json（不對外）
       #    證交所約 20:30／22:30 才更新當天 → 15:40、18:40 班抓不到就跳過，21:20／22:05 班補；往回看 5 天缺的補上。
       #    逐檔官方公式＋跨日核對，沒過不寫那天；失敗不擋上線。
@@ -348,6 +332,23 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: |
           python site_tools/stock_maint.py --site . --sector ../code/sector_map.csv || { echo "::warning::個股族群融資維持率失敗（網站沿用上一份）"; echo "個股族群融資維持率失敗（網站沿用上一份）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+
+      # 🟢 10-29 晚（總指揮 雲端 1，Evans 核准）：選股 EDM（網站「量化 EDM」）→ docs/data/pick_edm.json＋docs/data/edm_hist/<資料日>.json（11-06 C8：歷史只存資料，保留 90 天）。
+      #    11-06（C7）：排在主動式 ETF 日報之後，「主動式 ETF 每日操作」卡才讀得到這一班的 aetf_daily.json。
+      #    料全部是上面各步剛寫好的檔（web_data、radar、trail、rrg、chips、chips_daily、etf_flow、stock_bars、lookup），不打網路；
+      #    程式用另一份原始資料（daily.npz、chips_daily）重算核對，沒過就不出檔 → 網站沿用上一份。
+      #    11-22 凌晨（雲端新20，Evans「我全部同意」）：移到「個股族群融資維持率」之後——融資維持率 EDM 7 張讀這一班的 stock_maint.json。
+      - name: 選股 EDM
+        id: pickedm
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 5
+        env:
+          PYTHONUNBUFFERED: "1"
+          # 11-09（【舊】總指揮代推，雲端G2（六）2）：edm_fit_check 過半判超出＝檢查異常時要發 TG
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: python tools/pick_edm.py ../site ../site/docs/data/pick_edm.json
 
       # 🟢 11-16（雲端舊14，Evans 看過預覽 OK）：軌跡流向（動能轉折日＋族群動能流向＋量能／籌碼／估值／爆量圖層）→ docs/data/trail_flow.json
       #    只讀日K、法人、本益比與指數檔，不打網路；預覽同一支 tools/trail_flow.py；失敗不擋（網站沿用上一份）
