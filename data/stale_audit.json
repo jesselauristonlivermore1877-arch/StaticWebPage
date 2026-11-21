@@ -1,8 +1,7 @@
 {
- "asof": "2026-11-22 00:40",
+ "asof": "2026-11-22 01:08",
  "first_stale": {
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-20",
-  "docs/data/warrant_flow.json|權證資金流": "2026-11-21",
   "docs/data/pcf/00984A|主動 ETF 持股 00984A": "2026-11-21",
   "docs/data/pcf/00989A|主動 ETF 持股 00989A": "2026-11-21",
   "docs/data/pcf/00993A|主動 ETF 持股 00993A": "2026-11-21"
@@ -311,12 +310,12 @@
   {
    "name": "權證資金流",
    "path": "docs/data/warrant_flow.json",
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "freq": "td",
    "allow": 0,
-   "lag_td": 1,
-   "days": 3,
-   "stale": true,
+   "lag_td": 0,
+   "days": 2,
+   "stale": false,
    "owner": "W 本機 tools/warrant_flow.py（盤後）",
    "note": ""
   },
@@ -887,11 +886,11 @@
   {
    "name": "主動 ETF 持股 00996A",
    "path": "docs/data/pcf/00996A",
-   "date": "2026-11-18",
+   "date": "2026-11-19",
    "freq": "td",
    "allow": 0,
-   "lag_td": 2,
-   "days": 4,
+   "lag_td": 1,
+   "days": 3,
    "stale": true,
    "owner": "W 本機排程 tools/pcf_local.py（兆豐官網擋雲端 IP）",
    "note": ""
@@ -945,6 +944,6 @@
    "note": "最後檢查 2026-11-20 15:48：正常 資料到 13:45"
   }
  ],
- "n_stale": 5,
+ "n_stale": 4,
  "tg_day": "2026-11-21"
 }
