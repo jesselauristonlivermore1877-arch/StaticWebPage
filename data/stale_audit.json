@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-22 01:08",
+ "asof": "2026-11-22 02:55",
  "first_stale": {
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-20",
   "docs/data/pcf/00984A|主動 ETF 持股 00984A": "2026-11-21",
@@ -370,11 +370,11 @@
   {
    "name": "盤勢緊急通知",
    "path": "docs/data/market_alert.json",
-   "date": "2026-11-21",
+   "date": "2026-11-22",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 market_alert",
    "note": ""
@@ -382,11 +382,11 @@
   {
    "name": "正式站巡檢",
    "path": "docs/data/site_smoke.json",
-   "date": "2026-11-21",
+   "date": "2026-11-22",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 site_smoke.yml",
    "note": ""
