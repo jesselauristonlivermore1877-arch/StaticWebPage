@@ -4,8 +4,9 @@
 預覽＝正式版同一段程式；之後接 daily.yml 也呼叫這支。只讀本 repo 的檔，不打網路。
 
 用法：
-  python site_tools/stock_maint.py [--site .] [--sector data/sector_map_snapshot.csv] [--out docs/preview/stock_maint]
-輸出：<out>/data.json（個股表、族群表、校準與驗證）；畫頁面另由 <out>/build_html.py 讀 data.json
+  正式（daily.yml 每班）：python site_tools/stock_maint.py --sector ../code/sector_map.csv → docs/data/stock_maint.json
+  預覽：另加 --preview docs/preview/<目錄>（同一份結果另寫 data.json＋index.html）
+網站「籌碼 → 維持率」（template.html tabMaint）讀 docs/data/stock_maint.json；說明與驗證段落由 stock_maint_page.help_html 產生，預覽與正式同一段
 
 算法（總指揮規格）：
  1. 逐檔逐日累推「推估融資金額」（先用法規成數 r0：上市 0.6、上櫃 0.5）
@@ -361,18 +362,13 @@ def load_daily(site):
             'close': z['close'], 'vol': z['vol'], 'amt': z['amt'], 'mkt': np.array([str(x) for x in z['mkt']])}
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument('--site', default='.')
-    ap.add_argument('--sector', default='data/sector_map_snapshot.csv')
-    ap.add_argument('--out', default='docs/preview/stock_maint')
-    a = ap.parse_args()
-    site = a.site
+def build(site, sector):
+    """算全部數字 → dict（預覽與正式共用這一段，不分兩套）"""
     daily = load_daily(site)
     official, off_cmp = load_official(site)
     ca = load_ca(site)
     ind = load_industry(site)
-    smap = load_sector(os.path.join(site, a.sector) if not os.path.isabs(a.sector) else a.sector)
+    smap = load_sector(sector)
     out = {'gen': 'site_tools/stock_maint.py', 'mkts': {}}
     for mkt in ('twse', 'otc'):
         res = run_market(site, mkt, daily, official, ca)
@@ -392,13 +388,51 @@ def main():
     out['off_cmp'] = off_cmp
     out['sector_cov'] = {m: {k: sum(1 for r in out['mkts'][m]['rows'] if r[3] >= 100 and r[11] == k) for k in ('本站', '官方', '未分類')}
                          for m in out['mkts']}
-    os.makedirs(os.path.join(site, a.out), exist_ok=True)
-    json.dump(out, open(os.path.join(site, a.out, 'data.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
-    print('✓', os.path.join(a.out, 'data.json'))
+    return out
+
+
+def ext_check(text):
+    """公開檔不得出現他站平台名稱（程式 repo ext_platforms.py；check_web 會 ✗✗ 擋上線）。找不到模組就跳過、印出來。"""
+    for d in ('../code', '../CustomerServiceANDSales'):
+        if os.path.exists(os.path.join(d, 'ext_platforms.py')):
+            import sys; sys.path.insert(0, os.path.abspath(d))
+            import ext_platforms
+            return ext_platforms.scan(text)
+    print('⚠ 找不到 ext_platforms.py，他站名稱檢查跳過')
+    return []
+
+
+def main():
+    """正式（daily.yml 每班）：python site_tools/stock_maint.py --sector ../code/sector_map.csv
+         → docs/data/stock_maint.json（網站「籌碼 → 維持率」讀這份）
+       預覽：另加 --preview docs/preview/<目錄>，同一份結果再寫 data.json＋index.html（正式建置不可加，提交步驟會擋）"""
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--site', default='.')
+    ap.add_argument('--sector', required=True, help='族群分類：程式 repo 當下的 sector_map.csv（跟網站其他族群口徑一致）')
+    ap.add_argument('--json', default='docs/data/stock_maint.json', help='正式檔')
+    ap.add_argument('--preview', default=None, help='預覽目錄（選用）')
+    a = ap.parse_args()
+    site = a.site
+    sector = a.sector if os.path.isabs(a.sector) else os.path.join(site, a.sector)
+    if not os.path.exists(sector):
+        raise SystemExit(f'✗ 找不到族群分類 {sector}，不寫檔（網站沿用上一份）')
+    out = build(site, sector)
     import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import stock_maint_page
-    stock_maint_page.write(out, os.path.join(site, a.out, 'index.html'))
-    print('✓', os.path.join(a.out, 'index.html'))
+    pub = stock_maint_page.public(out)
+    txt = json.dumps(pub, ensure_ascii=False, separators=(',', ':'))
+    hit = ext_check(txt)
+    if hit:
+        raise SystemExit(f'✗ 公開檔出現他站平台名稱 {hit}，不寫檔')
+    jp = os.path.join(site, a.json)
+    os.makedirs(os.path.dirname(jp), exist_ok=True)
+    open(jp + '.tmp', 'w').write(txt); os.replace(jp + '.tmp', jp)
+    print('✓', a.json, f'{len(txt) // 1024} KB；上市 {pub["mkts"]["twse"]["date"]}、上櫃 {pub["mkts"]["otc"]["date"]}；驗證 {"通過" if pub["passed"] else "未過（照實標）"}')
+    if a.preview:
+        os.makedirs(os.path.join(site, a.preview), exist_ok=True)
+        json.dump(out, open(os.path.join(site, a.preview, 'data.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
+        stock_maint_page.write(out, os.path.join(site, a.preview, 'index.html'))
+        print('✓ 預覽', a.preview)
 
 
 if __name__ == '__main__':

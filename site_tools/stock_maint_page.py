@@ -2,7 +2,7 @@
 """個股／族群融資維持率頁面（讀 stock_maint.py 的 data.json → index.html；不打網路）
 由 site_tools/stock_maint.py 呼叫；也可單獨跑：python site_tools/stock_maint_page.py <data.json> <index.html>
 """
-import json, sys, html
+import json, sys, html, re
 
 MKT_NAME = {'twse': '上市', 'otc': '上櫃'}
 
@@ -103,13 +103,14 @@ def cal_table(d, m):
             f'<tbody>{tr}</tbody></table></div>')
 
 
-def build(d):
+def passed(d):
+    return all((d['mkts'][m]['summary'].get('bal_match') or 0) >= 99.9 and (d['mkts'][m]['summary']['err20_max'] or 99) < 2 for m in MKT_NAME)
+
+
+def help_html(d):
+    """「說明與驗證」整段（預覽頁與網站「籌碼 → 維持率」共用同一段；網站版由 public() 加 mt- 前綴）"""
     tw = d['mkts']['twse']; ot = d['mkts']['otc']
-    payload = {m: {'date': d['mkts'][m]['date'], 'rows': d['mkts'][m]['rows'], 'sec': d['mkts'][m]['sectors'],
-                   'ratio': d['mkts'][m]['summary']['ratio']} for m in MKT_NAME}
-    js_data = json.dumps(payload, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     nfull = tw['n_full'] + ot['n_full']
-    passed = all((d['mkts'][m]['summary'].get('bal_match') or 0) >= 99.9 and (d['mkts'][m]['summary']['err20_max'] or 99) < 2 for m in MKT_NAME)
     traces = ''
     for m, nm in MKT_NAME.items():
         for t in d['mkts'][m]['traces']:
@@ -121,6 +122,27 @@ def build(d):
                        '<th>日期</th><th>昨日餘額</th><th>今日餘額</th><th>真的買進</th><th>近似買進</th><th>均價</th><th>收盤</th>'
                        '<th>累推（百萬，法規成數）</th><th>推估金額（百萬）</th><th>推估維持率</th><th></th></tr></thead>'
                        f'<tbody>{tr}</tbody></table></div></details>')
+    return f'''<div class="card"><h2>驗證結果（照實寫）</h2>{ver_block(d)}
+<p class="m">{skip_note(d)}{"" if nfull else "目前 margin_full（逐檔融資買進）還沒進 repo，上市 ETF 逐檔只有 7/16～8/25 與 11/11～11/20 零星日子、上櫃只有 11/19～11/20，所以能校準的日子很少；回補進來後重跑即更新。"}</p></div>
+<details class="card"><summary>怎麼算（本站推估）</summary><div class="in"><ol class="m" style="padding-left:20px;margin:4px 0">
+<li>證交所、櫃買不公布個股融資金額，本站逐檔逐日累推：今日金額＝昨日金額 ×（今日餘額 − 今日買進）÷ 昨日餘額 ＋ 今日買進張數 × 1000 × 當日均價（成交金額 ÷ 成交股數）× 成數；起點（{md(tw["start"])}）＝ 餘額 × 1000 × 收盤 × 成數。</li>
+<li>「今日買進」有證交所／櫃買逐檔融資買進的日子用真的買進；沒有的日子用退路：買進 ≈ max(今日餘額 − 昨日餘額, 0)（會低估週轉，下跌時推估成本偏高、維持率偏低）。</li>
+<li><b>成數為本站校準推估</b>：法規上限上市 6 成、上櫃 5 成，但券商可只借 4、3 成，所以先用 6／5 成累推，再用證交所／櫃買公布的融資總金額（含 ETF，分子也含 ETF）逐日校準出「實際平均成數」，套回各股。上市目前約 {f(tw["summary"]["ratio"] * 100, 1)}%、上櫃約 {f(ot["summary"]["ratio"] * 100, 1)}%。</li>
+<li>個股推估維持率＝融資張數 × 1000 × 收盤 ÷ 推估融資金額；「再跌幾 % 到 130%」＝（維持率 − 130）÷ 維持率。族群維持率＝族群融資市值合計 ÷ 族群推估金額合計。</li>
+<li>減資、面額變更：生效當天證交所／櫃買會把融資張數換算（例：面額變更 1 換 4 張），本站先把前一日張數照比例換算再累推，不當成買賣；融資金額不變。配股：融資張數不會調整、融資金額也不變，所以不調整（配到的股票不在融資擔保品裡）。現金股利不調整。</li><li>已知限制：新上市／斷檔後重新起算時，成本先以當天收盤代入；沒有逐檔融資買進資料的日子用退路（買進 ≈ 餘額增加量）。</li></ol></div></details>{ca_block(d)}{off_block(d)}
+<details class="card"><summary>校準紀錄（近 20 個校準日）</summary><div class="in"><p class="m">上市</p>{cal_table(d, "twse")}<p class="m">上櫃</p>{cal_table(d, "otc")}</div></details>
+<details class="card"><summary>抽樣 5 檔逐日累推過程（前 3 天＋最後 3 天）</summary><div class="in">{traces}</div></details>
+<p class="foot">資料：證交所 MI_MARGN、櫃買融資融券餘額（逐檔融資張數）、本站日K（收盤、成交金額、成交股數）、證交所／櫃買公布融資金額。資料日：上市 {md(tw["date"])}、上櫃 {md(ot["date"])}。<b>歷史統計，非預測，不構成買賣建議。</b></p>
+'''
+
+
+def build(d):
+    tw = d['mkts']['twse']; ot = d['mkts']['otc']
+    payload = {m: {'date': d['mkts'][m]['date'], 'rows': d['mkts'][m]['rows'], 'sec': d['mkts'][m]['sectors'],
+                   'ratio': d['mkts'][m]['summary']['ratio']} for m in MKT_NAME}
+    js_data = json.dumps(payload, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+    nfull = tw['n_full'] + ot['n_full']
+    pz = passed(d)
     return f'''<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><title>個股融資維持率</title><style>
 :root{{--bg:#F4F6F4;--card:#fff;--ink:#0F161D;--ink2:#44515E;--line:#DDE3E0;--up:#E5484D;--dn:#12A366;--acc:#B0842F;--raise:#EDF0EE;--bad:#C8323A;--badbg:#FCE9EA;--warnbg:#FBF3E2}}
@@ -158,7 +180,7 @@ details{{margin:6px 0}} summary{{cursor:pointer;font-size:14px;font-weight:600}}
 .foot{{font-size:12px;color:var(--ink2);margin-top:8px;overflow-wrap:anywhere}}
 </style></head><body><div class="w"><h1>個股／族群融資維持率（本站推估）</h1>
 <p class="alert"><b>130% 斷頭是「整戶」計算，不是單一股票</b>；本表是每檔股票全體融資戶的平均推估，個別投資人成本不同。</p>
-<nav class="tabs" id="tabs"><button data-p="pS" class="on">個股</button><button data-p="pG">族群</button><button data-p="pH">說明與驗證 <small>{"已驗證" if passed else "驗證未過"}</small></button></nav>
+<nav class="tabs" id="tabs"><button data-p="pS" class="on">個股</button><button data-p="pG">族群</button><button data-p="pH">說明與驗證 <small>{"已驗證" if pz else "驗證未過"}</small></button></nav>
 
 <section class="pane on" id="pS">
 <div class="bar"><span class="seg" data-g="mkt"><button data-v="twse" class="on">上市</button><button data-v="otc">上櫃</button></span>
@@ -185,18 +207,7 @@ details{{margin:6px 0}} summary{{cursor:pointer;font-size:14px;font-weight:600}}
 </section>
 
 <section class="pane" id="pH">
-<div class="card"><h2>驗證結果（照實寫）</h2>{ver_block(d)}
-<p class="m">{skip_note(d)}{"" if nfull else "目前 margin_full（逐檔融資買進）還沒進 repo，上市 ETF 逐檔只有 7/16～8/25 與 11/11～11/20 零星日子、上櫃只有 11/19～11/20，所以能校準的日子很少；回補進來後重跑即更新。"}</p></div>
-<details class="card"><summary>怎麼算（本站推估）</summary><div class="in"><ol class="m" style="padding-left:20px;margin:4px 0">
-<li>證交所、櫃買不公布個股融資金額，本站逐檔逐日累推：今日金額＝昨日金額 ×（今日餘額 − 今日買進）÷ 昨日餘額 ＋ 今日買進張數 × 1000 × 當日均價（成交金額 ÷ 成交股數）× 成數；起點（{md(tw["start"])}）＝ 餘額 × 1000 × 收盤 × 成數。</li>
-<li>「今日買進」有證交所／櫃買逐檔融資買進的日子用真的買進；沒有的日子用退路：買進 ≈ max(今日餘額 − 昨日餘額, 0)（會低估週轉，下跌時推估成本偏高、維持率偏低）。</li>
-<li><b>成數為本站校準推估</b>：法規上限上市 6 成、上櫃 5 成，但券商可只借 4、3 成，所以先用 6／5 成累推，再用證交所／櫃買公布的融資總金額（含 ETF，分子也含 ETF）逐日校準出「實際平均成數」，套回各股。上市目前約 {f(tw["summary"]["ratio"] * 100, 1)}%、上櫃約 {f(ot["summary"]["ratio"] * 100, 1)}%。</li>
-<li>個股推估維持率＝融資張數 × 1000 × 收盤 ÷ 推估融資金額；「再跌幾 % 到 130%」＝（維持率 − 130）÷ 維持率。族群維持率＝族群融資市值合計 ÷ 族群推估金額合計。</li>
-<li>減資、面額變更：生效當天證交所／櫃買會把融資張數換算（例：面額變更 1 換 4 張），本站先把前一日張數照比例換算再累推，不當成買賣；融資金額不變。配股：融資張數不會調整、融資金額也不變，所以不調整（配到的股票不在融資擔保品裡）。現金股利不調整。</li><li>已知限制：新上市／斷檔後重新起算時，成本先以當天收盤代入；沒有逐檔融資買進資料的日子用退路（買進 ≈ 餘額增加量）。</li></ol></div></details>{ca_block(d)}{off_block(d)}
-<details class="card"><summary>校準紀錄（近 20 個校準日）</summary><div class="in"><p class="m">上市</p>{cal_table(d, "twse")}<p class="m">上櫃</p>{cal_table(d, "otc")}</div></details>
-<details class="card"><summary>抽樣 5 檔逐日累推過程（前 3 天＋最後 3 天）</summary><div class="in">{traces}</div></details>
-<p class="foot">資料：證交所 MI_MARGN、櫃買融資融券餘額（逐檔融資張數）、本站日K（收盤、成交金額、成交股數）、證交所／櫃買公布融資金額。資料日：上市 {md(tw["date"])}、上櫃 {md(ot["date"])}。<b>歷史統計，非預測，不構成買賣建議。</b></p>
-</section>
+{help_html(d)}</section>
 </div>
 <script>
 const D={js_data};
@@ -232,6 +243,19 @@ $('#gt tbody').onclick=e=>{{const tr=e.target.closest('tr.sec');if(!tr)return;co
 $('#q').oninput=()=>{{S.lim=30;drawS()}};$('#more').onclick=()=>{{S.lim+=50;drawS()}};$('#gmore').onclick=()=>{{S.glim+=50;drawG()}};
 drawS();drawG();
 </script></body></html>'''
+
+
+def mt_prefix(h):
+    """class 一律加 mt- 前綴（網站模組慣例，不碰既有樣式）"""
+    return re.sub(r'class="([^"]*)"', lambda m: 'class="' + ' '.join('mt-' + c for c in m.group(1).split()) + '"', h)
+
+
+def public(d):
+    """正式檔 docs/data/stock_maint.json 的內容（網站讀這份）：表格資料＋說明與驗證 HTML"""
+    return {'gen': 'site_tools/stock_maint.py', 'passed': passed(d), 'sector_cov': d['sector_cov'],
+            'mkts': {m: {'date': d['mkts'][m]['date'], 'rows': d['mkts'][m]['rows'], 'sec': d['mkts'][m]['sectors'],
+                         'ratio': d['mkts'][m]['summary']['ratio']} for m in MKT_NAME},
+            'help': mt_prefix(help_html(d))}
 
 
 def write(d, path):

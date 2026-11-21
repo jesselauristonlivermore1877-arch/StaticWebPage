@@ -336,6 +336,19 @@ jobs:
           python site_tools/etf_margin.py land . || echo "::warning::ETF 逐檔融資落地失敗（明天再補）"
           python site_tools/etf_margin.py patch . || echo "::warning::維持率含 ETF 修正沒套用（ETF 歷史未補齊或核對沒過，沿用舊值）"
 
+      # 🟢 11-21（雲端新16，【新】總指揮代 Evans 裁示：籌碼組新子頁籤「維持率」，排在現貨籌碼後面）：
+      #    個股／族群融資維持率（本站推估）→ docs/data/stock_maint.json（網站「籌碼 → 維持率」讀這份）。
+      #    排在上一步之後：要讀這一班剛落地的 data/margin_full、margin*.npz、daily.npz、mkt_overlay.json；族群讀程式 repo 當下的 sector_map.csv。
+      #    預覽＝正式同一支程式（site_tools/stock_maint.py；預覽另加 --preview，正式建置不加）。只讀檔、不打網路；失敗不擋（網站沿用上一份）。
+      - name: 個股族群融資維持率
+        working-directory: site
+        continue-on-error: true
+        timeout-minutes: 5
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python site_tools/stock_maint.py --site . --sector ../code/sector_map.csv || { echo "::warning::個股族群融資維持率失敗（網站沿用上一份）"; echo "個股族群融資維持率失敗（網站沿用上一份）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+
       # 🟢 11-16（雲端舊14，Evans 看過預覽 OK）：軌跡流向（動能轉折日＋族群動能流向＋量能／籌碼／估值／爆量圖層）→ docs/data/trail_flow.json
       #    只讀日K、法人、本益比與指數檔，不打網路；預覽同一支 tools/trail_flow.py；失敗不擋（網站沿用上一份）
       - name: 軌跡流向（市場）
