@@ -442,7 +442,7 @@ def board_rows(mkt, raw, mo, book):
     """「大盤」子頁 20 日資券進出：維持率、融資金額直接取 docs/data/mkt_overlay.json（市場動態卡同一份），張數、融券取逐檔原始資料加總。
     上市：maint.twse.rows ＝ [日期, 含 ETF 維持率, 加權, 融資金額億, 扣除 ETF 維持率, 扣除 ETF 金額億, ETF 金額億]（etf_margin.adjust 寫的）
     上櫃：maint.otc.rows 第 3 欄＝本站含 ETF 維持率、第 5 欄＝融資金額億；扣除 ETF 用同一段 etf_book 照上市公式算（卡上沒有，本站推估）
-    回傳近 20 日（最舊→最新），每列：date、lots、lots_etf、short、short_etf、amt、amt_ex、amt_etf、maint、maint_ex"""
+    回傳近 21 日（最舊→最新；頁面只顯示最近 20 日，第 21 日只拿來算最舊那天的增減，總指揮 11-21 裁示），每列：date、lots、lots_etf、short、short_etf、amt、amt_ex、amt_etf、maint、maint_ex"""
     rw = {x['date']: x for x in raw}
     out = []
     for r in mo['rows']:
@@ -461,7 +461,7 @@ def board_rows(mkt, raw, mo, book):
         x = rw.get(d, {})
         out.append({'date': d, 'lots': x.get('lots'), 'lots_etf': x.get('lots_etf'), 'short': x.get('short'), 'short_etf': x.get('short_etf'),
                     'amt': round(amt, 1), 'amt_ex': amt_ex, 'amt_etf': amt_etf, 'maint': maint, 'maint_ex': maint_ex})
-    return out[-20:]
+    return out[-21:]
 
 
 def etf_books(site):
