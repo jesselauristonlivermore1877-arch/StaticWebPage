@@ -184,6 +184,43 @@ def etf_mv(site, mkt, d, close, bc):
     return v / 1e8, miss
 
 
+def etf_book(site, mkt, dates, b=None):
+    """ETF 融資金額逐檔推估（市場動態卡「扣除 ETF」、維持率頁籤 ETF 個別／分組、「大盤」子頁共用這一段，雲端新18 從 adjust() 抽出，算法不變）。
+    今日金額＝昨日金額×(今日餘額−今日買進)÷昨日餘額＋今日買進張×1000×當日均價×成數；起點（dates 第一天，或該檔第一次出現）＝餘額×收盤×成數。
+    mkt：'twse'／'tpex'（data/margin_etf/<mkt>_<日期>.json）；dates 要從頭依序給（起點不同，金額就不同）。
+    回傳 {日期: {'amt': ETF 金額合計（億）, 'mv': ETF 融資市值合計（億）, 'codes': {代號: [推估金額（元）, 融資張數, 收盤]}}}；缺檔的日子跳過"""
+    import numpy as np
+    if b is None:
+        b = np.load(os.path.join(site, 'data', 'bars', 'daily.npz'), allow_pickle=True)
+    BD = [str(x) for x in b['dates']]; bi = {d: i for i, d in enumerate(BD)}; bc = {str(c): i for i, c in enumerate(b['codes'])}
+    A, out = {}, {}
+    for d in dates:
+        p = os.path.join(site, 'data', 'margin_etf', f'{mkt}_{d}.json')
+        if d not in bi or not os.path.exists(p):
+            continue
+        i = bi[d]
+        rows = json.load(open(p))['rows']
+        cl, vo, am = b['close'][i], b['vol'][i], b['amt'][i]
+        amt_e = mv_e = 0.0; per = {}
+        for c, x in rows.items():
+            buy, prev, bal = x[0], x[3], x[4]
+            k = bc.get(c)
+            px = float(cl[k]) if k is not None and cl[k] == cl[k] else float('nan')
+            vw = float(am[k]) / float(vo[k]) if k is not None and vo[k] == vo[k] and vo[k] > 0 and am[k] == am[k] and am[k] > 0 else px
+            if px != px:
+                px = vw
+            if px != px:
+                A[c] = A.get(c, 0.0); continue
+            if c not in A:
+                a = bal * 1000 * px * ETF_RATIO
+            else:
+                a = (A[c] * max(bal - buy, 0) / prev if prev else 0.0) + buy * 1000 * vw * ETF_RATIO
+            A[c] = a; amt_e += a / 1e8; mv_e += bal * 1000 * px / 1e8
+            per[c] = [a, bal, px]
+        out[d] = {'amt': amt_e, 'mv': mv_e, 'codes': per}
+    return out
+
+
 def adjust(site, M):
     """把 ETF 融資市值加進 maint（tools/mkt_overlay.maint() 的回傳 dict，記憶體內直接改）；成功回 0，沒改回 1。
     🟢 11-21（雲端新14）：從 patch() 拆出來，讓選股 EDM（tools/pick_edm_ext.py margin_credit，daily 裡比 patch 早跑）用同一段算法。"""
@@ -213,26 +250,10 @@ def adjust(site, M):
     # 🟢 11-20 夜（【新】總指揮，Evans 選 A 版：卡上第二行「扣除 ETF」）：ETF 融資金額逐檔推估（同預覽 build_preview.py 算法）
     #   今日金額＝昨日金額×(今日餘額−今日買進)÷昨日餘額＋今日買進張×1000×當日均價×成數；起點＝餘額×收盤×成數
     #   扣除 ETF 維持率＝(含 ETF 融資市值 − ETF 融資市值) ÷ (融資金額 − ETF 融資金額推估)；推估值，頁面註明
-    A, ex = {}, {}
+    book = etf_book(site, 'twse', [r[0] for r in new], b)
+    ex = {}
     for r in new:
-        d = r[0]; i = BD.index(d)
-        rows = json.load(open(os.path.join(site, 'data', 'margin_etf', f'twse_{d}.json')))['rows']
-        cl, vo, am = b['close'][i], b['vol'][i], b['amt'][i]
-        amt_e = mv_e = 0.0
-        for c, x in rows.items():
-            buy, prev, bal = x[0], x[3], x[4]
-            k = bc.get(c)
-            px = float(cl[k]) if k is not None and cl[k] == cl[k] else float('nan')
-            vw = float(am[k]) / float(vo[k]) if k is not None and vo[k] == vo[k] and vo[k] > 0 and am[k] == am[k] and am[k] > 0 else px
-            if px != px:
-                px = vw
-            if px != px:
-                A[c] = A.get(c, 0.0); continue
-            if c not in A:
-                a = bal * 1000 * px * ETF_RATIO
-            else:
-                a = (A[c] * max(bal - buy, 0) / prev if prev else 0.0) + buy * 1000 * vw * ETF_RATIO
-            A[c] = a; amt_e += a / 1e8; mv_e += bal * 1000 * px / 1e8
+        d = r[0]; amt_e, mv_e = book[d]['amt'], book[d]['mv']
         mv_all = r[1] * r[3] / 100
         ex[d] = (round((mv_all - mv_e) / (r[3] - amt_e) * 100, 2), round(r[3] - amt_e, 1), round(amt_e, 1))
     for r in new:

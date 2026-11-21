@@ -129,6 +129,7 @@ def help_html(d):
 <li>「今日買進」有證交所／櫃買逐檔融資買進的日子用真的買進；沒有的日子用退路：買進 ≈ max(今日餘額 − 昨日餘額, 0)（會低估週轉，下跌時推估成本偏高、維持率偏低）。</li>
 <li><b>成數為本站校準推估</b>：法規上限上市 6 成、上櫃 5 成，但券商可只借 4、3 成，所以先用 6／5 成累推，再用證交所／櫃買公布的融資總金額（含 ETF，分子也含 ETF）逐日校準出「實際平均成數」，套回各股。上市目前約 {f(tw["summary"]["ratio"] * 100, 1)}%、上櫃約 {f(ot["summary"]["ratio"] * 100, 1)}%。</li>
 <li>個股推估維持率＝融資張數 × 1000 × 收盤 ÷ 推估融資金額；「再跌幾 % 到 130%」＝（維持率 − 130）÷ 維持率。族群維持率＝族群融資市值合計 ÷ 族群推估金額合計。</li>
+<li><b>ETF（雲端新18）</b>：ETF 融資金額不用上面的校準成數，改用市場動態「上市融資維持率」卡「扣除 ETF」同一段算法（逐檔累推、成數固定 6 成、上市起點 {md((d.get('etf_start') or {}).get('twse'))}、上櫃起點 {md((d.get('etf_start') or {}).get('otc'))}），所以全部 ETF 推估金額合計＝卡上的 ETF 融資金額，兩處數字一致；ETF 推估維持率＝融資張數 × 1000 × 收盤 ÷ ETF 推估融資金額。分組：主動式＝代號 A、D、T 結尾；被動式再分台股正2（00631L、00663L、00675L、00685L）、其他槓桿（其餘 L 結尾）、反向（R）、債券（B）、期貨商品（U）、市值高息等（其餘）。</li>
 <li>減資、面額變更：生效當天證交所／櫃買會把融資張數換算（例：面額變更 1 換 4 張），本站先把前一日張數照比例換算再累推，不當成買賣；融資金額不變。配股：融資張數不會調整、融資金額也不變，所以不調整（配到的股票不在融資擔保品裡）。現金股利不調整。</li><li>已知限制：新上市／斷檔後重新起算時，成本先以當天收盤代入；沒有逐檔融資買進資料的日子用退路（買進 ≈ 餘額增加量）。</li></ol></div></details>{ca_block(d)}{off_block(d)}
 <details class="card"><summary>校準紀錄（近 20 個校準日）</summary><div class="in"><p class="m">上市</p>{cal_table(d, "twse")}<p class="m">上櫃</p>{cal_table(d, "otc")}</div></details>
 <details class="card"><summary>抽樣 5 檔逐日累推過程（前 3 天＋最後 3 天）</summary><div class="in">{traces}</div></details>
@@ -254,7 +255,11 @@ def public(d):
     """正式檔 docs/data/stock_maint.json 的內容（網站讀這份）：表格資料＋說明與驗證 HTML"""
     return {'gen': 'site_tools/stock_maint.py', 'passed': passed(d), 'sector_cov': d['sector_cov'],
             'mkts': {m: {'date': d['mkts'][m]['date'], 'rows': d['mkts'][m]['rows'], 'sec': d['mkts'][m]['sectors'],
-                         'ratio': d['mkts'][m]['summary']['ratio']} for m in MKT_NAME},
+                         'ratio': d['mkts'][m]['summary']['ratio'],
+                         # 雲端新18：ETF 個別（欄位同 rows）、ETF 分組、「大盤」20 日資券進出
+                         'etf': d['mkts'][m].get('etf_rows', []), 'esec': d['mkts'][m].get('etf_sec', []),
+                         'board': d['mkts'][m].get('board', []), 'etf_cal': d['mkts'][m].get('etf_cal')} for m in MKT_NAME},
+            'etf_groups': d.get('etf_groups'), 'etf_start': d.get('etf_start'),
             'help': mt_prefix(help_html(d))}
 
 
