@@ -1,5 +1,5 @@
 {
-"checked": "2026-11-15",
+"checked": "2026-11-21",
 "src_asof": [
 "2026-11-15",
 "2026-10-25"
@@ -259,8 +259,8 @@
 "id": "br_leader",
 "zh": "路易斯·伊納西奧·魯拉·達席爾瓦",
 "en": "Luiz Inácio Lula da Silva",
-"ok": true,
-"why": "出處頁有名字與職位",
+"ok": false,
+"why": "出處打不開（HTTP 0）",
 "src": [
 "https://www.gov.br/planalto/en"
 ]
@@ -269,8 +269,8 @@
 "id": "br_finance",
 "zh": "達里奧·卡內瓦利·杜里根",
 "en": "Dario Carnevalli Durigan",
-"ok": true,
-"why": "出處頁有名字與職位",
+"ok": false,
+"why": "出處打不開（HTTP 0）",
 "src": [
 "https://www.gov.br/fazenda/pt-br/composicao/ministro/dario-carnevalli-durigan"
 ]
@@ -469,8 +469,8 @@
 "id": "ch_cb",
 "zh": "馬丁·施萊格爾",
 "en": "Martin Schlegel",
-"ok": true,
-"why": "出處頁有名字與職位",
+"ok": false,
+"why": "出處頁找不到名字",
 "src": [
 "https://www.snb.ch/en/"
 ]
@@ -2350,8 +2350,8 @@
 "ticker": "SCHW",
 "name": "The Charles Schwab Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2374,8 +2374,8 @@
 "ticker": "ISRG",
 "name": "Intuitive Surgical, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 500）"
 },
 {
 "cty": "us",
@@ -2494,8 +2494,8 @@
 "ticker": "NEM",
 "name": "Newmont Corporation",
 "status": "listed",
-"ok": false,
-"why": "出處頁找不到負責人名字"
+"ok": true,
+"why": "出處頁有公司名與負責人"
 },
 {
 "cty": "us",
@@ -2558,8 +2558,8 @@
 "ticker": "0700.HK",
 "name": "Tencent Holdings Limited",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "cn",
@@ -2659,8 +2659,8 @@
 }
 ],
 "n_ok": [
-45,
-249
+42,
+247
 ],
 "n": [
 53,

@@ -1,9 +1,8 @@
 {
- "asof": "2026-11-21 05:28",
+ "asof": "2026-11-21 12:14",
  "first_stale": {
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-20",
   "docs/data/warrant_flow.json|權證資金流": "2026-11-21",
-  "data/macro_tags.json|新聞分類": "2026-11-21",
   "docs/data/pcf/00984A|主動 ETF 持股 00984A": "2026-11-21",
   "docs/data/pcf/00989A|主動 ETF 持股 00989A": "2026-11-21",
   "docs/data/pcf/00993A|主動 ETF 持股 00993A": "2026-11-21"
@@ -156,11 +155,11 @@
   {
    "name": "總經",
    "path": "docs/data/macro.json",
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -324,11 +323,11 @@
   {
    "name": "財報公告",
    "path": "docs/data/releases.json",
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -360,11 +359,11 @@
   {
    "name": "國際指數",
    "path": "docs/data/world_idx.json",
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 macro.yml（世界趨勢）＋daily.yml world_idx.py",
    "note": ""
@@ -408,11 +407,11 @@
   {
    "name": "AI 自由現金流（GEA AI FCF）",
    "path": "docs/data/fcf_ai.json",
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 fcf_ai.bat",
    "note": ""
@@ -468,12 +467,12 @@
   {
    "name": "新聞分類",
    "path": "data/macro_tags.json",
-   "date": "2026-11-19",
+   "date": "2026-11-21",
    "freq": "td",
    "allow": 0,
-   "lag_td": 1,
-   "days": 2,
-   "stale": true,
+   "lag_td": 0,
+   "days": 0,
+   "stale": false,
    "owner": "W 本機排程 macro_tags_daily",
    "note": ""
   },
@@ -504,11 +503,11 @@
   {
    "name": "產業動向",
    "path": "data/industry_notes",
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "freq": "ev",
    "allow": 5,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 ir_report_watch",
    "note": ""
@@ -946,6 +945,6 @@
    "note": "最後檢查 2026-11-20 15:48：正常 資料到 13:45"
   }
  ],
- "n_stale": 6,
- "tg_day": "2026-11-20"
+ "n_stale": 5,
+ "tg_day": "2026-11-21"
 }
