@@ -1,9 +1,23 @@
 {
- "checked_at": "2026-11-21T10:36:33.081Z",
+ "checked_at": "2026-11-21T10:53:51.663Z",
  "date": "2026-11-20",
  "n": 79,
- "n_bad": 0,
- "bad": {},
+ "n_bad": 1,
+ "bad": {
+  "GEA_選股_主動ETF": {
+   "cat": "ETF",
+   "title": "主動式 ETF",
+   "err": "",
+   "issues": [
+    {
+     "area": "div.pe-top",
+     "dir": "下",
+     "px": 23,
+     "why": "div.pe-top scrollHeight 223＞clientHeight 200（容許 2）"
+    }
+   ]
+  }
+ },
  "js_errors": [],
  "chrome": "google-chrome",
  "no_cjk_font": false
