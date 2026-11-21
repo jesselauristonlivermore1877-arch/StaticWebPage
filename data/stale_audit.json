@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-21 12:14",
+ "asof": "2026-11-21 14:50",
  "first_stale": {
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-20",
   "docs/data/warrant_flow.json|權證資金流": "2026-11-21",
@@ -347,11 +347,11 @@
   {
    "name": "即時信息流",
    "path": "docs/data/news_live.json",
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 news_live.yml",
    "note": ""

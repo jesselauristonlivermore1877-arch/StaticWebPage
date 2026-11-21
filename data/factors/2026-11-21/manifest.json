@@ -1,15 +1,15 @@
 {
  "version": 1,
  "date": "2026-11-21",
- "built_at": "2026-11-21T12:14:11+08:00",
+ "built_at": "2026-11-21T14:50:11+08:00",
  "builder": "CustomerServiceANDSales/tools/factor_snapshot.py",
- "run": "44863044876",
+ "run": "44876196185",
  "rule": "只存當天看得到的值；回測一律用 tools/factor_pit.py load(date, factors) 讀，不讀現在的 docs/data。",
  "files": {
   "stocks.json.gz": {
-   "bytes": 123805,
-   "raw": 1082964,
-   "sha256": "8e588fcbc5f48a0645c264e9e4ad5712cc474fc127ce41766e69c9189e02caf1",
+   "bytes": 123803,
+   "raw": 1082956,
+   "sha256": "16e56f075db95f2363c372391eed82ca6e4682cf69f168545dd72d3561bda49a",
    "n_rows": 3358,
    "n_cols": 59
   },
@@ -111,8 +111,8 @@
    "name": "量化評分",
    "file": "data/web_data.json",
    "ok": true,
-   "bytes": 1586360,
-   "sha256": "d28465055f6dd33d341c0b4954184970ec4c1b906891f8d9c0633eb6b9c6c3aa",
+   "bytes": 1586394,
+   "sha256": "733367e1e747aa52525f9ceceb0276b16ff7a7b224e7191e2805b9ed3ac0d56f",
    "asof": "2026-11-20",
    "cols": null,
    "n": 253,
@@ -123,7 +123,7 @@
    "file": "docs/data/river.json",
    "ok": true,
    "bytes": 596286,
-   "sha256": "a713f6b1b3585fb1e41a9d648818768229103c62209327fd1a104a32e7546c8b",
+   "sha256": "86a77ede4ade1a30d05d3716633cb3de6758f6d3f75720b4e3c4e9eea813067e",
    "asof": "2026-11-20",
    "cols": null,
    "n": 253,
@@ -199,11 +199,11 @@
    "name": "AI研究報告",
    "file": "docs/data/company_reports.json",
    "ok": true,
-   "bytes": 3192350,
-   "sha256": "621dd2124c463684924ebc2d57ea8e939281afd33d0c1a1f372c680cea267af9",
+   "bytes": 3159825,
+   "sha256": "5a8b08fdadf7626589558f5dafcb08cc1036bf141503d30b9feee6baa49aa8dc",
    "asof": "2026-11-20",
    "cols": null,
-   "n": 108,
+   "n": 107,
    "n_sec": 0
   }
  ]

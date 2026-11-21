@@ -2,7 +2,7 @@
  "file": "2344_2026-11-03.md",
  "code": "2344",
  "date": "2026-11-03",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "mcap",
+    "why": "數字檔 6570.0 億元，站上資料 6891.9166"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",
