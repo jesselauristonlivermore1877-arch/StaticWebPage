@@ -490,6 +490,30 @@ def load_daily(site):
             'close': z['close'], 'vol': z['vol'], 'amt': z['amt'], 'mkt': np.array([str(x) for x in z['mkt']])}
 
 
+def add_mcap_turnover(site, daily, out):
+    """每列（股票 rows、ETF etf_rows）最後補 [市值億, 成交值億20日均]；印覆蓋率"""
+    p = os.path.join(site, 'docs/data/company.json')
+    co = (json.load(open(p, encoding='utf-8')).get('co') or {}) if os.path.exists(p) else {}
+    if not co:
+        print('⚠ 找不到 docs/data/company.json 股數，市值欄全部寫 —')
+    amt = daily['amt']
+    for mkt, res in out['mkts'].items():
+        n_cap = n_to = 0
+        for key in ('rows', 'etf_rows'):
+            for r in res[key]:
+                sh = (co.get(r[0]) or {}).get('shares') if key == 'rows' else None
+                cap = round(sh * r[9] / 1e8, 1) if (sh and r[9]) else None
+                i = daily['ci'].get(r[0])
+                to = None
+                if i is not None:
+                    a = amt[-20:, i]
+                    a = a[np.isfinite(a) & (a > 0)]
+                    to = round(float(a.mean()) / 1e8, 2) if len(a) else None
+                r.append(cap); r.append(to)
+                n_cap += cap is not None; n_to += to is not None
+        print(f'  {mkt} 市值欄 {n_cap} 檔、成交值欄 {n_to} 檔（股票 {len(res["rows"])}、ETF {len(res["etf_rows"])}）')
+
+
 def build(site, sector):
     """算全部數字 → dict（預覽與正式共用這一段，不分兩套）"""
     daily = load_daily(site)
@@ -518,7 +542,12 @@ def build(site, sector):
         res['etf_sec'] = etf_sectors(res['etf_rows'], res['board'][-1] if res['board'] else None, len(res['rows']))
         out['mkts'][mkt] = res
         print(mkt, json.dumps(res['summary'], ensure_ascii=False))
-    out['fields'] = ['代號', '名稱', '族群', '融資張數', '融資市值億', '推估成本', '推估維持率', '離130%', '近5日增減', '收盤', '推估金額億', '來源', '以法定成數計維持率']
+    # 🟢 11-21（雲端新19，Evans：「維持率裡面的個股可以讓我用市值排名嗎」）：每列最後加兩欄（不改既有索引，前端依索引讀）
+    #    r[13] 市值（億）＝發行股數（docs/data/company.json co[代號].shares，公開資訊觀測站基本資料；河流圖同業市值同一份股數）× 收盤（r[9]）；
+    #          沒有股數的寫 None（頁面「—」）；ETF 目前沒有逐檔規模的落地資料 → None
+    #    r[14] 成交值（億，20 日均）＝ daily.npz 成交金額最近 20 個交易日平均（有資料的日子），代表熱門程度
+    add_mcap_turnover(site, daily, out)
+    out['fields'] = ['代號', '名稱', '族群', '融資張數', '融資市值億', '推估成本', '推估維持率', '離130%', '近5日增減', '收盤', '推估金額億', '來源', '以法定成數計維持率', '市值億', '成交值億20日均']
     out['sector_fields'] = ['族群', '大類', '檔數', '融資市值億', '推估金額億', '族群維持率', '低於130檔數', '成分股']
     out['sector_n'] = len(smap)
     out['etf_groups'] = [list(x) for x in ETF_GROUPS]
