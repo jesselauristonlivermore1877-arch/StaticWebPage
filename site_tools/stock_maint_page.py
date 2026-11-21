@@ -103,6 +103,11 @@ def cal_table(d, m):
             f'<tbody>{tr}</tbody></table></div>')
 
 
+def fail_mkts(d):
+    """沒過驗證的市場名稱（11-21 雲端新19：頁籤標「上櫃驗證未過」，不只寫「驗證未過」）"""
+    return [nm for m, nm in MKT_NAME.items() if not ((d['mkts'][m]['summary'].get('bal_match') or 0) >= 99.9 and (d['mkts'][m]['summary']['err20_max'] or 99) < 2)]
+
+
 def passed(d):
     return all((d['mkts'][m]['summary'].get('bal_match') or 0) >= 99.9 and (d['mkts'][m]['summary']['err20_max'] or 99) < 2 for m in MKT_NAME)
 
@@ -273,7 +278,7 @@ def mt_prefix(h):
 
 def public(d):
     """正式檔 docs/data/stock_maint.json 的內容（網站讀這份）：表格資料＋說明與驗證 HTML"""
-    return {'gen': 'site_tools/stock_maint.py', 'passed': passed(d), 'sector_cov': d['sector_cov'],
+    return {'gen': 'site_tools/stock_maint.py', 'passed': passed(d), 'fail': fail_mkts(d), 'sector_cov': d['sector_cov'],
             'mkts': {m: {'date': d['mkts'][m]['date'], 'rows': d['mkts'][m]['rows'], 'sec': d['mkts'][m]['sectors'],
                          'ratio': d['mkts'][m]['summary']['ratio'], 'r0': d['mkts'][m]['r0'],
                          # 雲端新18：ETF 個別（欄位同 rows）、ETF 分組、「大盤」20 日資券進出
