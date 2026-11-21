@@ -314,6 +314,16 @@ def adjust(site, M):
             if x and x[ie] is not None:
                 print(f'  · 上櫃 {d} 本站估算 {x[ie]} vs 外部參考 {ref}（差 {x[ie] - ref:+.2f}）')
         O['est_etf_days'] = n_ok
+        # 🟢 11-21（【新】總指揮）：last 是 mkt_overlay.py 寫的另一份拷貝，上面只改了 rows → last 換成 rows 同一天那列（含 ETF 的 est），
+        #    pct_est 用同一序列、同 mkt_overlay.pctile 公式重算（pct 是證交所整戶官方值，不變）
+        if O.get('last'):
+            x = next((r for r in O['rows'] if r[0] == O['last'][0]), None)
+            if x:
+                O['last'] = list(x)
+        ev = [r[ie] for r in O['rows'] if r[ie]]
+        v = next((r[ie] for r in reversed(O['rows']) if r[ie]), None)
+        if ev and v is not None:
+            O['pct_est'] = round((sum(1 for y in ev if y < v) + 0.5 * sum(1 for y in ev if y == v)) / len(ev) * 100)
     print(f'✓ 上市 {len(new)} 天改含 ETF，最新 {new[-1][0]} {new[-1][1]}%，第 {T["pct"]} 百分位')
     return 0
 
