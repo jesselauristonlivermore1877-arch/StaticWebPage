@@ -1,0 +1,71 @@
+# ============================================================================
+# backfill_margin_total.yml ─ 回補 融資總額歷史（雲端新19，2026-11-21；【新】總指揮派工）
+#
+#   上市（證交所 MI_MARGN MS，2001 起）、上櫃（櫃買融資融券餘額 summary，2007 前後起）全市場融資金額逐日歷史
+#   → data/margin_total/<twse|otc>.json（data/ 不對外）。給量化 EDM「融資大減」歷史排行用（tools/pick_edm_1116.py mf_rank）。
+#   慢速：每發間隔 ≥ 6 秒；遇到 307／403／429／非 JSON 立刻停（exit 3）、不繞過；
+#   分段：每段 --minutes 分鐘，段尾 commit＋push，下一段從檔裡最早那天接著往回補；跑完一班沒補完就再按一次 Run workflow。
+#   兩個市場各一個 job（各打各的網站、寫不同檔），push 前 pull --rebase。
+# ============================================================================
+name: 回補 融資總額歷史
+
+on:
+  workflow_dispatch:
+    inputs:
+      mkt:
+        description: "twse、otc 或 both"
+        required: false
+        default: "both"
+      segments:
+        description: "分幾段（每段結束 commit＋push）"
+        required: false
+        default: "8"
+      minutes:
+        description: "每段幾分鐘"
+        required: false
+        default: "40"
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        mkt: [twse, otc]
+    steps:
+      - uses: actions/checkout@v4
+        if: inputs.mkt == 'both' || inputs.mkt == matrix.mkt
+      - uses: actions/setup-python@v5
+        if: inputs.mkt == 'both' || inputs.mkt == matrix.mkt
+        with:
+          python-version: "3.12.14"
+      - run: pip install requests
+        if: inputs.mkt == 'both' || inputs.mkt == matrix.mkt
+      - name: 分段回補 ${{ matrix.mkt }}
+        if: inputs.mkt == 'both' || inputs.mkt == matrix.mkt
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for seg in $(seq 1 ${{ inputs.segments }}); do
+            echo "── 第 $seg 段 ──"
+            set +e
+            python site_tools/margin_total_backfill.py --mkt ${{ matrix.mkt }} --minutes ${{ inputs.minutes }} --gap 6
+            rc=$?
+            set -e
+            git add data/margin_total/${{ matrix.mkt }}.json
+            if ! git diff --staged --quiet; then
+              git commit -m "data: 回補 融資總額歷史 ${{ matrix.mkt }} 第 $seg 段 $(TZ=Asia/Taipei date '+%F %H:%M')"
+              for i in 1 2 3 4; do
+                git pull --rebase origin main && git push origin HEAD:main && break
+                sleep $((i * 15))
+              done
+            fi
+            if [ "$rc" = "3" ]; then echo "::warning::${{ matrix.mkt }} 被擋或異常回應，停（不繞過），已補的已推上"; break; fi
+            if grep -q '"floor":"' data/margin_total/${{ matrix.mkt }}.json; then echo "✓ ${{ matrix.mkt }} 已補到資料起點"; break; fi
+            if [ "$rc" != "0" ]; then echo "::warning::回補程式 exit $rc"; break; fi
+          done
