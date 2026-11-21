@@ -59,9 +59,9 @@ function card(T) {
   const days = (T.days || []).map(d => `<div class="rcth-day ${d.rank === 1 ? "top" : ""}"><b>${esc(md(d.date))}${d.mode === "us_only" ? "（盤前）" : ""}</b>` +
     `${d.rank ? `第 ${d.rank} 名` : "未列"}${d.carried ? "（帶入）" : ""}<br><span class="rcth-chip ${stCls(d.status)}">${esc(d.status || "")}</span>` +
     `${d.quant ? `<br>量化：${esc(d.quant)}` : ""}</div>`).join("");
-  const tl = (T.timeline || []).map(r => `<li><span class="rcth-t">${esc(md(r.pub))}</span><div><span class="rcth-who">${esc(r.who)}</span>` +
-    `${r.auth ? `<span class="rcth-chip ${r.auth === "官方" ? "ok" : ""}">${esc(r.auth)}</span> ` : ""}${esc(r.t)}</div>` +
-    `<div class="rcth-src">${A(r.u, r.src)}・${esc(r.check)}${r.hedged ? "・轉述語氣" : ""}</div></li>`).join("");
+  // 11-21 總指揮：權威標籤標的是出處、不是發言者 → 移到出處那一行，寫成「出處：權威媒體」
+  const tl = (T.timeline || []).map(r => `<li><span class="rcth-t">${esc(md(r.pub))}</span><div><span class="rcth-who">${esc(r.who)}</span>${esc(r.t)}</div>` +
+    `<div class="rcth-src">${r.auth ? `<span class="rcth-chip ${r.auth === "官方" ? "ok" : ""}">出處：${esc(r.auth)}</span> ` : ""}${A(r.u, r.src)}・${esc(r.check)}${r.hedged ? "・轉述語氣" : ""}</div></li>`).join("");
   const tu = (T.turning || []).map(r => `<li><span class="rcth-t">${esc(md(r.pub))}</span><div>${esc(r.t)}</div><div class="rcth-src">${A(r.u, r.src)}・${esc(r.check)}</div></li>`).join("");
   const Q = T.quant_test || {};
   const qr = (Q.rows || []).map(r => `<tr><td>${esc(md(r.date))}</td><td class="n">${sg(r.twii)}</td><td class="n">${r.twii_z != null ? Math.abs(r.twii_z).toFixed(1) : "—"}</td>` +
