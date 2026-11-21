@@ -1,53 +1,6 @@
 {
  "dead": {},
  "count": {
-  "2026-11-11": {
-   "gemini-3.5-flash-lite": {
-    "req": 108,
-    "tok": 212002
-   },
-   "gemini-3.1-flash-lite": {
-    "req": 26,
-    "tok": 77880
-   },
-   "gemini-2.5-flash-lite": {
-    "req": 1,
-    "tok": 0
-   },
-   "gemini-flash-lite-latest": {
-    "req": 1,
-    "tok": 0
-   },
-   "gemini-3.1-flash-lite-preview": {
-    "req": 1,
-    "tok": 0
-   },
-   "gemini-3.6-flash": {
-    "req": 1,
-    "tok": 0
-   },
-   "gemini-3.5-flash": {
-    "req": 1,
-    "tok": 0
-   },
-   "gemini-2.5-flash": {
-    "req": 1,
-    "tok": 0
-   },
-   "gemini-flash-latest": {
-    "req": 1,
-    "tok": 0
-   },
-   "gemini-3-flash-preview": {
-    "req": 1,
-    "tok": 34272
-   },
-   "gemini-omni-flash-preview": {
-    "req": 1,
-    "tok": 0,
-    "e429": 1
-   }
-  },
   "2026-11-12": {
    "gemini-3.5-flash-lite": {
     "req": 108,
@@ -303,24 +256,34 @@
     "req": 1,
     "tok": 0
    }
+  },
+  "2026-11-21": {
+   "gemini-3.5-flash-lite": {
+    "req": 4,
+    "tok": 530
+   },
+   "gemini-3.1-flash-lite": {
+    "req": 3,
+    "tok": 11114
+   }
   }
  },
  "tpm": [
   [
-   1795245057.39346,
-   1257
+   1795248647.922748,
+   530
   ],
   [
-   1795245069.6415548,
-   4311
+   1795248659.825143,
+   4161
   ],
   [
-   1795245074.6174605,
-   4632
+   1795248669.3940506,
+   3926
   ],
   [
-   1795245078.9070597,
-   3268
+   1795248674.3601604,
+   3027
   ]
  ]
 }
