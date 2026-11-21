@@ -96,6 +96,11 @@ jobs:
             echo "沒有新東西，不提交。"
           else
             git commit -m "data: 法說與報告擷取 $(TZ=Asia/Taipei date +%F)"
+            # 🔴 11-21（【新】總指揮）：上面 tr 只加不刪，沒加進來的刪除（與其他沒 add 的檔）留在工作區 →
+            #    git pull --rebase 回「cannot pull with rebase: You have unstaged changes」，11-17 起每班都推不上（逐字稿索引停在 11-16）。
+            #    提交後把殘留收進 stash（不提交、也不丟，runner 結束就消失），再 pull／push。
+            git status --short | head -20
+            git stash push -u -q -m "未提交殘留（不推）" || true
             ok=0
             for i in 1 2 3 4; do
               git pull --rebase origin main && git push origin HEAD:main && { ok=1; break; }
