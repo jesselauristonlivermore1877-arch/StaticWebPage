@@ -1,29 +1,9 @@
 {
- "checked_at": "2026-11-21T19:51:39.688Z",
+ "checked_at": "2026-11-21T20:08:31.422Z",
  "date": "2026-11-20",
  "n": 88,
- "n_bad": 1,
- "bad": {
-  "GEA_選股_加權大跌歷史前十": {
-   "cat": "歷史排行",
-   "title": "歷史排行・加權大跌前十",
-   "err": "",
-   "issues": [
-    {
-     "area": "「加權跌點歷史第 1～5 名★＝今天」",
-     "dir": "右",
-     "px": 9,
-     "why": "div.pe-gg scrollWidth 1017＞clientWidth 1008"
-    },
-    {
-     "area": "「加權跌點歷史第 6～10 名1987 起 10,」",
-     "dir": "右",
-     "px": 10,
-     "why": "div.pe-box scrollWidth 505＞clientWidth 495"
-    }
-   ]
-  }
- },
+ "n_bad": 0,
+ "bad": {},
  "js_errors": [],
  "chrome": "google-chrome",
  "no_cjk_font": false
