@@ -1,60 +1,10 @@
 {
- "trig": [
-  {
-   "kind": "台指期",
-   "what": "期交所行情",
-   "date": "2026-11-17",
-   "t": "台指期夜盤重挫 -918 點（-2.29%），報 39,093；盤中最低 39,010",
-   "u": "https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/FuturesDomestic/"
-  },
-  {
-   "kind": "台指期",
-   "what": "期交所行情",
-   "date": "2026-11-17",
-   "t": "台指期日盤重挫 -954 點（-2.34%），報 39,827；盤中最低 39,825",
-   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
-  },
-  {
-   "kind": "台指期",
-   "what": "期交所行情",
-   "date": "2026-11-16",
-   "t": "台指期日盤重挫 -2,954 點（-6.74%），報 40,885；盤中最低 40,714",
-   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
-  },
-  {
-   "kind": "台指期",
-   "what": "期交所行情",
-   "date": "2026-11-16",
-   "t": "台指期日盤重挫 -2,572 點（-5.87%），報 41,267；盤中最低 41,154",
-   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
-  },
-  {
-   "kind": "台指期",
-   "what": "期交所行情",
-   "date": "2026-11-16",
-   "t": "台指期日盤重挫 -2,167 點（-4.94%），報 41,672；盤中最低 41,569",
-   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
-  },
-  {
-   "kind": "台指期",
-   "what": "期交所行情",
-   "date": "2026-11-16",
-   "t": "台指期日盤重挫 -1,725 點（-3.93%），報 42,114；盤中最低 41,985",
-   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
-  },
-  {
-   "kind": "台指期",
-   "what": "期交所行情",
-   "date": "2026-11-16",
-   "t": "台指期日盤重挫 -1,217 點（-2.78%），報 42,622；盤中最低 42,350",
-   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
-  }
- ],
+ "trig": [],
  "moves": {
   "TWII": {
    "date": "2026-11-17",
    "prev": "2026-11-16",
-   "close": 40092.11,
+   "close": 40092.1094,
    "prev_close": 41040.0781,
    "pct": -2.31,
    "sd": 1.869,
