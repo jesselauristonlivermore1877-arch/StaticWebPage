@@ -7659,6 +7659,10 @@
       ],
       [
        "11/22",
+       "2327 國巨｜併購擴大感測布局，AI與調價推升獲利"
+      ],
+      [
+       "11/22",
        "6510 精測｜應用由AP轉向HPC，帶動營運成長"
       ],
       [
@@ -7672,10 +7676,6 @@
       [
        "11/22",
        "1590 ｜電池應用比重提升，獲利上移並拓展外銷"
-      ],
-      [
-       "11/21",
-       "2356 英業達｜伺服器躍居最大業務，營收擴張但毛利承壓"
       ]
      ]
     },
@@ -8830,7 +8830,7 @@
      },
      {
       "lab": "前 20 名新進",
-      "num": 13,
+      "num": 12,
       "u": "檔",
       "c": "up",
       "sub": "國巨*、友達、台泥"
@@ -8844,7 +8844,7 @@
      },
      {
       "lab": "統計檔數",
-      "num": 18,
+      "num": 17,
       "u": "檔",
       "c": "",
       "sub": "資料日 11-22"
@@ -8882,7 +8882,7 @@
        },
        5,
        "5／0／0",
-       "−10",
+       "−12",
        "—",
        {
         "v": "—",
@@ -8982,8 +8982,8 @@
       [
        8,
        {
-        "code": "2303",
-        "name": "聯電"
+        "code": "1301",
+        "name": "台塑"
        },
        1,
        "1／0／0",
@@ -8997,13 +8997,13 @@
       [
        9,
        {
-        "code": "2344",
-        "name": "華邦電"
+        "code": "2303",
+        "name": "聯電"
        },
        1,
        "1／0／0",
-       "0",
-       "↓3",
+       "+1",
+       "新進",
        {
         "v": "—",
         "c": ""
@@ -9012,13 +9012,13 @@
       [
        10,
        {
-        "code": "2881",
-        "name": "富邦金"
+        "code": "2344",
+        "name": "華邦電"
        },
        1,
        "1／0／0",
-       "+1",
-       "新進",
+       "0",
+       "↓4",
        {
         "v": "—",
         "c": ""
@@ -9027,13 +9027,13 @@
       [
        11,
        {
-        "code": "2890",
-        "name": "永豐金"
+        "code": "2454",
+        "name": "聯發科"
        },
        1,
        "1／0／0",
-       "+1",
-       "新進",
+       "0",
+       "↓4",
        {
         "v": "—",
         "c": ""
@@ -9042,8 +9042,8 @@
       [
        12,
        {
-        "code": "3008",
-        "name": "大立光"
+        "code": "2881",
+        "name": "富邦金"
        },
        1,
        "1／0／0",
@@ -9063,7 +9063,7 @@
    "verify": {
     "ok": true,
     "bad": [],
-    "checked": "關注度 18 檔次數加總與排序、前 12 名當日漲跌"
+    "checked": "關注度 17 檔次數加總與排序、前 12 名當日漲跌"
    },
    "foot": "量化篩選結果，非投資建議"
   },
@@ -11334,9 +11334,9 @@
    "tag": "本週市場主軸",
    "title": "AI 燒錢，",
    "hl": "融資開始降溫",
-   "subt": "本週權威媒體 15424 則新聞分成 12272 個事件，前 40 大事件裡「融資」「AI 燒錢」出現最多",
+   "subt": "本週權威媒體 15333 則新聞分成 12200 個事件，前 40 大事件裡「融資」「AI 燒錢」出現最多",
    "date": "2026-11-22",
-   "src": "資料：權威媒體新聞（news_rank 分群，2026-11-15T13:05～2026-11-22T13:05 UTC）、證交所、FRED（ICE BofA US High Yield OAS）",
+   "src": "資料：權威媒體新聞（news_rank 分群，2026-11-15T14:30～2026-11-22T14:30 UTC）、證交所、FRED（ICE BofA US High Yield OAS）",
    "kpi": [
     [
      {
@@ -11355,7 +11355,7 @@
      },
      {
       "lab": "主軸新聞",
-      "num": "6",
+      "num": "5",
       "u": "群",
       "c": "",
       "sub": "前 40 大事件群"
@@ -11380,34 +11380,34 @@
      ],
      "rows": [
       [
+       "Anthropic上市首日先盛後衰 AI熱潮能否延續備受關注",
+       "中央社",
+       "11/20",
+       "8 家"
+      ],
+      [
        "黃仁勳爭議纏身仍不受影響！輝達傳入選川普「AI國家隊」 出口許可、聯邦融資有望到手",
        "Yahoo 股市",
        "11/16",
-       "6 家"
-      ],
-      [
-       "超越SpaceX！Anthropic募資813億美元、估值衝1.5兆美元創史上最大IPO",
-       "工商時報",
-       "11/19",
        "7 家"
       ],
       [
-       "Anthropic上市首日開盤漲34％ 市值突破2兆美元",
-       "自由財經",
+       "Protesters Converge on Nasdaq Ahead of Anthropic IPO",
+       "彭博",
        "11/19",
-       "3 家"
+       "8 家"
+      ],
+      [
+       "Anthropic上市，募資813億！最讓人擔心的，卻不是那9009億美元",
+       "鉅亨",
+       "11/20",
+       "6 家"
       ],
       [
        "《路透》SEC調查輝達會計處理！新加坡營收揭露、AI循環融資再受檢視",
        "鉅亨",
        "11/20",
        "3 家"
-      ],
-      [
-       "The Investors Set to Win Big in Anthropic’s IPO",
-       "華爾街日報",
-       "11/16",
-       "5 家"
       ]
      ]
     },
@@ -11767,12 +11767,12 @@
    "hl": "今天市場在看什麼",
    "subt": "台股公司與族群新聞；只收權威來源，標題照原文",
    "date": "2026-11-22",
-   "src": "資料時間 2026-11-22 13:06｜來源：網站「即時信息流」（各國通訊社、路透、彭博、日經、經濟日報、工商時報、鉅亨等權威名單）",
+   "src": "資料時間 2026-11-22 14:28｜來源：網站「即時信息流」（各國通訊社、路透、彭博、日經、經濟日報、工商時報、鉅亨等權威名單）",
    "kpi": [
     [
      {
       "lab": "新聞",
-      "num": 35,
+      "num": 34,
       "u": "則",
       "c": "gd",
       "sub": "權威來源（全部 36 則）"
@@ -11793,7 +11793,7 @@
      },
      {
       "lab": "最新",
-      "num": "20:30",
+      "num": "22:03",
       "u": "",
       "c": "",
       "sub": "台北時間"
@@ -11816,9 +11816,9 @@
      ],
      "rows": [
       [
-       "11/22 16:53",
-       "工商時報",
-       "11／22本周國內外財經焦點｜台經院11月景氣動向調查報告、永豐金等法說會、美PCE、戴爾等財報"
+       "11/22 22:03",
+       "聯合新聞網",
+       "大摩：聯發科可望贏得新 TPU 專案 重申目標價6,188元"
       ],
       [
        "11/21 20:21",
@@ -11839,6 +11839,11 @@
        "11/20 07:15",
        "Yahoo ",
        "史上最大IPO也救不了！道瓊狂瀉1101點失守5萬點、AI股慘崩台積電ADR跌2.9%、台指期夜盤退回38K"
+      ],
+      [
+       "11/22 21:58",
+       "聯合新聞網",
+       "中工、信紘科攜手投入台塑都更案 預計2029年完工"
       ],
       [
        "11/22 20:30",
@@ -11871,24 +11876,19 @@
        "聯電、友達、群創、南亞科…台股週一崩跌還要買？杜金龍「頭洗下去」持股拉9成、外資也買超它們"
       ],
       [
-       "11/22 17:10",
-       "風傳媒",
-       "台股下周有望反彈？杜金龍喊「台積電2000元已到地板價」 點名2檔迎作帳行情"
-      ],
-      [
-       "11/22 16:36",
-       "自由財經",
-       "群聯不去桃園了！潘健成指「外部力量」介入美光勞資爭議 桃市產總提3點反擊"
-      ],
-      [
-       "11/22 16:02",
-       "聯合新聞網",
-       "和碩召開2026供應商大會 海內外逾千家夥伴響應"
-      ],
-      [
        "11/22 13:48",
        "中央社",
        "台塑化：23日起汽柴油價格維持不變"
+      ],
+      [
+       "11/22 11:18",
+       "工商時報",
+       "股災還沒完？費半重挫千點、台積電ADR跌近一成 分析師揭周一台股關鍵轉折"
+      ],
+      [
+       "11/22 02:50",
+       "經濟日報",
+       "美股血流成河 費半崩跌10% 台積 ADR 受傷 對於賣壓分析師這樣認為"
       ],
       [
        "11/21 16:59",
@@ -11914,7 +11914,7 @@
    "verify": {
     "ok": true,
     "bad": [],
-    "checked": "18 則逐則在 news_live.json，媒體逐則比對權威名單（不在名單的 1 則不放）"
+    "checked": "18 則逐則在 news_live.json，媒體逐則比對權威名單（不在名單的 2 則不放）"
    },
    "foot": "量化篩選結果，非投資建議"
   },
@@ -11925,33 +11925,33 @@
    "hl": "今天市場在看什麼",
    "subt": "美股公司、科技與總經新聞（外電原標題）；只收權威來源，標題照原文",
    "date": "2026-11-22",
-   "src": "資料時間 2026-11-22 13:06｜來源：網站「即時信息流」（各國通訊社、路透、彭博、日經、經濟日報、工商時報、鉅亨等權威名單）",
+   "src": "資料時間 2026-11-22 14:28｜來源：網站「即時信息流」（各國通訊社、路透、彭博、日經、經濟日報、工商時報、鉅亨等權威名單）",
    "kpi": [
     [
      {
       "lab": "新聞",
-      "num": 222,
+      "num": 236,
       "u": "則",
       "c": "gd",
-      "sub": "權威來源（全部 223 則）"
+      "sub": "權威來源（全部 237 則）"
      },
      {
       "lab": "重大",
-      "num": 8,
+      "num": 5,
       "u": "則",
       "c": "up",
       "sub": "A 級或重磅"
      },
      {
       "lab": "媒體",
-      "num": 24,
+      "num": 21,
       "u": "家",
       "c": "",
       "sub": ""
      },
      {
       "lab": "最新",
-      "num": "21:02",
+      "num": "22:11",
       "u": "",
       "c": "",
       "sub": "台北時間"
@@ -11984,11 +11984,6 @@
        "Elon Musk's Tesla and SpaceX Each Formed a Special Committee to Explore a Merger as His AI"
       ],
       [
-       "11/20 17:58",
-       "Barron",
-       "Anthropic Stock Falls. The IPO Buzz Is Already Fading as Reality Hits Home."
-      ],
-      [
        "11/20 09:33",
        "Yahoo ",
        "California attorney general subpoenas Nvidia over chips, former CEO's affair"
@@ -12004,14 +11999,54 @@
        "Nvidia, AMD, Micron Sink as Anthropic Closes 17% Above IPO Price"
       ],
       [
-       "11/19 22:04",
-       "Barron",
-       "Stock Futures Are Rising Ahead of Nvidia’s Earnings, Anthropic’s IPO"
+       "11/22 22:11",
+       "彭博",
+       "Nvidia Board Faces a Governance Reckoning"
       ],
       [
-       "11/19 21:44",
+       "11/22 22:00",
+       "Market",
+       "Stocks are in a correction heading into the Thanksgiving holiday. What to brace for next."
+      ],
+      [
+       "11/22 21:33",
        "Yahoo ",
-       "Nvidia, AMD, Micron stocks lead chip sector higher amid Anthropic IPO optimism"
+       "Warren Buffett’s Favorite Type of Stock Is Perfect for Patient Investors"
+      ],
+      [
+       "11/22 21:32",
+       "彭博",
+       "Governors Push States to Lead on AI"
+      ],
+      [
+       "11/22 21:30",
+       "彭博",
+       "Strong Earnings Prove No Match for the Crumbling AI Trade"
+      ],
+      [
+       "11/22 21:30",
+       "彭博",
+       "Oil Shock Response Sets Emerging-Market Bond Winners and Losers"
+      ],
+      [
+       "11/22 21:30",
+       "彭博",
+       "Oil Shock Response Sets Emerging-Market Bond Winners and Losers"
+      ],
+      [
+       "11/22 21:09",
+       "路透",
+       "Chinese exchanges ease margin trading requirements to aid stock markets"
+      ],
+      [
+       "11/22 21:08",
+       "Yahoo ",
+       "Top 3 Canadian Cash Flow Stocks To Watch In November 2026"
+      ],
+      [
+       "11/22 21:07",
+       "Yahoo ",
+       "Vietnam Industrial Stocks In Focus As Local Supply Chain Rules Tighten"
       ],
       [
        "11/22 21:02",
@@ -12019,49 +12054,14 @@
        "Copper at Lowest Since April Amid AI Market Turmoil, Chinese Demand Concerns"
       ],
       [
-       "11/22 20:35",
+       "11/22 21:02",
        "彭博",
-       "Taiwan Mulls Lowering Margin Requirement to Support Stock Market"
+       "Czech Economy Facing Stagflation Shock, Policymaker Seidler Says"
       ],
       [
-       "11/22 20:27",
-       "Yahoo ",
-       "Not Lucid. Not Ford. The EV Stock Most Likely to Catch Every Refunded Cybertruck Buyer."
-      ],
-      [
-       "11/22 20:22",
-       "路透",
-       "Correction or deeper reckoning? Investors seek signs US stock selling will abate"
-      ],
-      [
-       "11/22 20:13",
-       "CNBC",
-       "Top Wall Street analysts favor these 3 dividend stocks for strong returns"
-      ],
-      [
-       "11/22 20:10",
-       "CNBC",
-       "The Nasdaq is in freefall. Here's one stock to look at"
-      ],
-      [
-       "11/22 20:04",
-       "華爾街日報",
-       "GXO Looks to Data Centers, Aerospace and Defense for Growth"
-      ],
-      [
-       "11/22 19:35",
-       "Yahoo ",
-       "月配年配都有！聯博首創ETF傘型基金開募中中國大陸財報季！嗶哩嗶哩BILI、理想汽車LI同周交卷Dell財報＋PCE同天出爐中油油價連10不漲！中油累計吸收357億撐住油價"
-      ],
-      [
-       "11/22 19:32",
-       "金融時報",
-       "Nscale slows hiring and curtails spending ahead of planned $35bn IPO"
-      ],
-      [
-       "11/22 19:10",
-       "路透",
-       "EXCLUSIVE: Like SpaceX, Anthropic ran an unusual IPO process, chafing some bankers"
+       "11/22 21:02",
+       "彭博",
+       "Czech Economy Facing Stagflation Shock, Policymaker Seidler Says"
       ]
      ]
     }
@@ -31049,7 +31049,7 @@
    "verify": {
     "ok": true,
     "bad": [],
-    "checked": "上市回補跟 mkt_overlay 重疊 276 天（2025-09-22～2026-11-13）：全段最大差 14.62 億、差 > 0.5 億 194 天（網站累推誤差，排行用官方原值）；接縫最後 20 天最大差 0.05 億；前 10 名與★共 44 個大減日用另一份原始資料重算，44 天一致（其中 1 天差額＝官方前日餘額調整：2018-10-11 −3.6 億）"
+    "checked": "上市回補跟 mkt_overlay 重疊 281 天（2025-09-22～2026-11-20）：全段最大差 0.01 億、差 > 0.5 億 0 天（網站累推誤差，排行用官方原值）；接縫最後 20 天最大差 0.0 億；前 10 名與★共 44 個大減日用另一份原始資料重算，44 天一致（其中 1 天差額＝官方前日餘額調整：2018-10-11 −3.6 億）"
    },
    "foot": "量化篩選結果，非投資建議"
   },
@@ -31355,7 +31355,7 @@
    "verify": {
     "ok": true,
     "bad": [],
-    "checked": "上櫃回補跟 mkt_overlay 重疊 70 天（2026-08-03～2026-11-13）：全段最大差 0.0 億、差 > 0.5 億 0 天（網站累推誤差，排行用官方原值）；接縫最後 20 天最大差 0.0 億；前 10 名與★共 42 個大減日用另一份原始資料重算，42 天一致（其中 1 天差額＝官方前日餘額調整：2018-10-11 +1.1 億）"
+    "checked": "上櫃回補跟 mkt_overlay 重疊 75 天（2026-08-03～2026-11-20）：全段最大差 0.0 億、差 > 0.5 億 0 天（網站累推誤差，排行用官方原值）；接縫最後 20 天最大差 0.0 億；前 10 名與★共 42 個大減日用另一份原始資料重算，42 天一致（其中 1 天差額＝官方前日餘額調整：2018-10-11 +1.1 億）"
    },
    "foot": "量化篩選結果，非投資建議"
   },
@@ -33964,7 +33964,7 @@
        },
        "67.0",
        {
-        "v": "124.9%",
+        "v": "125.0%",
         "c": "dn"
        },
        {
@@ -35902,7 +35902,7 @@
   }
  ],
  "fit": {
-  "checked_at": "2026-11-22T14:02:25.794Z",
+  "checked_at": "2026-11-22T14:56:03.084Z",
   "n": 88,
   "bad": {}
  }
