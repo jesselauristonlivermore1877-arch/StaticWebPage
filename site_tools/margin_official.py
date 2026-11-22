@@ -103,7 +103,7 @@ def patch(M, site):
     if not tw and not ot:
         print('✗ data/margin_total 沒有官方檔，不改'); return 1
     if M.get('amt_official'):
-        print('已經是官方優先版（amt_official），不重複套用'); return 0
+        print('已經是官方優先版（amt_official），不重複套用'); return -1
     T, O = M['twse'], M.get('otc') or {}
     rep = {}
     # 上市：fields date, est, taiex, margin_yi[, est_ex, margin_ex_yi, etf_amt_yi]（含 ETF 版的 est_ex 分母是 margin_ex，不在這裡改）
@@ -165,7 +165,7 @@ def main():
     J = json.load(open(pj))
     rc = patch(J['maint'], site)
     if rc:
-        return rc
+        return max(rc, 0)   # -1＝已套用過：不重寫檔、exit 0
     tmp = pj + '.tmp'
     json.dump(J, open(tmp, 'w'), ensure_ascii=False)   # 先寫暫存檔，成功才換掉
     json.load(open(tmp)); os.replace(tmp, pj)
