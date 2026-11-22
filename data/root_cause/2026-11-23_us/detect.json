@@ -1,0 +1,107 @@
+{
+ "trig": [
+  {
+   "kind": "價格",
+   "what": "費城半導體",
+   "date": "2026-11-20",
+   "pct": -10.73,
+   "z": -3.51,
+   "t": "費城半導體 2026-11-20 -10.73%（3.5 個標準差）"
+  },
+  {
+   "kind": "價格",
+   "what": "那斯達克 100 期貨",
+   "date": "2026-11-20",
+   "pct": -5.54,
+   "z": -4.09,
+   "t": "那斯達克 100 期貨 2026-11-20 -5.54%（4.1 個標準差）"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-20",
+   "t": "台指期日盤重挫 -2,732 點（-7.08%），報 35,875；盤中最低 35,563",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-20",
+   "t": "台指期日盤重挫 -2,699 點（-6.99%），報 35,908；盤中最低 35,908",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-20",
+   "t": "台指期日盤重挫 -2,202 點（-5.70%），報 36,405；盤中最低 35,974",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-20",
+   "t": "台指期日盤重挫 -1,890 點（-4.90%），報 36,717；盤中最低 36,250",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-20",
+   "t": "台指期日盤重挫 -1,407 點（-3.64%），報 37,200；盤中最低 36,872",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-20",
+   "t": "台指期日盤重挫 -1,104 點（-2.86%），報 37,503；盤中最低 37,478",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  }
+ ],
+ "moves": {
+  "SOX": {
+   "date": "2026-11-20",
+   "prev": "2026-11-19",
+   "close": 8408.5898,
+   "prev_close": 9419.7197,
+   "pct": -10.73,
+   "sd": 3.061,
+   "z": -3.51,
+   "n": 250,
+   "key": "SOX",
+   "name": "費城半導體",
+   "sym": "^SOX"
+  },
+  "NQ": {
+   "date": "2026-11-20",
+   "prev": "2026-11-19",
+   "close": 25126.5,
+   "prev_close": 26600.25,
+   "pct": -5.54,
+   "sd": 1.354,
+   "z": -4.09,
+   "n": 250,
+   "key": "NQ",
+   "name": "那斯達克 100 期貨",
+   "sym": "NQ=F"
+  },
+  "SPX": {
+   "date": "2026-11-20",
+   "prev": "2026-11-19",
+   "close": 6910.3901,
+   "prev_close": 7175.8301,
+   "pct": -3.7,
+   "sd": 0.872,
+   "z": -4.24,
+   "n": 250,
+   "key": "SPX",
+   "name": "S&P 500",
+   "sym": "^GSPC"
+  }
+ },
+ "sec": {
+  "sectors": [],
+  "note": "只看美股：台股 2026-11-23 還沒開盤，不算族群"
+ }
+}
