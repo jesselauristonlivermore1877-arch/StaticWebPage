@@ -1,0 +1,47 @@
+{
+ "file": "6672_2026-11-20.md",
+ "code": "6672",
+ "date": "2026-11-20",
+ "show": true,
+ "numbers": {
+  "ok": true,
+  "bad": [],
+  "cited": 46,
+  "facts": 100
+ },
+ "compliance": {
+  "ok": true,
+  "hits": []
+ },
+ "src": {
+  "ok": true,
+  "bad": []
+ },
+ "cross": {
+  "ok": true,
+  "bad": [],
+  "checked": [
+   "eps_q",
+   "rev_m"
+  ]
+ },
+ "tables": {
+  "ok": true,
+  "bad": []
+ },
+ "sections": {
+  "ok": true,
+  "missing": []
+ },
+ "eps": {
+  "ok": true,
+  "bad": [],
+  "checked": 7,
+  "skipped": 0
+ },
+ "transcript": {
+  "ok": true,
+  "bad": [],
+  "has": true
+ }
+}
