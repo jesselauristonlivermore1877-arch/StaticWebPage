@@ -333,6 +333,19 @@ jobs:
         run: |
           python site_tools/stock_maint.py --site . --sector ../code/sector_map.csv || { echo "::warning::個股族群融資維持率失敗（網站沿用上一份）"; echo "個股族群融資維持率失敗（網站沿用上一份）" >> "$RUNNER_TEMP/soft_fail.txt"; }
 
+      # 🟢 11-22（雲端舊31，Evans「今天派出去的研究能上板就上站去」）：籌碼 → 維持率 →「研究：門檻 120% 情境」片段 → docs/data/art/maint_120.json。
+      #    排在「個股族群融資維持率」之後：讀這一班的 stock_maint.json、mkt_overlay.json、margin_full、daily.npz。程式在程式 repo tools/maint_120.py
+      #    （原 StaticWebPage site_tools/maint_120.py 搬過去，預覽＝正式同一支）；核對（另一份原始資料重算）沒過 exit 2、不出檔 → 網站沿用上一份。
+      #    正式門檻照舊 130%（Evans：維持率先不動），本段只是「市場傳聞」的情境推估。
+      - name: 維持率門檻情境研究
+        working-directory: code
+        continue-on-error: true
+        timeout-minutes: 5
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python tools/maint_120.py --site ../site --art docs/data/art/maint_120.json || { echo "::warning::維持率門檻情境研究核對沒過或失敗（網站沿用上一份）"; echo "維持率門檻情境研究核對沒過或失敗（網站沿用上一份）" >> "$RUNNER_TEMP/soft_fail.txt"; }
+
       # 🟢 10-29 晚（總指揮 雲端 1，Evans 核准）：選股 EDM（網站「量化 EDM」）→ docs/data/pick_edm.json＋docs/data/edm_hist/<資料日>.json（11-06 C8：歷史只存資料，保留 90 天）。
       #    11-06（C7）：排在主動式 ETF 日報之後，「主動式 ETF 每日操作」卡才讀得到這一班的 aetf_daily.json。
       #    料全部是上面各步剛寫好的檔（web_data、radar、trail、rrg、chips、chips_daily、etf_flow、stock_bars、lookup），不打網路；
