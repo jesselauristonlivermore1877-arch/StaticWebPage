@@ -15,6 +15,13 @@
   連續 --stop-empty 個工作日都沒資料（預設 40 ≈ 兩個月）→ 視為已到資料起點，記 floor、exit 0。
   --minutes 到了就寫檔 exit 0（workflow 分段 commit＋push 後再接著跑下一段）。
 用法：python site_tools/margin_total_backfill.py --mkt twse|otc [--until 2001-01-01] [--minutes 40] [--gap 6]
+      python site_tools/margin_total_backfill.py --mkt twse|otc --forward   （每日班用：只補檔裡最後一天之後到今天的缺口）
+
+🟢 11-22（雲端舊32，【舊】總指揮派工 P19）：加 --forward（每日戰情更新呼叫）。
+  從檔裡最後一天的隔天查到今天（台北時間），只查週一～週五，每發間隔 ≥ 6 秒、最多 --max-days 天（預設 15）；
+  殘缺不寫（npz 鐵律）：融資金額前日／今日、融資張數三欄缺任一、或不是正數 → 那天不寫、印出來；
+  查無資料的日子：同一輪裡更晚的日子有資料 → 判定休市記進 empty；更晚的都沒有（官方可能還沒公布，例如 15:40 班）→ 不記，下一班再查。
+  被擋（307／403／429／非 JSON）→ 已補的先存、exit 3（daily 那步 continue-on-error，不擋上線）。
 """
 import argparse, datetime as dt, json, os, sys, time
 import requests
@@ -72,6 +79,50 @@ def fetch(sess, mkt, d):
     return [round(num(amt[2]) / 1e5, 4), round(num(amt[6]) / 1e5, 4), num(lots[6]) if lots else None]
 
 
+def complete(v):
+    """殘缺判定：三欄齊全且為正數才算完整的一天"""
+    return bool(v) and len(v) == 3 and all(x is not None and x > 0 for x in v)
+
+
+def forward(a, H, p, save):
+    today = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=8)).date()
+    last = max(H["days"]) if H["days"] else None
+    if not last:
+        print("✗ %s 檔裡沒有任何一天，--forward 不知道從哪接（先跑回補）" % a.mkt); return 2
+    d = dt.date.fromisoformat(last) + dt.timedelta(days=1)
+    todo = []
+    while d <= today and len(todo) < a.max_days:
+        if d.weekday() < 5 and d.isoformat() not in H["empty"]:
+            todo.append(d)
+        d += dt.timedelta(days=1)
+    print("%s 往後接：檔裡最後一天 %s，要查 %d 天 %s" % (a.mkt, last, len(todo), [x.isoformat() for x in todo]), flush=True)
+    sess, got, none, code = requests.Session(), [], [], 0
+    for i, d in enumerate(todo):
+        if i:
+            time.sleep(a.gap)
+        k = d.isoformat()
+        try:
+            v = fetch(sess, a.mkt, d)
+        except Blocked as e:
+            print("✗ %s %s 被擋或異常回應：%s → 停（不繞過）" % (a.mkt, k, e)); code = 3; break
+        except requests.RequestException as e:
+            print("✗ %s %s 連線失敗：%s %s → 停" % (a.mkt, k, type(e).__name__, e)); code = 3; break
+        if v is None:
+            none.append(k); print("  %s 查無資料" % k); continue
+        if not complete(v):
+            print("  ✗ %s 殘缺 %s → 不寫" % (k, v)); continue
+        H["days"][k] = v; got.append(k)
+        print("  ✓ %s 前日 %.2f 億 → 今日 %.2f 億（%s 張）" % (k, v[0], v[1], v[2]))
+    if got:   # 比最後一個有資料日早的「查無資料」＝休市
+        hol = [k for k in none if k < max(got)]
+        H["empty"].extend(hol)
+        if hol:
+            print("  休市（之後有資料）記進 empty：%s" % hol)
+    save()
+    print("%s 往後接完：新增 %d 天，檔裡最後一天 %s" % (a.mkt, len(got), max(H["days"])))
+    return code
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--mkt", required=True, choices=["twse", "otc"])
@@ -80,6 +131,8 @@ def main():
     ap.add_argument("--minutes", type=float, default=40)
     ap.add_argument("--gap", type=float, default=6)
     ap.add_argument("--stop-empty", type=int, default=40)
+    ap.add_argument("--forward", action="store_true", help="只補最後一天之後到今天（每日班用）")
+    ap.add_argument("--max-days", type=int, default=15, help="--forward 一次最多查幾個工作日")
     a = ap.parse_args()
     if a.gap < 6:
         raise SystemExit("✗ 間隔至少 6 秒（總指揮規格）")
@@ -90,6 +143,13 @@ def main():
     known = set(H["days"]) | set(H["empty"])
     # 沒有檔時從 7 天前開始（最近幾天官方可能還沒公布，不要誤記成「沒資料」；近期本來就有 mkt_overlay 那份）
     start = min(known) if known else ((dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=8)).date() - dt.timedelta(days=7)).isoformat()
+    if a.forward:
+        def save_fw():
+            H["days"] = dict(sorted(H["days"].items()))
+            H["empty"] = sorted(set(H["empty"]))
+            open(p + ".tmp", "w").write(json.dumps(H, ensure_ascii=False, separators=(",", ":")))
+            os.replace(p + ".tmp", p)
+        return forward(a, H, p, save_fw)
     if H.get("floor"):
         print("✓ %s 已到資料起點 %s（%d 天），不再往回補" % (a.mkt, H["floor"], len(H["days"])))
         return 0

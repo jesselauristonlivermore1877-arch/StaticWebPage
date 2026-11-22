@@ -297,6 +297,19 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: python tools/sbl_daily.py ../site --days 5
 
+      # 🟢 11-22（雲端舊32，【舊】總指揮 P19）：官方融資總額往後接 → data/margin_total/<twse|otc>.json
+      #    回補（backfill_margin_total.yml）只往回補，沒人往後接；這步從檔裡最後一天接到今天（每市場一天一個請求、間隔 6 秒）。
+      #    殘缺日不寫、官方還沒公布的日子不記休市（下一班再查）；被擋 exit 3 不繞過。失敗不擋上線。
+      - name: 官方融資總額往後接
+        working-directory: site
+        continue-on-error: true
+        timeout-minutes: 5
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python site_tools/margin_total_backfill.py --mkt twse --forward || echo "::warning::上市官方融資總額往後接沒完成（下一班再補）"
+          python site_tools/margin_total_backfill.py --mkt otc --forward || echo "::warning::上櫃官方融資總額往後接沒完成（下一班再補）"
+
       # 🟢 11-05 晚（雲端A，總指揮 A3）：疊圖三張（融資維持率 × 指數、委買委賣每筆張數＋電金比、市場結構轉變）→ docs/data/mkt_overlay.json
       #    只讀上面各步寫好的檔、不打網路；失敗不擋（網站沿用上一份）
       - name: 疊圖三張（市場動態）
@@ -304,6 +317,16 @@ jobs:
         continue-on-error: true
         timeout-minutes: 5
         run: python tools/mkt_overlay.py ../site ../site/docs/data/mkt_overlay.json
+
+      # 🟢 11-22（雲端舊32，【舊】總指揮 P19）：「融資 × 指數」融資金額改官方優先（data/margin_total；官方沒有的日子才用累推，日期記在 check）
+      #    要排在 ETF 修正之前（ETF 修正的分母用這裡換好的官方金額）。只讀檔；失敗不擋（網站用 tools/mkt_overlay.py 原值）。
+      - name: 融資金額改官方優先
+        working-directory: site
+        continue-on-error: true
+        timeout-minutes: 3
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python site_tools/margin_official.py . || echo "::warning::融資金額官方優先沒套用（沿用累推值）"
 
       # 🟢 11-20 晚（雲端新12，【新】總指揮依 Evans：基準＝財經M平方「融資買進市值（含 ETF）÷ 融資金額」）：
       #    margin.npz／margin_otc.npz 沒有 ETF → 上市維持率分子少了 ETF 市值（11/19 136.4 → 應為 147.9）。
