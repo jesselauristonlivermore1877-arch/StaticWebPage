@@ -203,7 +203,7 @@ def page(o):
             sec_rows += '<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s%%</td><td>%s</td><td>%s</td></tr>' % (
                 lab, E(s['name']), s['n'], fmt(s['amt']), fmt(s['maint']),
                 ('%s%%' % fmt(-s['to130'])) if s['to130'] > 0 else '已低於', ('%s%%' % fmt(-s['to120'])) if s['to120'] > 0 else '已低於')
-    ev_rows = ''
+    ev_rows = ''; ev_cards = ''
     st = {x['d']: x for x in o['ev_stats']}
     for e in o['events']:
         x = st.get(e['d'], {})
@@ -211,6 +211,9 @@ def page(o):
         def cell(k):
             v = x.get(k)
             return '—' if v is None else ('%+.1f%%' % v)
+        ev_cards += ('<div class="m1-ev"><div class="m1-evh"><b>%s</b>　%s</div><p>%s</p><p class="m1-s">出處：%s</p>'
+                     '<dl><dt>加權</dt><dd>5 日 %s／20 日 %s／60 日 %s</dd><dt>上市融資</dt><dd>5 日 %s／20 日 %s／60 日 %s</dd></dl></div>') % (
+            e['d'], e['kind'], E(e['what']), links, cell('tw5'), cell('tw20'), cell('tw60'), cell('m5'), cell('m20'), cell('m60'))
         ev_rows += '<tr><td>%s</td><td>%s</td><td class="m1-w">%s<br><span class="m1-s">%s</span></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (
             e['d'], e['kind'], E(e['what']), links, cell('tw5'), cell('tw20'), cell('tw60'), cell('m5'), cell('m20'), cell('m60'))
     ck = o['chk']
@@ -242,6 +245,10 @@ section{{background:var(--card);border:1px solid var(--line);border-radius:10px;
 .m1-t th:first-child,.m1-t td:first-child,.m1-t td.m1-w{{text-align:left}} .m1-t td.m1-w{{white-space:normal;min-width:260px}}
 .m1-hl td{{background:var(--hl);font-weight:700}} .m1-s{{color:var(--ink2);font-size:12px}}
 a{{color:var(--acc)}} ul{{padding-left:20px;margin:6px 0}} li{{margin:3px 0}}
+.m1-evs{{display:none}}
+.m1-ev{{border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin:8px 0}} .m1-ev p{{margin:4px 0}}
+.m1-ev dl{{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;margin:4px 0 0;font-size:13px;font-variant-numeric:tabular-nums}} .m1-ev dt{{color:var(--ink2)}} .m1-ev dd{{margin:0}}
+@media (max-width:640px){{.m1-evs{{display:block}} .m1-evt{{display:none}}}}
 .m1-foot{{color:var(--ink2);font-size:13px;text-align:center;margin-top:18px}}
 </style></head><body><main>
 <h1>融資維持率門檻 130%→120%：若實施的情境分析</h1>
@@ -276,7 +283,8 @@ a{{color:var(--acc)}} ul{{padding-left:20px;margin:6px 0}} li{{margin:3px 0}}
 
 <section><h2>四、歷史上主管機關調整維持率／追繳的先例（只列官方出處）</h2>
 <p>官方紀錄中<b>未查到「暫時調降整戶擔保維持率門檻」的先例</b>；查到的是 2015 年把門檻由 120% <b>提高</b>到 130%，以及三次「放寬補繳擔保品範圍」（門檻不變）。</p>
-<div class="m1-x"><table class="m1-t"><thead><tr><th>生效日</th><th>類型</th><th>內容與官方出處</th><th>加權 5 日</th><th>加權 20 日</th><th>加權 60 日</th><th>上市融資 5 日</th><th>20 日</th><th>60 日</th></tr></thead><tbody>{ev_rows}</tbody></table></div>
+<div class="m1-evs">{ev_cards}</div>
+<div class="m1-x m1-evt"><table class="m1-t"><thead><tr><th>生效日</th><th>類型</th><th>內容與官方出處</th><th>加權 5 日</th><th>加權 20 日</th><th>加權 60 日</th><th>上市融資 5 日</th><th>20 日</th><th>60 日</th></tr></thead><tbody>{ev_rows}</tbody></table></div>
 <p class="m1-s">變化＝生效日前一個交易日收盤 → 之後第 5／20／60 個交易日；「—」＝還沒到。樣本只有 4 件、性質各不相同（一次提高門檻、三次放寬補繳），而且都在大跌當中或剛過，<b>只描述、不下結論</b>。加權＝本站加權收盤檔；上市融資＝證交所 MI_MARGN 融資金額。</p></section>
 
 <section><h2>核對（另一份原始資料重算）</h2><ul>{ckline('twse')}{ckline('otc')}
