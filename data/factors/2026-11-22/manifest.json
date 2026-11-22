@@ -1,15 +1,15 @@
 {
  "version": 1,
  "date": "2026-11-22",
- "built_at": "2026-11-22T18:25:31+08:00",
+ "built_at": "2026-11-22T22:02:37+08:00",
  "builder": "CustomerServiceANDSales/tools/factor_snapshot.py",
- "run": "45010919764",
+ "run": "45029294179",
  "rule": "只存當天看得到的值；回測一律用 tools/factor_pit.py load(date, factors) 讀，不讀現在的 docs/data。",
  "files": {
   "stocks.json.gz": {
-   "bytes": 123886,
-   "raw": 1083135,
-   "sha256": "2ecee3022b8220e79866e8fad0a090d345526f87eb53a1962ad4675873d0a541",
+   "bytes": 123899,
+   "raw": 1083139,
+   "sha256": "e67232373ede3f96c0d6872aaf129ab6ce529b2ea66a257ca2ef9bc77d1a34b3",
    "n_rows": 3358,
    "n_cols": 59
   },
@@ -111,8 +111,8 @@
    "name": "量化評分",
    "file": "data/web_data.json",
    "ok": true,
-   "bytes": 1585482,
-   "sha256": "a1267be8f29d40f0ae854ef63fe39e50d1091cf894e933c9022afb8ee1ba11f0",
+   "bytes": 1585116,
+   "sha256": "1db0ae44daebf1e002532f0ee1a2063e85af3f393743b37042f4f5b78519aa76",
    "asof": "2026-11-20",
    "cols": null,
    "n": 253,
@@ -122,8 +122,8 @@
    "name": "河流圖位階",
    "file": "docs/data/river.json",
    "ok": true,
-   "bytes": 596945,
-   "sha256": "4afa9f91cf46a31928d392d0e91f0f5ae88e66d260b08adbf1c78386f1cd3687",
+   "bytes": 597223,
+   "sha256": "f59b239a37e61017780efd0fd06aabb5cedc12b244b3d02fef7aa1cf55242ac8",
    "asof": "2026-11-20",
    "cols": null,
    "n": 253,
@@ -144,11 +144,11 @@
    "name": "法說指引",
    "file": "data/guidance.json",
    "ok": true,
-   "bytes": 3189833,
-   "sha256": "394fa787aa95179253007af9d13b5cc48e11d83588aea0a52c7ed2b940673eaa",
-   "asof": "2026-11-21",
+   "bytes": 3222312,
+   "sha256": "399b321a81f059296a1ca5f196c9cdabcfe70f8cc813954616ac5affe53340b2",
+   "asof": "2026-11-22",
    "cols": null,
-   "n": 213,
+   "n": 214,
    "n_sec": 0
   },
   {
@@ -199,11 +199,11 @@
    "name": "AI研究報告",
    "file": "docs/data/company_reports.json",
    "ok": true,
-   "bytes": 3390929,
-   "sha256": "17f4d6e54da6c85ba51e3efef24560f53f58b335e5985823c413cd2b3959c894",
+   "bytes": 3324548,
+   "sha256": "5d034028a7e0443b5773a5c8360ae95300b64e8e75c3a9da60f98081ee3ab528",
    "asof": "2026-11-22",
    "cols": null,
-   "n": 114,
+   "n": 112,
    "n_sec": 0
   }
  ]
