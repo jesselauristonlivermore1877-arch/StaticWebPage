@@ -1,9 +1,23 @@
 {
- "checked_at": "2026-11-22T16:43:04.948Z",
+ "checked_at": "2026-11-22T19:05:15.791Z",
  "date": "2026-11-20",
- "n": 88,
- "n_bad": 0,
- "bad": {},
+ "n": 149,
+ "n_bad": 1,
+ "bad": {
+  "GEA_主動ETF成本_00996A": {
+   "cat": "ETF 成本",
+   "title": "00996A 兆豐台灣豐收",
+   "err": "",
+   "issues": [
+    {
+     "area": "「套牢最深現值 ≥ 1,000 萬」",
+     "dir": "右",
+     "px": 10,
+     "why": "div.pe-box scrollWidth 505＞clientWidth 495"
+    }
+   ]
+  }
+ },
  "js_errors": [],
  "chrome": "google-chrome",
  "no_cjk_font": false

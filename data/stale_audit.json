@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-23 00:43",
+ "asof": "2026-11-23 03:05",
  "first_stale": {
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-20",
   "docs/data/pcf/00989A|主動 ETF 持股 00989A": "2026-11-21"
@@ -368,11 +368,11 @@
   {
    "name": "盤勢緊急通知",
    "path": "docs/data/market_alert.json",
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 market_alert",
    "note": ""
@@ -380,11 +380,11 @@
   {
    "name": "正式站巡檢",
    "path": "docs/data/site_smoke.json",
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 site_smoke.yml",
    "note": ""
@@ -416,11 +416,11 @@
   {
    "name": "意見領袖",
    "path": "docs/data/kol.json",
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 kol.yml",
    "note": ""
@@ -500,11 +500,11 @@
   {
    "name": "產業動向",
    "path": "data/industry_notes",
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "freq": "ev",
    "allow": 5,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 ir_report_watch",
    "note": ""
