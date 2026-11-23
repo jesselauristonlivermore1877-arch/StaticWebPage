@@ -1,9 +1,22 @@
 {
- "checked_at": "2026-11-23T06:53:56.049Z",
+ "checked_at": "2026-11-23T08:07:19.834Z",
  "date": "2026-11-20",
- "n": 138,
- "n_bad": 2,
+ "n": 137,
+ "n_bad": 4,
  "bad": {
+  "GEA_選股_主動ETF": {
+   "cat": "ETF",
+   "title": "主動式 ETF",
+   "err": "",
+   "issues": [
+    {
+     "area": "div.pe-top",
+     "dir": "下",
+     "px": 23,
+     "why": "div.pe-top scrollHeight 223＞clientHeight 200（容許 2）"
+    }
+   ]
+  },
   "GEA_主動ETF日報_00411A": {
    "cat": "ETF 各檔",
    "title": "00411A 統一前沿科技",
@@ -14,6 +27,19 @@
      "dir": "下",
      "px": 6,
      "why": "div.pe-top scrollHeight 201＞clientHeight 195（容許 2）"
+    }
+   ]
+  },
+  "GEA_主動ETF成本_00988A": {
+   "cat": "ETF 成本",
+   "title": "00988A 統一全球創新",
+   "err": "",
+   "issues": [
+    {
+     "area": "「套牢最深現值 ≥ 1,000 萬」",
+     "dir": "右",
+     "px": 26,
+     "why": "div.pe-box scrollWidth 521＞clientWidth 495"
     }
    ]
   },
