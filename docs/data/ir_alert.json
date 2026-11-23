@@ -1,8 +1,50 @@
 {
- "asof": "2026-11-23T03:05+00:00",
+ "asof": "2026-11-23T03:35+00:00",
  "rule": "法說高成長指引：翻倍／倍增／成長 N 倍／成長 N%（N≥50）／明年大幅成長／上修財測／創新高指引；11-13 起只收 AI／未來產業、且有長約／擴產／資本支出內容的公司人員原話；同一公司同一場法說只觸發一次；頁首只放即時偵測、觸發後 3 個交易日內的（until），個股頁標記留 30 天",
- "top": [],
+ "top": [
+  {
+   "code": "4533",
+   "name": "協易機",
+   "quote": "協易機前三季EPS比去年同期倍增23日法說會說明營運展望- 上市櫃",
+   "pat": "翻倍",
+   "src": "旺得富理財網",
+   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1ZRmJIak56aGVLajlubS1UX19tWDZVVlAtOEpZb0dnYlI4dklCVnBNdDR1ZUE5Y1JrdVljcWc0NGdabFFUVDN4d1p5NkgwaTkxbXppYmpVUC1NQ21oeVhVYUtUOWZ6SXJQUmc?oc=5",
+   "pub": "2026-11-23T03:33+00:00",
+   "seen": "2026-11-23T03:35+00:00",
+   "meeting": "2026-11-23",
+   "px": {
+    "d": "2026-11-20",
+    "close": 24.299999237060547,
+    "chg": -10.0
+   },
+   "mx": null,
+   "pre": null,
+   "kind": "news",
+   "n_more": 0,
+   "until": "2026-11-27T00:00+08:00"
+  }
+ ],
  "by_code": {
+  "4533": {
+   "code": "4533",
+   "name": "協易機",
+   "quote": "協易機前三季EPS比去年同期倍增23日法說會說明營運展望- 上市櫃",
+   "pat": "翻倍",
+   "src": "旺得富理財網",
+   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1ZRmJIak56aGVLajlubS1UX19tWDZVVlAtOEpZb0dnYlI4dklCVnBNdDR1ZUE5Y1JrdVljcWc0NGdabFFUVDN4d1p5NkgwaTkxbXppYmpVUC1NQ21oeVhVYUtUOWZ6SXJQUmc?oc=5",
+   "pub": "2026-11-23T03:33+00:00",
+   "seen": "2026-11-23T03:35+00:00",
+   "meeting": "2026-11-23",
+   "px": {
+    "d": "2026-11-20",
+    "close": 24.299999237060547,
+    "chg": -10.0
+   },
+   "mx": null,
+   "pre": null,
+   "kind": "news",
+   "n_more": 0
+  },
   "6531": {
    "code": "6531",
    "name": "愛普*",
