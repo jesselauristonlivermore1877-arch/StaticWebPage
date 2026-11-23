@@ -1,7 +1,7 @@
 {
- "ver": "20261123a",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261123a/GEA_OM_Setup_20261123a.exe",
- "sha256": "c79d89b759e9c848c32ab496077598afc1c1e56835d44351a4468de959461fde",
- "notes": "20261123a：券商憑證元件被其他軟體（例如國票全球財神）重裝蓋掉時，下單機會跳出「修復」視窗並自動重新註冊；斷線自動重登改成重新取得登入憑證；被中繼踢下線 5 分鐘後自動再連",
- "sig": "DUXJzQD8yRa2wFX/dl+LTQJRL0PWJzNtAAqmGrwY4F/nKUMhZEYDNvFffCG03gC/NC99HBRkL1uG8xSgxfQjIg=="
+ "ver": "20261124a",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261124a/GEA_OM_Setup_20261124a.exe",
+ "sha256": "c03c8d98419932499d18703cc4fedc9cd1d55eac80cdcd3136c7c998ea97f10e",
+ "notes": "更新後自動開回來的下單機改成一般權限（排程或桌面開），之後可正常關閉；其他功能不變",
+ "sig": "eEmMqFADhm+jZb8gnDXf2XKDxHz5eucInPWUZrVobOiFGI/h5fkk88v+HYeTF60TT3fk8Xl6C5btgr1C9n9KKA=="
 }
