@@ -1,9 +1,9 @@
 {
  "date": "2026-11-23",
  "data_date": "2026-11-23",
- "made": "2026-11-24T05:20+08:00",
- "built_at": "2026-11-24T05:13:05+08:00",
- "run": "45267122061",
+ "made": "2026-11-24T05:40+08:00",
+ "built_at": "2026-11-24T05:31:05+08:00",
+ "run": "45268507647",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
   "web_data.market.taiex": "2026-11-23",
@@ -368,18 +368,18 @@
    "id": "disp_hot",
    "sec": "處置股",
    "label": "再一次注意就處置的個股數",
-   "value": 29,
+   "value": 19,
    "unit": " 檔",
-   "text": "29 檔",
+   "text": "19 檔",
    "src": "docs/data/disposal.json"
   },
   {
    "id": "disp_now",
    "sec": "處置股",
    "label": "處置中的個股數",
-   "value": 22,
+   "value": 29,
    "unit": " 檔",
-   "text": "22 檔",
+   "text": "29 檔",
    "src": "docs/data/disposal.json"
   }
  ],
