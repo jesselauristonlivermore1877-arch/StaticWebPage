@@ -413,8 +413,8 @@
   },
   "2026-11-23": {
    "gemini-3.5-flash-lite": {
-    "req": 6,
-    "tok": 91167
+    "req": 13,
+    "tok": 178950
    },
    "gemini-3.8-flash": {
     "req": 2,
@@ -437,7 +437,7 @@
     "e429": 1
    },
    "gemini-2.5-flash": {
-    "req": 1,
+    "req": 4,
     "tok": 0
    },
    "gemini-omni-1.2-flash": {
@@ -466,15 +466,27 @@
     "e429": 1
    },
    "gemini-3.1-flash-lite": {
-    "req": 1,
-    "tok": 25868
+    "req": 8,
+    "tok": 51113
+   },
+   "gemini-2.5-flash-lite": {
+    "req": 3,
+    "tok": 0
+   },
+   "gemini-flash-lite-latest": {
+    "req": 7,
+    "tok": 22909
+   },
+   "gemini-3.1-flash-lite-preview": {
+    "req": 7,
+    "tok": 25601
    }
   }
  },
  "tpm": [
   [
-   1795431983.1664414,
-   15593
+   1795464750.5650842,
+   87783
   ]
  ]
 }
