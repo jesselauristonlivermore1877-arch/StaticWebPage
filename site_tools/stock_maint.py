@@ -18,13 +18,15 @@
       驗證：用前一個校準日的 k 推今天（out-of-sample），誤差＝ k_prev × ΣV ÷ 官方 − 1
       （上市官方金額含 ETF，所以分母要含 ETF；當天沒有 ETF 逐檔就不拿來校準，照實標）
  3. 誤差＝ k×ΣV ÷ 官方 − 1（不硬湊）
- 4. 個股推估維持率 ＝ 融資張數 × 1000 × 收盤 ÷ 推估融資金額；離 130% ＝(維持率 − 130)÷ 維持率
+ 4. 個股推估維持率 ＝ 融資張數 × 1000 × 收盤 ÷ 推估融資金額；離門檻 ＝(維持率 − 門檻)÷ 維持率
+    （門檻＝資料日的追繳門檻，site_tools/maint_call.py：11/24 起 120%、之前 130%；雲端舊34 11-23）
  5. 族群維持率 ＝ Σ 族群融資市值 ÷ Σ 族群推估金額（依 sector_map 當下分類，族群用「細類」）
 """
 import argparse, csv, json, os, glob, random
 import sys
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from maint_call import maint_call   # 🔴 11-23 雲端舊34：追繳門檻依日期生效
 
 R0 = {'twse': 0.6, 'otc': 0.5}
 FILE_MKT = {'twse': 'twse', 'otc': 'tpex'}
@@ -309,6 +311,7 @@ def run_market(site, mkt, daily, official, ca=None):
 
     # 最新一天的個股表
     t = T - 1; kk = k[t]
+    cl = maint_call(D[t], mkt)   # 這一天的追繳門檻（%）
     rows = []
     legal = {}   # 「以法定成數計」維持率（上市 6 成、上櫃 5 成，不校準的累推值）＝ 融資市值 ÷ V；主數字 ＝ 這個 × 法定成數 ÷ 校準成數
     for j, c in enumerate(codes):
@@ -323,7 +326,7 @@ def run_market(site, mkt, daily, official, ca=None):
         b5 = bal[t - 5, j] * float(np.prod(adj[t - 4:t + 1, j])) if t >= 5 else np.nan
         legal[c] = round(float(mv[t, j] / V[t, j] * 100), 1)
         rows.append([c, names[c], int(b), round(float(mv[t, j]) / 1e8, 3), round(float(cost), 2),
-                     round(float(mt), 1), round((mt - 130) / mt * 100, 1),
+                     round(float(mt), 1), round((mt - cl) / mt * 100, 1),
                      None if np.isnan(b5) else int(b - b5), round(float(close[t, j]), 2), round(float(amt) / 1e8, 3)])
 
     # ETF 個別推估維持率：🟢 11-21（雲端新18 追加，Evans 裁示 3）改用跟股票同一套校準成數（推估金額＝k × V），不再用 6 成另算；
@@ -341,7 +344,7 @@ def run_market(site, mkt, daily, official, ca=None):
         b5 = bal[t - 5, j] if t >= 5 else np.nan
         legal[c] = round(float(mv[t, j] / V[t, j] * 100), 1)
         etf_rows.append([c, names[c], int(b), round(float(mv[t, j]) / 1e8, 3), round(float(cost), 2),
-                         round(float(mt), 1), round(float((mt - 130) / mt * 100), 1),
+                         round(float(mt), 1), round(float((mt - cl) / mt * 100), 1),
                          None if np.isnan(b5) else int(b - b5), round(float(close[t, j]), 2), round(float(amt) / 1e8, 3)])
 
     etf_cal = eser[D[-1]][0]
@@ -380,7 +383,7 @@ def run_market(site, mkt, daily, official, ca=None):
         traces.append({'code': c, 'name': names[c], 'steps': steps})
 
     # 驗證：真的買進 vs 近似買進（只算 margin_full 有資料的區段）
-    return {'date': D[-1], 'start': D[0], 'skipped': skipped, 'ca': ca_applied, 'r0': r0, 'rows': rows, 'etf_rows': etf_rows, 'legal': legal, 'eser': eser, 'etf_cal': None if etf_cal is None else round(etf_cal, 1), 'board': board, 'cal': cal, 'chk': chk, 'traces': traces,
+    return {'date': D[-1], 'call': cl, 'start': D[0], 'skipped': skipped, 'ca': ca_applied, 'r0': r0, 'rows': rows, 'etf_rows': etf_rows, 'legal': legal, 'eser': eser, 'etf_cal': None if etf_cal is None else round(etf_cal, 1), 'board': board, 'cal': cal, 'chk': chk, 'traces': traces,
             'n_full': int(full_ok.sum()), 'n_etf': int(etf_ok.sum()), 'n_days': T}
 
 
@@ -405,12 +408,12 @@ def summarize(res):
     return s
 
 
-def sectors(rows):
-    """rows：[代號, 族群, 大類, 來源, 融資市值億, 推估維持率, 推估金額億]"""
+def sectors(rows, cl=130.0):
+    """rows：[代號, 族群, 大類, 來源, 融資市值億, 推估維持率, 推估金額億]；cl＝資料日追繳門檻（lt130 欄＝低於門檻檔數，鍵名沿用）"""
     g = {}
     for c, sec, big, src, mv, mt, amt in rows:
         x = g.setdefault((src, sec), {'big': big, 'n': 0, 'mv': 0.0, 'amt': 0.0, 'lt130': 0, 'codes': []})
-        x['n'] += 1; x['mv'] += mv; x['amt'] += amt; x['lt130'] += mt < 130; x['codes'].append(c)
+        x['n'] += 1; x['mv'] += mv; x['amt'] += amt; x['lt130'] += mt < cl; x['codes'].append(c)
     out = []
     for (src, sec), x in g.items():
         out.append([sec, x['big'], x['n'], round(x['mv'], 2), round(x['amt'], 2),
@@ -418,14 +421,14 @@ def sectors(rows):
     return out
 
 
-def etf_sectors(etf_rows, last, n_stock):
-    """ETF 分組表：[分組, 主動式／被動式／合計, 檔數, 融資張數, 融資市值億, 推估金額億, 分組維持率, 低於130檔數, 成分]
+def etf_sectors(etf_rows, last, n_stock, cl=130.0):
+    """ETF 分組表：[分組, 主動式／被動式／合計, 檔數, 融資張數, 融資市值億, 推估金額億, 分組維持率, 低於門檻檔數, 成分]
     依 ETF_GROUPS 順序；另附「主動式合計」「被動式合計」「ETF 合計」「股票（扣除 ETF）」四列。
     「股票（扣除 ETF）」直接取「大盤」20 日表最新一天（＝市場動態卡同一份數字），不另算"""
     g = {sub: {'top': top, 'n': 0, 'lots': 0, 'mv': 0.0, 'amt': 0.0, 'lt': 0, 'codes': []} for top, sub in ETF_GROUPS}
     for r in etf_rows:
         x = g[r[2]]
-        x['n'] += 1; x['lots'] += r[3]; x['mv'] += r[4]; x['amt'] += r[10]; x['lt'] += r[6] < 130; x['codes'].append(r[0])
+        x['n'] += 1; x['lots'] += r[3]; x['mv'] += r[4]; x['amt'] += r[10]; x['lt'] += r[6] < cl; x['codes'].append(r[0])
     row = lambda nm, top, x: [nm, top, x['n'], x['lots'], round(x['mv'], 2), round(x['amt'], 2),
                               round(x['mv'] / x['amt'] * 100, 1) if x['amt'] else None, x['lt'], x['codes']]
     def tot(keys):
@@ -532,14 +535,14 @@ def build(site, sector):
             cls[r[0]] = (big, src)
             r.insert(2, sec); r.append(src); r.append(res['legal'].get(r[0]))
         # 族群表只算融資 ≥ 100 張（同個股表預設）
-        res['sectors'] = sectors([[r[0], r[2], cls[r[0]][0], r[11], r[4], r[6], r[10]] for r in res['rows'] if r[3] >= 100])
+        res['sectors'] = sectors([[r[0], r[2], cls[r[0]][0], r[11], r[4], r[6], r[10]] for r in res['rows'] if r[3] >= 100], res['call'])
         # ETF：第 3 欄＝ETF 細類、最後一欄來源＝'ETF'；分組維持率＝Σ融資市值 ÷ Σ推估金額（全部有融資的 ETF，不設張數門檻）
         for r in res['etf_rows']:
             top, sub = etf_group(r[0])
             r.insert(2, sub); r.append('ETF'); r.append(res['legal'].get(r[0]))
         res['board'] = board_rows(mkt, res['board'], mo[mkt], res['eser'])
         del res['legal'], res['eser']
-        res['etf_sec'] = etf_sectors(res['etf_rows'], res['board'][-1] if res['board'] else None, len(res['rows']))
+        res['etf_sec'] = etf_sectors(res['etf_rows'], res['board'][-1] if res['board'] else None, len(res['rows']), res['call'])
         out['mkts'][mkt] = res
         print(mkt, json.dumps(res['summary'], ensure_ascii=False))
     # 🟢 11-21（雲端新19，Evans：「維持率裡面的個股可以讓我用市值排名嗎」）：每列最後加兩欄（不改既有索引，前端依索引讀）
@@ -547,8 +550,8 @@ def build(site, sector):
     #          沒有股數的寫 None（頁面「—」）；ETF 目前沒有逐檔規模的落地資料 → None
     #    r[14] 成交值（億，20 日均）＝ daily.npz 成交金額最近 20 個交易日平均（有資料的日子），代表熱門程度
     add_mcap_turnover(site, daily, out)
-    out['fields'] = ['代號', '名稱', '族群', '融資張數', '融資市值億', '推估成本', '推估維持率', '離130%', '近5日增減', '收盤', '推估金額億', '來源', '以法定成數計維持率', '市值億', '成交值億20日均']
-    out['sector_fields'] = ['族群', '大類', '檔數', '融資市值億', '推估金額億', '族群維持率', '低於130檔數', '成分股']
+    out['fields'] = ['代號', '名稱', '族群', '融資張數', '融資市值億', '推估成本', '推估維持率', '離追繳門檻%', '近5日增減', '收盤', '推估金額億', '來源', '以法定成數計維持率', '市值億', '成交值億20日均']
+    out['sector_fields'] = ['族群', '大類', '檔數', '融資市值億', '推估金額億', '族群維持率', '低於追繳門檻檔數', '成分股']
     out['sector_n'] = len(smap)
     out['etf_groups'] = [list(x) for x in ETF_GROUPS]
     out['etf_start'] = {'twse': mo['twse']['rows'][0][0] if mo['twse']['rows'] else None,

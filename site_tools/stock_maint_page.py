@@ -153,7 +153,7 @@ def help_html(d):
 <li>證交所、櫃買不公布個股融資金額，本站逐檔逐日累推：今日金額＝昨日金額 ×（今日餘額 − 今日買進）÷ 昨日餘額 ＋ 今日買進張數 × 1000 × 當日均價（成交金額 ÷ 成交股數）× 成數；起點（{md(tw["start"])}）＝ 餘額 × 1000 × 收盤 × 成數。</li>
 <li>「今日買進」有證交所／櫃買逐檔融資買進的日子用真的買進；沒有的日子用退路：買進 ≈ max(今日餘額 − 昨日餘額, 0)（會低估週轉，下跌時推估成本偏高、維持率偏低）。</li>
 <li><b>成數為本站校準推估</b>：法規上限上市 6 成、上櫃 5 成，但券商可只借 4、3 成，所以先用 6／5 成累推，再用證交所／櫃買公布的融資總金額（含 ETF，分子也含 ETF）逐日校準出「實際平均成數」，套回各股。上市目前約 {f(tw["summary"]["ratio"] * 100, 1)}%、上櫃約 {f(ot["summary"]["ratio"] * 100, 1)}%。</li>
-<li>個股推估維持率＝融資張數 × 1000 × 收盤 ÷ 推估融資金額；「再跌幾 % 到 130%」＝（維持率 − 130）÷ 維持率。族群維持率＝族群融資市值合計 ÷ 族群推估金額合計。</li>
+<li>個股推估維持率＝融資張數 × 1000 × 收盤 ÷ 推估融資金額；「再跌幾 % 到追繳門檻」＝（維持率 − 門檻）÷ 維持率；門檻依資料日（證交所 115/11/23 公告：11/24 起 120%，之前 130%）。族群維持率＝族群融資市值合計 ÷ 族群推估金額合計。</li>
 <li><b>ETF</b>：跟股票同一套（逐檔累推、同一個校準成數），全部 ETF 推估金額合計＝市場動態「上市融資維持率」卡「扣除 ETF」用的 ETF 融資金額，卡、「大盤」、個股／ETF 表三處同一份數字；ETF 推估維持率＝融資張數 × 1000 × 收盤 ÷ ETF 推估融資金額。分組：主動式＝代號 A、D、T 結尾；被動式再分台股正2（00631L、00663L、00675L、00685L）、其他槓桿（其餘 L 結尾）、反向（R）、債券（B）、期貨商品（U）、市值高息等（其餘）。</li>
 <li>減資、面額變更：生效當天證交所／櫃買會把融資張數換算（例：面額變更 1 換 4 張），本站先把前一日張數照比例換算再累推，不當成買賣；融資金額不變。配股：融資張數不會調整、融資金額也不變，所以不調整（配到的股票不在融資擔保品裡）。現金股利不調整。</li><li>已知限制：新上市／斷檔後重新起算時，成本先以當天收盤代入；沒有逐檔融資買進資料的日子用退路（買進 ≈ 餘額增加量）。</li></ol></div></details>{ca_block(d)}{off_block(d)}
 <details class="card"><summary>校準紀錄（近 20 個校準日）</summary><div class="in"><p class="m">上市</p>{cal_table(d, "twse")}<p class="m">上櫃</p>{cal_table(d, "otc")}</div></details>
@@ -164,6 +164,7 @@ def help_html(d):
 
 def build(d):
     tw = d['mkts']['twse']; ot = d['mkts']['otc']
+    cl = tw.get('call', 130.0)   # 🔴 11-23 雲端舊34：追繳門檻依資料日
     payload = {m: {'date': d['mkts'][m]['date'], 'rows': d['mkts'][m]['rows'], 'sec': d['mkts'][m]['sectors'],
                    'ratio': d['mkts'][m]['summary']['ratio']} for m in MKT_NAME}
     js_data = json.dumps(payload, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
@@ -205,29 +206,29 @@ details{{margin:6px 0}} summary{{cursor:pointer;font-size:14px;font-weight:600}}
 .src{{font-size:11px;color:var(--ink2);border:1px solid var(--line);border-radius:4px;padding:0 4px;margin-left:4px;font-weight:400}}
 .foot{{font-size:12px;color:var(--ink2);margin-top:8px;overflow-wrap:anywhere}}
 </style></head><body><div class="w"><h1>個股／族群融資維持率（本站推估）</h1>
-<p class="alert"><b>130% 斷頭是「整戶」計算，不是單一股票</b>；本表是每檔股票全體融資戶的平均推估，個別投資人成本不同。</p>
+<p class="alert"><b>{cl:g}% 斷頭是「整戶」計算，不是單一股票</b>；本表是每檔股票全體融資戶的平均推估，個別投資人成本不同。</p>
 <nav class="tabs" id="tabs"><button data-p="pS" class="on">個股</button><button data-p="pG">族群</button><button data-p="pH">說明與驗證 <small>{"已驗證" if pz else "驗證未過"}</small></button></nav>
 
 <section class="pane on" id="pS">
 <div class="bar"><span class="seg" data-g="mkt"><button data-v="twse" class="on">上市</button><button data-v="otc">上櫃</button></span>
-<span class="seg" data-g="flt"><button data-v="all" class="on">全部</button><button data-v="lt">&lt; 130%</button><button data-v="mid">130～150%</button></span>
-<span class="seg" data-g="srt"><button data-v="6" class="on">維持率</button><button data-v="7">離 130%</button><button data-v="4">融資市值</button></span>
+<span class="seg" data-g="flt"><button data-v="all" class="on">全部</button><button data-v="lt">&lt; {cl:g}%</button><button data-v="mid">{cl:g}～150%</button></span>
+<span class="seg" data-g="srt"><button data-v="6" class="on">維持率</button><button data-v="7">離 {cl:g}%</button><button data-v="4">融資市值</button></span>
 <input type="search" id="q" placeholder="搜尋代號／名稱" aria-label="搜尋代號或名稱"></div>
 <p class="m" id="info"></p>
 <div class="tw"><table class="stk" id="st"><thead><tr>
-<th class="s l" data-k="0">代號</th><th class="l">名稱</th><th class="s" data-k="6">推估維持率</th><th class="s" data-k="7">再跌幾 % 到 130%</th><th class="s" data-k="4">融資市值（億）</th>
+<th class="s l" data-k="0">代號</th><th class="l">名稱</th><th class="s" data-k="6">推估維持率</th><th class="s" data-k="7">再跌幾 % 到 {cl:g}%</th><th class="s" data-k="4">融資市值（億）</th>
 <th class="s" data-k="3">融資張數</th><th class="s" data-k="5">推估成本（元）</th><th class="s" data-k="9">收盤</th><th class="s" data-k="8">近 5 日增減（張）</th><th class="s l" data-k="2">族群</th>
 </tr></thead><tbody></tbody></table></div><button class="more" id="more" hidden></button>
-<p class="foot">本站推估；紅底＝推估維持率 &lt; 130%、黃底＝130～150%；只列融資 ≥ 100 張的股票（不含 ETF）。成數為本站校準推估，算法見「說明與驗證」。歷史統計，非預測，不構成買賣建議。</p>
+<p class="foot">本站推估；紅底＝推估維持率 &lt; {cl:g}%、黃底＝{cl:g}～150%；只列融資 ≥ 100 張的股票（不含 ETF）。成數為本站校準推估，算法見「說明與驗證」。歷史統計，非預測，不構成買賣建議。</p>
 </section>
 
 <section class="pane" id="pG">
 <div class="bar"><span class="seg" data-g="mkt"><button data-v="twse" class="on">上市</button><button data-v="otc">上櫃</button></span>
-<span class="seg" data-g="gsrt"><button data-v="5" class="on">族群維持率</button><button data-v="6">&lt; 130% 檔數</button><button data-v="3">融資市值</button></span>
+<span class="seg" data-g="gsrt"><button data-v="5" class="on">族群維持率</button><button data-v="6">&lt; {cl:g}% 檔數</button><button data-v="3">融資市值</button></span>
 <span class="seg" data-g="src"><button data-v="all" class="on">全部</button><button data-v="本站">本站族群</button><button data-v="官方">官方產業別</button></span></div>
 <p class="m">分類來源：本站追蹤池有分類的股票用本站族群（融資 ≥ 100 張中上市 {d["sector_cov"]["twse"]["本站"]} 檔、上櫃 {d["sector_cov"]["otc"]["本站"]} 檔），其他用證交所／櫃買公布的官方產業別（標「官方」；上市 {d["sector_cov"]["twse"]["官方"]} 檔、上櫃 {d["sector_cov"]["otc"]["官方"]} 檔）；未分類剩上市 {d["sector_cov"]["twse"]["未分類"]} 檔、上櫃 {d["sector_cov"]["otc"]["未分類"]} 檔。</p><p class="m" id="ginfo"></p>
 <div class="tw"><table class="stk" id="gt"><thead><tr>
-<th class="s l" data-k="0">族群</th><th class="s" data-k="5">族群維持率</th><th class="s" data-k="6">&lt; 130% 檔數</th><th class="s" data-k="2">檔數</th><th class="s" data-k="3">融資市值（億）</th><th class="s" data-k="4">推估金額（億）</th><th class="s l" data-k="1">大類</th></tr></thead><tbody></tbody></table></div>
+<th class="s l" data-k="0">族群</th><th class="s" data-k="5">族群維持率</th><th class="s" data-k="6">&lt; {cl:g}% 檔數</th><th class="s" data-k="2">檔數</th><th class="s" data-k="3">融資市值（億）</th><th class="s" data-k="4">推估金額（億）</th><th class="s l" data-k="1">大類</th></tr></thead><tbody></tbody></table></div>
 <button class="more" id="gmore" hidden></button>
 <p class="foot">點一列展開成分股。族群＝本站族群表「細類」，沒有的用官方產業別；族群維持率＝族群融資市值合計 ÷ 族群推估融資金額合計。本站推估，歷史統計，非預測。</p>
 </section>
@@ -236,28 +237,28 @@ details{{margin:6px 0}} summary{{cursor:pointer;font-size:14px;font-weight:600}}
 {help_html(d)}</section>
 </div>
 <script>
-const D={js_data};
+const D={js_data};const CL={cl:g};
 const S={{mkt:'twse',flt:'all',sk:6,sd:1,lim:30,gk:5,gd:1,glim:30,src:'all'}};const open=new Set();
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const fm=(v,n)=>v==null?'—':v.toLocaleString('zh-TW',{{minimumFractionDigits:n,maximumFractionDigits:n}});
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}})[c]);
 const DESC=new Set([3,4,8]),GDESC=new Set([2,3,4,6]);
 function cmp(k,d){{return (a,b)=>{{const x=a[k],y=b[k];if(x==null)return 1;if(y==null)return -1;return (typeof x==='string'?x.localeCompare(y,'zh-Hant'):x-y)*d}}}}
-function cls(m){{return m<130?'badrow':m<150?'warn':''}}
-function gap(r){{return r[6]<130?'<span class="bad">已低於</span>':fm(r[7],1)+'%'}}
+function cls(m){{return m<CL?'badrow':m<150?'warn':''}}
+function gap(r){{return r[6]<CL?'<span class="bad">已低於</span>':fm(r[7],1)+'%'}}
 function arrows(tb,k,d){{$$(tb+' th.s').forEach(th=>{{th.querySelector('.ar')?.remove();if(+th.dataset.k===k)th.insertAdjacentHTML('beforeend',`<span class="ar">${{d>0?'▲':'▼'}}</span>`)}})}}
 function segSync(){{$$('.seg').forEach(sg=>{{const g=sg.dataset.g;const v=g==='srt'?String(S.sk):g==='gsrt'?String(S.gk):S[g];sg.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===v))}})}}
 function drawS(){{const q=$('#q').value.trim();let rs=D[S.mkt].rows.filter(r=>r[3]>=100&&(!q||r[0].includes(q)||r[1].includes(q)));
-const lo=rs.filter(r=>r[6]<130).length,mid=rs.filter(r=>r[6]>=130&&r[6]<150).length;
-if(S.flt==='lt')rs=rs.filter(r=>r[6]<130);else if(S.flt==='mid')rs=rs.filter(r=>r[6]>=130&&r[6]<150);
+const lo=rs.filter(r=>r[6]<CL).length,mid=rs.filter(r=>r[6]>=CL&&r[6]<150).length;
+if(S.flt==='lt')rs=rs.filter(r=>r[6]<CL);else if(S.flt==='mid')rs=rs.filter(r=>r[6]>=CL&&r[6]<150);
 rs.sort(cmp(S.sk,S.sd));
-$('#info').textContent=`資料日 ${{D[S.mkt].date}}・融資 ≥ 100 張 ${{D[S.mkt].rows.filter(r=>r[3]>=100).length}} 檔：< 130% ${{lo}} 檔、130～150% ${{mid}} 檔・校準成數約 ${{(D[S.mkt].ratio*100).toFixed(1)}}%`;
-$('#st tbody').innerHTML=rs.slice(0,S.lim).map(r=>`<tr class="${{cls(r[6])}}"><td>${{esc(r[0])}}</td><td class="l nm" title="${{esc(r[1])}}">${{esc(r[1])}}</td><td class="${{r[6]<130?'bad':''}}">${{fm(r[6],1)}}%</td><td>${{gap(r)}}</td><td>${{fm(r[4],2)}}</td><td>${{fm(r[3],0)}}</td><td>${{fm(r[5],2)}}</td><td>${{fm(r[9],2)}}</td><td>${{r[8]==null?'—':(r[8]>0?'+':'')+fm(r[8],0)}}</td><td class="l">${{esc(r[2])}}${{r[11]==='官方'?'<small class="src">官方</small>':''}}</td></tr>`).join('')||'<tr><td colspan="10" class="l m">沒有符合的股票</td></tr>';
+$('#info').textContent=`資料日 ${{D[S.mkt].date}}・融資 ≥ 100 張 ${{D[S.mkt].rows.filter(r=>r[3]>=100).length}} 檔：< ${{CL}}% ${{lo}} 檔、${{CL}}～150% ${{mid}} 檔・校準成數約 ${{(D[S.mkt].ratio*100).toFixed(1)}}%`;
+$('#st tbody').innerHTML=rs.slice(0,S.lim).map(r=>`<tr class="${{cls(r[6])}}"><td>${{esc(r[0])}}</td><td class="l nm" title="${{esc(r[1])}}">${{esc(r[1])}}</td><td class="${{r[6]<CL?'bad':''}}">${{fm(r[6],1)}}%</td><td>${{gap(r)}}</td><td>${{fm(r[4],2)}}</td><td>${{fm(r[3],0)}}</td><td>${{fm(r[5],2)}}</td><td>${{fm(r[9],2)}}</td><td>${{r[8]==null?'—':(r[8]>0?'+':'')+fm(r[8],0)}}</td><td class="l">${{esc(r[2])}}${{r[11]==='官方'?'<small class="src">官方</small>':''}}</td></tr>`).join('')||'<tr><td colspan="10" class="l m">沒有符合的股票</td></tr>';
 const mb=$('#more');mb.hidden=rs.length<=S.lim;mb.textContent=`顯示更多（${{Math.min(S.lim,rs.length)}} / ${{rs.length}}）`;arrows('#st',S.sk,S.sd);segSync()}}
 function drawG(){{const by=Object.fromEntries(D[S.mkt].rows.map(r=>[r[0],r]));let gs=D[S.mkt].sec.filter(g=>S.src==='all'||g[8]===S.src).sort(cmp(S.gk,S.gd));
 $('#ginfo').textContent=`資料日 ${{D[S.mkt].date}}・${{gs.length}} 個族群`;let h='';
-for(const g of gs.slice(0,S.glim)){{h+=`<tr class="sec" data-g="${{esc(g[0])}}"><td>${{open.has(g[0])?'▾':'▸'}} ${{esc(g[0])}}${{g[8]==='官方'?'<small class="src">官方</small>':''}}</td><td class="${{g[5]<130?'bad':''}}">${{fm(g[5],1)}}%</td><td>${{g[6]}}</td><td>${{g[2]}}</td><td>${{fm(g[3],2)}}</td><td>${{fm(g[4],2)}}</td><td class="l">${{esc(g[1])}}</td></tr>`;
-if(open.has(g[0])){{const cs=g[7].map(c=>by[c]).filter(Boolean).sort(cmp(6,1));h+=cs.map(r=>`<tr class="sub"><td>　${{esc(r[0])}} ${{esc(r[1])}}</td><td class="${{r[6]<130?'bad':''}}">${{fm(r[6],1)}}%</td><td>${{gap(r)}}</td><td></td><td>${{fm(r[4],2)}}</td><td>${{fm(r[10],2)}}</td><td class="l"></td></tr>`).join('')}}}}
+for(const g of gs.slice(0,S.glim)){{h+=`<tr class="sec" data-g="${{esc(g[0])}}"><td>${{open.has(g[0])?'▾':'▸'}} ${{esc(g[0])}}${{g[8]==='官方'?'<small class="src">官方</small>':''}}</td><td class="${{g[5]<CL?'bad':''}}">${{fm(g[5],1)}}%</td><td>${{g[6]}}</td><td>${{g[2]}}</td><td>${{fm(g[3],2)}}</td><td>${{fm(g[4],2)}}</td><td class="l">${{esc(g[1])}}</td></tr>`;
+if(open.has(g[0])){{const cs=g[7].map(c=>by[c]).filter(Boolean).sort(cmp(6,1));h+=cs.map(r=>`<tr class="sub"><td>　${{esc(r[0])}} ${{esc(r[1])}}</td><td class="${{r[6]<CL?'bad':''}}">${{fm(r[6],1)}}%</td><td>${{gap(r)}}</td><td></td><td>${{fm(r[4],2)}}</td><td>${{fm(r[10],2)}}</td><td class="l"></td></tr>`).join('')}}}}
 $('#gt tbody').innerHTML=h;const mb=$('#gmore');mb.hidden=gs.length<=S.glim;mb.textContent=`顯示更多（${{Math.min(S.glim,gs.length)}} / ${{gs.length}}）`;arrows('#gt',S.gk,S.gd);segSync()}}
 $('#tabs').onclick=e=>{{const b=e.target.closest('button');if(!b)return;$$('#tabs button').forEach(x=>x.classList.toggle('on',x===b));$$('.pane').forEach(p=>p.classList.toggle('on',p.id===b.dataset.p))}};
 $$('.seg').forEach(sg=>sg.onclick=e=>{{const b=e.target.closest('button');if(!b)return;const g=sg.dataset.g,v=b.dataset.v;
@@ -281,6 +282,7 @@ def public(d):
     return {'gen': 'site_tools/stock_maint.py', 'passed': passed(d), 'fail': fail_mkts(d), 'sector_cov': d['sector_cov'],
             'mkts': {m: {'date': d['mkts'][m]['date'], 'rows': d['mkts'][m]['rows'], 'sec': d['mkts'][m]['sectors'],
                          'ratio': d['mkts'][m]['summary']['ratio'], 'r0': d['mkts'][m]['r0'],
+                         'call': d['mkts'][m].get('call', 130.0),   # 🔴 11-23 雲端舊34：資料日的追繳門檻（%）
                          # 雲端新18：ETF 個別（欄位同 rows）、ETF 分組、「大盤」20 日資券進出
                          'etf': d['mkts'][m].get('etf_rows', []), 'esec': d['mkts'][m].get('etf_sec', []),
                          'board': d['mkts'][m].get('board', []), 'etf_cal': d['mkts'][m].get('etf_cal')} for m in MKT_NAME},
