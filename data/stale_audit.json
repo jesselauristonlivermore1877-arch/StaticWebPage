@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-23 14:24",
+ "asof": "2026-11-23 14:54",
  "first_stale": {
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-20"
  },
@@ -7,11 +7,11 @@
   {
    "name": "庫藏股（日K／事件研究）",
    "path": "docs/data/buyback.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） buyback.py",
    "note": ""
@@ -79,11 +79,11 @@
   {
    "name": "處置股",
    "path": "docs/data/disposal.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -127,11 +127,11 @@
   {
    "name": "ETF 成本",
    "path": "docs/data/etf_cost.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -163,11 +163,11 @@
   {
    "name": "股價營收比河流",
    "path": "docs/data/ps_river.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） ps_river.py",
    "note": ""
@@ -187,11 +187,11 @@
   {
    "name": "RRG 輪動",
    "path": "docs/data/rrg.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -211,11 +211,11 @@
   {
    "name": "個股日K",
    "path": "docs/data/stock_bars.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -247,11 +247,11 @@
   {
    "name": "資金軌跡",
    "path": "docs/data/trail.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -259,11 +259,11 @@
   {
    "name": "資金軌跡（流向）",
    "path": "docs/data/trail_flow.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -271,11 +271,11 @@
   {
    "name": "族群題材",
    "path": "docs/data/topic_industry.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -283,11 +283,11 @@
   {
    "name": "估值拆解",
    "path": "docs/data/val_decomp.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -811,11 +811,11 @@
   {
    "name": "主動 ETF 持股 00990A",
    "path": "docs/data/pcf/00990A",
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "freq": "td",
    "allow": 2,
-   "lag_td": 1,
-   "days": 4,
+   "lag_td": 0,
+   "days": 3,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": "海外持股／美債：官網揭露本來就晚 2 個交易日"
