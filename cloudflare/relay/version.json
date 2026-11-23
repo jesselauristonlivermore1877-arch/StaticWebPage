@@ -1,7 +1,7 @@
 {
- "ver": "20261116a",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261116a/GEA_OM_Setup_20261116a.exe",
- "sha256": "84d1daa0e6d9887115fcbd62219be74a82e523fc475c3fc5428c2ffece5103a9",
- "notes": "20261116a：開機補收序號加定位紀錄（送出的 since、補收每則序號）；中繼即時推送的部位快照（訂閱、上架後）馬上對帳，不再等下次重連",
- "sig": "/J2cKiY/H2NSWEvTyKTLTDXVtcWwSl/X2XhyGAYCbgAyyqtvhlo1E/mQp5/Mgdwaoj9OPpIL76UFCLI2Ylzj+Q=="
+ "ver": "20261123a",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261123a/GEA_OM_Setup_20261123a.exe",
+ "sha256": "c79d89b759e9c848c32ab496077598afc1c1e56835d44351a4468de959461fde",
+ "notes": "20261123a：券商憑證元件被其他軟體（例如國票全球財神）重裝蓋掉時，下單機會跳出「修復」視窗並自動重新註冊；斷線自動重登改成重新取得登入憑證；被中繼踢下線 5 分鐘後自動再連",
+ "sig": "DUXJzQD8yRa2wFX/dl+LTQJRL0PWJzNtAAqmGrwY4F/nKUMhZEYDNvFffCG03gC/NC99HBRkL1uG8xSgxfQjIg=="
 }
