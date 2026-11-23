@@ -239,31 +239,30 @@
   },
   "2026-11-23": {
    "gemini-3.5-flash-lite": {
-    "req": 24,
+    "req": 28,
     "tok": 36464
    },
    "gemini-3.1-flash-lite": {
-    "req": 11,
+    "req": 15,
     "tok": 28113
    },
    "gemini-2.5-flash-lite": {
-    "req": 2,
+    "req": 6,
     "tok": 0
    },
    "gemini-flash-lite-latest": {
-    "req": 2,
+    "req": 6,
     "tok": 0
    },
    "gemini-3.1-flash-lite-preview": {
-    "req": 2,
+    "req": 6,
     "tok": 5050
+   },
+   "gemini-2.5-flash": {
+    "req": 4,
+    "tok": 0
    }
   }
  },
- "tpm": [
-  [
-   1795439627.553335,
-   3215
-  ]
- ]
+ "tpm": []
 }
