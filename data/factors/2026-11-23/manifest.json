@@ -1,22 +1,22 @@
 {
  "version": 1,
  "date": "2026-11-23",
- "built_at": "2026-11-23T16:07:35+08:00",
+ "built_at": "2026-11-23T19:18:53+08:00",
  "builder": "CustomerServiceANDSales/tools/factor_snapshot.py",
- "run": "45132806274",
+ "run": "45158233928",
  "rule": "只存當天看得到的值；回測一律用 tools/factor_pit.py load(date, factors) 讀，不讀現在的 docs/data。",
  "files": {
   "stocks.json.gz": {
-   "bytes": 124230,
-   "raw": 1083362,
-   "sha256": "255a0bb595e17bf35544ed8f7ca469e8e7c5510273c058acfc94295ae5663493",
+   "bytes": 124392,
+   "raw": 1083515,
+   "sha256": "61037f981ace4504e1cd264e260cb66d1f0706fee1551b390d9bf36a0b2ffdd5",
    "n_rows": 3358,
    "n_cols": 59
   },
   "sectors.json.gz": {
-   "bytes": 1811,
-   "raw": 3630,
-   "sha256": "a4c084f3c16d4654353afddcbe71137d1d01b111d37763f65a313f0ce087646c",
+   "bytes": 1828,
+   "raw": 3647,
+   "sha256": "d8b80e7fd907c5b8e93389dd18b924b901bfc6a4042a4afd1e4725d0ca3fb870",
    "n_rows": 27,
    "n_cols": 20
   }
@@ -111,8 +111,8 @@
    "name": "量化評分",
    "file": "data/web_data.json",
    "ok": true,
-   "bytes": 1584767,
-   "sha256": "1574c07af8c3a4b0434a231d0e9dca6cc9d72cc3165ea34c9fa510d5731116d8",
+   "bytes": 1593837,
+   "sha256": "f2d29422292ca34bfcf550428cf3b30b4b85874e1b19c26a3710c43ed3c8472d",
    "asof": "2026-11-23",
    "cols": null,
    "n": 253,
@@ -122,9 +122,9 @@
    "name": "河流圖位階",
    "file": "docs/data/river.json",
    "ok": true,
-   "bytes": 597075,
-   "sha256": "ef0be999226e1f8d478181513b8824050c00feaa5e3bef868e9408450729cf82",
-   "asof": "2026-11-20",
+   "bytes": 597300,
+   "sha256": "28bc633531b68fdf872e19d576aecab35da22da5c4f2e88486768f5603574079",
+   "asof": "2026-11-23",
    "cols": null,
    "n": 253,
    "n_sec": 27
@@ -144,9 +144,9 @@
    "name": "法說指引",
    "file": "data/guidance.json",
    "ok": true,
-   "bytes": 3222312,
-   "sha256": "399b321a81f059296a1ca5f196c9cdabcfe70f8cc813954616ac5affe53340b2",
-   "asof": "2026-11-22",
+   "bytes": 3240462,
+   "sha256": "cd317ea81e888318f921a72eeec1626035d2285521df13d7059fc487c7c69acf",
+   "asof": "2026-11-23",
    "cols": null,
    "n": 216,
    "n_sec": 0
@@ -199,11 +199,11 @@
    "name": "AI研究報告",
    "file": "docs/data/company_reports.json",
    "ok": true,
-   "bytes": 3324548,
-   "sha256": "5d034028a7e0443b5773a5c8360ae95300b64e8e75c3a9da60f98081ee3ab528",
+   "bytes": 3294551,
+   "sha256": "a7f2d0829aab1aac4dc6b629813913d923afcd29af899a7ce18132f679ff5812",
    "asof": "2026-11-22",
    "cols": null,
-   "n": 112,
+   "n": 111,
    "n_sec": 0
   }
  ]

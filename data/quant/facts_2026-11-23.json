@@ -1,9 +1,9 @@
 {
  "date": "2026-11-23",
  "data_date": "2026-11-23",
- "made": "2026-11-23T15:53+08:00",
- "built_at": "2026-11-23T15:41:56+08:00",
- "run": "45132806274",
+ "made": "2026-11-23T18:58+08:00",
+ "built_at": "2026-11-23T18:46:34+08:00",
+ "run": "45158233928",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
   "web_data.market.taiex": "2026-11-23",
@@ -16,13 +16,12 @@
   "web_data.elecfin": "2026-11-23",
   "web_data.screen.sector_score": "2026-11-23",
   "docs/data/rrg.json": "2026-11-23",
-  "docs/data/chips.json": "2026-11-20",
+  "docs/data/chips.json": "2026-11-23",
   "docs/data/disposal.json": "2026-11-23",
-  "docs/data/etf_flow.json": "2026-11-19"
+  "docs/data/etf_flow.json": "2026-11-20"
  },
  "skipped": {
-  "web_data.market.margin_balance": "來源資料日 2026-11-20 ≠ 資料日 2026-11-23",
-  "docs/data/chips.json": "來源資料日 2026-11-20 ≠ 資料日 2026-11-23"
+  "web_data.market.margin_balance": "來源資料日 2026-11-20 ≠ 資料日 2026-11-23"
  },
  "facts": [
   {
@@ -143,6 +142,42 @@
    "src": "web_data.breadth"
   },
   {
+   "id": "br_tp_0",
+   "sec": "市場廣度",
+   "label": "上櫃上漲家數",
+   "value": 560,
+   "unit": " 家",
+   "text": "560 家",
+   "src": "web_data.breadth"
+  },
+  {
+   "id": "br_tp_1",
+   "sec": "市場廣度",
+   "label": "上櫃下跌家數",
+   "value": 254,
+   "unit": " 家",
+   "text": "254 家",
+   "src": "web_data.breadth"
+  },
+  {
+   "id": "br_tp_3",
+   "sec": "市場廣度",
+   "label": "上櫃漲停家數",
+   "value": 25,
+   "unit": " 家",
+   "text": "25 家",
+   "src": "web_data.breadth"
+  },
+  {
+   "id": "br_tp_4",
+   "sec": "市場廣度",
+   "label": "上櫃跌停家數",
+   "value": 7,
+   "unit": " 家",
+   "text": "7 家",
+   "src": "web_data.breadth"
+  },
+  {
    "id": "ord_ratio_n",
    "sec": "市場廣度",
    "label": "委賣筆÷委買筆",
@@ -226,28 +261,28 @@
   {
    "id": "sec_bot1",
    "sec": "族群",
-   "label": "族群評分倒數第 1 名：CCL與電子材料",
-   "value": 1.2,
+   "label": "族群評分倒數第 1 名：面板",
+   "value": 3.7,
    "unit": " 分",
-   "text": "1.2 分",
+   "text": "3.7 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot2",
    "sec": "族群",
-   "label": "族群評分倒數第 2 名：矽晶圓與化合物半導體",
-   "value": 1.4,
+   "label": "族群評分倒數第 2 名：光學鏡頭與元件",
+   "value": 4.8,
    "unit": " 分",
-   "text": "1.4 分",
+   "text": "4.8 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot3",
    "sec": "族群",
-   "label": "族群評分倒數第 3 名：測試設備與介面",
-   "value": 2.0,
+   "label": "族群評分倒數第 3 名：伺服器電源與儲能",
+   "value": 5.7,
    "unit": " 分",
-   "text": "2.0 分",
+   "text": "5.7 分",
    "src": "web_data.screen.sector_score"
   },
   {
@@ -290,36 +325,54 @@
    "id": "etf_net",
    "sec": "主動式 ETF",
    "label": "主動式 ETF 合計淨買賣（含申購贖回）（最近一個有資料的交易日）",
-   "value": 39.9,
+   "value": -42.1,
    "unit": " 億元",
-   "text": "+39.9 億元",
+   "text": "-42.1 億元",
    "src": "docs/data/etf_flow.json"
   },
   {
    "id": "etf_xnet",
    "sec": "主動式 ETF",
    "label": "主動式 ETF 經理人自己調整持股的淨額（扣申購贖回）（最近一個有資料的交易日）",
-   "value": 30.3,
+   "value": -51.8,
    "unit": " 億元",
-   "text": "+30.3 億元",
+   "text": "-51.8 億元",
    "src": "docs/data/etf_flow.json"
+  },
+  {
+   "id": "dl_self",
+   "sec": "法人籌碼",
+   "label": "自營商自行買賣（個股加總估算）",
+   "value": -39.0,
+   "unit": " 億元",
+   "text": "-39.0 億元",
+   "src": "docs/data/chips.json"
+  },
+  {
+   "id": "dl_hedge",
+   "sec": "法人籌碼",
+   "label": "自營商避險（個股加總估算）",
+   "value": -127.7,
+   "unit": " 億元",
+   "text": "-127.7 億元",
+   "src": "docs/data/chips.json"
   },
   {
    "id": "disp_hot",
    "sec": "處置股",
    "label": "再一次注意就處置的個股數",
-   "value": 20,
+   "value": 29,
    "unit": " 檔",
-   "text": "20 檔",
+   "text": "29 檔",
    "src": "docs/data/disposal.json"
   },
   {
    "id": "disp_now",
    "sec": "處置股",
    "label": "處置中的個股數",
-   "value": 18,
+   "value": 25,
    "unit": " 檔",
-   "text": "18 檔",
+   "text": "25 檔",
    "src": "docs/data/disposal.json"
   }
  ],

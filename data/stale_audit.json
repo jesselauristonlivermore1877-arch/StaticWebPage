@@ -1,8 +1,6 @@
 {
- "asof": "2026-11-23 16:07",
- "first_stale": {
-  "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-20"
- },
+ "asof": "2026-11-23 19:19",
+ "first_stale": {},
  "rows": [
   {
    "name": "庫藏股（日K／事件研究）",
@@ -43,11 +41,11 @@
   {
    "name": "籌碼總覽",
    "path": "docs/data/chips.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -55,11 +53,11 @@
   {
    "name": "逐日籌碼",
    "path": "docs/data/chips_daily.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -91,11 +89,11 @@
   {
    "name": "選股 EDM 適配",
    "path": "docs/data/edm_fit.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -103,11 +101,11 @@
   {
    "name": "選股 EDM 歷史",
    "path": "docs/data/edm_hist",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -115,11 +113,11 @@
   {
    "name": "獲利流向",
    "path": "docs/data/eps_flow.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） eps_flow.py",
    "note": ""
@@ -139,11 +137,11 @@
   {
    "name": "ETF 資金流",
    "path": "docs/data/etf_flow.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -175,11 +173,11 @@
   {
    "name": "本益比河流",
    "path": "docs/data/river.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） river.py",
    "note": ""
@@ -199,11 +197,11 @@
   {
    "name": "產業本益比分位",
    "path": "docs/data/sector_pe.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） sector_pe.py",
    "note": ""
@@ -451,11 +449,11 @@
   {
    "name": "法說逐字稿",
    "path": "docs/data/ir/tr",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "ev",
    "allow": 5,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 ir_transcribe_one",
    "note": "有法說才有"
@@ -535,11 +533,11 @@
   {
    "name": "主動 ETF 持股 00400A",
    "path": "docs/data/pcf/00400A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -547,11 +545,11 @@
   {
    "name": "主動 ETF 持股 00401A",
    "path": "docs/data/pcf/00401A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -571,11 +569,11 @@
   {
    "name": "主動 ETF 持股 00403A",
    "path": "docs/data/pcf/00403A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -583,11 +581,11 @@
   {
    "name": "主動 ETF 持股 00404A",
    "path": "docs/data/pcf/00404A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -595,11 +593,11 @@
   {
    "name": "主動 ETF 持股 00405A",
    "path": "docs/data/pcf/00405A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -607,11 +605,11 @@
   {
    "name": "主動 ETF 持股 00406A",
    "path": "docs/data/pcf/00406A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -619,11 +617,11 @@
   {
    "name": "主動 ETF 持股 00407A",
    "path": "docs/data/pcf/00407A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -631,11 +629,11 @@
   {
    "name": "主動 ETF 持股 00408A",
    "path": "docs/data/pcf/00408A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -643,11 +641,11 @@
   {
    "name": "主動 ETF 持股 00411A",
    "path": "docs/data/pcf/00411A",
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "freq": "td",
    "allow": 2,
-   "lag_td": 1,
-   "days": 4,
+   "lag_td": 0,
+   "days": 3,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": "海外持股／美債：官網揭露本來就晚 2 個交易日"
@@ -679,11 +677,11 @@
   {
    "name": "主動 ETF 持股 00980A",
    "path": "docs/data/pcf/00980A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -691,11 +689,11 @@
   {
    "name": "主動 ETF 持股 00981A",
    "path": "docs/data/pcf/00981A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -715,11 +713,11 @@
   {
    "name": "主動 ETF 持股 00982A",
    "path": "docs/data/pcf/00982A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -739,11 +737,11 @@
   {
    "name": "主動 ETF 持股 00984A",
    "path": "docs/data/pcf/00984A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -775,11 +773,11 @@
   {
    "name": "主動 ETF 持股 00987A",
    "path": "docs/data/pcf/00987A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -823,11 +821,11 @@
   {
    "name": "主動 ETF 持股 00991A",
    "path": "docs/data/pcf/00991A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -835,11 +833,11 @@
   {
    "name": "主動 ETF 持股 00992A",
    "path": "docs/data/pcf/00992A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -847,11 +845,11 @@
   {
    "name": "主動 ETF 持股 00993A",
    "path": "docs/data/pcf/00993A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -859,11 +857,11 @@
   {
    "name": "主動 ETF 持股 00994A",
    "path": "docs/data/pcf/00994A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -871,11 +869,11 @@
   {
    "name": "主動 ETF 持股 00995A",
    "path": "docs/data/pcf/00995A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -883,12 +881,12 @@
   {
    "name": "主動 ETF 持股 00996A",
    "path": "docs/data/pcf/00996A",
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "freq": "td",
    "allow": 0,
-   "lag_td": 1,
-   "days": 4,
-   "stale": true,
+   "lag_td": 0,
+   "days": 3,
+   "stale": false,
    "owner": "W 本機排程 tools/pcf_local.py（兆豐官網擋雲端 IP）",
    "note": ""
   },
@@ -907,11 +905,11 @@
   {
    "name": "主動 ETF 持股 00999A",
    "path": "docs/data/pcf/00999A",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -919,11 +917,11 @@
   {
    "name": "主動 ETF 持股 ETF27",
    "path": "docs/data/pcf/ETF27",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 3,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -931,16 +929,16 @@
   {
    "name": "盤中資金（會員站，盤中每小時檢查）",
    "path": "data/live_watch.json",
-   "date": "2026-11-20",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
    "lag_td": null,
    "days": null,
    "stale": false,
    "owner": "W 本機 live_push／dash_live（檢查：雲端 live_watch.yml）",
-   "note": "最後檢查 2026-11-20 15:48：正常 資料到 13:45"
+   "note": "最後檢查 2026-11-23 16:18：正常 資料到 13:45"
   }
  ],
- "n_stale": 1,
+ "n_stale": 0,
  "tg_day": "2026-11-23"
 }
