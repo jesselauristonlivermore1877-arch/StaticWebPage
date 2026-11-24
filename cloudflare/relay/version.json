@@ -1,7 +1,7 @@
 {
- "ver": "20261124a",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261124a/GEA_OM_Setup_20261124a.exe",
- "sha256": "c03c8d98419932499d18703cc4fedc9cd1d55eac80cdcd3136c7c998ea97f10e",
- "notes": "更新後自動開回來的下單機改成一般權限（排程或桌面開），之後可正常關閉；其他功能不變",
- "sig": "eEmMqFADhm+jZb8gnDXf2XKDxHz5eucInPWUZrVobOiFGI/h5fkk88v+HYeTF60TT3fk8Xl6C5btgr1C9n9KKA=="
+ "ver": "20261124b",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261124b/GEA_OM_Setup_20261124b.exe",
+ "sha256": "fb35291473def1c072e2b4f506bd07c937d21491f60af227416dcea0bebef841",
+ "notes": "對帳小改進：不是任何策略在交易的商品（例：手動買賣個股期貨）成交只記日誌、不再發「對不到策略」TG；策略商品照舊查庫存＋TG。其他功能不變。",
+ "sig": "iiYgNjgbLsMKQ8orYUg9NGQsfJYZfCzxed6pV9LpeeRdtx6J8+zjvUyfln8DmQ1lo0fah8bc5JsCM7jXWOLrYw=="
 }
