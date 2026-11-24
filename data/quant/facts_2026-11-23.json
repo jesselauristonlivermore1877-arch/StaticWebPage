@@ -1,107 +1,92 @@
 {
  "date": "2026-11-23",
  "data_date": "2026-11-23",
- "made": "2026-11-24T05:40+08:00",
- "built_at": "2026-11-24T05:31:05+08:00",
- "run": "45268507647",
+ "made": "2026-11-24T09:58+08:00",
+ "built_at": "2026-11-24T09:46:25+08:00",
+ "run": "45306347339",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
   "web_data.market.taiex": "2026-11-23",
   "web_data.market.otc": "2026-11-23",
-  "web_data.market.tsmc": "2026-11-23",
+  "web_data.market.tsmc": "2026-11-24",
   "web_data.breadth": "2026-11-23",
   "web_data.orders": "2026-11-23",
   "web_data.inst.summary": "2026-11-23",
   "web_data.market.margin_balance": "2026-11-23",
   "web_data.elecfin": "2026-11-23",
-  "web_data.screen.sector_score": "2026-11-23",
+  "web_data.screen.sector_score": "2026-11-24",
   "docs/data/rrg.json": "2026-11-23",
   "docs/data/chips.json": "2026-11-23",
   "docs/data/disposal.json": "2026-11-23",
   "docs/data/etf_flow.json": "2026-11-20"
  },
- "skipped": {},
+ "skipped": {
+  "web_data.market.tsmc": "來源資料日 2026-11-24 ≠ 資料日 2026-11-23",
+  "web_data.screen.sector_score": "來源資料日 2026-11-24 ≠ 資料日 2026-11-23"
+ },
  "facts": [
   {
    "id": "taiex_close",
    "sec": "大盤",
    "label": "加權指數收盤",
-   "value": 36811.89,
+   "value": 40154.53,
    "unit": " 點",
-   "text": "36811.89 點",
+   "text": "40154.53 點",
    "src": "web_data.market.taiex"
   },
   {
    "id": "taiex_chg",
    "sec": "大盤",
    "label": "加權指數漲跌點",
-   "value": 778.6,
+   "value": 3342.64,
    "unit": " 點",
-   "text": "+778.60 點",
+   "text": "+3342.64 點",
    "src": "web_data.market.taiex"
   },
   {
    "id": "taiex_r1",
    "sec": "大盤",
    "label": "加權指數漲跌幅",
-   "value": 2.16,
+   "value": 9.08,
    "unit": "%",
-   "text": "+2.16%",
+   "text": "+9.08%",
    "src": "web_data.market.taiex"
   },
   {
    "id": "taiex_dd52",
    "sec": "大盤",
    "label": "加權指數距 52 週高點",
-   "value": -26.33,
+   "value": -19.65,
    "unit": "%",
-   "text": "-26.33%",
+   "text": "-19.65%",
    "src": "web_data.market.taiex"
   },
   {
    "id": "taiex_ma20",
    "sec": "大盤",
    "label": "加權指數距 20 日均線",
-   "value": -12.89,
+   "value": -5.36,
    "unit": "%",
-   "text": "-12.89%",
+   "text": "-5.36%",
    "src": "web_data.market.taiex"
   },
   {
    "id": "otc_close",
    "sec": "大盤",
    "label": "櫃買指數收盤",
-   "value": 270.9,
+   "value": 293.15,
    "unit": " 點",
-   "text": "270.90 點",
+   "text": "293.15 點",
    "src": "web_data.market.otc"
   },
   {
    "id": "otc_r1",
    "sec": "大盤",
    "label": "櫃買指數漲跌幅",
-   "value": 2.88,
+   "value": 8.21,
    "unit": "%",
-   "text": "+2.88%",
+   "text": "+8.21%",
    "src": "web_data.market.otc"
-  },
-  {
-   "id": "tsmc_close",
-   "sec": "大盤",
-   "label": "台積電收盤",
-   "value": 2030.0,
-   "unit": " 元",
-   "text": "2030.00 元",
-   "src": "web_data.market.tsmc"
-  },
-  {
-   "id": "tsmc_r1",
-   "sec": "大盤",
-   "label": "台積電漲跌幅",
-   "value": 1.5,
-   "unit": "%",
-   "text": "+1.50%",
-   "src": "web_data.market.tsmc"
   },
   {
    "id": "br_tw_0",
@@ -237,60 +222,6 @@
    "unit": "",
    "text": "0.7236",
    "src": "web_data.elecfin"
-  },
-  {
-   "id": "sec_top1",
-   "sec": "族群",
-   "label": "族群評分第 1 名：電信與雲端服務",
-   "value": 40.5,
-   "unit": " 分",
-   "text": "40.5 分",
-   "src": "web_data.screen.sector_score"
-  },
-  {
-   "id": "sec_top2",
-   "sec": "族群",
-   "label": "族群評分第 2 名：金融",
-   "value": 29.9,
-   "unit": " 分",
-   "text": "29.9 分",
-   "src": "web_data.screen.sector_score"
-  },
-  {
-   "id": "sec_top3",
-   "sec": "族群",
-   "label": "族群評分第 3 名：航運",
-   "value": 24.8,
-   "unit": " 分",
-   "text": "24.8 分",
-   "src": "web_data.screen.sector_score"
-  },
-  {
-   "id": "sec_bot1",
-   "sec": "族群",
-   "label": "族群評分倒數第 1 名：面板",
-   "value": 3.7,
-   "unit": " 分",
-   "text": "3.7 分",
-   "src": "web_data.screen.sector_score"
-  },
-  {
-   "id": "sec_bot2",
-   "sec": "族群",
-   "label": "族群評分倒數第 2 名：光學鏡頭與元件",
-   "value": 4.8,
-   "unit": " 分",
-   "text": "4.8 分",
-   "src": "web_data.screen.sector_score"
-  },
-  {
-   "id": "sec_bot3",
-   "sec": "族群",
-   "label": "族群評分倒數第 3 名：伺服器電源與儲能",
-   "value": 5.7,
-   "unit": " 分",
-   "text": "5.7 分",
-   "src": "web_data.screen.sector_score"
   },
   {
    "id": "rrg_領先",

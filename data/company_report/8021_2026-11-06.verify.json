@@ -2,7 +2,7 @@
  "file": "8021_2026-11-06.md",
  "code": "8021",
  "date": "2026-11-06",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,8 +18,13 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "mcap",
+    "why": "數字檔 453.8 億元，站上資料 466.8518"
+   }
+  ],
   "checked": [
    "close",
    "eps_q",
