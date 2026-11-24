@@ -1,12 +1,13 @@
 {
- "asof": "2026-11-25 05:56",
+ "asof": "2026-11-25 07:53",
  "first_stale": {
   "data/registry/officials_src.json|名單查證": "2026-11-24",
   "docs/data/pcf/00989A|主動 ETF 持股 00989A": "2026-11-25",
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-25",
   "docs/data/pick_edm.json#aetf_f_00989A|EDM 主動式 ETF・00989A・摩根美國科技〔aetf_f_00989A〕": "2026-11-25",
   "docs/data/pick_edm.json#aetf_f_00996A|EDM 主動式 ETF・00996A・兆豐台灣〔aetf_f_00996A〕": "2026-11-25",
-  "docs/data/pick_edm.json#aetf_h_00989A|EDM 主動式 ETF 依基金・00989A・摩根美國科技〔aetf_h_00989A〕": "2026-11-25"
+  "docs/data/pick_edm.json#aetf_h_00989A|EDM 主動式 ETF 依基金・00989A・摩根美國科技〔aetf_h_00989A〕": "2026-11-25",
+  "docs/data/pick_edm.json#aetf_h_00415A|EDM 主動式 ETF 依基金・00415A・群益核心50〔aetf_h_00415A〕": "2026-11-25"
  },
  "rows": [
   {
@@ -156,11 +157,11 @@
   {
    "name": "總經",
    "path": "docs/data/macro.json",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -324,11 +325,11 @@
   {
    "name": "財報公告",
    "path": "docs/data/releases.json",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -384,11 +385,11 @@
   {
    "name": "正式站巡檢",
    "path": "docs/data/site_smoke.json",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 site_smoke.yml",
    "note": ""
@@ -408,11 +409,11 @@
   {
    "name": "AI 自由現金流（GEA AI FCF）",
    "path": "docs/data/fcf_ai.json",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 fcf_ai.bat",
    "note": ""
@@ -504,11 +505,11 @@
   {
    "name": "產業動向",
    "path": "data/industry_notes",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "freq": "ev",
    "allow": 5,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 ir_report_watch",
    "note": ""
@@ -1930,12 +1931,12 @@
   {
    "name": "EDM 主動式 ETF 依基金・00415A・群益核心50〔aetf_h_00415A〕",
    "path": "docs/data/pick_edm.json#aetf_h_00415A",
-   "date": "2026-11-24",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
-   "lag_td": 0,
-   "days": 1,
-   "stale": false,
+   "lag_td": 1,
+   "days": 2,
+   "stale": true,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（aetf_fund_edm）",
    "note": "",
@@ -2490,11 +2491,11 @@
   {
    "name": "EDM 市場主軸・市場主軸〔fcf〕",
    "path": "docs/data/pick_edm.json#fcf",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -2896,11 +2897,11 @@
   {
    "name": "EDM 產業動向・AI 研究報告・產業研究〔res〕",
    "path": "docs/data/pick_edm.json#res",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -3340,6 +3341,6 @@
    "note": "最後檢查 2026-11-24 18:28：正常 資料到 13:45"
   }
  ],
- "n_stale": 6,
+ "n_stale": 7,
  "tg_day": "2026-11-24"
 }
