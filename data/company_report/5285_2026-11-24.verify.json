@@ -1,0 +1,50 @@
+{
+ "file": "5285_2026-11-24.md",
+ "code": "5285",
+ "date": "2026-11-24",
+ "show": true,
+ "numbers": {
+  "ok": true,
+  "bad": [],
+  "cited": 69,
+  "facts": 135
+ },
+ "compliance": {
+  "ok": true,
+  "hits": []
+ },
+ "src": {
+  "ok": true,
+  "bad": []
+ },
+ "cross": {
+  "ok": true,
+  "bad": [],
+  "checked": [
+   "close",
+   "eps_q",
+   "mcap",
+   "pe_ttm",
+   "rev_m"
+  ]
+ },
+ "tables": {
+  "ok": true,
+  "bad": []
+ },
+ "sections": {
+  "ok": true,
+  "missing": []
+ },
+ "eps": {
+  "ok": true,
+  "bad": [],
+  "checked": 8,
+  "skipped": 0
+ },
+ "transcript": {
+  "ok": true,
+  "bad": [],
+  "has": true
+ }
+}

@@ -7,7 +7,7 @@
   "ok": true,
   "bad": [],
   "cited": 62,
-  "facts": 116
+  "facts": 129
  },
  "compliance": {
   "ok": true,
@@ -21,10 +21,7 @@
   "ok": true,
   "bad": [],
   "checked": [
-   "close",
    "eps_q",
-   "mcap",
-   "pe_ttm",
    "rev_m"
   ]
  },
@@ -39,7 +36,7 @@
  "eps": {
   "ok": true,
   "bad": [],
-  "checked": 7,
+  "checked": 8,
   "skipped": 0
  },
  "transcript": {
