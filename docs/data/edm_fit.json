@@ -1,34 +1,9 @@
 {
- "checked_at": "2026-11-24T06:24:04.619Z",
+ "checked_at": "2026-11-24T07:04:21.747Z",
  "date": "2026-11-23",
- "n": 147,
+ "n": 138,
  "n_bad": 4,
  "bad": {
-  "GEA_選股_維持率ETF": {
-   "cat": "維持率",
-   "title": "維持率・ETF（融資市值前 20）",
-   "err": "",
-   "issues": [
-    {
-     "area": "整張卡",
-     "dir": "右",
-     "px": 38,
-     "why": "卡片內容總寬 1118"
-    },
-    {
-     "area": "「融資市值第 1～10 名融資市值單位億元」",
-     "dir": "右",
-     "px": 75,
-     "why": "div.pe-box scrollWidth 570＞clientWidth 495"
-    },
-    {
-     "area": "「融資市值第 11～20 名上市＋上櫃」",
-     "dir": "右",
-     "px": 75,
-     "why": "div.pe-box scrollWidth 570＞clientWidth 495"
-    }
-   ]
-  },
   "GEA_主動ETF成本_00406A": {
    "cat": "ETF 成本",
    "title": "00406A 中信台灣收益",
@@ -39,6 +14,25 @@
      "dir": "右",
      "px": 17,
      "why": "div.pe-box scrollWidth 512＞clientWidth 495"
+    }
+   ]
+  },
+  "GEA_主動ETF成本_00982A": {
+   "cat": "ETF 成本",
+   "title": "00982A 群益台灣強棒",
+   "err": "",
+   "issues": [
+    {
+     "area": "「持股前 6 大（依現值）・現價距推估成本元｜損益」",
+     "dir": "右",
+     "px": 8,
+     "why": "div.pe-gg scrollWidth 1016＞clientWidth 1008"
+    },
+    {
+     "area": "「獲利最多現值 ≥ 1,000 萬」",
+     "dir": "右",
+     "px": 9,
+     "why": "div.pe-box scrollWidth 504＞clientWidth 495"
     }
    ]
   },
