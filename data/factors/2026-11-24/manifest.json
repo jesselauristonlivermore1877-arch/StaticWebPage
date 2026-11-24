@@ -1,22 +1,22 @@
 {
  "version": 1,
  "date": "2026-11-24",
- "built_at": "2026-11-24T15:04:34+08:00",
+ "built_at": "2026-11-24T16:46:00+08:00",
  "builder": "CustomerServiceANDSales/tools/factor_snapshot.py",
- "run": "45337486862",
+ "run": "45349798949",
  "rule": "只存當天看得到的值；回測一律用 tools/factor_pit.py load(date, factors) 讀，不讀現在的 docs/data。",
  "files": {
   "stocks.json.gz": {
-   "bytes": 124465,
-   "raw": 1083531,
-   "sha256": "cfe9eece9b183df57f48e020aea5351780951f13b40be8c0e4628d357c242af3",
+   "bytes": 124274,
+   "raw": 1083431,
+   "sha256": "b8239a0ee0836338d96d3b9699bbec495ebf3ad35c54cbbcc839968e3a5b65cc",
    "n_rows": 3358,
    "n_cols": 59
   },
   "sectors.json.gz": {
-   "bytes": 1809,
-   "raw": 3620,
-   "sha256": "51ad5bb9a6c9a026824d18f03b70ba110301c6ce8fc55e8cf5405f934973bc20",
+   "bytes": 1801,
+   "raw": 3610,
+   "sha256": "3eef2c8bf609a6f21ff5f35e38bfe6340ad4030fa932e9841846c1054d3671d7",
    "n_rows": 27,
    "n_cols": 20
   }
@@ -111,8 +111,8 @@
    "name": "量化評分",
    "file": "data/web_data.json",
    "ok": true,
-   "bytes": 1580057,
-   "sha256": "8e964cd7ed1a9a1a8fb61b49a8e5f3c95448d9d120a118046030a2622ff763fb",
+   "bytes": 1587169,
+   "sha256": "80df88ab48e9189ad126e1d62a1c7146245caa6ecb951b244c86d6cb65e00568",
    "asof": "2026-11-24",
    "cols": null,
    "n": 253,
