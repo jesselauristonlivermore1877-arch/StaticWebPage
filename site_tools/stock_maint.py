@@ -456,9 +456,12 @@ def board_rows(mkt, raw, mo, eser):
     for r in mo['rows']:
         d = r[0]
         if mkt == 'twse':
-            if len(r) < 7:
+            if len(r) < 4 or r[1] is None or not r[3]:
                 continue
-            maint, amt, maint_ex, amt_ex, amt_etf = r[1], r[3], r[4], r[5], r[6]
+            # 11-24 總指揮：mkt_overlay 有時還沒被 etf_margin.adjust 補成 7 欄（同一班先後順序），以前整段丟掉 → board 空 → maint_board／maint_120 IndexError；
+            # 改成含 ETF 欄照用、扣除 ETF 三欄留空（下一班補齊）
+            maint, amt = r[1], r[3]
+            maint_ex, amt_ex, amt_etf = (r[4], r[5], r[6]) if len(r) >= 7 else (None, None, None)
         else:
             maint, amt = r[2], r[4]
             bk = eser.get(d)
