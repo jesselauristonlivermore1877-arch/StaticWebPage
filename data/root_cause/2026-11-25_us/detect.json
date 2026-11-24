@@ -1,0 +1,119 @@
+{
+ "trig": [
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-25",
+   "t": "台指期夜盤重挫 -1,842 點（-4.57%），報 38,482；盤中最低 37,730",
+   "u": "https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-25",
+   "t": "台指期夜盤重挫 -2,038 點（-5.05%），報 38,286；盤中最低 37,730",
+   "u": "https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-25",
+   "t": "台指期夜盤重挫 -2,421 點（-6.00%），報 37,903；盤中最低 37,730",
+   "u": "https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-24",
+   "t": "台指期夜盤重挫 -1,436 點（-3.56%），報 38,888；盤中最低 38,688",
+   "u": "https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-24",
+   "t": "台指期夜盤重挫 -1,086 點（-2.69%），報 39,238；盤中最低 38,795",
+   "u": "https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-24",
+   "t": "台指期日盤大漲 +3,665 點（+10.00%），報 40,324；盤中最高 40,324",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-24",
+   "t": "台指期日盤大漲 +3,663 點（+9.99%），報 40,322；盤中最高 40,324",
+   "u": "https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-24",
+   "t": "台指期夜盤大漲 +3,170 點（+8.65%），報 39,829；盤中最高 40,324",
+   "u": "https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-24",
+   "t": "台指期夜盤大漲 +3,363 點（+9.17%），報 40,022；盤中最高 40,324",
+   "u": "https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/FuturesDomestic/"
+  },
+  {
+   "kind": "台指期",
+   "what": "期交所行情",
+   "date": "2026-11-24",
+   "t": "台指期夜盤大漲 +3,665 點（+10.00%），報 40,324；盤中最高 40,324",
+   "u": "https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/FuturesDomestic/"
+  }
+ ],
+ "moves": {
+  "SOX": {
+   "date": "2026-11-24",
+   "prev": "2026-11-23",
+   "close": 8832.501,
+   "prev_close": 9588.0498,
+   "pct": -7.88,
+   "sd": 3.246,
+   "z": -2.43,
+   "n": 250,
+   "key": "SOX",
+   "name": "費城半導體",
+   "sym": "^SOX"
+  },
+  "NQ": {
+   "date": "2026-11-24",
+   "prev": "2026-11-23",
+   "close": 26269.5,
+   "prev_close": 26808.0,
+   "pct": -2.01,
+   "sd": 1.452,
+   "z": -1.38,
+   "n": 250,
+   "key": "NQ",
+   "name": "那斯達克 100 期貨",
+   "sym": "NQ=F"
+  },
+  "SPX": {
+   "date": "2026-11-24",
+   "prev": "2026-11-23",
+   "close": 7201.0898,
+   "prev_close": 7237.1699,
+   "pct": -0.5,
+   "sd": 0.944,
+   "z": -0.53,
+   "n": 250,
+   "key": "SPX",
+   "name": "S&P 500",
+   "sym": "^GSPC"
+  }
+ },
+ "sec": {
+  "sectors": [],
+  "note": "只看美股：台股 2026-11-25 還沒開盤，不算族群"
+ }
+}
