@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-24 10:28",
+ "asof": "2026-11-24 14:24",
  "first_stale": {
   "data/registry/officials_src.json|名單查證": "2026-11-24",
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-24"
@@ -296,11 +296,11 @@
   {
    "name": "權證",
    "path": "docs/data/warrant.json",
-   "date": "2026-11-23",
+   "date": "2026-11-24",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） warrant.py",
    "note": ""
@@ -332,11 +332,11 @@
   {
    "name": "國安基金／限空令歷史",
    "path": "docs/data/nsf_history.json",
-   "date": "2026-11-23",
+   "date": "2026-11-24",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/nsf_history.py",
    "note": ""
@@ -356,11 +356,11 @@
   {
    "name": "國際指數",
    "path": "docs/data/world_idx.json",
-   "date": "2026-11-23",
+   "date": "2026-11-24",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 macro.yml（世界趨勢）＋daily.yml world_idx.py",
    "note": ""
