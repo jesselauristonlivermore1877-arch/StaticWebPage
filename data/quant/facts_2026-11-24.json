@@ -1,9 +1,9 @@
 {
  "date": "2026-11-24",
  "data_date": "2026-11-24",
- "made": "2026-11-25T05:20+08:00",
- "built_at": "2026-11-25T05:13:12+08:00",
- "run": "45488558777",
+ "made": "2026-11-25T05:44+08:00",
+ "built_at": "2026-11-25T05:38:34+08:00",
+ "run": "45489842884",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
   "web_data.market.taiex": "2026-11-24",
@@ -277,19 +277,19 @@
   {
    "id": "sec_bot2",
    "sec": "族群",
-   "label": "族群評分倒數第 2 名：光通訊上游",
-   "value": 4.8,
+   "label": "族群評分倒數第 2 名：載板與PCB",
+   "value": 5.8,
    "unit": " 分",
-   "text": "4.8 分",
+   "text": "5.8 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot3",
    "sec": "族群",
-   "label": "族群評分倒數第 3 名：光通訊中下游",
-   "value": 4.8,
+   "label": "族群評分倒數第 3 名：連接器與機構件",
+   "value": 5.9,
    "unit": " 分",
-   "text": "4.8 分",
+   "text": "5.9 分",
    "src": "web_data.screen.sector_score"
   },
   {
