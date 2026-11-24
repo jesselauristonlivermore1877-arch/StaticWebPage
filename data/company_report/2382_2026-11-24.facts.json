@@ -3,10 +3,10 @@
  "name": "廣達",
  "date": "2026-11-24",
  "industry": "伺服器與品牌組裝",
- "made": "本機 company_report（2026-11-24T20:53）",
+ "made": "本機 company_report（2026-11-24T22:12）",
  "deck": {
   "url": "https://mopsov.twse.com.tw/nas/STR/238220261111M001.pdf",
-  "date": "2026-11-11"
+  "date": "2026-11-24"
  },
  "transcript": {
   "date": "2026-11-11",
@@ -1072,6 +1072,106 @@
    "period": "2026Q2"
   },
   {
+   "id": "q2026s3_rev",
+   "sec": "季度",
+   "label": "2026Q3 營收",
+   "value": 11155.44521,
+   "unit": " 億元",
+   "text": "11155.45 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_gp",
+   "sec": "季度",
+   "label": "2026Q3 營業毛利",
+   "value": 530.2438,
+   "unit": " 億元",
+   "text": "530.24 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_op",
+   "sec": "季度",
+   "label": "2026Q3 營業利益",
+   "value": 322.03723,
+   "unit": " 億元",
+   "text": "322.04 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_ni",
+   "sec": "季度",
+   "label": "2026Q3 歸屬母公司淨利",
+   "value": 284.21926,
+   "unit": " 億元",
+   "text": "284.22 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_eps",
+   "sec": "季度",
+   "label": "2026Q3 EPS",
+   "value": 7.1,
+   "unit": " 元",
+   "text": "7.10 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_gm",
+   "sec": "季度",
+   "label": "2026Q3 毛利率",
+   "value": 4.753228,
+   "unit": "%",
+   "text": "4.8%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_opm",
+   "sec": "季度",
+   "label": "2026Q3 營益率",
+   "value": 2.886816,
+   "unit": "%",
+   "text": "2.9%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_npm",
+   "sec": "季度",
+   "label": "2026Q3 淨利率",
+   "value": 2.547807,
+   "unit": "%",
+   "text": "2.5%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_yoy",
+   "sec": "季度",
+   "label": "2026Q3 營收年增",
+   "value": 125.244956,
+   "unit": "%",
+   "text": "+125.2%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_qoq",
+   "sec": "季度",
+   "label": "2026Q3 營收季增",
+   "value": 7.616473,
+   "unit": "%",
+   "text": "+7.6%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
    "id": "y2021_rev",
    "sec": "年度",
    "label": "2021 年營收",
@@ -1260,6 +1360,66 @@
    "text": "+25.6%",
    "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
    "period": "2025"
+  },
+  {
+   "id": "cy_rev",
+   "sec": "年度",
+   "label": "2026 前 3 季累計營收",
+   "value": 29613.58288,
+   "unit": " 億元",
+   "text": "29613.6 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026 前 3 季"
+  },
+  {
+   "id": "cy_ni",
+   "sec": "年度",
+   "label": "2026 前 3 季累計歸屬母公司淨利",
+   "value": 782.65833,
+   "unit": " 億元",
+   "text": "782.7 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026 前 3 季"
+  },
+  {
+   "id": "cy_epsg",
+   "sec": "年度",
+   "label": "2026 前 3 季累計 EPS 年增",
+   "value": 46.20438,
+   "unit": "%",
+   "text": "+46.2%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026 前 3 季"
+  },
+  {
+   "id": "equity",
+   "sec": "估值",
+   "label": "2026Q3 母公司業主權益",
+   "value": 3441.61669,
+   "unit": " 億元",
+   "text": "3441.6 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb05",
+   "period": "2026Q3"
+  },
+  {
+   "id": "pbr",
+   "sec": "估值",
+   "label": "股價淨值比",
+   "value": 3.371685,
+   "unit": " 倍",
+   "text": "3.37 倍",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb05",
+   "period": "2026-11-24"
+  },
+  {
+   "id": "roe_ttm",
+   "sec": "估值",
+   "label": "ROE（近四季淨利 ÷ 期末母公司權益）",
+   "value": 29.190676,
+   "unit": "%",
+   "text": "29.2%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb05",
+   "period": "近四季"
   }
  ],
  "tables": {
@@ -1286,7 +1446,7 @@
       "q2025s4_rev",
       "q2026s1_rev",
       "q2026s2_rev",
-      null
+      "q2026s3_rev"
      ]
     },
     {
@@ -1299,7 +1459,7 @@
       "q2025s4_gp",
       "q2026s1_gp",
       "q2026s2_gp",
-      null
+      "q2026s3_gp"
      ]
     },
     {
@@ -1312,7 +1472,7 @@
       "q2025s4_op",
       "q2026s1_op",
       "q2026s2_op",
-      null
+      "q2026s3_op"
      ]
     },
     {
@@ -1325,7 +1485,7 @@
       "q2025s4_ni",
       "q2026s1_ni",
       "q2026s2_ni",
-      null
+      "q2026s3_ni"
      ]
     },
     {
@@ -1338,7 +1498,7 @@
       "q2025s4_eps",
       "q2026s1_eps",
       "q2026s2_eps",
-      null
+      "q2026s3_eps"
      ]
     },
     {
@@ -1351,7 +1511,7 @@
       "q2025s4_gm",
       "q2026s1_gm",
       "q2026s2_gm",
-      null
+      "q2026s3_gm"
      ]
     },
     {
@@ -1364,7 +1524,7 @@
       "q2025s4_opm",
       "q2026s1_opm",
       "q2026s2_opm",
-      null
+      "q2026s3_opm"
      ]
     },
     {
@@ -1377,7 +1537,7 @@
       "q2025s4_npm",
       "q2026s1_npm",
       "q2026s2_npm",
-      null
+      "q2026s3_npm"
      ]
     },
     {
@@ -1390,7 +1550,7 @@
       "q2025s4_yoy",
       "q2026s1_yoy",
       "q2026s2_yoy",
-      null
+      "q2026s3_yoy"
      ]
     },
     {
@@ -1403,7 +1563,7 @@
       "q2025s4_qoq",
       "q2026s1_qoq",
       "q2026s2_qoq",
-      null
+      "q2026s3_qoq"
      ]
     }
    ]
@@ -1413,7 +1573,8 @@
    "cols": [
     "2023",
     "2024",
-    "2025"
+    "2025",
+    "2026 前 3 季"
    ],
    "rows": [
     {
@@ -1421,7 +1582,8 @@
      "cells": [
       "y2023_rev",
       "y2024_rev",
-      "y2025_rev"
+      "y2025_rev",
+      "cy_rev"
      ]
     },
     {
@@ -1429,7 +1591,8 @@
      "cells": [
       "y2023_ni",
       "y2024_ni",
-      "y2025_ni"
+      "y2025_ni",
+      "cy_ni"
      ]
     },
     {
@@ -1437,7 +1600,8 @@
      "cells": [
       "y2023_eps",
       "y2024_eps",
-      "y2025_eps"
+      "y2025_eps",
+      "eps_q"
      ]
     },
     {
@@ -1445,7 +1609,8 @@
      "cells": [
       "y2023_epsg",
       "y2024_epsg",
-      "y2025_epsg"
+      "y2025_epsg",
+      "cy_epsg"
      ]
     }
    ]
@@ -1465,13 +1630,13 @@
     {
      "label": "股價淨值比",
      "cells": [
-      null
+      "pbr"
      ]
     },
     {
      "label": "ROE（近四季）",
      "cells": [
-      null
+      "roe_ttm"
      ]
     },
     {

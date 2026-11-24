@@ -1317,6 +1317,136 @@
    "text": "40%",
    "src": "https://mopsov.twse.com.tw/nas/STR/234720261111M001.pdf",
    "period": "Y2610"
+  },
+  {
+   "id": "cy_rev",
+   "sec": "年度",
+   "label": "2026 前 3 季累計營收",
+   "value": 5639.75067,
+   "unit": " 億元",
+   "text": "5639.8 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026 前 3 季"
+  },
+  {
+   "id": "cy_ni",
+   "sec": "年度",
+   "label": "2026 前 3 季累計歸屬母公司淨利",
+   "value": 117.4722,
+   "unit": " 億元",
+   "text": "117.5 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026 前 3 季"
+  },
+  {
+   "id": "cy_epsg",
+   "sec": "年度",
+   "label": "2026 前 3 季累計 EPS 年增",
+   "value": 105.847953,
+   "unit": "%",
+   "text": "+105.8%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026 前 3 季"
+  },
+  {
+   "id": "q2026s3_rev",
+   "sec": "季度",
+   "label": "2026Q3 營收",
+   "value": 2366.07466,
+   "unit": " 億元",
+   "text": "2366.07 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_gp",
+   "sec": "季度",
+   "label": "2026Q3 營業毛利",
+   "value": 82.48963,
+   "unit": " 億元",
+   "text": "82.49 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_op",
+   "sec": "季度",
+   "label": "2026Q3 營業利益",
+   "value": 61.40734,
+   "unit": " 億元",
+   "text": "61.41 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_ni",
+   "sec": "季度",
+   "label": "2026Q3 歸屬母公司淨利",
+   "value": 48.83485,
+   "unit": " 億元",
+   "text": "48.83 億元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_eps",
+   "sec": "季度",
+   "label": "2026Q3 EPS",
+   "value": 2.92,
+   "unit": " 元",
+   "text": "2.92 元",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_gm",
+   "sec": "季度",
+   "label": "2026Q3 毛利率",
+   "value": 3.486349,
+   "unit": "%",
+   "text": "3.5%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_opm",
+   "sec": "季度",
+   "label": "2026Q3 營益率",
+   "value": 2.595326,
+   "unit": "%",
+   "text": "2.6%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_npm",
+   "sec": "季度",
+   "label": "2026Q3 淨利率",
+   "value": 2.063961,
+   "unit": "%",
+   "text": "2.1%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_yoy",
+   "sec": "季度",
+   "label": "2026Q3 營收年增",
+   "value": 136.075053,
+   "unit": "%",
+   "text": "+136.1%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
+  },
+  {
+   "id": "q2026s3_qoq",
+   "sec": "季度",
+   "label": "2026Q3 營收季增",
+   "value": 17.709329,
+   "unit": "%",
+   "text": "+17.7%",
+   "src": "https://mopsov.twse.com.tw/mops/web/t163sb04",
+   "period": "2026Q3"
   }
  ],
  "tables": {
@@ -1343,7 +1473,7 @@
       "q2025s4_rev",
       "q2026s1_rev",
       "q2026s2_rev",
-      null
+      "q2026s3_rev"
      ]
     },
     {
@@ -1356,7 +1486,7 @@
       "q2025s4_gp",
       "q2026s1_gp",
       "q2026s2_gp",
-      null
+      "q2026s3_gp"
      ]
     },
     {
@@ -1369,7 +1499,7 @@
       "q2025s4_op",
       "q2026s1_op",
       "q2026s2_op",
-      null
+      "q2026s3_op"
      ]
     },
     {
@@ -1382,7 +1512,7 @@
       "q2025s4_ni",
       "q2026s1_ni",
       "q2026s2_ni",
-      null
+      "q2026s3_ni"
      ]
     },
     {
@@ -1395,7 +1525,7 @@
       "q2025s4_eps",
       "q2026s1_eps",
       "q2026s2_eps",
-      null
+      "q2026s3_eps"
      ]
     },
     {
@@ -1408,7 +1538,7 @@
       "q2025s4_gm",
       "q2026s1_gm",
       "q2026s2_gm",
-      null
+      "q2026s3_gm"
      ]
     },
     {
@@ -1421,7 +1551,7 @@
       "q2025s4_opm",
       "q2026s1_opm",
       "q2026s2_opm",
-      null
+      "q2026s3_opm"
      ]
     },
     {
@@ -1434,7 +1564,7 @@
       "q2025s4_npm",
       "q2026s1_npm",
       "q2026s2_npm",
-      null
+      "q2026s3_npm"
      ]
     },
     {
@@ -1447,7 +1577,7 @@
       "q2025s4_yoy",
       "q2026s1_yoy",
       "q2026s2_yoy",
-      null
+      "q2026s3_yoy"
      ]
     },
     {
@@ -1460,7 +1590,7 @@
       "q2025s4_qoq",
       "q2026s1_qoq",
       "q2026s2_qoq",
-      null
+      "q2026s3_qoq"
      ]
     }
    ]
