@@ -1,0 +1,195 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"川普政府擬對16個經濟體祭出新關稅與301調查\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-25\",\n      \"who\": \"川普政府\",\n      \"event\": \"川普政府擬對16個經濟體祭出新關稅與301調查\",\n      \"mechanism\": \"關稅威脅引發貿易戰擔憂，導致外資拋售權值股與科技股。\",\n      \"industry\": \"晶圓代工與製造、伺服器與品牌組裝、網通與衛星\",\n      \"tw_link\": \"外資匯出、權值股領跌\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"伺服器與品牌組裝\",\n        \"網通與衛星\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Trump\",\n        \"Tariffs\",\n        \"301 Investigation\",\n        \"川普\",\n        \"關稅\",\n        \"貿易戰\",\n        \"產能過剩\",\n        \"トランプ\",\n        \"関税\",\n        \"301条\"\n      ],\n      \"evidence\": [\n        \"D32\",\n        \"D34\",\n        \"D48\",\n        \"D53\",\n        \"P1189\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"drill\": [\n        \"Trump 301 investigation Taiwan\",\n        \"川普 301調查 關稅\",\n        \"トランプ 関税 台湾 301条\",\n        \"Trump tariffs excess capacity\"\n      ]\n    },\n    {\n      \"title\": \"AI晶片股拋售潮與輝達、Anthropic回檔\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-25\",\n      \"who\": \"輝達、Anthropic\",\n      \"event\": \"AI晶片股拋售潮與輝達、Anthropic回檔\",\n      \"mechanism\": \"AI行情退燒，資金從高估值科技股撤出，引發全球科技股連鎖反應。\",\n      \"industry\": \"晶圓代工與製造、IC設計、伺服器與品牌組裝、散熱與液冷\",\n      \"tw_link\": \"台積電ADR與AI供應鏈連動大跌\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"IC設計\",\n        \"伺服器與品牌組裝\",\n        \"散熱與液冷\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Nvidia\",\n        \"Anthropic\",\n        \"AI selloff\",\n        \"輝達\",\n        \"AI泡沫\",\n        \"科技股\",\n        \"エヌビディア\",\n        \"AI売り\"\n      ],\n      \"evidence\": [\n        \"D1\",\n        \"D6\",\n        \"D16\",\n        \"D18\",\n        \"D41\",\n        \"D78\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"drill\": [\n        \"Nvidia Anthropic selloff\",\n        \"輝達 AI 拋售\",\n        \"エヌビディア AI 売り\",\n        \"AI bubble concerns\"\n      ]\n    },\n    {\n      \"title\": \"市場對通膨與利率預期的擔憂\",\n      \"layer\": \"表面\",\n      \"event_date\": \"2026-11-25\",\n      \"who\": \"市場投資人\",\n      \"event\": \"市場對通膨與利率預期的擔憂\",\n      \"mechanism\": \"總體經濟不確定性導致避險情緒升溫。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"資金流出亞洲市場\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"Inflation\",\n        \"Interest rates\",\n        \"通膨\",\n        \"利率\",\n        \"インフレ\",\n        \"金利\"\n      ],\n      \"evidence\": [\n        \"D2\",\n        \"D35\",\n        \"D76\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\",\n        \"ja\"\n      ],\n      \"why_root\": \"通膨與利率預期是市場對川普政策與AI泡沫反應的背景因素，加劇了避險情緒。\",\n      \"drill\": [\n        \"Inflation interest rate market impact\",\n        \"通膨 利率 股市影響\",\n        \"インフレ 金利 市場影響\"\n      ]\n    },\n    {\n      \"title\": \"證交所與金管會祭出穩定市場措施\",\n      \"layer\": \"政策回應\",\n      \"event_date\": \"2026-11-25\",\n      \"who\": \"證交所、金管會\",\n      \"event\": \"證交所與金管會祭出穩定市場措施\",\n      \"mechanism\": \"透過調降保證金、鼓勵法說會等措施穩定信心。\",\n      \"industry\": \"全市場\",\n      \"tw_link\": \"緩解恐慌性賣壓\",\n      \"tw_sectors\": [\n        \"全市場\"\n      ],\n      \"direction\": \"漲\",\n      \"keywords\": [\n        \"證交所\",\n        \"庫藏股\",\n        \"擔保維持率\",\n        \"穩定市場\",\n        \"金管會\",\n        \"反詐騙\"\n      ],\n      \"evidence\": [\n        \"P1226\",\n        \"P1227\",\n        \"P1230\"\n      ],\n      \"langs\": [\n        \"zh\"\n      ],\n      \"drill\": [\n        \"證交所 穩定市場措施\",\n        \"金管會 庫藏股\",\n        \"Taiwan stock market stabilization measures\"\n      ]\n    }\n  ],\n  \"summary\": \"昨晚美股受川普新關稅計畫與AI類股拋售潮影響，預期傳導到今天台股，將持續面臨科技股與權值股的賣壓，市場關注關稅對供應鏈的實質衝擊。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "川普政府擬對16個經濟體祭出新關稅與301調查",
+    "layer": "根因",
+    "event_date": "2026-11-25",
+    "who": "川普政府",
+    "event": "川普政府擬對16個經濟體祭出新關稅與301調查",
+    "mechanism": "關稅威脅引發貿易戰擔憂，導致外資拋售權值股與科技股。",
+    "industry": "晶圓代工與製造、伺服器與品牌組裝、網通與衛星",
+    "tw_link": "外資匯出、權值股領跌",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "伺服器與品牌組裝",
+     "網通與衛星"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Trump",
+     "Tariffs",
+     "301 Investigation",
+     "川普",
+     "關稅",
+     "貿易戰",
+     "產能過剩",
+     "トランプ",
+     "関税",
+     "301条"
+    ],
+    "evidence": [
+     "D32",
+     "D34",
+     "D48",
+     "D53",
+     "P1189"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "drill": [
+     "Trump 301 investigation Taiwan",
+     "川普 301調查 關稅",
+     "トランプ 関税 台湾 301条",
+     "Trump tariffs excess capacity"
+    ]
+   },
+   {
+    "title": "AI晶片股拋售潮與輝達、Anthropic回檔",
+    "layer": "根因",
+    "event_date": "2026-11-25",
+    "who": "輝達、Anthropic",
+    "event": "AI晶片股拋售潮與輝達、Anthropic回檔",
+    "mechanism": "AI行情退燒，資金從高估值科技股撤出，引發全球科技股連鎖反應。",
+    "industry": "晶圓代工與製造、IC設計、伺服器與品牌組裝、散熱與液冷",
+    "tw_link": "台積電ADR與AI供應鏈連動大跌",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "IC設計",
+     "伺服器與品牌組裝",
+     "散熱與液冷"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Nvidia",
+     "Anthropic",
+     "AI selloff",
+     "輝達",
+     "AI泡沫",
+     "科技股",
+     "エヌビディア",
+     "AI売り"
+    ],
+    "evidence": [
+     "D1",
+     "D6",
+     "D16",
+     "D18",
+     "D41",
+     "D78"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "drill": [
+     "Nvidia Anthropic selloff",
+     "輝達 AI 拋售",
+     "エヌビディア AI 売り",
+     "AI bubble concerns"
+    ]
+   },
+   {
+    "title": "市場對通膨與利率預期的擔憂",
+    "layer": "表面",
+    "event_date": "2026-11-25",
+    "who": "市場投資人",
+    "event": "市場對通膨與利率預期的擔憂",
+    "mechanism": "總體經濟不確定性導致避險情緒升溫。",
+    "industry": "全市場",
+    "tw_link": "資金流出亞洲市場",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "Inflation",
+     "Interest rates",
+     "通膨",
+     "利率",
+     "インフレ",
+     "金利"
+    ],
+    "evidence": [
+     "D2",
+     "D35",
+     "D76"
+    ],
+    "langs": [
+     "zh",
+     "en",
+     "ja"
+    ],
+    "why_root": "通膨與利率預期是市場對川普政策與AI泡沫反應的背景因素，加劇了避險情緒。",
+    "drill": [
+     "Inflation interest rate market impact",
+     "通膨 利率 股市影響",
+     "インフレ 金利 市場影響"
+    ]
+   },
+   {
+    "title": "證交所與金管會祭出穩定市場措施",
+    "layer": "政策回應",
+    "event_date": "2026-11-25",
+    "who": "證交所、金管會",
+    "event": "證交所與金管會祭出穩定市場措施",
+    "mechanism": "透過調降保證金、鼓勵法說會等措施穩定信心。",
+    "industry": "全市場",
+    "tw_link": "緩解恐慌性賣壓",
+    "tw_sectors": [
+     "全市場"
+    ],
+    "direction": "漲",
+    "keywords": [
+     "證交所",
+     "庫藏股",
+     "擔保維持率",
+     "穩定市場",
+     "金管會",
+     "反詐騙"
+    ],
+    "evidence": [
+     "P1226",
+     "P1227",
+     "P1230"
+    ],
+    "langs": [
+     "zh"
+    ],
+    "drill": [
+     "證交所 穩定市場措施",
+     "金管會 庫藏股",
+     "Taiwan stock market stabilization measures"
+    ]
+   }
+  ],
+  "summary": "昨晚美股受川普新關稅計畫與AI類股拋售潮影響，預期傳導到今天台股，將持續面臨科技股與權值股的賣壓，市場關注關稅對供應鏈的實質衝擊。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmpk3ighi02.txt",
+  "附檔": [],
+  "耗時秒": 126.5,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.1-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 94974,
+   "prompt_tokens": 30545,
+   "output_tokens": 1516,
+   "thinking_tokens": 62913
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1126_synth2",
+  "ok": true
+ }
+}
