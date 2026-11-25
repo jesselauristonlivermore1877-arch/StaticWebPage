@@ -384,7 +384,7 @@
     "e429": 1
    },
    "gemini-2.5-flash": {
-    "req": 3,
+    "req": 4,
     "tok": 0
    },
    "gemini-omni-1.2-flash": {
@@ -413,24 +413,24 @@
     "e429": 1
    },
    "gemini-3.5-flash-lite": {
-    "req": 108,
-    "tok": 2056087
+    "req": 127,
+    "tok": 2234463
    },
    "gemini-3.1-flash-lite": {
-    "req": 30,
-    "tok": 1395982
+    "req": 40,
+    "tok": 1664523
    },
    "gemini-2.5-flash-lite": {
-    "req": 2,
+    "req": 3,
     "tok": 0
    },
    "gemini-flash-lite-latest": {
-    "req": 5,
+    "req": 11,
     "tok": 22862
    },
    "gemini-3.1-flash-lite-preview": {
-    "req": 4,
-    "tok": 0
+    "req": 10,
+    "tok": 85835
    }
   }
  },
