@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-26 05:47",
+ "asof": "2026-11-26 07:22",
  "first_stale": {
   "data/registry/officials_src.json|名單查證": "2026-11-24",
   "docs/data/pcf/00989A|主動 ETF 持股 00989A": "2026-11-26",
@@ -384,11 +384,11 @@
   {
    "name": "正式站巡檢",
    "path": "docs/data/site_smoke.json",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 site_smoke.yml",
    "note": ""
@@ -504,11 +504,11 @@
   {
    "name": "產業動向",
    "path": "data/industry_notes",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "ev",
    "allow": 5,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 ir_report_watch",
    "note": ""
@@ -2356,9 +2356,9 @@
    "lag_td": 0,
    "days": 1,
    "stale": false,
-   "blocked": true,
+   "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
-   "note": "今天核對沒過被擋下（上次通過 11-25）：3532 已達條件標記不一致",
+   "note": "",
    "edm": true
   },
   {
