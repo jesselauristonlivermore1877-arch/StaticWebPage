@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-26 03:09",
+ "asof": "2026-11-26 05:30",
  "first_stale": {
   "data/registry/officials_src.json|名單查證": "2026-11-24",
   "docs/data/pick_edm.json#maint_big|EDM maint_big〔maint_big〕": "2026-11-25",
@@ -2255,11 +2255,11 @@
   {
    "name": "EDM 可轉債・可轉債〔cb_fl〕",
    "path": "docs/data/pick_edm.json#cb_fl",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "freq": "td",
    "allow": 1,
-   "lag_td": 1,
-   "days": 2,
+   "lag_td": 0,
+   "days": 1,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（cb_edm）",
@@ -2269,11 +2269,11 @@
   {
    "name": "EDM 可轉債・可轉債〔cb_new〕",
    "path": "docs/data/pick_edm.json#cb_new",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "freq": "td",
    "allow": 1,
-   "lag_td": 1,
-   "days": 2,
+   "lag_td": 0,
+   "days": 1,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（cb_edm）",
@@ -2893,7 +2893,7 @@
    "stale": false,
    "blocked": true,
    "owner": "雲端 root_cause.yml＋雲端 daily.yml（每日戰情更新） tools/pick_edm.py（root_cause_edm）",
-   "note": "今天核對沒過被擋下（上次通過 11-16）：測試設備與介面 漲跌中位數：卡上 -8.78／重算 -8.31；CCL與電子材料 漲跌中位數：卡上 -8.62／重算 -8.77",
+   "note": "今天核對沒過被擋下（上次通過 11-16）：記憶體 外資（億）：卡上 -55.51／重算 -51.71；測試設備與介面 漲跌中位數：卡上 -8.78／重算 -8.31",
    "edm": true
   },
   {
@@ -2913,11 +2913,11 @@
   {
    "name": "EDM 產業動向・AI 研究報告・產業研究〔res〕",
    "path": "docs/data/pick_edm.json#res",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
