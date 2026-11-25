@@ -1,9 +1,9 @@
 {
  "date": "2026-11-25",
  "data_date": "2026-11-25",
- "made": "2026-11-25T18:53+08:00",
- "built_at": "2026-11-25T18:42:00+08:00",
- "run": "45597210514",
+ "made": "2026-11-25T21:33+08:00",
+ "built_at": "2026-11-25T21:21:57+08:00",
+ "run": "45622554390",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
   "web_data.market.taiex": "2026-11-25",
@@ -12,7 +12,7 @@
   "web_data.breadth": "2026-11-25",
   "web_data.orders": "2026-11-25",
   "web_data.inst.summary": "2026-11-25",
-  "web_data.market.margin_balance": "2026-11-24",
+  "web_data.market.margin_balance": "2026-11-25",
   "web_data.elecfin": "2026-11-25",
   "web_data.screen.sector_score": "2026-11-25",
   "docs/data/rrg.json": "2026-11-25",
@@ -20,9 +20,7 @@
   "docs/data/disposal.json": "2026-11-25",
   "docs/data/etf_flow.json": "2026-11-24"
  },
- "skipped": {
-  "web_data.market.margin_balance": "來源資料日 2026-11-24 ≠ 資料日 2026-11-25"
- },
+ "skipped": {},
  "facts": [
   {
    "id": "taiex_close",
@@ -223,6 +221,15 @@
    "src": "web_data.inst.summary"
   },
   {
+   "id": "margin_twse",
+   "sec": "信用交易",
+   "label": "上市融資餘額",
+   "value": 4341.4,
+   "unit": " 億元",
+   "text": "4341.4 億元",
+   "src": "web_data.market.margin_balance"
+  },
+  {
    "id": "elecfin",
    "sec": "族群",
    "label": "電金比（電子÷金融）",
@@ -325,18 +332,18 @@
    "id": "etf_net",
    "sec": "主動式 ETF",
    "label": "主動式 ETF 合計淨買賣（含申購贖回）（最近一個有資料的交易日）",
-   "value": 271.7,
+   "value": 273.3,
    "unit": " 億元",
-   "text": "+271.7 億元",
+   "text": "+273.3 億元",
    "src": "docs/data/etf_flow.json"
   },
   {
    "id": "etf_xnet",
    "sec": "主動式 ETF",
    "label": "主動式 ETF 經理人自己調整持股的淨額（扣申購贖回）（最近一個有資料的交易日）",
-   "value": 128.4,
+   "value": 129.9,
    "unit": " 億元",
-   "text": "+128.4 億元",
+   "text": "+129.9 億元",
    "src": "docs/data/etf_flow.json"
   },
   {
