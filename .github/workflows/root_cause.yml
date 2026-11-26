@@ -181,5 +181,11 @@ jobs:
           git add data/gemini_quota data/root_cause docs/data/root_cause 2>/dev/null || true
           if git diff --staged --quiet; then echo "沒有變動"; exit 0; fi
           git commit -qm "data: 根因追蹤（${{ inputs.trigger || '排程' }}${FULL_SCHED:+・盤後完整班}${{ inputs.resanitize && '・敏感字關卡重跑' || '' }}${US_ONLY:+・盤前只看美股}${OFFDAY:+・非交易日官方政策班}）$(TZ=Asia/Taipei date '+%F %H:%M')：$CASES"
-          for i in 1 2 3 4; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep $((2 ** i)); done
+          # 11-26【新】：15:52 班跟別班同時改 data/root_cause/px/NQ.json → rebase 衝突、整班失敗（結果與 TG 旗標都沒存）。
+          #   這班產出的檔以這班為準（rebase 時 -X theirs＝套用中的本班 commit）；還是失敗就 abort 再重試，不留半套狀態。
+          for i in 1 2 3 4; do
+            if git pull -q --rebase -X theirs origin main && git push -q origin HEAD:main; then exit 0; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((2 ** i))
+          done
           exit 1
