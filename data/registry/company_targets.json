@@ -1,5 +1,5 @@
 {
-"asof": "2026-11-26",
+"asof": "2026-11-27",
 "note": "本機每週查這份名單裡公司的上市狀態與負責人（台灣只查 status），格式見 TODO 2026-09-28",
 "companies": [
 {
@@ -14,13 +14,13 @@
 },
 {
 "cty": "us",
-"ticker": "GOOGL",
-"name": "Alphabet Inc."
+"ticker": "NVDA",
+"name": "NVIDIA Corporation"
 },
 {
 "cty": "us",
-"ticker": "NVDA",
-"name": "NVIDIA Corporation"
+"ticker": "GOOGL",
+"name": "Alphabet Inc."
 },
 {
 "cty": "us",
@@ -34,11 +34,6 @@
 },
 {
 "cty": "us",
-"ticker": "AVGO",
-"name": "Broadcom Inc."
-},
-{
-"cty": "us",
 "ticker": "META",
 "name": "Meta Platforms, Inc."
 },
@@ -49,13 +44,18 @@
 },
 {
 "cty": "us",
-"ticker": "BRK-A",
-"name": "Berkshire Hathaway Inc."
+"ticker": "AVGO",
+"name": "Broadcom Inc."
 },
 {
 "cty": "us",
 "ticker": "LLY",
 "name": "Eli Lilly and Company"
+},
+{
+"cty": "us",
+"ticker": "BRK-A",
+"name": "Berkshire Hathaway Inc."
 },
 {
 "cty": "us",
@@ -79,23 +79,23 @@
 },
 {
 "cty": "us",
-"ticker": "AMD",
-"name": "Advanced Micro Devices, Inc."
-},
-{
-"cty": "us",
 "ticker": "MU",
 "name": "Micron Technology, Inc."
 },
 {
 "cty": "us",
-"ticker": "XOM",
-"name": "ExxonMobil Holdings Corporation"
+"ticker": "AMD",
+"name": "Advanced Micro Devices, Inc."
 },
 {
 "cty": "us",
 "ticker": "JNJ",
 "name": "Johnson & Johnson"
+},
+{
+"cty": "us",
+"ticker": "XOM",
+"name": "ExxonMobil Holdings Corporation"
 },
 {
 "cty": "us",
@@ -129,13 +129,13 @@
 },
 {
 "cty": "us",
-"ticker": "CSCO",
-"name": "Cisco Systems, Inc."
+"ticker": "PLTR",
+"name": "Palantir Technologies Inc."
 },
 {
 "cty": "us",
-"ticker": "PLTR",
-"name": "Palantir Technologies Inc."
+"ticker": "CSCO",
+"name": "Cisco Systems, Inc."
 },
 {
 "cty": "us",
@@ -169,11 +169,6 @@
 },
 {
 "cty": "us",
-"ticker": "PM",
-"name": "Philip Morris International Inc."
-},
-{
-"cty": "us",
 "ticker": "PANW",
 "name": "Palo Alto Networks, Inc."
 },
@@ -184,8 +179,8 @@
 },
 {
 "cty": "us",
-"ticker": "MS",
-"name": "Morgan Stanley"
+"ticker": "PM",
+"name": "Philip Morris International Inc."
 },
 {
 "cty": "us",
@@ -194,23 +189,13 @@
 },
 {
 "cty": "us",
+"ticker": "MS",
+"name": "Morgan Stanley"
+},
+{
+"cty": "us",
 "ticker": "TMO",
 "name": "Thermo Fisher Scientific Inc."
-},
-{
-"cty": "us",
-"ticker": "TXN",
-"name": "Texas Instruments Incorporated"
-},
-{
-"cty": "us",
-"ticker": "AMAT",
-"name": "Applied Materials, Inc."
-},
-{
-"cty": "us",
-"ticker": "WFC",
-"name": "Wells Fargo & Company"
 },
 {
 "cty": "us",
@@ -224,18 +209,23 @@
 },
 {
 "cty": "us",
+"ticker": "AMAT",
+"name": "Applied Materials, Inc."
+},
+{
+"cty": "us",
+"ticker": "TXN",
+"name": "Texas Instruments Incorporated"
+},
+{
+"cty": "us",
 "ticker": "NFLX",
 "name": "Netflix, Inc."
 },
 {
 "cty": "us",
-"ticker": "CRWD",
-"name": "CrowdStrike Holdings, Inc."
-},
-{
-"cty": "us",
-"ticker": "GS",
-"name": "The Goldman Sachs Group, Inc."
+"ticker": "WFC",
+"name": "Wells Fargo & Company"
 },
 {
 "cty": "us",
@@ -244,13 +234,13 @@
 },
 {
 "cty": "us",
-"ticker": "IBM",
-"name": "International Business Machines Corporation"
+"ticker": "GS",
+"name": "The Goldman Sachs Group, Inc."
 },
 {
 "cty": "us",
-"ticker": "ANET",
-"name": "Arista Networks, Inc."
+"ticker": "IBM",
+"name": "International Business Machines Corporation"
 },
 {
 "cty": "us",
@@ -259,8 +249,8 @@
 },
 {
 "cty": "us",
-"ticker": "AXP",
-"name": "American Express Company"
+"ticker": "CRWD",
+"name": "CrowdStrike Holdings, Inc."
 },
 {
 "cty": "us",
@@ -269,8 +259,13 @@
 },
 {
 "cty": "us",
-"ticker": "VZ",
-"name": "Verizon Communications Inc."
+"ticker": "AXP",
+"name": "American Express Company"
+},
+{
+"cty": "us",
+"ticker": "ANET",
+"name": "Arista Networks, Inc."
 },
 {
 "cty": "us",
@@ -284,8 +279,18 @@
 },
 {
 "cty": "us",
+"ticker": "VZ",
+"name": "Verizon Communications Inc."
+},
+{
+"cty": "us",
 "ticker": "GEV",
 "name": "GE Vernova Inc."
+},
+{
+"cty": "us",
+"ticker": "DELL",
+"name": "Dell Technologies Inc."
 },
 {
 "cty": "us",
@@ -304,13 +309,13 @@
 },
 {
 "cty": "us",
-"ticker": "DELL",
-"name": "Dell Technologies Inc."
+"ticker": "QCOM",
+"name": "QUALCOMM Incorporated"
 },
 {
 "cty": "us",
-"ticker": "TMUS",
-"name": "T-Mobile US, Inc."
+"ticker": "APH",
+"name": "Amphenol Corporation"
 },
 {
 "cty": "us",
@@ -324,18 +329,13 @@
 },
 {
 "cty": "us",
-"ticker": "APH",
-"name": "Amphenol Corporation"
-},
-{
-"cty": "us",
 "ticker": "BLK",
 "name": "BlackRock, Inc."
 },
 {
 "cty": "us",
-"ticker": "ADI",
-"name": "Analog Devices, Inc."
+"ticker": "TMUS",
+"name": "T-Mobile US, Inc."
 },
 {
 "cty": "us",
@@ -344,23 +344,13 @@
 },
 {
 "cty": "us",
-"ticker": "QCOM",
-"name": "QUALCOMM Incorporated"
-},
-{
-"cty": "us",
 "ticker": "DE",
 "name": "Deere & Company"
 },
 {
 "cty": "us",
-"ticker": "COP",
-"name": "ConocoPhillips"
-},
-{
-"cty": "us",
-"ticker": "SCHW",
-"name": "The Charles Schwab Corporation"
+"ticker": "CRM",
+"name": "Salesforce, Inc."
 },
 {
 "cty": "us",
@@ -369,8 +359,13 @@
 },
 {
 "cty": "us",
-"ticker": "DHR",
-"name": "Danaher Corporation"
+"ticker": "SCHW",
+"name": "The Charles Schwab Corporation"
+},
+{
+"cty": "us",
+"ticker": "ADI",
+"name": "Analog Devices, Inc."
 },
 {
 "cty": "us",
@@ -379,13 +374,18 @@
 },
 {
 "cty": "us",
-"ticker": "T",
-"name": "AT&T Inc."
+"ticker": "DHR",
+"name": "Danaher Corporation"
 },
 {
 "cty": "us",
-"ticker": "CRM",
-"name": "Salesforce, Inc."
+"ticker": "COP",
+"name": "ConocoPhillips"
+},
+{
+"cty": "us",
+"ticker": "T",
+"name": "AT&T Inc."
 },
 {
 "cty": "us",
@@ -399,16 +399,6 @@
 },
 {
 "cty": "us",
-"ticker": "PGR",
-"name": "The Progressive Corporation"
-},
-{
-"cty": "us",
-"ticker": "UBER",
-"name": "Uber Technologies, Inc."
-},
-{
-"cty": "us",
 "ticker": "VRTX",
 "name": "Vertex Pharmaceuticals Incorporated"
 },
@@ -419,8 +409,23 @@
 },
 {
 "cty": "us",
+"ticker": "PGR",
+"name": "The Progressive Corporation"
+},
+{
+"cty": "us",
+"ticker": "UBER",
+"name": "Uber Technologies, Inc."
+},
+{
+"cty": "us",
 "ticker": "SPGI",
 "name": "S&P Global Inc."
+},
+{
+"cty": "us",
+"ticker": "LOW",
+"name": "Lowe's Companies, Inc."
 },
 {
 "cty": "us",
@@ -434,13 +439,8 @@
 },
 {
 "cty": "us",
-"ticker": "LOW",
-"name": "Lowe's Companies, Inc."
-},
-{
-"cty": "us",
-"ticker": "MCK",
-"name": "McKesson Corporation"
+"ticker": "SYK",
+"name": "Stryker Corporation"
 },
 {
 "cty": "us",
@@ -449,8 +449,8 @@
 },
 {
 "cty": "us",
-"ticker": "PLD",
-"name": "Prologis, Inc."
+"ticker": "APP",
+"name": "AppLovin Corporation"
 },
 {
 "cty": "us",
@@ -459,8 +459,13 @@
 },
 {
 "cty": "us",
-"ticker": "SYK",
-"name": "Stryker Corporation"
+"ticker": "MCK",
+"name": "McKesson Corporation"
+},
+{
+"cty": "us",
+"ticker": "PLD",
+"name": "Prologis, Inc."
 },
 {
 "cty": "us",
@@ -469,18 +474,8 @@
 },
 {
 "cty": "us",
-"ticker": "APP",
-"name": "AppLovin Corporation"
-},
-{
-"cty": "us",
 "ticker": "SCCO",
 "name": "Southern Copper Corporation"
-},
-{
-"cty": "us",
-"ticker": "NEMCL",
-"name": "Newmont Corporation"
 },
 {
 "cty": "us",
@@ -489,13 +484,18 @@
 },
 {
 "cty": "us",
-"ticker": "CME",
-"name": "CME Group Inc."
+"ticker": "NEMCL",
+"name": "Newmont Corporation"
 },
 {
 "cty": "us",
 "ticker": "PH",
 "name": "Parker-Hannifin Corporation"
+},
+{
+"cty": "us",
+"ticker": "CME",
+"name": "CME Group Inc."
 },
 {
 "cty": "us",
@@ -539,18 +539,8 @@
 },
 {
 "cty": "jp",
-"ticker": "8035.T",
-"name": "Tokyo Electron Limited"
-},
-{
-"cty": "jp",
 "ticker": "8058.T",
 "name": "Mitsubishi Corporation"
-},
-{
-"cty": "jp",
-"ticker": "8411.T",
-"name": "Mizuho Financial Group, Inc."
 },
 {
 "cty": "jp",
@@ -559,8 +549,13 @@
 },
 {
 "cty": "jp",
-"ticker": "9984.T",
-"name": "SoftBank Group Corp."
+"ticker": "8035.T",
+"name": "Tokyo Electron Limited"
+},
+{
+"cty": "jp",
+"ticker": "8411.T",
+"name": "Mizuho Financial Group, Inc."
 },
 {
 "cty": "jp",
@@ -571,6 +566,11 @@
 "cty": "jp",
 "ticker": "8766.T",
 "name": "Tokio Marine Holdings, Inc."
+},
+{
+"cty": "jp",
+"ticker": "9984.T",
+"name": "SoftBank Group Corp."
 },
 {
 "cty": "jp",
@@ -589,13 +589,13 @@
 },
 {
 "cty": "jp",
-"ticker": "4519.T",
-"name": "Chugai Pharmaceutical Co., Ltd."
+"ticker": "285A.T",
+"name": "Kioxia Holdings Corporation"
 },
 {
 "cty": "jp",
-"ticker": "285A.T",
-"name": "Kioxia Holdings Corporation"
+"ticker": "4519.T",
+"name": "Chugai Pharmaceutical Co., Ltd."
 },
 {
 "cty": "jp",
@@ -609,13 +609,13 @@
 },
 {
 "cty": "jp",
-"ticker": "9433.T",
-"name": "KDDI Corporation"
+"ticker": "7974.T",
+"name": "Nintendo Co., Ltd."
 },
 {
 "cty": "jp",
-"ticker": "7974.T",
-"name": "Nintendo Co., Ltd."
+"ticker": "9433.T",
+"name": "KDDI Corporation"
 },
 {
 "cty": "jp",
@@ -629,13 +629,13 @@
 },
 {
 "cty": "jp",
-"ticker": "7011.T",
-"name": "Mitsubishi Heavy Industries, Ltd."
+"ticker": "6503.T",
+"name": "Mitsubishi Electric Corporation"
 },
 {
 "cty": "jp",
-"ticker": "6503.T",
-"name": "Mitsubishi Electric Corporation"
+"ticker": "7011.T",
+"name": "Mitsubishi Heavy Industries, Ltd."
 },
 {
 "cty": "jp",
@@ -649,8 +649,8 @@
 },
 {
 "cty": "jp",
-"ticker": "8002.T",
-"name": "Marubeni Corporation"
+"ticker": "8725.T",
+"name": "MS&AD Insurance Group Holdings, Inc."
 },
 {
 "cty": "kr",
@@ -714,11 +714,6 @@
 },
 {
 "cty": "kr",
-"ticker": "086790.KS",
-"name": "Hana Financial Group Inc."
-},
-{
-"cty": "kr",
 "ticker": "006400.KS",
 "name": "Samsung SDI Co., Ltd."
 },
@@ -726,6 +721,11 @@
 "cty": "kr",
 "ticker": "012450.KS",
 "name": "Hanwha Aerospace Co., Ltd."
+},
+{
+"cty": "kr",
+"ticker": "086790.KS",
+"name": "Hana Financial Group Inc."
 },
 {
 "cty": "kr",
@@ -739,23 +739,23 @@
 },
 {
 "cty": "kr",
-"ticker": "329180.KS",
-"name": "HD Hyundai Heavy Industries Co., Ltd."
-},
-{
-"cty": "kr",
 "ticker": "035420.KS",
 "name": "NAVER Corporation"
 },
 {
 "cty": "kr",
-"ticker": "034730.KS",
-"name": "SK Inc."
+"ticker": "329180.KS",
+"name": "HD Hyundai Heavy Industries Co., Ltd."
 },
 {
 "cty": "kr",
 "ticker": "066570.KS",
 "name": "LG Electronics Inc."
+},
+{
+"cty": "kr",
+"ticker": "034730.KS",
+"name": "SK Inc."
 },
 {
 "cty": "kr",
@@ -794,23 +794,23 @@
 },
 {
 "cty": "kr",
-"ticker": "018260.KS",
-"name": "Samsung SDS Co., Ltd."
+"ticker": "051910.KS",
+"name": "LG Chem, Ltd."
 },
 {
 "cty": "kr",
-"ticker": "096770.KS",
-"name": "SK Innovation Co., Ltd."
-},
-{
-"cty": "gb",
-"ticker": "HSBA.L",
-"name": "HSBC Holdings plc"
+"ticker": "180640.KS",
+"name": "Hanjin Kal"
 },
 {
 "cty": "gb",
 "ticker": "AZN.L",
 "name": "AstraZeneca PLC"
+},
+{
+"cty": "gb",
+"ticker": "HSBA.L",
+"name": "HSBC Holdings plc"
 },
 {
 "cty": "gb",
@@ -854,23 +854,23 @@
 },
 {
 "cty": "gb",
-"ticker": "LLOY.L",
-"name": "Lloyds Banking Group plc"
-},
-{
-"cty": "gb",
 "ticker": "BA.L",
 "name": "BAE Systems plc"
 },
 {
 "cty": "gb",
-"ticker": "BARC.L",
-"name": "Barclays PLC"
+"ticker": "LLOY.L",
+"name": "Lloyds Banking Group plc"
 },
 {
 "cty": "gb",
 "ticker": "REL.L",
 "name": "RELX PLC"
+},
+{
+"cty": "gb",
+"ticker": "BARC.L",
+"name": "Barclays PLC"
 },
 {
 "cty": "gb",
@@ -904,13 +904,13 @@
 },
 {
 "cty": "gb",
-"ticker": "TSCO.L",
-"name": "Tesco PLC"
+"ticker": "AAL.L",
+"name": "Anglo American plc"
 },
 {
 "cty": "gb",
-"ticker": "AAL.L",
-"name": "Anglo American plc"
+"ticker": "TSCO.L",
+"name": "Tesco PLC"
 },
 {
 "cty": "gb",
@@ -924,8 +924,18 @@
 },
 {
 "cty": "gb",
+"ticker": "III.L",
+"name": "3i Group Ord"
+},
+{
+"cty": "gb",
 "ticker": "ANTO.L",
 "name": "Antofagasta plc"
+},
+{
+"cty": "gb",
+"ticker": "IMB.L",
+"name": "Imperial Brands PLC"
 },
 {
 "cty": "gb",
@@ -941,16 +951,6 @@
 "cty": "gb",
 "ticker": "BT-A.L",
 "name": "BT Group plc"
-},
-{
-"cty": "gb",
-"ticker": "IMB.L",
-"name": "Imperial Brands PLC"
-},
-{
-"cty": "gb",
-"ticker": "IAG.L",
-"name": "International Consolidated Airlines Group S.A."
 },
 {
 "cty": "de",
@@ -989,11 +989,6 @@
 },
 {
 "cty": "de",
-"ticker": "IFX.DE",
-"name": "Infineon Technologies AG"
-},
-{
-"cty": "de",
 "ticker": "DB1.DE",
 "name": "Deutsche Börse AG"
 },
@@ -1001,6 +996,11 @@
 "cty": "de",
 "ticker": "DBK.DE",
 "name": "Deutsche Bank Aktiengesellschaft"
+},
+{
+"cty": "de",
+"ticker": "IFX.DE",
+"name": "Infineon Technologies AG"
 },
 {
 "cty": "de",
@@ -1034,13 +1034,13 @@
 },
 {
 "cty": "de",
-"ticker": "CBK.DE",
-"name": "Commerzbank AG"
+"ticker": "MBG.DE",
+"name": "Mercedes-Benz Group AG"
 },
 {
 "cty": "de",
-"ticker": "MBG.DE",
-"name": "Mercedes-Benz Group AG"
+"ticker": "CBK.DE",
+"name": "Commerzbank AG"
 },
 {
 "cty": "de",
@@ -1054,18 +1054,13 @@
 },
 {
 "cty": "de",
-"ticker": "TLX.DE",
-"name": "Talanx AG"
-},
-{
-"cty": "de",
 "ticker": "RHM.DE",
 "name": "Rheinmetall AG"
 },
 {
 "cty": "de",
-"ticker": "BMW.DE",
-"name": "Bayerische Motoren Werke Aktiengesellschaft"
+"ticker": "TLX.DE",
+"name": "Talanx AG"
 },
 {
 "cty": "de",
@@ -1074,13 +1069,18 @@
 },
 {
 "cty": "de",
-"ticker": "DTG.DE",
-"name": "Daimler Truck Holding AG"
+"ticker": "BMW.DE",
+"name": "Bayerische Motoren Werke Aktiengesellschaft"
 },
 {
 "cty": "de",
 "ticker": "HEI.DE",
 "name": "Heidelberg Materials AG"
+},
+{
+"cty": "de",
+"ticker": "DTG.DE",
+"name": "Daimler Truck Holding AG"
 },
 {
 "cty": "de",
@@ -1119,13 +1119,13 @@
 },
 {
 "cty": "fr",
-"ticker": "SU.PA",
-"name": "Schneider Electric S.E."
+"ticker": "RMS.PA",
+"name": "Hermès International Société en commandite par actions"
 },
 {
 "cty": "fr",
-"ticker": "RMS.PA",
-"name": "Hermès International Société en commandite par actions"
+"ticker": "SU.PA",
+"name": "Schneider Electric S.E."
 },
 {
 "cty": "fr",
@@ -1169,13 +1169,13 @@
 },
 {
 "cty": "fr",
-"ticker": "ACA.PA",
-"name": "Crédit Agricole S.A."
+"ticker": "HO.PA",
+"name": "Thales S.A."
 },
 {
 "cty": "fr",
-"ticker": "HO.PA",
-"name": "Thales S.A."
+"ticker": "ACA.PA",
+"name": "Crédit Agricole S.A."
 },
 {
 "cty": "fr",
@@ -1219,13 +1219,13 @@
 },
 {
 "cty": "fr",
-"ticker": "DIM.PA",
-"name": "Sartorius Stedim Biotech S.A."
+"ticker": "KER.PA",
+"name": "Kering SA"
 },
 {
 "cty": "fr",
-"ticker": "KER.PA",
-"name": "Kering SA"
+"ticker": "DIM.PA",
+"name": "Sartorius Stedim Biotech S.A."
 },
 {
 "cty": "fr",
@@ -1249,8 +1249,8 @@
 },
 {
 "cty": "fr",
-"ticker": "IPN.PA",
-"name": "Ipsen S.A."
+"ticker": "BVI.PA",
+"name": "Bureau Veritas SA"
 },
 {
 "cty": "nl",
@@ -1274,13 +1274,13 @@
 },
 {
 "cty": "nl",
-"ticker": "ABN.AS",
-"name": "ABN AMRO Bank N.V."
+"ticker": "AD.AS",
+"name": "Koninklijke Ahold Delhaize N.V."
 },
 {
 "cty": "nl",
-"ticker": "ASM.AS",
-"name": "ASM International NV"
+"ticker": "ABN.AS",
+"name": "ABN AMRO Bank N.V."
 },
 {
 "cty": "nl",
@@ -1289,18 +1289,18 @@
 },
 {
 "cty": "nl",
-"ticker": "AD.AS",
-"name": "Koninklijke Ahold Delhaize N.V."
-},
-{
-"cty": "nl",
-"ticker": "PHIA.AS",
-"name": "Koninklijke Philips N.V."
+"ticker": "ASM.AS",
+"name": "ASM International NV"
 },
 {
 "cty": "nl",
 "ticker": "ADYEN.AS",
 "name": "Adyen N.V."
+},
+{
+"cty": "nl",
+"ticker": "PHIA.AS",
+"name": "Koninklijke Philips N.V."
 },
 {
 "cty": "nl",
@@ -1334,13 +1334,13 @@
 },
 {
 "cty": "nl",
-"ticker": "BESI.AS",
-"name": "BE Semiconductor Industries N.V."
+"ticker": "AGN.AS",
+"name": "Aegon Ltd."
 },
 {
 "cty": "nl",
-"ticker": "AGN.AS",
-"name": "Aegon Ltd."
+"ticker": "BESI.AS",
+"name": "BE Semiconductor Industries N.V."
 },
 {
 "cty": "nl",
@@ -1359,11 +1359,6 @@
 },
 {
 "cty": "nl",
-"ticker": "VPK.AS",
-"name": "Koninklijke Vopak N.V."
-},
-{
-"cty": "nl",
 "ticker": "IMCD.AS",
 "name": "IMCD N.V."
 },
@@ -1374,13 +1369,18 @@
 },
 {
 "cty": "nl",
-"ticker": "NRP.AS",
-"name": "NEPI Rockcastle N.V."
+"ticker": "VPK.AS",
+"name": "Koninklijke Vopak N.V."
 },
 {
 "cty": "nl",
 "ticker": "SBMO.AS",
 "name": "SBM Offshore N.V."
+},
+{
+"cty": "nl",
+"ticker": "NRP.AS",
+"name": "NEPI Rockcastle N.V."
 },
 {
 "cty": "nl",
@@ -1459,11 +1459,6 @@
 },
 {
 "cty": "it",
-"ticker": "BAMI.MI",
-"name": "Banco BPM S.p.A."
-},
-{
-"cty": "it",
 "ticker": "MB.MI",
 "name": "Mediobanca Banca di Credito Finanziario S.p.A."
 },
@@ -1471,6 +1466,11 @@
 "cty": "it",
 "ticker": "SRG.MI",
 "name": "Snam S.p.A."
+},
+{
+"cty": "it",
+"ticker": "BAMI.MI",
+"name": "Banco BPM S.p.A."
 },
 {
 "cty": "it",
@@ -1544,13 +1544,13 @@
 },
 {
 "cty": "it",
-"ticker": "CE.MI",
-"name": "Credito Emiliano S.p.A."
+"ticker": "INW.MI",
+"name": "Infrastrutture Wireless Italiane S.p.A."
 },
 {
 "cty": "it",
-"ticker": "INW.MI",
-"name": "Infrastrutture Wireless Italiane S.p.A."
+"ticker": "CE.MI",
+"name": "Credito Emiliano S.p.A."
 },
 {
 "cty": "es",
@@ -1614,18 +1614,13 @@
 },
 {
 "cty": "es",
-"ticker": "SAB.MC",
-"name": "Banco de Sabadell, S.A."
-},
-{
-"cty": "es",
 "ticker": "CLNX.MC",
 "name": "Cellnex Telecom, S.A."
 },
 {
 "cty": "es",
-"ticker": "MAP.MC",
-"name": "Mapfre, S.A."
+"ticker": "SAB.MC",
+"name": "Banco de Sabadell, S.A."
 },
 {
 "cty": "es",
@@ -1634,18 +1629,23 @@
 },
 {
 "cty": "es",
+"ticker": "MAP.MC",
+"name": "Mapfre, S.A."
+},
+{
+"cty": "es",
 "ticker": "ANA.MC",
 "name": "Acciona, S.A."
 },
 {
 "cty": "es",
-"ticker": "RED.MC",
-"name": "Redeia Corporación, S.A."
+"ticker": "IDR.MC",
+"name": "Indra Sistemas, S.A."
 },
 {
 "cty": "es",
-"ticker": "IDR.MC",
-"name": "Indra Sistemas, S.A."
+"ticker": "RED.MC",
+"name": "Redeia Corporación, S.A."
 },
 {
 "cty": "es",
@@ -1794,13 +1794,13 @@
 },
 {
 "cty": "ch",
-"ticker": "KNIN.SW",
-"name": "Kuehne + Nagel International AG"
+"ticker": "SLHN.SW",
+"name": "Swiss Life Holding AG"
 },
 {
 "cty": "ch",
-"ticker": "SLHN.SW",
-"name": "Swiss Life Holding AG"
+"ticker": "KNIN.SW",
+"name": "Kuehne + Nagel International AG"
 },
 {
 "cty": "ch",
@@ -1824,23 +1824,23 @@
 },
 {
 "cty": "ch",
-"ticker": "EMSN.SW",
-"name": "EMS-CHEMIE HOLDING AG"
-},
-{
-"cty": "ch",
 "ticker": "AMRZ.SW",
 "name": "Amrize AG"
 },
 {
 "cty": "ch",
-"ticker": "SOON.SW",
-"name": "Sonova Holding AG"
+"ticker": "EMSN.SW",
+"name": "EMS-CHEMIE HOLDING AG"
 },
 {
 "cty": "ch",
 "ticker": "STMN.SW",
 "name": "Straumann Holding AG"
+},
+{
+"cty": "ch",
+"ticker": "SOON.SW",
+"name": "Sonova Holding AG"
 },
 {
 "cty": "ch",
@@ -1859,13 +1859,13 @@
 },
 {
 "cty": "in",
-"ticker": "BHARTIARTL.NS",
-"name": "Bharti Airtel Limited"
+"ticker": "HDFCBANK.BO",
+"name": "HDFC Bank Limited"
 },
 {
 "cty": "in",
-"ticker": "HDFCBANK.NS",
-"name": "HDFC Bank Limited"
+"ticker": "BHARTIARTL.NS",
+"name": "Bharti Airtel Limited"
 },
 {
 "cty": "in",
@@ -1879,7 +1879,7 @@
 },
 {
 "cty": "in",
-"ticker": "SBIN.NS",
+"ticker": "SBIN.BO",
 "name": "State Bank of India"
 },
 {
@@ -1889,13 +1889,8 @@
 },
 {
 "cty": "in",
-"ticker": "BAJFINANCE.NS",
+"ticker": "BAJFINANCE.BO",
 "name": "Bajaj Finance Limited"
-},
-{
-"cty": "in",
-"ticker": "LT.NS",
-"name": "Larsen & Toubro Limited"
 },
 {
 "cty": "in",
@@ -1904,28 +1899,23 @@
 },
 {
 "cty": "in",
+"ticker": "LT.BO",
+"name": "Larsen & Toubro Limited"
+},
+{
+"cty": "in",
 "ticker": "LICI.NS",
 "name": "Life Insurance Corporation of India"
 },
 {
 "cty": "in",
-"ticker": "KOTAKBANK.BO",
+"ticker": "KOTAKBANK.NS",
 "name": "Kotak Mahindra Bank Limited"
 },
 {
 "cty": "in",
-"ticker": "HINDUNILVR.BO",
+"ticker": "HINDUNILVR.NS",
 "name": "Hindustan Unilever Limited"
-},
-{
-"cty": "in",
-"ticker": "SUNPHARMA.BO",
-"name": "Sun Pharmaceutical Industries Limited"
-},
-{
-"cty": "in",
-"ticker": "AXISBANK.BO",
-"name": "Axis Bank Limited"
 },
 {
 "cty": "in",
@@ -1934,17 +1924,27 @@
 },
 {
 "cty": "in",
-"ticker": "ADANIPORTS.NS",
-"name": "Adani Ports and Special Economic Zone Limited"
+"ticker": "SUNPHARMA.NS",
+"name": "Sun Pharmaceutical Industries Limited"
 },
 {
 "cty": "in",
-"ticker": "MARUTI.NS",
+"ticker": "MARUTI.BO",
 "name": "Maruti Suzuki India Limited"
 },
 {
 "cty": "in",
-"ticker": "M&M.NS",
+"ticker": "ADANIPORTS.BO",
+"name": "Adani Ports and Special Economic Zone Limited"
+},
+{
+"cty": "in",
+"ticker": "AXISBANK.BO",
+"name": "Axis Bank Limited"
+},
+{
+"cty": "in",
+"ticker": "M&M.BO",
 "name": "Mahindra & Mahindra Limited"
 },
 {
@@ -1959,8 +1959,8 @@
 },
 {
 "cty": "in",
-"ticker": "ULTRACEMCO.NS",
-"name": "UltraTech Cement Limited"
+"ticker": "HCLTECH.NS",
+"name": "HCL Technologies Limited"
 },
 {
 "cty": "in",
@@ -1969,13 +1969,13 @@
 },
 {
 "cty": "in",
-"ticker": "ADANIENT.BO",
-"name": "Adani Enterprises Limited"
+"ticker": "ULTRACEMCO.NS",
+"name": "UltraTech Cement Limited"
 },
 {
 "cty": "in",
-"ticker": "HCLTECH.NS",
-"name": "HCL Technologies Limited"
+"ticker": "ADANIENT.NS",
+"name": "Adani Enterprises Limited"
 },
 {
 "cty": "in",
@@ -1984,23 +1984,23 @@
 },
 {
 "cty": "in",
+"ticker": "HAL.NS",
+"name": "Hindustan Aeronautics Limited"
+},
+{
+"cty": "in",
 "ticker": "JSWSTEEL.BO",
 "name": "JSW Steel Limited"
 },
 {
 "cty": "in",
-"ticker": "HAL.BO",
-"name": "Hindustan Aeronautics Limited"
-},
-{
-"cty": "in",
-"ticker": "NTPC.NS",
+"ticker": "NTPC.BO",
 "name": "NTPC Limited"
 },
 {
 "cty": "in",
-"ticker": "BAJAJFINSV.NS",
-"name": "Bajaj Finserv Ltd."
+"ticker": "DIVISLAB.BO",
+"name": "Divi's Laboratories Limited"
 },
 {
 "cty": "ca",
@@ -2024,13 +2024,13 @@
 },
 {
 "cty": "ca",
-"ticker": "BNS.TO",
-"name": "The Bank of Nova Scotia"
+"ticker": "ENB.TO",
+"name": "Enbridge Inc."
 },
 {
 "cty": "ca",
-"ticker": "ENB.TO",
-"name": "Enbridge Inc."
+"ticker": "BNS.TO",
+"name": "The Bank of Nova Scotia"
 },
 {
 "cty": "ca",
@@ -2049,13 +2049,13 @@
 },
 {
 "cty": "ca",
-"ticker": "CP.TO",
-"name": "Canadian Pacific Kansas City Limited"
+"ticker": "AEM.TO",
+"name": "Agnico Eagle Mines Limited"
 },
 {
 "cty": "ca",
-"ticker": "AEM.TO",
-"name": "Agnico Eagle Mines Limited"
+"ticker": "CP.TO",
+"name": "Canadian Pacific Kansas City Limited"
 },
 {
 "cty": "ca",
@@ -2079,28 +2079,13 @@
 },
 {
 "cty": "ca",
-"ticker": "L.TO",
-"name": "Loblaw Companies Limited"
-},
-{
-"cty": "ca",
 "ticker": "GWO.TO",
 "name": "Great-West Lifeco Inc."
 },
 {
 "cty": "ca",
-"ticker": "IMO.TO",
-"name": "Imperial Oil Limited"
-},
-{
-"cty": "ca",
-"ticker": "NA.TO",
-"name": "National Bank of Canada"
-},
-{
-"cty": "ca",
-"ticker": "ATD.TO",
-"name": "Alimentation Couche-Tard Inc."
+"ticker": "L.TO",
+"name": "Loblaw Companies Limited"
 },
 {
 "cty": "ca",
@@ -2114,13 +2099,28 @@
 },
 {
 "cty": "ca",
+"ticker": "IMO.TO",
+"name": "Imperial Oil Limited"
+},
+{
+"cty": "ca",
+"ticker": "ATD.TO",
+"name": "Alimentation Couche-Tard Inc."
+},
+{
+"cty": "ca",
+"ticker": "NA.TO",
+"name": "National Bank of Canada"
+},
+{
+"cty": "ca",
 "ticker": "CVE.TO",
 "name": "Cenovus Energy Inc."
 },
 {
 "cty": "ca",
-"ticker": "CSU.TO",
-"name": "Constellation Software Inc."
+"ticker": "FNV.TO",
+"name": "Franco-Nevada Corporation"
 },
 {
 "cty": "ca",
@@ -2129,8 +2129,8 @@
 },
 {
 "cty": "ca",
-"ticker": "FNV.TO",
-"name": "Franco-Nevada Corporation"
+"ticker": "CSU.TO",
+"name": "Constellation Software Inc."
 },
 {
 "cty": "ca",
@@ -2164,13 +2164,13 @@
 },
 {
 "cty": "br",
-"ticker": "VALE3.SA",
-"name": "Vale S.A."
+"ticker": "ABEV3.SA",
+"name": "Ambev S.A."
 },
 {
 "cty": "br",
-"ticker": "ABEV3.SA",
-"name": "Ambev S.A."
+"ticker": "VALE3.SA",
+"name": "Vale S.A."
 },
 {
 "cty": "br",
@@ -2194,13 +2194,13 @@
 },
 {
 "cty": "br",
-"ticker": "VIVT3.SA",
-"name": "Telefônica Brasil S.A."
+"ticker": "AXIA3.SA",
+"name": "AXIA Energia SA"
 },
 {
 "cty": "br",
-"ticker": "AXIA3.SA",
-"name": "AXIA Energia SA"
+"ticker": "VIVT3.SA",
+"name": "Telefônica Brasil S.A."
 },
 {
 "cty": "br",
@@ -2214,23 +2214,23 @@
 },
 {
 "cty": "br",
-"ticker": "EMBJ3.SA",
-"name": "Embraer S.A."
-},
-{
-"cty": "br",
 "ticker": "RDOR3.SA",
 "name": "Rede D'Or São Luiz S.A."
 },
 {
 "cty": "br",
-"ticker": "BBSE3.SA",
-"name": "BB Seguridade Participações S.A."
+"ticker": "B3SA3.SA",
+"name": "B3 S.A. - Brasil, Bolsa, Balcão"
 },
 {
 "cty": "br",
-"ticker": "B3SA3.SA",
-"name": "B3 S.A. - Brasil, Bolsa, Balcão"
+"ticker": "EMBJ3.SA",
+"name": "Embraer S.A."
+},
+{
+"cty": "br",
+"ticker": "BBSE3.SA",
+"name": "BB Seguridade Participações S.A."
 },
 {
 "cty": "br",
@@ -2241,6 +2241,11 @@
 "cty": "br",
 "ticker": "CXSE3.SA",
 "name": "Caixa Seguridade Participações S.A."
+},
+{
+"cty": "br",
+"ticker": "ENEV3.SA",
+"name": "Eneva S.A."
 },
 {
 "cty": "br",
@@ -2259,11 +2264,6 @@
 },
 {
 "cty": "br",
-"ticker": "ENEV3.SA",
-"name": "Eneva S.A."
-},
-{
-"cty": "br",
 "ticker": "CMIG3.SA",
 "name": "Companhia Energética de Minas Gerais - CEMIG"
 },
@@ -2274,13 +2274,13 @@
 },
 {
 "cty": "br",
-"ticker": "SAUD3.SA",
-"name": "Bradsaúde S.A."
+"ticker": "CPLE3.SA",
+"name": "Companhia Paranaense de Energia - COPEL"
 },
 {
 "cty": "br",
-"ticker": "CPLE3.SA",
-"name": "Companhia Paranaense de Energia - COPEL"
+"ticker": "SAUD3.SA",
+"name": "Bradsaúde S.A."
 },
 {
 "cty": "br",
@@ -2299,8 +2299,8 @@
 },
 {
 "cty": "br",
-"ticker": "UGPA3.SA",
-"name": "Ultrapar Participações S.A."
+"ticker": "RENT3.SA",
+"name": "Localiza Rent a Car S.A."
 },
 {
 "cty": "au",
@@ -2334,13 +2334,13 @@
 },
 {
 "cty": "au",
-"ticker": "TLS.AX",
-"name": "Telstra Group Limited"
+"ticker": "WDS.AX",
+"name": "Woodside Energy Group Ltd"
 },
 {
 "cty": "au",
-"ticker": "WDS.AX",
-"name": "Woodside Energy Group Ltd"
+"ticker": "TLS.AX",
+"name": "Telstra Group Limited"
 },
 {
 "cty": "au",
@@ -2379,13 +2379,18 @@
 },
 {
 "cty": "au",
+"ticker": "BXB.AX",
+"name": "Brambles Limited"
+},
+{
+"cty": "au",
 "ticker": "COL.AX",
 "name": "Coles Group Limited"
 },
 {
 "cty": "au",
-"ticker": "BXB.AX",
-"name": "Brambles Limited"
+"ticker": "EVN.AX",
+"name": "Evolution Mining Limited"
 },
 {
 "cty": "au",
@@ -2396,11 +2401,6 @@
 "cty": "au",
 "ticker": "ORG.AX",
 "name": "Origin Energy Limited"
-},
-{
-"cty": "au",
-"ticker": "EVN.AX",
-"name": "Evolution Mining Limited"
 },
 {
 "cty": "au",
@@ -2419,13 +2419,13 @@
 },
 {
 "cty": "au",
-"ticker": "SCG.AX",
-"name": "Scentre Group"
+"ticker": "S32.AX",
+"name": "South32 Limited"
 },
 {
 "cty": "au",
-"ticker": "S32.AX",
-"name": "South32 Limited"
+"ticker": "SCG.AX",
+"name": "Scentre Group"
 },
 {
 "cty": "au",
@@ -2444,13 +2444,13 @@
 },
 {
 "cty": "au",
-"ticker": "QAN.AX",
-"name": "Qantas Airways Limited"
+"ticker": "MPL.AX",
+"name": "Medibank Private Limited"
 },
 {
 "cty": "au",
-"ticker": "MPL.AX",
-"name": "Medibank Private Limited"
+"ticker": "QAN.AX",
+"name": "Qantas Airways Limited"
 },
 {
 "cty": "mx",
@@ -2461,6 +2461,11 @@
 "cty": "mx",
 "ticker": "FEMSAUBD.MX",
 "name": "Fomento Económico Mexicano, S.A.B. de C.V."
+},
+{
+"cty": "mx",
+"ticker": "FORION20.MX",
+"name": "Orión Fibra-E"
 },
 {
 "cty": "mx",
@@ -2504,8 +2509,13 @@
 },
 {
 "cty": "mx",
-"ticker": "IDEALB-1.MX",
-"name": "Impulsora del Desarrollo y el Empleo en América Latina, S.A.B. de C.V."
+"ticker": "SOMA21.MX",
+"name": "Fibra SOMA"
+},
+{
+"cty": "mx",
+"ticker": "PINFRA.MX",
+"name": "Promotora y Operadora de Infraestructura, S. A. B. de C. V."
 },
 {
 "cty": "mx",
@@ -2516,11 +2526,6 @@
 "cty": "mx",
 "ticker": "KIMBERA.MX",
 "name": "Kimberly-Clark de México, S. A. B. de C. V."
-},
-{
-"cty": "mx",
-"ticker": "PINFRA.MX",
-"name": "Promotora y Operadora de Infraestructura, S. A. B. de C. V."
 },
 {
 "cty": "mx",
@@ -2544,11 +2549,6 @@
 },
 {
 "cty": "mx",
-"ticker": "SIMECB.MX",
-"name": "Grupo Simec, S.A.B. de C.V."
-},
-{
-"cty": "mx",
 "ticker": "CMOCTEZ.MX",
 "name": "Corporación Moctezuma, S.A.B. de C.V."
 },
@@ -2559,13 +2559,13 @@
 },
 {
 "cty": "mx",
-"ticker": "FHIPO14.MX",
-"name": "Fideicomiso Irrevocable F/2061 FHipo"
+"ticker": "BBAJIOO.MX",
+"name": "Banco del Bajío, S.A., Institución de Banca Múltiple"
 },
 {
 "cty": "mx",
-"ticker": "BBAJIOO.MX",
-"name": "Banco del Bajío, S.A., Institución de Banca Múltiple"
+"ticker": "FHIPO14.MX",
+"name": "Fideicomiso Irrevocable F/2061 FHipo"
 },
 {
 "cty": "mx",
@@ -2584,11 +2584,6 @@
 },
 {
 "cty": "mx",
-"ticker": "ALSEA.MX",
-"name": "Alsea, S.A.B. de C.V."
-},
-{
-"cty": "mx",
 "ticker": "CUERVO.MX",
 "name": "Becle, S.A.B. de C.V."
 },
@@ -2599,8 +2594,13 @@
 },
 {
 "cty": "mx",
-"ticker": "TLEVISACPO.MX",
-"name": "Grupo Televisa, S.A.B."
+"ticker": "ALSEA.MX",
+"name": "Alsea, S.A.B. de C.V."
+},
+{
+"cty": "mx",
+"ticker": "FRAGUAB.MX",
+"name": "Corporativo Fragua, S.A.B. de C.V."
 },
 {
 "cty": "tr",
@@ -2639,13 +2639,13 @@
 },
 {
 "cty": "tr",
-"ticker": "THYAO.IS",
-"name": "Türk Hava Yollari Anonim Ortakligi"
+"ticker": "BIMAS.IS",
+"name": "BIM Birlesik Magazalar A.S."
 },
 {
 "cty": "tr",
-"ticker": "BIMAS.IS",
-"name": "BIM Birlesik Magazalar A.S."
+"ticker": "THYAO.IS",
+"name": "Türk Hava Yollari Anonim Ortakligi"
 },
 {
 "cty": "tr",
@@ -2684,11 +2684,6 @@
 },
 {
 "cty": "tr",
-"ticker": "SOHOE.IS",
-"name": "Soho Giyim Ve Enerji Anonim Sirketi"
-},
-{
-"cty": "tr",
 "ticker": "EREGL.IS",
 "name": "Eregli Demir ve Çelik Fabrikalari T.A.S."
 },
@@ -2696,6 +2691,11 @@
 "cty": "tr",
 "ticker": "TCELL.IS",
 "name": "Turkcell Iletisim Hizmetleri A.S."
+},
+{
+"cty": "tr",
+"ticker": "SOHOE.IS",
+"name": "Soho Giyim Ve Enerji Anonim Sirketi"
 },
 {
 "cty": "tr",
@@ -2719,18 +2719,13 @@
 },
 {
 "cty": "tr",
-"ticker": "ENJSA.IS",
-"name": "Enerjisa Enerji A.S."
-},
-{
-"cty": "tr",
-"ticker": "INVES.IS",
-"name": "Investco Holding A.S."
-},
-{
-"cty": "tr",
 "ticker": "ENERY.IS",
 "name": "Enerya Enerji Anonim Sirketi"
+},
+{
+"cty": "tr",
+"ticker": "ENJSA.IS",
+"name": "Enerjisa Enerji A.S."
 },
 {
 "cty": "tr",
@@ -2739,13 +2734,18 @@
 },
 {
 "cty": "tr",
-"ticker": "TRALT.IS",
-"name": "Turk Altin Isletmeleri A.S."
+"ticker": "INVES.IS",
+"name": "Investco Holding A.S."
 },
 {
 "cty": "tr",
 "ticker": "AHGAZ.IS",
 "name": "Ahlatci Dogal Gaz Dagitim Enerji ve Yatirim A.S."
+},
+{
+"cty": "tr",
+"ticker": "TRALT.IS",
+"name": "Turk Altin Isletmeleri A.S."
 },
 {
 "cty": "tr",
@@ -2774,13 +2774,13 @@
 },
 {
 "cty": "id",
-"ticker": "BREN.JK",
-"name": "PT Barito Renewables Energy Tbk"
+"ticker": "BYAN.JK",
+"name": "PT Bayan Resources Tbk."
 },
 {
 "cty": "id",
-"ticker": "BYAN.JK",
-"name": "PT Bayan Resources Tbk."
+"ticker": "BREN.JK",
+"name": "PT Barito Renewables Energy Tbk"
 },
 {
 "cty": "id",
@@ -2814,13 +2814,13 @@
 },
 {
 "cty": "id",
-"ticker": "CASA.JK",
-"name": "PT Capital Financial Indonesia Tbk"
+"ticker": "TPIA.JK",
+"name": "PT Chandra Asri Pacific Tbk"
 },
 {
 "cty": "id",
-"ticker": "TPIA.JK",
-"name": "PT Chandra Asri Pacific Tbk"
+"ticker": "CASA.JK",
+"name": "PT Capital Financial Indonesia Tbk"
 },
 {
 "cty": "id",
@@ -2829,13 +2829,13 @@
 },
 {
 "cty": "id",
-"ticker": "UNTR.JK",
-"name": "PT United Tractors Tbk"
+"ticker": "ICBP.JK",
+"name": "PT Indofood CBP Sukses Makmur Tbk"
 },
 {
 "cty": "id",
-"ticker": "ICBP.JK",
-"name": "PT Indofood CBP Sukses Makmur Tbk"
+"ticker": "UNTR.JK",
+"name": "PT United Tractors Tbk"
 },
 {
 "cty": "id",
@@ -2854,8 +2854,23 @@
 },
 {
 "cty": "id",
+"ticker": "BRPT.JK",
+"name": "PT Barito Pacific Tbk"
+},
+{
+"cty": "id",
 "ticker": "EMAS.JK",
 "name": "PT Merdeka Gold Resources Tbk"
+},
+{
+"cty": "id",
+"ticker": "ANTM.JK",
+"name": "PT Antam (Persero) Tbk"
+},
+{
+"cty": "id",
+"ticker": "UNVR.JK",
+"name": "PT Unilever Indonesia Tbk"
 },
 {
 "cty": "id",
@@ -2869,38 +2884,23 @@
 },
 {
 "cty": "id",
-"ticker": "ANTM.JK",
-"name": "PT Antam (Persero) Tbk"
-},
-{
-"cty": "id",
-"ticker": "BRPT.JK",
-"name": "PT Barito Pacific Tbk"
-},
-{
-"cty": "id",
-"ticker": "UNVR.JK",
-"name": "PT Unilever Indonesia Tbk"
-},
-{
-"cty": "id",
-"ticker": "MORA.JK",
-"name": "PT Mora Telematika Indonesia Tbk"
-},
-{
-"cty": "id",
 "ticker": "BRIS.JK",
 "name": "PT Bank Syariah Indonesia Tbk"
 },
 {
 "cty": "id",
-"ticker": "ADMR.JK",
-"name": "PT Alamtri Minerals Indonesia Tbk"
+"ticker": "CDIA.JK",
+"name": "PT Chandra Daya Investasi TBK."
 },
 {
 "cty": "id",
-"ticker": "PGUN.JK",
-"name": "PT Pradiksi Gunatama Tbk"
+"ticker": "BUMI.JK",
+"name": "PT Bumi Resources Tbk"
+},
+{
+"cty": "id",
+"ticker": "MORA.JK",
+"name": "PT Mora Telematika Indonesia Tbk"
 },
 {
 "cty": "sa",
@@ -3019,13 +3019,13 @@
 },
 {
 "cty": "sa",
-"ticker": "7202.SR",
-"name": "Arabian Internet and Communication Services Company"
+"ticker": "8210.SR",
+"name": "Bupa Arabia for Cooperative Insurance Company"
 },
 {
 "cty": "sa",
-"ticker": "4190.SR",
-"name": "Jarir Marketing Company"
+"ticker": "7202.SR",
+"name": "Arabian Internet and Communication Services Company"
 },
 {
 "cty": "sa",
@@ -3034,13 +3034,13 @@
 },
 {
 "cty": "sa",
-"ticker": "8210.SR",
-"name": "Bupa Arabia for Cooperative Insurance Company"
+"ticker": "8010.SR",
+"name": "The Company for Cooperative Insurance"
 },
 {
 "cty": "sa",
-"ticker": "8010.SR",
-"name": "The Company for Cooperative Insurance"
+"ticker": "4190.SR",
+"name": "Jarir Marketing Company"
 },
 {
 "cty": "sa",
@@ -3054,13 +3054,13 @@
 },
 {
 "cty": "cn",
-"ticker": "601398.SS",
-"name": "Industrial and Commercial Bank of China Limited"
+"ticker": "601939.SS",
+"name": "China Construction Bank Corporation"
 },
 {
 "cty": "cn",
-"ticker": "601939.SS",
-"name": "China Construction Bank Corporation"
+"ticker": "601398.SS",
+"name": "Industrial and Commercial Bank of China Limited"
 },
 {
 "cty": "cn",
@@ -3074,6 +3074,11 @@
 },
 {
 "cty": "cn",
+"ticker": "600941.SS",
+"name": "China Mobile Limited"
+},
+{
+"cty": "cn",
 "ticker": "601857.SS",
 "name": "PetroChina Company Limited"
 },
@@ -3081,11 +3086,6 @@
 "cty": "cn",
 "ticker": "688825.SS",
 "name": "CXMT Corporation"
-},
-{
-"cty": "cn",
-"ticker": "600941.SS",
-"name": "China Mobile Limited"
 },
 {
 "cty": "cn",
@@ -3109,13 +3109,13 @@
 },
 {
 "cty": "cn",
-"ticker": "3968.HK",
-"name": "China Merchants Bank Co., Ltd."
+"ticker": "601088.SS",
+"name": "China Shenhua Energy Company Limited"
 },
 {
 "cty": "cn",
-"ticker": "601088.SS",
-"name": "China Shenhua Energy Company Limited"
+"ticker": "3968.HK",
+"name": "China Merchants Bank Co., Ltd."
 },
 {
 "cty": "cn",
@@ -3134,6 +3134,11 @@
 },
 {
 "cty": "cn",
+"ticker": "601138.SS",
+"name": "Foxconn Industrial Internet Co., Ltd."
+},
+{
+"cty": "cn",
 "ticker": "600900.SS",
 "name": "China Yangtze Power Co., Ltd."
 },
@@ -3144,8 +3149,13 @@
 },
 {
 "cty": "cn",
-"ticker": "601138.SS",
-"name": "Foxconn Industrial Internet Co., Ltd."
+"ticker": "601658.SS",
+"name": "Postal Savings Bank of China Co., Ltd."
+},
+{
+"cty": "cn",
+"ticker": "000333.SZ",
+"name": "Midea Group Co., Ltd."
 },
 {
 "cty": "cn",
@@ -3156,16 +3166,6 @@
 "cty": "cn",
 "ticker": "002594.SZ",
 "name": "BYD Company Limited"
-},
-{
-"cty": "cn",
-"ticker": "000333.SZ",
-"name": "Midea Group Co., Ltd."
-},
-{
-"cty": "cn",
-"ticker": "601658.SS",
-"name": "Postal Savings Bank of China Co., Ltd."
 },
 {
 "cty": "cn",
@@ -3184,13 +3184,13 @@
 },
 {
 "cty": "cn",
-"ticker": "1810.HK",
-"name": "Xiaomi Corporation"
+"ticker": "688256.SS",
+"name": "Cambricon Technologies Corporation Limited"
 },
 {
 "cty": "cn",
-"ticker": "688256.SS",
-"name": "Cambricon Technologies Corporation Limited"
+"ticker": "1810.HK",
+"name": "Xiaomi Corporation"
 },
 {
 "cty": "cn",
@@ -3249,6 +3249,11 @@
 },
 {
 "cty": "tw",
+"ticker": "2383",
+"name": "台光電"
+},
+{
+"cty": "tw",
 "ticker": "2412",
 "name": "中華電"
 },
@@ -3264,13 +3269,8 @@
 },
 {
 "cty": "tw",
-"ticker": "2383",
-"name": "台光電"
-},
-{
-"cty": "tw",
-"ticker": "2408",
-"name": "南亞科"
+"ticker": "3017",
+"name": "奇鋐"
 },
 {
 "cty": "tw",
@@ -3279,8 +3279,13 @@
 },
 {
 "cty": "tw",
-"ticker": "3017",
-"name": "奇鋐"
+"ticker": "2408",
+"name": "南亞科"
+},
+{
+"cty": "tw",
+"ticker": "2345",
+"name": "智邦"
 },
 {
 "cty": "tw",
@@ -3294,8 +3299,8 @@
 },
 {
 "cty": "tw",
-"ticker": "2886",
-"name": "兆豐金"
+"ticker": "6669",
+"name": "緯穎"
 },
 {
 "cty": "tw",
@@ -3304,13 +3309,13 @@
 },
 {
 "cty": "tw",
-"ticker": "6669",
-"name": "緯穎"
+"ticker": "3443",
+"name": "創意"
 },
 {
 "cty": "tw",
-"ticker": "3443",
-"name": "創意"
+"ticker": "2886",
+"name": "兆豐金"
 },
 {
 "cty": "tw",
@@ -3319,8 +3324,18 @@
 },
 {
 "cty": "tw",
-"ticker": "2345",
-"name": "智邦"
+"ticker": "2327",
+"name": "國巨*"
+},
+{
+"cty": "tw",
+"ticker": "2059",
+"name": "川湖"
+},
+{
+"cty": "tw",
+"ticker": "3653",
+"name": "健策"
 },
 {
 "cty": "tw",
@@ -3329,18 +3344,38 @@
 },
 {
 "cty": "tw",
-"ticker": "2327",
-"name": "國巨*"
-},
-{
-"cty": "tw",
 "ticker": "2357",
 "name": "華碩"
 },
 {
 "cty": "tw",
-"ticker": "3653",
-"name": "健策"
+"ticker": "3008",
+"name": "大立光"
+},
+{
+"cty": "tw",
+"ticker": "3231",
+"name": "緯創"
+},
+{
+"cty": "tw",
+"ticker": "7769",
+"name": "鴻勁"
+},
+{
+"cty": "tw",
+"ticker": "2603",
+"name": "長榮"
+},
+{
+"cty": "tw",
+"ticker": "2368",
+"name": "金像電"
+},
+{
+"cty": "tw",
+"ticker": "2883",
+"name": "凱基金"
 },
 {
 "cty": "tw",
@@ -3354,33 +3389,8 @@
 },
 {
 "cty": "tw",
-"ticker": "7769",
-"name": "鴻勁"
-},
-{
-"cty": "tw",
-"ticker": "2059",
-"name": "川湖"
-},
-{
-"cty": "tw",
-"ticker": "2883",
-"name": "凱基金"
-},
-{
-"cty": "tw",
-"ticker": "2603",
-"name": "長榮"
-},
-{
-"cty": "tw",
-"ticker": "3231",
-"name": "緯創"
-},
-{
-"cty": "tw",
-"ticker": "3008",
-"name": "大立光"
+"ticker": "2395",
+"name": "研華"
 },
 {
 "cty": "tw",
@@ -3389,13 +3399,28 @@
 },
 {
 "cty": "tw",
+"ticker": "2344",
+"name": "華邦電"
+},
+{
+"cty": "tw",
+"ticker": "8046",
+"name": "南電"
+},
+{
+"cty": "tw",
+"ticker": "2360",
+"name": "致茂"
+},
+{
+"cty": "tw",
 "ticker": "3045",
 "name": "台灣大"
 },
 {
 "cty": "tw",
-"ticker": "2395",
-"name": "研華"
+"ticker": "2301",
+"name": "光寶科"
 },
 {
 "cty": "tw",
@@ -3409,38 +3434,13 @@
 },
 {
 "cty": "tw",
-"ticker": "8046",
-"name": "南電"
-},
-{
-"cty": "tw",
-"ticker": "2344",
-"name": "華邦電"
-},
-{
-"cty": "tw",
-"ticker": "2301",
-"name": "光寶科"
-},
-{
-"cty": "tw",
-"ticker": "2360",
-"name": "致茂"
+"ticker": "4958",
+"name": "臻鼎-KY"
 },
 {
 "cty": "tw",
 "ticker": "6223",
 "name": "旺矽"
-},
-{
-"cty": "tw",
-"ticker": "2368",
-"name": "金像電"
-},
-{
-"cty": "tw",
-"ticker": "4904",
-"name": "遠傳"
 },
 {
 "cty": "tw",
@@ -3454,8 +3454,8 @@
 },
 {
 "cty": "tw",
-"ticker": "4958",
-"name": "臻鼎-KY"
+"ticker": "4904",
+"name": "遠傳"
 },
 {
 "cty": "tw",
@@ -3474,6 +3474,16 @@
 },
 {
 "cty": "tw",
+"ticker": "3665",
+"name": "貿聯-KY"
+},
+{
+"cty": "tw",
+"ticker": "3661",
+"name": "世芯-KY"
+},
+{
+"cty": "tw",
 "ticker": "2801",
 "name": "彰銀"
 },
@@ -3484,33 +3494,8 @@
 },
 {
 "cty": "tw",
-"ticker": "3661",
-"name": "世芯-KY"
-},
-{
-"cty": "tw",
-"ticker": "2002",
-"name": "中鋼"
-},
-{
-"cty": "tw",
 "ticker": "2615",
 "name": "萬海"
-},
-{
-"cty": "tw",
-"ticker": "3665",
-"name": "貿聯-KY"
-},
-{
-"cty": "tw",
-"ticker": "6488",
-"name": "環球晶"
-},
-{
-"cty": "tw",
-"ticker": "3034",
-"name": "聯詠"
 },
 {
 "cty": "tw",
@@ -3519,13 +3504,18 @@
 },
 {
 "cty": "tw",
-"ticker": "5876",
-"name": "上海商銀"
+"ticker": "6488",
+"name": "環球晶"
 },
 {
 "cty": "tw",
-"ticker": "2618",
-"name": "長榮航"
+"ticker": "2002",
+"name": "中鋼"
+},
+{
+"cty": "tw",
+"ticker": "3034",
+"name": "聯詠"
 },
 {
 "cty": "tw",
@@ -3534,33 +3524,18 @@
 },
 {
 "cty": "tw",
-"ticker": "3293",
-"name": "鈊象"
-},
-{
-"cty": "tw",
-"ticker": "5347",
-"name": "世界"
-},
-{
-"cty": "tw",
-"ticker": "3036",
-"name": "文曄"
-},
-{
-"cty": "tw",
-"ticker": "2912",
-"name": "統一超"
-},
-{
-"cty": "tw",
 "ticker": "3044",
 "name": "健鼎"
 },
 {
 "cty": "tw",
-"ticker": "4938",
-"name": "和碩"
+"ticker": "2618",
+"name": "長榮航"
+},
+{
+"cty": "tw",
+"ticker": "5876",
+"name": "上海商銀"
 },
 {
 "cty": "tw",
@@ -3569,13 +3544,38 @@
 },
 {
 "cty": "tw",
+"ticker": "2449",
+"name": "京元電子"
+},
+{
+"cty": "tw",
 "ticker": "6274",
 "name": "台燿"
 },
 {
 "cty": "tw",
-"ticker": "2449",
-"name": "京元電子"
+"ticker": "4938",
+"name": "和碩"
+},
+{
+"cty": "tw",
+"ticker": "3036",
+"name": "文曄"
+},
+{
+"cty": "tw",
+"ticker": "5347",
+"name": "世界"
+},
+{
+"cty": "tw",
+"ticker": "3293",
+"name": "鈊象"
+},
+{
+"cty": "tw",
+"ticker": "2912",
+"name": "統一超"
 },
 {
 "cty": "tw",
@@ -3584,8 +3584,8 @@
 },
 {
 "cty": "tw",
-"ticker": "1590",
-"name": "亞德客-KY"
+"ticker": "2376",
+"name": "技嘉"
 },
 {
 "cty": "tw",
@@ -3594,8 +3594,13 @@
 },
 {
 "cty": "tw",
-"ticker": "1101",
-"name": "台泥"
+"ticker": "1590",
+"name": "亞德客-KY"
+},
+{
+"cty": "tw",
+"ticker": "2409",
+"name": "友達"
 },
 {
 "cty": "tw",
@@ -3604,13 +3609,28 @@
 },
 {
 "cty": "tw",
-"ticker": "2376",
-"name": "技嘉"
+"ticker": "1101",
+"name": "台泥"
 },
 {
 "cty": "tw",
-"ticker": "2409",
-"name": "友達"
+"ticker": "3533",
+"name": "嘉澤"
+},
+{
+"cty": "tw",
+"ticker": "5871",
+"name": "中租-KY"
+},
+{
+"cty": "tw",
+"ticker": "1802",
+"name": "台玻"
+},
+{
+"cty": "tw",
+"ticker": "2404",
+"name": "漢唐"
 },
 {
 "cty": "tw",
@@ -3624,18 +3644,8 @@
 },
 {
 "cty": "tw",
-"ticker": "5871",
-"name": "中租-KY"
-},
-{
-"cty": "tw",
-"ticker": "3533",
-"name": "嘉澤"
-},
-{
-"cty": "tw",
-"ticker": "2404",
-"name": "漢唐"
+"ticker": "1519",
+"name": "華城"
 },
 {
 "cty": "tw",
@@ -3644,53 +3654,8 @@
 },
 {
 "cty": "tw",
-"ticker": "1802",
-"name": "台玻"
-},
-{
-"cty": "tw",
-"ticker": "8069",
-"name": "元太"
-},
-{
-"cty": "tw",
-"ticker": "3529",
-"name": "力旺"
-},
-{
-"cty": "tw",
-"ticker": "1519",
-"name": "華城"
-},
-{
-"cty": "tw",
-"ticker": "2356",
-"name": "英業達"
-},
-{
-"cty": "tw",
-"ticker": "2633",
-"name": "台灣高鐵"
-},
-{
-"cty": "tw",
 "ticker": "6239",
 "name": "力成"
-},
-{
-"cty": "tw",
-"ticker": "1402",
-"name": "遠東新"
-},
-{
-"cty": "tw",
-"ticker": "3702",
-"name": "大聯大"
-},
-{
-"cty": "tw",
-"ticker": "2610",
-"name": "華航"
 },
 {
 "cty": "tw",
@@ -3699,13 +3664,28 @@
 },
 {
 "cty": "tw",
-"ticker": "1504",
-"name": "東元"
+"ticker": "2356",
+"name": "英業達"
 },
 {
 "cty": "tw",
-"ticker": "1605",
-"name": "華新"
+"ticker": "3529",
+"name": "力旺"
+},
+{
+"cty": "tw",
+"ticker": "8069",
+"name": "元太"
+},
+{
+"cty": "tw",
+"ticker": "2633",
+"name": "台灣高鐵"
+},
+{
+"cty": "tw",
+"ticker": "1402",
+"name": "遠東新"
 },
 {
 "cty": "tw",
@@ -3714,13 +3694,43 @@
 },
 {
 "cty": "tw",
+"ticker": "3702",
+"name": "大聯大"
+},
+{
+"cty": "tw",
+"ticker": "1504",
+"name": "東元"
+},
+{
+"cty": "tw",
+"ticker": "2610",
+"name": "華航"
+},
+{
+"cty": "tw",
 "ticker": "2337",
 "name": "旺宏"
 },
 {
 "cty": "tw",
+"ticker": "1605",
+"name": "華新"
+},
+{
+"cty": "tw",
+"ticker": "6415",
+"name": "矽力*-KY"
+},
+{
+"cty": "tw",
 "ticker": "2347",
 "name": "聯強"
+},
+{
+"cty": "tw",
+"ticker": "6515",
+"name": "穎崴"
 },
 {
 "cty": "tw",
@@ -3734,8 +3744,8 @@
 },
 {
 "cty": "tw",
-"ticker": "6415",
-"name": "矽力*-KY"
+"ticker": "6805",
+"name": "富世達"
 },
 {
 "cty": "tw",
@@ -3744,38 +3754,8 @@
 },
 {
 "cty": "tw",
-"ticker": "6515",
-"name": "穎崴"
-},
-{
-"cty": "tw",
-"ticker": "2474",
-"name": "可成"
-},
-{
-"cty": "tw",
-"ticker": "8464",
-"name": "億豐"
-},
-{
-"cty": "tw",
-"ticker": "2812",
-"name": "台中銀"
-},
-{
-"cty": "tw",
-"ticker": "6919",
-"name": "康霈*"
-},
-{
-"cty": "tw",
-"ticker": "1476",
-"name": "儒鴻"
-},
-{
-"cty": "tw",
-"ticker": "6805",
-"name": "富世達"
+"ticker": "6526",
+"name": "達發"
 },
 {
 "cty": "tw",
@@ -3784,28 +3764,23 @@
 },
 {
 "cty": "tw",
-"ticker": "3374",
-"name": "精材"
-},
-{
-"cty": "tw",
-"ticker": "6147",
-"name": "頎邦"
-},
-{
-"cty": "tw",
-"ticker": "3491",
-"name": "昇達科"
-},
-{
-"cty": "tw",
-"ticker": "6526",
-"name": "達發"
+"ticker": "2474",
+"name": "可成"
 },
 {
 "cty": "tw",
 "ticker": "6789",
 "name": "采鈺"
+},
+{
+"cty": "tw",
+"ticker": "2812",
+"name": "台中銀"
+},
+{
+"cty": "tw",
+"ticker": "8464",
+"name": "億豐"
 },
 {
 "cty": "tw",
@@ -3819,28 +3794,13 @@
 },
 {
 "cty": "tw",
-"ticker": "3260",
-"name": "威剛"
+"ticker": "1476",
+"name": "儒鴻"
 },
 {
 "cty": "tw",
-"ticker": "2105",
-"name": "正新"
-},
-{
-"cty": "tw",
-"ticker": "6510",
-"name": "精測"
-},
-{
-"cty": "tw",
-"ticker": "8996",
-"name": "高力"
-},
-{
-"cty": "tw",
-"ticker": "6531",
-"name": "愛普*"
+"ticker": "6147",
+"name": "頎邦"
 },
 {
 "cty": "tw",
@@ -3849,8 +3809,23 @@
 },
 {
 "cty": "tw",
-"ticker": "2838",
-"name": "聯邦銀"
+"ticker": "1560",
+"name": "中砂"
+},
+{
+"cty": "tw",
+"ticker": "3491",
+"name": "昇達科"
+},
+{
+"cty": "tw",
+"ticker": "6531",
+"name": "愛普*"
+},
+{
+"cty": "tw",
+"ticker": "3260",
+"name": "威剛"
 },
 {
 "cty": "tw",
@@ -3859,53 +3834,23 @@
 },
 {
 "cty": "tw",
+"ticker": "6919",
+"name": "康霈*"
+},
+{
+"cty": "tw",
+"ticker": "2105",
+"name": "正新"
+},
+{
+"cty": "tw",
+"ticker": "3374",
+"name": "精材"
+},
+{
+"cty": "tw",
 "ticker": "5483",
 "name": "中美晶"
-},
-{
-"cty": "tw",
-"ticker": "3324",
-"name": "雙鴻"
-},
-{
-"cty": "tw",
-"ticker": "2353",
-"name": "宏碁"
-},
-{
-"cty": "tw",
-"ticker": "5269",
-"name": "祥碩"
-},
-{
-"cty": "tw",
-"ticker": "1560",
-"name": "中砂"
-},
-{
-"cty": "tw",
-"ticker": "7750",
-"name": "新代"
-},
-{
-"cty": "tw",
-"ticker": "5536",
-"name": "聖暉*"
-},
-{
-"cty": "tw",
-"ticker": "2542",
-"name": "興富發"
-},
-{
-"cty": "tw",
-"ticker": "3706",
-"name": "神達"
-},
-{
-"cty": "tw",
-"ticker": "5904",
-"name": "寶雅*"
 },
 {
 "cty": "tw",
@@ -3914,13 +3859,28 @@
 },
 {
 "cty": "tw",
-"ticker": "5289",
-"name": "宜鼎"
+"ticker": "8996",
+"name": "高力"
 },
 {
 "cty": "tw",
-"ticker": "5434",
-"name": "崇越"
+"ticker": "2838",
+"name": "聯邦銀"
+},
+{
+"cty": "tw",
+"ticker": "3706",
+"name": "神達"
+},
+{
+"cty": "tw",
+"ticker": "7750",
+"name": "新代"
+},
+{
+"cty": "tw",
+"ticker": "2353",
+"name": "宏碁"
 },
 {
 "cty": "tw",
@@ -3929,13 +3889,53 @@
 },
 {
 "cty": "tw",
+"ticker": "5434",
+"name": "崇越"
+},
+{
+"cty": "tw",
+"ticker": "5269",
+"name": "祥碩"
+},
+{
+"cty": "tw",
+"ticker": "2542",
+"name": "興富發"
+},
+{
+"cty": "tw",
+"ticker": "6442",
+"name": "光聖"
+},
+{
+"cty": "tw",
+"ticker": "3324",
+"name": "雙鴻"
+},
+{
+"cty": "tw",
+"ticker": "6510",
+"name": "精測"
+},
+{
+"cty": "tw",
+"ticker": "5289",
+"name": "宜鼎"
+},
+{
+"cty": "tw",
+"ticker": "5536",
+"name": "聖暉*"
+},
+{
+"cty": "tw",
 "ticker": "3264",
 "name": "欣銓"
 },
 {
 "cty": "tw",
-"ticker": "3532",
-"name": "台勝科"
+"ticker": "6196",
+"name": "帆宣"
 },
 {
 "cty": "tw",
@@ -3944,13 +3944,13 @@
 },
 {
 "cty": "tw",
-"ticker": "9904",
-"name": "寶成"
+"ticker": "5904",
+"name": "寶雅*"
 },
 {
 "cty": "tw",
-"ticker": "1229",
-"name": "聯華"
+"ticker": "9904",
+"name": "寶成"
 }
 ],
 "private": [
