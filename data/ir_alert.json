@@ -190,9 +190,35 @@
     "chg": 7.19
    },
    "pre_sent": true
+  },
+  {
+   "code": "2345",
+   "quote": "2027年 AI 基建資本支出預估達 US$1.66T，年增75% (外部預測)",
+   "pat": "N%",
+   "val": 75.0,
+   "frag": "年增75%",
+   "src": "法說簡報",
+   "url": "https://mopsov.twse.com.tw/nas/STR/234520261126M001.pdf",
+   "pub": "2026-11-26T18:22+00:00",
+   "kind": "deck",
+   "title": "2027年 AI 基建資本支出預估達 US$1.66T，年增75% (外部預測)",
+   "ctx": "2027年 AI 基建資本支出預估達 US$1.66T，年增75% (外部預測)",
+   "heavy_why": "AI／未來產業「AI」＋「資本支出」",
+   "verify": "公司來源（deck）",
+   "key": "2345_2026-11-27",
+   "name": "智邦",
+   "meeting": "2026-11-27",
+   "seen": "2026-11-26T23:11+00:00",
+   "px": {
+    "d": "2026-11-26",
+    "close": 1620.0,
+    "chg": 9.83
+   },
+   "sent": false,
+   "mx": null
   }
  ],
- "asof": "2026-11-26T16:50+00:00",
+ "asof": "2026-11-26T23:11+00:00",
  "body": {
   "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9XMEJTZ3FtNEp3ZDlIMzJoZExULTctZTBSSXU0MmE2YUh0U1M5LWsySEFOalRRQ1RULS11UU52VXJPSlltZlp5SzdxV200UGt00gFWQVVfeXFMUEk4XzhjTEcyWnFHZXVrNHByMklwbHQzSEtTTmZucVpkdnJCekp5YXJUYkhlenhrcmtIZDdXTGFoV3g1ZUdFTWxaZDBkZjQ4Q0JONFQwakE?oc=5": {
    "r": "ok",
@@ -292,16 +318,6 @@
   }
  },
  "deck": {
-  "https://mopsov.twse.com.tw/nas/STR/303720261111M001.pdf": {
-   "s": [],
-   "at": "2026-11-19T23:05+00:00",
-   "v": 1
-  },
-  "https://mopsov.twse.com.tw/nas/STR/587620261119M001.pdf": {
-   "s": [],
-   "at": "2026-11-19T23:05+00:00",
-   "v": 1
-  },
   "https://mopsov.twse.com.tw/nas/STR/240820261111M001.pdf": {
    "s": [],
    "at": "2026-11-20T07:11+00:00",
@@ -365,6 +381,30 @@
   "https://mopsov.twse.com.tw/nas/STR/289020261125M002.pdf": {
    "s": [],
    "at": "2026-11-25T23:11+00:00",
+   "v": 1
+  },
+  "https://mopsov.twse.com.tw/nas/STR/234520261126M001.pdf": {
+   "s": [
+    "2026 預估｜年增 111%*",
+    "2027 預估｜年增 75%",
+    "2027年 AI 基建資本支出預估達 US$1.66T，年增75% (外部預測)"
+   ],
+   "at": "2026-11-26T23:11+00:00",
+   "v": 1
+  },
+  "https://mopsov.twse.com.tw/nas/STR/246820261126M002.pdf": {
+   "s": [],
+   "at": "2026-11-26T23:11+00:00",
+   "v": 1
+  },
+  "https://mopsov.twse.com.tw/nas/STR/288020261126M001.pdf": {
+   "s": [],
+   "at": "2026-11-26T23:11+00:00",
+   "v": 1
+  },
+  "https://mopsov.twse.com.tw/nas/STR/365320261126M001.pdf": {
+   "s": [],
+   "at": "2026-11-26T23:11+00:00",
    "v": 1
   }
  },
