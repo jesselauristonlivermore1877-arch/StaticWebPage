@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-26 10:44",
+ "asof": "2026-11-26 14:32",
  "first_stale": {
   "data/registry/officials_src.json|名單查證": "2026-11-24",
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-26",
@@ -297,11 +297,11 @@
   {
    "name": "權證",
    "path": "docs/data/warrant.json",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） warrant.py",
    "note": ""
@@ -333,11 +333,11 @@
   {
    "name": "國安基金／限空令歷史",
    "path": "docs/data/nsf_history.json",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/nsf_history.py",
    "note": ""
@@ -2901,7 +2901,7 @@
    "stale": false,
    "blocked": true,
    "owner": "雲端 root_cause.yml＋雲端 daily.yml（每日戰情更新） tools/pick_edm.py（root_cause_edm）",
-   "note": "今天核對沒過被擋下（上次通過 11-23）：2026-11-26 加權漲跌：日K庫與 root_cause 都沒有，標題方向無法判斷；那斯達克 100 期貨 2026-11-25 漲跌：卡上 0.14／重算 0.012368819158359301",
+   "note": "今天核對沒過被擋下（上次通過 11-23）：2026-11-26 加權漲跌：日K庫與 root_cause 都沒有，標題方向無法判斷",
    "edm": true
   },
   {
@@ -2935,11 +2935,11 @@
   {
    "name": "EDM 極端情緒之後・極端情緒〔senti_ext〕",
    "path": "docs/data/pick_edm.json#senti_ext",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（pick_edm_sentiment）",
@@ -3103,15 +3103,15 @@
   {
    "name": "EDM 本週市場主軸・AI 燒錢，〔theme_week〕",
    "path": "docs/data/pick_edm.json#theme_week",
-   "date": "2026-11-26",
+   "date": "2026-11-23",
    "freq": "wk",
    "allow": 0,
-   "lag_td": 0,
-   "days": 0,
+   "lag_td": 2,
+   "days": 3,
    "stale": false,
-   "blocked": false,
+   "blocked": true,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（theme_edm）",
-   "note": "",
+   "note": "今天核對沒過被擋下（上次通過 11-23）：加權指數 2026-11-19 38426.89 → 2026-11-26 39151.81：market_series ✗ 不一致",
    "edm": true
   },
   {
