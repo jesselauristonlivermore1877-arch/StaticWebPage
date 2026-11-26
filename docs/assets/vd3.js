@@ -350,7 +350,8 @@ window.vd3Mount = function (root, D, SRC) {
         var c = m[0], s = m[1], p = s.p[cur].px;
         h += '<div class="vd-r vd-st"><div class="vd-lab">' + vdTag(p.st) + " <b>" + vdEsc(s.nm) + "</b> <small>" + c + (s.sub ? "・" + vdEsc(s.sub) : "") + "</small></div>" +
           '<div class="vd-plot" data-c="' + c + '"></div>' +
-          '<div class="vd-num">股價 <b>' + vdF(p.dP) + "</b>（" + p.p0 + "→" + p.p1 + "）＝EPS " + vdF(p.dE) + "（" + vdN2(p.e0) + "→" + vdN2(p.e1) + "）× 本益比 " + vdF(p.dPE) + "（" + vdN2(p.pe0) + "→" + vdN2(p.pe1) + " 倍）" + (p.b !== D.periods[cur].t0 ? "・起點 " + vdMd(p.b) : "") + "</div>" +
+          '<div class="vd-num">股價 <b>' + vdF(p.dP) + "</b>（" + p.p0 + "→" + p.p1 + "）＝明年 EPS 預估 " + vdF(p.dE) + "（" + vdN2(p.e0) + "→" + vdN2(p.e1) + "，券商共識）× 前瞻本益比 " + vdF(p.dPE) + "（" + vdN2(p.pe0) + "→" + vdN2(p.pe1) + " 倍）" + (p.b !== D.periods[cur].t0 ? "・起點 " + vdMd(p.b) : "") +
+          (s.act ? '<br><small>對照實際 EPS：近四季 ' + vdN2(s.act.ttm) + "、今年已公布 " + vdN2(s.act.ytd) + "（至 " + vdEsc(s.act.yq) + "，公開資訊觀測站）</small>" : "") + "</div>" +
           irBlock(s) + "</div>";
       });
       h += '<div class="vd-r vd-hd"><div class="vd-lab"></div><div class="vd-ax vd-mx-b"></div></div>';
