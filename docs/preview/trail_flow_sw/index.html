@@ -1,0 +1,352 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>軌跡流向子切換（預覽）</title>
+<script>try{var q=new URLSearchParams(location.search).get("theme");if(q)document.documentElement.setAttribute("data-theme",q);}catch(e){}</script>
+<style>
+:root{--up:#E5484D;--down:#12A366;--acc:#D9A441;--bg:#000;--surface:#111;--raise:#1E1E1E;--ink-1:#F5F5F5;--ink-2:#A3A3A3;--line:#2A2A2A}
+:root[data-theme="light"]{--up:#D92D33;--down:#0E8A55;--acc:#A8740F;--bg:#F4F6F4;--surface:#FFFFFF;--raise:#EEF0EE;--ink-1:#16181A;--ink-2:#5A6168;--line:#D5D9D5}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink-1);font:15px/1.6 system-ui,-apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+main{max-width:1400px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:4px 0}.pv{color:var(--ink-2);font-size:13px;border:1px dashed var(--line);border-radius:8px;padding:8px 10px;margin:8px 0 12px}
+.pv ul,.pv ol{margin:4px 0 0;padding-left:20px}.pv b{color:var(--ink-1)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.tabs span{border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:13px;color:var(--ink-2)}.tabs .on{color:var(--acc);border-color:var(--acc)}
+.th{float:right;border:1px solid var(--line);background:var(--raise);color:var(--ink-1);border-radius:999px;padding:3px 10px;font-size:13px;cursor:pointer}
+</style></head><body><main>
+<button class="th" id="th" type="button">切換淺色／深色</button>
+<h1>市場 ▸ 軌跡流向（子切換預覽）</h1>
+<div class="tabs"><span>市場結構轉變</span><span class="on">軌跡流向</span><span>融資×指數＋市場體感</span><span>點數貢獻</span><span>…</span></div>
+<div class="pv"><b>要看的重點</b>
+<ol><li>下方「族群流向」「族群 × 日熱力圖」「歷史統計」上面多一列子切換：<b>動能｜量能｜法人籌碼｜產業本益比</b>，預設動能（跟現在正式頁一樣）。上面的指數日K與圖層按鈕不變。</li>
+<li>量能、法人籌碼：算法跟動能一樣（族群日值 → 3 日平均 → 翻轉占比 → 全面轉折日），口徑＝族群頁軌跡同一份；全面轉折日跟上方「量能轉折」「籌碼轉折」圖層是<b>同一組日子</b>（程式直接共用）。唯一不同：動能門檻有最低 30%，量能／籌碼沒有（11-16 v2 先定的規則，沒改）。</li>
+<li>產業本益比：本益比沒有逐日翻轉，改畫「各族群本益比在自己歷史第幾分位」熱力圖（紅高綠低、≥ 80 紅框、≤ 20 綠框），資料＝族群頁「產業本益比」同一份 sector_pe.json；沒有轉折日、沒有翻轉統計，頁上有寫。</li>
+<li><b>名稱候選（請 Evans 選；預覽先不改名）</b>：族群頁也有一個「軌跡流向」，兩個同名容易混。候選：<b>①「轉折流向」</b>（強調全面轉折日）<b>②「族群轉折」</b>（強調很多族群同時翻轉）<b>③「同步轉折」</b>（強調同一天一起翻）。</li></ol>
+抽樣核對（另一份原始資料重算，核對不過的那一種按鈕不會出現）：<ul><li>量能：daily_raw 原始日K 重算 12 天 × 27 族，最大差 0.0000 pp（容許 0.02）；另有 17 天兩份檔的成交金額本身不一致（2026-09-11～2026-10-22，追蹤池合計差最大 4.6%），不拿來驗公式</li><li>法人籌碼：chips_daily.json 重算 12 天、324 格，最大差 0.0413%（容許 0.05）</li><li>產業本益比：val.npz＋sector_map.csv 重算 12 天、309 格，最大差 0.050 分位（容許 0.15）</li></ul>
+預覽頁（不從網站連過來）。資料由 tools/trail_flow.py build() 產生＝正式每日戰情更新同一段程式；畫面是 tfCard()＝套版後市場頁籤同一段程式。資料日 2026-11-26。</div>
+<div id="app"></div>
+</main><script>
+document.getElementById("th").onclick=function(){var r=document.documentElement,l=r.getAttribute("data-theme")==="light";var u=new URL(location.href);u.searchParams.set("theme",l?"dark":"light");location.href=u.toString();};
+/* 🟡 11-26（雲端新21，Evans「軌跡流向是屬於動能的 要做的子標籤切換動能 量能 法人籌碼 嗎? 產業本益比做得出來嗎??」）：
+   下方族群流向、族群×日熱力圖、歷史統計加子切換「動能｜量能｜法人籌碼｜產業本益比」（預設動能＝跟現在一樣）。
+   資料＝trail_flow.json 的 sw（tools/trail_flow.py build() 第六節）；沒有 sw 或某一種核對沒過 → 那顆按鈕不出現。預覽版，Evans 點頭才替換 template 的 TF_BEGIN～TF_END。 */
+function tfCard(url) {
+  const NS = "http://www.w3.org/2000/svg";
+  if (!document.getElementById("tf-css")) {
+    const st = document.createElement("style");
+    st.id = "tf-css";
+    st.textContent = `
+.tf-wrap{white-space:normal;color:var(--ink-1,#eee);max-width:1400px}
+.tf-sub{color:var(--ink-2,#a3a3a3);font-size:13px;line-height:1.6;margin:4px 0}
+.tf-h{font-size:16px;font-weight:700;margin:16px 0 6px}
+.tf-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}
+.tf-btn{border:1px solid var(--line,#2a2a2a);background:var(--raise,#1e1e1e);color:var(--ink-1,#eee);border-radius:999px;padding:4px 12px;font-size:13px;cursor:pointer}
+.tf-btn.on{border-color:var(--acc,#D9A441);color:var(--acc,#D9A441);font-weight:700}
+.tf-box{background:var(--surface,#111);border:1px solid var(--line,#2a2a2a);border-radius:10px;padding:10px 10px 6px;margin:8px 0}
+.tf-read{font-size:13px;min-height:20px;color:var(--ink-2,#a3a3a3);font-variant-numeric:tabular-nums}
+.tf-svg{width:100%;height:auto;display:block}
+.tf-tbl{border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;width:100%;max-width:720px}
+.tf-tbl th,.tf-tbl td{border-bottom:1px solid var(--line,#2a2a2a);padding:4px 6px;text-align:right}
+.tf-tbl th:first-child,.tf-tbl td:first-child{text-align:left}
+.tf-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tf-up{color:var(--up,#E5484D)}.tf-dn{color:var(--down,#12A366)}
+.tf-chip{display:inline-block;border:1px solid var(--line,#2a2a2a);border-radius:8px;padding:6px 10px;margin:4px 6px 4px 0;font-size:13px}
+.tf-chip b{font-size:15px}
+.tf-sw{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:18px 0 4px;padding:8px 10px;border:1px solid var(--line,#2a2a2a);border-radius:10px;background:var(--raise,#1e1e1e)}
+.tf-sw .tf-btn{background:var(--surface,#111)}`;
+    document.head.appendChild(st);
+  }
+  const mk = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+  const sv = (tag, at) => { const e = document.createElementNS(NS, tag); for (const k in at) e.setAttribute(k, at[k]); return e; };
+  const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const UP = css("--up") || "#E5484D", DN = css("--down") || "#12A366", ACC = css("--acc") || "#D9A441";
+  const INK2 = css("--ink-2") || "#a3a3a3", LINE = css("--line") || "#2a2a2a";
+  const LIGHT = document.documentElement.getAttribute("data-theme") === "light";
+  const TURN = LIGHT ? "#1A4FD8" : "#4DB2FF", TFBG = css("--bg") || (LIGHT ? "#F4F6F4" : "#000");
+  // 🟢 11-17（雲端新1 C44 追加，Evans「不想用紅綠K棒，用會員站看盤區的黑白配色」）：會員站 THEMES.bw＝漲空心白框、跌實心灰；淺色主題換深框
+  const KUP = LIGHT ? "#1F2937" : "#E6E6E6", KDN = LIGHT ? "#9AA3AE" : "#7C8591", KBG = css("--surface") || (LIGHT ? "#FFF" : "#111");
+  const pct = v => v == null ? "—" : (v * 100).toFixed(0) + "%";
+  const sg = v => v == null ? "—" : (v > 0 ? "+" : "") + v.toFixed(2) + "%";
+  const md = d => d.slice(5).replace("-", "/");
+
+  const root = mk("div", "tf-wrap", `<div class="tf-sub">載入中…</div>`);
+  fetch(url + (typeof _dv === "function" ? _dv() : ""), {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null).then(J => {
+    root.innerHTML = "";
+    if (!J || !J.dates) { root.appendChild(mk("div", "tf-sub", "軌跡流向資料還沒產生（每日戰情更新跑過就會有）。")); return; }
+    const J0 = J, N0 = J0.dates.length;
+    const lastT0 = (J0.turns || []).slice().sort((a, b) => b[0] - a[0])[0];
+    const narrow = (root.clientWidth || window.innerWidth) < 700;
+    let RNG = narrow ? 60 : 240;
+    const view = k => { const o = Math.max(0, N0 - k), cut = a => a.slice(o), sh = a => a.filter(t => t[0] >= o).map(t => [t[0] - o].concat(t.slice(1)));
+      const mv2 = a => (a || []).filter(i => i >= o).map(i => i - o);
+      const L2 = (J0.layers || []).map(q => Object.assign({}, q, {idx: mv2(q.idx), up: mv2(q.up), dn: mv2(q.dn)}));
+      return Object.assign({}, J0, {off: o, dates: cut(J0.dates), taiex: cut(J0.taiex), txf: cut(J0.txf), pos: cut(J0.pos), dn: cut(J0.dn), up: cut(J0.up),
+        heat: J0.heat.map(cut), turns: sh(J0.turns || []), layers: L2,
+        sw: Object.fromEntries(Object.entries(J0.sw || {}).map(([k2, q]) => [k2, Object.assign({}, q, {heat: (q.heat || []).map(cut),
+          pos: q.pos ? cut(q.pos) : null, dn: q.dn ? cut(q.dn) : null, up: q.up ? cut(q.up) : null, turns: q.turns ? sh(q.turns) : null})]))}); };
+    // 子切換：mom＝動能（頂層欄位）；其餘讀 J.sw[鍵]
+    const SWK = ["mom"].concat(["vol", "chip", "pe"].filter(k2 => (J0.sw || {})[k2]));
+    const SWN = {mom: "動能", vol: "量能", chip: "法人籌碼", pe: "產業本益比"};
+    let MODE = "mom";
+    const pick = J => MODE === "mom" ? Object.assign({name: "動能", unit: "%", rule: J0.rule, hs: 2.5}, J) : J.sw[MODE];
+
+    // ── 摘要 ──
+    const lastT = lastT0, n0last = N0 - 1;
+    root.appendChild(mk("div", "tf-sub", J.rule));
+    const chips = mk("div", "");
+    const last = n0last, today = J.dn[last] != null ? `<span class="tf-chip">${md(J.dates[last])}　向下翻轉 <b class="tf-dn">${pct(J.dn[last])}</b>　向上翻轉 <b class="tf-up">${pct(J.up[last])}</b>　動能為正 <b>${pct(J.pos[last])}</b>（${J.secs.length} 族）</span>` : "";
+    const lt = lastT ? `<span class="tf-chip">最近一次全面轉折：<b class="${lastT[1] > 0 ? "tf-up" : "tf-dn"}">${md(J.dates[lastT[0]])} ${lastT[1] > 0 ? "▲ 向上" : "▼ 向下"}</b>（${pct(lastT[2])} 族群同時翻轉）</span>` : "";
+    chips.innerHTML = today + lt;
+    root.appendChild(chips);
+
+    const rbar = mk("div", "tf-bar");
+    rbar.appendChild(mk("span", "tf-sub", "區間"));
+    const rb = {};
+    [60, 120, 240].forEach(k => { const b = mk("button", "tf-btn" + (k === RNG ? " on" : ""), "近 " + k + " 日"); rb[k] = b; rbar.appendChild(b);
+      b.onclick = () => { RNG = k; Object.keys(rb).forEach(q => rb[q].classList.toggle("on", +q === k)); draw(); }; });
+    root.appendChild(rbar);
+    const body = mk("div", "");
+    root.appendChild(body);
+    let SRC = "taiex";
+    const LY = {};
+    (J0.layers || []).forEach(q => { LY[q.key] = false; });
+    const LN = {}; (J0.layers || []).forEach(q => { LN[q.key] = q; });
+    function draw() {
+    body.innerHTML = "";
+    const J = view(RNG), n = J.dates.length;
+    const tmap = {}; (J.turns || []).forEach(t => { tmap[t[0]] = t; });
+    const WW = Math.max(340, Math.min(1000, Math.round(body.clientWidth || root.clientWidth || 1000) - 22));
+    const root2 = body;
+    // ── 日K＋轉折日 ──
+    root2.appendChild(mk("div", "tf-h", "指數日K × 動能轉折日"));
+    const bar = mk("div", "tf-bar");
+    const bT = mk("button", "tf-btn" + (SRC === "taiex" ? " on" : ""), "加權指數"), bF = mk("button", "tf-btn" + (SRC === "txf" ? " on" : ""), "台指期");
+    bar.append(bT, bF);
+    const lyBtn = {};
+    Object.keys(LY).forEach(k => { const b = mk("button", "tf-btn" + (LY[k] ? " on" : ""), "＋" + LN[k].name); lyBtn[k] = b; bar.appendChild(b); });
+    root2.appendChild(bar);
+    const kread = mk("div", "tf-read", "移到圖上看任一天");
+    const kbox = mk("div", "tf-box");
+    root2.appendChild(kbox);
+
+    // 圖層標記：[索引, 方向(+1 紅／−1 綠), 圖層, 說明]；爆量依「這張圖」收盤比前一日收盤分漲跌（不看 K 棒紅綠）
+    function layerMarks(J, K) {
+      const out = [];
+      const prevC = i => { if (i > 0) return K[i - 1] ? K[i - 1][3] : null;
+        const a = J0[SRC], g = J.off - 1; return g >= 0 && a[g] ? a[g][3] : (J0[SRC + "_prev"] ?? null); };
+      (J.layers || []).forEach(q => {
+        if (!LY[q.key]) return;
+        if (q.by_close) (q.idx || []).forEach(i => { const b = K[i], p = prevC(i); if (!b || p == null) return;
+          const r = (b[3] / p - 1) * 100; out.push([i, r >= 0 ? 1 : -1, q, `${q.name}收${r >= 0 ? "漲" : "跌"} ${(r >= 0 ? "+" : "") + r.toFixed(2)}%`]); });
+        (q.up || []).forEach(i => out.push([i, 1, q, q.rows[0][0]]));
+        (q.dn || []).forEach(i => out.push([i, -1, q, q.rows[1][0]]));
+      });
+      return out;
+    }
+    function drawK() {
+      kbox.innerHTML = "";
+      kbox.appendChild(kread);
+      const K = J[SRC] || [];
+      const W = WW, H = Math.round(WW < 600 ? 260 : 330), L = 4, R = 56, TOP = 22, BOT = 26, PW = W - L - R, PH = H - TOP - BOT;
+      let lo = Infinity, hi = -Infinity;
+      K.forEach(b => { if (b) { lo = Math.min(lo, b[2]); hi = Math.max(hi, b[1]); } });
+      if (!isFinite(lo)) { kbox.appendChild(mk("div", "tf-sub", "這段期間沒有資料。")); return; }
+      const nOn = Object.keys(LY).filter(k => LY[k]).length, pad = (hi - lo) * (0.08 + 0.05 * nOn); lo -= pad; hi += pad;
+      const X = i => L + (i + 0.5) * PW / n, Y = v => TOP + (hi - v) / (hi - lo) * PH, bw = Math.max(1, PW / n * 0.62);
+      const s = sv("svg", {class: "tf-svg", viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": (SRC === "txf" ? "台指期" : "加權指數") + "日K與動能轉折日"});
+      for (let g = 0; g <= 4; g++) {
+        const v = lo + (hi - lo) * g / 4, y = Y(v);
+        s.appendChild(sv("line", {x1: L, x2: W - R, y1: y, y2: y, stroke: LINE, "stroke-width": 1}));
+        const t = sv("text", {x: W - R + 6, y: y + 4, "font-size": 12, fill: INK2}); t.textContent = Math.round(v).toLocaleString(); s.appendChild(t);
+      }
+            for (let i = 0; i < n; i += Math.ceil(n / (WW < 600 ? 4 : 6))) {
+        const t = sv("text", {x: X(i), y: H - 6, "font-size": 12, fill: INK2, "text-anchor": "middle"}); t.textContent = J.dates[i].slice(2, 7).replace("-", "/"); if (!i) t.setAttribute("text-anchor", "start"); s.appendChild(t);
+      }
+      // 轉折日藍色虛線（跟熱力格同一色），畫在K棒後面
+      (J.turns || []).forEach(t => { if (!K[t[0]]) return; const x = X(t[0]);
+        s.appendChild(sv("line", {x1: x, x2: x, y1: TOP, y2: H - BOT, stroke: TURN, "stroke-width": 2, "stroke-dasharray": "6 4", opacity: .9})); });
+      K.forEach((b, i) => {
+        if (!b) return;
+        const up = b[3] >= b[0], c = up ? KUP : KDN, hb = Math.max(1, Math.abs(Y(b[0]) - Y(b[3])));
+        s.appendChild(sv("line", {x1: X(i), x2: X(i), y1: Y(b[1]), y2: Y(b[2]), stroke: c, "stroke-width": 1}));
+        s.appendChild(up && bw >= 3 ? sv("rect", {x: X(i) - bw / 2 + .5, y: Y(Math.max(b[0], b[3])) + .5, width: bw - 1, height: Math.max(1, hb - 1), fill: KBG, stroke: c, "stroke-width": 1})
+                                    : sv("rect", {x: X(i) - bw / 2, y: Y(Math.max(b[0], b[3])), width: bw, height: hb, fill: c}));
+      });
+      (J.turns || []).forEach(t => {
+        const b = K[t[0]]; if (!b) return;
+        const x = X(t[0]);
+        if (t[1] < 0) { const y = Y(b[1]) - 6; s.appendChild(sv("path", {d: `M${x - 6},${y - 10}L${x + 6},${y - 10}L${x},${y}Z`, fill: DN})); }
+        else { const y = Y(b[2]) + 6; s.appendChild(sv("path", {d: `M${x - 6},${y + 10}L${x + 6},${y + 10}L${x},${y}Z`, fill: UP})); }
+      });
+      const marks = layerMarks(J, K);
+      const slotU = {}, slotD = {};
+      marks.forEach(([i, dir, q]) => { const b = K[i]; if (!b) return;
+        const x = X(i);
+        let y;
+        if (dir > 0) { const k2 = slotU[i] = (slotU[i] || 0) + 1; y = Y(b[2]) + 6 + (tmap[i] && tmap[i][1] > 0 ? 12 : 0) + k2 * 17 - 8; }
+        else { const k2 = slotD[i] = (slotD[i] || 0) + 1; y = Y(b[1]) - 6 - (tmap[i] && tmap[i][1] < 0 ? 12 : 0) - k2 * 17 + 8; }
+        s.appendChild(sv("circle", {cx: x, cy: y, r: 8, fill: dir > 0 ? UP : DN, stroke: "rgba(0,0,0,.55)", "stroke-width": 1}));
+        const t = sv("text", {x, y: y + 3.6, "font-size": 10, fill: "#fff", "text-anchor": "middle", "font-weight": 700}); t.textContent = q.ch; s.appendChild(t); });
+      const hl = sv("line", {x1: 0, x2: 0, y1: TOP, y2: H - BOT, stroke: INK2, "stroke-dasharray": "3 3", opacity: 0});
+      s.appendChild(hl);
+      const mv = ev => {
+        const r = s.getBoundingClientRect(), x = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left;
+        const i = Math.max(0, Math.min(n - 1, Math.floor((x / r.width * W - L) / (PW / n))));
+        const b = K[i]; hl.setAttribute("x1", X(i)); hl.setAttribute("x2", X(i)); hl.setAttribute("opacity", 1);
+        const t = tmap[i];
+        kread.innerHTML = `${J.dates[i]}　` + (b ? `開 ${b[0].toLocaleString()}　高 ${b[1].toLocaleString()}　低 ${b[2].toLocaleString()}　收 ${b[3].toLocaleString()}` : "（無資料）") +
+          (t ? `　<b class="${t[1] > 0 ? "tf-up" : "tf-dn"}">${t[1] > 0 ? "▲ 全面向上轉折" : "▼ 全面向下轉折"} ${pct(t[2])}</b>` : "") +
+          marks.filter(m => m[0] === i).map(m => `　<b class="${m[1] > 0 ? "tf-up" : "tf-dn"}">［${m[2].ch}］${m[3]}</b>`).join("");
+      };
+      s.addEventListener("mousemove", mv); s.addEventListener("touchstart", mv, {passive: true});
+      kbox.appendChild(s);
+      const lg = mk("div", "tf-sub", `<b style="color:${TURN}">┆ 藍色虛線</b>＝全面轉折日：<span class="tf-dn">▼</span> 向下　<span class="tf-up">▲</span> 向上｜K棒：空心＝收漲、實心灰＝收跌` +
+        Object.keys(LY).filter(k => LY[k]).map(k => `<br>［${LN[k].ch}］${LN[k].name}：${LN[k].rule}`).join("") +
+        (SRC === "txf" ? `　｜台指期日K到 ${J.txf_last}（每週更新，最新幾天可能還沒有）` : ""));
+      kbox.appendChild(lg);
+    }
+    bT.onclick = () => { SRC = "taiex"; bT.classList.add("on"); bF.classList.remove("on"); drawK(); };
+    bF.onclick = () => { SRC = "txf"; bF.classList.add("on"); bT.classList.remove("on"); drawK(); };
+    Object.keys(lyBtn).forEach(k => { lyBtn[k].onclick = () => { LY[k] = !LY[k]; lyBtn[k].classList.toggle("on", LY[k]); drawK(); }; });
+    drawK();
+
+    // ── 子切換（只管下面兩段＋歷史統計；上面日K與圖層不受影響）──
+    const swb = mk("div", "tf-sw");
+    swb.appendChild(mk("span", "tf-sub", "下方看："));
+    SWK.forEach(k2 => { const b = mk("button", "tf-btn" + (MODE === k2 ? " on" : ""), SWN[k2]);
+      b.onclick = () => { MODE = k2; [...swb.querySelectorAll("button")].forEach(x => x.classList.toggle("on", x === b)); drawLower(); drawStat(); }; swb.appendChild(b); });
+    root2.appendChild(swb);
+    const lower = mk("div", "");
+    root2.appendChild(lower);
+    function drawLower() {
+    lower.innerHTML = "";
+    const M = pick(J), PE = MODE === "pe", nm = M.name;
+    const tmap = {}; (M.turns || []).forEach(t => { tmap[t[0]] = t; });
+    if (MODE !== "mom") lower.appendChild(mk("div", "tf-sub", M.rule));
+    const fmtv = v => v == null ? "—" : PE ? v.toFixed(0) + " 分位" : MODE === "chip" ? (v > 0 ? "+" : "") + v.toFixed(2) + "%" : MODE === "vol" ? (v > 0 ? "+" : "") + v.toFixed(2) + " pp" : sg(v);
+    const root2 = lower;
+    if (PE) {
+      root2.appendChild(mk("div", "tf-h", "族群本益比位階"));
+      root2.appendChild(mk("div", "tf-box", `<div class="tf-sub">本益比沒有「逐日翻正／翻負」，所以這裡沒有翻轉占比、沒有全面轉折日；直接看下面熱力圖每個族群在自己歷史的第幾分位（紅＝偏高、綠＝偏低，≥ 80 高檔、≤ 20 低檔，框線標出）。</div>`));
+    } else {
+    root2.appendChild(mk("div", "tf-h", `族群${nm}流向（每天有幾成族群同時翻轉）`));
+    const fread = mk("div", "tf-read", "移到圖上看任一天");
+    const fbox = mk("div", "tf-box");
+    fbox.appendChild(fread);
+    {
+      const W = WW, L = 4, R = 56, TOP = 10, P1 = 70, GAP = 24, P2 = 150, BOT = 26, H = TOP + P1 + GAP + P2 + BOT, PW = W - L - R;
+      const mid = TOP + P1 + GAP + P2 / 2;
+      const X = i => L + (i + 0.5) * PW / n, bw = Math.max(1, PW / n * 0.7);
+      const s = sv("svg", {class: "tf-svg", viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "動能為正的族群占比與每日翻轉占比"});
+      const Yp = v => TOP + (1 - v) * P1, Yb = v => mid - v * P2 / 2;
+      const lab = (y, tx) => { const t = sv("text", {x: W - R + 6, y: y + 4, "font-size": 12, fill: INK2}); t.textContent = tx; s.appendChild(t); };
+      [[1, "100%"], [0.5, "50%"], [0, "0%"]].forEach(([v, lb]) => { s.appendChild(sv("line", {x1: L, x2: W - R, y1: Yp(v), y2: Yp(v), stroke: LINE, "stroke-width": 1})); lab(Yp(v), lb); });
+      [[1, "↑100%"], [0, "0"], [-1, "↓100%"]].forEach(([v, lb]) => { s.appendChild(sv("line", {x1: L, x2: W - R, y1: Yb(v), y2: Yb(v), stroke: LINE, "stroke-width": v === 0 ? 1.5 : 1})); lab(Yb(v), lb); });
+      [[M.thr[1], UP], [-M.thr[0], DN]].forEach(([v, c]) => s.appendChild(sv("line", {x1: L, x2: W - R, y1: Yb(v), y2: Yb(v), stroke: c, "stroke-dasharray": "5 4", opacity: .7})));
+      for (let i = 0; i < n; i++) {
+        if (M.up[i]) s.appendChild(sv("rect", {x: X(i) - bw / 2, y: Yb(M.up[i]), width: bw, height: M.up[i] * P2 / 2, fill: UP, opacity: tmap[i] && tmap[i][1] > 0 ? 1 : .4}));
+        if (M.dn[i]) s.appendChild(sv("rect", {x: X(i) - bw / 2, y: mid, width: bw, height: M.dn[i] * P2 / 2, fill: DN, opacity: tmap[i] && tmap[i][1] < 0 ? 1 : .4}));
+      }
+      let d = "";
+      M.pos.forEach((v, i) => { if (v != null) d += (d ? "L" : "M") + X(i).toFixed(1) + "," + Yp(v).toFixed(1); });
+      s.appendChild(sv("path", {d, fill: "none", stroke: ACC, "stroke-width": 1.6}));
+      for (let i = 0; i < n; i += Math.ceil(n / (WW < 600 ? 4 : 6))) {
+        const t = sv("text", {x: X(i), y: H - 6, "font-size": 12, fill: INK2, "text-anchor": i ? "middle" : "start"}); t.textContent = J.dates[i].slice(2, 7).replace("-", "/"); s.appendChild(t);
+      }
+      const mv = ev => {
+        const r = s.getBoundingClientRect(), x = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left;
+        const i = Math.max(0, Math.min(n - 1, Math.floor((x / r.width * W - L) / (PW / n))));
+        fread.innerHTML = `${J.dates[i]}　<span class="tf-up">${MODE === "chip" ? "翻買" : "向上翻轉"} ${pct(M.up[i])}</span>　<span class="tf-dn">${MODE === "chip" ? "翻賣" : "向下翻轉"} ${pct(M.dn[i])}</span>　<span style="color:${ACC}">${nm}為正 ${pct(M.pos[i])}</span>` + (tmap[i] ? `　<b class="${tmap[i][1] > 0 ? "tf-up" : "tf-dn"}">${tmap[i][1] > 0 ? "▲ 全面向上" : "▼ 全面向下"}</b>` : "");
+      };
+      s.addEventListener("mousemove", mv); s.addEventListener("touchstart", mv, {passive: true});
+      fbox.appendChild(s);
+      fbox.appendChild(mk("div", "tf-sub", `上格金線＝3 日平均${nm}為正的族群占比。下格紅柱（往上）＝當天由負翻正的族群占比、綠柱（往下）＝由正翻負的占比；深色＝超過門檻（虛線）的全面轉折日。` +
+        (MODE === "mom" ? "" : `門檻跟上方「${MODE === "vol" ? "量能轉折" : "籌碼轉折"}」圖層同一組（全期第 95 百分位、不設最低）；動能另有最低 30% 的規定，所以兩者門檻高低不同。`)));
+    }
+    root2.appendChild(fbox);
+    }
+
+    // ── 熱力格 ──
+    root2.appendChild(mk("div", "tf-h", PE ? "族群 × 日　本益比在自己歷史的分位（紅高綠低）" : `族群 × 日　3 日平均${nm}（紅正綠負；藍色虛線＝全面轉折日）`));
+    const hread = mk("div", "tf-read", "移到格子上看族群與數值");
+    const hbox = mk("div", "tf-box");
+    hbox.appendChild(hread);
+    {
+      const m = J.secs.length, LB = WW < 600 ? 104 : 150, W = WW, R = 8, RH = WW < 600 ? 16 : 15, TOP = 16, BOT = 22, PW = W - LB - R, H = TOP + m * RH + BOT;
+      const cw = PW / n;
+      const s = sv("svg", {class: "tf-svg", viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "族群動能熱力格"});
+      const col = v => v == null ? "transparent" : (PE ? (v >= 50 ? UP : DN) : (v >= 0 ? UP : DN));
+      const op = v => PE ? 0.08 + 0.92 * Math.min(1, Math.abs(v - 50) / 50) : 0.15 + 0.85 * Math.min(1, Math.abs(v) / (M.hs || 2.5));
+      J.secs.forEach((sec, r) => {
+        const t = sv("text", {x: LB - 6, y: TOP + r * RH + RH * .75, "font-size": WW < 600 ? 10.5 : 11.5, fill: INK2, "text-anchor": "end"}); t.textContent = WW < 600 && sec.length > 8 ? sec.slice(0, 8) + "…" : sec; s.appendChild(t);
+        (M.heat[r] || []).forEach((v, i) => {
+          if (v == null) return;
+          s.appendChild(sv("rect", {x: LB + i * cw, y: TOP + r * RH + 1, width: cw + .3, height: RH - 2, fill: col(v), opacity: op(v).toFixed(2)}));
+        });
+        // 產業本益比：≥ 80／≤ 20 的連續區段描框（高檔／低檔）
+        if (PE) { const hr = M.heat[r] || []; let a = -1;
+          for (let i = 0; i <= n; i++) { const z = i < n && hr[i] != null && (hr[i] >= 80 || hr[i] <= 20) ? (hr[i] >= 80 ? 1 : -1) : 0, pz = a >= 0 ? (hr[a] >= 80 ? 1 : -1) : 0;
+            if (a >= 0 && z !== pz) { s.appendChild(sv("rect", {x: LB + a * cw + .5, y: TOP + r * RH + 1.5, width: Math.max(1, (i - a) * cw - 1), height: RH - 3, fill: "none", stroke: pz > 0 ? UP : DN, "stroke-width": 1.2})); a = -1; }
+            if (a < 0 && z) a = i; } }
+      });
+      // 🟢 11-17（雲端新1 C44，Evans「虛線很不明顯」）：轉折線改藍色加粗虛線（紅底綠底都看得到）＋底下墊一層背景色描邊；方向改由上緣 ▲紅／▼綠 表示
+      (PE ? [] : (M.turns || [])).forEach(t => { const x = LB + (t[0] + .5) * cw;
+        s.appendChild(sv("line", {x1: x, x2: x, y1: TOP, y2: TOP + m * RH, stroke: TFBG, "stroke-width": 4, "stroke-dasharray": "6 4", opacity: .55}));
+        s.appendChild(sv("line", {x1: x, x2: x, y1: TOP, y2: TOP + m * RH, stroke: TURN, "stroke-width": 2.2, "stroke-dasharray": "6 4"}));
+        s.appendChild(sv("path", {d: t[1] > 0 ? `M${x - 5},${TOP - 2}L${x + 5},${TOP - 2}L${x},${TOP - 11}Z` : `M${x - 5},${TOP - 11}L${x + 5},${TOP - 11}L${x},${TOP - 2}Z`, fill: t[1] > 0 ? UP : DN})); });
+      for (let i = 0; i < n; i += Math.ceil(n / (WW < 600 ? 4 : 6))) {
+        const t = sv("text", {x: LB + (i + .5) * cw, y: H - 6, "font-size": 12, fill: INK2, "text-anchor": i ? "middle" : "start"}); t.textContent = J.dates[i].slice(2, 7).replace("-", "/"); s.appendChild(t);
+      }
+      const mv = ev => {
+        const r = s.getBoundingClientRect(), p = ev.touches ? ev.touches[0] : ev;
+        const x = (p.clientX - r.left) / r.width * W, y = (p.clientY - r.top) / r.height * H;
+        const i = Math.floor((x - LB) / cw), k = Math.floor((y - TOP) / RH);
+        if (i < 0 || i >= n || k < 0 || k >= m) return;
+        const v = (M.heat[k] || [])[i];
+        hread.innerHTML = `${J.dates[i]}　${J.secs[k]}${PE ? "" : `（${J.n_mem[k]} 檔）`}　${PE ? "本益比位於自己歷史" : "3 日平均" + nm} <b class="${(PE ? v >= 50 : v > 0) ? "tf-up" : "tf-dn"}">${fmtv(v)}</b>` +
+          (PE && v != null ? (v >= 80 ? "（高檔）" : v <= 20 ? "（低檔）" : "") : "") + (tmap[i] ? `　<b class="${tmap[i][1] > 0 ? "tf-up" : "tf-dn"}">${tmap[i][1] > 0 ? "▲ 全面向上" : "▼ 全面向下"}</b>` : "");
+      };
+      s.addEventListener("mousemove", mv); s.addEventListener("touchstart", mv, {passive: true});
+      hbox.appendChild(s);
+      hbox.appendChild(mk("div", "tf-sub", PE
+        ? `格子紅＝本益比在自己歷史 50 分位以上、綠＝以下，越深越極端；<span class="tf-up">紅框</span>＝≥ 80 高檔、<span class="tf-dn">綠框</span>＝≤ 20 低檔。空白＝歷史不滿 250 天或當天有本益比的成員不到 3 檔。沒有轉折日。`
+        : `<b style="color:${TURN}">┆ 藍色虛線</b>＝全面轉折日（很多族群同一天翻轉）；上緣 <span class="tf-up">▲</span> 向上轉折、<span class="tf-dn">▼</span> 向下轉折。格子紅＝3 日平均${nm}為正、綠＝為負，顏色越深數值越大。`));
+    }
+    root2.appendChild(hbox);
+    }
+    drawLower();
+    }
+    const statBox = mk("div", "");
+    draw();
+    let rz = null;
+    window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { if (root.isConnected) draw(); }, 250); });
+
+    // ── 歷史統計（依子切換）──
+    root.appendChild(statBox);
+    function drawStat() {
+    statBox.innerHTML = "";
+    const root = statBox;
+    root.appendChild(mk("div", "tf-h", `歷史統計${MODE === "mom" ? "" : "：" + SWN[MODE]}（${MODE === "chip" && J0.sw.chip.first ? "法人資料 " + J0.sw.chip.first + " 起" : J.first}～${J.asof}${MODE === "chip" ? "" : `，${J.days} 個交易日`}）`));
+    if (MODE === "pe") { root.appendChild(mk("div", "tf-sub", "產業本益比沒有逐日翻轉，所以沒有全面轉折日、也沒有翻轉統計。要看「估值高低檔」事件之後的加權表現，請切回「動能」看統計表的［估］兩列（那是上方圖層的口徑：追蹤池成員、各族群分位平均）。")); return; }
+    const pc = v => v == null ? "—" : (v >= 90 || v <= 10 ? `<b>${v}</b>` : v);
+    const st = (MODE === "mom" ? J.stat : J0.sw[MODE].stat) || {}, row = (nm, o) => o ? `<tr><td>${nm}</td><td>${o.n}</td><td>${sg(o.m5)}</td><td>${o.up5 ?? "—"}%</td><td>${pc(o.pct5)}</td><td>${sg(o.m20)}</td><td>${o.up20 ?? "—"}%</td><td>${pc(o.pct20)}</td></tr>` : "";
+    const base = st.down || {};
+    const tb = mk("div", "tf-scroll", `<table class="tf-tbl"><thead><tr><th>之後的加權指數</th><th>次數</th><th>5 日平均</th><th>5 日上漲機率</th><th>比隨機（分位）</th><th>20 日平均</th><th>20 日上漲機率</th><th>比隨機（分位）</th></tr></thead><tbody>` +
+      (MODE === "mom" ? row("▼ 全面向下轉折日", st.down) + row("▲ 全面向上轉折日", st.up) +
+        (J.layers || []).map(q => q.rows.map(r => row(`［${q.ch}］${r[0]}`, r[1])).join("")).join("")
+        : MODE === "chip" ? row("▲ 全面翻買日", st.up) + row("▼ 全面翻賣日", st.down) : row("▲ 量能全面翻正（資金湧入）", st.up) + row("▼ 量能全面翻負（資金退潮）", st.down)) +
+      `<tr><td>（對照）所有交易日</td><td>—</td><td>${sg(base.bm5)}</td><td>${base.bup5 ?? "—"}%</td><td>50</td><td>${sg(base.bm20)}</td><td>${base.bup20 ?? "—"}%</td><td>50</td></tr></tbody></table>`);
+    root.appendChild(tb);
+    const nts = (J.layers || []).filter(q => MODE === "mom" || q.key === MODE).flatMap(q => (q.notes || []).map(t => `［${q.ch}］${t}`));
+    if (nts.length) root.appendChild(mk("div", "tf-sub", nts.join("<br>")));
+    const p3 = J.pre3 || {};
+    root.appendChild(mk("div", "tf-sub", "怎麼看：「比隨機」＝事件之後的平均漲跌，放在同樣次數隨機抽日子（2,000 次）的第幾分位；50 附近＝跟隨便哪一天差不多，粗體（≥ 90 或 ≤ 10）才算明顯偏多或偏空。" +
+      (MODE !== "mom" ? `${SWN[MODE]}轉折日跟上方「${MODE === "vol" ? "量能轉折" : "籌碼轉折"}」圖層是同一組日子，所以這裡的數字跟「動能」頁統計表裡的［${MODE === "vol" ? "量" : "籌"}］兩列一樣。` : "") +
+      (MODE !== "mom" ? "" : `動能轉折日描述的是「族群同時轉向」這件事本身，之後的漲跌跟一般日子分不太出來：3 日平均要等動能真的翻過來才確認，向上轉折前 3 天加權平均已經先漲 ${sg(p3.up)}、向下轉折前 3 天已經先跌 ${sg(p3.down)}（一般 3 天 ${sg(p3.all)}），確認時大半段已經走完，所以是看盤時的結構提示，不是單獨的方向訊號。`) +
+      (J.foot ? "　" + J.foot : "")));
+    }
+    drawStat();
+  });
+  return root;
+}
+
+document.getElementById("app").appendChild(tfCard("data.json"));
+</script></body></html>
