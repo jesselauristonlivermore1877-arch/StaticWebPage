@@ -2,7 +2,7 @@
  "file": "1101_2026-11-25.md",
  "code": "1101",
  "date": "2026-11-25",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -21,10 +21,7 @@
   "ok": true,
   "bad": [],
   "checked": [
-   "close",
    "eps_q",
-   "mcap",
-   "pe_ttm",
    "rev_m"
   ]
  },
@@ -43,8 +40,15 @@
   "skipped": 0
  },
  "transcript": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "why": "原話：那台泥預計在今年年底開始，我們也會在葡萄牙及土耳其的水泥廠導入AI無人礦卡。"
+   },
+   {
+    "why": "沒有任何原話"
+   }
+  ],
   "has": true
  }
 }
