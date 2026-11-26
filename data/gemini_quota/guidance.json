@@ -530,7 +530,7 @@
     "e429": 1
    },
    "gemini-2.5-flash": {
-    "req": 1,
+    "req": 2,
     "tok": 0
    },
    "gemini-omni-1.2-flash": {
@@ -559,31 +559,39 @@
     "e429": 1
    },
    "gemini-3.5-flash-lite": {
-    "req": 13,
-    "tok": 103610
+    "req": 23,
+    "tok": 442302
    },
    "gemini-3.1-flash-lite": {
-    "req": 15,
-    "tok": 961595
+    "req": 21,
+    "tok": 1189739
    },
    "gemini-2.5-flash-lite": {
-    "req": 1,
+    "req": 2,
     "tok": 0
    },
    "gemini-flash-lite-latest": {
-    "req": 8,
-    "tok": 68854
+    "req": 12,
+    "tok": 178872
    },
    "gemini-3.1-flash-lite-preview": {
-    "req": 14,
-    "tok": 303700
+    "req": 18,
+    "tok": 433886
    }
   }
  },
  "tpm": [
   [
-   1795692446.2523649,
-   18195
+   1795718893.8251238,
+   15958
+  ],
+  [
+   1795718922.9506094,
+   15761
+  ],
+  [
+   1795718946.9078672,
+   60560
   ]
  ]
 }
