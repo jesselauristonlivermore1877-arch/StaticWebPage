@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-27 02:13",
+ "asof": "2026-11-27 02:49",
  "first_stale": {
   "data/registry/officials_src.json|名單查證": "2026-11-24",
   "docs/data/pick_edm.json#maint_big|EDM maint_big〔maint_big〕": "2026-11-26",
@@ -2879,7 +2879,7 @@
    "stale": false,
    "blocked": true,
    "owner": "雲端 root_cause.yml＋雲端 daily.yml（每日戰情更新） tools/pick_edm.py（root_cause_edm）",
-   "note": "今天核對沒過被擋下（上次通過 11-16）：載板與PCB 漲跌中位數：卡上 9.26／重算 9.86；CCL與電子材料 漲跌中位數：卡上 7.84／重算 7.76",
+   "note": "今天核對沒過被擋下（上次通過 11-16）：載板與PCB 漲跌中位數：卡上 9.26／重算 9.86；載板與PCB 外資（億）：卡上 -46.1／重算 -37.22",
    "edm": true
   },
   {
