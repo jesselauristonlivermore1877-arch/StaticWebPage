@@ -1,0 +1,117 @@
+{
+ "raw": "{\n  \"candidates\": [\n    {\n      \"title\": \"川普擬對美墨加以外或特定夥伴推動新關稅及通膨升溫引發美股科技股與費半重挫\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-25\",\n      \"who\": \"美國總統川普與相關官員\",\n      \"event\": \"川普提出新關稅與核心PCE通膨數據高於預期，引發美股費半與科技股大跌\",\n      \"mechanism\": \"關稅風險與通膨升溫導致升息疑慮再起，資金從AI與半導體高估值族群撤出，引發全球股市骨牌效應\",\n      \"industry\": \"半導體與AI科技\",\n      \"tw_link\": \"美股費半大跌透過外資提款與供應鏈連動，直接衝擊台股電子與半導體權值股\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"IC設計\",\n        \"伺服器與品牌組裝\",\n        \"記憶體\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"川普\",\n        \"關稅\",\n        \"費半\",\n        \"輝達\",\n        \"台積電ADR\",\n        \"通膨\",\n        \"Tariff\",\n        \"Nvidia\",\n        \"Philadelphia Semiconductor\"\n      ],\n      \"evidence\": [\n        \"P114\",\n        \"P140\",\n        \"P179\",\n        \"P138\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\"\n      ],\n      \"why_root\": \"直接由美國政策與總經數據驅動的基本面預期改變\",\n      \"drill\": [\n        \"Trump tariff semiconductor impact 2026\",\n        \"川普 關稅 晶片\",\n        \"トランプ 関税 半導体\",\n        \"트럼프 관세 반도체\"\n      ]\n    },\n    {\n      \"title\": \"黃仁勳回歸輝達帶動的短暫慶祝行情消退與AI泡沫疑慮再起\",\n      \"layer\": \"根因\",\n      \"event_date\": \"2026-11-25\",\n      \"who\": \"華爾街法人與市場投資人\",\n      \"event\": \"黃仁勳回鍋激勵的短暫反彈迅速消退，市場對龐大AI基礎設施投資報酬率產生質疑\",\n      \"mechanism\": \"AI資本支出回收疑慮引發科技股多殺多，融資斷頭與槓桿平倉賣壓擴大亞股跌勢\",\n      \"industry\": \"AI伺服器與晶片\",\n      \"tw_link\": \"台股高度連結美國AI供應鏈， AI概念股與權值股遭遇外資極速倒貨\",\n      \"tw_sectors\": [\n        \"晶圓代工與製造\",\n        \"伺服器與品牌組裝\",\n        \"散熱與液冷\",\n        \"IC設計\"\n      ],\n      \"direction\": \"跌\",\n      \"keywords\": [\n        \"黃仁勳\",\n        \"輝達\",\n        \"AI泡沫\",\n        \"Jensen Huang\",\n        \"Nvidia\",\n        \"AI Selloff\"\n      ],\n      \"evidence\": [\n        \"P204\",\n        \"P205\",\n        \"P369\",\n        \"P371\"\n      ],\n      \"langs\": [\n        \"zh\",\n        \"en\"\n      ],\n      \"why_root\": \"直接對AI產業鏈基本面及投資報酬率的懷疑\",\n      \"drill\": [\n        \"Jensen Huang Nvidia return selloff\",\n        \"黃仁勳 輝達 泡沫\",\n        \"ジェンスン・フアン エヌビディア 暴落\",\n        \"젠슨 황 엔비디아 폭락\"\n      ]\n    }\n  ],\n  \"summary\": \"昨晚美股受川普新關稅提案與通膨升溫以及AI投資回報疑慮夾擊導致費半與科技股大跌，預期傳導到今天台股加權指數與電子權值股面臨沈重賣壓與外資提款。\"\n}",
+ "obj": {
+  "candidates": [
+   {
+    "title": "川普擬對美墨加以外或特定夥伴推動新關稅及通膨升溫引發美股科技股與費半重挫",
+    "layer": "根因",
+    "event_date": "2026-11-25",
+    "who": "美國總統川普與相關官員",
+    "event": "川普提出新關稅與核心PCE通膨數據高於預期，引發美股費半與科技股大跌",
+    "mechanism": "關稅風險與通膨升溫導致升息疑慮再起，資金從AI與半導體高估值族群撤出，引發全球股市骨牌效應",
+    "industry": "半導體與AI科技",
+    "tw_link": "美股費半大跌透過外資提款與供應鏈連動，直接衝擊台股電子與半導體權值股",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "IC設計",
+     "伺服器與品牌組裝",
+     "記憶體"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "川普",
+     "關稅",
+     "費半",
+     "輝達",
+     "台積電ADR",
+     "通膨",
+     "Tariff",
+     "Nvidia",
+     "Philadelphia Semiconductor"
+    ],
+    "evidence": [
+     "P114",
+     "P140",
+     "P179",
+     "P138"
+    ],
+    "langs": [
+     "zh",
+     "en"
+    ],
+    "why_root": "直接由美國政策與總經數據驅動的基本面預期改變",
+    "drill": [
+     "Trump tariff semiconductor impact 2026",
+     "川普 關稅 晶片",
+     "トランプ 関税 半導体",
+     "트럼프 관세 반도체"
+    ]
+   },
+   {
+    "title": "黃仁勳回歸輝達帶動的短暫慶祝行情消退與AI泡沫疑慮再起",
+    "layer": "根因",
+    "event_date": "2026-11-25",
+    "who": "華爾街法人與市場投資人",
+    "event": "黃仁勳回鍋激勵的短暫反彈迅速消退，市場對龐大AI基礎設施投資報酬率產生質疑",
+    "mechanism": "AI資本支出回收疑慮引發科技股多殺多，融資斷頭與槓桿平倉賣壓擴大亞股跌勢",
+    "industry": "AI伺服器與晶片",
+    "tw_link": "台股高度連結美國AI供應鏈， AI概念股與權值股遭遇外資極速倒貨",
+    "tw_sectors": [
+     "晶圓代工與製造",
+     "伺服器與品牌組裝",
+     "散熱與液冷",
+     "IC設計"
+    ],
+    "direction": "跌",
+    "keywords": [
+     "黃仁勳",
+     "輝達",
+     "AI泡沫",
+     "Jensen Huang",
+     "Nvidia",
+     "AI Selloff"
+    ],
+    "evidence": [
+     "P204",
+     "P205",
+     "P369",
+     "P371"
+    ],
+    "langs": [
+     "zh",
+     "en"
+    ],
+    "why_root": "直接對AI產業鏈基本面及投資報酬率的懷疑",
+    "drill": [
+     "Jensen Huang Nvidia return selloff",
+     "黃仁勳 輝達 泡沫",
+     "ジェンスン・フアン エヌビディア 暴落",
+     "젠슨 황 엔비디아 폭락"
+    ]
+   }
+  ],
+  "summary": "昨晚美股受川普新關稅提案與通膨升溫以及AI投資回報疑慮夾擊導致費半與科技股大跌，預期傳導到今天台股加權指數與電子權值股面臨沈重賣壓與外資提款。"
+ },
+ "meta": {
+  "任務檔": "/tmp/tmpw_pbmwl3.txt",
+  "附檔": [],
+  "耗時秒": 4.3,
+  "agy 狀態": "SUCCESS",
+  "線路": "api",
+  "模型": "gemini-3.5-flash-lite",
+  "主線失敗": null,
+  "搜尋出處": null,
+  "搜尋詞": null,
+  "agy 自報秒數": null,
+  "token": {
+   "total_tokens": 31230,
+   "prompt_tokens": 30223,
+   "output_tokens": 1007,
+   "thinking_tokens": null
+  },
+  "conversation_id": null,
+  "返回碼": 0,
+  "name": "rootcause_1127_synth1",
+  "ok": true
+ }
+}
