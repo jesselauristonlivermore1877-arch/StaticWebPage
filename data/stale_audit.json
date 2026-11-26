@@ -1,12 +1,9 @@
 {
- "asof": "2026-11-26 07:22",
+ "asof": "2026-11-26 09:57",
  "first_stale": {
   "data/registry/officials_src.json|名單查證": "2026-11-24",
-  "docs/data/pcf/00989A|主動 ETF 持股 00989A": "2026-11-26",
   "docs/data/pcf/00996A|主動 ETF 持股 00996A": "2026-11-26",
-  "docs/data/pick_edm.json#aetf_f_00989A|EDM 主動式 ETF・00989A・摩根美國科技〔aetf_f_00989A〕": "2026-11-26",
-  "docs/data/pick_edm.json#aetf_f_00996A|EDM 主動式 ETF・00996A・兆豐台灣〔aetf_f_00996A〕": "2026-11-26",
-  "docs/data/pick_edm.json#aetf_h_00989A|EDM 主動式 ETF 依基金・00989A・摩根美國科技〔aetf_h_00989A〕": "2026-11-26"
+  "docs/data/pick_edm.json#aetf_f_00996A|EDM 主動式 ETF・00996A・兆豐台灣〔aetf_f_00996A〕": "2026-11-26"
  },
  "rows": [
   {
@@ -36,11 +33,11 @@
   {
    "name": "主動 ETF 每日",
    "path": "docs/data/aetf_daily.json",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -156,11 +153,11 @@
   {
    "name": "總經",
    "path": "docs/data/macro.json",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -324,11 +321,11 @@
   {
    "name": "財報公告",
    "path": "docs/data/releases.json",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -348,11 +345,11 @@
   {
    "name": "即時信息流",
    "path": "docs/data/news_live.json",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 news_live.yml",
    "note": ""
@@ -360,11 +357,11 @@
   {
    "name": "國際指數",
    "path": "docs/data/world_idx.json",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 macro.yml（世界趨勢）＋daily.yml world_idx.py",
    "note": ""
@@ -408,11 +405,11 @@
   {
    "name": "AI 自由現金流（GEA AI FCF）",
    "path": "docs/data/fcf_ai.json",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 fcf_ai.bat",
    "note": ""
@@ -444,11 +441,11 @@
   {
    "name": "根因追蹤",
    "path": "docs/data/root_cause",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 root_cause.yml＋W 07:25 盤前班",
    "note": ""
@@ -468,11 +465,11 @@
   {
    "name": "新聞分類",
    "path": "data/macro_tags.json",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 macro_tags_daily",
    "note": ""
@@ -516,11 +513,11 @@
   {
    "name": "世界趨勢日報",
    "path": "data/daily/gemini_daily_*.md",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "off",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 daily_news",
    "note": "11-15 總指揮裁示日報停掉（text_health 不再催）"
@@ -768,11 +765,11 @@
   {
    "name": "主動 ETF 持股 00986A",
    "path": "docs/data/pcf/00986A",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
@@ -804,12 +801,12 @@
   {
    "name": "主動 ETF 持股 00989A",
    "path": "docs/data/pcf/00989A",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "freq": "td",
    "allow": 0,
-   "lag_td": 1,
-   "days": 2,
-   "stale": true,
+   "lag_td": 0,
+   "days": 1,
+   "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） etf_pcf.py",
    "note": ""
   },
@@ -1594,11 +1591,11 @@
   {
    "name": "EDM 主動式 ETF・00986A・台新龍頭成長〔aetf_f_00986A〕",
    "path": "docs/data/pick_edm.json#aetf_f_00986A",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（aetf_fund_edm）",
@@ -1636,12 +1633,12 @@
   {
    "name": "EDM 主動式 ETF・00989A・摩根美國科技〔aetf_f_00989A〕",
    "path": "docs/data/pick_edm.json#aetf_f_00989A",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "freq": "td",
    "allow": 0,
-   "lag_td": 1,
-   "days": 2,
-   "stale": true,
+   "lag_td": 0,
+   "days": 1,
+   "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（aetf_fund_edm）",
    "note": "",
@@ -2042,15 +2039,15 @@
   {
    "name": "EDM 主動式 ETF 依基金・00986A・台新龍頭成長〔aetf_h_00986A〕",
    "path": "docs/data/pick_edm.json#aetf_h_00986A",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "freq": "td",
    "allow": 0,
-   "lag_td": 1,
-   "days": 2,
+   "lag_td": 0,
+   "days": 1,
    "stale": false,
-   "blocked": true,
+   "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（aetf_fund_edm）",
-   "note": "今天核對沒過被擋下（上次通過 11-24）：00986A 2330：網站權重 9.1889 ≠ PCF 2026-11-25 權重 8.2735；00986A 2454：網站權重 1.8543 ≠ PCF 2026-11-25 權重 1.6687",
+   "note": "",
    "edm": true
   },
   {
@@ -2084,12 +2081,12 @@
   {
    "name": "EDM 主動式 ETF 依基金・00989A・摩根美國科技〔aetf_h_00989A〕",
    "path": "docs/data/pick_edm.json#aetf_h_00989A",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "freq": "td",
    "allow": 0,
-   "lag_td": 1,
-   "days": 2,
-   "stale": true,
+   "lag_td": 0,
+   "days": 1,
+   "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（aetf_fund_edm）",
    "note": "",
@@ -2224,11 +2221,11 @@
   {
    "name": "EDM 主動式 ETF 每日操作・主動式 ETF〔aetf_ops〕",
    "path": "docs/data/pick_edm.json#aetf_ops",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（aetf_fund_edm）",
@@ -2490,11 +2487,11 @@
   {
    "name": "EDM 市場主軸・市場主軸〔fcf〕",
    "path": "docs/data/pick_edm.json#fcf",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -2784,11 +2781,11 @@
   {
    "name": "EDM 每日新聞・台股新聞〔news_tw〕",
    "path": "docs/data/pick_edm.json#news_tw",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -2798,11 +2795,11 @@
   {
    "name": "EDM 每日新聞・美股新聞〔news_us〕",
    "path": "docs/data/pick_edm.json#news_us",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -2894,17 +2891,17 @@
    "edm": true
   },
   {
-   "name": "EDM 根因追蹤・11/25 台股重挫〔rc_root〕",
+   "name": "EDM 根因追蹤〔rc_root〕",
    "path": "docs/data/pick_edm.json#rc_root",
-   "date": "2026-11-25",
+   "date": "2026-11-23",
    "freq": "td",
    "allow": 0,
-   "lag_td": 0,
-   "days": 1,
+   "lag_td": 2,
+   "days": 3,
    "stale": false,
-   "blocked": false,
+   "blocked": true,
    "owner": "雲端 root_cause.yml＋雲端 daily.yml（每日戰情更新） tools/pick_edm.py（root_cause_edm）",
-   "note": "",
+   "note": "今天核對沒過被擋下（上次通過 11-23）：2026-11-26 加權漲跌：日K庫與 root_cause 都沒有，標題方向無法判斷",
    "edm": true
   },
   {
@@ -3106,11 +3103,11 @@
   {
    "name": "EDM 本週市場主軸・AI 燒錢，〔theme_week〕",
    "path": "docs/data/pick_edm.json#theme_week",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "wk",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（theme_edm）",
@@ -3340,6 +3337,6 @@
    "note": "最後檢查 2026-11-25 17:15：正常 資料到 13:45"
   }
  ],
- "n_stale": 6,
- "tg_day": "2026-11-25"
+ "n_stale": 3,
+ "tg_day": "2026-11-26"
 }
