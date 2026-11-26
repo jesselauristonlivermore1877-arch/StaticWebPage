@@ -1,9 +1,9 @@
 {
  "date": "2026-11-26",
  "data_date": "2026-11-26",
- "made": "2026-11-26T14:04+08:00",
- "built_at": "2026-11-26T13:53:12+08:00",
- "run": "45764311501",
+ "made": "2026-11-26T14:46+08:00",
+ "built_at": "2026-11-26T14:33:54+08:00",
+ "run": "45765467989",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
   "web_data.market.taiex": "2026-11-25",
@@ -15,18 +15,16 @@
   "web_data.market.margin_balance": "2026-11-25",
   "web_data.elecfin": "2026-11-26",
   "web_data.screen.sector_score": "2026-11-26",
-  "docs/data/rrg.json": "2026-11-25",
+  "docs/data/rrg.json": "2026-11-26",
   "docs/data/chips.json": "2026-11-25",
-  "docs/data/disposal.json": "2026-11-25",
+  "docs/data/disposal.json": "2026-11-26",
   "docs/data/etf_flow.json": "2026-11-24"
  },
  "skipped": {
   "web_data.market.taiex": "來源資料日 2026-11-25 ≠ 資料日 2026-11-26",
   "web_data.inst.summary": "來源資料日 2026-11-25 ≠ 資料日 2026-11-26",
   "web_data.market.margin_balance": "來源資料日 2026-11-25 ≠ 資料日 2026-11-26",
-  "docs/data/rrg.json": "來源資料日 2026-11-25 ≠ 資料日 2026-11-26",
-  "docs/data/chips.json": "來源資料日 2026-11-25 ≠ 資料日 2026-11-26",
-  "docs/data/disposal.json": "來源資料日 2026-11-25 ≠ 資料日 2026-11-26"
+  "docs/data/chips.json": "來源資料日 2026-11-25 ≠ 資料日 2026-11-26"
  },
  "facts": [
   {
@@ -51,18 +49,18 @@
    "id": "tsmc_close",
    "sec": "大盤",
    "label": "台積電收盤",
-   "value": 2150.0,
+   "value": 2145.0,
    "unit": " 元",
-   "text": "2150.00 元",
+   "text": "2145.00 元",
    "src": "web_data.market.tsmc"
   },
   {
    "id": "tsmc_r1",
    "sec": "大盤",
    "label": "台積電漲跌幅",
-   "value": 0.0,
+   "value": -0.23,
    "unit": "%",
-   "text": "+0.00%",
+   "text": "-0.23%",
    "src": "web_data.market.tsmc"
   },
   {
@@ -131,74 +129,128 @@
   {
    "id": "sec_top1",
    "sec": "族群",
-   "label": "族群評分第 1 名：航運",
-   "value": 37.1,
+   "label": "族群評分第 1 名：電信與雲端服務",
+   "value": 43.9,
    "unit": " 分",
-   "text": "37.1 分",
+   "text": "43.9 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_top2",
    "sec": "族群",
-   "label": "族群評分第 2 名：電信與雲端服務",
-   "value": 36.4,
+   "label": "族群評分第 2 名：航運",
+   "value": 37.3,
    "unit": " 分",
-   "text": "36.4 分",
+   "text": "37.3 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_top3",
    "sec": "族群",
-   "label": "族群評分第 3 名：晶圓耗材／設備",
-   "value": 27.1,
+   "label": "族群評分第 3 名：金融",
+   "value": 33.1,
    "unit": " 分",
-   "text": "27.1 分",
+   "text": "33.1 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot1",
    "sec": "族群",
    "label": "族群評分倒數第 1 名：功率元件",
-   "value": 2.7,
+   "value": 10.8,
    "unit": " 分",
-   "text": "2.7 分",
+   "text": "10.8 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot2",
    "sec": "族群",
-   "label": "族群評分倒數第 2 名：被動元件",
-   "value": 3.4,
+   "label": "族群評分倒數第 2 名：面板",
+   "value": 11.3,
    "unit": " 分",
-   "text": "3.4 分",
+   "text": "11.3 分",
    "src": "web_data.screen.sector_score"
   },
   {
    "id": "sec_bot3",
    "sec": "族群",
-   "label": "族群評分倒數第 3 名：面板",
-   "value": 3.6,
+   "label": "族群評分倒數第 3 名：被動元件",
+   "value": 12.8,
    "unit": " 分",
-   "text": "3.6 分",
+   "text": "12.8 分",
    "src": "web_data.screen.sector_score"
+  },
+  {
+   "id": "rrg_領先",
+   "sec": "族群",
+   "label": "RRG 週線「領先」象限族群數",
+   "value": 2,
+   "unit": " 個",
+   "text": "2 個",
+   "src": "docs/data/rrg.json"
+  },
+  {
+   "id": "rrg_轉弱",
+   "sec": "族群",
+   "label": "RRG 週線「轉弱」象限族群數",
+   "value": 6,
+   "unit": " 個",
+   "text": "6 個",
+   "src": "docs/data/rrg.json"
+  },
+  {
+   "id": "rrg_落後",
+   "sec": "族群",
+   "label": "RRG 週線「落後」象限族群數",
+   "value": 3,
+   "unit": " 個",
+   "text": "3 個",
+   "src": "docs/data/rrg.json"
+  },
+  {
+   "id": "rrg_改善",
+   "sec": "族群",
+   "label": "RRG 週線「改善」象限族群數",
+   "value": 16,
+   "unit": " 個",
+   "text": "16 個",
+   "src": "docs/data/rrg.json"
   },
   {
    "id": "etf_net",
    "sec": "主動式 ETF",
    "label": "主動式 ETF 合計淨買賣（含申購贖回）（最近一個有資料的交易日）",
-   "value": 273.3,
+   "value": 270.7,
    "unit": " 億元",
-   "text": "+273.3 億元",
+   "text": "+270.7 億元",
    "src": "docs/data/etf_flow.json"
   },
   {
    "id": "etf_xnet",
    "sec": "主動式 ETF",
    "label": "主動式 ETF 經理人自己調整持股的淨額（扣申購贖回）（最近一個有資料的交易日）",
-   "value": 129.9,
+   "value": 127.3,
    "unit": " 億元",
-   "text": "+129.9 億元",
+   "text": "+127.3 億元",
    "src": "docs/data/etf_flow.json"
+  },
+  {
+   "id": "disp_hot",
+   "sec": "處置股",
+   "label": "再一次注意就處置的個股數",
+   "value": 3,
+   "unit": " 檔",
+   "text": "3 檔",
+   "src": "docs/data/disposal.json"
+  },
+  {
+   "id": "disp_now",
+   "sec": "處置股",
+   "label": "處置中的個股數",
+   "value": 29,
+   "unit": " 檔",
+   "text": "29 檔",
+   "src": "docs/data/disposal.json"
   }
  ],
  "ids_unique": true

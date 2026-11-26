@@ -1,31 +1,19 @@
 {
- "checked_at": "2026-11-26T06:31:24.452Z",
+ "checked_at": "2026-11-26T07:07:13.030Z",
  "date": "2026-11-25",
- "n": 150,
+ "n": 141,
  "n_bad": 3,
  "bad": {
-  "GEA_選股_維持率ETF": {
-   "cat": "維持率",
-   "title": "維持率・ETF（融資市值前 20）",
+  "GEA_選股_族群循環圖": {
+   "cat": "市場",
+   "title": "族群循環圖",
    "err": "",
    "issues": [
     {
-     "area": "整張卡",
+     "area": "div.pe-box",
      "dir": "右",
-     "px": 38,
-     "why": "卡片內容總寬 1118"
-    },
-    {
-     "area": "「融資市值第 1～10 名融資市值單位億元」",
-     "dir": "右",
-     "px": 75,
-     "why": "div.pe-box scrollWidth 570＞clientWidth 495"
-    },
-    {
-     "area": "「融資市值第 11～20 名上市＋上櫃」",
-     "dir": "右",
-     "px": 75,
-     "why": "div.pe-box scrollWidth 570＞clientWidth 495"
+     "px": 17,
+     "why": "圖內文字超出圖框：網通與衛星"
     }
    ]
   },
