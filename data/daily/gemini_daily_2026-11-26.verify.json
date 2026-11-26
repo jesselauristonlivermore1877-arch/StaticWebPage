@@ -1,0 +1,514 @@
+{
+ "file": "gemini_daily_2026-11-26.md",
+ "checked_at": "2026-11-26T00:07:57+00:00",
+ "offline": false,
+ "min_rate": 0.7,
+ "n": 28,
+ "summary": {
+  "通過": 26,
+  "失敗": 2,
+  "無法驗證": 0
+ },
+ "rate": 0.929,
+ "show": true,
+ "items": [
+  {
+   "id": "1.1",
+   "event": "華爾街估AI資本支出近1.4兆美元",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://finance.biggo.com.tw/news/5052736d-08cb-45b9-b908-77b69216d53b",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "華爾街估明年大型科技股AI資本支出近1.4兆美元，韓國三星電子、SK海力士記憶體榮景可望延長 — BigGo 財經 ‖ 華爾街估明年大型科技股AI資本支出近1.4兆美元，韓國三星電子、SK海力士記憶體榮景可望延長 摩根大通預估，Alphabet、微軟、亞馬遜、Meta、甲骨文等五大超大規模雲端業者明年的AI資本支出將達1.4兆美元（約46.2兆新台幣），接近今年的兩倍。高盛與Morgan… 華爾街估明年大型科技股AI資本支出近1.4兆美元，韓國三星電子、SK海力士記憶體榮景可望延長 — BigGo 財經 摩根大通預估，Alphabet、微軟、亞馬遜、Meta、甲骨文等五大超大規模雲端業者明年的AI資本支出將達1.4兆美元（約46.2兆新台幣），接近今年的兩倍。高盛與Morgan… 華爾街估明年大型科技股AI資本支出近1.4兆美元，韓國三星電子、SK海力士記憶體榮景可望延長 — BigGo 財經",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "華爾街估明年大型科技股AI資本支出近1.4兆美元，韓國三星電子、SK海力士記憶體榮景可望延長（BigGo 財經）"
+  },
+  {
+   "id": "1.2",
+   "event": "華爾街估AI資本支出近1.4兆美元",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://finance.biggo.com/news/5052736d-08cb-45b9-b908-77b69216d53b",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "Wall Street Sees Big Tech AI Capex Hitting $1.4 Trillion Next Year; Samsung, SK Hynix Memory Boom Expected to Extend — BigGo Finance ‖ Wall Street Sees Big Tech AI Capex Hitting $1.4 Trillion Next Year; Samsung, SK Hynix Memory Boom Expected to Extend JPMorgan projects that next year&#x27;s AI capital expenditure by the five major hyperscalers—Alphabet, Microsoft, Amazon, Meta and Oracle—will reach $1.4… Wall Street Sees Big Tech AI Capex Hitting $1.4 Trillion Next Year; Samsung, SK Hynix Memory Boom Expected to Extend — BigGo Fi",
+   "keywords": [
+    "BigGo Finance"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "Wall Street Sees Big Tech AI Capex Hitting $1.4 Trillion Next Year; Samsung, SK Hynix Memory Boom Expected to Extend（BigGo Finance）"
+  },
+  {
+   "id": "2.1",
+   "event": "10年期美債殖利率維持高檔",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://finance.biggo.com/news/70b704b8-44fe-4544-83eb-bf23746b848c",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "Treasury Yields Hold Steady as AI Stock Rally Cools; 10-Year Slips to 4.906% — BigGo Finance ‖ Treasury Yields Hold Steady as AI Stock Rally Cools; 10-Year Slips to 4.906% US Treasury yields ended little changed Tuesday, with the 10-year note down 1.6 basis points to 4.906%, as a pullback in AI shares cooled the prior… Treasury Yields Hold Steady as AI Stock Rally Cools; 10-Year Slips to 4.906% — BigGo Finance US Treasury yields ended little changed Tuesday, with the 10-year note down 1.6 b",
+   "keywords": [
+    "BigGo Finance"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "Treasury Yields Hold Steady as AI Stock Rally Cools; 10-Year Slips to 4.906%（BigGo Finance）"
+  },
+  {
+   "id": "2.2",
+   "event": "10年期美債殖利率維持高檔",
+   "sub": "發生了什麼",
+   "status": "失敗",
+   "reason": "頁面找不到條目的人名／專有名詞（Yahoo Finance）",
+   "url": "https://finance.yahoo.com/markets/options/articles/10-treasury-yields-4-92-000355215.html",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "The 10-Year Treasury Yields 4.92%. JPMorgan’s Income ETF Paid 5.7% Over the Past Year, BlackRock’s Paid 6.06%, and Neither Has a Maturity Date ‖ The 10-Year Treasury Yields 4.92%. JPMorgan’s Income ETF Paid 5.7% Over the Past Year, BlackRock’s Paid 6.06%, and Neither Has a Maturity Date Two bond ETFs out-earned the 10-year Treasury The 10-Year Treasury Yields 4.92%. JPMorgan’s Income ETF Paid 5.7% Over the Past Year, BlackRock’s Paid 6.06%, and Neither Has a Maturity Date Two bond ETFs out-earned the 10-year Treasury The 10-Year Treasury Y",
+   "keywords": [
+    "Yahoo Finance"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "The 10-Year Treasury Yields 4.92%. JPMorgan’s Income ETF Paid 5.7% Over the Past Year, BlackRock’s Paid 6.06%, and Neither Has a Maturity Date（Yahoo Finance）"
+  },
+  {
+   "id": "3.1",
+   "event": "黃仁勳復職激勵輝達股價",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://tw.stock.yahoo.com/news/%E9%BB%83%E4%BB%81%E5%8B%B3%E5%BE%A9%E8%81%B7%E6%BF%80%E5%8B%B5%E8%BC%9D%E9%81%94%E6%9A%B4%E6%BC%B23%E6%88%90-%E7%BE%8E%E8%82%A1%E5%8A%87%E9%9C%87%E5%BC%95%E7%99%BCai%E6%B3%A1%E6%B2%AB%E7%96%91%E6%85%AE-033308934.html",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "黃仁勳復職激勵輝達暴漲3成 美股劇震引發AI泡沫疑慮 ‖ 黃仁勳復職激勵輝達暴漲3成 美股劇震引發AI泡沫疑慮 圖／本報資料庫商傳媒｜方承業／綜合外電報導美股近期走勢有如雲霄飛車，人工智慧晶片龍頭輝達（Nvidia）執行長黃仁勳在經歷下台風波後迅速復職，帶動該公司股價週一強彈超過 30%，同時激勵科技股大幅反彈。然而，這場由單一企業高層去留引發的市場動盪，也讓華爾街再度熱議 AI 概念股的高估值風險，以及金融市場對科技巨頭過度依賴的隱憂。 執行長戲劇性回歸 輝達市值單日暴增 根據《Los Angeles Times》與《The Guardian》報導，黃仁勳於 11 月 12 日因涉及婚外情傳聞辭去執行長一職，隨即引發輝達股價連續重挫，上週五單日跌幅達 14%。然而，在美國總統川普（Donald Trump）與副總統范斯（JD Vance）等政治圈高層強力遊說與介入下，輝達董事會迅速於週一宣布讓黃仁勳回鍋任職。消息一出，輝達週一開盤隨即飆漲逾 3",
+   "keywords": [
+    "Huang",
+    "Jensen Huang",
+    "NVIDIA",
+    "Nvidia"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "黃仁勳復職激勵輝達暴漲3成 美股劇震引發AI泡沫疑慮（Yahoo股市）"
+  },
+  {
+   "id": "3.2",
+   "event": "黃仁勳復職激勵輝達股價",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://tw.stock.yahoo.com/news/%E9%BB%83%E4%BB%81%E5%8B%B3%E4%B8%8B%E9%80%B1%E8%B5%B4%E5%9C%8B%E6%9C%83%E4%BD%9C%E8%AD%89-%E5%B7%9D%E6%99%AE%E8%A1%A8%E6%98%8E%E9%A1%98%E5%8B%95%E7%94%A8%E8%B5%A6%E5%85%8D%E6%AC%8A-%E4%B8%8D%E6%8E%92%E9%99%A4%E5%85%A5%E8%82%A1%E8%BC%9D%E9%81%94-005000380.html",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "黃仁勳下週赴國會作證！川普表明願動用赦免權 不排除入股輝達 ‖ 黃仁勳下週赴國會作證！川普表明願動用赦免權 不排除入股輝達 [FTNN新聞網]財經中心／綜合報導輝達（NVIDIA）執行長黃仁勳在台灣時間前（23）晚震撼回歸，恢復所有職務，消息一出激勵全球股市，台股昨（24）日更狂飆3310... 黃仁勳下週赴國會作證！川普表明願動用赦免權 不排除入股輝達 [FTNN新聞網]財經中心／綜合報導輝達（NVIDIA）執行長黃仁勳在台灣時間前（23）晚震撼回歸，恢復所有職務，消息一出激勵全球股市，台股昨（24）日更狂飆3310... 黃仁勳下週赴國會作證！川普表明願動用赦免權 不排除入股輝達",
+   "keywords": [
+    "Huang",
+    "Jensen Huang",
+    "NVIDIA",
+    "Nvidia",
+    "Trump"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "黃仁勳下週赴國會作證！川普表明願動用赦免權 不排除入股輝達（Yahoo股市）"
+  },
+  {
+   "id": "4.1",
+   "event": "美國消費者信心升至近兩年最高",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://news.now.com/home/finance/player?newsId=670818",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "美國消費者信心升至近兩年來最高 | Now 新聞 ‖ 美國消費者信心升至近兩年來最高 【Now新聞台】數據顯示，美國消費者信心升至近兩年來最高。 美國消費者信心升至近兩年來最高 【Now新聞台】數據顯示，美國消費者信心升至近兩年來最高。",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "美國消費者信心升至近兩年來最高（Now 新聞）"
+  },
+  {
+   "id": "4.2",
+   "event": "美國消費者信心升至近兩年最高",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://forbesmiddleeast.com/industry/economy/us-consumer-confidence-rises-to-1033-highest-level-since-january-2025",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "US Consumer Confidence Hits 103.3 In November, Highest Since Jan 2025 ‖ US Consumer Confidence Hits 103.3 In November, Highest Since Jan 2025 US Consumer Confidence Hits 103.3 In November, Highest Since Jan 2025 &lt;p&gt;US consumer confidence rose 11.4 points to 103.3 in November, its highest since January 2025, as labor market assessments improved, according to a Tuesday Conference Board statement.&lt;/p&gt; US consumer confidence rose 11.4 points to 103.3 in Novemb",
+   "keywords": [
+    "Forbes Middle East"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "US Consumer Confidence Hits 103.3 In November, Highest Since Jan 2025（Forbes Middle East）"
+  },
+  {
+   "id": "5.1",
+   "event": "美國擬對16國實施新關稅",
+   "sub": "發生了什麼",
+   "status": "失敗",
+   "reason": "HTTP 404",
+   "url": "https://www.sinotrade.com.tw/richclub/hotstock/%E5%B7%9D%E6%99%AE%E6%96%B0%E4%B8%80%E8%BC%AA301%E9%97%9C%E7%A8%85%E5%B0%87%E8%87%B3-%E5%8F%B0%E7%81%A3%E7%AD%8916%E5%9C%8B%E5%88%97%E7%94%A2%E8%83%BD%E9%81%8E%E5%89%A9%E8%AA%BF%E6%9F%A5-15-%E4%B8%8A%E9%99%90%E8%83%BD%E5%90%A6%E4%BF%9D%E4%BD%8F%E6%88%90%E9%97%9C%E9%8D%B5-%E8%82%A1%E5%B8%82%E8%A9%B1%E9%A1%8C-6b062ab26019e00020cac428",
+   "date": "2026-11-25",
+   "http": 404,
+   "title": "404｜豐雲學堂 ‖ 永豐金證券豐雲學堂串連投資路上的每個節點，為投資人提供最專業、精準的投資視角！涵蓋市場話題、活動新訊、調查排行、交易工具、金融知識、交易時機、選股策略，從證券的專業背景策劃各種以金融、理財、投資為中心的多型態知識內容、功能輔具，讓使用者在投資路上不斷精實決策能力、更在各種內容碰撞中找到更多隨機的投資想法。 404｜豐雲學堂 永豐金證券豐雲學堂串連投資路上的每個節點，為投資人提供最專業、精準的投資視角！涵蓋市場話題、活動新訊、調查排行、交易工具、金融知識、交易時機、選股策略，從證券的專業背景策劃各種以金融、理財、投資為中心的多型態知識內容、功能輔具，讓使用者在投資路上不斷精實決策能力、更在各種內容碰撞中找到更多隨機的投資想法。",
+   "keywords": [
+    "Trump"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "川普新一輪301關稅將至！台灣等16國列產能過剩調查，15%上限能否保住成關鍵｜股市話題｜豐雲學堂2026 年 11 月（永豐金證券）"
+  },
+  {
+   "id": "5.2",
+   "event": "美國擬對16國實施新關稅",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://m.moneydj.com/f1a.aspx?a=cbe3c617-079e-4d1a-ae38-d3ca8c6da384&c=MB020000",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "川普政府傳擬對16經濟體疊加新關稅、台灣也在列 - 總體經濟 - 新聞 - MoneyDJ理財網 ‖ 川普政府傳擬對16經濟體疊加新關稅、台灣也在列 提供專業的金融網路資訊服務，幫您迅速掌握國內外即時財經新聞，除了有台股、美股、基金、港股、權證、ETF等投資專屬頻道，還有獨家專業的選股看盤商品，讓您輕鬆掌握致富先機，成為理財達人。 川普政府傳擬對16經濟體疊加新關稅、台灣也在列 - 總體經濟 - 新聞 - MoneyDJ理財網",
+   "keywords": [
+    "MoneyDJ",
+    "Trump"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "川普政府傳擬對16經濟體疊加新關稅、台灣也在列 - 總體經濟 - 新聞（MoneyDJ）"
+  },
+  {
+   "id": "6.1",
+   "event": "台積電傳出擬赴德州建廠",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://tw.stock.yahoo.com/news/%E5%8F%B0%E7%A9%8D%E9%9B%BB%E6%AE%BA210%E5%85%83%E5%89%B5%E7%AC%AC2%E5%A4%A7%E8%B7%8C%E9%BB%9E-%E5%A4%96%E5%AA%92%E6%9B%9D%E6%93%AC%E7%A0%B8226%E5%84%84%E7%BE%8E%E5%85%83%E8%B5%B4%E5%BE%B7%E5%B7%9E%E5%BB%BA2%E5%A5%88%E7%B1%B3%E5%BB%A0-%E5%85%AC%E5%8F%B8%E9%80%99%E6%A8%A3%E5%9B%9E%E6%87%89-024400944.html",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "台積電殺210元創第2大跌點！外媒曝擬砸226億美元赴德州建2奈米廠 公司這樣回應 ‖ 台積電殺210元創第2大跌點！外媒曝擬砸226億美元赴德州建2奈米廠 公司這樣回應 【記者蕭文康／台北報導】台積電（2330）今受到美國政府有意重啟提高對各國關稅並引發全球股市重挫影響，早盤最低下挫210元來到2020元，重挫9.42%，創史上第2大跌點，僅次11月6日跌220元，幾乎把昨日漲幅吐回。 台積電殺210元創第2大跌點！外媒曝擬砸226億美元赴德州建2奈米廠 公司這樣回應 【記者蕭文康／台北報導】台積電（2330）今受到美國政府有意重啟提高對各國關稅並引發全球股市重挫影響，早盤最低下挫210元來到2020元，重挫9.42%，創史上第2大跌點，僅次11月6日跌220元，幾乎把昨日漲幅吐回。 台積電殺210元創第2大跌點！外媒曝擬砸226億美元赴德州建2奈米廠 公司這樣回應",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "台積電殺210元創第2大跌點！外媒曝擬砸226億美元赴德州建2奈米廠 公司這樣回應（Yahoo股市）"
+  },
+  {
+   "id": "6.2",
+   "event": "台積電傳出擬赴德州建廠",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://tw.stock.yahoo.com/news/%E9%B4%BB%E6%B5%B7%E5%B4%A97-%E8%81%AF%E7%99%BC%E7%A7%91%E6%8C%AB6-%E5%8F%B0%E7%A9%8D%E9%9B%BB%E5%A4%A7%E8%B7%8C140%E5%85%83%E8%87%B32090%E5%85%83-%E5%8F%B0%E8%82%A1%E9%96%8B%E4%BD%8E%E6%9A%B4%E8%B7%8C2061%E9%BB%9E%E8%B7%8C%E7%A0%B439000%E9%BB%9E%E5%A4%A7%E9%97%9C-011000155.html",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "鴻海崩7%、聯發科挫6%！台積電大跌140元至2090元 台股開低暴跌2061點跌破39000點大關 ‖ 鴻海崩7%、聯發科挫6%！台積電大跌140元至2090元 台股開低暴跌2061點跌破39000點大關 [FTNN新聞網]記者薛明峻／台北報導由於AI晶片龍頭輝達（NVDA-US）帶領晶片股漲勢未能延續，加上傳出美國又將對中國等十數個經濟體增加關稅，美股四大指數周二... 鴻海崩7%、聯發科挫6%！台積電大跌140元至2090元 台股開低暴跌2061點跌破39000點大關 [FTNN新聞網]記者薛明峻／台北報導由於AI晶片龍頭輝達（NVDA-US）帶領晶片股漲勢未能延續，加上傳出美國又將對中國等十數個經濟體增加關稅，美股四大指數周二... 鴻海崩7%、聯發科挫6%！台積電大跌140元至2090元 台股開低暴跌2061點跌破39000點大關",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "鴻海崩7%、聯發科挫6%！台積電大跌140元至2090元 台股開低暴跌2061點跌破39000點大關（Yahoo股市）"
+  },
+  {
+   "id": "7.1",
+   "event": "新台幣早盤再度貶破33元",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.ctee.com.tw/news/20261125701015-430302",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "台股又暴跌 新台幣早盤再度貶破33元價位 - 金融 - 工商時報 ‖ 台股又暴跌 新台幣早盤再度貶破33元價位 台股又暴跌 新台幣早盤再度貶破33元價位 川普祭出新一輪關稅疑慮升溫，台股25日又暴跌逾3,000點，新台幣兌美元匯率同步下殺，且早盤再度貶破33元，最低觸及33.034元，不過，隨台股跌幅收斂，新台幣也穩住陣腳，中午暫收32.997元，貶5.8分，成交金額14.79億美元。 匯銀主管指出，相較於台股波動劇烈，新台幣貶幅相對可控，雖然仍觸及... 川普祭出新一輪關稅疑慮升溫，台股25日又暴跌逾3,000點，新台幣兌美元匯率同步下殺，且早盤再度貶破33元，最低觸及33.034元，不過，隨台股跌幅收斂，新台幣也穩住陣腳，中午暫收32.997元，貶5.8分，成交金額14.79億美元。 匯銀主管指出，相較於台股波動劇烈，新台幣貶幅相對可控，雖然仍觸及...",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "台股又暴跌新台幣早盤再度貶破33元價位- 金融（工商時報）"
+  },
+  {
+   "id": "7.2",
+   "event": "新台幣早盤再度貶破33元",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://udn.com/news/story/7239/9900228",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "新台幣開盤貶2.1分 早盤逼近33元關卡 | 金融要聞 | 產經 | 聯合新聞網 ‖ 新台幣開盤貶2.1分 早盤逼近33元關卡 新台幣開盤貶2.1分 早盤逼近33元關卡 | 聯合新聞網 台北外匯市場新台幣兌美元匯率今天以32.96元開盤，貶2.1分，隨後貶勢稍微擴大，最低為32.992元，逼近33元關卡 台北外匯市場新台幣兌美元匯率今天以32.96元開盤，貶2.1分，隨後貶勢稍微擴大，最低為32.992元，逼近33元關卡 新台幣開盤貶2.1分 早盤逼近33元關卡 | 聯合新聞網",
+   "keywords": [
+    "UDN"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "新台幣開盤貶2.1分早盤逼近33元關卡| 金融要聞| 產經（UDN）"
+  },
+  {
+   "id": "8.1",
+   "event": "華為涉伊朗業務及竊密遭美定罪",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.cna.com.tw/news/aopl/202611250010.aspx",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "華為竊取商業機密、隱瞞伊朗業務 遭美國陪審團定罪 | 國際 | 中央社 CNA ‖ 華為竊取商業機密、隱瞞伊朗業務 遭美國陪審團定罪  中國電信設備製造商華為（Huawei）今天在美國一起牽涉廣泛的刑事案件中被定罪，罪名包含就伊朗業務欺騙銀行，並竊取美國公司商業機密。 華為竊取商業機密、隱瞞伊朗業務 遭美國陪審團定罪 | 國際 | 中央社 CNA 中國電信設備製造商華為（Huawei）今天在美國一起牽涉廣泛的刑事案件中被定罪，罪名包含就伊朗業務欺騙銀行，並竊取美國公司商業機密。 華為竊取商業機密、隱瞞伊朗業務 遭美國陪審團定罪 | 國際 | 中央社 CNA",
+   "keywords": [
+    "Iran"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "華為竊取商業機密、隱瞞伊朗業務遭美國陪審團定罪| 國際（中央社 CNA）"
+  },
+  {
+   "id": "8.2",
+   "event": "華為涉伊朗業務及竊密遭美定罪",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.taisounds.com/news/content/84/311658",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "華為隱瞞伊朗業務 遭美國陪審團裁定10項罪名成立 | 國際焦點 - 太報 TaiSounds ‖ 華為隱瞞伊朗業務&#x3000;遭美國陪審團裁定10項罪名成立 華為隱瞞伊朗業務 遭美國陪審團裁定10項罪名成立 | 國際焦點 - 太報 TaiSounds 華為隱瞞伊朗業務 遭美國陪審團裁定10項罪名成立 | 國際焦點 - 太報 TaiSounds 中國科技巨擘華為因涉嫌違反美國對伊朗的制裁令，而被美國司法部起訴12項罪名。紐約陪審團週二（11/24）裁定包括竊取商業機密罪、欺詐銀行等10項罪名成立。 中國科技巨擘華為因涉嫌違反美國對伊朗的制裁令，而被美國司法部起訴12項罪名。紐約陪審團週二（11/24）裁定包括竊取商業機密罪、欺詐銀行等10項罪名成立。",
+   "keywords": [
+    "Iran"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "華為隱瞞伊朗業務遭美國陪審團裁定10項罪名成立| 國際焦點（太報 TaiSounds）"
+  },
+  {
+   "id": "9.1",
+   "event": "人民幣中間價報6.7088元",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.fxstreet.com/news/pboc-sets-usd-cny-reference-rate-at-67088-vs-67111-previous-202611250115",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "PBOC sets USD/CNY reference rate at 6.7088 vs. 6.7111 previous ‖ PBOC sets USD/CNY reference rate at 6.7088 vs. 6.7111 previous The People’s Bank of China (PBOC) sets the USD/CNY central rate for the trading session ahead on Wednesday at 6.7088 compared to the previous day&#x27;s fix of 6.7111 and 6.6559 Reuters estimate. PBOC sets USD/CNY reference rate at 6.7088 vs. 6.7111 previous | FXStreet The People’s Bank of China (PBOC) sets the USD/CNY central rate for",
+   "keywords": [
+    "FXStreet"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "PBOC sets USD/CNY reference rate at 6.7088 vs. 6.7111 previous（FXStreet）"
+  },
+  {
+   "id": "9.2",
+   "event": "人民幣中間價報6.7088元",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://ww2.money-link.com.tw/RealtimeNews/NewsContent.aspx?SN=6371178001&PU=0010",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "《大陸金融》人民幣升值0.23分 中間價6.7088元_富聯網 ‖ 證期權 ETF MONEY-LINK 富聯網首創「看懂財經、解讀資訊」，幫助投資人看懂、讀懂、聽懂全球股市/債市/匯市財經訊息，係台灣最大財經軟體資訊商精誠資訊旗下唯一開放式資訊平台。",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "《大陸金融》人民幣升值0.23分 中間價6.7088元（富聯網）"
+  },
+  {
+   "id": "10.1",
+   "event": "日本央行升息預期持續升溫",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.businesstimes.com.sg/companies-markets/banking-finance/bank-japan-likely-lift-rate-2-mid-2027-ex-board-member-says",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "Bank of Japan likely to lift rate to 2% by mid-2027, ex-board member says - The Business Times ‖ Bank of Japan likely to lift rate to 2% by mid-2027, ex-board member says He expects the BOJ to hike again on Dec 18 Read more at The Business Times. Bank of Japan likely to lift rate to 2% by mid-2027, ex-board member says He expects the BOJ to hike again on Dec 18 Read more at The Business Times. Bank of Japan likely to lift rate to 2% by mid-2027, ex-board member says",
+   "keywords": [
+    "The Business Times"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "Bank of Japan likely to lift rate to 2% by mid-2027, ex-board member says（The Business Times）"
+  },
+  {
+   "id": "10.2",
+   "event": "日本央行升息預期持續升溫",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.tradingview.com/news/binance_news:d63fdcfe6094b:0-ex-boj-board-member-sees-rate-reaching-2-by-mid-2027/",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "Ex-BOJ Board Member Sees Rate Reaching 2% by Mid-2027 — TradingView News ‖ Ex-BOJ Board Member Sees Rate Reaching 2% by Mid-2027 According to Bloomberg, a former Bank of Japan board member expects the central bank to raise its benchmark interest rate three more times to 2% through the middle of next year. That would be the highest level since 1993. Ex-BOJ Board Member Sees Rate Reaching 2% by Mid-2027 According to Bloomberg, a former Bank of Japan board member expects th",
+   "keywords": [
+    "TradingView"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "Ex-BOJ Board Member Sees Rate Reaching 2% by Mid-2027（TradingView）"
+  },
+  {
+   "id": "11.1",
+   "event": "南韓受惠AI晶片帶動匯率表現",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://finance.yahoo.com/news/ai-chip-boom-see-won-014144127.html",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "AI Chip Boom to See Won Build on Best Year in Almost a Decade ‖ AI Chip Boom to See Won Build on Best Year in Almost a Decade South Korea’s AI chip windfall is unleashing a wave of year-end currency flows, potentially pushing the won into its next phase of gains. AI Chip Boom to See Won Build on Best Year in Almost a Decade South Korea’s AI chip windfall is unleashing a wave of year-end currency flows, potentially pushing the won into its next phase of gains. ",
+   "keywords": [
+    "Yahoo Finance"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "AI Chip Boom to See Won Build on Best Year in Almost a Decade（Yahoo Finance）"
+  },
+  {
+   "id": "11.2",
+   "event": "南韓受惠AI晶片帶動匯率表現",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.ekn.kr/web/view.php?key=20261125027134438",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "“킹달러도 못 막는다”…삼전닉스가 이끄는 ‘환율 1200원 시대’ 오나 [머니+] ‖ “킹달러도 못 막는다”…삼전닉스가 이끄는 ‘환율 1200원 시대’ 오나 [머니+] 올 하반기 들어 본격화한 원화 강세 흐름이 내년까지 이어지면서 원/달러 환율이 1200원대로 하락할 것이란 전망에 힘이 실리고 있다. 25일 블룸버그통신에 따르면 시장조사업체 매크.. “킹달러도 못 막는다”…삼전닉스가 이끄는 ‘환율 1200원 시대’ 오나 [머니+] 올 하반기 들어 본격화한 원화 강세 흐름이 내년까지 이어지면서 원/달러 환율이 1200원대로 하락할 것이란 전망에 힘이 실리고 있다. 25일 블룸버그통신에 따르면 시장조사업체 매크.. “킹달러도 못 막는다”…삼전닉스가 이끄는 ‘환율 1200원 시대’ 오나 [머니+]",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "“킹달러도 못 막는다”…삼전닉스가 이끄는 ‘환율 1200원 시대’ 오나 [머니+]（에너지경제신문）"
+  },
+  {
+   "id": "12.1",
+   "event": "英國央行官員呼籲加快升息",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://mlq.ai/news/bank-of-englands-greene-calls-for-faster-rate-hikes-as-ex-jpmorgan-executive-daniel-pinto-joins-the-fpc/",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "Bank of England&#x27;s Greene calls for faster rate hikes as ex-JPMorgan executive Daniel Pinto joins the FPC | MLQ.ai ‖ Bank of England&#x27;s Greene calls for faster rate hikes as ex-JPMorgan executive Daniel Pinto joins the FPC Bank of England rate-setter Megan Greene said on Tuesday, Nov. 24, that the Bank is &quot;a little bit behind the curve&quot; and that the UK needs to raise rates faster… Bank of England&#x27;s Greene calls for faster rate hikes as ex-JPMorgan executive Daniel Pinto joins the FPC Bank of E",
+   "keywords": [
+    "MLQ.ai"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "Bank of England's Greene calls for faster rate hikes as ex-JPMorgan executive Daniel Pinto joins the FPC（MLQ.ai）"
+  },
+  {
+   "id": "12.2",
+   "event": "英國央行官員呼籲加快升息",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.mpamag.com/uk/news/general/bank-of-england-officials-hint-at-faster-rate-hikes-ahead/598620",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "Bank of England officials hint at faster rate hikes ahead | Mortgage Introducer ‖ Bank of England officials hint at faster rate hikes ahead No results Decisionmakers warn delay risks lasting inflation, leaving brokers braced for another round of mortgage repricing Bank of England officials hint at faster rate hikes ahead Decisionmakers warn delay risks lasting inflation, leaving brokers braced for another round of mortgage repricing Bank of England officials hint at faster rate",
+   "keywords": [
+    "Mortgage Professional America"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "Bank of England officials hint at faster rate hikes ahead（Mortgage Professional America）"
+  },
+  {
+   "id": "13.1",
+   "event": "普丁稱烏襲擊俄石油設施將報復",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://news.cnyes.com/news/id/6671620",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "普丁：烏克蘭無視川普要求續襲俄煉油廠 報復行動「不可避免」 | 鉅亨網 ‖ 普丁：烏克蘭無視川普要求續襲俄煉油廠 報復行動「不可避免」  ...    普丁指烏克蘭無視川普要求，持續攻擊俄羅斯煉油設施，俄方報復行動「不可避免」，並要求加強能源設施維安。&amp;#10;路透稱10月底以來烏無人機攻擊，使俄羅斯煉油廠原油加工總量減少45%，部分地區已限制汽油與柴油零售。&amp;#10;戰事外溢升高，波蘭控俄無人機與飛彈侵入領空，英國警告援烏企業防俄破壞；札波羅熱遭襲2死40傷。 普丁：烏克蘭無視川普要求續襲俄煉油廠 報復行動「不可避免」 普丁指烏克蘭無視川普要求，持續攻擊俄羅斯煉油設施，俄方報復行動「不可避免」，並要求加強能源設施維安。&amp;#10;路透稱10月底以來烏無人機攻擊，使俄羅斯煉油廠原油加工總量減少45%，部分地區已限制汽油與柴油零售。&amp;#10;戰事外溢升高，波蘭控俄無人機與飛彈侵入領空，英國警告援烏企業防俄破壞；札波羅熱遭襲2死40傷。 ",
+   "keywords": [
+    "Trump"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "普丁：烏克蘭無視川普要求續襲俄煉油廠 報復行動「不可避免」（鉅亨網）"
+  },
+  {
+   "id": "13.2",
+   "event": "普丁稱烏襲擊俄石油設施將報復",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://www.aljazeera.com/news/2026/11/24/putin-says-kyiv-hit-russian-oil-plants-despite-trump-plea-vows-retaliation",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "Putin says retaliation ‘inevitable’ after Ukraine hit Russian oil plants | Russia-Ukraine war News | Al Jazeera ‖ Putin says retaliation ‘inevitable’ after Ukraine hit Russian oil plants Ukrainian attacks subsided after Trump’s mid-October declaration of an energy ceasefire, but picked up again afterwards. Putin says retaliation ‘inevitable’ after Ukraine hit Russian oil plants Ukrainian attacks subsided after Trump&#x27;s mid-October declaration of an energy ceasefire, but picked up again afterwards. Putin s",
+   "keywords": [
+    "Al Jazeera"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "Putin says retaliation ‘inevitable’ after Ukraine hit Russian oil plants（Al Jazeera）"
+  },
+  {
+   "id": "14.1",
+   "event": "荷姆茲海峽油輪遇襲運量驟降",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://sunmedia.tw/news/finance/1795560377-%E9%9C%8D%E7%88%BE%E6%9C%A8%E8%8C%B2%E6%B5%B7%E5%B3%BD%E6%B2%B9%E8%BC%AA%E9%81%87%E8%A5%B2%E9%81%8B%E9%87%8F%E9%A9%9F%E9%99%8D%E5%9B%9B%E6%88%90%E3%80%80%E5%9C%8B%E9%9A%9B%E6%B2%B9%E5%83%B9%E7%9B%A4%E4%B8%AD%E5%BE%AE%E6%BC%B2%E5%AE%88%E4%BD%8F89%E7%BE%8E%E5%85%83",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "霍爾木茲海峽油輪遇襲運量驟降四成 國際油價盤中微漲守住89美元 - 商傳媒 ‖ 霍爾木茲海峽油輪遇襲運量驟降四成 國際油價盤中微漲守住89美元  霍爾木茲海峽油輪遇襲運量驟降四成 國際油價盤中微漲守住89美元 霍爾木茲海峽油輪頻傳遇襲與觸雷，導致11月航運量大減四成。不過在各國戰略儲備釋放與全球供應過剩的預期下，國際油價反應平淡，布蘭特原油盤中僅小幅回升至每桶89.82美元。 霍爾木茲海峽油輪頻傳遇襲與觸雷，導致11月航運量大減四成。不過在各國戰略儲備釋放與全球供應過剩的預期下，國際油價反應平淡，布蘭特原油盤中僅小幅回升至每桶89.82美元。 霍爾木茲海峽油輪遇襲運量驟降四成 國際油價盤中微漲守住89美元",
+   "keywords": [
+    "Hormuz"
+   ],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "霍爾木茲海峽油輪遇襲運量驟降四成 國際油價盤中微漲守住89美元（商傳媒）"
+  },
+  {
+   "id": "14.2",
+   "event": "荷姆茲海峽油輪遇襲運量驟降",
+   "sub": "發生了什麼",
+   "status": "通過",
+   "reason": "HTTP 200，頁面標題對得上新聞原標題（100%）",
+   "url": "https://hk.finance.yahoo.com/news/%E8%83%BD%E6%BA%90%E7%9B%A4%E5%BE%8C-%E8%8D%B7%E5%A7%86%E8%8C%B2%E6%B5%B7%E5%B3%BD3%E8%89%98%E8%88%B9%E9%81%87%E8%A5%B2-%E5%8E%9F%E6%B2%B9%E6%BC%B2%E9%80%BE2-%E4%BD%86%E4%BE%9B%E6%87%89%E9%81%8E%E5%89%A9%E4%BB%8D%E5%A3%93%E9%A0%82-210004397.html",
+   "date": "2026-11-25",
+   "http": 200,
+   "title": "〈能源盤後〉荷姆茲海峽3艘船遇襲 原油漲逾2% 但供應過剩仍壓頂 ‖ 〈能源盤後〉荷姆茲海峽3艘船遇襲 原油漲逾2% 但供應過剩仍壓頂 荷姆茲海峽附近船舶遇襲，布蘭特油價漲2.27%至91.40美元、WTI漲2.35%至82.05美元 UKMTO稱3艘船遭不明飛行物擊中；伊朗稱貨櫃船遭攻擊，美方並調查伊朗涉50艘油輪網攻 利比亞Sharara管線復產、全球10月庫存增5200萬桶；德銀估日供應過剩170萬桶，壓抑油價 〈能源盤後〉荷姆茲海峽3艘船遇襲 原油漲逾2% 但供應過剩仍壓頂 荷姆茲海峽附近船舶遇襲，布蘭特油價漲2.27%至91.40美元、WTI漲2.35%至82.05美元 UKMTO稱3艘船遭不明飛行物擊中；伊朗稱貨櫃船遭攻擊，美方並調查伊朗涉50艘油輪網攻 利比亞Sharara管線復產、全球10月庫存增5200萬桶；德銀估日供應過剩170萬桶，壓抑油價 〈能源盤後〉荷姆茲海峽3艘船遇襲 原油漲逾2% 但供應過剩仍壓頂",
+   "keywords": [],
+   "matched": [],
+   "quotes": [],
+   "quote_found": null,
+   "text": "〈能源盤後〉荷姆茲海峽3艘船遇襲 原油漲逾2% 但供應過剩仍壓頂（Yahoo 財經）"
+  }
+ ],
+ "md_sha": "5da08d978bf38fb3a7fa16c838710af863161d11",
+ "v": 3
+}
