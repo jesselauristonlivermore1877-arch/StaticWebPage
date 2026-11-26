@@ -1,7 +1,10 @@
 {
- "asof": "2026-11-26 19:15",
+ "asof": "2026-11-26 21:49",
  "first_stale": {
-  "data/registry/officials_src.json|名單查證": "2026-11-24"
+  "data/registry/officials_src.json|名單查證": "2026-11-24",
+  "docs/data/pick_edm.json#maint_big|EDM maint_big〔maint_big〕": "2026-11-26",
+  "docs/data/pick_edm.json#maint_board|EDM maint_board〔maint_board〕": "2026-11-26",
+  "docs/data/pick_edm.json#maint_sec|EDM maint_sec〔maint_sec〕": "2026-11-26"
  },
  "rows": [
   {
@@ -223,11 +226,11 @@
   {
    "name": "個股融資維持率排行",
    "path": "docs/data/stock_keep_rank.json",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/stock_keep_rank.py",
    "note": ""
@@ -487,11 +490,11 @@
   {
    "name": "AI 研究報告（公司產業報告）",
    "path": "data/company_report",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "ev",
    "allow": 5,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 ir_report_watch",
    "note": ""
@@ -2525,31 +2528,31 @@
    "edm": true
   },
   {
-   "name": "EDM 權值股維持率〔maint_big〕",
+   "name": "EDM maint_big〔maint_big〕",
    "path": "docs/data/pick_edm.json#maint_big",
    "date": null,
    "freq": "td",
    "allow": 0,
    "lag_td": null,
    "days": null,
-   "stale": false,
-   "blocked": true,
+   "stale": true,
+   "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（pick_edm_maint）",
-   "note": "今天核對沒過被擋下（上次通過 無）：maint_big 2330 成交值 1048.94 ≠ 日K 20 日均 1023.87949568；maint_big 2454 成交值 545.19 ≠ 日K 20 日均 530.08433152",
+   "note": "今天產生失敗：maint_big 產生失敗：TypeError: must be real number, not NoneType",
    "edm": true
   },
   {
-   "name": "EDM 大盤維持率・大盤融資維持率〔maint_board〕",
+   "name": "EDM maint_board〔maint_board〕",
    "path": "docs/data/pick_edm.json#maint_board",
    "date": "2026-11-25",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
    "days": 1,
-   "stale": false,
+   "stale": true,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（pick_edm_maint）",
-   "note": "",
+   "note": "今天產生失敗：maint_board 產生失敗：TypeError: must be real number, not NoneType",
    "edm": true
   },
   {
@@ -2563,7 +2566,7 @@
    "stale": false,
    "blocked": true,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（pick_edm_maint）",
-   "note": "今天核對沒過被擋下（上次通過 無）：maint_etf 00981A 成交值 119.24 ≠ 日K 20 日均 114.9268992；maint_etf 00631L 成交值 176.5 ≠ 日K 20 日均 171.04164864",
+   "note": "今天核對沒過被擋下（上次通過 無）：大盤核對失敗：IndexError: list index out of range",
    "edm": true
   },
   {
@@ -2577,7 +2580,7 @@
    "stale": false,
    "blocked": true,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（pick_edm_maint）",
-   "note": "今天核對沒過被擋下（上次通過 無）：maint_hot 2330 成交值 1048.94 ≠ 日K 20 日均 1023.87949568；maint_hot 2454 成交值 545.19 ≠ 日K 20 日均 530.08433152",
+   "note": "今天核對沒過被擋下（上次通過 無）：大盤核對失敗：IndexError: list index out of range；maint_hot 2330：margin_full 2026-11-26 沒有這檔",
    "edm": true
   },
   {
@@ -2591,7 +2594,7 @@
    "stale": false,
    "blocked": true,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（pick_edm_maint）",
-   "note": "今天核對沒過被擋下（上次通過 無）：maint_legal 2330 成交值 1048.94 ≠ 日K 20 日均 1023.87949568；maint_legal 2454 成交值 545.19 ≠ 日K 20 日均 530.08433152",
+   "note": "今天核對沒過被擋下（上次通過 無）：大盤核對失敗：IndexError: list index out of range；maint_legal 2330：margin_full 2026-11-26 沒有這檔",
    "edm": true
   },
   {
@@ -2605,31 +2608,31 @@
    "stale": false,
    "blocked": true,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（pick_edm_maint）",
-   "note": "今天核對沒過被擋下（上次通過 無）：maint_near 3037 成交值 216.79 ≠ 日K 20 日均 213.74701568；maint_near 2327 成交值 175.94 ≠ 日K 20 日均 179.3750016",
+   "note": "今天核對沒過被擋下（上次通過 無）：大盤核對失敗：IndexError: list index out of range；maint_near 2337：margin_full 2026-11-26 沒有這檔",
    "edm": true
   },
   {
-   "name": "EDM 族群維持率・族群維持率〔maint_sec〕",
+   "name": "EDM maint_sec〔maint_sec〕",
    "path": "docs/data/pick_edm.json#maint_sec",
    "date": "2026-11-25",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
    "days": 1,
-   "stale": false,
+   "stale": true,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（pick_edm_maint）",
-   "note": "",
+   "note": "今天產生失敗：maint_sec 產生失敗：TypeError: must be real number, not NoneType",
    "edm": true
   },
   {
    "name": "EDM 融資融券・融資融券〔margin〕",
    "path": "docs/data/pick_edm.json#margin",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -2653,11 +2656,11 @@
   {
    "name": "EDM 信用交易・信用交易〔mcred〕",
    "path": "docs/data/pick_edm.json#mcred",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -2667,11 +2670,11 @@
   {
    "name": "EDM 信用交易・上櫃・上櫃融資〔mcred_tp〕",
    "path": "docs/data/pick_edm.json#mcred_tp",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -2681,11 +2684,11 @@
   {
    "name": "EDM 信用交易・上市・上市融資〔mcred_tw〕",
    "path": "docs/data/pick_edm.json#mcred_tw",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -2707,13 +2710,41 @@
    "edm": true
   },
   {
+   "name": "EDM 歷史排行・融資大減〔mf_rank〕",
+   "path": "docs/data/pick_edm.json#mf_rank",
+   "date": "2026-11-26",
+   "freq": "evx",
+   "allow": 0,
+   "lag_td": 0,
+   "days": 0,
+   "stale": false,
+   "blocked": false,
+   "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（pick_edm_1116 歷史排行）",
+   "note": "今天進歷史前十才出；",
+   "edm": true
+  },
+  {
+   "name": "EDM 歷史排行・融資大減〔mf_rank_otc〕",
+   "path": "docs/data/pick_edm.json#mf_rank_otc",
+   "date": "2026-11-26",
+   "freq": "evx",
+   "allow": 0,
+   "lag_td": 0,
+   "days": 0,
+   "stale": false,
+   "blocked": false,
+   "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（pick_edm_1116 歷史排行）",
+   "note": "今天進歷史前十才出；",
+   "edm": true
+  },
+  {
    "name": "EDM 個股融資流向・個股融資流向〔mflow〕",
    "path": "docs/data/pick_edm.json#mflow",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -2723,11 +2754,11 @@
   {
    "name": "EDM 融資流向・族群融資流向〔msec〕",
    "path": "docs/data/pick_edm.json#msec",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -3031,11 +3062,11 @@
   {
    "name": "EDM 標籤・資金軌跡 C〔trail_C〕",
    "path": "docs/data/pick_edm.json#tab:trail_C",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -3279,6 +3310,6 @@
    "note": "最後檢查 2026-11-26 16:56：正常 資料到 13:45"
   }
  ],
- "n_stale": 1,
+ "n_stale": 4,
  "tg_day": "2026-11-26"
 }
