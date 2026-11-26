@@ -1,7 +1,7 @@
 {
- "ver": "20261124b",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261124b/GEA_OM_Setup_20261124b.exe",
- "sha256": "fb35291473def1c072e2b4f506bd07c937d21491f60af227416dcea0bebef841",
- "notes": "對帳小改進：不是任何策略在交易的商品（例：手動買賣個股期貨）成交只記日誌、不再發「對不到策略」TG；策略商品照舊查庫存＋TG。其他功能不變。",
- "sig": "iiYgNjgbLsMKQ8orYUg9NGQsfJYZfCzxed6pV9LpeeRdtx6J8+zjvUyfln8DmQ1lo0fah8bc5JsCM7jXWOLrYw=="
+ "ver": "20261126a",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261126a/GEA_OM_Setup_20261126a.exe",
+ "sha256": "0b683c7a6784c22e814e971ac0084b36f9cc8fe92fd0dfcfa24132312168d532",
+ "notes": "20261126a：新增「本機訊號」——客戶可用自己電腦上 MC／CT PRO 寫出的訊號檔直接下單（不需開通碼，有過時、最大口數、一次跳動、格式防呆）；GEA 跟單（VVIP）流程不變；設定精靈改為先選訊號來源。",
+ "sig": "SsJWYITe3NkQE1buiYzgceb7SPrChwA21D0Zx6BNkgOYExL330kyKCZij98qO54ooviHEY4HW6blq2pA6lCSpg=="
 }
