@@ -132,6 +132,7 @@ code{background:var(--panel2);padding:0 4px;border-radius:4px;font-size:12px;wor
 </table></div>
 
 <h2>H. 已知問題（H1、H2 已在 d17 修好；20261127a 沒有新增已知問題）</h2>
+<p class="note">傳送端 B（外部平台訊號檔）：MC 格式有測；<b>TC 未實測</b>（Evans 11-26：沒有 TC 報價、給不了 TC 訊號），TC 解析照現有留著，不列待辦。</p>
 <div class="card scroll"><table>
 <tr><th>#</th><th>問題</th><th>現在怎麼避開</th></tr>
 <tr><td>H1</td><td>🔴 <b>在國票 App 手動平倉跟單中的策略</b>：下單機記「成交回報對不到策略」只寫 log、<b>不扣帳本</b> → 下一個出場訊號會變成反向開倉（11-13 S GEA5 第一筆真單實際發生，S 已改帳本、跟單關）。</td><td>✅ d17 修好：成交對不到策略 → 查庫存、不符就停＋TG。仍建議先關跟單再手動處理。</td></tr>
