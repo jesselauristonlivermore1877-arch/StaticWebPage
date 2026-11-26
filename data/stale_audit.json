@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-27 02:49",
+ "asof": "2026-11-27 05:30",
  "first_stale": {
   "data/registry/officials_src.json|名單查證": "2026-11-24",
   "docs/data/pick_edm.json#maint_big|EDM maint_big〔maint_big〕": "2026-11-26",
@@ -459,11 +459,11 @@
   {
    "name": "法說逐字稿",
    "path": "docs/data/ir/tr",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "ev",
    "allow": 5,
-   "lag_td": 1,
-   "days": 2,
+   "lag_td": 0,
+   "days": 1,
    "stale": false,
    "owner": "W 本機排程 ir_transcribe_one",
    "note": "有法說才有"
@@ -2255,11 +2255,11 @@
   {
    "name": "EDM 可轉債・可轉債〔cb_fl〕",
    "path": "docs/data/pick_edm.json#cb_fl",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 1,
-   "lag_td": 1,
-   "days": 2,
+   "lag_td": 0,
+   "days": 1,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（cb_edm）",
@@ -2269,11 +2269,11 @@
   {
    "name": "EDM 可轉債・可轉債〔cb_new〕",
    "path": "docs/data/pick_edm.json#cb_new",
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "freq": "td",
    "allow": 1,
-   "lag_td": 1,
-   "days": 2,
+   "lag_td": 0,
+   "days": 1,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（cb_edm）",
