@@ -72,7 +72,7 @@ ok(r.err === 403, "停權用戶被拒", "HTTP " + r.err);
 // ── 正常廣播
 const subs = {};
 for (const u of ["u1", "u2", "u3"]) { subs[u] = await connect("sub", u, tok[u]); ok(!subs[u].err, `接收端 ${u} 連上`); }
-const pub = await connect("pub", "sender", PUB);
+let pub = await connect("pub", "sender", PUB);
 ok(!pub.err, "發送端連上");
 const lat = [];
 for (let i = 1; i <= 10; i++) {
@@ -516,6 +516,29 @@ n1b.ws.close();
   ok((await connect("pub", "sh2", rp.j.token)).err === 401, "停用後不能再連");
   ok(!pub.closed, "現行訊號主機（RELAY_PUB_TOKEN）不受影響");
   r1.ws.close();
+}
+
+// ── 20261127a 作者斷線提示：pub 全部斷線 60 秒 → 帶 caps:author 的接收端收到 {ctl:author,on:false}；舊版（沒帶 caps）不送；pub 回來 → on:true
+{
+  const ta = (await admin("user?id=au1&subs=**")).j.token, tb = (await admin("user?id=ao1&subs=**")).j.token;
+  const sa = await connect("sub", "au1", ta, true), sb = await connect("sub", "ao1", tb, true);
+  sa.ws.send(JSON.stringify({ hello: { ver: "20261127a", caps: ["author"] } }));
+  sb.ws.send(JSON.stringify({ hello: { ver: "20261126a" } }));
+  await until(() => sa.ctl.some(c => c.ctl === "author"));
+  ok(sa.ctl.some(c => c.ctl === "author" && c.on === true), "hello 帶 caps:author → 先收到作者現況（在線）", JSON.stringify(sa.ctl.filter(c => c.ctl === "author")));
+  pub.ws.close(); const t0 = Date.now();
+  await sleep(30e3);
+  ok(!sa.ctl.some(c => c.ctl === "author" && c.on === false), "pub 斷線 30 秒（< 60 秒寬限）→ 還不通知");
+  await until(() => sa.ctl.some(c => c.ctl === "author" && c.on === false), 60e3);
+  const off = sa.ctl.find(c => c.ctl === "author" && c.on === false);
+  ok(!!off && off.since > 0, "pub 斷線約 60 秒 → 收到作者離線", off ? `${Math.round((Date.now() - t0) / 1000)} 秒、since ${new Date(off.since).toISOString()}` : "沒收到");
+  ok(!sb.ctl.some(c => c.ctl === "author"), "舊版接收端（hello 沒帶 caps）不收 ctl:author");
+  const h = await (await fetch(`${BASE}/health?ch=${CH}`)).json();
+  ok(h.author && h.author.on === false, "/health 帶作者狀態", JSON.stringify(h.author));
+  pub = await connect("pub", "sender", PUB);
+  await until(() => sa.ctl.some(c => c.ctl === "author" && c.on === true && sa.ctl.indexOf(c) > sa.ctl.indexOf(off)));
+  ok(sa.ctl.slice(sa.ctl.indexOf(off) + 1).some(c => c.ctl === "author" && c.on === true), "pub 重新連上 → 立刻收到作者恢復");
+  sa.ws.close(); sb.ws.close();
 }
 
 // ── 收尾

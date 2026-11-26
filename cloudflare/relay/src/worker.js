@@ -369,6 +369,11 @@ export default {
 };
 
 const STALE_S = 150;   // 用戶端每 30 秒 ping；150 秒＝連漏 4 次以上才算殭屍（測試可用 var RELAY_STALE_S 縮短）
+// 20261127a 作者斷線提示（【新】總指揮 11-26 第 4 項）：頻道裡沒有任何傳送端（pub）連線持續 AUTHOR_GRACE_S（60 秒）→ 送 {"ctl":"author","on":false,"since":<離線時間 ms>}；
+//   pub 連著但 STALE_S（150 秒）沒心跳也沒訊息 → sweep 關掉、算離線（所以「沒心跳」最晚 150＋60 秒內通知）。pub 重新連上 → 立刻送 {"ctl":"author","on":true}。
+//   只送給 hello 帶 caps:["author"] 的接收端（20261127a 起）；舊版收到不認得的 ctl 會發 TG，所以不送。接收端送 hello 時中繼回一則現況。
+//   偵測靠 DO alarm：pub 在線時每 60 秒醒一次看心跳；最後一條 pub 斷線時排在 60 秒後確認。
+const AUTHOR_GRACE_S = 60;
 
 export class Relay extends DurableObject {
   constructor(ctx, env) {
@@ -632,7 +637,7 @@ export class Relay extends DurableObject {
         last_pub: last ? new Date(last.rts).toISOString() : null, last_seq: last ? last.seq : null,
         last_pub_age_s: last ? Math.round((now - last.rts) / 1000) : null,
         subs_online: this.ctx.getWebSockets("sub").length, pubs_online: this.ctx.getWebSockets("pub").length,
-        signals_1h: n1h, stored: this.sql.exec("SELECT COUNT(*) AS n FROM msgs").one().n });
+        author: this.authorMsg(), signals_1h: n1h, stored: this.sql.exec("SELECT COUNT(*) AS n FROM msgs").one().n });
     }
     if (p === "/redeem") return this.redeem(req);
     if (p === "/tg") {
@@ -927,7 +932,33 @@ export class Relay extends DurableObject {
     const pair = new WebSocketPair();
     this.ctx.acceptWebSocket(pair[1], [role, tag]);
     pair[1].serializeAttachment({ role, id, v2: !!v2, at: Date.now(), colo: (req.cf && req.cf.colo) || null, ...sub });
+    if (role === "pub") await this.pubUp();
     return new Response(null, { status: 101, webSocket: pair[0] });
+  }
+
+  // ── 20261127a 作者斷線提示
+  authorMsg() {
+    const off = this.meta("author_off") === "1";
+    return { ctl: "author", on: !off, since: off ? Number(this.meta("author_off_at") || 0) : null };
+  }
+  authorSend() {
+    const msg = JSON.stringify(this.authorMsg()), to = [];
+    for (const s of this.live("sub")) { const a = s.deserializeAttachment() || {}; if (a.author) { this.send(s, msg); to.push(a.id); } }
+    return to;
+  }
+  async pubUp() {
+    this.meta("pub_gone_at", "");
+    if (this.meta("author_off") === "1") { this.meta("author_off", "0"); this.authorSend(); }
+    await this.ctx.storage.setAlarm(Date.now() + AUTHOR_GRACE_S * 1e3);       // 在線期間每 60 秒醒來看心跳
+  }
+  async alarm() {
+    this.sweep();
+    const now = Date.now();
+    if (this.live("pub").length) { await this.ctx.storage.setAlarm(now + AUTHOR_GRACE_S * 1e3); return; }
+    let gone = Number(this.meta("pub_gone_at") || 0);
+    if (!gone) { gone = now; this.meta("pub_gone_at", gone); }               // 被 sweep 清掉的殭屍 pub：從現在起算 60 秒
+    if (now - gone < AUTHOR_GRACE_S * 1e3 - 1e3) { await this.ctx.storage.setAlarm(gone + AUTHOR_GRACE_S * 1e3); return; }
+    if (this.meta("author_off") !== "1") { this.meta("author_off", "1"); this.meta("author_off_at", gone); this.authorSend(); }
   }
 
   send(ws, o) { try { ws.send(typeof o === "string" ? o : JSON.stringify(o)); } catch (e) { /* 已斷線 */ } }
@@ -980,7 +1011,9 @@ export class Relay extends DurableObject {
     if ("hello" in m) {
       const h = m.hello || {};
       this.sql.exec("UPDATE users SET ver=? WHERE id=?", String(h.ver || "").slice(0, 30), a.id);
-      if (!a.v2) { a.v2 = true; ws.serializeAttachment(a); }
+      const au = Array.isArray(h.caps) && h.caps.includes("author");
+      if (!a.v2 || (au && !a.author)) { a.v2 = true; if (au) a.author = true; ws.serializeAttachment(a); }
+      if (au) this.send(ws, this.authorMsg());                                 // 20261127a：連上先告訴它作者現在在不在
       return;
     }
     if ("recon" in m) {
@@ -1016,6 +1049,11 @@ export class Relay extends DurableObject {
 
   async webSocketClose(ws, code, reason) {
     try { ws.close(code, reason); } catch (e) { /* 已關 */ }
+    const a = ws.deserializeAttachment() || {};
+    if (a.role === "pub" && !this.live("pub").some(x => x !== ws)) {             // 20261127a：最後一條 pub 斷了 → 60 秒後還沒回來就通知
+      this.meta("pub_gone_at", Date.now());
+      await this.ctx.storage.setAlarm(Date.now() + AUTHOR_GRACE_S * 1e3);
+    }
   }
 
   async webSocketError(ws) {
