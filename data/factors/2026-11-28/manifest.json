@@ -1,9 +1,9 @@
 {
  "version": 1,
  "date": "2026-11-28",
- "built_at": "2026-11-28T05:30:37+08:00",
+ "built_at": "2026-11-28T05:50:02+08:00",
  "builder": "CustomerServiceANDSales/tools/factor_snapshot.py",
- "run": "46068669565",
+ "run": "46069466409",
  "rule": "只存當天看得到的值；回測一律用 tools/factor_pit.py load(date, factors) 讀，不讀現在的 docs/data。",
  "files": {
   "stocks.json.gz": {
@@ -111,8 +111,8 @@
    "name": "量化評分",
    "file": "data/web_data.json",
    "ok": true,
-   "bytes": 1571166,
-   "sha256": "83f4623565b1930f0c6d32f2f909787b5efc6dbdbb5c43db50783f5e23cf14b2",
+   "bytes": 1571272,
+   "sha256": "4238e0ab451527dafeed4882e3c2a31ea6688b9ce0597568ab5f038a8dc64631",
    "asof": "2026-11-27",
    "cols": null,
    "n": 253,
@@ -189,7 +189,7 @@
    "file": "data/stock_extra.json",
    "ok": true,
    "bytes": 1810375,
-   "sha256": "dc44440070930ae034e932978922d11a3793efdd34e64d0b6136fb9e041c5884",
+   "sha256": "36f42db222245aa59224bab5de3bd526482011824498dd8b6ed3358a9b1a0a57",
    "asof": "2026-11-27",
    "cols": null,
    "n": 1988,
