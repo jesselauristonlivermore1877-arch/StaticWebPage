@@ -1,9 +1,34 @@
 {
- "checked_at": "2026-11-27T18:42:30.687Z",
+ "checked_at": "2026-11-27T21:30:19.701Z",
  "date": "2026-11-27",
- "n": 143,
- "n_bad": 4,
+ "n": 150,
+ "n_bad": 5,
  "bad": {
+  "GEA_選股_維持率ETF": {
+   "cat": "維持率",
+   "title": "維持率・ETF（融資市值前 20）",
+   "err": "",
+   "issues": [
+    {
+     "area": "整張卡",
+     "dir": "右",
+     "px": 38,
+     "why": "卡片內容總寬 1118"
+    },
+    {
+     "area": "「融資市值第 1～10 名融資市值單位億元」",
+     "dir": "右",
+     "px": 75,
+     "why": "div.pe-box scrollWidth 570＞clientWidth 495"
+    },
+    {
+     "area": "「融資市值第 11～20 名上市＋上櫃」",
+     "dir": "右",
+     "px": 75,
+     "why": "div.pe-box scrollWidth 570＞clientWidth 495"
+    }
+   ]
+  },
   "GEA_主動ETF日報_00988A": {
    "cat": "ETF 各檔",
    "title": "00988A 統一全球創新",
