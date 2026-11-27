@@ -1,17 +1,17 @@
 {
  "date": "2026-11-27",
  "data_date": "2026-11-27",
- "made": "2026-11-27T14:48+08:00",
- "built_at": "2026-11-27T14:36:26+08:00",
- "run": "45949347303",
+ "made": "2026-11-27T15:58+08:00",
+ "built_at": "2026-11-27T15:41:54+08:00",
+ "run": "45960073730",
  "rule": "量化統計日報只能引用這份檔裡的數字；雲端 quant_verify 逐一核對，對不上或出現禁用字眼整篇不顯示。",
  "src_dates": {
-  "web_data.market.taiex": "2026-11-26",
+  "web_data.market.taiex": "2026-11-27",
   "web_data.market.otc": "2026-11-27",
   "web_data.market.tsmc": "2026-11-27",
   "web_data.breadth": "2026-11-27",
   "web_data.orders": "2026-11-27",
-  "web_data.inst.summary": "2026-11-26",
+  "web_data.inst.summary": "2026-11-27",
   "web_data.market.margin_balance": "2026-11-26",
   "web_data.elecfin": "2026-11-27",
   "web_data.screen.sector_score": "2026-11-27",
@@ -21,12 +21,55 @@
   "docs/data/etf_flow.json": "2026-11-25"
  },
  "skipped": {
-  "web_data.market.taiex": "來源資料日 2026-11-26 ≠ 資料日 2026-11-27",
-  "web_data.inst.summary": "來源資料日 2026-11-26 ≠ 資料日 2026-11-27",
   "web_data.market.margin_balance": "來源資料日 2026-11-26 ≠ 資料日 2026-11-27",
   "docs/data/chips.json": "來源資料日 2026-11-26 ≠ 資料日 2026-11-27"
  },
  "facts": [
+  {
+   "id": "taiex_close",
+   "sec": "大盤",
+   "label": "加權指數收盤",
+   "value": 39308.08,
+   "unit": " 點",
+   "text": "39308.08 點",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_chg",
+   "sec": "大盤",
+   "label": "加權指數漲跌點",
+   "value": 156.27,
+   "unit": " 點",
+   "text": "+156.27 點",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_r1",
+   "sec": "大盤",
+   "label": "加權指數漲跌幅",
+   "value": 0.4,
+   "unit": "%",
+   "text": "+0.40%",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_dd52",
+   "sec": "大盤",
+   "label": "加權指數距 52 週高點",
+   "value": -21.33,
+   "unit": "%",
+   "text": "-21.33%",
+   "src": "web_data.market.taiex"
+  },
+  {
+   "id": "taiex_ma20",
+   "sec": "大盤",
+   "label": "加權指數距 20 日均線",
+   "value": -3.8,
+   "unit": "%",
+   "text": "-3.80%",
+   "src": "web_data.market.taiex"
+  },
   {
    "id": "otc_close",
    "sec": "大盤",
@@ -116,6 +159,33 @@
    "unit": "",
    "text": "0.52",
    "src": "web_data.orders"
+  },
+  {
+   "id": "inst_外資",
+   "sec": "法人籌碼",
+   "label": "外資買賣超",
+   "value": -296.3,
+   "unit": " 億元",
+   "text": "-296.3 億元",
+   "src": "web_data.inst.summary"
+  },
+  {
+   "id": "inst_投信",
+   "sec": "法人籌碼",
+   "label": "投信買賣超",
+   "value": 85.2,
+   "unit": " 億元",
+   "text": "+85.2 億元",
+   "src": "web_data.inst.summary"
+  },
+  {
+   "id": "inst_自營",
+   "sec": "法人籌碼",
+   "label": "自營買賣超",
+   "value": -2.0,
+   "unit": " 億元",
+   "text": "-2.0 億元",
+   "src": "web_data.inst.summary"
   },
   {
    "id": "elecfin",
