@@ -1,16 +1,16 @@
 {
- "when": "2026-11-27T21:55:03.730Z",
- "tw": "2026-11-28 05:55",
+ "when": "2026-11-27T22:43:30.505Z",
+ "tw": "2026-11-28 06:43",
  "url": "https://jesselauristonlivermore1877-arch.github.io/StaticWebPage/",
  "max_age": 4,
  "widths": {
   "390": {
    "width": 390,
-   "secs": 105,
+   "secs": 107,
    "blocks": [
     {
      "path": "產業 › 產業信息 › 即時訊息",
-     "len": 1758,
+     "len": 1760,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -18,7 +18,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 498 產業與科技 331 台股公司 127 美股公司 40 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體",
+     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 498 產業與科技 330 台股公司 128 美股公司 40 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體",
      "leaf": true,
      "dyn": false
     },
@@ -32,7 +32,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 127 公開資訊觀測站重大訊",
+     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 128 公開資訊觀測站重大訊",
      "leaf": true,
      "dyn": false
     },
@@ -310,7 +310,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "官方穩定市場措施（11/06 起，10 項） 官方政策回應｜11/06 起・最近 11/23｜資料截至 11/27（產出 11-28 02:09） 官方確認 週末公布、2026-11-23（下個交易日）生效 財政部 金管會 行政院與金管會 證券交易所、金融監督管理委員會 原出處：財政部：國安基金決定啟動安定市場任務，維",
+     "head": "官方穩定市場措施（11/06 起，10 項） 官方政策回應｜11/06 起・最近 11/23｜資料截至 11/27（產出 11-28 06:41） 官方確認 週末公布、2026-11-23（下個交易日）生效 財政部 金管會 行政院與金管會 證券交易所、金融監督管理委員會 原出處：財政部：國安基金決定啟動安定市場任務，維",
      "leaf": true,
      "dyn": false
     },
@@ -2005,283 +2005,283 @@
    "console": [],
    "http": [],
    "files": {
-    "data/macro.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/topic_industry.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/ir/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/topic_industry.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/mkt_overlay.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/news_live.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/stock_bars.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/risk_alert.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/kol.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/company.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/warrant_flow.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/names.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/tdcc.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/kol.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/disposal.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/f13.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/names.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/aetf_daily.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/mkt_overlay.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/risk_alert.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/insider_rank.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/capital.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/warrant.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/market_alert.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/capital.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/ir_alert.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/warrant_flow.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/stock_bars.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/aetf_daily.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/f13.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/root_cause/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/insider.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/news_live.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/world_idx.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
-    "data/river.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/ir_alert.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/market_alert.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
+     "st": 200
+    },
+    "data/tdcc.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
+     "st": 200
+    },
+    "data/insider.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/insider_mp.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/insider/9951.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/insider_new.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/macro.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/river.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/val_decomp.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/ir/2313.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/company_reports.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/ir/tr/2313_2026-11-27.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/company_reports.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/is_q.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/industry_notes.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/ir/targets.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/mi_react.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/broker.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
+     "st": 200
+    },
+    "data/mi_react.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/calendar.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/rrg.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/radar.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/trail.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/nsf_holdings.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/nsf_history.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/root_cause/2026-11-27.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/rc_topic/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/root_cause/threads.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/rc_topic/index.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/root_cause/2026-11-27.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/trail_flow.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/contrib.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/margin.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/attention.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/edm_hist/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/pick_edm.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/f13_edm/latest.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/f13_edm/2026Q3/manifest.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/chips.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/chips_daily.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/stock_maint.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/art/maint_120.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/art/forced_sell.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/etf_flow.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/etf_cost.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/buyback.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/buyback/8299.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/tail_combo.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/art/roll_article.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/lookup/23.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/lookup/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
+     "st": 200
+    },
+    "data/lookup/23.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/analyst.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     }
    }
   },
   "768": {
    "width": 768,
-   "secs": 104,
+   "secs": 105,
    "blocks": [
     {
      "path": "產業 › 產業信息 › 即時訊息",
-     "len": 1758,
+     "len": 1760,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -2289,7 +2289,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 498 產業與科技 331 台股公司 127 美股公司 40 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體",
+     "head": "即時訊息 產業與科技、台股公司、美股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 分類 全部 498 產業與科技 330 台股公司 128 美股公司 40 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體",
      "leaf": true,
      "dyn": false
     },
@@ -2303,7 +2303,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 127 公開資訊觀測站重大訊",
+     "head": "台股公司 台股公司・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 個股 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」），分數＝跨媒體同報＋主軸詞＋權值股＋價格反應；滑過「市場關注」看明細 來源 全部 128 公開資訊觀測站重大訊",
      "leaf": true,
      "dyn": false
     },
@@ -2581,7 +2581,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "官方穩定市場措施（11/06 起，10 項） 官方政策回應｜11/06 起・最近 11/23｜資料截至 11/27（產出 11-28 02:09） 官方確認 週末公布、2026-11-23（下個交易日）生效 財政部 金管會 行政院與金管會 證券交易所、金融監督管理委員會 原出處：財政部：國安基金決定啟動安定市場任務，維",
+     "head": "官方穩定市場措施（11/06 起，10 項） 官方政策回應｜11/06 起・最近 11/23｜資料截至 11/27（產出 11-28 06:41） 官方確認 週末公布、2026-11-23（下個交易日）生效 財政部 金管會 行政院與金管會 證券交易所、金融監督管理委員會 原出處：財政部：國安基金決定啟動安定市場任務，維",
      "leaf": true,
      "dyn": false
     },
@@ -4276,283 +4276,283 @@
    "console": [],
    "http": [],
    "files": {
-    "data/macro.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
     "data/topic_industry.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/ir/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/stock_bars.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/risk_alert.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/kol.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/company.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/mkt_overlay.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/disposal.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/tdcc.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/names.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/ir/index.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/aetf_daily.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/insider.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/stock_bars.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/capital.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/names.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/insider_rank.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/warrant.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/capital.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/mkt_overlay.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/warrant_flow.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/tdcc.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/f13.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/world_idx.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/company.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/market_alert.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/risk_alert.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/news_live.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/ir_alert.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/disposal.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/market_alert.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
+     "st": 200
+    },
+    "data/world_idx.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/root_cause/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/warrant.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/insider.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/insider/9951.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/insider_mp.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/insider_new.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/macro.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/river.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/val_decomp.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/ir/2313.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/company_reports.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/ir/tr/2313_2026-11-27.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/ir/2313.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/company_reports.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/is_q.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/industry_notes.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/ir/targets.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/mi_react.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/broker.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
+     "st": 200
+    },
+    "data/mi_react.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/calendar.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/rrg.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/radar.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/trail.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/nsf_holdings.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/nsf_history.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
+     "st": 200
+    },
+    "data/nsf_holdings.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/root_cause/2026-11-27.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/rc_topic/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/root_cause/threads.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/trail_flow.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/contrib.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/margin.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/attention.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/pick_edm.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/edm_hist/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/f13_edm/latest.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/f13_edm/2026Q3/manifest.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/chips.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/chips_daily.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/stock_maint.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/art/maint_120.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/art/forced_sell.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/etf_flow.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/etf_cost.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/buyback.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/buyback/8299.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/tail_combo.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/art/roll_article.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/lookup/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/lookup/23.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/analyst.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     }
    }
   },
   "1366": {
    "width": 1366,
-   "secs": 289,
+   "secs": 290,
    "blocks": [
     {
      "path": "產業 › 產業信息 › 即時訊息",
-     "len": 1765,
+     "len": 1760,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -6820,7 +6820,7 @@
     },
     {
      "path": "產業 › 產業信息 › 台股公司",
-     "len": 1660,
+     "len": 1653,
      "viz": 0,
      "flags": [],
      "maxd": null,
@@ -7092,7 +7092,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "即時訊息 利率、央行與匯率、經濟指標、台股大盤與政策・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 分類 全部 128 利率、央行與匯率 42 經濟指標 46 台股大盤與政策 40 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」）",
+     "head": "即時訊息 利率、央行與匯率、經濟指標、台股大盤與政策・權威來源近 48 小時；上排切來源，媒體與外資再分各家，公開資訊觀測站重大訊息再分科技／金融／傳產／生技醫療與族群 分類 全部 129 利率、央行與匯率 43 經濟指標 46 台股大盤與政策 40 排序 市場會追的程度 最新 同一事件合成一則（其他媒體列在「另見」）",
      "leaf": true,
      "dyn": false
     },
@@ -8492,7 +8492,7 @@
      "stale": false,
      "console": [],
      "http": [],
-     "head": "官方穩定市場措施（11/06 起，10 項） 官方政策回應｜11/06 起・最近 11/23｜資料截至 11/27（產出 11-28 02:09） 官方確認 週末公布、2026-11-23（下個交易日）生效 財政部 金管會 行政院與金管會 證券交易所、金融監督管理委員會 原出處：財政部：國安基金決定啟動安定市場任務，維",
+     "head": "官方穩定市場措施（11/06 起，10 項） 官方政策回應｜11/06 起・最近 11/23｜資料截至 11/27（產出 11-28 06:41） 官方確認 週末公布、2026-11-23（下個交易日）生效 財政部 金管會 行政院與金管會 證券交易所、金融監督管理委員會 原出處：財政部：國安基金決定啟動安定市場任務，維",
      "leaf": true,
      "dyn": false
     },
@@ -10257,276 +10257,276 @@
    "console": [],
    "http": [],
    "files": {
-    "data/topic_industry.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/ir/index.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/ir/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/topic_industry.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/risk_alert.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/aetf_daily.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/company.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/kol.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/disposal.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/names.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/warrant.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/mkt_overlay.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/root_cause/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/world_idx.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/market_alert.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/stock_bars.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/ir_alert.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/tdcc.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/insider_rank.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/f13.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/mkt_overlay.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/capital.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/names.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
-    "data/insider.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+    "data/warrant.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/aetf_daily.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/company.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/stock_bars.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/kol.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/market_alert.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/warrant_flow.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/insider.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
+     "st": 200
+    },
+    "data/root_cause/index.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/ir_alert.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/capital.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/tdcc.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
+     "st": 200
+    },
+    "data/world_idx.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/f13.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/news_live.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/insider/9951.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/insider_new.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/insider_mp.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/macro.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/river.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/val_decomp.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/ir/2313.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/ir/tr/2313_2026-11-27.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/ir/2313.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/company_reports.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/is_q.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/industry_notes.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/ir/targets.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/broker.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/mi_react.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/calendar.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/rrg.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/radar.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/trail.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/world.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/nsf_holdings.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/nsf_history.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/root_cause/threads.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/rc_topic/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/root_cause/2026-11-27.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/root_cause/threads.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
+     "st": 200
+    },
+    "data/rc_topic/index.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/trail_flow.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/contrib.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/margin.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/attention.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/edm_hist/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/pick_edm.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/f13_edm/latest.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/f13_edm/2026Q3/manifest.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/chips.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/chips_daily.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/stock_maint.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/art/maint_120.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/art/forced_sell.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/etf_flow.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/etf_cost.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/buyback.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/buyback/8299.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     },
     "data/tail_combo.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/art/roll_article.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
-     "st": 200
-    },
-    "data/lookup/23.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/lookup/index.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
+     "st": 200
+    },
+    "data/lookup/23.json": {
+     "lm": "Fri, 27 Nov 2026 22:42:51 GMT",
      "st": 200
     },
     "data/analyst.json": {
-     "lm": "Fri, 27 Nov 2026 21:51:32 GMT",
+     "lm": "Fri, 27 Nov 2026 22:42:52 GMT",
      "st": 200
     }
    }
