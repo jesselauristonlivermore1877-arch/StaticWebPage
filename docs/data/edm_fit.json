@@ -1,44 +1,19 @@
 {
- "checked_at": "2026-11-27T06:33:51.530Z",
+ "checked_at": "2026-11-27T07:19:00.445Z",
  "date": "2026-11-26",
- "n": 150,
+ "n": 140,
  "n_bad": 4,
  "bad": {
-  "GEA_選股_族群循環圖": {
-   "cat": "市場",
-   "title": "族群循環圖",
+  "GEA_主動ETF日報_00988A": {
+   "cat": "ETF 各檔",
+   "title": "00988A 統一全球創新",
    "err": "",
    "issues": [
     {
-     "area": "div.pe-box",
-     "dir": "右",
-     "px": 17,
-     "why": "圖內文字超出圖框：網通與衛星"
-    }
-   ]
-  },
-  "GEA_選股_維持率ETF": {
-   "cat": "維持率",
-   "title": "維持率・ETF（融資市值前 20）",
-   "err": "",
-   "issues": [
-    {
-     "area": "整張卡",
-     "dir": "右",
-     "px": 38,
-     "why": "卡片內容總寬 1118"
-    },
-    {
-     "area": "「融資市值第 1～10 名融資市值單位億元」",
-     "dir": "右",
-     "px": 75,
-     "why": "div.pe-box scrollWidth 570＞clientWidth 495"
-    },
-    {
-     "area": "「融資市值第 11～20 名上市＋上櫃」",
-     "dir": "右",
-     "px": 75,
-     "why": "div.pe-box scrollWidth 570＞clientWidth 495"
+     "area": "div.pe-top",
+     "dir": "下",
+     "px": 6,
+     "why": "div.pe-top scrollHeight 201＞clientHeight 195（容許 2）"
     }
    ]
   },
@@ -65,6 +40,25 @@
      "dir": "右",
      "px": 10,
      "why": "div.pe-box scrollWidth 505＞clientWidth 495"
+    }
+   ]
+  },
+  "GEA_主動ETF成本_00408A": {
+   "cat": "ETF 成本",
+   "title": "00408A 第一金優股息",
+   "err": "",
+   "issues": [
+    {
+     "area": "「持股前 6 大（依現值）・現價距推估成本元｜損益」",
+     "dir": "右",
+     "px": 18,
+     "why": "div.pe-gg scrollWidth 1026＞clientWidth 1008"
+    },
+    {
+     "area": "「獲利最多現值 ≥ 1,000 萬」",
+     "dir": "右",
+     "px": 19,
+     "why": "div.pe-box scrollWidth 514＞clientWidth 495"
     }
    ]
   }

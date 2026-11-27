@@ -2478,8 +2478,8 @@
 "ticker": "VLO",
 "name": "Valero Energy Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -2494,16 +2494,16 @@
 "ticker": "NEM",
 "name": "Newmont Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
 "ticker": "MO",
 "name": "Altria Group, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -2660,7 +2660,7 @@
 ],
 "n_ok": [
 43,
-172
+171
 ],
 "n": [
 53,
