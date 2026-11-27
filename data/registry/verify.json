@@ -1,5 +1,5 @@
 {
-"checked": "2026-11-21",
+"checked": "2026-11-27",
 "src_asof": [
 "2026-11-15",
 "2026-10-25"
@@ -479,8 +479,8 @@
 "id": "tw_leader",
 "zh": "賴清德",
 "en": "Lai Ching-te",
-"ok": false,
-"why": "出處頁找不到名字",
+"ok": true,
+"why": "出處頁有名字與職位",
 "src": [
 "https://www.cna.com.tw/news/aipl/202611090103.aspx"
 ]
@@ -1750,48 +1750,48 @@
 "ticker": "AAPL",
 "name": "Apple Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "GOOGL",
 "name": "Alphabet Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "MSFT",
 "name": "Microsoft Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "AMZN",
 "name": "Amazon.com, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "SPCX",
 "name": "Space Exploration Technologies Corp.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "META",
 "name": "Meta Platforms, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -1799,7 +1799,7 @@
 "name": "Tesla, Inc.",
 "status": "listed",
 "ok": false,
-"why": "出處打不開（HTTP 403）"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -1814,8 +1814,8 @@
 "ticker": "LLY",
 "name": "Eli Lilly and Company",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -1830,8 +1830,8 @@
 "ticker": "WMT",
 "name": "Walmart Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -1863,31 +1863,31 @@
 "name": "ExxonMobil Holdings Corporation",
 "status": "listed",
 "ok": false,
-"why": "出處打不開（HTTP 403）"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "JNJ",
 "name": "Johnson & Johnson",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "MA",
 "name": "Mastercard Incorporated",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "ABBV",
 "name": "AbbVie Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -1895,7 +1895,7 @@
 "name": "Intel Corporation",
 "status": "listed",
 "ok": false,
-"why": "出處頁找不到負責人名字"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -1910,64 +1910,64 @@
 "ticker": "CVX",
 "name": "Chevron Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "COST",
 "name": "Costco Wholesale Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "CSCO",
 "name": "Cisco Systems, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "KO",
 "name": "The Coca-Cola Company",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "ORCL",
 "name": "Oracle Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "UNH",
 "name": "UnitedHealth Group Incorporated",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "MRK",
 "name": "Merck & Co., Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "PG",
 "name": "The Procter & Gamble Company",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -1982,16 +1982,16 @@
 "ticker": "CAT",
 "name": "Caterpillar Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "LRCX",
 "name": "Lam Research Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -1999,15 +1999,15 @@
 "name": "Applied Materials, Inc.",
 "status": "listed",
 "ok": false,
-"why": "出處打不開（HTTP 403）"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "HD",
 "name": "The Home Depot, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2015,7 +2015,7 @@
 "name": "Dell Technologies Inc.",
 "status": "listed",
 "ok": false,
-"why": "出處打不開（HTTP 403）"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2038,32 +2038,32 @@
 "ticker": "MS",
 "name": "Morgan Stanley",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "PANW",
 "name": "Palo Alto Networks, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "NFLX",
 "name": "Netflix, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "GS",
 "name": "The Goldman Sachs Group, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2071,31 +2071,31 @@
 "name": "Texas Instruments Incorporated",
 "status": "listed",
 "ok": false,
-"why": "出處打不開（HTTP 403）"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "TMO",
 "name": "Thermo Fisher Scientific Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "RTX",
 "name": "RTX Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "GEV",
 "name": "GE Vernova Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2103,71 +2103,71 @@
 "name": "Wells Fargo & Company",
 "status": "listed",
 "ok": false,
-"why": "出處頁找不到負責人名字"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "CRWD",
 "name": "CrowdStrike Holdings, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "AMGN",
 "name": "Amgen Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "IBM",
 "name": "International Business Machines Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "ANET",
 "name": "Arista Networks, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "MRVL",
 "name": "Marvell Technology, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "AXP",
 "name": "American Express Company",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "KLAC",
 "name": "KLA Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "C",
 "name": "Citigroup Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2175,23 +2175,23 @@
 "name": "Sandisk Corporation",
 "status": "listed",
 "ok": false,
-"why": "出處打不開（HTTP 403）"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "CRM",
 "name": "Salesforce, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "APH",
 "name": "Amphenol Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2199,23 +2199,23 @@
 "name": "Analog Devices, Inc.",
 "status": "listed",
 "ok": false,
-"why": "出處打不開（HTTP 403）"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "DIS",
 "name": "The Walt Disney Company",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "GILD",
 "name": "Gilead Sciences, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -2230,8 +2230,8 @@
 "ticker": "BLK",
 "name": "BlackRock, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2239,15 +2239,15 @@
 "name": "PepsiCo, Inc.",
 "status": "listed",
 "ok": false,
-"why": "出處頁找不到公司名"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "VZ",
 "name": "Verizon Communications Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2262,24 +2262,24 @@
 "ticker": "MCD",
 "name": "McDonald's Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "ABT",
 "name": "Abbott Laboratories",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "UNP",
 "name": "Union Pacific Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2294,32 +2294,32 @@
 "ticker": "WELL",
 "name": "Welltower Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "PFE",
 "name": "Pfizer Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "SCCO",
 "name": "Southern Copper Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
 "ticker": "TMUS",
 "name": "T-Mobile US, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2334,8 +2334,8 @@
 "ticker": "DHR",
 "name": "Danaher Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2343,7 +2343,7 @@
 "name": "The TJX Companies, Inc.",
 "status": "listed",
 "ok": false,
-"why": "出處頁找不到負責人名字"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2358,16 +2358,16 @@
 "ticker": "NOW",
 "name": "ServiceNow, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "BA",
 "name": "The Boeing Company",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2375,7 +2375,7 @@
 "name": "Intuitive Surgical, Inc.",
 "status": "listed",
 "ok": false,
-"why": "出處打不開（HTTP 500）"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2383,71 +2383,71 @@
 "name": "AT&T Inc.",
 "status": "listed",
 "ok": false,
-"why": "出處頁找不到公司名"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "WDC",
 "name": "Western Digital Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "UBER",
 "name": "Uber Technologies, Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "MPC",
 "name": "Marathon Petroleum Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "VRTX",
 "name": "Vertex Pharmaceuticals Incorporated",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "BX",
 "name": "Blackstone Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "SPGI",
 "name": "S&P Global Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "PGR",
 "name": "The Progressive Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": "COF",
 "name": "Capital One Financial Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
@@ -2510,8 +2510,8 @@
 "ticker": "PH",
 "name": "Parker-Hannifin Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處頁找不到負責人名字"
 },
 {
 "cty": "us",
@@ -2526,8 +2526,8 @@
 "ticker": "2222.SR",
 "name": "Saudi Arabian Oil Company",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "kr",
@@ -2542,16 +2542,16 @@
 "ticker": "000660.KS",
 "name": "SK hynix Inc.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "nl",
 "ticker": "ASML.AS",
 "name": "ASML Holding N.V.",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "cn",
@@ -2559,31 +2559,31 @@
 "name": "Tencent Holdings Limited",
 "status": "listed",
 "ok": false,
-"why": "出處頁找不到負責人名字"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "cn",
 "ticker": "601398.SS",
 "name": "Industrial and Commercial Bank of China Limited",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "cn",
 "ticker": "601939.SS",
 "name": "China Construction Bank Corporation",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "cn",
 "ticker": "601288.SS",
 "name": "Agricultural Bank of China Limited",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "ch",
@@ -2591,7 +2591,7 @@
 "name": "Roche Holding AG",
 "status": "listed",
 "ok": false,
-"why": "出處頁找不到負責人名字"
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "cn",
@@ -2606,61 +2606,61 @@
 "ticker": "HSBA.L",
 "name": "HSBC Holdings plc",
 "status": "listed",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": null,
 "name": "Anthropic",
 "status": "private",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": null,
 "name": "xAI",
 "status": "merged",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": null,
 "name": "Safe Superintelligence (SSI)",
 "status": "private",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": null,
 "name": "Databricks",
 "status": "private",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": null,
 "name": "Scale AI",
 "status": "private",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 },
 {
 "cty": "us",
 "ticker": null,
 "name": "Perplexity",
 "status": "private",
-"ok": true,
-"why": "出處頁有公司名與負責人"
+"ok": false,
+"why": "出處打不開（HTTP 404）"
 }
 ],
 "n_ok": [
-42,
-247
+43,
+172
 ],
 "n": [
 53,

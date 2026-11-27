@@ -1,22 +1,22 @@
 {
  "version": 1,
  "date": "2026-11-27",
- "built_at": "2026-11-27T07:16:52+08:00",
+ "built_at": "2026-11-27T14:34:02+08:00",
  "builder": "CustomerServiceANDSales/tools/factor_snapshot.py",
- "run": "45907805510",
+ "run": "45948284606",
  "rule": "只存當天看得到的值；回測一律用 tools/factor_pit.py load(date, factors) 讀，不讀現在的 docs/data。",
  "files": {
   "stocks.json.gz": {
-   "bytes": 125168,
-   "raw": 1084054,
-   "sha256": "792699406d6fba8cea716747f024d63c91be071ffc1148573a46826d2c787123",
+   "bytes": 125039,
+   "raw": 1083884,
+   "sha256": "73f8f50ab4fb52b039e67417ae8bd374d49e3d1df351182551384999136c5493",
    "n_rows": 3358,
    "n_cols": 59
   },
   "sectors.json.gz": {
-   "bytes": 1891,
-   "raw": 3699,
-   "sha256": "91cb46f236c036a74cc2fa4433c1ca641d38099246d759d3e30f8acb3d2dc5ba",
+   "bytes": 1853,
+   "raw": 3652,
+   "sha256": "ce97e84ff404a408d2d9eb1d1f32bf4de4edf2c7df7473bf7d44a7466b8ef349",
    "n_rows": 27,
    "n_cols": 20
   }
@@ -111,9 +111,9 @@
    "name": "量化評分",
    "file": "data/web_data.json",
    "ok": true,
-   "bytes": 1583337,
-   "sha256": "da33fe0f0efe50dff64710b8b7b74bf8d6f6a0952282af19318052d959a37b17",
-   "asof": "2026-11-26",
+   "bytes": 1578062,
+   "sha256": "c5f42a21f93f69e0506276023c886e8ec74fafffe7233f9b923d801b1b093a77",
+   "asof": "2026-11-27",
    "cols": null,
    "n": 253,
    "n_sec": 27
@@ -188,8 +188,8 @@
    "name": "外資持股融資",
    "file": "data/stock_extra.json",
    "ok": true,
-   "bytes": 1785918,
-   "sha256": "143bc1b24b9c089a75ab3566c0c86bc5bbabc8fe6437b54aa50765396fd23a6b",
+   "bytes": 1786016,
+   "sha256": "b85f9b800e7aa37f4f1d569bf0eb67c108335ba2f50a48af2ec9c7716c5d7393",
    "asof": "2026-11-26",
    "cols": null,
    "n": 1988,
