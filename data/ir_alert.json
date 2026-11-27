@@ -215,10 +215,24 @@
     "chg": 9.83
    },
    "sent": true,
-   "mx": null
+   "mx": {
+    "d": "2026-11-27",
+    "close": 1555.0,
+    "chg": -4.01,
+    "prev": 1620.0,
+    "prev_d": "2026-11-26",
+    "src": "官方盤後"
+   },
+   "pre": {
+    "from_d": "2026-11-26",
+    "from": 1620.0,
+    "to_d": "2026-11-27",
+    "to": 1555.0,
+    "chg": -4.01
+   }
   }
  ],
- "asof": "2026-11-27T06:10+00:00",
+ "asof": "2026-11-27T07:11+00:00",
  "body": {
   "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9XMEJTZ3FtNEp3ZDlIMzJoZExULTctZTBSSXU0MmE2YUh0U1M5LWsySEFOalRRQ1RULS11UU52VXJPSlltZlp5SzdxV200UGt00gFWQVVfeXFMUEk4XzhjTEcyWnFHZXVrNHByMklwbHQzSEtTTmZucVpkdnJCekp5YXJUYkhlenhrcmtIZDdXTGFoV3g1ZUdFTWxaZDBkZjQ4Q0JONFQwakE?oc=5": {
    "r": "ok",
@@ -336,16 +350,6 @@
   }
  },
  "deck": {
-  "https://mopsov.twse.com.tw/nas/STR/240820261111M001.pdf": {
-   "s": [],
-   "at": "2026-11-20T07:11+00:00",
-   "v": 1
-  },
-  "https://mopsov.twse.com.tw/nas/STR/241220261120M001.pdf": {
-   "s": [],
-   "at": "2026-11-20T07:11+00:00",
-   "v": 1
-  },
   "https://mopsov.twse.com.tw/nas/STR/289020261123M001.pdf": {
    "s": [],
    "at": "2026-11-23T08:11+00:00",
