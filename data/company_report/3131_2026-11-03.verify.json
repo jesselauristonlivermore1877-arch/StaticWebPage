@@ -2,7 +2,7 @@
  "file": "3131_2026-11-03.md",
  "code": "3131",
  "date": "2026-11-03",
- "show": true,
+ "show": false,
  "numbers": {
   "ok": true,
   "bad": [],
@@ -18,10 +18,18 @@
   "bad": []
  },
  "cross": {
-  "ok": true,
-  "bad": [],
+  "ok": false,
+  "bad": [
+   {
+    "id": "pe_ttm",
+    "why": "數字檔 29.20 倍，站上資料 30.985"
+   }
+  ],
   "checked": [
+   "close",
    "eps_q",
+   "mcap",
+   "pe_ttm",
    "rev_m"
   ]
  },
