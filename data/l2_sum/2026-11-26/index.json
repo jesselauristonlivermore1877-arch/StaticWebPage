@@ -1,0 +1,68 @@
+{
+ "day": "2026-11-26",
+ "made": "2026-11-27T14:00:09",
+ "big_pct": 95,
+ "note": "W tools/l2_sum.py；原始逐筆與五檔只存 W 本機 30 天",
+ "items": [
+  {
+   "code": "CCFL6",
+   "cls": "F",
+   "n_tick": 839,
+   "n_bidask": 11671,
+   "mins": 634,
+   "big_lots": 4,
+   "big_b": 30,
+   "big_s": 23
+  },
+  {
+   "code": "CDFL6",
+   "cls": "F",
+   "n_tick": 541,
+   "n_bidask": 46909,
+   "mins": 695,
+   "big_lots": 3,
+   "big_b": 21,
+   "big_s": 17
+  },
+  {
+   "code": "NYFL6",
+   "cls": "F",
+   "n_tick": 806,
+   "n_bidask": 41813,
+   "mins": 670,
+   "big_lots": 3,
+   "big_b": 23,
+   "big_s": 30
+  },
+  {
+   "code": "QFFL6",
+   "cls": "F",
+   "n_tick": 2458,
+   "n_bidask": 39324,
+   "mins": 695,
+   "big_lots": 7,
+   "big_b": 58,
+   "big_s": 71
+  },
+  {
+   "code": "SRFL6",
+   "cls": "F",
+   "n_tick": 2689,
+   "n_bidask": 36171,
+   "mins": 695,
+   "big_lots": 5,
+   "big_b": 56,
+   "big_s": 78
+  },
+  {
+   "code": "TXFL6",
+   "cls": "F",
+   "n_tick": 14500,
+   "n_bidask": 183087,
+   "mins": 701,
+   "big_lots": 2,
+   "big_b": 1330,
+   "big_s": 1272
+  }
+ ]
+}

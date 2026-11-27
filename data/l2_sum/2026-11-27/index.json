@@ -1,0 +1,1118 @@
+{
+ "day": "2026-11-27",
+ "made": "2026-11-27T14:01:43",
+ "big_pct": 95,
+ "note": "W tools/l2_sum.py；原始逐筆與五檔只存 W 本機 30 天",
+ "items": [
+  {
+   "code": "1303",
+   "cls": "S",
+   "n_tick": 18031,
+   "n_bidask": 103216,
+   "mins": 266,
+   "big_lots": 10,
+   "big_b": 528,
+   "big_s": 687
+  },
+  {
+   "code": "1802",
+   "cls": "S",
+   "n_tick": 25562,
+   "n_bidask": 107367,
+   "mins": 266,
+   "big_lots": 16,
+   "big_b": 511,
+   "big_s": 819
+  },
+  {
+   "code": "1815",
+   "cls": "S",
+   "n_tick": 10118,
+   "n_bidask": 62562,
+   "mins": 266,
+   "big_lots": 11,
+   "big_b": 198,
+   "big_s": 314
+  },
+  {
+   "code": "2059",
+   "cls": "S",
+   "n_tick": 705,
+   "n_bidask": 18122,
+   "mins": 256,
+   "big_lots": 3,
+   "big_b": 20,
+   "big_s": 29
+  },
+  {
+   "code": "2301",
+   "cls": "S",
+   "n_tick": 2882,
+   "n_bidask": 36473,
+   "mins": 266,
+   "big_lots": 15,
+   "big_b": 67,
+   "big_s": 83
+  },
+  {
+   "code": "2303",
+   "cls": "S",
+   "n_tick": 17817,
+   "n_bidask": 99879,
+   "mins": 266,
+   "big_lots": 12,
+   "big_b": 323,
+   "big_s": 612
+  },
+  {
+   "code": "2308",
+   "cls": "S",
+   "n_tick": 5389,
+   "n_bidask": 50524,
+   "mins": 266,
+   "big_lots": 7,
+   "big_b": 128,
+   "big_s": 172
+  },
+  {
+   "code": "2313",
+   "cls": "S",
+   "n_tick": 7503,
+   "n_bidask": 24714,
+   "mins": 266,
+   "big_lots": 14,
+   "big_b": 252,
+   "big_s": 128
+  },
+  {
+   "code": "2317",
+   "cls": "S",
+   "n_tick": 6098,
+   "n_bidask": 51851,
+   "mins": 266,
+   "big_lots": 11,
+   "big_b": 171,
+   "big_s": 142
+  },
+  {
+   "code": "2327",
+   "cls": "S",
+   "n_tick": 13191,
+   "n_bidask": 78412,
+   "mins": 266,
+   "big_lots": 10,
+   "big_b": 335,
+   "big_s": 422
+  },
+  {
+   "code": "2330",
+   "cls": "S",
+   "n_tick": 10884,
+   "n_bidask": 77976,
+   "mins": 266,
+   "big_lots": 6,
+   "big_b": 410,
+   "big_s": 186
+  },
+  {
+   "code": "2344",
+   "cls": "S",
+   "n_tick": 11039,
+   "n_bidask": 70409,
+   "mins": 266,
+   "big_lots": 11,
+   "big_b": 543,
+   "big_s": 262
+  },
+  {
+   "code": "2345",
+   "cls": "S",
+   "n_tick": 2326,
+   "n_bidask": 27623,
+   "mins": 266,
+   "big_lots": 8,
+   "big_b": 60,
+   "big_s": 60
+  },
+  {
+   "code": "2360",
+   "cls": "S",
+   "n_tick": 1016,
+   "n_bidask": 11256,
+   "mins": 266,
+   "big_lots": 7,
+   "big_b": 23,
+   "big_s": 29
+  },
+  {
+   "code": "2368",
+   "cls": "S",
+   "n_tick": 5482,
+   "n_bidask": 41984,
+   "mins": 266,
+   "big_lots": 5,
+   "big_b": 121,
+   "big_s": 208
+  },
+  {
+   "code": "2382",
+   "cls": "S",
+   "n_tick": 3893,
+   "n_bidask": 25226,
+   "mins": 266,
+   "big_lots": 6,
+   "big_b": 94,
+   "big_s": 103
+  },
+  {
+   "code": "2383",
+   "cls": "S",
+   "n_tick": 2454,
+   "n_bidask": 31401,
+   "mins": 266,
+   "big_lots": 5,
+   "big_b": 63,
+   "big_s": 68
+  },
+  {
+   "code": "2408",
+   "cls": "S",
+   "n_tick": 9552,
+   "n_bidask": 79853,
+   "mins": 266,
+   "big_lots": 10,
+   "big_b": 292,
+   "big_s": 322
+  },
+  {
+   "code": "2412",
+   "cls": "S",
+   "n_tick": 5900,
+   "n_bidask": 29251,
+   "mins": 266,
+   "big_lots": 8,
+   "big_b": 2507,
+   "big_s": 301
+  },
+  {
+   "code": "2449",
+   "cls": "S",
+   "n_tick": 5088,
+   "n_bidask": 43219,
+   "mins": 266,
+   "big_lots": 11,
+   "big_b": 105,
+   "big_s": 157
+  },
+  {
+   "code": "2454",
+   "cls": "S",
+   "n_tick": 4699,
+   "n_bidask": 50453,
+   "mins": 266,
+   "big_lots": 4,
+   "big_b": 113,
+   "big_s": 166
+  },
+  {
+   "code": "2455",
+   "cls": "S",
+   "n_tick": 2697,
+   "n_bidask": 28463,
+   "mins": 266,
+   "big_lots": 5,
+   "big_b": 69,
+   "big_s": 95
+  },
+  {
+   "code": "2603",
+   "cls": "S",
+   "n_tick": 5504,
+   "n_bidask": 43796,
+   "mins": 266,
+   "big_lots": 7,
+   "big_b": 220,
+   "big_s": 804
+  },
+  {
+   "code": "2882",
+   "cls": "S",
+   "n_tick": 4424,
+   "n_bidask": 28808,
+   "mins": 266,
+   "big_lots": 15,
+   "big_b": 100,
+   "big_s": 1426
+  },
+  {
+   "code": "2886",
+   "cls": "S",
+   "n_tick": 13960,
+   "n_bidask": 61341,
+   "mins": 266,
+   "big_lots": 9,
+   "big_b": 322,
+   "big_s": 437
+  },
+  {
+   "code": "2890",
+   "cls": "S",
+   "n_tick": 10275,
+   "n_bidask": 42840,
+   "mins": 266,
+   "big_lots": 12,
+   "big_b": 231,
+   "big_s": 298
+  },
+  {
+   "code": "2891",
+   "cls": "S",
+   "n_tick": 6569,
+   "n_bidask": 47004,
+   "mins": 266,
+   "big_lots": 18,
+   "big_b": 170,
+   "big_s": 169
+  },
+  {
+   "code": "3008",
+   "cls": "S",
+   "n_tick": 1695,
+   "n_bidask": 22420,
+   "mins": 266,
+   "big_lots": 3,
+   "big_b": 55,
+   "big_s": 94
+  },
+  {
+   "code": "3017",
+   "cls": "S",
+   "n_tick": 2968,
+   "n_bidask": 30295,
+   "mins": 266,
+   "big_lots": 3,
+   "big_b": 93,
+   "big_s": 159
+  },
+  {
+   "code": "3037",
+   "cls": "S",
+   "n_tick": 11146,
+   "n_bidask": 73570,
+   "mins": 266,
+   "big_lots": 9,
+   "big_b": 285,
+   "big_s": 337
+  },
+  {
+   "code": "3081",
+   "cls": "S",
+   "n_tick": 123,
+   "n_bidask": 126,
+   "mins": 126,
+   "big_lots": 18,
+   "big_b": 2,
+   "big_s": 10
+  },
+  {
+   "code": "3105",
+   "cls": "S",
+   "n_tick": 18830,
+   "n_bidask": 89501,
+   "mins": 264,
+   "big_lots": 10,
+   "big_b": 486,
+   "big_s": 508
+  },
+  {
+   "code": "3167",
+   "cls": "S",
+   "n_tick": 2866,
+   "n_bidask": 27014,
+   "mins": 266,
+   "big_lots": 6,
+   "big_b": 60,
+   "big_s": 92
+  },
+  {
+   "code": "3189",
+   "cls": "S",
+   "n_tick": 7966,
+   "n_bidask": 68562,
+   "mins": 266,
+   "big_lots": 9,
+   "big_b": 194,
+   "big_s": 211
+  },
+  {
+   "code": "3231",
+   "cls": "S",
+   "n_tick": 3788,
+   "n_bidask": 35241,
+   "mins": 266,
+   "big_lots": 11,
+   "big_b": 88,
+   "big_s": 109
+  },
+  {
+   "code": "3324",
+   "cls": "S",
+   "n_tick": 2315,
+   "n_bidask": 22104,
+   "mins": 266,
+   "big_lots": 4,
+   "big_b": 54,
+   "big_s": 93
+  },
+  {
+   "code": "3374",
+   "cls": "S",
+   "n_tick": 5129,
+   "n_bidask": 35827,
+   "mins": 266,
+   "big_lots": 8,
+   "big_b": 136,
+   "big_s": 151
+  },
+  {
+   "code": "3406",
+   "cls": "S",
+   "n_tick": 2953,
+   "n_bidask": 25465,
+   "mins": 266,
+   "big_lots": 5,
+   "big_b": 100,
+   "big_s": 108
+  },
+  {
+   "code": "3443",
+   "cls": "S",
+   "n_tick": 130,
+   "n_bidask": 131,
+   "mins": 131,
+   "big_lots": 20,
+   "big_b": 3,
+   "big_s": 5
+  },
+  {
+   "code": "3653",
+   "cls": "S",
+   "n_tick": 132,
+   "n_bidask": 133,
+   "mins": 133,
+   "big_lots": 29,
+   "big_b": 3,
+   "big_s": 4
+  },
+  {
+   "code": "3661",
+   "cls": "S",
+   "n_tick": 1539,
+   "n_bidask": 20865,
+   "mins": 266,
+   "big_lots": 4,
+   "big_b": 31,
+   "big_s": 53
+  },
+  {
+   "code": "3665",
+   "cls": "S",
+   "n_tick": 1776,
+   "n_bidask": 19572,
+   "mins": 266,
+   "big_lots": 5,
+   "big_b": 48,
+   "big_s": 89
+  },
+  {
+   "code": "3711",
+   "cls": "S",
+   "n_tick": 6396,
+   "n_bidask": 52535,
+   "mins": 266,
+   "big_lots": 8,
+   "big_b": 178,
+   "big_s": 178
+  },
+  {
+   "code": "4958",
+   "cls": "S",
+   "n_tick": 5688,
+   "n_bidask": 49147,
+   "mins": 266,
+   "big_lots": 8,
+   "big_b": 101,
+   "big_s": 196
+  },
+  {
+   "code": "5274",
+   "cls": "S",
+   "n_tick": 337,
+   "n_bidask": 7701,
+   "mins": 243,
+   "big_lots": 2,
+   "big_b": 17,
+   "big_s": 21
+  },
+  {
+   "code": "5347",
+   "cls": "S",
+   "n_tick": 2056,
+   "n_bidask": 30360,
+   "mins": 266,
+   "big_lots": 20,
+   "big_b": 123,
+   "big_s": 26
+  },
+  {
+   "code": "6213",
+   "cls": "S",
+   "n_tick": 6755,
+   "n_bidask": 49573,
+   "mins": 266,
+   "big_lots": 6,
+   "big_b": 150,
+   "big_s": 271
+  },
+  {
+   "code": "6223",
+   "cls": "S",
+   "n_tick": 504,
+   "n_bidask": 6552,
+   "mins": 257,
+   "big_lots": 2,
+   "big_b": 32,
+   "big_s": 46
+  },
+  {
+   "code": "6274",
+   "cls": "S",
+   "n_tick": 6224,
+   "n_bidask": 46112,
+   "mins": 266,
+   "big_lots": 6,
+   "big_b": 152,
+   "big_s": 210
+  },
+  {
+   "code": "6488",
+   "cls": "S",
+   "n_tick": 2241,
+   "n_bidask": 33231,
+   "mins": 266,
+   "big_lots": 7,
+   "big_b": 35,
+   "big_s": 95
+  },
+  {
+   "code": "6669",
+   "cls": "S",
+   "n_tick": 3207,
+   "n_bidask": 40353,
+   "mins": 266,
+   "big_lots": 8,
+   "big_b": 74,
+   "big_s": 102
+  },
+  {
+   "code": "6770",
+   "cls": "S",
+   "n_tick": 9780,
+   "n_bidask": 62406,
+   "mins": 266,
+   "big_lots": 15,
+   "big_b": 194,
+   "big_s": 302
+  },
+  {
+   "code": "7769",
+   "cls": "S",
+   "n_tick": 819,
+   "n_bidask": 11588,
+   "mins": 265,
+   "big_lots": 3,
+   "big_b": 44,
+   "big_s": 31
+  },
+  {
+   "code": "8046",
+   "cls": "S",
+   "n_tick": 9425,
+   "n_bidask": 58683,
+   "mins": 266,
+   "big_lots": 7,
+   "big_b": 229,
+   "big_s": 268
+  },
+  {
+   "code": "8299",
+   "cls": "S",
+   "n_tick": 2822,
+   "n_bidask": 26590,
+   "mins": 266,
+   "big_lots": 7,
+   "big_b": 144,
+   "big_s": 84
+  },
+  {
+   "code": "CAFL6",
+   "cls": "F",
+   "n_tick": 3694,
+   "n_bidask": 37988,
+   "mins": 300,
+   "big_lots": 6,
+   "big_b": 107,
+   "big_s": 114
+  },
+  {
+   "code": "CCFL6",
+   "cls": "F",
+   "n_tick": 5186,
+   "n_bidask": 51562,
+   "mins": 300,
+   "big_lots": 11,
+   "big_b": 121,
+   "big_s": 138
+  },
+  {
+   "code": "CDFL6",
+   "cls": "F",
+   "n_tick": 4474,
+   "n_bidask": 49692,
+   "mins": 300,
+   "big_lots": 4,
+   "big_b": 179,
+   "big_s": 81
+  },
+  {
+   "code": "CKFL6",
+   "cls": "F",
+   "n_tick": 400,
+   "n_bidask": 6607,
+   "mins": 297,
+   "big_lots": 9,
+   "big_b": 11,
+   "big_s": 12
+  },
+  {
+   "code": "CLFL6",
+   "cls": "F",
+   "n_tick": 3188,
+   "n_bidask": 43965,
+   "mins": 299,
+   "big_lots": 3,
+   "big_b": 96,
+   "big_s": 124
+  },
+  {
+   "code": "CNFL6",
+   "cls": "F",
+   "n_tick": 597,
+   "n_bidask": 21529,
+   "mins": 287,
+   "big_lots": 5,
+   "big_b": 11,
+   "big_s": 16
+  },
+  {
+   "code": "CYFL6",
+   "cls": "F",
+   "n_tick": 2637,
+   "n_bidask": 128547,
+   "mins": 301,
+   "big_lots": 5,
+   "big_b": 70,
+   "big_s": 99
+  },
+  {
+   "code": "CZFL6",
+   "cls": "F",
+   "n_tick": 894,
+   "n_bidask": 23491,
+   "mins": 300,
+   "big_lots": 5,
+   "big_b": 37,
+   "big_s": 19
+  },
+  {
+   "code": "DEFL6",
+   "cls": "F",
+   "n_tick": 970,
+   "n_bidask": 17485,
+   "mins": 296,
+   "big_lots": 9,
+   "big_b": 23,
+   "big_s": 25
+  },
+  {
+   "code": "DHFL6",
+   "cls": "F",
+   "n_tick": 1377,
+   "n_bidask": 24882,
+   "mins": 301,
+   "big_lots": 14,
+   "big_b": 43,
+   "big_s": 27
+  },
+  {
+   "code": "DKFL6",
+   "cls": "F",
+   "n_tick": 764,
+   "n_bidask": 13178,
+   "mins": 294,
+   "big_lots": 3,
+   "big_b": 25,
+   "big_s": 38
+  },
+  {
+   "code": "DLFL6",
+   "cls": "F",
+   "n_tick": 241,
+   "n_bidask": 8529,
+   "mins": 293,
+   "big_lots": 10,
+   "big_b": 10,
+   "big_s": 5
+  },
+  {
+   "code": "DVFL6",
+   "cls": "F",
+   "n_tick": 820,
+   "n_bidask": 31045,
+   "mins": 300,
+   "big_lots": 2,
+   "big_b": 42,
+   "big_s": 40
+  },
+  {
+   "code": "DXFL6",
+   "cls": "F",
+   "n_tick": 944,
+   "n_bidask": 19302,
+   "mins": 301,
+   "big_lots": 10,
+   "big_b": 33,
+   "big_s": 28
+  },
+  {
+   "code": "FGFL6",
+   "cls": "F",
+   "n_tick": 579,
+   "n_bidask": 34274,
+   "mins": 288,
+   "big_lots": 1,
+   "big_b": 274,
+   "big_s": 246
+  },
+  {
+   "code": "FQFL6",
+   "cls": "F",
+   "n_tick": 542,
+   "n_bidask": 15667,
+   "mins": 299,
+   "big_lots": 4,
+   "big_b": 10,
+   "big_s": 21
+  },
+  {
+   "code": "FRFL6",
+   "cls": "F",
+   "n_tick": 900,
+   "n_bidask": 125238,
+   "mins": 300,
+   "big_lots": 3,
+   "big_b": 20,
+   "big_s": 26
+  },
+  {
+   "code": "FT1L6",
+   "cls": "F",
+   "n_tick": 20,
+   "n_bidask": 556,
+   "mins": 66,
+   "big_lots": 1,
+   "big_b": 17,
+   "big_s": 3
+  },
+  {
+   "code": "FZFL6",
+   "cls": "F",
+   "n_tick": 2209,
+   "n_bidask": 19645,
+   "mins": 300,
+   "big_lots": 17,
+   "big_b": 58,
+   "big_s": 69
+  },
+  {
+   "code": "GRFL6",
+   "cls": "F",
+   "n_tick": 784,
+   "n_bidask": 39213,
+   "mins": 300,
+   "big_lots": 4,
+   "big_b": 21,
+   "big_s": 24
+  },
+  {
+   "code": "GUFL6",
+   "cls": "F",
+   "n_tick": 1031,
+   "n_bidask": 20771,
+   "mins": 297,
+   "big_lots": 2,
+   "big_b": 69,
+   "big_s": 72
+  },
+  {
+   "code": "IJFL6",
+   "cls": "F",
+   "n_tick": 93,
+   "n_bidask": 22697,
+   "mins": 299,
+   "big_lots": 1,
+   "big_b": 51,
+   "big_s": 40
+  },
+  {
+   "code": "IRFL6",
+   "cls": "F",
+   "n_tick": 1902,
+   "n_bidask": 31938,
+   "mins": 300,
+   "big_lots": 4,
+   "big_b": 31,
+   "big_s": 67
+  },
+  {
+   "code": "IXFL6",
+   "cls": "F",
+   "n_tick": 2423,
+   "n_bidask": 29886,
+   "mins": 300,
+   "big_lots": 3,
+   "big_b": 83,
+   "big_s": 94
+  },
+  {
+   "code": "JBFL6",
+   "cls": "F",
+   "n_tick": 341,
+   "n_bidask": 13989,
+   "mins": 299,
+   "big_lots": 1,
+   "big_b": 166,
+   "big_s": 160
+  },
+  {
+   "code": "JMFL6",
+   "cls": "F",
+   "n_tick": 118,
+   "n_bidask": 5828,
+   "mins": 279,
+   "big_lots": 2,
+   "big_b": 4,
+   "big_s": 4
+  },
+  {
+   "code": "KBFL6",
+   "cls": "F",
+   "n_tick": 1605,
+   "n_bidask": 27819,
+   "mins": 300,
+   "big_lots": 3,
+   "big_b": 32,
+   "big_s": 53
+  },
+  {
+   "code": "KUFL6",
+   "cls": "F",
+   "n_tick": 5690,
+   "n_bidask": 44191,
+   "mins": 301,
+   "big_lots": 13,
+   "big_b": 127,
+   "big_s": 176
+  },
+  {
+   "code": "LEFL6",
+   "cls": "F",
+   "n_tick": 115,
+   "n_bidask": 19084,
+   "mins": 297,
+   "big_lots": 2,
+   "big_b": 6,
+   "big_s": 12
+  },
+  {
+   "code": "LUFL6",
+   "cls": "F",
+   "n_tick": 1480,
+   "n_bidask": 28664,
+   "mins": 297,
+   "big_lots": 3,
+   "big_b": 56,
+   "big_s": 61
+  },
+  {
+   "code": "LXFL6",
+   "cls": "F",
+   "n_tick": 2814,
+   "n_bidask": 45444,
+   "mins": 300,
+   "big_lots": 4,
+   "big_b": 89,
+   "big_s": 130
+  },
+  {
+   "code": "LYFL6",
+   "cls": "F",
+   "n_tick": 1576,
+   "n_bidask": 36348,
+   "mins": 300,
+   "big_lots": 3,
+   "big_b": 42,
+   "big_s": 64
+  },
+  {
+   "code": "MJFL6",
+   "cls": "F",
+   "n_tick": 49,
+   "n_bidask": 6151,
+   "mins": 283,
+   "big_lots": 1,
+   "big_b": 23,
+   "big_s": 23
+  },
+  {
+   "code": "NAFL6",
+   "cls": "F",
+   "n_tick": 5074,
+   "n_bidask": 46942,
+   "mins": 300,
+   "big_lots": 4,
+   "big_b": 157,
+   "big_s": 132
+  },
+  {
+   "code": "NLFL6",
+   "cls": "F",
+   "n_tick": 297,
+   "n_bidask": 10585,
+   "mins": 293,
+   "big_lots": 5,
+   "big_b": 6,
+   "big_s": 10
+  },
+  {
+   "code": "NWFL6",
+   "cls": "F",
+   "n_tick": 1127,
+   "n_bidask": 22828,
+   "mins": 300,
+   "big_lots": 2,
+   "big_b": 73,
+   "big_s": 93
+  },
+  {
+   "code": "OPFL6",
+   "cls": "F",
+   "n_tick": 295,
+   "n_bidask": 15190,
+   "mins": 295,
+   "big_lots": 1,
+   "big_b": 123,
+   "big_s": 131
+  },
+  {
+   "code": "OTFL6",
+   "cls": "F",
+   "n_tick": 290,
+   "n_bidask": 4575,
+   "mins": 209,
+   "big_lots": 2,
+   "big_b": 10,
+   "big_s": 6
+  },
+  {
+   "code": "OVFL6",
+   "cls": "F",
+   "n_tick": 1567,
+   "n_bidask": 25330,
+   "mins": 301,
+   "big_lots": 3,
+   "big_b": 32,
+   "big_s": 84
+  },
+  {
+   "code": "OWFL6",
+   "cls": "F",
+   "n_tick": 518,
+   "n_bidask": 22973,
+   "mins": 298,
+   "big_lots": 2,
+   "big_b": 28,
+   "big_s": 33
+  },
+  {
+   "code": "OZFL6",
+   "cls": "F",
+   "n_tick": 1103,
+   "n_bidask": 124123,
+   "mins": 300,
+   "big_lots": 5,
+   "big_b": 30,
+   "big_s": 33
+  },
+  {
+   "code": "PJFL6",
+   "cls": "F",
+   "n_tick": 79,
+   "n_bidask": 17390,
+   "mins": 299,
+   "big_lots": 1,
+   "big_b": 29,
+   "big_s": 47
+  },
+  {
+   "code": "PTFL6",
+   "cls": "F",
+   "n_tick": 424,
+   "n_bidask": 15649,
+   "mins": 295,
+   "big_lots": 2,
+   "big_b": 25,
+   "big_s": 32
+  },
+  {
+   "code": "PVFL6",
+   "cls": "F",
+   "n_tick": 436,
+   "n_bidask": 16281,
+   "mins": 292,
+   "big_lots": 2,
+   "big_b": 36,
+   "big_s": 15
+  },
+  {
+   "code": "PZFL6",
+   "cls": "F",
+   "n_tick": 1,
+   "n_bidask": 12494,
+   "mins": 265,
+   "big_lots": 1,
+   "big_b": 1,
+   "big_s": 0
+  },
+  {
+   "code": "QFFL6",
+   "cls": "F",
+   "n_tick": 7655,
+   "n_bidask": 80187,
+   "mins": 300,
+   "big_lots": 11,
+   "big_b": 273,
+   "big_s": 145
+  },
+  {
+   "code": "QLFL6",
+   "cls": "F",
+   "n_tick": 1679,
+   "n_bidask": 21574,
+   "mins": 298,
+   "big_lots": 5,
+   "big_b": 31,
+   "big_s": 67
+  },
+  {
+   "code": "QZFL6",
+   "cls": "F",
+   "n_tick": 2364,
+   "n_bidask": 27386,
+   "mins": 300,
+   "big_lots": 6,
+   "big_b": 73,
+   "big_s": 68
+  },
+  {
+   "code": "RAFL6",
+   "cls": "F",
+   "n_tick": 316,
+   "n_bidask": 17410,
+   "mins": 298,
+   "big_lots": 2,
+   "big_b": 6,
+   "big_s": 14
+  },
+  {
+   "code": "RKFL6",
+   "cls": "F",
+   "n_tick": 967,
+   "n_bidask": 24236,
+   "mins": 300,
+   "big_lots": 2,
+   "big_b": 56,
+   "big_s": 52
+  },
+  {
+   "code": "TXFL6",
+   "cls": "F",
+   "n_tick": 42967,
+   "n_bidask": 173964,
+   "mins": 301,
+   "big_lots": 3,
+   "big_b": 1403,
+   "big_s": 1459
+  },
+  {
+   "code": "UMFL6",
+   "cls": "F",
+   "n_tick": 28,
+   "n_bidask": 17772,
+   "mins": 293,
+   "big_lots": 1,
+   "big_b": 12,
+   "big_s": 15
+  },
+  {
+   "code": "UVFL6",
+   "cls": "F",
+   "n_tick": 4,
+   "n_bidask": 15208,
+   "mins": 263,
+   "big_lots": 1,
+   "big_b": 3,
+   "big_s": 1
+  },
+  {
+   "code": "VEFL6",
+   "cls": "F",
+   "n_tick": 93,
+   "n_bidask": 17971,
+   "mins": 292,
+   "big_lots": 2,
+   "big_b": 5,
+   "big_s": 1
+  },
+  {
+   "code": "VPFL6",
+   "cls": "F",
+   "n_tick": 1283,
+   "n_bidask": 20508,
+   "mins": 300,
+   "big_lots": 6,
+   "big_b": 48,
+   "big_s": 41
+  },
+  {
+   "code": "VTFL6",
+   "cls": "F",
+   "n_tick": 3,
+   "n_bidask": 8151,
+   "mins": 284,
+   "big_lots": 1,
+   "big_b": 2,
+   "big_s": 1
+  }
+ ]
+}
