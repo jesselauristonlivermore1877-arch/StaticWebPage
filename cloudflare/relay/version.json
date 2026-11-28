@@ -1,7 +1,7 @@
 {
- "ver": "20261128a",
- "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261128a/GEA_OM_Setup_20261128a.exe",
- "sha256": "aa4cec3fffb617636d6f21cc1ea34f1c40276a8de2d4263be08f25aba27bf9fa",
- "notes": "20261128a：開機補發缺段只在真的漏收時才顯示 ✗ 並發 TG（開機前已處理過的舊序號改成一般資訊行）；下單、送單、對帳邏輯不變",
- "sig": "gExQg7SxggSDOt971LL6ZWGOyhPmcE1FqlkbB2c3EnonIYGSdCQK+aee7AQLi7Rvd5KbCWOLU3B/PbP+1c+/uQ=="
+ "ver": "20261128b",
+ "url": "https://github.com/jesselauristonlivermore1877-arch/StaticWebPage/releases/download/om-20261128b/GEA_OM_Setup_20261128b.exe",
+ "sha256": "d8afd9e9e19313df1b2f6f7f7ac39cc67f875ea8d490a056dc9b418e5d48483b",
+ "notes": "新增指令列更新 GeaOrder.exe --upgrade-now（不跳框、回傳結束代碼）與 --version；下單、送單、對帳、補發都沒改",
+ "sig": "l3k09+zH6LORc+mjl5Ug/l91sHgrOgVtNQRUrfeHDaU7AmH6dMyRos6T7EIxP7MtoSUgq+cBrMZPEpK8w7MB1w=="
 }
