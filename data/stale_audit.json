@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-28 05:50",
+ "asof": "2026-11-28 17:18",
  "first_stale": {
   "data/registry/officials_src.json|名單查證": "2026-11-24",
   "docs/data/pcf/00989A|主動 ETF 持股 00989A": "2026-11-27",
@@ -162,11 +162,11 @@
   {
    "name": "總經",
    "path": "docs/data/macro.json",
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -330,11 +330,11 @@
   {
    "name": "財報公告",
    "path": "docs/data/releases.json",
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 daily.yml（每日戰情更新）",
    "note": ""
@@ -354,11 +354,11 @@
   {
    "name": "即時信息流",
    "path": "docs/data/news_live.json",
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 news_live.yml",
    "note": ""
@@ -366,11 +366,11 @@
   {
    "name": "國際指數",
    "path": "docs/data/world_idx.json",
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 macro.yml（世界趨勢）＋daily.yml world_idx.py",
    "note": ""
@@ -390,11 +390,11 @@
   {
    "name": "正式站巡檢",
    "path": "docs/data/site_smoke.json",
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "雲端 site_smoke.yml",
    "note": ""
@@ -414,11 +414,11 @@
   {
    "name": "AI 自由現金流（GEA AI FCF）",
    "path": "docs/data/fcf_ai.json",
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 fcf_ai.bat",
    "note": ""
@@ -474,11 +474,11 @@
   {
    "name": "新聞分類",
    "path": "data/macro_tags.json",
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 macro_tags_daily",
    "note": ""
@@ -510,11 +510,11 @@
   {
    "name": "產業動向",
    "path": "data/industry_notes",
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "freq": "ev",
    "allow": 5,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 ir_report_watch",
    "note": ""
@@ -522,11 +522,11 @@
   {
    "name": "世界趨勢日報",
    "path": "data/daily/gemini_daily_*.md",
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "freq": "off",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "owner": "W 本機排程 daily_news",
    "note": "11-15 總指揮裁示日報停掉（text_health 不再催）"
@@ -2496,11 +2496,11 @@
   {
    "name": "EDM 市場主軸・市場主軸〔fcf〕",
    "path": "docs/data/pick_edm.json#fcf",
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -2776,11 +2776,11 @@
   {
    "name": "EDM 每日新聞・台股新聞〔news_tw〕",
    "path": "docs/data/pick_edm.json#news_tw",
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -2790,11 +2790,11 @@
   {
    "name": "EDM 每日新聞・美股新聞〔news_us〕",
    "path": "docs/data/pick_edm.json#news_us",
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "freq": "td",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py",
@@ -3098,11 +3098,11 @@
   {
    "name": "EDM 本週市場主軸・AI 燒錢，〔theme_week〕",
    "path": "docs/data/pick_edm.json#theme_week",
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "freq": "wk",
    "allow": 0,
    "lag_td": 0,
-   "days": 1,
+   "days": 0,
    "stale": false,
    "blocked": false,
    "owner": "雲端 daily.yml（每日戰情更新） tools/pick_edm.py（theme_edm）",
@@ -3333,5 +3333,5 @@
   }
  ],
  "n_stale": 12,
- "tg_day": "2026-11-27"
+ "tg_day": "2026-11-28"
 }
